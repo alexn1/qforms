@@ -569,7 +569,7 @@ class RowFormFileFieldView extends RowFormFieldView {
       ref: this.div
     }), /*#__PURE__*/React.createElement("span", {
       className: "length"
-    }, value.length)), /*#__PURE__*/React.createElement("input", {
+    }, Helper.formatNumber(value.length))), /*#__PURE__*/React.createElement("input", {
       type: "file",
       onChange: this.onChange,
       disabled: !ctrl.isEditable()

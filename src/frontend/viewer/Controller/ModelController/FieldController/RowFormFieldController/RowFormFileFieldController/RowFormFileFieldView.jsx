@@ -50,7 +50,7 @@ class RowFormFileFieldView extends RowFormFieldView {
                 <div>
                     <Image ref={this.image} src={value} onClick={this.onImageClick}/>
                     <span className="size" ref={this.div}></span>
-                    <span className="length">{value.length}</span>
+                    <span className="length">{Helper.formatNumber(value.length)}</span>
                 </div>
             }
             <input type="file" onChange={this.onChange} disabled={!ctrl.isEditable()}/>
