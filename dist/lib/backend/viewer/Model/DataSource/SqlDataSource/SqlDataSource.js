@@ -79,13 +79,14 @@ class SqlDataSource extends DataSource_1.default {
             context.params.limit = limit;
         }
         const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
-        const rows = await this.getDatabase().queryRows(context, query, context.getParams());
+        const params = context.getParams();
+        const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
         // count
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), context.getParams());
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
                 count = parseInt(count);
             }
             catch (err) {
