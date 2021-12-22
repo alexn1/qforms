@@ -151,14 +151,11 @@ class BackHostApp {
     }
     initExpressServer() {
         // middlewares
-        // server.use(morgan('dev'));
-        // server.use(serverRequest);
         this.express.use(bodyParser.json({
             limit: '10mb',
             reviver: Helper_1.default.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
-        // server.use(multipartHandler);
         this.express.use(session({
             store: new FileSessionStore_1.default(this.sessionDirPath),
             secret: this.getSecretSync(),
