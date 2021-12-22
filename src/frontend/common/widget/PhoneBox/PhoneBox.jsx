@@ -88,7 +88,9 @@ class PhoneBox extends ReactComponent {
         }
         return value;
     }
-    static formatPhoneNumber(value) {
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+
         // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
         // console.log('arr:', arr);
