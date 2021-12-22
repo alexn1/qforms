@@ -86,15 +86,19 @@ class RowFormView extends FormView {
         }
         return true;
     }
-    renderLabel(fieldCtrl, key) {
-        const model = fieldCtrl.model;
+    renderLabel(fieldCtrl) {
+        const model = fieldCtrl.getModel();
+        const name = model.getName();
+        const key = `label.${name}`;
         return <div key={key} className={`${this.getCssBlockName()}__label`}>
             {model.getCaption()}:
             {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
         </div>;
     }
-    renderField(fieldCtrl, key) {
-        // console.log('RowFormView.renderField2', fieldCtrl.model.getClassName());
+    renderField(fieldCtrl) {
+        // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
+        const name = fieldCtrl.getModel().getName();
+        const key = `field.${name}`;
         return <div key={key} className={`${this.getCssBlockName()}__field`}>
             {React.createElement(fieldCtrl.getViewClass(), {
                 onCreate: fieldCtrl.onViewCreate,
@@ -102,8 +106,10 @@ class RowFormView extends FormView {
             })}
         </div>;
     }
-    renderError(fieldCtrl, key) {
+    renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
+        const name = fieldCtrl.getModel().getName();
+        const key = `tooltip.${name}`;
         return <div key={key} className={`${this.getCssBlockName()}__error`}>
             <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
         </div>;
@@ -111,9 +117,9 @@ class RowFormView extends FormView {
     renderItem(fieldCtrl) {
         const name = fieldCtrl.getModel().getName();
         return [
-            this.renderLabel(fieldCtrl, `label.${name}`),
-            this.renderField(fieldCtrl, `field.${name}`),
-            this.renderError(fieldCtrl, `tooltip.${name}`)
+            this.renderLabel(fieldCtrl),
+            this.renderField(fieldCtrl),
+            this.renderError(fieldCtrl)
         ];
     }
     renderGrid() {
