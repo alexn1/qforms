@@ -101,7 +101,7 @@ class Application extends Model_1.default {
         // nav
         response.nav = this.nav;
         // uuid
-        response.uuid = uuid_1.v4();
+        response.uuid = (0, uuid_1.v4)();
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name: BaseModel_1.default.getName(data),
