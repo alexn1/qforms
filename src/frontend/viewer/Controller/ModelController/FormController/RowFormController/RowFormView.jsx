@@ -89,8 +89,7 @@ class RowFormView extends FormView {
     renderLabel(fieldCtrl) {
         const model = fieldCtrl.getModel();
         const name = model.getName();
-        const key = `label.${name}`;
-        return <div key={key} className={`${this.getCssBlockName()}__label`}>
+        return <div key={`label.${name}`} className={`${this.getCssBlockName()}__label`}>
             {model.getCaption()}:
             {model.isNotNull() && <span style={{color: 'red'}}>*</span>}
         </div>;
@@ -98,8 +97,7 @@ class RowFormView extends FormView {
     renderField(fieldCtrl) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         const name = fieldCtrl.getModel().getName();
-        const key = `field.${name}`;
-        return <div key={key} className={`${this.getCssBlockName()}__field`}>
+        return <div key={`field.${name}`} className={`${this.getCssBlockName()}__field`}>
             {React.createElement(fieldCtrl.getViewClass(), {
                 onCreate: fieldCtrl.onViewCreate,
                 ctrl: fieldCtrl,
@@ -109,8 +107,7 @@ class RowFormView extends FormView {
     renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
-        const key = `tooltip.${name}`;
-        return <div key={key} className={`${this.getCssBlockName()}__error`}>
+        return <div key={`tooltip.${name}`} className={`${this.getCssBlockName()}__error`}>
             <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
         </div>;
     }

@@ -1199,9 +1199,8 @@ class RowFormView extends FormView {
   renderLabel(fieldCtrl) {
     const model = fieldCtrl.getModel();
     const name = model.getName();
-    const key = `label.${name}`;
     return /*#__PURE__*/React.createElement("div", {
-      key: key,
+      key: `label.${name}`,
       className: `${this.getCssBlockName()}__label`
     }, model.getCaption(), ":", model.isNotNull() && /*#__PURE__*/React.createElement("span", {
       style: {
@@ -1213,9 +1212,8 @@ class RowFormView extends FormView {
   renderField(fieldCtrl) {
     // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
     const name = fieldCtrl.getModel().getName();
-    const key = `field.${name}`;
     return /*#__PURE__*/React.createElement("div", {
-      key: key,
+      key: `field.${name}`,
       className: `${this.getCssBlockName()}__field`
     }, React.createElement(fieldCtrl.getViewClass(), {
       onCreate: fieldCtrl.onViewCreate,
@@ -1226,9 +1224,8 @@ class RowFormView extends FormView {
   renderError(fieldCtrl) {
     // console.log('RowFormView.renderError:', fieldCtrl.state);
     const name = fieldCtrl.getModel().getName();
-    const key = `tooltip.${name}`;
     return /*#__PURE__*/React.createElement("div", {
-      key: key,
+      key: `tooltip.${name}`,
       className: `${this.getCssBlockName()}__error`
     }, /*#__PURE__*/React.createElement(Tooltip, {
       position: "left",
