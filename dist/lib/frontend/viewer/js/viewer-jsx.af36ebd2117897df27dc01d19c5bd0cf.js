@@ -1593,7 +1593,7 @@ class PageView extends ModelView {
       // console.log('focus', this.getElement());
       this.getElement().focus();
     } else {
-      console.error(`${this.getCtrl().getModel().getFullName()}: element is null`);
+      console.error(`${this.getCtrl().getModel().getFullName()}: el is null`);
     }
   }
 
