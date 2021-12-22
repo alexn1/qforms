@@ -8,7 +8,8 @@ const SRC_PATH   = './src';
 const BUILD_PATH = './dist';
 
 async function backend_clean() {
-    fs.rmdirSync(path.join('dist', 'lib/backend'), { recursive: true });
+    // fs.rmdirSync(path.join('dist', 'lib/backend'), { recursive: true });
+    fs.rmSync(path.join('dist', 'lib/backend'), { recursive: true });
 }
 
 function backend_ejs() {

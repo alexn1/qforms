@@ -12,7 +12,8 @@ const SRC_PATH   = './src';
 const BUILD_PATH = './dist';
 
 async function frontend_clean() {
-    fs.rmdirSync(path.join('dist', 'lib/frontend'), { recursive: true });
+    // fs.rmdirSync(path.join('dist', 'lib/frontend'), { recursive: true });
+    fs.rmSync(path.join('dist', 'lib/frontend'), { recursive: true });
 }
 
 function frontend_root() {
