@@ -22,6 +22,7 @@ function root() {
     return gulp.src([
         './LICENSE',
         './package.json',
+        './package-lock.json',
         './README.md',
     ]).pipe(gulp.dest(BUILD_PATH));
 }
