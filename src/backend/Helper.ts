@@ -416,6 +416,9 @@ class Helper {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
+    static fillArray(n: number): number[] {
+        return Array.from(Array(n).keys());
+    }
 }
 
 export = Helper;

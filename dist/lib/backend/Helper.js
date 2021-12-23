@@ -400,5 +400,8 @@ class Helper {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
+    static fillArray(n) {
+        return Array.from(Array(n).keys());
+    }
 }
 module.exports = Helper;
