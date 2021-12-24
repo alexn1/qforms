@@ -11,6 +11,10 @@ class ReactComponent extends React.Component {
     return this.el.current;
   }
 
+  getParent() {
+    return this.props.parent;
+  }
+
   checkParent() {
     if (!this.props.parent) throw new Error(`${this.constructor.name}: no parent`);
   }
