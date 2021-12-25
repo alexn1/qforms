@@ -129,9 +129,13 @@ class Database extends Model {
         return this.parent;
     }
 
+    findTable(name) {
+        return this.tables.find(table => table.getName() === name);
+    }
+
     getTable(name): Table {
         if (!name) throw new Error('getTable: no name');
-        const table = this.tables.find(table => table.getName() === name);
+        const table = this.findTable(name);
         if (!table) throw new Error(`no table with name: ${name}`);
         return table;
         // if (!this.tables[name]) throw new Error(`no table with name: ${name}`);

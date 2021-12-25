@@ -24,6 +24,7 @@ declare class Database extends Model {
     createParam(name: any): Param;
     getConfig(): any;
     getApp(): Application;
+    findTable(name: any): Table;
     getTable(name: any): Table;
     static getUsedParams(query: any): any;
     static checkParams(query: any, params: any): void;

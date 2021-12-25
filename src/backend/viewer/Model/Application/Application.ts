@@ -341,7 +341,7 @@ class Application extends Model {
 
     getDatabase(name: string): Database {
         if (!name) throw new Error('getDatabase: no name');
-        const database = this.databases.find(database => database.getName() === name);
+        const database = this.findDatabase(name);
         if (!database) throw new Error(`no database with name: ${name}`);
         return database;
     }
@@ -450,6 +450,18 @@ class Application extends Model {
     }
     composeForeignResult(result: Result): Result {
         const fResult = new Result();
+        for (const databaseName in result) {
+            const database = this.findDatabase(databaseName);
+            if (database) {
+                for (const tableName in result[databaseName]) {
+                    const table = database.findTable(tableName);
+                    if (table) {
+                        if (!fResult[databaseName]) fResult[databaseName] = {};
+                        fResult[databaseName][tableName] = {refresh: true};
+                    }
+                }
+            }
+        }
         return fResult;
     }
     getTitle(context) {

@@ -275,7 +275,7 @@ class Application extends Model_1.default {
     getDatabase(name) {
         if (!name)
             throw new Error('getDatabase: no name');
-        const database = this.databases.find(database => database.getName() === name);
+        const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database with name: ${name}`);
         return database;
@@ -381,6 +381,19 @@ class Application extends Model_1.default {
     }
     composeForeignResult(result) {
         const fResult = new Result_1.default();
+        for (const databaseName in result) {
+            const database = this.findDatabase(databaseName);
+            if (database) {
+                for (const tableName in result[databaseName]) {
+                    const table = database.findTable(tableName);
+                    if (table) {
+                        if (!fResult[databaseName])
+                            fResult[databaseName] = {};
+                        fResult[databaseName][tableName] = { refresh: true };
+                    }
+                }
+            }
+        }
         return fResult;
     }
     getTitle(context) {
