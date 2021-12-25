@@ -10,6 +10,7 @@ const Helper_1 = __importDefault(require("../../../Helper"));
 const PageLink_1 = __importDefault(require("../PageLink/PageLink"));
 const JsonFile_1 = __importDefault(require("../../../JsonFile"));
 const MyError_1 = __importDefault(require("../../../MyError"));
+const Result_1 = __importDefault(require("../../../Result"));
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 class Application extends Model_1.default {
@@ -268,6 +269,9 @@ class Application extends Model_1.default {
     getApp() {
         return this;
     }
+    findDatabase(name) {
+        return this.databases.find(database => database.getName() === name);
+    }
     getDatabase(name) {
         if (!name)
             throw new Error('getDatabase: no name');
@@ -348,8 +352,8 @@ class Application extends Model_1.default {
         this.clients.splice(i, 1);
         // console.log('this.clients', this.clients);
     }
-    broadcastResultToClients(context, result) {
-        console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
+    broadcastDomesticResultToClients(context, result) {
+        console.log('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -360,6 +364,24 @@ class Application extends Model_1.default {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
         }
+    }
+    broadcastForeignResultToClients(context, result) {
+        console.log('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        if (!context.getReq().body.uuid)
+            throw new Error('no uuid');
+        if (!result)
+            throw new Error('no result');
+        const uuid = context.getReq().body.uuid;
+        const fResult = this.composeForeignResult(result);
+        for (const webSocket of this.clients) {
+            if (webSocket.uuid !== uuid) {
+                webSocket.send(JSON.stringify({ type: 'result', data: fResult }));
+            }
+        }
+    }
+    composeForeignResult(result) {
+        const fResult = new Result_1.default();
+        return fResult;
     }
     getTitle(context) {
         return this.getAttr('caption');

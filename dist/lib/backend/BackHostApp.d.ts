@@ -80,6 +80,6 @@ declare class BackHostApp {
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;
-    broadcastResult(application: Application, context: Context, result: Result): void;
+    broadcastResult(sourceApplication: Application, context: Context, result: Result): void;
 }
 export = BackHostApp;

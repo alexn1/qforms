@@ -1058,13 +1058,14 @@ class BackHostApp {
         return this.params;
     }
 
-    broadcastResult(application: Application, context: Context, result: Result) {
+    broadcastResult(sourceApplication: Application, context: Context, result: Result) {
         console.log('BackHostApp.broadcastResult');
         for (const route in this.applications) {
-            if (context.getRoute() === route && this.applications[route] === application) {  // source application
-                application.broadcastResultToClients(context, result);
+            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
+                sourceApplication.broadcastDomesticResultToClients(context, result);
             } else {
-                console.log('broadcast to other app: ', route, result);
+                const application = this.applications[route];
+                application.broadcastForeignResultToClients(context, result);
             }
         }
     }

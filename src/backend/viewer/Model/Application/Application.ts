@@ -335,6 +335,10 @@ class Application extends Model {
         return this;
     }
 
+    findDatabase(name: string): Database {
+        return this.databases.find(database => database.getName() === name);
+    }
+
     getDatabase(name: string): Database {
         if (!name) throw new Error('getDatabase: no name');
         const database = this.databases.find(database => database.getName() === name);
@@ -421,8 +425,8 @@ class Application extends Model {
         // console.log('this.clients', this.clients);
     }
 
-    broadcastResultToClients(context: Context, result: Result): void {
-        console.log('Application.broadcastResultToClients', context.getReq().body.uuid, result);
+    broadcastDomesticResultToClients(context: Context, result: Result): void {
+        console.log('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const uuid = context.getReq().body.uuid;
@@ -431,6 +435,22 @@ class Application extends Model {
                 webSocket.send(JSON.stringify({type: 'result', data: result}));
             }
         }
+    }
+    broadcastForeignResultToClients(context: Context, result: Result): void {
+        console.log('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        if (!context.getReq().body.uuid) throw new Error('no uuid');
+        if (!result) throw new Error('no result');
+        const uuid = context.getReq().body.uuid;
+        const fResult = this.composeForeignResult(result);
+        for (const webSocket of this.clients) {
+            if (webSocket.uuid !== uuid) {
+                webSocket.send(JSON.stringify({type: 'result', data: fResult}));
+            }
+        }
+    }
+    composeForeignResult(result: Result): Result {
+        const fResult = new Result();
+        return fResult;
     }
     getTitle(context) {
         return this.getAttr('caption');

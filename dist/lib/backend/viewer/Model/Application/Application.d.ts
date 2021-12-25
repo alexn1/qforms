@@ -49,6 +49,7 @@ declare class Application extends Model {
     getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): Application;
+    findDatabase(name: string): Database;
     getDatabase(name: string): Database;
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
@@ -60,7 +61,9 @@ declare class Application extends Model {
     release(context: any): void;
     addClient(webSocket: any): void;
     removeClient(webSocket: any): void;
-    broadcastResultToClients(context: Context, result: Result): void;
+    broadcastDomesticResultToClients(context: Context, result: Result): void;
+    broadcastForeignResultToClients(context: Context, result: Result): void;
+    composeForeignResult(result: Result): Result;
     getTitle(context: any): any;
     getLoginViewClassName(): string;
     isAvailable(): boolean;
