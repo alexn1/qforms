@@ -460,22 +460,23 @@ class BackHostApp {
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().connect(context);
+        const database = dataSource.getDatabase();
+        await database.connect(context);
         try {
             await application.initContext(context);
-            await dataSource.getDatabase().begin(context);
+            await database.begin(context);
             try {
                 const result = await dataSource.insert(context);
                 if (result === undefined) throw new Error('insert action: result is undefined');
-                await dataSource.getDatabase().commit(context);
+                await database.commit(context);
                 await res.json(result);
                 application.broadcastResultToClients(context, result);
             } catch (err) {
-                await dataSource.getDatabase().rollback(context, err);
+                await database.rollback(context, err);
                 throw err;
             }
         } finally {
-            dataSource.getDatabase().release(context);
+            database.release(context);
         }
     }
 
