@@ -12,7 +12,6 @@ import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
-import Database from './viewer/Model/Database/Database';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorModule from './monitor/MonitorModule';
@@ -471,7 +470,7 @@ class BackHostApp {
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                this.broadcastResult(context, application, database, result);
+                this.broadcastResult(application, context, result);
             } catch (err) {
                 await database.rollback(context, err);
                 throw err;
@@ -488,22 +487,23 @@ class BackHostApp {
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().connect(context);
+        const database = dataSource.getDatabase();
+        await database.connect(context);
         try {
             await application.initContext(context);
-            await dataSource.getDatabase().begin(context);
+            await database.begin(context);
             try {
                 const result = await dataSource.update(context);
                 if (result === undefined) throw new Error('action update: result is undefined');
-                await dataSource.getDatabase().commit(context);
+                await database.commit(context);
                 await res.json(result);
-                application.broadcastResultToClients(context, result);
+                this.broadcastResult(application, context, result);
             } catch (err) {
-                await dataSource.getDatabase().rollback(context, err);
+                await database.rollback(context, err);
                 throw err;
             }
         } finally {
-            dataSource.getDatabase().release(context);
+            database.release(context);
         }
     }
 
@@ -514,22 +514,23 @@ class BackHostApp {
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
-        await dataSource.getDatabase().connect(context);
+        const database = dataSource.getDatabase();
+        await database.connect(context);
         try {
             await application.initContext(context);
-            await dataSource.getDatabase().begin(context);
+            await database.begin(context);
             try {
                 const result = await dataSource.delete(context);
                 if (result === undefined) throw new Error('delete result is undefined');
-                await dataSource.getDatabase().commit(context);
+                await database.commit(context);
                 await res.json(result);
-                application.broadcastResultToClients(context, result);
+                this.broadcastResult(application, context, result);
             } catch (err) {
-                await dataSource.getDatabase().rollback(context, err);
+                await database.rollback(context, err);
                 throw err;
             }
         } finally {
-            dataSource.getDatabase().release(context);
+            database.release(context);
         }
     }
 
@@ -554,7 +555,7 @@ class BackHostApp {
             if (result === undefined) throw new Error('rpc action: result is undefined');
             await res.json(result);
             if (result instanceof Result) {
-                application.broadcastResultToClients(context, result);
+                this.broadcastResult(application, context, result);
             }
         } catch (err) {
             const errorMessage = err.message;
@@ -1057,7 +1058,7 @@ class BackHostApp {
         return this.params;
     }
 
-    broadcastResult(context: Context, application: Application, database: Database, result: Result) {
+    broadcastResult(application: Application, context: Context, result: Result) {
         application.broadcastResultToClients(context, result);
     }
 

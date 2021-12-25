@@ -1,6 +1,5 @@
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
-import Database from './viewer/Model/Database/Database';
 import { AppInfo } from './AppInfo';
 import MonitorModule from './monitor/MonitorModule';
 import IndexModule from './index/IndexModule';
@@ -81,6 +80,6 @@ declare class BackHostApp {
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;
-    broadcastResult(context: Context, application: Application, database: Database, result: Result): void;
+    broadcastResult(application: Application, context: Context, result: Result): void;
 }
 export = BackHostApp;
