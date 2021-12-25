@@ -12,6 +12,7 @@ import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
+import Database from './viewer/Model/Database/Database';
 import { AppInfo } from './AppInfo';
 import Model from './viewer/Model/Model';
 import MonitorModule from './monitor/MonitorModule';
@@ -470,7 +471,7 @@ class BackHostApp {
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                application.broadcastResultToClients(context, result);
+                this.broadcastResult(context, application, database, result);
             } catch (err) {
                 await database.rollback(context, err);
                 throw err;
@@ -1054,6 +1055,10 @@ class BackHostApp {
 
     getParams() {
         return this.params;
+    }
+
+    broadcastResult(context: Context, application: Application, database: Database, result: Result) {
+        application.broadcastResultToClients(context, result);
     }
 
 }

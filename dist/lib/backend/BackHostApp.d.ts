@@ -1,11 +1,13 @@
 import Context from '../backend/Context';
 import Application from './viewer/Model/Application/Application';
+import Database from './viewer/Model/Database/Database';
 import { AppInfo } from './AppInfo';
 import MonitorModule from './monitor/MonitorModule';
 import IndexModule from './index/IndexModule';
 import ViewerModule from './viewer/ViewerModule';
 import EditorModule from './editor/EditorModule';
 import CommonModule from './common/CommonModule';
+import Result from "./Result";
 declare class BackHostApp {
     params: any;
     applications: any;
@@ -79,5 +81,6 @@ declare class BackHostApp {
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;
+    broadcastResult(context: Context, application: Application, database: Database, result: Result): void;
 }
 export = BackHostApp;

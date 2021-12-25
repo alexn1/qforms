@@ -423,7 +423,7 @@ class BackHostApp {
                     throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                application.broadcastResultToClients(context, result);
+                this.broadcastResult(context, application, database, result);
             }
             catch (err) {
                 await database.rollback(context, err);
@@ -1000,6 +1000,9 @@ class BackHostApp {
     }
     getParams() {
         return this.params;
+    }
+    broadcastResult(context, application, database, result) {
+        application.broadcastResultToClients(context, result);
     }
 }
 module.exports = BackHostApp;
