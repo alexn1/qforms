@@ -1004,7 +1004,16 @@ class BackHostApp {
         return this.params;
     }
     broadcastResult(application, context, result) {
-        application.broadcastResultToClients(context, result);
+        console.log('BackHostApp.broadcastResult');
+        for (const route in this.applications) {
+            console.log('route:', route);
+            if (context.getRoute() === route && this.applications[route] === application) { // source application
+                application.broadcastResultToClients(context, result);
+            }
+            else {
+                console.log('broadcast to other app: ', route, result);
+            }
+        }
     }
 }
 module.exports = BackHostApp;
