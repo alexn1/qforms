@@ -22,9 +22,10 @@ class Table extends Model {
     emitResult(result, source = null) {
         console.log('Table.emitResult');
         return [
-            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
-            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
-            ...(result.delete ? [this.emitDelete(source, result.delete)] : [])
+            ...(result.insert  ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update  ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete  ? [this.emitDelete(source, result.delete)] : []),
+            ...(result.refresh ? [this.emitRefresh(source              )] : [])
         ];
     }
     emitInsert(source, inserts) {
@@ -35,6 +36,9 @@ class Table extends Model {
     }
     emitDelete(source, deletes) {
         return this.emit('delete', {source, deletes});
+    }
+    emitRefresh(source) {
+        return this.emit('refresh', {source});
     }
 }
 window.QForms.Table = Table;

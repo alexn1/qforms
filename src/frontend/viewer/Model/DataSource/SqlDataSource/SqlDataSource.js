@@ -175,6 +175,17 @@ class SqlDataSource extends DataSource {
         this.emit('delete', e);
     }
 
+    onTableRefresh = async e => {
+        console.log('SqlDataSource.onTableRefresh', this.getFullName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (e.source) throw new Error('refresh is foreign result so source must be null');
+        await this.refill();
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete(e);
+        }
+        this.emit('refresh', e);
+    }
+
     getPageParams() {
         const page = this.getPage();
         return page ? page.getParams() : {};

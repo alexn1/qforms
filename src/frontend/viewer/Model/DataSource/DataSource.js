@@ -13,18 +13,20 @@ class DataSource extends Model {
         this.setRows(this.data.rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.on('insert', this.onTableInsert);
-            table.on('update', this.onTableUpdate);
-            table.on('delete', this.onTableDelete);
+            table.on('insert' , this.onTableInsert);
+            table.on('update' , this.onTableUpdate);
+            table.on('delete' , this.onTableDelete);
+            table.on('refresh', this.onTableRefresh);
         }
     }
 
     deinit() {
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.off('insert', this.onTableInsert);
-            table.off('update', this.onTableUpdate);
-            table.off('delete', this.onTableDelete);
+            table.off('insert' , this.onTableInsert);
+            table.off('update' , this.onTableUpdate);
+            table.off('delete' , this.onTableDelete);
+            table.off('refresh', this.onTableRefresh);
         }
         super.deinit();
     }
@@ -479,6 +481,10 @@ class DataSource extends Model {
             this.parent.onDataSourceDelete(e);
         }
         this.emit('delete', e);
+    }
+
+    onTableRefresh = async e => {
+        throw new Error('DataSource.onTableRefresh: not implemented');
     }
 
     isSurrogate() {

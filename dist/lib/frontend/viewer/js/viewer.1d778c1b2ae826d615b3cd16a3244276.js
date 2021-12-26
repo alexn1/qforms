@@ -2497,18 +2497,20 @@ class DataSource extends Model {
         this.setRows(this.data.rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.on('insert', this.onTableInsert);
-            table.on('update', this.onTableUpdate);
-            table.on('delete', this.onTableDelete);
+            table.on('insert' , this.onTableInsert);
+            table.on('update' , this.onTableUpdate);
+            table.on('delete' , this.onTableDelete);
+            table.on('refresh', this.onTableRefresh);
         }
     }
 
     deinit() {
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.off('insert', this.onTableInsert);
-            table.off('update', this.onTableUpdate);
-            table.off('delete', this.onTableDelete);
+            table.off('insert' , this.onTableInsert);
+            table.off('update' , this.onTableUpdate);
+            table.off('delete' , this.onTableDelete);
+            table.off('refresh', this.onTableRefresh);
         }
         super.deinit();
     }
@@ -2965,6 +2967,10 @@ class DataSource extends Model {
         this.emit('delete', e);
     }
 
+    onTableRefresh = async e => {
+        throw new Error('DataSource.onTableRefresh: not implemented');
+    }
+
     isSurrogate() {
         return this.isAttr('database');
     }
@@ -3147,6 +3153,17 @@ class SqlDataSource extends DataSource {
             this.parent.onDataSourceDelete(e);
         }
         this.emit('delete', e);
+    }
+
+    onTableRefresh = async e => {
+        console.log('SqlDataSource.onTableRefresh', this.getFullName(), e);
+        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (e.source) throw new Error('refresh is foreign result so source must be null');
+        await this.refill();
+        if (this.parent.onDataSourceDelete) {
+            this.parent.onDataSourceDelete(e);
+        }
+        this.emit('refresh', e);
     }
 
     getPageParams() {
@@ -4021,9 +4038,10 @@ class Table extends Model {
     emitResult(result, source = null) {
         console.log('Table.emitResult');
         return [
-            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
-            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
-            ...(result.delete ? [this.emitDelete(source, result.delete)] : [])
+            ...(result.insert  ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update  ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete  ? [this.emitDelete(source, result.delete)] : []),
+            ...(result.refresh ? [this.emitRefresh(source              )] : [])
         ];
     }
     emitInsert(source, inserts) {
@@ -4034,6 +4052,9 @@ class Table extends Model {
     }
     emitDelete(source, deletes) {
         return this.emit('delete', {source, deletes});
+    }
+    emitRefresh(source) {
+        return this.emit('refresh', {source});
     }
 }
 window.QForms.Table = Table;
