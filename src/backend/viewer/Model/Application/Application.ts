@@ -440,22 +440,25 @@ class Application extends Model {
         console.log('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
-        const uuid = context.getReq().body.uuid;
         const fResult = this.composeForeignResult(result);
-        for (const webSocket of this.clients) {
-            if (webSocket.uuid !== uuid) {
-                webSocket.send(JSON.stringify({type: 'result', data: fResult}));
+        if (fResult) {
+            const uuid = context.getReq().body.uuid;
+            for (const webSocket of this.clients) {
+                if (webSocket.uuid !== uuid) {
+                    webSocket.send(JSON.stringify({type: 'result', data: fResult}));
+                }
             }
         }
     }
     composeForeignResult(result: Result): Result {
-        const fResult = new Result();
+        let fResult = null;
         for (const databaseName in result) {
             const database = this.findDatabase(databaseName);
             if (database) {
                 for (const tableName in result[databaseName]) {
                     const table = database.findTable(tableName);
                     if (table) {
+                        if (!fResult) fResult = new Result();
                         if (!fResult[databaseName]) fResult[databaseName] = {};
                         fResult[databaseName][tableName] = {refresh: true};
                     }
