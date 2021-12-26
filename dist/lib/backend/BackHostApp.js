@@ -71,8 +71,17 @@ const EDITOR_ACTIONS = [
 class BackHostApp {
     constructor(params = {}) {
         // console.log('BackHostApp.constructor');
+        this.checkVersion();
         this.params = params;
         this.applications = {};
+    }
+    checkVersion() {
+        const [majorNodeVersion] = process.versions.node.split('.');
+        // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
+        const MIN_NODE_VERSION = 16;
+        if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
+            throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
+        }
     }
     async run() {
         // console.log(`${this.constructor.name}.run`);

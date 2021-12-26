@@ -26,6 +26,7 @@ declare class BackHostApp {
     startTime: Date;
     logErrorUrl: string;
     constructor(params?: any);
+    checkVersion(): void;
     run(): Promise<void>;
     initProcess(): void;
     getSecretSync(): any;
