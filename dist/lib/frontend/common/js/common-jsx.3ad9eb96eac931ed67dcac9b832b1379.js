@@ -258,11 +258,12 @@ class EditIcon extends React.Component {
 }
 class LeftIcon extends React.Component {
   render() {
+    const size = this.props.size || 24;
     return /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
-      height: "18px",
+      height: size,
+      width: size,
       viewBox: "0 0 24 24",
-      width: "18px",
       fill: "#000000"
     }, /*#__PURE__*/React.createElement("path", {
       d: "M0 0h24v24H0V0z",
@@ -361,11 +362,12 @@ class RefreshIcon extends React.Component {
 }
 class RightIcon extends React.Component {
   render() {
+    const size = this.props.size || 24;
     return /*#__PURE__*/React.createElement("svg", {
       xmlns: "http://www.w3.org/2000/svg",
-      height: "18px",
+      height: size,
+      width: size,
       viewBox: "0 0 24 24",
-      width: "18px",
       fill: "#000000"
     }, /*#__PURE__*/React.createElement("path", {
       d: "M0 0h24v24H0V0z",
@@ -917,12 +919,16 @@ class DatePicker extends ReactComponent {
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`,
       onClick: this.onPrevClick
-    }, /*#__PURE__*/React.createElement(LeftIcon, null)), /*#__PURE__*/React.createElement("span", {
+    }, /*#__PURE__*/React.createElement(LeftIcon, {
+      size: 18
+    })), /*#__PURE__*/React.createElement("span", {
       className: `${this.getCssBlockName()}__caption-title`
     }, `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__caption-link enabled`,
       onClick: this.onNextClick
-    }, /*#__PURE__*/React.createElement(RightIcon, null)))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
+    }, /*#__PURE__*/React.createElement(RightIcon, {
+      size: 18
+    })))), /*#__PURE__*/React.createElement("thead", null, /*#__PURE__*/React.createElement("tr", null, /*#__PURE__*/React.createElement("th", {
       className: `${this.getCssBlockName()}__th`
     }, "\u041F\u043D"), /*#__PURE__*/React.createElement("th", {
       className: `${this.getCssBlockName()}__th`
@@ -2315,13 +2321,13 @@ class Slider extends ReactComponent {
       onClick: this.onImageClick
     }), images.length > 1 && /*#__PURE__*/React.createElement("div", {
       className: 'Slider__label'
-    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), images.length > 1 && /*#__PURE__*/React.createElement("button", {
+    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), images.length > 0 && /*#__PURE__*/React.createElement("button", {
       className: 'Slider__prev',
       onClick: this.onPrevClick
-    }, "prev"), images.length > 1 && /*#__PURE__*/React.createElement("button", {
+    }, /*#__PURE__*/React.createElement(LeftIcon, null)), images.length > 0 && /*#__PURE__*/React.createElement("button", {
       className: 'Slider__next',
       onClick: this.onNextClick
-    }, "next"), /*#__PURE__*/React.createElement("div", {
+    }, /*#__PURE__*/React.createElement(RightIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: 'Slider__close',
       onClick: this.onCloseClick
     }, /*#__PURE__*/React.createElement(CloseIcon2, null)));

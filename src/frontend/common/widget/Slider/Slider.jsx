@@ -39,11 +39,15 @@ class Slider extends ReactComponent {
             {images.length > 1 &&
                 <div className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0}/{images.length}</div>
             }
-            {images.length > 1 &&
-                <button className={'Slider__prev'} onClick={this.onPrevClick}>prev</button>
+            {images.length > 0 &&
+                <button className={'Slider__prev'} onClick={this.onPrevClick}>
+                    <LeftIcon/>
+                </button>
             }
-            {images.length > 1 &&
-                <button className={'Slider__next'} onClick={this.onNextClick}>next</button>
+            {images.length > 0 &&
+                <button className={'Slider__next'} onClick={this.onNextClick}>
+                    <RightIcon/>
+                </button>
             }
             <div className={'Slider__close'} onClick={this.onCloseClick}>
                 <CloseIcon2/>

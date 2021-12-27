@@ -159,13 +159,13 @@ class DatePicker extends ReactComponent {
                         <div className={`${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`}
                              onClick={this.onPrevClick}
                         >
-                            <LeftIcon/>
+                            <LeftIcon size={18}/>
                         </div>
                         <span className={`${this.getCssBlockName()}__caption-title`}>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
                         <div className={`${this.getCssBlockName()}__caption-link enabled`}
                              onClick={this.onNextClick}
                         >
-                            <RightIcon/>
+                            <RightIcon size={18}/>
                         </div>
                     </div>
                 </caption>

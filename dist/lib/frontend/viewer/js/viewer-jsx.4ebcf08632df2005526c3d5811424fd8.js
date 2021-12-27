@@ -1337,7 +1337,9 @@ class TableFormView extends FormView {
     }, /*#__PURE__*/React.createElement(Button, {
       enabled: ctrl.canPrev(),
       onClick: ctrl.onPreviousClick
-    }, /*#__PURE__*/React.createElement(LeftIcon, null)), /*#__PURE__*/React.createElement(ComboBox, {
+    }, /*#__PURE__*/React.createElement(LeftIcon, {
+      size: 18
+    })), /*#__PURE__*/React.createElement(ComboBox, {
       value: ctrl.model.getDefaultDataSource().getFrame().toString(),
       onChange: ctrl.onFrameChanged,
       items: new Array(dataSource.getFramesCount()).fill().map((val, i) => ({
@@ -1347,7 +1349,9 @@ class TableFormView extends FormView {
     }), /*#__PURE__*/React.createElement(Button, {
       enabled: ctrl.canNext(),
       onClick: ctrl.onNextClick
-    }, /*#__PURE__*/React.createElement(RightIcon, null))));
+    }, /*#__PURE__*/React.createElement(RightIcon, {
+      size: 18
+    }))));
   }
 
   getGridColumns() {
