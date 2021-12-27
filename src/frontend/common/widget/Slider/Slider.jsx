@@ -36,10 +36,18 @@ class Slider extends ReactComponent {
         const images = this.props.images || [];
         return <div className={this.getCssClassNames()}>
             <img className={'Slider_image'} src={images[this.state.image]} onClick={this.onImageClick}/>
-            <p className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0}/{images.length}</p>
-            <button className={'Slider__prev'} onClick={this.onPrevClick}>prev</button>
-            <button className={'Slider__next'} onClick={this.onNextClick}>next</button>
-            <button className={'Slider__close'} onClick={this.onCloseClick}>close</button>
+            {images.length > 1 &&
+                <div className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0}/{images.length}</div>
+            }
+            {images.length > 1 &&
+                <button className={'Slider__prev'} onClick={this.onPrevClick}>prev</button>
+            }
+            {images.length > 1 &&
+                <button className={'Slider__next'} onClick={this.onNextClick}>next</button>
+            }
+            <div className={'Slider__close'} onClick={this.onCloseClick}>
+                <CloseIcon2/>
+            </div>
         </div>;
     }
 }

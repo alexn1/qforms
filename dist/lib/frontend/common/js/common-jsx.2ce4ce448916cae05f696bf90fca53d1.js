@@ -2313,18 +2313,18 @@ class Slider extends ReactComponent {
       className: 'Slider_image',
       src: images[this.state.image],
       onClick: this.onImageClick
-    }), /*#__PURE__*/React.createElement("p", {
+    }), images.length > 1 && /*#__PURE__*/React.createElement("div", {
       className: 'Slider__label'
-    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), /*#__PURE__*/React.createElement("button", {
+    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), images.length > 1 && /*#__PURE__*/React.createElement("button", {
       className: 'Slider__prev',
       onClick: this.onPrevClick
-    }, "prev"), /*#__PURE__*/React.createElement("button", {
+    }, "prev"), images.length > 1 && /*#__PURE__*/React.createElement("button", {
       className: 'Slider__next',
       onClick: this.onNextClick
-    }, "next"), /*#__PURE__*/React.createElement("button", {
+    }, "next"), /*#__PURE__*/React.createElement("div", {
       className: 'Slider__close',
       onClick: this.onCloseClick
-    }, "close"));
+    }, /*#__PURE__*/React.createElement(CloseIcon2, null)));
   }
 
 }

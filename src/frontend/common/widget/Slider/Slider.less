@@ -17,7 +17,6 @@
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
 }
@@ -35,10 +34,30 @@
 }
 
 .Slider__close {
+  background: rgba(0,0,0,0.6);
+  padding: 10px;
   position: absolute;
   right: 0;
   top: 0;
   display: none;
+  cursor: pointer;
+
+  svg {
+    width: 40px;
+    height: 40px;
+    fill: #aaa;
+  }
+  &:hover {
+    svg {
+      fill: #fff;
+    }
+  }
+  &:active {
+    svg {
+      fill: #eee;
+    }
+  }
+
 }
 
 .Slider_full {

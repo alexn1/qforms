@@ -609,7 +609,6 @@ svg {
   position: absolute;
   top: 0;
   left: 0;
-  margin: 0;
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
 }
@@ -624,10 +623,24 @@ svg {
   bottom: 0;
 }
 .Slider__close {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
   position: absolute;
   right: 0;
   top: 0;
   display: none;
+  cursor: pointer;
+}
+.Slider__close svg {
+  width: 40px;
+  height: 40px;
+  fill: #aaa;
+}
+.Slider__close:hover svg {
+  fill: #fff;
+}
+.Slider__close:active svg {
+  fill: #eee;
 }
 .Slider_full {
   position: fixed;
