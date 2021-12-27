@@ -4,6 +4,37 @@
   position: relative;
   overflow: hidden;
   background-color: black;
+
+  &:hover {
+    .Slider__arrow {
+      visibility: visible;
+    }
+  }
+
+  &.full {
+    position: fixed;
+    top:0;
+    left: 0;
+    bottom: 0;
+    right:0;
+    z-index: 100;
+    .Slider_image {
+      object-fit: contain;
+      cursor: default;
+    }
+    .Slider__close {
+      display: block;
+    }
+
+    .Slider__arrow {
+      visibility: visible;
+      padding: 20px 0;
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
 }
 
 .Slider_image {
@@ -21,16 +52,35 @@
   color: white;
 }
 
-.Slider__prev {
+.Slider__arrow {
+  background: rgba(0,0,0,0.6);
+  visibility: hidden;
+  padding: 10px 0;
   position: absolute;
-  left: 0;
-  bottom: 0;
-}
-
-.Slider__next {
-  position: absolute;
-  right: 0;
-  bottom: 0;
+  cursor: pointer;
+  svg {
+    fill: #aaa;
+  }
+  &:hover {
+    svg {
+      fill: #fff;
+    }
+  }
+  &:active {
+    svg {
+      fill: #eee;
+    }
+  }
+  &.left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  &.right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
 }
 
 .Slider__close {
@@ -41,7 +91,6 @@
   top: 0;
   display: none;
   cursor: pointer;
-
   svg {
     width: 40px;
     height: 40px;
@@ -60,18 +109,3 @@
 
 }
 
-.Slider_full {
-  position: fixed;
-  top:0;
-  left: 0;
-  bottom: 0;
-  right:0;
-  z-index: 100;
-  .Slider_image {
-    object-fit: contain;
-    cursor: default;
-  }
-  .Slider__close {
-    display: block;
-  }
-}

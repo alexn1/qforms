@@ -599,6 +599,32 @@ svg {
   overflow: hidden;
   background-color: black;
 }
+.Slider:hover .Slider__arrow {
+  visibility: visible;
+}
+.Slider.full {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+.Slider.full .Slider_image {
+  object-fit: contain;
+  cursor: default;
+}
+.Slider.full .Slider__close {
+  display: block;
+}
+.Slider.full .Slider__arrow {
+  visibility: visible;
+  padding: 20px 0;
+}
+.Slider.full .Slider__arrow svg {
+  width: 40px;
+  height: 40px;
+}
 .Slider_image {
   width: 100%;
   height: 100%;
@@ -612,15 +638,31 @@ svg {
   background-color: rgba(0, 0, 0, 0.7);
   color: white;
 }
-.Slider__prev {
+.Slider__arrow {
+  background: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+  padding: 10px 0;
   position: absolute;
-  left: 0;
-  bottom: 0;
+  cursor: pointer;
 }
-.Slider__next {
-  position: absolute;
+.Slider__arrow svg {
+  fill: #aaa;
+}
+.Slider__arrow:hover svg {
+  fill: #fff;
+}
+.Slider__arrow:active svg {
+  fill: #eee;
+}
+.Slider__arrow.left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Slider__arrow.right {
   right: 0;
-  bottom: 0;
+  top: 50%;
+  transform: translateY(-50%);
 }
 .Slider__close {
   background: rgba(0, 0, 0, 0.6);
@@ -641,21 +683,6 @@ svg {
 }
 .Slider__close:active svg {
   fill: #eee;
-}
-.Slider_full {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  z-index: 100;
-}
-.Slider_full .Slider_image {
-  object-fit: contain;
-  cursor: default;
-}
-.Slider_full .Slider__close {
-  display: block;
 }
 
 .Statusbar {

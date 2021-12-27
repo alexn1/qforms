@@ -26,7 +26,7 @@ class Slider extends ReactComponent {
     }
     onImageClick = e => {
         console.log('Slider.onImageClick');
-        this.setState({classList: ['Slider_full']});
+        this.setState({classList: ['full']});
     }
     onCloseClick = e => {
         this.setState({classList: null});
@@ -39,15 +39,15 @@ class Slider extends ReactComponent {
             {images.length > 1 &&
                 <div className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0}/{images.length}</div>
             }
-            {images.length > 0 &&
-                <button className={'Slider__prev'} onClick={this.onPrevClick}>
+            {images.length > 1 &&
+                <div className={'Slider__arrow left'} onClick={this.onPrevClick}>
                     <LeftIcon/>
-                </button>
+                </div>
             }
-            {images.length > 0 &&
-                <button className={'Slider__next'} onClick={this.onNextClick}>
+            {images.length > 1 &&
+                <div className={'Slider__arrow right'} onClick={this.onNextClick}>
                     <RightIcon/>
-                </button>
+                </div>
             }
             <div className={'Slider__close'} onClick={this.onCloseClick}>
                 <CloseIcon2/>

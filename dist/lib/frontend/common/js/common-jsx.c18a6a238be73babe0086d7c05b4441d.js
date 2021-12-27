@@ -2293,7 +2293,7 @@ class Slider extends ReactComponent {
     _defineProperty(this, "onImageClick", e => {
       console.log('Slider.onImageClick');
       this.setState({
-        classList: ['Slider_full']
+        classList: ['full']
       });
     });
 
@@ -2321,11 +2321,11 @@ class Slider extends ReactComponent {
       onClick: this.onImageClick
     }), images.length > 1 && /*#__PURE__*/React.createElement("div", {
       className: 'Slider__label'
-    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), images.length > 0 && /*#__PURE__*/React.createElement("button", {
-      className: 'Slider__prev',
+    }, images.length > 0 ? this.state.image + 1 : 0, "/", images.length), images.length > 1 && /*#__PURE__*/React.createElement("div", {
+      className: 'Slider__arrow left',
       onClick: this.onPrevClick
-    }, /*#__PURE__*/React.createElement(LeftIcon, null)), images.length > 0 && /*#__PURE__*/React.createElement("button", {
-      className: 'Slider__next',
+    }, /*#__PURE__*/React.createElement(LeftIcon, null)), images.length > 1 && /*#__PURE__*/React.createElement("div", {
+      className: 'Slider__arrow right',
       onClick: this.onNextClick
     }, /*#__PURE__*/React.createElement(RightIcon, null)), /*#__PURE__*/React.createElement("div", {
       className: 'Slider__close',
