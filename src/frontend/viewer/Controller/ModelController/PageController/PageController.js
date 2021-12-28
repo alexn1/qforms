@@ -87,7 +87,6 @@ class PageController extends ModelController {
         for (const form of this.forms) {
             if (form instanceof RowFormController) {
                 form.validate();
-                form.invalidate();
             }
         }
     }

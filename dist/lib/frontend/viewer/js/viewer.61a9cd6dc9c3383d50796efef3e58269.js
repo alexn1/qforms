@@ -1672,6 +1672,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].validate();
         }
+        this.invalidate();
     }
     clearFieldsError() {
         for (const name in this.fields) {
@@ -2142,7 +2143,6 @@ class PageController extends ModelController {
         for (const form of this.forms) {
             if (form instanceof RowFormController) {
                 form.validate();
-                form.invalidate();
             }
         }
     }

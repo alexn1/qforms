@@ -85,6 +85,7 @@ class RowFormController extends FormController {
         for (const name in this.fields) {
             this.fields[name].validate();
         }
+        this.invalidate();
     }
     clearFieldsError() {
         for (const name in this.fields) {
