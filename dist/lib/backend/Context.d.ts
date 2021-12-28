@@ -8,12 +8,14 @@ declare class Context {
     constructor(options: any);
     getRoute(): string;
     getUser(): any;
+    getVirtualPath(): string;
     getClientTimezoneOffset(): number;
     getTimeOffset(): number;
     getParams(): any;
     getReq(): any;
     getDomain(): any;
     getBody(): any;
+    getModule(): string;
     getAppDirName(): string;
     getAppFileName(): string;
     getEnv(): string;

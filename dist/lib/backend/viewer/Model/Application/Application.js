@@ -86,7 +86,7 @@ class Application extends Model_1.default {
         const response = await super.fill(context);
         response.route = context.getRoute();
         response.domain = context.getDomain();
-        // response.virtualPath     = context.getVirtualPath();
+        response.virtualPath = context.getVirtualPath();
         response.logErrorUrl = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion = this.getVersion();

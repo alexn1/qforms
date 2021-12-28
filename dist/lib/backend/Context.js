@@ -31,9 +31,9 @@ class Context {
         }
         return null;
     }
-    /*getVirtualPath(): string {
+    getVirtualPath() {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
-    }*/
+    }
     getClientTimezoneOffset() {
         if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
             return this.getReq().session.tzOffset;
@@ -62,12 +62,12 @@ class Context {
     getBody() {
         return this.getReq().body;
     }
-    /*getModule(): string {
+    getModule() {
         if (this.options.module) {
             return this.options.module;
         }
         return this.getReq().params.module;
-    }*/
+    }
     getAppDirName() {
         if (this.options.appDirName) {
             return this.options.appDirName;
