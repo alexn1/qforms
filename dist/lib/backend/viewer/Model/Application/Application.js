@@ -124,7 +124,7 @@ class Application extends Model_1.default {
         };
     }
     async createMenu(context) {
-        console.log('Application.createMenu');
+        // console.log('Application.createMenu');
         const menu = {};
         const nav = {};
         // pages

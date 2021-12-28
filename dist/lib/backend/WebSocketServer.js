@@ -8,7 +8,7 @@ const url = require('url');
 class WebSocketServer {
     constructor(options) {
         this.options = options;
-        console.log('WebSocketServer.constructor');
+        // console.log('WebSocketServer.constructor');
         this.server = new ws.Server({
             server: options.httpServer,
             path: '/'

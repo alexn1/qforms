@@ -175,7 +175,7 @@ class Application extends Model {
     }
 
     async createMenu(context: Context): Promise<void> {
-        console.log('Application.createMenu');
+        // console.log('Application.createMenu');
         const menu = {};
         const nav = {};
 

@@ -136,7 +136,7 @@ class Helper {
     }*/
 
     static readTextFile(path): Promise<string> {
-        console.log(colors.blue('Helper.readTextFile'), path);
+        // console.log(colors.blue('Helper.readTextFile'), path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {
@@ -155,7 +155,7 @@ class Helper {
         return null;
     }
     static getFileContentSync(filePath) {
-        console.log(colors.blue('Helper.getFileContentSync'), filePath);
+        // console.log(colors.blue('Helper.getFileContentSync'), filePath);
         if (!fs.existsSync(filePath)) {
             return null;
         }
@@ -219,7 +219,7 @@ class Helper {
     }
 
     static createDirIfNotExistsSync(dirPath) {
-        console.log(colors.blue('Helper.createDirIfNotExistsSync'), dirPath);
+        // console.log(colors.blue('Helper.createDirIfNotExistsSync'), dirPath);
         if (!fs.existsSync(dirPath)) {
             fs.mkdirSync(dirPath);
         }
@@ -293,7 +293,7 @@ class Helper {
     }
 
     static exists(path) {
-        console.log(colors.blue('Helper.exists'), path);
+        // console.log(colors.blue('Helper.exists'), path);
         return new Promise(resolve => {
             fs.exists(path, exists => {
                 resolve(exists);
