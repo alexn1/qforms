@@ -419,6 +419,21 @@ class Helper {
     static fillArray(n: number): number[] {
         return Array.from(Array(n).keys());
     }
+    static formatDate(date, format) {
+        const YYYY = date.getFullYear();
+        const M    = date.getMonth() + 1;
+        const D    = date.getDate();
+        const h    = date.getHours();
+        const m    = date.getMinutes();
+        const s    = date.getSeconds();
+        const MM = M < 10 ? `0${M}` : M;
+        const DD = D < 10 ? `0${D}` : D;
+        const hh = h < 10 ? `0${h}` : h;
+        const mm = m < 10 ? `0${m}` : m;
+        const ss = s < 10 ? `0${s}` : s;
+        const values = {YYYY, M, D, h, m, s, MM, DD, hh, mm, ss};
+        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+    }
 }
 
 export = Helper;

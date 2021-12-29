@@ -34,5 +34,6 @@ declare class Helper {
     static Session_save(session: any): Promise<void>;
     static addMinutes(date: any, minutes: any): void;
     static fillArray(n: number): number[];
+    static formatDate(date: any, format: any): any;
 }
 export = Helper;
