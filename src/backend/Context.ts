@@ -112,6 +112,12 @@ class Context {
     getIp(): string {
         return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
     }
+    getHost() {
+        return this.getReq().headers.host;
+    }
+    getProtocol() {
+        return this.getReq().headers['x-forwarded-proto'] || 'http';
+    }
     destroy() {
     }
 }

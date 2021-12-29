@@ -21,6 +21,8 @@ declare class Context {
     getEnv(): string;
     getUri(): string;
     getIp(): string;
+    getHost(): any;
+    getProtocol(): any;
     destroy(): void;
 }
 export = Context;
