@@ -1,11 +1,11 @@
 "use strict";
 class Result {
     // result {
-    //   insert: {table: ["1", "2"]},
-    //   update: {table: {"1": "2"}},
-    //   delete: {table:["1", "2"]},
+    //   insert  : {table: ["1", "2"]},
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
+    //   update  : {table: {"1": "2"}},
     //   updateEx: {table: {"1": {field: 1, field2: 2}}}
+    //   delete  : {table:["1", "2"]},
     // }
     static addInsertToResult(result, database, table, key) {
         if (!result[database])
@@ -53,6 +53,13 @@ class Result {
         if (!result[database][table].delete)
             result[database][table].delete = [];
         result[database][table].delete.push(key);
+    }
+    static addTableToResult(result, database, table, value) {
+        if (!result[database])
+            result[database] = {};
+        if (result[database][table])
+            throw new Error(`table ${table} already exists`);
+        result[database][table] = value;
     }
 }
 module.exports = Result;
