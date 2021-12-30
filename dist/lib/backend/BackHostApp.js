@@ -523,9 +523,19 @@ class BackHostApp {
             const result = await model.rpc(req.body.name, context);
             if (result === undefined)
                 throw new Error('rpc action: result is undefined');
-            await res.json(result);
-            if (result instanceof Result_1.default) {
-                this.broadcastResult(application, context, result);
+            if (Array.isArray(result)) {
+                const [response, _result] = result;
+                await res.json(response);
+                if (!(_result instanceof Result_1.default)) {
+                    throw new Error('_result is not Result');
+                }
+                this.broadcastResult(application, context, _result);
+            }
+            else {
+                await res.json(result);
+                if (result instanceof Result_1.default) {
+                    this.broadcastResult(application, context, result);
+                }
             }
         }
         catch (err) {
