@@ -35,5 +35,6 @@ declare class Helper {
     static addMinutes(date: any, minutes: any): void;
     static fillArray(n: number): number[];
     static formatDate(date: any, format: any): any;
+    static getFirstField(object: any): any;
 }
 export = Helper;

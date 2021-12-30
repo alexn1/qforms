@@ -434,6 +434,10 @@ class Helper {
         const values = {YYYY, M, D, h, m, s, MM, DD, hh, mm, ss};
         return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
+    static getFirstField(object) {
+        const [key] = Object.keys(object);
+        return object[key];
+    }
 }
 
 export = Helper;
