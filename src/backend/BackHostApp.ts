@@ -239,7 +239,7 @@ class BackHostApp {
 
         // viewer/editor module
         this.express.get( '/:module/:appDirName/:appFileName/:env/' , this.moduleGet.bind(this));
-        this.express.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
+        this.express.post('/:module/:appDirName/:appFileName/:env/' , this.modulePost.bind(this));
         this.express.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
         // handle static for index and monitor
@@ -827,8 +827,8 @@ class BackHostApp {
         }
     }
 
-    async appPost(req, res, next)  {
-        console.log(colors.magenta.underline('BackHostApp.appPost'), req.params, req.body);
+    async modulePost(req, res, next)  {
+        console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1056,7 +1056,7 @@ class BackHostApp {
 
     getPostAlias(path, arr, query) {
         this.alias('get' , path , arr, 'moduleGet' , query);
-        this.alias('post', path , arr, 'appPost', query);
+        this.alias('post', path , arr, 'modulePost', query);
     }
 
     getNodeEnv(): string {

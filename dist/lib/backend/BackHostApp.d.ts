@@ -59,7 +59,7 @@ declare class BackHostApp {
     indexGet(req: any, res: any, next: any): Promise<void>;
     indexPost(req: any, res: any, next: any): Promise<void>;
     monitorGet(req: any, res: any, next: any): Promise<void>;
-    appPost(req: any, res: any, next: any): Promise<void>;
+    modulePost(req: any, res: any, next: any): Promise<void>;
     appGetFile(req: any, res: any, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
