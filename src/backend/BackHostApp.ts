@@ -238,7 +238,7 @@ class BackHostApp {
         this.express.get('/monitor' , this.monitorGet.bind(this));
 
         // viewer/editor module
-        this.express.get( '/:module/:appDirName/:appFileName/:env/' , this.appGet.bind(this));
+        this.express.get( '/:module/:appDirName/:appFileName/:env/' , this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/' , this.appPost.bind(this));
         this.express.get( '/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
 
@@ -742,8 +742,8 @@ class BackHostApp {
         );
     }
 
-    async appGet(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.appGet'), req.params);
+    async moduleGet(req, res, next) {
+        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1055,7 +1055,7 @@ class BackHostApp {
     }
 
     getPostAlias(path, arr, query) {
-        this.alias('get' , path , arr, 'appGet' , query);
+        this.alias('get' , path , arr, 'moduleGet' , query);
         this.alias('post', path , arr, 'appPost', query);
     }
 

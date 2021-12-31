@@ -191,7 +191,7 @@ class BackHostApp {
         // monitor module
         this.express.get('/monitor', this.monitorGet.bind(this));
         // viewer/editor module
-        this.express.get('/:module/:appDirName/:appFileName/:env/', this.appGet.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/', this.appPost.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
         // handle static for index and monitor
@@ -701,8 +701,8 @@ class BackHostApp {
         }
         await PostgreSqlDatabase_1.default.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
-    async appGet(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.appGet'), req.params);
+    async moduleGet(req, res, next) {
+        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -1005,7 +1005,7 @@ class BackHostApp {
         });
     }
     getPostAlias(path, arr, query) {
-        this.alias('get', path, arr, 'appGet', query);
+        this.alias('get', path, arr, 'moduleGet', query);
         this.alias('post', path, arr, 'appPost', query);
     }
     getNodeEnv() {
