@@ -232,12 +232,10 @@ class BackHostApp {
         if (this.isDevelopment()) {
             this.express.get( '/index' , this.indexGet.bind(this));
             this.express.post('/index' , this.indexPost.bind(this));
-            // this.express.get( '/index/*', this.indexGetFile.bind(this));
         }
 
         // monitor module
         this.express.get('/monitor' , this.monitorGet.bind(this));
-        // this.express.get('/monitor/*', this.monitorGetFile.bind(this));
 
         // viewer/editor module
         this.express.get( '/:module/:appDirName/:appFileName/:env/' , this.appGet.bind(this));
