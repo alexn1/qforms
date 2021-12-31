@@ -193,7 +193,7 @@ class BackHostApp {
         // viewer/editor module
         this.express.get('/:module/:appDirName/:appFileName/:env/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/', this.modulePost.bind(this));
-        this.express.get('/:module/:appDirName/:appFileName/:env/*', this.appGetFile.bind(this));
+        this.express.get('/:module/:appDirName/:appFileName/:env/*', this.moduleGetFile.bind(this));
         // handle static for index and monitor
         this.express.use(express.static(this.frontendDirPath));
         this.initCustomRoutes();
@@ -824,8 +824,8 @@ class BackHostApp {
             }
         }
     }
-    async appGetFile(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.appGetFile'), req.originalUrl);
+    async moduleGetFile(req, res, next) {
+        console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         if (req.params.module !== 'viewer') {
             next();
             return;
@@ -849,7 +849,7 @@ class BackHostApp {
             res.sendFile(filePath);
         }
         catch (err) {
-            err.message = `appGetFile error: ${err.message}`;
+            err.message = `moduleGetFile error: ${err.message}`;
             next(err);
         }
         finally {
