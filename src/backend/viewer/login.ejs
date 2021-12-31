@@ -28,7 +28,7 @@
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json"><%- JSON.stringify(data, null, 4) %></script>
+    <script type="application/json"><%- JSON.stringify(data/*, null, 4*/) %></script>
 </head>
 <body class="<%=application.getLoginViewClassName()%>__body">
     <div class="<%=application.getLoginViewClassName()%>__root"></div>
