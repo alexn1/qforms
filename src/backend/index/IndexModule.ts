@@ -35,8 +35,10 @@ class IndexModule {
     }
     getScripts() {
         return [
-            '/lib/react/react.development.js',
-            '/lib/react/react-dom.development.js',
+            // '/lib/react/react.development.js',
+            // '/lib/react/react-dom.development.js',
+            '/lib/react/react.production.min.js',
+            '/lib/react/react-dom.production.min.js',
             ...(this.backHostApp.commonModule.js),
             ...(this.js)
         ];
