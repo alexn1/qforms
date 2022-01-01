@@ -368,16 +368,7 @@ class ViewerModule {
     }
 
     async handleViewerGetFile(context: Context, application: Application, next) {
-        const filePath = path.join(application.getFrontendDirPath(), context.getUri());
-        if (await Helper.exists(filePath)) {
-            context.getRes().sendFile(filePath);
-        } /*else if () {
-            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-                throw new MyError({message: 'not authenticated', context});
-            }
-        }*/ else {
-            next();
-        }
+        await application.handleGetFile(context, next);
     }
 
 }

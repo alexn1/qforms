@@ -409,5 +409,19 @@ class Application extends Model_1.default {
     isAvailable() {
         return true;
     }
+    async handleGetFile(context, next) {
+        console.log('Application.handleGetFile', context.getUri());
+        const filePath = path.join(this.getFrontendDirPath(), context.getUri());
+        if (await Helper_1.default.exists(filePath)) {
+            context.getRes().sendFile(filePath);
+        } /*else if () {
+            if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+                throw new MyError({message: 'not authenticated', context});
+            }
+        }*/
+        else {
+            next();
+        }
+    }
 }
 module.exports = Application;

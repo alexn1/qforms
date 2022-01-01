@@ -67,5 +67,6 @@ declare class Application extends Model {
     getTitle(context: any): any;
     getLoginViewClassName(): string;
     isAvailable(): boolean;
+    handleGetFile(context: Context, next: any): Promise<void>;
 }
 export = Application;

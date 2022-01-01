@@ -478,6 +478,20 @@ class Application extends Model {
     isAvailable() {
         return true;
     }
+
+    async handleGetFile(context: Context, next) {
+        // console.log('Application.handleGetFile', context.getUri());
+        const filePath = path.join(this.getFrontendDirPath(), context.getUri());
+        if (await Helper.exists(filePath)) {
+            context.getRes().sendFile(filePath);
+        } /*else if () {
+            if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+                throw new MyError({message: 'not authenticated', context});
+            }
+        }*/ else {
+            next();
+        }
+    }
 }
 
 export = Application;
