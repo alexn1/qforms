@@ -51,17 +51,16 @@ class ViewerModule {
             ...(this.js)
         ];
     }
-    async handleViewerGet(req, res, context: Context, application: Application) {
+    async handleViewerGet(context: Context, application: Application) {
         console.log('ViewerModule.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        // const application = this.getApplication(context);
-        if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-            await this.loginGet(req, res, context, application);
+        if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+            await this.loginGet(context, application);
         } else {
             await application.connect(context);
             try {
                 await application.initContext(context);
                 const response =  await application.fill(context);
-                res.render('viewer/index', {
+                context.getRes().render('viewer/index', {
                     version       : pkg.version,
                     application   : application,
                     context       : context,
@@ -80,19 +79,19 @@ class ViewerModule {
             }
         }
     }
-    async loginGet(req, res, context: Context, application: Application) {
+    async loginGet(context: Context, application: Application) {
         console.log('ViewerModule.loginGet');
         // const application = this.getApplication(context);
         // const users = await application.getUsers(context);
-        res.render('viewer/login', {
+        context.getRes().render('viewer/login', {
             version    : pkg.version,
             context    : context,
             application: application,
-            links         : [
+            links      : [
                 ...this.getLinks(),
                 ...application.links
             ],
-            scripts       : [
+            scripts: [
                 ...this.getScripts(),
                 ...application.scripts
             ],

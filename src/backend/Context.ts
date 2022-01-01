@@ -76,6 +76,9 @@ class Context {
     getReq() {
         return this.options.req;
     }
+    getRes() {
+        return this.options.res;
+    }
     getDomain() {
         return this.options.domain;
     }

@@ -9,8 +9,8 @@ declare class ViewerModule {
     init(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];
-    handleViewerGet(req: any, res: any, context: Context, application: Application): Promise<void>;
-    loginGet(req: any, res: any, context: Context, application: Application): Promise<void>;
+    handleViewerGet(context: Context, application: Application): Promise<void>;
+    loginGet(context: Context, application: Application): Promise<void>;
     handleViewerPost(req: any, res: any, context: Context, application: Application): Promise<any>;
     loginPost(req: any, res: any, context: Context, application: Application): Promise<void>;
     page(req: any, res: any, context: Context, application: Application): Promise<void>;

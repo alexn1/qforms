@@ -69,7 +69,7 @@ class EditorModule {
         ];
     }
     async handleEditorGet(req, res, context) {
-        console.log('BackHostApp.handleEditorGet');
+        console.log('EditorModule.handleEditorGet');
         const appInfo = await Application_1.default.loadAppInfo(this.backHostApp.getAppFilePath(context));
         // data
         const data = {
@@ -89,7 +89,7 @@ class EditorModule {
         });
     }
     async handleEditorPost(req, res, context) {
-        console.log('BackHostApp.handleEditorPost', req.body);
+        console.log('EditorModule.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }

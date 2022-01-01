@@ -13,6 +13,7 @@ declare class Context {
     getTimeOffset(): number;
     getParams(): any;
     getReq(): any;
+    getRes(): any;
     getDomain(): any;
     getBody(): any;
     getModule(): string;

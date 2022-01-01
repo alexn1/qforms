@@ -746,10 +746,10 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, domain: this.getDomain(req)});
+                context = new Context({req, res, domain: this.getDomain(req)});
                 const application = await this.createApplicationIfNotExists(context);
                 if (application.isAvailable()) {
-                    await this.viewerModule.handleViewerGet(req, res, context, application);
+                    await this.viewerModule.handleViewerGet(context, application);
                 } else {
                     next();
                 }
