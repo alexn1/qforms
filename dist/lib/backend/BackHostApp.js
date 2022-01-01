@@ -21,7 +21,6 @@ const ViewerModule_1 = __importDefault(require("./viewer/ViewerModule"));
 const EditorModule_1 = __importDefault(require("./editor/EditorModule"));
 const CommonModule_1 = __importDefault(require("./common/CommonModule"));
 const FileSessionStore_1 = __importDefault(require("./FileSessionStore"));
-const Result_1 = __importDefault(require("./Result"));
 const backend = require('./index');
 const pkg = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
@@ -354,7 +353,7 @@ class BackHostApp {
         }
     }*/
     // action (fill page)
-    async page(req, res, context, application) {
+    /*async page(req, res, context: Context, application: Application) {
         console.log('BackHostApp.page', req.body.page);
         // const application = this.getApplication(context);
         await application.connect(context);
@@ -362,16 +361,14 @@ class BackHostApp {
             await application.initContext(context);
             const page = await application.getPage(context, req.body.page);
             const response = await page.fill(context);
-            if (response === undefined)
-                throw new Error('page action: response is undefined');
-            await res.json({ page: response });
-        }
-        finally {
+            if (response === undefined) throw new Error('page action: response is undefined');
+            await res.json({page: response});
+        } finally {
             application.release(context);
         }
-    }
+    }*/
     // action
-    async select(req, res, context, application) {
+    /*async select(req, res, context: Context, application: Application) {
         console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
         // const application = this.getApplication(context);
@@ -380,12 +377,10 @@ class BackHostApp {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
                 dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
-            }
-            else {
+            } else {
                 dataSource = page.getDataSource(req.body.ds);
             }
-        }
-        else {
+        } else {
             dataSource = application.getDataSource(req.body.ds);
         }
         await dataSource.getDatabase().connect(context);
@@ -394,15 +389,14 @@ class BackHostApp {
             const [rows, count] = await dataSource.select(context);
             const time = Date.now() - start;
             console.log('select time:', time);
-            await res.json({ rows, count, time });
+            await res.json({rows, count, time});
             return time;
-        }
-        finally {
+        } finally {
             await dataSource.getDatabase().release(context);
         }
-    }
+    }*/
     // action
-    async insert(req, res, context, application) {
+    /*async insert(req, res, context: Context, application: Application) {
         console.log('BackHostApp.insert', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -415,23 +409,20 @@ class BackHostApp {
             await database.begin(context);
             try {
                 const result = await dataSource.insert(context);
-                if (result === undefined)
-                    throw new Error('insert action: result is undefined');
+                if (result === undefined) throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
                 this.broadcastResult(application, context, result);
-            }
-            catch (err) {
+            } catch (err) {
                 await database.rollback(context, err);
                 throw err;
             }
-        }
-        finally {
+        } finally {
             database.release(context);
         }
-    }
+    }*/
     // action
-    async update(req, res, context, application) {
+    /*async update(req, res, context: Context, application: Application) {
         console.log('BackHostApp.update', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -444,23 +435,20 @@ class BackHostApp {
             await database.begin(context);
             try {
                 const result = await dataSource.update(context);
-                if (result === undefined)
-                    throw new Error('action update: result is undefined');
+                if (result === undefined) throw new Error('action update: result is undefined');
                 await database.commit(context);
                 await res.json(result);
                 this.broadcastResult(application, context, result);
-            }
-            catch (err) {
+            } catch (err) {
                 await database.rollback(context, err);
                 throw err;
             }
-        }
-        finally {
+        } finally {
             database.release(context);
         }
-    }
+    }*/
     // action
-    async _delete(req, res, context, application) {
+    /*async _delete(req, res, context: Context, application: Application) {
         console.log('BackHostApp._delete', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -473,83 +461,75 @@ class BackHostApp {
             await database.begin(context);
             try {
                 const result = await dataSource.delete(context);
-                if (result === undefined)
-                    throw new Error('delete result is undefined');
+                if (result === undefined) throw new Error('delete result is undefined');
                 await database.commit(context);
                 await res.json(result);
                 this.broadcastResult(application, context, result);
-            }
-            catch (err) {
+            } catch (err) {
                 await database.rollback(context, err);
                 throw err;
             }
-        }
-        finally {
+        } finally {
             database.release(context);
         }
-    }
+    }*/
     // action
-    async rpc(req, res, context, application) {
+    /*async rpc(req, res, context: Context, application: Application) {
         console.log('BackHostApp.rpc', req.body);
         // const application = this.getApplication(context);
         // await application.initContext(context);
-        let model;
+        let model: Model;
         if (req.body.page) {
             if (req.body.form) {
                 const page = await application.getPage(context, req.body.page);
                 model = page.getForm(req.body.form);
-            }
-            else {
+            } else {
                 model = await application.getPage(context, req.body.page);
             }
-        }
-        else {
+        } else {
             model = application;
         }
         try {
             const result = await model.rpc(req.body.name, context);
-            if (result === undefined)
-                throw new Error('rpc action: result is undefined');
+            if (result === undefined) throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 await res.json(response);
-                if (!(_result instanceof Result_1.default)) {
+                if (!(_result instanceof Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.broadcastResult(application, context, _result);
-            }
-            else {
+            } else {
                 await res.json(result);
-                if (result instanceof Result_1.default) {
+                if (result instanceof Result) {
                     this.broadcastResult(application, context, result);
                 }
             }
-        }
-        catch (err) {
+        } catch (err) {
             const errorMessage = err.message;
             err.message = `rpc error ${req.body.name}: ${err.message}`;
             err.context = context;
             await this.logError(err, req);
-            await res.json({ errorMessage });
+            await res.json({errorMessage});
         }
-    }
-    // action
-    async logout(req, res, context, application) {
+    }*/
+    /*// action
+    async logout(req, res, context: Context, application: Application) {
         console.log('BackHostApp.logout');
         if (!req.session.user || !req.session.user[context.getRoute()]) {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
         delete req.session.user[context.getRoute()];
-        await Helper_1.default.Session_save(req.session);
+        await Helper.Session_save(req.session);
         await res.json(null);
-    }
+    }*/
     // action
-    async test(req, res, context, application) {
+    /*async test(req, res, context: Context, application: Application) {
         console.log('BackHostApp.test', req.body);
         // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
-    }
+    }*/
     async handleEditorGet(req, res, context) {
         console.log('BackHostApp.handleEditorGet');
         const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));

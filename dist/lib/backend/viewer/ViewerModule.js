@@ -6,6 +6,7 @@ const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = __importDefault(require("../Helper"));
 const MyError_1 = __importDefault(require("../MyError"));
+const Result_1 = __importDefault(require("../Result"));
 // post actions
 const ACTIONS = [
     'page',
@@ -110,7 +111,7 @@ class ViewerModule {
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
-            return await this.backHostApp[req.body.action](req, res, context, application);
+            return await this[req.body.action](req, res, context, application);
         }
     }
     async loginPost(req, res, context, application) {
@@ -166,6 +167,201 @@ class ViewerModule {
         finally {
             application.release(context);
         }
+    }
+    // action (fill page)
+    async page(req, res, context, application) {
+        console.log('BackHostApp.page', req.body.page);
+        await application.connect(context);
+        try {
+            await application.initContext(context);
+            const page = await application.getPage(context, req.body.page);
+            const response = await page.fill(context);
+            if (response === undefined)
+                throw new Error('page action: response is undefined');
+            await res.json({ page: response });
+        }
+        finally {
+            application.release(context);
+        }
+    }
+    // action
+    async select(req, res, context, application) {
+        console.log('BackHostApp.select', req.body.page);
+        const start = Date.now();
+        let dataSource;
+        if (req.body.page) {
+            const page = await application.getPage(context, req.body.page);
+            if (req.body.form) {
+                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
+            }
+            else {
+                dataSource = page.getDataSource(req.body.ds);
+            }
+        }
+        else {
+            dataSource = application.getDataSource(req.body.ds);
+        }
+        await dataSource.getDatabase().connect(context);
+        try {
+            await application.initContext(context);
+            const [rows, count] = await dataSource.select(context);
+            const time = Date.now() - start;
+            console.log('select time:', time);
+            await res.json({ rows, count, time });
+            return time;
+        }
+        finally {
+            await dataSource.getDatabase().release(context);
+        }
+    }
+    // action
+    async insert(req, res, context, application) {
+        console.log('BackHostApp.insert', req.body.page);
+        // const application = this.getApplication(context);
+        const page = await application.getPage(context, req.body.page);
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
+        await database.connect(context);
+        try {
+            await application.initContext(context);
+            await database.begin(context);
+            try {
+                const result = await dataSource.insert(context);
+                if (result === undefined)
+                    throw new Error('insert action: result is undefined');
+                await database.commit(context);
+                await res.json(result);
+                this.backHostApp.broadcastResult(application, context, result);
+            }
+            catch (err) {
+                await database.rollback(context, err);
+                throw err;
+            }
+        }
+        finally {
+            database.release(context);
+        }
+    }
+    // action
+    async update(req, res, context, application) {
+        console.log('BackHostApp.update', req.body.page);
+        // const application = this.getApplication(context);
+        const page = await application.getPage(context, req.body.page);
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
+        await database.connect(context);
+        try {
+            await application.initContext(context);
+            await database.begin(context);
+            try {
+                const result = await dataSource.update(context);
+                if (result === undefined)
+                    throw new Error('action update: result is undefined');
+                await database.commit(context);
+                await res.json(result);
+                this.backHostApp.broadcastResult(application, context, result);
+            }
+            catch (err) {
+                await database.rollback(context, err);
+                throw err;
+            }
+        }
+        finally {
+            database.release(context);
+        }
+    }
+    // action
+    async _delete(req, res, context, application) {
+        console.log('BackHostApp._delete', req.body.page);
+        // const application = this.getApplication(context);
+        const page = await application.getPage(context, req.body.page);
+        const form = page.getForm(req.body.form);
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
+        await database.connect(context);
+        try {
+            await application.initContext(context);
+            await database.begin(context);
+            try {
+                const result = await dataSource.delete(context);
+                if (result === undefined)
+                    throw new Error('delete result is undefined');
+                await database.commit(context);
+                await res.json(result);
+                this.backHostApp.broadcastResult(application, context, result);
+            }
+            catch (err) {
+                await database.rollback(context, err);
+                throw err;
+            }
+        }
+        finally {
+            database.release(context);
+        }
+    }
+    // action
+    async rpc(req, res, context, application) {
+        console.log('BackHostApp.rpc', req.body);
+        // const application = this.getApplication(context);
+        // await application.initContext(context);
+        let model;
+        if (req.body.page) {
+            if (req.body.form) {
+                const page = await application.getPage(context, req.body.page);
+                model = page.getForm(req.body.form);
+            }
+            else {
+                model = await application.getPage(context, req.body.page);
+            }
+        }
+        else {
+            model = application;
+        }
+        try {
+            const result = await model.rpc(req.body.name, context);
+            if (result === undefined)
+                throw new Error('rpc action: result is undefined');
+            if (Array.isArray(result)) {
+                const [response, _result] = result;
+                await res.json(response);
+                if (!(_result instanceof Result_1.default)) {
+                    throw new Error('_result is not Result');
+                }
+                this.backHostApp.broadcastResult(application, context, _result);
+            }
+            else {
+                await res.json(result);
+                if (result instanceof Result_1.default) {
+                    this.backHostApp.broadcastResult(application, context, result);
+                }
+            }
+        }
+        catch (err) {
+            const errorMessage = err.message;
+            err.message = `rpc error ${req.body.name}: ${err.message}`;
+            err.context = context;
+            await this.backHostApp.logError(err, req);
+            await res.json({ errorMessage });
+        }
+    }
+    // action
+    async logout(req, res, context, application) {
+        console.log('BackHostApp.logout');
+        if (!req.session.user || !req.session.user[context.getRoute()]) {
+            throw new Error(`no user for route ${context.getRoute()}`);
+        }
+        delete req.session.user[context.getRoute()];
+        await Helper_1.default.Session_save(req.session);
+        await res.json(null);
+    }
+    // action
+    async test(req, res, context, application) {
+        console.log('BackHostApp.test', req.body);
+        // const result = await Test[req.body.name](req, res, context, application);
+        // if (result === undefined) throw new Error('test action: result is undefined');
+        await res.json(null);
     }
 }
 module.exports = ViewerModule;

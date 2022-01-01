@@ -29,7 +29,7 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
 // const Test    = require('./test/Test');
 
 // post actions
-const ACTIONS = [
+/*const ACTIONS = [
     'page',
     'select',       // select
     'insert',       // insert
@@ -38,7 +38,7 @@ const ACTIONS = [
     'rpc',
     'logout',
     'test',
-];
+];*/
 
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -416,7 +416,7 @@ class BackHostApp {
     }*/
 
     // action (fill page)
-    async page(req, res, context: Context, application: Application) {
+    /*async page(req, res, context: Context, application: Application) {
         console.log('BackHostApp.page', req.body.page);
         // const application = this.getApplication(context);
         await application.connect(context);
@@ -429,10 +429,10 @@ class BackHostApp {
         } finally {
             application.release(context);
         }
-    }
+    }*/
 
     // action
-    async select(req, res, context: Context, application: Application) {
+    /*async select(req, res, context: Context, application: Application) {
         console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
         // const application = this.getApplication(context);
@@ -458,10 +458,10 @@ class BackHostApp {
         } finally {
             await dataSource.getDatabase().release(context);
         }
-    }
+    }*/
 
     // action
-    async insert(req, res, context: Context, application: Application) {
+    /*async insert(req, res, context: Context, application: Application) {
         console.log('BackHostApp.insert', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -485,10 +485,10 @@ class BackHostApp {
         } finally {
             database.release(context);
         }
-    }
+    }*/
 
     // action
-    async update(req, res, context: Context, application: Application) {
+    /*async update(req, res, context: Context, application: Application) {
         console.log('BackHostApp.update', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -512,10 +512,10 @@ class BackHostApp {
         } finally {
             database.release(context);
         }
-    }
+    }*/
 
     // action
-    async _delete(req, res, context: Context, application: Application) {
+    /*async _delete(req, res, context: Context, application: Application) {
         console.log('BackHostApp._delete', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -539,10 +539,10 @@ class BackHostApp {
         } finally {
             database.release(context);
         }
-    }
+    }*/
 
     // action
-    async rpc(req, res, context: Context, application: Application) {
+    /*async rpc(req, res, context: Context, application: Application) {
         console.log('BackHostApp.rpc', req.body);
         // const application = this.getApplication(context);
         // await application.initContext(context);
@@ -580,9 +580,9 @@ class BackHostApp {
             await this.logError(err, req);
             await res.json({errorMessage});
         }
-    }
+    }*/
 
-    // action
+    /*// action
     async logout(req, res, context: Context, application: Application) {
         console.log('BackHostApp.logout');
         if (!req.session.user || !req.session.user[context.getRoute()]) {
@@ -591,15 +591,15 @@ class BackHostApp {
         delete req.session.user[context.getRoute()];
         await Helper.Session_save(req.session);
         await res.json(null);
-    }
+    }*/
 
     // action
-    async test(req, res, context: Context, application: Application) {
+    /*async test(req, res, context: Context, application: Application) {
         console.log('BackHostApp.test', req.body);
         // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
-    }
+    }*/
 
     async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
