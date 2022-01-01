@@ -484,13 +484,17 @@ class Application extends Model {
         const filePath = path.join(this.getFrontendDirPath(), context.getUri());
         if (await Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
-        } /*else if () {
-            if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-                throw new MyError({message: 'not authenticated', context});
-            }
-        }*/ else {
-            next();
+        } else {
+            // next();
+            context.getRes().statusCode = 404;
+            context.getRes().end('Not Found');
+            await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
+        /*
+        if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+            throw new MyError({message: 'not authenticated', context});
+        }
+        */
     }
 }
 
