@@ -110,7 +110,7 @@ class ViewerModule {
             if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
                 throw new Error(`unknown action: ${context.getReq().body.action}`);
             }
-            return await this[context.getReq().body.action](context.getReq(), context.getRes(), context, application);
+            return await this[context.getReq().body.action](context, application);
         }
     }
     async loginPost(context, application) {
@@ -170,8 +170,10 @@ class ViewerModule {
         }
     }
     // action (fill page)
-    async page(req, res, context, application) {
-        console.log('ViewerModule.page', req.body.page);
+    async page(context, application) {
+        console.log('ViewerModule.page', context.getReq().body.page);
+        const req = context.getReq();
+        const res = context.getRes();
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -186,8 +188,10 @@ class ViewerModule {
         }
     }
     // action
-    async select(req, res, context, application) {
-        console.log('ViewerModule.select', req.body.page);
+    async select(context, application) {
+        console.log('ViewerModule.select', context.getReq().body.page);
+        const req = context.getReq();
+        const res = context.getRes();
         const start = Date.now();
         let dataSource;
         if (req.body.page) {
@@ -216,8 +220,10 @@ class ViewerModule {
         }
     }
     // action
-    async insert(req, res, context, application) {
-        console.log('ViewerModule.insert', req.body.page);
+    async insert(context, application) {
+        console.log('ViewerModule.insert', context.getReq().body.page);
+        const req = context.getReq();
+        const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -245,8 +251,10 @@ class ViewerModule {
         }
     }
     // action
-    async update(req, res, context, application) {
-        console.log('ViewerModule.update', req.body.page);
+    async update(context, application) {
+        console.log('ViewerModule.update', context.getReq().body.page);
+        const req = context.getReq();
+        const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -274,8 +282,10 @@ class ViewerModule {
         }
     }
     // action
-    async _delete(req, res, context, application) {
-        console.log('ViewerModule._delete', req.body.page);
+    async _delete(context, application) {
+        console.log('ViewerModule._delete', context.getReq().body.page);
+        const req = context.getReq();
+        const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -303,8 +313,10 @@ class ViewerModule {
         }
     }
     // action
-    async rpc(req, res, context, application) {
-        console.log('ViewerModule.rpc', req.body);
+    async rpc(context, application) {
+        console.log('ViewerModule.rpc', context.getReq().body);
+        const req = context.getReq();
+        const res = context.getRes();
         // const application = this.getApplication(context);
         // await application.initContext(context);
         let model;
@@ -348,8 +360,10 @@ class ViewerModule {
         }
     }
     // action
-    async logout(req, res, context, application) {
+    async logout(context, application) {
         console.log('ViewerModule.logout');
+        const req = context.getReq();
+        const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
@@ -358,8 +372,10 @@ class ViewerModule {
         await res.json(null);
     }
     // action
-    async test(req, res, context, application) {
-        console.log('ViewerModule.test', req.body);
+    async test(context, application) {
+        console.log('ViewerModule.test', context.getReq().body);
+        const req = context.getReq();
+        const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);

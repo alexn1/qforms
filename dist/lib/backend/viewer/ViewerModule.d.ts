@@ -13,13 +13,13 @@ declare class ViewerModule {
     loginGet(context: Context, application: Application): Promise<void>;
     handleViewerPost(context: Context, application: Application): Promise<any>;
     loginPost(context: Context, application: Application): Promise<void>;
-    page(req: any, res: any, context: Context, application: Application): Promise<void>;
-    select(req: any, res: any, context: Context, application: Application): Promise<number>;
-    insert(req: any, res: any, context: Context, application: Application): Promise<void>;
-    update(req: any, res: any, context: Context, application: Application): Promise<void>;
-    _delete(req: any, res: any, context: Context, application: Application): Promise<void>;
-    rpc(req: any, res: any, context: Context, application: Application): Promise<void>;
-    logout(req: any, res: any, context: Context, application: Application): Promise<void>;
-    test(req: any, res: any, context: Context, application: Application): Promise<void>;
+    page(context: Context, application: Application): Promise<void>;
+    select(context: Context, application: Application): Promise<number>;
+    insert(context: Context, application: Application): Promise<void>;
+    update(context: Context, application: Application): Promise<void>;
+    _delete(context: Context, application: Application): Promise<void>;
+    rpc(context: Context, application: Application): Promise<void>;
+    logout(context: Context, application: Application): Promise<void>;
+    test(context: Context, application: Application): Promise<void>;
 }
 export = ViewerModule;
