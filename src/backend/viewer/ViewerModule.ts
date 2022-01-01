@@ -113,7 +113,7 @@ class ViewerModule {
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
-            return await this.backHostApp[req.body.action](req, res, context);
+            return await this.backHostApp[req.body.action](req, res, context, application);
         }
     }
     async loginPost(req, res, context: Context, application: Application): Promise<void> {

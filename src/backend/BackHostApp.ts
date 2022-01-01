@@ -416,9 +416,9 @@ class BackHostApp {
     }*/
 
     // action (fill page)
-    async page(req, res, context: Context) {
+    async page(req, res, context: Context, application: Application) {
         console.log('BackHostApp.page', req.body.page);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -432,10 +432,10 @@ class BackHostApp {
     }
 
     // action
-    async select(req, res, context: Context) {
+    async select(req, res, context: Context, application: Application) {
         console.log('BackHostApp.select', req.body.page);
         const start = Date.now();
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         let dataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
@@ -461,9 +461,9 @@ class BackHostApp {
     }
 
     // action
-    async insert(req, res, context: Context) {
+    async insert(req, res, context: Context, application: Application) {
         console.log('BackHostApp.insert', req.body.page);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
@@ -488,9 +488,9 @@ class BackHostApp {
     }
 
     // action
-    async update(req, res, context: Context) {
+    async update(req, res, context: Context, application: Application) {
         console.log('BackHostApp.update', req.body.page);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
@@ -515,9 +515,9 @@ class BackHostApp {
     }
 
     // action
-    async _delete(req, res, context: Context) {
+    async _delete(req, res, context: Context, application: Application) {
         console.log('BackHostApp._delete', req.body.page);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
         const dataSource = form.getDataSource('default');
@@ -542,9 +542,9 @@ class BackHostApp {
     }
 
     // action
-    async rpc(req, res, context: Context) {
+    async rpc(req, res, context: Context, application: Application) {
         console.log('BackHostApp.rpc', req.body);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         // await application.initContext(context);
         let model: Model;
         if (req.body.page) {
@@ -583,7 +583,7 @@ class BackHostApp {
     }
 
     // action
-    async logout(req, res, context: Context) {
+    async logout(req, res, context: Context, application: Application) {
         console.log('BackHostApp.logout');
         if (!req.session.user || !req.session.user[context.getRoute()]) {
             throw new Error(`no user for route ${context.getRoute()}`);
@@ -594,9 +594,9 @@ class BackHostApp {
     }
 
     // action
-    async test(req, res, context: Context) {
+    async test(req, res, context: Context, application: Application) {
         console.log('BackHostApp.test', req.body);
-        // const result = await Test[req.body.name](req, res, context, this.getApplication(context));
+        // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
     }
