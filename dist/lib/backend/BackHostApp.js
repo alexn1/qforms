@@ -239,37 +239,35 @@ class BackHostApp {
         // console.log('BackHostApp.getApplicationClass', appInfo);
         return Application_1.default;
     }
-    async handleViewerGet(req, res, context, application) {
-        console.log('BackHostApp.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+    /*async handleViewerGet(req, res, context: Context, application: Application) {
+        console.log('BackHostApp.handleViewerGet', context.query/!*, Object.keys(context.query).map(name => typeof context.query[name])*!/);
         // const application = this.getApplication(context);
         if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
-        }
-        else {
+        } else {
             await application.connect(context);
             try {
                 await application.initContext(context);
-                const response = await application.fill(context);
+                const response =  await application.fill(context);
                 res.render('viewer/index', {
-                    version: pkg.version,
-                    application: application,
-                    context: context,
-                    response: response,
-                    links: [
+                    version       : pkg.version,
+                    application   : application,
+                    context       : context,
+                    response      : response,
+                    links         : [
                         ...this.viewerModule.getLinks(),
                         ...application.links
                     ],
-                    scripts: [
+                    scripts       : [
                         ...this.viewerModule.getScripts(),
                         ...application.scripts
                     ]
                 });
-            }
-            finally {
+            } finally {
                 application.release(context);
             }
         }
-    }
+    }*/
     async handleViewerPost(req, res, context) {
         // console.log('BackHostApp.handleViewerPost');
         await this.createApplicationIfNotExists(context);
@@ -286,30 +284,30 @@ class BackHostApp {
             return await this[req.body.action](req, res, context);
         }
     }
-    async loginGet(req, res, context) {
+    /*async loginGet(req, res, context: Context) {
         console.log('BackHostApp.loginGet');
         const application = this.getApplication(context);
         // const users = await application.getUsers(context);
         res.render('viewer/login', {
-            version: pkg.version,
-            context: context,
+            version    : pkg.version,
+            context    : context,
             application: application,
-            links: [
+            links         : [
                 ...this.viewerModule.getLinks(),
                 ...application.links
             ],
-            scripts: [
+            scripts       : [
                 ...this.viewerModule.getScripts(),
                 ...application.scripts
             ],
             data: {
-                name: application.getName(),
-                text: application.getText(),
-                title: application.getTitle(context),
+                name  : application.getName(),
+                text  : application.getText(),
+                title : application.getTitle(context),
                 errMsg: null,
             }
         });
-    }
+    }*/
     async loginPost(req, res, context) {
         console.log('BackHostApp.loginPost');
         if (req.body.tzOffset === undefined)

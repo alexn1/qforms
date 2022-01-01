@@ -40,7 +40,7 @@ class ViewerModule {
         console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         // const application = this.getApplication(context);
         if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-            await this.backHostApp.loginGet(req, res, context);
+            await this.loginGet(req, res, context, application);
         } else {
             await application.connect(context);
             try {
@@ -64,6 +64,30 @@ class ViewerModule {
                 application.release(context);
             }
         }
+    }
+    async loginGet(req, res, context: Context, application: Application) {
+        console.log('BackHostApp.loginGet');
+        // const application = this.getApplication(context);
+        // const users = await application.getUsers(context);
+        res.render('viewer/login', {
+            version    : pkg.version,
+            context    : context,
+            application: application,
+            links         : [
+                ...this.getLinks(),
+                ...application.links
+            ],
+            scripts       : [
+                ...this.getScripts(),
+                ...application.scripts
+            ],
+            data: {
+                name  : application.getName(),
+                text  : application.getText(),
+                title : application.getTitle(context),
+                errMsg: null,
+            }
+        });
     }
 }
 export = ViewerModule;

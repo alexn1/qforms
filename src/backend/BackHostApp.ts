@@ -343,7 +343,7 @@ class BackHostApp {
         }
     }
 
-    async loginGet(req, res, context: Context) {
+    /*async loginGet(req, res, context: Context) {
         console.log('BackHostApp.loginGet');
         const application = this.getApplication(context);
         // const users = await application.getUsers(context);
@@ -366,7 +366,7 @@ class BackHostApp {
                 errMsg: null,
             }
         });
-    }
+    }*/
 
     async loginPost(req, res, context: Context) {
         console.log('BackHostApp.loginPost');

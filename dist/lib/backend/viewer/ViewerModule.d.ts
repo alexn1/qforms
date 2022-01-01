@@ -10,5 +10,6 @@ declare class ViewerModule {
     getLinks(): string[];
     getScripts(): string[];
     handleViewerGet(req: any, res: any, context: Context, application: Application): Promise<void>;
+    loginGet(req: any, res: any, context: Context, application: Application): Promise<void>;
 }
 export = ViewerModule;
