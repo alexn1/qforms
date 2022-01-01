@@ -530,26 +530,27 @@ class BackHostApp {
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
     }*/
-    async handleEditorGet(req, res, context) {
+    /*async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
-        const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+
         // data
         const data = {
-            app: appInfo.appFile.data,
-            nodeEnv: this.getNodeEnv(),
+            app        : appInfo.appFile.data,
+            nodeEnv    : this.getNodeEnv(),
             logErrorUrl: this.logErrorUrl
         };
         res.render('editor/index', {
-            version: pkg.version,
-            data: data,
-            runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/?debug=1`,
-            appDirName: context.getAppDirName(),
+            version    : pkg.version,
+            data       : data,
+            runAppLink : `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/?debug=1`,
+            appDirName : context.getAppDirName(),
             appFileName: context.getAppFileName(),
-            env: context.getEnv(),
-            links: this.editorModule.getLinks(),
-            scripts: this.editorModule.getScripts()
+            env        : context.getEnv(),
+            links      : this.editorModule.getLinks(),
+            scripts    : this.editorModule.getScripts()
         });
-    }
+    }*/
     async handleEditorPost(req, res, context) {
         console.log('BackHostApp.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
@@ -687,7 +688,7 @@ class BackHostApp {
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
                     context = new Context_1.default({ req, domain: this.getDomain(req) });
-                    await this.handleEditorGet(req, res, context);
+                    await this.editorModule.handleEditorGet(req, res, context);
                 }
                 else {
                     next();

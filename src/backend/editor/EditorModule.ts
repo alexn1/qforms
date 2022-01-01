@@ -1,7 +1,11 @@
+import Context from "../Context";
+
 const path = require('path');
+const pkg     = require('../../../package.json');
 
 import BackHostApp from '../BackHostApp';
 import Helper from "../Helper";
+import Application from "../viewer/Model/Application/Application";
 
 class EditorModule {
     backHostApp: BackHostApp;
@@ -35,6 +39,27 @@ class EditorModule {
             ...(this.backHostApp.commonModule.js),
             ...(this.js)
         ];
+    }
+    async handleEditorGet(req, res, context: Context) {
+        console.log('BackHostApp.handleEditorGet');
+        const appInfo = await Application.loadAppInfo(this.backHostApp.getAppFilePath(context));
+
+        // data
+        const data = {
+            app        : appInfo.appFile.data,
+            nodeEnv    : this.backHostApp.getNodeEnv(),
+            logErrorUrl: this.backHostApp.logErrorUrl
+        };
+        res.render('editor/index', {
+            version    : pkg.version,
+            data       : data,
+            runAppLink : `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/?debug=1`,
+            appDirName : context.getAppDirName(),
+            appFileName: context.getAppFileName(),
+            env        : context.getEnv(),
+            links      : this.getLinks(),
+            scripts    : this.getScripts()
+        });
     }
 }
 export = EditorModule;

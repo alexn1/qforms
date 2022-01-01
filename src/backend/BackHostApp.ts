@@ -601,7 +601,7 @@ class BackHostApp {
         await res.json(null);
     }*/
 
-    async handleEditorGet(req, res, context: Context) {
+    /*async handleEditorGet(req, res, context: Context) {
         console.log('BackHostApp.handleEditorGet');
         const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
 
@@ -621,7 +621,7 @@ class BackHostApp {
             links      : this.editorModule.getLinks(),
             scripts    : this.editorModule.getScripts()
         });
-    }
+    }*/
 
     async handleEditorPost(req, res, context: Context) {
         console.log('BackHostApp.handleEditorPost', req.body);
@@ -756,7 +756,7 @@ class BackHostApp {
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
                     context = new Context({req, domain: this.getDomain(req)});
-                    await this.handleEditorGet(req, res, context);
+                    await this.editorModule.handleEditorGet(req, res, context);
                 } else {
                     next();
                 }
