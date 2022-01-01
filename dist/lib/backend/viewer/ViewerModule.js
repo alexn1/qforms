@@ -380,5 +380,18 @@ class ViewerModule {
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
     }
+    async handleViewerGetFile(context, application, next) {
+        const filePath = path.join(application.getFrontendDirPath(), context.getUri());
+        if (await Helper_1.default.exists(filePath)) {
+            context.getRes().sendFile(filePath);
+        } /*else if () {
+            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+                throw new MyError({message: 'not authenticated', context});
+            }
+        }*/
+        else {
+            next();
+        }
+    }
 }
 module.exports = ViewerModule;

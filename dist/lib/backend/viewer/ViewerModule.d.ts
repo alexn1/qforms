@@ -21,5 +21,6 @@ declare class ViewerModule {
     rpc(context: Context, application: Application): Promise<void>;
     logout(context: Context, application: Application): Promise<void>;
     test(context: Context, application: Application): Promise<void>;
+    handleViewerGetFile(context: Context, application: Application, next: any): Promise<void>;
 }
 export = ViewerModule;
