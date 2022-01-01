@@ -11,7 +11,7 @@ declare class ViewerModule {
     getScripts(): string[];
     handleViewerGet(context: Context, application: Application): Promise<void>;
     loginGet(context: Context, application: Application): Promise<void>;
-    handleViewerPost(req: any, res: any, context: Context, application: Application): Promise<any>;
+    handleViewerPost(context: Context, application: Application): Promise<any>;
     loginPost(req: any, res: any, context: Context, application: Application): Promise<void>;
     page(req: any, res: any, context: Context, application: Application): Promise<void>;
     select(req: any, res: any, context: Context, application: Application): Promise<number>;

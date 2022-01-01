@@ -831,9 +831,9 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, domain: this.getDomain(req)});
+                context = new Context({req, res, domain: this.getDomain(req)});
                 const application = await this.createApplicationIfNotExists(context);
-                const time = await this.viewerModule.handleViewerPost(req, res, context, application);
+                const time = await this.viewerModule.handleViewerPost(context, application);
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {

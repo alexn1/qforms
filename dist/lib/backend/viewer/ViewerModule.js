@@ -98,19 +98,19 @@ class ViewerModule {
             }
         });
     }
-    async handleViewerPost(req, res, context, application) {
+    async handleViewerPost(context, application) {
         // console.log('ViewerModule.handleViewerPost');
-        if (req.body.action === 'login') {
-            await this.loginPost(req, res, context, application);
+        if (context.getReq().body.action === 'login') {
+            await this.loginPost(context.getReq(), context.getRes(), context, application);
         }
         else {
-            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+            if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
                 throw new MyError_1.default({ message: 'Unauthorized', status: 401, context });
             }
-            if (ACTIONS.indexOf(req.body.action) === -1) {
-                throw new Error(`unknown action: ${req.body.action}`);
+            if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
+                throw new Error(`unknown action: ${context.getReq().body.action}`);
             }
-            return await this[req.body.action](req, res, context, application);
+            return await this[context.getReq().body.action](context.getReq(), context.getRes(), context, application);
         }
     }
     async loginPost(req, res, context, application) {
