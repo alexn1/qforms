@@ -12,7 +12,7 @@ declare class ViewerModule {
     handleViewerGet(context: Context, application: Application): Promise<void>;
     loginGet(context: Context, application: Application): Promise<void>;
     handleViewerPost(context: Context, application: Application): Promise<any>;
-    loginPost(req: any, res: any, context: Context, application: Application): Promise<void>;
+    loginPost(context: Context, application: Application): Promise<void>;
     page(req: any, res: any, context: Context, application: Application): Promise<void>;
     select(req: any, res: any, context: Context, application: Application): Promise<number>;
     insert(req: any, res: any, context: Context, application: Application): Promise<void>;

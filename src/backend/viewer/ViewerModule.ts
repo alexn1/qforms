@@ -106,7 +106,7 @@ class ViewerModule {
     async handleViewerPost(context: Context, application: Application) {
         // console.log('ViewerModule.handleViewerPost');
         if (context.getReq().body.action === 'login') {
-            await this.loginPost(context.getReq(), context.getRes(), context, application);
+            await this.loginPost(context, application);
         } else {
             if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
                 throw new MyError({message: 'Unauthorized', status: 401, context});
@@ -117,8 +117,10 @@ class ViewerModule {
             return await this[context.getReq().body.action](context.getReq(), context.getRes(), context, application);
         }
     }
-    async loginPost(req, res, context: Context, application: Application): Promise<void> {
+    async loginPost(context: Context, application: Application): Promise<void> {
         console.log('ViewerModule.loginPost');
+        const req = context.getReq();
+        const res = context.getRes();
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');

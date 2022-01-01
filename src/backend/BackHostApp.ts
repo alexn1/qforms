@@ -755,7 +755,7 @@ class BackHostApp {
                 }
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, domain: this.getDomain(req)});
+                    context = new Context({req, res, domain: this.getDomain(req)});
                     await this.editorModule.handleEditorGet(req, res, context);
                 } else {
                     next();
@@ -837,7 +837,7 @@ class BackHostApp {
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, domain: this.getDomain(req)});
+                    context = new Context({req, res, domain: this.getDomain(req)});
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 } else {
@@ -863,7 +863,7 @@ class BackHostApp {
         }
         let context = null;
         try {
-            context = new Context({req, domain: this.getDomain(req)});
+            context = new Context({req, res, domain: this.getDomain(req)});
             if (!this.applications[context.getRoute()]) {
                 next();
                 return;
