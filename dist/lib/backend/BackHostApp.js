@@ -26,16 +26,16 @@ const pkg = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
 // post actions
-const ACTIONS = [
+/*const ACTIONS = [
     'page',
-    'select',
-    'insert',
-    'update',
-    '_delete',
+    'select',       // select
+    'insert',       // insert
+    'update',       // update
+    '_delete',      // delete
     'rpc',
     'logout',
     'test',
-];
+];*/
 const EDITOR_CONTROLLERS = [
     'Application',
     'Database',

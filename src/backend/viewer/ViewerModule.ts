@@ -52,7 +52,7 @@ class ViewerModule {
         ];
     }
     async handleViewerGet(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        console.log('ViewerModule.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
         // const application = this.getApplication(context);
         if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context, application);
@@ -81,7 +81,7 @@ class ViewerModule {
         }
     }
     async loginGet(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.loginGet');
+        console.log('ViewerModule.loginGet');
         // const application = this.getApplication(context);
         // const users = await application.getUsers(context);
         res.render('viewer/login', {
@@ -105,7 +105,7 @@ class ViewerModule {
         });
     }
     async handleViewerPost(req, res, context: Context, application: Application) {
-        // console.log('BackHostApp.handleViewerPost');
+        // console.log('ViewerModule.handleViewerPost');
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context, application);
         } else {
@@ -119,7 +119,7 @@ class ViewerModule {
         }
     }
     async loginPost(req, res, context: Context, application: Application): Promise<void> {
-        console.log('BackHostApp.loginPost');
+        console.log('ViewerModule.loginPost');
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');
@@ -168,7 +168,7 @@ class ViewerModule {
 
     // action (fill page)
     async page(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.page', req.body.page);
+        console.log('ViewerModule.page', req.body.page);
         await application.connect(context);
         try {
             await application.initContext(context);
@@ -183,7 +183,7 @@ class ViewerModule {
 
     // action
     async select(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.select', req.body.page);
+        console.log('ViewerModule.select', req.body.page);
         const start = Date.now();
         let dataSource;
         if (req.body.page) {
@@ -211,7 +211,7 @@ class ViewerModule {
 
     // action
     async insert(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.insert', req.body.page);
+        console.log('ViewerModule.insert', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -238,7 +238,7 @@ class ViewerModule {
 
     // action
     async update(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.update', req.body.page);
+        console.log('ViewerModule.update', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -265,7 +265,7 @@ class ViewerModule {
 
     // action
     async _delete(req, res, context: Context, application: Application) {
-        console.log('BackHostApp._delete', req.body.page);
+        console.log('ViewerModule._delete', req.body.page);
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
@@ -292,7 +292,7 @@ class ViewerModule {
 
     // action
     async rpc(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.rpc', req.body);
+        console.log('ViewerModule.rpc', req.body);
         // const application = this.getApplication(context);
         // await application.initContext(context);
         let model: Model;
@@ -333,7 +333,7 @@ class ViewerModule {
 
     // action
     async logout(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.logout');
+        console.log('ViewerModule.logout');
         if (!req.session.user || !req.session.user[context.getRoute()]) {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
@@ -344,7 +344,7 @@ class ViewerModule {
 
     // action
     async test(req, res, context: Context, application: Application) {
-        console.log('BackHostApp.test', req.body);
+        console.log('ViewerModule.test', req.body);
         // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
         await res.json(null);
