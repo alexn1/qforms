@@ -268,22 +268,20 @@ class BackHostApp {
             }
         }
     }*/
-    async handleViewerPost(req, res, context) {
+    /*async handleViewerPost(req, res, context: Context, application: Application) {
         // console.log('BackHostApp.handleViewerPost');
-        await this.createApplicationIfNotExists(context);
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context);
-        }
-        else {
-            if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
-                throw new MyError_1.default({ message: 'Unauthorized', status: 401, context });
+        } else {
+            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+                throw new MyError({message: 'Unauthorized', status: 401, context});
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
             return await this[req.body.action](req, res, context);
         }
-    }
+    }*/
     /*async loginGet(req, res, context: Context) {
         console.log('BackHostApp.loginGet');
         const application = this.getApplication(context);
@@ -308,60 +306,53 @@ class BackHostApp {
             }
         });
     }*/
-    async loginPost(req, res, context) {
+    /*async loginPost(req, res, context: Context, application: Application): Promise<void> {
         console.log('BackHostApp.loginPost');
-        if (req.body.tzOffset === undefined)
-            throw new Error('no tzOffset');
-        if (req.body.username === undefined)
-            throw new Error('no username');
-        if (req.body.password === undefined)
-            throw new Error('no password');
-        const application = this.getApplication(context);
+        if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
+        if (req.body.username === undefined) throw new Error('no username');
+        if (req.body.password === undefined) throw new Error('no password');
+        // const application = this.getApplication(context);
         await application.connect(context);
         try {
             const user = await application.authenticate(context, req.body.username, req.body.password);
             if (user) {
-                if (!user.id)
-                    throw new Error('no user id');
-                if (!user.name)
-                    throw new Error('no user name');
+                if (!user.id)   throw new Error('no user id');
+                if (!user.name) throw new Error('no user name');
                 if (req.session.user === undefined) {
                     req.session.user = {};
                 }
-                req.session.ip = context.getIp();
+                req.session.ip       = context.getIp();
                 req.session.tzOffset = JSON.parse(req.body.tzOffset);
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
-            }
-            else {
+            } else {
                 // const users = await application.getUsers(context);
                 res.render('viewer/login', {
-                    version: pkg.version,
-                    context: context,
+                    version    : pkg.version,
+                    context    : context,
                     application: application,
-                    links: [
+                    links         : [
                         ...this.viewerModule.getLinks(),
                         ...application.links
                     ],
-                    scripts: [
+                    scripts       : [
                         ...this.viewerModule.getScripts(),
                         ...application.scripts
                     ],
                     data: {
-                        name: application.getName(),
-                        text: application.getText(),
-                        title: application.getTitle(context),
+                        name  : application.getName(),
+                        text  : application.getText(),
+                        title : application.getTitle(context),
                         errMsg: application.getText().login.WrongUsernameOrPassword,
                         username: req.body.username,
                         password: req.body.password,
                     }
                 });
             }
-        }
-        finally {
+        } finally {
             application.release(context);
         }
-    }
+    }*/
     // action (fill page)
     async page(req, res, context) {
         console.log('BackHostApp.page', req.body.page);
@@ -796,7 +787,8 @@ class BackHostApp {
         try {
             if (req.params.module === 'viewer') {
                 context = new Context_1.default({ req, domain: this.getDomain(req) });
-                const time = await this.handleViewerPost(req, res, context);
+                const application = await this.createApplicationIfNotExists(context);
+                const time = await this.viewerModule.handleViewerPost(req, res, context, application);
                 // await this.logRequest(req, context, time);
             }
             else if (req.params.module === 'editor') {

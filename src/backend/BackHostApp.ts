@@ -327,13 +327,12 @@ class BackHostApp {
         }
     }*/
 
-    async handleViewerPost(req, res, context: Context) {
+    /*async handleViewerPost(req, res, context: Context, application: Application) {
         // console.log('BackHostApp.handleViewerPost');
-        await this.createApplicationIfNotExists(context);
         if (req.body.action === 'login') {
             await this.loginPost(req, res, context);
         } else {
-            if (this.getApplication(context).isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
+            if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
                 throw new MyError({message: 'Unauthorized', status: 401, context});
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
@@ -341,7 +340,7 @@ class BackHostApp {
             }
             return await this[req.body.action](req, res, context);
         }
-    }
+    }*/
 
     /*async loginGet(req, res, context: Context) {
         console.log('BackHostApp.loginGet');
@@ -368,12 +367,12 @@ class BackHostApp {
         });
     }*/
 
-    async loginPost(req, res, context: Context) {
+    /*async loginPost(req, res, context: Context, application: Application): Promise<void> {
         console.log('BackHostApp.loginPost');
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
         if (req.body.password === undefined) throw new Error('no password');
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         await application.connect(context);
         try {
             const user = await application.authenticate(context, req.body.username, req.body.password);
@@ -414,7 +413,7 @@ class BackHostApp {
         } finally {
             application.release(context);
         }
-    }
+    }*/
 
     // action (fill page)
     async page(req, res, context: Context) {
@@ -833,7 +832,8 @@ class BackHostApp {
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({req, domain: this.getDomain(req)});
-                const time = await this.handleViewerPost(req, res, context);
+                const application = await this.createApplicationIfNotExists(context);
+                const time = await this.viewerModule.handleViewerPost(req, res, context, application);
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
