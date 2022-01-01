@@ -9,5 +9,6 @@ declare class EditorModule {
     getLinks(): string[];
     getScripts(): string[];
     handleEditorGet(req: any, res: any, context: Context): Promise<void>;
+    handleEditorPost(req: any, res: any, context: Context): Promise<void>;
 }
 export = EditorModule;

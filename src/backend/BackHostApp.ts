@@ -40,7 +40,7 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
     'test',
 ];*/
 
-const EDITOR_CONTROLLERS = [
+/*const EDITOR_CONTROLLERS = [
     'Application',
     'Database'   ,
     'Param'      ,
@@ -71,7 +71,7 @@ const EDITOR_ACTIONS = [
     'moveUp'           ,
     'moveDown'         ,
     'createModelBackJs',
-];
+];*/
 
 class BackHostApp {
     params: any;
@@ -623,7 +623,7 @@ class BackHostApp {
         });
     }*/
 
-    async handleEditorPost(req, res, context: Context) {
+    /*async handleEditorPost(req, res, context: Context) {
         console.log('BackHostApp.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
@@ -644,7 +644,7 @@ class BackHostApp {
         // console.log('json result:', result);
         if (result === undefined) throw new Error('handleEditorPost: result is undefined');
         await res.json(result);
-    }
+    }*/
 
     async createApp(req) {
         console.log('createApp');
@@ -838,7 +838,7 @@ class BackHostApp {
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
                     context = new Context({req, domain: this.getDomain(req)});
-                    const time = await this.handleEditorPost(req, res, context);
+                    const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 } else {
                     next();

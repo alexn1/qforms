@@ -37,7 +37,6 @@ declare class BackHostApp {
     getAppFilePath(context: Context): any;
     createApplication(context: Context): Promise<Application>;
     getApplicationClass(appInfo: AppInfo): typeof Application;
-    handleEditorPost(req: any, res: any, context: Context): Promise<void>;
     createApp(req: any): Promise<AppInfo[]>;
     logError(err: any, req?: any): Promise<void>;
     logRequest(req: any, context: Context, time: any): Promise<void>;
