@@ -239,9 +239,9 @@ class BackHostApp {
         // console.log('BackHostApp.getApplicationClass', appInfo);
         return Application_1.default;
     }
-    async handleViewerGet(req, res, context) {
+    async handleViewerGet(req, res, context, application) {
         console.log('BackHostApp.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        const application = this.getApplication(context);
+        // const application = this.getApplication(context);
         if (application.isAuthentication() && !(req.session.user && req.session.user[context.getRoute()])) {
             await this.loginGet(req, res, context);
         }
@@ -709,7 +709,7 @@ class BackHostApp {
                 context = new Context_1.default({ req, domain: this.getDomain(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 if (application.isAvailable()) {
-                    await this.handleViewerGet(req, res, context);
+                    await this.viewerModule.handleViewerGet(req, res, context, application);
                 }
                 else {
                     next();
