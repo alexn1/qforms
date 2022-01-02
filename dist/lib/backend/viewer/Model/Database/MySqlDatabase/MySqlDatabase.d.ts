@@ -7,7 +7,7 @@ declare class MySqlDatabase extends Database {
     getPool(): any;
     getConfig(): any;
     static Pool_getConnection(pool: any): Promise<any>;
-    queryRows(context: any, query: any, params: any): Promise<any[]>;
+    queryRows(context: Context, query: string, params?: any): Promise<any[]>;
     queryResult(context: any, query: any, params?: any): Promise<any>;
     _getRows(result: any, fields: any): any[];
     begin(context: Context): Promise<void>;

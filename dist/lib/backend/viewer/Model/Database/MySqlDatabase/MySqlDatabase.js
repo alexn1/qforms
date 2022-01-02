@@ -70,7 +70,7 @@ class MySqlDatabase extends Database_1.default {
             }
         });
     }*/
-    async queryRows(context, query, params) {
+    async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
         Database_1.default.checkParams(query, params);
         const nest = true;

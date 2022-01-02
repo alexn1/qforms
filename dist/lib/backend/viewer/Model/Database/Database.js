@@ -39,7 +39,7 @@ class Database extends Model_1.default {
     async queryResult(context, query, params = null) {
         throw new Error('Database.queryResult not implemented');
     }
-    async queryRows(context, query, params) {
+    async queryRows(context, query, params = null) {
         throw new Error('Database.queryRows not implemented');
     }
     async queryScalar(context, query, params) {

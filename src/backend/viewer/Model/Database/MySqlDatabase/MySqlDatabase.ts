@@ -81,7 +81,7 @@ class MySqlDatabase extends Database {
     }*/
 
 
-    async queryRows(context, query, params): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         Database.checkParams(query, params);
         const nest = true;

@@ -47,7 +47,7 @@ class Database extends Model {
         throw new Error('Database.queryResult not implemented');
     }
 
-    async queryRows(context, query, params): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         throw new Error('Database.queryRows not implemented');
     }
 

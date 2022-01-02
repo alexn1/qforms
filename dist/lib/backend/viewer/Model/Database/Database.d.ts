@@ -13,7 +13,7 @@ declare class Database extends Model {
     getConnection(context: any): any;
     release(context: Context): void;
     queryResult(context: any, query: any, params?: any): Promise<void>;
-    queryRows(context: any, query: any, params: any): Promise<any[]>;
+    queryRows(context: Context, query: string, params?: any): Promise<any[]>;
     queryScalar(context: any, query: any, params: any): Promise<any>;
     begin(context: Context): Promise<void>;
     commit(context: any): Promise<void>;
