@@ -800,20 +800,8 @@ class BackHostApp {
             let context = null;
             try {
                 context = new Context_1.default({ req, res, domain: this.getDomain(req) });
-                if (this.applications[context.getRoute()]) {
-                    const application = this.getApplication(context);
-                    await this.viewerModule.handleViewerGetFile(context, application, next);
-                    /*
-                    const filePath = path.join(application.getFrontendDirPath(), context.getUri());
-                    if (await Helper.exists(filePath)) {
-                        res.sendFile(filePath);
-                    } else {
-                        next();
-                    }*/
-                }
-                else {
-                    next();
-                }
+                const application = await this.createApplicationIfNotExists(context);
+                await this.viewerModule.handleViewerGetFile(context, application, next);
             }
             catch (err) {
                 err.message = `moduleGetFile error: ${err.message}`;
