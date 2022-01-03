@@ -417,8 +417,7 @@ class Application extends Model_1.default {
         }
         else {
             // next();
-            context.getRes().statusCode = 404;
-            context.getRes().end('Not Found');
+            context.getRes().status(404).end('Not Found');
             await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
         /*
