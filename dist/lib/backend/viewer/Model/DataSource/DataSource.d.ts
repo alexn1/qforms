@@ -3,6 +3,7 @@ import Model from '../Model';
 import Context from '../../../Context';
 import Application from '../Application/Application';
 import Database from '../Database/Database';
+import Form from '../Form/Form';
 declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];
@@ -33,5 +34,6 @@ declare class DataSource extends Model {
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
+    getForm(): Form;
 }
 export = DataSource;

@@ -259,7 +259,9 @@ class DataSource extends Model {
     async delete(context: Context): Promise<Result> {
         throw new Error('DataSource.delete not implemented');
     }
-
+    getForm(): Form {
+        return this.isOnForm() ? this.getParent() : null;
+    }
 }
 
 export = DataSource;

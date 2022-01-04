@@ -237,5 +237,8 @@ class DataSource extends Model_1.default {
     async delete(context) {
         throw new Error('DataSource.delete not implemented');
     }
+    getForm() {
+        return this.isOnForm() ? this.getParent() : null;
+    }
 }
 module.exports = DataSource;
