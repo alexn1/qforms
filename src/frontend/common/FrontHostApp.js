@@ -43,8 +43,8 @@ class FrontHostApp {
             method: 'POST',
             body  : JSON.stringify({
                 href           : window.location.href,
-                platformVersion: this.data.platformVersion,
-                appVersion     : this.data.appVersion,
+                platformVersion: this.data.versions.platform,
+                appVersion     : this.data.versions.app,
                 message        : err.message,
                 stack          : err.stack,
             }),
