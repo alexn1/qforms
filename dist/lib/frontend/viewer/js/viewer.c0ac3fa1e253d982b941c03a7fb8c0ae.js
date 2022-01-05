@@ -421,9 +421,21 @@ class ApplicationController extends ModelController {
         }
     }
     onRequest = async e => {
-        console.log('onRequest', e.time);
+        console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
+        }
+        this.createVersionNotificationIfNotExists();
+    }
+    createVersionNotificationIfNotExists() {
+        console.log('ApplicationController.createVersionNotificationIfNotExists');
+        if (!document.querySelector(`.${this.getView().getCssBlockName()}__version-notification`)) {
+            const div = document.createElement('div');
+            div.innerHTML = 'version notification';
+            div.className = `${this.getView().getCssBlockName()}__version-notification`;
+            document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
+        } else {
+            console.log(`version notification already exists`);
         }
     }
     getGlobalParams() {
@@ -2420,7 +2432,11 @@ class Application extends Model {
         const [headers, body] = await FrontHostApp.doHttpRequest2(options);
         if (!headers['qforms-platform-version']) throw new Error('no qforms-platform-version header');
         if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
-        this.emit('request', {time: Date.now() - start});
+        this.emit('request', {
+            time: Date.now() - start,
+            remotePlatformVersion: headers['qforms-platform-version'],
+            remoteAppVersionVersion: headers['qforms-app-version']
+        });
         return body;
     }
 

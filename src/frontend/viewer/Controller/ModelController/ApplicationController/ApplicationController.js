@@ -56,9 +56,21 @@ class ApplicationController extends ModelController {
         }
     }
     onRequest = async e => {
-        console.log('onRequest', e.time);
+        console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
+        }
+        this.createVersionNotificationIfNotExists();
+    }
+    createVersionNotificationIfNotExists() {
+        console.log('ApplicationController.createVersionNotificationIfNotExists');
+        if (!document.querySelector(`.${this.getView().getCssBlockName()}__version-notification`)) {
+            const div = document.createElement('div');
+            div.innerHTML = 'version notification';
+            div.className = `${this.getView().getCssBlockName()}__version-notification`;
+            document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
+        } else {
+            console.log(`version notification already exists`);
         }
     }
     getGlobalParams() {
