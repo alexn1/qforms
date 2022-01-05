@@ -60,17 +60,21 @@ class ApplicationController extends ModelController {
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
         }
-        this.createVersionNotificationIfNotExists();
+        // console.log('e.remoteAppVersion', e.remoteAppVersion);
+        // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+        if (this.getModel().getData().versions.app !== e.remoteAppVersion) {
+            this.createVersionNotificationIfNotExists();
+        }
     }
     createVersionNotificationIfNotExists() {
-        console.log('ApplicationController.createVersionNotificationIfNotExists');
+        // console.log('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector(`.${this.getView().getCssBlockName()}__version-notification`)) {
             const div = document.createElement('div');
-            div.innerHTML = 'version notification';
+            div.innerHTML = this.getModel().getText().application.versionNotification;
             div.className = `${this.getView().getCssBlockName()}__version-notification`;
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         } else {
-            console.log(`version notification already exists`);
+            // console.log(`version notification already exists`);
         }
     }
     getGlobalParams() {

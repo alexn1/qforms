@@ -9,7 +9,8 @@
     "application": {
         "logout": "Выйти",
         "error": "Ошибка",
-        "confirm": "Подтверждение"
+        "confirm": "Подтверждение",
+        "versionNotification": "Доступна новая версия. Пожалуйста обновите страницу."
     },
     "page": {
         "create": "Создать",

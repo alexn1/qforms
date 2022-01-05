@@ -46,7 +46,7 @@ class Application extends Model {
         this.emit('request', {
             time: Date.now() - start,
             remotePlatformVersion: headers['qforms-platform-version'],
-            remoteAppVersionVersion: headers['qforms-app-version']
+            remoteAppVersion: headers['qforms-app-version']
         });
         return body;
     }

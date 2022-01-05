@@ -9,7 +9,8 @@
     "application": {
         "logout": "Logout",
         "error": "Error",
-        "confirm": "Confirm"
+        "confirm": "Confirm",
+        "versionNotification": "New version is available. Please refresh page."
     },
     "page": {
         "create": "Create",

@@ -76,5 +76,8 @@ class Model extends EventEmitter {
     getParent() {
         return this.parent;
     }
+    getData() {
+        return this.data;
+    }
 }
 window.QForms.Model = Model;

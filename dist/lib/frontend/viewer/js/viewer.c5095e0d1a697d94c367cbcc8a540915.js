@@ -425,17 +425,21 @@ class ApplicationController extends ModelController {
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
         }
-        this.createVersionNotificationIfNotExists();
+        // console.log('e.remoteAppVersion', e.remoteAppVersion);
+        // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+        if (this.getModel().getData().versions.app !== e.remoteAppVersion) {
+            this.createVersionNotificationIfNotExists();
+        }
     }
     createVersionNotificationIfNotExists() {
-        console.log('ApplicationController.createVersionNotificationIfNotExists');
+        // console.log('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector(`.${this.getView().getCssBlockName()}__version-notification`)) {
             const div = document.createElement('div');
-            div.innerHTML = 'version notification';
+            div.innerHTML = this.getModel().getText().application.versionNotification;
             div.className = `${this.getView().getCssBlockName()}__version-notification`;
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         } else {
-            console.log(`version notification already exists`);
+            // console.log(`version notification already exists`);
         }
     }
     getGlobalParams() {
@@ -2384,6 +2388,9 @@ class Model extends EventEmitter {
     getParent() {
         return this.parent;
     }
+    getData() {
+        return this.data;
+    }
 }
 window.QForms.Model = Model;
 
@@ -2435,7 +2442,7 @@ class Application extends Model {
         this.emit('request', {
             time: Date.now() - start,
             remotePlatformVersion: headers['qforms-platform-version'],
-            remoteAppVersionVersion: headers['qforms-app-version']
+            remoteAppVersion: headers['qforms-app-version']
         });
         return body;
     }
