@@ -24,6 +24,7 @@ declare class Context {
     getIp(): string;
     getHost(): any;
     getProtocol(): any;
+    setVersionHeaders(platformVersion: any, appVersion: any): void;
     destroy(): void;
 }
 export = Context;

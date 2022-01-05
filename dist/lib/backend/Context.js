@@ -101,6 +101,10 @@ class Context {
     getProtocol() {
         return this.getReq().headers['x-forwarded-proto'] || 'http';
     }
+    setVersionHeaders(platformVersion, appVersion) {
+        this.getRes().setHeader('qforms-platform-version', platformVersion);
+        this.getRes().setHeader('qforms-app-version', appVersion);
+    }
     destroy() {
     }
 }
