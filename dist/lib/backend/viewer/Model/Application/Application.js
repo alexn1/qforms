@@ -91,7 +91,7 @@ class Application extends Model_1.default {
         response.platformVersion = pkg.version;
         response.appVersion = this.getVersion();
         response.versions = {
-            qforms: pkg.version,
+            platform: pkg.version,
             app: this.getVersion()
         };
         await this.fillCollection(response, 'databases', context);

@@ -55,9 +55,9 @@ class FrontHostApp {
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const result = await FrontHostApp.postJson(window.location.href, data);
-        console.warn(`result ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, result);
-        return result;
+        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        return body;
     }
 
     static async postJson(url, data) {
@@ -67,13 +67,22 @@ class FrontHostApp {
     static async post(url, body, contentType) {
         try {
             FrontHostApp.startWait();
-            const res = await fetch(url, {
+            const response = await fetch(url, {
                 method: 'POST',
                 body  : body,
                 ...(contentType ? {headers: {'Content-Type': contentType}} : {}),
             });
-            if (res.ok) return await res.json();
-            throw new Error(`${res.status} ${res.statusText}: ${await res.text()}`);
+            if (response.ok) {
+                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
+                    const [name, value] = header;
+                    acc[name] = value;
+                    return acc;
+                }, {});
+                // console.log('headers:', headers);
+                const body = await response.json();
+                return [headers, body];
+            }
+            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
         } finally {
             FrontHostApp.stopWait();
         }

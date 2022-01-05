@@ -60,6 +60,7 @@ class ViewerModule {
             try {
                 await application.initContext(context);
                 const response =  await application.fill(context);
+                context.getRes().setHeader('qforms-platform-version', pkg.version);
                 context.getRes().render('viewer/index', {
                     version       : pkg.version,
                     application   : application,
@@ -178,6 +179,7 @@ class ViewerModule {
             const page = await application.getPage(context, req.body.page);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
+            context.getRes().setHeader('qforms-platform-version', pkg.version);
             await res.json({page: response});
         } finally {
             application.release(context);
