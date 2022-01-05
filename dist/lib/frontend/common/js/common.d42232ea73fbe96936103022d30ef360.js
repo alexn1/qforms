@@ -57,6 +57,8 @@ class FrontHostApp {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        if (!headers['qforms-platform-version']) throw new Error('no qforms-platform-version header');
+        if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
         return body;
     }
 
