@@ -38,11 +38,6 @@ class ApplicationView extends ModelView {
             <Statusbar onCreate={this.getCtrl().onStatusbarCreate}/>
         </footer>;
     }
-    renderNotifications() {
-        return <div className={`${this.getCssBlockName()}__version-notification`}>
-            version notification
-        </div>;
-    }
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
         return <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
@@ -50,7 +45,6 @@ class ApplicationView extends ModelView {
             {this.renderMain()}
             {this.renderFooter()}
             {this.renderModals()}
-            {this.renderNotifications()}
         </div>;
     }
 }
