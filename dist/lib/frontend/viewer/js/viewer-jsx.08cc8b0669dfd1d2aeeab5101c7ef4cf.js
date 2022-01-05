@@ -284,12 +284,18 @@ class ApplicationView extends ModelView {
     }));
   }
 
+  renderNotifications() {
+    return /*#__PURE__*/React.createElement("div", {
+      className: `${this.getCssBlockName()}__version-notification`
+    }, "version notification");
+  }
+
   render() {
     console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
     return /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__container`,
       style: this.getStyle()
-    }, this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals());
+    }, this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals(), this.renderNotifications());
   }
 
 }

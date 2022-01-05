@@ -241,6 +241,10 @@
   display: grid;
   grid-template-rows: max-content auto max-content;
 }
+.ApplicationView__version-notification {
+  background-color: yellow;
+  position: fixed;
+}
 
 .RowFormCheckBoxFieldView > input {
   margin: 0;
