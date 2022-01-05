@@ -128,6 +128,10 @@ class Application extends Model {
         response.logErrorUrl     = this.hostApp.logErrorUrl;
         response.platformVersion = pkg.version;
         response.appVersion      = this.getVersion();
+        response.versions = {
+            qforms: pkg.version,
+            app   : this.getVersion()
+        };
 
         await this.fillCollection(response, 'databases'  , context);
         await this.fillCollection(response, 'actions'    , context);
