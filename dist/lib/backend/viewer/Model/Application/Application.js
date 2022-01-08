@@ -87,9 +87,7 @@ class Application extends Model_1.default {
         response.route = context.getRoute();
         response.domain = context.getDomain();
         response.virtualPath = context.getVirtualPath();
-        response.logErrorUrl = this.hostApp.logErrorUrl;
-        // response.platformVersion = pkg.version;
-        // response.appVersion      = this.getVersion();
+        response.logErrorUrl = this.hostApp.logErrorUrl || '/error';
         response.versions = {
             platform: pkg.version,
             app: this.getVersion()

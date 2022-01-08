@@ -115,7 +115,7 @@ class BackHostApp {
 
         this.appsDirPath      = path.resolve(this.params.appsDirPath    || './apps');
         this.runtimeDirPath   = path.resolve(this.params.runtimeDirPath || './runtime');
-        this.logErrorUrl      = this.params.logErrorUrl     || '/error';
+        this.logErrorUrl      = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host            = this.params.host            || 'localhost';
         const port            = this.params.port            || 3000;

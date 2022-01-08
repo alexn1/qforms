@@ -75,7 +75,7 @@ class EditorModule {
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.backHostApp.getNodeEnv(),
-            logErrorUrl: this.backHostApp.logErrorUrl
+            logErrorUrl: '/error'
         };
         res.render('editor/index', {
             version: pkg.version,
