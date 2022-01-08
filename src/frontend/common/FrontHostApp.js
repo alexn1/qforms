@@ -38,21 +38,22 @@ class FrontHostApp {
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
-        console.log(`post error to ${this.data.logErrorUrl}`);
+        const values = {
+            type   : 'error',
+            source : 'client',
+            message: err.message,
+            stack  : err.stack,
+            data   : {
+                href           : window.location.href,
+                platformVersion: this.data.versions.platform,
+                appVersion     : this.data.versions.app,
+            }
+        };
+        console.log(`POST ${this.data.logErrorUrl}`, values);
         fetch(this.data.logErrorUrl, {
-            method: 'POST',
-            body  : JSON.stringify({
-                type   : 'error',
-                source : 'client',
-                message: err.message,
-                stack  : err.stack,
-                data: {
-                    href           : window.location.href,
-                    platformVersion: this.data.versions.platform,
-                    appVersion     : this.data.versions.app,
-                }
-            }),
-            headers: {'Content-Type': 'application/json;charset=utf-8'}
+            method : 'POST',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+            body   : JSON.stringify(values)
         }).catch(err => {
             console.error(err.message);
         });
