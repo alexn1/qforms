@@ -27,6 +27,7 @@ const backend = require('./index');
 const pkg     = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
+const fetch = require('node-fetch');
 
 // post actions
 /*const ACTIONS = [
@@ -661,15 +662,13 @@ class BackHostApp {
     }
 
     async logError(err, req = null) {
-        console.log('BackHostApp.logError:', colors.red(err));
-        if (!this.logPool) return;
+        console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err.context ? err.context.getRoute() : null;
-            let appVersion = null;
-            if (route) {
-                appVersion = this.applications[route].getVersion();
-            }
-            await BackHostApp.createLog(this.logPool, {
+            let appVersion = route ? this.applications[route].getVersion() : null;
+
+            // log row values
+            const values = {
                 type   : 'error',
                 source : 'server',
                 ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -688,7 +687,18 @@ class BackHostApp {
                     status         : err.status || null,
                     data           : err.data || null
                 }, null, 4) : null
-            });
+            };
+
+            if (this.logPool) {
+                await BackHostApp.createLog(this.logPool, values);
+            } else  if (this.logErrorUrl) {
+                console.log(`fetch ${this.logErrorUrl}`);
+                await fetch(this.logErrorUrl, {
+                    method : 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body   : JSON.stringify(values)
+                });
+            }
         } catch (err) {
             console.error(colors.red(err));
         }
