@@ -269,38 +269,42 @@ class BackHostApp {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err.context ? err.context.getRoute() : null;
-            let appVersion = route ? this.applications[route].getVersion() : null;
-
-            // log row values
-            const values = {
-                type   : 'error',
-                source : 'server',
-                ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
-                message: err.message,
-                stack  : err.stack.toString(),
-                data   : req ? JSON.stringify({
-                    headers        : req.headers,
-                    method         : req.method,
-                    host           : req.headers.host,
-                    originalUrl    : req.originalUrl,
-                    uri            : req.params['0'],
-                    platformVersion: pkg.version,
-                    appVersion     : appVersion,
-                    route          : route,
-                    body           : req.body,
-                    status         : err.status || null,
-                    data           : err.data || null
-                }, null, 4) : null
-            };
+            const data = req ? {
+                headers        : req.headers,
+                method         : req.method,
+                host           : req.headers.host,
+                originalUrl    : req.originalUrl,
+                uri            : req.params['0'],
+                platformVersion: pkg.version,
+                appVersion     : route ? this.applications[route].getVersion() : null,
+                route          : route,
+                body           : req.body,
+                status         : err.status || null,
+                data           : err.data || null
+            } : null;
 
             if (this.logPool) {
-                await BackHostApp.createLog(this.logPool, values);
+                await BackHostApp.createLog(this.logPool, {
+                    type   : 'error',
+                    source : 'server',
+                    ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    message: err.message,
+                    stack  : err.stack.toString(),
+                    data   : data ? JSON.stringify(data, null, 4) : null
+                });
             } else  if (this.logErrorUrl) {
                 console.log(`fetch ${this.logErrorUrl}`);
                 await fetch(this.logErrorUrl, {
                     method : 'POST',
                     headers: {'Content-Type': 'application/json'},
-                    body   : JSON.stringify(values)
+                    body   : JSON.stringify({
+                        type   : 'error',
+                        source : 'server',
+                        ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                        message: err.message,
+                        stack  : err.stack.toString(),
+                        data   : data
+                    })
                 });
             }
         } catch (err) {
@@ -608,19 +612,19 @@ class BackHostApp {
     }
 
     async postError(req, res, next) {
-        console.log(colors.red('BackHostApp.postError'), colors.red(req.body));
+        console.log(colors.blue('BackHostApp.postError'), req.body);
         if (this.logPool) {
             try {
                 await BackHostApp.createLog(this.logPool, {
-                    type   : 'error',
-                    source : 'client',
-                    ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    type   : req.body.type,
+                    source : req.body.source,
+                    ip     : req.body.ip || (req.headers['x-forwarded-for'] || req.connection.remoteAddress),
                     message: req.body.message,
                     stack  : req.body.stack,
                     data   : req ? JSON.stringify({
                         headers: req.headers,
                         domain : this.getDomain(req),
-                        body   : req.body
+                        ...req.body.data,
                     }, null, 4) : null
                 });
                 res.header('Access-Control-Allow-Origin', '*');

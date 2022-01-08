@@ -42,11 +42,15 @@ class FrontHostApp {
         fetch(this.data.logErrorUrl, {
             method: 'POST',
             body  : JSON.stringify({
-                href           : window.location.href,
-                platformVersion: this.data.versions.platform,
-                appVersion     : this.data.versions.app,
-                message        : err.message,
-                stack          : err.stack,
+                type   : 'error',
+                source : 'client',
+                message: err.message,
+                stack  : err.stack,
+                data: {
+                    href           : window.location.href,
+                    platformVersion: this.data.versions.platform,
+                    appVersion     : this.data.versions.app,
+                }
             }),
             headers: {'Content-Type': 'application/json;charset=utf-8'}
         }).catch(err => {
