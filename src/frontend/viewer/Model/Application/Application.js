@@ -91,5 +91,8 @@ class Application extends Model {
         // console.log('promises:', promises);
         return Promise.allSettled(promises);
     }
+    getNodeEnv() {
+        return this.data.nodeEnv;
+    }
 }
 window.QForms.Application = Application;
