@@ -16,6 +16,12 @@ class AlertView extends View {
     this.el = React.createRef();
   }
 
+  getHeaderStyle() {
+    return this.getCtrl().options.titleStyle
+    /* || {color: 'red'}*/
+    ;
+  }
+
   render() {
     return /*#__PURE__*/React.createElement("div", {
       className: this.getCssClassNames(),
@@ -30,9 +36,7 @@ class AlertView extends View {
       className: `${this.getCssBlockName()}__header`
     }, /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__title`,
-      style: this.getCtrl().options.titleStyle || {
-        color: 'red'
-      }
+      style: this.getHeaderStyle()
     }, this.getCtrl().options.title || 'Alert'), /*#__PURE__*/React.createElement("div", {
       className: `${this.getCssBlockName()}__close`,
       onClick: this.getCtrl().onCloseClick

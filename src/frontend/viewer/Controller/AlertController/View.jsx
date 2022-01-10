@@ -3,6 +3,9 @@ class AlertView extends View {
         super(props);
         this.el = React.createRef();
     }
+    getHeaderStyle() {
+        return this.getCtrl().options.titleStyle/* || {color: 'red'}*/;
+    }
     render() {
         return (
             <div className={this.getCssClassNames()}
@@ -13,7 +16,7 @@ class AlertView extends View {
                 <div className={`${this.getCssBlockName()}__container`}>
                     <div className={`${this.getCssBlockName()}__content flex-column`}>
                         <div className={`${this.getCssBlockName()}__header`}>
-                            <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle || {color: 'red'}}>
+                            <div className={`${this.getCssBlockName()}__title`} style={this.getHeaderStyle()}>
                                 {this.getCtrl().options.title || 'Alert'}
                             </div>
                             <div className={`${this.getCssBlockName()}__close`} onClick={this.getCtrl().onCloseClick}>

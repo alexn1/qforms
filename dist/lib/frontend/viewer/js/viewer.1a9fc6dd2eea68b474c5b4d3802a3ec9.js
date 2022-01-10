@@ -643,9 +643,9 @@ class ApplicationController extends ModelController {
         this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
     }
     async alert(options) {
-        if (!options.title) {
+        /*if (!options.title) {
             options.title = this.getModel().getText().application.error;
-        }
+        }*/
         const activeElement = document.activeElement;
         try {
             return await this.frontHostApp.alert(options);
