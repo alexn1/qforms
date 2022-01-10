@@ -108,7 +108,7 @@ class PostgreSqlDatabase extends Database {
     }
 
     async rollback(context: Context, err): Promise<void> {
-        console.log('PostgreSqlDatabase.rollback: ', this.getName(), err.message);
+        console.log(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
