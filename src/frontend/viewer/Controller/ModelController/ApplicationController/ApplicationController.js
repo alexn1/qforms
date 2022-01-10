@@ -316,6 +316,9 @@ class ApplicationController extends ModelController {
         this.removeModal(ctrl);
         await this.rerender();
     }
+    getHostApp() {
+        return this.frontHostApp;
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;
