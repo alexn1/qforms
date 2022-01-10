@@ -53,18 +53,19 @@ class LoginFrontHostApp extends FrontHostApp {
 }
 
 class ViewerFrontHostApp extends FrontHostApp {
-    constructor(data) {
-        if (!data) throw new Error('no data');
+    constructor(options = {}) {
+        if (!options.data) throw new Error('no data');
         super();
-        this.data = data;
+        this.options = options;
+        // this.data = options.data;
         this.applicationController = null;
         this.webSocketClient = null;
     }
     async run() {
-        console.log('ViewerFrontHostApp.run', this.data);
+        console.log('ViewerFrontHostApp.run', this.options.data);
 
         // application
-        const application = new Application(this.data);
+        const application = new Application(this.options.data);
         application.init();
 
         // applicationController
@@ -82,11 +83,11 @@ class ViewerFrontHostApp extends FrontHostApp {
         // web socket client
         try {
             this.webSocketClient = new WebSocketClient({
-                protocol: this.data.nodeEnv === 'development' ? 'ws' : 'wss',
+                protocol: this.options.data.nodeEnv === 'development' ? 'ws' : 'wss',
                 frontHostApp: this,
-                route: this.data.route,
-                uuid: this.data.uuid,
-                userId: this.data.user ? this.data.user.id : null,
+                route: this.options.data.route,
+                uuid: this.options.data.uuid,
+                userId: this.options.data.user ? this.options.data.user.id : null,
             });
             await this.webSocketClient.connect();
         } catch (err) {
