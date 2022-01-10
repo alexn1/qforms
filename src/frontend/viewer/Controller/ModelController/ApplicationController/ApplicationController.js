@@ -8,6 +8,7 @@ class ApplicationController extends ModelController {
         this.modals = [];
         this.statusbar  = null;
         this.homePageName = null;
+        this.webSocketClient = null;
     }
     static create(model, frontHostApp) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
@@ -318,6 +319,17 @@ class ApplicationController extends ModelController {
     }
     getHostApp() {
         return this.frontHostApp;
+    }
+    async connect() {
+        const data = this.getModel().getData();
+        this.webSocketClient = new WebSocketClient({
+            applicationController: this,
+            protocol             : data.nodeEnv === 'development' ? 'ws' : 'wss',
+            route                : data.route,
+            uuid                 : data.uuid,
+            userId               : data.user ? data.user.id : null,
+        });
+        await this.webSocketClient.connect();
     }
 }
 

@@ -3,9 +3,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         if (!options.data) throw new Error('no data');
         super();
         this.options = options;
-        // this.data = options.data;
         this.applicationController = null;
-        this.webSocketClient = null;
     }
     async run() {
         console.log('ViewerFrontHostApp.run', this.options.data);
@@ -26,16 +24,9 @@ class ViewerFrontHostApp extends FrontHostApp {
         }
         applicationController.createView(rootElement);
 
-        // web socket client
+        // connect
         try {
-            this.webSocketClient = new WebSocketClient({
-                protocol: this.options.data.nodeEnv === 'development' ? 'ws' : 'wss',
-                frontHostApp: this,
-                route: this.options.data.route,
-                uuid: this.options.data.uuid,
-                userId: this.options.data.user ? this.options.data.user.id : null,
-            });
-            await this.webSocketClient.connect();
+            await applicationController.connect();
         } catch (err) {
             this.logError(err);
         }

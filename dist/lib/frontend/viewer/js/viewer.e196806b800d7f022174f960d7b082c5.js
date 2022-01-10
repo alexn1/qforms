@@ -57,9 +57,7 @@ class ViewerFrontHostApp extends FrontHostApp {
         if (!options.data) throw new Error('no data');
         super();
         this.options = options;
-        // this.data = options.data;
         this.applicationController = null;
-        this.webSocketClient = null;
     }
     async run() {
         console.log('ViewerFrontHostApp.run', this.options.data);
@@ -80,16 +78,9 @@ class ViewerFrontHostApp extends FrontHostApp {
         }
         applicationController.createView(rootElement);
 
-        // web socket client
+        // connect
         try {
-            this.webSocketClient = new WebSocketClient({
-                protocol: this.options.data.nodeEnv === 'development' ? 'ws' : 'wss',
-                frontHostApp: this,
-                route: this.options.data.route,
-                uuid: this.options.data.uuid,
-                userId: this.options.data.user ? this.options.data.user.id : null,
-            });
-            await this.webSocketClient.connect();
+            await applicationController.connect();
         } catch (err) {
             this.logError(err);
         }
@@ -105,7 +96,7 @@ window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        if (!options.frontHostApp) throw new Error('no options.frontHostApp');
+        if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');
         this.url = `${options.protocol}://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
         this.webSocket         = null;
@@ -178,10 +169,7 @@ class WebSocketClient {
         }
     }
     getApp() {
-        return this.getFrontHostApp().applicationController;
-    }
-    getFrontHostApp() {
-        return this.options.frontHostApp;
+        return this.options.applicationController;
     }
 }
 
@@ -374,6 +362,7 @@ class ApplicationController extends ModelController {
         this.modals = [];
         this.statusbar  = null;
         this.homePageName = null;
+        this.webSocketClient = null;
     }
     static create(model, frontHostApp) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
@@ -684,6 +673,17 @@ class ApplicationController extends ModelController {
     }
     getHostApp() {
         return this.frontHostApp;
+    }
+    async connect() {
+        const data = this.getModel().getData();
+        this.webSocketClient = new WebSocketClient({
+            applicationController: this,
+            protocol             : data.nodeEnv === 'development' ? 'ws' : 'wss',
+            route                : data.route,
+            uuid                 : data.uuid,
+            userId               : data.user ? data.user.id : null,
+        });
+        await this.webSocketClient.connect();
     }
 }
 

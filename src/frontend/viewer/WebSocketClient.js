@@ -1,7 +1,7 @@
 class WebSocketClient {
     constructor(options = {}) {
         this.options = options;
-        if (!options.frontHostApp) throw new Error('no options.frontHostApp');
+        if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');
         this.url = `${options.protocol}://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
         this.webSocket         = null;
@@ -74,9 +74,6 @@ class WebSocketClient {
         }
     }
     getApp() {
-        return this.getFrontHostApp().applicationController;
-    }
-    getFrontHostApp() {
-        return this.options.frontHostApp;
+        return this.options.applicationController;
     }
 }
