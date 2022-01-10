@@ -50,7 +50,7 @@ class WebSocketClient {
             await this.connect();
         } catch (err) {
             console.error(err);
-            console.log(`waiting ${this.RECONNECT_TIMEOUT} sec...`);
+            console.log(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
             setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
