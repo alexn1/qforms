@@ -30,6 +30,7 @@ function frontend_common_jsx() {
         // .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('common-jsx.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
