@@ -9,6 +9,7 @@ const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
 // const order = require('gulp-order');
 const myOrder = require('./myOrder');
+const cleanCSS = require('gulp-clean-css');
 
 const SRC_PATH   = './src';
 const BUILD_PATH = './dist';
@@ -17,54 +18,6 @@ function frontend_editor_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.js'))
         .pipe(myOrder())
         // .pipe(sourcemaps.init())
-        /*.pipe(order([
-            'EditorFrontHostApp/EditorFrontHostApp.js',
-            'FormWizard/FormWizard.js',
-            'FormWizard/MySqlFormWizard/MySqlFormWizard.js',
-            'FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.js',
-            'ModalController/ModalController.js',
-            'ModalController/ChangeClassController/ChangeClassController.js',
-            'ModalController/NewActionController/NewActionController.js',
-            'ModalController/NewColumnController/NewColumnController.js',
-            'ModalController/NewDatabaseController/NewDatabaseController.js',
-            'ModalController/NewDataSourceController/NewDataSourceController.js',
-            'ModalController/NewFieldController/NewFieldController.js',
-            'ModalController/NewFormController/NewFormController.js',
-            'ModalController/NewFormFromTableController/NewFormFromTableController.js',
-            'ModalController/NewKeyColumnController/NewKeyColumnController.js',
-            'ModalController/NewPageController/NewPageController.js',
-            'ModalController/NewParamController/NewParamController.js',
-            'ModalController/NewTableController/NewTableController.js',
-            'Model/Model.js',
-            'Model/Action/Action.js',
-            'Model/Application/Application.js',
-            'Model/Column/Column.js',
-            'Model/Database/Database.js',
-            'Model/DataSource/DataSource.js',
-            'Model/Field/Field.js',
-            'Model/Form/Form.js',
-            'Model/KeyColumn/KeyColumn.js',
-            'Model/Page/Page.js',
-            'Model/PageLink/PageLink.js',
-            'Model/Param/Param.js',
-            'Model/Table/Table.js',
-            'ModelController/ModelController.js',
-            'ModelController/ActionController/ActionController.js',
-            'ModelController/ColumnController/ColumnController.js',
-            'ModelController/DocumentController/DocumentController.js',
-            'ModelController/DocumentController/DatabaseController/DatabaseController.js',
-            'ModelController/DocumentController/DataSourceController/DataSourceController.js',
-            'ModelController/DocumentController/TableController/TableController.js',
-            'ModelController/DocumentController/TableController/TableController.js',
-            'ModelController/DocumentController/VisualController/VisualController.js',
-            'ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.js',
-            'ModelController/DocumentController/VisualController/FieldController/FieldController.js',
-            'ModelController/DocumentController/VisualController/FormController/FormController.js',
-            'ModelController/DocumentController/VisualController/PageController/PageController.js',
-            'ModelController/KeyColumnController/KeyColumnController.js',
-            'ModelController/PageLinkController/PageLinkController.js',
-            'ModelController/ParamController/ParamController.js',
-        ]))*/
         .pipe(concat('editor.js'))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         //.pipe(uglify())
@@ -75,31 +28,6 @@ function frontend_editor_js() {
 function frontend_editor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.jsx'))
         .pipe(myOrder())
-        /*.pipe(order([
-            'ActionList/ActionList.jsx',
-            'EditorFrontHostApp/EditorFrontHostAppView.jsx',
-            'ModalController/ModalView.jsx',
-            'ModalController/ChangeClassController/ChangeClassView.jsx',
-            'ModalController/NewActionController/NewActionController.jsx',
-            'ModalController/NewColumnController/NewColumnController.jsx',
-            'ModalController/NewDatabaseController/NewDatabaseController.jsx',
-            'ModalController/NewDataSourceController/NewDataSourceController.jsx',
-            'ModalController/NewFieldController/NewFieldController.jsx',
-            'ModalController/NewFormController/NewFormController.jsx',
-            'ModalController/NewFormFromTableController/NewFormFromTableController.jsx',
-            'ModalController/NewKeyColumnController/NewKeyColumnController.jsx',
-            'ModalController/NewPageController/NewPageController.jsx',
-            'ModalController/NewParamController/NewParamController.jsx',
-            'ModalController/NewTableController/NewTableController.jsx',
-            'ModelController/DocumentController/DocumentView.jsx',
-            'ModelController/DatabaseController/DatabaseView.jsx',
-            'ModelController/DataSourceController/SqlDataSourceView.jsx',
-            'ModelController/TableController/TableView.jsx',
-            'ModelController/VisualController/VisualView.jsx',
-            'PropertyGrid/PropertyGrid.jsx',
-            'TreeWidget/TreeItem.jsx',
-            'TreeWidget/TreeWidget.jsx',
-        ]))*/
         // .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('editor-jsx.js'))
@@ -114,6 +42,7 @@ function frontend_editor_less() {
         .pipe(myOrder())
         .pipe(less())
         .pipe(concat('editor.css'))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
         // .pipe(sourcemaps.write('.'))

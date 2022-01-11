@@ -1,9 +1,0 @@
-.IndexView {
-  font-size: small;
-}
-.IndexView option {
-  padding: 5px;
-}
-.IndexView *:focus {
-  outline: none !important;
-}

@@ -9,6 +9,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
 // const order = require('gulp-order');
 const myOrder = require('./myOrder');
+const cleanCSS = require('gulp-clean-css');
 
 const BUILD_PATH = './dist';
 const SRC_PATH   = './src';
@@ -41,6 +42,7 @@ function frontend_viewer_less() {
         // .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(concat('viewer.css'))
+        .pipe(cleanCSS({compatibility: 'ie8'}))
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
         // .pipe(minifyCss())
         // .pipe(sourcemaps.write('.'))
