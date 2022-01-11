@@ -380,6 +380,8 @@
 .RowFormDateTimeFieldView__time-close {
   display: flex;
   position: absolute;
+  align-items: center;
+  justify-content: center;
   width: 10px;
   height: 100%;
   top: 0;
@@ -387,11 +389,11 @@
   cursor: pointer;
   visibility: hidden;
 }
-.RowFormDateTimeFieldView__time-close:hover svg line {
-  stroke: black;
-}
 .RowFormDateTimeFieldView__time-close.visible {
   visibility: visible;
+}
+.RowFormDateTimeFieldView__time-close:hover svg line {
+  stroke: black;
 }
 .RowFormDateTimeFieldView__time-icon {
   position: absolute;

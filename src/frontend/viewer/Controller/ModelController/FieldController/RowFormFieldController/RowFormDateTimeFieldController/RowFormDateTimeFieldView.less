@@ -58,17 +58,19 @@
 .RowFormDateTimeFieldView__time-close {
   display: flex;
   position: absolute;
+  align-items: center;
+  justify-content: center;
   width: 10px;
   height: 100%;
   top: 0;
   right: 24px;
   cursor: pointer;
   visibility: hidden;
-  &:hover svg line {
-    stroke: black;
-  }
   &.visible {
     visibility: visible;
+  }
+  &:hover svg line {
+    stroke: black;
   }
 }
 
