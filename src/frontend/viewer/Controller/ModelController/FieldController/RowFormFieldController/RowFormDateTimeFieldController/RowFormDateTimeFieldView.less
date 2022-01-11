@@ -9,16 +9,13 @@
   &.date > .RowFormDateTimeFieldView__time {
     display: none;
   }
-  &.error > div > input {
+  &.error > .RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
     background-color: #f2dede !important;
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateTimeFieldView__dropdown-date-picker {
-  &:not(.read-only) > input {
-    cursor: pointer;
-  }
   > .DropdownDatePicker__input {
     height      : @fieldHeight;
     border-width: 0;
@@ -26,6 +23,9 @@
     font-family : inherit;
     font-weight : inherit;
     font-size   : inherit;
+  }
+  &:not(.read-only) > .DropdownDatePicker__input {
+    cursor: pointer;
   }
   &.read-only > .DropdownDatePicker__input {
     background-color: @fieldDisableBackgroundColor;
@@ -90,6 +90,11 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.debug .RowFormDateTimeFieldView.changed > div > input {
-  background-color: @fieldDebugChangeBackgroundColor;
+.debug .RowFormDateTimeFieldView.changed {
+  > .RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
+    background-color: @fieldDebugChangeBackgroundColor;
+  }
+  > .RowFormDateTimeFieldView__time > .RowFormDateTimeFieldView__time-box {
+    background-color: @fieldDebugChangeBackgroundColor;
+  }
 }
