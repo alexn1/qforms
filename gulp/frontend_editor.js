@@ -6,7 +6,6 @@ const less      = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
 const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
-// const order = require('gulp-order');
 const myOrder = require('./myOrder');
 const cleanCSS = require('gulp-clean-css');
 
