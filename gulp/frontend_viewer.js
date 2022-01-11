@@ -1,6 +1,6 @@
 const gulp      = require('gulp');
 const path      = require('path');
-// const uglify    = require('gulp-uglify');
+const uglify    = require('gulp-uglify');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 const babel      = require('gulp-babel');
@@ -14,23 +14,24 @@ const SRC_PATH   = './src';
 
 function frontend_viewer_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.js'))
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(myOrder())
         .pipe(concat('viewer.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        //.pipe(uglify())
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/js')));
 }
 
 function frontend_viewer_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.jsx'))
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(myOrder())
         .pipe(babel())
         .pipe(concat('viewer-jsx.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/viewer/js')));
 }
 
