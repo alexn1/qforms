@@ -26,6 +26,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             format={ctrl.getFormat()}
             oldDates={this.props.oldDates}
             getMinDate={this.props.getMinDate}
+            highlightedDate={ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null}
         />;
     }
     renderTimePart() {
