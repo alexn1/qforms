@@ -1,7 +1,6 @@
 const path      = require('path');
 const gulp      = require('gulp');
-//const uglify    = require('gulp-uglify');
-// const minifyCss = require('gulp-minify-css');
+const uglify    = require('gulp-uglify');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 const babel      = require('gulp-babel');
@@ -17,11 +16,11 @@ const BUILD_PATH = './dist';
 function frontend_common_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.js'))
         .pipe(myOrder())
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(concat('common.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        //.pipe(uglify())
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
 }
 
