@@ -26,12 +26,12 @@ function frontend_common_js() {
 function frontend_common_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/common/**/*.jsx'))
         .pipe(myOrder())
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('common-jsx.js'))
         .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/common/js')));
 }
 
