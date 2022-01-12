@@ -56,21 +56,9 @@ module.exports.build = require("./gulp/build");
 module.exports.clean = require('./gulp/clean');
 module.exports.ts = require('./gulp/backend_ts');
 module.exports.test1 = async function () {
-    const packageJson1 = await getJsonFileData('package.json');
-    const version = versionWithoutDev(packageJson1.version);
-
-    console.log('version:', version);
-    const nextVersion = packageJson1.version = incPatch(version);
-
-    console.log('nextVersion:', nextVersion);
-
-    await putJsonFileData('package.json', packageJson1);
-
-
-
-
+    const packageJson = await getJsonFileData('package.json');
+    packageJson.version = incPatch(versionWithoutDev(packageJson.version));
+    await putJsonFileData('package.json', packageJson);
 };
-
-
 
 module.exports.frontend_viewer = require('./gulp/frontend_viewer');
