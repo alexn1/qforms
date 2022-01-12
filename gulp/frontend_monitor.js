@@ -1,6 +1,6 @@
 const path      = require('path');
 const gulp      = require('gulp');
-//const uglify    = require('gulp-uglify');
+const uglify    = require('gulp-uglify');
 const concat    = require('gulp-concat');
 const less      = require('gulp-less');
 const sourcemaps = require('gulp-sourcemaps');
@@ -16,22 +16,23 @@ const BUILD_PATH = './dist';
 function frontend_monitor_js() {
     return gulp.src(path.join(SRC_PATH, 'frontend/monitor/**/*.js'))
         .pipe(myOrder())
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(concat('monitor.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        //.pipe(uglify())
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/monitor/js')));
 }
 
 function frontend_monitor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/monitor/**/*.jsx'))
         .pipe(myOrder())
-        // .pipe(sourcemaps.init())
+        .pipe(sourcemaps.init())
         .pipe(babel())
         .pipe(concat('monitor-jsx.js'))
+        .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
-        // .pipe(sourcemaps.write('.'))
+        .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest(path.join(BUILD_PATH, 'lib/frontend/monitor/js')));
 }
 
