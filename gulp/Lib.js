@@ -36,7 +36,7 @@ class Lib {
     }
 
     static putJsonFileData(filePath, data) {
-        console.log('putJsonFileData version:', data.version);
+        // console.log('putJsonFileData version:', data.version);
         return new Promise(function(resolve, reject) {
             try {
                 const text = JSON.stringify(data, null, 2) + '\n';
