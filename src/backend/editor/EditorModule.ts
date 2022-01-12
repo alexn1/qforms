@@ -109,7 +109,7 @@ class EditorModule {
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
 
         const appInfo = await Application.loadAppInfo(this.backHostApp.getAppFilePath(context));
-        const ctrl = new ControllerClass(appInfo, this, null);
+        const ctrl = new ControllerClass(appInfo, this.backHostApp, null);
         await ctrl.init(context);
         const method = req.body.action;
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
