@@ -19,8 +19,12 @@ main(); async function main() {
     if (stderr) throw new Error(stderr);
 
     // commit
-    await exec(`git commit -am "release v${releaseVersion}"`);
-    await exec('git push origin master');
+    try {
+        await exec(`git commit -am "release v${releaseVersion}"`);
+        await exec('git push origin master');
+    } catch (err) {
+        console.error(err.message);
+    }
 
     // release branch
     await exec('git checkout release');
