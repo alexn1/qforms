@@ -1,4 +1,5 @@
-const fs = require("fs");
+/*
+const fs = require('fs');
 
 function getJsonFileData(filePath) {
     return new Promise(function(resolve, reject) {
@@ -50,15 +51,15 @@ function putJsonFileData(filePath, data) {
             reject(err);
         }
     });
-}
+}*/
 
-module.exports.build = require("./gulp/build");
-module.exports.clean = require('./gulp/clean');
-module.exports.ts = require('./gulp/backend_ts');
-module.exports.test1 = async function () {
+/*module.exports.test1 = async function () {
     const packageJson = await getJsonFileData('package.json');
     packageJson.version = incPatch(versionWithoutDev(packageJson.version));
     await putJsonFileData('package.json', packageJson);
-};
+};*/
 
+module.exports.build           = require('./gulp/build');
+module.exports.clean           = require('./gulp/clean');
+module.exports.ts              = require('./gulp/backend_ts');
 module.exports.frontend_viewer = require('./gulp/frontend_viewer');
