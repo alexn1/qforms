@@ -1,10 +1,10 @@
 import Context from "../Context";
 import BackHostApp from '../BackHostApp';
 declare class EditorModule {
-    backHostApp: BackHostApp;
+    hostApp: BackHostApp;
     css: string[];
     js: string[];
-    constructor(backHostApp: BackHostApp);
+    constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];

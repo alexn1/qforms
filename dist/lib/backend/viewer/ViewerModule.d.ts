@@ -2,10 +2,10 @@ import Context from "../Context";
 import BackHostApp from '../BackHostApp';
 import Application from "./Model/Application/Application";
 declare class ViewerModule {
-    backHostApp: BackHostApp;
+    hostApp: BackHostApp;
     css: string[];
     js: string[];
-    constructor(backHostApp: BackHostApp);
+    constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     getLinks(): string[];
     getScripts(): string[];

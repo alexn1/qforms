@@ -129,7 +129,7 @@ class BackHostApp {
 
         // ws
         this.wsServer = new WebSocketServer({
-            backHostApp: this,
+            hostApp: this,
             httpServer: this.httpServer
         });
     }

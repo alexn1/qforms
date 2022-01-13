@@ -5,21 +5,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 const path = require('path');
 const Helper_1 = __importDefault(require("../Helper"));
 class MonitorModule {
-    constructor(backHostApp) {
-        this.backHostApp = backHostApp;
+    constructor(hostApp) {
+        this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
+        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
+        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
     fill() {
         return {
-            nodeEnv: this.backHostApp.getNodeEnv(),
-            uptime: Date.now() - this.backHostApp.startTime.getTime(),
-            applications: Object.keys(this.backHostApp.applications).map(route => {
-                const app = this.backHostApp.applications[route];
+            nodeEnv: this.hostApp.getNodeEnv(),
+            uptime: Date.now() - this.hostApp.startTime.getTime(),
+            applications: Object.keys(this.hostApp.applications).map(route => {
+                const app = this.hostApp.applications[route];
                 return {
                     route: route,
                     version: app.getVersion(),
@@ -40,7 +40,7 @@ class MonitorModule {
     }
     getLinks() {
         return [
-            ...(this.backHostApp.commonModule.css),
+            ...(this.hostApp.commonModule.css),
             ...(this.css)
         ];
     }
@@ -50,7 +50,7 @@ class MonitorModule {
             // '/lib/react/react-dom.development.js',
             '/lib/react/react.production.min.js',
             '/lib/react/react-dom.production.min.js',
-            ...(this.backHostApp.commonModule.js),
+            ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
     }
@@ -58,14 +58,14 @@ class MonitorModule {
         const base64string = req.headers.authorization.substr(6);
         const usernamePassword = new Buffer(base64string, 'base64').toString();
         const [username, password] = usernamePassword.split(':');
-        return username === this.backHostApp.getParams().monitor.username &&
-            password === this.backHostApp.getParams().monitor.password;
+        return username === this.hostApp.getParams().monitor.username &&
+            password === this.hostApp.getParams().monitor.password;
     }
     authorize(req) {
-        if (this.backHostApp.isDevelopment()) {
+        if (this.hostApp.isDevelopment()) {
             return true;
         }
-        if (!this.backHostApp.getParams().monitor) {
+        if (!this.hostApp.getParams().monitor) {
             throw new Error('no monitor params');
         }
         return req.headers.authorization &&

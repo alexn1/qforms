@@ -39,12 +39,12 @@ const EDITOR_ACTIONS = [
     'createModelBackJs',
 ];
 class EditorModule {
-    constructor(backHostApp) {
-        this.backHostApp = backHostApp;
+    constructor(hostApp) {
+        this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
+        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
+        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -52,7 +52,7 @@ class EditorModule {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',
-            ...(this.backHostApp.commonModule.css),
+            ...(this.hostApp.commonModule.css),
             ...(this.css)
         ];
     }
@@ -64,17 +64,17 @@ class EditorModule {
             '/lib/react/react-dom.production.min.js',
             '/lib/codemirror-4.8/lib/codemirror.js',
             '/lib/codemirror-4.8/mode/javascript/javascript.js',
-            ...(this.backHostApp.commonModule.js),
+            ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
     }
     async handleEditorGet(req, res, context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await Application_1.default.loadAppInfo(this.backHostApp.getAppFilePath(context));
+        const appInfo = await Application_1.default.loadAppInfo(this.hostApp.getAppFilePath(context));
         // data
         const data = {
             app: appInfo.appFile.data,
-            nodeEnv: this.backHostApp.getNodeEnv(),
+            nodeEnv: this.hostApp.getNodeEnv(),
             logErrorUrl: '/error'
         };
         res.render('editor/index', {
@@ -100,8 +100,8 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await Application_1.default.loadAppInfo(this.backHostApp.getAppFilePath(context));
-        const ctrl = new ControllerClass(appInfo, this.backHostApp, null);
+        const appInfo = await Application_1.default.loadAppInfo(this.hostApp.getAppFilePath(context));
+        const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;
         if (!ctrl[method])

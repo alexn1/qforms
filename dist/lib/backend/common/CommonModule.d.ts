@@ -1,9 +1,9 @@
 import BackHostApp from '../BackHostApp';
 declare class CommonModule {
-    backHostApp: BackHostApp;
+    hostApp: BackHostApp;
     css: string[];
     js: string[];
-    constructor(backHostApp: BackHostApp);
+    constructor(hostApp: BackHostApp);
     init(): Promise<void>;
 }
 export = CommonModule;

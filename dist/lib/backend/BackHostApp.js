@@ -93,7 +93,7 @@ class BackHostApp {
         this.httpServer = this.createAndRunHttpServer(host, port);
         // ws
         this.wsServer = new WebSocketServer_1.default({
-            backHostApp: this,
+            hostApp: this,
             httpServer: this.httpServer
         });
     }

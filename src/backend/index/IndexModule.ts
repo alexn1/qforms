@@ -4,23 +4,23 @@ import Application from '../viewer/Model/Application/Application';
 import Helper from "../Helper";
 
 class IndexModule {
-    backHostApp: any;
+    hostApp: any;
     css: string[];
     js : string[];
-    constructor(backHostApp) {
-        this.backHostApp = backHostApp;
+    constructor(hostApp) {
+        this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'index'), 'css')).map(path => `/index/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'index'), 'js' )).map(path => `/index/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'css')).map(path => `/index/${path}`);
+        this.js  = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'js' )).map(path => `/index/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application.getAppInfos(this.backHostApp.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath);
         // console.log('appInfos:', appInfos);
         return {
-            nodeEnv : this.backHostApp.getNodeEnv(),
+            nodeEnv : this.hostApp.getNodeEnv(),
             appInfos: appInfos.map(appInfo => ({
                 fullName: appInfo.fullName,
                 envs    : appInfo.envs
@@ -29,7 +29,7 @@ class IndexModule {
     }
     getLinks() {
         return [
-            ...(this.backHostApp.commonModule.css),
+            ...(this.hostApp.commonModule.css),
             ...(this.css)
         ];
     }
@@ -39,7 +39,7 @@ class IndexModule {
             // '/lib/react/react-dom.development.js',
             '/lib/react/react.production.min.js',
             '/lib/react/react-dom.production.min.js',
-            ...(this.backHostApp.commonModule.js),
+            ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
     }

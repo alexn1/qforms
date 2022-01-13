@@ -48,7 +48,7 @@ class WebSocketServer {
         console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
     getBackHostApp() {
-        return this.options.backHostApp;
+        return this.options.hostApp;
     }
 }
 module.exports = WebSocketServer;

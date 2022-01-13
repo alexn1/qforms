@@ -1,8 +1,8 @@
 declare class IndexModule {
-    backHostApp: any;
+    hostApp: any;
     css: string[];
     js: string[];
-    constructor(backHostApp: any);
+    constructor(hostApp: any);
     init(): Promise<void>;
     fill(): Promise<{
         nodeEnv: any;

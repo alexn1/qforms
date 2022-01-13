@@ -19,18 +19,18 @@ const ACTIONS = [
     'test',
 ];
 class ViewerModule {
-    constructor(backHostApp) {
-        this.backHostApp = backHostApp;
+    constructor(hostApp) {
+        this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.backHostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
+        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
+        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
         return [
-            ...(this.backHostApp.commonModule.css),
+            ...(this.hostApp.commonModule.css),
             ...(this.css)
         ];
     }
@@ -40,7 +40,7 @@ class ViewerModule {
             // '/lib/react/react-dom.development.js',
             '/lib/react/react.production.min.js',
             '/lib/react/react-dom.production.min.js',
-            ...(this.backHostApp.commonModule.js),
+            ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
     }
@@ -239,7 +239,7 @@ class ViewerModule {
                     throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                this.backHostApp.broadcastResult(application, context, result);
+                this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {
                 await database.rollback(context, err);
@@ -270,7 +270,7 @@ class ViewerModule {
                     throw new Error('action update: result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                this.backHostApp.broadcastResult(application, context, result);
+                this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {
                 await database.rollback(context, err);
@@ -301,7 +301,7 @@ class ViewerModule {
                     throw new Error('delete result is undefined');
                 await database.commit(context);
                 await res.json(result);
-                this.backHostApp.broadcastResult(application, context, result);
+                this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {
                 await database.rollback(context, err);
@@ -342,12 +342,12 @@ class ViewerModule {
                 if (!(_result instanceof Result_1.default)) {
                     throw new Error('_result is not Result');
                 }
-                this.backHostApp.broadcastResult(application, context, _result);
+                this.hostApp.broadcastResult(application, context, _result);
             }
             else {
                 await res.json(result);
                 if (result instanceof Result_1.default) {
-                    this.backHostApp.broadcastResult(application, context, result);
+                    this.hostApp.broadcastResult(application, context, result);
                 }
             }
         }
@@ -355,7 +355,7 @@ class ViewerModule {
             const errorMessage = err.message;
             err.message = `rpc error ${req.body.name}: ${err.message}`;
             err.context = context;
-            await this.backHostApp.logError(err, req);
+            await this.hostApp.logError(err, req);
             await res.json({ errorMessage });
         }
     }
