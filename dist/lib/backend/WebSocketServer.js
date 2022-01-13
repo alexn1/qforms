@@ -33,7 +33,7 @@ class WebSocketServer {
         webSocket.on('message', this.onMessage.bind(this, webSocket));
         const [domain, appDirName, appFileName, env] = parts.query.route.split('/');
         const context = new Context_1.default({ module: 'viewer', domain, appDirName, appFileName, env });
-        const application = await this.getBackHostApp().createApplicationIfNotExists(context);
+        const application = await this.getHostApp().createApplicationIfNotExists(context);
         application.addClient(webSocket);
         // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
@@ -42,12 +42,12 @@ class WebSocketServer {
     }
     async onClose(webSocket, code, reason) {
         console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
-        this.getBackHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
+        this.getHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
     async onMessage(webSocket, data, flags) {
         console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
-    getBackHostApp() {
+    getHostApp() {
         return this.options.hostApp;
     }
 }

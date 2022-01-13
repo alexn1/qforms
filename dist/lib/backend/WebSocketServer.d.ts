@@ -7,6 +7,6 @@ declare class WebSocketServer {
     onConnection(webSocket: any): Promise<void>;
     onClose(webSocket: any, code: any, reason: any): Promise<void>;
     onMessage(webSocket: any, data: any, flags: any): Promise<void>;
-    getBackHostApp(): BackHostApp;
+    getHostApp(): BackHostApp;
 }
 export = WebSocketServer;
