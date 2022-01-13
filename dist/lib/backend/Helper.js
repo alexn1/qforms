@@ -422,5 +422,13 @@ class Helper {
         const [key] = Object.keys(object);
         return object[key];
     }
+    static getCommandLineParams() {
+        return process.argv
+            .map(arg => arg.split('='))
+            .reduce((acc, [name, value]) => {
+            acc[name] = value;
+            return acc;
+        }, {});
+    }
 }
 module.exports = Helper;

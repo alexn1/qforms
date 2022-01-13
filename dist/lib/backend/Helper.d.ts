@@ -36,5 +36,6 @@ declare class Helper {
     static fillArray(n: number): number[];
     static formatDate(date: any, format: any): any;
     static getFirstField(object: any): any;
+    static getCommandLineParams(): {};
 }
 export = Helper;
