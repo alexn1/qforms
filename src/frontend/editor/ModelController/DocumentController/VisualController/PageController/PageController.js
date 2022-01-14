@@ -93,7 +93,7 @@ class PageController extends VisualController {
         await EditorFrontHostApp.editorApp.openModal(new NewFormController({onCreate: async values => {
             const form = await this.model.newForm({
                 name   : values.name,
-                caption: values.caption,
+                caption: values.caption || values.name,
                 class  : values.class
             });
             const formController = this.createForm(form);

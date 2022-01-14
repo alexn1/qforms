@@ -102,7 +102,7 @@ class TableController extends DocumentController {
                     pageName    : values.page,
                     className   : values.class,
                     formName    : values.name,
-                    formCaption : values.caption,
+                    formCaption : values.caption || values.name,
                 });
                 const params = formWizard.getFormParams();
                 // console.log('params:', params);
