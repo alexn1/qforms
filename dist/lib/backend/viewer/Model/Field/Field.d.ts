@@ -20,6 +20,6 @@ declare class Field extends Model {
     getDatabaseTableColumn(): Column;
     getType(): string;
     getDbType(): any;
-    valueToSqlParam(value: any): any;
+    valueToSqlValue(value: any): any;
 }
 export = Field;

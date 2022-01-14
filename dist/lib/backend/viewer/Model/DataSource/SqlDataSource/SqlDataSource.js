@@ -264,7 +264,7 @@ class SqlDataSource extends DataSource_1.default {
             const column = field.getAttr('column');
             if (row.hasOwnProperty(column)) {
                 const value = field.rawToValue(row[column]);
-                values[column] = field.valueToSqlParam(value);
+                values[column] = field.valueToSqlValue(value);
             }
         }
         return values;

@@ -121,7 +121,7 @@ class Field extends Model {
     getDbType() {
         return this.getDatabaseTableColumn().getAttr('dbType');
     }
-    valueToSqlParam(value) {
+    valueToSqlValue(value) {
         if (this.getDbType() === 'json') {
             return JSON.stringify(value);
         }
