@@ -6,10 +6,10 @@ class ViewerFrontHostApp extends FrontHostApp {
         this.applicationController = null;
     }
     async run() {
-        console.log('ViewerFrontHostApp.run', this.options.data);
+        console.log('ViewerFrontHostApp.run', this.getData());
 
         // application
-        const application = new Application(this.options.data);
+        const application = new Application(this.getData());
         application.init();
 
         // applicationController
@@ -34,6 +34,80 @@ class ViewerFrontHostApp extends FrontHostApp {
     async onWindowPopState(e) {
         // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
+    }
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+        const values = {
+            type   : 'error',
+            source : 'client',
+            message: err.message,
+            stack  : err.stack,
+            data   : {
+                href           : window.location.href,
+                platformVersion: this.getData().versions.platform,
+                appVersion     : this.getData().versions.app,
+            }
+        };
+        console.log(`POST ${this.getData().logErrorUrl}`, values);
+        fetch(this.getData().logErrorUrl, {
+            method : 'POST',
+            headers: {'Content-Type': 'application/json;charset=utf-8'},
+            body   : JSON.stringify(values)
+        }).catch(err => {
+            console.error(err.message);
+        });
+    }
+    getData() {
+        if (!this.options.data) throw new Error('no data');
+        return this.options.data;
+    }
+    alert(options) {
+        console.log('ViewerFrontHostApp.alert', options);
+        return new Promise((resolve, reject) => {
+            try {
+                const root = document.querySelector('.alert-root');
+                if (root.childElementCount === 0) {
+                    const ctrl = this.alertCtrl = new AlertController({
+                        ...options,
+                        onClose: result => {
+                            this.alertCtrl = null;
+                            ReactDOM.unmountComponentAtNode(root);
+                            resolve(result);
+                        }});
+                    // console.log('ctrl:', ctrl);
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    // console.log('view', view);
+                } else {
+                    reject(new Error('alert already exists'));
+                }
+            } catch (err) {
+                reject(err);
+            }
+        });
+    }
+    confirm(options) {
+        console.log('ViewerFrontHostApp.confirm', options);
+        return new Promise((resolve, reject) => {
+            try {
+                const root = document.querySelector('.alert-root');
+                if (root.childElementCount === 0) {
+                    const ctrl = this.alertCtrl = new ConfirmController({
+                        ...options,
+                        onClose: result => {
+                            this.alertCtrl = null;
+                            ReactDOM.unmountComponentAtNode(root);
+                            resolve(result);
+                        }});
+                    // console.log('ctrl:', ctrl);
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    // console.log('view', view);
+                } else {
+                    reject(new Error('confirm already exists'));
+                }
+            } catch (err) {
+                reject(err);
+            }
+        });
     }
 }
 

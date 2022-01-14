@@ -36,37 +36,15 @@ class FrontHostApp {
             console.error(`onWindowError error: ${err.message}`);
         }
     }
-    logError(err) {
-        console.error('FrontHostApp.logError', err);
-        const values = {
-            type   : 'error',
-            source : 'client',
-            message: err.message,
-            stack  : err.stack,
-            data   : {
-                href           : window.location.href,
-                platformVersion: this.getData().versions.platform,
-                appVersion     : this.getData().versions.app,
-            }
-        };
-        console.log(`POST ${this.getData().logErrorUrl}`, values);
-        fetch(this.getData().logErrorUrl, {
-            method : 'POST',
-            headers: {'Content-Type': 'application/json;charset=utf-8'},
-            body   : JSON.stringify(values)
-        }).catch(err => {
-            console.error(err.message);
-        });
-    }
-    getData() {
-        if (!this.options.data) throw new Error('no data');
-        return this.options.data;
-    }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
         return body;
+    }
+
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
     }
 
     static async doHttpRequest2(data) {
@@ -119,55 +97,14 @@ class FrontHostApp {
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
-    alert(options) {
+    async alert(options) {
         console.log('FrontHostApp.alert', options);
-        return new Promise((resolve, reject) => {
-            try {
-                const root = document.querySelector('.alert-root');
-                if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new AlertController({
-                        ...options,
-                        onClose: result => {
-                            this.alertCtrl = null;
-                            ReactDOM.unmountComponentAtNode(root);
-                            resolve(result);
-                        }});
-                    // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
-                    // console.log('view', view);
-                } else {
-                    reject(new Error('alert already exists'));
-                }
-            } catch (err) {
-                reject(err);
-            }
-        });
+        alert(options.message);
     }
-    confirm(options) {
+    async confirm(options) {
         console.log('FrontHostApp.confirm', options);
-        return new Promise((resolve, reject) => {
-            try {
-                const root = document.querySelector('.alert-root');
-                if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new ConfirmController({
-                        ...options,
-                        onClose: result => {
-                            this.alertCtrl = null;
-                            ReactDOM.unmountComponentAtNode(root);
-                            resolve(result);
-                        }});
-                    // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
-                    // console.log('view', view);
-                } else {
-                    reject(new Error('confirm already exists'));
-                }
-            } catch (err) {
-                reject(err);
-            }
-        });
+        return confirm(options.message);
     }
-
 }
 
 window.QForms.FrontHostApp = FrontHostApp;
