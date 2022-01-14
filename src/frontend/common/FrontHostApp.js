@@ -45,18 +45,22 @@ class FrontHostApp {
             stack  : err.stack,
             data   : {
                 href           : window.location.href,
-                platformVersion: this.data.versions.platform,
-                appVersion     : this.data.versions.app,
+                platformVersion: this.getData().versions.platform,
+                appVersion     : this.getData().versions.app,
             }
         };
-        console.log(`POST ${this.data.logErrorUrl}`, values);
-        fetch(this.data.logErrorUrl, {
+        console.log(`POST ${this.getData().logErrorUrl}`, values);
+        fetch(this.getData().logErrorUrl, {
             method : 'POST',
             headers: {'Content-Type': 'application/json;charset=utf-8'},
             body   : JSON.stringify(values)
         }).catch(err => {
             console.error(err.message);
         });
+    }
+    getData() {
+        if (!this.options.data) throw new Error('no data');
+        return this.options.data;
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
