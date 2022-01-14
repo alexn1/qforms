@@ -116,7 +116,7 @@ class ApplicationController extends VisualController {
         await EditorFrontHostApp.editorApp.openModal(new NewPageController({onCreate: async values => {
             const page = await this.model.newPage({
                 name   : values.name,
-                caption: values.caption,
+                caption: values.caption || values.name,
                 startup: values.startup
             });
             const pageLinkController = this.createPageLink(page.pageLink);
