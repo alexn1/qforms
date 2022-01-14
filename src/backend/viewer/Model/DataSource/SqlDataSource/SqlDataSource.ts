@@ -280,10 +280,11 @@ class SqlDataSource extends DataSource {
     getValuesFromRow(row) {
         console.log('SqlDataSource.getValuesFromRow', row);
         const values = {};
-        for (const field of this.getParent().fields) {
+        for (const field of this.getForm().fields) {
             const column = field.getAttr('column');
             if (row.hasOwnProperty(column)) {
-                values[column] = field.rawToValue(row[column]);
+                const value = field.rawToValue(row[column]);
+                values[column] = field.valueToSqlParam(value);
             }
         }
         return values;

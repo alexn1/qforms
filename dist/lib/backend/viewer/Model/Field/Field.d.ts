@@ -2,6 +2,7 @@ import Model from '../Model';
 import Application from '../Application/Application';
 import Page from '../Page/Page';
 import Form from '../Form/Form';
+import Column from "../Column/Column";
 declare class Field extends Model {
     static create(data: any, parent: any): Promise<Field>;
     fillAttributes(response: any): void;
@@ -16,5 +17,9 @@ declare class Field extends Model {
     valueToRaw(value: any): any;
     rawToValue(raw: any): any;
     isTimezone(): boolean;
+    getDatabaseTableColumn(): Column;
+    getType(): string;
+    getDbType(): any;
+    valueToSqlParam(value: any): any;
 }
 export = Field;

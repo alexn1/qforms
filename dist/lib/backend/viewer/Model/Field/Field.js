@@ -93,5 +93,31 @@ class Field extends Model_1.default {
     isTimezone() {
         return this.getAttr('timezone') === 'true';
     }
+    getDatabaseTableColumn() {
+        if (!this.getAttr('column'))
+            throw new Error(`${this.getFullName()}: column attr is empty`);
+        const defaultDataSource = this.getForm().getDataSource('default');
+        if (!defaultDataSource)
+            throw new Error(`${this.getFullName()}: no default datasource`);
+        return defaultDataSource.getTable().getColumn(this.getAttr('column'));
+    }
+    getType() {
+        if (this.getAttr('column')) {
+            return this.getDatabaseTableColumn().getAttr('type');
+        }
+        if (this.getAttr('type')) {
+            return this.getAttr('type');
+        }
+        throw new Error(`${this.getFullName()}: type attr is empty`);
+    }
+    getDbType() {
+        return this.getDatabaseTableColumn().getAttr('dbType');
+    }
+    valueToSqlParam(value) {
+        if (this.getDbType() === 'json') {
+            return JSON.stringify(value);
+        }
+        return value;
+    }
 }
 module.exports = Field;

@@ -1,9 +1,12 @@
+import SqlDataSource from "../DataSource/SqlDataSource/SqlDataSource";
+
 const path = require('path');
 
 import Model from '../Model';
 import Application from '../Application/Application';
 import Page from '../Page/Page';
 import Form from '../Form/Form';
+import Column from "../Column/Column";
 
 const Helper = require('../../../Helper');
 
@@ -99,6 +102,30 @@ class Field extends Model {
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';
+    }
+    getDatabaseTableColumn(): Column {
+        if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: column attr is empty`);
+        const defaultDataSource = this.getForm().getDataSource('default') as SqlDataSource;
+        if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
+        return defaultDataSource.getTable().getColumn(this.getAttr('column'));
+    }
+    getType(): string {
+        if (this.getAttr('column')) {
+            return this.getDatabaseTableColumn().getAttr('type');
+        }
+        if (this.getAttr('type')) {
+            return this.getAttr('type');
+        }
+        throw new Error(`${this.getFullName()}: type attr is empty`);
+    }
+    getDbType() {
+        return this.getDatabaseTableColumn().getAttr('dbType');
+    }
+    valueToSqlParam(value) {
+        if (this.getDbType() === 'json') {
+            return JSON.stringify(value);
+        }
+        return value;
     }
 }
 
