@@ -28,12 +28,29 @@ class KeyColumnEditor extends Editor {
             controller: 'KeyColumn',
             action    : 'delete',
             params    : {
-                page      : this.dataSource.parent.page.pageLink.getFileName(),
-                form      : this.dataSource.parent.getName(),
+                // page      : this.dataSource.parent.page.pageLink.getFileName(),
+                ...(this.getPage() ? {page: this.getPage().pageLink.getFileName()} : {}),
+                // form      : this.dataSource.parent.getName(),
+                ...(this.getForm() ? {form: this.getForm().getName()}: {}),
                 dataSource: this.dataSource.getName(),
                 keyColumn : this.getName()
             }
         });
+    }
+    getPage() {
+        if (this.dataSource.parent.constructor.name === 'FormEditor') {
+            return this.dataSource.parent.page;
+        }
+        if (this.dataSource.parent.constructor.name === 'PageEditor') {
+            return this.dataSource.parent;
+        }
+        return null;
+    }
+    getForm() {
+        if (this.dataSource.parent.constructor.name === 'FormEditor') {
+            return this.dataSource.parent;
+        }
+        return null;
     }
     async delete() {
         await this.deleteData();
