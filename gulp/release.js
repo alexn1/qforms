@@ -1,7 +1,7 @@
 const fs            = require('fs');
 const child_process = require('child_process');
 
-main(); async function main() {
+async function release() {
 
     // master branch
     await exec('git checkout master');
@@ -51,39 +51,39 @@ main(); async function main() {
     await exec('git push origin master');*/
 }
 
-function versionWithoutDev(version) {
+/*function versionWithoutDev(version) {
     const ver = version.split('.');
     const major = ver[0];
     const minor = ver[1];
     const patch = ver[2].split('-');
     return [major, minor, patch[0]].join('.');
-}
+}*/
 
-function versionWithDev(version) {
+/*function versionWithDev(version) {
     const ver = version.split('.');
     const major = ver[0];
     const minor = ver[1];
     const patch = ver[2].split('-');
     return [major, minor, [patch[0], 'dev'].join('-')].join('.');
-}
+}*/
 
-function incMinor(version) {
+/*function incMinor(version) {
     const ver = version.split('.');
     const major = ver[0];
     let minor = ver[1];
     const patch = ver[2];
     minor = parseInt(minor) + 1;
     return [major, minor, patch].join('.');
-}
+}*/
 
-function incPatch(version) {
+/*function incPatch(version) {
     const ver = version.split('.');
     const major = ver[0];
     const minor = ver[1];
     let patch = ver[2];
     patch = parseInt(patch) + 1;
     return [major, minor, patch].join('.');
-}
+}*/
 
 function getJsonFileData(filePath) {
     return new Promise(function(resolve, reject) {
@@ -102,7 +102,7 @@ function getJsonFileData(filePath) {
     });
 }
 
-function putJsonFileData(filePath, data) {
+/*function putJsonFileData(filePath, data) {
     console.log('putJsonFileData version:', data.version);
     return new Promise(function(resolve, reject) {
         try {
@@ -118,7 +118,7 @@ function putJsonFileData(filePath, data) {
             reject(err);
         }
     });
-}
+}*/
 
 async function exec(cmd) {
     console.log(cmd);
@@ -135,3 +135,5 @@ async function exec(cmd) {
         // childProcess.on('exit', code => console.log(`${cmd} process exited with code: ${code}`));
     });
 }
+
+module.exports = release;
