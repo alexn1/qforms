@@ -1,6 +1,6 @@
 const Lib = require('./Lib');
 
-module.exports = async () => {
+async function release() {
 
     // master branch
     await Lib.exec('git checkout master');
@@ -49,3 +49,5 @@ module.exports = async () => {
     /*await Lib.exec(`git commit -am "begin v${Lib.versionWithoutDev(nextVersion)}"`);
     await Lib.exec('git push origin master');*/
 }
+
+module.exports = release;
