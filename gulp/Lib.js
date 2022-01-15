@@ -1,4 +1,5 @@
 const fs = require('fs');
+const child_process = require("child_process");
 
 class Lib {
     static getJsonFileData(filePath) {
@@ -51,6 +52,38 @@ class Lib {
                 reject(err);
             }
         });
+    }
+    static async exec(cmd) {
+        console.log(cmd);
+        return new Promise(function(resolve, reject) {
+            const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(stderr);
+                }
+            });
+            childProcess.stdout.on('data', data => process.stdout.write(data));
+            childProcess.stderr.on('data', data => process.stderr.write(data));
+            // childProcess.on('exit', code => console.log(`${cmd} process exited with code: ${code}`));
+        });
+    }
+
+    static versionWithDev(version) {
+        const ver = version.split('.');
+        const major = ver[0];
+        const minor = ver[1];
+        const patch = ver[2].split('-');
+        return [major, minor, [patch[0], 'dev'].join('-')].join('.');
+    }
+
+    static incMinor(version) {
+        const ver = version.split('.');
+        const major = ver[0];
+        let minor = ver[1];
+        const patch = ver[2];
+        minor = parseInt(minor) + 1;
+        return [major, minor, patch].join('.');
     }
 }
 
