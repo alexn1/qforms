@@ -10,7 +10,7 @@ class RowFormEditor extends FormEditor {
                 ...FormEditor.createAttributes(params),
                 newMode      : params.newMode  ? params.newMode : '',
                 backOnly     : params.backOnly ? params.backOnly: 'false',
-                refreshButton: params.refreshButton  || 'true',
+                refreshButton: params.refreshButton  || 'false',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
