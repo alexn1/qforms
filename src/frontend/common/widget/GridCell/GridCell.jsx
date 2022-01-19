@@ -7,7 +7,8 @@ class GridCell extends ReactComponent {
         if (!this.span.current) return 0;
         return this.span.current.offsetWidth;
     }
-    renderCellValue(value) {
+    renderCellValue(rawValue) {
+        const value = this.props.grid.props.decodeValue ? Helper.decodeValue(rawValue) : rawValue;
         if (typeof value === 'boolean') return value.toString();
         return value;
     }

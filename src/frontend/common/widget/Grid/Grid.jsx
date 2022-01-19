@@ -270,6 +270,7 @@ class Grid extends ReactComponent {
         }
         if (view) return view;
         return <GridCell
+            grid={this}
             row={row}
             column={column}
             onCreate={this.onCellViewCreate}
