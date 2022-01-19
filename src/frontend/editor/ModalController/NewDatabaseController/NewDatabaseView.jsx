@@ -21,12 +21,14 @@ class NewDatabaseView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="ModalView NewDatabaseView">
-            <div className="modal-header">
-                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
-                <h4 className="modal-title">New Database</h4>
+        return <div className={this.getCssClassNames()}>
+            <div className={`${this.getCssBlockName()}__header`}>
+                <div className={`${this.getCssBlockName()}__title`}>New Database</div>
+                <button type="button" className="close" onClick={ctrl.onClose}>
+                    <span>&times;</span>
+                </button>
             </div>
-            <div className="modal-body">
+            <div className={`${this.getCssBlockName()}__body`}>
                 <div>
                     <label htmlFor="class">Class</label>
                     <ComboBox id={'class'} items={[
@@ -55,9 +57,9 @@ class NewDatabaseView extends ReactComponent {
                     <TextBox id={'password'} value={'123qwe'} onCreate={c => this.password = c} autocomplete={'off'}/>
                 </div>
             </div>
-            <div className="modal-footer">
-                <Button name="create" classList={['btn', 'btn-primary']} onClick={this.onCreate}>Create</Button>
-                <Button classList={['btn', 'btn-default']} onClick={ctrl.onClose}>Close</Button>
+            <div className={`${this.getCssBlockName()}__footer`}>
+                <Button onClick={ctrl.onClose}>Close</Button>
+                <Button name="create" onClick={this.onCreate}>Create</Button>
             </div>
         </div>;
     }
