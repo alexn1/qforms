@@ -491,5 +491,17 @@ class DataSource extends Model {
         return this.isAttr('database');
     }
 
+    moveRow(row, offset) {
+        console.log('DataSource.moveRow');
+        Helper.moveArrItem(this.rows, row, offset);
+
+        // refresh event
+        const event = {source: this};
+        if (this.parent.onDataSourceRefresh) {
+            this.parent.onDataSourceRefresh(event);
+        }
+        this.emit('refresh', event);
+    }
+
 }
 window.QForms.DataSource = DataSource;
