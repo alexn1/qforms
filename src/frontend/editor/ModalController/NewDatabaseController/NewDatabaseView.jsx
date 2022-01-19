@@ -21,14 +21,14 @@ class NewDatabaseView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getCssClassNames()}>
-            <div className={`${this.getCssBlockName()}__header`}>
-                <div className={`${this.getCssBlockName()}__title`}>New Database</div>
+        return <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div className={`NewModelView__header`}>
+                <div className={`NewModelView__title`}>New Database</div>
                 <button type="button" className="close" onClick={ctrl.onClose}>
                     <span>&times;</span>
                 </button>
             </div>
-            <div className={`${this.getCssBlockName()}__body`}>
+            <div className={`NewModelView__body`}>
                 <div>
                     <label htmlFor="class">Class</label>
                     <ComboBox id={'class'} items={[
@@ -57,7 +57,7 @@ class NewDatabaseView extends ReactComponent {
                     <TextBox id={'password'} value={'123qwe'} onCreate={c => this.password = c} autocomplete={'off'}/>
                 </div>
             </div>
-            <div className={`${this.getCssBlockName()}__footer`}>
+            <div className={`NewModelView__footer`}>
                 <Button onClick={ctrl.onClose}>Close</Button>
                 <Button name="create" onClick={this.onCreate}>Create</Button>
             </div>
