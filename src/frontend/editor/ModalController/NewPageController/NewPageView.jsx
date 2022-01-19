@@ -38,8 +38,8 @@ class NewPageView extends ReactComponent {
                 </div>
             </div>
             <div className={'NewModelView__footer'}>
-                <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
-                <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
+                <button name="create" type="button" onClick={this.onCreate}>Create</button>
+                <button type="button" onClick={ctrl.onClose}>Close</button>
             </div>
         </div>;
     }

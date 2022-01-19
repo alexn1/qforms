@@ -37,8 +37,8 @@ class ChangeClassView extends ReactComponent {
                 </div>
             </div>
             <div className={'NewModelView__footer'}>
-                <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
-                <button name="change" type="button" className="btn btn-primary" onClick={this.onCreate}>Change</button>
+                <button type="button" onClick={ctrl.onClose}>Close</button>
+                <button name="change" type="button" onClick={this.onCreate}>Change</button>
             </div>
         </div>;
     }
