@@ -20,12 +20,12 @@ class NewFormFromTableView extends ReactComponent {
         const tableController = ctrl.options.tableController;
         const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({value: pageLink.getName(), title: pageLink.getName()}))
         console.log('pages:', pages);
-        return <div className="ModalView">
-            <div className="modal-header">
+        return <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div className={'NewModelView__header'}>
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Form</h4>
             </div>
-            <div className="modal-body">
+            <div className={'NewModelView__body'}>
                 <div>
                     <label htmlFor="table">Table</label>
                     <TextBox id="table" disabled={true} value={tableController.model.getName()}/>
@@ -50,7 +50,7 @@ class NewFormFromTableView extends ReactComponent {
                 <TextBox id="caption" onCreate={c => this.caption = c} autocomplete={'off'}/>
             </div>
         </div>
-        <div className="modal-footer">
+        <div className={'NewModelView__footer'}>
             <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
             <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
         </div>

@@ -11,18 +11,18 @@ class NewTableView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="ModalView">
-            <div className="modal-header">
+        return <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div className={'NewModelView__header'}>
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Table</h4>
             </div>
-            <div className="modal-body">
+            <div className={'NewModelView__body'}>
                 <div>
                     <label htmlFor="tableName">Name</label>
                     <TextBox id="tableName" onCreate={c => this.name = c}/>
                 </div>
             </div>
-            <div className="modal-footer">
+            <div className={'NewModelView__footer'}>
                 <button name="create" type="button" className="btn btn-primary" onClick={this.onCreate}>Create</button>
                 <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
             </div>

@@ -13,12 +13,12 @@ class NewDataSourceView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="ModalView NewDataSourceView">
-            <div className="modal-header">
+        return <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div className={'NewModelView__header'}>
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Data Source</h4>
             </div>
-            <div className="modal-body">
+            <div className={'NewModelView__body'}>
                 <div>
                     <label htmlFor="name">Name</label>
                     <TextBox id={'name'} onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
@@ -31,7 +31,7 @@ class NewDataSourceView extends ReactComponent {
                     ]} onCreate={c => this.class = c} value={'SqlDataSource'}/>
                 </div>
             </div>
-            <div className="modal-footer">
+            <div className={'NewModelView__footer'}>
                 <Button name="create" classList={['btn', 'btn-primary']} onClick={this.onCreate}>Create</Button>
                 <Button classList={['btn', 'btn-default']} onClick={ctrl.onClose}>Close</Button>
             </div>
