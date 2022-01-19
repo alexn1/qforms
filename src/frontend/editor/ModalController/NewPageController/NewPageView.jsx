@@ -15,7 +15,7 @@ class NewPageView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="modal-content">
+        return <div className="ModalView">
             <div className="modal-header">
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <h4 className="modal-title">New Page</h4>
