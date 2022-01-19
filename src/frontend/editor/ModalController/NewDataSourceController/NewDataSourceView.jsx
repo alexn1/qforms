@@ -15,8 +15,8 @@ class NewDataSourceView extends ReactComponent {
         const ctrl = this.props.ctrl;
         return <div className={`${this.getCssClassNames()} NewModelView`}>
             <div className={'NewModelView__header'}>
-                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
                 <div className={'NewModelView__title'}>New Data Source</div>
+                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
             </div>
             <div className={'NewModelView__body'}>
                 <div>
