@@ -11,12 +11,12 @@ class ChangeClassView extends ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className="ModalView">
-            <div className="modal-header">
+        return <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div className={'NewModelView__header'}>
+                <div className={'NewModelView__title'}>Change Field Class</div>
                 <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
-                <h4 className="modal-title">Change Field Class</h4>
             </div>
-            <div className="modal-body">
+            <div className={'NewModelView__body'}>
                 <div>
                     <label htmlFor="class">Class</label>
                     <ComboBox id="class" items={[
@@ -36,9 +36,9 @@ class ChangeClassView extends ReactComponent {
                     ]} value={ctrl.options.fieldCtrl.model.getClassName()} onCreate={c => this.class = c}/>
                 </div>
             </div>
-            <div className="modal-footer">
-                <button name="change" type="button" className="btn btn-primary" onClick={this.onCreate}>Change</button>
+            <div className={'NewModelView__footer'}>
                 <button type="button" className="btn btn-default" onClick={ctrl.onClose}>Close</button>
+                <button name="change" type="button" className="btn btn-primary" onClick={this.onCreate}>Change</button>
             </div>
         </div>;
     }
