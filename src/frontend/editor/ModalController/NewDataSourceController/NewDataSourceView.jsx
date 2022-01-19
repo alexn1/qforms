@@ -32,8 +32,8 @@ class NewDataSourceView extends ReactComponent {
                 </div>
             </div>
             <div className={'NewModelView__footer'}>
-                <Button name="create" onClick={this.onCreate}>Create</Button>
                 <Button onClick={ctrl.onClose}>Close</Button>
+                <Button name="create" onClick={this.onCreate}>Create</Button>
             </div>
         </div>;
     }
