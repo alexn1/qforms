@@ -612,7 +612,7 @@ class BackHostApp {
     }
 
     async postError(req, res, next) {
-        console.log(colors.blue('BackHostApp.postError'), req.body);
+        console.log(colors.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
                 await BackHostApp.createLog(this.logPool, {
