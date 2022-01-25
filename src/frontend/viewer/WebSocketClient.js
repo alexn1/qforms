@@ -57,6 +57,7 @@ class WebSocketClient {
 
     async onClose(e) {
         console.error('WebSocketClient.onClose', e);
+        this.getApp().getHostApp().logError(new Error('websocket close'));
         this.resetRefreshTimeout();
         this.webSocket.onclose = null;
         this.webSocket.onmessage = null;
