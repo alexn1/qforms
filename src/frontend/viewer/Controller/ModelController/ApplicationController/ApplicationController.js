@@ -336,8 +336,9 @@ class ApplicationController extends ModelController {
         if (result.errorMessage) {
             this.getHostApp().logError(new Error(result.errorMessage));
             await this.alert({
-                title: this.getModel().getText().application.error,
-                message: result.errorMessage
+                title     : this.getModel().getText().application.error,
+                titleStyle: {color: 'red'},
+                message   : result.errorMessage
             });
         }
         return result;
