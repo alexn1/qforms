@@ -331,6 +331,17 @@ class ApplicationController extends ModelController {
         });
         await this.webSocketClient.connect();
     }
+    async rpc(name, params) {
+        const result = await this.getModel().rpc(name, params);
+        if (result.errorMessage) {
+            this.getHostApp().logError(new Error(result.errorMessage));
+            await this.alert({
+                title: this.getModel().getText().application.error,
+                message: result.errorMessage
+            });
+        }
+        return result;
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;

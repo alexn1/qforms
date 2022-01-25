@@ -79,7 +79,6 @@ class Application extends Model {
             name  : name,
             params: params
         });
-        if (result.errorMessage) throw new Error(result.errorMessage);
         return result;
     }
     emitResult(result, source = null) {
