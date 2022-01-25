@@ -97,10 +97,10 @@ class RowFormController extends FormController {
         this.validate();
         this.calcState();
         if (this.isValid()) {
-            this.state.mode = 'view';
             try {
                 this.getApp().getView().disableRerender();
                 await this.model.update();
+                this.state.mode = 'view';
                 console.log('form model updated', this.getModel().getFullName());
             } finally {
                 this.getApp().getView().enableRerender();
