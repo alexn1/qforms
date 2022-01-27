@@ -9,6 +9,7 @@
     "application": {
         "logout": "Logout",
         "error": "Error",
+        "alert": "Alert",
         "confirm": "Confirm",
         "versionNotification": "New version is available. Please refresh page."
     },
