@@ -69,10 +69,10 @@ class ApplicationController extends ModelController {
     }
     createVersionNotificationIfNotExists() {
         // console.log('ApplicationController.createVersionNotificationIfNotExists');
-        if (!document.querySelector(`.${this.getView().getCssBlockName()}__version-notification`)) {
+        if (!document.querySelector('.version-notification')) {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
-            div.className = `${this.getView().getCssBlockName()}__version-notification`;
+            div.className = 'version-notification';
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         } else {
             // console.log(`version notification already exists`);
