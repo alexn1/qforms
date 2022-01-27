@@ -333,14 +333,14 @@ class ApplicationController extends ModelController {
     }
     async rpc(name, params) {
         const result = await this.getModel().rpc(name, params);
-        if (result.errorMessage) {
+        /*if (result.errorMessage) {
             this.getHostApp().logError(new Error(result.errorMessage));
             await this.alert({
                 title     : this.getModel().getText().application.error,
                 titleStyle: {color: 'red'},
                 message   : result.errorMessage
             });
-        }
+        }*/
         return result;
     }
 }
