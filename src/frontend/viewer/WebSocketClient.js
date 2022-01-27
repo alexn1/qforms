@@ -3,11 +3,20 @@ class WebSocketClient {
         this.options = options;
         if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');
-        this.url = `${options.protocol}://${window.location.host}/?route=${encodeURIComponent(options.route)}&uuid=${encodeURIComponent(options.uuid)}&userId=${encodeURIComponent(options.userId)}`;
+        this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
         this.webSocket         = null;
         this.refreshTimeoutId  = null;
         this.RECONNECT_TIMEOUT = 10;        // sec
         this.REFRESH_TIMEOUT   = 60*60;     // sec
+    }
+    createUriParamsString(options) {
+        const params = {
+            route  : options.route,
+            uuid   : options.uuid,
+            userId : options.userId,
+            version: this.getApp().getModel().getData().versions.app
+        };
+        return Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
     }
     connect() {
         console.log('WebSocketClient.connect', this.url);

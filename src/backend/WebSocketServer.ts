@@ -23,11 +23,15 @@ class WebSocketServer {
     async onConnection(webSocket) {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         const parts = url.parse(webSocket.upgradeReq.url, true);
+        // console.log('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
-        webSocket.route = parts.query.route;
-        webSocket.uuid = parts.query.uuid;
+        webSocket.route  = parts.query.route;
+        webSocket.uuid   = parts.query.uuid;
         webSocket.userId = parts.query.userId;
+        webSocket.customFields = {
+            version: parts.query.version
+        };
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
 

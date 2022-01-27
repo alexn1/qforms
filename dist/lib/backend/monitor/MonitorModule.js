@@ -31,7 +31,9 @@ class MonitorModule {
                     clients: app.clients.map(webSocket => {
                         return {
                             uuid: webSocket.uuid,
-                            userId: webSocket.userId
+                            userId: webSocket.userId,
+                            ip: Helper_1.default.getWebSocketIP(webSocket),
+                            version: webSocket.customFields.version
                         };
                     })
                 };

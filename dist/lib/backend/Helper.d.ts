@@ -37,5 +37,7 @@ declare class Helper {
     static formatDate(date: any, format: any): any;
     static getFirstField(object: any): any;
     static getCommandLineParams(): {};
+    static getWebSocketIP(webSocket: any): any;
+    static getWebSocketPort(webSocket: any): any;
 }
 export = Helper;

@@ -446,6 +446,17 @@ class Helper {
                 return acc;
             }, {});
     }
+    static getWebSocketIP(webSocket) {
+        return webSocket.upgradeReq.headers['x-real-ip'] ?
+            webSocket.upgradeReq.headers['x-real-ip'] :
+            webSocket.upgradeReq.socket.remoteAddress;
+    }
+
+    static getWebSocketPort(webSocket) {
+        return webSocket.upgradeReq.headers['x-real-port'] ?
+            webSocket.upgradeReq.headers['x-real-port'] :
+            webSocket.upgradeReq.socket.remotePort;
+    }
 }
 
 export = Helper;
