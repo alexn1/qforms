@@ -347,28 +347,13 @@ class BackHostApp {
     async logEvent(context: Context, message, data = null) {
         console.log('BackHostApp.logEvent', message);
         try {
-            if (this.logPool) {
-                await BackHostApp.createLog(this.logPool, {
-                    type   : 'log',
-                    source : 'server',
-                    ip     : context.getIp(),
-                    message: message,
-                    data   : data ? JSON.stringify(data) : null
-                });
-            } else if (this.logErrorUrl) {
-                console.log(`fetch ${this.logErrorUrl}`);
-                await fetch(this.logErrorUrl, {
-                    method : 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body   : JSON.stringify({
-                        type   : 'log',
-                        source : 'server',
-                        ip     : context.getIp(),
-                        message: message,
-                        data   : data
-                    })
-                });
-            }
+            await this.createLog2({
+                type   : 'log',
+                source : 'server',
+                ip     : context.getIp(),
+                message: message,
+                data   : data
+            });
         } catch (err) {
             console.error(colors.red(err));
         }
@@ -387,6 +372,31 @@ class BackHostApp {
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
             values
         );
+    }
+
+    async createLog2(values) {
+        if (this.logPool) {
+            await BackHostApp.createLog(this.logPool, {
+                type   : values.type,
+                source : values.source,
+                ip     : values.ip,
+                message: values.message,
+                data   : values.data ? JSON.stringify(values.data) : null
+            });
+        } else if (this.logErrorUrl) {
+            console.log(`fetch ${this.logErrorUrl}`);
+            await fetch(this.logErrorUrl, {
+                method : 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body   : JSON.stringify({
+                    type   : values.type,
+                    source : values.source,
+                    ip     : values.ip,
+                    message: values.message,
+                    data   : values.data
+                })
+            });
+        }
     }
 
     async moduleGet(req, res, next) {
