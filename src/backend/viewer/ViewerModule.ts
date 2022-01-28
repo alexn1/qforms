@@ -138,6 +138,7 @@ class ViewerModule {
                 req.session.tzOffset = JSON.parse(req.body.tzOffset);
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
+                this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
             } else {
                 // const users = await application.getUsers(context);
                 res.render('viewer/login', {
@@ -369,6 +370,10 @@ class ViewerModule {
 
     async handleViewerGetFile(context: Context, application: Application, next) {
         await application.handleGetFile(context, next);
+    }
+
+    getHostApp() {
+        return this.hostApp;
     }
 
 }

@@ -22,5 +22,6 @@ declare class ViewerModule {
     logout(context: Context, application: Application): Promise<void>;
     test(context: Context, application: Application): Promise<void>;
     handleViewerGetFile(context: Context, application: Application, next: any): Promise<void>;
+    getHostApp(): BackHostApp;
 }
 export = ViewerModule;

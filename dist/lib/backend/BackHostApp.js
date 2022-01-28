@@ -292,6 +292,37 @@ class BackHostApp {
             console.error(colors.red(err));
         }
     }
+    async logEvent(context, message, data = null) {
+        console.log('BackHostApp.logEvent', message);
+        try {
+            if (this.logPool) {
+                await BackHostApp.createLog(this.logPool, {
+                    type: 'log',
+                    source: 'server',
+                    ip: context.getIp(),
+                    message: message,
+                    data: data ? JSON.stringify(data) : null
+                });
+            }
+            else if (this.logErrorUrl) {
+                console.log(`fetch ${this.logErrorUrl}`);
+                await fetch(this.logErrorUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'log',
+                        source: 'server',
+                        ip: context.getIp(),
+                        message: message,
+                        data: data
+                    })
+                });
+            }
+        }
+        catch (err) {
+            console.error(colors.red(err));
+        }
+    }
     static async createLog(cnn, values) {
         // console.log('BackHostApp.createLog', values);
         if (values.stack === undefined)
