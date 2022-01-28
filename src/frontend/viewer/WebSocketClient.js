@@ -66,7 +66,7 @@ class WebSocketClient {
 
     async onClose(e) {
         console.error('WebSocketClient.onClose', e);
-        this.getApp().getHostApp().logError(new Error('websocket close'));
+        this.getApp().getHostApp().logError(new Error(`websocket close ${this.getApp().getModel().getDomain()}/${this.getApp().getModel().getName()}`));
         this.resetRefreshTimeout();
         this.webSocket.onclose = null;
         this.webSocket.onmessage = null;
