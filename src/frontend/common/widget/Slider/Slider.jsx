@@ -26,7 +26,11 @@ class Slider extends ReactComponent {
     }
     onImageClick = e => {
         console.log('Slider.onImageClick');
-        this.setState({classList: ['full']});
+        if (this.state.classList) {
+            this.setState({classList: null});
+        } else {
+            this.setState({classList: ['full']});
+        }
     }
     onCloseClick = e => {
         this.setState({classList: null});
