@@ -16,7 +16,7 @@ class RowFormTimeFieldController extends RowFormFieldController {
     getDefaultValue() {
         return this.defaultValue;
     }
-    setDefaultValue(defaultValue) {
+    setDefaultValue2(defaultValue) {
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {

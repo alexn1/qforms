@@ -98,8 +98,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     getDefaultValue() {
         return this.defaultValue;
     }
-    setDefaultValue(defaultValue) {
-        // console.log('RowFormDateTimeFieldController.setDefaultValue', this.widget2 ? this.widget2.getValue() : null);
+    setDefaultValue2(defaultValue) {
+        // console.log('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
