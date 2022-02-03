@@ -40,7 +40,7 @@ declare class BackHostApp {
     createApp(req: any): Promise<AppInfo[]>;
     logError(err: any, req?: any): Promise<void>;
     logRequest(req: any, context: Context, time: any): Promise<void>;
-    logEvent(context: Context, message: any, data?: any): Promise<void>;
+    logEvent(context: Context, message: string, data?: any): Promise<void>;
     static createLog(cnn: any, values: any): Promise<void>;
     createLog2(values: any): Promise<void>;
     moduleGet(req: any, res: any, next: any): Promise<void>;

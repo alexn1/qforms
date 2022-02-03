@@ -344,7 +344,7 @@ class BackHostApp {
         }
     }
 
-    async logEvent(context: Context, message, data = null) {
+    async logEvent(context: Context, message: string, data = null): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
             await this.createLog2({
