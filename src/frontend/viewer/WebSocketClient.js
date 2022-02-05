@@ -34,7 +34,7 @@ class WebSocketClient {
                     resolve(e);
                 };
             } catch (err) {
-                reject(err);
+                console.error('WebSocketClient.connect error', err);
             }
         });
     }
