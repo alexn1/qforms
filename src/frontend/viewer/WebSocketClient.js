@@ -21,17 +21,21 @@ class WebSocketClient {
     connect() {
         console.log('WebSocketClient.connect', this.url);
         return new Promise((resolve, reject) => {
-            this.webSocket = new WebSocket(this.url);
-            this.webSocket.onclose = async e => {
-                this.webSocket = null;
-                reject(new Error(`Connection failed ${e.code}`));
-            };
-            this.webSocket.onopen = e => {
-                this.webSocket.onclose   = this.onClose.bind(this);
-                this.webSocket.onmessage = this.onMessage.bind(this);
-                this.startRefreshTimeout();
-                resolve(e);
-            };
+            try {
+                this.webSocket = new WebSocket(this.url);
+                this.webSocket.onclose = async e => {
+                    this.webSocket = null;
+                    reject(new Error(`Connection failed ${e.code}`));
+                };
+                this.webSocket.onopen = e => {
+                    this.webSocket.onclose   = this.onClose.bind(this);
+                    this.webSocket.onmessage = this.onMessage.bind(this);
+                    this.startRefreshTimeout();
+                    resolve(e);
+                };
+            } catch (err) {
+                reject(err);
+            }
         });
     }
     async onRefreshTimeout() {
