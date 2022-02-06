@@ -19,4 +19,10 @@ class Controller extends EventEmitter {
     getViewClass() {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
+    createElement() {
+        return React.createElement(this.getViewClass(), {
+            ctrl    : this,
+            onCreate: this.onViewCreate
+        });
+    }
 }
