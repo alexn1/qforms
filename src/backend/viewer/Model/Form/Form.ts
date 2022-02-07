@@ -97,6 +97,15 @@ class Form extends Model {
                 return '{' + arr.join('.') + '}';
             }
             return text;
+        }).replace(/\[([@\w\.]+)\]/g, (text, name) => {
+            if (name.indexOf('.') !== -1) {
+                const arr = name.split('.');
+                if (arr[0] === 'this') {
+                    arr[0] = this.getPage().getName();
+                }
+                return '[' + arr.join('.') + ']';
+            }
+            return text;
         });
     }
 
