@@ -29,5 +29,6 @@ declare class SqlDataSource extends DataSource {
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
     getBuffer(context: Context, file: any): Promise<any>;
+    templateQuery(context: Context, query: string): string;
 }
 export = SqlDataSource;
