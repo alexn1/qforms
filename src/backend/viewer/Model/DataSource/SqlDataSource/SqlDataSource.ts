@@ -85,8 +85,7 @@ class SqlDataSource extends DataSource {
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
-        let query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
-        query = this.templateQuery(context, query);
+        const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
@@ -95,9 +94,7 @@ class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                let countQuery = this.getCountQuery(context);
-                countQuery = this.templateQuery(context, countQuery);
-                count = await this.getDatabase().queryScalar(context, countQuery, params);
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -128,8 +125,7 @@ class SqlDataSource extends DataSource {
         const keyParams = DataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
 
-        let singleQuery = this.getSingleQuery(context);
-        singleQuery = this.templateQuery(context, singleQuery);
+        const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
 
         // row
@@ -172,8 +168,7 @@ class SqlDataSource extends DataSource {
         console.log('newKeyParams:', newKeyParams);
 
         // select updated row
-        let selectQuery = this.getSingleQuery(context);
-        selectQuery = this.templateQuery(context, selectQuery);
+        const selectQuery = this.getSingleQuery(context);
         // console.log('selectQuery:', selectQuery);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
@@ -305,16 +300,6 @@ class SqlDataSource extends DataSource {
 
     async getBuffer(context: Context, file) {
         return file.data;
-    }
-
-    templateQuery(context: Context, query: string): string {
-        const params = this.getSelectParams(context);
-        return query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
-            if (params[name]) {
-                return params[name];
-            }
-            return `[${name}]`;
-        });
     }
 }
 
