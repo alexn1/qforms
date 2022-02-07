@@ -15,22 +15,43 @@ class SqlDataSource extends DataSource_1.default {
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
     getCountQuery(context) {
-        const countQuery = this.getAttr('countQuery');
-        if (!countQuery)
+        let query = this.getAttr('countQuery');
+        if (!query)
             throw new Error(`no countQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, countQuery) : countQuery;
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
     }
     getSingleQuery(context) {
-        const singleQuery = this.getAttr('singleQuery');
-        if (!singleQuery)
+        let query = this.getAttr('singleQuery');
+        if (!query)
             throw new Error(`no singleQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, singleQuery) : singleQuery;
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
     }
     getMultipleQuery(context) {
-        const multipleQuery = this.getAttr('multipleQuery');
-        if (!multipleQuery)
+        let query = this.getAttr('multipleQuery');
+        if (!query)
             throw new Error(`no multipleQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
+    }
+    templateQuery(context, query) {
+        const params = this.getSelectParams(context);
+        return query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
+            if (params[name]) {
+                return params[name];
+            }
+            return `[${name}]`;
+        });
     }
     /*async selectSingle(context: Context) {
         // console.log('SqlDataSource.selectSingle');

@@ -17,21 +17,43 @@ class SqlDataSource extends DataSource {
     }
 
     getCountQuery(context: Context) {
-        const countQuery = this.getAttr('countQuery');
-        if (!countQuery) throw new Error(`no countQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, countQuery) : countQuery;
+        let query = this.getAttr('countQuery');
+        if (!query) throw new Error(`no countQuery: ${this.getFullName()}`);
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
     }
 
     getSingleQuery(context: Context) {
-        const singleQuery = this.getAttr('singleQuery');
-        if (!singleQuery) throw new Error(`no singleQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, singleQuery) : singleQuery;
+        let query = this.getAttr('singleQuery');
+        if (!query) throw new Error(`no singleQuery: ${this.getFullName()}`);
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
     }
 
     getMultipleQuery(context: Context) {
-        const multipleQuery = this.getAttr('multipleQuery');
-        if (!multipleQuery) throw new Error(`no multipleQuery: ${this.getFullName()}`);
-        return this.isOnForm() ? this.parent.replaceThis(context, multipleQuery) : multipleQuery;
+        let query = this.getAttr('multipleQuery');
+        if (!query) throw new Error(`no multipleQuery: ${this.getFullName()}`);
+        if (this.isOnForm()) {
+            query = this.parent.replaceThis(context, query);
+        }
+        query = this.templateQuery(context, query);
+        return query;
+    }
+
+    templateQuery(context: Context, query: string): string {
+        const params = this.getSelectParams(context);
+        return query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
+            if (params[name]) {
+                return params[name];
+            }
+            return `[${name}]`;
+        });
     }
 
     /*async selectSingle(context: Context) {
