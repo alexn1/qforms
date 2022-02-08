@@ -121,7 +121,7 @@ class PostgreSqlDatabase extends Database_1.default {
             if (keys.indexOf(name) > -1) {
                 return `$${keys.indexOf(name) + 1}`;
             }
-            return `{${name}}`;
+            return text;
         });
         return { sql, values };
     }

@@ -50,7 +50,7 @@ class SqlDataSource extends DataSource_1.default {
             if (params[name]) {
                 return params[name];
             }
-            return `[${name}]`;
+            return text;
         });
     }
     /*async selectSingle(context: Context) {

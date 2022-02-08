@@ -52,7 +52,7 @@ class SqlDataSource extends DataSource {
             if (params[name]) {
                 return params[name];
             }
-            return `[${name}]`;
+            return text;
         });
     }
 
