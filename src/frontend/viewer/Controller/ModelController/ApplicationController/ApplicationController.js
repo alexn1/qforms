@@ -25,6 +25,9 @@ class ApplicationController extends ModelController {
             return acc;
         }, {});
     }
+    static searchObjToString(obj) {
+        return Object.keys(obj).map(name => `${name}=${obj[name]}`).join('&');
+    }
     static isDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
     }
