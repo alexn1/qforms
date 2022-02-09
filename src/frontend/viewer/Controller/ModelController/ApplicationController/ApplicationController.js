@@ -28,6 +28,18 @@ class ApplicationController extends ModelController {
     static searchObjToString(obj) {
         return Object.keys(obj).map(name => `${name}=${obj[name]}`).join('&');
     }
+    static filterSearchString(names) {
+        const newObj = {};
+        const obj = ApplicationController.getSearchObj();
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        const search = ApplicationController.searchObjToString(newObj);
+        if (!search) return '';
+        return `?${search}`;
+    }
     static isDebugMode() {
         return ApplicationController.getSearchObj()['debug'] === '1';
     }
