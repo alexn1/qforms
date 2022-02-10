@@ -1,11 +1,12 @@
 {
   "name": "qforms",
-  "version": "0.1.141",
+  "version": "0.1.147",
   "description": "A platform for building Web UI for databases.",
   "main": "lib/backend/index.js",
   "dependencies": {
     "body-parser": "^1.19.1",
     "colors": "^1.4.0",
+    "cookie-parser": "^1.4.6",
     "ejs": "~2.5.5",
     "express": "^4.17.2",
     "express-session": "^1.17.2",

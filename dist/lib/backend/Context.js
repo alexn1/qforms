@@ -47,11 +47,17 @@ class Context {
         }
         return null;
     }
+    getCookies() {
+        return Object.assign({}, (this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}));
+    }
+    getQuery() {
+        return Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
+    }
     getParams() {
         // console.log('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
-        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
+        return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
         return this.options.req;

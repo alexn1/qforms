@@ -6,6 +6,7 @@ const WebSocketServer_1 = __importDefault(require("./WebSocketServer"));
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const express = require('express');
 const http = require('http');
@@ -122,6 +123,7 @@ class BackHostApp {
             reviver: Helper_1.default.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(cookieParser());
         this.express.use(session({
             store: new FileSessionStore_1.default(this.sessionDirPath),
             secret: this.getSecretSync(),

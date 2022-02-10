@@ -1,12 +1,13 @@
 import WebSocketServer from "./WebSocketServer";
 
-const fs         = require('fs');
-const path       = require('path');
-const bodyParser = require('body-parser');
-const session    = require('express-session');
-const express    = require('express');
-const http       = require('http');
-const colors     = require('colors/safe');
+const fs           = require('fs');
+const path         = require('path');
+const bodyParser   = require('body-parser');
+const cookieParser = require('cookie-parser');
+const session      = require('express-session');
+const express      = require('express');
+const http         = require('http');
+const colors       = require('colors/safe');
 
 import Helper from './Helper';
 import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -161,6 +162,7 @@ class BackHostApp {
             reviver: Helper.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
+        this.express.use(cookieParser());
         this.express.use(session({
             store             : new FileSessionStore(this.sessionDirPath),
             secret            : this.getSecretSync(),

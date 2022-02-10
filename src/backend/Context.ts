@@ -61,11 +61,22 @@ class Context {
         }
         return null;
     }
+    getCookies() {
+        return {
+            ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {})
+        };
+    }
+    getQuery() {
+        return {
+        ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
+        };
+    }
     getParams(): any {
         // console.log('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return {
+            ...this.getCookies(),
             ...this.query,
             ...this.params,
             ...(this.querytime ? this.querytime.params : {}),

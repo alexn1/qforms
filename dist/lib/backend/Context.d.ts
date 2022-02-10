@@ -11,6 +11,8 @@ declare class Context {
     getVirtualPath(): string;
     getClientTimezoneOffset(): number;
     getTimeOffset(): number;
+    getCookies(): any;
+    getQuery(): any;
     getParams(): any;
     getReq(): any;
     getRes(): any;
