@@ -111,6 +111,9 @@ class Context {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
         this.getRes().setHeader('qforms-app-version', appVersion);
     }
+    addParam(name, value) {
+        this.params[name] = value;
+    }
     destroy() {
     }
 }
