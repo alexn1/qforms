@@ -12,7 +12,7 @@ class PostgreSqlFormWizard extends FormWizard {
         console.log('PostgreSqlFormWizard.getMultipleQuery');
         const columns = this.getColumns().map(column => column.name);
         const _columns = columns.map(column => `    "${column}"`).join(',\n');
-        return `select\n${_columns}\nfrom "${this.tableName}"\nlimit {limit}\noffset {offset}`;
+        return `select\n${_columns}\nfrom "${this.tableName}"\norder by "id"\nlimit {limit}\noffset {offset}`;
     }
 
     getCountQuery() {
