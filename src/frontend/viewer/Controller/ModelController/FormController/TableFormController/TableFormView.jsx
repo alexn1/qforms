@@ -16,6 +16,17 @@ class TableFormView extends FormView {
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
                 }
+                {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
+                <Button
+                    key="refresh"
+                    classList={['toolbar-button']}
+                    onClick={ctrl.onRefreshClick}
+                    enabled={!ctrl.parent.model.hasNew()}
+                >
+                    <RefreshIcon/>
+                    <div>{model.getApp().getText().form.refresh}</div>
+                </Button>
+                }
                 {model.data.deleteRowMode !== 'disabled' &&
                     <Button
                         key="delete"
@@ -25,17 +36,6 @@ class TableFormView extends FormView {
                     >
                         <DeleteIcon/>
                         <div>{model.getApp().getText().form.delete}</div>
-                    </Button>
-                }
-                {model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
-                    <Button
-                        key="refresh"
-                        classList={['toolbar-button']}
-                        onClick={ctrl.onRefreshClick}
-                        enabled={!ctrl.parent.model.hasNew()}
-                    >
-                        <RefreshIcon/>
-                        <div>{model.getApp().getText().form.refresh}</div>
                     </Button>
                 }
                 {ctrl.model.hasActions() &&
