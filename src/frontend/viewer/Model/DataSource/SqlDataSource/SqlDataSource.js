@@ -180,8 +180,8 @@ class SqlDataSource extends DataSource {
         if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source) throw new Error('refresh is foreign result so source must be null');
         await this.refill();
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(e);
+        if (this.parent.onDataSourceRefresh) {
+            this.parent.onDataSourceRefresh(e);
         }
         this.emit('refresh', e);
     }
