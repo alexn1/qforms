@@ -2,7 +2,11 @@
 
 .RowFormCheckBoxFieldView {
   > input {
+    display: block;
     margin: 0;
     height: @fieldHeight;
+    &:not(:disabled) {
+      cursor: pointer;
+    }
   }
 }
