@@ -32,11 +32,28 @@ class Radio extends ReactComponent {
     }
     renderItem(item, i) {
         return [
-            <input type={'radio'} name={this.props.name} id={`${this.props.name}${i}`} value={item.value} onChange={this.onChange} checked={item.value === this.getValue()}/>,
+            <input type={'radio'}
+                   name={this.props.name}
+                   id={`${this.props.name}${i}`}
+                   value={item.value}
+                   onChange={this.onChange}
+                   checked={item.value === this.getValue()}
+                   readOnly={this.isReadOnly()}
+                   disabled={this.isReadOnly()}
+            />,
             <label htmlFor={`${this.props.name}${i}`}>
                 {item.title || item.value}
             </label>
         ];
+    }
+    isReadOnly() {
+        if (this.props.readOnly !== undefined) return this.props.readOnly;
+        return false;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        this.state.value = nextProps.value;
+        return true;
     }
     render() {
         const items = this.props.items || [];

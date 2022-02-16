@@ -1,16 +1,9 @@
 .RowFormRadioFieldView {
-
+  padding-top: 3px;
 }
 
 .RowFormRadioFieldView__radio {
-  cursor: pointer;
-
-  input {
-    cursor: inherit;
+  &:not(.readOnly) {
+    input, label {cursor: pointer}
   }
-  label {
-    cursor: inherit;
-  }
-
-
 }
