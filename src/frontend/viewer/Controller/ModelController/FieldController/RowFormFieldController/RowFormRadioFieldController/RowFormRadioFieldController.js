@@ -2,4 +2,18 @@ class RowFormRadioFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormRadioFieldView;
     }
+    getItems() {
+        try {
+            return this.getRows().map(row => ({
+                value: this.getModel().getValueValue(row).toString(),
+                title: this.getModel().getDisplayValue(row).toString()
+            }));
+        } catch (err) {
+            err.message = `${this.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
+    getRows() {
+        return this.getModel().getDataSource().getRows();
+    }
 }
