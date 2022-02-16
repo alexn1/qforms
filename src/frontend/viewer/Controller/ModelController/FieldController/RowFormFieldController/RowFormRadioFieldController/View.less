@@ -1,8 +1,19 @@
 .RowFormRadioFieldView {
-  padding-top: 3px;
+  height: 100%;
 }
 
 .RowFormRadioFieldView__radio {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  input {
+    margin: 0;
+    display: block;
+  }
+  label {
+    padding: 0 10px 0 3px;
+    display: block;
+  }
   &:not(.readOnly) {
     input, label {cursor: pointer}
   }
