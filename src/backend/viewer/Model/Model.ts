@@ -87,6 +87,7 @@ class Model extends BaseModel {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
+        if (!Class) throw new Error(`no class ${className}`);
         return new Class(data, this);
     }
 

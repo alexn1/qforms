@@ -131,7 +131,10 @@ class Editor extends BaseModel {
         const { name } = params;
         if (!name)
             throw new Error('no name');
-        const Class = backend[`${className}Editor`];
+        const editorClassName = `${className}Editor`;
+        const Class = backend[editorClassName];
+        if (!Class)
+            throw new Error(`no class ${editorClassName}`);
         const data = Class.createData(params);
         this.addModelData(colName, data);
         return data;

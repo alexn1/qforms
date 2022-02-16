@@ -79,6 +79,8 @@ class Model extends BaseModel_1.default {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel_1.default.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
+        if (!Class)
+            throw new Error(`no class ${className}`);
         return new Class(data, this);
     }
     getDirPath() {
