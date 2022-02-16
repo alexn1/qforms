@@ -29,6 +29,8 @@ module.exports.TextAreaField                     = require('./viewer/Model/Field
 module.exports.TextBoxField                      = require('./viewer/Model/Field/TextBoxField/TextBoxField');
 module.exports.PhoneField                        = require('./viewer/Model/Field/PhoneField/PhoneField');
 module.exports.PasswordField                     = require('./viewer/Model/Field/PasswordField/PasswordField');
+module.exports.RadioField                        = require('./viewer/Model/Field/RadioField/RadioField');
+
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
