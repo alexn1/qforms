@@ -14,7 +14,9 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
         dataSource.off('delete', this.onListDelete);
         super.deinit();
     }
-
+    getViewClass() {
+        return super.getViewClass() || RowFormComboBoxFieldView;
+    }
     getItems() {
         try {
             return this.getRows().map(row => ({
@@ -28,9 +30,6 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     }
     getRows() {
         return this.model.getComboBoxDataSource().getRows();
-    }
-    getViewClass() {
-        return super.getViewClass() || RowFormComboBoxFieldView;
     }
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
