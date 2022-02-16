@@ -39,6 +39,7 @@ class NewFieldView extends ReactComponent {
                         {value: 'FileField'},
                         {value: 'PhoneField'},
                         {value: 'PasswordField'},
+                        {value: 'RadioField'},
                     ]} onCreate={c => this.class = c}/>
                 </div>
                 <div>

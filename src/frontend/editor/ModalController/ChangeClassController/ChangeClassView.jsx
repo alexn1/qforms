@@ -33,6 +33,7 @@ class ChangeClassView extends ReactComponent {
                         {value: 'FileField'},
                         {value: 'PhoneField'},
                         {value: 'PasswordField'},
+                        {value: 'RadioField'},
                     ]} value={ctrl.options.fieldCtrl.model.getClassName()} onCreate={c => this.class = c}/>
                 </div>
             </div>

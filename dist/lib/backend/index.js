@@ -58,6 +58,7 @@ module.exports.TextAreaFieldEditor               = require('./editor/Editor/Fiel
 module.exports.TextBoxFieldEditor                = require('./editor/Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
 module.exports.PhoneFieldEditor                  = require('./editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor');
 module.exports.PasswordFieldEditor               = require('./editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor');
+module.exports.RadioFieldEditor                  = require('./editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor');
 
 module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
