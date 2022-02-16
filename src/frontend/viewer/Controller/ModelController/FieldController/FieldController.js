@@ -7,7 +7,9 @@ class FieldController extends ModelController {
         const page = model.getPage();
         const form = model.getForm();
         const CustomClass = FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
-        const GeneralClass = FrontHostApp.getClassByName(`${parent.model.getClassName()}${model.getClassName()}Controller`);
+        const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
+        if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
         const Class = CustomClass ? CustomClass : GeneralClass;
         return new Class(model, parent);
     }
