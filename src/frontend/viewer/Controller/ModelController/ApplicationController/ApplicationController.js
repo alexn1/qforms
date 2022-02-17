@@ -16,30 +16,6 @@ class ApplicationController extends ModelController {
         const Class = CustomClass ? CustomClass : ApplicationController;
         return new Class(model, frontHostApp);
     }
-    /*static getSearchObj() {
-        // console.log('ApplicationController.getSearchObj:', window.location);
-        if (!window.location.search.split('?')[1]) return {};
-        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
-            const kv = item.split('=');
-            acc[kv[0]] = kv[1];
-            return acc;
-        }, {});
-    }*/
-    /*static searchObjToString(obj) {
-        return Object.keys(obj).map(name => `${name}=${obj[name]}`).join('&');
-    }*/
-    /*static filterSearchString(names) {
-        const newObj = {};
-        const obj = Search.getObj();
-        for (const name of names) {
-            if (obj.hasOwnProperty(name)) {
-                newObj[name] = obj[name];
-            }
-        }
-        const search = Search.objToString(newObj);
-        if (!search) return '';
-        return `?${search}`;
-    }*/
     static isDebugMode() {
         return Search.getObj()['debug'] === '1';
     }

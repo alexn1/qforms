@@ -3,12 +3,14 @@ class Search {
         if (!window.location.search.split('?')[1]) return {};
         return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
             const kv = item.split('=');
-            acc[kv[0]] = kv[1];
+            acc[kv[0]] = decodeURIComponent(kv[1]);
             return acc;
         }, {});
     }
     static objToString(obj) {
-        return Object.keys(obj).map(name => `${name}=${obj[name]}`).join('&');
+        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        if (!search) return '';
+        return `?${search}`;
     }
     static filter(names) {
         const newObj = {};
@@ -18,8 +20,6 @@ class Search {
                 newObj[name] = obj[name];
             }
         }
-        const search = Search.objToString(newObj);
-        if (!search) return '';
-        return `?${search}`;
+        return Search.objToString(newObj);
     }
 }
