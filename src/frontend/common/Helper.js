@@ -229,6 +229,13 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
+    static inIframe () {
+        try {
+            return window.self !== window.top;
+        } catch (e) {
+            return true;
+        }
+    }
 }
 
 window.QForms.Helper = Helper;
