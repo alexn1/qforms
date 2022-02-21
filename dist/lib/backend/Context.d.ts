@@ -24,10 +24,10 @@ declare class Context {
     getEnv(): string;
     getUri(): string;
     getIp(): string;
-    getHost(): any;
-    getProtocol(): any;
-    setVersionHeaders(platformVersion: any, appVersion: any): void;
-    addParam(name: any, value: any): void;
+    getHost(): string;
+    getProtocol(): string;
+    setVersionHeaders(platformVersion: string, appVersion: string): void;
+    addParam(name: string, value: any): void;
     destroy(): void;
 }
 export = Context;

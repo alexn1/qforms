@@ -61,12 +61,12 @@ class Context {
         }
         return null;
     }
-    getCookies() {
+    getCookies(): any {
         return {
             ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {})
         };
     }
-    getQuery() {
+    getQuery(): any {
         return {
         ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
         };
@@ -84,10 +84,10 @@ class Context {
             ...(timeOffset !== null ? {timeOffset} : {})
         };
     }
-    getReq() {
+    getReq(): any {
         return this.options.req;
     }
-    getRes() {
+    getRes(): any {
         return this.options.res;
     }
     getDomain() {
@@ -126,20 +126,20 @@ class Context {
     getIp(): string {
         return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
     }
-    getHost() {
+    getHost(): string {
         return this.getReq().headers.host;
     }
-    getProtocol() {
+    getProtocol(): string {
         return this.getReq().headers['x-forwarded-proto'] || 'http';
     }
-    setVersionHeaders(platformVersion, appVersion) {
+    setVersionHeaders(platformVersion: string, appVersion: string): void {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
         this.getRes().setHeader('qforms-app-version'     , appVersion);
     }
-    addParam(name, value) {
+    addParam(name: string, value): void {
         this.params[name] = value;
     }
-    destroy() {
+    destroy(): void {
     }
 }
 
