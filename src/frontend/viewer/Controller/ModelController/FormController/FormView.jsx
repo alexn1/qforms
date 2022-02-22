@@ -17,7 +17,7 @@ class FormView extends ModelView {
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
+        console.log('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
         if (nextProps.updated - this.props.updated) return true;
         return false;
     }
