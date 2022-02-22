@@ -200,6 +200,7 @@ class SqlDataSource extends DataSource {
     }
 
     async refill() {
+        console.log('SqlDataSource.refill', this.getFullName());
         if (this.isChanged()) throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
         const data = await this.select(this.getLimit() ? {frame : this.frame} : {});
         this.count = data.count;

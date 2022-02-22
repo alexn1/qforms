@@ -174,23 +174,24 @@ class TableFormController extends FormController {
     }
     onModelRefresh = async e => {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
-        if (!this.view) return;
         this.invalidate();
+        if (!this.view) return;
         await this.rerender();
     }
     onModelInsert = async e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
+        this.invalidate();
         if (!this.view) return;
         if (this.grid && e.source) {
             for (const key of e.inserts) {
                 this.grid.setActiveRowKey(key);
             }
         }
-        this.invalidate();
         await this.rerender();
     }
     onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
+        this.invalidate();
         if (!this.view) return;
         if (this.grid) {
             for (const key in e.updates) {
@@ -202,11 +203,11 @@ class TableFormController extends FormController {
                 }
             }
         }
-        this.invalidate();
         await this.rerender();
     }
     onModelDelete = async e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
+        this.invalidate();
         if (!this.view) return;
         if (this.grid) {
             for (const key of e.deletes) {
@@ -215,7 +216,6 @@ class TableFormController extends FormController {
                 }
             }
         }
-        this.invalidate();
         await this.rerender();
     }
 
