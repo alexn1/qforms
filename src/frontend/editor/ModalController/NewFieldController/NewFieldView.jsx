@@ -24,6 +24,10 @@ class NewFieldView extends ReactComponent {
             </div>
             <div className={'NewModelView__body'}>
                 <div>
+                    <label htmlFor="name">Name</label>
+                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+                </div>
+                <div>
                     <label htmlFor="class">Class</label>
                     <ComboBox id="class" items={[
                         {value: 'TextBoxField'},
@@ -41,10 +45,6 @@ class NewFieldView extends ReactComponent {
                         {value: 'PasswordField'},
                         {value: 'RadioField'},
                     ]} onCreate={c => this.class = c}/>
-                </div>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
                 </div>
                 <div>
                     <label htmlFor="caption">Caption</label>
