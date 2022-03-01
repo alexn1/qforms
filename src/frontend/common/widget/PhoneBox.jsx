@@ -85,6 +85,8 @@ class PhoneBox extends ReactComponent {
         if (value === '') {
         } else if (value.match(/^8/)) {
             return value.replace(/^8/, '+7');
+        } else if (value.match(/^7/)) {
+            return `+${value}`;
         } else if (value[0] !== '+') {
             return `+7${value}`;
         }
