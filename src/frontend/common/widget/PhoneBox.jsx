@@ -50,7 +50,9 @@ class PhoneBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        if (nextProps.value !== undefined) {
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
         return true;
     }
     render() {
