@@ -8,6 +8,9 @@ class Select extends ReactComponent {
             visible: false,
         };
     }
+    isVisible() {
+        return this.state.visible;
+    }
     getInitialValue() {
         // console.log('Select.getInitialValue', this.props.value);
         let value = null;
@@ -139,7 +142,7 @@ class Select extends ReactComponent {
         </div>;
     }
     renderIcon() {
-        return <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'up' : ''}`}>
+        return <div className={`${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}`}>
             <ArrowIcon/>
         </div>;
     }
