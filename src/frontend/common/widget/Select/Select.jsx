@@ -118,39 +118,51 @@ class Select extends ReactComponent {
         if (this.props.readOnly) return false;
         return this.state.value !== '';
     }
+    renderInput() {
+        return <input className={`${this.getCssBlockName()}__input`}
+              readOnly={true}
+              disabled={this.props.readOnly}
+              placeholder={this.props.placeholder}
+              onBlur={this.onInputBlur}
+              value={this.getValueTitle(this.getValue())}
+              onMouseDown={this.onInputMouseDown}
+              onKeyDown={this.onKeyDown}
+        />;
+    }
+    renderClose() {
+        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible': ''}`} onClick={this.onCloseClick}>
+            <CloseIcon/>
+        </div>;
+    }
+    renderIcon() {
+        return <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'up' : ''}`}>
+            <ArrowIcon/>
+        </div>;
+    }
+    renderDropdown() {
+        return <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}
+                   style={{visibility: this.getVisibility()}}
+                   onMouseDown={this.onDropdownMouseDown}
+                   onClick={this.onDropdownClick}
+        >
+            {this.isNullable() &&
+                <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
+            }
+            {this.getItems().map(item => {
+                return <li key={item.value}
+                           className={`${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`}
+                           data-value={JSON.stringify(item.value)}
+                >{item.title || `#${item.value}`}</li>;
+            })}
+        </ul>;
+    }
     render() {
         // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return <div ref={this.el} className={this.getCssClassNames()}>
-            <input className={`${this.getCssBlockName()}__input`}
-                   readOnly={true}
-                   disabled={this.props.readOnly}
-                   placeholder={this.props.placeholder}
-                   onBlur={this.onInputBlur}
-                   value={this.getValueTitle(this.getValue())}
-                   onMouseDown={this.onInputMouseDown}
-                   onKeyDown={this.onKeyDown}
-            />
-            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible': ''}`} onClick={this.onCloseClick}>
-                <CloseIcon/>
-            </div>
-            <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'up' : ''}`}>
-                <ArrowIcon/>
-            </div>
-            <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}
-                style={{visibility: this.getVisibility()}}
-                onMouseDown={this.onDropdownMouseDown}
-                onClick={this.onDropdownClick}
-            >
-                {this.isNullable() &&
-                    <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
-                }
-                {this.getItems().map(item => {
-                    return <li key={item.value}
-                               className={`${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`}
-                               data-value={JSON.stringify(item.value)}
-                    >{item.title || `#${item.value}`}</li>;
-                })}
-            </ul>
+            {this.renderInput()}
+            {this.renderClose()}
+            {this.renderIcon()}
+            {this.renderDropdown()}
         </div>;
     }
 }
