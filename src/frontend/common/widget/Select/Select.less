@@ -11,24 +11,6 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Select__icon {
-  position: absolute;
-  right: 0;
-  top: 0;
-  display: flex;
-  align-items: center;
-  height: 100%;
-  width: 20px;
-  pointer-events: none;
-  svg {
-    margin: 0 auto;
-    width: 10px;
-    height: 6px;
-    fill: #aaa;
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Select__close {
   position   : absolute;
   display    : flex;
@@ -51,9 +33,25 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Select__icon_up {
+.Select__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
   svg {
-    transform: rotate(180deg);
+    margin: 0 auto;
+    width: 10px;
+    height: 6px;
+    fill: #aaa;
+  }
+  &.up {
+    svg {
+      transform: rotate(180deg);
+    }
   }
 }
 

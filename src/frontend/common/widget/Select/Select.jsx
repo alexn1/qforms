@@ -133,7 +133,7 @@ class Select extends ReactComponent {
             <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible': ''}`} onClick={this.onCloseClick}>
                 <CloseIcon/>
             </div>
-            <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'Select__icon_up' : ''}`}>
+            <div className={`${this.getCssBlockName()}__icon ${this.state.visible ? 'up' : ''}`}>
                 <ArrowIcon/>
             </div>
             <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}
