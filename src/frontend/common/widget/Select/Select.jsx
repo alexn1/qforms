@@ -45,6 +45,9 @@ class Select extends ReactComponent {
     getVisibility() {
         return this.state.visible ? 'visible' : 'hidden';
     }
+    getDisplay() {
+        return this.state.visible ? 'block' : 'none';
+    }
     onKeyDown = async e => {
         // console.log('Select.onKeyDown');
         if (this.state.visible) {
@@ -53,6 +56,7 @@ class Select extends ReactComponent {
         }
     }
     onInputMouseDown = async e => {
+        console.log('Select.onInputMouseDown');
         if (this.props.readOnly) return;
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
@@ -141,7 +145,10 @@ class Select extends ReactComponent {
     }
     renderDropdown() {
         return <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}
-                   style={{visibility: this.getVisibility()}}
+                   style={{
+                       // visibility: this.getVisibility(),
+                       display: this.getDisplay()
+                   }}
                    onMouseDown={this.onDropdownMouseDown}
                    onClick={this.onDropdownClick}
         >
