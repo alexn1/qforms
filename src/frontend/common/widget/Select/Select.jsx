@@ -160,7 +160,7 @@ class Select extends ReactComponent {
         // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return <div ref={this.el} className={this.getCssClassNames()}>
             {this.renderInput()}
-            {this.renderClose()}
+            {this.isNullable() && this.renderClose()}
             {this.renderIcon()}
             {this.renderDropdown()}
         </div>;
