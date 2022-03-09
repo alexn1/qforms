@@ -46,14 +46,14 @@ class Select extends ReactComponent {
         return this.props.nullable !== undefined ? this.props.nullable : true;
     }
     getVisibility() {
-        return this.state.visible ? 'visible' : 'hidden';
+        return this.isVisible() ? 'visible' : 'hidden';
     }
     getDisplay() {
-        return this.state.visible ? 'block' : 'none';
+        return this.isVisible() ? 'block' : 'none';
     }
     onKeyDown = async e => {
         // console.log('Select.onKeyDown');
-        if (this.state.visible) {
+        if (this.isVisible()) {
             this.setState({visible: false});
             e.stopPropagation();
         }
@@ -64,7 +64,7 @@ class Select extends ReactComponent {
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
         } else {
-            if (!this.state.visible) {
+            if (!this.isVisible()) {
                 const [selected] = this.el.current.querySelectorAll('li.selected');
                 // console.log('selected:', selected);
                 if (selected) {
