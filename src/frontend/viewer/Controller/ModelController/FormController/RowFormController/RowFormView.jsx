@@ -98,11 +98,14 @@ class RowFormView extends FormView {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         const name = fieldCtrl.getModel().getName();
         return <div key={`field.${name}`} className={`${this.getCssBlockName()}__field`}>
-            {React.createElement(fieldCtrl.getViewClass(), {
-                onCreate: fieldCtrl.onViewCreate,
-                ctrl: fieldCtrl,
-            })}
+            {this.renderFieldView(fieldCtrl)}
         </div>;
+    }
+    renderFieldView(fieldCtrl) {
+        return React.createElement(fieldCtrl.getViewClass(), {
+            onCreate: fieldCtrl.onViewCreate,
+            ctrl: fieldCtrl,
+        });
     }
     renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
