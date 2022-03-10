@@ -20,34 +20,45 @@ class RowFormComboBoxFieldView extends RowFormFieldView {
                 && !!this.getCtrl().getModel().getAttr('itemCreateForm');
         }
     }
+    renderSelect() {
+        const ctrl = this.getCtrl();
+        return <Select
+            classList={[`${this.getCssBlockName()}__select`]}
+            onCreate={this.onWidgetCreate}
+            nullable={true}
+            value={ctrl.getValueForWidget()}
+            readOnly={!ctrl.isEditable()}
+            onChange={this.onChange}
+            items={ctrl.getItems()}
+            placeholder={ctrl.getPlaceholder()}
+            onMouseDown={ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null}
+        />;
+    }
+    renderEditButton() {
+        const ctrl = this.getCtrl();
+        return <Button
+            classList={[`${this.getCssBlockName()}__edit-button`]}
+            onClick={ctrl.onEditButtonClick}
+            enabled={!!ctrl.getValue()}
+        >...</Button>;
+    }
+    renderCreateButton() {
+        const ctrl = this.getCtrl();
+        return <Button
+            classList={[`${this.getCssBlockName()}__create-button`]}
+            onClick={ctrl.onCreateButtonClick}
+        >+</Button>;
+    }
     render() {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
-        const ctrl = this.props.ctrl;
         return (
             <div className={this.getCssClassNames()}>
-                <Select
-                    classList={[`${this.getCssBlockName()}__select`]}
-                    onCreate={this.onWidgetCreate}
-                    nullable={true}
-                    value={ctrl.getValueForWidget()}
-                    readOnly={!ctrl.isEditable()}
-                    onChange={this.onChange}
-                    items={ctrl.getItems()}
-                    placeholder={ctrl.getPlaceholder()}
-                    onMouseDown={ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null}
-                />
-                {ctrl.getModel().getAttr('itemEditPage') && !!ctrl.getValue() &&
-                    <Button
-                        classList={[`${this.getCssBlockName()}__edit-button`]}
-                        onClick={ctrl.onEditButtonClick}
-                        enabled={!!ctrl.getValue()}
-                    >...</Button>
+                {this.renderSelect()}
+                {this.getCtrl().getModel().getAttr('itemEditPage') && !!this.getCtrl().getValue() &&
+                    this.renderEditButton()
                 }
-                {this.isCreateButtonVisible()
-                    && <Button
-                        classList={[`${this.getCssBlockName()}__create-button`]}
-                        onClick={ctrl.onCreateButtonClick}
-                    >+</Button>
+                {this.isCreateButtonVisible() &&
+                    this.renderCreateButton()
                 }
             </div>
         );
