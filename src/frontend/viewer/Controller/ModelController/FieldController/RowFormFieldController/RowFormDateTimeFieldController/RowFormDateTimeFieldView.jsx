@@ -49,11 +49,12 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             </div>
         </div>;
     }
+    getMode() {
+        return this.getCtrl().state.value ? 'datetime' : 'date';
+    }
     render() {
         // console.log('RowFormDateTimeFieldView.render');
-        const ctrl = this.getCtrl();
-        const row = ctrl.getRow()
-        return <div className={`${this.getCssClassNames()} ${ctrl.state.value ? 'datetime' : 'date'}`} style={this.getStyle(row)}>
+        return <div className={`${this.getCssClassNames()} ${this.getMode()}`} style={this.getStyle(this.getCtrl().getRow())}>
             {this.renderDatePart()}
             {this.renderTimePart()}
         </div>;
