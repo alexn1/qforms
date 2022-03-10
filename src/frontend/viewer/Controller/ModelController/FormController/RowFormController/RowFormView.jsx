@@ -111,13 +111,17 @@ class RowFormView extends FormView {
             <Tooltip position="left" type="alert" hidden={fieldCtrl.getErrorMessage() === null} tip={fieldCtrl.getErrorMessage()}/>
         </div>;
     }
-    renderItem(fieldCtrl) {
-        const name = fieldCtrl.getModel().getName();
+    renderGroup(fieldCtrl) {
         return [
             this.renderLabel(fieldCtrl),
             this.renderField(fieldCtrl),
             this.renderError(fieldCtrl)
         ];
+        /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
+            {this.renderLabel(fieldCtrl)}
+            {this.renderField(fieldCtrl)}
+            {this.renderError(fieldCtrl)}
+        </div>;*/
     }
     renderGrid() {
         // console.log('RowFormView.renderGrid');
@@ -126,7 +130,7 @@ class RowFormView extends FormView {
             {Object.keys(ctrl.fields)
                 .filter(name => ctrl.getField(name).isVisible())
                 .map(name => {
-                return this.renderItem(ctrl.getField(name));
+                return this.renderGroup(ctrl.getField(name));
             })}
         </div>;
     }
