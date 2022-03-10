@@ -33,27 +33,33 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         this.removeCssClass('focus');
         await this.rerender();
     }
-    render() {
+    renderTextBox() {
         const ctrl = this.props.ctrl;
+        return <TextBox
+            classList={[`${this.getCssBlockName()}__input`]}
+            value={ctrl.getValueForWidget()}
+            readOnly={!ctrl.isEditable()}
+            disabled={!ctrl.isEditable()}
+            autoFocus={ctrl.isAutoFocus()}
+            placeholder={ctrl.getPlaceholder() || null}
+            autocomplete={ctrl.getAutocomplete()}
+            onCreate={this.onWidgetCreate}
+            onChange={ctrl.onChange}
+            onFocus={this.onFocus}
+            onBlur={this.onBlur}
+        />;
+    }
+    renderCloseIcon() {
+        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
+             onClick={this.onCloseClick}
+        >
+            <CloseIcon/>
+        </div>;
+    }
+    render() {
         return <div className={this.getCssClassNames()}>
-            <TextBox
-                classList={[`${this.getCssBlockName()}__input`]}
-                value={ctrl.getValueForWidget()}
-                readOnly={!ctrl.isEditable()}
-                disabled={!ctrl.isEditable()}
-                autoFocus={ctrl.isAutoFocus()}
-                placeholder={ctrl.getPlaceholder() || null}
-                autocomplete={ctrl.getAutocomplete()}
-                onCreate={this.onWidgetCreate}
-                onChange={ctrl.onChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-            />
-            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
-                 onClick={this.onCloseClick}
-            >
-                <CloseIcon/>
-            </div>
+            {this.renderTextBox()}
+            {this.renderCloseIcon()}
         </div>;
     }
 }
