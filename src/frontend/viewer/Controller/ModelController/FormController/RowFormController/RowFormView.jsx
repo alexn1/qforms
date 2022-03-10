@@ -125,11 +125,9 @@ class RowFormView extends FormView {
     }
     renderGrid() {
         // console.log('RowFormView.renderGrid');
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return <div className={`${this.getCssBlockName()}__grid`}>
-            {Object.keys(ctrl.fields)
-                .filter(name => ctrl.getField(name).isVisible())
-                .map(name => {
+            {Object.keys(ctrl.fields).filter(name => ctrl.getField(name).isVisible()).map(name => {
                 return this.renderGroup(ctrl.getField(name));
             })}
         </div>;
