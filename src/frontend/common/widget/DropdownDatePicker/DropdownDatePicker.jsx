@@ -103,37 +103,46 @@ class DropdownDatePicker extends ReactComponent {
             ...(this.props.readOnly ? ['read-only'] : [])
         ];
     }
-
+    renderInput() {
+        return <input className={`${this.getCssBlockName()}__input`}
+                      readOnly={true}
+                      onClick={this.onInputClick}
+                      onBlur={this.onBlur}
+                      value={this.getStringValue()}
+                      placeholder={this.props.placeholder}
+                      onKeyDown={this.onInputKeyDown}
+        />;
+    }
+    renderCloseIcon() {
+        return <div className={`${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
+            <CloseIcon/>
+        </div>;
+    }
+    renderDateIcon() {
+        return <div className={`${this.getCssBlockName()}__icon`}>
+            <DateIcon/>
+        </div>;
+    }
+    renderDatePicker() {
+        return <DatePicker
+            classList={[`${this.getCssBlockName()}__date-picker`]}
+            minDate={this.getMinDate()}
+            selectedMonth={this.getSelectedMonth()}
+            selectedDate={this.getSelectedDate()}
+            onMouseDown={this.onDatePickerMouseDown}
+            onDateSelected={this.onDatePickerDateSelected}
+            selectToday={this.props.selectToday}
+            highlightedDate={this.props.highlightedDate}
+        />;
+    }
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className={this.getCssClassNames()}>
-                <input className={`${this.getCssBlockName()}__input`}
-                    readOnly={true}
-                    onClick={this.onInputClick}
-                    onBlur={this.onBlur}
-                    value={this.getStringValue()}
-                    placeholder={this.props.placeholder}
-                    onKeyDown={this.onInputKeyDown}
-                />
-                <div className={`${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
-                    <CloseIcon/>
-                </div>
-                <div className={`${this.getCssBlockName()}__icon`}>
-                    <DateIcon/>
-                </div>
-                {this.state.open &&
-                    <DatePicker
-                        classList={[`${this.getCssBlockName()}__date-picker`]}
-                        minDate={this.getMinDate()}
-                        selectedMonth={this.getSelectedMonth()}
-                        selectedDate={this.getSelectedDate()}
-                        onMouseDown={this.onDatePickerMouseDown}
-                        onDateSelected={this.onDatePickerDateSelected}
-                        selectToday={this.props.selectToday}
-                        highlightedDate={this.props.highlightedDate}
-                    />
-                }
+                {this.renderInput()}
+                {this.renderCloseIcon()}
+                {this.renderDateIcon()}
+                {this.state.open && this.renderDatePicker()}
             </div>
         );
     }
