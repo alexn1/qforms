@@ -1,4 +1,8 @@
 class TimeBox2 extends TimeBox {
+    constructor(props) {
+        super(props);
+        this.inputEl = React.createRef();
+    }
     isCloseVisible() {
         return !!this.state.value;
     }
@@ -9,9 +13,13 @@ class TimeBox2 extends TimeBox {
             }
         });
     }
+    getInputElement() {
+        return this.inputEl.current;
+    }
     render() {
         return <div ref={this.el} className={this.getCssClassNames()}>
-            <input className={`${this.getCssBlockName()}__input`}
+            <input ref={this.inputEl}
+                className={`${this.getCssBlockName()}__input`}
                 type={'text'}
                 // id={this.props.id}
                 readOnly={this.props.readOnly}
