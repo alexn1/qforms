@@ -1,0 +1,33 @@
+.Expand {
+  padding: 5px 0;
+  &.opened {
+    .Expand__icon {
+      transform: rotate(180deg);
+    }
+    .Expand__title {
+      //font-weight: bold;
+    }
+    .Expand__content {
+      display: block;
+    }
+  }
+}
+
+.Expand__header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.Expand__icon {
+  fill: #555;
+}
+
+.Expand__title {
+  color: #555;
+}
+
+.Expand__content {
+  display: none;
+  padding-top: 10px;
+}
