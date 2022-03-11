@@ -163,22 +163,20 @@ class TimeBox extends ReactComponent {
     }
     render() {
         // console.log('TimeBox.render', this.state.value);
-        return (
-            <input
-                ref={this.el}
-                className={this.getCssClassNames()}
-                type={'text'}
-                id={this.props.id}
-                readOnly={this.props.readOnly}
-                placeholder={this.props.placeholder}
-                value={this.state.value}
-                onChange={this.onChange}
-                // onKeyDown={this.onKeyDown}
-                // onKeyUp={this.onKeyUp}
-                onKeyPress={this.onKeyPress}
-                onBlur={this.onBlur}
-            />
-        );
+        return <input
+            ref={this.el}
+            className={this.getCssClassNames()}
+            type={'text'}
+            id={this.props.id}
+            readOnly={this.props.readOnly}
+            placeholder={this.props.placeholder}
+            value={this.state.value}
+            onChange={this.onChange}
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress={this.onKeyPress}
+            onBlur={this.onBlur}
+        />;
     }
 }
 

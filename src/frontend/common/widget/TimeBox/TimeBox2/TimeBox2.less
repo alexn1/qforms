@@ -1,0 +1,40 @@
+.TimeBox2 {
+  position: relative;
+}
+
+.TimeBox2__input {
+  width: 100%;
+}
+
+.TimeBox2__close-icon {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  visibility: hidden;
+  &.visible {
+    visibility: visible;
+  }
+  &:hover svg line {
+    stroke: black;
+  }
+}
+
+.TimeBox2__time-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+  svg {
+    fill: #aaa;
+  }
+}
