@@ -105,6 +105,7 @@ class DropdownDatePicker extends ReactComponent {
     }
     renderInput() {
         return <input className={`${this.getCssBlockName()}__input`}
+                      type={'text'}
                       readOnly={true}
                       onClick={this.onInputClick}
                       onBlur={this.onBlur}
