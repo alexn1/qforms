@@ -15,7 +15,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         return ctrl.widget2.state.value !== '';
     }
     renderDatePart() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return <DropdownDatePicker
             classList={[`${this.getCssBlockName()}__dropdown-date-picker`]}
             onCreate={this.onWidgetCreate}
@@ -30,7 +30,16 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
         />;
     }
     renderTimePart() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
+        return <TimeBox2 classList={[`${this.getCssBlockName()}__time-box`]}
+            onCreate={ctrl.onView2Create}
+            readOnly={!ctrl.isEditable()}
+            value={ctrl.getValueForTime()}
+            onChange={ctrl.onChange2}
+            onBlur={ctrl.onBlur2}
+            placeholder={ctrl.getPlaceholder2()}
+        />;
+        /*
         return <div className={`${this.getCssBlockName()}__time`}>
             <TimeBox
                 classList={[`${this.getCssBlockName()}__time-box`]}
@@ -47,7 +56,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             <div className={`${this.getCssBlockName()}__time-icon`}>
                 <TimeIcon/>
             </div>
-        </div>;
+        </div>;*/
     }
     getMode() {
         return this.getCtrl().state.value ? 'datetime' : 'date';
