@@ -137,14 +137,12 @@ class DropdownDatePicker extends ReactComponent {
     }
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
-        return (
-            <div className={this.getCssClassNames()}>
-                {this.renderInput()}
-                {this.renderCloseIcon()}
-                {this.renderDateIcon()}
-                {this.state.open && this.renderDatePicker()}
-            </div>
-        );
+        return <div className={this.getCssClassNames()}>
+            {this.renderInput()}
+            {this.renderCloseIcon()}
+            {this.renderDateIcon()}
+            {this.state.open && this.renderDatePicker()}
+        </div>;
     }
 }
 
