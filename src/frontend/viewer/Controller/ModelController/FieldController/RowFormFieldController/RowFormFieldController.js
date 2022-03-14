@@ -194,5 +194,11 @@ class RowFormFieldController extends FieldController {
         }
         return this.state.error;
     }
+    renderView() {
+        return React.createElement(this.getViewClass(), {
+            onCreate: this.onViewCreate,
+            ctrl: this,
+        });
+    }
 }
 window.QForms.RowFormFieldController = RowFormFieldController;

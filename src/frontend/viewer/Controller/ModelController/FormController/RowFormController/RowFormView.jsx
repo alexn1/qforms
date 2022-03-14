@@ -102,10 +102,14 @@ class RowFormView extends FormView {
         </div>;
     }
     renderFieldView(fieldCtrl) {
-        return React.createElement(fieldCtrl.getViewClass(), {
+        return RowFormView.renderFieldView(fieldCtrl);
+    }
+    static renderFieldView(fieldCtrl) {
+        /*return React.createElement(fieldCtrl.getViewClass(), {
             onCreate: fieldCtrl.onViewCreate,
             ctrl: fieldCtrl,
-        });
+        });*/
+        return fieldCtrl.renderView();
     }
     renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
