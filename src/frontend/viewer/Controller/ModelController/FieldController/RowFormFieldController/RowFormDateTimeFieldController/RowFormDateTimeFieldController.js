@@ -39,7 +39,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onView2Create = widget2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
-    };
+    }
     _onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (widgetValue !== null) {
@@ -75,7 +75,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }
             this.parent.onFieldChange({source: this});
         }
-    };
+    }
     onBlur2 = (widgetValue, fireEvent = false) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
@@ -92,7 +92,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             }
         }
         this.parent.onFieldChange({source: this});
-    };
+    }
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
     }

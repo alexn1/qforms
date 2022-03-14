@@ -6,10 +6,11 @@ class TimeBox2 extends TimeBox {
     isCloseVisible() {
         return !!this.state.value;
     }
-    onCloseDown = e => {
+    onClear = e => {
+        // console.log('TimeBox2.onClear');
         this.setState({value: ''}, () => {
-            if (this.props.onChange) {
-                this.props.onChange('');
+            if (this.props.onClear) {
+                this.props.onClear();
             }
         });
     }
@@ -31,7 +32,7 @@ class TimeBox2 extends TimeBox {
                 onKeyPress={this.onKeyPress}
                 onBlur={this.onBlur}
             />
-            <div className={`${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
+            <div className={`${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onClear}>
                 <CloseIcon/>
             </div>
             <div className={`${this.getCssBlockName()}__time-icon`}>

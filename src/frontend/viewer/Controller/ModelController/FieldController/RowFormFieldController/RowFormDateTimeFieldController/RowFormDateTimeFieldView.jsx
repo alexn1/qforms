@@ -1,10 +1,7 @@
 class RowFormDateTimeFieldView extends RowFormFieldView {
-    onCloseDown = async e => {
-        console.log('RowFormDateTimeFieldView.onCloseDown');
-        const ctrl = this.props.ctrl;
-        ctrl.widget2.setState({value: ''}, () => {
-            ctrl.onChange2(null);
-        });
+    onClear2 = async () => {
+        // console.log('RowFormDateTimeFieldView.onClear2');
+        this.getCtrl().onChange2(null);
     }
     isCloseVisible() {
         if (this.props.readOnly) return false;
@@ -39,6 +36,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             onChange={ctrl.onChange2}
             onBlur={ctrl.onBlur2}
             placeholder={ctrl.getPlaceholder2()}
+            onClear={this.onClear2}
         />;
         /*
         return <div className={`${this.getCssBlockName()}__time`}>
