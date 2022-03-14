@@ -8,6 +8,9 @@ class Expand extends ReactComponent {
     isOpened() {
         return this.state.opened;
     }
+    isHighlighted() {
+        return !!this.props.highlighted;
+    }
     onTitleClick = e => {
         console.log('Expand.onTitleClick');
         this.setState(prevState => {
@@ -15,7 +18,7 @@ class Expand extends ReactComponent {
         });
     }
     render() {
-        return <div className={`${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''}`}>
+        return <div className={`${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}`}>
             <div className={`${this.getCssBlockName()}__header`} onClick={this.onTitleClick}>
                 <div className={`${this.getCssBlockName()}__icon`}><DownIcon/></div>
                 <div className={`${this.getCssBlockName()}__title`}>{this.props.title}</div>
