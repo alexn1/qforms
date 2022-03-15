@@ -29,30 +29,37 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         this.removeCssClass('focus');
         await this.rerender();
     }
-    render() {
-        console.log('RowFormPhoneFieldView.render');
+    renderPhoneBox() {
         const ctrl = this.getCtrl();
+        return <PhoneBox classList={[`${this.getCssBlockName()}__input`]}
+                         value={ctrl.getValueForWidget()}
+                         readOnly={!ctrl.isEditable()}
+                         disabled={!ctrl.isEditable()}
+                         autoFocus={ctrl.isAutoFocus()}
+                         placeholder={ctrl.getPlaceholder() || null}
+                         autocomplete={ctrl.getAutocomplete()}
+                         onCreate={this.onWidgetCreate}
+                         onChange={ctrl.onChange}
+                         onFocus={this.onFocus}
+                         onBlur={this.onBlur}
+        />;
+    }
+    renderCloseButton() {
+        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
+            <CloseIcon/>
+        </div>;
+    }
+    renderPhoneIcon() {
+        return <div className={`${this.getCssBlockName()}__icon`} >
+            <PhoneIcon/>
+        </div>;
+    }
+    render() {
+        // console.log('RowFormPhoneFieldView.render');
         return <div className={this.getCssClassNames()}>
-            <PhoneBox classList={[`${this.getCssBlockName()}__input`]}
-                      value={ctrl.getValueForWidget()}
-                      readOnly={!ctrl.isEditable()}
-                      disabled={!ctrl.isEditable()}
-                      autoFocus={ctrl.isAutoFocus()}
-                      placeholder={ctrl.getPlaceholder() || null}
-                      autocomplete={ctrl.getAutocomplete()}
-                      onCreate={this.onWidgetCreate}
-                      onChange={ctrl.onChange}
-                      onFocus={this.onFocus}
-                      onBlur={this.onBlur}
-            />
-            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
-                 onClick={this.onCloseClick}
-            >
-                <CloseIcon/>
-            </div>
-            <div className={`${this.getCssBlockName()}__icon`} >
-                <PhoneIcon/>
-            </div>
+            {this.renderPhoneBox()}
+            {this.renderCloseButton()}
+            {this.renderPhoneIcon()}
         </div>;
     }
 }
