@@ -142,9 +142,12 @@ class RowFormFieldController extends FieldController {
         // null validator
         const value = this.getValue();
         if (this.model.isNotNull() && (value === null || value === undefined)) {
-            return this.getModel().getApp().getText().form.required;
+            return this.getNullErrorText();
         }
         return null;
+    }
+    getNullErrorText() {
+        return this.getModel().getApp().getText().form.required;
     }
     isEditable() {
         return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
