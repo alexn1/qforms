@@ -112,8 +112,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
     }
     setValueFromView2(widgetValue) {
-        if (isNaN(widgetValue)) throw new Error('wrong time');
+        if (isNaN(widgetValue)) throw new Error(this.getTimeErrorText());
         this.setValue2(widgetValue);
+    }
+    getTimeErrorText() {
+        return this.getModel().getApp().getText().field.timeNotValid;
     }
     setValue2(widgetValue) {
         const value = widgetValue !== null ? widgetValue : this.defaultValue;

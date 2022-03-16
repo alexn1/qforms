@@ -42,7 +42,8 @@
     },
     "field": {
         "selectValue": "select value",
-        "fillValue": "fill in this field"
+        "fillValue": "fill in this field",
+        "timeNotValid": "time not valid"
     },
     "error": {
         "notNumber": "not a number",
