@@ -18,7 +18,9 @@ class CheckBox extends ReactComponent {
         // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
         if (!this.props.readOnly) {
             this.setState(prevState => {
-                if (this.props.onChange) this.props.onChange(!prevState.checked);
+                if (this.props.onChange) {
+                    this.props.onChange(!prevState.checked);
+                }
                 return {checked: !prevState.checked};
             });
         }
@@ -51,6 +53,7 @@ class CheckBox extends ReactComponent {
         return (
             <input
                 type="checkbox"
+                id={this.props.id}
                 checked={this.state.checked}
                 readOnly={this.props.readOnly}
                 disabled={this.props.disabled}
