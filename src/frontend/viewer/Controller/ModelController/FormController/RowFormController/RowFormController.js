@@ -132,7 +132,9 @@ class RowFormController extends FormController {
 
         // ui
         this.calcState();
-        this.state.mode = 'view';
+        if (this.getModel().hasDefaultSqlDataSource()) {
+            this.state.mode = 'view';
+        }
         this.rerender();
 
         // event
