@@ -19,7 +19,7 @@ class CheckBox extends ReactComponent {
         if (!this.props.readOnly) {
             this.setState(prevState => {
                 if (this.props.onChange) {
-                    this.props.onChange(!prevState.checked);
+                    this.props.onChange(!prevState.checked, e);
                 }
                 return {checked: !prevState.checked};
             });
