@@ -56,7 +56,7 @@ class Model extends EventEmitter {
         for (const data of this.data.dataSources) {
             try {
                 const Class = FrontHostApp.getClassByName(data.class);
-                if (!Class) throw new Error(`no class ${data.class}`);
+                if (!Class) throw new Error(`no class ${data.class} class`);
                 const dataSource = new Class(data, this);
                 dataSource.init();
                 this.dataSources.push(dataSource);

@@ -12,7 +12,7 @@ class Form extends Model {
         // fields
         for (const data of this.data.fields) {
             const Class = FrontHostApp.getClassByName(data.class);
-            if (!Class) throw new Error(`no class ${data.class}`);
+            if (!Class) throw new Error(`no class ${data.class} class`);
             const field = new Class(data, this);
             field.init();
             this.fields.push(field);
