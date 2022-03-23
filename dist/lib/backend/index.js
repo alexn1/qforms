@@ -48,6 +48,7 @@ module.exports.DataSourceEditor                  = require('./editor/Editor/Data
 module.exports.SqlDataSourceEditor               = require('./editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 module.exports.FieldEditor                       = require('./editor/Editor/FieldEditor/FieldEditor');
 module.exports.CheckBoxFieldEditor               = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
+module.exports.CheckBoxListFieldEditor           = require('./editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor');
 module.exports.ComboBoxFieldEditor               = require('./editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
 module.exports.DateFieldEditor                   = require('./editor/Editor/FieldEditor/DateFieldEditor/DateFieldEditor');
 module.exports.TimeFieldEditor                   = require('./editor/Editor/FieldEditor/TimeFieldEditor/TimeFieldEditor');

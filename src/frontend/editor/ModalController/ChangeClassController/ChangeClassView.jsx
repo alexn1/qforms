@@ -30,6 +30,7 @@ class ChangeClassView extends ReactComponent {
                         {value: 'TimeField'},
                         {value: 'DateTimeField'},
                         {value: 'CheckBoxField'},
+                        {value: 'CheckBoxListField'},
                         {value: 'FileField'},
                         {value: 'PhoneField'},
                         {value: 'PasswordField'},
