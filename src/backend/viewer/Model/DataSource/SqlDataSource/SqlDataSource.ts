@@ -46,14 +46,31 @@ class SqlDataSource extends DataSource {
         return query;
     }
 
-    templateQuery(context: Context, query: string): string {
+    templateQuery(context: Context, _query: string): string {
         const params = this.getSelectParams(context);
-        return query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
+        let query = _query;
+
+        // replace [param] to value
+        query = _query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
             if (params[name]) {
                 return params[name];
             }
             return text;
         });
+
+        // replace array param to ('itemA', 'itemB')
+        /*for (const name of Object.keys(params)) {
+            if (Array.isArray(params[name])) {
+                const items = params[name].map(item => {
+                    const type = typeof item;
+                    if (type === 'number') return item;
+                    if (type === 'string') return `'${item}'`;
+                    throw new Error(`wrong type for array item: ${type}`);
+                });
+                query = query.replaceAll(`{${name}}`, `(${items})`);
+            }
+        }*/
+        return query;
     }
 
     /*async selectSingle(context: Context) {
