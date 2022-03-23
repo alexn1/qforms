@@ -4,6 +4,7 @@ class RowFormCheckBoxListFieldView extends RowFormFieldView {
             classList={[`${this.getCssBlockName()}__checkboxlist`]}
             name={this.getCtrl().getModel().getFullName()}
             items={this.getCtrl().getItems()}
+            onChange={this.getCtrl().onChange}
         />;
     }
     render() {

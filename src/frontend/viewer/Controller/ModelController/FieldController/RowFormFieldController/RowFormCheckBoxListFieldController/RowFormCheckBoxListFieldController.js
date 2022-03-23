@@ -42,6 +42,12 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController {
     onListDelete = async e => {
         await this.rerender();
     }
+    getValueForWidget() {
+        return this.getValue();
+    }
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
+    }
 }
 
 window.QForms.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;
