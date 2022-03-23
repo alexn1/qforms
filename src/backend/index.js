@@ -17,6 +17,7 @@ module.exports.DataSource                        = require('./viewer/Model/DataS
 module.exports.SqlDataSource                     = require('./viewer/Model/DataSource/SqlDataSource/SqlDataSource');
 module.exports.Field                             = require('./viewer/Model/Field/Field');
 module.exports.CheckBoxField                     = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');
+module.exports.CheckBoxListField                 = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
 module.exports.ComboBoxField                     = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
 module.exports.DateField                         = require('./viewer/Model/Field/DateField/DateField');
 module.exports.TimeField                         = require('./viewer/Model/Field/TimeField/TimeField');
