@@ -63,7 +63,7 @@ class SqlDataSource extends DataSource_1.default {
                     if (type === 'string') return `'${item}'`;
                     throw new Error(`wrong type for array item: ${type}`);
                 });
-                query = query.replace(`{${name}}`, `(${items})`);
+                query = query.replaceAll(`{${name}}`, `(${items})`);
             }
         }*/
         return query;

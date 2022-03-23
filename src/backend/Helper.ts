@@ -457,6 +457,14 @@ class Helper {
             webSocket.upgradeReq.headers['x-real-port'] :
             webSocket.upgradeReq.socket.remotePort;
     }
+    static templateArray(arr) {
+        return arr.map(item => {
+            const type = typeof item;
+            if (type === 'number') return item;
+            if (type === 'string') return `'${item}'`;
+            throw new Error(`wrong type for array item: ${type}`);
+        });
+    }
 }
 
 export = Helper;

@@ -39,5 +39,6 @@ declare class Helper {
     static getCommandLineParams(): {};
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
+    static templateArray(arr: any): any;
 }
 export = Helper;
