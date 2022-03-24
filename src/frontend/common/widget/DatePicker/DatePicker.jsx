@@ -35,6 +35,8 @@ class DatePicker extends ReactComponent {
         // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
         if (this.props.selectedDate) {
             return [this.props.selectedDate[0], this.props.selectedDate[1]];
+        } else if (this.props.highlightedDate) {
+            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         } else {
             const dates = [Helper.today().getTime()];
             if (this.props.minDate) dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
