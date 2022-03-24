@@ -9,6 +9,9 @@ class CheckBoxList extends ReactComponent {
     getItems() {
         return this.props.items || [];
     }
+    getValue() {
+        return this.state.value || [];
+    }
     onCheckBoxChange = e => {
         // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
         const checked = e.target.checked;
@@ -33,15 +36,21 @@ class CheckBoxList extends ReactComponent {
             return {value};
         }, () => {
             if (this.props.onChange) {
-                this.props.onChange(this.state.value);
+                this.props.onChange(this.getValue());
             }
         });
     }
     isValueChecked(value) {
-        return this.state.value.indexOf(value) > -1;
+        return this.getValue().indexOf(value) > -1;
     }
     composeItemId(value) {
         return `${this.props.name}.${value}`;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('nextProps.value:', nextProps.value);
+        this.state.value = nextProps.value;
+        return true;
     }
     render() {
         return <ul className={this.getCssClassNames()}>
@@ -53,6 +62,7 @@ class CheckBoxList extends ReactComponent {
                            checked={this.isValueChecked(item.value)}
                            onChange={this.onCheckBoxChange}
                            data-value={item.value}
+                           readOnly={this.props.readOnly}
                     />
                     <label for={this.composeItemId(item.value)}>
                         {item.title || item.value}

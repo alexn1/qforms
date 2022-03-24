@@ -1,10 +1,14 @@
 class RowFormCheckBoxListFieldView extends RowFormFieldView {
     renderCheckBoxList() {
+        const ctrl = this.getCtrl();
         return <CheckBoxList
+            name={ctrl.getModel().getFullName()}
             classList={[`${this.getCssBlockName()}__checkboxlist`]}
-            name={this.getCtrl().getModel().getFullName()}
-            items={this.getCtrl().getItems()}
-            onChange={this.getCtrl().onChange}
+            onCreate={this.onWidgetCreate}
+            value={ctrl.getValueForWidget()}
+            readOnly={!ctrl.isEditable()}
+            onChange={ctrl.onChange}
+            items={ctrl.getItems()}
         />;
     }
     render() {

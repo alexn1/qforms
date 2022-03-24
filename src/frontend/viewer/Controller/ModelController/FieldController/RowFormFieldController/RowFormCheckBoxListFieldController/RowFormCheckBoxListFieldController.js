@@ -43,7 +43,10 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController {
         await this.rerender();
     }
     getValueForWidget() {
-        return this.getValue();
+        // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
+        const value = this.getValue();
+        // console.log('value:', value);
+        return value;
     }
     setValueFromWidget(widgetValue) {
         this.setValue(widgetValue);
