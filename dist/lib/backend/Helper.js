@@ -443,10 +443,12 @@ class Helper {
     static templateArray(arr) {
         return arr.map(item => {
             const type = typeof item;
-            if (type === 'number')
+            if (type === 'number' || type === 'boolean') {
                 return item;
-            if (type === 'string')
+            }
+            if (type === 'string') {
                 return `'${item}'`;
+            }
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
