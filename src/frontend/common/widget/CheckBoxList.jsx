@@ -18,7 +18,8 @@ class CheckBoxList extends ReactComponent {
         const itemValue = e.target.dataset.value;
         // console.log('itemValue:', itemValue);
         this.setState(prevState => {
-            const value = [...prevState.value];
+            const prevValue =  prevState.value || [];
+            const value = [...prevValue];
             if (checked) {
                 if (value.indexOf(itemValue) > -1) {
                     console.log('value:', itemValue, checked, value);
