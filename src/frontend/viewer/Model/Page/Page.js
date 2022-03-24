@@ -148,7 +148,7 @@ class Page extends Model {
         for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key);// key params to page params
             for (const name in keyParams) {
-                this.addParam(name, keyParams[name]);
+                this.setParam(name, keyParams[name]);
             }
         }
     }

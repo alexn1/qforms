@@ -27,7 +27,7 @@ declare class Context {
     getHost(): string;
     getProtocol(): string;
     setVersionHeaders(platformVersion: string, appVersion: string): void;
-    addParam(name: string, value: any): void;
+    setParam(name: string, value: any): void;
     destroy(): void;
 }
 export = Context;

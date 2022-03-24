@@ -36,7 +36,7 @@ class Field extends Model {
     valueToPageParams(row) {
         // console.log('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
-            this.getPage().addParam(this.getFullName(), this.getValue(row));
+            this.getPage().setParam(this.getFullName(), this.getValue(row));
         }
     }
 
