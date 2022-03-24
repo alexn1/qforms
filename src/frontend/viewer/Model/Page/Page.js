@@ -58,8 +58,8 @@ class Page extends Model {
         };
     }
 
-    addParam(name, value) {
-        // console.log('Page.addParam', name);
+    setParam(name, value) {
+        // console.log('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
 
