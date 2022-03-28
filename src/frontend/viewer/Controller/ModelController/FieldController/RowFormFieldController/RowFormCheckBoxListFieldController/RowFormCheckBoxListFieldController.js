@@ -17,17 +17,6 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormCheckBoxListFieldView;
     }
-    getItems() {
-        try {
-            return this.getRows().map(row => ({
-                value: this.model.getValueValue(row).toString(),
-                title: this.model.getDisplayValue(row).toString()
-            }));
-        } catch (err) {
-            err.message = `${this.getModel().getFullName()}: ${err.message}`;
-            throw err;
-        }
-    }
     getRows() {
         return this.model.getDataSource().getRows();
     }

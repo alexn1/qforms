@@ -1,4 +1,17 @@
 class RowFormCheckBoxListFieldView extends RowFormFieldView {
+    getItems() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        try {
+            return ctrl.getRows().map(row => ({
+                value: model.getValueValue(row).toString(),
+                title: model.getDisplayValue(row).toString()
+            }));
+        } catch (err) {
+            err.message = `${model.getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
     renderCheckBoxList() {
         const ctrl = this.getCtrl();
         return <CheckBoxList
@@ -8,7 +21,7 @@ class RowFormCheckBoxListFieldView extends RowFormFieldView {
             value={ctrl.getValueForWidget()}
             readOnly={!ctrl.isEditable()}
             onChange={ctrl.onChange}
-            items={ctrl.getItems()}
+            items={this.getItems()}
         />;
     }
     render() {
