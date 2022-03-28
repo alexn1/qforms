@@ -194,10 +194,13 @@ class Helper {
         return 60 * Helper.SECOND();
     }
     static HOUR() {
-        return 60*Helper.MINUTE();
+        return 60 * Helper.MINUTE();
     }
     static DAY() {
-        return 24*Helper.HOUR();
+        return 24 * Helper.HOUR();
+    }
+    static WEEK() {
+        return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
         // console.log('Helper.fallbackCopyTextToClipboard', text);
