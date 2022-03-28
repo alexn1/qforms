@@ -40,6 +40,13 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController {
     setValueFromWidget(widgetValue) {
         this.setValue(widgetValue);
     }
+    getItemFromRow(row) {
+        const model = this.getModel();
+        return {
+            value: model.getValueValue(row).toString(),
+            title: model.getDisplayValue(row).toString()
+        };
+    }
 }
 
 window.QForms.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;

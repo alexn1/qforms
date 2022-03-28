@@ -3,10 +3,9 @@ class RowFormCheckBoxListFieldView extends RowFormFieldView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         try {
-            return ctrl.getRows().map(row => ({
-                value: model.getValueValue(row).toString(),
-                title: model.getDisplayValue(row).toString()
-            }));
+            return ctrl.getRows().map(row => {
+                return ctrl.getItemFromRow(row);
+            });
         } catch (err) {
             err.message = `${model.getFullName()}: ${err.message}`;
             throw err;
