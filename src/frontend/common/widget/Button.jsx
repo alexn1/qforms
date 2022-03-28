@@ -6,6 +6,7 @@ class Button extends ReactComponent {
         this.el = React.createRef();
     }
     isDisabled() {
+        if (this.props.disabled !== undefined) return this.props.disabled;
         if (this.props.enabled !== undefined) return !this.props.enabled;
         return this.state.disabled;
     }
