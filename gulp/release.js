@@ -10,6 +10,7 @@ async function release() {
     // edit package.json
     const packageJson1 = await Lib.getJsonFileData('package.json');
     const releaseVersion = packageJson1.version;
+    console.log('releaseVersion:', releaseVersion);
     // const releaseVersion = packageJson1.version = Lib.versionWithoutDev(packageJson1.version);
     // await Lib.putJsonFileData('package.json', packageJson1);
 
