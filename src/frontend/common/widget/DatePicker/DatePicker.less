@@ -80,6 +80,9 @@
       border: 1px solid @selectionColor;
     }
   }
+  &:not(.selectable) {
+    text-decoration: line-through;
+  }
   &.selected {
     background-color: #ddd;
     border: 1px solid #ddd;
