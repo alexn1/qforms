@@ -518,7 +518,9 @@ class BackHostApp {
     }
 
     async moduleGetFile(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+        if (process.env.NODE_ENV === 'development') {
+            console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+        }
         if (req.params.module === 'viewer') {
             let context = null;
             try {
