@@ -36,7 +36,13 @@ class Field extends Model {
     valueToPageParams(row) {
         // console.log('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
-            this.getPage().setParam(this.getFullName(), this.getValue(row));
+            // we need to dump value to param without meta info such as timezone prop
+            const value = this.getValue(row);
+            const rawValue = this.valueToRaw(value);
+            // console.log('value:', value);
+            // console.log('rawValue:', rawValue);
+            const paramValue = rawValue !== undefined ? Helper.decodeValue(rawValue) : undefined;
+            this.getPage().setParam(this.getFullName(), paramValue);
         }
     }
 

@@ -56,9 +56,9 @@ class Field extends Model_1.default {
             if (!column)
                 throw new Error('no column attr');
             const rawValue = row[column];
-            console.log('rawValue:', rawValue);
+            // console.log('rawValue:', rawValue);
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
-            console.log('value:', value);
+            // console.log('value:', value);
             params[fullName] = value;
         }
         catch (err) {
