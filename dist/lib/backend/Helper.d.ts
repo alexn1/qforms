@@ -33,6 +33,9 @@ declare class Helper {
     static DAY(): number;
     static Session_save(session: any): Promise<void>;
     static addMinutes(date: any, minutes: any): void;
+    static removeTimezoneOffset(date: any): void;
+    static addTimezoneOffset(date: any): void;
+    static cloneDate(date: any): Date;
     static fillArray(n: number): number[];
     static formatDate(date: any, format: any): any;
     static getFirstField(object: any): any;

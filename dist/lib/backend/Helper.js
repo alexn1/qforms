@@ -400,6 +400,15 @@ class Helper {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
+    static removeTimezoneOffset(date) {
+        Helper.addMinutes(date, -date.getTimezoneOffset());
+    }
+    static addTimezoneOffset(date) {
+        Helper.addMinutes(date, date.getTimezoneOffset());
+    }
+    static cloneDate(date) {
+        return new Date(date.getTime());
+    }
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
