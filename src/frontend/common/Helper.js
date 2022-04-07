@@ -229,6 +229,9 @@ class Helper {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
+    static removeTimezone(date) {
+        Helper.addMinutes(date, -date.getTimezoneOffset());
+    }
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
