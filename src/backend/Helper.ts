@@ -412,17 +412,17 @@ class Helper {
             });
         })
     }
-    static addMinutes(date, minutes) {
+    static addMinutes(date, minutes): void {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
-    static removeTimezoneOffset(date) {
+    static removeTimezoneOffset(date): void {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
-    static addTimezoneOffset(date) {
+    static addTimezoneOffset(date): void {
         Helper.addMinutes(date, date.getTimezoneOffset());
     }
-    static cloneDate(date) {
+    static cloneDate(date): Date {
         return new Date(date.getTime());
     }
     static fillArray(n: number): number[] {
