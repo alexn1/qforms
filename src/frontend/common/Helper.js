@@ -232,7 +232,7 @@ class Helper {
     static removeTimezone(date) {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
-    static closeDate(date) {
+    static cloneDate(date) {
         return new Date(date.getTime());
     }
     static fillArray(n) {
