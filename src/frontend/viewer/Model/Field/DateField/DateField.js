@@ -7,7 +7,7 @@ class DateField extends Field {
         // console.log('DateField.rawToValue', this.getFullName(), raw);
         const value = Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
-            Helper.addMinutes(value, value.getTimezoneOffset());
+            Helper.addTimezoneOffset(value);
         }
         // console.log('DateField.rawToValue:', raw, value);
         return value;
@@ -16,8 +16,8 @@ class DateField extends Field {
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = new Date(value.getTime());
-            Helper.addMinutes(v, -v.getTimezoneOffset());
+            const v = Helper.cloneDate(value);
+            Helper.removeTimezoneOffset(v);
             rawValue = Helper.encodeValue(v);
         } else {
             rawValue = Helper.encodeValue(value);
