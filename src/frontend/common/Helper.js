@@ -232,6 +232,9 @@ class Helper {
     static removeTimezone(date) {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
+    static closeDate(date) {
+        return new Date(date.getTime());
+    }
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
