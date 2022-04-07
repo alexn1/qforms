@@ -62,9 +62,11 @@ class Field extends Model {
         try {
             const column = this.getAttr('column');
             if (!column) throw new Error('no column attr');
-            const value = row[column];
+            const rawValue = row[column];
+            // console.log('rawValue:', rawValue);
+            const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
             // console.log('value:', value);
-            params[fullName] = value !== undefined ? Helper.decodeValue(value) : null;
+            params[fullName] = value;
         } catch (err) {
             // console.log('row:', row);
             err.message = `${fullName}: ${err.message}`;
