@@ -15,11 +15,12 @@ class RowFormPhoneFieldView extends RowFormFieldView {
     isCloseVisible() {
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
-        if (!this.getWidget()) {
+        return ctrl.getValueForWidget() !== '';
+        /*if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
         // console.log('this.getWidget().state.value:', this.getWidget().state.value);
-        return this.getWidget().state.value !== '';
+        return this.getWidget().state.value !== '';*/
     }
     onFocus = async e => {
         this.addCssClass('focus');
