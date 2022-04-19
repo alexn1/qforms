@@ -125,17 +125,18 @@ class DropdownDatePicker extends ReactComponent {
         </div>;
     }
     renderDatePicker() {
-        return <DatePicker
-            classList={[`${this.getCssBlockName()}__date-picker`]}
-            // minDate={this.getMinDate()}
-            minDate={this.props.minDate}
-            selectedMonth={this.getSelectedMonth()}
-            selectedDate={this.getSelectedDate()}
-            onMouseDown={this.onDatePickerMouseDown}
-            onDateSelected={this.onDatePickerDateSelected}
-            selectToday={this.props.selectToday}
-            highlightedDate={this.props.highlightedDate}
-        />;
+        return <div className={`${this.getCssBlockName()}__date-picker-container`}>
+            <DatePicker
+                // minDate={this.getMinDate()}
+                minDate={this.props.minDate}
+                selectedMonth={this.getSelectedMonth()}
+                selectedDate={this.getSelectedDate()}
+                onMouseDown={this.onDatePickerMouseDown}
+                onDateSelected={this.onDatePickerDateSelected}
+                selectToday={this.props.selectToday}
+                highlightedDate={this.props.highlightedDate}
+            />;
+        </div>;
     }
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
