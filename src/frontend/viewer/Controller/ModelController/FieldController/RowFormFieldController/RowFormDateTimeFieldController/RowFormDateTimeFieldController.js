@@ -192,5 +192,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : [])
         ].join(', ');
     }
+    isValidateOnChange2() {
+        return true;
+    }
+    isValidateOnBlur2() {
+        return false;
+    }
 }
 window.QForms.RowFormDateTimeFieldController = RowFormDateTimeFieldController;

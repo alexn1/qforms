@@ -34,8 +34,8 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             onCreate={ctrl.onView2Create}
             readOnly={!ctrl.isEditable()}
             value={ctrl.getValueForTime()}
-            onChange={ctrl.onChange2}
-            onBlur={ctrl.onBlur2}
+            onChange={ctrl.isValidateOnChange2() ? ctrl.onChange2 : null}
+            onBlur={ctrl.isValidateOnBlur2() ? ctrl.onBlur2 : null}
             placeholder={ctrl.getPlaceholder2()}
             onClear={this.onClear2}
         />;
