@@ -53,6 +53,10 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onChange2 = (widgetValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
         this.resetErrors2();
+        this.rerender();
+
+        if (!this.isValidateOnChange2()) return;
+
         try {
             this.setValueFromView2(widgetValue);
         } catch (err) {
@@ -84,6 +88,8 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onBlur2 = (widgetValue, fireEvent = true) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
+
+
 
         this.resetErrors2();
         try {

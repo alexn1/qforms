@@ -34,29 +34,11 @@ class RowFormDateTimeFieldView extends RowFormFieldView {
             onCreate={ctrl.onView2Create}
             readOnly={!ctrl.isEditable()}
             value={ctrl.getValueForTime()}
-            onChange={ctrl.isValidateOnChange2() ? ctrl.onChange2 : null}
+            onChange={ctrl.onChange2}
             onBlur={ctrl.isValidateOnBlur2() ? ctrl.onBlur2 : null}
             placeholder={ctrl.getPlaceholder2()}
             onClear={this.onClear2}
         />;
-        /*
-        return <div className={`${this.getCssBlockName()}__time`}>
-            <TimeBox
-                classList={[`${this.getCssBlockName()}__time-box`]}
-                onCreate={ctrl.onView2Create}
-                readOnly={!ctrl.isEditable()}
-                value={ctrl.getValueForTime()}
-                onChange={ctrl.onChange2}
-                onBlur={ctrl.onBlur2}
-                placeholder={ctrl.getPlaceholder2()}
-            />
-            <div className={`${this.getCssBlockName()}__time-close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onCloseDown}>
-                <CloseIcon/>
-            </div>
-            <div className={`${this.getCssBlockName()}__time-icon`}>
-                <TimeIcon/>
-            </div>
-        </div>;*/
     }
     getMode() {
         return this.getCtrl().state.value ? 'datetime' : 'date';
