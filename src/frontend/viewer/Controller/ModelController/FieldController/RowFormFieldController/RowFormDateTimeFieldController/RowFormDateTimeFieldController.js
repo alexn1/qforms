@@ -60,12 +60,18 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.state.parseError2 = err.message;
         }
         if (!this.state.parseError2) {
+
+            // validate
             this.validate2();
             if (this.isValid()) {
                 this.copyValueToModel();
             }
         }
+
+        // changed
         this.refreshChanged();
+
+        // event
         if (fireEvent) {
             try {
                 this.emit('change', {value: widgetValue});
@@ -78,19 +84,25 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     onBlur2 = (widgetValue, fireEvent = false) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
+
+        // validate
         this.validate2();
         if (this.isValid()) {
             this.copyValueToModel();
         }
+
+        // changed
         this.refreshChanged();
+
+        // event
         if (fireEvent) {
             try {
                 this.emit('change', {value: widgetValue});
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
+            this.parent.onFieldChange({source: this});
         }
-        this.parent.onFieldChange({source: this});
     }
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
