@@ -40,17 +40,16 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
     }
-    _onChange(widgetValue) {
+    /*_onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (widgetValue !== null) {
             setTimeout(() => {
-                // const input = this.widget2.getElement();
                 const input = this.widget2.getInputElement();
                 input.focus();
                 input.setSelectionRange(0, input.value.length);
             }, 0);
         }
-    }
+    }*/
     onChange2 = (widgetValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
         this.resetErrors2();

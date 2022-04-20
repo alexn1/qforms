@@ -46,15 +46,28 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DropdownDatePicker__date-picker-container {
-  //position: absolute;
-  z-index: 1;
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: lightyellow;
+  background-color: rgba(0,0,0, 0.5);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@media (min-width: 1024px) {
+  .DropdownDatePicker__date-picker-container {
+    position: absolute;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    background-color: unset;
+    display: unset;
+    align-items: unset;
+    justify-content: unset;
+  }
 }
