@@ -59,9 +59,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
             this.state.parseError2 = err.message;
         }
-        if (!this.state.parseError2) {
 
-            // validate
+        // validate
+        if (!this.state.parseError2) {
             this.validate2();
             if (this.isValid()) {
                 this.copyValueToModel();
@@ -81,14 +81,24 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
             this.parent.onFieldChange({source: this});
         }
     }
-    onBlur2 = (widgetValue, fireEvent = false) => {
+    onBlur2 = (widgetValue, fireEvent = true) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
 
+        this.resetErrors2();
+        try {
+            this.setValueFromView2(widgetValue);
+        } catch (err) {
+            console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+            this.state.parseError2 = err.message;
+        }
+
         // validate
-        this.validate2();
-        if (this.isValid()) {
-            this.copyValueToModel();
+        if (!this.state.parseError2) {
+            this.validate2();
+            if (this.isValid()) {
+                this.copyValueToModel();
+            }
         }
 
         // changed
