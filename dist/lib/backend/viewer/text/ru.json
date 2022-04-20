@@ -38,7 +38,8 @@
         "cancel": "Отменить",
         "discard": "Сбросить",
         "actions": "Действия",
-        "required": "обязательно"
+        "required": "обязательно",
+        "phoneNumberFormatError": "неверный формат номера"
     },
     "field": {
         "selectValue": "выберите значение",

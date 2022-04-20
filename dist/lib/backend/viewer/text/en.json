@@ -38,7 +38,8 @@
         "cancel": "Cancel",
         "discard": "Discard",
         "actions": "Actions",
-        "required": "required"
+        "required": "required",
+        "phoneNumberFormatError": "phone number format error"
     },
     "field": {
         "selectValue": "select value",
