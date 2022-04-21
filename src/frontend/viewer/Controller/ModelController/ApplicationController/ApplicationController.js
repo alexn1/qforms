@@ -30,9 +30,7 @@ class ApplicationController extends ModelController {
             params: this.getGlobalParams()
         }) : null;
         document.title = this.getTitle();
-        if (Helper.inIframe()) {
-            document.documentElement.classList.add('iframe');
-        }
+        document.documentElement.classList.add(Helper.inIframe() ? 'iframe' : 'not-iframe');
         this.homePageName = this.activePage.getModel().getName();
     }
     deinit() {
