@@ -53,7 +53,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     }
     renderCloseIcon() {
         return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
-             onClick={this.onCloseClick}
+             onMouseDown={this.onCloseClick}
         >
             <CloseIcon/>
         </div>;

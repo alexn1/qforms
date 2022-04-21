@@ -5,7 +5,7 @@ class RowFormPhoneFieldView extends RowFormFieldView {
             classList: []
         };
     }
-    onCloseClick = async e => {
+    onClear = async e => {
         const ctrl = this.getCtrl();
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
@@ -47,8 +47,8 @@ class RowFormPhoneFieldView extends RowFormFieldView {
                          onBlur={this.onBlur}
         />;
     }
-    renderCloseButton() {
-        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
+    renderClearButton() {
+        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onClear}>
             <CloseIcon/>
         </div>;
     }
@@ -61,7 +61,7 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         // console.log('RowFormPhoneFieldView.render');
         return <div className={this.getCssClassNames()}>
             {this.renderPhoneBox()}
-            {this.renderCloseButton()}
+            {this.renderClearButton()}
             {this.renderPhoneIcon()}
         </div>;
     }

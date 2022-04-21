@@ -43,8 +43,6 @@ class RowFormFieldController extends FieldController {
         this.resetErrors();
         this.rerender();
 
-        if (!this.isValidateOnChange()) return;
-
         // get value from widget
         try {
             this.setValueFromWidget(widgetValue);
@@ -54,7 +52,7 @@ class RowFormFieldController extends FieldController {
         }
 
         // validate
-        if (!this.state.parseError) {
+        if (!this.state.parseError && this.isValidateOnChange()) {
             this.validate();
             if (this.isValid()) {
                 this.copyValueToModel();
@@ -81,7 +79,7 @@ class RowFormFieldController extends FieldController {
         this.resetErrors();
         this.rerender();
 
-        if (!this.isValidateOnBlur()) return;
+        // if (!this.isValidateOnBlur()) return;
 
         // get value from widget
         try {
@@ -92,7 +90,7 @@ class RowFormFieldController extends FieldController {
         }
 
         // validate
-        if (!this.state.parseError) {
+        if (!this.state.parseError && this.isValidateOnBlur()) {
             this.validate();
             if (this.isValid()) {
                 this.getModel().setValue(this.getRow(), this.getValue());
