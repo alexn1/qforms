@@ -37,7 +37,7 @@ class RowFormFieldController extends FieldController {
         this.onChange(widgetValue, false);
     }
     onChange = async (widgetValue, fireEvent = true) => {
-        // console.log('RowFormFieldController.onChange', widgetValue);
+        console.log('RowFormFieldController.onChange', widgetValue);
         this._onChange(widgetValue);
 
         this.resetErrors();
@@ -75,7 +75,7 @@ class RowFormFieldController extends FieldController {
         }
     }
     onBlur = (widgetValue, fireEvent = true) => {
-        // console.log('RowFormFieldController.onBlur', this.model.getFullName(), widgetValue, typeof widgetValue);
+        console.log('RowFormFieldController.onBlur', this.model.getFullName(), widgetValue, typeof widgetValue);
         if (!this.isEditable()) return;
 
         this.resetErrors();

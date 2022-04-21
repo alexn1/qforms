@@ -28,9 +28,9 @@ class RowFormPhoneFieldView extends RowFormFieldView {
     }
     onBlur = async e => {
         // console.log('RowFormPhoneFieldView.onBlur', e.target.value);
+        const value = e.target.value;
         this.removeCssClass('focus');
-        await this.rerender();
-        this.getCtrl().onBlur(e.target.value);
+        this.getCtrl().onBlur(value);
     }
     renderPhoneBox() {
         const ctrl = this.getCtrl();
