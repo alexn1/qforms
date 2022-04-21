@@ -141,9 +141,10 @@ class RowFormFieldController extends FieldController {
 
         // null validator
         const value = this.getValue();
-        if (this.model.isNotNull() && (value === null || value === undefined)) {
+        if (this.getModel().isNotNull() && (value === null || value === undefined)) {
             return this.getNullErrorText();
         }
+
         return null;
     }
     getNullErrorText() {
