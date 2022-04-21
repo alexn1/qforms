@@ -7,7 +7,8 @@ class RowFormPhoneFieldController extends RowFormFieldController {
     }
 
     getError() {
-        super.getError();
+        const error = super.getError();
+        if (error) return error;
 
         // russian phone format validator
         const value = this.getValue();
