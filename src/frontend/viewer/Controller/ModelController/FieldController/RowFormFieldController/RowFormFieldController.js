@@ -39,7 +39,13 @@ class RowFormFieldController extends FieldController {
     onChange = async (widgetValue, fireEvent = true) => {
         // console.log('RowFormFieldController.onChange', widgetValue);
         this._onChange(widgetValue);
+
         this.resetErrors();
+        this.rerender();
+
+        if (!this.isValidateOnChange()) return;
+
+        // get value from widget
         try {
             this.setValueFromWidget(widgetValue);
         } catch (err) {
@@ -47,13 +53,18 @@ class RowFormFieldController extends FieldController {
             this.state.parseError = err.message;
         }
 
-        if (this.model.validateOnChange()) {
+        // validate
+        if (!this.state.parseError) {
             this.validate();
             if (this.isValid()) {
                 this.copyValueToModel();
             }
         }
+
+        // changed
         this.refreshChanged();
+
+        // event
         if (fireEvent) {
             try {
                 this.emit('change', {value: widgetValue});
@@ -64,22 +75,41 @@ class RowFormFieldController extends FieldController {
         }
     }
     onBlur = (widgetValue, fireEvent = true) => {
-        // console.log('RowFormFieldController.onBlur', this.model.getFullName());
-        if (this.model.validateOnBlur()) {
-            console.log('validateOnBlur');
+        // console.log('RowFormFieldController.onBlur', this.model.getFullName(), widgetValue, typeof widgetValue);
+        if (!this.isEditable()) return;
+
+        this.resetErrors();
+        this.rerender();
+
+        if (!this.isValidateOnBlur()) return;
+
+        // get value from widget
+        try {
+            this.setValueFromWidget(widgetValue);
+        } catch (err) {
+            console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+            this.state.parseError = err.message;
+        }
+
+        // validate
+        if (!this.state.parseError) {
             this.validate();
             if (this.isValid()) {
-                this.model.setValue(this.getRow(), this.getValue());
+                this.getModel().setValue(this.getRow(), this.getValue());
             }
-            this.refreshChanged();
-            if (fireEvent) {
-                try {
-                    this.emit('change', {value: widgetValue});
-                } catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
-                }
-                this.parent.onFieldChange({source: this});
+        }
+
+        // changed
+        this.refreshChanged();
+
+        // event
+        if (fireEvent) {
+            try {
+                this.emit('change', {value: widgetValue});
+            } catch (err) {
+                console.error('unhandled change event error:', this.model.getFullName(), err);
             }
+            this.parent.onFieldChange({source: this});
         }
     }
     getValueForWidget() {
@@ -203,6 +233,12 @@ class RowFormFieldController extends FieldController {
             onCreate: this.onViewCreate,
             ctrl: this,
         });
+    }
+    isValidateOnChange() {
+        return this.getModel().validateOnChange();
+    }
+    isValidateOnBlur() {
+        return this.getModel().validateOnBlur();
     }
 }
 window.QForms.RowFormFieldController = RowFormFieldController;

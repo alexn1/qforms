@@ -31,8 +31,9 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     }
     onBlur = async e => {
         // console.log('RowFormTextBoxFieldView.onBlur');
+        const value = e.target.value;
         this.removeCssClass('focus');
-        await this.rerender();
+        this.getCtrl().onBlur(value);
     }
     renderTextBox() {
         const ctrl = this.props.ctrl;
