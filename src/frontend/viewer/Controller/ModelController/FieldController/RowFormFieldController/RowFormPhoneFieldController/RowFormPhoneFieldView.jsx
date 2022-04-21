@@ -6,21 +6,15 @@ class RowFormPhoneFieldView extends RowFormFieldView {
         };
     }
     onClear = async e => {
-        const ctrl = this.getCtrl();
-        this.getWidget().state.value = '';
-        this.getWidget().setState({value: ''});
-        ctrl.onChange('');
-        this.getWidget().getElement().focus();
+        this.getCtrl().onChange('');
+        setTimeout(() => {
+            this.getWidget().getElement().focus();
+        }, 0);
     }
     isCloseVisible() {
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
-        /*if (!this.getWidget()) {
-            return this.props.value !== undefined;
-        }
-        // console.log('this.getWidget().state.value:', this.getWidget().state.value);
-        return this.getWidget().state.value !== '';*/
     }
     onFocus = async e => {
         this.addCssClass('focus');

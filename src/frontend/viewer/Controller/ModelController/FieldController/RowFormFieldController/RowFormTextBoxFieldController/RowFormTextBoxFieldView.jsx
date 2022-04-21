@@ -5,24 +5,17 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
             classList: []
         };
     }
-    onCloseClick = async e => {
-        // console.log('RowFormTextBoxFieldView.onCloseClick');
-        const ctrl = this.props.ctrl;
-        this.getWidget().state.value = '';
-        this.getWidget().setState({value: ''});
-        ctrl.onChange('');
-        this.getWidget().getElement().focus();
+    onClear = async e => {
+        this.getCtrl().onChange('');
+        setTimeout(() => {
+            this.getWidget().getElement().focus();
+        }, 0);
     }
     isCloseVisible() {
         // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
-        /*if (!this.getWidget()) {
-            return this.props.value !== undefined;
-        }
-        // console.log('this.getWidget().state.value:', this.getWidget().state.value);
-        return this.getWidget().state.value !== '';*/
     }
     onFocus = async e => {
         // console.log('RowFormTextBoxFieldView.onFocus');
@@ -53,7 +46,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     }
     renderCloseIcon() {
         return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
-             onMouseDown={this.onCloseClick}
+             onMouseDown={this.onClear}
         >
             <CloseIcon/>
         </div>;
