@@ -31,6 +31,7 @@ declare class Helper {
     static MINUTE(): number;
     static HOUR(): number;
     static DAY(): number;
+    static WEEK(): number;
     static Session_save(session: any): Promise<void>;
     static addMinutes(date: any, minutes: any): void;
     static removeTimezoneOffset(date: any): void;
