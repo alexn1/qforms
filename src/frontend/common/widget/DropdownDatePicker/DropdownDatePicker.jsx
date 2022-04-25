@@ -126,6 +126,9 @@ class DropdownDatePicker extends ReactComponent {
     }
     renderDatePicker() {
         return <div className={`${this.getCssBlockName()}__date-picker-container`}>
+            <div className={`${this.getCssBlockName()}__date-picker-close`}>
+                <CloseIcon2/>
+            </div>
             <DatePicker
                 // minDate={this.getMinDate()}
                 minDate={this.props.minDate}
