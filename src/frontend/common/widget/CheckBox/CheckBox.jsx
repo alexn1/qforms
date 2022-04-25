@@ -38,29 +38,18 @@ class CheckBox extends ReactComponent {
     }
     render() {
         if (this.state.checked === null) {
-            return (<span
-                style={{
-                    width: '16px',
-                    height: '16px',
-                    // backgroundColor: 'yellow',
-                    display: 'inline-block',
-                    textAlign: 'center',
-                    cursor: 'default'
-                }}
-                onClick={this.onClick}
-            >?</span>);
+            return <div className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`} onClick={this.onClick}
+            >?</div>;
         }
-        return (
-            <input
-                type="checkbox"
-                id={this.props.id}
-                checked={this.state.checked}
-                readOnly={this.props.readOnly}
-                disabled={this.props.disabled}
-                data-tag={this.props.tag}
-                onChange={this.onChange}
-            />
-        );
+        return <input className={this.getCssClassNames()}
+            type="checkbox"
+            id={this.props.id}
+            checked={this.state.checked}
+            readOnly={this.props.readOnly}
+            disabled={this.props.disabled}
+            data-tag={this.props.tag}
+            onChange={this.onChange}
+        />;
     }
 }
 
