@@ -41,7 +41,7 @@ class Slider extends ReactComponent {
         return <div className={this.getCssClassNames()}>
             <img className={'Slider_image'} src={images[this.state.image]} onClick={this.onImageClick}/>
             {images.length > 1 &&
-                <div className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0}/{images.length}</div>
+                <div className={'Slider__label'}>{images.length > 0 ? this.state.image+1 : 0} / {images.length}</div>
             }
             {images.length > 1 &&
                 <div className={'Slider__arrow left'} onClick={this.onPrevClick}>
