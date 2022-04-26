@@ -20,8 +20,9 @@ class RowFormComboBoxFieldController extends RowFormFieldController {
     getItems() {
         try {
             return this.getRows().map(row => ({
-                value: this.model.getValueValue(row).toString(),
-                title: this.model.getDisplayValue(row).toString()
+                value: this.getModel().getValueValue(row) === null ? '' : this.getModel().getValueValue(row).toString(),
+                // value: this.getModel().getValueValue(row).toString(),
+                title: this.getModel().getDisplayValue(row).toString()
             }));
         } catch (err) {
             err.message = `${this.getModel().getFullName()}: ${err.message}`;
