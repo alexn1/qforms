@@ -33,7 +33,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         return <TextBox
             classList={[`${this.getCssBlockName()}__input`]}
             value={ctrl.getValueForWidget()}
-            readOnly={ctrl.isEnabled()}
+            readOnly={!ctrl.isEnabled()}
             enabled={ctrl.isEnabled()}
             autoFocus={ctrl.isAutoFocus()}
             placeholder={ctrl.getPlaceholder() || null}
