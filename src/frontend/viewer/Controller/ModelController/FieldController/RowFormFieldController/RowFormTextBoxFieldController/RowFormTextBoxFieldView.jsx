@@ -14,7 +14,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
     isCloseVisible() {
         // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
-        if (!ctrl.isEditable()) return false;
+        if (!ctrl.isEnabled()) return false;
         return ctrl.getValueForWidget() !== '';
     }
     onFocus = async e => {
@@ -33,7 +33,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView {
         return <TextBox
             classList={[`${this.getCssBlockName()}__input`]}
             value={ctrl.getValueForWidget()}
-            readOnly={!ctrl.isEditable()}
+            readOnly={ctrl.isEnabled()}
             enabled={ctrl.isEnabled()}
             autoFocus={ctrl.isAutoFocus()}
             placeholder={ctrl.getPlaceholder() || null}
