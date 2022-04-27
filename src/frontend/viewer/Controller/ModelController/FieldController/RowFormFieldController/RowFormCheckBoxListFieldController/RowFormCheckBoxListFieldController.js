@@ -41,10 +41,9 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController {
         this.setValue(widgetValue);
     }
     getItemFromRow(row) {
-        const model = this.getModel();
         return {
-            value: model.getValueValue(row).toString(),
-            title: model.getDisplayValue(row).toString()
+            value: this.valueToString(this.getModel().getValueValue(row)),
+            title: this.getModel().getDisplayValue(row)
         };
     }
 }
