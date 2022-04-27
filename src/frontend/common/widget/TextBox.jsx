@@ -37,7 +37,7 @@ class TextBox extends ReactComponent {
                 id={this.props.id}
                 name={this.props.name}
                 readOnly={this.props.readOnly}
-                disabled={this.props.disabled}
+                disabled={this.isDisabled()}
                 placeholder={this.props.placeholder}
                 autoFocus={this.props.autoFocus}
                 spellCheck={this.props.spellCheck}
