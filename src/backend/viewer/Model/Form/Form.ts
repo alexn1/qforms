@@ -25,7 +25,7 @@ class Form extends Model {
         this.fields          = [];
     }
 
-    async init(context) {
+    async init(context): Promise<void> {
         await this.createColItems('dataSources', context);
         await this.createColItems('actions', context);
         await this.createColItems('fields', context);
