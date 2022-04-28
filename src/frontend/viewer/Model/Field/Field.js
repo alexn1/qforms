@@ -57,12 +57,12 @@ class Field extends Model {
     }
 
     getValue(row) {
-        // console.log('Field.getValue', this.getFullName());
+        // console.log('Field.getValue', this.getFullName(), row);
         if (!row && this.parent instanceof RowForm) {
             row = this.parent.getRow();
         }
         if (!row) {
-            console.log(`${this.getFullName()}: need row`);
+            throw new Error(`${this.getFullName()}: need row`);
         }
         let rawValue;
         if (this.getAttr('column')) {
@@ -72,6 +72,7 @@ class Field extends Model {
             try {
                 rawValue = eval(js);
             } catch (err) {
+                console.error(err);
                 throw new Error(`${this.getFullName()}: value eval error: ${err.message}`);
             }
         } else {
