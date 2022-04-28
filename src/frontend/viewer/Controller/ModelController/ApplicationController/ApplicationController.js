@@ -232,6 +232,7 @@ class ApplicationController extends ModelController {
                     throw new Error(`no handler for action '${name}'`);
                 }
             } catch (err) {
+                console.error(err);
                 await this.alert({message: err.message});
             }
         } else if (type === 'custom' && name === 'logout') {

@@ -13,6 +13,7 @@ class FormView extends ModelView {
                 throw new Error(`no handler for action '${name}'`);
             }
         } catch (err) {
+            console.error(err);
             await this.getCtrl().getApp().alert({message: err.message});
         }
     }
