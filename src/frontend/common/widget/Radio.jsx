@@ -14,7 +14,7 @@ class Radio extends ReactComponent {
             value = this.props.value;
             const item = this.props.items.find(item => item.value === this.props.value);
             if (!item) {
-                console.error(`no item for value:`, this.props.value, typeof this.props.value);
+                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
                 console.log('items:', this.props.items);
             }
         }

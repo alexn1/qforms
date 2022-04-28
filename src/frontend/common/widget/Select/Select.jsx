@@ -20,7 +20,7 @@ class Select extends ReactComponent {
             if (!item) {
                 if (this.isNullable() && value === '') {
                 } else {
-                    console.error(`no item for value:`, this.props.value, typeof this.props.value);
+                    console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
                     console.log('items:', this.getItems());
                 }
             }
