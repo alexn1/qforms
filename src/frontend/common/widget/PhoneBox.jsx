@@ -48,6 +48,17 @@ class PhoneBox extends ReactComponent {
             this.props.onChange(value);
         }
     }
+    onBlur = e => {
+        // console.log('PhoneBox.onBlur');
+        let value = PhoneBox.clearValue(e.target.value);
+        value = PhoneBox.ifNoCodeAddRussianCode(value);
+        // console.log('value:', value);
+
+        // event
+        if (this.props.onBlur) {
+            this.props.onBlur(value);
+        }
+    }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
@@ -72,8 +83,8 @@ class PhoneBox extends ReactComponent {
                 autoComplete={this.props.autocomplete}
                 value={this.state.value}
                 onFocus={this.props.onFocus}
-                onBlur={this.props.onBlur}
                 onChange={this.onChange}
+                onBlur={this.onBlur}
                 onKeyPress={this.onKeyPress}
             />
         );
