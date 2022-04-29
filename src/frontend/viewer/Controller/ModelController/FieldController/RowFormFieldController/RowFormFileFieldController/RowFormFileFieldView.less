@@ -1,23 +1,29 @@
 .RowFormFileFieldView {
-  img {
-    width: 100%;
-    display: block;
-  }
-  > div {
-    position: relative;
-    font-size: 10px;
-    > .size {
-      position: absolute;
-      bottom: 0;
-      background-color: rgba(0,0,0,0.5);
-      color: #eee;
-    }
-    >.length {
-      position: absolute;
-      bottom: 0;
-      right:0;
-      background-color: rgba(0,0,0,0.5);
-      color: #eee;
-    }
-  }
+
+}
+
+.RowFormFileFieldView__image-block {
+  position: relative;
+  font-size: 10px;
+}
+
+.RowFormFileFieldView__image {
+  width: 100%;
+  display: block;
+  cursor: zoom-in !important;
+}
+
+.RowFormFileFieldView__size {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5);
+  color: #eee;
+}
+
+.RowFormFileFieldView__length {
+  position: absolute;
+  bottom: 0;
+  right:0;
+  background-color: rgba(0,0,0,0.5);
+  color: #eee;
 }

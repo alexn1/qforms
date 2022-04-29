@@ -19,4 +19,8 @@ class ImageDialogController extends ModalController {
             await this.close();
         }
     }
+    onImageClick = async e => {
+        console.log('ImageDialogController.onImageClick');
+        await this.close();
+    }
 }

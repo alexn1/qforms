@@ -42,19 +42,21 @@ class RowFormFileFieldView extends RowFormFieldView {
         await app.openModal(imageDialogCtrl);
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const row = ctrl.getRow();
         const value = ctrl.getValueForWidget();
         return <div className={this.getCssClassNames()} style={this.getStyle(row)}>
             {!!value &&
-                <div>
-                    <Image ref={this.image} src={value} onClick={this.onImageClick}/>
-                    <span className="size" ref={this.div}></span>
-                    <span className="length">{Helper.formatNumber(value.length)}</span>
+                <div className={`${this.getCssBlockName()}__image-block`}>
+                    <Image classList={[`${this.getCssBlockName()}__image`]} ref={this.image} src={value} onClick={this.onImageClick}/>
+                    <span className={`${this.getCssBlockName()}__size`} ref={this.div}></span>
+                    <span className={`${this.getCssBlockName()}__length`}>{Helper.formatNumber(value.length)}</span>
                 </div>
             }
             <input type="file" onChange={this.onChange} disabled={!ctrl.isEditable()}/>
-            {!!value && <Button onClick={this.onClearClick} enabled={ctrl.isEditable()}>Clear</Button>}
+            {!!value &&
+                <Button onClick={this.onClearClick} enabled={ctrl.isEditable()}>Clear</Button>
+            }
         </div>;
     }
     componentDidMount() {
