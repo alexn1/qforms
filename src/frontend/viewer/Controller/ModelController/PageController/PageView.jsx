@@ -146,14 +146,19 @@ class PageView extends ModelView {
         </div>;
     }
     renderMain() {
-        const model = this.getCtrl().getModel();
         return <div className={`${this.getCssBlockName()}__main flex-max frame`}>
             <div className="frame__container flex-column grid-gap-10">
                 {this.isToolbar() && this.renderToolbar()}
-                {model.hasRowForm() && this.renderRowForms()}
-                {model.hasTableForm() && this.renderTableForms()}
+                {this.renderForms()}
             </div>
         </div>;
+    }
+    renderForms() {
+        const model = this.getCtrl().getModel();
+        return [
+            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
+            ...(model.hasTableForm() ? [this.renderTableForms()] : [])
+        ];
     }
     renderFooter() {
     }
