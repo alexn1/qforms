@@ -4,6 +4,41 @@ class PageView extends ModelView {
         this.checkParent();
         this.el = React.createRef();
     }
+    onActionsClick = async li => {
+        // console.log('PageView.onActionsClick:', li);
+        const ctrl = this.getCtrl();
+        const name = li.dataset.action;
+        try {
+            const result = await ctrl.onActionClick(name);
+            if (!result) {
+                throw new Error(`no handler for action '${name}'`);
+            }
+        } catch (err) {
+            console.error(err);
+            await this.getCtrl().getApp().alert({message: err.message});
+        }
+    }
+    isToolbar() {
+        const model = this.getCtrl().getModel();
+        return model.options.selectMode
+            || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+            || model.hasActions();
+    }
+    getFormTabs(forms) {
+        return forms.map(form => {
+            return {
+                name   : form.getModel().getName(),
+                title  : form.getTitle(),
+                content: this.renderForm(form)
+            };
+        });
+    }
+    getRowForms() {
+        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
+    }
+    getTableForms() {
+        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
+    }
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
             parent  : this,
@@ -18,7 +53,7 @@ class PageView extends ModelView {
         return this.getRowForms().map(form => this.renderForm(form));
     }
     renderTitle() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return <h1 className={`${this.getCssBlockName()}__title`}>
             {ctrl.getTitle()}
@@ -27,22 +62,8 @@ class PageView extends ModelView {
             }
         </h1>;
     }
-    onActionsClick = async li => {
-        // console.log('PageView.onActionsClick:', li);
-        const ctrl = this.props.ctrl;
-        const name = li.dataset.action;
-        try {
-            const result = await ctrl.onActionClick(name);
-            if (!result) {
-                throw new Error(`no handler for action '${name}'`);
-            }
-        } catch (err) {
-            console.error(err);
-            await this.getCtrl().getApp().alert({message: err.message});
-        }
-    }
     renderToolbar() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const model = ctrl.model;
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
@@ -87,12 +108,6 @@ class PageView extends ModelView {
     /*shouldComponentUpdate(nextProps, nextState) {
         return false;
     }*/
-    isToolbar() {
-        const model = this.getCtrl().getModel();
-        return model.options.selectMode
-            || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
-            || model.hasActions();
-    }
     renderTableForms() {
         const tableForms = this.getTableForms();
         // if (tableForms.length === 1) {
@@ -105,36 +120,21 @@ class PageView extends ModelView {
             </div>;
         // }
     }
-    getFormTabs(forms) {
-        return forms.map(form => {
-            return {
-                name   : form.getModel().getName(),
-                title  : form.getTitle(),
-                content: this.renderForm(form)
-            };
-        });
-    }
-    getRowForms() {
-        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
-    }
-    getTableForms() {
-        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
-    }
+
     renderOpenPageHeaderButton() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return <div key={'open'} className={`${this.getCssBlockName()}__open`} onClick={ctrl.onOpenPageClick}>
             <OpenInNewIcon/>
         </div>;
     }
     renderClosePageHeaderButton() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return <div key={'close'} className={`${this.getCssBlockName()}__close`} onClick={ctrl.onClosePageClick}>
             <CloseIcon2/>
         </div>;
     }
     renderHeader() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.getModel();
+        const model = this.getCtrl().getModel();
         return <div className={`${this.getCssBlockName()}__header`}>
             {this.renderTitle()}
             {model.isModal() &&
@@ -159,6 +159,9 @@ class PageView extends ModelView {
             ...(model.hasRowForm() ? [this.renderRowForms()] : []),
             ...(model.hasTableForm() ? [this.renderTableForms()] : [])
         ];
+    }
+    renderForms2() {
+        return <Tab2 tabs={this.getFormTabs(this.getCtrl().forms)} classList={['Tab-blue', 'full']}/>;
     }
     renderFooter() {
     }
