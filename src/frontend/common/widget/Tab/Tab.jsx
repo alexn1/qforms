@@ -57,7 +57,6 @@ class Tab extends ReactComponent {
             </div>);
     }
     render() {
-
         return (
             <div className={this.getCssClassNames()}>
                 <ul>
