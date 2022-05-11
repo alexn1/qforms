@@ -110,15 +110,15 @@ class PageView extends ModelView {
     }*/
     renderTableForms() {
         const tableForms = this.getTableForms();
-        // if (tableForms.length === 1) {
-        //     return this.renderForm(tableForms[0]);
-        // } else {
+        if (tableForms.length === 1) {
+            return this.renderForm(tableForms[0]);
+        } else {
             return <div className={`${this.getCssBlockName()}__table-forms flex-max frame`}>
                 <div className="frame__container">
                     <Tab2 tabs={this.getFormTabs(tableForms)} classList={['Tab-blue', 'full']}/>
                 </div>
             </div>;
-        // }
+        }
     }
 
     renderOpenPageHeaderButton() {
