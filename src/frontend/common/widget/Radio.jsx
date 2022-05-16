@@ -6,7 +6,7 @@ class Radio extends ReactComponent {
         this.state = {
             value: this.getInitialValue()
         };
-        console.log('value:', this.getValue());
+        console.log('value:', JSON.stringify(this.getValue()));
     }
     getInitialValue() {
         let value = null;
