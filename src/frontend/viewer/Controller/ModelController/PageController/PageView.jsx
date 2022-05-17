@@ -160,7 +160,7 @@ class PageView extends ModelView {
     }
     renderMain() {
         return <div className={`${this.getCssBlockName()}__main flex-max frame`}>
-            <div className="frame__container flex-column grid-gap-10">
+            <div className={'frame__container flex-column grid-gap-10'}>
                 {this.isToolbar() && this.renderToolbar()}
                 {this.renderForms()}
             </div>
