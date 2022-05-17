@@ -86,6 +86,15 @@ class PageView extends ModelView {
             <div>{model.getApp().getText().page.saveAndClose}</div>
         </Button>;
     }
+    renderActionsDropdownButton() {
+        return <DropdownButton
+            classList={['toolbar-dropdown-button']}
+            actions={this.getActionsForDropdownButton()}
+            onClick={this.onActionsClick}
+        >
+            <MoreVertIcon/>
+        </DropdownButton>;
+    }
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -99,15 +108,7 @@ class PageView extends ModelView {
                     />
                 }*/}
                 {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
-                {model.hasActions() &&
-                    <DropdownButton
-                        classList={['toolbar-dropdown-button']}
-                        actions={this.getActionsForDropdownButton()}
-                        onClick={this.onActionsClick}
-                    >
-                        <MoreVertIcon/>
-                    </DropdownButton>
-                }
+                {model.hasActions() && this.renderActionsDropdownButton()}
             </div>
         );
     }
