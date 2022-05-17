@@ -168,5 +168,8 @@ class Page extends Model {
     getForm(name) {
         return this.forms.find(form => form.getName() === name);
     }
+    isSelectMode() {
+        return !!this.options.selectMode;
+    }
 }
 window.QForms.Page = Page;

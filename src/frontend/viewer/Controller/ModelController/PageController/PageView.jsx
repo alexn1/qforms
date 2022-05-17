@@ -20,7 +20,7 @@ class PageView extends ModelView {
     }
     isToolbar() {
         const model = this.getCtrl().getModel();
-        return model.options.selectMode
+        return model.isSelectMode()
             || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
             || model.hasActions();
     }
@@ -98,19 +98,17 @@ class PageView extends ModelView {
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
-        return (
-            <div className={`${this.getCssBlockName()}__toolbar`}>
-                {model.options.selectMode && this.renderSelectButton()}
-                {/*{model.options.selectMode &&
+        return <div className={`${this.getCssBlockName()}__toolbar`}>
+            {model.isSelectMode() && this.renderSelectButton()}
+            {/*{model.isSelectMode() &&
                     <Button classList={['toolbar-button']}
                         title={model.getApp().getText().page.reset}
                             onClick={ctrl.onResetClick}
                     />
                 }*/}
-                {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
-                {model.hasActions() && this.renderActionsDropdownButton()}
-            </div>
-        );
+            {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
+            {model.hasActions() && this.renderActionsDropdownButton()}
+        </div>;
     }
     /*shouldComponentUpdate(nextProps, nextState) {
         return false;
