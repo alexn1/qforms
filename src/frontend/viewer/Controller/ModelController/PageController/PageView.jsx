@@ -21,7 +21,7 @@ class PageView extends ModelView {
     isToolbar() {
         const model = this.getCtrl().getModel();
         return model.isSelectMode()
-            || (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+            //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
             || model.hasActions();
     }
     getFormTabs(forms) {
