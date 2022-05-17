@@ -106,7 +106,6 @@ class PageView extends ModelView {
                             onClick={ctrl.onResetClick}
                     />
                 }*/}
-            {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
             {model.hasActions() && this.renderActionsDropdownButton()}
         </div>;
     }
@@ -169,8 +168,9 @@ class PageView extends ModelView {
         return <Tab2 tabs={this.getFormTabs(this.getCtrl().forms)} classList={['Tab-blue', 'full']}/>;
     }
     renderFooter() {
+        const model = this.getCtrl().getModel();
         return <div className={`${this.getCssBlockName()}__footer`}>
-            footer
+            {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
         </div>;
     }
     render() {
