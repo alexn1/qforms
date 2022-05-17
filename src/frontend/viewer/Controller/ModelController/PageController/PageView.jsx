@@ -74,6 +74,18 @@ class PageView extends ModelView {
             <div>{model.getApp().getText().page.select}</div>
         </Button>;
     }
+    renderSaveAndCloseButton() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return <Button
+            classList={['toolbar-button', 'default']}
+            onClick={ctrl.onSaveAndCloseClick}
+            enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
+        >
+            <DoneIcon/>
+            <div>{model.getApp().getText().page.saveAndClose}</div>
+        </Button>;
+    }
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -86,16 +98,7 @@ class PageView extends ModelView {
                             onClick={ctrl.onResetClick}
                     />
                 }*/}
-                {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() &&
-                    <Button
-                        classList={['toolbar-button', 'default']}
-                        onClick={ctrl.onSaveAndCloseClick}
-                        enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
-                    >
-                        <DoneIcon/>
-                        <div>{model.getApp().getText().page.saveAndClose}</div>
-                    </Button>
-                }
+                {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
                 {model.hasActions() &&
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
