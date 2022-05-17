@@ -64,7 +64,7 @@ class PageView extends ModelView {
     }
     renderToolbar() {
         const ctrl = this.getCtrl();
-        const model = ctrl.model;
+        const model = ctrl.getModel();
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
                 {model.options.selectMode &&
@@ -164,6 +164,9 @@ class PageView extends ModelView {
         return <Tab2 tabs={this.getFormTabs(this.getCtrl().forms)} classList={['Tab-blue', 'full']}/>;
     }
     renderFooter() {
+        return <div className={`${this.getCssBlockName()}__footer`}>
+            footer
+        </div>;
     }
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
@@ -175,7 +178,7 @@ class PageView extends ModelView {
         >
             {this.renderHeader()}
             {this.renderMain()}
-            {this.renderFooter()}
+            {this.getCtrl().isModal() && this.renderFooter()}
         </div>;
     }
     getStyle() {
