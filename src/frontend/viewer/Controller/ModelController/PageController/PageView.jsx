@@ -62,21 +62,24 @@ class PageView extends ModelView {
             }
         </h1>;
     }
+    renderSelectButton() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return <Button
+            classList={['toolbar-button', 'default']}
+            onClick={ctrl.onSelectClick}
+            enabled={!!ctrl.getSelectedRowKey()}
+        >
+            <DoneIcon/>
+            <div>{model.getApp().getText().page.select}</div>
+        </Button>;
+    }
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
             <div className={`${this.getCssBlockName()}__toolbar`}>
-                {model.options.selectMode &&
-                    <Button
-                        classList={['toolbar-button', 'default']}
-                        onClick={ctrl.onSelectClick}
-                        enabled={!!ctrl.getSelectedRowKey()}
-                    >
-                        <DoneIcon/>
-                        <div>{model.getApp().getText().page.select}</div>
-                    </Button>
-                }
+                {model.options.selectMode && this.renderSelectButton()}
                 {/*{model.options.selectMode &&
                     <Button classList={['toolbar-button']}
                         title={model.getApp().getText().page.reset}
