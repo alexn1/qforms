@@ -31,7 +31,8 @@ class ApplicationController extends ModelController {
         }) : null;
         document.title = this.getTitle();
         document.documentElement.classList.add(Helper.inIframe() ? 'iframe' : 'not-iframe');
-        this.homePageName = this.activePage.getModel().getName();
+        const activePageName = this.getActivePageName();
+        this.homePageName = activePageName ? activePageName : document.title;
     }
     deinit() {
         // this.model.off('logout', this.onLogout);
