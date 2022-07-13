@@ -56,7 +56,7 @@ class ApplicationController extends ModelController {
         }
         // console.log('e.remoteAppVersion', e.remoteAppVersion);
         // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
-        if (this.getModel().getData().versions.app !== e.remoteAppVersion) {
+        if (this.getModel().getData().versions.app && this.getModel().getData().versions.app !== e.remoteAppVersion) {
             this.createVersionNotificationIfNotExists();
         }
     }
