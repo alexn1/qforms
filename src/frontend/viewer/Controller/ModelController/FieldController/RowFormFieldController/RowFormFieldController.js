@@ -199,7 +199,6 @@ class RowFormFieldController extends FieldController {
             const fieldRawValue = this.model.valueToRaw(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-
                 console.log(`FIELD CHANGED ${this.model.getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
