@@ -73,7 +73,7 @@ class RowFormFieldController extends FieldController {
         }
     }
     onBlur = (widgetValue, fireEvent = true) => {
-        console.log('RowFormFieldController.onBlur', this.model.getFullName(), widgetValue, typeof widgetValue);
+        console.log('RowFormFieldController.onBlur', this.model.getFullName(), JSON.stringify(widgetValue));
         if (!this.isEditable()) return;
 
         this.resetErrors();
@@ -199,7 +199,8 @@ class RowFormFieldController extends FieldController {
             const fieldRawValue = this.model.valueToRaw(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-                console.log(`FIELD CHANGED ${this.model.getFullName()}`, dsRawValue, fieldRawValue);
+
+                console.log(`FIELD CHANGED ${this.model.getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
         }
