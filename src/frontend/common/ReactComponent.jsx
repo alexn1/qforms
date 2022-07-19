@@ -71,19 +71,13 @@ class ReactComponent extends React.Component {
     }*/
     isEnabled() {
         // console.log('ReactComponent.isEnabled', this.state);
-        if (this.state && this.state.disabled !== undefined) {
-            return !this.state.disabled;
-        }
-        if (this.props.enabled !== undefined) {
-            return this.props.enabled;
-        }
-        if (this.props.disabled !== undefined) {
-            return !this.props.disabled;
-        }
-        return true;
+        return !this.isDisabled();
     }
     isDisabled() {
-        return !this.isEnabled();
+        if (this.state && this.state.disabled !== undefined) return this.state.disabled;
+        if (this.props.disabled !== undefined) return this.props.disabled;
+        if (this.props.enabled !== undefined) return !this.props.enabled;
+        return false;
     }
     disable() {
         // console.log('ReactComponent.disable');
