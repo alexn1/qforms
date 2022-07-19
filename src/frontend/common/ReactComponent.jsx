@@ -88,11 +88,11 @@ class ReactComponent extends React.Component {
     disable() {
         // console.log('ReactComponent.disable');
         if (!this.state) throw new Error('no state');
-        this.state.disabled = true;
+        this.setState({disabled: true});
     }
     enable() {
         if (!this.state) throw new Error('no state');
-        this.state.disabled = undefined;
+        this.setState({disabled: undefined});
     }
 }
 
