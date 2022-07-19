@@ -70,6 +70,10 @@ class ReactComponent extends React.Component {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
     }*/
     isEnabled() {
+        // console.log('ReactComponent.isEnabled', this.state);
+        if (this.state && this.state.disabled !== undefined) {
+            return !this.state.disabled;
+        }
         if (this.props.enabled !== undefined) {
             return this.props.enabled;
         }
@@ -80,6 +84,15 @@ class ReactComponent extends React.Component {
     }
     isDisabled() {
         return !this.isEnabled();
+    }
+    disable() {
+        console.log('ReactComponent.disable');
+        if (!this.state) throw new Error('no state');
+        this.state.disabled = true;
+    }
+    enable() {
+        if (!this.state) throw new Error('no state');
+        this.state.disabled = undefined;
     }
 }
 
