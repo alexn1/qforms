@@ -20,7 +20,7 @@ class RowFormFieldController extends FieldController {
         const value = this.model.getValue(this.getRow());
         this.setValue(value);
         this.resetErrors();
-        this.refreshChanged();
+        this.refreshChangedState();
     }
     getRow() {
         return this.model.getForm().getRow();
@@ -60,7 +60,7 @@ class RowFormFieldController extends FieldController {
         }
 
         // changed
-        this.refreshChanged();
+        this.refreshChangedState();
 
         // event
         if (fireEvent) {
@@ -98,7 +98,7 @@ class RowFormFieldController extends FieldController {
         }
 
         // changed
-        this.refreshChanged();
+        this.refreshChangedState();
 
         // event
         if (fireEvent) {
@@ -142,7 +142,7 @@ class RowFormFieldController extends FieldController {
             this.state.error = this.getError();
         }
     }
-    refreshChanged() {
+    refreshChangedState() {
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {

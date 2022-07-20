@@ -73,7 +73,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
 
         // changed
-        this.refreshChanged();
+        this.refreshChangedState();
 
         // event
         if (fireEvent) {
@@ -109,7 +109,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         }
 
         // changed
-        this.refreshChanged();
+        this.refreshChangedState();
 
         // event
         if (fireEvent) {
@@ -194,7 +194,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
         super.refill();
         this.widget2.setValue(this.getValueForTime());
         this.resetErrors2();
-        this.refreshChanged();
+        this.refreshChangedState();
     }
     isParseError() {
         return super.isParseError() || this.isParseError2();
