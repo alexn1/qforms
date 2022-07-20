@@ -76,10 +76,10 @@ class RowFormFieldController extends FieldController {
         console.log('RowFormFieldController.onBlur', this.model.getFullName(), JSON.stringify(widgetValue));
         if (!this.isEditable()) return;
 
-        this.resetErrors();
-        this.rerender();
+        /*this.resetErrors();
+        this.rerender();*/
 
-        // if (!this.isValidateOnBlur()) return;
+        if (!this.isValidateOnBlur()) return;
 
         // get value from widget
         try {
