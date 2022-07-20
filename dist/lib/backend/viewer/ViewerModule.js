@@ -95,6 +95,7 @@ class ViewerModule {
                 text: application.getText(),
                 title: application.getTitle(context),
                 errMsg: null,
+                username: context.query.username,
             }
         });
     }
