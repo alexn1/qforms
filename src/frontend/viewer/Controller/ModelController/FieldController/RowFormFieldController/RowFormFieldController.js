@@ -27,7 +27,7 @@ class RowFormFieldController extends FieldController {
     }
     copyValueToModel() {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
-        this.model.setValue(this.getRow(), this.getValue());
+        this.getModel().setValue(this.getRow(), this.getValue());
     }
     _onChange(widgetValue) {
 
@@ -93,7 +93,7 @@ class RowFormFieldController extends FieldController {
         if (!this.state.parseError && this.isValidateOnBlur()) {
             this.validate();
             if (this.isValid()) {
-                this.getModel().setValue(this.getRow(), this.getValue());
+                this.copyValueToModel();
             }
         }
 
