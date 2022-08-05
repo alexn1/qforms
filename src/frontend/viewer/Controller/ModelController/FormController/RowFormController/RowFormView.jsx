@@ -12,7 +12,7 @@ class RowFormView extends FormView {
                         onClick={ctrl.onEditClick}
                         visible={ctrl.getMode() === 'view'}
                     >
-                        <EditIcon/>
+                        {/*<EditIcon/>*/}
                         <div>{text.form.edit}</div>
                     </Button>
                 }
@@ -24,7 +24,7 @@ class RowFormView extends FormView {
                         onClick={ctrl.onSaveClick}
                         visible={ctrl.getMode() === 'edit'}
                     >
-                        <SaveIcon/>
+                        {/*<SaveIcon/>*/}
                         <div>{text.form.save}</div>
                     </Button>
                 }
@@ -35,7 +35,7 @@ class RowFormView extends FormView {
                         visible={ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid}
                         onClick={ctrl.onCancelClick}
                     >
-                        <CancelIcon/>
+                        {/*<CancelIcon/>*/}
                         <div>{text.form.cancel}</div>
                     </Button>
                 }
@@ -47,7 +47,7 @@ class RowFormView extends FormView {
                         onClick={ctrl.onDiscardClick}
                         visible={ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)}
                     >
-                        <CloseIcon2/>
+                        {/*<CloseIcon2/>*/}
                         <div>{text.form.discard}</div>
                     </Button>
                 }
@@ -59,7 +59,7 @@ class RowFormView extends FormView {
                         onClick={ctrl.onRefreshClick}
                         visible={ctrl.getMode() === 'view'}
                     >
-                        <RefreshIcon/>
+                        {/*<RefreshIcon/>*/}
                         <div>{text.form.refresh}</div>
                     </Button>
                 }
