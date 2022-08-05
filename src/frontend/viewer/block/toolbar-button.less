@@ -1,5 +1,5 @@
-//@highlightColor: #398bce;
-@highlightColor: #2335D9;
+@import "../style/application";
+
 @backgroundColor: #fafafa;
 
 .toolbar-button {
@@ -22,7 +22,7 @@
   // regular style
   &:not(:disabled) {
     cursor: pointer;
-    color: @highlightColor;
+    color: @accentColor;
     &:hover {
       background-color: darken(@backgroundColor, 5%);
     }
@@ -39,18 +39,18 @@
   // default style
   &.default {
     color: white;
-    background-color: @highlightColor;
+    background-color: @accentColor;
     svg {
       fill: white;
     }
     &:hover {
-      background-color: darken(@highlightColor, 10%);
+      background-color: darken(@accentColor, 10%);
     }
     &:active {
-      background-color: darken(@highlightColor, 20%);
+      background-color: darken(@accentColor, 20%);
     }
     &:disabled {
-      background-color: lighten(@highlightColor, 30%);
+      background-color: lighten(@accentColor, 30%);
     }
   }
 
