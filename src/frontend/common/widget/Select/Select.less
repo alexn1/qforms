@@ -1,3 +1,5 @@
+@import "../../../viewer/style/application";
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Select {
   position: relative;
@@ -81,7 +83,8 @@
     background-color: #eee;
   }
   &.selected {
-    background-color: #398bce !important;
+    //background-color: #398bce !important;
+    background-color: @accentColor !important;
     color: white !important;
   }
 }
