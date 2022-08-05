@@ -6,8 +6,12 @@
 .RowFormComboBoxFieldView {
     display: flex;
     border-bottom: 1px solid #bbb;
+    &.error {
+        border-bottom: 1px solid red;
+    }
     &.error > .RowFormComboBoxFieldView__select > .Select__input {
-        background-color: #f2dede;
+        //background-color: #f2dede;
+        color: red;
     }
 }
 

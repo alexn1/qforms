@@ -3,8 +3,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView {
     border-bottom: 1px solid #bbb;
+    &.error {
+        border-bottom: 1px solid red;
+    }
     &.error .DropdownDatePicker__input {
-        background-color: #f2dede;
+        //background-color: #f2dede;
+        color: red;
     }
 }
 

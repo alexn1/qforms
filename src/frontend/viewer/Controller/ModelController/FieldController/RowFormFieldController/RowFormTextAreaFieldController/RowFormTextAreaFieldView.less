@@ -3,8 +3,15 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextAreaFieldView {
     border-bottom: 1px solid #bbb;
+    &.focus {
+        border-bottom: 1px solid @fieldFocusColor;
+    }
+    &.error {
+        border-bottom: 1px solid red;
+    }
     &.error > .RowFormTextAreaFieldView__textarea {
-        background-color: #f2dede;
+        //background-color: #f2dede;
+        color: red;
     }
 }
 

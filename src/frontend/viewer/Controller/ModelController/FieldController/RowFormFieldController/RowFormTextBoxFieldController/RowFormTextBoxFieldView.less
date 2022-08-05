@@ -4,8 +4,15 @@
 .RowFormTextBoxFieldView {
   position: relative;
   border-bottom: 1px solid #bbb;
+  &.focus {
+    border-bottom: 1px solid @fieldFocusColor;
+  }
+  &.error {
+    border-bottom: 1px solid red;
+  }
   &.error > .RowFormTextBoxFieldView__input {
-    background-color: #f2dede;
+    //background-color: #f2dede;
+    color: red;
   }
 }
 
