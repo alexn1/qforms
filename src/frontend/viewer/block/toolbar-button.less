@@ -1,14 +1,15 @@
-@defaultBackgroundColor: #398bce;
+@highlightColor: #398bce;
 @backgroundColor: #ddd;
 
 .toolbar-button {
-  min-width: 140px;
+  //min-width: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
   grid-gap: 3px;
   border: none;
-  background-color: @backgroundColor;
+  //background-color: @backgroundColor;
+  background-color: unset;
   height: 30px;
   text-transform: uppercase;
   font-weight: bold;
@@ -20,6 +21,7 @@
   // regular style
   &:not(:disabled) {
     cursor: pointer;
+    color: @highlightColor;
     &:hover {
       background-color: darken(@backgroundColor, 5%);
     }
@@ -36,18 +38,18 @@
   // default style
   &.default {
     color: white;
-    background-color: @defaultBackgroundColor;
+    background-color: @highlightColor;
     svg {
       fill: white;
     }
     &:hover {
-      background-color: darken(@defaultBackgroundColor, 10%);
+      background-color: darken(@highlightColor, 10%);
     }
     &:active {
-      background-color: darken(@defaultBackgroundColor, 20%);
+      background-color: darken(@highlightColor, 20%);
     }
     &:disabled {
-      background-color: lighten(@defaultBackgroundColor, 30%);
+      background-color: lighten(@highlightColor, 30%);
     }
   }
 

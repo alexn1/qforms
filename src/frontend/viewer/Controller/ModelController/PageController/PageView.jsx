@@ -82,7 +82,7 @@ class PageView extends ModelView {
             onClick={ctrl.onSaveAndCloseClick}
             enabled={ctrl.isValid() && (model.hasNew() || (ctrl.isChanged()))}
         >
-            <DoneIcon/>
+            {/*<DoneIcon/>*/}
             <div>{model.getApp().getText().page.saveAndClose}</div>
         </Button>;
     }
