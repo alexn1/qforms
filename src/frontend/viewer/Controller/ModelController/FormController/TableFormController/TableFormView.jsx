@@ -12,7 +12,7 @@ class TableFormView extends FormView {
                         onClick={ctrl.onNewClick}
                         enabled={!ctrl.parent.model.hasNew()}
                     >
-                        <AddIcon/>
+                        {/*<AddIcon/>*/}
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
                 }
@@ -23,7 +23,7 @@ class TableFormView extends FormView {
                     onClick={ctrl.onRefreshClick}
                     enabled={!ctrl.parent.model.hasNew()}
                 >
-                    <RefreshIcon/>
+                    {/*<RefreshIcon/>*/}
                     <div>{model.getApp().getText().form.refresh}</div>
                 </Button>
                 }
@@ -34,7 +34,7 @@ class TableFormView extends FormView {
                         onClick={ctrl.onDeleteClick}
                         enabled={ctrl.isRowSelected()}
                     >
-                        <DeleteIcon/>
+                        {/*<DeleteIcon/>*/}
                         <div>{model.getApp().getText().form.delete}</div>
                     </Button>
                 }

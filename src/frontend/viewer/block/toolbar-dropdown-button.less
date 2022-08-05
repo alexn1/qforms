@@ -1,13 +1,18 @@
-@backgroundColor: #ddd;
+@highlightColor: #398bce;
+@backgroundColor: #fafafa;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .toolbar-dropdown-button {
   .DropdownButton__button {
     height: 30px;
     border: none;
-    background-color: @backgroundColor;
+    //background-color: @backgroundColor;
+    background-color: unset;
     &:not(:disabled) {
       cursor: pointer;
+      svg {
+        fill: @highlightColor;
+      }
       &:hover {
         background-color: darken(@backgroundColor, 5%);
       }
