@@ -1,3 +1,4 @@
+@import "../../../../../style/application";
 @import "../../../../../style/field";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -19,6 +20,9 @@
   &.error > .RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
     //background-color: #f2dede !important;
     color: red;
+  }
+  &.editable:hover {
+    border-bottom: 1px solid @accentColor;
   }
 }
 
