@@ -10,8 +10,9 @@ class RowFormFieldView extends FieldView {
         const ctrl = this.getCtrl();
         return [
             ...super.getClassList(),
+            ...(ctrl.isEditable()                ? ['editable'] : []),
             ...(ctrl.isChanged()                ? ['changed'] : []),
-            ...(ctrl.getErrorMessage() !== null ? ['error']   : [])
+            ...(ctrl.getErrorMessage() !== null ? ['error']   : []),
         ];
     }
     onWidgetCreate = widget => {

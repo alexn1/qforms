@@ -1,8 +1,12 @@
+@import "../../../../../style/application";
 @import "../../../../../style/field";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView {
     border-bottom: 1px solid #bbb;
+    &.editable:hover {
+        border-bottom: 1px solid @accentColor;
+    }
     &.error {
         border-bottom: 1px solid red;
     }
