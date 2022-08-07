@@ -15,16 +15,27 @@
   padding: 0;
   margin: 0;
   display: flex;
+  border-bottom: 1px solid #bbb;
+  box-sizing: border-box;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab2__button {
-  background-color: #eee;
-  margin-right: 1px;
-  /*border-radius: 3px 3px 0 0;*/
+  //margin-right: 1px;
   cursor: pointer;
+  margin-bottom: -1px;
+  border-top: 2px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid #bbb;
+  &:not(.active) {
+    color: #555;
+  }
   &.active {
-    background-color: white;
+    border-top: 2px solid #bbb;
+    border-left: 1px solid #bbb;
+    border-right: 1px solid #bbb;
+    border-bottom: 1px solid white;
   }
   > span {
     margin          : 7px 10px 2px 10px;
@@ -54,17 +65,17 @@
     //border-radius: 3px 3px 0 0;
   }
   > li.active {
-    background-color: @activeColor;
+    //background-color: @activeColor;
+    border-top: 2px solid @accentColor;
     > span {
-      color: white;
+      //color: white;
     }
   }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Tab2.Tab-blue > div {
-  > div {
-    box-sizing: border-box;
-    border-top: 3px solid @activeColor;
-  }
+.Tab2.Tab-blue > .Tab2__pages > .Tab2__page {
+  //box-sizing: border-box;
+  // border-top: 3px solid @activeColor;
+  //border-top: 1px solid #bbb;
 }
