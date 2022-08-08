@@ -10,7 +10,7 @@ class RowFormRadioFieldView extends RowFormFieldView {
                 `${this.getCssBlockName()}__radio`,
                 ...(!this.getCtrl().isEditable() ? ['readOnly'] : [])
             ]}
-                    name={this.getCtrl().getModel().getName()}
+                    name={this.getCtrl().getModel().getFullName()}
                     items={this.getCtrl().getItems()}
                     value={this.getCtrl().getValueForWidget()}
                     readOnly={!this.getCtrl().isEditable()}
