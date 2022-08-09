@@ -29,16 +29,16 @@ class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
     }
-    _onChange(widgetValue) {
+    /*_onChange(widgetValue) {
 
-    }
+    }*/
     putValue(widgetValue) {
         // console.log('RowFormFieldController.putValue', widgetValue);
         this.onChange(widgetValue, false);
     }
     onChange = async (widgetValue, fireEvent = true) => {
         console.log('RowFormFieldController.onChange', JSON.stringify(widgetValue));
-        this._onChange(widgetValue);
+        // this._onChange(widgetValue);
 
         this.resetErrors();
         this.rerender();
