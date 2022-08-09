@@ -5,6 +5,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView {
+    height: @fieldHeight;
+    box-sizing: border-box;
     display: flex;
     border-bottom: 1px solid #bbb;
     &.editable:hover {
@@ -25,7 +27,7 @@
     .Select__input {
         background-color: white;
         border          : none;
-        height          : @fieldHeight;
+        height          : 100%;
         padding         : 0 5px;
         font-family: inherit;
         font-weight: inherit;
@@ -40,7 +42,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__edit-button {
-    height          : @fieldHeight;
     border          : none;
     background-color: #ccc;
     width           : @buttonWidth;
@@ -58,7 +59,6 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__create-button {
-    height          : @fieldHeight;
     border          : none;
     background-color: #ccc;
     width           : @buttonWidth;
