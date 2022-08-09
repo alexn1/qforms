@@ -4,6 +4,11 @@ class RowFormRadioFieldView extends RowFormFieldView {
         this.rerender();
         await this.getCtrl().onChange(widgetValue);
     }
+    onClick = async e => {
+        // console.log('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
+        let value = JSON.parse(e.currentTarget.dataset.value);
+        await this.getCtrl().onChange(this.getCtrl().valueToString(value));
+    }
     /*render() {
         return <div className={this.getCssClassNames()}>
             <Radio  classList={[
@@ -32,6 +37,7 @@ class RowFormRadioFieldView extends RowFormFieldView {
                               value={item.title || item.value}
                               disabled={!this.getCtrl().isEditable()}
                               data-value={JSON.stringify(item.value)}
+                              onClick={this.onClick}
                 />;
             })}
         </div>;
