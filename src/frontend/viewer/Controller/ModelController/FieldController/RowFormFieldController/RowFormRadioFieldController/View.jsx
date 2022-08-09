@@ -7,9 +7,9 @@ class RowFormRadioFieldView extends RowFormFieldView {
     render() {
         return <div className={this.getCssClassNames()}>
             <Radio  classList={[
-                `${this.getCssBlockName()}__radio`,
-                ...(!this.getCtrl().isEditable() ? ['readOnly'] : [])
-            ]}
+                        `${this.getCssBlockName()}__radio`,
+                        ...(!this.getCtrl().isEditable() ? ['readOnly'] : [])
+                    ]}
                     name={this.getCtrl().getModel().getFullName()}
                     items={this.getCtrl().getItems()}
                     value={this.getCtrl().getValueForWidget()}
