@@ -3,6 +3,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView {
+    height    : @fieldHeight;
+    box-sizing: border-box;
     border-bottom: 1px solid #bbb;
     &.editable:hover {
         border-bottom: 1px solid var(--accent-color);
@@ -18,9 +20,10 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView__date-picker {
-    width: 100%;
+    width : 100%;
+    height: 100%;
     > .DropdownDatePicker__input {
-        height      : @fieldHeight;
+        height      : 100%;
         border-width: 0;
         padding     : 0 5px 0 5px;
         font-family: inherit;
