@@ -1,6 +1,7 @@
 @import "../../../../../style/field";
 
 .RowFormCheckBoxFieldView {
+  height: @fieldHeight;
   > div.CheckBox {
     &.disabled {
       background-color: lightgoldenrodyellow;
@@ -9,7 +10,7 @@
   > input.CheckBox {
     display: block;
     margin: 0;
-    height: @fieldHeight;
+    height: 100%;
     accent-color: var(--accent-color);
     &:not(:disabled) {
       cursor: pointer;
