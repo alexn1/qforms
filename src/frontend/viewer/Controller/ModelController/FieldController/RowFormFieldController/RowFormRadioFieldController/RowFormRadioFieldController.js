@@ -5,7 +5,8 @@ class RowFormRadioFieldController extends RowFormFieldController {
     getItems() {
         try {
             return this.getRows().map(row => ({
-                value: this.valueToString(this.getModel().getValueValue(row)),
+                // value: this.valueToString(this.getModel().getValueValue(row)),
+                value: this.getModel().getValueValue(row),
                 title: this.getModel().getDisplayValue(row)
             }));
         } catch (err) {
