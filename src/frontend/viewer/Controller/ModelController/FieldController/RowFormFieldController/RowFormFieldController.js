@@ -238,5 +238,34 @@ class RowFormFieldController extends FieldController {
     isValidateOnBlur() {
         return this.getModel().validateOnBlur();
     }
+    onChangePure = async (value, fireEvent = true) => {
+        console.log('RowFormFieldController.onChangePure', JSON.stringify(value));
+
+        // value
+        this.setValue(value);
+        this.resetErrors();
+        this.rerender();
+
+        // validate
+        if (this.isValidateOnChange()) {
+            this.validate();
+            if (this.isValid()) {
+                this.copyValueToModel();
+            }
+        }
+
+        // changed
+        this.refreshChangedState();
+
+        // event
+        if (fireEvent) {
+            try {
+                this.emit('change', {value});
+            } catch (err) {
+                console.error('unhandled change event error:', this.getModel().getFullName(), err);
+            }
+            this.parent.onFieldChange({source: this});
+        }
+    }
 }
 window.QForms.RowFormFieldController = RowFormFieldController;
