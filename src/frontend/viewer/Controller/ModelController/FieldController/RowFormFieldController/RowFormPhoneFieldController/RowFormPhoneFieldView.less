@@ -3,6 +3,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormPhoneFieldView {
+  height : @fieldHeight;
+  box-sizing: border-box;
   position: relative;
   border-bottom: 1px solid #bbb;
   &.editable:hover {
@@ -23,7 +25,7 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormPhoneFieldView__input {
   width  : 100%;
-  height : @fieldHeight;
+  height : 100%;
   border : none;
   padding: 0 16px 0 5px;
   font-family: inherit;
