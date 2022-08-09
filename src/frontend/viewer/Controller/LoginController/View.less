@@ -1,4 +1,4 @@
-@backgroundColor: #398bce;
+@import "../../style/application";
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .LoginView {
@@ -84,13 +84,13 @@
   background-color: #398bce;
   color: white;
   &:hover {
-    background-color: darken(@backgroundColor, 10%);
+    background-color: darken(@accentColor, 10%);
   }
   &:active {
-    background-color: darken(@backgroundColor, 20%);
+    background-color: darken(@accentColor, 20%);
   }
   &:disabled {
-    background-color: lighten(@backgroundColor, 30%);
+    background-color: lighten(@accentColor, 30%);
     cursor: default;
   }
 }

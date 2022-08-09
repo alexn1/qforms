@@ -22,7 +22,7 @@
   // regular style
   &:not(:disabled) {
     cursor: pointer;
-    color: @accentColor;
+    color: var(--accent-color);
     &:hover {
       background-color: darken(@backgroundColor, 5%);
     }
@@ -39,7 +39,7 @@
   // default style
   &.default {
     color: white;
-    background-color: @accentColor;
+    background-color: var(--accent-color);
     svg {
       fill: white;
     }
