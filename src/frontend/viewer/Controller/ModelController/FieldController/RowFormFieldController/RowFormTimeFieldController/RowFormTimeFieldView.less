@@ -1,10 +1,12 @@
 @import "../../../../../style/field";
 
 .RowFormTimeFieldView {
-  position: relative;
+  height    : @fieldHeight;
+  box-sizing: border-box;
+  position  : relative;
   > input {
     width       : 100%;
-    height      : @fieldHeight;
+    height      : 100%;
     border-width: 0;
     padding     : 0 5px 0 5px;
     font-family : inherit;
