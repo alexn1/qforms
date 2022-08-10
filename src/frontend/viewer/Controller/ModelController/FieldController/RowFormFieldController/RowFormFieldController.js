@@ -202,14 +202,14 @@ class RowFormFieldController extends FieldController {
                 console.log(`FIELD CHANGED ${this.model.getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
-        }
-        if (this.model.isChanged(row)) {
-            let original = row[this.model.getAttr('column')];
-            let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
-            if (original) original = original.substr(0, 100);
-            if (modified) modified = modified.substr(0, 100);
-            console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
-            return true;
+            if (this.model.isChanged(row)) {
+                let original = row[this.model.getAttr('column')];
+                let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
+                if (original) original = original.substr(0, 100);
+                if (modified) modified = modified.substr(0, 100);
+                console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
+                return true;
+            }
         }
         return false;
     }
