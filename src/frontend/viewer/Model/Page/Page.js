@@ -108,14 +108,16 @@ class Page extends Model {
 
     hasRowForm() {
         for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm') return true;
+            if (form.getClassName() === 'RowForm' && form.getAttr('visible') === 'true') {
+                return true;
+            }
         }
         return false;
     }
 
     hasTableForm() {
         for (const form of this.forms) {
-            if (form.getClassName() === 'TableForm') {
+            if (form.getClassName() === 'TableForm' && form.getAttr('visible') === 'true') {
                 return true;
             }
         }
