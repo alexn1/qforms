@@ -44,7 +44,8 @@
     "field": {
         "selectValue": "select value",
         "fillValue": "fill in this field",
-        "timeNotValid": "time not valid"
+        "timeNotValid": "time not valid",
+        "clear": "Clear"
     },
     "error": {
         "notNumber": "not a number",
