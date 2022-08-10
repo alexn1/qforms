@@ -34,10 +34,16 @@ class PageView extends ModelView {
         });
     }
     getRowForms() {
-        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm');
+        return this.getCtrl().forms
+            .filter(form => form.getModel().getClassName() === 'RowForm')
+            .filter(form => form.isVisible())
+            ;
     }
     getTableForms() {
-        return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm');
+        return this.getCtrl().forms
+            .filter(form => form.getModel().getClassName() === 'TableForm')
+            .filter(form => form.isVisible())
+            ;
     }
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
@@ -174,7 +180,7 @@ class PageView extends ModelView {
         ];
     }
     renderForms2() {
-        return <Tab2 tabs={this.getFormTabs(this.getCtrl().forms)} classList={['Tab-blue', 'full']}/>;
+        return <Tab2 tabs={this.getFormTabs(this.getCtrl().forms.filter(form => form.isVisible()))} classList={['Tab-blue', 'full']}/>;
     }
     renderFooter() {
         const model = this.getCtrl().getModel();

@@ -67,5 +67,8 @@ class FormController extends ModelController {
         }
         return false;
     }
+    isVisible() {
+        return this.getModel().getAttr('visible') === 'true';
+    }
 }
 window.QForms.FormController = FormController;
