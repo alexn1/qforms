@@ -52,6 +52,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController {
     }*/
     onChange2 = (widgetValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
+        this.resetErrors();
         this.resetErrors2();
         this.rerender();
 
