@@ -94,5 +94,8 @@ class Application extends Model {
     getNodeEnv() {
         return this.data.nodeEnv;
     }
+    isDevelopment() {
+        return this.getNodeEnv() === 'development';
+    }
 }
 window.QForms.Application = Application;
