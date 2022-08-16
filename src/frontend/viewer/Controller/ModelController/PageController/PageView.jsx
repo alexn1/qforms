@@ -20,9 +20,9 @@ class PageView extends ModelView {
     }
     isToolbar() {
         const model = this.getCtrl().getModel();
-        return model.isSelectMode()
+        return model.hasActions()
             //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
-            || model.hasActions();
+            //|| model.isSelectMode();
     }
     getFormTabs(forms) {
         return forms.map(form => {
@@ -76,7 +76,7 @@ class PageView extends ModelView {
             onClick={ctrl.onSelectClick}
             enabled={!!ctrl.getSelectedRowKey()}
         >
-            <DoneIcon/>
+            {/*<DoneIcon/>*/}
             <div>{model.getApp().getText().page.select}</div>
         </Button>;
     }
@@ -115,7 +115,6 @@ class PageView extends ModelView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return <div className={`${this.getCssBlockName()}__toolbar`}>
-            {model.isSelectMode() && this.renderSelectButton()}
             {/*{model.isSelectMode() &&
                     <Button classList={['toolbar-button']}
                         title={model.getApp().getText().page.reset}
@@ -187,6 +186,7 @@ class PageView extends ModelView {
         return <div className={`${this.getCssBlockName()}__footer`}>
             {this.renderCloseButton()}
             {model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton()}
+            {model.isSelectMode() && this.renderSelectButton()}
         </div>;
     }
     render() {
