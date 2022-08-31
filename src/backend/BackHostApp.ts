@@ -406,7 +406,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, res, domain: this.getDomain(req)});
+                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
@@ -416,7 +416,7 @@ class BackHostApp {
                 }
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, res, domain: this.getDomain(req)});
+                    context = new Context({req, res, domain: this.getDomainFromRequest(req)});
                     await this.editorModule.handleEditorGet(req, res, context);
                 } else {
                     next();
@@ -492,14 +492,14 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, res, domain: this.getDomain(req)});
+                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, res, domain: this.getDomain(req)});
+                    context = new Context({req, res, domain: this.getDomainFromRequest(req)});
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 } else {
@@ -524,7 +524,7 @@ class BackHostApp {
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context({req, res, domain: this.getDomain(req)});
+                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);
@@ -648,7 +648,8 @@ class BackHostApp {
         }*/
     }
 
-    getDomain(req: any): string {
+    getDomainFromRequest(req: any): string {
+        if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
         const [host, port] = hostPort.split(':');
@@ -667,7 +668,7 @@ class BackHostApp {
                     stack  : req.body.stack,
                     data   : req ? JSON.stringify({
                         headers: req.headers,
-                        domain : this.getDomain(req),
+                        domain : this.getDomainFromRequest(req),
                         ...req.body.data,
                     }, null, 4) : null
                 });

@@ -351,7 +351,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.default({ req, res, domain: this.getDomain(req) });
+                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
@@ -363,7 +363,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.default({ req, res, domain: this.getDomain(req) });
+                    context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
                     await this.editorModule.handleEditorGet(req, res, context);
                 }
                 else {
@@ -443,7 +443,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.default({ req, res, domain: this.getDomain(req) });
+                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
@@ -451,7 +451,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.default({ req, res, domain: this.getDomain(req) });
+                    context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 }
@@ -479,7 +479,7 @@ class BackHostApp {
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context_1.default({ req, res, domain: this.getDomain(req) });
+                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);
@@ -594,7 +594,9 @@ class BackHostApp {
             console.error(err);
         }*/
     }
-    getDomain(req) {
+    getDomainFromRequest(req) {
+        if (!req)
+            throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort)
             throw new Error('no host');
@@ -611,7 +613,7 @@ class BackHostApp {
                     ip: req.body.ip || (req.headers['x-forwarded-for'] || req.connection.remoteAddress),
                     message: req.body.message,
                     stack: req.body.stack,
-                    data: req ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomain(req) }, req.body.data), null, 4) : null
+                    data: req ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4) : null
                 });
                 res.header('Access-Control-Allow-Origin', '*');
                 res.end('ok');
