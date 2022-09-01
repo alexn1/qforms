@@ -464,5 +464,17 @@ class Helper {
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
+    static createEmptyPromise() {
+        let _resolve, _reject;
+        const promise = new Promise(function (resolve, reject) {
+            _resolve = resolve;
+            _reject = reject;
+        });
+        // @ts-ignore
+        promise.resolve = _resolve;
+        // @ts-ignore
+        promise.reject = _reject;
+        return promise;
+    }
 }
 module.exports = Helper;
