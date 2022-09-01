@@ -46,12 +46,14 @@ class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     logErrorUrl: string;
+    creatingApplication: boolean;
 
     constructor(params: any = {}) {
         // console.log('BackHostApp.constructor');
         this.checkVersion();
         this.params = params;
         this.applications = {};
+        this.creatingApplication = false;
     }
 
     checkVersion() {
