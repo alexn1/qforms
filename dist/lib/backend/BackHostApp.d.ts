@@ -25,8 +25,8 @@ declare class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     logErrorUrl: string;
-    creatingApplication: boolean;
-    appQueue: Array<Promise<any>>;
+    creatingApplication: any;
+    appQueue: any;
     constructor(params?: any);
     checkVersion(): void;
     run(): Promise<void>;
