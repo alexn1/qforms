@@ -7,8 +7,8 @@ declare class Context {
     querytime: any;
     constructor(options: any);
     getRoute(): string;
-    getUser(): any;
     getVirtualPath(): string;
+    getUser(): any;
     getClientTimezoneOffset(): number;
     getTimeOffset(): number;
     getCookies(): any;
@@ -16,9 +16,9 @@ declare class Context {
     getParams(): any;
     getReq(): any;
     getRes(): any;
-    getDomain(): any;
     getBody(): any;
     getModule(): string;
+    getDomain(): any;
     getAppDirName(): string;
     getAppFileName(): string;
     getEnv(): string;

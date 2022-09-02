@@ -9,7 +9,6 @@ class Context {
     constructor(options) {
         // console.log('Context', options);
         this.options = options;
-        if (!options.domain) throw new Error('no domain');
 
         // query
         this.query  = {
@@ -36,7 +35,10 @@ class Context {
         this.querytime = {params: {}};
     }
     getRoute(): string {
-        return `${this.getDomain()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
+        return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
+    }
+    getVirtualPath(): string {
+        return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
     }
     getUser(): any {
         const route = this.getRoute();
@@ -44,9 +46,6 @@ class Context {
             return this.getReq().session.user[route];
         }
         return null;
-    }
-    getVirtualPath(): string {
-        return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}`;
     }
     getClientTimezoneOffset(): number {
         if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
@@ -90,9 +89,6 @@ class Context {
     getRes(): any {
         return this.options.res;
     }
-    getDomain() {
-        return this.options.domain;
-    }
     getBody(): any {
         return this.getReq().body;
     }
@@ -101,6 +97,12 @@ class Context {
             return this.options.module;
         }
         return this.getReq().params.module;
+    }
+    getDomain() {
+        if (this.options.domain) {
+            return this.options.domain;
+        }
+        return this.getReq().params.domain;
     }
     getAppDirName(): string {
         if (this.options.appDirName) {

@@ -198,9 +198,9 @@ class BackHostApp {
         this.express.get('/monitor' , this.monitorGet.bind(this));
 
         // viewer/editor module
-        this.express.get( '/:module/:appDirName/:appFileName/:env/' , this.moduleGet.bind(this));
-        this.express.post('/:module/:appDirName/:appFileName/:env/' , this.modulePost.bind(this));
-        this.express.get( '/:module/:appDirName/:appFileName/:env/*', this.moduleGetFile.bind(this));
+        this.express.get( '/:module/:appDirName/:appFileName/:env/:domain/' , this.moduleGet.bind(this));
+        this.express.post('/:module/:appDirName/:appFileName/:env/:domain/' , this.modulePost.bind(this));
+        this.express.get( '/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
 
         // handle static for index and monitor
         this.express.use(express.static(this.frontendDirPath));
@@ -678,7 +678,9 @@ class BackHostApp {
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
         const [host, port] = hostPort.split(':');
-        return host;
+        const [domain] = host.split('.');
+        if (!domain) throw new Error('trouble getting a domain');
+        return domain;
     }
 
     async postError(req, res, next) {

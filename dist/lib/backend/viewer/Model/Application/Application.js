@@ -42,12 +42,12 @@ class Application extends Model_1.default {
         return this.hostApp;
     }
     async getLinks(context) {
-        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
+        const virtualPath = context.getVirtualPath();
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
-        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
+        const virtualPath = context.getVirtualPath();
         return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${virtualPath}/${src}`);
     }

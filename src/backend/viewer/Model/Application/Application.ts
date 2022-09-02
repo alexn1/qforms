@@ -70,13 +70,13 @@ class Application extends Model {
     }
 
     async getLinks(context: Context): Promise<string[]> {
-        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
+        const virtualPath = context.getVirtualPath();
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${virtualPath}/${src}`);
     }
 
     async getScripts(context: Context): Promise<string[]> {
-        const virtualPath = `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}`;
+        const virtualPath = context.getVirtualPath();
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${virtualPath}/${src}`);
     }
