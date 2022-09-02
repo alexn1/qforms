@@ -1,5 +1,6 @@
 class WebSocketClient {
     constructor(options = {}) {
+        // console.log('WebSocketClient.constructor', options);
         this.options = options;
         if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');

@@ -712,7 +712,7 @@ class BackHostApp {
     alias(
         method: string,
         path: string,
-        [module, appDirName, appFileName, env],
+        [module, appDirName, appFileName, env, domain],
         cb: string,
         query?: any
     ) {
@@ -720,7 +720,12 @@ class BackHostApp {
             req.params.module      = module;
             req.params.appDirName  = appDirName;
             req.params.appFileName = appFileName;
-            req.params.env         = env;
+            if (env) {
+                req.params.env = env;
+            }
+            if (domain) {
+                req.params.domain = domain;
+            }
             if (query) {
                 for (const name in query) {
                     req.query[name] = query[name] ? query[name] : req.params[name];

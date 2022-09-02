@@ -647,12 +647,17 @@ class BackHostApp {
     }
     initCustomRoutes() {
     }
-    alias(method, path, [module, appDirName, appFileName, env], cb, query) {
+    alias(method, path, [module, appDirName, appFileName, env, domain], cb, query) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
             req.params.appDirName = appDirName;
             req.params.appFileName = appFileName;
-            req.params.env = env;
+            if (env) {
+                req.params.env = env;
+            }
+            if (domain) {
+                req.params.domain = domain;
+            }
             if (query) {
                 for (const name in query) {
                     req.query[name] = query[name] ? query[name] : req.params[name];

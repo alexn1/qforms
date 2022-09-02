@@ -64,7 +64,7 @@ declare class BackHostApp {
     postError(req: any, res: any, next: any): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
-    alias(method: string, path: string, [module, appDirName, appFileName, env]: [any, any, any, any], cb: string, query?: any): void;
+    alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [any, any, any, any, any], cb: string, query?: any): void;
     getPostAlias(path: any, arr: any, query: any): void;
     getNodeEnv(): string;
     isDevelopment(): boolean;
