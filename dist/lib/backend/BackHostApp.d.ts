@@ -25,7 +25,6 @@ declare class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     logErrorUrl: string;
-    creatingApplication: any;
     appQueue: any;
     constructor(params?: any);
     checkVersion(): void;

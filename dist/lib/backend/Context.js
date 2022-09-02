@@ -3,7 +3,6 @@ class Context {
     constructor(options) {
         // console.log('Context', options);
         this.options = options;
-        // if (!options.domain) throw new Error('no domain');
         // query
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
         // params

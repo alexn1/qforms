@@ -32,7 +32,6 @@ class BackHostApp {
         this.checkVersion();
         this.params = params;
         this.applications = {};
-        this.creatingApplication = {};
         this.appQueue = {};
     }
     checkVersion() {
@@ -173,16 +172,14 @@ class BackHostApp {
             return application;
         }
         // if creating application
-        if (this.creatingApplication[context.getRoute()]) {
+        if (Array.isArray(this.appQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
             const promise = Helper_1.default.createEmptyPromise();
             this.appQueue[context.getRoute()].push(promise);
             return promise;
         }
-        this.creatingApplication[context.getRoute()] = true;
         this.appQueue[context.getRoute()] = [];
         const app = this.applications[context.getRoute()] = await this.createApplication(context);
-        this.creatingApplication[context.getRoute()] = false;
         console.log('application created, start resolve loop', context.getRoute(), this.appQueue[context.getRoute()].length);
         for (const p of this.appQueue[context.getRoute()]) {
             // @ts-ignore
