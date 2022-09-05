@@ -337,6 +337,9 @@ class ApplicationController extends ModelController {
         }*/
         return result;
     }
+    getDomain() {
+        return this.getModel().getDomain();
+    }
 }
 
 window.QForms.ApplicationController = ApplicationController;

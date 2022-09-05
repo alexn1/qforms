@@ -65,7 +65,7 @@ class Application extends Model {
         return this.data.user;
     }
     getDomain() {
-        return this.data.domain;
+        return this.getAttr('domain');
     }
     getVirtualPath() {
         return this.data.virtualPath;
