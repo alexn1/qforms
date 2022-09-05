@@ -120,7 +120,7 @@ class BackHostApp {
     initExpressServer() {
         // middlewares
         this.express.use(bodyParser.json({
-            limit: '10mb',
+            limit: '20mb',
             reviver: Helper_1.default.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
