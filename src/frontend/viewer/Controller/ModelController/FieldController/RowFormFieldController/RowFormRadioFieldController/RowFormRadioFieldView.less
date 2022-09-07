@@ -41,15 +41,19 @@
     background-color: #eee;
     color: #bbb;
     &.selected {
-      background-color: #ddd;
-      color: #777;
+      //background-color: #ddd;
+      //color: #777;
+      background-color: var(--accent-color-disabled);
+      color: white;
     }
   }
   &:not(:disabled) {
     cursor: pointer;
     &.selected {
-      background-color: #eee;
-      color: black;
+      //background-color: #eee;
+      //color: black;
+      background-color: var(--accent-color);
+      color: white;
     }
     &:not(.selected) {
       &:hover {
