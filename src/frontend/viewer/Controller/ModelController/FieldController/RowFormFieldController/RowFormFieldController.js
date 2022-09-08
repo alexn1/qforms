@@ -37,7 +37,7 @@ class RowFormFieldController extends FieldController {
         this.onChange(widgetValue, false);
     }
     onChange = async (widgetValue, fireEvent = true) => {
-        console.log('RowFormFieldController.onChange', JSON.stringify(widgetValue.substring(0, 100)));
+        console.log('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
         // this._onChange(widgetValue);
 
         this.resetErrors();
