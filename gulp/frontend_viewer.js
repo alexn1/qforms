@@ -8,6 +8,7 @@ const sourcemaps = require('gulp-sourcemaps');
 const hash = require('gulp-hash-filename');
 const myOrder = require('./myOrder');
 const cleanCSS = require('gulp-clean-css');
+const babelConfig = require('./babel.config.json');
 
 const BUILD_PATH = './dist';
 const SRC_PATH   = './src';
@@ -27,7 +28,7 @@ function frontend_viewer_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/viewer/**/*.jsx'))
         .pipe(sourcemaps.init())
         .pipe(myOrder())
-        .pipe(babel())
+        .pipe(babel(babelConfig))
         .pipe(concat('viewer-jsx.js'))
         .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))

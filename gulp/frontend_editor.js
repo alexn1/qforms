@@ -8,6 +8,7 @@ const babel      = require('gulp-babel');
 const hash = require('gulp-hash-filename');
 const myOrder = require('./myOrder');
 const cleanCSS = require('gulp-clean-css');
+const babelConfig = require('./babel.config.json');
 
 const SRC_PATH   = './src';
 const BUILD_PATH = './dist';
@@ -27,7 +28,7 @@ function frontend_editor_jsx() {
     return gulp.src(path.join(SRC_PATH, 'frontend/editor/**/*.jsx'))
         .pipe(myOrder())
         .pipe(sourcemaps.init())
-        .pipe(babel())
+        .pipe(babel(babelConfig))
         .pipe(concat('editor-jsx.js'))
         .pipe(uglify())
         .pipe(hash({"format": "{name}.{hash}{ext}"}))
