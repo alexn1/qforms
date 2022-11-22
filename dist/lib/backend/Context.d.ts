@@ -1,0 +1,33 @@
+declare class Context {
+    options: any;
+    query: any;
+    params: any;
+    files: any;
+    connections: any;
+    querytime: any;
+    constructor(options: any);
+    getRoute(): string;
+    getVirtualPath(): string;
+    getUser(): any;
+    getClientTimezoneOffset(): number;
+    getTimeOffset(): number;
+    getCookies(): any;
+    getQuery(): any;
+    getParams(): any;
+    getReq(): any;
+    getRes(): any;
+    getBody(): any;
+    getModule(): string;
+    getDomain(): any;
+    getAppDirName(): string;
+    getAppFileName(): string;
+    getEnv(): string;
+    getUri(): string;
+    getIp(): string;
+    getHost(): string;
+    getProtocol(): string;
+    setVersionHeaders(platformVersion: string, appVersion: string): void;
+    setParam(name: string, value: any): void;
+    destroy(): void;
+}
+export = Context;
