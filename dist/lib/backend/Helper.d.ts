@@ -45,5 +45,6 @@ declare class Helper {
     static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any): any;
     static createEmptyPromise(): Promise<unknown>;
+    static test(): void;
 }
 export = Helper;

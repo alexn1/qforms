@@ -493,6 +493,9 @@ class Helper {
         promise.reject  = _reject;
         return promise;
     }
+    static test() {
+        console.log('Helper.test');
+    }
 }
 
 export = Helper;
