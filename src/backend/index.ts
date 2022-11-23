@@ -1,5 +1,3 @@
-// backend
-
 import {Result} from './Result';
 import {Context} from './Context';
 
@@ -35,7 +33,6 @@ module.exports.TextBoxField                      = require('./viewer/Model/Field
 module.exports.PhoneField                        = require('./viewer/Model/Field/PhoneField/PhoneField');
 module.exports.PasswordField                     = require('./viewer/Model/Field/PasswordField/PasswordField');
 module.exports.RadioField                        = require('./viewer/Model/Field/RadioField/RadioField');
-
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
@@ -67,7 +64,6 @@ module.exports.TextBoxFieldEditor                = require('./editor/Editor/Fiel
 module.exports.PhoneFieldEditor                  = require('./editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor');
 module.exports.PasswordFieldEditor               = require('./editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor');
 module.exports.RadioFieldEditor                  = require('./editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor');
-
 module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
@@ -80,7 +76,6 @@ module.exports.PostgreSqlDatabaseEditor          = require('./editor/Editor/Data
 module.exports.TableEditor                       = require('./editor/Editor/TableEditor/TableEditor');
 module.exports.ParamEditor                       = require('./editor/Editor/ParamEditor/ParamEditor');
 module.exports.ColumnEditor                      = require('./editor/Editor/ColumnEditor/ColumnEditor');
-
 // module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
 module.exports.DatabaseEditorController          = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
@@ -95,6 +90,3 @@ module.exports.ApplicationEditorController       = require('./editor/EditorContr
 module.exports.FieldEditorController             = require('./editor/EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./editor/EditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController              = require('./editor/EditorController/PageEditorController/PageEditorController');
-
-
-export = module.exports;

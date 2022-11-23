@@ -1,5 +1,5 @@
 "use strict";
-// backend
+Object.defineProperty(exports, "__esModule", { value: true });
 const Result_1 = require("./Result");
 const Context_1 = require("./Context");
 module.exports.BackHostApp = require('./BackHostApp');
@@ -89,4 +89,3 @@ module.exports.ApplicationEditorController = require('./editor/EditorController/
 module.exports.FieldEditorController = require('./editor/EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController = require('./editor/EditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController = require('./editor/EditorController/PageEditorController/PageEditorController');
-module.exports = module.exports;
