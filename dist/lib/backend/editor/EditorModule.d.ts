@@ -1,4 +1,4 @@
-import Context = require("../Context");
+import { Context } from "../Context";
 import BackHostApp = require('../BackHostApp');
 declare class EditorModule {
     hostApp: BackHostApp;

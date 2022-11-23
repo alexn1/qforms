@@ -1,4 +1,4 @@
-import Context = require("../../../../Context");
+import {Context} from "../../../../Context";
 
 const mysql = require('mysql');
 import Database = require('../Database');

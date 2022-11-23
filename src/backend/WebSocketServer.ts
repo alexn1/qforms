@@ -1,5 +1,5 @@
 import BackHostApp = require("./BackHostApp");
-import Context = require("./Context");
+import {Context} from "./Context";
 
 const ws = require('ws');
 const url = require('url');

@@ -1,5 +1,5 @@
 import Database = require('../Database');
-import Context = require('../../../../Context');
+import { Context } from '../../../../Context';
 declare class PostgreSqlDatabase extends Database {
     pool: any;
     constructor(data: any, parent?: any);

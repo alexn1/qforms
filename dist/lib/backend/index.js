@@ -1,9 +1,10 @@
 "use strict";
 // backend
 const Result_1 = require("./Result");
+const Context_1 = require("./Context");
 module.exports.BackHostApp = require('./BackHostApp');
 module.exports.BaseModel = require('./BaseModel');
-module.exports.Context = require('./Context');
+module.exports.Context = Context_1.Context;
 module.exports.Helper = require('./Helper');
 module.exports.Converter = require('./Converter');
 module.exports.JsonFile = require('./JsonFile');

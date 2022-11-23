@@ -1,4 +1,4 @@
-import Context = require("../Context");
+import {Context} from "../Context";
 
 const path = require('path');
 const pkg     = require('../../../package.json');

@@ -1,4 +1,4 @@
-import Context = require("../../../Context");
+import {Context} from "../../../Context";
 import Application = require("../../../viewer/Model/Application/Application");
 const EditorController = require('../EditorController');
 

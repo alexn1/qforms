@@ -1,6 +1,6 @@
 import DataSource = require('../DataSource');
 import Table = require('../../Table/Table');
-import Context = require('../../../../Context');
+import { Context } from '../../../../Context';
 import { Result } from "../../../../Result";
 declare class SqlDataSource extends DataSource {
     table: Table;

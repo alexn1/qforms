@@ -1,5 +1,5 @@
 "use strict";
-const Context = require("./Context");
+const Context_1 = require("./Context");
 const ws = require('ws');
 const url = require('url');
 class WebSocketServer {
@@ -33,7 +33,7 @@ class WebSocketServer {
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
         const [appDirName, appFileName, env, domain] = parts.query.route.split('/');
-        const context = new Context({ module: 'viewer', appDirName, appFileName, env, domain });
+        const context = new Context_1.Context({ module: 'viewer', appDirName, appFileName, env, domain });
         const application = await this.getHostApp().createApplicationIfNotExists(context);
         application.addClient(webSocket);
         // say hello

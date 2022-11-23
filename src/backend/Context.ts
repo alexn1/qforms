@@ -1,4 +1,4 @@
-class Context {
+export class Context {
     options: any;
     query: any;
     params: any;
@@ -144,5 +144,3 @@ class Context {
     destroy(): void {
     }
 }
-
-export = Context;

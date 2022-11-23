@@ -1,4 +1,4 @@
-import Context = require('../backend/Context');
+import { Context } from '../backend/Context';
 import Application = require('./viewer/Model/Application/Application');
 import { AppInfo } from './AppInfo';
 import MonitorModule = require('./monitor/MonitorModule');

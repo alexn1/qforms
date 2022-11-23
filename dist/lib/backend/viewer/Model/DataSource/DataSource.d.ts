@@ -1,6 +1,6 @@
 import { Result } from "../../../Result";
 import Model = require('../Model');
-import Context = require('../../../Context');
+import { Context } from '../../../Context';
 import Application = require('../Application/Application');
 import Database = require('../Database/Database');
 import Form = require('../Form/Form');

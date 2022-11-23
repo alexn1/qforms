@@ -6,7 +6,7 @@ import Database = require('../Database/Database');
 import DataSource = require('../DataSource/DataSource');
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
-import Context = require('../../../Context');
+import { Context } from '../../../Context';
 import JsonFile = require('../../../JsonFile');
 import { Result } from "../../../Result";
 declare class Application extends Model {

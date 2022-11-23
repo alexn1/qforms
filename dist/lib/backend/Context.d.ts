@@ -1,4 +1,4 @@
-declare class Context {
+export declare class Context {
     options: any;
     query: any;
     params: any;
@@ -30,4 +30,3 @@ declare class Context {
     setParam(name: string, value: any): void;
     destroy(): void;
 }
-export = Context;

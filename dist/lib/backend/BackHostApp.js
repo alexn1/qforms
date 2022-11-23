@@ -10,7 +10,7 @@ const http = require('http');
 const colors = require('colors/safe');
 const Helper = require("./Helper");
 const PostgreSqlDatabase = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
-const Context = require("../backend/Context");
+const Context_1 = require("../backend/Context");
 const Application = require("./viewer/Model/Application/Application");
 const MonitorModule = require("./monitor/MonitorModule");
 const IndexModule = require("./index/IndexModule");
@@ -364,7 +364,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
@@ -376,7 +376,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
                     await this.editorModule.handleEditorGet(req, res, context);
                 }
                 else {
@@ -456,7 +456,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
@@ -464,7 +464,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 }
@@ -492,7 +492,7 @@ class BackHostApp {
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);

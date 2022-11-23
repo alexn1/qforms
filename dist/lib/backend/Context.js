@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Context = void 0;
 class Context {
     constructor(options) {
         // console.log('Context', options);
@@ -118,4 +120,4 @@ class Context {
     destroy() {
     }
 }
-module.exports = Context;
+exports.Context = Context;

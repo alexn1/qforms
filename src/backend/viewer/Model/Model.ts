@@ -1,4 +1,4 @@
-import Context = require("../../Context");
+import {Context} from "../../Context";
 import BaseModel = require('../../BaseModel');
 
 class Model extends BaseModel {

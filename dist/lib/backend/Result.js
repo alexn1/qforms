@@ -65,4 +65,3 @@ class Result {
     }
 }
 exports.Result = Result;
-// export = Result;

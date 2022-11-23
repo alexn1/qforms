@@ -2,7 +2,7 @@ import Model = require('../Model');
 import Param = require('../Param/Param');
 import Application = require('../Application/Application');
 import Table = require('../Table/Table');
-import Context = require('../../../Context');
+import { Context } from '../../../Context';
 declare class Database extends Model {
     tables: Table[];
     constructor(data: any, parent?: any);
