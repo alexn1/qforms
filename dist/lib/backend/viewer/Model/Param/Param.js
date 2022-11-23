@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Model_1 = __importDefault(require("../Model"));
-class Param extends Model_1.default {
+const Model = require("../Model");
+class Param extends Model {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');

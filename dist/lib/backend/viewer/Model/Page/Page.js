@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
-const Model_1 = __importDefault(require("../Model"));
-const MyError_1 = __importDefault(require("../../../MyError"));
-class Page extends Model_1.default {
+const Model = require("../Model");
+const MyError = require("../../../MyError");
+class Page extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
@@ -39,7 +36,7 @@ class Page extends Model_1.default {
         console.log('Page.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.default({
+        throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

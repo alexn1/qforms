@@ -1,5 +1,5 @@
-import Model from '../Model';
+import Model = require('../Model');
 declare class PageLink extends Model {
-    getPageFilePath(): string;
+    getPageFilePath(): any;
 }
 export = PageLink;

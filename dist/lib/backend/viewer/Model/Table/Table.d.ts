@@ -1,6 +1,6 @@
-import Model from '../Model';
-import Column from '../Column/Column';
-import Application from '../Application/Application';
+import Model = require('../Model');
+import Column = require('../Column/Column');
+import Application = require('../Application/Application');
 declare class Table extends Model {
     columns: Column[];
     constructor(data: any, parent: any);

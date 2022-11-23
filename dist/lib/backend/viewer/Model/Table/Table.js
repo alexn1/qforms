@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Model_1 = __importDefault(require("../Model"));
-class Table extends Model_1.default {
+const Model = require("../Model");
+class Table extends Model {
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
