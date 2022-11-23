@@ -1,12 +1,12 @@
-import SqlDataSource from "../DataSource/SqlDataSource/SqlDataSource";
+import SqlDataSource = require("../DataSource/SqlDataSource/SqlDataSource");
 
 const path = require('path');
 
-import Model from '../Model';
-import Application from '../Application/Application';
-import Page from '../Page/Page';
-import Form from '../Form/Form';
-import Column from "../Column/Column";
+import Model = require('../Model');
+import Application = require('../Application/Application');
+import Page = require('../Page/Page');
+import Form = require('../Form/Form');
+import Column = require("../Column/Column");
 
 const Helper = require('../../../Helper');
 

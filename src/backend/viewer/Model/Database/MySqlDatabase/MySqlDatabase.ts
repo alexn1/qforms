@@ -1,7 +1,7 @@
-import Context from "../../../../Context";
+import Context = require("../../../../Context");
 
 const mysql = require('mysql');
-import Database from '../Database';
+import Database = require('../Database');
 
 class MySqlDatabase extends Database {
     pool: any;

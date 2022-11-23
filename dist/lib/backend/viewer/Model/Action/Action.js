@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Model_1 = __importDefault(require("../Model"));
-class Action extends Model_1.default {
+const Model = require("../Model");
+class Action extends Model {
     static async create(data, parent) {
         return new Action(data, parent);
     }

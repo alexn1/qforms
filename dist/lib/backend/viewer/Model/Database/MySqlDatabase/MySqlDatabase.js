@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const mysql = require('mysql');
-const Database_1 = __importDefault(require("../Database"));
-class MySqlDatabase extends Database_1.default {
+const Database = require("../Database");
+class MySqlDatabase extends Database {
     constructor(data, parent) {
         super(data, parent);
         //console.log('new MySqlDatabase');
@@ -72,7 +69,7 @@ class MySqlDatabase extends Database_1.default {
     }*/
     async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
-        Database_1.default.checkParams(query, params);
+        Database.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -94,7 +91,7 @@ class MySqlDatabase extends Database_1.default {
     }
     async queryResult(context, query, params = null) {
         console.log('MySqlDatabase.queryResult', query, params);
-        Database_1.default.checkParams(query, params);
+        Database.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {

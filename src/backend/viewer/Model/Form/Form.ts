@@ -1,12 +1,12 @@
 const path  = require('path');
 
-import Model from '../Model';
-import DataSource from '../DataSource/DataSource';
-import Action from '../Action/Action';
-import Field from '../Field/Field';
-import Page from '../Page/Page'
-import Application from '../Application/Application';
-import MyError from '../../../MyError';
+import Model = require('../Model');
+import DataSource = require('../DataSource/DataSource');
+import Action = require('../Action/Action');
+import Field = require('../Field/Field');
+import Page = require('../Page/Page');
+import Application = require('../Application/Application');
+import MyError = require('../../../MyError');
 
 class Form extends Model {
     dataSources: DataSource[];

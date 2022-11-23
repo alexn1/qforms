@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 
 class PasswordField extends Field {
     fillAttributes(response: any): void {

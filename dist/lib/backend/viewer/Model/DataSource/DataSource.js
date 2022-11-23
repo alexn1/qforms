@@ -1,15 +1,12 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
-const Model_1 = __importDefault(require("../Model"));
-const Helper_1 = __importDefault(require("../../../Helper"));
-const Page_1 = __importDefault(require("../Page/Page"));
-const Form_1 = __importDefault(require("../Form/Form"));
-const RowForm_1 = __importDefault(require("../Form/RowForm/RowForm"));
-const TableForm_1 = __importDefault(require("../Form/TableForm/TableForm"));
-class DataSource extends Model_1.default {
+const Model = require("../Model");
+const Helper = require("../../../Helper");
+const Page = require("../Page/Page");
+const Form = require("../Form/Form");
+const RowForm = require("../Form/RowForm/RowForm");
+const TableForm = require("../Form/TableForm/TableForm");
+class DataSource extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
@@ -28,9 +25,9 @@ class DataSource extends Model_1.default {
         this.keyColumns = this.getKeyColumns();
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper_1.default.exists(jsonFilePath);
+        const exists = await Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper_1.default.readTextFile(jsonFilePath);
+            const content = await Helper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }
@@ -101,7 +98,7 @@ class DataSource extends Model_1.default {
         }
         else {
             for (const name in row) {
-                row[name] = Helper_1.default.encodeValue(row[name]);
+                row[name] = Helper.encodeValue(row[name]);
             }
         }
     }
@@ -142,7 +139,7 @@ class DataSource extends Model_1.default {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof Page_1.default) {
+        else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
         }
         else {
@@ -211,16 +208,16 @@ class DataSource extends Model_1.default {
         return this.rows;
     }
     isOnForm() {
-        return this.parent instanceof Form_1.default;
+        return this.parent instanceof Form;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();
     }
     isDefaultOnRowForm() {
-        return this.getName() === 'default' && this.parent instanceof RowForm_1.default;
+        return this.getName() === 'default' && this.parent instanceof RowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.parent instanceof TableForm_1.default;
+        return this.getName() === 'default' && this.parent instanceof TableForm;
     }
     getDatabase() {
         const databaseName = this.getAttr('database');

@@ -1,9 +1,9 @@
-import Result from "../../../Result";
-import Model from '../Model';
-import Context from '../../../Context';
-import Application from '../Application/Application';
-import Database from '../Database/Database';
-import Form from '../Form/Form';
+import Result = require("../../../Result");
+import Model = require('../Model');
+import Context = require('../../../Context');
+import Application = require('../Application/Application');
+import Database = require('../Database/Database');
+import Form = require('../Form/Form');
 declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];

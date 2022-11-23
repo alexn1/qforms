@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 
 class ComboBoxField extends Field {
     fillAttributes(response: any): void {

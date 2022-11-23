@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Form_1 = __importDefault(require("../Form"));
-class RowForm extends Form_1.default {
+const Form = require("../Form");
+class RowForm extends Form {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());

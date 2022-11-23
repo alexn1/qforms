@@ -1,8 +1,8 @@
-import Model from '../Model';
-import Param from '../Param/Param';
-import Application from '../Application/Application';
-import Table from '../Table/Table';
-import Context from '../../../Context';
+import Model = require('../Model');
+import Param = require('../Param/Param');
+import Application = require('../Application/Application');
+import Table = require('../Table/Table');
+import Context = require('../../../Context');
 
 class Database extends Model {
     tables: Table[];

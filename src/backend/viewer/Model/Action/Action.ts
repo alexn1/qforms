@@ -1,4 +1,4 @@
-import Model from '../Model';
+import Model = require('../Model');
 
 class Action extends Model {
     static async create(data, parent): Promise<Action> {

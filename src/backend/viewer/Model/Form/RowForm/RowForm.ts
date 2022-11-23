@@ -1,4 +1,4 @@
-import Form from '../Form';
+import Form = require('../Form');
 
 class RowForm extends Form {
 

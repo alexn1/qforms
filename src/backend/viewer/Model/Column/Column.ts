@@ -1,5 +1,5 @@
-import Model from '../Model';
-import Application from '../Application/Application';
+import Model = require('../Model');
+import Application = require('../Application/Application');
 
 class Column extends Model {
 

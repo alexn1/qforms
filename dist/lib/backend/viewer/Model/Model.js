@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const BaseModel_1 = __importDefault(require("../../BaseModel"));
+const BaseModel = require("../../BaseModel");
 const backend = require('../../../backend');
-class Model extends BaseModel_1.default {
+class Model extends BaseModel {
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = [];
@@ -55,8 +52,8 @@ class Model extends BaseModel_1.default {
             this[colName].push(model);
         }
         catch (err) {
-            const name = BaseModel_1.default.getName(data);
-            const className = BaseModel_1.default.getClassName(data);
+            const name = BaseModel.getName(data);
+            const className = BaseModel.getClassName(data);
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
         }
@@ -77,7 +74,7 @@ class Model extends BaseModel_1.default {
     }
     async createChildModel(colName, data) {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
-        const className = BaseModel_1.default.getClassName(data);
+        const className = BaseModel.getClassName(data);
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class)
             throw new Error(`no class ${className}`);

@@ -1,6 +1,6 @@
-import Context from "../Context";
-import BackHostApp from '../BackHostApp';
-import Application from "./Model/Application/Application";
+import Context = require("../Context");
+import BackHostApp = require('../BackHostApp');
+import Application = require("./Model/Application/Application");
 declare class ViewerModule {
     hostApp: BackHostApp;
     css: string[];

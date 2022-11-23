@@ -1,8 +1,8 @@
 const { Pool, Client } = require('pg');
 const colors = require('colors');
 
-import Database from '../Database';
-import Context from '../../../../Context';
+import Database = require('../Database');
+import Context = require('../../../../Context');
 
 class PostgreSqlDatabase extends Database {
     pool: any;

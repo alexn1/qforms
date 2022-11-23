@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const DataSource_1 = __importDefault(require("../DataSource"));
-const Helper_1 = __importDefault(require("../../../../Helper"));
-const Result_1 = __importDefault(require("../../../../Result"));
-class SqlDataSource extends DataSource_1.default {
+const DataSource = require("../DataSource");
+const Helper = require("../../../../Helper");
+const Result = require("../../../../Result");
+class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
@@ -152,7 +149,7 @@ class SqlDataSource extends DataSource_1.default {
         if (!key)
             throw new Error('insert: cannot calc row key');
         console.log('key:', key);
-        const keyParams = DataSource_1.default.keyToParams(key);
+        const keyParams = DataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
@@ -162,9 +159,9 @@ class SqlDataSource extends DataSource_1.default {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = new Result_1.default();
-        Result_1.default.addInsertToResult(result, database, table, key);
-        Result_1.default.addInsertExToResult(result, database, table, key, row);
+        const result = new Result();
+        Result.addInsertToResult(result, database, table, key);
+        Result.addInsertExToResult(result, database, table, key, row);
         return result;
     }
     async update(context) {
@@ -182,13 +179,13 @@ class SqlDataSource extends DataSource_1.default {
         const values = changes[key];
         // update row
         const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
-        const _values = Helper_1.default.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = Helper_1.default.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource_1.default.keyToParams(newKey);
+        const newKeyParams = DataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);
@@ -201,9 +198,9 @@ class SqlDataSource extends DataSource_1.default {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
         // result
-        const result = new Result_1.default();
-        Result_1.default.addUpdateToResult(result, database, table, key, newKey);
-        Result_1.default.addUpdateExToResult(result, database, table, key, row);
+        const result = new Result();
+        Result.addUpdateToResult(result, database, table, key, newKey);
+        Result.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
     async delete(context) {
@@ -215,8 +212,8 @@ class SqlDataSource extends DataSource_1.default {
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = new Result_1.default();
-        Result_1.default.addDeleteToResult(result, database, table, key);
+        const result = new Result();
+        Result.addDeleteToResult(result, database, table, key);
         return result;
     }
     fillAttributes(response) {

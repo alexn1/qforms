@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 
 class TimeField extends Field {
     fillAttributes(response: any): void {

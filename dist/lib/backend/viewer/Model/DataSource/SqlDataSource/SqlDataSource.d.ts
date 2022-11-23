@@ -1,7 +1,7 @@
-import DataSource from '../DataSource';
-import Table from '../../Table/Table';
-import Context from '../../../../Context';
-import Result from "../../../../Result";
+import DataSource = require('../DataSource');
+import Table = require('../../Table/Table');
+import Context = require('../../../../Context');
+import Result = require("../../../../Result");
 declare class SqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);

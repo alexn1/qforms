@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const { Pool, Client } = require('pg');
 const colors = require('colors');
-const Database_1 = __importDefault(require("../Database"));
-class PostgreSqlDatabase extends Database_1.default {
+const Database = require("../Database");
+class PostgreSqlDatabase extends Database {
     constructor(data, parent) {
         super(data, parent);
         // console.log('new PostgreSqlDatabase');
@@ -63,7 +60,7 @@ class PostgreSqlDatabase extends Database_1.default {
     async queryResult(context, query, params = null) {
         if (context.query.sql)
             console.log(colors.blue('PostgreSqlDatabase.queryResult'), { query, params } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
-        Database_1.default.checkParams(query, params);
+        Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
@@ -75,7 +72,7 @@ class PostgreSqlDatabase extends Database_1.default {
     }
     static async queryResult(cnn, query, params = null) {
         console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
-        Database_1.default.checkParams(query, params);
+        Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -112,7 +109,7 @@ class PostgreSqlDatabase extends Database_1.default {
         if (!params) {
             return { sql: query, values: null };
         }
-        const usedValues = Database_1.default.getUsedParams(query);
+        const usedValues = Database.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);

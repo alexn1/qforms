@@ -1,16 +1,16 @@
-import Result from "../../../Result";
+import Result = require("../../../Result");
 
 const path = require('path');
 
-import Model from '../Model';
-import Helper from '../../../Helper';
-import Context from '../../../Context';
-import Application from '../Application/Application';
-import Database from '../Database/Database';
-import Page from '../Page/Page';
-import Form from '../Form/Form';
-import RowForm from '../Form/RowForm/RowForm';
-import TableForm from '../Form/TableForm/TableForm';
+import Model = require('../Model');
+import Helper = require('../../../Helper');
+import Context = require('../../../Context');
+import Application = require('../Application/Application');
+import Database = require('../Database/Database');
+import Page = require('../Page/Page');
+import Form = require('../Form/Form');
+import RowForm = require('../Form/RowForm/RowForm');
+import TableForm = require('../Form/TableForm/TableForm');
 
 class DataSource extends Model {
     keyColumns: any;

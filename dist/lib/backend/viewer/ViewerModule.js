@@ -1,12 +1,9 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
 const pkg = require('../../../package.json');
-const Helper_1 = __importDefault(require("../Helper"));
-const MyError_1 = __importDefault(require("../MyError"));
-const Result_1 = __importDefault(require("../Result"));
+const Helper = require("../Helper");
+const MyError = require("../MyError");
+const Result = require("../Result");
 // post actions
 const ACTIONS = [
     'page',
@@ -23,8 +20,8 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
+        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
@@ -106,7 +103,7 @@ class ViewerModule {
         }
         else {
             if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-                throw new MyError_1.default({ message: 'Unauthorized', status: 401, context });
+                throw new MyError({ message: 'Unauthorized', status: 401, context });
             }
             if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
                 throw new Error(`unknown action: ${context.getReq().body.action}`);
@@ -341,14 +338,14 @@ class ViewerModule {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 await res.json(response);
-                if (!(_result instanceof Result_1.default)) {
+                if (!(_result instanceof Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.hostApp.broadcastResult(application, context, _result);
             }
             else {
                 await res.json(result);
-                if (result instanceof Result_1.default) {
+                if (result instanceof Result) {
                     this.hostApp.broadcastResult(application, context, result);
                 }
             }
@@ -370,7 +367,7 @@ class ViewerModule {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
         delete req.session.user[context.getRoute()];
-        await Helper_1.default.Session_save(req.session);
+        await Helper.Session_save(req.session);
         await res.json(null);
     }
     // action

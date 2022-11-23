@@ -1,5 +1,5 @@
-import Context from "../../../../Context";
-import Database from '../Database';
+import Context = require("../../../../Context");
+import Database = require('../Database');
 declare class MySqlDatabase extends Database {
     pool: any;
     constructor(data: any, parent?: any);

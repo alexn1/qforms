@@ -1,5 +1,5 @@
-import Model from '../Model';
-import Application from '../Application/Application';
+import Model = require('../Model');
+import Application = require('../Application/Application');
 declare class Column extends Model {
     static create(data: any, parent: any): Promise<Column>;
     fillAttributes(response: any): void;

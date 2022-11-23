@@ -1,5 +1,5 @@
-import Context from "../../Context";
-import BaseModel from '../../BaseModel';
+import Context = require("../../Context");
+import BaseModel = require('../../BaseModel');
 
 const backend  = require('../../../backend');
 

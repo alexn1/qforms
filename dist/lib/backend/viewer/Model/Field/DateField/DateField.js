@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Field_1 = __importDefault(require("../Field"));
+const Field = require("../Field");
 const Helper = require('../../../../Helper');
-class DateField extends Field_1.default {
+class DateField extends Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

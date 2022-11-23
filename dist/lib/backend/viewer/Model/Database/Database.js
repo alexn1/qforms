@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const Model_1 = __importDefault(require("../Model"));
-const Param_1 = __importDefault(require("../Param/Param"));
-class Database extends Model_1.default {
+const Model = require("../Model");
+const Param = require("../Param/Param");
+class Database extends Model {
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);
@@ -94,7 +91,7 @@ class Database extends Model_1.default {
         return query;
     }
     createParam(name) {
-        return new Param_1.default(this.getColItemData('params', name), this);
+        return new Param(this.getColItemData('params', name), this);
     }
     getConfig() {
         const config = {

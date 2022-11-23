@@ -1,14 +1,14 @@
 import { AppInfo } from "../../../AppInfo";
-import BackHostApp from '../../../BackHostApp';
-import Model from '../Model';
-import Action from '../Action/Action';
-import Database from '../Database/Database';
-import DataSource from '../DataSource/DataSource';
-import Page from '../Page/Page';
-import PageLink from '../PageLink/PageLink';
-import Context from '../../../Context';
-import JsonFile from '../../../JsonFile';
-import Result from "../../../Result";
+import BackHostApp = require('../../../BackHostApp');
+import Model = require('../Model');
+import Action = require('../Action/Action');
+import Database = require('../Database/Database');
+import DataSource = require('../DataSource/DataSource');
+import Page = require('../Page/Page');
+import PageLink = require('../PageLink/PageLink');
+import Context = require('../../../Context');
+import JsonFile = require('../../../JsonFile');
+import Result = require("../../../Result");
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;

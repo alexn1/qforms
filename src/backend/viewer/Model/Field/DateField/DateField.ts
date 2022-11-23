@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 const Helper = require('../../../../Helper');
 
 class DateField extends Field {

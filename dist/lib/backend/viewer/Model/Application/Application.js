@@ -1,19 +1,16 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const uuid_1 = require("uuid");
 const path = require('path');
-const BaseModel_1 = __importDefault(require("../../../BaseModel"));
-const Model_1 = __importDefault(require("../Model"));
-const Helper_1 = __importDefault(require("../../../Helper"));
-const PageLink_1 = __importDefault(require("../PageLink/PageLink"));
-const JsonFile_1 = __importDefault(require("../../../JsonFile"));
-const MyError_1 = __importDefault(require("../../../MyError"));
-const Result_1 = __importDefault(require("../../../Result"));
+const BaseModel = require("../../../BaseModel");
+const Model = require("../Model");
+const Helper = require("../../../Helper");
+const PageLink = require("../PageLink/PageLink");
+const JsonFile = require("../../../JsonFile");
+const MyError = require("../../../MyError");
+const Result = require("../../../Result");
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
-class Application extends Model_1.default {
+class Application extends Model {
     constructor(data, appInfo, hostApp, context) {
         super(data);
         if (!hostApp)
@@ -43,12 +40,12 @@ class Application extends Model_1.default {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'css'))
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.default.getFilePaths(this.getFrontendDirPath(), 'js'))
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${virtualPath}/${src}`);
     }
     async deinit() {
@@ -107,8 +104,8 @@ class Application extends Model_1.default {
         response.uuid = (0, uuid_1.v4)();
         // actions
         response.actions = this.getCol('actions').map(data => ({
-            name: BaseModel_1.default.getName(data),
-            caption: BaseModel_1.default.getAttr(data, 'caption')
+            name: BaseModel.getName(data),
+            caption: BaseModel.getAttr(data, 'caption')
         }));
         // pages
         response.pages = await this.fillPages(context);
@@ -136,7 +133,7 @@ class Application extends Model_1.default {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = pageLink.getPageFilePath();
-                const pageFile = new JsonFile_1.default(pageFilePath);
+                const pageFile = new JsonFile(pageFilePath);
                 await pageFile.read();
                 // menu
                 if (!menu[pageLinkMenu]) {
@@ -162,8 +159,8 @@ class Application extends Model_1.default {
         if (actions.length) {
             menu['Actions'] = actions.map(actionData => ({
                 type: 'action',
-                action: BaseModel_1.default.getName(actionData),
-                caption: BaseModel_1.default.getAttr(actionData, 'caption')
+                action: BaseModel.getName(actionData),
+                caption: BaseModel.getAttr(actionData, 'caption')
             }));
         }
         this.menu = menu;
@@ -171,7 +168,7 @@ class Application extends Model_1.default {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new PageLink_1.default(data, this);
+        return new PageLink(data, this);
     }
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);
@@ -181,7 +178,7 @@ class Application extends Model_1.default {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await Helper_1.default.readTextFile(pageFilePath);
+        const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
         await page.init();
@@ -203,8 +200,8 @@ class Application extends Model_1.default {
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
-            .filter(data => BaseModel_1.default.getAttr(data, 'startup') === 'true')
-            .map(data => BaseModel_1.default.getName(data));
+            .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
+            .map(data => BaseModel.getName(data));
     }
     async fillPages(context) {
         // console.log('Application.fillPages', context.query.page);
@@ -243,7 +240,7 @@ class Application extends Model_1.default {
         console.log('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.default({
+        throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -293,10 +290,10 @@ class Application extends Model_1.default {
         const dirName = path.basename(path.dirname(appFilePath));
         return {
             appFile: appFile,
-            name: BaseModel_1.default.getName(data),
-            caption: BaseModel_1.default.getAttr(data, 'caption'),
+            name: BaseModel.getName(data),
+            caption: BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
-            envs: BaseModel_1.default.getEnvList(data),
+            envs: BaseModel.getEnvList(data),
             fileName: fileName,
             dirName: dirName,
             filePath: path.resolve(appFilePath),
@@ -307,14 +304,14 @@ class Application extends Model_1.default {
     }
     static async loadAppInfo(appFilePath) {
         // console.log('Application.loadAppInfo', appFilePath);
-        const appFile = new JsonFile_1.default(appFilePath);
+        const appFile = new JsonFile(appFilePath);
         await appFile.read();
         const appInfo = Application.makeAppInfoFromAppFile(appFile);
         return appInfo;
     }
     static async getAppInfos(appsDirPath) {
         // console.log('Application.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper_1.default._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -392,7 +389,7 @@ class Application extends Model_1.default {
                     const table = database.findTable(tableName);
                     if (table) {
                         if (!fResult)
-                            fResult = new Result_1.default();
+                            fResult = new Result();
                         if (!fResult[databaseName])
                             fResult[databaseName] = {};
                         fResult[databaseName][tableName] = { refresh: true };
@@ -414,7 +411,7 @@ class Application extends Model_1.default {
     async handleGetFile(context, next) {
         // console.log('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getFrontendDirPath(), context.getUri());
-        if (await Helper_1.default.exists(filePath)) {
+        if (await Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {

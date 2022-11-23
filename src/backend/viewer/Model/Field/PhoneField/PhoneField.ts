@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 
 class PhoneField extends Field {
     fillAttributes(response: any): void {

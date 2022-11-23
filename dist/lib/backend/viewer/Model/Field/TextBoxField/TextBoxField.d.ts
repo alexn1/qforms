@@ -1,4 +1,4 @@
-import Field from '../Field';
+import Field = require('../Field');
 declare class TextBoxField extends Field {
     fillAttributes(response: any): void;
 }

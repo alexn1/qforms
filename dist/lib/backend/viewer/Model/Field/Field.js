@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
-const Model_1 = __importDefault(require("../Model"));
+const Model = require("../Model");
 const Helper = require('../../../Helper');
-class Field extends Model_1.default {
+class Field extends Model {
     static async create(data, parent) {
         return new Field(data, parent);
     }
