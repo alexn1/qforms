@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FileSessionStore = void 0;
 const path = require('path');
 const session = require('express-session');
 const Helper_1 = require("./Helper");
@@ -49,4 +51,4 @@ class FileSessionStore extends session.Store {
         cb(null);
     }
 }
-module.exports = FileSessionStore;
+exports.FileSessionStore = FileSessionStore;

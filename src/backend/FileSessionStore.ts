@@ -3,7 +3,7 @@ const session  = require('express-session');
 import {Helper} from './Helper';
 const colors     = require('colors/safe');
 
-class FileSessionStore extends session.Store {
+export class FileSessionStore extends session.Store {
     store: any;
     dirPath: string;
     constructor(dirPath: string) {
@@ -48,4 +48,3 @@ class FileSessionStore extends session.Store {
         cb(null);
     }
 }
-export = FileSessionStore;

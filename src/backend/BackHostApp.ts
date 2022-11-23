@@ -20,7 +20,7 @@ import MyError = require('./MyError');
 import ViewerModule = require('./viewer/ViewerModule');
 import EditorModule = require('./editor/EditorModule');
 import CommonModule = require('./common/CommonModule');
-import FileSessionStore = require('./FileSessionStore');
+import {FileSessionStore} from './FileSessionStore';
 import {Result} from "./Result";
 
 const pkg     = require('../../package.json');

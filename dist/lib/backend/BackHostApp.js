@@ -20,7 +20,7 @@ const MyError = require("./MyError");
 const ViewerModule = require("./viewer/ViewerModule");
 const EditorModule = require("./editor/EditorModule");
 const CommonModule = require("./common/CommonModule");
-const FileSessionStore = require("./FileSessionStore");
+const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
@@ -125,7 +125,7 @@ class BackHostApp {
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(cookieParser());
         this.express.use(session({
-            store: new FileSessionStore(this.sessionDirPath),
+            store: new FileSessionStore_1.FileSessionStore(this.sessionDirPath),
             secret: this.getSecretSync(),
             key: 'sid',
             resave: false,
