@@ -10,7 +10,7 @@ const session = require('express-session');
 const express = require('express');
 const http = require('http');
 const colors = require('colors/safe');
-const Helper = require("./Helper");
+const Helper_1 = require("./Helper");
 const PostgreSqlDatabase = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("../backend/Context");
 const Application = require("./viewer/Model/Application/Application");
@@ -62,8 +62,8 @@ class BackHostApp {
         this.frontendDirPath = path.resolve(path.join(backendDirPath, '../frontend'));
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
         // runtime & temp
-        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        Helper.createDirIfNotExistsSync(this.sessionDirPath);
+        Helper_1.Helper.createDirIfNotExistsSync(this.runtimeDirPath);
+        Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
             this.logPool = PostgreSqlDatabase.createPool(log);
@@ -108,19 +108,19 @@ class BackHostApp {
     getSecretSync() {
         const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
         let secret;
-        secret = Helper.getFileContentSync(secretFilePath);
+        secret = Helper_1.Helper.getFileContentSync(secretFilePath);
         if (secret) {
             return secret;
         }
-        secret = Helper.getRandomString(20);
-        Helper.writeFileSync(secretFilePath, secret);
+        secret = Helper_1.Helper.getRandomString(20);
+        Helper_1.Helper.writeFileSync(secretFilePath, secret);
         return secret;
     }
     initExpressServer() {
         // middlewares
         this.express.use(bodyParser.json({
             limit: '20mb',
-            reviver: Helper.dateTimeReviver
+            reviver: Helper_1.Helper.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(cookieParser());
@@ -173,7 +173,7 @@ class BackHostApp {
         // if creating application
         if (Array.isArray(this.appQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = Helper.createEmptyPromise();
+            const promise = Helper_1.Helper.createEmptyPromise();
             this.appQueue[context.getRoute()].push(promise);
             return promise;
         }
@@ -223,7 +223,7 @@ class BackHostApp {
         const name = req.body.name;
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
-        await Helper.createDirIfNotExists(appDirPath);
+        await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         return appInfos;

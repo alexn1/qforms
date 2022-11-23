@@ -1,6 +1,6 @@
 "use strict";
 const Field = require("../Field");
-const Helper = require('../../../../Helper');
+const Helper_1 = require("../../../../Helper");
 class DateTimeField extends Field {
     fillAttributes(response) {
         super.fillAttributes(response);
@@ -15,20 +15,20 @@ class DateTimeField extends Field {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = Helper.cloneDate(value);
-            Helper.removeTimezoneOffset(v);
-            raw = Helper.encodeValue(v);
+            const v = Helper_1.Helper.cloneDate(value);
+            Helper_1.Helper.removeTimezoneOffset(v);
+            raw = Helper_1.Helper.encodeValue(v);
         }
         else {
-            raw = Helper.encodeValue(value);
+            raw = Helper_1.Helper.encodeValue(value);
         }
         // console.log('DateTimeField.rawToValue', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
-        const value = Helper.decodeValue(raw);
+        const value = Helper_1.Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            Helper.addTimezoneOffset(value);
+            Helper_1.Helper.addTimezoneOffset(value);
         }
         // console.log('DateTimeField.rawToValue', this.getFullName(), raw, value);
         return value;

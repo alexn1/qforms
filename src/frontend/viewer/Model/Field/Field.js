@@ -1,3 +1,5 @@
+
+
 class Field extends Model {
     // constructor(data, parent) {
     //     super(data, parent);
@@ -23,6 +25,7 @@ class Field extends Model {
         const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
         // console.log('js', this.getFullName(), js);
+        module.Helper
         try {
             const value = eval(js);
             if (value !== undefined) {

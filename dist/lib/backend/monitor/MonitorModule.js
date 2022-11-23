@@ -1,13 +1,13 @@
 "use strict";
 const path = require('path');
-const Helper = require("../Helper");
+const Helper_1 = require("../Helper");
 class MonitorModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
-        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
@@ -29,7 +29,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: Helper.getWebSocketIP(webSocket),
+                            ip: Helper_1.Helper.getWebSocketIP(webSocket),
                             version: webSocket.customFields.version
                         };
                     })

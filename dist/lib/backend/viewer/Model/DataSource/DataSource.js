@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const Model = require("../Model");
-const Helper = require("../../../Helper");
+const Helper_1 = require("../../../Helper");
 const Page = require("../Page/Page");
 const Form = require("../Form/Form");
 const RowForm = require("../Form/RowForm/RowForm");
@@ -25,9 +25,9 @@ class DataSource extends Model {
         this.keyColumns = this.getKeyColumns();
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper.exists(jsonFilePath);
+        const exists = await Helper_1.Helper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper.readTextFile(jsonFilePath);
+            const content = await Helper_1.Helper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }
@@ -98,7 +98,7 @@ class DataSource extends Model {
         }
         else {
             for (const name in row) {
-                row[name] = Helper.encodeValue(row[name]);
+                row[name] = Helper_1.Helper.encodeValue(row[name]);
             }
         }
     }

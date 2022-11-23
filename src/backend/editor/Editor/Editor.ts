@@ -2,7 +2,7 @@ const path    = require('path');
 const ejs     = require('ejs');
 
 import {BaseModel} from '../../BaseModel';
-import Helper = require('../../Helper');
+import {Helper} from '../../Helper';
 import backend = require('../../../backend');
 
 class Editor extends BaseModel {

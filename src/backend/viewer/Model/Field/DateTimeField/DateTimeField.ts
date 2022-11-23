@@ -1,5 +1,5 @@
 import Field = require('../Field');
-const Helper = require('../../../../Helper');
+import {Helper} from '../../../../Helper';
 
 class DateTimeField extends Field {
     fillAttributes(response: any): void {

@@ -1,14 +1,14 @@
 "use strict";
 const path = require('path');
 const Application = require("../viewer/Model/Application/Application");
-const Helper = require("../Helper");
+const Helper_1 = require("../Helper");
 class IndexModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'css')).map(path => `/index/${path}`);
-        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'js')).map(path => `/index/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'css')).map(path => `/index/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'js')).map(path => `/index/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }

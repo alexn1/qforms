@@ -2,7 +2,7 @@
 const path = require('path');
 const ejs = require('ejs');
 const BaseModel_1 = require("../../BaseModel");
-const Helper = require("../../Helper");
+const Helper_1 = require("../../Helper");
 const backend = require("../../../backend");
 class Editor extends BaseModel_1.BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
@@ -21,13 +21,13 @@ class Editor extends BaseModel_1.BaseModel {
         return text;
     }*/
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await Helper.exists(newFilePath);
+        const exists = await Helper_1.Helper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
-        const template = await Helper.readTextFile(templateFilePath);
+        const template = await Helper_1.Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await Helper.writeFile2(newFilePath, content);
+        await Helper_1.Helper.writeFile2(newFilePath, content);
         return content;
     }
     /*getViewName() {
@@ -35,17 +35,17 @@ class Editor extends BaseModel_1.BaseModel {
     }*/
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
-        const exists = await Helper.exists(filePath);
+        const exists = await Helper_1.Helper.exists(filePath);
         if (exists) {
-            return await Helper.readTextFile(filePath);
+            return await Helper_1.Helper.readTextFile(filePath);
         }
     }
     async saveFile(filePath, content) {
-        const exists = await Helper.exists(filePath);
+        const exists = await Helper_1.Helper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        await Helper.writeFile2(filePath, content);
+        await Helper_1.Helper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
         console.log('Editor.getCustomFile', ext);
@@ -88,7 +88,7 @@ class Editor extends BaseModel_1.BaseModel {
         return new DataSourceClass(data, this);
     }*/
     moveDataColItem(colName, name, offset) {
-        Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+        Helper_1.Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     /*async newActionData(params) {
         if (!params.name) throw new Error('no name');

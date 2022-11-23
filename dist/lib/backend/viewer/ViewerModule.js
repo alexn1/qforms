@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const pkg = require('../../../package.json');
-const Helper = require("../Helper");
+const Helper_1 = require("../Helper");
 const MyError = require("../MyError");
 const Result_1 = require("../Result");
 // post actions
@@ -20,8 +20,8 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
-        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
@@ -367,7 +367,7 @@ class ViewerModule {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
         delete req.session.user[context.getRoute()];
-        await Helper.Session_save(req.session);
+        await Helper_1.Helper.Session_save(req.session);
         await res.json(null);
     }
     // action

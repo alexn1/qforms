@@ -1,5 +1,5 @@
 import DataSource = require('../DataSource');
-import Helper = require('../../../../Helper');
+import {Helper} from '../../../../Helper';
 import Table = require('../../Table/Table');
 import {Context} from '../../../../Context';
 import {Result} from "../../../../Result";

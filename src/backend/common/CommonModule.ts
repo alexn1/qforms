@@ -1,4 +1,4 @@
-import Helper = require("../Helper");
+import {Helper} from "../Helper";
 
 const path = require('path');
 import {BackHostApp} from '../BackHostApp';

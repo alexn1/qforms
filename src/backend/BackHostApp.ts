@@ -9,7 +9,7 @@ const express      = require('express');
 const http         = require('http');
 const colors       = require('colors/safe');
 
-import Helper = require('./Helper');
+import {Helper} from './Helper';
 import PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 import {Context} from '../backend/Context';
 import Application = require('./viewer/Model/Application/Application');

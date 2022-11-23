@@ -11,7 +11,7 @@ import Model = require('../Model');
 import Action = require('../Action/Action');
 import Database = require('../Database/Database');
 import DataSource = require('../DataSource/DataSource');
-import Helper = require('../../../Helper');
+import {Helper} from '../../../Helper';
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import {Context} from '../../../Context';

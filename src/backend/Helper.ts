@@ -33,7 +33,7 @@ async function _getFilePaths2(dirPath, ext, filePaths) {
     }
 }
 
-class Helper {
+export class Helper {
     static getRandomString(length) {
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -498,4 +498,3 @@ class Helper {
     }
 }
 
-export = Helper;

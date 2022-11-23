@@ -1,4 +1,4 @@
-import Helper  = require('./Helper');
+import {Helper} from './Helper';
 import {BaseModel} from './BaseModel';
 
 export class JsonFile {

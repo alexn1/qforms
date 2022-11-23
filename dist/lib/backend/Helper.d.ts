@@ -1,4 +1,4 @@
-declare class Helper {
+export declare class Helper {
     static getRandomString(length: any): string;
     static getFilePathsSync(publicDirPath: any, subDirPath: any, ext: any): any;
     static _glob(path: any): Promise<any[]>;
@@ -47,4 +47,3 @@ declare class Helper {
     static createEmptyPromise(): Promise<unknown>;
     static test(): void;
 }
-export = Helper;

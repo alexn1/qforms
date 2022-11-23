@@ -3,7 +3,7 @@ import {Result} from "../../../Result";
 const path = require('path');
 
 import Model = require('../Model');
-import Helper = require('../../../Helper');
+import {Helper} from '../../../Helper';
 import {Context} from '../../../Context';
 import Application = require('../Application/Application');
 import Database = require('../Database/Database');

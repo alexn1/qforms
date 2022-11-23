@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const pkg = require('../../../package.json');
-const Helper = require("../Helper");
+const Helper_1 = require("../Helper");
 const Application = require("../viewer/Model/Application/Application");
 const backend = require('../index');
 const EDITOR_CONTROLLERS = [
@@ -40,8 +40,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
-        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }

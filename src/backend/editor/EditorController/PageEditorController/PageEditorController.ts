@@ -1,6 +1,6 @@
 const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
-const Helper = require('../../../Helper');
+import {Helper} from '../../../Helper';
 
 class PageEditorController extends VisualEditorController {
     /*constructor(...args) {

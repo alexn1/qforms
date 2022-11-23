@@ -1,14 +1,14 @@
 "use strict";
 const path = require('path');
 const VisualEditorController = require('../VisualEditorController');
-const Helper = require('../../../Helper');
+const Helper_1 = require("../../../Helper");
 class PageEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
     async get(params) {
         const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
-        const content = await Helper.readTextFile(pageFilePath);
+        const content = await Helper_1.Helper.readTextFile(pageFilePath);
         return JSON.parse(content);
     }
     async save(params) {

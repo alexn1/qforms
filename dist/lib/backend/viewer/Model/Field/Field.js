@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const Model = require("../Model");
-const Helper = require('../../../Helper');
+const Helper_1 = require("../../../Helper");
 class Field extends Model {
     static async create(data, parent) {
         return new Field(data, parent);
@@ -33,7 +33,9 @@ class Field extends Model {
             return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getParams();
-        const js = Helper.templateToJsString(defaultValue, params);
+        const js = Helper_1.Helper.templateToJsString(defaultValue, params);
+        // @ts-ignore
+        global.Helper = Helper_1.Helper;
         let value;
         try {
             value = eval(js);
@@ -84,10 +86,10 @@ class Field extends Model {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
     valueToRaw(value) {
-        return Helper.encodeValue(value);
+        return Helper_1.Helper.encodeValue(value);
     }
     rawToValue(raw) {
-        return Helper.decodeValue(raw);
+        return Helper_1.Helper.decodeValue(raw);
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';

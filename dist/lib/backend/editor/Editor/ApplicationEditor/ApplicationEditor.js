@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const Editor = require('../Editor');
-const Helper = require('../../../Helper');
+const Helper_1 = require("../../../Helper");
 const Application = require('../../../viewer/Model/Application/Application');
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor = require("../PageEditor/PageEditor");
@@ -70,7 +70,7 @@ class ApplicationEditor extends Editor {
     async removePageFile(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
-        await Helper.fsUnlink(pageFilePath);
+        await Helper_1.Helper.fsUnlink(pageFilePath);
     }
     async createPageEditor(relFilePath) {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);

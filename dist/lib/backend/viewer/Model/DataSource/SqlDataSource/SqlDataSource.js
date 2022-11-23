@@ -1,6 +1,6 @@
 "use strict";
 const DataSource = require("../DataSource");
-const Helper = require("../../../../Helper");
+const Helper_1 = require("../../../../Helper");
 const Result_1 = require("../../../../Result");
 class SqlDataSource extends DataSource {
     constructor(data, parent) {
@@ -179,8 +179,8 @@ class SqlDataSource extends DataSource {
         const values = changes[key];
         // update row
         const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
-        const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = Helper_1.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = Helper_1.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key

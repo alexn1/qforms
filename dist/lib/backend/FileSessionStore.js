@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const session = require('express-session');
-const Helper = require("./Helper");
+const Helper_1 = require("./Helper");
 const colors = require('colors/safe');
 class FileSessionStore extends session.Store {
     constructor(dirPath) {
@@ -15,7 +15,7 @@ class FileSessionStore extends session.Store {
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        Helper.writeFile(sessionFilePath, content).then(() => {
+        Helper_1.Helper.writeFile(sessionFilePath, content).then(() => {
             cb(null);
         });
     }
@@ -27,7 +27,7 @@ class FileSessionStore extends session.Store {
         }
         else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            Helper.getFileContent(sessionFilePath).then(content => {
+            Helper_1.Helper.getFileContent(sessionFilePath).then(content => {
                 if (content) {
                     try {
                         const session = this.store[sid] = JSON.parse(content);

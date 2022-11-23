@@ -8,7 +8,7 @@ import Page = require('../Page/Page');
 import Form = require('../Form/Form');
 import Column = require("../Column/Column");
 
-const Helper = require('../../../Helper');
+import {Helper} from '../../../Helper';
 
 class Field extends Model {
     static async create(data, parent): Promise<Field> {
@@ -45,6 +45,8 @@ class Field extends Model {
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getParams();
         const js = Helper.templateToJsString(defaultValue, params);
+        // @ts-ignore
+        global.Helper = Helper;
         let value;
         try {
             value = eval(js);

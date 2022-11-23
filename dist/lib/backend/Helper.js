@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Helper = void 0;
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
@@ -480,4 +482,4 @@ class Helper {
         console.log('Helper.test');
     }
 }
-module.exports = Helper;
+exports.Helper = Helper;

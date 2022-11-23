@@ -3,7 +3,7 @@ const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const BaseModel_1 = require("../../../BaseModel");
 const Model = require("../Model");
-const Helper = require("../../../Helper");
+const Helper_1 = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError = require("../../../MyError");
@@ -40,12 +40,12 @@ class Application extends Model {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
+        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
+        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${virtualPath}/${src}`);
     }
     async deinit() {
@@ -178,7 +178,7 @@ class Application extends Model {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await Helper.readTextFile(pageFilePath);
+        const content = await Helper_1.Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
         await page.init();
@@ -311,7 +311,7 @@ class Application extends Model {
     }
     static async getAppInfos(appsDirPath) {
         // console.log('Application.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await Helper_1.Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -411,7 +411,7 @@ class Application extends Model {
     async handleGetFile(context, next) {
         // console.log('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getFrontendDirPath(), context.getUri());
-        if (await Helper.exists(filePath)) {
+        if (await Helper_1.Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {
