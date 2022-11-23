@@ -19,8 +19,8 @@ import {CheckBoxListField} from './viewer/Model/Field/CheckBoxListField/CheckBox
 import {ComboBoxField} from './viewer/Model/Field/ComboBoxField/ComboBoxField';
 import {DateField} from './viewer/Model/Field/DateField/DateField';
 import {TimeField} from './viewer/Model/Field/TimeField/TimeField';
+import {DateTimeField} from './viewer/Model/Field/DateTimeField/DateTimeField';
 
-module.exports.DateTimeField                     = require('./viewer/Model/Field/DateTimeField/DateTimeField');
 module.exports.FileField                         = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField                        = require('./viewer/Model/Field/ImageField/ImageField');
 module.exports.LabelField                        = require('./viewer/Model/Field/LabelField/LabelField');
@@ -30,6 +30,7 @@ module.exports.TextBoxField                      = require('./viewer/Model/Field
 module.exports.PhoneField                        = require('./viewer/Model/Field/PhoneField/PhoneField');
 module.exports.PasswordField                     = require('./viewer/Model/Field/PasswordField/PasswordField');
 module.exports.RadioField                        = require('./viewer/Model/Field/RadioField/RadioField');
+
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
@@ -112,4 +113,5 @@ export {
     ComboBoxField,
     DateField,
     TimeField,
+    DateTimeField,
 };

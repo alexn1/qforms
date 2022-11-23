@@ -18,4 +18,5 @@ import { CheckBoxListField } from './viewer/Model/Field/CheckBoxListField/CheckB
 import { ComboBoxField } from './viewer/Model/Field/ComboBoxField/ComboBoxField';
 import { DateField } from './viewer/Model/Field/DateField/DateField';
 import { TimeField } from './viewer/Model/Field/TimeField/TimeField';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, };
+import { DateTimeField } from './viewer/Model/Field/DateTimeField/DateTimeField';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, DateTimeField, };

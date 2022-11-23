@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -41,7 +41,8 @@ const DateField_1 = require("./viewer/Model/Field/DateField/DateField");
 Object.defineProperty(exports, "DateField", { enumerable: true, get: function () { return DateField_1.DateField; } });
 const TimeField_1 = require("./viewer/Model/Field/TimeField/TimeField");
 Object.defineProperty(exports, "TimeField", { enumerable: true, get: function () { return TimeField_1.TimeField; } });
-module.exports.DateTimeField = require('./viewer/Model/Field/DateTimeField/DateTimeField');
+const DateTimeField_1 = require("./viewer/Model/Field/DateTimeField/DateTimeField");
+Object.defineProperty(exports, "DateTimeField", { enumerable: true, get: function () { return DateTimeField_1.DateTimeField; } });
 module.exports.FileField = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField = require('./viewer/Model/Field/ImageField/ImageField');
 module.exports.LabelField = require('./viewer/Model/Field/LabelField/LabelField');
