@@ -20,8 +20,8 @@ import {ComboBoxField} from './viewer/Model/Field/ComboBoxField/ComboBoxField';
 import {DateField} from './viewer/Model/Field/DateField/DateField';
 import {TimeField} from './viewer/Model/Field/TimeField/TimeField';
 import {DateTimeField} from './viewer/Model/Field/DateTimeField/DateTimeField';
+import {FileField} from './viewer/Model/Field/FileField/FileField';
 
-module.exports.FileField                         = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField                        = require('./viewer/Model/Field/ImageField/ImageField');
 module.exports.LabelField                        = require('./viewer/Model/Field/LabelField/LabelField');
 module.exports.LinkField                         = require('./viewer/Model/Field/LinkField/LinkField');
@@ -114,4 +114,5 @@ export {
     DateField,
     TimeField,
     DateTimeField,
+    FileField,
 };

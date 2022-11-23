@@ -1,5 +1,4 @@
 import { Field } from '../Field';
-declare class FileField extends Field {
+export declare class FileField extends Field {
     fillAttributes(response: any): void;
 }
-export = FileField;
