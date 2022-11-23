@@ -1,4 +1,4 @@
-import { BackHostApp, Helper } from './index';
+const { BackHostApp, Helper } = require('./index');
 
 main(); async function main() {
     // console.log('main');
