@@ -1,7 +1,7 @@
 const path = require('path');
 
-import BackHostApp from '../BackHostApp';
-import Helper from "../Helper";
+import BackHostApp = require('../BackHostApp');
+import Helper = require("../Helper");
 
 class MonitorModule {
     hostApp: BackHostApp;

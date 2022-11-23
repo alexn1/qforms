@@ -1,7 +1,7 @@
 const path = require('path');
 
-import Application from '../viewer/Model/Application/Application';
-import Helper from "../Helper";
+import Application = require('../viewer/Model/Application/Application');
+import Helper = require("../Helper");
 
 class IndexModule {
     hostApp: any;

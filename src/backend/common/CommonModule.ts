@@ -1,7 +1,7 @@
-import Helper from "../Helper";
+import Helper = require("../Helper");
 
 const path = require('path');
-import BackHostApp from '../BackHostApp';
+import BackHostApp = require('../BackHostApp');
 
 class CommonModule {
     hostApp: BackHostApp;

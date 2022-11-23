@@ -1,8 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const ApplicationEditor_1 = __importDefault(require("../Editor/ApplicationEditor/ApplicationEditor"));
+const ApplicationEditor = require("../Editor/ApplicationEditor/ApplicationEditor");
 class EditorController {
     constructor(appInfo, hostApp) {
         if (!hostApp)
@@ -20,7 +17,7 @@ class EditorController {
     }
     createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
-        return new ApplicationEditor_1.default(this.appInfo.appFile);
+        return new ApplicationEditor(this.appInfo.appFile);
     }
 }
 module.exports = EditorController;

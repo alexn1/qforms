@@ -2,9 +2,9 @@ const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
-import JsonFile from '../../../JsonFile';
+import JsonFile = require('../../../JsonFile');
 import {AppInfo} from '../../../AppInfo';
-import PageEditor from '../PageEditor/PageEditor';
+import PageEditor = require('../PageEditor/PageEditor');
 
 class ApplicationEditor extends Editor {
     appFile: JsonFile;

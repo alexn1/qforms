@@ -1,11 +1,8 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
 const pkg = require('../../../package.json');
-const Helper_1 = __importDefault(require("../Helper"));
-const Application_1 = __importDefault(require("../viewer/Model/Application/Application"));
+const Helper = require("../Helper");
+const Application = require("../viewer/Model/Application/Application");
 const backend = require('../index');
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -43,8 +40,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
+        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')).map(path => `/editor/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -70,7 +67,7 @@ class EditorModule {
     }
     async handleEditorGet(req, res, context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await Application_1.default.loadAppInfo(this.hostApp.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(this.hostApp.getAppFilePath(context));
         // data
         const data = {
             app: appInfo.appFile.data,
@@ -100,7 +97,7 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await Application_1.default.loadAppInfo(this.hostApp.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(this.hostApp.getAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;

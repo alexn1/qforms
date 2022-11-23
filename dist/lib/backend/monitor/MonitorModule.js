@@ -1,16 +1,13 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
-const Helper_1 = __importDefault(require("../Helper"));
+const Helper = require("../Helper");
 class MonitorModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
-        this.js = (await Helper_1.default.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
+        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
+        this.js = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
@@ -32,7 +29,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: Helper_1.default.getWebSocketIP(webSocket),
+                            ip: Helper.getWebSocketIP(webSocket),
                             version: webSocket.customFields.version
                         };
                     })

@@ -1,9 +1,6 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const ApplicationEditor_1 = __importDefault(require("../ApplicationEditor/ApplicationEditor"));
-const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
+const ApplicationEditor = require("../ApplicationEditor/ApplicationEditor");
+const PageEditor = require("../PageEditor/PageEditor");
 const path = require('path');
 const Editor = require('../Editor');
 class DataSourceEditor extends Editor {
@@ -39,10 +36,10 @@ class DataSourceEditor extends Editor {
         return 'dataSources';
     }
     async save() {
-        if (this.parent instanceof ApplicationEditor_1.default) {
+        if (this.parent instanceof ApplicationEditor) {
             await this.parent.appFile.save();
         }
-        else if (this.parent instanceof PageEditor_1.default) {
+        else if (this.parent instanceof PageEditor) {
             await this.parent.pageFile.save();
         }
         else {

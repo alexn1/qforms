@@ -1,4 +1,4 @@
-import BackHostApp from "./BackHostApp";
+import BackHostApp = require("./BackHostApp");
 declare class WebSocketServer {
     options: any;
     server: any;

@@ -1,4 +1,4 @@
-import BackHostApp from '../BackHostApp';
+import BackHostApp = require('../BackHostApp');
 declare class MonitorModule {
     hostApp: BackHostApp;
     css: string[];

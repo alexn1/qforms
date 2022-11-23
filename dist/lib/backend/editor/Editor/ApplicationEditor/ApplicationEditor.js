@@ -1,13 +1,10 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
-const JsonFile_1 = __importDefault(require("../../../JsonFile"));
-const PageEditor_1 = __importDefault(require("../PageEditor/PageEditor"));
+const JsonFile = require("../../../JsonFile");
+const PageEditor = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor {
     constructor(appFile) {
         super(appFile.data);
@@ -49,7 +46,7 @@ class ApplicationEditor extends Editor {
     }
     static async createAppFile(appFilePath, params) {
         const data = ApplicationEditor.createData(params);
-        const appFile = new JsonFile_1.default(appFilePath, data);
+        const appFile = new JsonFile(appFilePath, data);
         await appFile.create();
         return appFile;
     }
@@ -57,8 +54,8 @@ class ApplicationEditor extends Editor {
         const pagesDirPath = path.join(this.appInfo.dirPath, 'pages');
         const pageDirPath = path.join(pagesDirPath, params.name);
         const pageFilePath = path.join(pageDirPath, params.name + '.json');
-        const pageData = PageEditor_1.default.createData(params);
-        const pageFile = new JsonFile_1.default(pageFilePath, pageData);
+        const pageData = PageEditor.createData(params);
+        const pageFile = new JsonFile(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
@@ -77,9 +74,9 @@ class ApplicationEditor extends Editor {
     }
     async createPageEditor(relFilePath) {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
-        const pageFile = new JsonFile_1.default(pageFilePath);
+        const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
-        return new PageEditor_1.default(this, pageFile);
+        return new PageEditor(this, pageFile);
     }
     async getPage(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);

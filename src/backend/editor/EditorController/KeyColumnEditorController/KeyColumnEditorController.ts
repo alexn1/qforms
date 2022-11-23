@@ -1,4 +1,4 @@
-import KeyColumnEditor from '../../Editor/KeyColumnEditor/KeyColumnEditor';
+import KeyColumnEditor = require('../../Editor/KeyColumnEditor/KeyColumnEditor');
 
 const EditorController = require('../EditorController');
 

@@ -1,5 +1,5 @@
-import Context from "../../../Context";
-import Application from "../../../viewer/Model/Application/Application";
+import Context = require("../../../Context");
+import Application = require("../../../viewer/Model/Application/Application");
 declare const EditorController: any;
 declare class DatabaseEditorController extends EditorController {
     application: Application;

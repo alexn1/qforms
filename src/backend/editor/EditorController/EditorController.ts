@@ -1,7 +1,7 @@
-import BackHostApp from "../../BackHostApp";
-import ApplicationEditor from '../Editor/ApplicationEditor/ApplicationEditor';
+import BackHostApp = require("../../BackHostApp");
+import ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 import {AppInfo} from '../../AppInfo';
-import Context from "../../Context";
+import Context = require("../../Context");
 
 class EditorController {
     appInfo: AppInfo;

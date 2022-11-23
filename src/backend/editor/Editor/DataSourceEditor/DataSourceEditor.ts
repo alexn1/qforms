@@ -1,5 +1,5 @@
-import ApplicationEditor from "../ApplicationEditor/ApplicationEditor";
-import PageEditor from "../PageEditor/PageEditor";
+import ApplicationEditor = require("../ApplicationEditor/ApplicationEditor");
+import PageEditor = require("../PageEditor/PageEditor");
 
 const path = require('path');
 const Editor = require('../Editor');
