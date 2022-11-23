@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Converter = void 0;
 const JsonFile = require("./JsonFile");
 const ApplicationEditor = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
@@ -22,4 +24,4 @@ class Converter {
         }
     }
 }
-module.exports = Converter;
+exports.Converter = Converter;

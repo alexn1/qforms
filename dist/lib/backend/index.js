@@ -4,11 +4,12 @@ const Result_1 = require("./Result");
 const Context_1 = require("./Context");
 const BaseModel_1 = require("./BaseModel");
 const BackHostApp_1 = require("./BackHostApp");
+const Converter_1 = require("./Converter");
 module.exports.BackHostApp = BackHostApp_1.BackHostApp;
 module.exports.BaseModel = BaseModel_1.BaseModel;
 module.exports.Context = Context_1.Context;
 module.exports.Helper = require('./Helper');
-module.exports.Converter = require('./Converter');
+module.exports.Converter = Converter_1.Converter;
 module.exports.JsonFile = require('./JsonFile');
 module.exports.Result = Result_1.Result;
 // viewer

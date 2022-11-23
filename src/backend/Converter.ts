@@ -2,7 +2,7 @@ import JsonFile = require('./JsonFile');
 import ApplicationEditor = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 import {BaseModel} from './BaseModel';
 
-class Converter {
+export class Converter {
     static async reformat(appFilePath) {
         console.log('Convert.reformat', appFilePath);
         const appFile = new JsonFile(appFilePath);
@@ -24,5 +24,3 @@ class Converter {
         }
     }
 }
-
-export = Converter;
