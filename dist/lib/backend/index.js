@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -25,7 +25,8 @@ const MySqlDatabase_1 = require("./viewer/Model/Database/MySqlDatabase/MySqlData
 Object.defineProperty(exports, "MySqlDatabase", { enumerable: true, get: function () { return MySqlDatabase_1.MySqlDatabase; } });
 const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 Object.defineProperty(exports, "PostgreSqlDatabase", { enumerable: true, get: function () { return PostgreSqlDatabase_1.PostgreSqlDatabase; } });
-module.exports.DataSource = require('./viewer/Model/DataSource/DataSource');
+const DataSource_1 = require("./viewer/Model/DataSource/DataSource");
+Object.defineProperty(exports, "DataSource", { enumerable: true, get: function () { return DataSource_1.DataSource; } });
 module.exports.SqlDataSource = require('./viewer/Model/DataSource/SqlDataSource/SqlDataSource');
 module.exports.Field = require('./viewer/Model/Field/Field');
 module.exports.CheckBoxField = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');

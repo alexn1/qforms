@@ -10,4 +10,5 @@ import { Application } from "./viewer/Model/Application/Application";
 import { Database } from './viewer/Model/Database/Database';
 import { MySqlDatabase } from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
 import { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, };
+import { DataSource } from './viewer/Model/DataSource/DataSource';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, };

@@ -1,7 +1,7 @@
 const path = require('path');
 
 import {Model} from '../Model';
-import DataSource = require('../DataSource/DataSource');
+import {DataSource} from '../DataSource/DataSource';
 import Action = require('../Action/Action');
 import {Application} from '../Application/Application';
 import Form = require('../Form/Form');

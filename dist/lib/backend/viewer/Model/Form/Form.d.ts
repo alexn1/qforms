@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import DataSource = require('../DataSource/DataSource');
+import { DataSource } from '../DataSource/DataSource';
 import Action = require('../Action/Action');
 import Field = require('../Field/Field');
 import Page = require('../Page/Page');

@@ -10,7 +10,7 @@ import {BaseModel} from '../../../BaseModel';
 import {Model} from '../Model';
 import Action = require('../Action/Action');
 import {Database} from '../Database/Database';
-import DataSource = require('../DataSource/DataSource');
+import {DataSource} from '../DataSource/DataSource';
 import {Helper} from '../../../Helper';
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');

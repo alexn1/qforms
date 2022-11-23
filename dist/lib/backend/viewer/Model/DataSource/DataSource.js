@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DataSource = void 0;
 const path = require('path');
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
@@ -238,4 +240,4 @@ class DataSource extends Model_1.Model {
         return this.isOnForm() ? this.getParent() : null;
     }
 }
-module.exports = DataSource;
+exports.DataSource = DataSource;

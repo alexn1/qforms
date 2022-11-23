@@ -1,8 +1,8 @@
 "use strict";
-const DataSource = require("../DataSource");
+const DataSource_1 = require("../DataSource");
 const Helper_1 = require("../../../../Helper");
 const Result_1 = require("../../../../Result");
-class SqlDataSource extends DataSource {
+class SqlDataSource extends DataSource_1.DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
@@ -149,7 +149,7 @@ class SqlDataSource extends DataSource {
         if (!key)
             throw new Error('insert: cannot calc row key');
         console.log('key:', key);
-        const keyParams = DataSource.keyToParams(key);
+        const keyParams = DataSource_1.DataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
@@ -185,7 +185,7 @@ class SqlDataSource extends DataSource {
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource.keyToParams(newKey);
+        const newKeyParams = DataSource_1.DataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);

@@ -3,7 +3,7 @@ import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
 import Action = require('../Action/Action');
 import { Database } from '../Database/Database';
-import DataSource = require('../DataSource/DataSource');
+import { DataSource } from '../DataSource/DataSource';
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import { Context } from '../../../Context';

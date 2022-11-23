@@ -4,7 +4,7 @@ import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
 import Form = require('../Form/Form');
-declare class DataSource extends Model {
+export declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];
     constructor(data: any, parent: any);
@@ -36,4 +36,3 @@ declare class DataSource extends Model {
     delete(context: Context): Promise<Result>;
     getForm(): Form;
 }
-export = DataSource;

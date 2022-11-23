@@ -12,7 +12,7 @@ import Form = require('../Form/Form');
 import RowForm = require('../Form/RowForm/RowForm');
 import TableForm = require('../Form/TableForm/TableForm');
 
-class DataSource extends Model {
+export class DataSource extends Model {
     keyColumns: any;
     rows: any[];
     constructor(data, parent) {
@@ -263,5 +263,3 @@ class DataSource extends Model {
         return this.isOnForm() ? this.getParent() : null;
     }
 }
-
-export = DataSource;
