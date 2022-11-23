@@ -10,7 +10,7 @@ import {Database} from '../Database/Database';
 import Page = require('../Page/Page');
 import {Form} from '../Form/Form';
 import {RowForm} from '../Form/RowForm/RowForm';
-import TableForm = require('../Form/TableForm/TableForm');
+import {TableForm} from '../Form/TableForm/TableForm';
 
 export class DataSource extends Model {
     keyColumns: any;

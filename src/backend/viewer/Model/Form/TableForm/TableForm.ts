@@ -1,6 +1,6 @@
 import {Form} from '../Form';
 
-class TableForm extends Form {
+export class TableForm extends Form {
 
     /*static async create(data, parent) {
         return new TableForm(data, parent);
@@ -22,5 +22,3 @@ class TableForm extends Form {
     }
 
 }
-
-export = TableForm;

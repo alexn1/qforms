@@ -7,7 +7,7 @@ const Helper_1 = require("../../../Helper");
 const Page = require("../Page/Page");
 const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
-const TableForm = require("../Form/TableForm/TableForm");
+const TableForm_1 = require("../Form/TableForm/TableForm");
 class DataSource extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -219,7 +219,7 @@ class DataSource extends Model_1.Model {
         return this.getName() === 'default' && this.parent instanceof RowForm_1.RowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.parent instanceof TableForm;
+        return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;
     }
     getDatabase() {
         const databaseName = this.getAttr('database');

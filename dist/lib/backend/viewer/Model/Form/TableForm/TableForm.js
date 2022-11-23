@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TableForm = void 0;
 const Form_1 = require("../Form");
 class TableForm extends Form_1.Form {
     /*static async create(data, parent) {
@@ -18,4 +20,4 @@ class TableForm extends Form_1.Form {
         response.refreshButton = this.getAttr('refreshButton');
     }
 }
-module.exports = TableForm;
+exports.TableForm = TableForm;

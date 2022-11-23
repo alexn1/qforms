@@ -30,8 +30,8 @@ import {PasswordField} from './viewer/Model/Field/PasswordField/PasswordField';
 import {RadioField} from './viewer/Model/Field/RadioField/RadioField';
 import {Form} from './viewer/Model/Form/Form';
 import {RowForm} from './viewer/Model/Form/RowForm/RowForm';
+import {TableForm} from './viewer/Model/Form/TableForm/TableForm';
 
-module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
 module.exports.Page                              = require('./viewer/Model/Page/Page');
 module.exports.PageLink                          = require('./viewer/Model/PageLink/PageLink');
 module.exports.Column                            = require('./viewer/Model/Column/Column');
@@ -123,4 +123,5 @@ export {
     RadioField,
     Form,
     RowForm,
+    TableForm,
 };
