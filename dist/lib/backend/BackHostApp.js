@@ -1,8 +1,5 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const WebSocketServer_1 = __importDefault(require("./WebSocketServer"));
+const WebSocketServer = require("./WebSocketServer");
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -11,17 +8,17 @@ const session = require('express-session');
 const express = require('express');
 const http = require('http');
 const colors = require('colors/safe');
-const Helper_1 = __importDefault(require("./Helper"));
-const PostgreSqlDatabase_1 = __importDefault(require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase"));
-const Context_1 = __importDefault(require("../backend/Context"));
-const Application_1 = __importDefault(require("./viewer/Model/Application/Application"));
-const MonitorModule_1 = __importDefault(require("./monitor/MonitorModule"));
-const IndexModule_1 = __importDefault(require("./index/IndexModule"));
-const MyError_1 = __importDefault(require("./MyError"));
-const ViewerModule_1 = __importDefault(require("./viewer/ViewerModule"));
-const EditorModule_1 = __importDefault(require("./editor/EditorModule"));
-const CommonModule_1 = __importDefault(require("./common/CommonModule"));
-const FileSessionStore_1 = __importDefault(require("./FileSessionStore"));
+const Helper = require("./Helper");
+const PostgreSqlDatabase = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
+const Context = require("../backend/Context");
+const Application = require("./viewer/Model/Application/Application");
+const MonitorModule = require("./monitor/MonitorModule");
+const IndexModule = require("./index/IndexModule");
+const MyError = require("./MyError");
+const ViewerModule = require("./viewer/ViewerModule");
+const EditorModule = require("./editor/EditorModule");
+const CommonModule = require("./common/CommonModule");
+const FileSessionStore = require("./FileSessionStore");
 const pkg = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
 // const Test    = require('./test/Test');
@@ -63,11 +60,11 @@ class BackHostApp {
         this.frontendDirPath = path.resolve(path.join(backendDirPath, '../frontend'));
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
         // runtime & temp
-        Helper_1.default.createDirIfNotExistsSync(this.runtimeDirPath);
-        Helper_1.default.createDirIfNotExistsSync(this.sessionDirPath);
+        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
+        Helper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
-            this.logPool = PostgreSqlDatabase_1.default.createPool(log);
+            this.logPool = PostgreSqlDatabase.createPool(log);
         }
         // express server
         this.express = express();
@@ -77,24 +74,24 @@ class BackHostApp {
         this.express.enable('strict routing');
         this.initExpressServer();
         // commonModule
-        this.commonModule = new CommonModule_1.default(this);
+        this.commonModule = new CommonModule(this);
         await this.commonModule.init();
         // indexModule
-        this.indexModule = new IndexModule_1.default(this);
+        this.indexModule = new IndexModule(this);
         await this.indexModule.init();
         // monitorModule
-        this.monitorModule = new MonitorModule_1.default(this);
+        this.monitorModule = new MonitorModule(this);
         await this.monitorModule.init();
         // viewerModule
-        this.viewerModule = new ViewerModule_1.default(this);
+        this.viewerModule = new ViewerModule(this);
         await this.viewerModule.init();
         // editorModule
-        this.editorModule = new EditorModule_1.default(this);
+        this.editorModule = new EditorModule(this);
         await this.editorModule.init();
         // http
         this.httpServer = this.createAndRunHttpServer(host, port);
         // ws
-        this.wsServer = new WebSocketServer_1.default({
+        this.wsServer = new WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer
         });
@@ -109,24 +106,24 @@ class BackHostApp {
     getSecretSync() {
         const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
         let secret;
-        secret = Helper_1.default.getFileContentSync(secretFilePath);
+        secret = Helper.getFileContentSync(secretFilePath);
         if (secret) {
             return secret;
         }
-        secret = Helper_1.default.getRandomString(20);
-        Helper_1.default.writeFileSync(secretFilePath, secret);
+        secret = Helper.getRandomString(20);
+        Helper.writeFileSync(secretFilePath, secret);
         return secret;
     }
     initExpressServer() {
         // middlewares
         this.express.use(bodyParser.json({
             limit: '20mb',
-            reviver: Helper_1.default.dateTimeReviver
+            reviver: Helper.dateTimeReviver
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(cookieParser());
         this.express.use(session({
-            store: new FileSessionStore_1.default(this.sessionDirPath),
+            store: new FileSessionStore(this.sessionDirPath),
             secret: this.getSecretSync(),
             key: 'sid',
             resave: false,
@@ -174,7 +171,7 @@ class BackHostApp {
         // if creating application
         if (Array.isArray(this.appQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = Helper_1.default.createEmptyPromise();
+            const promise = Helper.createEmptyPromise();
             this.appQueue[context.getRoute()].push(promise);
             return promise;
         }
@@ -202,7 +199,7 @@ class BackHostApp {
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application_1.default.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -212,7 +209,7 @@ class BackHostApp {
     }
     getApplicationClass(appInfo) {
         // console.log('BackHostApp.getApplicationClass', appInfo);
-        return Application_1.default;
+        return Application;
     }
     async createApp(req) {
         console.log('createApp');
@@ -224,9 +221,9 @@ class BackHostApp {
         const name = req.body.name;
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
-        await Helper_1.default.createDirIfNotExists(appDirPath);
+        await Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application_1.default.getAppInfos(this.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }
     async logError(err, req = null) {
@@ -335,7 +332,7 @@ class BackHostApp {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await PostgreSqlDatabase_1.default.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await PostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
     async createLog2(values) {
         if (this.logPool) {
@@ -367,7 +364,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
@@ -379,7 +376,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
                     await this.editorModule.handleEditorGet(req, res, context);
                 }
                 else {
@@ -459,7 +456,7 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
@@ -467,7 +464,7 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 }
@@ -495,7 +492,7 @@ class BackHostApp {
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context_1.default({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context({ req, res, domain: this.getDomainFromRequest(req) });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);
@@ -516,7 +513,7 @@ class BackHostApp {
     }
     async _e404(req, res, next) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
-        next(new MyError_1.default({
+        next(new MyError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404
         }));
@@ -524,7 +521,7 @@ class BackHostApp {
     async _e500(err, req, res, next) {
         console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
-        const error = typeof err === 'string' ? new MyError_1.default({ message: err }) : err;
+        const error = typeof err === 'string' ? new MyError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
             res.end(this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error');

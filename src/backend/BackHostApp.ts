@@ -1,4 +1,4 @@
-import WebSocketServer from "./WebSocketServer";
+import WebSocketServer = require("./WebSocketServer");
 
 const fs           = require('fs');
 const path         = require('path');
@@ -9,19 +9,19 @@ const express      = require('express');
 const http         = require('http');
 const colors       = require('colors/safe');
 
-import Helper from './Helper';
-import PostgreSqlDatabase from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
-import Context from '../backend/Context';
-import Application from './viewer/Model/Application/Application';
+import Helper = require('./Helper');
+import PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
+import Context = require('../backend/Context');
+import Application = require('./viewer/Model/Application/Application');
 import { AppInfo } from './AppInfo';
-import MonitorModule from './monitor/MonitorModule';
-import IndexModule from './index/IndexModule';
-import MyError from './MyError';
-import ViewerModule from './viewer/ViewerModule';
-import EditorModule from './editor/EditorModule';
-import CommonModule from './common/CommonModule';
-import FileSessionStore from './FileSessionStore';
-import Result from "./Result";
+import MonitorModule = require('./monitor/MonitorModule');
+import IndexModule = require('./index/IndexModule');
+import MyError = require('./MyError');
+import ViewerModule = require('./viewer/ViewerModule');
+import EditorModule = require('./editor/EditorModule');
+import CommonModule = require('./common/CommonModule');
+import FileSessionStore = require('./FileSessionStore');
+import Result = require("./Result");
 
 const pkg     = require('../../package.json');
 const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');

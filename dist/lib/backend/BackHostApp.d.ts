@@ -1,12 +1,12 @@
-import Context from '../backend/Context';
-import Application from './viewer/Model/Application/Application';
+import Context = require('../backend/Context');
+import Application = require('./viewer/Model/Application/Application');
 import { AppInfo } from './AppInfo';
-import MonitorModule from './monitor/MonitorModule';
-import IndexModule from './index/IndexModule';
-import ViewerModule from './viewer/ViewerModule';
-import EditorModule from './editor/EditorModule';
-import CommonModule from './common/CommonModule';
-import Result from "./Result";
+import MonitorModule = require('./monitor/MonitorModule');
+import IndexModule = require('./index/IndexModule');
+import ViewerModule = require('./viewer/ViewerModule');
+import EditorModule = require('./editor/EditorModule');
+import CommonModule = require('./common/CommonModule');
+import Result = require("./Result");
 declare class BackHostApp {
     params: any;
     applications: any;
