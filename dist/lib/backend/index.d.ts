@@ -6,4 +6,5 @@ import { BackHostApp } from "./BackHostApp";
 import { Converter } from "./Converter";
 import { JsonFile } from "./JsonFile";
 import { Model } from './viewer/Model/Model';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, };
+import { Application } from "./viewer/Model/Application/Application";
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, };

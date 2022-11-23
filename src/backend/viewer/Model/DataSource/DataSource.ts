@@ -5,7 +5,7 @@ const path = require('path');
 import {Model} from '../Model';
 import {Helper} from '../../../Helper';
 import {Context} from '../../../Context';
-import Application = require('../Application/Application');
+import {Application} from '../Application/Application';
 import Database = require('../Database/Database');
 import Page = require('../Page/Page');
 import Form = require('../Form/Form');

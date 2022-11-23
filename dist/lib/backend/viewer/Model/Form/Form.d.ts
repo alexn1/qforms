@@ -3,7 +3,7 @@ import DataSource = require('../DataSource/DataSource');
 import Action = require('../Action/Action');
 import Field = require('../Field/Field');
 import Page = require('../Page/Page');
-import Application = require('../Application/Application');
+import { Application } from '../Application/Application';
 declare class Form extends Model {
     dataSources: DataSource[];
     actions: Action[];

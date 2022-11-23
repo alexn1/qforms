@@ -2,14 +2,14 @@
 const path = require('path');
 const Editor = require('../Editor');
 const Helper_1 = require("../../../Helper");
-const Application = require('../../../viewer/Model/Application/Application');
+const Application_1 = require("../../../viewer/Model/Application/Application");
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = Application.makeAppInfoFromAppFile(appFile);
+        this.appInfo = Application_1.Application.makeAppInfoFromAppFile(appFile);
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);

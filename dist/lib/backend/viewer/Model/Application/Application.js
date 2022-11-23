@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Application = void 0;
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const BaseModel_1 = require("../../../BaseModel");
@@ -426,4 +428,4 @@ class Application extends Model_1.Model {
         */
     }
 }
-module.exports = Application;
+exports.Application = Application;

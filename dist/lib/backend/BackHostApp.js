@@ -13,7 +13,7 @@ const colors = require('colors/safe');
 const Helper_1 = require("./Helper");
 const PostgreSqlDatabase = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("../backend/Context");
-const Application = require("./viewer/Model/Application/Application");
+const Application_1 = require("./viewer/Model/Application/Application");
 const MonitorModule = require("./monitor/MonitorModule");
 const IndexModule = require("./index/IndexModule");
 const MyError = require("./MyError");
@@ -201,7 +201,7 @@ class BackHostApp {
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application_1.Application.loadAppInfo(this.getAppFilePath(context));
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -211,7 +211,7 @@ class BackHostApp {
     }
     getApplicationClass(appInfo) {
         // console.log('BackHostApp.getApplicationClass', appInfo);
-        return Application;
+        return Application_1.Application;
     }
     async createApp(req) {
         console.log('createApp');
@@ -225,7 +225,7 @@ class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application.getAppInfos(this.appsDirPath);
+        const appInfos = await Application_1.Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }
     async logError(err, req = null) {

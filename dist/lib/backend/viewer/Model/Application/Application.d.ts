@@ -9,7 +9,7 @@ import PageLink = require('../PageLink/PageLink');
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from "../../../Result";
-declare class Application extends Model {
+export declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
     env: string;
@@ -69,4 +69,3 @@ declare class Application extends Model {
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;
 }
-export = Application;

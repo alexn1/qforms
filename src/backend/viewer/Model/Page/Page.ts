@@ -3,7 +3,7 @@ const path = require('path');
 import {Model} from '../Model';
 import DataSource = require('../DataSource/DataSource');
 import Action = require('../Action/Action');
-import Application = require('../Application/Application');
+import {Application} from '../Application/Application';
 import Form = require('../Form/Form');
 // import {Context} from '../../../Context';
 import MyError = require('../../../MyError');

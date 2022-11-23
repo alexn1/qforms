@@ -1,13 +1,13 @@
 import {Context} from "../../../Context";
-import Application = require("../../../viewer/Model/Application/Application");
-const EditorController = require('../EditorController');
+import {Application} from "../../../viewer/Model/Application/Application";
+import EditorController = require('../EditorController');
 
 class DatabaseEditorController extends EditorController {
-    application: Application;
-    constructor(...args) {
+    application: Application = null;
+    /*constructor(...args) {
         super(...args);
         this.application = null;
-    }
+    }*/
 
     async init(context: Context) {
         await super.init(context);
@@ -52,6 +52,7 @@ class DatabaseEditorController extends EditorController {
             const database = this.application.getDatabase(params.database);
 
             // tables
+            // @ts-ignore
             result.data.tables = await database.getTableList();
         }
         return result;

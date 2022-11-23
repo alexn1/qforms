@@ -1,6 +1,6 @@
 "use strict";
 const path = require('path');
-const Application = require("../viewer/Model/Application/Application");
+const Application_1 = require("../viewer/Model/Application/Application");
 const Helper_1 = require("../Helper");
 class IndexModule {
     constructor(hostApp) {
@@ -13,7 +13,7 @@ class IndexModule {
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath);
+        const appInfos = await Application_1.Application.getAppInfos(this.hostApp.appsDirPath);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),

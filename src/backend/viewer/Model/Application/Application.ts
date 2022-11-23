@@ -22,7 +22,7 @@ import {Result}  from "../../../Result";
 const text = require('../../text');
 const pkg  = require('../../../../../package.json');
 
-class Application extends Model {
+export class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;
     env: string;
@@ -498,5 +498,3 @@ class Application extends Model {
         */
     }
 }
-
-export = Application;

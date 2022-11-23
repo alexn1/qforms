@@ -1,5 +1,5 @@
 import { Context } from '../backend/Context';
-import Application = require('./viewer/Model/Application/Application');
+import { Application } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import MonitorModule = require('./monitor/MonitorModule');
 import IndexModule = require('./index/IndexModule');

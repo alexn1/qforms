@@ -7,8 +7,8 @@ import {Converter} from "./Converter";
 import {JsonFile} from "./JsonFile";
 
 import {Model} from './viewer/Model/Model';
+import {Application} from "./viewer/Model/Application/Application";
 
-module.exports.Application                       = require('./viewer/Model/Application/Application');
 module.exports.Database                          = require('./viewer/Model/Database/Database');
 module.exports.MySqlDatabase                     = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
 module.exports.PostgreSqlDatabase                = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
@@ -100,4 +100,5 @@ export {
 
     // viewer
     Model,
+    Application,
 };

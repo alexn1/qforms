@@ -12,7 +12,7 @@ const colors       = require('colors/safe');
 import {Helper} from './Helper';
 import PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 import {Context} from '../backend/Context';
-import Application = require('./viewer/Model/Application/Application');
+import {Application} from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import MonitorModule = require('./monitor/MonitorModule');
 import IndexModule = require('./index/IndexModule');

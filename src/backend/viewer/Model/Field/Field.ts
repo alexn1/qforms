@@ -3,7 +3,7 @@ import SqlDataSource = require("../DataSource/SqlDataSource/SqlDataSource");
 const path = require('path');
 
 import {Model} from '../Model';
-import Application = require('../Application/Application');
+import {Application} from '../Application/Application';
 import Page = require('../Page/Page');
 import Form = require('../Form/Form');
 import Column = require("../Column/Column");

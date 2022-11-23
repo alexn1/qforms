@@ -1,6 +1,6 @@
 import {Model} from '../Model';
 import Param = require('../Param/Param');
-import Application = require('../Application/Application');
+import {Application} from '../Application/Application';
 import Table = require('../Table/Table');
 import {Context} from '../../../Context';
 

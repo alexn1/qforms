@@ -1,5 +1,5 @@
 import {Model} from '../Model';
-import Application = require('../Application/Application');
+import {Application} from '../Application/Application';
 
 class Param extends Model {
     getValue() {

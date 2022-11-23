@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import DataSource = require('../DataSource/DataSource');
 import Action = require('../Action/Action');
-import Application = require('../Application/Application');
+import { Application } from '../Application/Application';
 import Form = require('../Form/Form');
 declare class Page extends Model {
     dataSources: DataSource[];

@@ -1,10 +1,14 @@
 "use strict";
-const EditorController = require('../EditorController');
+const EditorController = require("../EditorController");
 class DatabaseEditorController extends EditorController {
-    constructor(...args) {
-        super(...args);
+    constructor() {
+        super(...arguments);
         this.application = null;
     }
+    /*constructor(...args) {
+        super(...args);
+        this.application = null;
+    }*/
     async init(context) {
         await super.init(context);
         this.application = await this.hostApp.createApplication(context);
@@ -43,6 +47,7 @@ class DatabaseEditorController extends EditorController {
             // database
             const database = this.application.getDatabase(params.database);
             // tables
+            // @ts-ignore
             result.data.tables = await database.getTableList();
         }
         return result;
