@@ -5,13 +5,7 @@ import {BackHostApp} from "./BackHostApp";
 import {Converter} from "./Converter";
 import {JsonFile} from "./JsonFile";
 
-module.exports.BackHostApp = BackHostApp;
-module.exports.BaseModel   = BaseModel;
-module.exports.Context     = Context;
-module.exports.Helper      = require('./Helper');
-module.exports.Converter   = Converter;
-module.exports.JsonFile    = JsonFile;
-module.exports.Result      = Result;
+module.exports.Helper = require('./Helper');
 
 // viewer
 module.exports.Model                             = require('./viewer/Model/Model');
@@ -94,3 +88,6 @@ module.exports.ApplicationEditorController       = require('./editor/EditorContr
 module.exports.FieldEditorController             = require('./editor/EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./editor/EditorController/FormEditorController/FormEditorController');
 module.exports.PageEditorController              = require('./editor/EditorController/PageEditorController/PageEditorController');
+
+
+export {BackHostApp, BaseModel, Context, Converter, JsonFile, Result};
