@@ -12,7 +12,7 @@ import Action = require('../Action/Action');
 import {Database} from '../Database/Database';
 import {DataSource} from '../DataSource/DataSource';
 import {Helper} from '../../../Helper';
-import Page = require('../Page/Page');
+import {Page} from '../Page/Page';
 import PageLink = require('../PageLink/PageLink');
 import {Context} from '../../../Context';
 import {JsonFile} from '../../../JsonFile';

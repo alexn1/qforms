@@ -31,4 +31,5 @@ import { RadioField } from './viewer/Model/Field/RadioField/RadioField';
 import { Form } from './viewer/Model/Form/Form';
 import { RowForm } from './viewer/Model/Form/RowForm/RowForm';
 import { TableForm } from './viewer/Model/Form/TableForm/TableForm';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, DateTimeField, FileField, ImageField, LabelField, LinkField, TextAreaField, TextBoxField, PhoneField, PasswordField, RadioField, Form, RowForm, TableForm, };
+import { Page } from './viewer/Model/Page/Page';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, DateTimeField, FileField, ImageField, LabelField, LinkField, TextAreaField, TextBoxField, PhoneField, PasswordField, RadioField, Form, RowForm, TableForm, Page, };

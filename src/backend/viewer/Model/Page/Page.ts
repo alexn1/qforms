@@ -8,7 +8,7 @@ import {Form} from '../Form/Form';
 // import {Context} from '../../../Context';
 import {MyError} from '../../../MyError';
 
-class Page extends Model {
+export class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];
     forms: Form[];
@@ -69,5 +69,3 @@ class Page extends Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 }
-
-export = Page;

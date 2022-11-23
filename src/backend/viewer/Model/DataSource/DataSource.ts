@@ -7,7 +7,7 @@ import {Helper} from '../../../Helper';
 import {Context} from '../../../Context';
 import {Application} from '../Application/Application';
 import {Database} from '../Database/Database';
-import Page = require('../Page/Page');
+import {Page} from '../Page/Page';
 import {Form} from '../Form/Form';
 import {RowForm} from '../Form/RowForm/RowForm';
 import {TableForm} from '../Form/TableForm/TableForm';

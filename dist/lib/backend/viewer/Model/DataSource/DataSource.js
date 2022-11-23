@@ -4,7 +4,7 @@ exports.DataSource = void 0;
 const path = require('path');
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
-const Page = require("../Page/Page");
+const Page_1 = require("../Page/Page");
 const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 const TableForm_1 = require("../Form/TableForm/TableForm");
@@ -141,7 +141,7 @@ class DataSource extends Model_1.Model {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof Page) {
+        else if (this.parent instanceof Page_1.Page) {
             return [this.parent.getName(), this.getName()].join('.');
         }
         else {

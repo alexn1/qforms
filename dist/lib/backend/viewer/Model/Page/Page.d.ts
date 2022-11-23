@@ -3,7 +3,7 @@ import { DataSource } from '../DataSource/DataSource';
 import Action = require('../Action/Action');
 import { Application } from '../Application/Application';
 import { Form } from '../Form/Form';
-declare class Page extends Model {
+export declare class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];
     forms: Form[];
@@ -17,4 +17,3 @@ declare class Page extends Model {
     getForm(name: any): Form;
     getDataSource(name: any): DataSource;
 }
-export = Page;

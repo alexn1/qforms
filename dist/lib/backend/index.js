@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.Page = exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -67,7 +67,8 @@ const RowForm_1 = require("./viewer/Model/Form/RowForm/RowForm");
 Object.defineProperty(exports, "RowForm", { enumerable: true, get: function () { return RowForm_1.RowForm; } });
 const TableForm_1 = require("./viewer/Model/Form/TableForm/TableForm");
 Object.defineProperty(exports, "TableForm", { enumerable: true, get: function () { return TableForm_1.TableForm; } });
-module.exports.Page = require('./viewer/Model/Page/Page');
+const Page_1 = require("./viewer/Model/Page/Page");
+Object.defineProperty(exports, "Page", { enumerable: true, get: function () { return Page_1.Page; } });
 module.exports.PageLink = require('./viewer/Model/PageLink/PageLink');
 module.exports.Column = require('./viewer/Model/Column/Column');
 module.exports.Table = require('./viewer/Model/Table/Table');

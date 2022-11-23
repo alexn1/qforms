@@ -4,7 +4,7 @@ import {Model} from '../Model';
 import {DataSource} from '../DataSource/DataSource';
 import Action = require('../Action/Action');
 import {Field} from '../Field/Field';
-import Page = require('../Page/Page');
+import {Page} from '../Page/Page';
 import {Application} from '../Application/Application';
 import {MyError} from '../../../MyError';
 

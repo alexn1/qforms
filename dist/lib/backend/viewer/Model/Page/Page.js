@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Page = void 0;
 const path = require('path');
 const Model_1 = require("../Model");
 // import {Context} from '../../../Context';
@@ -53,4 +55,4 @@ class Page extends Model_1.Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 }
-module.exports = Page;
+exports.Page = Page;
