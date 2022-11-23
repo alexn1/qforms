@@ -1,5 +1,4 @@
 import { Field } from '../Field';
-declare class RadioField extends Field {
+export declare class RadioField extends Field {
     fillAttributes(response: any): void;
 }
-export = RadioField;

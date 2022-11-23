@@ -21,15 +21,14 @@ import {DateField} from './viewer/Model/Field/DateField/DateField';
 import {TimeField} from './viewer/Model/Field/TimeField/TimeField';
 import {DateTimeField} from './viewer/Model/Field/DateTimeField/DateTimeField';
 import {FileField} from './viewer/Model/Field/FileField/FileField';
-
-module.exports.ImageField                        = require('./viewer/Model/Field/ImageField/ImageField');
-module.exports.LabelField                        = require('./viewer/Model/Field/LabelField/LabelField');
-module.exports.LinkField                         = require('./viewer/Model/Field/LinkField/LinkField');
-module.exports.TextAreaField                     = require('./viewer/Model/Field/TextAreaField/TextAreaField');
-module.exports.TextBoxField                      = require('./viewer/Model/Field/TextBoxField/TextBoxField');
-module.exports.PhoneField                        = require('./viewer/Model/Field/PhoneField/PhoneField');
-module.exports.PasswordField                     = require('./viewer/Model/Field/PasswordField/PasswordField');
-module.exports.RadioField                        = require('./viewer/Model/Field/RadioField/RadioField');
+import {ImageField} from './viewer/Model/Field/ImageField/ImageField';
+import {LabelField} from './viewer/Model/Field/LabelField/LabelField';
+import {LinkField} from './viewer/Model/Field/LinkField/LinkField';
+import {TextAreaField} from './viewer/Model/Field/TextAreaField/TextAreaField';
+import {TextBoxField} from './viewer/Model/Field/TextBoxField/TextBoxField';
+import {PhoneField} from './viewer/Model/Field/PhoneField/PhoneField';
+import {PasswordField} from './viewer/Model/Field/PasswordField/PasswordField';
+import {RadioField} from './viewer/Model/Field/RadioField/RadioField';
 
 module.exports.Form                              = require('./viewer/Model/Form/Form');
 module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
@@ -115,4 +114,12 @@ export {
     TimeField,
     DateTimeField,
     FileField,
+    ImageField,
+    LabelField,
+    LinkField,
+    TextAreaField,
+    TextBoxField,
+    PhoneField,
+    PasswordField,
+    RadioField,
 };

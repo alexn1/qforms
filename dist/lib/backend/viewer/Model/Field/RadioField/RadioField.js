@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RadioField = void 0;
 const Field_1 = require("../Field");
 class RadioField extends Field_1.Field {
     fillAttributes(response) {
@@ -10,4 +12,4 @@ class RadioField extends Field_1.Field {
         response.displayColumn = this.getAttr('displayColumn');
     }
 }
-module.exports = RadioField;
+exports.RadioField = RadioField;

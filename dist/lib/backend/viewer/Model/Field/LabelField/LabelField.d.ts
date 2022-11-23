@@ -1,4 +1,3 @@
 import { Field } from '../Field';
-declare class LabelField extends Field {
+export declare class LabelField extends Field {
 }
-export = LabelField;

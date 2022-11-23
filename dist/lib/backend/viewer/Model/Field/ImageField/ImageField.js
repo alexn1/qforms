@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ImageField = void 0;
 const Field_1 = require("../Field");
 class ImageField extends Field_1.Field {
     fillAttributes(response) {
@@ -7,4 +9,4 @@ class ImageField extends Field_1.Field {
         response.notNull = this.getAttr('notNull');
     }
 }
-module.exports = ImageField;
+exports.ImageField = ImageField;

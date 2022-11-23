@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TextAreaField = void 0;
 const Field_1 = require("../Field");
 class TextAreaField extends Field_1.Field {
     fillAttributes(response) {
@@ -11,4 +13,4 @@ class TextAreaField extends Field_1.Field {
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 }
-module.exports = TextAreaField;
+exports.TextAreaField = TextAreaField;

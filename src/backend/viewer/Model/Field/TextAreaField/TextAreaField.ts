@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class TextAreaField extends Field {
+export class TextAreaField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -11,5 +11,3 @@ class TextAreaField extends Field {
         response.validateOnBlur  = this.getAttr('validateOnBlur');
     }
 }
-
-export = TextAreaField;

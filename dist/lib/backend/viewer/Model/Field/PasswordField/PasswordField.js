@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PasswordField = void 0;
 const Field_1 = require("../Field");
 class PasswordField extends Field_1.Field {
     fillAttributes(response) {
@@ -11,4 +13,4 @@ class PasswordField extends Field_1.Field {
         response.autocomplete = this.getAttr('autocomplete');
     }
 }
-module.exports = PasswordField;
+exports.PasswordField = PasswordField;

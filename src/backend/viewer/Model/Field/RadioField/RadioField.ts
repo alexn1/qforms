@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class RadioField extends Field {
+export class RadioField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -10,5 +10,3 @@ class RadioField extends Field {
         response.displayColumn = this.getAttr('displayColumn');
     }
 }
-
-export = RadioField;

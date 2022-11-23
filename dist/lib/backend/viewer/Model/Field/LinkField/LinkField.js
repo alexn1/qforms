@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.LinkField = void 0;
 const Field_1 = require("../Field");
 class LinkField extends Field_1.Field {
     fillAttributes(response) {
@@ -6,4 +8,4 @@ class LinkField extends Field_1.Field {
         response.notNull = this.getAttr('notNull');
     }
 }
-module.exports = LinkField;
+exports.LinkField = LinkField;

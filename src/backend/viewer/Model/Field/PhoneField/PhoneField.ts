@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class PhoneField extends Field {
+export class PhoneField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly         = this.getAttr('readOnly');
@@ -11,5 +11,3 @@ class PhoneField extends Field {
         response.autocomplete     = this.getAttr('autocomplete');
     }
 }
-
-export = PhoneField;

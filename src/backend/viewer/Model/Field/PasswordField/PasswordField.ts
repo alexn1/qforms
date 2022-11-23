@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class PasswordField extends Field {
+export class PasswordField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly         = this.getAttr('readOnly');
@@ -11,5 +11,3 @@ class PasswordField extends Field {
         response.autocomplete     = this.getAttr('autocomplete');
     }
 }
-
-export = PasswordField;
