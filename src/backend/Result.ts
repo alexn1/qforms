@@ -44,5 +44,3 @@ export class Result {
         result[database][table] = value;
     }
 }
-
-// export = Result;
