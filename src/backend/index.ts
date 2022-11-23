@@ -15,8 +15,8 @@ import {DataSource} from './viewer/Model/DataSource/DataSource';
 import {SqlDataSource} from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 import {Field} from './viewer/Model/Field/Field';
 import {CheckBoxField} from './viewer/Model/Field/CheckBoxField/CheckBoxField';
+import {CheckBoxListField} from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';
 
-module.exports.CheckBoxListField                 = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
 module.exports.ComboBoxField                     = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
 module.exports.DateField                         = require('./viewer/Model/Field/DateField/DateField');
 module.exports.TimeField                         = require('./viewer/Model/Field/TimeField/TimeField');
@@ -108,4 +108,5 @@ export {
     SqlDataSource,
     Field,
     CheckBoxField,
+    CheckBoxListField,
 };

@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -33,7 +33,8 @@ const Field_1 = require("./viewer/Model/Field/Field");
 Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return Field_1.Field; } });
 const CheckBoxField_1 = require("./viewer/Model/Field/CheckBoxField/CheckBoxField");
 Object.defineProperty(exports, "CheckBoxField", { enumerable: true, get: function () { return CheckBoxField_1.CheckBoxField; } });
-module.exports.CheckBoxListField = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
+const CheckBoxListField_1 = require("./viewer/Model/Field/CheckBoxListField/CheckBoxListField");
+Object.defineProperty(exports, "CheckBoxListField", { enumerable: true, get: function () { return CheckBoxListField_1.CheckBoxListField; } });
 module.exports.ComboBoxField = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
 module.exports.DateField = require('./viewer/Model/Field/DateField/DateField');
 module.exports.TimeField = require('./viewer/Model/Field/TimeField/TimeField');

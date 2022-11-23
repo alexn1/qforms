@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class CheckBoxListField extends Field {
+export class CheckBoxListField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -11,4 +11,3 @@ class CheckBoxListField extends Field {
     }
 }
 
-export = CheckBoxListField;

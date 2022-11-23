@@ -14,4 +14,5 @@ import { DataSource } from './viewer/Model/DataSource/DataSource';
 import { SqlDataSource } from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 import { Field } from './viewer/Model/Field/Field';
 import { CheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, };
+import { CheckBoxListField } from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, };
