@@ -1,4 +1,4 @@
-declare class JsonFile {
+export declare class JsonFile {
     filePath: string;
     content: string;
     data: any;
@@ -8,4 +8,3 @@ declare class JsonFile {
     save(): Promise<void>;
     getAttr(name: any): any;
 }
-export = JsonFile;

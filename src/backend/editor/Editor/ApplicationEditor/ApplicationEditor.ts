@@ -2,7 +2,7 @@ const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
-import JsonFile = require('../../../JsonFile');
+import {JsonFile} from '../../../JsonFile';
 import {AppInfo} from '../../../AppInfo';
 import PageEditor = require('../PageEditor/PageEditor');
 

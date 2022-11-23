@@ -15,7 +15,7 @@ import Helper = require('../../../Helper');
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import {Context} from '../../../Context';
-import JsonFile = require('../../../JsonFile');
+import {JsonFile} from '../../../JsonFile';
 import MyError = require('../../../MyError');
 import {Result}  from "../../../Result";
 

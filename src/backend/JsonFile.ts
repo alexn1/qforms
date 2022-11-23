@@ -1,7 +1,7 @@
 import Helper  = require('./Helper');
 import {BaseModel} from './BaseModel';
 
-class JsonFile {
+export class JsonFile {
     filePath: string;
     content: string;
     data: any;
@@ -43,5 +43,3 @@ class JsonFile {
         return value;
     }
 }
-
-export = JsonFile;

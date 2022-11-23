@@ -5,7 +5,7 @@ const BaseModel_1 = require("../../../BaseModel");
 const Model = require("../Model");
 const Helper = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
-const JsonFile = require("../../../JsonFile");
+const JsonFile_1 = require("../../../JsonFile");
 const MyError = require("../../../MyError");
 const Result_1 = require("../../../Result");
 const text = require('../../text');
@@ -133,7 +133,7 @@ class Application extends Model {
             const pageLinkMenu = pageLink.getAttr('menu');
             if (pageLinkMenu) {
                 const pageFilePath = pageLink.getPageFilePath();
-                const pageFile = new JsonFile(pageFilePath);
+                const pageFile = new JsonFile_1.JsonFile(pageFilePath);
                 await pageFile.read();
                 // menu
                 if (!menu[pageLinkMenu]) {
@@ -304,7 +304,7 @@ class Application extends Model {
     }
     static async loadAppInfo(appFilePath) {
         // console.log('Application.loadAppInfo', appFilePath);
-        const appFile = new JsonFile(appFilePath);
+        const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = Application.makeAppInfoFromAppFile(appFile);
         return appInfo;

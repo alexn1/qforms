@@ -1,4 +1,4 @@
-import JsonFile = require('./JsonFile');
+import {JsonFile} from './JsonFile';
 import ApplicationEditor = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
 import {BaseModel} from './BaseModel';
 

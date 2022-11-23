@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.JsonFile = void 0;
 const Helper = require("./Helper");
 const BaseModel_1 = require("./BaseModel");
 class JsonFile {
@@ -39,4 +41,4 @@ class JsonFile {
         return value;
     }
 }
-module.exports = JsonFile;
+exports.JsonFile = JsonFile;

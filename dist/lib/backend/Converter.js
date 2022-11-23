@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Converter = void 0;
-const JsonFile = require("./JsonFile");
+const JsonFile_1 = require("./JsonFile");
 const ApplicationEditor = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
 class Converter {
     static async reformat(appFilePath) {
         console.log('Convert.reformat', appFilePath);
-        const appFile = new JsonFile(appFilePath);
+        const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         // app
         const appEditor = new ApplicationEditor(appFile);

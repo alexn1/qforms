@@ -5,12 +5,13 @@ const Context_1 = require("./Context");
 const BaseModel_1 = require("./BaseModel");
 const BackHostApp_1 = require("./BackHostApp");
 const Converter_1 = require("./Converter");
+const JsonFile_1 = require("./JsonFile");
 module.exports.BackHostApp = BackHostApp_1.BackHostApp;
 module.exports.BaseModel = BaseModel_1.BaseModel;
 module.exports.Context = Context_1.Context;
 module.exports.Helper = require('./Helper');
 module.exports.Converter = Converter_1.Converter;
-module.exports.JsonFile = require('./JsonFile');
+module.exports.JsonFile = JsonFile_1.JsonFile;
 module.exports.Result = Result_1.Result;
 // viewer
 module.exports.Model = require('./viewer/Model/Model');

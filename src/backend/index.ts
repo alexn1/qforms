@@ -3,13 +3,14 @@ import {Context} from './Context';
 import {BaseModel} from './BaseModel';
 import {BackHostApp} from "./BackHostApp";
 import {Converter} from "./Converter";
+import {JsonFile} from "./JsonFile";
 
 module.exports.BackHostApp = BackHostApp;
 module.exports.BaseModel   = BaseModel;
 module.exports.Context     = Context;
 module.exports.Helper      = require('./Helper');
 module.exports.Converter   = Converter;
-module.exports.JsonFile    = require('./JsonFile');
+module.exports.JsonFile    = JsonFile;
 module.exports.Result      = Result;
 
 // viewer

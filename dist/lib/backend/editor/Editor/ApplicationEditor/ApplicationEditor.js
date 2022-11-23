@@ -3,7 +3,7 @@ const path = require('path');
 const Editor = require('../Editor');
 const Helper = require('../../../Helper');
 const Application = require('../../../viewer/Model/Application/Application');
-const JsonFile = require("../../../JsonFile");
+const JsonFile_1 = require("../../../JsonFile");
 const PageEditor = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor {
     constructor(appFile) {
@@ -46,7 +46,7 @@ class ApplicationEditor extends Editor {
     }
     static async createAppFile(appFilePath, params) {
         const data = ApplicationEditor.createData(params);
-        const appFile = new JsonFile(appFilePath, data);
+        const appFile = new JsonFile_1.JsonFile(appFilePath, data);
         await appFile.create();
         return appFile;
     }
@@ -55,7 +55,7 @@ class ApplicationEditor extends Editor {
         const pageDirPath = path.join(pagesDirPath, params.name);
         const pageFilePath = path.join(pageDirPath, params.name + '.json');
         const pageData = PageEditor.createData(params);
-        const pageFile = new JsonFile(pageFilePath, pageData);
+        const pageFile = new JsonFile_1.JsonFile(pageFilePath, pageData);
         await pageFile.create();
         const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
@@ -74,7 +74,7 @@ class ApplicationEditor extends Editor {
     }
     async createPageEditor(relFilePath) {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
-        const pageFile = new JsonFile(pageFilePath);
+        const pageFile = new JsonFile_1.JsonFile(pageFilePath);
         await pageFile.read();
         return new PageEditor(this, pageFile);
     }

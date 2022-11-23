@@ -7,7 +7,7 @@ import DataSource = require('../DataSource/DataSource');
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import { Context } from '../../../Context';
-import JsonFile = require('../../../JsonFile');
+import { JsonFile } from '../../../JsonFile';
 import { Result } from "../../../Result";
 declare class Application extends Model {
     appInfo: AppInfo;
