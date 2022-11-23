@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -16,8 +16,7 @@ Object.defineProperty(exports, "Converter", { enumerable: true, get: function ()
 const JsonFile_1 = require("./JsonFile");
 Object.defineProperty(exports, "JsonFile", { enumerable: true, get: function () { return JsonFile_1.JsonFile; } });
 const Model_1 = require("./viewer/Model/Model");
-// viewer
-module.exports.Model = Model_1.Model;
+Object.defineProperty(exports, "Model", { enumerable: true, get: function () { return Model_1.Model; } });
 module.exports.Application = require('./viewer/Model/Application/Application');
 module.exports.Database = require('./viewer/Model/Database/Database');
 module.exports.MySqlDatabase = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
