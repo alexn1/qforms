@@ -4,7 +4,7 @@ import Action = require('../Action/Action');
 import { Field } from '../Field/Field';
 import Page = require('../Page/Page');
 import { Application } from '../Application/Application';
-declare class Form extends Model {
+export declare class Form extends Model {
     dataSources: DataSource[];
     actions: Action[];
     fields: Field[];
@@ -32,4 +32,3 @@ declare class Form extends Model {
     getField(name: any): Field;
     getDataSource(name: any): DataSource;
 }
-export = Form;

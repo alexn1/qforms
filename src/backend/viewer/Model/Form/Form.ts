@@ -8,7 +8,7 @@ import Page = require('../Page/Page');
 import {Application} from '../Application/Application';
 import {MyError} from '../../../MyError';
 
-class Form extends Model {
+export class Form extends Model {
     dataSources: DataSource[];
     actions: Action[];
     fields: Field[];
@@ -140,5 +140,3 @@ class Form extends Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 }
-
-export = Form;

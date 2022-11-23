@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Form = void 0;
 const path = require('path');
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
@@ -116,4 +118,4 @@ class Form extends Model_1.Model {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 }
-module.exports = Form;
+exports.Form = Form;

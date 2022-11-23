@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import Action = require('../Action/Action');
 import { Application } from '../Application/Application';
-import Form = require('../Form/Form');
+import { Form } from '../Form/Form';
 declare class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];

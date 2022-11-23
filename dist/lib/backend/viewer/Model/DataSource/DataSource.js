@@ -5,7 +5,7 @@ const path = require('path');
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 const Page = require("../Page/Page");
-const Form = require("../Form/Form");
+const Form_1 = require("../Form/Form");
 const RowForm = require("../Form/RowForm/RowForm");
 const TableForm = require("../Form/TableForm/TableForm");
 class DataSource extends Model_1.Model {
@@ -210,7 +210,7 @@ class DataSource extends Model_1.Model {
         return this.rows;
     }
     isOnForm() {
-        return this.parent instanceof Form;
+        return this.parent instanceof Form_1.Form;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();

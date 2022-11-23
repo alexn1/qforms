@@ -8,7 +8,7 @@ import {Context} from '../../../Context';
 import {Application} from '../Application/Application';
 import {Database} from '../Database/Database';
 import Page = require('../Page/Page');
-import Form = require('../Form/Form');
+import {Form} from '../Form/Form';
 import RowForm = require('../Form/RowForm/RowForm');
 import TableForm = require('../Form/TableForm/TableForm');
 

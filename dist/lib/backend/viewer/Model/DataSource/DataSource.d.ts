@@ -3,7 +3,7 @@ import { Model } from '../Model';
 import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
-import Form = require('../Form/Form');
+import { Form } from '../Form/Form';
 export declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];

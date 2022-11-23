@@ -1,6 +1,6 @@
 "use strict";
-const Form = require("../Form");
-class RowForm extends Form {
+const Form_1 = require("../Form");
+class RowForm extends Form_1.Form {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());

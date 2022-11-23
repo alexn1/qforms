@@ -1,6 +1,6 @@
 "use strict";
-const Form = require("../Form");
-class TableForm extends Form {
+const Form_1 = require("../Form");
+class TableForm extends Form_1.Form {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/

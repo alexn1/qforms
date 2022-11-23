@@ -1,4 +1,4 @@
-import Form = require('../Form');
+import {Form} from '../Form';
 
 class TableForm extends Form {
 

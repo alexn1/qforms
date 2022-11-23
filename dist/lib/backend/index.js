@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -61,7 +61,8 @@ const PasswordField_1 = require("./viewer/Model/Field/PasswordField/PasswordFiel
 Object.defineProperty(exports, "PasswordField", { enumerable: true, get: function () { return PasswordField_1.PasswordField; } });
 const RadioField_1 = require("./viewer/Model/Field/RadioField/RadioField");
 Object.defineProperty(exports, "RadioField", { enumerable: true, get: function () { return RadioField_1.RadioField; } });
-module.exports.Form = require('./viewer/Model/Form/Form');
+const Form_1 = require("./viewer/Model/Form/Form");
+Object.defineProperty(exports, "Form", { enumerable: true, get: function () { return Form_1.Form; } });
 module.exports.RowForm = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm = require('./viewer/Model/Form/TableForm/TableForm');
 module.exports.Page = require('./viewer/Model/Page/Page');

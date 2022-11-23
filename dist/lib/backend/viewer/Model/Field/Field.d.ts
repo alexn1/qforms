@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { Application } from '../Application/Application';
 import Page = require('../Page/Page');
-import Form = require('../Form/Form');
+import { Form } from '../Form/Form';
 import Column = require("../Column/Column");
 export declare class Field extends Model {
     static create(data: any, parent: any): Promise<Field>;
