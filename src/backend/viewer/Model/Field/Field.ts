@@ -1,4 +1,4 @@
-import SqlDataSource = require("../DataSource/SqlDataSource/SqlDataSource");
+import {SqlDataSource} from "../DataSource/SqlDataSource/SqlDataSource";
 
 const path = require('path');
 

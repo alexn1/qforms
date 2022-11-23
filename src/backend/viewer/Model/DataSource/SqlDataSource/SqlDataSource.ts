@@ -4,7 +4,7 @@ import Table = require('../../Table/Table');
 import {Context} from '../../../../Context';
 import {Result} from "../../../../Result";
 
-class SqlDataSource extends DataSource {
+export class SqlDataSource extends DataSource {
     table: Table;
     constructor(data, parent) {
         super(data, parent);
@@ -341,5 +341,3 @@ class SqlDataSource extends DataSource {
         return file.data;
     }
 }
-
-export = SqlDataSource;

@@ -2,7 +2,7 @@ import { DataSource } from '../DataSource';
 import Table = require('../../Table/Table');
 import { Context } from '../../../../Context';
 import { Result } from "../../../../Result";
-declare class SqlDataSource extends DataSource {
+export declare class SqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
     getKeyColumns(): string[];
@@ -31,4 +31,3 @@ declare class SqlDataSource extends DataSource {
     decodeChanges(changes: any): {};
     getBuffer(context: Context, file: any): Promise<any>;
 }
-export = SqlDataSource;

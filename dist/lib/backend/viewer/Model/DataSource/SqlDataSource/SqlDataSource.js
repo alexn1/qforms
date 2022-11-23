@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SqlDataSource = void 0;
 const DataSource_1 = require("../DataSource");
 const Helper_1 = require("../../../../Helper");
 const Result_1 = require("../../../../Result");
@@ -313,4 +315,4 @@ class SqlDataSource extends DataSource_1.DataSource {
         return file.data;
     }
 }
-module.exports = SqlDataSource;
+exports.SqlDataSource = SqlDataSource;

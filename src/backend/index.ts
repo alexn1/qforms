@@ -10,10 +10,10 @@ import {Model} from './viewer/Model/Model';
 import {Application} from "./viewer/Model/Application/Application";
 import {Database} from './viewer/Model/Database/Database';
 import {MySqlDatabase} from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
-import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase'
-import {DataSource} from './viewer/Model/DataSource/DataSource'
+import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
+import {DataSource} from './viewer/Model/DataSource/DataSource';
+import {SqlDataSource} from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 
-module.exports.SqlDataSource                     = require('./viewer/Model/DataSource/SqlDataSource/SqlDataSource');
 module.exports.Field                             = require('./viewer/Model/Field/Field');
 module.exports.CheckBoxField                     = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');
 module.exports.CheckBoxListField                 = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
@@ -105,4 +105,5 @@ export {
     MySqlDatabase,
     PostgreSqlDatabase,
     DataSource,
+    SqlDataSource,
 };
