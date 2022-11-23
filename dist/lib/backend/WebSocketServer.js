@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.WebSocketServer = void 0;
 const Context_1 = require("./Context");
 const ws = require('ws');
 const url = require('url');
@@ -52,4 +54,4 @@ class WebSocketServer {
         return this.options.hostApp;
     }
 }
-module.exports = WebSocketServer;
+exports.WebSocketServer = WebSocketServer;

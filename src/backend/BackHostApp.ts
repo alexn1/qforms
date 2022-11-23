@@ -1,4 +1,4 @@
-import WebSocketServer = require("./WebSocketServer");
+import {WebSocketServer} from "./WebSocketServer";
 
 const fs           = require('fs');
 const path         = require('path');

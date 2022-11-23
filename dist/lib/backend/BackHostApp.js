@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BackHostApp = void 0;
-const WebSocketServer = require("./WebSocketServer");
+const WebSocketServer_1 = require("./WebSocketServer");
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
@@ -93,7 +93,7 @@ class BackHostApp {
         // http
         this.httpServer = this.createAndRunHttpServer(host, port);
         // ws
-        this.wsServer = new WebSocketServer({
+        this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer
         });

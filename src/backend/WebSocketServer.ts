@@ -4,7 +4,7 @@ import {Context} from "./Context";
 const ws = require('ws');
 const url = require('url');
 
-class WebSocketServer {
+export class WebSocketServer {
     options: any;
     server: any;
     constructor(options) {
@@ -56,5 +56,3 @@ class WebSocketServer {
         return this.options.hostApp;
     }
 }
-
-export = WebSocketServer;

@@ -1,5 +1,5 @@
 import { BackHostApp } from "./BackHostApp";
-declare class WebSocketServer {
+export declare class WebSocketServer {
     options: any;
     server: any;
     constructor(options: any);
@@ -9,4 +9,3 @@ declare class WebSocketServer {
     onMessage(webSocket: any, data: any, flags: any): Promise<void>;
     getHostApp(): BackHostApp;
 }
-export = WebSocketServer;
