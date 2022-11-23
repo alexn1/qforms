@@ -1,6 +1,6 @@
 import {Form} from '../Form';
 
-class RowForm extends Form {
+export class RowForm extends Form {
 
     // constructor(data, parent) {
     //     super(data, parent);
@@ -28,5 +28,3 @@ class RowForm extends Form {
     }
 
 }
-
-export = RowForm;

@@ -9,7 +9,7 @@ import {Application} from '../Application/Application';
 import {Database} from '../Database/Database';
 import Page = require('../Page/Page');
 import {Form} from '../Form/Form';
-import RowForm = require('../Form/RowForm/RowForm');
+import {RowForm} from '../Form/RowForm/RowForm';
 import TableForm = require('../Form/TableForm/TableForm');
 
 export class DataSource extends Model {

@@ -5,7 +5,6 @@ import {BaseModel} from './BaseModel';
 import {BackHostApp} from "./BackHostApp";
 import {Converter} from "./Converter";
 import {JsonFile} from "./JsonFile";
-
 import {Model} from './viewer/Model/Model';
 import {Application} from "./viewer/Model/Application/Application";
 import {Database} from './viewer/Model/Database/Database';
@@ -30,8 +29,8 @@ import {PhoneField} from './viewer/Model/Field/PhoneField/PhoneField';
 import {PasswordField} from './viewer/Model/Field/PasswordField/PasswordField';
 import {RadioField} from './viewer/Model/Field/RadioField/RadioField';
 import {Form} from './viewer/Model/Form/Form';
+import {RowForm} from './viewer/Model/Form/RowForm/RowForm';
 
-module.exports.RowForm                           = require('./viewer/Model/Form/RowForm/RowForm');
 module.exports.TableForm                         = require('./viewer/Model/Form/TableForm/TableForm');
 module.exports.Page                              = require('./viewer/Model/Page/Page');
 module.exports.PageLink                          = require('./viewer/Model/PageLink/PageLink');
@@ -123,4 +122,5 @@ export {
     PasswordField,
     RadioField,
     Form,
+    RowForm,
 };
