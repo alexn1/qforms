@@ -6,7 +6,7 @@ const pkg     = require('../../../package.json');
 import {Helper} from "../Helper";
 import {BackHostApp} from '../BackHostApp';
 import {Application} from "./Model/Application/Application";
-import MyError = require("../MyError");
+import {MyError} from "../MyError";
 import {Model} from "./Model/Model";
 import {Result} from "../Result";
 

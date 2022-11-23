@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
 const Model_1 = require("../Model");
-const MyError = require("../../../MyError");
+const MyError_1 = require("../../../MyError");
 class Form extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -91,7 +91,7 @@ class Form extends Model_1.Model {
         console.log('Form.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new MyError({
+        throw new MyError_1.MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

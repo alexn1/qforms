@@ -6,7 +6,7 @@ import Action = require('../Action/Action');
 import Field = require('../Field/Field');
 import Page = require('../Page/Page');
 import {Application} from '../Application/Application';
-import MyError = require('../../../MyError');
+import {MyError} from '../../../MyError';
 
 class Form extends Model {
     dataSources: DataSource[];

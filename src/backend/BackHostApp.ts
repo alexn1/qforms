@@ -16,7 +16,7 @@ import {Application} from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import MonitorModule = require('./monitor/MonitorModule');
 import IndexModule = require('./index/IndexModule');
-import MyError = require('./MyError');
+import {MyError} from './MyError';
 import ViewerModule = require('./viewer/ViewerModule');
 import EditorModule = require('./editor/EditorModule');
 import CommonModule = require('./common/CommonModule');

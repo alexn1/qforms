@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MyError = void 0;
 class MyError extends Error {
     constructor(options) {
         if (!options.message)
@@ -9,4 +11,4 @@ class MyError extends Error {
         this.context = options.context;
     }
 }
-module.exports = MyError;
+exports.MyError = MyError;

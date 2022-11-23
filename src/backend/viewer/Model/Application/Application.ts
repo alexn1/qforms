@@ -16,7 +16,7 @@ import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import {Context} from '../../../Context';
 import {JsonFile} from '../../../JsonFile';
-import MyError = require('../../../MyError');
+import {MyError} from '../../../MyError';
 import {Result}  from "../../../Result";
 
 const text = require('../../text');

@@ -8,7 +8,7 @@ const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
 const JsonFile_1 = require("../../../JsonFile");
-const MyError = require("../../../MyError");
+const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../Result");
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
@@ -242,7 +242,7 @@ class Application extends Model_1.Model {
         console.log('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
-        throw new MyError({
+        throw new MyError_1.MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

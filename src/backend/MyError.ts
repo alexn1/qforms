@@ -1,6 +1,6 @@
 import {Context} from './Context';
 
-class MyError extends Error {
+export class MyError extends Error {
     context: Context;
     status: number;
     data: any;
@@ -12,5 +12,3 @@ class MyError extends Error {
         this.context = options.context;
     }
 }
-
-export = MyError;

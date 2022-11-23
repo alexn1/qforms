@@ -2,7 +2,7 @@
 const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = require("../Helper");
-const MyError = require("../MyError");
+const MyError_1 = require("../MyError");
 const Result_1 = require("../Result");
 // post actions
 const ACTIONS = [
@@ -103,7 +103,7 @@ class ViewerModule {
         }
         else {
             if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-                throw new MyError({ message: 'Unauthorized', status: 401, context });
+                throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
             }
             if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
                 throw new Error(`unknown action: ${context.getReq().body.action}`);

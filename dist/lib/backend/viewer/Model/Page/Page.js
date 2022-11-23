@@ -2,7 +2,7 @@
 const path = require('path');
 const Model_1 = require("../Model");
 // import {Context} from '../../../Context';
-const MyError = require("../../../MyError");
+const MyError_1 = require("../../../MyError");
 class Page extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -37,7 +37,7 @@ class Page extends Model_1.Model {
         console.log('Page.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new MyError({
+        throw new MyError_1.MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

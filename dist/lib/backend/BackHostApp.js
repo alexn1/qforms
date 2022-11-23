@@ -16,7 +16,7 @@ const Context_1 = require("../backend/Context");
 const Application_1 = require("./viewer/Model/Application/Application");
 const MonitorModule = require("./monitor/MonitorModule");
 const IndexModule = require("./index/IndexModule");
-const MyError = require("./MyError");
+const MyError_1 = require("./MyError");
 const ViewerModule = require("./viewer/ViewerModule");
 const EditorModule = require("./editor/EditorModule");
 const CommonModule = require("./common/CommonModule");
@@ -515,7 +515,7 @@ class BackHostApp {
     }
     async _e404(req, res, next) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
-        next(new MyError({
+        next(new MyError_1.MyError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404
         }));
@@ -523,7 +523,7 @@ class BackHostApp {
     async _e500(err, req, res, next) {
         console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
-        const error = typeof err === 'string' ? new MyError({ message: err }) : err;
+        const error = typeof err === 'string' ? new MyError_1.MyError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
             res.end(this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error');
