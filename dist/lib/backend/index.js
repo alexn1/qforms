@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -37,7 +37,8 @@ const CheckBoxListField_1 = require("./viewer/Model/Field/CheckBoxListField/Chec
 Object.defineProperty(exports, "CheckBoxListField", { enumerable: true, get: function () { return CheckBoxListField_1.CheckBoxListField; } });
 const ComboBoxField_1 = require("./viewer/Model/Field/ComboBoxField/ComboBoxField");
 Object.defineProperty(exports, "ComboBoxField", { enumerable: true, get: function () { return ComboBoxField_1.ComboBoxField; } });
-module.exports.DateField = require('./viewer/Model/Field/DateField/DateField');
+const DateField_1 = require("./viewer/Model/Field/DateField/DateField");
+Object.defineProperty(exports, "DateField", { enumerable: true, get: function () { return DateField_1.DateField; } });
 module.exports.TimeField = require('./viewer/Model/Field/TimeField/TimeField');
 module.exports.DateTimeField = require('./viewer/Model/Field/DateTimeField/DateTimeField');
 module.exports.FileField = require('./viewer/Model/Field/FileField/FileField');

@@ -1,7 +1,7 @@
 import {Field} from '../Field';
 import {Helper} from '../../../../Helper';
 
-class DateField extends Field {
+export class DateField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -35,5 +35,3 @@ class DateField extends Field {
         return value;
     }
 }
-
-export = DateField;

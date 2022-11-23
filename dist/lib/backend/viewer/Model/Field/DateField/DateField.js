@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DateField = void 0;
 const Field_1 = require("../Field");
 const Helper_1 = require("../../../../Helper");
 class DateField extends Field_1.Field {
@@ -36,4 +38,4 @@ class DateField extends Field_1.Field {
         return value;
     }
 }
-module.exports = DateField;
+exports.DateField = DateField;
