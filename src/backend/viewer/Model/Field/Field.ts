@@ -54,7 +54,7 @@ class Field extends Model {
                 row[column] = this.valueToRaw(value);
             }
         } catch (e) {
-            throw new Error(`[${this.getFullName()}] fillDefaultValue: ${e.toString()}`);
+            throw new Error(`[${this.getFullName()}] fillDefaultValue eval error: ${e.toString()}`);
         }
     }
 

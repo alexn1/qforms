@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Helper = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = void 0;
+exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+const Helper_1 = require("./Helper");
+Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
 Object.defineProperty(exports, "Result", { enumerable: true, get: function () { return Result_1.Result; } });
 const Context_1 = require("./Context");
@@ -9,8 +11,6 @@ const BaseModel_1 = require("./BaseModel");
 Object.defineProperty(exports, "BaseModel", { enumerable: true, get: function () { return BaseModel_1.BaseModel; } });
 const BackHostApp_1 = require("./BackHostApp");
 Object.defineProperty(exports, "BackHostApp", { enumerable: true, get: function () { return BackHostApp_1.BackHostApp; } });
-const Helper_1 = require("./Helper");
-Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Converter_1 = require("./Converter");
 Object.defineProperty(exports, "Converter", { enumerable: true, get: function () { return Converter_1.Converter; } });
 const JsonFile_1 = require("./JsonFile");

@@ -44,7 +44,7 @@ class Field extends Model {
             }
         }
         catch (e) {
-            throw new Error(`[${this.getFullName()}] fillDefaultValue: ${e.toString()}`);
+            throw new Error(`[${this.getFullName()}] fillDefaultValue eval error: ${e.toString()}`);
         }
     }
     dumpRowValueToParams(row, params) {
