@@ -694,5 +694,8 @@ class BackHostApp {
             }
         }
     }
+    static test() {
+        console.log('BackHostApp.test');
+    }
 }
 module.exports = BackHostApp;

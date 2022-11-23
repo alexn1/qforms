@@ -71,5 +71,6 @@ declare class BackHostApp {
     isProduction(): boolean;
     getParams(): any;
     broadcastResult(sourceApplication: Application, context: Context, result: Result): void;
+    static test(): void;
 }
 export = BackHostApp;
