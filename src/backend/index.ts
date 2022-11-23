@@ -18,8 +18,8 @@ import {CheckBoxField} from './viewer/Model/Field/CheckBoxField/CheckBoxField';
 import {CheckBoxListField} from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';
 import {ComboBoxField} from './viewer/Model/Field/ComboBoxField/ComboBoxField';
 import {DateField} from './viewer/Model/Field/DateField/DateField';
+import {TimeField} from './viewer/Model/Field/TimeField/TimeField';
 
-module.exports.TimeField                         = require('./viewer/Model/Field/TimeField/TimeField');
 module.exports.DateTimeField                     = require('./viewer/Model/Field/DateTimeField/DateTimeField');
 module.exports.FileField                         = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField                        = require('./viewer/Model/Field/ImageField/ImageField');
@@ -111,4 +111,5 @@ export {
     CheckBoxListField,
     ComboBoxField,
     DateField,
+    TimeField,
 };

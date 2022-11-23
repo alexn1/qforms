@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class TimeField extends Field {
+export class TimeField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly         = this.getAttr('readOnly');
@@ -10,5 +10,3 @@ class TimeField extends Field {
         response.validateOnBlur   = this.getAttr('validateOnBlur');
     }
 }
-
-export = TimeField;

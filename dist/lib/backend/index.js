@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -39,7 +39,8 @@ const ComboBoxField_1 = require("./viewer/Model/Field/ComboBoxField/ComboBoxFiel
 Object.defineProperty(exports, "ComboBoxField", { enumerable: true, get: function () { return ComboBoxField_1.ComboBoxField; } });
 const DateField_1 = require("./viewer/Model/Field/DateField/DateField");
 Object.defineProperty(exports, "DateField", { enumerable: true, get: function () { return DateField_1.DateField; } });
-module.exports.TimeField = require('./viewer/Model/Field/TimeField/TimeField');
+const TimeField_1 = require("./viewer/Model/Field/TimeField/TimeField");
+Object.defineProperty(exports, "TimeField", { enumerable: true, get: function () { return TimeField_1.TimeField; } });
 module.exports.DateTimeField = require('./viewer/Model/Field/DateTimeField/DateTimeField');
 module.exports.FileField = require('./viewer/Model/Field/FileField/FileField');
 module.exports.ImageField = require('./viewer/Model/Field/ImageField/ImageField');

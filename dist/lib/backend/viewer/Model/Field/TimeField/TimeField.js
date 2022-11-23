@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TimeField = void 0;
 const Field_1 = require("../Field");
 class TimeField extends Field_1.Field {
     fillAttributes(response) {
@@ -10,4 +12,4 @@ class TimeField extends Field_1.Field {
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 }
-module.exports = TimeField;
+exports.TimeField = TimeField;
