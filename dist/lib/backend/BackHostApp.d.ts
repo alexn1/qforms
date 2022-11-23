@@ -6,7 +6,7 @@ import IndexModule = require('./index/IndexModule');
 import ViewerModule = require('./viewer/ViewerModule');
 import EditorModule = require('./editor/EditorModule');
 import CommonModule = require('./common/CommonModule');
-import Result = require("./Result");
+import { Result } from "./Result";
 declare class BackHostApp {
     params: any;
     applications: any;

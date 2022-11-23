@@ -17,7 +17,7 @@ import PageLink = require('../PageLink/PageLink');
 import Context = require('../../../Context');
 import JsonFile = require('../../../JsonFile');
 import MyError = require('../../../MyError');
-import Result = require("../../../Result");
+import {Result}  from "../../../Result";
 
 const text = require('../../text');
 const pkg  = require('../../../../../package.json');

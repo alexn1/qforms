@@ -7,7 +7,7 @@ const Helper = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
 const JsonFile = require("../../../JsonFile");
 const MyError = require("../../../MyError");
-const Result = require("../../../Result");
+const Result_1 = require("../../../Result");
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 class Application extends Model {
@@ -389,7 +389,7 @@ class Application extends Model {
                     const table = database.findTable(tableName);
                     if (table) {
                         if (!fResult)
-                            fResult = new Result();
+                            fResult = new Result_1.Result();
                         if (!fResult[databaseName])
                             fResult[databaseName] = {};
                         fResult[databaseName][tableName] = { refresh: true };

@@ -2,7 +2,7 @@ import DataSource = require('../DataSource');
 import Helper = require('../../../../Helper');
 import Table = require('../../Table/Table');
 import Context = require('../../../../Context');
-import Result = require("../../../../Result");
+import {Result} from "../../../../Result";
 
 class SqlDataSource extends DataSource {
     table: Table;

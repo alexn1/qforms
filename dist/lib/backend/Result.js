@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Result = void 0;
 class Result {
     // result {
     //   insert  : {table: ["1", "2"]},
@@ -62,4 +64,5 @@ class Result {
         result[database][table] = value;
     }
 }
-module.exports = Result;
+exports.Result = Result;
+// export = Result;

@@ -8,7 +8,7 @@ import BackHostApp = require('../BackHostApp');
 import Application = require("./Model/Application/Application");
 import MyError = require("../MyError");
 import Model = require("./Model/Model");
-import Result = require("../Result");
+import {Result} from "../Result";
 
 // post actions
 const ACTIONS = [

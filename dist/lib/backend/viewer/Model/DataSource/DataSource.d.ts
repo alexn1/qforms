@@ -1,4 +1,4 @@
-import Result = require("../../../Result");
+import { Result } from "../../../Result";
 import Model = require('../Model');
 import Context = require('../../../Context');
 import Application = require('../Application/Application');

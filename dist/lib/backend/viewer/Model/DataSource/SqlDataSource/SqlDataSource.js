@@ -1,7 +1,7 @@
 "use strict";
 const DataSource = require("../DataSource");
 const Helper = require("../../../../Helper");
-const Result = require("../../../../Result");
+const Result_1 = require("../../../../Result");
 class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
@@ -159,9 +159,9 @@ class SqlDataSource extends DataSource {
             throw new Error('singleQuery does not return row');
         this.prepareRows(context, [row]);
         // console.log('row:', row);
-        const result = new Result();
-        Result.addInsertToResult(result, database, table, key);
-        Result.addInsertExToResult(result, database, table, key, row);
+        const result = new Result_1.Result();
+        Result_1.Result.addInsertToResult(result, database, table, key);
+        Result_1.Result.addInsertExToResult(result, database, table, key, row);
         return result;
     }
     async update(context) {
@@ -198,9 +198,9 @@ class SqlDataSource extends DataSource {
         this.prepareRows(context, [row]);
         // console.log('row:', row);
         // result
-        const result = new Result();
-        Result.addUpdateToResult(result, database, table, key, newKey);
-        Result.addUpdateExToResult(result, database, table, key, row);
+        const result = new Result_1.Result();
+        Result_1.Result.addUpdateToResult(result, database, table, key, newKey);
+        Result_1.Result.addUpdateExToResult(result, database, table, key, row);
         return result;
     }
     async delete(context) {
@@ -212,8 +212,8 @@ class SqlDataSource extends DataSource {
         const table = this.getAttr('table');
         const query = this.getDatabase().getDeleteQuery(table, keyValues);
         await this.getDatabase().queryResult(context, query, keyValues);
-        const result = new Result();
-        Result.addDeleteToResult(result, database, table, key);
+        const result = new Result_1.Result();
+        Result_1.Result.addDeleteToResult(result, database, table, key);
         return result;
     }
     fillAttributes(response) {

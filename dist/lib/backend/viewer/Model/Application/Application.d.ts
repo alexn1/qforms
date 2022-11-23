@@ -8,7 +8,7 @@ import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');
 import Context = require('../../../Context');
 import JsonFile = require('../../../JsonFile');
-import Result = require("../../../Result");
+import { Result } from "../../../Result";
 declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;

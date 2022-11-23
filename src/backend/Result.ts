@@ -1,4 +1,4 @@
-class Result {
+export class Result {
     // result {
     //   insert  : {table: ["1", "2"]},
     //   insertEx: {table: {"1": {field: 1, field2: 2}}}
@@ -45,4 +45,4 @@ class Result {
     }
 }
 
-export = Result;
+// export = Result;

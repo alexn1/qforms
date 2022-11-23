@@ -1,4 +1,4 @@
-import Result = require("../../../Result");
+import {Result} from "../../../Result";
 
 const path = require('path');
 

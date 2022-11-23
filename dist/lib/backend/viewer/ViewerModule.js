@@ -3,7 +3,7 @@ const path = require('path');
 const pkg = require('../../../package.json');
 const Helper = require("../Helper");
 const MyError = require("../MyError");
-const Result = require("../Result");
+const Result_1 = require("../Result");
 // post actions
 const ACTIONS = [
     'page',
@@ -338,14 +338,14 @@ class ViewerModule {
             if (Array.isArray(result)) {
                 const [response, _result] = result;
                 await res.json(response);
-                if (!(_result instanceof Result)) {
+                if (!(_result instanceof Result_1.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.hostApp.broadcastResult(application, context, _result);
             }
             else {
                 await res.json(result);
-                if (result instanceof Result) {
+                if (result instanceof Result_1.Result) {
                     this.hostApp.broadcastResult(application, context, result);
                 }
             }
