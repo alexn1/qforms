@@ -1,9 +1,9 @@
-declare const BaseModel: any;
+import BaseModel = require('../../BaseModel');
 declare class Editor extends BaseModel {
     createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
-    getFile(filePath: any): Promise<any>;
+    getFile(filePath: any): Promise<string>;
     saveFile(filePath: any, content: any): Promise<void>;
-    getCustomFile(ext: any): Promise<any>;
+    getCustomFile(ext: any): Promise<string>;
     saveCustomFile(ext: any, text: any): Promise<void>;
     getCustomFilePath(ext: any): Promise<any>;
     moveDataColItem(colName: any, name: any, offset: any): void;

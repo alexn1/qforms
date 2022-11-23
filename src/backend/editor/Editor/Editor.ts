@@ -1,9 +1,9 @@
 const path    = require('path');
 const ejs     = require('ejs');
 
-const BaseModel = require('../../BaseModel');
-const Helper = require('../../Helper');
-const backend = require('../../../backend');
+import BaseModel = require('../../BaseModel');
+import Helper = require('../../Helper');
+import backend = require('../../../backend');
 
 class Editor extends BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {

@@ -1,6 +1,6 @@
 // backend
 module.exports.BackHostApp = require('./BackHostApp');
-module.exports.BaseModel   = require('./BaseModel');
+// module.exports.BaseModel   = require('./BaseModel');
 module.exports.Context     = require('./Context');
 module.exports.Helper      = require('./Helper');
 module.exports.Converter   = require('./Converter');
