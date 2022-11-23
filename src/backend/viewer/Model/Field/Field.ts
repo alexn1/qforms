@@ -45,10 +45,10 @@ class Field extends Model {
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getParams();
         const js = Helper.templateToJsString(defaultValue, params);
-        // @ts-ignore
-        global.Helper = Helper;
         let value;
         try {
+            // @ts-ignore
+            global.Helper = Helper;
             value = eval(js);
             if (value !== undefined) {
                 row[column] = this.valueToRaw(value);
