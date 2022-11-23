@@ -3,7 +3,7 @@ import {Context} from "../../../../Context";
 const mysql = require('mysql');
 import {Database} from '../Database';
 
-class MySqlDatabase extends Database {
+export class MySqlDatabase extends Database {
     pool: any;
     constructor(data, parent?) {
         super(data, parent);
@@ -344,5 +344,3 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[this.getName()] = null;
     }
 }
-
-export = MySqlDatabase;

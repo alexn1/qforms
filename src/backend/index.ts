@@ -9,8 +9,8 @@ import {JsonFile} from "./JsonFile";
 import {Model} from './viewer/Model/Model';
 import {Application} from "./viewer/Model/Application/Application";
 import {Database} from './viewer/Model/Database/Database';
+import {MySqlDatabase} from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
 
-module.exports.MySqlDatabase                     = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
 module.exports.PostgreSqlDatabase                = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 module.exports.DataSource                        = require('./viewer/Model/DataSource/DataSource');
 module.exports.SqlDataSource                     = require('./viewer/Model/DataSource/SqlDataSource/SqlDataSource');
@@ -102,4 +102,5 @@ export {
     Model,
     Application,
     Database,
+    MySqlDatabase,
 };

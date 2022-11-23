@@ -8,4 +8,5 @@ import { JsonFile } from "./JsonFile";
 import { Model } from './viewer/Model/Model';
 import { Application } from "./viewer/Model/Application/Application";
 import { Database } from './viewer/Model/Database/Database';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, };
+import { MySqlDatabase } from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, };

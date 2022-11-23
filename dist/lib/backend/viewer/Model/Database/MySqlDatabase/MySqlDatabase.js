@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MySqlDatabase = void 0;
 const mysql = require('mysql');
 const Database_1 = require("../Database");
 class MySqlDatabase extends Database_1.Database {
@@ -319,4 +321,4 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[this.getName()] = null;
     }
 }
-module.exports = MySqlDatabase;
+exports.MySqlDatabase = MySqlDatabase;
