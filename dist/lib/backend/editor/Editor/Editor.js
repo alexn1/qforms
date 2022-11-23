@@ -1,10 +1,10 @@
 "use strict";
 const path = require('path');
 const ejs = require('ejs');
-const BaseModel = require("../../BaseModel");
+const BaseModel_1 = require("../../BaseModel");
 const Helper = require("../../Helper");
 const backend = require("../../../backend");
-class Editor extends BaseModel {
+class Editor extends BaseModel_1.BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
@@ -109,7 +109,7 @@ class Editor extends BaseModel {
     }
     createItemEditor(colName, itemName) {
         const data = this.getColItemData(colName, itemName);
-        const className = BaseModel.getClassName(data);
+        const className = BaseModel_1.BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
         return new Class(data, this);
     }
@@ -145,15 +145,15 @@ class Editor extends BaseModel {
     static createItemData(data) {
         // console.log('Editor.createItemData', data);
         try {
-            const params = data['@attributes'] ? Object.assign(Object.assign({ class: BaseModel.getClassName(data) }, BaseModel.attributes(data)), data) : data;
+            const params = data['@attributes'] ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;
             if (!params.class) {
-                const name = data['@attributes'] ? BaseModel.getName(data) : data.name;
+                const name = data['@attributes'] ? BaseModel_1.BaseModel.getName(data) : data.name;
                 throw new Error(`${name}: no class in data`);
             }
             return backend[`${params.class}Editor`].createData(params);
         }
         catch (err) {
-            const name = data['@attributes'] ? BaseModel.getName(data) : data.name;
+            const name = data['@attributes'] ? BaseModel_1.BaseModel.getName(data) : data.name;
             err.message = `${name}: ${err.message}`;
             throw err;
         }

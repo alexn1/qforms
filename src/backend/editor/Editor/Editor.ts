@@ -1,7 +1,7 @@
 const path    = require('path');
 const ejs     = require('ejs');
 
-import BaseModel = require('../../BaseModel');
+import {BaseModel} from '../../BaseModel';
 import Helper = require('../../Helper');
 import backend = require('../../../backend');
 

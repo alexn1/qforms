@@ -1,4 +1,4 @@
-declare class BaseModel {
+export declare class BaseModel {
     data: any;
     parent: any;
     constructor(data: any, parent?: any);
@@ -25,4 +25,3 @@ declare class BaseModel {
     replaceDataColItem(colName: any, oldData: any, newData: any): any;
     getParent(): any;
 }
-export = BaseModel;

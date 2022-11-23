@@ -1,7 +1,7 @@
 "use strict";
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
-const BaseModel = require("../../../BaseModel");
+const BaseModel_1 = require("../../../BaseModel");
 const Model = require("../Model");
 const Helper = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
@@ -104,8 +104,8 @@ class Application extends Model {
         response.uuid = uuidv4();
         // actions
         response.actions = this.getCol('actions').map(data => ({
-            name: BaseModel.getName(data),
-            caption: BaseModel.getAttr(data, 'caption')
+            name: BaseModel_1.BaseModel.getName(data),
+            caption: BaseModel_1.BaseModel.getAttr(data, 'caption')
         }));
         // pages
         response.pages = await this.fillPages(context);
@@ -159,8 +159,8 @@ class Application extends Model {
         if (actions.length) {
             menu['Actions'] = actions.map(actionData => ({
                 type: 'action',
-                action: BaseModel.getName(actionData),
-                caption: BaseModel.getAttr(actionData, 'caption')
+                action: BaseModel_1.BaseModel.getName(actionData),
+                caption: BaseModel_1.BaseModel.getAttr(actionData, 'caption')
             }));
         }
         this.menu = menu;
@@ -200,8 +200,8 @@ class Application extends Model {
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
-            .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
-            .map(data => BaseModel.getName(data));
+            .filter(data => BaseModel_1.BaseModel.getAttr(data, 'startup') === 'true')
+            .map(data => BaseModel_1.BaseModel.getName(data));
     }
     async fillPages(context) {
         // console.log('Application.fillPages', context.query.page);
@@ -290,10 +290,10 @@ class Application extends Model {
         const dirName = path.basename(path.dirname(appFilePath));
         return {
             appFile: appFile,
-            name: BaseModel.getName(data),
-            caption: BaseModel.getAttr(data, 'caption'),
+            name: BaseModel_1.BaseModel.getName(data),
+            caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
-            envs: BaseModel.getEnvList(data),
+            envs: BaseModel_1.BaseModel.getEnvList(data),
             fileName: fileName,
             dirName: dirName,
             filePath: path.resolve(appFilePath),

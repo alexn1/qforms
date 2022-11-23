@@ -1,7 +1,7 @@
 "use strict";
 const JsonFile = require("./JsonFile");
 const ApplicationEditor = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
-const BaseModel = require("./BaseModel");
+const BaseModel_1 = require("./BaseModel");
 class Converter {
     static async reformat(appFilePath) {
         console.log('Convert.reformat', appFilePath);
@@ -12,7 +12,7 @@ class Converter {
         appEditor.reformat();
         await appEditor.save();
         // pages
-        const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
+        const pageNames = appEditor.data.pageLinks.map(data => BaseModel_1.BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {

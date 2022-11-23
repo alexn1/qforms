@@ -1,6 +1,6 @@
 "use strict";
-const BaseModel = require("../../BaseModel");
-class Model extends BaseModel {
+const BaseModel_1 = require("../../BaseModel");
+class Model extends BaseModel_1.BaseModel {
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = [];
@@ -51,8 +51,8 @@ class Model extends BaseModel {
             this[colName].push(model);
         }
         catch (err) {
-            const name = BaseModel.getName(data);
-            const className = BaseModel.getClassName(data);
+            const name = BaseModel_1.BaseModel.getName(data);
+            const className = BaseModel_1.BaseModel.getClassName(data);
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
         }
@@ -73,7 +73,7 @@ class Model extends BaseModel {
     }
     async createChildModel(colName, data) {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
-        const className = BaseModel.getClassName(data);
+        const className = BaseModel_1.BaseModel.getClassName(data);
         const backend = require('../../../backend');
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class)

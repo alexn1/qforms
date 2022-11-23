@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BaseModel = void 0;
 class BaseModel {
     constructor(data, parent) {
         if (!data)
@@ -103,4 +105,4 @@ class BaseModel {
         return this.parent;
     }
 }
-module.exports = BaseModel;
+exports.BaseModel = BaseModel;

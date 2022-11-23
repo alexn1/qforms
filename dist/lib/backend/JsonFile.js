@@ -1,6 +1,6 @@
 "use strict";
 const Helper = require("./Helper");
-const BaseModel = require("./BaseModel");
+const BaseModel_1 = require("./BaseModel");
 class JsonFile {
     constructor(filePath, data = null) {
         this.filePath = filePath;
@@ -33,7 +33,7 @@ class JsonFile {
         await Helper.writeFile2(this.filePath, this.content);
     }
     getAttr(name) {
-        const value = BaseModel.getAttr(this.data, name);
+        const value = BaseModel_1.BaseModel.getAttr(this.data, name);
         if (value === undefined)
             throw new Error(`no attribute '${name}'`);
         return value;

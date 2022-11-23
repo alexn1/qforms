@@ -1,4 +1,4 @@
-import BaseModel = require('../../BaseModel');
+import { BaseModel } from '../../BaseModel';
 declare class Editor extends BaseModel {
     createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
     getFile(filePath: any): Promise<string>;

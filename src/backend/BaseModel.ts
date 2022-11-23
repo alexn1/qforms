@@ -1,4 +1,4 @@
-class BaseModel {
+export class BaseModel {
     data: any;
     parent: any;
     constructor(data: any, parent?: any) {
@@ -118,4 +118,3 @@ class BaseModel {
     }
 
 }
-export = BaseModel;
