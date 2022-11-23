@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Database = void 0;
 const Model_1 = require("../Model");
 const Param = require("../Param/Param");
 class Database extends Model_1.Model {
@@ -148,4 +150,4 @@ class Database extends Model_1.Model {
         throw new Error('Database.getTableInfo not implemented');
     }
 }
-module.exports = Database;
+exports.Database = Database;

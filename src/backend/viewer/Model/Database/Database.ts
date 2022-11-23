@@ -4,7 +4,7 @@ import {Application} from '../Application/Application';
 import Table = require('../Table/Table');
 import {Context} from '../../../Context';
 
-class Database extends Model {
+export class Database extends Model {
     tables: Table[];
     constructor(data, parent?) {
         //console.log('Database.constructor');
@@ -166,5 +166,3 @@ class Database extends Model {
         throw new Error('Database.getTableInfo not implemented');
     }
 }
-
-export = Database;

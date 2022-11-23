@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -19,7 +19,8 @@ const Model_1 = require("./viewer/Model/Model");
 Object.defineProperty(exports, "Model", { enumerable: true, get: function () { return Model_1.Model; } });
 const Application_1 = require("./viewer/Model/Application/Application");
 Object.defineProperty(exports, "Application", { enumerable: true, get: function () { return Application_1.Application; } });
-module.exports.Database = require('./viewer/Model/Database/Database');
+const Database_1 = require("./viewer/Model/Database/Database");
+Object.defineProperty(exports, "Database", { enumerable: true, get: function () { return Database_1.Database; } });
 module.exports.MySqlDatabase = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');
 module.exports.PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 module.exports.DataSource = require('./viewer/Model/DataSource/DataSource');

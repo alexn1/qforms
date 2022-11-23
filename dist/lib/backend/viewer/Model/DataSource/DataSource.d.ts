@@ -2,7 +2,7 @@ import { Result } from "../../../Result";
 import { Model } from '../Model';
 import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
-import Database = require('../Database/Database');
+import { Database } from '../Database/Database';
 import Form = require('../Form/Form');
 declare class DataSource extends Model {
     keyColumns: any;

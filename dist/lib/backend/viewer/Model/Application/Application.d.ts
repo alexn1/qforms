@@ -2,7 +2,7 @@ import { AppInfo } from "../../../AppInfo";
 import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
 import Action = require('../Action/Action');
-import Database = require('../Database/Database');
+import { Database } from '../Database/Database';
 import DataSource = require('../DataSource/DataSource');
 import Page = require('../Page/Page');
 import PageLink = require('../PageLink/PageLink');

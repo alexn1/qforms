@@ -1,8 +1,8 @@
 "use strict";
 const { Pool, Client } = require('pg');
 const colors = require('colors');
-const Database = require("../Database");
-class PostgreSqlDatabase extends Database {
+const Database_1 = require("../Database");
+class PostgreSqlDatabase extends Database_1.Database {
     constructor(data, parent) {
         super(data, parent);
         // console.log('new PostgreSqlDatabase');
@@ -60,7 +60,7 @@ class PostgreSqlDatabase extends Database {
     async queryResult(context, query, params = null) {
         if (context.query.sql)
             console.log(colors.blue('PostgreSqlDatabase.queryResult'), { query, params } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
-        Database.checkParams(query, params);
+        Database_1.Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
@@ -72,7 +72,7 @@ class PostgreSqlDatabase extends Database {
     }
     static async queryResult(cnn, query, params = null) {
         console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
-        Database.checkParams(query, params);
+        Database_1.Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -109,7 +109,7 @@ class PostgreSqlDatabase extends Database {
         if (!params) {
             return { sql: query, values: null };
         }
-        const usedValues = Database.getUsedParams(query);
+        const usedValues = Database_1.Database.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);

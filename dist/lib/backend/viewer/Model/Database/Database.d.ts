@@ -3,7 +3,7 @@ import Param = require('../Param/Param');
 import { Application } from '../Application/Application';
 import Table = require('../Table/Table');
 import { Context } from '../../../Context';
-declare class Database extends Model {
+export declare class Database extends Model {
     tables: Table[];
     constructor(data: any, parent?: any);
     init(context: Context): Promise<void>;
@@ -32,4 +32,3 @@ declare class Database extends Model {
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
 }
-export = Database;

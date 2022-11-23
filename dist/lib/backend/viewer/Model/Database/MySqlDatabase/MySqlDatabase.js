@@ -1,7 +1,7 @@
 "use strict";
 const mysql = require('mysql');
-const Database = require("../Database");
-class MySqlDatabase extends Database {
+const Database_1 = require("../Database");
+class MySqlDatabase extends Database_1.Database {
     constructor(data, parent) {
         super(data, parent);
         //console.log('new MySqlDatabase');
@@ -69,7 +69,7 @@ class MySqlDatabase extends Database {
     }*/
     async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
-        Database.checkParams(query, params);
+        Database_1.Database.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -91,7 +91,7 @@ class MySqlDatabase extends Database {
     }
     async queryResult(context, query, params = null) {
         console.log('MySqlDatabase.queryResult', query, params);
-        Database.checkParams(query, params);
+        Database_1.Database.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {

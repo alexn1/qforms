@@ -7,4 +7,5 @@ import { Converter } from "./Converter";
 import { JsonFile } from "./JsonFile";
 import { Model } from './viewer/Model/Model';
 import { Application } from "./viewer/Model/Application/Application";
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, };
+import { Database } from './viewer/Model/Database/Database';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, };
