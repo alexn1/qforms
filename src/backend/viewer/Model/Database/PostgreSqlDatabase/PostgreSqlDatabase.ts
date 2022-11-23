@@ -4,7 +4,7 @@ const colors = require('colors');
 import {Database} from '../Database';
 import {Context} from '../../../../Context';
 
-class PostgreSqlDatabase extends Database {
+export class PostgreSqlDatabase extends Database {
     pool: any;
     constructor(data, parent?) {
         super(data, parent);
@@ -298,5 +298,3 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
 
 
 }
-
-export = PostgreSqlDatabase;

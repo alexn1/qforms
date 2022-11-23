@@ -10,7 +10,7 @@ const http         = require('http');
 const colors       = require('colors/safe');
 
 import {Helper} from './Helper';
-import PostgreSqlDatabase = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
+import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
 import {Context} from '../backend/Context';
 import {Application} from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';

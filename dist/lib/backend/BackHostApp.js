@@ -11,7 +11,7 @@ const express = require('express');
 const http = require('http');
 const colors = require('colors/safe');
 const Helper_1 = require("./Helper");
-const PostgreSqlDatabase = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
+const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("../backend/Context");
 const Application_1 = require("./viewer/Model/Application/Application");
 const MonitorModule = require("./monitor/MonitorModule");
@@ -66,7 +66,7 @@ class BackHostApp {
         Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
-            this.logPool = PostgreSqlDatabase.createPool(log);
+            this.logPool = PostgreSqlDatabase_1.PostgreSqlDatabase.createPool(log);
         }
         // express server
         this.express = express();
@@ -334,7 +334,7 @@ class BackHostApp {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await PostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await PostgreSqlDatabase_1.PostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
     async createLog2(values) {
         if (this.logPool) {

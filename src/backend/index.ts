@@ -10,8 +10,8 @@ import {Model} from './viewer/Model/Model';
 import {Application} from "./viewer/Model/Application/Application";
 import {Database} from './viewer/Model/Database/Database';
 import {MySqlDatabase} from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
+import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase'
 
-module.exports.PostgreSqlDatabase                = require('./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase');
 module.exports.DataSource                        = require('./viewer/Model/DataSource/DataSource');
 module.exports.SqlDataSource                     = require('./viewer/Model/DataSource/SqlDataSource/SqlDataSource');
 module.exports.Field                             = require('./viewer/Model/Field/Field');
@@ -103,4 +103,5 @@ export {
     Application,
     Database,
     MySqlDatabase,
+    PostgreSqlDatabase,
 };

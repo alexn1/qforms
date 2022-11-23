@@ -1,6 +1,6 @@
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
-declare class PostgreSqlDatabase extends Database {
+export declare class PostgreSqlDatabase extends Database {
     pool: any;
     constructor(data: any, parent?: any);
     deinit(): Promise<void>;
@@ -38,4 +38,3 @@ declare class PostgreSqlDatabase extends Database {
     queryAutoValues(context: Context, table: string, autoColumnTypes: any): Promise<{}>;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<any>;
 }
-export = PostgreSqlDatabase;

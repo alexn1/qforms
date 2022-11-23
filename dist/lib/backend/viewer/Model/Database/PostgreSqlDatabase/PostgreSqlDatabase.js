@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PostgreSqlDatabase = void 0;
 const { Pool, Client } = require('pg');
 const colors = require('colors');
 const Database_1 = require("../Database");
@@ -271,4 +273,4 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         return Object.assign({}, values);
     }
 }
-module.exports = PostgreSqlDatabase;
+exports.PostgreSqlDatabase = PostgreSqlDatabase;
