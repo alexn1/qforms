@@ -14,8 +14,8 @@ import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/Pos
 import {DataSource} from './viewer/Model/DataSource/DataSource';
 import {SqlDataSource} from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 import {Field} from './viewer/Model/Field/Field';
+import {CheckBoxField} from './viewer/Model/Field/CheckBoxField/CheckBoxField';
 
-module.exports.CheckBoxField                     = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');
 module.exports.CheckBoxListField                 = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
 module.exports.ComboBoxField                     = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
 module.exports.DateField                         = require('./viewer/Model/Field/DateField/DateField');
@@ -107,4 +107,5 @@ export {
     DataSource,
     SqlDataSource,
     Field,
+    CheckBoxField,
 };

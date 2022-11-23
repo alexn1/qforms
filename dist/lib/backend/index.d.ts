@@ -13,4 +13,5 @@ import { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/P
 import { DataSource } from './viewer/Model/DataSource/DataSource';
 import { SqlDataSource } from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 import { Field } from './viewer/Model/Field/Field';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, };
+import { CheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, };
