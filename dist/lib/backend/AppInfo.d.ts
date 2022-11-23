@@ -1,4 +1,4 @@
-import JsonFile from './JsonFile';
+import JsonFile = require('./JsonFile');
 export declare type AppInfo = {
     appFile: JsonFile;
     name: string;

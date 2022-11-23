@@ -1,6 +1,6 @@
 const path = require('path');
 const session  = require('express-session');
-import Helper from './Helper';
+import Helper = require('./Helper');
 const colors     = require('colors/safe');
 
 class FileSessionStore extends session.Store {

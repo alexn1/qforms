@@ -1,10 +1,7 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 const path = require('path');
 const session = require('express-session');
-const Helper_1 = __importDefault(require("./Helper"));
+const Helper = require("./Helper");
 const colors = require('colors/safe');
 class FileSessionStore extends session.Store {
     constructor(dirPath) {
@@ -18,7 +15,7 @@ class FileSessionStore extends session.Store {
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        Helper_1.default.writeFile(sessionFilePath, content).then(() => {
+        Helper.writeFile(sessionFilePath, content).then(() => {
             cb(null);
         });
     }
@@ -30,7 +27,7 @@ class FileSessionStore extends session.Store {
         }
         else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            Helper_1.default.getFileContent(sessionFilePath).then(content => {
+            Helper.getFileContent(sessionFilePath).then(content => {
                 if (content) {
                     try {
                         const session = this.store[sid] = JSON.parse(content);

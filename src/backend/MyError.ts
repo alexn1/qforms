@@ -1,4 +1,4 @@
-import Context from './Context';
+import Context = require('./Context');
 
 class MyError extends Error {
     context: Context;

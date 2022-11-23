@@ -1,21 +1,18 @@
 "use strict";
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-const JsonFile_1 = __importDefault(require("./JsonFile"));
-const ApplicationEditor_1 = __importDefault(require("./editor/Editor/ApplicationEditor/ApplicationEditor"));
-const BaseModel_1 = __importDefault(require("./BaseModel"));
+const JsonFile = require("./JsonFile");
+const ApplicationEditor = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
+const BaseModel = require("./BaseModel");
 class Converter {
     static async reformat(appFilePath) {
         console.log('Convert.reformat', appFilePath);
-        const appFile = new JsonFile_1.default(appFilePath);
+        const appFile = new JsonFile(appFilePath);
         await appFile.read();
         // app
-        const appEditor = new ApplicationEditor_1.default(appFile);
+        const appEditor = new ApplicationEditor(appFile);
         appEditor.reformat();
         await appEditor.save();
         // pages
-        const pageNames = appEditor.data.pageLinks.map(data => BaseModel_1.default.getName(data));
+        const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {

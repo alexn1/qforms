@@ -1,5 +1,5 @@
-import Helper from './Helper';
-import BaseModel from './BaseModel';
+import Helper  = require('./Helper');
+import BaseModel = require('./BaseModel');
 
 class JsonFile {
     filePath: string;

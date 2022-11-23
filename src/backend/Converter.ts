@@ -1,6 +1,6 @@
-import JsonFile from './JsonFile';
-import ApplicationEditor from './editor/Editor/ApplicationEditor/ApplicationEditor';
-import BaseModel from './BaseModel';
+import JsonFile = require('./JsonFile');
+import ApplicationEditor = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
+import BaseModel = require('./BaseModel');
 
 class Converter {
     static async reformat(appFilePath) {
