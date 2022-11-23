@@ -1,8 +1,6 @@
 import Context = require("../../Context");
 import BaseModel = require('../../BaseModel');
 
-
-
 class Model extends BaseModel {
     fillCollections: any[];
     constructor(data: any, parent?: any) {
