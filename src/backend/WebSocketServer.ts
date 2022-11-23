@@ -1,4 +1,4 @@
-import BackHostApp = require("./BackHostApp");
+import {BackHostApp} from "./BackHostApp";
 import {Context} from "./Context";
 
 const ws = require('ws');

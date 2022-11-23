@@ -3,7 +3,7 @@ import {Context} from "../Context";
 const path = require('path');
 const pkg     = require('../../../package.json');
 
-import BackHostApp = require('../BackHostApp');
+import {BackHostApp} from '../BackHostApp';
 import Helper = require("../Helper");
 import Application = require("../viewer/Model/Application/Application");
 

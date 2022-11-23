@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BackHostApp = void 0;
 const WebSocketServer = require("./WebSocketServer");
 const fs = require('fs');
 const path = require('path');
@@ -695,4 +697,4 @@ class BackHostApp {
         console.log('BackHostApp.test');
     }
 }
-module.exports = BackHostApp;
+exports.BackHostApp = BackHostApp;

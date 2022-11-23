@@ -4,7 +4,7 @@ const path = require('path');
 const pkg     = require('../../../package.json');
 
 import Helper = require("../Helper");
-import BackHostApp = require('../BackHostApp');
+import {BackHostApp} from '../BackHostApp';
 import Application = require("./Model/Application/Application");
 import MyError = require("../MyError");
 import Model = require("./Model/Model");

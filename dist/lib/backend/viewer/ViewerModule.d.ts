@@ -1,5 +1,5 @@
 import { Context } from "../Context";
-import BackHostApp = require('../BackHostApp');
+import { BackHostApp } from '../BackHostApp';
 import Application = require("./Model/Application/Application");
 declare class ViewerModule {
     hostApp: BackHostApp;

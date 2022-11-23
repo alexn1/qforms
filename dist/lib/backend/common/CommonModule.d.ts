@@ -1,4 +1,4 @@
-import BackHostApp = require('../BackHostApp');
+import { BackHostApp } from '../BackHostApp';
 declare class CommonModule {
     hostApp: BackHostApp;
     css: string[];

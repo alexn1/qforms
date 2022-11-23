@@ -5,7 +5,7 @@ const path  = require('path');
 // const axios = require('axios');
 // const colors = require('colors/safe');
 
-import BackHostApp = require('../../../BackHostApp');
+import {BackHostApp} from '../../../BackHostApp';
 import {BaseModel} from '../../../BaseModel';
 import Model = require('../Model');
 import Action = require('../Action/Action');

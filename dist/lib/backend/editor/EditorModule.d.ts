@@ -1,5 +1,5 @@
 import { Context } from "../Context";
-import BackHostApp = require('../BackHostApp');
+import { BackHostApp } from '../BackHostApp';
 declare class EditorModule {
     hostApp: BackHostApp;
     css: string[];

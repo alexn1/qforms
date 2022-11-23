@@ -28,7 +28,7 @@ const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/Ap
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 
-class BackHostApp {
+export class BackHostApp {
     params: any;
     applications: any;          // application by route
     express: any;
@@ -774,4 +774,3 @@ class BackHostApp {
 
 }
 
-export = BackHostApp;

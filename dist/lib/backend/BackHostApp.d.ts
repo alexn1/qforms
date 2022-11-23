@@ -7,7 +7,7 @@ import ViewerModule = require('./viewer/ViewerModule');
 import EditorModule = require('./editor/EditorModule');
 import CommonModule = require('./common/CommonModule');
 import { Result } from "./Result";
-declare class BackHostApp {
+export declare class BackHostApp {
     params: any;
     applications: any;
     express: any;
@@ -73,4 +73,3 @@ declare class BackHostApp {
     broadcastResult(sourceApplication: Application, context: Context, result: Result): void;
     static test(): void;
 }
-export = BackHostApp;

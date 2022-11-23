@@ -1,4 +1,4 @@
-import BackHostApp = require("../../BackHostApp");
+import { BackHostApp } from "../../BackHostApp";
 import ApplicationEditor = require('../Editor/ApplicationEditor/ApplicationEditor');
 import { AppInfo } from '../../AppInfo';
 import { Context } from "../../Context";
