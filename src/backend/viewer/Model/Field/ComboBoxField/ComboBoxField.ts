@@ -1,6 +1,6 @@
 import {Field} from '../Field';
 
-class ComboBoxField extends Field {
+export class ComboBoxField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -16,5 +16,3 @@ class ComboBoxField extends Field {
         response.itemSelectPage = this.getAttr('itemSelectPage');
     }
 }
-
-export = ComboBoxField;

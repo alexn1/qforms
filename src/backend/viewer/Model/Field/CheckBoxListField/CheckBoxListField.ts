@@ -10,4 +10,3 @@ export class CheckBoxListField extends Field {
         response.displayColumn = this.getAttr('displayColumn');
     }
 }
-

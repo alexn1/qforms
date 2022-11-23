@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -35,7 +35,8 @@ const CheckBoxField_1 = require("./viewer/Model/Field/CheckBoxField/CheckBoxFiel
 Object.defineProperty(exports, "CheckBoxField", { enumerable: true, get: function () { return CheckBoxField_1.CheckBoxField; } });
 const CheckBoxListField_1 = require("./viewer/Model/Field/CheckBoxListField/CheckBoxListField");
 Object.defineProperty(exports, "CheckBoxListField", { enumerable: true, get: function () { return CheckBoxListField_1.CheckBoxListField; } });
-module.exports.ComboBoxField = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
+const ComboBoxField_1 = require("./viewer/Model/Field/ComboBoxField/ComboBoxField");
+Object.defineProperty(exports, "ComboBoxField", { enumerable: true, get: function () { return ComboBoxField_1.ComboBoxField; } });
 module.exports.DateField = require('./viewer/Model/Field/DateField/DateField');
 module.exports.TimeField = require('./viewer/Model/Field/TimeField/TimeField');
 module.exports.DateTimeField = require('./viewer/Model/Field/DateTimeField/DateTimeField');
