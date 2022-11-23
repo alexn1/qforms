@@ -1,6 +1,5 @@
 "use strict";
 const BaseModel = require("../../BaseModel");
-const backend = require('../../../backend');
 class Model extends BaseModel {
     constructor(data, parent) {
         super(data, parent);
@@ -75,6 +74,7 @@ class Model extends BaseModel {
     async createChildModel(colName, data) {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
+        const backend = require('../../../backend');
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class)
             throw new Error(`no class ${className}`);

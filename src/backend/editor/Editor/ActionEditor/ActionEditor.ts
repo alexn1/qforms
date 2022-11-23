@@ -1,5 +1,4 @@
 const Editor = require('../Editor');
-const backend = require('../../../../backend');
 
 class ActionEditor extends Editor {
     static createData(params) {

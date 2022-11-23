@@ -1,7 +1,7 @@
 import Context = require("../../Context");
 import BaseModel = require('../../BaseModel');
 
-const backend  = require('../../../backend');
+
 
 class Model extends BaseModel {
     fillCollections: any[];
@@ -86,6 +86,7 @@ class Model extends BaseModel {
     async createChildModel(colName: string, data: any): Promise<any> {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
+        const backend  = require('../../../backend');
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class) throw new Error(`no class ${className}`);
         return new Class(data, this);
