@@ -6,7 +6,7 @@ const path = require('path');
 const BaseModel_1 = require("../../../BaseModel");
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
-const PageLink = require("../PageLink/PageLink");
+const PageLink_1 = require("../PageLink/PageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../Result");
@@ -170,7 +170,7 @@ class Application extends Model_1.Model {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new PageLink(data, this);
+        return new PageLink_1.PageLink(data, this);
     }
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Table = void 0;
 const Model_1 = require("../Model");
 class Table extends Model_1.Model {
     constructor(data, parent) {
@@ -34,4 +36,4 @@ class Table extends Model_1.Model {
         response.name = this.getAttr('name');
     }
 }
-module.exports = Table;
+exports.Table = Table;

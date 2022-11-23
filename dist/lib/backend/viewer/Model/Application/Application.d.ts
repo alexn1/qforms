@@ -1,11 +1,11 @@
 import { AppInfo } from "../../../AppInfo";
 import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
-import Action = require('../Action/Action');
+import { Action } from '../Action/Action';
 import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { Page } from '../Page/Page';
-import PageLink = require('../PageLink/PageLink');
+import { PageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from "../../../Result";

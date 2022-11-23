@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Column = void 0;
 const Model_1 = require("../Model");
 class Column extends Model_1.Model {
     // constructor(data, parent) {
@@ -23,4 +25,4 @@ class Column extends Model_1.Model {
         return this.parent.parent.parent;
     }
 }
-module.exports = Column;
+exports.Column = Column;

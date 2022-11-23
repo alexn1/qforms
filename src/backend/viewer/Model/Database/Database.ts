@@ -1,7 +1,7 @@
 import {Model} from '../Model';
 import Param = require('../Param/Param');
 import {Application} from '../Application/Application';
-import Table = require('../Table/Table');
+import {Table} from '../Table/Table';
 import {Context} from '../../../Context';
 
 export class Database extends Model {

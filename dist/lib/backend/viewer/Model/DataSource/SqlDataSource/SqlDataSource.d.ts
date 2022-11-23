@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import Table = require('../../Table/Table');
+import { Table } from '../../Table/Table';
 import { Context } from '../../../../Context';
 import { Result } from "../../../../Result";
 export declare class SqlDataSource extends DataSource {

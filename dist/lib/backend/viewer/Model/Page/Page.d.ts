@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
-import Action = require('../Action/Action');
+import { Action } from '../Action/Action';
 import { Application } from '../Application/Application';
 import { Form } from '../Form/Form';
 export declare class Page extends Model {

@@ -1,7 +1,7 @@
 import {Model} from '../Model';
 import {Application} from '../Application/Application';
 
-class Column extends Model {
+export class Column extends Model {
 
     // constructor(data, parent) {
     //     super(data, parent);
@@ -33,5 +33,3 @@ class Column extends Model {
         return this.getAttr('dbType');
     }*/
 }
-
-export = Column;

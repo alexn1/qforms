@@ -6,8 +6,7 @@ import {Model} from '../Model';
 import {Application} from '../Application/Application';
 import {Page} from '../Page/Page';
 import {Form} from '../Form/Form';
-import Column = require("../Column/Column");
-
+import {Column} from "../Column/Column";
 import {Helper} from '../../../Helper';
 
 export class Field extends Model {

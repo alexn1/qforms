@@ -1,8 +1,8 @@
 import {Model} from '../Model';
-import Column = require('../Column/Column');
+import {Column} from '../Column/Column';
 import {Application} from '../Application/Application';
 
-class Table extends Model {
+export class Table extends Model {
     columns: Column[];
 
     constructor(data, parent) {
@@ -42,5 +42,3 @@ class Table extends Model {
         response.name = this.getAttr('name');
     }
 }
-
-export = Table;

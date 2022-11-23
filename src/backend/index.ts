@@ -32,11 +32,11 @@ import {Form} from './viewer/Model/Form/Form';
 import {RowForm} from './viewer/Model/Form/RowForm/RowForm';
 import {TableForm} from './viewer/Model/Form/TableForm/TableForm';
 import {Page} from './viewer/Model/Page/Page';
+import {PageLink} from './viewer/Model/PageLink/PageLink';
+import {Column} from './viewer/Model/Column/Column';
+import {Table} from './viewer/Model/Table/Table';
+import {Action} from './viewer/Model/Action/Action';
 
-module.exports.PageLink                          = require('./viewer/Model/PageLink/PageLink');
-module.exports.Column                            = require('./viewer/Model/Column/Column');
-module.exports.Table                             = require('./viewer/Model/Table/Table');
-module.exports.Action                            = require('./viewer/Model/Action/Action');
 
 // editor
 // module.exports.Editor                            = require('./editor/Editor/Editor');
@@ -125,4 +125,8 @@ export {
     RowForm,
     TableForm,
     Page,
+    PageLink,
+    Column,
+    Table,
+    Action,
 };

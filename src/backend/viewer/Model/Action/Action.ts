@@ -1,6 +1,6 @@
 import {Model} from '../Model';
 
-class Action extends Model {
+export class Action extends Model {
     static async create(data, parent): Promise<Action> {
         return new Action(data, parent);
     }
@@ -10,5 +10,3 @@ class Action extends Model {
         response.caption = this.getAttr('caption');
     }
 }
-
-export = Action;

@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
-import Action = require('../Action/Action');
+import { Action } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';

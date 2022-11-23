@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Action = void 0;
 const Model_1 = require("../Model");
 class Action extends Model_1.Model {
     static async create(data, parent) {
@@ -9,4 +11,4 @@ class Action extends Model_1.Model {
         response.caption = this.getAttr('caption');
     }
 }
-module.exports = Action;
+exports.Action = Action;
