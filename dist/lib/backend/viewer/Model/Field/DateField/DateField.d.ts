@@ -1,4 +1,4 @@
-import Field = require('../Field');
+import { Field } from '../Field';
 declare class DateField extends Field {
     fillAttributes(response: any): void;
     valueToRaw(value: any): any;

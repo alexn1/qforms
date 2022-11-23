@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import Action = require('../Action/Action');
-import Field = require('../Field/Field');
+import { Field } from '../Field/Field';
 import Page = require('../Page/Page');
 import { Application } from '../Application/Application';
 declare class Form extends Model {

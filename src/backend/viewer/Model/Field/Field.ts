@@ -10,7 +10,7 @@ import Column = require("../Column/Column");
 
 import {Helper} from '../../../Helper';
 
-class Field extends Model {
+export class Field extends Model {
     static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     }
@@ -132,5 +132,3 @@ class Field extends Model {
         return value;
     }
 }
-
-export = Field;

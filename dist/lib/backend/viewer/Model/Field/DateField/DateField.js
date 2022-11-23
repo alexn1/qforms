@@ -1,7 +1,7 @@
 "use strict";
-const Field = require("../Field");
+const Field_1 = require("../Field");
 const Helper_1 = require("../../../../Helper");
-class DateField extends Field {
+class DateField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

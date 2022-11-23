@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Field = void 0;
 const path = require('path');
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
@@ -121,4 +123,4 @@ class Field extends Model_1.Model {
         return value;
     }
 }
-module.exports = Field;
+exports.Field = Field;

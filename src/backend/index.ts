@@ -13,8 +13,8 @@ import {MySqlDatabase} from './viewer/Model/Database/MySqlDatabase/MySqlDatabase
 import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
 import {DataSource} from './viewer/Model/DataSource/DataSource';
 import {SqlDataSource} from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
+import {Field} from './viewer/Model/Field/Field';
 
-module.exports.Field                             = require('./viewer/Model/Field/Field');
 module.exports.CheckBoxField                     = require('./viewer/Model/Field/CheckBoxField/CheckBoxField');
 module.exports.CheckBoxListField                 = require('./viewer/Model/Field/CheckBoxListField/CheckBoxListField');
 module.exports.ComboBoxField                     = require('./viewer/Model/Field/ComboBoxField/ComboBoxField');
@@ -106,4 +106,5 @@ export {
     PostgreSqlDatabase,
     DataSource,
     SqlDataSource,
+    Field,
 };

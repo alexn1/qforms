@@ -1,4 +1,4 @@
-import Field = require('../Field');
+import {Field} from '../Field';
 import {Helper} from '../../../../Helper';
 
 class DateTimeField extends Field {

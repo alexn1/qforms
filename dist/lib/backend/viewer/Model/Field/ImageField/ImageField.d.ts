@@ -1,4 +1,4 @@
-import Field = require('../Field');
+import { Field } from '../Field';
 declare class ImageField extends Field {
     fillAttributes(response: any): void;
 }

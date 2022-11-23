@@ -3,7 +3,7 @@ import { Application } from '../Application/Application';
 import Page = require('../Page/Page');
 import Form = require('../Form/Form');
 import Column = require("../Column/Column");
-declare class Field extends Model {
+export declare class Field extends Model {
     static create(data: any, parent: any): Promise<Field>;
     fillAttributes(response: any): void;
     getDirPath(): string;
@@ -22,4 +22,3 @@ declare class Field extends Model {
     getDbType(): any;
     valueToSqlValue(value: any): any;
 }
-export = Field;
