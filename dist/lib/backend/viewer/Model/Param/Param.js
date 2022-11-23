@@ -1,6 +1,6 @@
 "use strict";
-const Model = require("../Model");
-class Param extends Model {
+const Model_1 = require("../Model");
+class Param extends Model_1.Model {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');

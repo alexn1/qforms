@@ -1,8 +1,8 @@
 "use strict";
 const path = require('path');
-const Model = require("../Model");
+const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
-class Field extends Model {
+class Field extends Model_1.Model {
     static async create(data, parent) {
         return new Field(data, parent);
     }

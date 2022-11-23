@@ -1,5 +1,5 @@
 import { Result } from "../../../Result";
-import Model = require('../Model');
+import { Model } from '../Model';
 import { Context } from '../../../Context';
 import Application = require('../Application/Application');
 import Database = require('../Database/Database');

@@ -1,4 +1,4 @@
-import Model = require('../Model');
+import { Model } from '../Model';
 import DataSource = require('../DataSource/DataSource');
 import Action = require('../Action/Action');
 import Field = require('../Field/Field');

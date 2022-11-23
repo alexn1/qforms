@@ -2,7 +2,7 @@ import SqlDataSource = require("../DataSource/SqlDataSource/SqlDataSource");
 
 const path = require('path');
 
-import Model = require('../Model');
+import {Model} from '../Model';
 import Application = require('../Application/Application');
 import Page = require('../Page/Page');
 import Form = require('../Form/Form');

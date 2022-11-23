@@ -1,12 +1,12 @@
 "use strict";
 const path = require('path');
-const Model = require("../Model");
+const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 const Page = require("../Page/Page");
 const Form = require("../Form/Form");
 const RowForm = require("../Form/RowForm/RowForm");
 const TableForm = require("../Form/TableForm/TableForm");
-class DataSource extends Model {
+class DataSource extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];

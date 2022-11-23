@@ -1,6 +1,6 @@
 "use strict";
-const Model = require("../Model");
-class Action extends Model {
+const Model_1 = require("../Model");
+class Action extends Model_1.Model {
     static async create(data, parent) {
         return new Action(data, parent);
     }

@@ -1,8 +1,8 @@
 "use strict";
 const path = require('path');
-const Model = require("../Model");
+const Model_1 = require("../Model");
 const MyError = require("../../../MyError");
-class Form extends Model {
+class Form extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];

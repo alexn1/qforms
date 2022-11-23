@@ -1,6 +1,6 @@
 "use strict";
-const Model = require("../Model");
-class Table extends Model {
+const Model_1 = require("../Model");
+class Table extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());

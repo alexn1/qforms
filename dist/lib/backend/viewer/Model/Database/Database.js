@@ -1,7 +1,7 @@
 "use strict";
-const Model = require("../Model");
+const Model_1 = require("../Model");
 const Param = require("../Param/Param");
-class Database extends Model {
+class Database extends Model_1.Model {
     constructor(data, parent) {
         //console.log('Database.constructor');
         super(data, parent);

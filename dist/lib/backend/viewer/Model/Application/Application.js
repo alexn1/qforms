@@ -2,7 +2,7 @@
 const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const BaseModel_1 = require("../../../BaseModel");
-const Model = require("../Model");
+const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 const PageLink = require("../PageLink/PageLink");
 const JsonFile_1 = require("../../../JsonFile");
@@ -10,7 +10,7 @@ const MyError = require("../../../MyError");
 const Result_1 = require("../../../Result");
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
-class Application extends Model {
+class Application extends Model_1.Model {
     constructor(data, appInfo, hostApp, context) {
         super(data);
         if (!hostApp)

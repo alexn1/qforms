@@ -1,4 +1,4 @@
-import Model = require('../Model');
+import {Model} from '../Model';
 import Column = require('../Column/Column');
 import Application = require('../Application/Application');
 

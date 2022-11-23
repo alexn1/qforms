@@ -1,9 +1,9 @@
 "use strict";
 const path = require('path');
-const Model = require("../Model");
+const Model_1 = require("../Model");
 // import {Context} from '../../../Context';
 const MyError = require("../../../MyError");
-class Page extends Model {
+class Page extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];

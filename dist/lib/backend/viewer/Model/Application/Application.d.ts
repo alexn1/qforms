@@ -1,6 +1,6 @@
 import { AppInfo } from "../../../AppInfo";
 import { BackHostApp } from '../../../BackHostApp';
-import Model = require('../Model');
+import { Model } from '../Model';
 import Action = require('../Action/Action');
 import Database = require('../Database/Database');
 import DataSource = require('../DataSource/DataSource');

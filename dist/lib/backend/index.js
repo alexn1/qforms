@@ -15,8 +15,9 @@ const Converter_1 = require("./Converter");
 Object.defineProperty(exports, "Converter", { enumerable: true, get: function () { return Converter_1.Converter; } });
 const JsonFile_1 = require("./JsonFile");
 Object.defineProperty(exports, "JsonFile", { enumerable: true, get: function () { return JsonFile_1.JsonFile; } });
+const Model_1 = require("./viewer/Model/Model");
 // viewer
-module.exports.Model = require('./viewer/Model/Model');
+module.exports.Model = Model_1.Model;
 module.exports.Application = require('./viewer/Model/Application/Application');
 module.exports.Database = require('./viewer/Model/Database/Database');
 module.exports.MySqlDatabase = require('./viewer/Model/Database/MySqlDatabase/MySqlDatabase');

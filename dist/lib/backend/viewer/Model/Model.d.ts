@@ -1,6 +1,6 @@
 import { Context } from "../../Context";
 import { BaseModel } from '../../BaseModel';
-declare class Model extends BaseModel {
+export declare class Model extends BaseModel {
     fillCollections: any[];
     constructor(data: any, parent?: any);
     init(context: Context): Promise<void>;
@@ -15,4 +15,3 @@ declare class Model extends BaseModel {
     getDirPath(): string;
     rpc(name: string, context: Context): Promise<any>;
 }
-export = Model;

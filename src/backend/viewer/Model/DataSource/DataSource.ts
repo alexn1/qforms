@@ -2,7 +2,7 @@ import {Result} from "../../../Result";
 
 const path = require('path');
 
-import Model = require('../Model');
+import {Model} from '../Model';
 import {Helper} from '../../../Helper';
 import {Context} from '../../../Context';
 import Application = require('../Application/Application');

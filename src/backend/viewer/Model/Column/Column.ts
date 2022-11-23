@@ -1,4 +1,4 @@
-import Model = require('../Model');
+import {Model} from '../Model';
 import Application = require('../Application/Application');
 
 class Column extends Model {

@@ -7,7 +7,7 @@ const path  = require('path');
 
 import {BackHostApp} from '../../../BackHostApp';
 import {BaseModel} from '../../../BaseModel';
-import Model = require('../Model');
+import {Model} from '../Model';
 import Action = require('../Action/Action');
 import Database = require('../Database/Database');
 import DataSource = require('../DataSource/DataSource');

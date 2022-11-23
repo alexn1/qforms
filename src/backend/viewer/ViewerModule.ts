@@ -7,7 +7,7 @@ import {Helper} from "../Helper";
 import {BackHostApp} from '../BackHostApp';
 import Application = require("./Model/Application/Application");
 import MyError = require("../MyError");
-import Model = require("./Model/Model");
+import {Model} from "./Model/Model";
 import {Result} from "../Result";
 
 // post actions
