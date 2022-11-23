@@ -1,5 +1,5 @@
 "use strict";
-const uuid_1 = require("uuid");
+const { v4: uuidv4 } = require('uuid');
 const path = require('path');
 const BaseModel = require("../../../BaseModel");
 const Model = require("../Model");
@@ -101,7 +101,7 @@ class Application extends Model {
         // nav
         response.nav = this.nav;
         // uuid
-        response.uuid = (0, uuid_1.v4)();
+        response.uuid = uuidv4();
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name: BaseModel.getName(data),
