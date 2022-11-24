@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageEditor = void 0;
 const path = require('path');
-const Editor = require('../Editor');
-class PageEditor extends Editor {
+const Editor_1 = require("../Editor");
+class PageEditor extends Editor_1.Editor {
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
@@ -20,13 +20,13 @@ class PageEditor extends Editor {
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
             },
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
             ],
             actions: [
-                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
             ],
             forms: [
-                ...(params.forms ? params.forms.map(Editor.createItemData) : [])
+                ...(params.forms ? params.forms.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

@@ -5,7 +5,7 @@ import {BaseModel} from '../../BaseModel';
 import {Helper} from '../../Helper';
 import backend = require('../../../backend');
 
-class Editor extends BaseModel {
+export class Editor extends BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
@@ -165,4 +165,3 @@ class Editor extends BaseModel {
     }
 }
 
-export = Editor;

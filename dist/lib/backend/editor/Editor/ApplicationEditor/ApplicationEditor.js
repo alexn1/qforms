@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApplicationEditor = void 0;
 const path = require('path');
-const Editor = require('../Editor');
+const Editor_1 = require("../Editor");
 const Helper_1 = require("../../../Helper");
 const Application_1 = require("../../../viewer/Model/Application/Application");
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor_1 = require("../PageEditor/PageEditor");
-class ApplicationEditor extends Editor {
+class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
@@ -33,16 +33,16 @@ class ApplicationEditor extends Editor {
             },
             env: params.env ? params.env : {},
             databases: [
-                ...(params.databases ? params.databases.map(Editor.createItemData) : [])
+                ...(params.databases ? params.databases.map(Editor_1.Editor.createItemData) : [])
             ],
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
             ],
             actions: [
-                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
             ],
             pageLinks: [
-                ...(params.pageLinks ? params.pageLinks.map(Editor.createItemData) : [])
+                ...(params.pageLinks ? params.pageLinks.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

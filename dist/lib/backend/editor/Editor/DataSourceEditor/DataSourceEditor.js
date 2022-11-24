@@ -4,8 +4,8 @@ exports.DataSourceEditor = void 0;
 const ApplicationEditor_1 = require("../ApplicationEditor/ApplicationEditor");
 const PageEditor_1 = require("../PageEditor/PageEditor");
 const path = require('path');
-const Editor = require('../Editor');
-class DataSourceEditor extends Editor {
+const Editor_1 = require("../Editor");
+class DataSourceEditor extends Editor_1.Editor {
     static createData(params) {
         return {
             '@class': 'DataSource',
@@ -15,7 +15,7 @@ class DataSourceEditor extends Editor {
                 table: params.table || '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

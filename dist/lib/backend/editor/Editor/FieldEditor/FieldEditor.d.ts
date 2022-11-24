@@ -1,4 +1,4 @@
-declare const Editor: any;
+import { Editor } from '../Editor';
 export declare class FieldEditor extends Editor {
     static createAttributes(params: any): any;
     changeClass(newClassName: any): any;
@@ -8,4 +8,3 @@ export declare class FieldEditor extends Editor {
     getCollectionDirPath(): Promise<any>;
     getColName(): string;
 }
-export {};

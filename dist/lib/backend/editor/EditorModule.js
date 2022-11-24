@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EditorModule = void 0;
 const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = require("../Helper");
@@ -110,4 +112,4 @@ class EditorModule {
         await res.json(result);
     }
 }
-module.exports = EditorModule;
+exports.EditorModule = EditorModule;

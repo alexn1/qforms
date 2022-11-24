@@ -1,6 +1,6 @@
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
-declare const Editor: any;
+import { Editor } from '../Editor';
 export declare class PageEditor extends Editor {
     appEditor: ApplicationEditor;
     pageFile: JsonFile;
@@ -27,4 +27,3 @@ export declare class PageEditor extends Editor {
     getCustomDirPath(): Promise<any>;
     reformat(): void;
 }
-export {};

@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormEditor = void 0;
 const path = require('path');
-const Editor = require('../Editor');
-class FormEditor extends Editor {
+const Editor_1 = require("../Editor");
+class FormEditor extends Editor_1.Editor {
     static createAttributes(params) {
         if (!params.name)
             throw new Error('no name');
@@ -21,13 +21,13 @@ class FormEditor extends Editor {
             '@class': 'Form',
             '@attributes': Object.assign({}, FormEditor.createAttributes(params)),
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
             ],
             actions: [
-                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
+                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
             ],
             fields: [
-                ...(params.fields ? params.fields.map(Editor.createItemData) : [])
+                ...(params.fields ? params.fields.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

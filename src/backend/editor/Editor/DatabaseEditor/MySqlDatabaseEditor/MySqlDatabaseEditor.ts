@@ -1,5 +1,5 @@
 import {DatabaseEditor} from '../DatabaseEditor';
-const Editor = require('../../Editor');
+import {Editor} from '../../Editor';
 
 export class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {

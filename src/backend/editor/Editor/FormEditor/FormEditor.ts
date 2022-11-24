@@ -1,5 +1,5 @@
 const path = require('path');
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 
 export class FormEditor extends Editor {
     static createAttributes(params): any {

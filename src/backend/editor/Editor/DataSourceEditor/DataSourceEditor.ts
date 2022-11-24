@@ -2,7 +2,7 @@ import {ApplicationEditor} from "../ApplicationEditor/ApplicationEditor";
 import {PageEditor} from "../PageEditor/PageEditor";
 
 const path = require('path');
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 
 export class DataSourceEditor extends Editor {
     static createData(params): any {

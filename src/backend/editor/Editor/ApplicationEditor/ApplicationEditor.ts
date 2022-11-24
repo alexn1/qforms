@@ -1,5 +1,5 @@
 const path = require('path');
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 import {Helper} from '../../../Helper';
 import {Application} from '../../../viewer/Model/Application/Application';
 import {JsonFile} from '../../../JsonFile';

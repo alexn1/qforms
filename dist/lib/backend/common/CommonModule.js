@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CommonModule = void 0;
 const Helper_1 = require("../Helper");
 const path = require('path');
 class CommonModule {
@@ -12,4 +14,4 @@ class CommonModule {
         // console.log('common.js:' , this.js);
     }
 }
-module.exports = CommonModule;
+exports.CommonModule = CommonModule;

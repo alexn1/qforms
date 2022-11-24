@@ -2,7 +2,7 @@ const path = require('path');
 
 import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
 import {JsonFile} from '../../../JsonFile';
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 
 export class PageEditor extends Editor {
     appEditor: ApplicationEditor;

@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySqlDatabaseEditor = void 0;
 const DatabaseEditor_1 = require("../DatabaseEditor");
-const Editor = require('../../Editor');
+const Editor_1 = require("../../Editor");
 class MySqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
     static createData(params) {
         if (!params.name)
@@ -13,10 +13,10 @@ class MySqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
                 name: params.name
             },
             params: [
-                ...(params.params ? params.params.map(Editor.createItemData) : [])
+                ...(params.params ? params.params.map(Editor_1.Editor.createItemData) : [])
             ],
             tables: [
-                ...(params.tables ? params.tables.map(Editor.createItemData) : [])
+                ...(params.tables ? params.tables.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

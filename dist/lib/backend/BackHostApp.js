@@ -18,8 +18,8 @@ const MonitorModule_1 = require("./monitor/MonitorModule");
 const IndexModule_1 = require("./index/IndexModule");
 const MyError_1 = require("./MyError");
 const ViewerModule = require("./viewer/ViewerModule");
-const EditorModule = require("./editor/EditorModule");
-const CommonModule = require("./common/CommonModule");
+const EditorModule_1 = require("./editor/EditorModule");
+const CommonModule_1 = require("./common/CommonModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
 const ApplicationEditor_1 = require("../backend/editor/Editor/ApplicationEditor/ApplicationEditor");
@@ -76,7 +76,7 @@ class BackHostApp {
         this.express.enable('strict routing');
         this.initExpressServer();
         // commonModule
-        this.commonModule = new CommonModule(this);
+        this.commonModule = new CommonModule_1.CommonModule(this);
         await this.commonModule.init();
         // indexModule
         this.indexModule = new IndexModule_1.IndexModule(this);
@@ -88,7 +88,7 @@ class BackHostApp {
         this.viewerModule = new ViewerModule(this);
         await this.viewerModule.init();
         // editorModule
-        this.editorModule = new EditorModule(this);
+        this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
         // http
         this.httpServer = this.createAndRunHttpServer(host, port);

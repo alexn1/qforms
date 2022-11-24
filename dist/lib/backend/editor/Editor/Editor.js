@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Editor = void 0;
 const path = require('path');
 const ejs = require('ejs');
 const BaseModel_1 = require("../../BaseModel");
@@ -159,4 +161,4 @@ class Editor extends BaseModel_1.BaseModel {
         }
     }
 }
-module.exports = Editor;
+exports.Editor = Editor;

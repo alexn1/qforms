@@ -1,4 +1,4 @@
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 
 export class DatabaseEditor extends Editor {
     static createData(params) {

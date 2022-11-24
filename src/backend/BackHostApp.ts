@@ -18,8 +18,8 @@ import {MonitorModule} from './monitor/MonitorModule';
 import {IndexModule} from './index/IndexModule';
 import {MyError} from './MyError';
 import ViewerModule = require('./viewer/ViewerModule');
-import EditorModule = require('./editor/EditorModule');
-import CommonModule = require('./common/CommonModule');
+import {EditorModule} from './editor/EditorModule';
+import {CommonModule} from './common/CommonModule';
 import {FileSessionStore} from './FileSessionStore';
 import {Result} from "./Result";
 

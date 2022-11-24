@@ -1,4 +1,4 @@
-declare const Editor: any;
+import { Editor } from '../Editor';
 export declare class DataSourceEditor extends Editor {
     static createData(params: any): any;
     getCollectionDirPath(): Promise<any>;
@@ -6,4 +6,3 @@ export declare class DataSourceEditor extends Editor {
     getColName(): string;
     save(): Promise<void>;
 }
-export {};

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DatabaseEditor = void 0;
-const Editor = require('../Editor');
-class DatabaseEditor extends Editor {
+const Editor_1 = require("../Editor");
+class DatabaseEditor extends Editor_1.Editor {
     static createData(params) {
         throw new Error('DatabaseEditor.createData not implemented');
     }

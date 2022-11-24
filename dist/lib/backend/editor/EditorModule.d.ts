@@ -1,6 +1,6 @@
 import { Context } from "../Context";
 import { BackHostApp } from '../BackHostApp';
-declare class EditorModule {
+export declare class EditorModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
@@ -11,4 +11,3 @@ declare class EditorModule {
     handleEditorGet(req: any, res: any, context: Context): Promise<void>;
     handleEditorPost(req: any, res: any, context: Context): Promise<void>;
 }
-export = EditorModule;

@@ -3,7 +3,7 @@ import {Helper} from "../Helper";
 const path = require('path');
 import {BackHostApp} from '../BackHostApp';
 
-class CommonModule {
+export class CommonModule {
     hostApp: BackHostApp;
     css: string[];
     js : string[];
@@ -17,4 +17,3 @@ class CommonModule {
         // console.log('common.js:' , this.js);
     }
 }
-export = CommonModule;

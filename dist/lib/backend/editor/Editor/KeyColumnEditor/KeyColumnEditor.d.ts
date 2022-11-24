@@ -1,4 +1,4 @@
-declare const Editor: any;
+import { Editor } from '../Editor';
 export declare class KeyColumnEditor extends Editor {
     static createData(params: any): {
         '@class': string;
@@ -8,4 +8,3 @@ export declare class KeyColumnEditor extends Editor {
     };
     getColName(): string;
 }
-export {};

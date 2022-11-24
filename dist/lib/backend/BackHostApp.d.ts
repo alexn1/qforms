@@ -4,8 +4,8 @@ import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
 import ViewerModule = require('./viewer/ViewerModule');
-import EditorModule = require('./editor/EditorModule');
-import CommonModule = require('./common/CommonModule');
+import { EditorModule } from './editor/EditorModule';
+import { CommonModule } from './common/CommonModule';
 import { Result } from "./Result";
 export declare class BackHostApp {
     params: any;

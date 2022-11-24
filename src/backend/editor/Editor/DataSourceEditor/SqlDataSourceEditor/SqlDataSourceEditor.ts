@@ -1,5 +1,5 @@
 import {DataSourceEditor} from '../DataSourceEditor';
-const Editor = require('../../Editor');
+import {Editor} from '../../Editor';
 
 export class SqlDataSourceEditor extends DataSourceEditor {
     static createData(params): any {

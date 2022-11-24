@@ -42,7 +42,7 @@ const EDITOR_ACTIONS = [
     'createModelBackJs',
 ];
 
-class EditorModule {
+export class EditorModule {
     hostApp: BackHostApp;
     css: string[];
     js : string[];
@@ -119,4 +119,4 @@ class EditorModule {
         await res.json(result);
     }
 }
-export = EditorModule;
+

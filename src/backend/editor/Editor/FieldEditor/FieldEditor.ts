@@ -1,5 +1,5 @@
 const path = require('path');
-const Editor = require('../Editor');
+import {Editor} from '../Editor';
 const backend = require('../../../../backend');
 
 export class FieldEditor extends Editor {

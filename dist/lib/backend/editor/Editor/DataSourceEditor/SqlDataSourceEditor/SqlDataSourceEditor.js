@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SqlDataSourceEditor = void 0;
 const DataSourceEditor_1 = require("../DataSourceEditor");
-const Editor = require('../../Editor');
+const Editor_1 = require("../../Editor");
 class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
     static createData(params) {
         return {
@@ -17,7 +17,7 @@ class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
                 limit: params.limit ? params.limit : '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : [])
             ],
         };
     }

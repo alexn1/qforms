@@ -2,9 +2,9 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FieldEditor = void 0;
 const path = require('path');
-const Editor = require('../Editor');
+const Editor_1 = require("../Editor");
 const backend = require('../../../../backend');
-class FieldEditor extends Editor {
+class FieldEditor extends Editor_1.Editor {
     static createAttributes(params) {
         if (!params.name)
             throw new Error('no name');

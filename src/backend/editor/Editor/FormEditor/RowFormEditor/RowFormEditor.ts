@@ -1,5 +1,5 @@
 import {FormEditor} from '../FormEditor';
-const Editor = require('../../Editor');
+import {Editor} from '../../Editor';
 
 export class RowFormEditor extends FormEditor {
     static createData(params) {

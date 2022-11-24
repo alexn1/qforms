@@ -1,5 +1,5 @@
 import { BaseModel } from '../../BaseModel';
-declare class Editor extends BaseModel {
+export declare class Editor extends BaseModel {
     createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
     getFile(filePath: any): Promise<string>;
     saveFile(filePath: any, content: any): Promise<void>;
@@ -17,4 +17,3 @@ declare class Editor extends BaseModel {
     getColName(): void;
     static createItemData(data: any): any;
 }
-export = Editor;

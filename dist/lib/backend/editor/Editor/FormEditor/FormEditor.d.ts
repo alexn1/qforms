@@ -1,4 +1,4 @@
-declare const Editor: any;
+import { Editor } from '../Editor';
 export declare class FormEditor extends Editor {
     static createAttributes(params: any): any;
     static createData(params: any): any;
@@ -9,4 +9,3 @@ export declare class FormEditor extends Editor {
     getCollectionDirPath(): Promise<any>;
     getColName(): string;
 }
-export {};
