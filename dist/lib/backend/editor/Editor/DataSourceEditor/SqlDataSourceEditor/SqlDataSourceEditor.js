@@ -1,7 +1,7 @@
 "use strict";
-const DataSourceEditor = require('../DataSourceEditor');
+const DataSourceEditor_1 = require("../DataSourceEditor");
 const Editor = require('../../Editor');
-class SqlDataSourceEditor extends DataSourceEditor {
+class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
     static createData(params) {
         return {
             '@class': 'SqlDataSource',

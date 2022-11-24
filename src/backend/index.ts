@@ -38,10 +38,9 @@ import {Table} from './viewer/Model/Table/Table';
 import {Action} from './viewer/Model/Action/Action';
 import {ActionEditor} from './editor/Editor/ActionEditor/ActionEditor';
 import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
+import {DataSourceEditor} from './editor/Editor/DataSourceEditor/DataSourceEditor';
 
 // editor
-
-module.exports.DataSourceEditor                  = require('./editor/Editor/DataSourceEditor/DataSourceEditor');
 module.exports.SqlDataSourceEditor               = require('./editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 module.exports.FieldEditor                       = require('./editor/Editor/FieldEditor/FieldEditor');
 module.exports.CheckBoxFieldEditor               = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
@@ -132,4 +131,5 @@ export {
     // editor
     ActionEditor,
     ApplicationEditor,
+    DataSourceEditor,
 };

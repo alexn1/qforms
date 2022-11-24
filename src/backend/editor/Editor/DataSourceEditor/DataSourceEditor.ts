@@ -4,7 +4,7 @@ import PageEditor = require("../PageEditor/PageEditor");
 const path = require('path');
 const Editor = require('../Editor');
 
-class DataSourceEditor extends Editor {
+export class DataSourceEditor extends Editor {
     static createData(params): any {
         return {
             '@class'     : 'DataSource',
@@ -46,5 +46,3 @@ class DataSourceEditor extends Editor {
         }
     }
 }
-
-export = DataSourceEditor;

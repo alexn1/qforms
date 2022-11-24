@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DataSourceEditor = void 0;
 const ApplicationEditor_1 = require("../ApplicationEditor/ApplicationEditor");
 const PageEditor = require("../PageEditor/PageEditor");
 const path = require('path');
@@ -47,4 +49,4 @@ class DataSourceEditor extends Editor {
         }
     }
 }
-module.exports = DataSourceEditor;
+exports.DataSourceEditor = DataSourceEditor;

@@ -38,4 +38,5 @@ import { Table } from './viewer/Model/Table/Table';
 import { Action } from './viewer/Model/Action/Action';
 import { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
-export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, DateTimeField, FileField, ImageField, LabelField, LinkField, TextAreaField, TextBoxField, PhoneField, PasswordField, RadioField, Form, RowForm, TableForm, Page, PageLink, Column, Table, Action, ActionEditor, ApplicationEditor, };
+import { DataSourceEditor } from './editor/Editor/DataSourceEditor/DataSourceEditor';
+export { Helper, BackHostApp, BaseModel, Context, Converter, JsonFile, Result, Model, Application, Database, MySqlDatabase, PostgreSqlDatabase, DataSource, SqlDataSource, Field, CheckBoxField, CheckBoxListField, ComboBoxField, DateField, TimeField, DateTimeField, FileField, ImageField, LabelField, LinkField, TextAreaField, TextBoxField, PhoneField, PasswordField, RadioField, Form, RowForm, TableForm, Page, PageLink, Column, Table, Action, ActionEditor, ApplicationEditor, DataSourceEditor, };

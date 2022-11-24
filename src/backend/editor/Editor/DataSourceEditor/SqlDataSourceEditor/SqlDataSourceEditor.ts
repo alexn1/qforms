@@ -1,4 +1,4 @@
-const DataSourceEditor = require('../DataSourceEditor');
+import {DataSourceEditor} from '../DataSourceEditor';
 const Editor = require('../../Editor');
 
 class SqlDataSourceEditor extends DataSourceEditor {
