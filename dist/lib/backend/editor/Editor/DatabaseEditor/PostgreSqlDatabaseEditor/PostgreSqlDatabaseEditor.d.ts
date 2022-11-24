@@ -1,4 +1,4 @@
-declare const DatabaseEditor: any;
+import { DatabaseEditor } from '../DatabaseEditor';
 declare class PostgreSqlDatabaseEditor extends DatabaseEditor {
     static createData(params: any): {
         '@class': string;

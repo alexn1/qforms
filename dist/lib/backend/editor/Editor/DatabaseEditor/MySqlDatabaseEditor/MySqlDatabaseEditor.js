@@ -1,7 +1,9 @@
 "use strict";
-const DatabaseEditor = require('../DatabaseEditor');
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MySqlDatabaseEditor = void 0;
+const DatabaseEditor_1 = require("../DatabaseEditor");
 const Editor = require('../../Editor');
-class MySqlDatabaseEditor extends DatabaseEditor {
+class MySqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
     static createData(params) {
         if (!params.name)
             throw new Error('no name');
@@ -19,4 +21,4 @@ class MySqlDatabaseEditor extends DatabaseEditor {
         };
     }
 }
-module.exports = MySqlDatabaseEditor;
+exports.MySqlDatabaseEditor = MySqlDatabaseEditor;

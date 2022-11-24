@@ -1,6 +1,6 @@
 const Editor = require('../Editor');
 
-class KeyColumnEditor extends Editor {
+export class KeyColumnEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -14,5 +14,3 @@ class KeyColumnEditor extends Editor {
         return 'keyColumns';
     }
 }
-
-export = KeyColumnEditor;

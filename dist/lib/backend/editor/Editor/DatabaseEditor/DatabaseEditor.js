@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DatabaseEditor = void 0;
 const Editor = require('../Editor');
 class DatabaseEditor extends Editor {
     static createData(params) {
@@ -8,4 +10,4 @@ class DatabaseEditor extends Editor {
         return 'databases';
     }
 }
-module.exports = DatabaseEditor;
+exports.DatabaseEditor = DatabaseEditor;

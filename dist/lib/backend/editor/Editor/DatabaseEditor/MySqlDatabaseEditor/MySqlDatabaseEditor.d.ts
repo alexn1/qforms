@@ -1,5 +1,5 @@
-declare const DatabaseEditor: any;
-declare class MySqlDatabaseEditor extends DatabaseEditor {
+import { DatabaseEditor } from '../DatabaseEditor';
+export declare class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -9,4 +9,3 @@ declare class MySqlDatabaseEditor extends DatabaseEditor {
         tables: any[];
     };
 }
-export = MySqlDatabaseEditor;

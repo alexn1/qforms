@@ -1,7 +1,7 @@
 "use strict";
-const DatabaseEditor = require('../DatabaseEditor');
+const DatabaseEditor_1 = require("../DatabaseEditor");
 const Editor = require('../../Editor');
-class PostgreSqlDatabaseEditor extends DatabaseEditor {
+class PostgreSqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
     static createData(params) {
         if (!params.name)
             throw new Error('no name');

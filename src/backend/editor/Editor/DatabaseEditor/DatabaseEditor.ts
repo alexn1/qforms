@@ -1,6 +1,6 @@
 const Editor = require('../Editor');
 
-class DatabaseEditor extends Editor {
+export class DatabaseEditor extends Editor {
     static createData(params) {
         throw new Error('DatabaseEditor.createData not implemented');
     }
@@ -8,5 +8,3 @@ class DatabaseEditor extends Editor {
         return 'databases';
     }
 }
-
-export = DatabaseEditor;

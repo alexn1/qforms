@@ -1,7 +1,7 @@
-const DatabaseEditor = require('../DatabaseEditor');
+import {DatabaseEditor} from '../DatabaseEditor';
 const Editor = require('../../Editor');
 
-class MySqlDatabaseEditor extends DatabaseEditor {
+export class MySqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -18,4 +18,3 @@ class MySqlDatabaseEditor extends DatabaseEditor {
         };
     }
 }
-export = MySqlDatabaseEditor;

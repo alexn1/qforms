@@ -1,5 +1,5 @@
 declare const Editor: any;
-declare class PageLinkEditor extends Editor {
+export declare class PageLinkEditor extends Editor {
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -11,4 +11,4 @@ declare class PageLinkEditor extends Editor {
     };
     getColName(): string;
 }
-export = PageLinkEditor;
+export {};

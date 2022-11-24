@@ -1,4 +1,4 @@
-const DatabaseEditor = require('../DatabaseEditor');
+import {DatabaseEditor} from '../DatabaseEditor';
 const Editor = require('../../Editor');
 
 class PostgreSqlDatabaseEditor extends DatabaseEditor {

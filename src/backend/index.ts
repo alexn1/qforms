@@ -60,12 +60,13 @@ import {FormEditor} from './editor/Editor/FormEditor/FormEditor';
 import {RowFormEditor} from './editor/Editor/FormEditor/RowFormEditor/RowFormEditor';
 import {TableFormEditor} from './editor/Editor/FormEditor/TableFormEditor/TableFormEditor';
 import {PageEditor} from './editor/Editor/PageEditor/PageEditor';
+import {PageLinkEditor} from './editor/Editor/PageLinkEditor/PageLinkEditor';
+import {KeyColumnEditor} from './editor/Editor/KeyColumnEditor/KeyColumnEditor';
+import {DatabaseEditor} from './editor/Editor/DatabaseEditor/DatabaseEditor';
+import {MySqlDatabaseEditor} from './editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor';
 
 // editor
-module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
-module.exports.KeyColumnEditor                   = require('./editor/Editor/KeyColumnEditor/KeyColumnEditor');
-module.exports.DatabaseEditor                    = require('./editor/Editor/DatabaseEditor/DatabaseEditor');
-module.exports.MySqlDatabaseEditor               = require('./editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor');
+
 module.exports.PostgreSqlDatabaseEditor          = require('./editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
 module.exports.TableEditor                       = require('./editor/Editor/TableEditor/TableEditor');
 module.exports.ParamEditor                       = require('./editor/Editor/ParamEditor/ParamEditor');
@@ -153,4 +154,8 @@ export {
     RowFormEditor,
     TableFormEditor,
     PageEditor,
+    PageLinkEditor,
+    KeyColumnEditor,
+    DatabaseEditor,
+    MySqlDatabaseEditor,
 };
