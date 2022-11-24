@@ -22,7 +22,7 @@ const ACTIONS = [
     'test',
 ];
 
-class ViewerModule {
+export class ViewerModule {
     hostApp: BackHostApp;
     css: string[];
     js : string[];
@@ -378,4 +378,3 @@ class ViewerModule {
     }
 
 }
-export = ViewerModule;

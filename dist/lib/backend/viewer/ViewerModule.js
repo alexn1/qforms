@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ViewerModule = void 0;
 const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = require("../Helper");
@@ -386,4 +388,4 @@ class ViewerModule {
         return this.hostApp;
     }
 }
-module.exports = ViewerModule;
+exports.ViewerModule = ViewerModule;

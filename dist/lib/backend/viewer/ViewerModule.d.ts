@@ -1,7 +1,7 @@
 import { Context } from "../Context";
 import { BackHostApp } from '../BackHostApp';
 import { Application } from "./Model/Application/Application";
-declare class ViewerModule {
+export declare class ViewerModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
@@ -24,4 +24,3 @@ declare class ViewerModule {
     handleViewerGetFile(context: Context, application: Application, next: any): Promise<void>;
     getHostApp(): BackHostApp;
 }
-export = ViewerModule;

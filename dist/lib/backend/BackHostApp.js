@@ -17,7 +17,7 @@ const Application_1 = require("./viewer/Model/Application/Application");
 const MonitorModule_1 = require("./monitor/MonitorModule");
 const IndexModule_1 = require("./index/IndexModule");
 const MyError_1 = require("./MyError");
-const ViewerModule = require("./viewer/ViewerModule");
+const ViewerModule_1 = require("./viewer/ViewerModule");
 const EditorModule_1 = require("./editor/EditorModule");
 const CommonModule_1 = require("./common/CommonModule");
 const FileSessionStore_1 = require("./FileSessionStore");
@@ -85,7 +85,7 @@ class BackHostApp {
         this.monitorModule = new MonitorModule_1.MonitorModule(this);
         await this.monitorModule.init();
         // viewerModule
-        this.viewerModule = new ViewerModule(this);
+        this.viewerModule = new ViewerModule_1.ViewerModule(this);
         await this.viewerModule.init();
         // editorModule
         this.editorModule = new EditorModule_1.EditorModule(this);

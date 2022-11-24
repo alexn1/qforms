@@ -3,7 +3,7 @@ import { Application } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
-import ViewerModule = require('./viewer/ViewerModule');
+import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { CommonModule } from './common/CommonModule';
 import { Result } from "./Result";

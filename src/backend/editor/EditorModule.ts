@@ -7,7 +7,7 @@ import {BackHostApp} from '../BackHostApp';
 import {Helper} from "../Helper";
 import {Application} from "../viewer/Model/Application/Application";
 
-const backend = require('../index');
+import * as backend from '../index';
 
 const EDITOR_CONTROLLERS = [
     'Application',
