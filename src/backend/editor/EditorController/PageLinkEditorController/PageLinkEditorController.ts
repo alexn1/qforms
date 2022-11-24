@@ -1,4 +1,4 @@
-const EditorController = require('../EditorController');
+import {EditorController} from '../EditorController';
 
 class PageLinkEditorController extends EditorController {
     async save(params) {

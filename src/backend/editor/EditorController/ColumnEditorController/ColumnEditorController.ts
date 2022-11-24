@@ -1,4 +1,4 @@
-const EditorController = require('../EditorController');
+import {EditorController} from '../EditorController';
 
 class ColumnEditorController extends EditorController {
 

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.EditorController = void 0;
 const ApplicationEditor_1 = require("../Editor/ApplicationEditor/ApplicationEditor");
 class EditorController {
     constructor(appInfo, hostApp) {
@@ -20,4 +22,4 @@ class EditorController {
         return new ApplicationEditor_1.ApplicationEditor(this.appInfo.appFile);
     }
 }
-module.exports = EditorController;
+exports.EditorController = EditorController;

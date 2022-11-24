@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ColumnEditor = void 0;
 const Editor = require('../Editor');
 class ColumnEditor extends Editor {
     static createData(params) {
@@ -30,4 +32,4 @@ class ColumnEditor extends Editor {
         return 'columns';
     }
 }
-module.exports = ColumnEditor;
+exports.ColumnEditor = ColumnEditor;

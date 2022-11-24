@@ -1,4 +1,4 @@
-declare const EditorController: any;
+import { EditorController } from '../EditorController';
 declare class DataSourceEditorController extends EditorController {
     createDataSourceEditor(params: any): Promise<any>;
     _new(params: any): Promise<any>;
@@ -9,6 +9,8 @@ declare class DataSourceEditorController extends EditorController {
     createModelBackJs(params: any): Promise<{
         js: any;
     }>;
-    getView(params: any): Promise<any>;
+    getView(params: any): Promise<{
+        data: {};
+    }>;
 }
 export = DataSourceEditorController;

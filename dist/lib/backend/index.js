@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileFieldEditor = exports.DateTimeFieldEditor = exports.TimeFieldEditor = exports.DateFieldEditor = exports.ComboBoxFieldEditor = exports.CheckBoxListFieldEditor = exports.CheckBoxFieldEditor = exports.FieldEditor = exports.SqlDataSourceEditor = exports.DataSourceEditor = exports.ApplicationEditor = exports.ActionEditor = exports.Action = exports.Table = exports.Column = exports.PageLink = exports.Page = exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
-exports.MySqlDatabaseEditor = exports.DatabaseEditor = exports.KeyColumnEditor = exports.PageLinkEditor = exports.PageEditor = exports.TableFormEditor = exports.RowFormEditor = exports.FormEditor = exports.RadioFieldEditor = exports.PasswordFieldEditor = exports.PhoneFieldEditor = exports.TextBoxFieldEditor = exports.TextAreaFieldEditor = exports.LinkFieldEditor = exports.LabelFieldEditor = exports.ImageFieldEditor = void 0;
+exports.DatabaseEditorController = exports.ActionEditorController = exports.ColumnEditor = exports.ParamEditor = exports.TableEditor = exports.PostgreSqlDatabaseEditor = exports.MySqlDatabaseEditor = exports.DatabaseEditor = exports.KeyColumnEditor = exports.PageLinkEditor = exports.PageEditor = exports.TableFormEditor = exports.RowFormEditor = exports.FormEditor = exports.RadioFieldEditor = exports.PasswordFieldEditor = exports.PhoneFieldEditor = exports.TextBoxFieldEditor = exports.TextAreaFieldEditor = exports.LinkFieldEditor = exports.LabelFieldEditor = exports.ImageFieldEditor = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -134,14 +134,20 @@ const DatabaseEditor_1 = require("./editor/Editor/DatabaseEditor/DatabaseEditor"
 Object.defineProperty(exports, "DatabaseEditor", { enumerable: true, get: function () { return DatabaseEditor_1.DatabaseEditor; } });
 const MySqlDatabaseEditor_1 = require("./editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor");
 Object.defineProperty(exports, "MySqlDatabaseEditor", { enumerable: true, get: function () { return MySqlDatabaseEditor_1.MySqlDatabaseEditor; } });
+const PostgreSqlDatabaseEditor_1 = require("./editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor");
+Object.defineProperty(exports, "PostgreSqlDatabaseEditor", { enumerable: true, get: function () { return PostgreSqlDatabaseEditor_1.PostgreSqlDatabaseEditor; } });
+const TableEditor_1 = require("./editor/Editor/TableEditor/TableEditor");
+Object.defineProperty(exports, "TableEditor", { enumerable: true, get: function () { return TableEditor_1.TableEditor; } });
+const ParamEditor_1 = require("./editor/Editor/ParamEditor/ParamEditor");
+Object.defineProperty(exports, "ParamEditor", { enumerable: true, get: function () { return ParamEditor_1.ParamEditor; } });
+const ColumnEditor_1 = require("./editor/Editor/ColumnEditor/ColumnEditor");
+Object.defineProperty(exports, "ColumnEditor", { enumerable: true, get: function () { return ColumnEditor_1.ColumnEditor; } });
 // editor
-module.exports.PostgreSqlDatabaseEditor = require('./editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
-module.exports.TableEditor = require('./editor/Editor/TableEditor/TableEditor');
-module.exports.ParamEditor = require('./editor/Editor/ParamEditor/ParamEditor');
-module.exports.ColumnEditor = require('./editor/Editor/ColumnEditor/ColumnEditor');
 // module.exports.EditorController                  = require('./editor/EditorController/EditorController');
-module.exports.ActionEditorController = require('./editor/EditorController/ActionEditorController/ActionEditorController');
-module.exports.DatabaseEditorController = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
+const ActionEditorController_1 = require("./editor/EditorController/ActionEditorController/ActionEditorController");
+Object.defineProperty(exports, "ActionEditorController", { enumerable: true, get: function () { return ActionEditorController_1.ActionEditorController; } });
+const DatabaseEditorController_1 = require("./editor/EditorController/DatabaseEditorController/DatabaseEditorController");
+Object.defineProperty(exports, "DatabaseEditorController", { enumerable: true, get: function () { return DatabaseEditorController_1.DatabaseEditorController; } });
 module.exports.DataSourceEditorController = require('./editor/EditorController/DataSourceEditorController/DataSourceEditorController');
 module.exports.KeyColumnEditorController = require('./editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
 module.exports.PageLinkEditorController = require('./editor/EditorController/PageLinkEditorController/PageLinkEditorController');

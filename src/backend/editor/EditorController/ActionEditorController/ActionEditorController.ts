@@ -1,6 +1,6 @@
-const EditorController = require('../EditorController');
+import {EditorController} from '../EditorController';
 
-class ActionEditorController extends EditorController {
+export class ActionEditorController extends EditorController {
     async _new(params) {
         console.log('ActionEditorController._new');
         const appEditor = this.createApplicationEditor();
@@ -95,5 +95,3 @@ class ActionEditorController extends EditorController {
         return null;
     }
 }
-
-export = ActionEditorController;

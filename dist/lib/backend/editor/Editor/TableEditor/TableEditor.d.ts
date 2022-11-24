@@ -1,5 +1,5 @@
 declare const Editor: any;
-declare class TableEditor extends Editor {
+export declare class TableEditor extends Editor {
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -9,4 +9,4 @@ declare class TableEditor extends Editor {
     };
     getColName(): string;
 }
-export = TableEditor;
+export {};

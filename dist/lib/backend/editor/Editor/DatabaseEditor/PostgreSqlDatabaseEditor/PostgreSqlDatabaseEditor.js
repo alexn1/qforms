@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PostgreSqlDatabaseEditor = void 0;
 const DatabaseEditor_1 = require("../DatabaseEditor");
 const Editor = require('../../Editor');
 class PostgreSqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
@@ -19,4 +21,4 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
         };
     }
 }
-module.exports = PostgreSqlDatabaseEditor;
+exports.PostgreSqlDatabaseEditor = PostgreSqlDatabaseEditor;

@@ -1,6 +1,6 @@
 const Editor = require('../Editor');
 
-class ParamEditor extends Editor {
+export class ParamEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -15,5 +15,3 @@ class ParamEditor extends Editor {
         return 'params';
     }
 }
-
-export = ParamEditor;

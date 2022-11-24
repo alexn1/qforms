@@ -1,6 +1,8 @@
 "use strict";
-const EditorController = require('../EditorController');
-class ActionEditorController extends EditorController {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ActionEditorController = void 0;
+const EditorController_1 = require("../EditorController");
+class ActionEditorController extends EditorController_1.EditorController {
     async _new(params) {
         console.log('ActionEditorController._new');
         const appEditor = this.createApplicationEditor();
@@ -105,4 +107,4 @@ class ActionEditorController extends EditorController {
         return null;
     }
 }
-module.exports = ActionEditorController;
+exports.ActionEditorController = ActionEditorController;

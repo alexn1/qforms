@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TableEditor = void 0;
 const Editor = require('../Editor');
 class TableEditor extends Editor {
     static createData(params) {
@@ -17,4 +19,4 @@ class TableEditor extends Editor {
         return 'tables';
     }
 }
-module.exports = TableEditor;
+exports.TableEditor = TableEditor;

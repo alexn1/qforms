@@ -1,5 +1,5 @@
 import { DatabaseEditor } from '../DatabaseEditor';
-declare class PostgreSqlDatabaseEditor extends DatabaseEditor {
+export declare class PostgreSqlDatabaseEditor extends DatabaseEditor {
     static createData(params: any): {
         '@class': string;
         '@attributes': {
@@ -9,4 +9,3 @@ declare class PostgreSqlDatabaseEditor extends DatabaseEditor {
         tables: any[];
     };
 }
-export = PostgreSqlDatabaseEditor;

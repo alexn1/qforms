@@ -64,16 +64,18 @@ import {PageLinkEditor} from './editor/Editor/PageLinkEditor/PageLinkEditor';
 import {KeyColumnEditor} from './editor/Editor/KeyColumnEditor/KeyColumnEditor';
 import {DatabaseEditor} from './editor/Editor/DatabaseEditor/DatabaseEditor';
 import {MySqlDatabaseEditor} from './editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor';
+import {PostgreSqlDatabaseEditor} from './editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor';
+import {TableEditor} from './editor/Editor/TableEditor/TableEditor';
+import {ParamEditor} from './editor/Editor/ParamEditor/ParamEditor';
+import {ColumnEditor} from './editor/Editor/ColumnEditor/ColumnEditor';
 
 // editor
-
-module.exports.PostgreSqlDatabaseEditor          = require('./editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor');
-module.exports.TableEditor                       = require('./editor/Editor/TableEditor/TableEditor');
-module.exports.ParamEditor                       = require('./editor/Editor/ParamEditor/ParamEditor');
-module.exports.ColumnEditor                      = require('./editor/Editor/ColumnEditor/ColumnEditor');
 // module.exports.EditorController                  = require('./editor/EditorController/EditorController');
-module.exports.ActionEditorController            = require('./editor/EditorController/ActionEditorController/ActionEditorController');
-module.exports.DatabaseEditorController          = require('./editor/EditorController/DatabaseEditorController/DatabaseEditorController');
+
+import {ActionEditorController} from './editor/EditorController/ActionEditorController/ActionEditorController';
+import {DatabaseEditorController} from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
+
+
 module.exports.DataSourceEditorController        = require('./editor/EditorController/DataSourceEditorController/DataSourceEditorController');
 module.exports.KeyColumnEditorController         = require('./editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
 module.exports.PageLinkEditorController          = require('./editor/EditorController/PageLinkEditorController/PageLinkEditorController');
@@ -158,4 +160,10 @@ export {
     KeyColumnEditor,
     DatabaseEditor,
     MySqlDatabaseEditor,
+    PostgreSqlDatabaseEditor,
+    TableEditor,
+    ParamEditor,
+    ColumnEditor,
+    ActionEditorController,
+    DatabaseEditorController,
 };

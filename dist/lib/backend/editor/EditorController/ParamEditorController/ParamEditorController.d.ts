@@ -1,4 +1,4 @@
-declare const EditorController: any;
+import { EditorController } from '../EditorController';
 declare class ParamEditorController extends EditorController {
     _new(params: any): Promise<any>;
     save(params: any): Promise<any>;

@@ -1,6 +1,6 @@
 import {KeyColumnEditor} from '../../Editor/KeyColumnEditor/KeyColumnEditor';
 
-const EditorController = require('../EditorController');
+import {EditorController} from '../EditorController';
 
 class KeyColumnEditorController extends EditorController {
     /*constructor(...args) {

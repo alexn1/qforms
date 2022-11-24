@@ -1,7 +1,7 @@
 import {DatabaseEditor} from '../DatabaseEditor';
 const Editor = require('../../Editor');
 
-class PostgreSqlDatabaseEditor extends DatabaseEditor {
+export class PostgreSqlDatabaseEditor extends DatabaseEditor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -18,4 +18,3 @@ class PostgreSqlDatabaseEditor extends DatabaseEditor {
         };
     }
 }
-export = PostgreSqlDatabaseEditor;

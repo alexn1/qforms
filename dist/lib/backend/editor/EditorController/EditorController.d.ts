@@ -2,7 +2,7 @@ import { BackHostApp } from "../../BackHostApp";
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
 import { AppInfo } from '../../AppInfo';
 import { Context } from "../../Context";
-declare class EditorController {
+export declare class EditorController {
     appInfo: AppInfo;
     hostApp: BackHostApp;
     constructor(appInfo: AppInfo, hostApp: BackHostApp);
@@ -12,4 +12,3 @@ declare class EditorController {
     }>;
     createApplicationEditor(): ApplicationEditor;
 }
-export = EditorController;

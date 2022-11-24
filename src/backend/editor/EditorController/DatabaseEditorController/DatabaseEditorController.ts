@@ -1,8 +1,8 @@
 import {Context} from "../../../Context";
 import {Application} from "../../../viewer/Model/Application/Application";
-import EditorController = require('../EditorController');
+import {EditorController} from '../EditorController';
 
-class DatabaseEditorController extends EditorController {
+export class DatabaseEditorController extends EditorController {
     application: Application = null;
     /*constructor(...args) {
         super(...args);
@@ -79,5 +79,3 @@ class DatabaseEditorController extends EditorController {
     }
 
 }
-
-export = DatabaseEditorController;

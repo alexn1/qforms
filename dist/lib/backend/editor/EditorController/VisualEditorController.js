@@ -1,5 +1,5 @@
 "use strict";
-const EditorController = require('./EditorController');
-class VisualEditorController extends EditorController {
+const EditorController_1 = require("./EditorController");
+class VisualEditorController extends EditorController_1.EditorController {
 }
 module.exports = VisualEditorController;

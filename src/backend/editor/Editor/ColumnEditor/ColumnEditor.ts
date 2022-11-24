@@ -1,6 +1,6 @@
 const Editor = require('../Editor');
 
-class ColumnEditor extends Editor {
+export class ColumnEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         if (params.key !== undefined && typeof params.key !== 'string') {
@@ -29,5 +29,3 @@ class ColumnEditor extends Editor {
         return 'columns';
     }
 }
-
-export = ColumnEditor;

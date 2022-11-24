@@ -3,7 +3,7 @@ import {ApplicationEditor} from '../Editor/ApplicationEditor/ApplicationEditor';
 import {AppInfo} from '../../AppInfo';
 import {Context} from "../../Context";
 
-class EditorController {
+export class EditorController {
     appInfo: AppInfo;
     hostApp: BackHostApp;
     constructor(appInfo: AppInfo, hostApp: BackHostApp) {
@@ -24,5 +24,3 @@ class EditorController {
         return new ApplicationEditor(this.appInfo.appFile);
     }
 }
-
-export = EditorController;

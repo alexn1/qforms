@@ -1,6 +1,6 @@
 "use strict";
-const EditorController = require('../EditorController');
-class ColumnEditorController extends EditorController {
+const EditorController_1 = require("../EditorController");
+class ColumnEditorController extends EditorController_1.EditorController {
     /*constructor(...args) {
         console.log('ColumnEditorController.constructor');
         super(...args);

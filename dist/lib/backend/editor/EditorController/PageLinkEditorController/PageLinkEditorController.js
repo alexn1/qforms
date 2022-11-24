@@ -1,6 +1,6 @@
 "use strict";
-const EditorController = require('../EditorController');
-class PageLinkEditorController extends EditorController {
+const EditorController_1 = require("../EditorController");
+class PageLinkEditorController extends EditorController_1.EditorController {
     async save(params) {
         const appEditor = this.createApplicationEditor();
         //const pageLinkEditor = appEditor.createPageLinkEditor(params.pageLink);

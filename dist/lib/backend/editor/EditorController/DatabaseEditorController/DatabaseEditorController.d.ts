@@ -1,7 +1,7 @@
 import { Context } from "../../../Context";
 import { Application } from "../../../viewer/Model/Application/Application";
-import EditorController = require('../EditorController');
-declare class DatabaseEditorController extends EditorController {
+import { EditorController } from '../EditorController';
+export declare class DatabaseEditorController extends EditorController {
     application: Application;
     init(context: Context): Promise<void>;
     _new(params: any): Promise<any>;
@@ -16,4 +16,3 @@ declare class DatabaseEditorController extends EditorController {
     moveUp(params: any): Promise<string>;
     moveDown(params: any): Promise<string>;
 }
-export = DatabaseEditorController;

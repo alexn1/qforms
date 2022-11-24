@@ -1,6 +1,8 @@
 "use strict";
-const EditorController = require("../EditorController");
-class DatabaseEditorController extends EditorController {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DatabaseEditorController = void 0;
+const EditorController_1 = require("../EditorController");
+class DatabaseEditorController extends EditorController_1.EditorController {
     constructor() {
         super(...arguments);
         this.application = null;
@@ -70,4 +72,4 @@ class DatabaseEditorController extends EditorController {
         return 'ok';
     }
 }
-module.exports = DatabaseEditorController;
+exports.DatabaseEditorController = DatabaseEditorController;
