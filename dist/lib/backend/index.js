@@ -143,7 +143,6 @@ Object.defineProperty(exports, "ParamEditor", { enumerable: true, get: function 
 const ColumnEditor_1 = require("./editor/Editor/ColumnEditor/ColumnEditor");
 Object.defineProperty(exports, "ColumnEditor", { enumerable: true, get: function () { return ColumnEditor_1.ColumnEditor; } });
 // editor
-// module.exports.EditorController                  = require('./editor/EditorController/EditorController');
 const ActionEditorController_1 = require("./editor/EditorController/ActionEditorController/ActionEditorController");
 Object.defineProperty(exports, "ActionEditorController", { enumerable: true, get: function () { return ActionEditorController_1.ActionEditorController; } });
 const DatabaseEditorController_1 = require("./editor/EditorController/DatabaseEditorController/DatabaseEditorController");

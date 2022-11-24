@@ -3,7 +3,7 @@ const ejs     = require('ejs');
 
 import {BaseModel} from '../../BaseModel';
 import {Helper} from '../../Helper';
-import backend = require('../../../backend');
+import * as backend from '../../../backend';
 
 export class Editor extends BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {

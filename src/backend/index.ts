@@ -70,8 +70,6 @@ import {ParamEditor} from './editor/Editor/ParamEditor/ParamEditor';
 import {ColumnEditor} from './editor/Editor/ColumnEditor/ColumnEditor';
 
 // editor
-// module.exports.EditorController                  = require('./editor/EditorController/EditorController');
-
 import {ActionEditorController} from './editor/EditorController/ActionEditorController/ActionEditorController';
 import {DatabaseEditorController} from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
 import {DataSourceEditorController} from './editor/EditorController/DataSourceEditorController/DataSourceEditorController';
