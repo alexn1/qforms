@@ -1,5 +1,5 @@
 import { FormEditor } from '../FormEditor';
-declare class TableFormEditor extends FormEditor {
+export declare class TableFormEditor extends FormEditor {
     static createData(params: any): {
         '@class': string;
         '@attributes': any;
@@ -8,4 +8,3 @@ declare class TableFormEditor extends FormEditor {
         fields: any[];
     };
 }
-export = TableFormEditor;

@@ -57,11 +57,10 @@ import {PhoneFieldEditor} from './editor/Editor/FieldEditor/PhoneFieldEditor/Pho
 import {PasswordFieldEditor} from './editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor';
 import {RadioFieldEditor} from './editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor';
 import {FormEditor} from './editor/Editor/FormEditor/FormEditor';
+import {RowFormEditor} from './editor/Editor/FormEditor/RowFormEditor/RowFormEditor';
+import {TableFormEditor} from './editor/Editor/FormEditor/TableFormEditor/TableFormEditor';
 
 // editor
-
-module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
-module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 module.exports.KeyColumnEditor                   = require('./editor/Editor/KeyColumnEditor/KeyColumnEditor');
@@ -151,4 +150,6 @@ export {
     PasswordFieldEditor,
     RadioFieldEditor,
     FormEditor,
+    RowFormEditor,
+    TableFormEditor,
 };

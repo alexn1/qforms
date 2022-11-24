@@ -1,5 +1,5 @@
 import { FormEditor } from '../FormEditor';
-declare class RowFormEditor extends FormEditor {
+export declare class RowFormEditor extends FormEditor {
     static createData(params: any): {
         '@class': string;
         '@attributes': any;
@@ -8,4 +8,3 @@ declare class RowFormEditor extends FormEditor {
         fields: any[];
     };
 }
-export = RowFormEditor;

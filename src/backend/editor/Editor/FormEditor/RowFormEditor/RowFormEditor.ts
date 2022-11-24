@@ -1,7 +1,7 @@
 import {FormEditor} from '../FormEditor';
 const Editor = require('../../Editor');
 
-class RowFormEditor extends FormEditor {
+export class RowFormEditor extends FormEditor {
     static createData(params) {
         // console.log('RowFormEditor.createData', params);
         return {
@@ -24,5 +24,3 @@ class RowFormEditor extends FormEditor {
         };
     }
 }
-
-export = RowFormEditor;
