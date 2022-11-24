@@ -41,23 +41,23 @@ import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEd
 import {DataSourceEditor} from './editor/Editor/DataSourceEditor/DataSourceEditor';
 import {SqlDataSourceEditor} from './editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor';
 import {FieldEditor} from './editor/Editor/FieldEditor/FieldEditor';
+import {CheckBoxFieldEditor} from './editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor';
+import {CheckBoxListFieldEditor} from './editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor';
+import {ComboBoxFieldEditor} from './editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor';
+import {DateFieldEditor} from './editor/Editor/FieldEditor/DateFieldEditor/DateFieldEditor';
+import {TimeFieldEditor} from './editor/Editor/FieldEditor/TimeFieldEditor/TimeFieldEditor';
+import {DateTimeFieldEditor} from './editor/Editor/FieldEditor/DateTimeFieldEditor/DateTimeFieldEditor';
+import {FileFieldEditor} from './editor/Editor/FieldEditor/FileFieldEditor/FileFieldEditor';
+import {ImageFieldEditor} from './editor/Editor/FieldEditor/ImageFieldEditor/ImageFieldEditor';
+import {LabelFieldEditor} from './editor/Editor/FieldEditor/LabelFieldEditor/LabelFieldEditor';
+import {LinkFieldEditor} from './editor/Editor/FieldEditor/LinkFieldEditor/LinkFieldEditor';
+import {TextAreaFieldEditor} from './editor/Editor/FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor';
+import {TextBoxFieldEditor} from './editor/Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor';
+import {PhoneFieldEditor} from './editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor';
+import {PasswordFieldEditor} from './editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor';
+import {RadioFieldEditor} from './editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor';
 
 // editor
-module.exports.CheckBoxFieldEditor               = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
-module.exports.CheckBoxListFieldEditor           = require('./editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor');
-module.exports.ComboBoxFieldEditor               = require('./editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
-module.exports.DateFieldEditor                   = require('./editor/Editor/FieldEditor/DateFieldEditor/DateFieldEditor');
-module.exports.TimeFieldEditor                   = require('./editor/Editor/FieldEditor/TimeFieldEditor/TimeFieldEditor');
-module.exports.DateTimeFieldEditor               = require('./editor/Editor/FieldEditor/DateTimeFieldEditor/DateTimeFieldEditor');
-module.exports.FileFieldEditor                   = require('./editor/Editor/FieldEditor/FileFieldEditor/FileFieldEditor');
-module.exports.ImageFieldEditor                  = require('./editor/Editor/FieldEditor/ImageFieldEditor/ImageFieldEditor');
-module.exports.LabelFieldEditor                  = require('./editor/Editor/FieldEditor/LabelFieldEditor/LabelFieldEditor');
-module.exports.LinkFieldEditor                   = require('./editor/Editor/FieldEditor/LinkFieldEditor/LinkFieldEditor');
-module.exports.TextAreaFieldEditor               = require('./editor/Editor/FieldEditor/TextAreaFieldEditor/TextAreaFieldEditor');
-module.exports.TextBoxFieldEditor                = require('./editor/Editor/FieldEditor/TextBoxFieldEditor/TextBoxFieldEditor');
-module.exports.PhoneFieldEditor                  = require('./editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor');
-module.exports.PasswordFieldEditor               = require('./editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor');
-module.exports.RadioFieldEditor                  = require('./editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor');
 module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
@@ -134,4 +134,19 @@ export {
     DataSourceEditor,
     SqlDataSourceEditor,
     FieldEditor,
+    CheckBoxFieldEditor,
+    CheckBoxListFieldEditor,
+    ComboBoxFieldEditor,
+    DateFieldEditor,
+    TimeFieldEditor,
+    DateTimeFieldEditor,
+    FileFieldEditor,
+    ImageFieldEditor,
+    LabelFieldEditor,
+    LinkFieldEditor,
+    TextAreaFieldEditor,
+    TextBoxFieldEditor,
+    PhoneFieldEditor,
+    PasswordFieldEditor,
+    RadioFieldEditor,
 };

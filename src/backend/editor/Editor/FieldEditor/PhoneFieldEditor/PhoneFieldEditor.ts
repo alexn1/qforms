@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class PhoneFieldEditor extends FieldEditor {
+export class PhoneFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -18,5 +18,3 @@ class PhoneFieldEditor extends FieldEditor {
     }
 
 }
-
-export = PhoneFieldEditor;

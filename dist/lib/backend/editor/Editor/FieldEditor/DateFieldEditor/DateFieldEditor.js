@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DateFieldEditor = void 0;
 const FieldEditor_1 = require("../FieldEditor");
 class DateFieldEditor extends FieldEditor_1.FieldEditor {
     static createData(params) {
@@ -8,4 +10,4 @@ class DateFieldEditor extends FieldEditor_1.FieldEditor {
         };
     }
 }
-module.exports = DateFieldEditor;
+exports.DateFieldEditor = DateFieldEditor;

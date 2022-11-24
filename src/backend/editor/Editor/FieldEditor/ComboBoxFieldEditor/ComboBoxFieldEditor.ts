@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class ComboBoxFieldEditor extends FieldEditor {
+export class ComboBoxFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -23,5 +23,3 @@ class ComboBoxFieldEditor extends FieldEditor {
     }
 
 }
-
-export = ComboBoxFieldEditor;

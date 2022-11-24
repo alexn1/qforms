@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class DateTimeFieldEditor extends FieldEditor {
+export class DateTimeFieldEditor extends FieldEditor {
     static createData(params) {
         return {
             '@class'     : 'DateTimeField',
@@ -17,5 +17,3 @@ class DateTimeFieldEditor extends FieldEditor {
         };
     }
 }
-
-export = DateTimeFieldEditor;

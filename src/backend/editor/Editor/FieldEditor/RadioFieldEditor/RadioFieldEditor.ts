@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class RadioFieldEditor extends FieldEditor {
+export class RadioFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -18,5 +18,3 @@ class RadioFieldEditor extends FieldEditor {
     }
 
 }
-
-export = RadioFieldEditor;

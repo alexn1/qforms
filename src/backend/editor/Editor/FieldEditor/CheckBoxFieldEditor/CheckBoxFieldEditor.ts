@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class CheckBoxFieldEditor extends FieldEditor {
+export class CheckBoxFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -14,5 +14,3 @@ class CheckBoxFieldEditor extends FieldEditor {
     }
 
 }
-
-export = CheckBoxFieldEditor;

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RadioFieldEditor = void 0;
 const FieldEditor_1 = require("../FieldEditor");
 class RadioFieldEditor extends FieldEditor_1.FieldEditor {
     static createData(params) {
@@ -10,4 +12,4 @@ class RadioFieldEditor extends FieldEditor_1.FieldEditor {
         };
     }
 }
-module.exports = RadioFieldEditor;
+exports.RadioFieldEditor = RadioFieldEditor;

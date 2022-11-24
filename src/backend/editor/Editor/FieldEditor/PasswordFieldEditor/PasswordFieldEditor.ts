@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class PasswordFieldEditor extends FieldEditor {
+export class PasswordFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -18,5 +18,3 @@ class PasswordFieldEditor extends FieldEditor {
     }
 
 }
-
-export = PasswordFieldEditor;

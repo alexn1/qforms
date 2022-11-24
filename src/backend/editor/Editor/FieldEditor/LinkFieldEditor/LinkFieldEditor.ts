@@ -1,6 +1,6 @@
 import {FieldEditor} from '../FieldEditor';
 
-class LinkFieldEditor extends FieldEditor {
+export class LinkFieldEditor extends FieldEditor {
 
     static createData(params) {
         return {
@@ -13,5 +13,3 @@ class LinkFieldEditor extends FieldEditor {
     }
 
 }
-
-export = LinkFieldEditor;
