@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DataSourceEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class DataSourceEditorController extends EditorController_1.EditorController {
     /*constructor(...args) {
@@ -129,4 +131,4 @@ class DataSourceEditorController extends EditorController_1.EditorController {
         }
     }
 }
-module.exports = DataSourceEditorController;
+exports.DataSourceEditorController = DataSourceEditorController;

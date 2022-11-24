@@ -74,15 +74,15 @@ import {ColumnEditor} from './editor/Editor/ColumnEditor/ColumnEditor';
 
 import {ActionEditorController} from './editor/EditorController/ActionEditorController/ActionEditorController';
 import {DatabaseEditorController} from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
+import {DataSourceEditorController} from './editor/EditorController/DataSourceEditorController/DataSourceEditorController';
+import {KeyColumnEditorController} from './editor/EditorController/KeyColumnEditorController/KeyColumnEditorController';
+import {PageLinkEditorController} from './editor/EditorController/PageLinkEditorController/PageLinkEditorController';
+import {ParamEditorController} from './editor/EditorController/ParamEditorController/ParamEditorController';
+import {TableEditorController} from './editor/EditorController/TableEditorController/TableEditorController';
+import {ColumnEditorController} from './editor/EditorController/ColumnEditorController/ColumnEditorController';
+import {VisualEditorController} from './editor/EditorController/VisualEditorController';
 
 
-module.exports.DataSourceEditorController        = require('./editor/EditorController/DataSourceEditorController/DataSourceEditorController');
-module.exports.KeyColumnEditorController         = require('./editor/EditorController/KeyColumnEditorController/KeyColumnEditorController');
-module.exports.PageLinkEditorController          = require('./editor/EditorController/PageLinkEditorController/PageLinkEditorController');
-module.exports.ParamEditorController             = require('./editor/EditorController/ParamEditorController/ParamEditorController');
-module.exports.TableEditorController             = require('./editor/EditorController/TableEditorController/TableEditorController');
-module.exports.ColumnEditorController            = require('./editor/EditorController/ColumnEditorController/ColumnEditorController');
-module.exports.VisualEditorController            = require('./editor/EditorController/VisualEditorController');
 module.exports.ApplicationEditorController       = require('./editor/EditorController/ApplicationEditorController/ApplicationEditorController');
 module.exports.FieldEditorController             = require('./editor/EditorController/FieldEditorController/FieldEditorController');
 module.exports.FormEditorController              = require('./editor/EditorController/FormEditorController/FormEditorController');
@@ -166,4 +166,11 @@ export {
     ColumnEditor,
     ActionEditorController,
     DatabaseEditorController,
+    DataSourceEditorController,
+    KeyColumnEditorController,
+    PageLinkEditorController,
+    ParamEditorController,
+    TableEditorController,
+    ColumnEditorController,
+    VisualEditorController,
 };

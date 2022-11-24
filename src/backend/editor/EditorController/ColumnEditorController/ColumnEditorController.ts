@@ -1,6 +1,6 @@
 import {EditorController} from '../EditorController';
 
-class ColumnEditorController extends EditorController {
+export class ColumnEditorController extends EditorController {
 
     /*constructor(...args) {
         console.log('ColumnEditorController.constructor');
@@ -39,5 +39,3 @@ class ColumnEditorController extends EditorController {
     }
 
 }
-
-export = ColumnEditorController;

@@ -1,6 +1,6 @@
 import {EditorController} from '../EditorController';
 
-class ParamEditorController extends EditorController {
+export class ParamEditorController extends EditorController {
     /*constructor(...args) {
         console.log('ParamEditorController.constructor');
         super(...args);
@@ -32,5 +32,3 @@ class ParamEditorController extends EditorController {
     }
 
 }
-
-export = ParamEditorController;

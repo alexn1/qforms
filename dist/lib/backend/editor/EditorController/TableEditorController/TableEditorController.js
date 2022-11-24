@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TableEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class TableEditorController extends EditorController_1.EditorController {
     /*constructor(...args) {
@@ -36,4 +38,4 @@ class TableEditorController extends EditorController_1.EditorController {
         return 'ok';
     }
 }
-module.exports = TableEditorController;
+exports.TableEditorController = TableEditorController;

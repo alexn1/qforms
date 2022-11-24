@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.KeyColumnEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class KeyColumnEditorController extends EditorController_1.EditorController {
     /*constructor(...args) {
@@ -66,4 +68,4 @@ class KeyColumnEditorController extends EditorController_1.EditorController {
         return data;
     }
 }
-module.exports = KeyColumnEditorController;
+exports.KeyColumnEditorController = KeyColumnEditorController;

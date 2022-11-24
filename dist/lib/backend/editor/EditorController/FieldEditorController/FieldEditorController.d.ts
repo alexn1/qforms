@@ -1,10 +1,12 @@
-declare const VisualEditorController: any;
+import { VisualEditorController } from '../VisualEditorController';
 declare class FieldEditorController extends VisualEditorController {
     _new(params: any): Promise<any>;
     save(params: any): Promise<any>;
     delete(params: any): Promise<any>;
     changeClass(params: any): Promise<any>;
-    getView(params: any): Promise<any>;
+    getView(params: any): Promise<{
+        data: {};
+    }>;
     createController(params: any): Promise<{
         js: any;
     }>;

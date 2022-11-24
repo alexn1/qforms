@@ -1,5 +1,5 @@
 const path    = require('path');
-const VisualEditorController = require('../VisualEditorController');
+import {VisualEditorController} from '../VisualEditorController';
 
 class ApplicationEditorController extends VisualEditorController {
 
@@ -17,6 +17,7 @@ class ApplicationEditorController extends VisualEditorController {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const appEditor = this.createApplicationEditor();
+            // @ts-ignore
             result.data.js = await appEditor.getCustomFile('js');
         }
         return result;

@@ -1,6 +1,6 @@
 import {EditorController} from '../EditorController';
 
-class PageLinkEditorController extends EditorController {
+export class PageLinkEditorController extends EditorController {
     async save(params) {
         const appEditor = this.createApplicationEditor();
         //const pageLinkEditor = appEditor.createPageLinkEditor(params.pageLink);
@@ -22,5 +22,3 @@ class PageLinkEditorController extends EditorController {
         return 'ok';
     }
 }
-
-export = PageLinkEditorController;

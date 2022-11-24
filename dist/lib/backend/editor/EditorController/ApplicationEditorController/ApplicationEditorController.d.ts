@@ -1,7 +1,9 @@
-declare const VisualEditorController: any;
+import { VisualEditorController } from '../VisualEditorController';
 declare class ApplicationEditorController extends VisualEditorController {
     save(params: any): Promise<any>;
-    getView(params: any): Promise<any>;
+    getView(params: any): Promise<{
+        data: {};
+    }>;
     createController(params: any): Promise<{
         js: any;
     }>;

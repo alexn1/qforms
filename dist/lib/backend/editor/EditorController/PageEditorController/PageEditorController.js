@@ -1,8 +1,8 @@
 "use strict";
 const path = require('path');
-const VisualEditorController = require('../VisualEditorController');
+const VisualEditorController_1 = require("../VisualEditorController");
 const Helper_1 = require("../../../Helper");
-class PageEditorController extends VisualEditorController {
+class PageEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -37,8 +37,11 @@ class PageEditorController extends VisualEditorController {
             case 'VisualView.html':
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
+                // @ts-ignore
                 result.data.js = await pageEditor.getCustomFile('js');
+                // @ts-ignore
                 result.data.jsx = await pageEditor.getCustomFile('jsx');
+                // @ts-ignore
                 result.data.less = await pageEditor.getCustomFile('less');
                 return result;
             default:

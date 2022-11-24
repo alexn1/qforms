@@ -1,8 +1,7 @@
 import {KeyColumnEditor} from '../../Editor/KeyColumnEditor/KeyColumnEditor';
-
 import {EditorController} from '../EditorController';
 
-class KeyColumnEditorController extends EditorController {
+export class KeyColumnEditorController extends EditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -68,5 +67,3 @@ class KeyColumnEditorController extends EditorController {
     }
 
 }
-
-export = KeyColumnEditorController;

@@ -1,6 +1,6 @@
 import {EditorController} from './EditorController';
 
-class VisualEditorController extends EditorController {
+export class VisualEditorController extends EditorController {
 
     /*async getView(params) {
         console.log('VisualEditorController.getView');
@@ -16,5 +16,3 @@ class VisualEditorController extends EditorController {
     }*/
 
 }
-
-export = VisualEditorController;

@@ -1,6 +1,6 @@
 import {EditorController} from '../EditorController';
 
-class DataSourceEditorController extends EditorController {
+export class DataSourceEditorController extends EditorController {
 
     /*constructor(...args) {
         super(...args);
@@ -143,5 +143,3 @@ class DataSourceEditorController extends EditorController {
     }*/
 
 }
-
-export = DataSourceEditorController;

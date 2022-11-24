@@ -1,7 +1,7 @@
 "use strict";
 const path = require('path');
-const VisualEditorController = require('../VisualEditorController');
-class ApplicationEditorController extends VisualEditorController {
+const VisualEditorController_1 = require("../VisualEditorController");
+class ApplicationEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -15,6 +15,7 @@ class ApplicationEditorController extends VisualEditorController {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
             const appEditor = this.createApplicationEditor();
+            // @ts-ignore
             result.data.js = await appEditor.getCustomFile('js');
         }
         return result;

@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PageLinkEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class PageLinkEditorController extends EditorController_1.EditorController {
     async save(params) {
@@ -22,4 +24,4 @@ class PageLinkEditorController extends EditorController_1.EditorController {
         return 'ok';
     }
 }
-module.exports = PageLinkEditorController;
+exports.PageLinkEditorController = PageLinkEditorController;

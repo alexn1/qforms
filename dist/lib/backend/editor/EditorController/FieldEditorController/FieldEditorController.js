@@ -1,6 +1,6 @@
 "use strict";
-const VisualEditorController = require('../VisualEditorController');
-class FieldEditorController extends VisualEditorController {
+const VisualEditorController_1 = require("../VisualEditorController");
+class FieldEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -45,8 +45,11 @@ class FieldEditorController extends VisualEditorController {
             const pageEditor = await appEditor.getPage(params.page);
             const formEditor = pageEditor.createItemEditor('forms', params.form);
             const fieldEditor = formEditor.createItemEditor('fields', params.field);
+            // @ts-ignore
             result.data.js = await fieldEditor.getCustomFile('js');
+            // @ts-ignore
             result.data.jsx = await fieldEditor.getCustomFile('jsx');
+            // @ts-ignore
             result.data.less = await fieldEditor.getCustomFile('less');
             return result;
         }

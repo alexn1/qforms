@@ -1,4 +1,4 @@
-const VisualEditorController = require('../VisualEditorController');
+import {VisualEditorController} from '../VisualEditorController';
 
 class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
@@ -48,8 +48,11 @@ class FormEditorController extends VisualEditorController {
                 const appEditor = this.createApplicationEditor();
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
+                // @ts-ignore
                 result.data.js   = await formEditor.getCustomFile('js');
+                // @ts-ignore
                 result.data.jsx  = await formEditor.getCustomFile('jsx');
+                // @ts-ignore
                 result.data.less = await formEditor.getCustomFile('less');
                 return result;
             default:

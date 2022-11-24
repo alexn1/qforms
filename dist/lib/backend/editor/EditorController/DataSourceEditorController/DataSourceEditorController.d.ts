@@ -1,5 +1,5 @@
 import { EditorController } from '../EditorController';
-declare class DataSourceEditorController extends EditorController {
+export declare class DataSourceEditorController extends EditorController {
     createDataSourceEditor(params: any): Promise<any>;
     _new(params: any): Promise<any>;
     delete(params: any): Promise<any>;
@@ -13,4 +13,3 @@ declare class DataSourceEditorController extends EditorController {
         data: {};
     }>;
 }
-export = DataSourceEditorController;

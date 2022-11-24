@@ -1,6 +1,6 @@
 import {EditorController} from '../EditorController';
 
-class TableEditorController extends EditorController {
+export class TableEditorController extends EditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -38,5 +38,3 @@ class TableEditorController extends EditorController {
     }
 
 }
-
-export = TableEditorController;
