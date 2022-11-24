@@ -1,5 +1,5 @@
 "use strict";
-const ApplicationEditor = require("../Editor/ApplicationEditor/ApplicationEditor");
+const ApplicationEditor_1 = require("../Editor/ApplicationEditor/ApplicationEditor");
 class EditorController {
     constructor(appInfo, hostApp) {
         if (!hostApp)
@@ -17,7 +17,7 @@ class EditorController {
     }
     createApplicationEditor() {
         console.log('EditorController.createApplicationEditor');
-        return new ApplicationEditor(this.appInfo.appFile);
+        return new ApplicationEditor_1.ApplicationEditor(this.appInfo.appFile);
     }
 }
 module.exports = EditorController;

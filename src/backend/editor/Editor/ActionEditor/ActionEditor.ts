@@ -1,6 +1,6 @@
 const Editor = require('../Editor');
 
-class ActionEditor extends Editor {
+export class ActionEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
@@ -15,5 +15,3 @@ class ActionEditor extends Editor {
         return 'actions';
     }
 }
-
-export = ActionEditor;

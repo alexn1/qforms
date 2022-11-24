@@ -22,7 +22,7 @@ const EditorModule = require("./editor/EditorModule");
 const CommonModule = require("./common/CommonModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
-const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
+const ApplicationEditor_1 = require("../backend/editor/Editor/ApplicationEditor/ApplicationEditor");
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 class BackHostApp {
@@ -224,7 +224,7 @@ class BackHostApp {
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
-        await ApplicationEditor.createAppFile(appFilePath, { name });
+        await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await Application_1.Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }

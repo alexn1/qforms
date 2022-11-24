@@ -1,5 +1,5 @@
 import {JsonFile} from './JsonFile';
-import ApplicationEditor = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
+import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import {BaseModel} from './BaseModel';
 
 export class Converter {

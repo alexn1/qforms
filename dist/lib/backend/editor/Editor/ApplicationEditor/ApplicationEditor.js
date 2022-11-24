@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApplicationEditor = void 0;
 const path = require('path');
 const Editor = require('../Editor');
 const Helper_1 = require("../../../Helper");
@@ -107,4 +109,4 @@ class ApplicationEditor extends Editor {
         this.data = this.appFile.data = ApplicationEditor.createData(Object.assign(Object.assign({}, this.attributes()), { env: this.data.env, databases: this.data.databases, dataSources: this.data.dataSources, actions: this.data.actions, pageLinks: this.data.pageLinks }));
     }
 }
-module.exports = ApplicationEditor;
+exports.ApplicationEditor = ApplicationEditor;

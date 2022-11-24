@@ -1,4 +1,4 @@
-import ApplicationEditor = require("../ApplicationEditor/ApplicationEditor");
+import {ApplicationEditor} from "../ApplicationEditor/ApplicationEditor";
 import PageEditor = require("../PageEditor/PageEditor");
 
 const path = require('path');

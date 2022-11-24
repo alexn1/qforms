@@ -1,6 +1,6 @@
 const path = require('path');
 
-import ApplicationEditor = require('../ApplicationEditor/ApplicationEditor');
+import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
 import {JsonFile} from '../../../JsonFile';
 const Editor = require('../Editor');
 

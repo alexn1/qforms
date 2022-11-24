@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ActionEditor = void 0;
 const Editor = require('../Editor');
 class ActionEditor extends Editor {
     static createData(params) {
@@ -16,4 +18,4 @@ class ActionEditor extends Editor {
         return 'actions';
     }
 }
-module.exports = ActionEditor;
+exports.ActionEditor = ActionEditor;

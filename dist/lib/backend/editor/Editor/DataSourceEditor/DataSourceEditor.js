@@ -1,5 +1,5 @@
 "use strict";
-const ApplicationEditor = require("../ApplicationEditor/ApplicationEditor");
+const ApplicationEditor_1 = require("../ApplicationEditor/ApplicationEditor");
 const PageEditor = require("../PageEditor/PageEditor");
 const path = require('path');
 const Editor = require('../Editor');
@@ -36,7 +36,7 @@ class DataSourceEditor extends Editor {
         return 'dataSources';
     }
     async save() {
-        if (this.parent instanceof ApplicationEditor) {
+        if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
             await this.parent.appFile.save();
         }
         else if (this.parent instanceof PageEditor) {

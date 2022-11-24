@@ -24,7 +24,7 @@ import {FileSessionStore} from './FileSessionStore';
 import {Result} from "./Result";
 
 const pkg     = require('../../package.json');
-const ApplicationEditor = require('../backend/editor/Editor/ApplicationEditor/ApplicationEditor');
+import {ApplicationEditor} from '../backend/editor/Editor/ApplicationEditor/ApplicationEditor';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 

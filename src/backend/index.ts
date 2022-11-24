@@ -36,12 +36,11 @@ import {PageLink} from './viewer/Model/PageLink/PageLink';
 import {Column} from './viewer/Model/Column/Column';
 import {Table} from './viewer/Model/Table/Table';
 import {Action} from './viewer/Model/Action/Action';
-
+import {ActionEditor} from './editor/Editor/ActionEditor/ActionEditor';
+import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 
 // editor
-// module.exports.Editor                            = require('./editor/Editor/Editor');
-module.exports.ActionEditor                      = require('./editor/Editor/ActionEditor/ActionEditor');
-module.exports.ApplicationEditor                 = require('./editor/Editor/ApplicationEditor/ApplicationEditor');
+
 module.exports.DataSourceEditor                  = require('./editor/Editor/DataSourceEditor/DataSourceEditor');
 module.exports.SqlDataSourceEditor               = require('./editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 module.exports.FieldEditor                       = require('./editor/Editor/FieldEditor/FieldEditor');
@@ -129,4 +128,8 @@ export {
     Column,
     Table,
     Action,
+
+    // editor
+    ActionEditor,
+    ApplicationEditor,
 };

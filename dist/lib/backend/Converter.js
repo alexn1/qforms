@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Converter = void 0;
 const JsonFile_1 = require("./JsonFile");
-const ApplicationEditor = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
+const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
 class Converter {
     static async reformat(appFilePath) {
@@ -10,7 +10,7 @@ class Converter {
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         // app
-        const appEditor = new ApplicationEditor(appFile);
+        const appEditor = new ApplicationEditor_1.ApplicationEditor(appFile);
         appEditor.reformat();
         await appEditor.save();
         // pages
