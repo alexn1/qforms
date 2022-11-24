@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Param = void 0;
 const Model_1 = require("../Model");
 class Param extends Model_1.Model {
     getValue() {
@@ -13,4 +15,4 @@ class Param extends Model_1.Model {
         return this.parent.getApp();
     }
 }
-module.exports = Param;
+exports.Param = Param;

@@ -1,4 +1,4 @@
-declare class IndexModule {
+export declare class IndexModule {
     hostApp: any;
     css: string[];
     js: string[];
@@ -14,4 +14,3 @@ declare class IndexModule {
     getLinks(): any[];
     getScripts(): any[];
 }
-export = IndexModule;

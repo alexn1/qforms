@@ -14,8 +14,8 @@ import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/Pos
 import {Context} from '../backend/Context';
 import {Application} from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
-import MonitorModule = require('./monitor/MonitorModule');
-import IndexModule = require('./index/IndexModule');
+import {MonitorModule} from './monitor/MonitorModule';
+import {IndexModule} from './index/IndexModule';
 import {MyError} from './MyError';
 import ViewerModule = require('./viewer/ViewerModule');
 import EditorModule = require('./editor/EditorModule');

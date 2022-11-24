@@ -1,5 +1,5 @@
 import { BackHostApp } from '../BackHostApp';
-declare class MonitorModule {
+export declare class MonitorModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
@@ -22,4 +22,3 @@ declare class MonitorModule {
     checkCredentials(req: any): boolean;
     authorize(req: any): boolean;
 }
-export = MonitorModule;

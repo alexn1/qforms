@@ -14,8 +14,8 @@ const Helper_1 = require("./Helper");
 const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("../backend/Context");
 const Application_1 = require("./viewer/Model/Application/Application");
-const MonitorModule = require("./monitor/MonitorModule");
-const IndexModule = require("./index/IndexModule");
+const MonitorModule_1 = require("./monitor/MonitorModule");
+const IndexModule_1 = require("./index/IndexModule");
 const MyError_1 = require("./MyError");
 const ViewerModule = require("./viewer/ViewerModule");
 const EditorModule = require("./editor/EditorModule");
@@ -79,10 +79,10 @@ class BackHostApp {
         this.commonModule = new CommonModule(this);
         await this.commonModule.init();
         // indexModule
-        this.indexModule = new IndexModule(this);
+        this.indexModule = new IndexModule_1.IndexModule(this);
         await this.indexModule.init();
         // monitorModule
-        this.monitorModule = new MonitorModule(this);
+        this.monitorModule = new MonitorModule_1.MonitorModule(this);
         await this.monitorModule.init();
         // viewerModule
         this.viewerModule = new ViewerModule(this);

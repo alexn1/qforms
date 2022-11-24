@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.MonitorModule = void 0;
 const path = require('path');
 const Helper_1 = require("../Helper");
 class MonitorModule {
@@ -72,4 +74,4 @@ class MonitorModule {
             this.checkCredentials(req);
     }
 }
-module.exports = MonitorModule;
+exports.MonitorModule = MonitorModule;

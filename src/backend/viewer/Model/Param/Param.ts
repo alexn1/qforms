@@ -1,7 +1,7 @@
 import {Model} from '../Model';
 import {Application} from '../Application/Application';
 
-class Param extends Model {
+export class Param extends Model {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');
@@ -16,5 +16,3 @@ class Param extends Model {
     }
 
 }
-
-export = Param;

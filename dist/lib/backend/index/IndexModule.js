@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.IndexModule = void 0;
 const path = require('path');
 const Application_1 = require("../viewer/Model/Application/Application");
 const Helper_1 = require("../Helper");
@@ -40,4 +42,4 @@ class IndexModule {
         ];
     }
 }
-module.exports = IndexModule;
+exports.IndexModule = IndexModule;

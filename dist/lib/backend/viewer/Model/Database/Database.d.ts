@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import Param = require('../Param/Param');
+import { Param } from '../Param/Param';
 import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';

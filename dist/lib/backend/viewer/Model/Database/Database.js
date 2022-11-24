@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Database = void 0;
 const Model_1 = require("../Model");
-const Param = require("../Param/Param");
+const Param_1 = require("../Param/Param");
 class Database extends Model_1.Model {
     constructor(data, parent) {
         //console.log('Database.constructor');
@@ -93,7 +93,7 @@ class Database extends Model_1.Model {
         return query;
     }
     createParam(name) {
-        return new Param(this.getColItemData('params', name), this);
+        return new Param_1.Param(this.getColItemData('params', name), this);
     }
     getConfig() {
         const config = {

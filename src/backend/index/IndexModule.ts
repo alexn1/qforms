@@ -3,7 +3,7 @@ const path = require('path');
 import {Application} from '../viewer/Model/Application/Application';
 import {Helper} from "../Helper";
 
-class IndexModule {
+export class IndexModule {
     hostApp: any;
     css: string[];
     js : string[];
@@ -44,4 +44,4 @@ class IndexModule {
         ];
     }
 }
-export = IndexModule;
+

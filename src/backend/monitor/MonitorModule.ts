@@ -3,7 +3,7 @@ const path = require('path');
 import {BackHostApp} from '../BackHostApp';
 import {Helper} from "../Helper";
 
-class MonitorModule {
+export class MonitorModule {
     hostApp: BackHostApp;
     css: string[];
     js : string[];
@@ -77,4 +77,3 @@ class MonitorModule {
             this.checkCredentials(req);
     }
 }
-export = MonitorModule;
