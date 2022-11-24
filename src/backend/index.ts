@@ -40,9 +40,9 @@ import {ActionEditor} from './editor/Editor/ActionEditor/ActionEditor';
 import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import {DataSourceEditor} from './editor/Editor/DataSourceEditor/DataSourceEditor';
 import {SqlDataSourceEditor} from './editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor';
+import {FieldEditor} from './editor/Editor/FieldEditor/FieldEditor';
 
 // editor
-module.exports.FieldEditor                       = require('./editor/Editor/FieldEditor/FieldEditor');
 module.exports.CheckBoxFieldEditor               = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
 module.exports.CheckBoxListFieldEditor           = require('./editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor');
 module.exports.ComboBoxFieldEditor               = require('./editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
@@ -133,4 +133,5 @@ export {
     ApplicationEditor,
     DataSourceEditor,
     SqlDataSourceEditor,
+    FieldEditor,
 };

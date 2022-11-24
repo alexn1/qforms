@@ -2,7 +2,7 @@ const path = require('path');
 const Editor = require('../Editor');
 const backend = require('../../../../backend');
 
-class FieldEditor extends Editor {
+export class FieldEditor extends Editor {
     static createAttributes(params): any {
         if (!params.name) throw new Error('no name');
         return {
@@ -70,5 +70,3 @@ class FieldEditor extends Editor {
         return 'fields';
     }
 }
-
-export = FieldEditor;

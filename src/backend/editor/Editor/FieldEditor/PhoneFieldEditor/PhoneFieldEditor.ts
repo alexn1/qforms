@@ -1,4 +1,4 @@
-const FieldEditor = require('../FieldEditor');
+import {FieldEditor} from '../FieldEditor';
 
 class PhoneFieldEditor extends FieldEditor {
 

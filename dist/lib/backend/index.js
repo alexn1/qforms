@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SqlDataSourceEditor = exports.DataSourceEditor = exports.ApplicationEditor = exports.ActionEditor = exports.Action = exports.Table = exports.Column = exports.PageLink = exports.Page = exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
+exports.FieldEditor = exports.SqlDataSourceEditor = exports.DataSourceEditor = exports.ApplicationEditor = exports.ActionEditor = exports.Action = exports.Table = exports.Column = exports.PageLink = exports.Page = exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -85,8 +85,9 @@ const DataSourceEditor_1 = require("./editor/Editor/DataSourceEditor/DataSourceE
 Object.defineProperty(exports, "DataSourceEditor", { enumerable: true, get: function () { return DataSourceEditor_1.DataSourceEditor; } });
 const SqlDataSourceEditor_1 = require("./editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor");
 Object.defineProperty(exports, "SqlDataSourceEditor", { enumerable: true, get: function () { return SqlDataSourceEditor_1.SqlDataSourceEditor; } });
+const FieldEditor_1 = require("./editor/Editor/FieldEditor/FieldEditor");
+Object.defineProperty(exports, "FieldEditor", { enumerable: true, get: function () { return FieldEditor_1.FieldEditor; } });
 // editor
-module.exports.FieldEditor = require('./editor/Editor/FieldEditor/FieldEditor');
 module.exports.CheckBoxFieldEditor = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
 module.exports.CheckBoxListFieldEditor = require('./editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor');
 module.exports.ComboBoxFieldEditor = require('./editor/Editor/FieldEditor/ComboBoxFieldEditor/ComboBoxFieldEditor');
