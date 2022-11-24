@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileFieldEditor = exports.DateTimeFieldEditor = exports.TimeFieldEditor = exports.DateFieldEditor = exports.ComboBoxFieldEditor = exports.CheckBoxListFieldEditor = exports.CheckBoxFieldEditor = exports.FieldEditor = exports.SqlDataSourceEditor = exports.DataSourceEditor = exports.ApplicationEditor = exports.ActionEditor = exports.Action = exports.Table = exports.Column = exports.PageLink = exports.Page = exports.TableForm = exports.RowForm = exports.Form = exports.RadioField = exports.PasswordField = exports.PhoneField = exports.TextBoxField = exports.TextAreaField = exports.LinkField = exports.LabelField = exports.ImageField = exports.FileField = exports.DateTimeField = exports.TimeField = exports.DateField = exports.ComboBoxField = exports.CheckBoxListField = exports.CheckBoxField = exports.Field = exports.SqlDataSource = exports.DataSource = exports.PostgreSqlDatabase = exports.MySqlDatabase = exports.Database = exports.Application = exports.Model = exports.Result = exports.JsonFile = exports.Converter = exports.Context = exports.BaseModel = exports.BackHostApp = exports.Helper = void 0;
-exports.RadioFieldEditor = exports.PasswordFieldEditor = exports.PhoneFieldEditor = exports.TextBoxFieldEditor = exports.TextAreaFieldEditor = exports.LinkFieldEditor = exports.LabelFieldEditor = exports.ImageFieldEditor = void 0;
+exports.FormEditor = exports.RadioFieldEditor = exports.PasswordFieldEditor = exports.PhoneFieldEditor = exports.TextBoxFieldEditor = exports.TextAreaFieldEditor = exports.LinkFieldEditor = exports.LabelFieldEditor = exports.ImageFieldEditor = void 0;
 const Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
 const Result_1 = require("./Result");
@@ -118,8 +118,9 @@ const PasswordFieldEditor_1 = require("./editor/Editor/FieldEditor/PasswordField
 Object.defineProperty(exports, "PasswordFieldEditor", { enumerable: true, get: function () { return PasswordFieldEditor_1.PasswordFieldEditor; } });
 const RadioFieldEditor_1 = require("./editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor");
 Object.defineProperty(exports, "RadioFieldEditor", { enumerable: true, get: function () { return RadioFieldEditor_1.RadioFieldEditor; } });
+const FormEditor_1 = require("./editor/Editor/FormEditor/FormEditor");
+Object.defineProperty(exports, "FormEditor", { enumerable: true, get: function () { return FormEditor_1.FormEditor; } });
 // editor
-module.exports.FormEditor = require('./editor/Editor/FormEditor/FormEditor');
 module.exports.RowFormEditor = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
 module.exports.TableFormEditor = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor = require('./editor/Editor/PageEditor/PageEditor');

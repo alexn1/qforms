@@ -56,9 +56,10 @@ import {TextBoxFieldEditor} from './editor/Editor/FieldEditor/TextBoxFieldEditor
 import {PhoneFieldEditor} from './editor/Editor/FieldEditor/PhoneFieldEditor/PhoneFieldEditor';
 import {PasswordFieldEditor} from './editor/Editor/FieldEditor/PasswordFieldEditor/PasswordFieldEditor';
 import {RadioFieldEditor} from './editor/Editor/FieldEditor/RadioFieldEditor/RadioFieldEditor';
+import {FormEditor} from './editor/Editor/FormEditor/FormEditor';
 
 // editor
-module.exports.FormEditor                        = require('./editor/Editor/FormEditor/FormEditor');
+
 module.exports.RowFormEditor                     = require('./editor/Editor/FormEditor/RowFormEditor/RowFormEditor');
 module.exports.TableFormEditor                   = require('./editor/Editor/FormEditor/TableFormEditor/TableFormEditor');
 module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
@@ -149,4 +150,5 @@ export {
     PhoneFieldEditor,
     PasswordFieldEditor,
     RadioFieldEditor,
+    FormEditor,
 };

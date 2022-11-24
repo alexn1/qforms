@@ -1,4 +1,4 @@
-const FormEditor = require('../FormEditor');
+import {FormEditor} from '../FormEditor';
 const Editor = require('../../Editor');
 
 class TableFormEditor extends FormEditor {

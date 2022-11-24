@@ -1,7 +1,7 @@
 const path = require('path');
 const Editor = require('../Editor');
 
-class FormEditor extends Editor {
+export class FormEditor extends Editor {
     static createAttributes(params): any {
         if (!params.name) throw new Error('no name');
         return {
@@ -78,5 +78,3 @@ class FormEditor extends Editor {
         return 'forms';
     }
 }
-
-export = FormEditor;

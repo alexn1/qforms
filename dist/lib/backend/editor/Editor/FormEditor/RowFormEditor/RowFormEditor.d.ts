@@ -1,4 +1,4 @@
-declare const FormEditor: any;
+import { FormEditor } from '../FormEditor';
 declare class RowFormEditor extends FormEditor {
     static createData(params: any): {
         '@class': string;

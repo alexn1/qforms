@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FormEditor = void 0;
 const path = require('path');
 const Editor = require('../Editor');
 class FormEditor extends Editor {
@@ -77,4 +79,4 @@ class FormEditor extends Editor {
         return 'forms';
     }
 }
-module.exports = FormEditor;
+exports.FormEditor = FormEditor;

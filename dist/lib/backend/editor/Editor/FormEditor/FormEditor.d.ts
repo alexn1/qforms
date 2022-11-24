@@ -1,5 +1,5 @@
 declare const Editor: any;
-declare class FormEditor extends Editor {
+export declare class FormEditor extends Editor {
     static createAttributes(params: any): any;
     static createData(params: any): any;
     createJs(params: any): Promise<any>;
@@ -9,4 +9,4 @@ declare class FormEditor extends Editor {
     getCollectionDirPath(): Promise<any>;
     getColName(): string;
 }
-export = FormEditor;
+export {};
