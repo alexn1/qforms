@@ -1,6 +1,6 @@
 const path = require('path');
 import {Editor} from '../Editor';
-const backend = require('../../../../backend');
+import * as backend from '../../../../backend';
 
 export class FieldEditor extends Editor {
     static createAttributes(params): any {
