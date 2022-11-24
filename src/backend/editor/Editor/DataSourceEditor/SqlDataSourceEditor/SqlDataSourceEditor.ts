@@ -1,7 +1,7 @@
 import {DataSourceEditor} from '../DataSourceEditor';
 const Editor = require('../../Editor');
 
-class SqlDataSourceEditor extends DataSourceEditor {
+export class SqlDataSourceEditor extends DataSourceEditor {
     static createData(params): any {
         return {
             '@class'     : 'SqlDataSource',
@@ -20,5 +20,3 @@ class SqlDataSourceEditor extends DataSourceEditor {
         };
     }
 }
-
-export = SqlDataSourceEditor;

@@ -39,9 +39,9 @@ import {Action} from './viewer/Model/Action/Action';
 import {ActionEditor} from './editor/Editor/ActionEditor/ActionEditor';
 import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import {DataSourceEditor} from './editor/Editor/DataSourceEditor/DataSourceEditor';
+import {SqlDataSourceEditor} from './editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor';
 
 // editor
-module.exports.SqlDataSourceEditor               = require('./editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor');
 module.exports.FieldEditor                       = require('./editor/Editor/FieldEditor/FieldEditor');
 module.exports.CheckBoxFieldEditor               = require('./editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor');
 module.exports.CheckBoxListFieldEditor           = require('./editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor');
@@ -132,4 +132,5 @@ export {
     ActionEditor,
     ApplicationEditor,
     DataSourceEditor,
+    SqlDataSourceEditor,
 };

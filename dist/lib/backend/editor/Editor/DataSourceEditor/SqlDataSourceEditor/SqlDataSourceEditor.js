@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.SqlDataSourceEditor = void 0;
 const DataSourceEditor_1 = require("../DataSourceEditor");
 const Editor = require('../../Editor');
 class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
@@ -20,4 +22,4 @@ class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
         };
     }
 }
-module.exports = SqlDataSourceEditor;
+exports.SqlDataSourceEditor = SqlDataSourceEditor;
