@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PageEditorController = void 0;
 const path = require('path');
 const VisualEditorController_1 = require("../VisualEditorController");
 const Helper_1 = require("../../../Helper");
@@ -79,4 +81,4 @@ class PageEditorController extends VisualEditorController_1.VisualEditorControll
         return { js };
     }
 }
-module.exports = PageEditorController;
+exports.PageEditorController = PageEditorController;

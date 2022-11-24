@@ -1,7 +1,7 @@
 const path    = require('path');
 import {VisualEditorController} from '../VisualEditorController';
 
-class ApplicationEditorController extends VisualEditorController {
+export class ApplicationEditorController extends VisualEditorController {
 
     /*constructor(...args) {
         super(...args);
@@ -38,5 +38,3 @@ class ApplicationEditorController extends VisualEditorController {
         return {js: params.text};
     }
 }
-
-export = ApplicationEditorController;

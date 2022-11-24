@@ -1,5 +1,5 @@
 import { VisualEditorController } from '../VisualEditorController';
-declare class FieldEditorController extends VisualEditorController {
+export declare class FieldEditorController extends VisualEditorController {
     _new(params: any): Promise<any>;
     save(params: any): Promise<any>;
     delete(params: any): Promise<any>;
@@ -22,4 +22,3 @@ declare class FieldEditorController extends VisualEditorController {
     moveUp(params: any): Promise<string>;
     moveDown(params: any): Promise<string>;
 }
-export = FieldEditorController;

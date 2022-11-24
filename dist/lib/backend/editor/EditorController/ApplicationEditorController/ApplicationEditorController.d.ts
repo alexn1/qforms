@@ -1,5 +1,5 @@
 import { VisualEditorController } from '../VisualEditorController';
-declare class ApplicationEditorController extends VisualEditorController {
+export declare class ApplicationEditorController extends VisualEditorController {
     save(params: any): Promise<any>;
     getView(params: any): Promise<{
         data: {};
@@ -14,4 +14,3 @@ declare class ApplicationEditorController extends VisualEditorController {
         js: any;
     }>;
 }
-export = ApplicationEditorController;

@@ -1,6 +1,6 @@
 import {VisualEditorController} from '../VisualEditorController';
 
-class FormEditorController extends VisualEditorController {
+export class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -95,5 +95,3 @@ class FormEditorController extends VisualEditorController {
         return {js};
     }
 }
-
-export = FormEditorController;

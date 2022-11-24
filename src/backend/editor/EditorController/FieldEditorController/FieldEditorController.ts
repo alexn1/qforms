@@ -1,6 +1,6 @@
 import {VisualEditorController} from '../VisualEditorController';
 
-class FieldEditorController extends VisualEditorController {
+export class FieldEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -112,5 +112,3 @@ class FieldEditorController extends VisualEditorController {
     }
 
 }
-
-export = FieldEditorController;

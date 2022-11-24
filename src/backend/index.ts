@@ -81,13 +81,10 @@ import {ParamEditorController} from './editor/EditorController/ParamEditorContro
 import {TableEditorController} from './editor/EditorController/TableEditorController/TableEditorController';
 import {ColumnEditorController} from './editor/EditorController/ColumnEditorController/ColumnEditorController';
 import {VisualEditorController} from './editor/EditorController/VisualEditorController';
-
-
-module.exports.ApplicationEditorController       = require('./editor/EditorController/ApplicationEditorController/ApplicationEditorController');
-module.exports.FieldEditorController             = require('./editor/EditorController/FieldEditorController/FieldEditorController');
-module.exports.FormEditorController              = require('./editor/EditorController/FormEditorController/FormEditorController');
-module.exports.PageEditorController              = require('./editor/EditorController/PageEditorController/PageEditorController');
-
+import {ApplicationEditorController} from './editor/EditorController/ApplicationEditorController/ApplicationEditorController';
+import {FieldEditorController} from './editor/EditorController/FieldEditorController/FieldEditorController';
+import {FormEditorController} from './editor/EditorController/FormEditorController/FormEditorController';
+import {PageEditorController} from './editor/EditorController/PageEditorController/PageEditorController';
 
 export {
     Helper,
@@ -173,4 +170,8 @@ export {
     TableEditorController,
     ColumnEditorController,
     VisualEditorController,
+    ApplicationEditorController,
+    FieldEditorController,
+    FormEditorController,
+    PageEditorController,
 };

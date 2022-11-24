@@ -2,7 +2,7 @@ const path = require('path');
 import {VisualEditorController} from '../VisualEditorController';
 import {Helper} from '../../../Helper';
 
-class PageEditorController extends VisualEditorController {
+export class PageEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
@@ -79,5 +79,3 @@ class PageEditorController extends VisualEditorController {
         return {js};
     }
 }
-
-export = PageEditorController;

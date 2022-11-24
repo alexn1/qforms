@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ApplicationEditorController = void 0;
 const path = require('path');
 const VisualEditorController_1 = require("../VisualEditorController");
 class ApplicationEditorController extends VisualEditorController_1.VisualEditorController {
@@ -36,4 +38,4 @@ class ApplicationEditorController extends VisualEditorController_1.VisualEditorC
         return { js: params.text };
     }
 }
-module.exports = ApplicationEditorController;
+exports.ApplicationEditorController = ApplicationEditorController;

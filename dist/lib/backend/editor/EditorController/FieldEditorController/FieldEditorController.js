@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.FieldEditorController = void 0;
 const VisualEditorController_1 = require("../VisualEditorController");
 class FieldEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
@@ -104,4 +106,4 @@ class FieldEditorController extends VisualEditorController_1.VisualEditorControl
         return 'ok';
     }
 }
-module.exports = FieldEditorController;
+exports.FieldEditorController = FieldEditorController;
