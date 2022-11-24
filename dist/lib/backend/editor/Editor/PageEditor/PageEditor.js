@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PageEditor = void 0;
 const path = require('path');
 const Editor = require('../Editor');
 class PageEditor extends Editor {
@@ -83,4 +85,4 @@ class PageEditor extends Editor {
         this.data = this.pageFile.data = PageEditor.createData(Object.assign(Object.assign({}, this.attributes()), { dataSources: this.data.dataSources, actions: this.data.actions, forms: this.data.forms }));
     }
 }
-module.exports = PageEditor;
+exports.PageEditor = PageEditor;

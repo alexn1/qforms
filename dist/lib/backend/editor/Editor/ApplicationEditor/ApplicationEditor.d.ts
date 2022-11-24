@@ -1,7 +1,7 @@
 declare const Editor: any;
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
-import PageEditor = require('../PageEditor/PageEditor');
+import { PageEditor } from '../PageEditor/PageEditor';
 export declare class ApplicationEditor extends Editor {
     appFile: JsonFile;
     appInfo: AppInfo;

@@ -4,7 +4,7 @@ import {Helper} from '../../../Helper';
 import {Application} from '../../../viewer/Model/Application/Application';
 import {JsonFile} from '../../../JsonFile';
 import {AppInfo} from '../../../AppInfo';
-import PageEditor = require('../PageEditor/PageEditor');
+import {PageEditor} from '../PageEditor/PageEditor';
 
 export class ApplicationEditor extends Editor {
     appFile: JsonFile;

@@ -4,7 +4,7 @@ import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
 import {JsonFile} from '../../../JsonFile';
 const Editor = require('../Editor');
 
-class PageEditor extends Editor {
+export class PageEditor extends Editor {
     appEditor: ApplicationEditor;
     pageFile: JsonFile;
     constructor(appEditor, pageFile) {
@@ -93,5 +93,3 @@ class PageEditor extends Editor {
         });
     }
 }
-
-export = PageEditor;

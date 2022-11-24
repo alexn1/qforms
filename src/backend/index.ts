@@ -59,9 +59,9 @@ import {RadioFieldEditor} from './editor/Editor/FieldEditor/RadioFieldEditor/Rad
 import {FormEditor} from './editor/Editor/FormEditor/FormEditor';
 import {RowFormEditor} from './editor/Editor/FormEditor/RowFormEditor/RowFormEditor';
 import {TableFormEditor} from './editor/Editor/FormEditor/TableFormEditor/TableFormEditor';
+import {PageEditor} from './editor/Editor/PageEditor/PageEditor';
 
 // editor
-module.exports.PageEditor                        = require('./editor/Editor/PageEditor/PageEditor');
 module.exports.PageLinkEditor                    = require('./editor/Editor/PageLinkEditor/PageLinkEditor');
 module.exports.KeyColumnEditor                   = require('./editor/Editor/KeyColumnEditor/KeyColumnEditor');
 module.exports.DatabaseEditor                    = require('./editor/Editor/DatabaseEditor/DatabaseEditor');
@@ -152,4 +152,5 @@ export {
     FormEditor,
     RowFormEditor,
     TableFormEditor,
+    PageEditor,
 };

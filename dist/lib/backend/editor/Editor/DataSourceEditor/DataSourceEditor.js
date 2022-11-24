@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataSourceEditor = void 0;
 const ApplicationEditor_1 = require("../ApplicationEditor/ApplicationEditor");
-const PageEditor = require("../PageEditor/PageEditor");
+const PageEditor_1 = require("../PageEditor/PageEditor");
 const path = require('path');
 const Editor = require('../Editor');
 class DataSourceEditor extends Editor {
@@ -41,7 +41,7 @@ class DataSourceEditor extends Editor {
         if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
             await this.parent.appFile.save();
         }
-        else if (this.parent instanceof PageEditor) {
+        else if (this.parent instanceof PageEditor_1.PageEditor) {
             await this.parent.pageFile.save();
         }
         else {
