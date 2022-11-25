@@ -25,8 +25,8 @@ export declare class Application extends Model {
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
     getHostApp(): any;
-    getLinks(context: Context): Promise<string[]>;
-    getScripts(context: Context): Promise<string[]>;
+    getLinks(context: Context): Promise<any[]>;
+    getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
     getFrontendDirPath(): any;

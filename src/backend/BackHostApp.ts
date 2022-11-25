@@ -735,7 +735,7 @@ export class BackHostApp {
         });
     }
 
-    getPostAlias(path, arr, query) {
+    getPostAlias(path, arr, query?) {
         this.alias('get' , path , arr, 'moduleGet' , query);
         this.alias('post', path , arr, 'modulePost', query);
     }

@@ -69,13 +69,13 @@ export class Application extends Model {
         return this.hostApp;
     }
 
-    async getLinks(context: Context): Promise<string[]> {
+    async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
             .map(src => `${virtualPath}/${src}`);
     }
 
-    async getScripts(context: Context): Promise<string[]> {
+    async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
             .map(src => `${virtualPath}/${src}`);

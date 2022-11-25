@@ -65,7 +65,7 @@ export declare class BackHostApp {
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
     alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [any, any, any, any, any], cb: string, query?: any): void;
-    getPostAlias(path: any, arr: any, query: any): void;
+    getPostAlias(path: any, arr: any, query?: any): void;
     getNodeEnv(): string;
     isDevelopment(): boolean;
     isProduction(): boolean;
