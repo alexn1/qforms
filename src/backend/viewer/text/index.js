@@ -1,4 +1,4 @@
 module.exports = {
-    en: require('./en'),
-    ru: require('./ru')
+    en: require('./en.json'),
+    ru: require('./ru.json')
 };
