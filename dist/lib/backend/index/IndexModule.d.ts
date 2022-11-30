@@ -13,4 +13,5 @@ export declare class IndexModule {
     }>;
     getLinks(): any[];
     getScripts(): any[];
+    render({ version }: any): string;
 }

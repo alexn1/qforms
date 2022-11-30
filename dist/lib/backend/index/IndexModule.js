@@ -1,9 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndexModule = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
 const path = require('path');
 const Application_1 = require("../viewer/Model/Application/Application");
 const Helper_1 = require("../Helper");
+const App_1 = require("./App");
+const server_1 = __importDefault(require("react-dom/server"));
 class IndexModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -40,6 +46,20 @@ class IndexModule {
             ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
+    }
+    render({ version }) {
+        const app = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(App_1.App, {}));
+        return (`<!DOCTYPE html>
+<html>
+<head>
+    <!-- ${version}> -->
+    <meta charSet="utf-8">
+    <title>QForms v${version}</title>
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>`);
     }
 }
 exports.IndexModule = IndexModule;

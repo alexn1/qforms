@@ -1,6 +1,6 @@
 {
   "name": "qforms",
-  "version": "0.1.1119",
+  "version": "0.1.1122",
   "description": "A platform for building Web UI for databases.",
   "main": "lib/backend/index.js",
   "dependencies": {
@@ -14,6 +14,8 @@
     "mysql": "^2.18.1",
     "node-fetch": "^2.6.6",
     "pg": "^8.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "slash": "^1.0.0",
     "uuid": "^8.3.2",
     "ws": "^2.3.1"
@@ -24,6 +26,8 @@
     "@babel/plugin-proposal-class-properties": "^7.16.5",
     "@babel/plugin-transform-react-jsx": "^7.16.5",
     "@types/node": "^15.14.9",
+    "@types/react": "^17.0.52",
+    "@types/react-dom": "^17.0.18",
     "babel-preset-react-app": "^3.1.2",
     "chai": "^3.2.0",
     "del": "^1.2.1",

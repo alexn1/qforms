@@ -5,6 +5,10 @@
     "esModuleInterop": true,
     "module": "commonjs",
     "outDir": "./dist/lib/backend",                                   /* Specify an output folder for all emitted files. */
+     "jsx": "react-jsx",                                /* Specify what JSX code is generated. */
   },
-  "include": ["src/backend/**/*.ts"]
+  "include": [
+    "src/backend/**/*.ts",
+    "src/backend/**/*.tsx"
+  ]
 }

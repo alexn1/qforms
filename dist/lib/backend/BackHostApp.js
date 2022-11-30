@@ -404,13 +404,20 @@ class BackHostApp {
         console.log(colors.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
-            res.render('index/index', {
+            res.end(this.indexModule.render({
                 hostApp: this,
                 version: pkg.version,
                 data: data,
                 links: this.indexModule.getLinks(),
                 scripts: this.indexModule.getScripts(),
-            });
+            }));
+            /*res.render('index/index', {
+                hostApp: this,
+                version: pkg.version,
+                data   : data,
+                links  : this.indexModule.getLinks(),
+                scripts: this.indexModule.getScripts(),
+            });*/
         }
         catch (err) {
             next(err);

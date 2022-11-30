@@ -8,7 +8,7 @@ const BUILD_PATH = './dist';
 const tsProject = ts.createProject('tsconfig.json');
 
 function backend_ts() {
-    return gulp.src(path.join(SRC_PATH, 'backend/**/*.ts'))
+    return gulp.src(path.join(SRC_PATH, 'backend/**/*.ts?(x)'))
         .pipe(
             //ts(
             // tsConfig.compilerOptions
