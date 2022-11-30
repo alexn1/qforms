@@ -405,11 +405,10 @@ class BackHostApp {
         try {
             const data = await this.indexModule.fill();
             res.end(this.indexModule.render({
-                hostApp: this,
                 version: pkg.version,
-                data: data,
                 links: this.indexModule.getLinks(),
                 scripts: this.indexModule.getScripts(),
+                data: data,
             }));
             /*res.render('index/index', {
                 hostApp: this,

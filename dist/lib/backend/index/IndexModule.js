@@ -9,7 +9,6 @@ const path = require('path');
 const server_1 = __importDefault(require("react-dom/server"));
 const Application_1 = require("../viewer/Model/Application/Application");
 const Helper_1 = require("../Helper");
-const App_1 = require("./App");
 const Links_1 = require("./Links");
 const Scripts_1 = require("./Scripts");
 class IndexModule {
@@ -49,10 +48,11 @@ class IndexModule {
             ...(this.js)
         ];
     }
-    render({ version, links, scripts }) {
-        const app = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(App_1.App, {}));
+    render({ version, links, scripts, data }) {
+        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: links }));
         const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: scripts }));
+        const data2 = JSON.stringify(data /*, null, 4*/);
         return (`<!DOCTYPE html>
 <html>
 <head>
@@ -61,6 +61,14 @@ class IndexModule {
     <title>QForms v${version}</title>
     ${links2}
     ${scripts2}
+    <script type="application/json">${data2}</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // console.log('DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            new IndexFrontHostApp(data).init();
+        });
+    </script>
 </head>
 <body>
 <div id="root"></div>

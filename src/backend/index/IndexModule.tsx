@@ -47,11 +47,11 @@ export class IndexModule {
             ...(this.js)
         ];
     }
-    render({version, links, scripts}: any) {
-        const app = ReactDOMServer.renderToStaticMarkup(<App/>);
+    render({version, links, scripts, data}: any) {
+        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={links}/>);
         const scripts2 = ReactDOMServer.renderToStaticMarkup(<Scripts scripts={scripts}/>);
-
+        const data2 = JSON.stringify(data/*, null, 4*/);
         return (
 `<!DOCTYPE html>
 <html>
@@ -61,6 +61,14 @@ export class IndexModule {
     <title>QForms v${version}</title>
     ${links2}
     ${scripts2}
+    <script type="application/json">${data2}</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // console.log('DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            new IndexFrontHostApp(data).init();
+        });
+    </script>
 </head>
 <body>
 <div id="root"></div>
