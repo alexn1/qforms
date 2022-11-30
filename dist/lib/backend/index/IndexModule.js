@@ -59,7 +59,9 @@ class IndexModule {
     <!-- ${version}> -->
     <meta charSet="utf-8">
     <title>QForms v${version}</title>
+    <!-- links -->
     ${links2}
+    <!-- scripts -->
     ${scripts2}
     <script type="application/json">${data2}</script>
     <script>
