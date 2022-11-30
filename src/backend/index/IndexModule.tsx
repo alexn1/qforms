@@ -1,9 +1,10 @@
 const path = require('path');
 
+import ReactDOMServer from 'react-dom/server';
 import {Application} from '../viewer/Model/Application/Application';
 import {Helper} from "../Helper";
 import {App} from './App';
-import ReactDOMServer from 'react-dom/server';
+import {Links} from './Links';
 
 export class IndexModule {
     hostApp: any;
@@ -45,8 +46,9 @@ export class IndexModule {
             ...(this.js)
         ];
     }
-    render({version}: any) {
+    render({version, links}: any) {
         const app = ReactDOMServer.renderToStaticMarkup(<App/>);
+        const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={links}/>);
 
         return (
 `<!DOCTYPE html>
@@ -55,6 +57,7 @@ export class IndexModule {
     <!-- ${version}> -->
     <meta charSet="utf-8">
     <title>QForms v${version}</title>
+    ${links2}    
 </head>
 <body>
 <div id="root"></div>
