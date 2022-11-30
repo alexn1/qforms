@@ -5,6 +5,7 @@ import {Application} from '../viewer/Model/Application/Application';
 import {Helper} from "../Helper";
 import {App} from './App';
 import {Links} from './Links';
+import {Scripts} from './Scripts';
 
 export class IndexModule {
     hostApp: any;
@@ -46,9 +47,10 @@ export class IndexModule {
             ...(this.js)
         ];
     }
-    render({version, links}: any) {
+    render({version, links, scripts}: any) {
         const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={links}/>);
+        const scripts2 = ReactDOMServer.renderToStaticMarkup(<Scripts scripts={scripts}/>);
 
         return (
 `<!DOCTYPE html>
@@ -57,7 +59,8 @@ export class IndexModule {
     <!-- ${version}> -->
     <meta charSet="utf-8">
     <title>QForms v${version}</title>
-    ${links2}    
+    ${links2}
+    ${scripts2}
 </head>
 <body>
 <div id="root"></div>

@@ -11,6 +11,7 @@ const Application_1 = require("../viewer/Model/Application/Application");
 const Helper_1 = require("../Helper");
 const App_1 = require("./App");
 const Links_1 = require("./Links");
+const Scripts_1 = require("./Scripts");
 class IndexModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -48,16 +49,18 @@ class IndexModule {
             ...(this.js)
         ];
     }
-    render({ version, links }) {
+    render({ version, links, scripts }) {
         const app = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(App_1.App, {}));
         const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: links }));
+        const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: scripts }));
         return (`<!DOCTYPE html>
 <html>
 <head>
     <!-- ${version}> -->
     <meta charSet="utf-8">
     <title>QForms v${version}</title>
-    ${links2}    
+    ${links2}
+    ${scripts2}
 </head>
 <body>
 <div id="root"></div>
