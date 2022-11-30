@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "declaration": true,
+    "esModuleInterop": true,
+    "module": "commonjs",
+    "outDir": "./dist/lib/backend",                                   /* Specify an output folder for all emitted files. */
+  },
+  "include": ["src/backend/**/*.ts"]
+}
