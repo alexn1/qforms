@@ -188,8 +188,10 @@ export class BackHostApp {
 
         // index module
         if (this.isDevelopment()) {
-            this.express.get( '/index' , this.indexGet.bind(this));
-            this.express.post('/index' , this.indexPost.bind(this));
+            // google chrome always redirect from /index to /index/ even with disabled cache
+            // so we use /index2
+            this.express.get( '/index2' , this.indexGet.bind(this));
+            this.express.post('/index2' , this.indexPost.bind(this));
         }
 
         // monitor module
@@ -604,7 +606,7 @@ export class BackHostApp {
             if (process.send) {
                 process.send('online');
             }
-            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index' : ''}\n`;
+            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
             msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
             msg += `\tappsDirPath: ${this.appsDirPath}\n`;
             if (this.isDevelopment()) {
