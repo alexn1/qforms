@@ -1,3 +1,4 @@
+// @ts-ignore
 window.QForms = {};
 export class Helper {
     /*static currentDate() {
@@ -92,12 +93,16 @@ export class Helper {
     static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
+        // @ts-ignore
         props.onCreate = c => component = c;
+        // @ts-ignore
         const reactElement = React.createElement(type, props, children);
+        // @ts-ignore
         ReactDOM.render(reactElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
+        // @ts-ignore
         ReactDOM.unmountComponentAtNode(root);
     }
 
@@ -179,8 +184,11 @@ export class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
+        // @ts-ignore
         if (h < 10) h = '0' + h;
+        // @ts-ignore
         if (m < 10) m = '0' + m;
+        // @ts-ignore
         if (s < 10) s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
             return `${sign}${m}:${s}`;
@@ -199,8 +207,11 @@ export class Helper {
         let h = Math.floor(sec / 3600);
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
+        // @ts-ignore
         if (h < 10) h = '0' + h;
+        // @ts-ignore
         if (m < 10) m = '0' + m;
+        // @ts-ignore
         if (s < 10) s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
             return `${sign}${m}m:${s}s`;
@@ -236,6 +247,7 @@ export class Helper {
         textArea.select();
         document.execCommand('copy');
         document.body.removeChild(textArea);
+        // @ts-ignore
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
@@ -299,4 +311,5 @@ export class Helper {
     }
 
 }
+// @ts-ignore
 window.QForms.Helper = window.Helper = Helper;

@@ -1,9 +1,14 @@
 /******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
 var __webpack_exports__ = {};
+// This entry need to be wrapped in an IIFE because it uses a non-standard name for the exports (exports).
+(() => {
+var exports = __webpack_exports__;
 /*!**************************************!*\
   !*** ./src/frontend/common/index.ts ***!
   \**************************************/
-// import {Helper} from './Helper';
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 // import {ReactComponent} from './ReactComponent';
 // import {FrontHostApp} from './FrontHostApp';
 // import {Search} from './Search';
@@ -17,6 +22,8 @@ var __webpack_exports__ = {};
 // import {Grid} from './widget/Grid/Grid';
 // import {GridRow} from './widget/GridRow/GridRow';
 // import {GridCell} from './widget/GridCell/GridCell';
+
+})();
 
 /******/ })()
 ;

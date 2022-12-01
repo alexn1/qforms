@@ -1,4 +1,4 @@
-// import {Helper} from './Helper';
+import {Helper} from './Helper';
 // import {ReactComponent} from './ReactComponent';
 // import {FrontHostApp} from './FrontHostApp';
 // import {Search} from './Search';
