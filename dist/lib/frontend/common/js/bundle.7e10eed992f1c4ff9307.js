@@ -3718,7 +3718,6 @@ exports.FrontHostApp = void 0;
 class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
-        // @ts-ignore
         this.alertCtrl = null;
         // window
         window.addEventListener('error', this.onWindowError.bind(this));

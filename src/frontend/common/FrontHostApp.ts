@@ -1,8 +1,8 @@
 export class FrontHostApp {
+    alertCtrl: any;
     constructor() {
         // console.log('FrontHostApp.constructor');
 
-        // @ts-ignore
         this.alertCtrl = null;
 
         // window
