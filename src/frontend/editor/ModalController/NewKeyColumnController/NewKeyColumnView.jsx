@@ -1,4 +1,4 @@
-class NewKeyColumnView extends ReactComponent {
+export class NewKeyColumnView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name = null;

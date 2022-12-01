@@ -1,4 +1,4 @@
-class NewColumnController extends ModalController {
+export class NewColumnController extends ModalController {
     getViewClass() {
         return NewColumnView;
     }

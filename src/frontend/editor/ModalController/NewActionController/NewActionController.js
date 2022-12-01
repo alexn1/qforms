@@ -1,4 +1,4 @@
-class NewActionController extends ModalController {
+export class NewActionController extends ModalController {
     getViewClass() {
         return NewActionView;
     }

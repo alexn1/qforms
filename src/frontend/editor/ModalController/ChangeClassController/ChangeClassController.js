@@ -1,4 +1,4 @@
-class ChangeClassController extends ModalController {
+export class ChangeClassController extends ModalController {
     getViewClass() {
         return ChangeClassView;
     }

@@ -1,4 +1,4 @@
-class NewFormFromTableView extends ReactComponent {
+export class NewFormFromTableView extends ReactComponent {
     constructor(props) {
         super(props);
         this.page = null;

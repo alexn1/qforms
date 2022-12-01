@@ -1,4 +1,4 @@
-class TableController extends DocumentController {
+export class TableController extends DocumentController {
 
     constructor(model, parent) {
         super(model, parent);

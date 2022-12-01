@@ -1,4 +1,4 @@
-class DataSourceEditor extends Editor {
+export class DataSourceEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);

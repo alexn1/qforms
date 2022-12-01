@@ -1,4 +1,4 @@
-class ChangeClassView extends ReactComponent {
+export class ChangeClassView extends ReactComponent {
     constructor(props) {
         super(props);
         this.class = null;

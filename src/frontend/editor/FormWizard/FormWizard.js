@@ -1,4 +1,4 @@
-class FormWizard {
+export class FormWizard {
     static create(params) {
         console.log('FormWizard.create', params);
         switch (params.model.database.getClassName()) {

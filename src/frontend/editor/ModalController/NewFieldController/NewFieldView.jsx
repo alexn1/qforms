@@ -1,4 +1,4 @@
-class NewFieldView extends ReactComponent {
+export class NewFieldView extends ReactComponent {
     constructor(props) {
         super(props);
         this.class   = null;

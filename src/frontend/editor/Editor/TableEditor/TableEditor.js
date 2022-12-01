@@ -1,4 +1,4 @@
-class TableEditor extends Editor {
+export class TableEditor extends Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;

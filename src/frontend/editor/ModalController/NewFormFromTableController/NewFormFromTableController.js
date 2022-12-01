@@ -1,4 +1,4 @@
-class NewFormFromTableController extends ModalController {
+export class NewFormFromTableController extends ModalController {
     getViewClass() {
         return NewFormFromTableView;
     }

@@ -1,4 +1,4 @@
-class VisualView extends DocumentView {
+export class VisualView extends DocumentView {
     constructor(props) {
         super(props);
         this.textarea = React.createRef();

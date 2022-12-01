@@ -1,4 +1,6 @@
-class EditorFrontHostApp extends FrontHostApp {
+import {ApplicationEditor} from '../Editor/ApplicationEditor/ApplicationEditor';
+
+export class EditorFrontHostApp extends FrontHostApp {
     constructor(data, runAppLink) {
         console.log('EditorFrontHostApp.constructor', data);
         if (!data) throw new Error('no data');

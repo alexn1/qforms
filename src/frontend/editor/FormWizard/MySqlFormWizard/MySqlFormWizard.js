@@ -1,4 +1,4 @@
-class MySqlFormWizard extends FormWizard {
+export class MySqlFormWizard extends FormWizard {
 
     getSingleQuery() {
         const columns = this.tableColumns.map(column => column.name);

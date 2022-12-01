@@ -1,4 +1,4 @@
-class DataSourceController extends DocumentController {
+export class DataSourceController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.keyColumns = [];

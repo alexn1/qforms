@@ -1,4 +1,4 @@
-class PropertyGrid extends ReactComponent {
+export class PropertyGrid extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {};

@@ -1,4 +1,4 @@
-class NewFormView extends ReactComponent {
+export class NewFormView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name    = null;

@@ -1,4 +1,4 @@
-class FieldController extends VisualController {
+export class FieldController extends VisualController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

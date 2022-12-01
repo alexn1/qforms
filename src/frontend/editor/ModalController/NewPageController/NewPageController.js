@@ -1,4 +1,4 @@
-class NewPageController extends ModalController {
+export class NewPageController extends ModalController {
     getViewClass() {
         return NewPageView;
     }

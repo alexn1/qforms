@@ -1,4 +1,4 @@
-class ModalController {
+export class ModalController {
     constructor(options) {
         this.options = options;
     }

@@ -1,4 +1,4 @@
-class NewDataSourceView extends ReactComponent {
+export class NewDataSourceView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name  = null;

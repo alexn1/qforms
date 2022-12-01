@@ -1,4 +1,4 @@
-class KeyColumnEditor extends Editor {
+export class KeyColumnEditor extends Editor {
 
     constructor(data, dataSource) {
         super(data, dataSource);

@@ -1,4 +1,4 @@
-class NewPageView extends ReactComponent {
+export class NewPageView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name    = null;

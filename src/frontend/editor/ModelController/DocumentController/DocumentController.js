@@ -1,4 +1,4 @@
-class DocumentController extends ModelController {
+export class DocumentController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.document = null;

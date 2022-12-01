@@ -64,7 +64,8 @@
     "nodemon-start": "NODE_ENV=development nodemon --watch dist dist/lib/backend/start.js",
     "webpack-common": "NODE_ENV=development webpack --config webpack.config.common.js",
     "webpack-index": "NODE_ENV=development webpack --config webpack.config.index.js",
-    "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js"
+    "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js",
+    "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js"
   },
   "repository": {
     "type": "git",

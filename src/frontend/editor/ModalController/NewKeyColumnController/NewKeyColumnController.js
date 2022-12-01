@@ -1,4 +1,4 @@
-class NewKeyColumnController extends ModalController {
+export class NewKeyColumnController extends ModalController {
     getViewClass() {
         return NewKeyColumnView;
     }

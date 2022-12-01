@@ -1,4 +1,4 @@
-class ActionController extends ModelController {
+export class ActionController extends ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

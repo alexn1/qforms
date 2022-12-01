@@ -1,4 +1,4 @@
-class DatabaseView extends ReactComponent {
+export class DatabaseView extends ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;

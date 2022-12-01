@@ -1,4 +1,4 @@
-class FieldEditor extends Editor {
+export class FieldEditor extends Editor {
 
     constructor(data, form) {
         super(data, form);

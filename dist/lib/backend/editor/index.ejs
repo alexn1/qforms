@@ -19,7 +19,7 @@
     %><script type="text/javascript" src="<%=src%>"></script>
     <%
     });%>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         document.addEventListener('DOMContentLoaded', async () => {
             console.log('editor.ejs DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
@@ -27,7 +27,7 @@
             const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
             await editorFrontHostApp.run();
         });
-    </script>
+    </script>-->
     <script type="application/json"><%-JSON.stringify(data/*, null, 4*/)%></script>
 </head>
 <body class="editor__body">

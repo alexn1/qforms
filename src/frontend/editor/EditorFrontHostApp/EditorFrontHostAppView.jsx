@@ -1,4 +1,4 @@
-class EditorFrontHostAppView extends ReactComponent {
+export class EditorFrontHostAppView extends ReactComponent {
     renderDocumentView(document) {
         if (!document.controller.getDocumentViewClass()) return <div>no document view for {document.controller.constructor.name}</div>;
         return React.createElement(document.controller.getDocumentViewClass(), {

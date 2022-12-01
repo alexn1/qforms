@@ -1,4 +1,4 @@
-class ApplicationController extends VisualController {
+export class ApplicationController extends VisualController {
 
     constructor(model, editorApp) {
         super(model);

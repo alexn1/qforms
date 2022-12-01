@@ -1,4 +1,4 @@
-class ActionEditor extends Editor {
+export class ActionEditor extends Editor {
     /*constructor(data, parent) {
         super(data, parent);
     }*/

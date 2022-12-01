@@ -1,4 +1,4 @@
-class NewDatabaseController extends ModalController {
+export class NewDatabaseController extends ModalController {
     getViewClass() {
         return NewDatabaseView;
     }

@@ -1,4 +1,4 @@
-class FormEditor extends Editor {
+export class FormEditor extends Editor {
 
     constructor(data, page) {
         super(data, page);

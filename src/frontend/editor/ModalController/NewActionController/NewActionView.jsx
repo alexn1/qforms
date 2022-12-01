@@ -1,4 +1,4 @@
-class NewActionView extends ReactComponent {
+export class NewActionView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name    = null;

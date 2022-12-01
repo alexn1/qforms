@@ -1,4 +1,4 @@
-class ParamController extends ModelController {
+export class ParamController extends ModelController {
 
     /*constructor(model, parent) {
         super(model, parent);

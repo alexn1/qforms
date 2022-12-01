@@ -1,4 +1,4 @@
-class SqlDataSourceView extends DocumentView {
+export class SqlDataSourceView extends DocumentView {
     constructor(props) {
         super(props);
         this.singleRef   = React.createRef();

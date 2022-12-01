@@ -1,4 +1,4 @@
-class PageLinkEditor extends Editor {
+export class PageLinkEditor extends Editor {
 
     constructor(data, parent) {
         super(data, parent);

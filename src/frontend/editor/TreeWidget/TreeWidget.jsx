@@ -1,4 +1,4 @@
-class TreeWidget extends ReactComponent {
+export class TreeWidget extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,4 +1,4 @@
-class ModalView extends ReactComponent {
+export class ModalView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return <Modal>

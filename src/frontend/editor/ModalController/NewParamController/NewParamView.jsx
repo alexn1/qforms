@@ -1,4 +1,4 @@
-class NewParamView extends ReactComponent {
+export class NewParamView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name = null;

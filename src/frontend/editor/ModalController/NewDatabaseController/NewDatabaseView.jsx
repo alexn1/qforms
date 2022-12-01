@@ -1,4 +1,4 @@
-class NewDatabaseView extends ReactComponent {
+export class NewDatabaseView extends ReactComponent {
     constructor(props) {
         super(props);
         this.class    = null;

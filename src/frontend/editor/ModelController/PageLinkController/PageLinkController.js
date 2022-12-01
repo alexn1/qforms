@@ -1,4 +1,4 @@
-class PageLinkController extends ModelController {
+export class PageLinkController extends ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.node = true;

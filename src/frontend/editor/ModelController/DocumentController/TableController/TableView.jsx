@@ -1,4 +1,4 @@
-class TableView extends ReactComponent {
+export class TableView extends ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
         return ctrl.columns.map(column => <tr key={column.model.getName()}>

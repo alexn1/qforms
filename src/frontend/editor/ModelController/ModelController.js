@@ -1,4 +1,4 @@
-class ModelController {
+export class ModelController {
     constructor(model, parent = null) {
         // super();
         this.model = model;

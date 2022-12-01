@@ -1,4 +1,4 @@
-class Editor {
+export class Editor {
 
     constructor(data, parent = null) {
         if (!data) throw new Error('no data');

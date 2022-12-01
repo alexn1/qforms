@@ -1,4 +1,7 @@
-class ApplicationEditor extends Editor {
+import {Editor} from '../Editor';
+import {DatabaseEditor} from '../DatabaseEditor/DatabaseEditor';
+
+export class ApplicationEditor extends Editor {
 
     constructor(data) {
         super(data);

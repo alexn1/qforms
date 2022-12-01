@@ -1,4 +1,4 @@
-class VisualController extends DocumentController {
+export class VisualController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.data = null;

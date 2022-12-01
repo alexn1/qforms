@@ -1,4 +1,4 @@
-class DatabaseController extends DocumentController {
+export class DatabaseController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.tableName = null;

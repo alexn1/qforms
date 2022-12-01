@@ -1,4 +1,4 @@
-class NewTableController extends ModalController {
+export class NewTableController extends ModalController {
     getViewClass() {
         return NewTableView;
     }

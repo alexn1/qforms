@@ -1,4 +1,4 @@
-class NewTableView extends ReactComponent {
+export class NewTableView extends ReactComponent {
     constructor(props) {
         super(props);
         this.name = null;

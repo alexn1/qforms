@@ -1,4 +1,4 @@
-class KeyColumnController extends ModelController {
+export class KeyColumnController extends ModelController {
 
     /*constructor(model, parent) {
         super(model, parent);

@@ -1,4 +1,4 @@
-class FormController extends VisualController {
+export class FormController extends VisualController {
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];

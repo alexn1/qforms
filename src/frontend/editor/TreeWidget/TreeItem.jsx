@@ -1,4 +1,4 @@
-class TreeItem extends ReactComponent {
+export class TreeItem extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {

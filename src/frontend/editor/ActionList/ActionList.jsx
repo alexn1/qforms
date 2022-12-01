@@ -1,4 +1,4 @@
-class ActionList extends ReactComponent {
+export class ActionList extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,4 +1,4 @@
-class ColumnEditor extends Editor {
+export class ColumnEditor extends Editor {
 
     constructor(data, table) {
         super(data, table);

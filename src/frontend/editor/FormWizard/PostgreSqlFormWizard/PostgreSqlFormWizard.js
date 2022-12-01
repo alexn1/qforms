@@ -1,4 +1,4 @@
-class PostgreSqlFormWizard extends FormWizard {
+export class PostgreSqlFormWizard extends FormWizard {
 
     getSingleQuery() {
         console.log('PostgreSqlFormWizard.getSingleQuery');
