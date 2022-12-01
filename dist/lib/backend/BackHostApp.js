@@ -36,7 +36,7 @@ class BackHostApp {
     checkVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
         // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
-        const MIN_NODE_VERSION = 16;
+        const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
             throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
         }
