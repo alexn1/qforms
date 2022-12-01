@@ -29,13 +29,22 @@ module.exports = {
                     },
                 ],
             },*/
-            /*{
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'ts-loader'
+                    loader: 'ts-loader',
+                    options: {
+                        compilerOptions: {
+                            target: "ES2017",
+                            declaration: false,
+                            esModuleInterop: false,
+                            jsx: "react-jsx",                                /* Specify what JSX code is generated. */
+                        },
+                        onlyCompileBundledFiles: true
+                    }
                 }
-            }*/
+            }
         ],
     },
 };
