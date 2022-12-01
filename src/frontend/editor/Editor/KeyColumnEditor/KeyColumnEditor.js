@@ -1,3 +1,5 @@
+import {Editor} from '../Editor';
+
 export class KeyColumnEditor extends Editor {
 
     constructor(data, dataSource) {

@@ -1,3 +1,5 @@
+import {VisualController} from '../VisualController';
+
 export class PageController extends VisualController {
 
     constructor(model, pageLinkController = null, options = {}) {

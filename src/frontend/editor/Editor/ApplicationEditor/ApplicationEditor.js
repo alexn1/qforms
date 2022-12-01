@@ -1,5 +1,7 @@
 import {Editor} from '../Editor';
 import {DatabaseEditor} from '../DatabaseEditor/DatabaseEditor';
+import {DataSourceEditor} from '../DataSourceEditor/DataSourceEditor';
+import {PageLinkEditor} from  '../PageLinkEditor/PageLinkEditor';
 
 export class ApplicationEditor extends Editor {
 
@@ -178,6 +180,13 @@ export class ApplicationEditor extends Editor {
             params    : params
         });
         return this.createAction(data);
+    }
+
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
     }
 
 }

@@ -1,3 +1,7 @@
+import {DocumentController} from '../DocumentController';
+import {ParamController} from '../../ParamController/ParamController';
+import {TableController} from '../TableController/TableController';
+
 export class DatabaseController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);

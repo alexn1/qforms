@@ -1,3 +1,6 @@
+import {DocumentController} from '../DocumentController';
+import {ColumnController} from '../../ColumnController/ColumnController';
+
 export class TableController extends DocumentController {
 
     constructor(model, parent) {

@@ -1,3 +1,5 @@
+
+
 export class Editor {
 
     constructor(data, parent = null) {
@@ -47,12 +49,12 @@ export class Editor {
     /*getObject(col, name) {
         return this[col].find(obj => obj.getName() === name);
     }*/
-    createDataSource(data) {
+    /*createDataSource(data) {
         const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
-    }
+    }*/
     removeDataSource(dataSource) {
         // console.log('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);

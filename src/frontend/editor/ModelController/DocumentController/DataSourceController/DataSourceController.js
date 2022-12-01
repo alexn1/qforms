@@ -1,3 +1,6 @@
+import {DocumentController} from '../DocumentController';
+import {KeyColumnController} from '../../KeyColumnController/KeyColumnController';
+
 export class DataSourceController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);

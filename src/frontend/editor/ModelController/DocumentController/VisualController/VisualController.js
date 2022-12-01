@@ -1,3 +1,6 @@
+import {DocumentController} from '../DocumentController';
+import {DataSourceController} from '../DataSourceController/DataSourceController';
+
 export class VisualController extends DocumentController {
     constructor(model, parent) {
         super(model, parent);

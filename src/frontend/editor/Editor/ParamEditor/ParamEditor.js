@@ -1,3 +1,5 @@
+import {Editor} from '../Editor';
+
 export class ParamEditor extends Editor {
 
     constructor(data, database) {

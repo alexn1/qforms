@@ -1,3 +1,7 @@
+import {Editor} from '../Editor';
+import {ParamEditor} from '../ParamEditor/ParamEditor';
+import {TableEditor} from '../TableEditor/TableEditor';
+
 export class DatabaseEditor extends Editor {
 
     constructor(data, parent) {

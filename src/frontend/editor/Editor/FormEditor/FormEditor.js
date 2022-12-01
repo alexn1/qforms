@@ -1,3 +1,5 @@
+import {Editor} from '../Editor';
+
 export class FormEditor extends Editor {
 
     constructor(data, page) {

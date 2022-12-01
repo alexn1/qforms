@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class KeyColumnController extends ModelController {
 
     /*constructor(model, parent) {

@@ -1,3 +1,6 @@
+import {Editor} from '../Editor';
+import {ColumnEditor} from '../ColumnEditor/ColumnEditor';
+
 export class TableEditor extends Editor {
     constructor(data, database) {
         super(data, database);

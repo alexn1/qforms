@@ -1,3 +1,5 @@
+import {Editor} from '../Editor';
+
 export class PageLinkEditor extends Editor {
 
     constructor(data, parent) {

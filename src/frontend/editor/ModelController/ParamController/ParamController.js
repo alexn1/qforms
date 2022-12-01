@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class ParamController extends ModelController {
 
     /*constructor(model, parent) {

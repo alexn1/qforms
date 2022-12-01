@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class PageLinkController extends ModelController {
     constructor(model, parent) {
         super(model, parent);

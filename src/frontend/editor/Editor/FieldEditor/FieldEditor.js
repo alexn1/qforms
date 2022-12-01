@@ -1,3 +1,5 @@
+import {Editor} from '../Editor';
+
 export class FieldEditor extends Editor {
 
     constructor(data, form) {

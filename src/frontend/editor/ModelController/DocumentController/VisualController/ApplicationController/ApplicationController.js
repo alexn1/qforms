@@ -1,3 +1,7 @@
+import {VisualController} from '../VisualController';
+import {DatabaseController} from '../../DatabaseController/DatabaseController';
+import {PageLinkController} from '../../../PageLinkController/PageLinkController';
+
 export class ApplicationController extends VisualController {
 
     constructor(model, editorApp) {

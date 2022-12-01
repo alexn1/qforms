@@ -1,4 +1,6 @@
 import {ApplicationEditor} from '../Editor/ApplicationEditor/ApplicationEditor';
+import {ApplicationController} from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
+import {EditorFrontHostAppView} from './EditorFrontHostAppView';
 
 export class EditorFrontHostApp extends FrontHostApp {
     constructor(data, runAppLink) {
