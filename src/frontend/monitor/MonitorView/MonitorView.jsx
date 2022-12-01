@@ -1,4 +1,4 @@
-class MonitorView extends ReactComponent {
+export class MonitorView extends ReactComponent {
     renderApplication(app) {
         return (
             <li key={app.route}>
