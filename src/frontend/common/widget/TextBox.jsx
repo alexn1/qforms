@@ -51,5 +51,5 @@ export class TextBox extends ReactComponent {
         );
     }
 }
+
 window.TextBox = TextBox;
-console.log('window.TextBox = TextBox');
