@@ -1,11 +1,13 @@
 const path = require('path');
 
 module.exports = {
+    mode: process.env.NODE_ENV || 'production',
+    devtool: false,
     entry: './src/frontend/index/main.js',
     output: {
-        // clean: true,
+        clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/index/js'),
-        filename: 'main.js',
+        filename: 'main.[hash].js',
     },
     resolve: {
         extensions: ['.jsx', '.js'],
@@ -36,6 +38,4 @@ module.exports = {
             }*/
         ],
     },
-    mode: process.env.NODE_ENV || 'production',
-    devtool: false
 };
