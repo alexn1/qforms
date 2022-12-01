@@ -683,6 +683,74 @@ window.Search = Search;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Box/Box.jsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class Box extends ReactComponent {
+  constructor(props) {
+    console.log('Box.constructor', props);
+    super(props);
+    this.state = {
+      backgroundColor: 'purple'
+    };
+  } // componentWillMount() {
+  //     console.log('Box.componentWillMount');
+  // }
+
+
+  componentDidMount() {
+    console.log('Box.componentDidMount');
+  }
+
+  componentWillUnmount() {
+    console.log('Box.componentWillUnmount');
+  }
+
+  update = () => {
+    console.log('Box.update');
+    this.setState({
+      backgroundColor: 'green'
+    });
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('Box.shouldComponentUpdate', nextProps, nextState);
+    return true;
+  }
+
+  componentDidUpdate() {
+    console.log('Box.componentDidUpdate');
+  }
+
+  render() {
+    console.log('Box.render');
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: "Box",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+        name: "one"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+        name: "two"
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+        name: "three"
+      })]
+    });
+  }
+
+}
+window.Box = Box;
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Button.jsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.jsx ***!
@@ -756,6 +824,90 @@ class Button extends ReactComponent {
 
 }
 window.Button = Button;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.jsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+class CheckBox extends ReactComponent {
+  constructor(props) {
+    super(props);
+
+    if (this.props.checked !== undefined && this.props.checked !== null && typeof this.props.checked !== 'boolean') {
+      throw new Error(`wrong checked prop: ${this.props.checked}`);
+    }
+
+    this.state = {
+      checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+    };
+  }
+
+  getValue() {
+    return this.state.checked;
+  }
+
+  onChange = e => {
+    // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+    if (!this.props.readOnly) {
+      this.setState(prevState => {
+        if (this.props.onChange) {
+          this.props.onChange(!prevState.checked, e);
+        }
+
+        return {
+          checked: !prevState.checked
+        };
+      });
+    }
+  };
+  onClick = e => {
+    if (!this.props.readOnly) {
+      if (this.props.onChange) this.props.onChange(true);
+      this.setState({
+        checked: true
+      });
+    }
+  };
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+    this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
+    return true;
+  }
+
+  render() {
+    if (this.state.checked === null) {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`,
+        onClick: this.onClick,
+        children: "?"
+      });
+    }
+
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", {
+      className: this.getCssClassNames(),
+      type: "checkbox",
+      id: this.props.id,
+      checked: this.state.checked,
+      readOnly: this.props.readOnly,
+      disabled: this.props.disabled,
+      "data-tag": this.props.tag,
+      onChange: this.onChange
+    });
+  }
+
+}
+window.CheckBox = CheckBox;
 
 /***/ }),
 
@@ -954,6 +1106,523 @@ class DropdownButton extends ReactComponent {
 
 }
 window.DropdownButton = DropdownButton;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.jsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.jsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class Grid extends ReactComponent {
+  constructor(props) {
+    console.log('Grid.constructor', props);
+    super(props);
+    this.state = {
+      key: this.props.selectedKey || null,
+      column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+      columnWidth: {},
+      resized: Date.now()
+    };
+    this.columns = {}; // each column is the array of each cell view
+
+    this.el = React.createRef();
+    this.head = React.createRef();
+  }
+
+  getActiveColumn() {
+    return this.state.column;
+  }
+
+  setActiveColumn(column) {
+    this.state.column = column;
+  }
+
+  getActiveRowKey() {
+    return this.state.key;
+  }
+
+  setActiveRowKey(key) {
+    // console.log('Grid.setActiveRowKey', key);
+    this.state.key = key;
+  }
+
+  isRowActive(i, key) {
+    return this.getActiveRowKey() === key;
+  }
+
+  onCellMouseDown = async e => {
+    console.log('Grid.onCellMouseDown', this.isLink());
+    e.preventDefault(); // prevent text selection on double click
+
+    if (this.isDisabled()) return;
+    this.getElement().focus(); // if (this.isLink()) return;
+
+    const button = e.button;
+    const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+    const row = this.props.rows[i];
+    const key = e.currentTarget.dataset.row;
+    await this.selectCell(key, j);
+
+    if (button === 0 && this.props.onClick) {
+      this.props.onClick(row, key);
+    }
+  };
+  onRowMouseDown = async e => {
+    console.log('Grid.onRowMouseDown', this.isLink()); // if (this.isLink()) return;
+
+    const key = e.currentTarget.dataset.row;
+    await this.selectRow(key);
+  };
+  onCellDoubleClick = async e => {
+    // console.log('Grid.onCellDoubleClick');
+    const button = e.button;
+    const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+    const row = this.props.rows[i];
+    const key = e.currentTarget.dataset.row; // console.log('row:', row);
+
+    if (button === 0 && this.props.onDoubleClick) {
+      await this.props.onDoubleClick(row, key);
+    }
+  };
+  onRowDoubleClick = async e => {
+    // console.log('Grid.onRowDoubleClick');
+    const i = parseInt(e.currentTarget.dataset.r);
+    const row = this.props.rows[i];
+    const key = e.currentTarget.dataset.row; // console.log('row:', row);
+
+    if (this.props.onDoubleClick) {
+      await this.props.onDoubleClick(row, key);
+    }
+  };
+  onKeyDown = async e => {
+    // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+    if (this.isDisabled()) return;
+
+    switch (e.keyCode) {
+      case 37:
+        e.preventDefault();
+        await this.onLeft();
+        break;
+
+      case 38:
+        e.preventDefault();
+        await this.onUp();
+        break;
+
+      case 39:
+        e.preventDefault();
+        await this.onRight();
+        break;
+
+      case 40:
+        e.preventDefault();
+        await this.onDown();
+        break;
+
+      case 13:
+        e.preventDefault();
+        await this.onEnter();
+        break;
+
+      case 46:
+        e.preventDefault();
+        await this.onDelete();
+        break;
+
+      case 67:
+        if (e.ctrlKey) {
+          e.preventDefault();
+          await this.onCopy();
+        }
+
+        break;
+    }
+  };
+
+  async onCopy() {
+    console.log('Grid.onCopy');
+    const row = this.findRow(this.getActiveRowKey());
+    const column = this.props.columns[this.getActiveColumn()].name;
+    const text = row[column];
+    await Helper.copyTextToClipboard(text);
+  }
+
+  findRow(key) {
+    return this.props.rows.find(row => this.getRowKey(row) === key);
+  }
+
+  async onLeft() {
+    console.log('Grid.onLeft');
+    const j = this.getActiveColumn();
+
+    if (j - 1 >= 0) {
+      this.setActiveColumn(j - 1);
+      await this.rerender();
+    }
+  }
+
+  async onUp() {
+    console.log('Grid.onUp');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key);
+    const i = this.props.rows.indexOf(row);
+
+    if (i - 1 >= 0) {
+      const pRow = this.props.rows[i - 1];
+      const pKey = this.getRowKey(pRow);
+      this.setActiveRowKey(pKey);
+      await this.rerender();
+    }
+  }
+
+  async onRight() {
+    console.log('Grid.onRight');
+    const j = this.getActiveColumn();
+
+    if (j + 1 <= this.props.columns.length - 1) {
+      this.setActiveColumn(j + 1);
+      await this.rerender();
+    }
+  }
+
+  async onDown() {
+    console.log('Grid.onDown');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key);
+    const i = this.props.rows.indexOf(row);
+
+    if (i + 1 <= this.props.rows.length - 1) {
+      const nRow = this.props.rows[i + 1];
+      const nKey = this.getRowKey(nRow);
+      this.setActiveRowKey(nKey);
+      await this.rerender();
+    }
+  }
+
+  async onEnter() {
+    console.log('Grid.onEnter');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key); // console.log(row, key);
+
+    if (this.props.onDoubleClick) {
+      await this.props.onDoubleClick(row, key);
+    }
+  }
+
+  async onDelete() {
+    console.log('Grid.onDelete');
+    const key = this.getActiveRowKey();
+    const row = this.findRow(key); // console.log(row, key);
+
+    if (this.props.onDeleteKeyDown) {
+      await this.props.onDeleteKeyDown(row, key);
+    }
+  }
+
+  async selectCell(key, j) {
+    // console.log('Grid.selectCell', key, j);
+    if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
+    this.setActiveRowKey(key);
+    this.setActiveColumn(j);
+
+    if (this.props.onSelectionChange) {
+      await this.props.onSelectionChange(key);
+    } else {
+      await this.rerender();
+    }
+  }
+
+  async selectRow(key) {
+    // console.log('Grid.selectRow', key);
+    if (this.getActiveRowKey() === key) return;
+    this.setActiveRowKey(key);
+
+    if (this.props.onSelectionChange) {
+      await this.props.onSelectionChange(key);
+    } else {
+      await this.rerender();
+    }
+  }
+
+  getMaxColumnWidth(column) {
+    return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2;
+  }
+
+  onResizeDoubleClick = async e => {
+    console.log('Grid.onResizeDoubleClick', e.target);
+    const i = parseInt(e.target.dataset.i);
+    const column = this.props.columns[i];
+    if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
+    this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+    this.state.resized = Date.now();
+    await this.rerender();
+  };
+
+  getColumnWidth(i) {
+    const column = this.props.columns[i];
+
+    if (this.state.columnWidth[column.name] !== undefined) {
+      return this.state.columnWidth[column.name];
+    }
+
+    return column.width;
+  }
+
+  renderColumns() {
+    return this.props.columns.map((column, i) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: `${this.getCssBlockName()}__th`,
+      style: {
+        width: this.getColumnWidth(i)
+      },
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: 'ellipsis',
+        children: column.title || column.name
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        className: 'Grid__resize',
+        "data-i": i,
+        onDoubleClick: this.onResizeDoubleClick
+      })]
+    }, column.name));
+  }
+
+  renderRows() {
+    return this.props.rows.map((row, i) => {
+      const key = this.getRowKey(row);
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GridRow, {
+        rowKey: key,
+        grid: this,
+        row: row,
+        i: i,
+        active: this.isRowActive(i, key),
+        activeColumn: this.getActiveColumn(),
+        updated: this.props.updated,
+        resized: this.state.resized
+      }, key);
+    });
+  }
+
+  getRowKey(row) {
+    if (this.props.getRowKey) {
+      return this.props.getRowKey(row);
+    }
+
+    return this.props.rows.indexOf(row).toString();
+  }
+
+  onCellViewCreate = c => {
+    // console.log('Grid.onCellViewCreate', c.props.column.name);
+    const columnName = c.props.column.name;
+    if (this.columns[columnName] === undefined) this.columns[columnName] = [];
+    this.columns[columnName].push(c);
+  };
+  onCellViewUnmount = c => {
+    // console.log('Grid.onCellViewUnmount', c.props.column.name);
+    const columnName = c.props.column.name;
+    const i = this.columns[columnName].indexOf(c);
+    if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
+    this.columns[columnName].splice(i, 1);
+  };
+  onBodyScroll = async e => {
+    // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+    this.head.current.scrollLeft = e.target.scrollLeft;
+  };
+
+  renderCell(row, column) {
+    let view;
+
+    if (this.props.renderGridCellView) {
+      view = this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
+    }
+
+    if (view) return view;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(GridCell, {
+      grid: this,
+      row: row,
+      column: column,
+      onCreate: this.onCellViewCreate,
+      onUnmount: this.onCellViewUnmount
+    });
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+    if (this.props.updated) {
+      if (nextProps.updated - this.props.updated) return true;
+      return false;
+    }
+
+    return true;
+  }
+
+  render() {
+    // console.log('Grid.render', this.props.name);
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`,
+      ref: this.el,
+      tabIndex: 0,
+      onKeyDown: this.onKeyDown,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: `${this.getCssBlockName()}__head`,
+        ref: this.head,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: `${this.getCssBlockName()}__table`,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+            className: `${this.getCssBlockName()}__tr`,
+            children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+              className: `${this.getCssBlockName()}__th`
+            })]
+          })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: `${this.getCssBlockName()}__body`,
+        onScroll: this.onBodyScroll,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+          className: `${this.getCssBlockName()}__table`,
+          children: this.props.rows && this.renderRows()
+        })
+      })]
+    });
+  }
+
+  isLink() {
+    return !!this.props.createLinkCallback;
+  }
+
+  onLinkClick = async e => {
+    console.log('Grid.onLinkClick', e.ctrlKey);
+    if (e.ctrlKey) return;
+    e.preventDefault();
+    /*if (!this.isLink()) return;
+    const key = e.currentTarget.dataset.key;
+    if (this.props.onLinkClick) {
+        await this.props.onLinkClick(key);
+    }*/
+  };
+}
+window.Grid = Grid;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.jsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.jsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+class GridCell extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.span = React.createRef();
+  }
+
+  getSpanOffsetWidth() {
+    if (!this.span.current) return 0;
+    return this.span.current.offsetWidth;
+  }
+
+  renderCellValue(rawValue) {
+    const value = this.props.grid.props.decodeValue ? Helper.decodeValue(rawValue) : rawValue;
+    if (typeof value === 'boolean') return value.toString();
+    return value;
+  }
+
+  render() {
+    const row = this.props.row;
+    const column = this.props.column;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        ref: this.span,
+        children: this.renderCellValue(row[column.name])
+      })
+    });
+  }
+
+}
+window.GridCell = GridCell;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridRow/GridRow.jsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/GridRow/GridRow.jsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class GridRow extends ReactComponent {
+  isCellActive(j) {
+    return this.props.active && this.props.activeColumn === j;
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+    if (this.props.updated) {
+      if (nextProps.updated - this.props.updated) return true;
+      if (nextProps.resized - this.props.resized) return true;
+      if (this.props.active !== nextProps.active) return true;
+      if (this.props.active && this.props.activeColumn !== nextProps.activeColumn) return true;
+      return false;
+    }
+
+    return true;
+  }
+
+  render() {
+    // console.log('GridRow.render', this.props.i);
+    const grid = this.props.grid;
+    const row = this.props.row;
+    const i = this.props.i;
+    const key = this.props.rowKey;
+    const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", {
+      className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`,
+      "data-key": key,
+      href: link,
+      onClick: grid.onLinkClick,
+      children: [grid.props.columns.map((column, j) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`,
+        style: {
+          width: grid.getColumnWidth(j)
+        },
+        "data-rc": `[${i},${j}]`,
+        "data-row": key,
+        onMouseDown: grid.onCellMouseDown,
+        onDoubleClick: grid.onCellDoubleClick,
+        children: grid.renderCell(row, column)
+      }, column.name)), !!grid.props.extraColumn && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: `${grid.getCssBlockName()}__td`,
+        "data-r": i,
+        "data-row": key,
+        onMouseDown: grid.onRowMouseDown,
+        onDoubleClick: grid.onRowDoubleClick
+      })]
+    });
+  }
+
+}
+window.GridRow = GridRow;
 
 /***/ }),
 
@@ -4895,13 +5564,23 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.js");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.jsx");
-/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.jsx");
-/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.jsx");
-/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.js");
-/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.js");
-/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.jsx");
-/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.jsx");
-/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.jsx");
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.js");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.js");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.jsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.jsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.jsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.jsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.jsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.jsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.jsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.jsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.jsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.jsx");
+
+
+
+
+
 
 
 
