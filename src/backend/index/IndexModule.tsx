@@ -64,13 +64,13 @@ export class IndexModule {
     <!-- scripts -->
     ${scripts2}
     <script type="application/json">${data2}</script>
-    <script>
+    <!--<script>
         document.addEventListener('DOMContentLoaded', () => {
             // console.log('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             new IndexFrontHostApp(data).init();
         });
-    </script>
+    </script>-->
 </head>
 <body>
 <div id="root"></div>

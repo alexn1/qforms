@@ -1,4 +1,6 @@
-class IndexFrontHostApp {
+import {IndexView} from './IndexView/IndexView';
+
+export class IndexFrontHostApp {
 
     constructor(data) {
         console.log('IndexFrontHostApp.constructor', data);

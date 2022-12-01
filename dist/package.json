@@ -1,6 +1,6 @@
 {
   "name": "qforms",
-  "version": "0.1.1122",
+  "version": "0.1.1123",
   "description": "A platform for building Web UI for databases.",
   "main": "lib/backend/index.js",
   "dependencies": {
@@ -41,6 +41,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
+    "nodemon": "^2.0.20",
     "prettier": "^1.19.1",
     "should": "^7.0.4",
     "through": "^2.3.8",
@@ -57,7 +58,8 @@
     "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
     "tsc-build-watch": "tsc --build tsconfig.json --watch",
     "build": "gulp build",
-    "webpack-development": "webpack --mode development"
+    "webpack-development": "webpack --mode development",
+    "nodemon-start": "NODE_ENV=development nodemon dist/lib/backend/start.js"
   },
   "repository": {
     "type": "git",

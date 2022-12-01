@@ -1,4 +1,4 @@
-class IndexView extends ReactComponent {
+export class IndexView extends ReactComponent {
     renderModals() {
         const ctrl = this.props.ctrl;
         return (
