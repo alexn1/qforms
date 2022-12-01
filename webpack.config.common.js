@@ -3,18 +3,18 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/common/index.js',
+    entry: './src/frontend/common/index.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/common/js'),
         filename: 'bundle.[contenthash].js',
     },
     resolve: {
-        extensions: ['.jsx', '.js'],
+        extensions: ['.ts', '.js'],
     },
     module: {
         rules: [
-            {
+            /*{
                 test: /\.(js)x?$/,
                 exclude: /node_modules/,
                 use: [
@@ -28,7 +28,7 @@ module.exports = {
 
                     },
                 ],
-            },
+            },*/
             /*{
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
