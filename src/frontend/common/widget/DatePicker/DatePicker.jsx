@@ -7,7 +7,7 @@
 //  getDateStyle function
 //  selectToday boolean false
 //  highlightedDate array [2021, 0, 1]
-class DatePicker extends ReactComponent {
+export class DatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
@@ -215,4 +215,4 @@ class DatePicker extends ReactComponent {
     }
 }
 
-window.QForms.DatePicker = DatePicker;
+window.DatePicker = DatePicker;

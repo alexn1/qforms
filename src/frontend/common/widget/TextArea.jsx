@@ -1,4 +1,4 @@
-class TextArea extends ReactComponent {
+export class TextArea extends ReactComponent {
     constructor(props) {
         // console.log('TextArea.constructor', props);
         super(props);
@@ -39,5 +39,4 @@ class TextArea extends ReactComponent {
         );
     }
 }
-
-window.QForms.TextArea = TextArea;
+window.TextArea = TextArea;

@@ -1,4 +1,4 @@
-class Menu extends ReactComponent {
+export class Menu extends ReactComponent {
     constructor(props) {
         // console.log('Menu.constructor', props);
         super(props);
@@ -53,4 +53,4 @@ class Menu extends ReactComponent {
     }
 }
 
-window.QForms.Menu = Menu;
+window.Menu = Menu;

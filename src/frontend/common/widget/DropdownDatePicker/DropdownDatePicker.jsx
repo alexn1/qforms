@@ -1,5 +1,5 @@
 // oldDates boolean true
-class DropdownDatePicker extends ReactComponent {
+export class DropdownDatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DropdownDatePicker.constructor', props);
         super(props);
@@ -152,4 +152,4 @@ class DropdownDatePicker extends ReactComponent {
     }
 }
 
-window.QForms.DropdownDatePicker = DropdownDatePicker;
+window.DropdownDatePicker = DropdownDatePicker;

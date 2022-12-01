@@ -1,4 +1,4 @@
-class GridRow extends ReactComponent {
+export class GridRow extends ReactComponent {
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
     }
@@ -51,4 +51,4 @@ class GridRow extends ReactComponent {
     }
 }
 
-window.QForms.GridRow = GridRow;
+window.GridRow = GridRow;

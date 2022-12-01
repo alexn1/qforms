@@ -1,4 +1,4 @@
-class Modal extends ReactComponent {
+export class Modal extends ReactComponent {
     render() {
         return (
             <div className={this.getCssClassNames()}>
@@ -10,4 +10,4 @@ class Modal extends ReactComponent {
     }
 }
 
-window.QForms.Modal = Modal;
+window.Modal = Modal;

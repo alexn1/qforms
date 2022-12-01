@@ -6,3 +6,4 @@ import {FrontHostApp} from './FrontHostApp';
 import {Search} from './Search';
 import {Tab} from './widget/Tab/Tab';
 import {DropdownButton} from './widget/DropdownButton/DropdownButton';
+import {TextBox} from './widget/TextBox';

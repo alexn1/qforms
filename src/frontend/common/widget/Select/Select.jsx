@@ -1,4 +1,4 @@
-class Select extends ReactComponent {
+export class Select extends ReactComponent {
     constructor(props) {
         super(props);
         this.el       = React.createRef();

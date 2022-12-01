@@ -1,3 +1,5 @@
+import {TreeWidget} from '../../../TreeWidget/TreeWidget';
+
 export class DatabaseView extends ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');

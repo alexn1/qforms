@@ -1,4 +1,4 @@
-class TimeBox2 extends TimeBox {
+export class TimeBox2 extends TimeBox {
     constructor(props) {
         super(props);
         this.inputEl = React.createRef();

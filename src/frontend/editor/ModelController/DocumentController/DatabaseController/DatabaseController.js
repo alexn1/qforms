@@ -1,6 +1,7 @@
 import {DocumentController} from '../DocumentController';
 import {ParamController} from '../../ParamController/ParamController';
 import {TableController} from '../TableController/TableController';
+import {DatabaseView} from './DatabaseView';
 
 export class DatabaseController extends DocumentController {
     constructor(model, parent) {

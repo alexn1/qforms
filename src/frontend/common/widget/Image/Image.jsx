@@ -1,4 +1,4 @@
-class Image extends ReactComponent {
+export class Image extends ReactComponent {
     constructor(props) {
         super(props);
         this.img = React.createRef();
@@ -35,4 +35,4 @@ class Image extends ReactComponent {
     }*/
 }
 
-window.QForms.Image = Image;
+window.Image = Image;

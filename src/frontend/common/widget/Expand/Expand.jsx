@@ -1,4 +1,4 @@
-class Expand extends ReactComponent {
+export class Expand extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {

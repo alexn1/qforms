@@ -1,4 +1,4 @@
-class TextBox extends ReactComponent {
+export class TextBox extends ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
@@ -51,5 +51,5 @@ class TextBox extends ReactComponent {
         );
     }
 }
-
-window.QForms.TextBox = TextBox;
+window.TextBox = TextBox;
+console.log('window.TextBox = TextBox');

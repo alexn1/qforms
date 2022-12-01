@@ -1,4 +1,4 @@
-class CheckBoxList extends ReactComponent {
+export class CheckBoxList extends ReactComponent {
     constructor(props) {
         super(props);
         if (!this.props.name) throw new Error('no CheckBoxList name');

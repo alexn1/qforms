@@ -1,4 +1,4 @@
-class Box extends ReactComponent {
+export class Box extends ReactComponent {
     constructor(props) {
         console.log('Box.constructor', props);
         super(props);
@@ -39,5 +39,4 @@ class Box extends ReactComponent {
         );
     }
 }
-
-window.QForms.Box = Box;
+window.Box = Box;

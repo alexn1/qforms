@@ -1,4 +1,4 @@
-class Slider extends ReactComponent {
+export class Slider extends ReactComponent {
     constructor(props) {
         super(props);
         if (!this.props.images) throw new Error('Slider: no images');
@@ -60,4 +60,4 @@ class Slider extends ReactComponent {
     }
 }
 
-window.QForms.Slider = Slider;
+window.Slider = Slider;

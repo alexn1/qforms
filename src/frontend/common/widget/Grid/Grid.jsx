@@ -1,4 +1,4 @@
-class Grid extends ReactComponent {
+export class Grid extends ReactComponent {
     constructor(props) {
         console.log('Grid.constructor', props);
         super(props);
@@ -324,4 +324,4 @@ class Grid extends ReactComponent {
     }
 }
 
-window.QForms.Grid = Grid;
+window.Grid = Grid;

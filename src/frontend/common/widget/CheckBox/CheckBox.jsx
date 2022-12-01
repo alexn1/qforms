@@ -1,4 +1,4 @@
-class CheckBox extends ReactComponent {
+export class CheckBox extends ReactComponent {
     constructor(props) {
         super(props);
         if (
@@ -52,5 +52,4 @@ class CheckBox extends ReactComponent {
         />;
     }
 }
-
-window.QForms.CheckBox = CheckBox;
+window.CheckBox = CheckBox;

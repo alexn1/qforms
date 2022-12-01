@@ -1,4 +1,4 @@
-class Statusbar extends ReactComponent {
+export class Statusbar extends ReactComponent {
     constructor(props) {
         // console.log('Statusbar.constructor', props);
         super(props);
@@ -16,4 +16,4 @@ class Statusbar extends ReactComponent {
     }
 }
 
-window.QForms.Statusbar = Statusbar;
+window.Statusbar = Statusbar;

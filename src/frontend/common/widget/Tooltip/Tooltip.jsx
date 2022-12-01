@@ -1,4 +1,4 @@
-class Tooltip extends ReactComponent {
+export class Tooltip extends ReactComponent {
     // constructor(props) {
     //     console.log('Tooltip.constructor', props);
     //     super(props);
@@ -16,4 +16,4 @@ class Tooltip extends ReactComponent {
     }
 }
 
-window.QForms.Tooltip = Tooltip;
+window.Tooltip = Tooltip;

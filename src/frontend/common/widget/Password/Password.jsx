@@ -1,4 +1,4 @@
-class Password extends ReactComponent {
+export class Password extends ReactComponent {
     constructor(props) {
         super(props);
         this.el = React.createRef();

@@ -1,4 +1,4 @@
-class TimeBox extends ReactComponent {
+export class TimeBox extends ReactComponent {
     constructor(props) {
         // console.log('TimeBox.constructor', props);
         super(props);
@@ -180,4 +180,4 @@ class TimeBox extends ReactComponent {
     }
 }
 
-window.QForms.TimeBox = TimeBox;
+window.TimeBox = TimeBox;

@@ -1,4 +1,4 @@
-class Tab2 extends ReactComponent {
+export class Tab2 extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
@@ -71,4 +71,4 @@ class Tab2 extends ReactComponent {
     }
 }
 
-window.QForms.Tab = Tab;
+window.Tab = Tab;

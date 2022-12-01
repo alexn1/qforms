@@ -1,4 +1,4 @@
-class GridCell extends ReactComponent {
+export class GridCell extends ReactComponent {
     constructor(props) {
         super(props);
         this.span = React.createRef();
@@ -23,4 +23,4 @@ class GridCell extends ReactComponent {
     }
 }
 
-window.QForms.GridCell = GridCell;
+window.GridCell = GridCell;
