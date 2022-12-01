@@ -1,4 +1,8 @@
-export class ReactComponent extends React.Component {
+import React from 'react';
+
+export class ReactComponent extends React.Component<any, any> {
+    allowRerender: boolean;
+    el: React.RefObject<any>;
     constructor(props) {
         super(props);
         if (props.onCreate) props.onCreate(this, this.props.name);
@@ -37,7 +41,7 @@ export class ReactComponent extends React.Component {
     rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender()) return Promise.resolve();
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {
@@ -87,4 +91,6 @@ export class ReactComponent extends React.Component {
         this.setState({disabled: undefined});
     }
 }
+
+// @ts-ignore
 window.ReactComponent = ReactComponent;

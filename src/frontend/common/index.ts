@@ -1,11 +1,11 @@
-import {Helper} from './Helper';
-// import {ReactComponent} from './ReactComponent';
-// import {FrontHostApp} from './FrontHostApp';
+export {Helper} from './Helper';
+export {ReactComponent} from './ReactComponent';
+export {FrontHostApp} from './FrontHostApp';
 // import {Search} from './Search';
 // import {Box} from './widget/Box/Box';
 // import {CheckBox} from './widget/CheckBox/CheckBox';
-// import {ComboBox} from './widget/ComboBox';
-// import {Button} from './widget/Button';
+export {ComboBox} from './widget/ComboBox';
+export {Button} from './widget/Button';
 // import {Tab} from './widget/Tab/Tab';
 // import {DropdownButton} from './widget/DropdownButton/DropdownButton';
 // import {TextBox} from './widget/TextBox';

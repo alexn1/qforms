@@ -1,3 +1,5 @@
+import {ReactComponent} from '../ReactComponent';
+
 export class ComboBox extends ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
@@ -46,6 +48,7 @@ export class ComboBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -73,4 +76,6 @@ export class ComboBox extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
 window.ComboBox = ComboBox;

@@ -10,7 +10,7 @@ module.exports = {
         filename: 'bundle.[contenthash].js',
     },
     resolve: {
-        extensions: ['.ts', '.js'],
+        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
@@ -38,7 +38,7 @@ module.exports = {
                         compilerOptions: {
                             target: "ES2017",
                             declaration: false,
-                            esModuleInterop: false,
+                            esModuleInterop: true,
                             jsx: "react-jsx",                                /* Specify what JSX code is generated. */
                         },
                         onlyCompileBundledFiles: true

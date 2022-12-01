@@ -1,3 +1,6 @@
+import React from 'react';
+import {ReactComponent} from '../ReactComponent';
+
 export class Button extends ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
@@ -48,4 +51,6 @@ export class Button extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
 window.Button = Button;

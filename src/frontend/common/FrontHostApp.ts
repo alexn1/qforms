@@ -1,6 +1,8 @@
 export class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
+
+        // @ts-ignore
         this.alertCtrl = null;
 
         // window
@@ -106,4 +108,6 @@ export class FrontHostApp {
         return confirm(options.message);
     }
 }
+
+// @ts-ignore
 window.FrontHostApp = FrontHostApp;
