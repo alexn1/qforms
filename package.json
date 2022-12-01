@@ -41,6 +41,7 @@
     "gulp-sourcemaps": "^3.0.0",
     "gulp-typescript": "^6.0.0-alpha.1",
     "gulp-uglify": "^3.0.2",
+    "nodemon": "^2.0.20",
     "prettier": "^1.19.1",
     "should": "^7.0.4",
     "through": "^2.3.8",
