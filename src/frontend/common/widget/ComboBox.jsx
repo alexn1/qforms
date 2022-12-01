@@ -1,4 +1,4 @@
-class ComboBox extends ReactComponent {
+export class ComboBox extends ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
@@ -73,5 +73,4 @@ class ComboBox extends ReactComponent {
         );
     }
 }
-
-window.QForms.ComboBox = ComboBox;
+window.ComboBox = ComboBox;

@@ -3,11 +3,11 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/common/Helper.js',
+    entry: './src/frontend/common/entry.js',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/common/js'),
-        filename: 'bundle.[hash].js',
+        filename: 'bundle.[contenthash].js',
     },
     resolve: {
         extensions: ['.jsx', '.js'],

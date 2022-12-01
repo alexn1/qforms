@@ -1,4 +1,4 @@
-class Button extends ReactComponent {
+export class Button extends ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
@@ -48,5 +48,4 @@ class Button extends ReactComponent {
         );
     }
 }
-
-window.QForms.Button = Button;
+window.Button = Button;

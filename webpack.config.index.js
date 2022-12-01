@@ -7,7 +7,7 @@ module.exports = {
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/index/js'),
-        filename: 'bundle.[hash].js',
+        filename: 'bundle.[contenthash].js',
     },
     resolve: {
         extensions: ['.jsx', '.js'],

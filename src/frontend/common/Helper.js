@@ -1,4 +1,5 @@
-class Helper {
+window.QForms = {};
+export class Helper {
     /*static currentDate() {
         const now = new Date();
         let dd = now.getDate();if (dd < 10) dd = '0' + dd;
@@ -298,5 +299,4 @@ class Helper {
     }
 
 }
-
-window.QForms.Helper = Helper;
+window.QForms.Helper = window.Helper = Helper;

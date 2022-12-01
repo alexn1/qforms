@@ -1,6 +1,4 @@
-window.QForms = {};
-
-class ReactComponent extends React.Component {
+export class ReactComponent extends React.Component {
     constructor(props) {
         super(props);
         if (props.onCreate) props.onCreate(this, this.props.name);
@@ -89,5 +87,4 @@ class ReactComponent extends React.Component {
         this.setState({disabled: undefined});
     }
 }
-
-window.QForms.ReactComponent = ReactComponent;
+window.ReactComponent = ReactComponent;
