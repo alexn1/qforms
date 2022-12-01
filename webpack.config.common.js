@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/common/entry.js',
+    entry: './src/frontend/common/index.js',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/common/js'),

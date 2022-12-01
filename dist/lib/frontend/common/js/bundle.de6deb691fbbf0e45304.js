@@ -4439,7 +4439,7 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 /*!**************************************!*\
-  !*** ./src/frontend/common/entry.js ***!
+  !*** ./src/frontend/common/index.js ***!
   \**************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.js");
