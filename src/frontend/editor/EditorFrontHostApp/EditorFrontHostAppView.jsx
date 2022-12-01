@@ -1,4 +1,6 @@
 import {ActionList} from '../ActionList/ActionList';
+import {TreeWidget} from '../TreeWidget/TreeWidget';
+import {PropertyGrid} from '../PropertyGrid/PropertyGrid';
 
 export class EditorFrontHostAppView extends ReactComponent {
     renderDocumentView(document) {

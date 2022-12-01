@@ -1358,13 +1358,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "EditorFrontHostAppView": () => (/* binding */ EditorFrontHostAppView)
 /* harmony export */ });
 /* harmony import */ var _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.jsx");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.jsx");
+/* harmony import */ var _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 
 
 
 class EditorFrontHostAppView extends ReactComponent {
   renderDocumentView(document) {
-    if (!document.controller.getDocumentViewClass()) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    if (!document.controller.getDocumentViewClass()) return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       children: ["no document view for ", document.controller.constructor.name]
     });
     return React.createElement(document.controller.getDocumentViewClass(), {
@@ -1385,27 +1389,27 @@ class EditorFrontHostAppView extends ReactComponent {
 
   render() {
     const ctrl = this.props.ctrl;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
       className: "EditorFrontHostAppView",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
         className: 'EditorFrontHostAppView__sidebar',
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("div", {
           className: 'tree-bar',
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("a", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("a", {
             href: ctrl.runAppLink,
             target: "_blank",
             children: "Run Application"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_0__.ActionList, {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_0__.ActionList, {
               onCreate: c => ctrl.actionList = c,
               onClick: ctrl.onActionClick
             })
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
           className: 'frame full',
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
             className: 'frame__container',
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TreeWidget, {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_1__.TreeWidget, {
               classList: ['full'],
               onCreate: c => ctrl.treeWidget2 = c,
               items: ctrl.items,
@@ -1414,20 +1418,20 @@ class EditorFrontHostAppView extends ReactComponent {
               onItemOpen: ctrl.onItemOpen2
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Tab, {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Tab, {
           classList: ['Tab-blue', 'full'],
           tabs: [{
             name: 'properties',
             title: 'Properties',
-            content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(PropertyGrid, {
+            content: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_2__.PropertyGrid, {
               onCreate: c => ctrl.pg = c,
               onChange: ctrl.onPropertyGrid2Change
             })
           }]
         })]
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("div", {
         className: 'EditorFrontHostAppView__client',
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Tab, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(Tab, {
           classList: ['full'],
           canClose: true,
           onTabClose: ctrl.onDocumentClose,
@@ -2640,6 +2644,304 @@ class ParamController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     this.parent.removeParam(this);
     EditorFrontHostApp.editorApp.treeWidget2.select(null);
     EditorFrontHostApp.editorApp.treeWidget2.rerender();
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/frontend/editor/PropertyGrid/PropertyGrid.jsx":
+/*!***********************************************************!*\
+  !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.jsx ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PropertyGrid": () => (/* binding */ PropertyGrid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class PropertyGrid extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
+  getObj() {
+    if (this.state.object) {
+      return this.state.object.obj;
+    }
+
+    return null;
+  }
+
+  getOptions() {
+    if (this.state.object) {
+      return this.state.object.options;
+    }
+
+    return null;
+  }
+
+  onChange = (name, value) => {
+    // console.log('PropertyGrid.onChange', name, value);
+    if (this.props.onChange) {
+      this.props.onChange(name, value);
+    }
+  };
+
+  renderInput(name) {
+    const obj = this.getObj();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TextBox, {
+      name: name,
+      value: obj[name],
+      spellCheck: "false",
+      onChange: value => this.onChange(name, value),
+      autocomplete: 'off'
+    });
+  }
+
+  renderSelect(name) {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ComboBox, {
+      name: name,
+      value: obj[name],
+      items: options[name].map(value => ({
+        value: value,
+        title: value
+      })),
+      onChange: value => this.onChange(name, value)
+    });
+  }
+
+  renderRows() {
+    const obj = this.getObj();
+    const options = this.getOptions();
+    return Object.keys(obj).map(name => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+        children: name
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", {
+        children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name)
+      })]
+    }, name));
+  }
+
+  render() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: 'PropertyGrid full frame',
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        className: 'frame__container',
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", {
+          className: 'PropertyGrid__table',
+          cellPadding: 0,
+          cellSpacing: 0,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", {
+            children: this.getObj() && this.renderRows()
+          })
+        })
+      })
+    });
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/frontend/editor/TreeWidget/TreeItem.jsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/editor/TreeWidget/TreeItem.jsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeItem": () => (/* binding */ TreeItem)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class TreeItem extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      opened: props.item.opened !== undefined ? props.item.opened : false
+    };
+    this.li = React.createRef();
+  }
+
+  onDivMouseDown = e => {
+    // console.log('TreeItem.onDivMouseDown', e.currentTarget);
+    const item = this.props.item;
+    const tree = this.props.tree;
+    tree.select(item);
+  };
+  onDivDoubleClick = e => {
+    // console.log('TreeItem.onDivDoubleClick');
+    const item = this.props.item;
+    const tree = this.props.tree;
+    tree.onDoubleClick(item);
+  };
+  onNodeMouseDown = e => {
+    // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
+    const item = this.props.item;
+    const tree = this.props.tree;
+    const opened = this.state.opened;
+    e.stopPropagation();
+    this.setState(prevState => {
+      return {
+        opened: !prevState.opened
+      };
+    });
+
+    if (!opened) {
+      tree.onOpen(item);
+    }
+  };
+
+  isSelected() {
+    return this.props.tree.getSelectedItem() === this.props.item;
+  }
+
+  isOpened() {
+    return this.state.opened;
+  }
+
+  getElement() {
+    return this.li.current;
+  }
+
+  open() {
+    console.log('TreeItem.open', this.props.item.getTitle());
+    this.state.opened = true;
+
+    if (this.parent) {
+      this.parent.open();
+    } else {
+      console.log('this.parent', this.parent);
+    }
+  }
+
+  render() {
+    // console.log('TreeItem.render', this.props.item.getTitle());
+    const tree = this.props.tree;
+    const item = this.props.item;
+    const items = item.items;
+    const hasItems = !!(items && items.length);
+    const isNode = item.node || hasItems;
+    const style = item.getStyle ? item.getStyle() : null;
+    const title = item.getTitle();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+      ref: this.li,
+      className: this.isOpened() ? 'opened' : null,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+        className: this.isSelected() ? 'active' : null,
+        style: {
+          paddingLeft: this.props.paddingLeft
+        },
+        onMouseDown: this.onDivMouseDown,
+        onDoubleClick: this.onDivDoubleClick,
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+          className: isNode ? 'node' : 'leaf',
+          onMouseDown: this.onNodeMouseDown
+        }), "\xA0", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+          style: style,
+          children: title
+        })]
+      }), hasItems && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+        children: items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, {
+          tree: tree,
+          item: item,
+          paddingLeft: this.props.paddingLeft + 15,
+          onCreate: c => {
+            // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+            c.parent = this;
+            item.view = c;
+          }
+        }, item.getTitle()))
+      })]
+    }, title);
+  }
+
+}
+
+/***/ }),
+
+/***/ "./src/frontend/editor/TreeWidget/TreeWidget.jsx":
+/*!*******************************************************!*\
+  !*** ./src/frontend/editor/TreeWidget/TreeWidget.jsx ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeWidget": () => (/* binding */ TreeWidget)
+/* harmony export */ });
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TreeItem */ "./src/frontend/editor/TreeWidget/TreeItem.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class TreeWidget extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedItem: null
+    };
+  }
+
+  async select(item) {
+    console.log('TreeWidget.select', item ? item.getTitle() : null);
+    if (this.isSelected(item)) return;
+    return new Promise(resolve => {
+      this.setState({
+        selectedItem: item
+      }, () => {
+        if (this.props.onItemSelect) this.props.onItemSelect(item);
+        resolve();
+      });
+    });
+  }
+
+  onDoubleClick(item) {
+    // console.log('TreeWidget.onDoubleClick', item);
+    if (this.props.onItemDoubleClick) this.props.onItemDoubleClick(item);
+  }
+
+  onOpen(item) {
+    if (this.props.onItemOpen) this.props.onItemOpen(item);
+  }
+
+  isSelected(item) {
+    return this.state.selectedItem === item;
+  }
+
+  getSelectedItem() {
+    return this.state.selectedItem;
+  }
+
+  scrollToSelected() {
+    console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
+    this.getSelectedItem().view.getElement().scrollIntoView();
+  }
+
+  render() {
+    console.log('TreeWidget.render'
+    /*, this.props.items*/
+    );
+    const items = this.props.items;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: this.getCssClassNames(),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("ul", {
+        children: items.map(item => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_0__.TreeItem, {
+          tree: this,
+          item: item,
+          paddingLeft: 5,
+          onCreate: c => item.view = c
+        }, item.getTitle()))
+      })
+    });
   }
 
 }

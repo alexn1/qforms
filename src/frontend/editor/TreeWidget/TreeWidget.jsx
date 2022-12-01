@@ -1,3 +1,5 @@
+import {TreeItem} from './TreeItem';
+
 export class TreeWidget extends ReactComponent {
     constructor(props) {
         super(props);
