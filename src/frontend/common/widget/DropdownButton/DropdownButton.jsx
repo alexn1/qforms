@@ -1,4 +1,4 @@
-class DropdownButton extends ReactComponent{
+export class DropdownButton extends ReactComponent{
     constructor(props) {
         super(props);
         this.state = {
@@ -64,5 +64,4 @@ class DropdownButton extends ReactComponent{
         );
     }
 }
-
-window.QForms.DropdownButton = DropdownButton;
+window.DropdownButton = DropdownButton;

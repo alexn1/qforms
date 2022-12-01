@@ -2,6 +2,149 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/frontend/common/FrontHostApp.js":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/FrontHostApp.js ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
+class FrontHostApp {
+  constructor() {
+    // console.log('FrontHostApp.constructor');
+    this.alertCtrl = null; // window
+
+    window.addEventListener('error', this.onWindowError.bind(this));
+    window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
+    window.addEventListener('popstate', this.onWindowPopState.bind(this)); // window.onunhandledrejection = this.onunhandledrejection.bind(this);
+    // window.onerror              = this.errorHandler.bind(this);
+    // window.onbeforeunload       = this.exit.bind(this);
+  }
+
+  async run() {
+    throw new Error('FrontHostApp.run not implemented');
+  }
+
+  async onWindowUnhandledrejection(e) {
+    console.log('FrontHostApp.onWindowUnhandledrejection'
+    /*, e*/
+    );
+
+    try {
+      e.preventDefault();
+      const err = e instanceof Error ? e : e.reason || e.detail.reason;
+      this.logError(err);
+      await this.alert({
+        title: 'Unhandled Rejection',
+        message: err.message
+      });
+    } catch (err) {
+      console.error(`onWindowUnhandledrejection error: ${err.message}`);
+    }
+  }
+
+  async onWindowError(e) {
+    console.log('FrontHostApp.onWindowError', e);
+
+    try {
+      e.preventDefault();
+      const err = e.error;
+      this.logError(err); // await this.alert({message: err.message});
+    } catch (err) {
+      console.error(`onWindowError error: ${err.message}`);
+    }
+  }
+
+  static async doHttpRequest(data) {
+    console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
+    const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+    console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+    return body;
+  }
+
+  logError(err) {
+    console.error('FrontHostApp.logError', err);
+  }
+
+  static async doHttpRequest2(data) {
+    console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
+    const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+    console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+    return [headers, body];
+  }
+
+  static async postJson(url, data) {
+    return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+  }
+
+  static async post(url, body, contentType) {
+    try {
+      FrontHostApp.startWait();
+      const response = await fetch(url, {
+        method: 'POST',
+        body: body,
+        ...(contentType ? {
+          headers: {
+            'Content-Type': contentType
+          }
+        } : {})
+      });
+
+      if (response.ok) {
+        const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
+          const [name, value] = header;
+          acc[name] = value;
+          return acc;
+        }, {}); // console.log('headers:', headers);
+
+        const body = await response.json();
+        return [headers, body];
+      }
+
+      throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+    } finally {
+      FrontHostApp.stopWait();
+    }
+  }
+
+  static startWait() {
+    document.querySelector('html').classList.add('wait');
+  }
+
+  static stopWait() {
+    document.querySelector('html').classList.remove('wait');
+  }
+
+  static getClassByName(className) {
+    if (eval(`typeof ${className}`) === 'function') {
+      return eval(className);
+    }
+
+    return null;
+  }
+
+  async onWindowPopState(e) {
+    console.log('FrontHostApp.onWindowPopState', e.state);
+  }
+
+  async alert(options) {
+    console.log('FrontHostApp.alert', options);
+    alert(options.message);
+  }
+
+  async confirm(options) {
+    console.log('FrontHostApp.confirm', options);
+    return confirm(options.message);
+  }
+
+}
+window.FrontHostApp = FrontHostApp;
+
+/***/ }),
+
 /***/ "./src/frontend/common/Helper.js":
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.js ***!
@@ -496,6 +639,50 @@ window.ReactComponent = ReactComponent;
 
 /***/ }),
 
+/***/ "./src/frontend/common/Search.js":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Search.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
+class Search {
+  static getObj() {
+    if (!window.location.search.split('?')[1]) return {};
+    return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+      const kv = item.split('=');
+      acc[kv[0]] = decodeURIComponent(kv[1]);
+      return acc;
+    }, {});
+  }
+
+  static objToString(obj) {
+    const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+    if (!search) return '';
+    return `?${search}`;
+  }
+
+  static filter(names) {
+    const newObj = {};
+    const obj = Search.getObj();
+
+    for (const name of names) {
+      if (obj.hasOwnProperty(name)) {
+        newObj[name] = obj[name];
+      }
+    }
+
+    return Search.objToString(newObj);
+  }
+
+}
+window.Search = Search;
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Button.jsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.jsx ***!
@@ -672,6 +859,195 @@ class ComboBox extends ReactComponent {
 
 }
 window.ComboBox = ComboBox;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.jsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class DropdownButton extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: false,
+      disabled: false
+    };
+  }
+
+  onButtonClick = e => {
+    // console.log('DropdownButton.onButtonClick');
+    this.setState(state => ({
+      open: !state.open
+    }));
+  };
+  onButtonBlur = e => {
+    // console.log('DropdownButton.onButtonBlur');
+    if (this.state.open) {
+      this.setState({
+        open: false
+      });
+    }
+  };
+  onKeyDown = e => {
+    // console.log('DropdownButton.onKeyDown', e.key);
+    if (e.key === 'Escape' && this.state.open) {
+      this.setState({
+        open: false
+      });
+      e.stopPropagation();
+    }
+  };
+  onUlMouseDown = e => {
+    // console.log('DropdownButton.onUlMouseDown');
+    e.preventDefault();
+  };
+  onLiClick = async e => {
+    // console.log('DropdownButton.onLiClick', e.currentTarget);
+    const li = e.currentTarget;
+    this.setState({
+      open: false
+    }, () => {
+      if (this.props.onClick) {
+        this.props.onClick(li);
+      }
+    });
+  };
+
+  isEnabled() {
+    if (this.props.enabled !== undefined) return this.props.enabled; // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+
+    return !this.state.disabled;
+  }
+
+  render() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: `${this.getCssClassNames()} ${this.state.open && 'show'}`,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
+        classList: [`${this.getCssBlockName()}__button`],
+        onClick: this.onButtonClick,
+        onBlur: this.onButtonBlur,
+        enabled: this.isEnabled(),
+        onKeyDown: this.onKeyDown,
+        children: this.props.title || this.props.children
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+        className: `${this.getCssBlockName()}__dropdown`,
+        onMouseDown: this.onUlMouseDown,
+        children: this.props.actions && this.props.actions.map(action => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", {
+          className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`,
+          "data-action": action.name,
+          onClick: action.enabled !== false ? this.onLiClick : null,
+          children: action.title
+        }, action.name))
+      })]
+    });
+  }
+
+}
+window.DropdownButton = DropdownButton;
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.jsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Tab/Tab.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class Tab extends ReactComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: 0
+    };
+  }
+
+  getActive() {
+    if (this.props.getActive) return this.props.getActive();
+    return this.state.active;
+  }
+
+  onLiMouseDown = e => {
+    // console.log('Tab.onLiMouseDown', e.target);
+    if (e.target.classList.contains('close')) return;
+    const i = parseInt(e.currentTarget.dataset.i);
+
+    if (this.props.getActive) {
+      if (this.props.onTabMouseDown) this.props.onTabMouseDown(i);
+    } else {
+      if (i !== this.getActive()) {
+        this.selectTab(i);
+      }
+    }
+  };
+  onLiClick = e => {
+    // console.log('Tab.onLiClick', e.target);
+    if (e.target.classList.contains('close')) {
+      const i = parseInt(e.currentTarget.dataset.i); // console.log('close tab:', i);
+
+      if (this.props.onTabClose) this.props.onTabClose(i);
+    }
+  };
+
+  selectTab(i) {
+    if (i === this.getActive()) return;
+    const start = Date.now();
+    this.setState({
+      active: i
+    }, () => console.log('selectTab time:', Date.now() - start));
+  }
+
+  renderTitles() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", {
+      className: i === this.getActive() ? 'active' : null,
+      onMouseDown: this.onLiMouseDown,
+      onClick: this.onLiClick,
+      "data-i": i,
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        children: tab.title
+      }), this.props.canClose && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
+        className: "close",
+        children: "\xD7"
+      })]
+    }, tab.name));
+  }
+
+  renderContents() {
+    return this.props.tabs.map((tab, i) => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+      className: i === this.getActive() ? 'active' : null,
+      children: tab.content
+    }, tab.name));
+  }
+
+  render() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
+      className: this.getCssClassNames(),
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", {
+        children: this.props.tabs && this.renderTitles()
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
+        children: this.props.tabs && this.renderContents()
+      })]
+    });
+  }
+
+}
+window.Tab = Tab;
 
 /***/ }),
 
@@ -4446,6 +4822,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.jsx");
 /* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.jsx");
 /* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.jsx");
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.js");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.js");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.jsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.jsx");
+
+
+
+
 
 
 

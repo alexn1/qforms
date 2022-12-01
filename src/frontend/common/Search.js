@@ -1,4 +1,4 @@
-class Search {
+export class Search {
     static getObj() {
         if (!window.location.search.split('?')[1]) return {};
         return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
@@ -23,3 +23,4 @@ class Search {
         return Search.objToString(newObj);
     }
 }
+window.Search = Search;

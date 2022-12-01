@@ -1,4 +1,4 @@
-class FrontHostApp {
+export class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
         this.alertCtrl = null;
@@ -106,5 +106,4 @@ class FrontHostApp {
         return confirm(options.message);
     }
 }
-
-window.QForms.FrontHostApp = FrontHostApp;
+window.FrontHostApp = FrontHostApp;
