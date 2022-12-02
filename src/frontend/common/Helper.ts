@@ -1,3 +1,6 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
+
 // @ts-ignore
 window.QForms = {};
 export class Helper {
@@ -95,14 +98,11 @@ export class Helper {
         let component;
         // @ts-ignore
         props.onCreate = c => component = c;
-        // @ts-ignore
         const reactElement = React.createElement(type, props, children);
-        // @ts-ignore
         ReactDOM.render(reactElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
-        // @ts-ignore
         ReactDOM.unmountComponentAtNode(root);
     }
 

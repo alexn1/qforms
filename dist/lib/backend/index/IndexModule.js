@@ -42,9 +42,9 @@ class IndexModule {
         return [
             // '/lib/react/react.development.js',
             // '/lib/react/react-dom.development.js',
-            '/lib/react/react.production.min.js',
-            '/lib/react/react-dom.production.min.js',
-            ...(this.hostApp.commonModule.js),
+            // '/lib/react/react.production.min.js',
+            // '/lib/react/react-dom.production.min.js',
+            // ...(this.hostApp.commonModule.js),
             ...(this.js)
         ];
     }

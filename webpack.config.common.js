@@ -39,7 +39,7 @@ module.exports = {
                         compilerOptions: {
                             target: "ES2017",
                             declaration: false,
-                            esModuleInterop: false,
+                            esModuleInterop: true,
                             jsx: "react-jsx",
                         }
                     }
