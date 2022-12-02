@@ -1,3 +1,5 @@
+import {ModelView} from '../ModelView';
+
 export class PageView extends ModelView {
     constructor(props) {
         super(props);

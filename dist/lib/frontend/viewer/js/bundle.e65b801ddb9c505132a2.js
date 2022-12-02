@@ -616,6 +616,518 @@ window.ApplicationController = ApplicationController;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.js ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldController": () => (/* binding */ FieldController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.js");
+
+class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+  /*constructor(model, parent) {
+      super(model, parent);
+  }*/
+  static create(model, parent) {
+    // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+    const page = model.getPage();
+    const form = model.getForm();
+    const CustomClass = FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
+    const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+    const GeneralClass = FrontHostApp.getClassByName(generalClassName);
+    if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
+    const Class = CustomClass ? CustomClass : GeneralClass;
+    return new Class(model, parent);
+  }
+
+  valueToString(value) {
+    // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
+    switch (typeof value) {
+      case 'string':
+        return value;
+
+      case 'object':
+        if (value === null) return '';
+        if (value instanceof Date) return value.toISOString();
+        return JSON.stringify(value, null, 4);
+
+      case 'number':
+      case 'boolean':
+        return value.toString();
+
+      case 'undefined':
+        return '';
+
+      default:
+        throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+    }
+  }
+
+  stringToValue(stringValue) {
+    // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+    // if (stringValue === undefined) return undefined;
+    // if (stringValue === null) return null;
+    const fieldType = this.model.getType(); // console.log('fieldType:', fieldType);
+
+    if (stringValue.trim() === '') return null;
+
+    if (fieldType === 'object' || fieldType === 'boolean') {
+      return JSON.parse(stringValue);
+    } else if (fieldType === 'date') {
+      const date = new Date(stringValue);
+      if (date.toString() === 'Invalid Date') throw new Error(`${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`);
+      return date;
+    } else if (fieldType === 'number') {
+      const num = Number(stringValue);
+      if (isNaN(num)) throw new Error(this.getApp().getModel().getText().error.notNumber);
+      return num;
+    }
+
+    return stringValue;
+  }
+
+  getViewStyle(row) {
+    return null;
+  }
+
+  async openPage(options) {
+    return await this.getParent().openPage(options);
+  }
+
+  getForm() {
+    return this.parent;
+  }
+
+  getPage() {
+    return this.parent.parent;
+  }
+
+  getApp() {
+    return this.parent.parent.parent;
+  }
+
+  isVisible() {
+    return this.getModel().getAttr('visible') === 'true';
+  }
+
+  isAutoFocus() {
+    return this.getModel().getAttr('autoFocus') === 'true';
+  }
+
+  getAutocomplete() {
+    return this.getModel().getAttr('autocomplete') || null;
+  }
+
+  getFormat() {
+    return this.getModel().getAttr('format');
+  }
+
+}
+window.FieldController = FieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.js":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.js ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormFieldController": () => (/* binding */ TableFormFieldController)
+/* harmony export */ });
+/* harmony import */ var _FieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.js");
+
+class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_0__.FieldController {
+  getValueForWidget(row) {
+    // console.log('TableFormFieldController.getValueForWidget');
+    return this.valueToString(this.model.getValue(row));
+  }
+
+}
+window.TableFormFieldController = TableFormFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.js":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.js ***!
+  \********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* binding */ TableFormTextBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.js");
+
+class TableFormTextBoxFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+  getViewClass() {
+    return super.getViewClass() || TableFormTextBoxFieldView;
+  }
+  /*beginEdit(view) {
+      view.firstElementChild.style.MozUserSelect = 'text';
+      view.firstElementChild.contentEditable = true;
+      const range = document.createRange();
+      range.selectNodeContents(view.firstElementChild);
+      window.getSelection().removeAllRanges();
+      window.getSelection().addRange(range);
+      view.firstElementChild.focus();
+      return true;
+  }*/
+
+  /*endEdit(view) {
+      view.firstElementChild.style.MozUserSelect = 'none';
+      view.firstElementChild.contentEditable = false;
+  }*/
+
+
+}
+window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.js":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/FormController.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormController": () => (/* binding */ FormController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.js");
+
+class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+  static create(model, parent) {
+    // console.log('FormController.create', model.getFullName());
+    const page = model.getPage();
+    const customClassName = `${page.getName()}${model.getName()}FormController`;
+    const CustomClass = FrontHostApp.getClassByName(customClassName);
+    const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+    const Class = CustomClass ? CustomClass : GeneralClass;
+    return new Class(model, parent);
+  }
+
+  constructor(model, parent) {
+    super(model, parent);
+    this.fields = {};
+  }
+
+  init() {
+    for (const field of this.model.fields) {
+      const ctrl = this.fields[field.getName()] = FieldController.create(field, this);
+      ctrl.init();
+    }
+  }
+
+  deinit() {
+    // console.log('FormController.deinit:', this.model.getFullName());
+    for (const name in this.fields) {
+      this.fields[name].deinit();
+    }
+
+    super.deinit();
+  }
+
+  isValid() {
+    return true;
+  }
+
+  async openPage(options) {
+    return await this.getPage().openPage(options);
+  }
+
+  getPage() {
+    return this.parent;
+  }
+
+  isChanged() {
+    return false;
+  }
+
+  async onFieldChange(e) {
+    // console.log('FormController.onFieldChange', this.model.getFullName());
+    await this.getPage().onFormChange(e);
+  }
+
+  getUpdated() {
+    return this.state.updated;
+  }
+
+  invalidate() {
+    this.state.updated = Date.now();
+  }
+
+  async onActionClick(name, row) {
+    console.log('FormController.onActionClick', name, row);
+  }
+
+  getField(name) {
+    return this.fields[name];
+  }
+
+  getApp() {
+    return this.parent.parent;
+  }
+
+  getSelectedRowKey() {
+    return null;
+  }
+
+  isAutoFocus() {
+    for (const name in this.fields) {
+      if (this.fields[name].isAutoFocus()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  isVisible() {
+    return this.getModel().getAttr('visible') === 'true';
+  }
+
+}
+window.FormController = FormController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.js":
+/*!**************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.js ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormController": () => (/* binding */ RowFormController)
+/* harmony export */ });
+/* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.js");
+
+class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
+  constructor(model, parent) {
+    super(model, parent);
+    this.state = {
+      updated: Date.now(),
+      mode: 'edit',
+      hasNew: false,
+      changed: false,
+      valid: true
+    };
+  }
+
+  init() {
+    super.init();
+    this.model.on('refresh', this.onModelRefresh);
+    this.model.on('insert', this.onModelInsert);
+    this.model.on('update', this.onModelUpdate);
+
+    if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') {
+      this.state.mode = 'view';
+    }
+
+    this.calcState();
+
+    if (this.state.hasNew) {
+      this.state.mode = 'edit';
+    }
+  }
+
+  deinit() {
+    // console.log('RowFormController.deinit', this.model.getFullName());
+    this.model.off('refresh', this.onModelRefresh);
+    this.model.off('insert', this.onModelInsert);
+    this.model.off('update', this.onModelUpdate);
+    super.deinit();
+  }
+
+  calcState() {
+    this.state.hasNew = this.model.hasNew();
+    this.state.changed = this.isChanged();
+    this.state.valid = this.isValid(); // console.log('hasNew:', hasNew);
+    // console.log('changed:', changed);
+    // console.log('valid:', valid);
+  }
+
+  refill() {
+    console.log('RowFormController.refill', this.model.getFullName());
+
+    for (const name in this.fields) {
+      this.fields[name].refill();
+    }
+  }
+
+  onModelRefresh = async e => {
+    console.log('RowFormController.onModelRefresh', this.model.getFullName());
+    if (!this.view) return;
+    this.refill();
+    this.invalidate();
+    this.rerender();
+  };
+  onModelInsert = async e => {
+    console.log('RowFormController.onModelInsert', this.model.getFullName());
+    this.refill();
+    this.invalidate();
+    this.calcState();
+    this.parent.onFormInsert(e);
+  };
+  onModelUpdate = async e => {
+    console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
+    this.refill();
+    this.invalidate();
+    this.calcState();
+    this.parent.onFormUpdate(e);
+  };
+
+  isValid() {
+    // console.log('RowFormController.isValid', this.model.getFullName());
+    for (const name in this.fields) {
+      const field = this.fields[name];
+      if (!field.isValid()) return false;
+    }
+
+    return true;
+  }
+
+  validate() {
+    // console.log('RowFormController.validate', this.getModel().getFullName());
+    for (const name in this.fields) {
+      this.fields[name].validate();
+    }
+
+    this.invalidate();
+  }
+
+  clearFieldsError() {
+    for (const name in this.fields) {
+      this.fields[name].setError(null);
+    }
+  }
+
+  onSaveClick = async () => {
+    console.log('RowFormController.onSaveClick');
+    this.validate();
+    this.calcState();
+
+    if (this.isValid()) {
+      try {
+        this.getApp().getView().disableRerender();
+        await this.model.update();
+        this.state.mode = 'view';
+        console.log('form model updated', this.getModel().getFullName());
+      } finally {
+        this.getApp().getView().enableRerender();
+        await this.getApp().getView().rerender();
+      }
+    } else {
+      console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
+      await this.rerender();
+    }
+  };
+  onDiscardClick = () => {
+    console.log('RowFormController.onDiscardClick', this.model.getFullName());
+    const changedFields = [];
+    const row = this.model.getRow();
+
+    for (const name in this.fields) {
+      const field = this.fields[name];
+
+      if (field.isChanged(row) || !field.isValid()) {
+        changedFields.push(name);
+      }
+    } // console.log('changedFields:', changedFields);
+
+
+    this.model.discard(changedFields); // refill changed fields
+
+    changedFields.forEach(name => {
+      this.fields[name].refill();
+    }); // ui
+
+    this.calcState();
+
+    if (this.getModel().hasDefaultSqlDataSource()) {
+      this.state.mode = 'view';
+    }
+
+    this.rerender(); // event
+
+    this.parent.onFormDiscard(this);
+  };
+  onRefreshClick = async () => {
+    // console.log('RowFormController.onRefreshClick', this.model.getFullName());
+    await this.model.refresh();
+  };
+
+  isChanged() {
+    // console.log('RowFormController.isChanged', this.model.getFullName());
+    if (this.model.isChanged()) return true;
+    const row = this.model.getRow();
+
+    for (const name in this.fields) {
+      const field = this.fields[name];
+      if (field.isChanged(row)) return true;
+    }
+
+    return false;
+  }
+
+  async onFieldChange(e) {
+    // console.log('RowFormController.onFieldChange', this.model.getFullName());
+    this.calcState();
+    this.invalidate();
+    await super.onFieldChange(e);
+  }
+
+  onEditClick = e => {
+    console.log('RowFormController.onEditClick');
+    this.state.mode = 'edit';
+    this.rerender();
+  };
+  onCancelClick = e => {
+    console.log('RowFormController.onCancelClick');
+    this.state.mode = 'view';
+    this.rerender();
+  };
+
+  getViewClass() {
+    // console.log('RowFormController.getViewClass', this.model.getFullName());
+    return super.getViewClass() || RowFormView;
+  }
+
+  getActiveRow(withChanges) {
+    return this.model.getRow(withChanges);
+  }
+
+  getMode() {
+    return this.state.mode;
+  }
+
+  isActionEnabled(name) {
+    return this.isViewMode();
+  }
+
+  isEditMode() {
+    return this.getMode() === 'edit';
+  }
+
+  isViewMode() {
+    return this.getMode() === 'view';
+  }
+
+}
+window.RowFormController = RowFormController;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/ModelController.js":
 /*!***************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/ModelController.js ***!
@@ -665,6 +1177,607 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
 
 }
 window.ModelController = ModelController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ModelView.jsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ModelView.jsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModelView": () => (/* binding */ ModelView)
+/* harmony export */ });
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class ModelView extends _View__WEBPACK_IMPORTED_MODULE_0__.View {
+  getActionsForDropdownButton() {
+    return this.props.ctrl.getModel().getCol('actions').map(data => {
+      const actionName = Model.getName(data);
+      return {
+        name: actionName,
+        title: this.renderActionIcon ? [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: this.renderActionIcon(actionName)
+        }, 'icon'), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          children: Model.getAttr(data, 'caption')
+        }, 'title')] : Model.getAttr(data, 'caption'),
+        enabled: this.getCtrl().isActionEnabled(actionName)
+      };
+    });
+  }
+
+  getCssBlockName() {
+    const model = this.props.ctrl.getModel();
+
+    if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
+      return model.getAttr('cssBlock');
+    }
+
+    return super.getCssBlockName();
+  }
+
+  getStyle() {}
+
+}
+window.ModelView = ModelView;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.js":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/PageController/PageController.js ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageController": () => (/* binding */ PageController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.js");
+
+class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+  constructor(model, parent, id) {
+    //console.log('PageController.constructor', model);
+    super(model, parent);
+    if (!id) throw new Error('no id');
+    this.id = id;
+    this.forms = [];
+  }
+
+  static create(model, parent, id, options) {
+    // console.log('PageController.create', model.getName());
+    const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
+    const Class = CustomClass ? CustomClass : PageController;
+    return new Class(model, parent, id, options);
+  }
+
+  init() {
+    for (const form of this.model.forms) {
+      const ctrl = FormController.create(form, this);
+      ctrl.init();
+      this.forms.push(ctrl);
+    }
+  }
+
+  deinit() {
+    console.log('PageController.deinit: ' + this.model.getFullName());
+
+    for (const form of this.forms) {
+      form.deinit();
+    }
+
+    super.deinit();
+  }
+
+  onSaveAndCloseClick = async () => {
+    console.log('PageController.onSaveAndCloseClick');
+    this.validate();
+
+    if (this.isValid()) {
+      try {
+        this.getApp().getView().disableRerender();
+        await this.getModel().update();
+        console.log('page model updated', this.getModel().getFullName());
+      } finally {
+        this.getApp().getView().enableRerender();
+      }
+
+      await this.getApp().closePage(this);
+
+      if (this.getModel().getOptions().onClose) {
+        this.getModel().getOptions().onClose();
+      }
+    } else {
+      await this.rerender();
+    }
+  };
+  onClosePageClick = async e => {
+    console.log('PageController.onClosePageClick', this.getModel().getFullName());
+    await this.close();
+  };
+  onOpenPageClick = async e => {
+    const name = this.getModel().getName();
+    const key = this.getModel().getKey();
+    const link = this.createOpenInNewLink(name, key); // console.log('link', link);
+
+    window.open(link, '_blank');
+  };
+
+  createOpenInNewLink(name, key) {
+    return PageController.createLink({
+      page: name,
+      ...DataSource.keyToParams(key)
+    });
+  }
+
+  async close() {
+    // console.log('PageController.close', this.model.getFullName());
+    const changed = this.isChanged(); // console.log('changed:', changed);
+    // const valid = this.isValid();
+    // console.log('valid:', valid);
+
+    if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
+      const result = await this.getApp().confirm({
+        message: this.model.getApp().getText().form.areYouSure
+      });
+      if (!result) return;
+    }
+
+    await this.getApp().closePage(this);
+
+    if (this.getModel().getOptions().onClose) {
+      this.getModel().getOptions().onClose();
+    }
+  }
+
+  validate() {
+    for (const form of this.forms) {
+      if (form instanceof RowFormController) {
+        form.validate();
+      }
+    }
+  }
+
+  isValid() {
+    // console.log('PageController.isValid', this.model.getFullName());
+    for (const form of this.forms) {
+      if (!form.isValid()) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  async onFormChange(e) {
+    // console.log('PageController.onFormChange', this.model.getFullName());
+    this.rerender();
+  }
+
+  onFormDiscard(formController) {
+    console.log('PageController.onFormDiscard', this.model.getFullName());
+    this.rerender();
+  }
+
+  onFormUpdate(e) {
+    console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
+    this.rerender();
+  }
+
+  onFormInsert(e) {
+    console.log('PageController.onFormInsert:', this.model.getFullName()); // console.log('hasNew:', this.model.hasNew());
+
+    for (const form of this.forms) {
+      form.invalidate();
+    }
+
+    this.rerender();
+  }
+
+  async openPage(options) {
+    if (!options.params) {
+      options.params = {};
+    }
+
+    const params = this.getModel().getParams();
+
+    for (const name in params) {
+      if (!options.params[name]) {
+        options.params[name] = params[name];
+      }
+    }
+
+    return await this.getApp().openPage(options);
+  }
+
+  isChanged() {
+    // console.log('PageController.isChanged', this.model.getFullName());
+    for (const form of this.forms) {
+      if (form.isChanged()) {
+        // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  getApp() {
+    return this.parent;
+  }
+
+  getViewClass() {
+    return super.getViewClass() || PageView;
+  }
+
+  static createLink(params = null) {
+    // const query = window.location.search.split('?')[1];
+    // console.log('query:', query);
+    if (params) {
+      return [window.location.pathname, [// ...(query ? query.split('&') : []),
+      ...(ApplicationController.isDebugMode() ? ['debug=1'] : []), ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)].join('&')].join('?');
+    }
+
+    return window.location.pathname;
+  }
+
+  getForm(name) {
+    return this.forms.find(form => form.model.getName() === name);
+  }
+
+  async onActionClick(name) {
+    console.log('PageController.onActionClick', name);
+  }
+
+  onKeyDown = async e => {
+    // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
+    if (e.key === 'Escape') {
+      if (this.isModal()) {
+        await this.close();
+      }
+    }
+  };
+
+  getTitle() {
+    const model = this.getModel();
+    const key = model.getKey();
+    let keyPart;
+
+    if (key) {
+      const arr = JSON.parse(key);
+
+      if (arr.length === 1 && typeof arr[0] === 'number') {
+        keyPart = `#${arr[0]}`;
+      } else {
+        keyPart = `${key}`;
+      }
+    }
+
+    return [model.getCaption(), ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []), ...(keyPart ? [keyPart] : [])].join(' ');
+  }
+
+  getSelectedRowKey() {
+    for (const form of this.forms) {
+      const selectedRowKey = form.getSelectedRowKey();
+      if (selectedRowKey) return selectedRowKey;
+    }
+
+    return null;
+  }
+
+  onSelectClick = async e => {
+    console.log('PageController.onSelectClick');
+    await this.selectRow(this.getSelectedRowKey());
+  };
+  onResetClick = async e => {
+    console.log('PageController.onResetClick');
+    await this.selectRow(null);
+  };
+
+  async selectRow(key) {
+    console.log('PageController.selectRow', key);
+    await this.close();
+    await this.getModel().getOptions().onSelect(key);
+  }
+
+  invalidate() {
+    this.forms.forEach(form => form.invalidate());
+  }
+
+  getId() {
+    return this.id;
+  }
+
+  isModal() {
+    return this.getModel().isModal();
+  }
+
+  isAutoFocus() {
+    for (const form of this.forms) {
+      if (form.isAutoFocus()) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+}
+window.PageController = PageController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.jsx":
+/*!************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/PageController/PageView.jsx ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageView": () => (/* binding */ PageView)
+/* harmony export */ });
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
+  constructor(props) {
+    super(props);
+    this.checkParent();
+    this.el = React.createRef();
+  }
+
+  onActionsClick = async li => {
+    // console.log('PageView.onActionsClick:', li);
+    const ctrl = this.getCtrl();
+    const name = li.dataset.action;
+
+    try {
+      const result = await ctrl.onActionClick(name);
+
+      if (!result) {
+        throw new Error(`no handler for action '${name}'`);
+      }
+    } catch (err) {
+      console.error(err);
+      await this.getCtrl().getApp().alert({
+        message: err.message
+      });
+    }
+  };
+
+  isToolbar() {
+    const model = this.getCtrl().getModel();
+    return model.hasActions(); //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+    //|| model.isSelectMode();
+  }
+
+  getFormTabs(forms) {
+    return forms.map(form => {
+      return {
+        name: form.getModel().getName(),
+        title: form.getTitle(),
+        content: this.renderForm(form)
+      };
+    });
+  }
+
+  getRowForms() {
+    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'RowForm').filter(form => form.isVisible());
+  }
+
+  getTableForms() {
+    return this.getCtrl().forms.filter(form => form.getModel().getClassName() === 'TableForm').filter(form => form.isVisible());
+  }
+
+  renderForm(formCtrl, props = {}) {
+    return React.createElement(formCtrl.getViewClass(), {
+      parent: this,
+      key: formCtrl.getModel().getName(),
+      ctrl: formCtrl,
+      onCreate: formCtrl.onViewCreate,
+      updated: formCtrl.getUpdated(),
+      ...props
+    });
+  }
+
+  renderRowForms() {
+    return this.getRowForms().map(form => this.renderForm(form));
+  }
+
+  renderTitle() {
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("h1", {
+      className: `${this.getCssBlockName()}__title`,
+      children: [ctrl.getTitle(), model.hasRowFormWithDefaultSqlDataSource() && (ctrl.isChanged() || model.hasNew()) && [' ', /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        className: `${this.getCssBlockName()}__star`,
+        children: "*"
+      }, 'star')]]
+    });
+  }
+
+  renderSelectButton() {
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      classList: ['toolbar-button', 'default'],
+      onClick: ctrl.onSelectClick,
+      enabled: !!ctrl.getSelectedRowKey(),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: model.getApp().getText().page.select
+      })
+    });
+  }
+
+  renderSaveAndCloseButton() {
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      classList: ['toolbar-button', 'default'],
+      onClick: ctrl.onSaveAndCloseClick,
+      enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged()),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: model.getApp().getText().page.saveAndClose
+      })
+    });
+  }
+
+  renderCloseButton() {
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      classList: ['toolbar-button'],
+      onClick: ctrl.onClosePageClick,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        children: model.getApp().getText().page.close
+      })
+    });
+  }
+
+  renderActionsDropdownButton() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(DropdownButton, {
+      classList: ['toolbar-dropdown-button'],
+      actions: this.getActionsForDropdownButton(),
+      onClick: this.onActionsClick,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(MoreVertIcon, {})
+    });
+  }
+
+  renderToolbar() {
+    const ctrl = this.getCtrl();
+    const model = ctrl.getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssBlockName()}__toolbar`,
+      children: model.hasActions() && this.renderActionsDropdownButton()
+    });
+  }
+  /*shouldComponentUpdate(nextProps, nextState) {
+      return false;
+  }*/
+
+
+  renderTableForms() {
+    const tableForms = this.getTableForms();
+
+    if (tableForms.length === 1) {
+      return this.renderForm(tableForms[0]);
+    } else {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+        className: `${this.getCssBlockName()}__table-forms flex-max frame`,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+          className: "frame__container",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Tab2, {
+            tabs: this.getFormTabs(tableForms),
+            classList: ['Tab-blue', 'full']
+          })
+        })
+      });
+    }
+  }
+
+  renderOpenPageHeaderButton() {
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssBlockName()}__open`,
+      onClick: ctrl.onOpenPageClick,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(OpenInNewIcon, {})
+    }, 'open');
+  }
+
+  renderClosePageHeaderButton() {
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssBlockName()}__close`,
+      onClick: ctrl.onClosePageClick,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CloseIcon2, {})
+    }, 'close');
+  }
+
+  renderHeader() {
+    const model = this.getCtrl().getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: `${this.getCssBlockName()}__header`,
+      children: [this.renderTitle(), model.isModal() && [...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []), this.renderClosePageHeaderButton()]]
+    });
+  }
+
+  renderMain() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssBlockName()}__main flex-max frame`,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+        className: 'frame__container flex-column grid-gap-10',
+        children: [this.isToolbar() && this.renderToolbar(), this.renderForms()]
+      })
+    });
+  }
+
+  renderForms() {
+    const model = this.getCtrl().getModel();
+    return [...(model.hasRowForm() ? [this.renderRowForms()] : []), ...(model.hasTableForm() ? [this.renderTableForms()] : [])];
+  }
+
+  renderForms2() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Tab2, {
+      tabs: this.getFormTabs(this.getCtrl().forms.filter(form => form.isVisible())),
+      classList: ['Tab-blue', 'full']
+    });
+  }
+
+  renderFooter() {
+    const model = this.getCtrl().getModel();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: `${this.getCssBlockName()}__footer`,
+      children: [this.renderCloseButton(), model.isModal() && model.hasRowFormWithDefaultSqlDataSource() && this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()]
+    });
+  }
+
+  render() {
+    console.log('PageView.render', this.getCtrl().getModel().getFullName());
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`,
+      style: this.getStyle(),
+      ref: this.el,
+      tabIndex: 0,
+      onKeyDown: this.getCtrl().onKeyDown,
+      children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()]
+    });
+  }
+
+  getStyle() {
+    if (this.getCtrl().isModal()) {
+      return {
+        width: 1000,
+        height: 750
+      };
+    }
+  }
+
+  componentDidMount() {
+    // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+    if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {} else {
+      this.focus();
+    }
+  }
+
+  focus() {
+    // console.log('PageView.focus', this.getCtrl().getModel().getFullName());
+    if (this.getElement()) {
+      // console.log('focus', this.getElement());
+      this.getElement().focus();
+    } else {
+      console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);
+    }
+  }
+
+}
+window.PageView = PageView;
 
 /***/ }),
 
@@ -1545,7 +2658,6 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   }
 
 }
-console.log('window.DataSource = DataSource');
 window.DataSource = DataSource;
 
 /***/ }),
@@ -5711,11 +6823,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
 /* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
+/* harmony export */   "PageController": () => (/* reexport safe */ _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_6__.PageController),
+/* harmony export */   "PageView": () => (/* reexport safe */ _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_3__.PageView),
+/* harmony export */   "RowFormController": () => (/* reexport safe */ _Controller_ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__.RowFormController),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_5__.TableFormTextBoxFieldController),
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.js");
 /* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.js");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.js");
+/* harmony import */ var _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Controller/ModelController/PageController/PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.jsx");
+/* harmony import */ var _Controller_ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controller/ModelController/FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.js");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.js");
+/* harmony import */ var _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Controller/ModelController/PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.js");
+
+
+
+
 
 
 

@@ -1,3 +1,5 @@
+import {View} from '../View';
+
 export class ModelView extends View {
     getActionsForDropdownButton() {
         return this.props.ctrl.getModel().getCol('actions').map(data => {

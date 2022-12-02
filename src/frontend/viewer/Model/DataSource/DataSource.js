@@ -506,5 +506,5 @@ export class DataSource extends Model {
     }
 
 }
-console.log('window.DataSource = DataSource');
+
 window.DataSource = DataSource;

@@ -1,3 +1,5 @@
+import {FormController} from '../FormController';
+
 export class RowFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
@@ -194,4 +196,5 @@ export class RowFormController extends FormController {
         return this.getMode() === 'view';
     }
 }
+
 window.RowFormController = RowFormController;
