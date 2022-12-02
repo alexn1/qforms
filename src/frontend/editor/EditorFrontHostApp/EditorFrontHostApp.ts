@@ -19,9 +19,9 @@ export class EditorFrontHostApp extends FrontHostApp {
     documents: any[];
     modal: any;
     constructor(data, runAppLink) {
+        super();
         console.log('EditorFrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
-        super();
         this.data = data;
         // @ts-ignore
         EditorFrontHostApp.editorApp = this;

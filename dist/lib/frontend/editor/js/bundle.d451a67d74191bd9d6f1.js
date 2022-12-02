@@ -32747,9 +32747,6 @@ const DocumentController_1 = __webpack_require__(/*! ../ModelController/Document
 const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
     constructor(data, runAppLink) {
-        console.log('EditorFrontHostApp.constructor', data);
-        if (!data)
-            throw new Error('no data');
         super();
         this.onItemOpen2 = async (item) => {
             console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
@@ -32813,6 +32810,9 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
             const controller = item instanceof PageLinkController_1.PageLinkController ? item.pageController : item;
             await controller.doAction(actionName);
         };
+        console.log('EditorFrontHostApp.constructor', data);
+        if (!data)
+            throw new Error('no data');
         this.data = data;
         // @ts-ignore
         EditorFrontHostApp.editorApp = this;
