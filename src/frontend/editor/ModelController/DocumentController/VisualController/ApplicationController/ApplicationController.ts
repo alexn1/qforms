@@ -1,9 +1,22 @@
 import {VisualController} from '../VisualController';
 import {DatabaseController} from '../../DatabaseController/DatabaseController';
 import {PageLinkController} from '../../../PageLinkController/PageLinkController';
+import {EditorFrontHostApp} from  '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import {NewDatabaseController} from '../../../../ModalController/NewDatabaseController/NewDatabaseController';
+import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import {NewPageController} from '../../../../ModalController/NewPageController/NewPageController';
+import {PageController} from '../PageController/PageController';
+import {VisualView} from '../VisualView';
+import {DocumentView} from '../../DocumentView';
 
 export class ApplicationController extends VisualController {
-
+    editorApp: any;
+    databases: any[];
+    dataSources: any[];
+    actions: any[];
+    pageLinks: any[];
+    opened: boolean;
+    items: any[];
     constructor(model, editorApp) {
         super(model);
         this.editorApp = editorApp;
@@ -82,6 +95,7 @@ export class ApplicationController extends VisualController {
 
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
+        // @ts-ignore
         await EditorFrontHostApp.editorApp.openModal(new NewDatabaseController({onCreate: async values => {
             // console.log('values: ', values);
             const database = await this.model.newDatabase({
@@ -98,6 +112,7 @@ export class ApplicationController extends VisualController {
             await EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
             databaseController.view.parent.open();
             this.view.rerender();
+            // @ts-ignore
             EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
         }}));
     }
@@ -142,6 +157,7 @@ export class ApplicationController extends VisualController {
         return this.pageLinks.find(pageLink => pageLink.model.getName() === name);
     }
     getDocumentViewClass() {
+        // @ts-ignore
         return VisualView;
     }
 }

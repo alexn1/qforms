@@ -8,6 +8,7 @@ import {DocumentController} from '../ModelController/DocumentController/Document
 import {Helper} from '../../common';
 
 export class EditorFrontHostApp extends FrontHostApp {
+    public static editorApp: any;
     data: any;
     runAppLink: string;
     view: any;

@@ -1,4 +1,9 @@
+import {Helper} from '../../common';
+
 export class ModelController {
+    model: any;
+    parent: any;
+    view: any;
     constructor(model, parent = null) {
         // super();
         this.model = model;
@@ -30,7 +35,7 @@ export class ModelController {
     async doAction(name) {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
-    getDocumentViewClass() {
+    getDocumentViewClass(): any {
         console.log(`${this.constructor.name}.getDocumentViewClass`);
         return null;
     }

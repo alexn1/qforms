@@ -1,6 +1,7 @@
 import {ModelController} from '../ModelController';
 
 export class DocumentController extends ModelController {
+    document: any;
     constructor(model, parent) {
         super(model, parent);
         this.document = null;

@@ -1,6 +1,12 @@
 import {ModelController} from '../ModelController';
+import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
+import {PageEditor} from '../../Editor/PageEditor/PageEditor';
+import {PageController} from '../DocumentController/VisualController/PageController/PageController';
 
 export class PageLinkController extends ModelController {
+    node: boolean;
+    pageController: any;
+    items: any;
     constructor(model, parent) {
         super(model, parent);
         this.node = true;

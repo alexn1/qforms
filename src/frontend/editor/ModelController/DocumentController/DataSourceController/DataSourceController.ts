@@ -1,7 +1,12 @@
 import {DocumentController} from '../DocumentController';
 import {KeyColumnController} from '../../KeyColumnController/KeyColumnController';
+import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import {NewKeyColumnController} from '../../../ModalController/NewKeyColumnController/NewKeyColumnController';
+import {SqlDataSourceView} from './SqlDataSourceView';
 
 export class DataSourceController extends DocumentController {
+    keyColumns: any[];
+    items: any[];
     constructor(model, parent) {
         super(model, parent);
         this.keyColumns = [];
