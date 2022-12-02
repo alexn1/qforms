@@ -13,3 +13,4 @@ export {Grid} from './widget/Grid/Grid';
 export {GridRow} from './widget/GridRow/GridRow';
 export {GridCell} from './widget/GridCell/GridCell';
 export {Modal} from './widget/Modal/Modal';
+export {Password} from './widget/Password/Password';

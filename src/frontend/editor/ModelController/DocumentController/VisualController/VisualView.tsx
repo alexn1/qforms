@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {DocumentView} from '../DocumentView';
 import {Button} from '../../../../common';
 

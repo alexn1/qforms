@@ -1,4 +1,6 @@
-class CloseIcon extends React.Component {
+import * as React from 'react';
+
+export class CloseIcon extends React.Component<any, any> {
     render() {
         return <svg width="10px" height="10px" viewBox="0 0 10 10">
             <line x1="2" y1="2" x2="8" y2="8" stroke="#aaa" strokeWidth={1} strokeMiterlimit="10"/>

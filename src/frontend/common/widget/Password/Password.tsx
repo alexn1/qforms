@@ -1,4 +1,11 @@
+import * as React from 'react';
+import {ReactComponent} from '../../ReactComponent';
+import {CloseIcon} from '../../icon/CloseIcon';
+import {VisibilityIcon} from '../../icon/VisibilityIcon';
+import {VisibilityOffIcon} from '../../icon/VisibilityOffIcon';
+
 export class Password extends ReactComponent {
+    inputEl: React.RefObject<any>;
     constructor(props) {
         super(props);
         this.el = React.createRef();
@@ -15,6 +22,7 @@ export class Password extends ReactComponent {
         return this.state.value;
     }
     _setValue(value) {
+        // @ts-ignore
         this.state.value = value;
         this.forceUpdate();
         if (this.props.onChange) {
@@ -29,6 +37,7 @@ export class Password extends ReactComponent {
         this.getInputElement().focus();
     }
     shouldComponentUpdate(nextProps, nextState) {
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -71,3 +80,6 @@ export class Password extends ReactComponent {
         </div>;
     }
 }
+
+// @ts-ignore
+window.Password = Password;

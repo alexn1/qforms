@@ -21,13 +21,13 @@
         %><script type="text/javascript" src="<%=src%>"></script>
     <%
     });%>
-    <script>
+    <!--<script>
         document.addEventListener('DOMContentLoaded', async () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
             await frontHostApp.run();
         });
-    </script>
+    </script>-->
     <script type="application/json"><%- JSON.stringify(response/*, null, 4*/) %></script>
 </head>
 <body class="<%=application.getViewClassName()%>__body">

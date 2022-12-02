@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {ReactComponent} from '../../ReactComponent';
 import {Helper} from '../../Helper';
 import {GridRow} from '../GridRow/GridRow';

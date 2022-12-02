@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {ReactComponent, Tab} from '../../common';
 import {ActionList} from '../ActionList/ActionList';
 import {TreeWidget} from '../TreeWidget/TreeWidget';

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import {ReactComponent, Modal} from '../../common';
 
 export class ModalView extends ReactComponent {

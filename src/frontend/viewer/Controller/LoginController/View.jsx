@@ -1,4 +1,6 @@
-class LoginView extends View {
+import {View} from '../View';
+
+export class LoginView extends View {
     constructor(props) {
         super(props);
         this.errMsgRef = React.createRef();

@@ -1,4 +1,6 @@
-class Controller extends EventEmitter {
+import {EventEmitter} from '../EventEmitter';
+
+export class Controller extends EventEmitter {
     constructor() {
         super();
         this.view = null;

@@ -1,4 +1,4 @@
-class View extends ReactComponent {
+export class View extends ReactComponent {
     constructor(props) {
         super(props);
         if (!props.ctrl) throw new Error(`${this.constructor.name}: no ctrl`);

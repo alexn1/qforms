@@ -1,4 +1,7 @@
-class LoginController extends Controller {
+import {Controller} from '../Controller';
+import {LoginView} from './View';
+
+export class LoginController extends Controller {
     constructor(frontHostApp) {
         super();
         console.log(`${this.constructor.name}.constructor`);

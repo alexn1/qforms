@@ -1,4 +1,6 @@
-class LoginFrontHostApp extends FrontHostApp {
+import {LoginController} from './Controller/LoginController/LoginController';
+
+export class LoginFrontHostApp extends FrontHostApp {
     constructor(data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();
@@ -17,3 +19,4 @@ class LoginFrontHostApp extends FrontHostApp {
         return this.data;
     }
 }
+window.LoginFrontHostApp = LoginFrontHostApp;
