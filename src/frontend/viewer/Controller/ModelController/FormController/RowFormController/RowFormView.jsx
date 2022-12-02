@@ -1,3 +1,5 @@
+import {FormView} from '../FormView';
+
 export class RowFormView extends FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');

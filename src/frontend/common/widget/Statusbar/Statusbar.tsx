@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Statusbar extends ReactComponent {
     constructor(props) {
         // console.log('Statusbar.constructor', props);
@@ -16,4 +18,5 @@ export class Statusbar extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Statusbar = Statusbar;

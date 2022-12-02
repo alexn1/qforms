@@ -28,4 +28,5 @@ export class DateField extends Field {
         return rawValue;
     }
 }
+
 window.DateField = DateField;

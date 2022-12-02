@@ -1,3 +1,5 @@
+export {RowFormFieldView} from '../RowFormFieldView';
+
 export class RowFormDateFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;

@@ -1,3 +1,5 @@
+import {Form} from '../Form';
+
 export class RowForm extends Form {
     init() {
         super.init();

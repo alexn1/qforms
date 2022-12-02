@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Menu extends ReactComponent {
     constructor(props) {
         // console.log('Menu.constructor', props);
@@ -13,14 +15,14 @@ export class Menu extends ReactComponent {
         await this.closeMenu(e.currentTarget.dataset.menu);
     }
     toggleMenu(menu) {
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             this.setState(prevState => ({
                 [menu]: !prevState[menu]
             }), resolve);
         });
     }
     closeMenu(menu) {
-        return new Promise(resolve => this.setState({[menu]: false}, resolve));
+        return new Promise<void>(resolve => this.setState({[menu]: false}, resolve));
     }
     onMouseDown = (e) => {
         // console.log('Menu.onMouseDown');
@@ -53,4 +55,5 @@ export class Menu extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Menu = Menu;

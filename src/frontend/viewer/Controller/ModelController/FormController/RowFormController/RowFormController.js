@@ -1,4 +1,5 @@
 import {FormController} from '../FormController';
+import {RowFormView} from './RowFormView';
 
 export class RowFormController extends FormController {
     constructor(model, parent) {

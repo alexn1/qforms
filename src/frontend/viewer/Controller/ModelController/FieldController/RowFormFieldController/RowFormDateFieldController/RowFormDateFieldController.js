@@ -1,4 +1,5 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormDateFieldView} from './RowFormDateFieldView';
 
 export class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {
@@ -11,4 +12,5 @@ export class RowFormDateFieldController extends RowFormFieldController {
         this.setValue(widgetValue);
     }
 }
+
 window.RowFormDateFieldController = RowFormDateFieldController;

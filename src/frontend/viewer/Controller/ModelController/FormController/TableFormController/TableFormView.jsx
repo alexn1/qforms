@@ -1,3 +1,5 @@
+import {FormView} from '../FormView';
+
 export class TableFormView extends FormView {
     renderToolbar() {
         const ctrl = this.props.ctrl;

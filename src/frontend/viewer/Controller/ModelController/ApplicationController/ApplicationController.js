@@ -1,4 +1,6 @@
 import {ModelController} from '../ModelController';
+import {Page} from '../../../Model/Page/Page';
+import {ApplicationView} from './ApplicationView';
 
 export class ApplicationController extends ModelController {
     constructor(model, frontHostApp) {

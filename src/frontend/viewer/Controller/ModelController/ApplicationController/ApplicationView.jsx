@@ -1,3 +1,5 @@
+export {ModelView} from '../ModelView';
+
 export class ApplicationView extends ModelView {
     renderActivePage() {
         const ctrl = this.props.ctrl;

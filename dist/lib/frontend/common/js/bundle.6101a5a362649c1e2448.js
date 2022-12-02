@@ -32698,6 +32698,67 @@ window.GridRow = GridRow;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Menu = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Menu extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('Menu.constructor', props);
+        super(props);
+        this.onMenuClick = async (e) => {
+            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            await this.toggleMenu(e.currentTarget.dataset.menu);
+        };
+        this.onBlur = async (e) => {
+            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            await this.closeMenu(e.currentTarget.dataset.menu);
+        };
+        this.onMouseDown = (e) => {
+            // console.log('Menu.onMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onMenuItemClick = async (e) => {
+            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            e.persist();
+            const { menu, type, name } = e.target.dataset;
+            await this.closeMenu(menu);
+            if (this.props.onClick) {
+                this.props.onClick(menu, type, name);
+            }
+        };
+        this.state = {};
+    }
+    toggleMenu(menu) {
+        return new Promise(resolve => {
+            this.setState(prevState => ({
+                [menu]: !prevState[menu]
+            }), resolve);
+        });
+    }
+    closeMenu(menu) {
+        return new Promise(resolve => this.setState({ [menu]: false }, resolve));
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items && this.props.items.map(menu => (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0, jsx_runtime_1.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => (0, jsx_runtime_1.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name)) }))] }), menu.name)) })));
+    }
+}
+exports.Menu = Menu;
+// @ts-ignore
+window.Menu = Menu;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Modal/Modal.tsx":
 /*!****************************************************!*\
   !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
@@ -32813,6 +32874,37 @@ class Password extends ReactComponent_1.ReactComponent {
 exports.Password = Password;
 // @ts-ignore
 window.Password = Password;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
+/*!************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Statusbar = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Statusbar extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('Statusbar.constructor', props);
+        super(props);
+        this.state = {};
+    }
+    setLastQueryTime(lastQueryTime) {
+        this.setState({ lastQueryTime });
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0, jsx_runtime_1.jsxs)("div", { children: ["Last query time: ", this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
+    }
+}
+exports.Statusbar = Statusbar;
+// @ts-ignore
+window.Statusbar = Statusbar;
 
 
 /***/ }),
@@ -32979,7 +33071,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -33012,6 +33104,10 @@ var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/co
 Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
 var Password_1 = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
 Object.defineProperty(exports, "Password", ({ enumerable: true, get: function () { return Password_1.Password; } }));
+var Menu_1 = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+Object.defineProperty(exports, "Menu", ({ enumerable: true, get: function () { return Menu_1.Menu; } }));
+var Statusbar_1 = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+Object.defineProperty(exports, "Statusbar", ({ enumerable: true, get: function () { return Statusbar_1.Statusbar; } }));
 
 })();
 
