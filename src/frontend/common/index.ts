@@ -18,3 +18,7 @@ export {Menu} from './widget/Menu/Menu';
 export {Statusbar} from './widget/Statusbar/Statusbar';
 export {Tooltip} from './widget/Tooltip/Tooltip';
 export {DropdownDatePicker} from './widget/DropdownDatePicker/DropdownDatePicker';
+export {DatePicker} from './widget/DatePicker/DatePicker';
+export {Select} from './widget/Select/Select';
+export {CloseIcon} from './icon/CloseIcon';
+export {LeftIcon} from './icon/LeftIcon';

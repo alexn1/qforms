@@ -1,4 +1,11 @@
+import React from 'react';
+import {ReactComponent} from '../../ReactComponent';
+import {CloseIcon} from '../../icon/CloseIcon';
+import {ArrowIcon} from '../../icon/ArrowIcon';
+
 export class Select extends ReactComponent {
+    dropdown: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.el       = React.createRef();
@@ -118,6 +125,7 @@ export class Select extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -176,3 +184,6 @@ export class Select extends ReactComponent {
         </div>;
     }
 }
+
+// @ts-ignore
+window.Select = Select;
