@@ -1,3 +1,5 @@
+import {DocumentView} from '../DocumentView';
+
 export class VisualView extends DocumentView {
     constructor(props) {
         super(props);

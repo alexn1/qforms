@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../../../common';
+
 export class TableView extends ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;

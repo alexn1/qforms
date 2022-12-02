@@ -1,3 +1,4 @@
+import {ReactComponent} from '../../../../common';
 import {TreeWidget} from '../../../TreeWidget/TreeWidget';
 
 export class DatabaseView extends ReactComponent {

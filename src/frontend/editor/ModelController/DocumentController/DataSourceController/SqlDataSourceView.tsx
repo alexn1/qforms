@@ -1,3 +1,5 @@
+import {DocumentView} from '../DocumentView';
+
 export class SqlDataSourceView extends DocumentView {
     constructor(props) {
         super(props);

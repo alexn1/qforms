@@ -1,16 +1,29 @@
+import {FrontHostApp} from '../../common/FrontHostApp';
 import {ApplicationEditor} from '../Editor/ApplicationEditor/ApplicationEditor';
 import {ApplicationController} from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
 import {EditorFrontHostAppView} from './EditorFrontHostAppView';
 import {PageLinkController} from '../ModelController/PageLinkController/PageLinkController';
 import {ModelController} from '../ModelController/ModelController';
 import {DocumentController} from '../ModelController/DocumentController/DocumentController';
+import {Helper} from '../../common';
 
 export class EditorFrontHostApp extends FrontHostApp {
+    data: any;
+    runAppLink: string;
+    view: any;
+    actionList: any;
+    treeWidget2: any;
+    pg: any;
+    items: any;
+    tabWidget: any;
+    documents: any[];
+    modal: any;
     constructor(data, runAppLink) {
         console.log('EditorFrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
         super();
         this.data = data;
+        // @ts-ignore
         EditorFrontHostApp.editorApp = this;
         this.runAppLink = runAppLink;
         this.view = null;

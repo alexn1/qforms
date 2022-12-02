@@ -1,3 +1,6 @@
+import React from 'react';
+import {ReactComponent} from '../../common';
+
 export class ModalView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;

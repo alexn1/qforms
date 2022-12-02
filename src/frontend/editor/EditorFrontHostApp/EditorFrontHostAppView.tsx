@@ -1,11 +1,15 @@
+import React from 'react';
+import {ReactComponent, Tab} from '../../common';
 import {ActionList} from '../ActionList/ActionList';
 import {TreeWidget} from '../TreeWidget/TreeWidget';
 import {PropertyGrid} from '../PropertyGrid/PropertyGrid';
+import {ModalView} from '../ModalController/ModalView';
 
 export class EditorFrontHostAppView extends ReactComponent {
     renderDocumentView(document) {
         if (!document.controller.getDocumentViewClass()) return <div>no document view for {document.controller.constructor.name}</div>;
         return React.createElement(document.controller.getDocumentViewClass(), {
+            // @ts-ignore
             onCreate: c => document.view = c,
             document: document,
             ctrl    : document.controller

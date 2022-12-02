@@ -1,3 +1,4 @@
+import {ReactComponent} from '../../common';
 import {TreeItem} from './TreeItem';
 
 export class TreeWidget extends ReactComponent {
