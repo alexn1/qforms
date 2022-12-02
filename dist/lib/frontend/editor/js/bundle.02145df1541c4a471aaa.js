@@ -35259,6 +35259,67 @@ exports.NewFieldView = NewFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts":
+/*!************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewFormController/NewFormController.ts ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewFormController = void 0;
+const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const NewFormView_1 = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx");
+class NewFormController extends ModalController_1.ModalController {
+    getViewClass() {
+        return NewFormView_1.NewFormView;
+    }
+}
+exports.NewFormController = NewFormController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewFormView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class NewFormView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+                class: this.class.getValue(),
+            });
+        };
+        this.name = null;
+        this.caption = null;
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "formClass", value: 'TableForm', items: [
+                                        { value: 'RowForm', title: 'RowForm' },
+                                        { value: 'TableForm', title: 'TableForm' },
+                                        { value: 'Form', title: 'Form' },
+                                    ], onCreate: c => this.class = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+    }
+}
+exports.NewFormView = NewFormView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts":
 /*!******************************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
@@ -36768,7 +36829,7 @@ const FormController_1 = __webpack_require__(/*! ../FormController/FormControlle
 const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 const NewDataSourceController_1 = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
 const DataSourceEditor_1 = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-const NewFormController_1 = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.js");
+const NewFormController_1 = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts");
 const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 const ModelController_1 = __webpack_require__(/*! ../../../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
 class PageController extends VisualController_1.VisualController {
@@ -37518,28 +37579,6 @@ class TreeWidget extends common_1.ReactComponent {
 exports.TreeWidget = TreeWidget;
 
 
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFormController/NewFormController.js":
-/*!************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFormController/NewFormController.js ***!
-  \************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-
-
-class NewFormController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return NewFormView;
-    }
-}
-
-
 /***/ })
 
 /******/ 	});
@@ -37567,35 +37606,6 @@ class NewFormController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.Mo
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};

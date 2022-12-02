@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../../common';
+import {ReactComponent, TextBox, ComboBox} from '../../../common';
 
 export class NewFormView extends ReactComponent {
     name: any;
