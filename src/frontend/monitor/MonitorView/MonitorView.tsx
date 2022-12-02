@@ -1,3 +1,5 @@
+import {ReactComponent, Helper} from '../../common';
+
 export class MonitorView extends ReactComponent {
     renderApplication(app) {
         return (

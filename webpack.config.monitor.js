@@ -3,18 +3,21 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/monitor/main.js',
+    entry: './src/frontend/monitor/main.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/monitor/js'),
         filename: 'bundle.[contenthash].js',
     },
-    resolve: {
+    /*resolve: {
         extensions: ['.jsx', '.js'],
+    },*/
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
-            {
+            /*{
                 test: /\.(js)x?$/,
                 exclude: /node_modules/,
                 use: [
@@ -28,14 +31,23 @@ module.exports = {
 
                     },
                 ],
-            },
-            /*{
+            },*/
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
-                    loader: 'ts-loader'
+                    loader: 'ts-loader',
+                    options: {
+                        onlyCompileBundledFiles: true,
+                        compilerOptions: {
+                            target: "ES2017",
+                            declaration: false,
+                            esModuleInterop: true,
+                            jsx: "react-jsx",
+                        }
+                    }
                 }
-            }*/
+            }
         ],
     },
 };
