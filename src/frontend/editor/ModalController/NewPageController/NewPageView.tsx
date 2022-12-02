@@ -1,6 +1,9 @@
-import {ReactComponent} from '../../../common';
+import {ReactComponent, TextBox, ComboBox} from '../../../common';
 
 export class NewPageView extends ReactComponent {
+    name: any;
+    caption: any;
+    startup: any;
     constructor(props) {
         super(props);
         this.name    = null;

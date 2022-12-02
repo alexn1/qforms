@@ -34813,6 +34813,75 @@ exports.PostgreSqlFormWizard = PostgreSqlFormWizard;
 
 /***/ }),
 
+/***/ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ChangeClassController = void 0;
+const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const ChangeClassView_1 = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx");
+class ChangeClassController extends ModalController_1.ModalController {
+    getViewClass() {
+        return ChangeClassView_1.ChangeClassView;
+    }
+}
+exports.ChangeClassController = ChangeClassController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx":
+/*!***************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ChangeClassView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class ChangeClassView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+            });
+        };
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+                                    { value: 'TextBoxField' },
+                                    { value: 'ComboBoxField' },
+                                    { value: 'TextAreaField' },
+                                    { value: 'LinkField' },
+                                    { value: 'ImageField' },
+                                    { value: 'LabelField' },
+                                    { value: 'DateField' },
+                                    { value: 'TimeField' },
+                                    { value: 'DateTimeField' },
+                                    { value: 'CheckBoxField' },
+                                    { value: 'CheckBoxListField' },
+                                    { value: 'FileField' },
+                                    { value: 'PhoneField' },
+                                    { value: 'PasswordField' },
+                                    { value: 'RadioField' },
+                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: c => this.class = c })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] }));
+    }
+}
+exports.ChangeClassView = ChangeClassView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/ModalController/ModalController.ts":
 /*!****************************************************************!*\
   !*** ./src/frontend/editor/ModalController/ModalController.ts ***!
@@ -34994,12 +35063,50 @@ exports.NewColumnView = NewColumnView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NewDataSourceController = void 0;
 const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const NewDataSourceView_1 = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx");
 class NewDataSourceController extends ModalController_1.ModalController {
     getViewClass() {
-        return NewDataSourceView;
+        return NewDataSourceView_1.NewDataSourceView;
     }
 }
 exports.NewDataSourceController = NewDataSourceController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewDataSourceView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class NewDataSourceView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                class: this.class.getValue(),
+            });
+        };
+        this.name = null;
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'name', onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+                                        { value: 'DataSource', title: 'DataSource' },
+                                        { value: 'SqlDataSource', title: 'SqlDataSource' },
+                                    ], onCreate: c => this.class = c, value: 'SqlDataSource' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+    }
+}
+exports.NewDataSourceView = NewDataSourceView;
 
 
 /***/ }),
@@ -35014,12 +35121,140 @@ exports.NewDataSourceController = NewDataSourceController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NewDatabaseController = void 0;
 const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const NewDatabaseView_1 = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx");
 class NewDatabaseController extends ModalController_1.ModalController {
     getViewClass() {
-        return NewDatabaseView;
+        return NewDatabaseView_1.NewDatabaseView;
     }
 }
 exports.NewDatabaseController = NewDatabaseController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx":
+/*!***************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewDatabaseView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class NewDatabaseView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDatabaseView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+                name: this.name.getValue(),
+                host: this.host.getValue(),
+                database: this.database.getValue(),
+                user: this.user.getValue(),
+                password: this.password.getValue()
+            });
+        };
+        this.class = null;
+        this.name = null;
+        this.host = null;
+        this.database = null;
+        this.user = null;
+        this.password = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: 'class', items: [
+                                        { value: 'MySqlDatabase', title: 'MySqlDatabase' },
+                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' }
+                                    ], onCreate: c => this.class = c, value: 'PostgreSqlDatabase' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'name', value: 'default', onCreate: c => this.name = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'host', value: 'localhost', onCreate: c => this.host = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'database', value: 'test', onCreate: c => this.database = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'user', value: 'test', onCreate: c => this.user = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'password', value: '123qwe', onCreate: c => this.password = c, autocomplete: 'off' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+    }
+}
+exports.NewDatabaseView = NewDatabaseView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewFieldController = void 0;
+const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const NewFieldView_1 = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx");
+class NewFieldController extends ModalController_1.ModalController {
+    getViewClass() {
+        return NewFieldView_1.NewFieldView;
+    }
+}
+exports.NewFieldController = NewFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx":
+/*!*********************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewFieldView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class NewFieldView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewFieldView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+                name: this.name.getValue(),
+                caption: this.caption.getValue() || this.name.getValue(),
+                type: this.type.getValue()
+            });
+        };
+        this.class = null;
+        this.name = null;
+        this.caption = null;
+        this.type = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+                                        { value: 'TextBoxField' },
+                                        { value: 'ComboBoxField' },
+                                        { value: 'TextAreaField' },
+                                        { value: 'LinkField' },
+                                        { value: 'ImageField' },
+                                        { value: 'LabelField' },
+                                        { value: 'DateField' },
+                                        { value: 'TimeField' },
+                                        { value: 'DateTimeField' },
+                                        { value: 'CheckBoxField' },
+                                        { value: 'CheckBoxListField' },
+                                        { value: 'FileField' },
+                                        { value: 'PhoneField' },
+                                        { value: 'PasswordField' },
+                                        { value: 'RadioField' },
+                                    ], onCreate: c => this.class = c })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "type", value: '', items: [
+                                        { value: '', title: '' },
+                                        { value: 'string', title: 'string' },
+                                        { value: 'number', title: 'number' },
+                                        { value: 'boolean', title: 'boolean' },
+                                        { value: 'object', title: 'object' },
+                                        { value: 'date', title: 'date' },
+                                    ], onCreate: c => this.type = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+    }
+}
+exports.NewFieldView = NewFieldView;
 
 
 /***/ }),
@@ -35152,12 +35387,52 @@ exports.NewKeyColumnView = NewKeyColumnView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.NewPageController = void 0;
 const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+const NewPageView_1 = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx");
 class NewPageController extends ModalController_1.ModalController {
     getViewClass() {
-        return NewPageView;
+        return NewPageView_1.NewPageView;
     }
 }
 exports.NewPageController = NewPageController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.NewPageView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class NewPageView extends common_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewPageView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+                startup: this.startup.getValue(),
+            });
+        };
+        this.name = null;
+        this.caption = null;
+        this.startup = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "startup", items: [
+                                        { value: 'false', title: 'false' },
+                                        { value: 'true', title: 'true' }
+                                    ], onCreate: c => this.startup = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+    }
+}
+exports.NewPageView = NewPageView;
 
 
 /***/ }),
@@ -36227,6 +36502,9 @@ exports.ApplicationController = ApplicationController;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FieldController = void 0;
 const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
+const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+const ChangeClassController_1 = __webpack_require__(/*! ../../../../ModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts");
+const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 class FieldController extends VisualController_1.VisualController {
     /*constructor(model, parent) {
         super(model, parent);
@@ -36259,22 +36537,22 @@ class FieldController extends VisualController_1.VisualController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('fields', this, -1);
-                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('fields', this, 1);
-                EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
     async actionChangeClass() {
-        await EditorFrontHostApp.editorApp.openModal(new ChangeClassController({
+        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new ChangeClassController_1.ChangeClassController({
             fieldCtrl: this,
             onCreate: async (values) => {
                 const data = await this.model.changeClass({ class: values.class });
                 console.log(data);
-                EditorFrontHostApp.editorApp.fillPropertyGrid(this);
+                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
                 this.view.rerender();
             }
         }));
@@ -36297,11 +36575,11 @@ class FieldController extends VisualController_1.VisualController {
     async delete() {
         await this.model.delete();
         this.parent.removeField(this);
-        EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return VisualView;
+        return VisualView_1.VisualView;
     }
 }
 exports.FieldController = FieldController;
@@ -36321,6 +36599,9 @@ exports.FormController = void 0;
 const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
 const FieldController_1 = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/FieldController/FieldController.ts");
 const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+const NewDataSourceController_1 = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
+const NewFieldController_1 = __webpack_require__(/*! ../../../../ModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts");
+const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 class FormController extends VisualController_1.VisualController {
     constructor(model, parent) {
         super(model, parent);
@@ -36397,7 +36678,7 @@ class FormController extends VisualController_1.VisualController {
         }
     }
     async actionNewDataSource() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({ onCreate: async (values) => {
+        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDataSourceController_1.NewDataSourceController({ onCreate: async (values) => {
                 const dataSource = await this.model.newDataSource({
                     name: values.name,
                     class: values.class
@@ -36410,7 +36691,7 @@ class FormController extends VisualController_1.VisualController {
             } }));
     }
     async actionNewField() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewFieldController({ onCreate: async (values) => {
+        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewFieldController_1.NewFieldController({ onCreate: async (values) => {
                 const field = await this.model.newField({
                     class: values.class,
                     name: values.name,
@@ -36465,7 +36746,7 @@ class FormController extends VisualController_1.VisualController {
         EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return VisualView;
+        return VisualView_1.VisualView;
     }
 }
 exports.FormController = FormController;
@@ -36730,13 +37011,18 @@ exports.VisualController = VisualController;
 /*!************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx ***!
   \************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.VisualView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const DocumentView_1 = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 class VisualView extends DocumentView_1.DocumentView {
     constructor(props) {
         super(props);
@@ -36748,7 +37034,7 @@ class VisualView extends DocumentView_1.DocumentView {
             // console.log('VisualView.onChange', this.isChanged());
             await this.rerender();
         };
-        this.textarea = React.createRef();
+        this.textarea = react_1.default.createRef();
         this.cm = null;
     }
     getTextarea() {
@@ -36786,8 +37072,8 @@ class VisualView extends DocumentView_1.DocumentView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'VisualView full' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "full flex-column" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), !ctrl.data.js && (0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: ctrl.onCreateCustomController }, { children: "Controller.front.js" })), !ctrl.data.jsx && (0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: ctrl.onCreateCustomView }, { children: "View.jsx" })), !ctrl.data.less && (0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: ctrl.onCreateCustomStyle }, { children: "View.less" })), ctrl.data.js &&
-                                (0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: this.onControllerSave, enabled: this.isChanged() }, { children: "Save" }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'edit flex-max full' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'cm-container full' }, { children: ctrl.data.js && (0, jsx_runtime_1.jsx)("textarea", { ref: this.textarea }) })) }))] })) }));
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'VisualView full' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "full flex-column" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), !ctrl.data.js && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomController }, { children: "Controller.front.js" })), !ctrl.data.jsx && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomView }, { children: "View.jsx" })), !ctrl.data.less && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomStyle }, { children: "View.less" })), ctrl.data.js &&
+                                (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onControllerSave, enabled: this.isChanged() }, { children: "Save" }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'edit flex-max full' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'cm-container full' }, { children: ctrl.data.js && (0, jsx_runtime_1.jsx)("textarea", { ref: this.textarea }) })) }))] })) }));
     }
 }
 exports.VisualView = VisualView;

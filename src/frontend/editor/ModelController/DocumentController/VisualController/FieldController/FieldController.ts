@@ -1,4 +1,7 @@
 import {VisualController} from '../VisualController';
+import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import {ChangeClassController} from '../../../../ModalController/ChangeClassController/ChangeClassController';
+import {VisualView} from '../VisualView';
 
 export class FieldController extends VisualController {
     /*constructor(model, parent) {

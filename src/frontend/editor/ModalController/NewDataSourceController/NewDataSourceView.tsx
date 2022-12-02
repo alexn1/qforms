@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../../common';
+import {ReactComponent, TextBox, ComboBox, Button} from '../../../common';
 
 export class NewDataSourceView extends ReactComponent {
     name: any;

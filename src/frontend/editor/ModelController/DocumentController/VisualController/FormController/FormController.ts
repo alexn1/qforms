@@ -1,6 +1,9 @@
 import {VisualController} from '../VisualController';
 import {FieldController} from '../FieldController/FieldController';
 import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import {NewFieldController} from '../../../../ModalController/NewFieldController/NewFieldController';
+import {VisualView} from '../VisualView';
 
 export class FormController extends VisualController {
     fields: any[];

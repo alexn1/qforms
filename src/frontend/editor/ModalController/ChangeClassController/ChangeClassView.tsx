@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../../common';
+import {ReactComponent, ComboBox} from '../../../common';
 
 export class ChangeClassView extends ReactComponent {
     class: any;
