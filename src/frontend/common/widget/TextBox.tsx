@@ -1,8 +1,11 @@
+import {createRef} from 'react';
+import {ReactComponent} from '../ReactComponent';
+
 export class TextBox extends ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
-        this.el = React.createRef();
+        this.el = createRef();
         this.state = {
             value: this.props.value || ''
         }
@@ -11,6 +14,7 @@ export class TextBox extends ReactComponent {
         return this.state.value;
     }
     _setValue(value) {
+        // @ts-ignore
         this.state.value = value;
         // this.setState({value: this.state.value});   // rerender
         this.forceUpdate();
@@ -24,6 +28,7 @@ export class TextBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -52,4 +57,5 @@ export class TextBox extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.TextBox = TextBox;

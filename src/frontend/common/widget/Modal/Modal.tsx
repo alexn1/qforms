@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Modal extends ReactComponent {
     render() {
         return (
@@ -10,4 +12,5 @@ export class Modal extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Modal = Modal;

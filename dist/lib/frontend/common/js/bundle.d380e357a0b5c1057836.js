@@ -2,275 +2,6 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/frontend/index/IndexFrontHostApp.js":
-/*!*************************************************!*\
-  !*** ./src/frontend/index/IndexFrontHostApp.js ***!
-  \*************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
-/* harmony export */ });
-/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.jsx");
-
-class IndexFrontHostApp {
-  constructor(data) {
-    console.log('IndexFrontHostApp.constructor', data);
-    this.data = data;
-    this.view = null;
-    this.currentAppFullName = undefined;
-    this.currentAppEnv = undefined;
-    this.modals = [];
-    this.folderNameTextBox = null;
-    this.folderName = null;
-    this.appName = null;
-  }
-
-  init() {
-    // console.log('IndexFrontHostApp.init');
-    const appInfo = this.data.appInfos[0];
-    this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
-    this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
-    this.createView(document.querySelector('#root'));
-  }
-
-  createView(root) {
-    this.view = Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
-      ctrl: this
-    });
-  }
-
-  getAppItems() {
-    return this.data.appInfos.map(appInfo => ({
-      value: appInfo.fullName,
-      title: appInfo.fullName
-    }));
-  }
-
-  getEnvItems() {
-    // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
-    if (this.currentAppFullName) {
-      const appInfo = this.getAppInfo(this.currentAppFullName);
-      if (appInfo) return appInfo.envs.map(env => ({
-        value: env,
-        title: env
-      }));
-    }
-
-    return [];
-  }
-
-  getAppInfo(fullName) {
-    // console.log('IndexFrontHostApp.getAppInfo', fullName);
-    return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
-  }
-
-  onAppChange = fullName => {
-    console.log('IndexFrontHostApp.onAppChange', fullName);
-    this.currentAppFullName = fullName;
-    const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
-    if (!appInfo) throw new Error(`no appInfo ${fullName}`); // console.log('appInfo:', appInfo);
-
-    this.currentAppEnv = appInfo.envs[0];
-    this.view.rerender();
-  };
-  onEnvChange = env => {
-    console.log('IndexFrontHostApp.onEnvChange', env);
-    this.currentAppEnv = env;
-  };
-  run = e => {
-    if (this.currentAppFullName) {
-      const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/`;
-      console.log('href:', href);
-      window.location.href = href;
-    }
-  };
-  edit = e => {
-    if (this.currentAppFullName) {
-      const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/`;
-      console.log('href:', href);
-      window.location.href = href;
-    }
-  };
-  btnCreate_Click = async e => {
-    this.modals.push({
-      id: 1
-    });
-    await this.view.rerender();
-    this.folderNameTextBox.getElement().focus();
-  };
-
-  async createApp(folderName, appName) {
-    const data = await FrontHostApp.doHttpRequest({
-      action: 'new',
-      folder: folderName,
-      name: appName
-    });
-    console.log('data:', data);
-
-    if (data.appInfos) {
-      this.data.appInfos = data.appInfos;
-      this.currentAppFullName = `${folderName}/${appName}`;
-      this.view.rerender();
-    }
-  }
-
-  closeModal = () => {
-    console.log('IndexFrontHostApp.closeModal');
-    this.modals.pop();
-    this.view.rerender();
-  };
-  onFolderNameCreate = textBox => {
-    console.log('IndexFrontHostApp.onFolderNameCreate');
-    this.folderNameTextBox = textBox;
-  };
-  onFolderNameChange = folderName => {
-    // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
-    this.folderName = folderName;
-  };
-  onAppNameChange = appName => {
-    this.appName = appName;
-  };
-  onCreateClick = async e => {
-    console.log('IndexFrontHostApp.onCreateClick');
-    console.log(this.folderName, this.appName);
-    this.closeModal();
-    await this.createApp(this.folderName, this.appName);
-  };
-}
-
-/***/ }),
-
-/***/ "./src/frontend/index/IndexView/IndexView.jsx":
-/*!****************************************************!*\
-  !*** ./src/frontend/index/IndexView/IndexView.jsx ***!
-  \****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "IndexView": () => (/* binding */ IndexView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
-
-class IndexView extends ReactComponent {
-  renderModals() {
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-      children: ctrl.modals.map(modal => /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Modal, {
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-          className: "modal-dialog modal-sm",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            className: "modal-content",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-              className: "modal-header",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-                classList: ['close'],
-                onClick: ctrl.closeModal,
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", {
-                  children: "\xD7"
-                })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", {
-                className: "modal-title",
-                children: "New Application"
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-              className: "modal-body",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-                  htmlFor: "folderName",
-                  children: "Folder Name"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TextBox, {
-                  id: "folderName",
-                  onCreate: ctrl.onFolderNameCreate,
-                  onChange: ctrl.onFolderNameChange
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", {
-                  htmlFor: "appName",
-                  children: "Application Name"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TextBox, {
-                  id: "appName",
-                  onChange: ctrl.onAppNameChange
-                })]
-              })]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-              className: "modal-footer",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-                name: "create",
-                classList: ['btn', 'btn-primary'],
-                onClick: ctrl.onCreateClick,
-                children: "Create"
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-                classList: ['btn', 'btn-default'],
-                onClick: ctrl.closeModal,
-                children: "Close"
-              })]
-            })]
-          })
-        })
-      }, modal.id.toString()))
-    });
-  }
-
-  render() {
-    console.log('IndexView.render');
-    const ctrl = this.props.ctrl;
-    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-      className: "IndexView",
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-        className: "container",
-        style: {
-          backgroundColor: '#eee'
-        },
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-          className: "row",
-          style: {
-            margin: '50px 0'
-          },
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ComboBox, {
-              value: ctrl.currentAppFullName,
-              items: ctrl.getAppItems(),
-              size: 15,
-              style: {
-                width: '100%'
-              },
-              onDoubleClick: ctrl.run,
-              onChange: ctrl.onAppChange
-            })
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", {
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", {
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(ComboBox, {
-                value: ctrl.currentAppEnv,
-                items: ctrl.getEnvItems(),
-                onChange: ctrl.onEnvChange
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-              classList: ['btn', 'btn-primary', 'btn-block'],
-              onClick: ctrl.run,
-              children: "Run"
-            }), ctrl.data.nodeEnv === 'development' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-              classList: ['btn', 'btn-default', 'btn-block'],
-              onClick: ctrl.edit,
-              children: "Edit"
-            }), ctrl.data.nodeEnv === 'development' && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(Button, {
-              classList: ['btn', 'btn-default', 'btn-block'],
-              onClick: ctrl.btnCreate_Click,
-              children: "New..."
-            })]
-          })]
-        })
-      }), this.renderModals()]
-    });
-  }
-
-}
-
-/***/ }),
-
 /***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
@@ -3973,6 +3704,782 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 };
 
 
+/***/ }),
+
+/***/ "./src/frontend/common/FrontHostApp.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/FrontHostApp.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FrontHostApp = void 0;
+class FrontHostApp {
+    constructor() {
+        // console.log('FrontHostApp.constructor');
+        this.alertCtrl = null;
+        // window
+        window.addEventListener('error', this.onWindowError.bind(this));
+        window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
+        window.addEventListener('popstate', this.onWindowPopState.bind(this));
+        // window.onunhandledrejection = this.onunhandledrejection.bind(this);
+        // window.onerror              = this.errorHandler.bind(this);
+        // window.onbeforeunload       = this.exit.bind(this);
+    }
+    async run() {
+        throw new Error('FrontHostApp.run not implemented');
+    }
+    async onWindowUnhandledrejection(e) {
+        console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        try {
+            e.preventDefault();
+            const err = e instanceof Error ? e : e.reason || e.detail.reason;
+            this.logError(err);
+            await this.alert({ title: 'Unhandled Rejection', message: err.message });
+        }
+        catch (err) {
+            console.error(`onWindowUnhandledrejection error: ${err.message}`);
+        }
+    }
+    async onWindowError(e) {
+        console.log('FrontHostApp.onWindowError', e);
+        try {
+            e.preventDefault();
+            const err = e.error;
+            this.logError(err);
+            // await this.alert({message: err.message});
+        }
+        catch (err) {
+            console.error(`onWindowError error: ${err.message}`);
+        }
+    }
+    static async doHttpRequest(data) {
+        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
+        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        return body;
+    }
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+    }
+    static async doHttpRequest2(data) {
+        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
+        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        return [headers, body];
+    }
+    static async postJson(url, data) {
+        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    }
+    static async post(url, body, contentType) {
+        try {
+            FrontHostApp.startWait();
+            const response = await fetch(url, Object.assign({ method: 'POST', body: body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
+            if (response.ok) {
+                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
+                    const [name, value] = header;
+                    acc[name] = value;
+                    return acc;
+                }, {});
+                // console.log('headers:', headers);
+                const body = await response.json();
+                return [headers, body];
+            }
+            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+        }
+        finally {
+            FrontHostApp.stopWait();
+        }
+    }
+    static startWait() {
+        document.querySelector('html').classList.add('wait');
+    }
+    static stopWait() {
+        document.querySelector('html').classList.remove('wait');
+    }
+    static getClassByName(className) {
+        if (eval(`typeof ${className}`) === 'function') {
+            return eval(className);
+        }
+        return null;
+    }
+    async onWindowPopState(e) {
+        console.log('FrontHostApp.onWindowPopState', e.state);
+    }
+    async alert(options) {
+        console.log('FrontHostApp.alert', options);
+        alert(options.message);
+    }
+    async confirm(options) {
+        console.log('FrontHostApp.confirm', options);
+        return confirm(options.message);
+    }
+}
+exports.FrontHostApp = FrontHostApp;
+// @ts-ignore
+window.FrontHostApp = FrontHostApp;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/Helper.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Helper.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Helper = void 0;
+// @ts-ignore
+window.QForms = {};
+class Helper {
+    /*static currentDate() {
+        const now = new Date();
+        let dd = now.getDate();if (dd < 10) dd = '0' + dd;
+        let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
+        const yyyy = now.getFullYear();
+        return [yyyy, mm, dd].join('-');
+    }*/
+    /*static currentDateTime() {
+        return Helper.currentDate() + ' ' + Helper.currentTime();
+    }*/
+    /*static currentTime() {
+        const now = new Date();
+        let hh = now.getHours();if (hh < 10) hh = '0' + hh;
+        let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
+        let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
+        return [hh, mm, ss].join(':');
+    }*/
+    static formatDate(date, format) {
+        const YYYY = date.getFullYear();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
+        const MM = M < 10 ? `0${M}` : M;
+        const DD = D < 10 ? `0${D}` : D;
+        const hh = h < 10 ? `0${h}` : h;
+        const mm = m < 10 ? `0${m}` : m;
+        const ss = s < 10 ? `0${s}` : s;
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+    }
+    static formatNumber(value) {
+        return new Intl.NumberFormat('ru-RU').format(value);
+    }
+    static today() {
+        const now = new Date();
+        // return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+        return Helper.getStartOfDay(now);
+    }
+    static getStartOfDay(date) {
+        return new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    }
+    static encodeObject(obj) {
+        const eObj = {};
+        for (const name in obj) {
+            eObj[name] = Helper.encodeValue(obj[name]);
+        }
+        return eObj;
+    }
+    static encodeValue(value) {
+        return JSON.stringify(value);
+    }
+    static decodeObject(eObj) {
+        if (!eObj)
+            throw new Error('Helper.decodeObject: no object');
+        const obj = {};
+        for (const name in eObj) {
+            obj[name] = Helper.decodeValue(eObj[name]);
+        }
+        return obj;
+    }
+    static decodeValue(raw) {
+        try {
+            return JSON.parse(raw, Helper.dateTimeReviver);
+        }
+        catch (err) {
+            // console.log('raw:', raw);
+            throw err;
+        }
+    }
+    static dateTimeReviver(key, value) {
+        if (typeof value === 'string') {
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
+                .exec(value);
+            if (a)
+                return new Date(value);
+        }
+        return value;
+    }
+    static createReactComponent(rootElement, type, props = {}, children = null) {
+        // console.log('Helper.createReactComponent', rootElement, type);
+        let component;
+        // @ts-ignore
+        props.onCreate = c => component = c;
+        // @ts-ignore
+        const reactElement = React.createElement(type, props, children);
+        // @ts-ignore
+        ReactDOM.render(reactElement, rootElement);
+        return component;
+    }
+    static destroyReactComponent(root) {
+        // @ts-ignore
+        ReactDOM.unmountComponentAtNode(root);
+    }
+    static readFileAsDataURL(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsDataURL(file);
+        });
+    }
+    /*static readFileAsArrayBuffer(file) {
+        return new Promise(resolve => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(reader.result);
+            reader.readAsArrayBuffer(file);
+        });
+    }*/
+    /*static convertBufferToBase64string(buffer) {
+        const array = new Uint8Array(buffer);
+        const binaryString = String.fromCharCode.apply(null, array);
+        return window.btoa(binaryString);
+    }*/
+    /*static createObjectUrl(buffer) {
+        const blob = new Blob([new Uint8Array(buffer)]);
+        return window.URL.createObjectURL(blob);
+    }*/
+    // append file as filed and all not file as json string
+    /*static createFormData(body) {
+        const formData = new FormData();
+        const fields = {};
+        for (const name in body) {
+            if (body[name] instanceof File) {
+                formData.append(name, body[name]);
+            } else {
+                fields[name] = body[name];
+            }
+        }
+        formData.append('__json', JSON.stringify(fields));
+        return formData;
+    }*/
+    /*static base64ToArrayBuffer(base64) {
+        const binaryString = window.atob(base64);
+        const len = binaryString.length;
+        const bytes = new Uint8Array(len);
+        for (let i = 0; i < len; i++) {
+            bytes[i] = binaryString.charCodeAt(i);
+        }
+        return bytes.buffer;
+    }*/
+    static templateToJsString(value, params) {
+        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
+            if (params.hasOwnProperty(name)) {
+                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
+            }
+            return 'undefined';
+        });
+    }
+    static moveArrItem(arr, item, offset) {
+        const oldIndex = arr.indexOf(item);
+        if (oldIndex === -1)
+            throw new Error('cannot find element');
+        const newIndex = oldIndex + offset;
+        if (newIndex < 0)
+            throw new Error('cannot up top element');
+        if (newIndex > arr.length - 1)
+            throw new Error('cannot down bottom element');
+        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
+    }
+    static formatTime(_sec) {
+        // console.log('Helper.formatTime', sec);
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        // @ts-ignore
+        if (h < 10)
+            h = '0' + h;
+        // @ts-ignore
+        if (m < 10)
+            m = '0' + m;
+        // @ts-ignore
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}:${s}`;
+        }
+        else {
+            return `${sign}${h}:${m}:${s}`;
+        }
+    }
+    static formatTime2(_sec) {
+        // console.log('Helper.formatTime', sec);
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        // @ts-ignore
+        if (h < 10)
+            h = '0' + h;
+        // @ts-ignore
+        if (m < 10)
+            m = '0' + m;
+        // @ts-ignore
+        if (s < 10)
+            s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        }
+        else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
+    }
+    static SECOND() {
+        return 1000;
+    }
+    static MINUTE() {
+        return 60 * Helper.SECOND();
+    }
+    static HOUR() {
+        return 60 * Helper.MINUTE();
+    }
+    static DAY() {
+        return 24 * Helper.HOUR();
+    }
+    static WEEK() {
+        return 7 * Helper.DAY();
+    }
+    static fallbackCopyTextToClipboard(text) {
+        // console.log('Helper.fallbackCopyTextToClipboard', text);
+        const activeElement = document.activeElement;
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.top = '0'; // Avoid scrolling to bottom
+        textArea.style.left = '0';
+        textArea.style.position = 'fixed';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        // @ts-ignore
+        activeElement.focus();
+    }
+    static async copyTextToClipboard(text) {
+        console.log('Helper.copyTextToClipboard', text);
+        if (!navigator.clipboard) {
+            Helper.fallbackCopyTextToClipboard(text);
+            return;
+        }
+        await navigator.clipboard.writeText(text);
+    }
+    static addMinutes(date, minutes) {
+        // console.log('Helper.addMinutes', date, minutes);
+        date.setMinutes(date.getMinutes() + minutes);
+    }
+    static removeTimezoneOffset(date) {
+        Helper.addMinutes(date, -date.getTimezoneOffset());
+    }
+    static addTimezoneOffset(date) {
+        Helper.addMinutes(date, date.getTimezoneOffset());
+    }
+    static cloneDate(date) {
+        return new Date(date.getTime());
+    }
+    static fillArray(n) {
+        return Array.from(Array(n).keys());
+    }
+    static inIframe() {
+        try {
+            return window.self !== window.top;
+        }
+        catch (e) {
+            return true;
+        }
+    }
+    static setCookie(name, value, time) {
+        var expires = "";
+        if (time) {
+            var date = new Date(time);
+            // date.setTime(date.getTime() + (days*24*60*60*1000));
+            expires = "; expires=" + date.toUTCString();
+        }
+        document.cookie = name + "=" + (encodeURIComponent(value) || "") + expires + "; path=/";
+    }
+    static getCookie(name) {
+        var nameEQ = name + "=";
+        var ca = document.cookie.split(';');
+        for (var i = 0; i < ca.length; i++) {
+            var c = ca[i];
+            while (c.charAt(0) == ' ')
+                c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0)
+                return decodeURIComponent(c.substring(nameEQ.length, c.length));
+        }
+        return undefined;
+    }
+    static eraseCookie(name) {
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+    }
+    static delay(ms = 1000) {
+        return new Promise(resolve => {
+            setTimeout(resolve, ms);
+        });
+    }
+}
+exports.Helper = Helper;
+// @ts-ignore
+window.QForms.Helper = window.Helper = Helper;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/ReactComponent.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/ReactComponent.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ReactComponent = void 0;
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+class ReactComponent extends react_1.Component {
+    constructor(props) {
+        super(props);
+        if (props.onCreate)
+            props.onCreate(this, this.props.name);
+        this.allowRerender = true;
+    }
+    getElement() {
+        return this.el.current;
+    }
+    getParent() {
+        return this.props.parent;
+    }
+    checkParent() {
+        if (!this.props.parent)
+            throw new Error(`${this.constructor.name}: no parent`);
+    }
+    getClassList() {
+        return [
+            this.getCssBlockName(),
+            ...(this.props.classList || []),
+            ...(this.state && this.state.classList ? this.state.classList : [])
+        ];
+    }
+    addCssClass(className) {
+        if (this.state.classList.indexOf(className) === -1) {
+            this.state.classList.push(className);
+        }
+    }
+    removeCssClass(className) {
+        this.state.classList.splice(this.state.classList.indexOf(className), 1);
+    }
+    getCssBlockName() {
+        return this.constructor.name;
+    }
+    getCssClassNames() {
+        return this.getClassList().join(' ');
+    }
+    rerender(logTime = true) {
+        // console.log(`${this.constructor.name}.rerender`, this.state);
+        if (!this.canRerender())
+            return Promise.resolve();
+        return new Promise(resolve => {
+            const start = Date.now();
+            this.forceUpdate(() => {
+                if (logTime) {
+                    console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                }
+                resolve();
+            });
+        });
+    }
+    canRerender() {
+        if (!this.allowRerender)
+            return false;
+        if (this.props.parent)
+            return this.props.parent.canRerender();
+        return true;
+    }
+    disableRerender() {
+        console.log(`${this.constructor.name}.disableRerender`);
+        this.allowRerender = false;
+    }
+    enableRerender() {
+        console.log(`${this.constructor.name}.enableRerender`);
+        this.allowRerender = true;
+    }
+    componentWillUnmount() {
+        // console.log('ReactComponent.componentWillUnmount');
+        if (this.props.onUnmount)
+            this.props.onUnmount(this, this.props.name);
+    }
+    /*componentDidMount() {
+        console.log('ReactComponent.componentDidMount', this.constructor.name);
+    }*/
+    isEnabled() {
+        // console.log('ReactComponent.isEnabled', this.state);
+        return !this.isDisabled();
+    }
+    isDisabled() {
+        if (this.state && this.state.disabled !== undefined)
+            return this.state.disabled;
+        if (this.props.disabled !== undefined)
+            return this.props.disabled;
+        if (this.props.enabled !== undefined)
+            return !this.props.enabled;
+        return false;
+    }
+    disable() {
+        // console.log('ReactComponent.disable');
+        if (!this.state)
+            throw new Error('no state');
+        this.setState({ disabled: true });
+    }
+    enable() {
+        if (!this.state)
+            throw new Error('no state');
+        this.setState({ disabled: undefined });
+    }
+}
+exports.ReactComponent = ReactComponent;
+// @ts-ignore
+window.ReactComponent = ReactComponent;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Button.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/widget/Button.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Button = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Button extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('Button.constructor', props);
+        super(props);
+        this.state = { disabled: undefined };
+        this.el = (0, react_1.createRef)();
+    }
+    /*isDisabled() {
+        if (this.props.disabled !== undefined) return this.props.disabled;
+        if (this.props.enabled !== undefined) return !this.props.enabled;
+        return this.state.disabled;
+    }*/
+    /*isEnabled() {
+        return !this.isDisabled();
+    }*/
+    /*disable() {
+        this.setState({disabled: true});
+    }*/
+    /*enable() {
+        this.setState({disabled: false});
+    }*/
+    isVisible() {
+        // return this.props.visible === undefined ? true : this.props.visible;
+        if (this.props.visible !== undefined)
+            return this.props.visible;
+        return true;
+    }
+    getStyle() {
+        return {
+            display: !this.isVisible() ? 'none' : null,
+            width: this.props.width
+        };
+    }
+    render() {
+        // console.log('Button.render', this.props.title, this.props);
+        return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
+    }
+}
+exports.Button = Button;
+// @ts-ignore
+window.Button = Button;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/ComboBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/ComboBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ComboBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class ComboBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        this.onMouseDown = async (e) => {
+            // console.log('ComboBox.onMouseDown', e.button);
+            if (this.props.onMouseDown) {
+                await this.props.onMouseDown(e);
+            }
+        };
+        if (!props.items)
+            throw new Error('no ComboBox items');
+        this.state = { value: this.getInitialValue() };
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find(item => item.value === this.props.value);
+            if (!item) {
+                if (this.props.nullable && value === '') {
+                }
+                else {
+                    console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
+                    console.log('items:', this.props.items);
+                }
+            }
+        }
+        else {
+            if (this.props.items.length) {
+                value = this.props.items[0].value;
+            }
+            else {
+                value = '';
+            }
+        }
+        if (value === null)
+            throw new Error('null is wrong value for ComboBox');
+        // console.log('combobox value:', value);
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('ComboBox.render', this.state.value);
+        return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable &&
+                    (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items && this.props.items.map(item => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value))] })));
+    }
+}
+exports.ComboBox = ComboBox;
+// @ts-ignore
+window.ComboBox = ComboBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Modal = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Modal extends ReactComponent_1.ReactComponent {
+    render() {
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+    }
+}
+exports.Modal = Modal;
+// @ts-ignore
+window.Modal = Modal;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextBox.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/TextBox.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TextBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class TextBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('TextBox.constructor', props);
+        super(props);
+        this.onChange = e => {
+            // console.log('TextBox.onChange', e.target.value);
+            this._setValue(e.target.value);
+        };
+        this.el = (0, react_1.createRef)();
+        this.state = {
+            value: this.props.value || ''
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        // this.setState({value: this.state.value});   // rerender
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+    }
+}
+exports.TextBox = TextBox;
+// @ts-ignore
+window.TextBox = TextBox;
+
+
 /***/ })
 
 /******/ 	});
@@ -4002,49 +4509,39 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 /******/ 	}
 /******/ 	
 /************************************************************************/
-/******/ 	/* webpack/runtime/define property getters */
-/******/ 	(() => {
-/******/ 		// define getter functions for harmony exports
-/******/ 		__webpack_require__.d = (exports, definition) => {
-/******/ 			for(var key in definition) {
-/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
-/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
-/******/ 				}
-/******/ 			}
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
-/******/ 	(() => {
-/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/make namespace object */
-/******/ 	(() => {
-/******/ 		// define __esModule on exports
-/******/ 		__webpack_require__.r = (exports) => {
-/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 			}
-/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 		};
-/******/ 	})();
-/******/ 	
-/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************!*\
-  !*** ./src/frontend/index/main.js ***!
-  \************************************/
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.js");
+var exports = __webpack_exports__;
+/*!**************************************!*\
+  !*** ./src/frontend/common/index.ts ***!
+  \**************************************/
 
-document.addEventListener('DOMContentLoaded', () => {
-  console.log('DOMContentLoaded');
-  const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-  new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
-});
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
+var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
+var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
+// export {Search} from './Search';
+// export {Box} from './widget/Box/Box';
+// export {CheckBox} from './widget/CheckBox/CheckBox';
+var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
+var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
+// export {Tab} from './widget/Tab/Tab';
+// export {DropdownButton} from './widget/DropdownButton/DropdownButton';
+var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
+// export {Grid} from './widget/Grid/Grid';
+// export {GridRow} from './widget/GridRow/GridRow';
+// export {GridCell} from './widget/GridCell/GridCell';
+var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
+
 })();
 
 /******/ })()

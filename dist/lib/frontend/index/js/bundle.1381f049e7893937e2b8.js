@@ -3915,7 +3915,7 @@ class Helper {
         }
         return value;
     }
-    static createReactComponent(rootElement, type, props = {}, children) {
+    static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         // @ts-ignore
@@ -4266,6 +4266,41 @@ window.ReactComponent = ReactComponent;
 
 /***/ }),
 
+/***/ "./src/frontend/common/index.ts":
+/*!**************************************!*\
+  !*** ./src/frontend/common/index.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
+var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
+var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
+// export {Search} from './Search';
+// export {Box} from './widget/Box/Box';
+// export {CheckBox} from './widget/CheckBox/CheckBox';
+var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
+var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
+// export {Tab} from './widget/Tab/Tab';
+// export {DropdownButton} from './widget/DropdownButton/DropdownButton';
+var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
+// export {Grid} from './widget/Grid/Grid';
+// export {GridRow} from './widget/GridRow/GridRow';
+// export {GridCell} from './widget/GridCell/GridCell';
+var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Button.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
@@ -4402,6 +4437,239 @@ exports.ComboBox = ComboBox;
 window.ComboBox = ComboBox;
 
 
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Modal = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Modal extends ReactComponent_1.ReactComponent {
+    render() {
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+    }
+}
+exports.Modal = Modal;
+// @ts-ignore
+window.Modal = Modal;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextBox.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/TextBox.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TextBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class TextBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('TextBox.constructor', props);
+        super(props);
+        this.onChange = e => {
+            // console.log('TextBox.onChange', e.target.value);
+            this._setValue(e.target.value);
+        };
+        this.el = (0, react_1.createRef)();
+        this.state = {
+            value: this.props.value || ''
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        // this.setState({value: this.state.value});   // rerender
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+    }
+}
+exports.TextBox = TextBox;
+// @ts-ignore
+window.TextBox = TextBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexFrontHostApp.ts":
+/*!*************************************************!*\
+  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.IndexFrontHostApp = void 0;
+const IndexView_1 = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
+const common_1 = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+class IndexFrontHostApp {
+    constructor(data) {
+        this.onAppChange = fullName => {
+            console.log('IndexFrontHostApp.onAppChange', fullName);
+            this.currentAppFullName = fullName;
+            const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
+            if (!appInfo)
+                throw new Error(`no appInfo ${fullName}`);
+            // console.log('appInfo:', appInfo);
+            this.currentAppEnv = appInfo.envs[0];
+            this.view.rerender();
+        };
+        this.onEnvChange = env => {
+            console.log('IndexFrontHostApp.onEnvChange', env);
+            this.currentAppEnv = env;
+        };
+        this.run = e => {
+            if (this.currentAppFullName) {
+                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/`;
+                console.log('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.edit = e => {
+            if (this.currentAppFullName) {
+                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/`;
+                console.log('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.btnCreate_Click = async (e) => {
+            this.modals.push({ id: 1 });
+            await this.view.rerender();
+            this.folderNameTextBox.getElement().focus();
+        };
+        this.closeModal = () => {
+            console.log('IndexFrontHostApp.closeModal');
+            this.modals.pop();
+            this.view.rerender();
+        };
+        this.onFolderNameCreate = textBox => {
+            console.log('IndexFrontHostApp.onFolderNameCreate');
+            this.folderNameTextBox = textBox;
+        };
+        this.onFolderNameChange = folderName => {
+            // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
+            this.folderName = folderName;
+        };
+        this.onAppNameChange = appName => {
+            this.appName = appName;
+        };
+        this.onCreateClick = async (e) => {
+            console.log('IndexFrontHostApp.onCreateClick');
+            console.log(this.folderName, this.appName);
+            this.closeModal();
+            await this.createApp(this.folderName, this.appName);
+        };
+        console.log('IndexFrontHostApp.constructor', data);
+        this.data = data;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
+    }
+    init() {
+        // console.log('IndexFrontHostApp.init');
+        const appInfo = this.data.appInfos[0];
+        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.createView(document.querySelector('#root'));
+    }
+    createView(root) {
+        this.view = common_1.Helper.createReactComponent(root, IndexView_1.IndexView, { ctrl: this });
+    }
+    getAppItems() {
+        return this.data.appInfos.map(appInfo => ({
+            value: appInfo.fullName,
+            title: appInfo.fullName
+        }));
+    }
+    getEnvItems() {
+        // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
+        if (this.currentAppFullName) {
+            const appInfo = this.getAppInfo(this.currentAppFullName);
+            if (appInfo)
+                return appInfo.envs.map(env => ({ value: env, title: env }));
+        }
+        return [];
+    }
+    getAppInfo(fullName) {
+        // console.log('IndexFrontHostApp.getAppInfo', fullName);
+        return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
+    }
+    async createApp(folderName, appName) {
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            action: 'new',
+            folder: folderName,
+            name: appName
+        });
+        console.log('data:', data);
+        if (data.appInfos) {
+            this.data.appInfos = data.appInfos;
+            this.currentAppFullName = `${folderName}/${appName}`;
+            this.view.rerender();
+        }
+    }
+}
+exports.IndexFrontHostApp = IndexFrontHostApp;
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexView/IndexView.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.IndexView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+class IndexView extends common_1.ReactComponent {
+    renderModals() {
+        const ctrl = this.props.ctrl;
+        return ((0, jsx_runtime_1.jsx)("div", { children: ctrl.modals.map(modal => (0, jsx_runtime_1.jsx)(common_1.Modal, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) })), (0, jsx_runtime_1.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString())) }));
+    }
+    render() {
+        console.log('IndexView.render');
+        const ctrl = this.props.ctrl;
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(common_1.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(common_1.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'development' &&
+                                        (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" })), ctrl.data.nodeEnv === 'development' &&
+                                        (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." }))] })] })) })), this.renderModals()] })));
+    }
+}
+exports.IndexView = IndexView;
+
+
 /***/ })
 
 /******/ 	});
@@ -4435,31 +4703,17 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
-/*!**************************************!*\
-  !*** ./src/frontend/common/index.ts ***!
-  \**************************************/
+/*!************************************!*\
+  !*** ./src/frontend/index/main.ts ***!
+  \************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Button = exports.ComboBox = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
-var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
-var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
-var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
-// import {Search} from './Search';
-// import {Box} from './widget/Box/Box';
-// import {CheckBox} from './widget/CheckBox/CheckBox';
-var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
-var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
-// import {Tab} from './widget/Tab/Tab';
-// import {DropdownButton} from './widget/DropdownButton/DropdownButton';
-// import {TextBox} from './widget/TextBox';
-// import {Grid} from './widget/Grid/Grid';
-// import {GridRow} from './widget/GridRow/GridRow';
-// import {GridCell} from './widget/GridCell/GridCell';
+const IndexFrontHostApp_1 = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded');
+    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+    new IndexFrontHostApp_1.IndexFrontHostApp(data).init();
+});
 
 })();
 

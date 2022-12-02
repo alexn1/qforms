@@ -1,3 +1,5 @@
+import {ReactComponent, Modal, Button, TextBox, ComboBox} from '../../common';
+
 export class IndexView extends ReactComponent {
     renderModals() {
         const ctrl = this.props.ctrl;

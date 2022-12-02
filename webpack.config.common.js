@@ -40,7 +40,7 @@ module.exports = {
                             target: "ES2017",
                             declaration: false,
                             esModuleInterop: false,
-                            jsx: "react-jsx",                                /* Specify what JSX code is generated. */
+                            jsx: "react-jsx",
                         }
                     }
                 }

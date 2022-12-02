@@ -90,7 +90,7 @@ export class Helper {
         }
         return value;
     }
-    static createReactComponent(rootElement, type, props = {}, children) {
+    static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         // @ts-ignore

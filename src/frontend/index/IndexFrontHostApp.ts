@@ -1,6 +1,15 @@
 import {IndexView} from './IndexView/IndexView';
+import {Helper, FrontHostApp} from '../common';
 
 export class IndexFrontHostApp {
+    data: any;
+    view: any;
+    currentAppFullName: string;
+    currentAppEnv: any;
+    modals: any[];
+    folderNameTextBox: any;
+    folderName: string;
+    appName: string;
 
     constructor(data) {
         console.log('IndexFrontHostApp.constructor', data);
