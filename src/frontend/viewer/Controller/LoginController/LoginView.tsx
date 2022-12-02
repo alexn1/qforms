@@ -1,5 +1,7 @@
 import React from 'react';
 import {View} from '../View';
+import {TextBox, Password} from '../../../common';
+
 
 export class LoginView extends View {
     errMsgRef: React.RefObject<any>;
@@ -14,6 +16,7 @@ export class LoginView extends View {
         // e.preventDefault();
     }
     renderLogo() {
+        return null;
     }
     renderTitle() {
         return this.getCtrl().getFrontHostApp().getData().title;

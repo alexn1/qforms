@@ -1,5 +1,6 @@
 import {Model} from '../Model';
 import {Database} from '../Database/Database';
+import {FrontHostApp} from '../../../common';
 
 export class Application extends Model {
     databases: any[];
@@ -94,6 +95,7 @@ export class Application extends Model {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
         // console.log('promises:', promises);
+        // @ts-ignore
         return Promise.allSettled(promises);
     }
     getNodeEnv() {
@@ -103,4 +105,6 @@ export class Application extends Model {
         return this.getNodeEnv() === 'development';
     }
 }
+
+// @ts-ignore
 window.Application = Application;

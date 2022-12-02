@@ -1,3 +1,4 @@
+import React from 'react';
 import {ReactComponent} from '../ReactComponent';
 
 export class PhoneBox extends ReactComponent {
@@ -42,6 +43,7 @@ export class PhoneBox extends ReactComponent {
         value = PhoneBox.ifNoCodeAddRussianCode(value);
 
         // state
+        // @ts-ignore
         this.state.value = PhoneBox.formatPhoneNumber(value);
         this.setState({value: this.state.value});       // for render only
 
@@ -64,6 +66,7 @@ export class PhoneBox extends ReactComponent {
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
+            // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
         }
         return true;

@@ -79,10 +79,10 @@ export class DataSource extends Model {
     //     super.deinit();
     // }
 
-    getType(column) {
+    /*getType(column) {
         // console.log('DataSource.getType', this.getClassName(), column);
         throw new Error('DataSource column type not implemented');
-    }
+    }*/
 
     discardRowColumn(row, column) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
@@ -493,7 +493,7 @@ export class DataSource extends Model {
         this.emit('delete', e);
     }
 
-    onTableRefresh = async e => {
+    onTableRefresh = async (e): Promise<any> =>  {
         throw new Error('DataSource.onTableRefresh: not implemented');
     }
 

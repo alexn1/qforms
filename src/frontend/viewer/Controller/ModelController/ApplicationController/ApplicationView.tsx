@@ -1,5 +1,7 @@
+import React from 'react';
 import {ModelView} from '../ModelView';
 import {PageController} from '../PageController/PageController';
+import {Modal, Menu, Statusbar} from '../../../../common';
 
 export class ApplicationView extends ModelView {
     renderActivePage() {

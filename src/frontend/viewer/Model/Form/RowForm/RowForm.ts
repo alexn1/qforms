@@ -33,7 +33,7 @@ export class RowForm extends Form {
         super.onDataSourceInsert(e);
     }
 
-    getRow(withChanges) {
+    getRow(withChanges?) {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 

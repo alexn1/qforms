@@ -141,6 +141,7 @@ export class ApplicationController extends ModelController {
         if (!options.onClose) {
             const activeElement = document.activeElement;
             options.onClose = () => {
+                // @ts-ignore
                 if (activeElement) activeElement.focus();
             };
         }
@@ -199,7 +200,7 @@ export class ApplicationController extends ModelController {
         pageController.deinit();
         pageController.model.deinit();
     }
-    async onActionClick(name) {
+    async onActionClick(name): Promise<any> {
         console.log('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
@@ -296,6 +297,7 @@ export class ApplicationController extends ModelController {
         try {
             return await this.frontHostApp.alert(options);
         } finally {
+            // @ts-ignore
             if (activeElement) activeElement.focus();
         }
     }
@@ -313,6 +315,7 @@ export class ApplicationController extends ModelController {
         try {
             return await this.frontHostApp.confirm(options);
         } finally {
+            // @ts-ignore
             if (activeElement) activeElement.focus();
         }
     }

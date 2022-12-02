@@ -1,8 +1,14 @@
+import ReactDOM from 'react-dom';
 import {Application} from './Model/Application/Application';
 import {ApplicationController} from './Controller/ModelController/ApplicationController/ApplicationController';
+import {FrontHostApp, Helper} from '../common';
+import {AlertController} from './Controller/AlertController/AlertController';
+import {ConfirmController} from './Controller/ConfirmController/ConfirmController';
 
 export class ViewerFrontHostApp extends FrontHostApp {
-    constructor(options = {}) {
+    options: any;
+    applicationController: any;
+    constructor(options: any = {}) {
         if (!options.data) throw new Error('no data');
         super();
         this.options = options;
@@ -114,4 +120,5 @@ export class ViewerFrontHostApp extends FrontHostApp {
     }
 }
 
+// @ts-ignore
 window.ViewerFrontHostApp = ViewerFrontHostApp;

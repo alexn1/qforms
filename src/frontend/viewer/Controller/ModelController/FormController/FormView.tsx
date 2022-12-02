@@ -25,4 +25,6 @@ export class FormView extends ModelView {
         return false;
     }
 }
+
+// @ts-ignore
 window.FormView = FormView;

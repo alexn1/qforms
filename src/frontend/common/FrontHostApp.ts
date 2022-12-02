@@ -100,11 +100,11 @@ export class FrontHostApp {
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
-    async alert(options) {
+    async alert(options): Promise<any> {
         console.log('FrontHostApp.alert', options);
         alert(options.message);
     }
-    async confirm(options) {
+    async confirm(options): Promise<any> {
         console.log('FrontHostApp.confirm', options);
         return confirm(options.message);
     }

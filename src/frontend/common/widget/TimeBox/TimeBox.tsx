@@ -1,3 +1,4 @@
+import React from 'react';
 import {ReactComponent} from '../../ReactComponent';
 
 export class TimeBox extends ReactComponent {
@@ -120,8 +121,8 @@ export class TimeBox extends ReactComponent {
         // console.log('TimeBox.getStringValue', value);
         if (value === null) return '';
         if (value !== undefined) {
-            let h = Math.floor(value / 60);
-            let m = Math.floor(value - h * 60);
+            let h: number|string = Math.floor(value / 60);
+            let m: number|string = Math.floor(value - h * 60);
             if (h < 10) h = '0' + h;
             if (m < 10) m = '0' + m;
             return `${h}:${m}`;
@@ -155,6 +156,7 @@ export class TimeBox extends ReactComponent {
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
+            // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
             return true;
         }
@@ -182,4 +184,5 @@ export class TimeBox extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.TimeBox = TimeBox;

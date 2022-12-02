@@ -32103,7 +32103,7 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CloseIcon2 = exports.Tab2 = exports.MoreVertIcon = exports.TextArea = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.PhoneBox = exports.TimeBox = exports.CloseIcon2 = exports.Tab2 = exports.MoreVertIcon = exports.TextArea = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -32164,6 +32164,10 @@ var Tab2_1 = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/commo
 Object.defineProperty(exports, "Tab2", ({ enumerable: true, get: function () { return Tab2_1.Tab2; } }));
 var CloseIcon2_1 = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 Object.defineProperty(exports, "CloseIcon2", ({ enumerable: true, get: function () { return CloseIcon2_1.CloseIcon2; } }));
+var TimeBox_1 = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+Object.defineProperty(exports, "TimeBox", ({ enumerable: true, get: function () { return TimeBox_1.TimeBox; } }));
+var PhoneBox_1 = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+Object.defineProperty(exports, "PhoneBox", ({ enumerable: true, get: function () { return PhoneBox_1.PhoneBox; } }));
 
 
 /***/ }),
@@ -33473,6 +33477,135 @@ window.Password = Password;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PhoneBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class PhoneBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyPress = e => {
+            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === '+'
+                && e.target.value.length
+                && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+                e.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('PhoneBox.onChange', e.target.value);
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const len = e.target.value.length;
+            // console.log('start/end/len:', start, end, len);
+            // disable edition in middle
+            if (start !== end || start !== len) {
+                return;
+            }
+            // value pipeline
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // state
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(value);
+            this.setState({ value: this.state.value }); // for render only
+            // event
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.onBlur = e => {
+            // console.log('PhoneBox.onBlur');
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // console.log('value:', value);
+            // event
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.el = react_1.default.createRef();
+        this.state = {
+            value: PhoneBox.formatPhoneNumber(this.props.value || '')
+        };
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        if (nextProps.value !== undefined) {
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+    }
+    static clearValue(value) {
+        return value.replace(/[^\+0-9]/g, '');
+    }
+    static ifNoCodeAddRussianCode(value) {
+        if (value === '') {
+        }
+        else if (value.match(/^8/)) {
+            return value.replace(/^8/, '+7');
+        }
+        else if (value.match(/^7/)) {
+            return `+${value}`;
+        }
+        else if (value[0] !== '+') {
+            return `+7${value}`;
+        }
+        return value;
+    }
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+        // console.log('arr:', arr);
+        if (arr) {
+            if (arr[5]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+            }
+            if (arr[4]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+            }
+            if (arr[3]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}`;
+            }
+            if (arr[2]) {
+                return `${arr[1]} ${arr[2]}`;
+            }
+            if (arr[1]) {
+                return `${arr[1]}`;
+            }
+        }
+        return value;
+    }
+}
+exports.PhoneBox = PhoneBox;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Select/Select.tsx":
 /*!******************************************************!*\
   !*** ./src/frontend/common/widget/Select/Select.tsx ***!
@@ -33933,6 +34066,215 @@ window.TextBox = TextBox;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TimeBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class TimeBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('TimeBox.constructor', props);
+        super(props);
+        this.onKeyPress = event => {
+            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+                console.log('cancel', event.key);
+                event.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('TimeBox.onChange', e.target.value);
+            const target = e.target;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            if (target.value.length > 5) {
+                return;
+            }
+            const inEnd = start === end && start === target.value.length;
+            const stringValue = this.formatValue(target.value);
+            // console.log('before:', target.selectionStart, target.selectionEnd);
+            this.setState({ value: stringValue }, () => {
+                // console.log('after:', target.selectionStart, target.selectionEnd);
+                // console.log('inEnd:', inEnd);
+                if (!inEnd) {
+                    target.selectionStart = start;
+                    target.selectionEnd = end;
+                }
+                if (this.props.onChange) {
+                    let nValue;
+                    try {
+                        nValue = this.getValue();
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                        nValue = NaN;
+                    }
+                    // console.log('nValue:', nValue);
+                    this.props.onChange(nValue);
+                }
+            });
+        };
+        this.onBlur = e => {
+            // console.log('TimeBox.onBlur');
+            if (this.props.onBlur) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                }
+                catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
+                this.props.onBlur(nValue);
+            }
+        };
+        if (props.value && typeof props.value !== 'number') {
+            throw new Error(`need number type, got ${typeof props.value}`);
+        }
+        this.state = {
+            value: TimeBox.getStringValue(props.value)
+        };
+        this.el = react_1.default.createRef();
+    }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        switch (pure.length) {
+            case 0: break;
+            case 1:
+                min = pure;
+                break;
+            case 2:
+                min = pure;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                break;
+        }
+        return [
+            min,
+            ...(sec ? [sec] : [])
+        ].join(':');
+    }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({ value: TimeBox.getStringValue(value) });
+    }
+    /*onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }*/
+    /*onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }*/
+    static getStringValue(value) {
+        // console.log('TimeBox.getStringValue', value);
+        if (value === null)
+            return '';
+        if (value !== undefined) {
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
+            if (h < 10)
+                h = '0' + h;
+            if (m < 10)
+                m = '0' + m;
+            return `${h}:${m}`;
+        }
+        return '';
+    }
+    static getIntegerValue(stringValue) {
+        // console.log('TimeBox.getIntegerValue', stringValue);
+        // try {
+        if (stringValue === '')
+            return null;
+        const arr = stringValue.split(':');
+        if (!arr[0])
+            throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1])
+            throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2)
+            throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2)
+            throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23)
+            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59)
+            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
+    }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        if (this.props.value !== nextProps.value) {
+            // @ts-ignore
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.props.readOnly !== nextProps.readOnly)
+            return true;
+        if (this.props.placeholder !== nextProps.placeholder)
+            return true;
+        if (this.state.value !== nextState.value)
+            return true;
+        return false;
+    }
+    render() {
+        // console.log('TimeBox.render', this.state.value);
+        return (0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur });
+    }
+}
+exports.TimeBox = TimeBox;
+// @ts-ignore
+window.TimeBox = TimeBox;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
@@ -33962,15 +34304,179 @@ window.Tooltip = Tooltip;
 
 /***/ }),
 
-/***/ "./src/frontend/viewer/Controller/Controller.ts":
-/*!******************************************************!*\
-  !*** ./src/frontend/viewer/Controller/Controller.ts ***!
-  \******************************************************/
+/***/ "./src/frontend/viewer/Controller/AlertController/AlertController.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/AlertController/AlertController.ts ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AlertController = void 0;
+const Controller_1 = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+const AlertView_1 = __webpack_require__(/*! ./AlertView */ "./src/frontend/viewer/Controller/AlertController/AlertView.tsx");
+class AlertController extends Controller_1.Controller {
+    constructor(options) {
+        super();
+        this.onOkButtonClick = async (e) => {
+            this.close(true);
+        };
+        this.onCloseClick = async (e) => {
+            this.close(false);
+        };
+        this.onKeyDown = async (e) => {
+            if (e.key === 'Escape') {
+                this.close(false);
+            }
+        };
+        this.options = options;
+        if (!options.message)
+            throw new Error('no message');
+        if (!options.onClose)
+            throw new Error('no onClose');
+    }
+    getViewClass() {
+        return AlertView_1.AlertView;
+    }
+    close(result) {
+        this.options.onClose(result);
+    }
+}
+exports.AlertController = AlertController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/AlertController/AlertView.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/AlertController/AlertView.tsx ***!
+  \**********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.AlertView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const View_1 = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class AlertView extends View_1.View {
+    constructor(props) {
+        super(props);
+        this.el = react_1.default.createRef();
+    }
+    getHeaderStyle() {
+        return this.getCtrl().options.titleStyle /* || {color: 'red'}*/;
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__content flex-column` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title`, style: this.getHeaderStyle() }, { children: this.getCtrl().options.title || 'Alert' })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: this.getCtrl().onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon2, {}) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max` }, { children: this.getCtrl().options.message })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(common_1.Button, { classList: [`${this.getCssBlockName()}__ok-button`], title: 'OK', onClick: this.getCtrl().onOkButtonClick }) }))] })) })) })));
+    }
+    componentDidMount() {
+        this.getElement().focus();
+    }
+}
+exports.AlertView = AlertView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConfirmController = void 0;
+const Controller_1 = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+const ConfirmView_1 = __webpack_require__(/*! ./ConfirmView */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx");
+class ConfirmController extends Controller_1.Controller {
+    constructor(options) {
+        super();
+        this.onYesClick = e => {
+            this.close(true);
+        };
+        this.onCloseClick = e => {
+            this.close(false);
+        };
+        this.onKeyDown = async (e) => {
+            if (e.key === 'Escape') {
+                this.close(false);
+            }
+        };
+        this.options = options;
+        if (!options.message)
+            throw new Error('no message');
+        if (!options.onClose)
+            throw new Error('no onClose');
+    }
+    getViewClass() {
+        return ConfirmView_1.ConfirmView;
+    }
+    close(result) {
+        this.options.onClose(result);
+    }
+}
+exports.ConfirmController = ConfirmController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx":
+/*!**************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx ***!
+  \**************************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ConfirmView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const View_1 = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class ConfirmView extends View_1.View {
+    constructor(props) {
+        super(props);
+        this.el = react_1.default.createRef();
+    }
+    render() {
+        // console.log('ConfirmView.render', this.getCtrl().options);
+        if (!this.getCtrl().options.yesButton)
+            throw new Error('no yesButton option');
+        if (!this.getCtrl().options.noButton)
+            throw new Error('no noButton option');
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__content flex-column` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title`, style: this.getCtrl().options.titleStyle }, { children: this.getCtrl().options.title || 'Confirm' })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: this.getCtrl().onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon2, {}) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max` }, { children: this.getCtrl().options.message })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, { classList: [`${this.getCssBlockName()}__no-button`], title: this.getCtrl().options.noButton, onClick: this.getCtrl().onCloseClick }), (0, jsx_runtime_1.jsx)(common_1.Button, { classList: [`${this.getCssBlockName()}__yes-button`], title: this.getCtrl().options.yesButton, onClick: this.getCtrl().onYesClick })] }))] })) })) })));
+    }
+    componentDidMount() {
+        this.getElement().focus();
+    }
+}
+exports.ConfirmView = ConfirmView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/Controller.ts":
+/*!******************************************************!*\
+  !*** ./src/frontend/viewer/Controller/Controller.ts ***!
+  \******************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Controller = void 0;
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const EventEmitter_1 = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.ts");
 class Controller extends EventEmitter_1.EventEmitter {
     constructor() {
@@ -33994,7 +34500,8 @@ class Controller extends EventEmitter_1.EventEmitter {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
     createElement() {
-        return React.createElement(this.getViewClass(), {
+        // @ts-ignore
+        return react_1.default.createElement(this.getViewClass(), {
             ctrl: this,
             onCreate: this.onViewCreate
         });
@@ -34015,7 +34522,8 @@ exports.Controller = Controller;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LoginController = void 0;
 const Controller_1 = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
-const View_1 = __webpack_require__(/*! ./View */ "./src/frontend/viewer/Controller/LoginController/View.tsx");
+const LoginView_1 = __webpack_require__(/*! ./LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 class LoginController extends Controller_1.Controller {
     constructor(frontHostApp) {
         super();
@@ -34026,12 +34534,12 @@ class LoginController extends Controller_1.Controller {
         const data = frontHostApp.getData();
         if (!data.name)
             throw new Error('no app name');
-        const CustomClass = FrontHostApp.getClassByName(`${data.name}LoginController`);
+        const CustomClass = common_1.FrontHostApp.getClassByName(`${data.name}LoginController`);
         const Class = CustomClass ? CustomClass : LoginController;
         return new Class(frontHostApp);
     }
     getViewClass() {
-        return View_1.LoginView;
+        return LoginView_1.LoginView;
     }
     getText() {
         return this.frontHostApp.getText();
@@ -34048,38 +34556,45 @@ exports.LoginController = LoginController;
 
 /***/ }),
 
-/***/ "./src/frontend/viewer/Controller/LoginController/View.tsx":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/viewer/Controller/LoginController/View.tsx ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/LoginController/LoginView.tsx ***!
+  \**********************************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LoginView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const View_1 = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 class LoginView extends View_1.View {
     constructor(props) {
         super(props);
         this.onLoginFormSubmit = e => {
             // console.log('LoginView.onLoginFormSubmit');
+            // @ts-ignore
             document.querySelector('.LoginView__button').disabled = true;
             // e.preventDefault();
         };
         this.onChange = e => {
             this.errMsgRef.current.innerHTML = '';
         };
-        this.errMsgRef = React.createRef();
+        this.errMsgRef = react_1.default.createRef();
     }
     renderLogo() {
+        return null;
     }
     renderTitle() {
         return this.getCtrl().getFrontHostApp().getData().title;
     }
     render() {
         // console.log('LoginView.render');
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0, jsx_runtime_1.jsx)(TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)(Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) }));
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0, jsx_runtime_1.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0, jsx_runtime_1.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)(common_1.Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0, jsx_runtime_1.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) }));
     }
 }
 exports.LoginView = LoginView;
@@ -34100,6 +34615,8 @@ const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/f
 const Page_1 = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
 const ApplicationView_1 = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
 const WebSocketClient_1 = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+const PageController_1 = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
 class ApplicationController extends ModelController_1.ModelController {
     constructor(model, frontHostApp) {
         // console.log('ApplicationController.constructor', model, view);
@@ -34127,7 +34644,7 @@ class ApplicationController extends ModelController_1.ModelController {
             console.log('ApplicationController.onMenuItemClick', menu, type, name);
             if (type === 'page') {
                 await this.openPage({ name: name, modal: false });
-                history.pushState({ pageName: name }, '', PageController.createLink({ page: name }));
+                history.pushState({ pageName: name }, '', PageController_1.PageController.createLink({ page: name }));
             }
             else if (type === 'action') {
                 try {
@@ -34158,12 +34675,12 @@ class ApplicationController extends ModelController_1.ModelController {
     }
     static create(model, frontHostApp) {
         // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
-        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
+        const CustomClass = common_1.FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
         const Class = CustomClass ? CustomClass : ApplicationController;
         return new Class(model, frontHostApp);
     }
     static isDebugMode() {
-        return Search.getObj()['debug'] === '1';
+        return common_1.Search.getObj()['debug'] === '1';
     }
     init() {
         // console.log('ApplicationController.init');
@@ -34176,7 +34693,7 @@ class ApplicationController extends ModelController_1.ModelController {
             params: this.getGlobalParams()
         }) : null;
         document.title = this.getTitle();
-        document.documentElement.classList.add(Helper.inIframe() ? 'iframe' : 'not-iframe');
+        document.documentElement.classList.add(common_1.Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : document.title;
     }
@@ -34190,7 +34707,7 @@ class ApplicationController extends ModelController_1.ModelController {
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), { ctrl: this });
+        this.view = common_1.Helper.createReactComponent(rootElement, this.getViewClass(), { ctrl: this });
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
@@ -34228,7 +34745,7 @@ class ApplicationController extends ModelController_1.ModelController {
         const pageModel = new Page_1.Page(pageData, this.model, options);
         pageModel.init();
         // controller
-        const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
+        const pc = PageController_1.PageController.create(pageModel, this, `c${this.getNextId()}`);
         pc.init();
         return pc;
     }
@@ -34258,6 +34775,7 @@ class ApplicationController extends ModelController_1.ModelController {
         if (!options.onClose) {
             const activeElement = document.activeElement;
             options.onClose = () => {
+                // @ts-ignore
                 if (activeElement)
                     activeElement.focus();
             };
@@ -34377,7 +34895,7 @@ class ApplicationController extends ModelController_1.ModelController {
     invalidate() {
         if (this.activePage)
             this.activePage.invalidate();
-        this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
+        this.modals.filter(ctrl => ctrl instanceof PageController_1.PageController).forEach(page => page.invalidate());
     }
     async alert(options) {
         if (!options.title) {
@@ -34388,6 +34906,7 @@ class ApplicationController extends ModelController_1.ModelController {
             return await this.frontHostApp.alert(options);
         }
         finally {
+            // @ts-ignore
             if (activeElement)
                 activeElement.focus();
         }
@@ -34407,6 +34926,7 @@ class ApplicationController extends ModelController_1.ModelController {
             return await this.frontHostApp.confirm(options);
         }
         finally {
+            // @ts-ignore
             if (activeElement)
                 activeElement.focus();
         }
@@ -34456,6 +34976,7 @@ class ApplicationController extends ModelController_1.ModelController {
     }
 }
 exports.ApplicationController = ApplicationController;
+// @ts-ignore
 window.ApplicationController = ApplicationController;
 
 
@@ -34465,15 +34986,20 @@ window.ApplicationController = ApplicationController;
 /*!**************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx ***!
   \**************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApplicationView = exports.ModelView = void 0;
+exports.ApplicationView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var ModelView_1 = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
-Object.defineProperty(exports, "ModelView", ({ enumerable: true, get: function () { return ModelView_1.ModelView; } }));
-class ApplicationView extends ModelView {
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ModelView_1 = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+const PageController_1 = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+class ApplicationView extends ModelView_1.ModelView {
     renderActivePage() {
         const ctrl = this.props.ctrl;
         if (ctrl.activePage) {
@@ -34481,24 +35007,24 @@ class ApplicationView extends ModelView {
         }
     }
     renderView(ctrl, props = {}) {
-        return React.createElement(ctrl.getViewClass(), Object.assign({ parent: this, ctrl: ctrl, onCreate: ctrl.onViewCreate }, props));
+        return react_1.default.createElement(ctrl.getViewClass(), Object.assign({ parent: this, ctrl: ctrl, onCreate: ctrl.onViewCreate }, props));
     }
     renderModals() {
         return this.props.ctrl.modals.map(ctrl => {
-            if (ctrl instanceof PageController) {
-                return (0, jsx_runtime_1.jsx)(Modal, { children: this.renderView(ctrl) }, ctrl.getId());
+            if (ctrl instanceof PageController_1.PageController) {
+                return (0, jsx_runtime_1.jsx)(common_1.Modal, { children: this.renderView(ctrl) }, ctrl.getId());
             }
             return this.renderView(ctrl, { key: ctrl.getId() });
         });
     }
     renderHeader() {
-        return (0, jsx_runtime_1.jsx)("header", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: (0, jsx_runtime_1.jsx)(Menu, { items: this.getCtrl().getMenuItemsProp(), onClick: this.getCtrl().onMenuItemClick }) }));
+        return (0, jsx_runtime_1.jsx)("header", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: (0, jsx_runtime_1.jsx)(common_1.Menu, { items: this.getCtrl().getMenuItemsProp(), onClick: this.getCtrl().onMenuItemClick }) }));
     }
     renderMain() {
         return (0, jsx_runtime_1.jsx)("main", Object.assign({ className: `${this.getCssBlockName()}__main` }, { children: this.renderActivePage() }));
     }
     renderFooter() {
-        return (0, jsx_runtime_1.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) }));
+        return (0, jsx_runtime_1.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(common_1.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) }));
     }
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
@@ -34506,6 +35032,7 @@ class ApplicationView extends ModelView {
     }
 }
 exports.ApplicationView = ApplicationView;
+// @ts-ignore
 window.ApplicationView = ApplicationView;
 
 
@@ -34521,6 +35048,7 @@ window.ApplicationView = ApplicationView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FieldController = void 0;
 const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 class FieldController extends ModelController_1.ModelController {
     /*constructor(model, parent) {
         super(model, parent);
@@ -34529,9 +35057,9 @@ class FieldController extends ModelController_1.ModelController {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const page = model.getPage();
         const form = model.getForm();
-        const CustomClass = FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
+        const CustomClass = common_1.FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
         const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
-        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
+        const GeneralClass = common_1.FrontHostApp.getClassByName(generalClassName);
         if (!GeneralClass)
             throw new Error(`no class ${generalClassName}`);
         const Class = CustomClass ? CustomClass : GeneralClass;
@@ -34610,6 +35138,7 @@ class FieldController extends ModelController_1.ModelController {
     }
 }
 exports.FieldController = FieldController;
+// @ts-ignore
 window.FieldController = FieldController;
 
 
@@ -34646,6 +35175,8 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormComboBoxFieldController = void 0;
 const RowFormFieldController_1 = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 const RowFormComboBoxFieldView_1 = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
+const ApplicationController_1 = __webpack_require__(/*! ../../../ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor() {
         super(...arguments);
@@ -34690,7 +35221,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             const onInsert = async (e) => {
                 form.off('insert', onInsert);
                 const [key] = e.inserts;
-                const [id] = Helper.decodeValue(key);
+                const [id] = common_1.Helper.decodeValue(key);
                 // console.log('id:', id);
                 await this.onChange(id.toString());
             };
@@ -34719,7 +35250,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
                     selectedKey: selectedKey,
                     onSelect: async (key) => {
                         if (key) {
-                            const [id] = Helper.decodeValue(key);
+                            const [id] = common_1.Helper.decodeValue(key);
                             // console.log('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
@@ -34771,10 +35302,11 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
     getPlaceholder() {
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        return ApplicationController.isDebugMode() ? '[null]' : null;
+        return ApplicationController_1.ApplicationController.isDebugMode() ? '[null]' : null;
     }
 }
 exports.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+// @ts-ignore
 window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
 
 
@@ -34791,6 +35323,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormComboBoxFieldView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
@@ -34818,17 +35351,17 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
     renderSelect() {
         const ctrl = this.getCtrl();
-        return (0, jsx_runtime_1.jsx)(Select, { classList: [`${this.getCssBlockName()}__select`], onCreate: this.onWidgetCreate, 
+        return (0, jsx_runtime_1.jsx)(common_1.Select, { classList: [`${this.getCssBlockName()}__select`], onCreate: this.onWidgetCreate, 
             // nullable={ctrl.getModel().isNullable()}
             value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: this.onChange, items: ctrl.getItems(), placeholder: ctrl.getPlaceholder(), onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null });
     }
     renderEditButton() {
         const ctrl = this.getCtrl();
-        return (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: [`${this.getCssBlockName()}__edit-button`], onClick: ctrl.onEditButtonClick, enabled: !!ctrl.getValue() }, { children: "..." }));
+        return (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__edit-button`], onClick: ctrl.onEditButtonClick, enabled: !!ctrl.getValue() }, { children: "..." }));
     }
     renderCreateButton() {
         const ctrl = this.getCtrl();
-        return (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" }));
+        return (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" }));
     }
     render() {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
@@ -34838,6 +35371,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
+// @ts-ignore
 window.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
 
 
@@ -34866,6 +35400,7 @@ class RowFormDateFieldController extends RowFormFieldController_1.RowFormFieldCo
     }
 }
 exports.RowFormDateFieldController = RowFormDateFieldController;
+// @ts-ignore
 window.RowFormDateFieldController = RowFormDateFieldController;
 
 
@@ -34879,19 +35414,20 @@ window.RowFormDateFieldController = RowFormDateFieldController;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RowFormDateFieldView = exports.RowFormFieldView = void 0;
+exports.RowFormDateFieldView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-var RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
-Object.defineProperty(exports, "RowFormFieldView", ({ enumerable: true, get: function () { return RowFormFieldView_1.RowFormFieldView; } }));
-class RowFormDateFieldView extends RowFormFieldView {
+const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+class RowFormDateFieldView extends RowFormFieldView_1.RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
                 // getMinDate={this.props.getMinDate}
                 minDate: this.props.minDate }) }));
     }
 }
 exports.RowFormDateFieldView = RowFormDateFieldView;
+// @ts-ignore
 window.RowFormDateFieldView = RowFormDateFieldView;
 
 
@@ -34901,12 +35437,17 @@ window.RowFormDateFieldView = RowFormDateFieldView;
 /*!*************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts ***!
   \*************************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormFieldController = void 0;
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const FieldController_1 = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
+const ApplicationController_1 = __webpack_require__(/*! ../../ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
 class RowFormFieldController extends FieldController_1.FieldController {
     constructor(model, parent) {
         super(model, parent);
@@ -35081,7 +35622,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        if (ApplicationController.isDebugMode()) {
+        if (ApplicationController_1.ApplicationController.isDebugMode()) {
             const value = this.getValue();
             if (value === undefined)
                 return 'undefined';
@@ -35164,7 +35705,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return this.state.error;
     }
     renderView() {
-        return React.createElement(this.getViewClass(), {
+        return react_1.default.createElement(this.getViewClass(), {
             onCreate: this.onViewCreate,
             ctrl: this,
         });
@@ -35177,6 +35718,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
     }
 }
 exports.RowFormFieldController = RowFormFieldController;
+// @ts-ignore
 window.RowFormFieldController = RowFormFieldController;
 
 
@@ -35214,6 +35756,7 @@ class RowFormFieldView extends FieldView_1.FieldView {
     }
 }
 exports.RowFormFieldView = RowFormFieldView;
+// @ts-ignore
 window.RowFormFieldView = RowFormFieldView;
 
 
@@ -35236,6 +35779,7 @@ class RowFormTextAreaFieldController extends RowFormFieldController_1.RowFormFie
     }
 }
 exports.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+// @ts-ignore
 window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
 
 
@@ -35252,6 +35796,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormTextAreaFieldView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 class RowFormTextAreaFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor(props) {
         super(props);
@@ -35272,10 +35817,11 @@ class RowFormTextAreaFieldView extends RowFormFieldView_1.RowFormFieldView {
     render() {
         // console.log('RowFormTextAreaFieldView.render', this.state);
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.model.getRows(), cols: ctrl.model.getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) }));
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.model.getRows(), cols: ctrl.model.getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) }));
     }
 }
 exports.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
+// @ts-ignore
 window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
 
 
@@ -35298,6 +35844,7 @@ class RowFormTextBoxFieldController extends RowFormFieldController_1.RowFormFiel
     }
 }
 exports.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
+// @ts-ignore
 window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
 
 
@@ -35314,6 +35861,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormTextBoxFieldView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor(props) {
         super(props);
@@ -35347,16 +35895,17 @@ class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
     renderTextBox() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(TextBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), enabled: ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur });
+        return (0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), enabled: ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur });
     }
     renderCloseIcon() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0, jsx_runtime_1.jsx)(CloseIcon, {}) }));
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon, {}) }));
     }
     render() {
         return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderTextBox(), this.renderCloseIcon()] }));
     }
 }
 exports.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
+// @ts-ignore
 window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
 
 
@@ -35373,6 +35922,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFormDateFieldController = void 0;
 const TableFormFieldController_1 = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
 const TableFormDateFieldView_1 = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
 class TableFormDateFieldController extends TableFormFieldController_1.TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormDateFieldView_1.TableFormDateFieldView;
@@ -35380,11 +35930,12 @@ class TableFormDateFieldController extends TableFormFieldController_1.TableFormF
     getValueForWidget(row) {
         const value = this.model.getValue(row);
         if (value)
-            return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+            return common_1.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }
 exports.TableFormDateFieldController = TableFormDateFieldController;
+// @ts-ignore
 window.TableFormDateFieldController = TableFormDateFieldController;
 
 
@@ -35409,6 +35960,7 @@ class TableFormDateFieldView extends TableFormFieldView_1.TableFormFieldView {
     }
 }
 exports.TableFormDateFieldView = TableFormDateFieldView;
+// @ts-ignore
 window.TableFormDateFieldView = TableFormDateFieldView;
 
 
@@ -35431,6 +35983,7 @@ class TableFormFieldController extends FieldController_1.FieldController {
     }
 }
 exports.TableFormFieldController = TableFormFieldController;
+// @ts-ignore
 window.TableFormFieldController = TableFormFieldController;
 
 
@@ -35440,16 +35993,20 @@ window.TableFormFieldController = TableFormFieldController;
 /*!************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx ***!
   \************************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFormFieldView = void 0;
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const FieldView_1 = __webpack_require__(/*! ../FieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.tsx");
 class TableFormFieldView extends FieldView_1.FieldView {
     constructor(props) {
         super(props);
-        this.span = React.createRef();
+        this.span = react_1.default.createRef();
     }
     getSpanOffsetWidth() {
         // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
@@ -35459,6 +36016,7 @@ class TableFormFieldView extends FieldView_1.FieldView {
     }
 }
 exports.TableFormFieldView = TableFormFieldView;
+// @ts-ignore
 window.TableFormFieldView = TableFormFieldView;
 
 
@@ -35481,6 +36039,7 @@ class TableFormTextBoxFieldController extends TableFormFieldController_1.TableFo
     }
 }
 exports.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+// @ts-ignore
 window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
 
 
@@ -35505,6 +36064,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView_1.TableFormFieldView 
     }
 }
 exports.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+// @ts-ignore
 window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 
 
@@ -35520,23 +36080,25 @@ window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormController = void 0;
 const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+const FieldController_1 = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
 class FormController extends ModelController_1.ModelController {
-    static create(model, parent) {
-        // console.log('FormController.create', model.getFullName());
-        const page = model.getPage();
-        const customClassName = `${page.getName()}${model.getName()}FormController`;
-        const CustomClass = FrontHostApp.getClassByName(customClassName);
-        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
-        const Class = CustomClass ? CustomClass : GeneralClass;
-        return new Class(model, parent);
-    }
     constructor(model, parent) {
         super(model, parent);
         this.fields = {};
     }
+    static create(model, parent) {
+        // console.log('FormController.create', model.getFullName());
+        const page = model.getPage();
+        const customClassName = `${page.getName()}${model.getName()}FormController`;
+        const CustomClass = common_1.FrontHostApp.getClassByName(customClassName);
+        const GeneralClass = common_1.FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+        const Class = CustomClass ? CustomClass : GeneralClass;
+        return new Class(model, parent);
+    }
     init() {
         for (const field of this.model.fields) {
-            const ctrl = this.fields[field.getName()] = FieldController.create(field, this);
+            const ctrl = this.fields[field.getName()] = FieldController_1.FieldController.create(field, this);
             ctrl.init();
         }
     }
@@ -35594,6 +36156,7 @@ class FormController extends ModelController_1.ModelController {
     }
 }
 exports.FormController = FormController;
+// @ts-ignore
 window.FormController = FormController;
 
 
@@ -35603,12 +36166,13 @@ window.FormController = FormController;
 /*!************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx ***!
   \************************************************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.FormView = void 0;
-class FormView extends ModelView {
+const ModelView_1 = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+class FormView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
@@ -35636,6 +36200,7 @@ class FormView extends ModelView {
     }
 }
 exports.FormView = FormView;
+// @ts-ignore
 window.FormView = FormView;
 
 
@@ -35839,6 +36404,7 @@ class RowFormController extends FormController_1.FormController {
     }
 }
 exports.RowFormController = RowFormController;
+// @ts-ignore
 window.RowFormController = RowFormController;
 
 
@@ -35855,18 +36421,19 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const FormView_1 = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 class RowFormView extends FormView_1.FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
         const text = ctrl.getModel().getApp().getText();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.model.hasDefaultSqlDataSource() &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.edit }) }), "edit"), ctrl.model.hasDefaultSqlDataSource() &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.save }) }), "save"), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.cancel }) }), "cancel"), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.discard }) }), "discard"), ctrl.model.hasDefaultSqlDataSource() && ctrl.getModel().getAttr('refreshButton') === 'true' &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.refresh }) }), "refresh"), this.isActionsVisible() && ctrl.model.hasActions() &&
-                    (0, jsx_runtime_1.jsx)(DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0, jsx_runtime_1.jsx)(MoreVertIcon, {}) }))] })));
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.edit }) }), "edit"), ctrl.model.hasDefaultSqlDataSource() &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.save }) }), "save"), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.cancel }) }), "cancel"), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.discard }) }), "discard"), ctrl.model.hasDefaultSqlDataSource() && ctrl.getModel().getAttr('refreshButton') === 'true' &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0, jsx_runtime_1.jsx)("div", { children: text.form.refresh }) }), "refresh"), this.isActionsVisible() && ctrl.model.hasActions() &&
+                    (0, jsx_runtime_1.jsx)(common_1.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0, jsx_runtime_1.jsx)(common_1.MoreVertIcon, {}) }))] })));
     }
     isActionsEnabled() {
         // return this.getCtrl().state.mode === 'view';
@@ -35901,7 +36468,7 @@ class RowFormView extends FormView_1.FormView {
     renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0, jsx_runtime_1.jsx)(Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`);
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0, jsx_runtime_1.jsx)(common_1.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`);
     }
     renderGroup(fieldCtrl) {
         return [
@@ -35928,6 +36495,7 @@ class RowFormView extends FormView_1.FormView {
     }
 }
 exports.RowFormView = RowFormView;
+// @ts-ignore
 window.RowFormView = RowFormView;
 
 
@@ -35943,7 +36511,9 @@ window.RowFormView = RowFormView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFormController = void 0;
 const TableFormView_1 = __webpack_require__(/*! ./TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
-class TableFormController extends FormController {
+const FormController_1 = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+const DataSource_1 = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+class TableFormController extends FormController_1.FormController {
     constructor(model, parent) {
         super(model, parent);
         this.onGridCreate = grid => {
@@ -36157,7 +36727,7 @@ class TableFormController extends FormController {
                 name: this.model.getAttr('itemEditPage'),
                 // key  : key,
                 modal: true,
-                params: Object.assign({}, DataSource.keyToParams(key))
+                params: Object.assign({}, DataSource_1.DataSource.keyToParams(key))
             });
         }
         else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
@@ -36174,7 +36744,7 @@ class TableFormController extends FormController {
                 name: this.model.getAttr('itemCreatePage'),
                 // key  : key,
                 modal: true,
-                params: Object.assign({}, DataSource.keyToParams(key))
+                params: Object.assign({}, DataSource_1.DataSource.keyToParams(key))
             });
         }
     }
@@ -36187,7 +36757,7 @@ class TableFormController extends FormController {
             await this.openPage({
                 name: this.model.getAttr('itemEditPage'),
                 modal: true,
-                params: Object.assign({}, DataSource.keyToParams(key))
+                params: Object.assign({}, DataSource_1.DataSource.keyToParams(key))
             });
         }
         catch (err) {
@@ -36218,6 +36788,7 @@ class TableFormController extends FormController {
     }
 }
 exports.TableFormController = TableFormController;
+// @ts-ignore
 window.TableFormController = TableFormController;
 
 
@@ -36227,13 +36798,20 @@ window.TableFormController = TableFormController;
 /*!*************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx ***!
   \*************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TableFormView = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const FormView_1 = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
+const PageController_1 = __webpack_require__(/*! ../../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+const DataSource_1 = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+const common_1 = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 class TableFormView extends FormView_1.FormView {
     constructor() {
         super(...arguments);
@@ -36243,10 +36821,10 @@ class TableFormView extends FormView_1.FormView {
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
             // console.log(column.name, ctrl.constructor.name);
-            return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
+            return react_1.default.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = key => {
-            return PageController.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource.keyToParams(key)));
+            return PageController_1.PageController.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource_1.DataSource.keyToParams(key)));
         };
     }
     renderToolbar() {
@@ -36254,10 +36832,10 @@ class TableFormView extends FormView_1.FormView {
         const model = ctrl.model;
         const dataSource = model.getDefaultDataSource();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.new }) }), "new"), model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh"), model.data.deleteRowMode !== 'disabled' &&
-                    (0, jsx_runtime_1.jsx)(Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete"), ctrl.model.hasActions() &&
-                    (0, jsx_runtime_1.jsx)(DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0, jsx_runtime_1.jsx)(MoreVertIcon, {}) }))] })));
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.new }) }), "new"), model.data.refreshButton === 'true' && dataSource.constructor.name === 'SqlDataSource' &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh"), model.data.deleteRowMode !== 'disabled' &&
+                    (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete"), ctrl.model.hasActions() &&
+                    (0, jsx_runtime_1.jsx)(common_1.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0, jsx_runtime_1.jsx)(common_1.MoreVertIcon, {}) }))] })));
     }
     renderPaging() {
         const ctrl = this.props.ctrl;
@@ -36265,7 +36843,7 @@ class TableFormView extends FormView_1.FormView {
         const dataSource = model.getDefaultDataSource();
         const text = model.getApp().getText();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0, jsx_runtime_1.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), " ", dataSource.getLimit() && `of ${dataSource.getCount()}`] })) })), dataSource.getLimit() &&
-                    (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0, jsx_runtime_1.jsx)(Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)(ComboBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged, items: new Array(dataSource.getFramesCount()).fill().map((val, i) => ({ value: (i + 1).toString(), title: (i + 1).toString() })) }), (0, jsx_runtime_1.jsx)(Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon, { size: 18 }) }))] }))] })));
+                    (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0, jsx_runtime_1.jsx)(common_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged, items: new Array(dataSource.getFramesCount()).fill(null).map((val, i) => ({ value: (i + 1).toString(), title: (i + 1).toString() })) }), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0, jsx_runtime_1.jsx)(common_1.RightIcon, { size: 18 }) }))] }))] })));
     }
     getGridColumns() {
         const ctrl = this.props.ctrl;
@@ -36286,11 +36864,11 @@ class TableFormView extends FormView_1.FormView {
         return true;
     }
     getGridClass() {
-        return Grid;
+        return common_1.Grid;
     }
     renderGrid() {
         const ctrl = this.props.ctrl;
-        return React.createElement(this.getGridClass(), {
+        return react_1.default.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
             name: ctrl.model.getFullName(),
@@ -36315,6 +36893,7 @@ class TableFormView extends FormView_1.FormView {
     }
 }
 exports.TableFormView = TableFormView;
+// @ts-ignore
 window.TableFormView = TableFormView;
 
 
@@ -36363,6 +36942,7 @@ class ModelController extends Controller_1.Controller {
     }
 }
 exports.ModelController = ModelController;
+// @ts-ignore
 window.ModelController = ModelController;
 
 
@@ -36401,7 +36981,7 @@ class ModelView extends View_1.View {
         }
         return super.getCssBlockName();
     }
-    getStyle() {
+    getStyle(row) {
     }
 }
 exports.ModelView = ModelView;
@@ -36421,6 +37001,12 @@ window.ModelView = ModelView;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.PageController = void 0;
 const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+const FormController_1 = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+const DataSource_1 = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+const RowFormController_1 = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
+const PageView_1 = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
+const ApplicationController_1 = __webpack_require__(/*! ../ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
 class PageController extends ModelController_1.ModelController {
     constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
@@ -36478,15 +37064,15 @@ class PageController extends ModelController_1.ModelController {
         this.id = id;
         this.forms = [];
     }
-    static create(model, parent, id, options) {
+    static create(model, parent, id, options = null) {
         // console.log('PageController.create', model.getName());
-        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
+        const CustomClass = common_1.FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
         return new Class(model, parent, id, options);
     }
     init() {
         for (const form of this.model.forms) {
-            const ctrl = FormController.create(form, this);
+            const ctrl = FormController_1.FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
         }
@@ -36499,7 +37085,7 @@ class PageController extends ModelController_1.ModelController {
         super.deinit();
     }
     createOpenInNewLink(name, key) {
-        return PageController.createLink(Object.assign({ page: name }, DataSource.keyToParams(key)));
+        return PageController.createLink(Object.assign({ page: name }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
         // console.log('PageController.close', this.model.getFullName());
@@ -36519,7 +37105,7 @@ class PageController extends ModelController_1.ModelController {
     }
     validate() {
         for (const form of this.forms) {
-            if (form instanceof RowFormController) {
+            if (form instanceof RowFormController_1.RowFormController) {
                 form.validate();
             }
         }
@@ -36579,7 +37165,7 @@ class PageController extends ModelController_1.ModelController {
         return this.parent;
     }
     getViewClass() {
-        return super.getViewClass() || PageView;
+        return super.getViewClass() || PageView_1.PageView;
     }
     static createLink(params = null) {
         // const query = window.location.search.split('?')[1];
@@ -36589,7 +37175,7 @@ class PageController extends ModelController_1.ModelController {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
+                    ...(ApplicationController_1.ApplicationController.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
                 ].join('&')
             ].join('?');
@@ -36617,7 +37203,7 @@ class PageController extends ModelController_1.ModelController {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(ApplicationController_1.ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : [])
         ].join(' ');
     }
@@ -36653,6 +37239,7 @@ class PageController extends ModelController_1.ModelController {
     }
 }
 exports.PageController = PageController;
+// @ts-ignore
 window.PageController = PageController;
 
 
@@ -36897,6 +37484,7 @@ class EventEmitter {
     async emit(name, e) {
         // console.log('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
+            // @ts-ignore
             const results = await Promise.allSettled(this.list[name].map(cb => cb(e)));
             // console.log('results:', results);
             for (const result of results) {
@@ -36922,7 +37510,8 @@ exports.EventEmitter = EventEmitter;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.LoginFrontHostApp = void 0;
 const LoginController_1 = __webpack_require__(/*! ./Controller/LoginController/LoginController */ "./src/frontend/viewer/Controller/LoginController/LoginController.ts");
-class LoginFrontHostApp extends FrontHostApp {
+const common_1 = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+class LoginFrontHostApp extends common_1.FrontHostApp {
     constructor(data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();
@@ -36932,7 +37521,7 @@ class LoginFrontHostApp extends FrontHostApp {
         console.log('LoginFrontHostApp.run');
         const loginController = LoginController_1.LoginController.create(this);
         const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
-        const loginView = Helper.createReactComponent(rootElement, loginController.getViewClass(), { ctrl: loginController });
+        const loginView = common_1.Helper.createReactComponent(rootElement, loginController.getViewClass(), { ctrl: loginController });
     }
     getText() {
         return this.data.text;
@@ -36942,6 +37531,7 @@ class LoginFrontHostApp extends FrontHostApp {
     }
 }
 exports.LoginFrontHostApp = LoginFrontHostApp;
+// @ts-ignore
 window.LoginFrontHostApp = LoginFrontHostApp;
 
 
@@ -36958,6 +37548,7 @@ Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Application = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 const Database_1 = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 class Application extends Model_1.Model {
     constructor(data) {
         super(data);
@@ -36994,7 +37585,7 @@ class Application extends Model_1.Model {
     async request(options) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, body] = await FrontHostApp.doHttpRequest2(options);
+        const [headers, body] = await common_1.FrontHostApp.doHttpRequest2(options);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         if (!headers['qforms-app-version'])
@@ -37046,6 +37637,7 @@ class Application extends Model_1.Model {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
         // console.log('promises:', promises);
+        // @ts-ignore
         return Promise.allSettled(promises);
     }
     getNodeEnv() {
@@ -37056,6 +37648,7 @@ class Application extends Model_1.Model {
     }
 }
 exports.Application = Application;
+// @ts-ignore
 window.Application = Application;
 
 
@@ -37088,6 +37681,7 @@ class Column extends Model_1.Model {
     }
 }
 exports.Column = Column;
+// @ts-ignore
 window.Column = Column;
 
 
@@ -37103,6 +37697,10 @@ window.Column = Column;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DataSource = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+const Form_1 = __webpack_require__(/*! ../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+const Page_1 = __webpack_require__(/*! ../Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
+const Application_1 = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 class DataSource extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -37239,10 +37837,10 @@ class DataSource extends Model_1.Model {
     //     console.log('DataSource.deinit', this.getFullName());
     //     super.deinit();
     // }
-    getType(column) {
+    /*getType(column) {
         // console.log('DataSource.getType', this.getClassName(), column);
         throw new Error('DataSource column type not implemented');
-    }
+    }*/
     discardRowColumn(row, column) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             delete this.changes.get(row)[column];
@@ -37352,17 +37950,17 @@ class DataSource extends Model_1.Model {
         return row;
     }
     getForm() {
-        return this.parent instanceof Form ? this.parent : null;
+        return this.parent instanceof Form_1.Form ? this.parent : null;
     }
     getPage() {
-        if (this.parent instanceof Page)
+        if (this.parent instanceof Page_1.Page)
             return this.parent;
-        if (this.parent instanceof Form)
+        if (this.parent instanceof Form_1.Form)
             return this.parent.getPage();
         return null;
     }
     getApp() {
-        if (this.parent instanceof Application)
+        if (this.parent instanceof Application_1.Application)
             return this.parent;
         return this.parent.getApp();
     }
@@ -37466,7 +38064,7 @@ class DataSource extends Model_1.Model {
         // console.log('type:', type);
         return type;
     }
-    async insert() {
+    async insert(row) {
         console.log('DataSource.insert', this.news);
         if (!this.news.length)
             throw new Error('no new rows to insert');
@@ -37574,7 +38172,7 @@ class DataSource extends Model_1.Model {
     }
     moveRow(row, offset) {
         console.log('DataSource.moveRow');
-        Helper.moveArrItem(this.rows, row, offset);
+        common_1.Helper.moveArrItem(this.rows, row, offset);
         // refresh event
         const event = { source: this };
         if (this.parent.onDataSourceRefresh) {
@@ -37584,6 +38182,7 @@ class DataSource extends Model_1.Model {
     }
 }
 exports.DataSource = DataSource;
+// @ts-ignore
 window.DataSource = DataSource;
 
 
@@ -37872,6 +38471,7 @@ class SqlDataSource extends DataSource_1.DataSource {
     }
 }
 exports.SqlDataSource = SqlDataSource;
+// @ts-ignore
 window.SqlDataSource = SqlDataSource;
 
 
@@ -37889,8 +38489,8 @@ exports.Database = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 const Table_1 = __webpack_require__(/*! ../Table/Table */ "./src/frontend/viewer/Model/Table/Table.ts");
 class Database extends Model_1.Model {
-    constructor(...args) {
-        super(...args);
+    constructor(data, parent = null) {
+        super(data, parent);
         this.tables = [];
     }
     init() {
@@ -37920,6 +38520,7 @@ class Database extends Model_1.Model {
     }
 }
 exports.Database = Database;
+// @ts-ignore
 window.Database = Database;
 
 
@@ -37935,12 +38536,13 @@ window.Database = Database;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ComboBoxField = void 0;
 const Field_1 = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 class ComboBoxField extends Field_1.Field {
     getDisplayValue(row) {
         let value = null;
         if (row[this.data.displayColumn]) {
             try {
-                value = Helper.decodeValue(row[this.data.displayColumn]);
+                value = common_1.Helper.decodeValue(row[this.data.displayColumn]);
             }
             catch (err) {
                 console.log('cannot parse:', row[this.data.displayColumn]);
@@ -37959,7 +38561,7 @@ class ComboBoxField extends Field_1.Field {
         if (!row[this.data.valueColumn]) {
             throw new Error('no valueColumn in ComboBox data source');
         }
-        return Helper.decodeValue(row[this.data.valueColumn]);
+        return common_1.Helper.decodeValue(row[this.data.valueColumn]);
     }
     getComboBoxDataSource() {
         const name = this.data.dataSourceName;
@@ -37981,6 +38583,7 @@ class ComboBoxField extends Field_1.Field {
     }
 }
 exports.ComboBoxField = ComboBoxField;
+// @ts-ignore
 window.ComboBoxField = ComboBoxField;
 
 
@@ -37996,15 +38599,16 @@ window.ComboBoxField = ComboBoxField;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.DateField = void 0;
 const Field_1 = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 class DateField extends Field_1.Field {
     getFormat() {
         return this.getAttr('format');
     }
     rawToValue(raw) {
         // console.log('DateField.rawToValue', this.getFullName(), raw);
-        const value = Helper.decodeValue(raw);
+        const value = common_1.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
-            Helper.addTimezoneOffset(value);
+            common_1.Helper.addTimezoneOffset(value);
         }
         // console.log('DateField.rawToValue:', raw, value);
         return value;
@@ -38012,18 +38616,19 @@ class DateField extends Field_1.Field {
     valueToRaw(value) {
         let rawValue;
         if (value && this.getAttr('timezone') === 'false') {
-            const v = Helper.cloneDate(value);
-            Helper.removeTimezoneOffset(v);
-            rawValue = Helper.encodeValue(v);
+            const v = common_1.Helper.cloneDate(value);
+            common_1.Helper.removeTimezoneOffset(v);
+            rawValue = common_1.Helper.encodeValue(v);
         }
         else {
-            rawValue = Helper.encodeValue(value);
+            rawValue = common_1.Helper.encodeValue(value);
         }
         // console.log('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }
 exports.DateField = DateField;
+// @ts-ignore
 window.DateField = DateField;
 
 
@@ -38033,13 +38638,14 @@ window.DateField = DateField;
 /*!**************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/Field.ts ***!
   \**************************************************/
-/***/ ((module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
-/* module decorator */ module = __webpack_require__.nmd(module);
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Field = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+const RowForm_1 = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
 class Field extends Model_1.Model {
     // constructor(data, parent) {
     //     super(data, parent);
@@ -38062,11 +38668,11 @@ class Field extends Model_1.Model {
         if (!column)
             return;
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
-        const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
+        const js = common_1.Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string')
             throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
         // console.log('js', this.getFullName(), js);
-        module.Helper;
+        // module.Helper
         try {
             const value = eval(js);
             if (value !== undefined) {
@@ -38085,7 +38691,7 @@ class Field extends Model_1.Model {
             const rawValue = this.valueToRaw(value);
             // console.log('value:', value);
             // console.log('rawValue:', rawValue);
-            const paramValue = rawValue !== undefined ? Helper.decodeValue(rawValue) : undefined;
+            const paramValue = rawValue !== undefined ? common_1.Helper.decodeValue(rawValue) : undefined;
             this.getPage().setParam(this.getFullName(), paramValue);
         }
     }
@@ -38100,7 +38706,7 @@ class Field extends Model_1.Model {
     }
     getValue(row) {
         // console.log('Field.getValue', this.getFullName(), row);
-        if (!row && this.parent instanceof RowForm) {
+        if (!row && this.parent instanceof RowForm_1.RowForm) {
             row = this.parent.getRow();
         }
         if (!row) {
@@ -38145,10 +38751,10 @@ class Field extends Model_1.Model {
         this.valueToPageParams(row);
     }
     rawToValue(rawValue) {
-        return Helper.decodeValue(rawValue);
+        return common_1.Helper.decodeValue(rawValue);
     }
     valueToRaw(value) {
-        return Helper.encodeValue(value);
+        return common_1.Helper.encodeValue(value);
     }
     getRawValue(row) {
         if (!this.hasColumn())
@@ -38231,6 +38837,7 @@ class Field extends Model_1.Model {
     }
 }
 exports.Field = Field;
+// @ts-ignore
 window.Field = Field;
 
 
@@ -38255,6 +38862,7 @@ class TextAreaField extends Field_1.Field {
     }
 }
 exports.TextAreaField = TextAreaField;
+// @ts-ignore
 window.TextAreaField = TextAreaField;
 
 
@@ -38273,6 +38881,7 @@ const Field_1 = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model
 class TextBoxField extends Field_1.Field {
 }
 exports.TextBoxField = TextBoxField;
+// @ts-ignore
 window.TextBoxField = TextBoxField;
 
 
@@ -38288,6 +38897,7 @@ window.TextBoxField = TextBoxField;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Form = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 class Form extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -38299,7 +38909,7 @@ class Form extends Model_1.Model {
         this.createDataSources();
         // fields
         for (const data of this.data.fields) {
-            const Class = FrontHostApp.getClassByName(data.class);
+            const Class = common_1.FrontHostApp.getClassByName(data.class);
             if (!Class)
                 throw new Error(`no ${data.class} class`);
             const field = new Class(data, this);
@@ -38405,6 +39015,7 @@ class Form extends Model_1.Model {
     }
 }
 exports.Form = Form;
+// @ts-ignore
 window.Form = Form;
 
 
@@ -38477,6 +39088,7 @@ class RowForm extends Form_1.Form {
     }
 }
 exports.RowForm = RowForm;
+// @ts-ignore
 window.RowForm = RowForm;
 
 
@@ -38495,6 +39107,7 @@ const Form_1 = __webpack_require__(/*! ../Form */ "./src/frontend/viewer/Model/F
 class TableForm extends Form_1.Form {
 }
 exports.TableForm = TableForm;
+// @ts-ignore
 window.TableForm = TableForm;
 
 
@@ -38510,8 +39123,9 @@ window.TableForm = TableForm;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Model = void 0;
 const EventEmitter_1 = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.ts");
+const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 class Model extends EventEmitter_1.EventEmitter {
-    constructor(data, parent) {
+    constructor(data, parent = null) {
         if (!data.name)
             throw new Error(`${data.class} no name`);
         super();
@@ -38569,7 +39183,7 @@ class Model extends EventEmitter_1.EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const Class = FrontHostApp.getClassByName(data.class);
+                const Class = common_1.FrontHostApp.getClassByName(data.class);
                 if (!Class)
                     throw new Error(`no ${data.class} class`);
                 const dataSource = new Class(data, this);
@@ -38598,6 +39212,7 @@ class Model extends EventEmitter_1.EventEmitter {
     }
 }
 exports.Model = Model;
+// @ts-ignore
 window.Model = Model;
 
 
@@ -38613,6 +39228,8 @@ window.Model = Model;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Page = void 0;
 const Model_1 = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+const DataSource_1 = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
@@ -38646,7 +39263,7 @@ class Page extends Model_1.Model {
     createForms() {
         // forms
         for (const data of this.data.forms) {
-            const FormClass = FrontHostApp.getClassByName(Model_1.Model.getClassName(data));
+            const FormClass = common_1.FrontHostApp.getClassByName(Model_1.Model.getClassName(data));
             const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);
@@ -38741,7 +39358,7 @@ class Page extends Model_1.Model {
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
         for (const key of e.inserts) {
-            const keyParams = DataSource.keyToParams(key); // key params to page params
+            const keyParams = DataSource_1.DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
                 this.setParam(name, keyParams[name]);
             }
@@ -38770,6 +39387,7 @@ class Page extends Model_1.Model {
     }
 }
 exports.Page = Page;
+// @ts-ignore
 window.Page = Page;
 
 
@@ -38831,6 +39449,7 @@ class Table extends Model_1.Model {
     }
 }
 exports.Table = Table;
+// @ts-ignore
 window.Table = Table;
 
 
@@ -38840,14 +39459,21 @@ window.Table = Table;
 /*!***************************************************!*\
   !*** ./src/frontend/viewer/ViewerFrontHostApp.ts ***!
   \***************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ViewerFrontHostApp = void 0;
+const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 const Application_1 = __webpack_require__(/*! ./Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 const ApplicationController_1 = __webpack_require__(/*! ./Controller/ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
-class ViewerFrontHostApp extends FrontHostApp {
+const common_1 = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+const AlertController_1 = __webpack_require__(/*! ./Controller/AlertController/AlertController */ "./src/frontend/viewer/Controller/AlertController/AlertController.ts");
+const ConfirmController_1 = __webpack_require__(/*! ./Controller/ConfirmController/ConfirmController */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts");
+class ViewerFrontHostApp extends common_1.FrontHostApp {
     constructor(options = {}) {
         if (!options.data)
             throw new Error('no data');
@@ -38915,13 +39541,13 @@ class ViewerFrontHostApp extends FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new AlertController(Object.assign(Object.assign({}, options), { onClose: result => {
+                    const ctrl = this.alertCtrl = new AlertController_1.AlertController(Object.assign(Object.assign({}, options), { onClose: result => {
                             this.alertCtrl = null;
-                            ReactDOM.unmountComponentAtNode(root);
+                            react_dom_1.default.unmountComponentAtNode(root);
                             resolve(result);
                         } }));
                     // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
                     // console.log('view', view);
                 }
                 else {
@@ -38939,13 +39565,13 @@ class ViewerFrontHostApp extends FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new ConfirmController(Object.assign(Object.assign({}, options), { onClose: result => {
+                    const ctrl = this.alertCtrl = new ConfirmController_1.ConfirmController(Object.assign(Object.assign({}, options), { onClose: result => {
                             this.alertCtrl = null;
-                            ReactDOM.unmountComponentAtNode(root);
+                            react_dom_1.default.unmountComponentAtNode(root);
                             resolve(result);
                         } }));
                     // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
                     // console.log('view', view);
                 }
                 else {
@@ -38959,6 +39585,7 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
 }
 exports.ViewerFrontHostApp = ViewerFrontHostApp;
+// @ts-ignore
 window.ViewerFrontHostApp = ViewerFrontHostApp;
 
 
@@ -39084,30 +39711,17 @@ exports.WebSocketClient = WebSocketClient;
 /******/ 		}
 /******/ 		// Create a new module (and put it into the cache)
 /******/ 		var module = __webpack_module_cache__[moduleId] = {
-/******/ 			id: moduleId,
-/******/ 			loaded: false,
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
 /******/ 			exports: {}
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
 /******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
 /******/ 	
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
-/******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
-/******/ 	
-/************************************************************************/
-/******/ 	/* webpack/runtime/node module decorator */
-/******/ 	(() => {
-/******/ 		__webpack_require__.nmd = (module) => {
-/******/ 			module.paths = [];
-/******/ 			if (!module.children) module.children = [];
-/******/ 			return module;
-/******/ 		};
-/******/ 	})();
 /******/ 	
 /************************************************************************/
 var __webpack_exports__ = {};

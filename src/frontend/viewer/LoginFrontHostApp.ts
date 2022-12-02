@@ -1,6 +1,8 @@
 import {LoginController} from './Controller/LoginController/LoginController';
+import {FrontHostApp, Helper} from '../common';
 
 export class LoginFrontHostApp extends FrontHostApp {
+    data: any;
     constructor(data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();
@@ -19,4 +21,6 @@ export class LoginFrontHostApp extends FrontHostApp {
         return this.data;
     }
 }
+
+// @ts-ignore
 window.LoginFrontHostApp = LoginFrontHostApp;

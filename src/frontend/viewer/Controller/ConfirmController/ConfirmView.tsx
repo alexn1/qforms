@@ -1,4 +1,6 @@
+import React from 'react';
 import {View} from '../View';
+import {CloseIcon2, Button} from '../../../common';
 
 export class ConfirmView extends View {
     constructor(props) {

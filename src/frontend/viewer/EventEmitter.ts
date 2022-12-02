@@ -1,4 +1,5 @@
 export class EventEmitter {
+    list: any;
     constructor() {
         this.list = {};
     }
@@ -21,6 +22,7 @@ export class EventEmitter {
     async emit(name, e) {
         // console.log('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
+            // @ts-ignore
             const results = await Promise.allSettled(this.list[name].map(cb => cb(e)));
             // console.log('results:', results);
             for (const result of results) {

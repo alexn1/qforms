@@ -43,6 +43,7 @@ module.exports = {
                             declaration: false,
                             esModuleInterop: true,
                             jsx: "react-jsx",
+                            noImplicitAny: false
                         }
                     }
                 }

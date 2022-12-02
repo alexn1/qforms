@@ -1,5 +1,11 @@
 export class WebSocketClient {
-    constructor(options = {}) {
+    options: any;
+    url: string;
+    webSocket: any;
+    refreshTimeoutId: any;
+    RECONNECT_TIMEOUT: number;
+    REFRESH_TIMEOUT: number;
+    constructor(options: any = {}) {
         // console.log('WebSocketClient.constructor', options);
         this.options = options;
         if (!options.applicationController) throw new Error('no options.applicationController');

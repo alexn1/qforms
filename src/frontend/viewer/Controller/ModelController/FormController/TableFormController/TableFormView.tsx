@@ -1,6 +1,8 @@
+import React from 'react';
 import {FormView} from '../FormView';
 import {PageController} from '../../PageController/PageController';
 import {DataSource} from '../../../../Model/DataSource/DataSource';
+import {Button, DropdownButton, MoreVertIcon, ComboBox, LeftIcon, RightIcon, Grid} from '../../../../../common';
 
 
 export class TableFormView extends FormView {
@@ -73,7 +75,7 @@ export class TableFormView extends FormView {
                         <ComboBox
                             value={ctrl.model.getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
-                            items={new Array(dataSource.getFramesCount()).fill().map((val, i) =>
+                            items={new Array(dataSource.getFramesCount()).fill(null).map((val, i) =>
                             ({value: (i+1).toString(), title: (i+1).toString()})
                         )}/>
                         <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick}>

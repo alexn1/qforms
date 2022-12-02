@@ -3,8 +3,8 @@ import {Table} from '../Table/Table';
 
 export class Database extends Model {
     tables: any[];
-    constructor(...args) {
-        super(...args);
+    constructor(data, parent = null) {
+        super(data, parent);
         this.tables = [];
     }
 

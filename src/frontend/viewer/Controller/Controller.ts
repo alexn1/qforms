@@ -24,6 +24,7 @@ export class Controller extends EventEmitter {
         throw new Error(`${this.constructor.name}.getViewClass not implemented`);
     }
     createElement() {
+        // @ts-ignore
         return React.createElement(this.getViewClass(), {
             ctrl    : this,
             onCreate: this.onViewCreate

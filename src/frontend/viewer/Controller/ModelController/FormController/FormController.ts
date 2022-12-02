@@ -1,6 +1,10 @@
 import {ModelController} from '../ModelController';
+import {FrontHostApp} from '../../../../common';
+import {FieldController} from '../FieldController/FieldController';
 
 export class FormController extends ModelController {
+    fields: any;
+    state: any;
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
@@ -73,4 +77,6 @@ export class FormController extends ModelController {
         return this.getModel().getAttr('visible') === 'true';
     }
 }
+
+// @ts-ignore
 window.FormController = FormController;

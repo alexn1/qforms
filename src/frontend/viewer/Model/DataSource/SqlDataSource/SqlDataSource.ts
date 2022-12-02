@@ -291,4 +291,6 @@ export class SqlDataSource extends DataSource {
         return this.lastFrame < this.getFramesCount();
     }
 }
+
+// @ts-ignore
 window.SqlDataSource = SqlDataSource;
