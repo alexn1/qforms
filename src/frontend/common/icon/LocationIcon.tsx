@@ -1,4 +1,6 @@
-class LocationIcon extends React.Component {
+import * as React from 'react';
+
+export class LocationIcon extends React.Component<any,any> {
     render() {
         const size = this.props.size || 24;
         return <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24">
@@ -7,3 +9,6 @@ class LocationIcon extends React.Component {
         </svg>;
     }
 }
+
+// @ts-ignore
+window.LocationIcon = LocationIcon;

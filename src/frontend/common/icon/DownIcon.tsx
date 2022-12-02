@@ -1,4 +1,7 @@
-class DownIcon extends React.Component {
+import * as React from 'react';
+import {DoneIcon} from './DoneIcon';
+
+export class DownIcon extends React.Component<any,any> {
     render() {
         const size = this.props.size || 24;
         return <svg xmlns="http://www.w3.org/2000/svg" height={size} width={size} viewBox="0 0 24 24">
@@ -7,3 +10,6 @@ class DownIcon extends React.Component {
         </svg>;
     }
 }
+
+// @ts-ignore
+window.DoneIcon = DoneIcon;

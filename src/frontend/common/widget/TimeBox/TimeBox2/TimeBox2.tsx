@@ -1,4 +1,9 @@
+import React from 'react';
+import {TimeBox} from '../TimeBox';
+
 export class TimeBox2 extends TimeBox {
+    inputEl: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.inputEl = React.createRef();

@@ -1514,6 +1514,89 @@ window.RowFormFieldView = RowFormFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.js":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.js ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* binding */ RowFormTextAreaFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.js");
+/* harmony import */ var _RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextAreaFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.jsx");
+
+
+class RowFormTextAreaFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+  getViewClass() {
+    return super.getViewClass() || _RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldView;
+  }
+
+}
+window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.jsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.jsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* binding */ RowFormTextAreaFieldView)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldView {
+  constructor(props) {
+    super(props);
+    this.state = {
+      classList: []
+    };
+  }
+
+  onFocus = async e => {
+    // console.log('RowFormTextAreaFieldView.onFocus');
+    this.addCssClass('focus');
+    await this.rerender();
+  };
+  onBlur = async e => {
+    // console.log('RowFormTextAreaFieldView.onBlur');
+    this.removeCssClass('focus');
+    await this.rerender();
+  };
+
+  render() {
+    // console.log('RowFormTextAreaFieldView.render', this.state);
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: this.getCssClassNames(),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextArea, {
+        classList: [`${this.getCssBlockName()}__textarea`],
+        onCreate: this.onWidgetCreate,
+        value: ctrl.getValueForWidget(),
+        readOnly: !ctrl.isEditable(),
+        disabled: !ctrl.isEditable(),
+        onChange: ctrl.onChange,
+        placeholder: ctrl.getPlaceholder(),
+        rows: ctrl.model.getRows(),
+        cols: ctrl.model.getCols(),
+        onFocus: this.onFocus,
+        onBlur: this.onBlur
+      })
+    });
+  }
+
+}
+window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.js":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.js ***!
@@ -9878,6 +9961,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_14__.RowFormComboBoxFieldController),
 /* harmony export */   "RowFormController": () => (/* reexport safe */ _Controller_ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__.RowFormController),
 /* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldController__WEBPACK_IMPORTED_MODULE_13__.RowFormDateFieldController),
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_19__.RowFormTextAreaFieldController),
 /* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_15__.RowFormTextBoxFieldController),
 /* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_12__.SqlDataSource),
 /* harmony export */   "TableForm": () => (/* reexport safe */ _Model_Form_TableForm_TableForm__WEBPACK_IMPORTED_MODULE_8__.TableForm),
@@ -9907,6 +9991,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Controller/ModelController/FormController/TableFormController/TableFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormController.js");
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.js");
 /* harmony import */ var _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Model/Field/TextAreaField/TextAreaField */ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.js");
+/* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.js");
+
 
 
 

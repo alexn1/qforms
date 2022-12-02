@@ -1,3 +1,5 @@
+import {ReactComponent} from '../ReactComponent';
+
 export class TextArea extends ReactComponent {
     constructor(props) {
         // console.log('TextArea.constructor', props);
@@ -18,6 +20,7 @@ export class TextArea extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -39,4 +42,6 @@ export class TextArea extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
 window.TextArea = TextArea;

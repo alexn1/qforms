@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Expand extends ReactComponent {
     constructor(props) {
         super(props);

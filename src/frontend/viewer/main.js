@@ -17,7 +17,7 @@ export {RowFormTextBoxFieldController} from './Controller/ModelController/FieldC
 export {TableFormController} from './Controller/ModelController/FormController/TableFormController/TableFormController';
 export {TableFormDateFieldController} from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController';
 export {TextAreaField} from './Model/Field/TextAreaField/TextAreaField';
-
+export {RowFormTextAreaFieldController} from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController';
 
 /*
 document.addEventListener('DOMContentLoaded', async () => {

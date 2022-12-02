@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Tab2 extends ReactComponent {
     constructor(props) {
         super(props);

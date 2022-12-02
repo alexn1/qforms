@@ -1,6 +1,8 @@
+import {ReactComponent} from '../ReactComponent';
+
 export class Radio extends ReactComponent {
     constructor(props) {
-        console.log('Radio.constructor', props.value);
+        // console.log('Radio.constructor', props.value);
         super(props);
         if (!props.name) throw new Error('no name');
         this.state = {

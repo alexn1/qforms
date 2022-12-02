@@ -1,4 +1,6 @@
-class DropDownIcon extends ReactComponent {
+import {ReactComponent} from '../../ReactComponent';
+
+export class DropDownIcon extends ReactComponent {
     render() {
         return <div className={this.getCssClassNames()} style={{width: this.props.size, height: this.props.size}}>
             <svg viewBox="0 0 10 10">
@@ -7,6 +9,7 @@ class DropDownIcon extends ReactComponent {
             </svg>
         </div>;
     }
-}
 
+}
+// @ts-ignore
 window.DropDownIcon = DropDownIcon;

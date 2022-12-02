@@ -23,3 +23,5 @@ export {Select} from './widget/Select/Select';
 export {CloseIcon} from './icon/CloseIcon';
 export {LeftIcon} from './icon/LeftIcon';
 export {RightIcon} from './icon/RightIcon';
+export {OpenInNewIcon} from './icon/OpenInNewIcon';
+export {TextArea} from './widget/TextArea';

@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Image extends ReactComponent {
     constructor(props) {
         super(props);

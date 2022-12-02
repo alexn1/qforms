@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class TimeBox extends ReactComponent {
     constructor(props) {
         // console.log('TimeBox.constructor', props);

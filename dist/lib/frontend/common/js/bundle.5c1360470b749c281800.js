@@ -31802,6 +31802,8 @@ const ArrowIcon = (props) => {
     return (0, jsx_runtime_1.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0, jsx_runtime_1.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) }));
 };
 exports.ArrowIcon = ArrowIcon;
+// @ts-ignore
+window.ArrowIcon = exports.ArrowIcon;
 
 
 /***/ }),
@@ -31841,6 +31843,8 @@ const CloseIcon2 = (props) => {
     return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] }));
 };
 exports.CloseIcon2 = CloseIcon2;
+// @ts-ignore
+window.CloseIcon2 = exports.CloseIcon2;
 
 
 /***/ }),
@@ -31885,6 +31889,8 @@ class DateIcon extends React.Component {
     }
 }
 exports.DateIcon = DateIcon;
+// @ts-ignore
+window.DateIcon = DateIcon;
 
 
 /***/ }),
@@ -31906,6 +31912,26 @@ const LeftIcon = (props) => {
 exports.LeftIcon = LeftIcon;
 // @ts-ignore
 window.LeftIcon = exports.LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.OpenInNewIcon = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const OpenInNewIcon = () => {
+    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] }));
+};
+exports.OpenInNewIcon = OpenInNewIcon;
+// @ts-ignore
+window.OpenInNewIcon = exports.OpenInNewIcon;
 
 
 /***/ }),
@@ -31971,6 +31997,8 @@ class VisibilityIcon extends React.Component {
     }
 }
 exports.VisibilityIcon = VisibilityIcon;
+// @ts-ignore
+window.VisibilityIcon = VisibilityIcon;
 
 
 /***/ }),
@@ -32015,6 +32043,8 @@ class VisibilityOffIcon extends React.Component {
     }
 }
 exports.VisibilityOffIcon = VisibilityOffIcon;
+// @ts-ignore
+window.VisibilityOffIcon = VisibilityOffIcon;
 
 
 /***/ }),
@@ -33611,6 +33641,53 @@ window.Tab = Tab;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/TextArea.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/TextArea.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TextArea = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class TextArea extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('TextArea.constructor', props);
+        super(props);
+        this.onChange = e => {
+            // console.log('TextArea.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                this.props.onChange(e.target.value);
+            }
+        };
+        this.state = {
+            value: this.props.value || ''
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextArea.render');
+        return ((0, jsx_runtime_1.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+    }
+}
+exports.TextArea = TextArea;
+// @ts-ignore
+window.TextArea = TextArea;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/TextBox.tsx":
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/TextBox.tsx ***!
@@ -33731,7 +33808,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.TextArea = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -33782,6 +33859,10 @@ var LeftIcon_1 = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/comm
 Object.defineProperty(exports, "LeftIcon", ({ enumerable: true, get: function () { return LeftIcon_1.LeftIcon; } }));
 var RightIcon_1 = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
 Object.defineProperty(exports, "RightIcon", ({ enumerable: true, get: function () { return RightIcon_1.RightIcon; } }));
+var OpenInNewIcon_1 = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+Object.defineProperty(exports, "OpenInNewIcon", ({ enumerable: true, get: function () { return OpenInNewIcon_1.OpenInNewIcon; } }));
+var TextArea_1 = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+Object.defineProperty(exports, "TextArea", ({ enumerable: true, get: function () { return TextArea_1.TextArea; } }));
 
 })();
 

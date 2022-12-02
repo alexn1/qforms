@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Slider extends ReactComponent {
     constructor(props) {
         super(props);
