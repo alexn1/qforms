@@ -83,4 +83,4 @@ export class Model extends EventEmitter {
         return this.data;
     }
 }
-window.QForms.Model = Model;
+window.Model = Model;

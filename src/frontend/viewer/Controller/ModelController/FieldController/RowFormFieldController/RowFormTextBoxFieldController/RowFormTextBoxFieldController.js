@@ -5,4 +5,4 @@ export class RowFormTextBoxFieldController extends RowFormFieldController {
         return super.getViewClass() || RowFormTextBoxFieldView;
     }
 }
-window.QForms.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
+window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;

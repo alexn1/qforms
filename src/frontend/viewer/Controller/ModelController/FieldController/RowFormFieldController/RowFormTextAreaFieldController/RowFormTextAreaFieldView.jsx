@@ -35,4 +35,4 @@ export class RowFormTextAreaFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
+window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;

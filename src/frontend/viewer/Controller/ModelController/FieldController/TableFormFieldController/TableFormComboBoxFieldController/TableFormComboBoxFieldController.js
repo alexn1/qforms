@@ -38,4 +38,4 @@ export class TableFormComboBoxFieldController extends TableFormFieldController {
     }
 
 }
-window.QForms.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
+window.TableFormComboBoxFieldController = TableFormComboBoxFieldController;

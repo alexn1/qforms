@@ -61,4 +61,4 @@ export class RowForm extends Form {
     }
 
 }
-window.QForms.RowForm = RowForm;
+window.RowForm = RowForm;

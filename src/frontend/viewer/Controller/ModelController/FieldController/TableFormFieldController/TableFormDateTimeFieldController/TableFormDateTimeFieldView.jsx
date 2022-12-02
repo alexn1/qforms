@@ -9,4 +9,4 @@ export class TableFormDateTimeFieldView extends TableFormFieldView {
         );
     }
 }
-window.QForms.TableFormDateTimeFieldView = TableFormDateTimeFieldView;
+window.TableFormDateTimeFieldView = TableFormDateTimeFieldView;

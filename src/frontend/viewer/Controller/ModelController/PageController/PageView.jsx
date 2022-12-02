@@ -228,4 +228,4 @@ export class PageView extends ModelView {
         }
     }
 }
-window.QForms.PageView = PageView;
+window.PageView = PageView;

@@ -269,4 +269,4 @@ export class TableFormController extends FormController {
         return this.isRowSelected();
     }
 }
-window.QForms.TableFormController = TableFormController;
+window.TableFormController = TableFormController;

@@ -3,4 +3,4 @@ export class TableFormTextAreaFieldController extends TableFormFieldController {
         return super.getViewClass() || TableFormTextAreaFieldView;
     }
 }
-window.QForms.TableFormTextAreaFieldController = TableFormTextAreaFieldController;
+window.TableFormTextAreaFieldController = TableFormTextAreaFieldController;

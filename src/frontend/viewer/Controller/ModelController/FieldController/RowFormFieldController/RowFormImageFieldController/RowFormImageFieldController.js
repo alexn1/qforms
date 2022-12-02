@@ -5,4 +5,4 @@ export class RowFormImageFieldController extends RowFormFieldController {
         return super.getViewClass() || RowFormImageFieldView;
     }
 }
-window.QForms.RowFormImageFieldController = RowFormImageFieldController;
+window.RowFormImageFieldController = RowFormImageFieldController;

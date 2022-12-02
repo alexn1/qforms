@@ -8,4 +8,4 @@ export class TableFormLinkFieldController extends TableFormFieldController {
         this.emit('click', {source: this});
     }
 }
-window.QForms.TableFormLinkFieldController = TableFormLinkFieldController;
+window.TableFormLinkFieldController = TableFormLinkFieldController;

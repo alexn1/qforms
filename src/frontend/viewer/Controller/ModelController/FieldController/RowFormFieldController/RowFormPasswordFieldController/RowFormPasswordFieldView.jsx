@@ -69,4 +69,4 @@ export class RowFormPasswordFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormPasswordFieldView = RowFormPasswordFieldView;
+window.RowFormPasswordFieldView = RowFormPasswordFieldView;

@@ -24,4 +24,4 @@ export class ModelView extends View {
     }
 }
 
-window.QForms.ModelView = ModelView;
+window.ModelView = ModelView;

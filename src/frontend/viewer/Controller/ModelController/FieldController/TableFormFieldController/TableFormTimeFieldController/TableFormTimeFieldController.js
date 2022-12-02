@@ -7,4 +7,4 @@ export class TableFormTimeFieldController extends TableFormFieldController {
         return TimeBox.getStringValue(value);
     }
 }
-window.QForms.TableFormTimeFieldController = TableFormTimeFieldController;
+window.TableFormTimeFieldController = TableFormTimeFieldController;

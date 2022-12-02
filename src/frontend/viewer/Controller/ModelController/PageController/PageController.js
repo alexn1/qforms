@@ -238,4 +238,4 @@ export class PageController extends ModelController {
         return false;
     }
 }
-window.QForms.PageController = PageController;
+window.PageController = PageController;

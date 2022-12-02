@@ -46,4 +46,4 @@ export class CheckBoxListField extends Field {
         return this.getDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }
-window.QForms.CheckBoxListField = CheckBoxListField;
+window.CheckBoxListField = CheckBoxListField;

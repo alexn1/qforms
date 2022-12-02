@@ -17,4 +17,4 @@ export class RowFormCheckBoxFieldView extends RowFormFieldView {
     }
 }
 
-window.QForms.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
+window.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;

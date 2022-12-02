@@ -31,4 +31,4 @@ export class ModelController extends Controller {
     }
 }
 
-window.QForms.ModelController = ModelController;
+window.ModelController = ModelController;

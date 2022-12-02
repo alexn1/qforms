@@ -10,4 +10,4 @@ export class RowFormLinkFieldView extends RowFormFieldView {
         );
     }
 }
-window.QForms.RowFormLinkFieldView = RowFormLinkFieldView;
+window.RowFormLinkFieldView = RowFormLinkFieldView;

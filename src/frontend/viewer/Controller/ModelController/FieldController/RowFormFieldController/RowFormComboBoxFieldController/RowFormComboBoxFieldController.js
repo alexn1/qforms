@@ -123,4 +123,4 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
     }
 }
 
-window.QForms.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;

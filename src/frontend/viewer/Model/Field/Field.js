@@ -192,4 +192,4 @@ export class Field extends Model {
         return caption;
     }
 }
-window.QForms.Field = Field;
+window.Field = Field;

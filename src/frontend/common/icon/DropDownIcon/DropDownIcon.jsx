@@ -9,4 +9,4 @@ class DropDownIcon extends ReactComponent {
     }
 }
 
-window.QForms.DropDownIcon = DropDownIcon;
+window.DropDownIcon = DropDownIcon;

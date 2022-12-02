@@ -23,4 +23,4 @@ export class FormView extends ModelView {
         return false;
     }
 }
-window.QForms.FormView = FormView;
+window.FormView = FormView;

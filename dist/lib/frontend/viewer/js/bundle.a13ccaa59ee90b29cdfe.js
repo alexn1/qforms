@@ -612,7 +612,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
   }
 
 }
-window.QForms.ApplicationController = ApplicationController;
+window.ApplicationController = ApplicationController;
 
 /***/ }),
 
@@ -664,7 +664,7 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
   }
 
 }
-window.QForms.ModelController = ModelController;
+window.ModelController = ModelController;
 
 /***/ }),
 
@@ -912,7 +912,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   }
 
 }
-window.QForms.Application = Application;
+window.Application = Application;
 
 /***/ }),
 
@@ -946,7 +946,7 @@ class Column extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   }
 
 }
-window.QForms.Column = Column;
+window.Column = Column;
 
 /***/ }),
 
@@ -1601,7 +1601,7 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   }
 
 }
-window.QForms.Database = Database;
+window.Database = Database;
 
 /***/ }),
 
@@ -1720,7 +1720,7 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
   }
 
 }
-window.QForms.Model = Model;
+window.Model = Model;
 
 /***/ }),
 
@@ -1796,7 +1796,7 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   }
 
 }
-window.QForms.Table = Table;
+window.Table = Table;
 
 /***/ }),
 

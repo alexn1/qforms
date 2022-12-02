@@ -49,4 +49,4 @@ export class ApplicationView extends ModelView {
     }
 }
 
-window.QForms.ApplicationView = ApplicationView;
+window.ApplicationView = ApplicationView;

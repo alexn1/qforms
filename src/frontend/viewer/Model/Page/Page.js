@@ -176,4 +176,4 @@ export class Page extends Model {
         return !!this.options.selectMode;
     }
 }
-window.QForms.Page = Page;
+window.Page = Page;

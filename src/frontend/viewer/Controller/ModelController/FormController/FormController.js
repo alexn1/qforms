@@ -73,4 +73,4 @@ export class FormController extends ModelController {
         return this.getModel().getAttr('visible') === 'true';
     }
 }
-window.QForms.FormController = FormController;
+window.FormController = FormController;

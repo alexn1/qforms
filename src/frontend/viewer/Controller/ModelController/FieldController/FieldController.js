@@ -80,4 +80,4 @@ export class FieldController extends ModelController {
         return this.getModel().getAttr('format');
     }
 }
-window.QForms.FieldController = FieldController;
+window.FieldController = FieldController;

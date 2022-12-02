@@ -85,4 +85,4 @@ export class RowFormFileFieldView extends RowFormFieldView {
         this.getInput().click();
     }
 }
-window.QForms.RowFormFileFieldView = RowFormFileFieldView;
+window.RowFormFileFieldView = RowFormFileFieldView;

@@ -5,4 +5,4 @@ export class RowFormFileFieldController extends RowFormFieldController {
         return super.getViewClass() || RowFormFileFieldView;
     }
 }
-window.QForms.RowFormFileFieldController = RowFormFileFieldController;
+window.RowFormFileFieldController = RowFormFileFieldController;

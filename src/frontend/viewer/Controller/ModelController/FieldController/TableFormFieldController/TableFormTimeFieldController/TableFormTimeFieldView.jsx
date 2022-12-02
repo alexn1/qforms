@@ -7,4 +7,4 @@ export class TableFormTimeFieldView extends TableFormFieldView {
         </div>;
     }
 }
-window.QForms.TableFormTimeFieldView = TableFormTimeFieldView;
+window.TableFormTimeFieldView = TableFormTimeFieldView;

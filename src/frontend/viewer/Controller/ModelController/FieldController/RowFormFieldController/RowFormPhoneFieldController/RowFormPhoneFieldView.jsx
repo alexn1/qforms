@@ -59,4 +59,4 @@ export class RowFormPhoneFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormPhoneFieldView = RowFormPhoneFieldView;
+window.RowFormPhoneFieldView = RowFormPhoneFieldView;

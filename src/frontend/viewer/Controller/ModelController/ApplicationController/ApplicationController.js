@@ -347,4 +347,4 @@ export class ApplicationController extends ModelController {
     }
 }
 
-window.QForms.ApplicationController = ApplicationController;
+window.ApplicationController = ApplicationController;

@@ -143,4 +143,4 @@ export class TableFormView extends FormView {
         });
     }
 }
-window.QForms.TableFormView = TableFormView;
+window.TableFormView = TableFormView;

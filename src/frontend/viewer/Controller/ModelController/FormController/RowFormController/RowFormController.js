@@ -194,4 +194,4 @@ export class RowFormController extends FormController {
         return this.getMode() === 'view';
     }
 }
-window.QForms.RowFormController = RowFormController;
+window.RowFormController = RowFormController;

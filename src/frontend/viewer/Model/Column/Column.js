@@ -15,4 +15,4 @@ export class Column  extends Model {
         return this.getAttr('type');
     }
 }
-window.QForms.Column = Column;
+window.Column = Column;

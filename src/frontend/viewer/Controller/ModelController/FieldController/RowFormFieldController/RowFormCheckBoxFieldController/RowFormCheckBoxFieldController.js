@@ -12,4 +12,4 @@ export class RowFormCheckBoxFieldController extends RowFormFieldController {
     }
 }
 
-window.QForms.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;
+window.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;

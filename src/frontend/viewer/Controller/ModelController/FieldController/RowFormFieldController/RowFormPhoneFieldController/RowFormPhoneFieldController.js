@@ -21,4 +21,4 @@ export class RowFormPhoneFieldController extends RowFormFieldController {
         return null;
     }
 }
-window.QForms.RowFormPhoneFieldController = RowFormPhoneFieldController;
+window.RowFormPhoneFieldController = RowFormPhoneFieldController;

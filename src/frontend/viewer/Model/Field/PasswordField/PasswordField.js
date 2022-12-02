@@ -3,4 +3,4 @@ import {Field} from '../Field';
 export class PasswordField extends Field {
 
 }
-window.QForms.PasswordField = PasswordField;
+window.PasswordField = PasswordField;

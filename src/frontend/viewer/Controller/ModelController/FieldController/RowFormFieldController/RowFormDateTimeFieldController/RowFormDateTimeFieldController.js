@@ -219,4 +219,4 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         return false;
     }
 }
-window.QForms.RowFormDateTimeFieldController = RowFormDateTimeFieldController;
+window.RowFormDateTimeFieldController = RowFormDateTimeFieldController;

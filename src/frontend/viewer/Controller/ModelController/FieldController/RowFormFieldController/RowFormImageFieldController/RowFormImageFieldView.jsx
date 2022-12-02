@@ -12,4 +12,4 @@ export class RowFormImageFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormImageFieldView = RowFormImageFieldView;
+window.RowFormImageFieldView = RowFormImageFieldView;

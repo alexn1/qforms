@@ -35,4 +35,4 @@ export class Database extends Model {
         return promises;
     }
 }
-window.QForms.Database = Database;
+window.Database = Database;

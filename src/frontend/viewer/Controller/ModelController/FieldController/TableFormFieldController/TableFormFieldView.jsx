@@ -9,4 +9,4 @@ export class TableFormFieldView extends FieldView {
         return this.span.current.offsetWidth;
     }
 }
-window.QForms.TableFormFieldView = TableFormFieldView;
+window.TableFormFieldView = TableFormFieldView;

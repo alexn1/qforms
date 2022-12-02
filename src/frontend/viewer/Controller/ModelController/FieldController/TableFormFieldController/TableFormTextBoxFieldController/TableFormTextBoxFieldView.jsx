@@ -7,4 +7,4 @@ export class TableFormTextBoxFieldView extends TableFormFieldView {
         </div>;
     }
 }
-window.QForms.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;

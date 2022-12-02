@@ -26,4 +26,4 @@ export class DateTimeField extends Field {
         return rawValue;
     }
 }
-window.QForms.DateTimeField = DateTimeField;
+window.DateTimeField = DateTimeField;

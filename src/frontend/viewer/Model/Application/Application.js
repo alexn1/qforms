@@ -101,4 +101,4 @@ export class Application extends Model {
         return this.getNodeEnv() === 'development';
     }
 }
-window.QForms.Application = Application;
+window.Application = Application;

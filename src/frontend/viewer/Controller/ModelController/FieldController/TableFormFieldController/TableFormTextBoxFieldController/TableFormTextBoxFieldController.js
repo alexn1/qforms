@@ -18,4 +18,4 @@ export class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.contentEditable = false;
     }*/
 }
-window.QForms.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;

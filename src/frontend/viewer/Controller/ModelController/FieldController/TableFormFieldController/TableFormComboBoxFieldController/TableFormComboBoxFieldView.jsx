@@ -9,4 +9,4 @@ export class TableFormComboBoxFieldView extends TableFormFieldView {
         );
     }
 }
-window.QForms.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;

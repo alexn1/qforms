@@ -11,4 +11,4 @@ export class RowFormDateFieldController extends RowFormFieldController {
         this.setValue(widgetValue);
     }
 }
-window.QForms.RowFormDateFieldController = RowFormDateFieldController;
+window.RowFormDateFieldController = RowFormDateFieldController;

@@ -151,4 +151,4 @@ export class RowFormView extends FormView {
     }*/
 }
 
-window.QForms.RowFormView = RowFormView;
+window.RowFormView = RowFormView;

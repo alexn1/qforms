@@ -44,4 +44,4 @@ export class Table extends Model {
         return this.emit('refresh', {source});
     }
 }
-window.QForms.Table = Table;
+window.Table = Table;

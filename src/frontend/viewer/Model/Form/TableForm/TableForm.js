@@ -1,4 +1,4 @@
 export class TableForm extends Form {
 
 }
-window.QForms.TableForm = TableForm;
+window.TableForm = TableForm;

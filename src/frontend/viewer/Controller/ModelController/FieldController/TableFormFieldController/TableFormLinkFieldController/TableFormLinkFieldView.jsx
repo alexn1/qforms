@@ -9,4 +9,4 @@ export class TableFormLinkFieldView extends TableFormFieldView {
         );
     }
 }
-window.QForms.TableFormLinkFieldView = TableFormLinkFieldView;
+window.TableFormLinkFieldView = TableFormLinkFieldView;

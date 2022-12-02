@@ -28,4 +28,4 @@ export class DateField extends Field {
         return rawValue;
     }
 }
-window.QForms.DateField = DateField;
+window.DateField = DateField;

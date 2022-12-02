@@ -5,4 +5,4 @@ export class RowFormPasswordFieldController extends RowFormFieldController {
         return super.getViewClass() || RowFormPasswordFieldView;
     }
 }
-window.QForms.RowFormPasswordFieldController = RowFormPasswordFieldController;
+window.RowFormPasswordFieldController = RowFormPasswordFieldController;

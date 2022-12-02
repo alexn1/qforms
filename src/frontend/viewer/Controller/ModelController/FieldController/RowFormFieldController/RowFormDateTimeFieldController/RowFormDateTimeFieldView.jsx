@@ -51,4 +51,4 @@ export class RowFormDateTimeFieldView extends RowFormFieldView {
         </div>;
     }
 }
-window.QForms.RowFormDateTimeFieldView = RowFormDateTimeFieldView;
+window.RowFormDateTimeFieldView = RowFormDateTimeFieldView;

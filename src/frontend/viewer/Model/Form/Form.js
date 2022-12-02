@@ -126,4 +126,4 @@ export class Form extends Model {
         return values;
     }
 }
-window.QForms.Form = Form;
+window.Form = Form;

@@ -8,4 +8,4 @@ export class TableFormDateFieldController extends TableFormFieldController {
         return '';
     }
 }
-window.QForms.TableFormDateFieldController = TableFormDateFieldController;
+window.TableFormDateFieldController = TableFormDateFieldController;

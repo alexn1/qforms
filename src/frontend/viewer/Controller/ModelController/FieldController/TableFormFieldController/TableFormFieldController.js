@@ -6,4 +6,4 @@ export class TableFormFieldController extends FieldController {
         return this.valueToString(this.model.getValue(row));
     }
 }
-window.QForms.TableFormFieldController = TableFormFieldController;
+window.TableFormFieldController = TableFormFieldController;

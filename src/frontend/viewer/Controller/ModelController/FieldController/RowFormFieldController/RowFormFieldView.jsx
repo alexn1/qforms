@@ -20,4 +20,4 @@ export class RowFormFieldView extends FieldView {
         this.widget = widget;
     }
 }
-window.QForms.RowFormFieldView = RowFormFieldView;
+window.RowFormFieldView = RowFormFieldView;

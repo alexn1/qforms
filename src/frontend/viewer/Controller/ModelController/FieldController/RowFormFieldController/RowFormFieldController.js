@@ -270,4 +270,4 @@ export class RowFormFieldController extends FieldController {
         }
     }
 }
-window.QForms.RowFormFieldController = RowFormFieldController;
+window.RowFormFieldController = RowFormFieldController;
