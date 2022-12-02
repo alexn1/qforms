@@ -65,7 +65,8 @@
     "webpack-common": "NODE_ENV=development webpack --config webpack.config.common.js",
     "webpack-index": "NODE_ENV=development webpack --config webpack.config.index.js",
     "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js",
-    "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js"
+    "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js",
+    "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js"
   },
   "repository": {
     "type": "git",
