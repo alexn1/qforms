@@ -1,8 +1,9 @@
-import React from 'react';
+import {Component, RefObject} from 'react';
 
-export class ReactComponent extends React.Component<any, any> {
+export class ReactComponent extends Component<any, any> {
     allowRerender: boolean;
-    el: React.RefObject<any>;
+    el: RefObject<any>;
+
     constructor(props) {
         super(props);
         if (props.onCreate) props.onCreate(this, this.props.name);

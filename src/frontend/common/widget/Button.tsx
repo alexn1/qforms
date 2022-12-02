@@ -1,4 +1,4 @@
-import React from 'react';
+import {createRef} from 'react';
 import {ReactComponent} from '../ReactComponent';
 
 export class Button extends ReactComponent {
@@ -6,7 +6,7 @@ export class Button extends ReactComponent {
         // console.log('Button.constructor', props);
         super(props);
         this.state = {disabled: undefined};
-        this.el = React.createRef();
+        this.el = createRef();
     }
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;

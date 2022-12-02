@@ -4153,16 +4153,13 @@ window.QForms.Helper = window.Helper = Helper;
 /*!************************************************!*\
   !*** ./src/frontend/common/ReactComponent.tsx ***!
   \************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.ReactComponent = void 0;
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-class ReactComponent extends react_1.default.Component {
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+class ReactComponent extends react_1.Component {
     constructor(props) {
         super(props);
         if (props.onCreate)
@@ -4273,23 +4270,20 @@ window.ReactComponent = ReactComponent;
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.Button = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 class Button extends ReactComponent_1.ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
-        this.el = react_1.default.createRef();
+        this.el = (0, react_1.createRef)();
     }
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
@@ -4430,7 +4424,7 @@ window.ComboBox = ComboBox;
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;

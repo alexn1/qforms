@@ -35,13 +35,13 @@ module.exports = {
                 use: {
                     loader: 'ts-loader',
                     options: {
+                        onlyCompileBundledFiles: true,
                         compilerOptions: {
                             target: "ES2017",
                             declaration: false,
-                            esModuleInterop: true,
+                            esModuleInterop: false,
                             jsx: "react-jsx",                                /* Specify what JSX code is generated. */
-                        },
-                        onlyCompileBundledFiles: true
+                        }
                     }
                 }
             }
