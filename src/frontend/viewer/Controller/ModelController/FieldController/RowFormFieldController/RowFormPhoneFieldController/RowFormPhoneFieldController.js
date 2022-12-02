@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormPhoneFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormPhoneFieldView;

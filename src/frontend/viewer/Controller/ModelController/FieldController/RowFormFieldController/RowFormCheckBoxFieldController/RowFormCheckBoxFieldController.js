@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormCheckBoxFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormCheckBoxFieldView;

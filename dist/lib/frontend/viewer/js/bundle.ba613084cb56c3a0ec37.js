@@ -626,7 +626,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ModelController": () => (/* binding */ ModelController)
 /* harmony export */ });
-class ModelController extends Controller {
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.js");
+
+class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
   constructor(model, parent) {
     super();
     this.model = model;

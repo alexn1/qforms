@@ -1,3 +1,4 @@
+import {FieldView} from '../FieldView';
 export class RowFormFieldView extends FieldView {
     constructor(props) {
         super(props);

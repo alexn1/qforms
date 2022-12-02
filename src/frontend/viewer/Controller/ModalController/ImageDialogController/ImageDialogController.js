@@ -1,3 +1,5 @@
+import {ModalController} from '../ModalController';
+
 export class ImageDialogController extends ModalController {
     constructor(options) {
         // console.log('ImageDialogController.constructor', options);

@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormComboBoxFieldController extends RowFormFieldController {
     init() {
         // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());

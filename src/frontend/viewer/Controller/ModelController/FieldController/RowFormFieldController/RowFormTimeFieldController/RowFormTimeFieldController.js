@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);

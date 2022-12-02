@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormDateFieldView;

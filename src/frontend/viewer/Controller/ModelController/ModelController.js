@@ -1,3 +1,5 @@
+import {Controller} from '../Controller';
+
 export class ModelController extends Controller {
     constructor(model, parent) {
         super();

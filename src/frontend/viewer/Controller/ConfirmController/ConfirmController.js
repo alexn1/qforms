@@ -1,3 +1,5 @@
+import {Controller} from '../Controller';
+
 export class ConfirmController extends Controller {
     constructor(options) {
         super();

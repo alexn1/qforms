@@ -1,3 +1,5 @@
+import {RowFormFieldController} from '../RowFormFieldController';
+
 export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     init() {
         // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
