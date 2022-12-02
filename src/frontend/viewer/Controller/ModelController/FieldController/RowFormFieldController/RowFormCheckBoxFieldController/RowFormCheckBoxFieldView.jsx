@@ -1,4 +1,4 @@
-class RowFormCheckBoxFieldView extends RowFormFieldView {
+export class RowFormCheckBoxFieldView extends RowFormFieldView {
     onCheckBoxChange = (checked, e) => {
         this.getCtrl().onChange(checked);
     }

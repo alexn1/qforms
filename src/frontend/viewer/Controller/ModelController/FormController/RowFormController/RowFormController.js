@@ -1,4 +1,4 @@
-class RowFormController extends FormController {
+export class RowFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {

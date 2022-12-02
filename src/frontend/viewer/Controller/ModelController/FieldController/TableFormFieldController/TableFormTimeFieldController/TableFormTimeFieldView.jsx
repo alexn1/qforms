@@ -1,4 +1,4 @@
-class TableFormTimeFieldView extends TableFormFieldView {
+export class TableFormTimeFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

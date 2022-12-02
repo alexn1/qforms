@@ -1,4 +1,4 @@
-class ImageDialogController extends ModalController {
+export class ImageDialogController extends ModalController {
     constructor(options) {
         // console.log('ImageDialogController.constructor', options);
         super(options);

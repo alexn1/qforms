@@ -1,4 +1,4 @@
-class ModelController extends Controller {
+export class ModelController extends Controller {
     constructor(model, parent) {
         super();
         this.model    = model;

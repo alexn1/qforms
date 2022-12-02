@@ -1,4 +1,4 @@
-class TableFormCheckBoxFieldController extends TableFormFieldController {
+export class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormCheckBoxFieldView;
     }

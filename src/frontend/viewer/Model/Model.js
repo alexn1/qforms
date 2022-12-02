@@ -1,4 +1,6 @@
-class Model extends EventEmitter {
+import {EventEmitter} from '../EventEmitter';
+
+export class Model extends EventEmitter {
     constructor(data, parent) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();

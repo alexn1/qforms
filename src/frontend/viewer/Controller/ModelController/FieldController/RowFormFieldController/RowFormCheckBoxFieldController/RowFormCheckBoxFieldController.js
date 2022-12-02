@@ -1,4 +1,4 @@
-class RowFormCheckBoxFieldController extends RowFormFieldController {
+export class RowFormCheckBoxFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormCheckBoxFieldView;
     }

@@ -1,4 +1,4 @@
-class RowFormPasswordFieldView extends RowFormFieldView {
+export class RowFormPasswordFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);
         this.state = {

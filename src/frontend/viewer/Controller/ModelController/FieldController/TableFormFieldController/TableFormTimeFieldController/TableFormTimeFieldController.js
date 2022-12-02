@@ -1,4 +1,4 @@
-class TableFormTimeFieldController extends TableFormFieldController {
+export class TableFormTimeFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormTimeFieldView;
     }

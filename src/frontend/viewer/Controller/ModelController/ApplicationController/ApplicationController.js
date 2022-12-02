@@ -1,4 +1,4 @@
-class ApplicationController extends ModelController {
+export class ApplicationController extends ModelController {
     constructor(model, frontHostApp) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);

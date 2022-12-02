@@ -1,4 +1,4 @@
-class RowFormTimeFieldView extends RowFormFieldView {
+export class RowFormTimeFieldView extends RowFormFieldView {
     onCloseClick = async e => {
         console.log('RowFormTimeFieldView.onCloseClick');
         /*const ctrl = this.props.ctrl;

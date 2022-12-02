@@ -1,4 +1,4 @@
-class ConfirmController extends Controller {
+export class ConfirmController extends Controller {
     constructor(options) {
         super();
         this.options = options;

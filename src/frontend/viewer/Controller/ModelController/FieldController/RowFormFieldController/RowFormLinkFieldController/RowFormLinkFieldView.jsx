@@ -1,4 +1,4 @@
-class RowFormLinkFieldView extends RowFormFieldView {
+export class RowFormLinkFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;
         return (

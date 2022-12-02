@@ -1,4 +1,5 @@
 export {LoginFrontHostApp} from './LoginFrontHostApp';
+export {ViewerFrontHostApp} from './ViewerFrontHostApp';
 
 /*
 document.addEventListener('DOMContentLoaded', async () => {

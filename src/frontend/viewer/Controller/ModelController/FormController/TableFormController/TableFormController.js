@@ -1,4 +1,4 @@
-class TableFormController extends FormController {
+export class TableFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {

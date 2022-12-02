@@ -1,4 +1,4 @@
-class ImageDialogView extends View {
+export class ImageDialogView extends View {
     constructor(props) {
         super(props);
         this.el = React.createRef();

@@ -1,4 +1,4 @@
-class RowFormView extends FormView {
+export class RowFormView extends FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;

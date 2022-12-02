@@ -1,4 +1,4 @@
-class RowFormFileFieldController extends RowFormFieldController {
+export class RowFormFileFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormFileFieldView;
     }

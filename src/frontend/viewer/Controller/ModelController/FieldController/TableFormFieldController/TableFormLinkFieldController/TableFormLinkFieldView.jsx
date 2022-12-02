@@ -1,4 +1,4 @@
-class TableFormLinkFieldView extends TableFormFieldView {
+export class TableFormLinkFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

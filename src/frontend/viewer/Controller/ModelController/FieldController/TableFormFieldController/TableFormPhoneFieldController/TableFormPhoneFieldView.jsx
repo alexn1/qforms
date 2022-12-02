@@ -1,4 +1,4 @@
-class TableFormPhoneFieldView extends TableFormFieldView {
+export class TableFormPhoneFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         return <div className={`${this.getCssClassNames()} ellipsis`} style={this.getStyle(row)}>

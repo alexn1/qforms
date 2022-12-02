@@ -313,6 +313,391 @@ window.LoginFrontHostApp = LoginFrontHostApp;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Application/Application.js":
+/*!**************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Application/Application.js ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Application": () => (/* binding */ Application)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+
+class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+  constructor(data) {
+    super(data);
+    this.databases = [];
+    this.dataSources = [];
+  }
+
+  init() {
+    // console.log('Application.init');
+    if (!this.data.theme) throw new Error('no theme attr'); // databases
+
+    for (const data of this.data.databases) {
+      const database = new Database(data, this);
+      database.init();
+      this.addDatabase(database);
+    } // data sources
+
+
+    this.createDataSources();
+  }
+
+  deinit() {
+    this.deinitDataSources(); // TODO: add deinit on opened pages
+
+    super.deinit();
+  }
+
+  addDatabase(database) {
+    this.databases.push(database);
+  }
+
+  async logout() {
+    const data = await this.request({
+      'action': 'logout'
+    });
+    this.emit('logout', {
+      source: this
+    });
+  }
+
+  async request(options) {
+    // console.warn('Application.request', data);
+    const start = Date.now();
+    const [headers, body] = await FrontHostApp.doHttpRequest2(options);
+    if (!headers['qforms-platform-version']) throw new Error('no qforms-platform-version header');
+    if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
+    this.emit('request', {
+      time: Date.now() - start,
+      remotePlatformVersion: headers['qforms-platform-version'],
+      remoteAppVersion: headers['qforms-app-version']
+    });
+    return body;
+  }
+
+  getDatabase(name) {
+    // console.log('Application.getDatabase', name);
+    const database = this.databases.find(database => database.getName() === name);
+    if (!database) throw new Error(`no database: ${name}`);
+    return database;
+  }
+
+  getText() {
+    return this.data.text;
+  }
+
+  getUser() {
+    return this.data.user;
+  }
+
+  getDomain() {
+    return this.getAttr('domain');
+  }
+
+  getVirtualPath() {
+    return this.data.virtualPath;
+  }
+
+  async rpc(name, params) {
+    console.log('Application.rpc', this.getFullName(), name, params);
+    if (!name) throw new Error('no name');
+    const result = await this.request({
+      uuid: this.getAttr('uuid'),
+      action: 'rpc',
+      name: name,
+      params: params
+    });
+    if (result.errorMessage) throw new Error(result.errorMessage);
+    return result;
+  }
+
+  emitResult(result, source = null) {
+    console.log('Application.emitResult', result, source);
+    const promises = [];
+
+    for (const database in result) {
+      promises.push(...this.getDatabase(database).emitResult(result[database], source));
+    } // console.log('promises:', promises);
+
+
+    return Promise.allSettled(promises);
+  }
+
+  getNodeEnv() {
+    return this.data.nodeEnv;
+  }
+
+  isDevelopment() {
+    return this.getNodeEnv() === 'development';
+  }
+
+}
+window.QForms.Application = Application;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Model.js":
+/*!********************************************!*\
+  !*** ./src/frontend/viewer/Model/Model.js ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Model": () => (/* binding */ Model)
+/* harmony export */ });
+/* harmony import */ var _EventEmitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.js");
+
+class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
+  constructor(data, parent) {
+    if (!data.name) throw new Error(`${data.class} no name`);
+    super();
+    this.data = data;
+    this.parent = parent;
+    this.deinited = false;
+  }
+
+  init() {}
+
+  deinit() {
+    if (this.deinited) throw new Error(`${this.getFullName()}: model already deinited`);
+    this.deinited = true;
+  }
+
+  static getAttr(data, name) {
+    return data[name];
+  }
+
+  static getCol(data, name) {
+    return data[name];
+  }
+
+  static getName(data) {
+    return Model.getAttr(data, 'name');
+  }
+
+  static getClassName(data) {
+    return Model.getAttr(data, 'class');
+  }
+
+  isAttr(name) {
+    // return this.data[name] !== undefined;
+    return this.data.hasOwnProperty(name);
+  }
+
+  getAttr(name) {
+    return this.data[name];
+  }
+
+  getCol(name) {
+    return this.data[name];
+  }
+
+  getClassName() {
+    return this.getAttr('class');
+  }
+
+  getName() {
+    return this.getAttr('name');
+  }
+
+  getFullName() {
+    if (this.parent) {
+      return `${this.parent.getFullName()}.${this.getName()}`;
+    }
+
+    return this.getName();
+  }
+
+  getCaption() {
+    return this.getAttr('caption');
+  }
+
+  getDataSource(name) {
+    return this.dataSources.find(dataSource => dataSource.getName() === name);
+  }
+
+  createDataSources() {
+    for (const data of this.data.dataSources) {
+      try {
+        const Class = FrontHostApp.getClassByName(data.class);
+        if (!Class) throw new Error(`no class ${data.class} class`);
+        const dataSource = new Class(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+      } catch (err) {
+        err.message = `${this.getFullName()}.${data.name}: ${err.message}`;
+        throw err;
+      }
+    }
+  }
+
+  deinitDataSources() {
+    for (const dataSource of this.dataSources) {
+      dataSource.deinit();
+    }
+  }
+
+  hasActions() {
+    return this.data.actions.length > 0;
+  }
+
+  getParent() {
+    return this.parent;
+  }
+
+  getData() {
+    return this.data;
+  }
+
+}
+window.QForms.Model = Model;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/ViewerFrontHostApp.js":
+/*!***************************************************!*\
+  !*** ./src/frontend/viewer/ViewerFrontHostApp.js ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ViewerFrontHostApp": () => (/* binding */ ViewerFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _Model_Application_Application__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.js");
+
+class ViewerFrontHostApp extends FrontHostApp {
+  constructor(options = {}) {
+    if (!options.data) throw new Error('no data');
+    super();
+    this.options = options;
+    this.applicationController = null;
+  }
+
+  async run() {
+    console.log('ViewerFrontHostApp.run', this.getData()); // application
+
+    const application = new _Model_Application_Application__WEBPACK_IMPORTED_MODULE_0__.Application(this.getData());
+    application.init(); // applicationController
+
+    const applicationController = this.applicationController = ApplicationController.create(application, this);
+    applicationController.init(); // view
+
+    const rootElementName = `.${applicationController.getViewClass().name}__root`;
+    const rootElement = document.querySelector(rootElementName);
+
+    if (!rootElement) {
+      throw new Error(`no root element: ${rootElementName}`);
+    }
+
+    applicationController.createView(rootElement); // connect
+
+    try {
+      await applicationController.connect();
+    } catch (err) {
+      this.logError(err);
+    }
+  }
+
+  async onWindowPopState(e) {
+    // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+    await this.applicationController.onWindowPopState(e);
+  }
+
+  logError(err) {
+    console.error('FrontHostApp.logError', err);
+    const values = {
+      type: 'error',
+      source: 'client',
+      message: err.message,
+      stack: err.stack,
+      data: {
+        href: window.location.href,
+        platformVersion: this.getData().versions.platform,
+        appVersion: this.getData().versions.app
+      }
+    };
+    console.log(`POST ${this.getData().logErrorUrl}`, values);
+    fetch(this.getData().logErrorUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=utf-8'
+      },
+      body: JSON.stringify(values)
+    }).catch(err => {
+      console.error(err.message);
+    });
+  }
+
+  getData() {
+    if (!this.options.data) throw new Error('no data');
+    return this.options.data;
+  }
+
+  alert(options) {
+    console.log('ViewerFrontHostApp.alert', options);
+    return new Promise((resolve, reject) => {
+      try {
+        const root = document.querySelector('.alert-root');
+
+        if (root.childElementCount === 0) {
+          const ctrl = this.alertCtrl = new AlertController({ ...options,
+            onClose: result => {
+              this.alertCtrl = null;
+              ReactDOM.unmountComponentAtNode(root);
+              resolve(result);
+            }
+          }); // console.log('ctrl:', ctrl);
+
+          const view = Helper.createReactComponent(root, ctrl.getViewClass(), {
+            ctrl
+          }); // console.log('view', view);
+        } else {
+          reject(new Error('alert already exists'));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+  confirm(options) {
+    console.log('ViewerFrontHostApp.confirm', options);
+    return new Promise((resolve, reject) => {
+      try {
+        const root = document.querySelector('.alert-root');
+
+        if (root.childElementCount === 0) {
+          const ctrl = this.alertCtrl = new ConfirmController({ ...options,
+            onClose: result => {
+              this.alertCtrl = null;
+              ReactDOM.unmountComponentAtNode(root);
+              resolve(result);
+            }
+          }); // console.log('ctrl:', ctrl);
+
+          const view = Helper.createReactComponent(root, ctrl.getViewClass(), {
+            ctrl
+          }); // console.log('view', view);
+        } else {
+          reject(new Error('confirm already exists'));
+        }
+      } catch (err) {
+        reject(err);
+      }
+    });
+  }
+
+}
+window.ViewerFrontHostApp = ViewerFrontHostApp;
+
+/***/ }),
+
 /***/ "./node_modules/react/cjs/react-jsx-runtime.development.js":
 /*!*****************************************************************!*\
   !*** ./node_modules/react/cjs/react-jsx-runtime.development.js ***!
@@ -4081,9 +4466,12 @@ var __webpack_exports__ = {};
   \*************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp)
+/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
+/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.js");
+/* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.js");
+
 
 /*
 document.addEventListener('DOMContentLoaded', async () => {

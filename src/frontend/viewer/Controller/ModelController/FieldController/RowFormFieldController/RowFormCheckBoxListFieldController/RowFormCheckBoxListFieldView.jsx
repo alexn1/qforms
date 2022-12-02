@@ -1,4 +1,4 @@
-class RowFormCheckBoxListFieldView extends RowFormFieldView {
+export class RowFormCheckBoxListFieldView extends RowFormFieldView {
     getItems() {
         const ctrl = this.getCtrl();
         try {

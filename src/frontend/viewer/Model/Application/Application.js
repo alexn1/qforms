@@ -1,4 +1,6 @@
-class Application extends Model {
+import {Model} from '../Model';
+
+export class Application extends Model {
     constructor(data) {
         super(data);
         this.databases   = [];

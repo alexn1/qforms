@@ -1,4 +1,4 @@
-class RowFormDateTimeFieldController extends RowFormFieldController {
+export class RowFormDateTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
         this.widget2 = null;

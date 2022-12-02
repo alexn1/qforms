@@ -1,4 +1,4 @@
-class TableFormTextBoxFieldView extends TableFormFieldView {
+export class TableFormTextBoxFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

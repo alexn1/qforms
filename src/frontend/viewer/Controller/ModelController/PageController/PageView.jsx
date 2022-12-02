@@ -1,4 +1,4 @@
-class PageView extends ModelView {
+export class PageView extends ModelView {
     constructor(props) {
         super(props);
         this.checkParent();

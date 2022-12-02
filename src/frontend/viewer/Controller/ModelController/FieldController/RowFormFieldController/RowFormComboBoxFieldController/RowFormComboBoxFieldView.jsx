@@ -1,4 +1,4 @@
-class RowFormComboBoxFieldView extends RowFormFieldView {
+export class RowFormComboBoxFieldView extends RowFormFieldView {
     onChange = async widgetValue => {
         // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
         this.rerender();

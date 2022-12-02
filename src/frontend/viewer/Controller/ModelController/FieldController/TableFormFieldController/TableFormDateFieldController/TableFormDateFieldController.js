@@ -1,4 +1,4 @@
-class TableFormDateFieldController extends TableFormFieldController {
+export class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormDateFieldView;
     }

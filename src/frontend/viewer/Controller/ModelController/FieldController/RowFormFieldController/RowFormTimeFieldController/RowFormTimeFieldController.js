@@ -1,4 +1,4 @@
-class RowFormTimeFieldController extends RowFormFieldController {
+export class RowFormTimeFieldController extends RowFormFieldController {
     constructor(...args) {
         super(...args);
         this.defaultValue = null;

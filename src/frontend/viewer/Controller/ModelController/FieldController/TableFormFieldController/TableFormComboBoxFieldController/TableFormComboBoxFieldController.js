@@ -1,4 +1,4 @@
-class TableFormComboBoxFieldController extends TableFormFieldController {
+export class TableFormComboBoxFieldController extends TableFormFieldController {
 
     init() {
         super.init();

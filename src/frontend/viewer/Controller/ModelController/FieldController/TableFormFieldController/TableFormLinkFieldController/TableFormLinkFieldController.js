@@ -1,4 +1,4 @@
-class TableFormLinkFieldController extends TableFormFieldController {
+export class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormLinkFieldView;
     }

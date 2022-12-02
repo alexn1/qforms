@@ -1,4 +1,4 @@
-class RowFormFieldView extends FieldView {
+export class RowFormFieldView extends FieldView {
     constructor(props) {
         super(props);
         this.widget = null;

@@ -1,4 +1,4 @@
-class RowFormRadioFieldController extends RowFormFieldController {
+export class RowFormRadioFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormRadioFieldView;
     }

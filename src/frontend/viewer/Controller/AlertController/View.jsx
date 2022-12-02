@@ -1,4 +1,4 @@
-class AlertView extends View {
+export class AlertView extends View {
     constructor(props) {
         super(props);
         this.el = React.createRef();

@@ -1,4 +1,4 @@
-class RowFormDateTimeFieldView extends RowFormFieldView {
+export class RowFormDateTimeFieldView extends RowFormFieldView {
     onClear2 = async () => {
         // console.log('RowFormDateTimeFieldView.onClear2');
         this.getCtrl().onChange2(null);

@@ -1,4 +1,4 @@
-class AlertController extends Controller {
+export class AlertController extends Controller {
     constructor(options) {
         super();
         this.options = options;

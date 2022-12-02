@@ -1,4 +1,4 @@
-class ModalController extends Controller {
+export class ModalController extends Controller {
     constructor(options = {}) {
         super();
         if (!options.app) throw new Error('no app');

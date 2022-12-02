@@ -1,4 +1,4 @@
-class TableFormComboBoxFieldView extends TableFormFieldView {
+export class TableFormComboBoxFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

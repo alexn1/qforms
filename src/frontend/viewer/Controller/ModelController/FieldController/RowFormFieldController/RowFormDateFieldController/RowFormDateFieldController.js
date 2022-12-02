@@ -1,4 +1,4 @@
-class RowFormDateFieldController extends RowFormFieldController {
+export class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormDateFieldView;
     }

@@ -1,4 +1,4 @@
-class TableFormView extends FormView {
+export class TableFormView extends FormView {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;

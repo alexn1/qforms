@@ -1,4 +1,4 @@
-class RowFormImageFieldView extends RowFormFieldView {
+export class RowFormImageFieldView extends RowFormFieldView {
     onImageClick = async e => {
         const ctrl = this.props.ctrl;
         console.log('RowFormImageFieldView.onImageClick');

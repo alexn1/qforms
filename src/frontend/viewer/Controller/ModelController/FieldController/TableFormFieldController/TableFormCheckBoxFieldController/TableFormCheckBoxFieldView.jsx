@@ -1,4 +1,4 @@
-class TableFormCheckBoxFieldView extends TableFormFieldView {
+export class TableFormCheckBoxFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

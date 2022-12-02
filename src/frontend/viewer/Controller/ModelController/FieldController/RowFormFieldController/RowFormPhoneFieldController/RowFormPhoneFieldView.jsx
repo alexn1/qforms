@@ -1,4 +1,4 @@
-class RowFormPhoneFieldView extends RowFormFieldView {
+export class RowFormPhoneFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);
         this.state = {

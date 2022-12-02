@@ -1,4 +1,4 @@
-class RowFormPasswordFieldController extends RowFormFieldController {
+export class RowFormPasswordFieldController extends RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormPasswordFieldView;
     }

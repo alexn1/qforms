@@ -1,4 +1,4 @@
-class TableFormPhoneFieldController extends TableFormFieldController {
+export class TableFormPhoneFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormPhoneFieldView;
     }

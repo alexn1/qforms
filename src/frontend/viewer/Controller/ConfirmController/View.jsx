@@ -1,4 +1,4 @@
-class ConfirmView extends View {
+export class ConfirmView extends View {
     constructor(props) {
         super(props);
         this.el = React.createRef();

@@ -1,4 +1,4 @@
-class TableFormTextBoxFieldController extends TableFormFieldController {
+export class TableFormTextBoxFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormTextBoxFieldView;
     }

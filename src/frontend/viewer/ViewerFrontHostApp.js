@@ -1,4 +1,6 @@
-class ViewerFrontHostApp extends FrontHostApp {
+import {Application} from './Model/Application/Application';
+
+export class ViewerFrontHostApp extends FrontHostApp {
     constructor(options = {}) {
         if (!options.data) throw new Error('no data');
         super();
@@ -111,4 +113,4 @@ class ViewerFrontHostApp extends FrontHostApp {
     }
 }
 
-window.QForms.ViewerFrontHostApp = ViewerFrontHostApp;
+window.ViewerFrontHostApp = ViewerFrontHostApp;

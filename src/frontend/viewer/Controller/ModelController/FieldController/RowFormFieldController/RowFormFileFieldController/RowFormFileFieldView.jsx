@@ -1,4 +1,4 @@
-class RowFormFileFieldView extends RowFormFieldView {
+export class RowFormFileFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);
         this.image = React.createRef();
