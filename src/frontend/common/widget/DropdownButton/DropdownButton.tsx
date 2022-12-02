@@ -1,3 +1,6 @@
+import {ReactComponent} from '../../ReactComponent';
+import {Button} from '../Button';
+
 export class DropdownButton extends ReactComponent{
     constructor(props) {
         super(props);
@@ -64,4 +67,6 @@ export class DropdownButton extends ReactComponent{
         );
     }
 }
+
+// @ts-ignore
 window.DropdownButton = DropdownButton;

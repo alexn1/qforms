@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Tab extends ReactComponent {
     constructor(props) {
         super(props);
@@ -69,4 +71,6 @@ export class Tab extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
 window.Tab = Tab;

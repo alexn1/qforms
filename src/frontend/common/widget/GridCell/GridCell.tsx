@@ -1,4 +1,9 @@
+import React from 'react';
+import {ReactComponent} from '../../ReactComponent';
+import {Helper} from '../../Helper';
+
 export class GridCell extends ReactComponent {
+    span: React.RefObject<any>;
     constructor(props) {
         super(props);
         this.span = React.createRef();
@@ -23,4 +28,5 @@ export class GridCell extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.GridCell = GridCell;

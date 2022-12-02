@@ -1,6 +1,9 @@
+import {ReactComponent} from '../../ReactComponent';
+import {Button} from '../Button';
+
 export class Box extends ReactComponent {
     constructor(props) {
-        console.log('Box.constructor', props);
+        // console.log('Box.constructor', props);
         super(props);
         this.state = {
             backgroundColor: 'purple'
@@ -39,4 +42,6 @@ export class Box extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
 window.Box = Box;

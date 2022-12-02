@@ -31764,6 +31764,60 @@ window.Search = Search;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Box/Box.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Box = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+class Box extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('Box.constructor', props);
+        super(props);
+        this.update = () => {
+            console.log('Box.update');
+            this.setState({
+                backgroundColor: 'green'
+            });
+        };
+        this.state = {
+            backgroundColor: 'purple'
+        };
+    }
+    // componentWillMount() {
+    //     console.log('Box.componentWillMount');
+    // }
+    componentDidMount() {
+        console.log('Box.componentDidMount');
+    }
+    componentWillUnmount() {
+        console.log('Box.componentWillUnmount');
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        return true;
+    }
+    componentDidUpdate() {
+        console.log('Box.componentDidUpdate');
+    }
+    render() {
+        console.log('Box.render');
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, { name: "one" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "two" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "three" })] })));
+    }
+}
+exports.Box = Box;
+// @ts-ignore
+window.Box = Box;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Button.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
@@ -31817,6 +31871,70 @@ class Button extends ReactComponent_1.ReactComponent {
 exports.Button = Button;
 // @ts-ignore
 window.Button = Button;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CheckBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class CheckBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = e => {
+            // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+            if (!this.props.readOnly) {
+                this.setState(prevState => {
+                    if (this.props.onChange) {
+                        this.props.onChange(!prevState.checked, e);
+                    }
+                    return { checked: !prevState.checked };
+                });
+            }
+        };
+        this.onClick = e => {
+            if (!this.props.readOnly) {
+                if (this.props.onChange)
+                    this.props.onChange(true);
+                this.setState({ checked: true });
+            }
+        };
+        if (this.props.checked !== undefined &&
+            this.props.checked !== null &&
+            typeof this.props.checked !== 'boolean') {
+            throw new Error(`wrong checked prop: ${this.props.checked}`);
+        }
+        this.state = {
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+        };
+    }
+    getValue() {
+        return this.state.checked;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
+        return true;
+    }
+    render() {
+        if (this.state.checked === null) {
+            return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" }));
+        }
+        return (0, jsx_runtime_1.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange });
+    }
+}
+exports.CheckBox = CheckBox;
+// @ts-ignore
+window.CheckBox = CheckBox;
 
 
 /***/ }),
@@ -31902,6 +32020,488 @@ window.ComboBox = ComboBox;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DropdownButton = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+class DropdownButton extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onButtonClick = e => {
+            // console.log('DropdownButton.onButtonClick');
+            this.setState(state => ({ open: !state.open }));
+        };
+        this.onButtonBlur = e => {
+            // console.log('DropdownButton.onButtonBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onKeyDown = e => {
+            // console.log('DropdownButton.onKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onUlMouseDown = e => {
+            // console.log('DropdownButton.onUlMouseDown');
+            e.preventDefault();
+        };
+        this.onLiClick = async (e) => {
+            // console.log('DropdownButton.onLiClick', e.currentTarget);
+            const li = e.currentTarget;
+            this.setState({ open: false }, () => {
+                if (this.props.onClick) {
+                    this.props.onClick(li);
+                }
+            });
+        };
+        this.state = {
+            open: false,
+            disabled: false
+        };
+    }
+    isEnabled() {
+        if (this.props.enabled !== undefined)
+            return this.props.enabled;
+        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+        return !this.state.disabled;
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0, jsx_runtime_1.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions && this.props.actions.map(action => (0, jsx_runtime_1.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name)) }))] })));
+    }
+}
+exports.DropdownButton = DropdownButton;
+// @ts-ignore
+window.DropdownButton = DropdownButton;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
+  \**************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Grid = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+const GridRow_1 = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+const GridCell_1 = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+class Grid extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('Grid.constructor', props);
+        super(props);
+        this.onCellMouseDown = async (e) => {
+            console.log('Grid.onCellMouseDown', this.isLink());
+            e.preventDefault(); // prevent text selection on double click
+            if (this.isDisabled())
+                return;
+            this.getElement().focus();
+            // if (this.isLink()) return;
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            await this.selectCell(key, j);
+            if (button === 0 && this.props.onClick) {
+                this.props.onClick(row, key);
+            }
+        };
+        this.onRowMouseDown = async (e) => {
+            console.log('Grid.onRowMouseDown', this.isLink());
+            // if (this.isLink()) return;
+            const key = e.currentTarget.dataset.row;
+            await this.selectRow(key);
+        };
+        this.onCellDoubleClick = async (e) => {
+            // console.log('Grid.onCellDoubleClick');
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (button === 0 && this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onRowDoubleClick = async (e) => {
+            // console.log('Grid.onRowDoubleClick');
+            const i = parseInt(e.currentTarget.dataset.r);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onKeyDown = async (e) => {
+            // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+            if (this.isDisabled())
+                return;
+            switch (e.keyCode) {
+                case 37:
+                    e.preventDefault();
+                    await this.onLeft();
+                    break;
+                case 38:
+                    e.preventDefault();
+                    await this.onUp();
+                    break;
+                case 39:
+                    e.preventDefault();
+                    await this.onRight();
+                    break;
+                case 40:
+                    e.preventDefault();
+                    await this.onDown();
+                    break;
+                case 13:
+                    e.preventDefault();
+                    await this.onEnter();
+                    break;
+                case 46:
+                    e.preventDefault();
+                    await this.onDelete();
+                    break;
+                case 67:
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        await this.onCopy();
+                    }
+                    break;
+            }
+        };
+        this.onResizeDoubleClick = async (e) => {
+            console.log('Grid.onResizeDoubleClick', e.target);
+            const i = parseInt(e.target.dataset.i);
+            const column = this.props.columns[i];
+            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+                return;
+            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+            // @ts-ignore
+            this.state.resized = Date.now();
+            await this.rerender();
+        };
+        this.onCellViewCreate = c => {
+            // console.log('Grid.onCellViewCreate', c.props.column.name);
+            const columnName = c.props.column.name;
+            if (this.columns[columnName] === undefined)
+                this.columns[columnName] = [];
+            this.columns[columnName].push(c);
+        };
+        this.onCellViewUnmount = c => {
+            // console.log('Grid.onCellViewUnmount', c.props.column.name);
+            const columnName = c.props.column.name;
+            const i = this.columns[columnName].indexOf(c);
+            if (i === -1)
+                throw new Error('cannot find FieldView in Grid.columns');
+            this.columns[columnName].splice(i, 1);
+        };
+        this.onBodyScroll = async (e) => {
+            // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+            this.head.current.scrollLeft = e.target.scrollLeft;
+        };
+        this.onLinkClick = async (e) => {
+            console.log('Grid.onLinkClick', e.ctrlKey);
+            if (e.ctrlKey)
+                return;
+            e.preventDefault();
+            /*if (!this.isLink()) return;
+            const key = e.currentTarget.dataset.key;
+            if (this.props.onLinkClick) {
+                await this.props.onLinkClick(key);
+            }*/
+        };
+        this.state = {
+            key: this.props.selectedKey || null,
+            column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+            columnWidth: {},
+            resized: Date.now(),
+        };
+        this.columns = {}; // each column is the array of each cell view
+        this.el = react_1.default.createRef();
+        this.head = react_1.default.createRef();
+    }
+    getActiveColumn() {
+        return this.state.column;
+    }
+    setActiveColumn(column) {
+        // @ts-ignore
+        this.state.column = column;
+    }
+    getActiveRowKey() {
+        return this.state.key;
+    }
+    setActiveRowKey(key) {
+        // console.log('Grid.setActiveRowKey', key);
+        // @ts-ignore
+        this.state.key = key;
+    }
+    isRowActive(i, key) {
+        return this.getActiveRowKey() === key;
+    }
+    async onCopy() {
+        console.log('Grid.onCopy');
+        const row = this.findRow(this.getActiveRowKey());
+        const column = this.props.columns[this.getActiveColumn()].name;
+        const text = row[column];
+        await Helper_1.Helper.copyTextToClipboard(text);
+    }
+    findRow(key) {
+        return this.props.rows.find(row => this.getRowKey(row) === key);
+    }
+    async onLeft() {
+        console.log('Grid.onLeft');
+        const j = this.getActiveColumn();
+        if (j - 1 >= 0) {
+            this.setActiveColumn(j - 1);
+            await this.rerender();
+        }
+    }
+    async onUp() {
+        console.log('Grid.onUp');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i - 1 >= 0) {
+            const pRow = this.props.rows[i - 1];
+            const pKey = this.getRowKey(pRow);
+            this.setActiveRowKey(pKey);
+            await this.rerender();
+        }
+    }
+    async onRight() {
+        console.log('Grid.onRight');
+        const j = this.getActiveColumn();
+        if (j + 1 <= this.props.columns.length - 1) {
+            this.setActiveColumn(j + 1);
+            await this.rerender();
+        }
+    }
+    async onDown() {
+        console.log('Grid.onDown');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i + 1 <= this.props.rows.length - 1) {
+            const nRow = this.props.rows[i + 1];
+            const nKey = this.getRowKey(nRow);
+            this.setActiveRowKey(nKey);
+            await this.rerender();
+        }
+    }
+    async onEnter() {
+        console.log('Grid.onEnter');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDoubleClick) {
+            await this.props.onDoubleClick(row, key);
+        }
+    }
+    async onDelete() {
+        console.log('Grid.onDelete');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDeleteKeyDown) {
+            await this.props.onDeleteKeyDown(row, key);
+        }
+    }
+    async selectCell(key, j) {
+        // console.log('Grid.selectCell', key, j);
+        if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
+            return;
+        this.setActiveRowKey(key);
+        this.setActiveColumn(j);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    async selectRow(key) {
+        // console.log('Grid.selectRow', key);
+        if (this.getActiveRowKey() === key)
+            return;
+        this.setActiveRowKey(key);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    getMaxColumnWidth(column) {
+        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2;
+    }
+    getColumnWidth(i) {
+        const column = this.props.columns[i];
+        if (this.state.columnWidth[column.name] !== undefined) {
+            return this.state.columnWidth[column.name];
+        }
+        return column.width;
+    }
+    renderColumns() {
+        return this.props.columns.map((column, i) => (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0, jsx_runtime_1.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name));
+    }
+    renderRows() {
+        return this.props.rows.map((row, i) => {
+            const key = this.getRowKey(row);
+            return (0, jsx_runtime_1.jsx)(GridRow_1.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key);
+        });
+    }
+    getRowKey(row) {
+        if (this.props.getRowKey) {
+            return this.props.getRowKey(row);
+        }
+        return this.props.rows.indexOf(row).toString();
+    }
+    renderCell(row, column) {
+        let view;
+        if (this.props.renderGridCellView) {
+            view = this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
+        }
+        if (view)
+            return view;
+        return (0, jsx_runtime_1.jsx)(GridCell_1.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount });
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('Grid.render', this.props.name);
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && (0, jsx_runtime_1.jsx)("div", { className: `${this.getCssBlockName()}__th` })] })) })) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+    }
+    isLink() {
+        return !!this.props.createLinkCallback;
+    }
+}
+exports.Grid = Grid;
+// @ts-ignore
+window.Grid = Grid;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
+  \**********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GridCell = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+class GridCell extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.span = react_1.default.createRef();
+    }
+    getSpanOffsetWidth() {
+        if (!this.span.current)
+            return 0;
+        return this.span.current.offsetWidth;
+    }
+    renderCellValue(rawValue) {
+        const value = this.props.grid.props.decodeValue ? Helper_1.Helper.decodeValue(rawValue) : rawValue;
+        if (typeof value === 'boolean')
+            return value.toString();
+        return value;
+    }
+    render() {
+        const row = this.props.row;
+        const column = this.props.column;
+        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0, jsx_runtime_1.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
+    }
+}
+exports.GridCell = GridCell;
+// @ts-ignore
+window.GridCell = GridCell;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridRow/GridRow.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.GridRow = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class GridRow extends ReactComponent_1.ReactComponent {
+    isCellActive(j) {
+        return this.props.active && this.props.activeColumn === j;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            if (nextProps.resized - this.props.resized)
+                return true;
+            if (this.props.active !== nextProps.active)
+                return true;
+            if (this.props.active && this.props.activeColumn !== nextProps.activeColumn)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('GridRow.render', this.props.i);
+        const grid = this.props.grid;
+        const row = this.props.row;
+        const i = this.props.i;
+        const key = this.props.rowKey;
+        const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
+        return (0, jsx_runtime_1.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name)), !!grid.props.extraColumn &&
+                    (0, jsx_runtime_1.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick })] }));
+    }
+}
+exports.GridRow = GridRow;
+// @ts-ignore
+window.GridRow = GridRow;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Modal/Modal.tsx":
 /*!****************************************************!*\
   !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
@@ -31921,6 +32521,77 @@ class Modal extends ReactComponent_1.ReactComponent {
 exports.Modal = Modal;
 // @ts-ignore
 window.Modal = Modal;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Tab = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Tab extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = e => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = e => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose &&
+                    (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name));
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0, jsx_runtime_1.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
+    }
+}
+exports.Tab = Tab;
+// @ts-ignore
+window.Tab = Tab;
 
 
 /***/ }),
@@ -32016,7 +32687,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -32025,19 +32696,26 @@ var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/c
 Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
 var Search_1 = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
 Object.defineProperty(exports, "Search", ({ enumerable: true, get: function () { return Search_1.Search; } }));
-// export {Box} from './widget/Box/Box';
-// export {CheckBox} from './widget/CheckBox/CheckBox';
+var Box_1 = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+Object.defineProperty(exports, "Box", ({ enumerable: true, get: function () { return Box_1.Box; } }));
+var CheckBox_1 = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+Object.defineProperty(exports, "CheckBox", ({ enumerable: true, get: function () { return CheckBox_1.CheckBox; } }));
 var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
 Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
 var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
 Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
-// export {Tab} from './widget/Tab/Tab';
-// export {DropdownButton} from './widget/DropdownButton/DropdownButton';
+var Tab_1 = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+Object.defineProperty(exports, "Tab", ({ enumerable: true, get: function () { return Tab_1.Tab; } }));
+var DropdownButton_1 = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+Object.defineProperty(exports, "DropdownButton", ({ enumerable: true, get: function () { return DropdownButton_1.DropdownButton; } }));
 var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
 Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
-// export {Grid} from './widget/Grid/Grid';
-// export {GridRow} from './widget/GridRow/GridRow';
-// export {GridCell} from './widget/GridCell/GridCell';
+var Grid_1 = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+Object.defineProperty(exports, "Grid", ({ enumerable: true, get: function () { return Grid_1.Grid; } }));
+var GridRow_1 = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+Object.defineProperty(exports, "GridRow", ({ enumerable: true, get: function () { return GridRow_1.GridRow; } }));
+var GridCell_1 = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+Object.defineProperty(exports, "GridCell", ({ enumerable: true, get: function () { return GridCell_1.GridCell; } }));
 var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
 Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
 

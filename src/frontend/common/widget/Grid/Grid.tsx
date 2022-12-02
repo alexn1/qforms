@@ -1,6 +1,14 @@
+import React from 'react';
+import {ReactComponent} from '../../ReactComponent';
+import {Helper} from '../../Helper';
+import {GridRow} from '../GridRow/GridRow';
+import {GridCell} from '../GridCell/GridCell';
+
 export class Grid extends ReactComponent {
+    columns: any;
+    head: React.RefObject<any>;
     constructor(props) {
-        console.log('Grid.constructor', props);
+        // console.log('Grid.constructor', props);
         super(props);
         this.state = {
             key        : this.props.selectedKey || null,
@@ -16,6 +24,7 @@ export class Grid extends ReactComponent {
         return this.state.column;
     }
     setActiveColumn(column) {
+        // @ts-ignore
         this.state.column = column;
     }
     getActiveRowKey() {
@@ -23,6 +32,7 @@ export class Grid extends ReactComponent {
     }
     setActiveRowKey(key) {
         // console.log('Grid.setActiveRowKey', key);
+        // @ts-ignore
         this.state.key = key;
     }
     isRowActive(i, key) {
@@ -204,6 +214,7 @@ export class Grid extends ReactComponent {
         const column = this.props.columns[i];
         if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
         this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+        // @ts-ignore
         this.state.resized = Date.now();
         await this.rerender();
     }
@@ -324,4 +335,5 @@ export class Grid extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Grid = Grid;

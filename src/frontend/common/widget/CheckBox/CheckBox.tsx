@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class CheckBox extends ReactComponent {
     constructor(props) {
         super(props);
@@ -33,6 +35,7 @@ export class CheckBox extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
     }
@@ -52,4 +55,5 @@ export class CheckBox extends ReactComponent {
         />;
     }
 }
+// @ts-ignore
 window.CheckBox = CheckBox;

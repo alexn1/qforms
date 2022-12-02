@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class GridRow extends ReactComponent {
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
@@ -51,4 +53,5 @@ export class GridRow extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.GridRow = GridRow;
