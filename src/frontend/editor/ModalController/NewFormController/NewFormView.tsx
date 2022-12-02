@@ -1,4 +1,9 @@
+import {ReactComponent} from '../../../common';
+
 export class NewFormView extends ReactComponent {
+    name: any;
+    caption: any;
+    class: any;
     constructor(props) {
         super(props);
         this.name    = null;

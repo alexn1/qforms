@@ -1,4 +1,12 @@
+import {ReactComponent} from '../../../common';
+
 export class NewDatabaseView extends ReactComponent {
+    class: any;
+    name: any;
+    host: any;
+    database: any;
+    user: any;
+    password: any;
     constructor(props) {
         super(props);
         this.class    = null;

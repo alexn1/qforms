@@ -1,3 +1,5 @@
+import {FormWizard} from '../FormWizard';
+
 export class MySqlFormWizard extends FormWizard {
 
     getSingleQuery() {

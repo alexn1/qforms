@@ -1,4 +1,5 @@
 import {ModelController} from '../ModelController';
+import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class ActionController extends ModelController {
     /*constructor(model, parent) {

@@ -1,4 +1,10 @@
+import {ReactComponent, TextBox, ComboBox} from '../../../common';
+
 export class NewFormFromTableView extends ReactComponent {
+    page: any;
+    class: any;
+    name: any;
+    caption: any;
     constructor(props) {
         super(props);
         this.page = null;

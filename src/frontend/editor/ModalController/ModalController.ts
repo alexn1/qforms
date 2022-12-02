@@ -1,4 +1,7 @@
+import {EditorFrontHostApp} from '../EditorFrontHostApp/EditorFrontHostApp';
+
 export class ModalController {
+    options: any;
     constructor(options) {
         this.options = options;
     }

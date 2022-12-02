@@ -2,8 +2,16 @@ import {DocumentController} from '../DocumentController';
 import {ParamController} from '../../ParamController/ParamController';
 import {TableController} from '../TableController/TableController';
 import {DatabaseView} from './DatabaseView';
+import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import {NewParamController} from '../../../ModalController/NewParamController/NewParamController';
+import {NewTableController} from '../../../ModalController/NewTableController/NewTableController';
 
 export class DatabaseController extends DocumentController {
+    tableName: any;
+    tableInfo: any;
+    params: any[];
+    tables: any[];
+    items: any[];
     constructor(model, parent) {
         super(model, parent);
         this.tableName = null;
@@ -116,6 +124,7 @@ export class DatabaseController extends DocumentController {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         // console.log('data:', result.data);
+        // @ts-ignore
         document.treeWidgetItems = result.data.tables.sort().map(tableName => ({getTitle: () => tableName}))
         return document;
     }

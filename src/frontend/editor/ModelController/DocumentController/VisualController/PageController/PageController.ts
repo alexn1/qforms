@@ -1,6 +1,16 @@
 import {VisualController} from '../VisualController';
+import {FormController} from '../FormController/FormController';
+import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import {DataSourceEditor} from '../../../../Editor/DataSourceEditor/DataSourceEditor';
+import {NewFormController} from '../../../../ModalController/NewFormController/NewFormController';
+import {VisualView} from '../VisualView';
+import {ModelController} from '../../../ModelController';
 
 export class PageController extends VisualController {
+    options: any;
+    forms: any[];
+    items: any[];
 
     constructor(model, pageLinkController = null, options = {}) {
         super(model);
@@ -114,7 +124,7 @@ export class PageController extends VisualController {
         return propList;
     }
 
-    setProperty(name, value) {
+    async setProperty(name, value) {
         if (name === 'startup' || name === 'menu') {
             this.getPageLink().setValue(name, value);
         } else  {

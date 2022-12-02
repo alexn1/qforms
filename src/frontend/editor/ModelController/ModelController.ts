@@ -26,7 +26,7 @@ export class ModelController {
             options: {}
         };
     }
-    async setProperty(name, value) {
+    async setProperty(name, value): Promise<void> {
         await this.model.setValue(name, value);
     }
     /*getObject(col, name) {

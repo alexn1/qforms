@@ -1,3 +1,5 @@
+import {FormWizard} from '../FormWizard';
+
 export class PostgreSqlFormWizard extends FormWizard {
 
     getSingleQuery() {

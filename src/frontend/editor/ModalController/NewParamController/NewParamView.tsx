@@ -1,4 +1,7 @@
+import {ReactComponent, TextBox} from '../../../common';
+
 export class NewParamView extends ReactComponent {
+    name: any;
     constructor(props) {
         super(props);
         this.name = null;

@@ -1,12 +1,9 @@
-export class FormWizard {
-    static create(params) {
-        console.log('FormWizard.create', params);
-        switch (params.model.database.getClassName()) {
-            case 'MySqlDatabase'     : return new MySqlFormWizard(params);
-            case 'PostgreSqlDatabase': return new PostgreSqlFormWizard(params);
-            default: throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
-        }
-    }
+export abstract class FormWizard {
+    params: any;
+    model: any;
+    databaseName: any;
+    tableName: any;
+    tableColumns: any;
 
     constructor(params) {
         console.log('FormWizard.constructor', params);
@@ -32,6 +29,10 @@ export class FormWizard {
         ];
     }
 
+    abstract getCountQuery()
+    abstract getSingleQuery()
+    abstract getMultipleQuery()
+
     getFieldClass(column) {
         if (column.type === 'date') return 'DateField';
         if (column.type === 'boolean') return 'CheckBoxField';
@@ -48,7 +49,7 @@ export class FormWizard {
 
     getField(column) {
         // console.log('FormWizard.getField', column);
-        let field = {
+        let field: any = {
             class: this.getFieldClass(column),
             name : column.name,
             caption: column.caption || column.name

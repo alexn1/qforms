@@ -1,4 +1,8 @@
+import {ReactComponent, TextBox} from '../../../common';
+
 export class NewActionView extends ReactComponent {
+    name: any;
+    caption: any;
     constructor(props) {
         super(props);
         this.name    = null;

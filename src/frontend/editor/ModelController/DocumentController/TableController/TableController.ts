@@ -1,8 +1,15 @@
 import {DocumentController} from '../DocumentController';
 import {ColumnController} from '../../ColumnController/ColumnController';
+import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import {FrontHostApp} from '../../../../common';
+import {NewColumnController} from '../../../ModalController/NewColumnController/NewColumnController';
+import {NewFormFromTableController} from '../../../ModalController/NewFormFromTableController/NewFormFromTableController';
+import {EditorHelper} from '../../../EditorHelper';
+import {TableView} from './TableView';
 
 export class TableController extends DocumentController {
-
+    columns: any[];
+    items: any[];
     constructor(model, parent) {
         super(model, parent);
         this.columns = [];
@@ -62,16 +69,6 @@ export class TableController extends DocumentController {
         }
     }
 
-    static async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : 'getView',
-            params    : {
-                view: view
-            }
-        });
-    }
-
     async actionNewColumn() {
         await EditorFrontHostApp.editorApp.openModal(new NewColumnController({onCreate: async values => {
             const column = await this.model.newColumn(values.name);
@@ -86,12 +83,22 @@ export class TableController extends DocumentController {
         console.log('TableController.onCreateFormButtonClick');
         await this.createFormAction();
     }
-    static async getView(view) {
+    /*static async getView(view) {
         console.log('TableController.getView', view);
         return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
             params    : {view : view}
+        });
+    }*/
+
+    static async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action    : 'getView',
+            params    : {
+                view: view
+            }
         });
     }
 
@@ -100,7 +107,7 @@ export class TableController extends DocumentController {
         await EditorFrontHostApp.editorApp.openModal(new NewFormFromTableController({
             tableController: this,
             onCreate: async values => {
-                const formWizard = FormWizard.create({
+                const formWizard = EditorHelper.create({
                     model       : this.model,
                     pageName    : values.page,
                     className   : values.class,

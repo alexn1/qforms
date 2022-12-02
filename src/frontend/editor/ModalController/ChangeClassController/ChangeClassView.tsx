@@ -1,4 +1,7 @@
+import {ReactComponent} from '../../../common';
+
 export class ChangeClassView extends ReactComponent {
+    class: any;
     constructor(props) {
         super(props);
         this.class = null;

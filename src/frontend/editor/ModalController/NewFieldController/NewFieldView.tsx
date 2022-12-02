@@ -1,4 +1,10 @@
+import {ReactComponent} from '../../../common';
+
 export class NewFieldView extends ReactComponent {
+    class: any;
+    name: any;
+    caption: any;
+    type: any;
     constructor(props) {
         super(props);
         this.class   = null;

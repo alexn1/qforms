@@ -1,6 +1,10 @@
 import {VisualController} from '../VisualController';
+import {FieldController} from '../FieldController/FieldController';
+import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class FormController extends VisualController {
+    fields: any[];
+    items: any[];
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];

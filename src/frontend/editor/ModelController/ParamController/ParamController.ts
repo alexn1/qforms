@@ -1,4 +1,6 @@
 import {ModelController} from '../ModelController';
+import {FrontHostApp} from '../../../common';
+import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class ParamController extends ModelController {
 

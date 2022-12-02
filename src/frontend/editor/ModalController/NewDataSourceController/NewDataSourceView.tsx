@@ -1,4 +1,8 @@
+import {ReactComponent} from '../../../common';
+
 export class NewDataSourceView extends ReactComponent {
+    name: any;
+    class: any;
     constructor(props) {
         super(props);
         this.name  = null;

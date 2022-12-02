@@ -1,9 +1,17 @@
+import React from 'react';
 import {DocumentView} from '../DocumentView';
+import {Button} from '../../../../common';
 
 export class SqlDataSourceView extends DocumentView {
+    singleRef: React.RefObject<any>;
+    multipleRef: React.RefObject<any>;
+    countRef: React.RefObject<any>;
+    singleQuery: any;
+    multipleQuery: any;
+    countQuery: any;
     constructor(props) {
         super(props);
-        this.singleRef   = React.createRef();
+        this.singleRef  = React.createRef();
         this.multipleRef = React.createRef();
         this.countRef    = React.createRef();
         this.state = {

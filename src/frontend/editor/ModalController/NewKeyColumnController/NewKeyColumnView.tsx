@@ -1,4 +1,7 @@
+import {ReactComponent, TextBox} from '../../../common';
+
 export class NewKeyColumnView extends ReactComponent {
+    name: any;
     constructor(props) {
         super(props);
         this.name = null;
