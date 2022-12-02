@@ -31721,6 +31721,49 @@ window.ReactComponent = ReactComponent;
 
 /***/ }),
 
+/***/ "./src/frontend/common/Search.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Search.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Search = void 0;
+class Search {
+    static getObj() {
+        if (!window.location.search.split('?')[1])
+            return {};
+        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+            const kv = item.split('=');
+            acc[kv[0]] = decodeURIComponent(kv[1]);
+            return acc;
+        }, {});
+    }
+    static objToString(obj) {
+        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        if (!search)
+            return '';
+        return `?${search}`;
+    }
+    static filter(names) {
+        const newObj = {};
+        const obj = Search.getObj();
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return Search.objToString(newObj);
+    }
+}
+exports.Search = Search;
+// @ts-ignore
+window.Search = Search;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Button.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
@@ -31973,14 +32016,15 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
 var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
-// export {Search} from './Search';
+var Search_1 = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+Object.defineProperty(exports, "Search", ({ enumerable: true, get: function () { return Search_1.Search; } }));
 // export {Box} from './widget/Box/Box';
 // export {CheckBox} from './widget/CheckBox/CheckBox';
 var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");

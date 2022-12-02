@@ -23,4 +23,6 @@ export class Search {
         return Search.objToString(newObj);
     }
 }
+
+// @ts-ignore
 window.Search = Search;

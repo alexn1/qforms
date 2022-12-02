@@ -1,7 +1,7 @@
 export {Helper} from './Helper';
 export {ReactComponent} from './ReactComponent';
 export {FrontHostApp} from './FrontHostApp';
-// export {Search} from './Search';
+export {Search} from './Search';
 // export {Box} from './widget/Box/Box';
 // export {CheckBox} from './widget/CheckBox/CheckBox';
 export {ComboBox} from './widget/ComboBox';
