@@ -1,4 +1,5 @@
 import {TableFormFieldController} from '../TableFormFieldController';
+import {TableFormComboBoxFieldView} from './TableFormComboBoxFieldView';
 
 export class TableFormComboBoxFieldController extends TableFormFieldController {
 
@@ -40,4 +41,6 @@ export class TableFormComboBoxFieldController extends TableFormFieldController {
     }
 
 }
+
+// @ts-ignore
 window.TableFormComboBoxFieldController = TableFormComboBoxFieldController;

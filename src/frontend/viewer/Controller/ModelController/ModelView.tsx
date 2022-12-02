@@ -23,7 +23,7 @@ export class ModelView extends View {
         }
         return super.getCssBlockName();
     }
-    getStyle() {
+    getStyle(row?: any): any {
 
     }
 }

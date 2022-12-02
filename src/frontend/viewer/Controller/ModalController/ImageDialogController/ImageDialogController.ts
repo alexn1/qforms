@@ -1,4 +1,5 @@
 import {ModalController} from '../ModalController';
+import {ImageDialogView} from './ImageDialogView';
 
 export class ImageDialogController extends ModalController {
     constructor(options) {

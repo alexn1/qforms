@@ -1,6 +1,14 @@
 import {ModelController} from '../ModelController';
+import {FrontHostApp} from '../../../../common';
+import {FormController} from '../FormController/FormController';
+import {DataSource} from '../../../Model/DataSource/DataSource';
+import {RowFormController} from '../FormController/RowFormController/RowFormController';
+import {PageView} from './PageView';
+import {ApplicationController} from '../ApplicationController/ApplicationController';
 
 export class PageController extends ModelController {
+    id: any;
+    forms: any[];
     constructor(model, parent, id) {
         //console.log('PageController.constructor', model);
         super(model, parent);
@@ -238,4 +246,6 @@ export class PageController extends ModelController {
         return false;
     }
 }
+
+// @ts-ignore
 window.PageController = PageController;

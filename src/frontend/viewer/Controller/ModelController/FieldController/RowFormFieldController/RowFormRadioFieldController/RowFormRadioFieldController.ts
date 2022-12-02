@@ -1,4 +1,5 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormRadioFieldView} from './RowFormRadioFieldView';
 
 export class RowFormRadioFieldController extends RowFormFieldController {
     getViewClass() {

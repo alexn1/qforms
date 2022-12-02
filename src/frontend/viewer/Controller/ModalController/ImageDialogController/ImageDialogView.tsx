@@ -1,3 +1,5 @@
+import {View} from '../../View';
+
 export class ImageDialogView extends View {
     constructor(props) {
         super(props);

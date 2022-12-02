@@ -1,3 +1,5 @@
+import {ModelView} from '../ModelView';
+
 export class FormView extends ModelView {
     constructor(props) {
         super(props);

@@ -1,5 +1,7 @@
 import {RowFormFieldController} from '../RowFormFieldController';
 import {RowFormComboBoxFieldView} from './RowFormComboBoxFieldView';
+import {ApplicationController} from '../../../ApplicationController/ApplicationController';
+import {Helper} from  '../../../../../../common';
 
 export class RowFormComboBoxFieldController extends RowFormFieldController {
     init() {
@@ -124,4 +126,5 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
     }
 }
 
+// @ts-ignore
 window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;

@@ -21,4 +21,6 @@ export class TableFormTextBoxFieldController extends TableFormFieldController {
         view.firstElementChild.contentEditable = false;
     }*/
 }
+
+// @ts-ignore
 window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;

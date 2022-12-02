@@ -34,4 +34,5 @@ export class ModelController extends Controller {
     }
 }
 
+// @ts-ignore
 window.ModelController = ModelController;

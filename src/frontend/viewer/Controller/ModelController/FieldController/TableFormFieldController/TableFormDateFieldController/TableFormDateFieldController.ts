@@ -1,5 +1,6 @@
 import {TableFormFieldController} from '../TableFormFieldController';
 import {TableFormDateFieldView} from './TableFormDateFieldView';
+import {Helper} from '../../../../../../common';
 
 export class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
@@ -11,4 +12,6 @@ export class TableFormDateFieldController extends TableFormFieldController {
         return '';
     }
 }
+
+// @ts-ignore
 window.TableFormDateFieldController = TableFormDateFieldController;

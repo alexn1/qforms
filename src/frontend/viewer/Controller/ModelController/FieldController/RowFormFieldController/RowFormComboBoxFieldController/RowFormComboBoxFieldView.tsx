@@ -66,4 +66,6 @@ export class RowFormComboBoxFieldView extends RowFormFieldView {
         );
     }
 }
+
+// @ts-ignore
 window.RowFormComboBoxFieldView = RowFormComboBoxFieldView;

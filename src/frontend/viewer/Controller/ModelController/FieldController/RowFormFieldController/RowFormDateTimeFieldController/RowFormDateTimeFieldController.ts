@@ -1,6 +1,11 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormDateTimeFieldView} from './RowFormDateTimeFieldView';
+import {TimeBox} from '../../../../../../common';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController {
+    widget2: any;
+    defaultValue: number;
+    state: any;
     constructor(...args) {
         super(...args);
         this.widget2 = null;
@@ -219,4 +224,6 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         return false;
     }
 }
+
+// @ts-ignore
 window.RowFormDateTimeFieldController = RowFormDateTimeFieldController;

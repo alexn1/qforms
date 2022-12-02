@@ -1,12 +1,15 @@
+import React from 'react';
 import {View} from '../View';
 
 export class LoginView extends View {
+    errMsgRef: React.RefObject<any>;
     constructor(props) {
         super(props);
         this.errMsgRef = React.createRef();
     }
     onLoginFormSubmit = e => {
         // console.log('LoginView.onLoginFormSubmit');
+        // @ts-ignore
         document.querySelector('.LoginView__button').disabled = true;
         // e.preventDefault();
     }

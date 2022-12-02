@@ -1,6 +1,13 @@
+import React from 'react';
 import {RowFormFieldView} from '../RowFormFieldView';
+import {Helper} from '../../../../../../common';
+import {ImageDialogController} from '../../../../ModalController/ImageDialogController/ImageDialogController';
 
 export class RowFormFileFieldView extends RowFormFieldView {
+    image: React.RefObject<any>;
+    div: React.RefObject<any>;
+    input: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.image = React.createRef();
@@ -87,4 +94,6 @@ export class RowFormFileFieldView extends RowFormFieldView {
         this.getInput().click();
     }
 }
+
+// @ts-ignore
 window.RowFormFileFieldView = RowFormFileFieldView;

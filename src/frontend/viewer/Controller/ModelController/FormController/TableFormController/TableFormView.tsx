@@ -1,4 +1,7 @@
 import {FormView} from '../FormView';
+import {PageController} from '../../PageController/PageController';
+import {DataSource} from '../../../../Model/DataSource/DataSource';
+
 
 export class TableFormView extends FormView {
     renderToolbar() {
@@ -145,4 +148,6 @@ export class TableFormView extends FormView {
         });
     }
 }
+
+// @ts-ignore
 window.TableFormView = TableFormView;

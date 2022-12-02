@@ -60,4 +60,6 @@ export class RowFormTextBoxFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;

@@ -1,4 +1,5 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormCheckBoxListFieldView} from './RowFormCheckBoxListFieldView';
 
 export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     init() {
@@ -50,4 +51,5 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     }
 }
 
+// @ts-ignore
 window.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;

@@ -1,6 +1,9 @@
+import React from 'react';
 import {FieldController} from '../FieldController';
+import {ApplicationController} from '../../ApplicationController/ApplicationController';
 
 export class RowFormFieldController extends FieldController {
+    state: any;
     constructor(model, parent) {
         super(model, parent);
         this.state = {
@@ -270,4 +273,6 @@ export class RowFormFieldController extends FieldController {
         }
     }
 }
+
+// @ts-ignore
 window.RowFormFieldController = RowFormFieldController;

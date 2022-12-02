@@ -12,4 +12,6 @@ export class RowFormLinkFieldView extends RowFormFieldView {
         );
     }
 }
+
+// @ts-ignore
 window.RowFormLinkFieldView = RowFormLinkFieldView;

@@ -1,6 +1,7 @@
 import {TableFormFieldView} from '../TableFormFieldView';
 
 export class TableFormTimeFieldView extends TableFormFieldView {
+    span: React.RefObject<any>;
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;
@@ -9,4 +10,6 @@ export class TableFormTimeFieldView extends TableFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.TableFormTimeFieldView = TableFormTimeFieldView;

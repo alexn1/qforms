@@ -1,3 +1,7 @@
+import {TableFormFieldController} from '../TableFormFieldController';
+import {TableFormTimeFieldView} from './TableFormTimeFieldView';
+import {TimeBox} from '../../../../../../common';
+
 export class TableFormTimeFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormTimeFieldView;
@@ -7,4 +11,6 @@ export class TableFormTimeFieldController extends TableFormFieldController {
         return TimeBox.getStringValue(value);
     }
 }
+
+// @ts-ignore
 window.TableFormTimeFieldController = TableFormTimeFieldController;

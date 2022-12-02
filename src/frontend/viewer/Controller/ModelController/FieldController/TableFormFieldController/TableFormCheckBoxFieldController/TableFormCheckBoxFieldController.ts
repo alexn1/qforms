@@ -1,4 +1,5 @@
 import {TableFormFieldController} from '../TableFormFieldController';
+import {TableFormCheckBoxFieldView} from './TableFormCheckBoxFieldView';
 
 export class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {
@@ -8,4 +9,6 @@ export class TableFormCheckBoxFieldController extends TableFormFieldController {
         return this.model.getValue(row);
     }
 }
+
+// @ts-ignore
 window.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;

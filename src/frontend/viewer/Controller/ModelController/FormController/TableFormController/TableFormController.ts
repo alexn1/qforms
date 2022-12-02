@@ -1,6 +1,10 @@
 import {TableFormView} from './TableFormView';
+import {FormController} from '../FormController';
+import {DataSource} from '../../../../Model/DataSource/DataSource';
 
 export class TableFormController extends FormController {
+    state: any;
+    grid: any;
     constructor(model, parent) {
         super(model, parent);
         this.state = {
@@ -271,4 +275,6 @@ export class TableFormController extends FormController {
         return this.isRowSelected();
     }
 }
+
+// @ts-ignore
 window.TableFormController = TableFormController;

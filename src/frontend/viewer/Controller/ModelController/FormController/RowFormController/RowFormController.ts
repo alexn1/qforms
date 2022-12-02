@@ -2,6 +2,8 @@ import {FormController} from '../FormController';
 import {RowFormView} from './RowFormView';
 
 export class RowFormController extends FormController {
+    state: any;
+    fields: any;
     constructor(model, parent) {
         super(model, parent);
         this.state = {
@@ -198,4 +200,5 @@ export class RowFormController extends FormController {
     }
 }
 
+// @ts-ignore
 window.RowFormController = RowFormController;

@@ -1,6 +1,9 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormTimeFieldView} from './RowFormTimeFieldView';
+import {TimeBox} from '../../../../../../common';
 
 export class RowFormTimeFieldController extends RowFormFieldController {
+    defaultValue: any;
     constructor(...args) {
         super(...args);
         this.defaultValue = null;
@@ -32,4 +35,6 @@ export class RowFormTimeFieldController extends RowFormFieldController {
         return super.getPlaceholder();
     }
 }
+
+// @ts-ignore
 window.RowFormTimeFieldController = RowFormTimeFieldController;

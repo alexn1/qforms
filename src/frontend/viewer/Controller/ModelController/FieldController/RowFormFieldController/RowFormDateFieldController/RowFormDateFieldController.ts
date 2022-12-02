@@ -13,4 +13,5 @@ export class RowFormDateFieldController extends RowFormFieldController {
     }
 }
 
+// @ts-ignore
 window.RowFormDateFieldController = RowFormDateFieldController;

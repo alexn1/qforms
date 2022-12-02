@@ -6,4 +6,6 @@ export class TableFormFieldController extends FieldController {
         return this.valueToString(this.model.getValue(row));
     }
 }
+
+// @ts-ignore
 window.TableFormFieldController = TableFormFieldController;

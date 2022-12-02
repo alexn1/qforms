@@ -153,4 +153,5 @@ export class RowFormView extends FormView {
     }*/
 }
 
+// @ts-ignore
 window.RowFormView = RowFormView;

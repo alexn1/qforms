@@ -1,4 +1,5 @@
 import {TableFormFieldController} from '../TableFormFieldController';
+import {TableFormLinkFieldView} from './TableFormLinkFieldView';
 
 export class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
@@ -10,4 +11,6 @@ export class TableFormLinkFieldController extends TableFormFieldController {
         this.emit('click', {source: this});
     }
 }
+
+// @ts-ignore
 window.TableFormLinkFieldController = TableFormLinkFieldController;

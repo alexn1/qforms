@@ -6,4 +6,6 @@ export class RowFormTextAreaFieldController extends RowFormFieldController {
         return super.getViewClass() || RowFormTextAreaFieldView;
     }
 }
+
+// @ts-ignore
 window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;

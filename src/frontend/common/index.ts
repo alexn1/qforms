@@ -28,3 +28,5 @@ export {TextArea} from './widget/TextArea';
 export {MoreVertIcon} from './icon/MoreVertIcon';
 export {Tab2} from './widget/Tab2/Tab2';
 export {CloseIcon2} from './icon/CloseIcon2';
+export {TimeBox} from './widget/TimeBox/TimeBox';
+export {PhoneBox} from './widget/PhoneBox';

@@ -71,4 +71,6 @@ export class RowFormPasswordFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.RowFormPasswordFieldView = RowFormPasswordFieldView;

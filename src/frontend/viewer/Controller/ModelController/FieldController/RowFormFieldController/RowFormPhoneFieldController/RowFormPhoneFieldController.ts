@@ -1,4 +1,5 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormPhoneFieldView} from './RowFormPhoneFieldView';
 
 export class RowFormPhoneFieldController extends RowFormFieldController {
     getViewClass() {
@@ -21,4 +22,6 @@ export class RowFormPhoneFieldController extends RowFormFieldController {
         return null;
     }
 }
+
+// @ts-ignore
 window.RowFormPhoneFieldController = RowFormPhoneFieldController;

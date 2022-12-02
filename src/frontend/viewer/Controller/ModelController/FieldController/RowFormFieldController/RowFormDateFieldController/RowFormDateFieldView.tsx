@@ -1,4 +1,4 @@
-export {RowFormFieldView} from '../RowFormFieldView';
+import {RowFormFieldView} from '../RowFormFieldView';
 
 export class RowFormDateFieldView extends RowFormFieldView {
     render() {
@@ -19,4 +19,6 @@ export class RowFormDateFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.RowFormDateFieldView = RowFormDateFieldView;

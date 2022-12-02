@@ -1,6 +1,8 @@
+import React from 'react';
 import {EventEmitter} from '../EventEmitter';
 
 export class Controller extends EventEmitter {
+    view: any;
     constructor() {
         super();
         this.view = null;

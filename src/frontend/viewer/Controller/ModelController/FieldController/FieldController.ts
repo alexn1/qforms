@@ -1,4 +1,5 @@
 import {ModelController} from '../ModelController';
+import {FrontHostApp} from '../../../../common';
 
 export class FieldController extends ModelController {
     /*constructor(model, parent) {
@@ -80,4 +81,6 @@ export class FieldController extends ModelController {
         return this.getModel().getAttr('format');
     }
 }
+
+// @ts-ignore
 window.FieldController = FieldController;

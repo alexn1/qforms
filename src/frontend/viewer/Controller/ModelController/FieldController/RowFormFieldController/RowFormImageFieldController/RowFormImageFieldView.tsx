@@ -14,4 +14,6 @@ export class RowFormImageFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.RowFormImageFieldView = RowFormImageFieldView;

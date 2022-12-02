@@ -37,4 +37,6 @@ export class RowFormTextAreaFieldView extends RowFormFieldView {
         </div>;
     }
 }
+
+// @ts-ignore
 window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;

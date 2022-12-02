@@ -1,5 +1,6 @@
 import {FieldView} from '../FieldView';
 export class RowFormFieldView extends FieldView {
+    widget: any;
     constructor(props) {
         super(props);
         this.widget = null;
@@ -20,4 +21,6 @@ export class RowFormFieldView extends FieldView {
         this.widget = widget;
     }
 }
+
+// @ts-ignore
 window.RowFormFieldView = RowFormFieldView;
