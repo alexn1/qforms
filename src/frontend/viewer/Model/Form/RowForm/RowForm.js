@@ -1,4 +1,4 @@
-class RowForm extends Form {
+export class RowForm extends Form {
     init() {
         super.init();
         if (this.isNewMode()) {

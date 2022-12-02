@@ -1,3 +1,3 @@
-class LinkField extends Field {
+export class LinkField extends Field {
 }
 window.QForms.LinkField = LinkField;

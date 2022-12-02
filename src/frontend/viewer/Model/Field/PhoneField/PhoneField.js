@@ -1,3 +1,3 @@
-class PhoneField extends Field {
+export class PhoneField extends Field {
 }
 window.QForms.PhoneField = PhoneField;

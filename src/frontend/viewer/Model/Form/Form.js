@@ -1,4 +1,4 @@
-class Form extends Model {
+export class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];

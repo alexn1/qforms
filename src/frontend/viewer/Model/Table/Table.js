@@ -1,4 +1,4 @@
-class Table extends Model {
+export class Table extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];

@@ -1,3 +1,3 @@
-class LabelField extends Field {
+export class LabelField extends Field {
 }
 window.QForms.LabelField = LabelField;

@@ -1,4 +1,4 @@
-class DataSource extends Model {
+export class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);

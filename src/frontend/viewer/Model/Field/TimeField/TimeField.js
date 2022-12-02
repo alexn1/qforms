@@ -1,4 +1,4 @@
-class TimeField extends Field {
+export class TimeField extends Field {
 
 }
 window.QForms.TimeField = TimeField;

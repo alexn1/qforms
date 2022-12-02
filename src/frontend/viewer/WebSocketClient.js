@@ -1,4 +1,4 @@
-class WebSocketClient {
+export class WebSocketClient {
     constructor(options = {}) {
         // console.log('WebSocketClient.constructor', options);
         this.options = options;

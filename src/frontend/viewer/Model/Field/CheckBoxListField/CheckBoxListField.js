@@ -1,4 +1,4 @@
-class CheckBoxListField extends Field {
+export class CheckBoxListField extends Field {
 
     getDisplayValue(row) {
         let value = null;

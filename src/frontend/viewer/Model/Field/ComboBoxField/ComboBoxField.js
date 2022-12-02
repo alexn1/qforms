@@ -1,4 +1,4 @@
-class ComboBoxField extends Field {
+export class ComboBoxField extends Field {
 
     getDisplayValue(row) {
         let value = null;

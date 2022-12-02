@@ -1,4 +1,4 @@
-class TextBoxField extends Field {
+export class TextBoxField extends Field {
 
 }
 window.QForms.TextBoxField = TextBoxField;

@@ -1,4 +1,4 @@
-class TableForm extends Form {
+export class TableForm extends Form {
 
 }
 window.QForms.TableForm = TableForm;

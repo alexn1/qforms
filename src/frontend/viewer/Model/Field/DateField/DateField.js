@@ -1,4 +1,4 @@
-class DateField extends Field {
+export class DateField extends Field {
     getFormat() {
         return this.getAttr('format');
     }

@@ -324,6 +324,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Application": () => (/* binding */ Application)
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+/* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.js");
+
 
 class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   constructor(data) {
@@ -337,7 +339,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     if (!this.data.theme) throw new Error('no theme attr'); // databases
 
     for (const data of this.data.databases) {
-      const database = new Database(data, this);
+      const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_1__.Database(data, this);
       database.init();
       this.addDatabase(database);
     } // data sources
@@ -437,6 +439,59 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
 
 }
 window.QForms.Application = Application;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Database/Database.js":
+/*!********************************************************!*\
+  !*** ./src/frontend/viewer/Model/Database/Database.js ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Database": () => (/* binding */ Database)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+
+class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+  constructor(...args) {
+    super(...args);
+    this.tables = [];
+  }
+
+  init() {
+    // console.log('Database.init', this.getName());
+    for (const data of this.data.tables) {
+      const table = new Table(data, this);
+      table.init();
+      this.addTable(table);
+    }
+  }
+
+  addTable(table) {
+    this.tables.push(table);
+  }
+
+  getTable(name) {
+    const table = this.tables.find(table => table.getName() === name);
+    if (!table) throw new Error(`${this.getFullName()}: no table with name: ${name}`);
+    return table;
+  }
+
+  emitResult(result, source = null) {
+    console.log('Database.emitResult');
+    const promises = [];
+
+    for (const table in result) {
+      promises.push(...this.getTable(table).emitResult(result[table], source));
+    }
+
+    return promises;
+  }
+
+}
+window.QForms.Database = Database;
 
 /***/ }),
 

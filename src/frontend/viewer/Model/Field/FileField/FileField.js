@@ -1,3 +1,3 @@
-class FileField extends Field {
+export class FileField extends Field {
 }
 window.QForms.FileField = FileField;

@@ -1,4 +1,4 @@
-class Page extends Model {
+export class Page extends Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');

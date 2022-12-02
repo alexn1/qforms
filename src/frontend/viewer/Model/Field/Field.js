@@ -1,6 +1,4 @@
-
-
-class Field extends Model {
+export class Field extends Model {
     // constructor(data, parent) {
     //     super(data, parent);
     // }

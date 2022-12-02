@@ -1,4 +1,6 @@
-class Database extends Model {
+import {Model} from '../Model';
+
+export class Database extends Model {
     constructor(...args) {
         super(...args);
         this.tables = [];

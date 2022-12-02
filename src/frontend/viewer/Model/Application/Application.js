@@ -1,4 +1,5 @@
 import {Model} from '../Model';
+import {Database} from '../Database/Database';
 
 export class Application extends Model {
     constructor(data) {

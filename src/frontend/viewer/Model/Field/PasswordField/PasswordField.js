@@ -1,4 +1,4 @@
-class PasswordField extends Field {
+export class PasswordField extends Field {
 
 }
 window.QForms.PasswordField = PasswordField;

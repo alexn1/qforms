@@ -1,4 +1,4 @@
-class SqlDataSource extends DataSource {
+export class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);
         this.frame  = 1;

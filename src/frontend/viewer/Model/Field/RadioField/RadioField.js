@@ -1,4 +1,4 @@
-class RadioField extends Field {
+export class RadioField extends Field {
     getDisplayValue(row) {
         const displayColumn = this.getAttr('displayColumn');
         let value = null;

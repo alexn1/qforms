@@ -1,4 +1,4 @@
-class CheckBoxField extends Field {
+export class CheckBoxField extends Field {
 
 }
 window.QForms.CheckBoxField = CheckBoxField;
