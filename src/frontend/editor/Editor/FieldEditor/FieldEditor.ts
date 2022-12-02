@@ -1,4 +1,5 @@
 import {Editor} from '../Editor';
+import {FrontHostApp} from '../../../common';
 
 export class FieldEditor extends Editor {
 

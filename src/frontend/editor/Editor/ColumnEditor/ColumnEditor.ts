@@ -1,7 +1,8 @@
 import {Editor} from '../Editor';
+import {FrontHostApp} from '../../../common';
 
 export class ColumnEditor extends Editor {
-
+    table: any;
     constructor(data, table) {
         super(data, table);
         this.table = table;

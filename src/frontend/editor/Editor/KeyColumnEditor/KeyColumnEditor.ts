@@ -1,7 +1,8 @@
 import {Editor} from '../Editor';
+import {FrontHostApp} from '../../../common';
 
 export class KeyColumnEditor extends Editor {
-
+    dataSource: any;
     constructor(data, dataSource) {
         super(data, dataSource);
         this.dataSource = dataSource;

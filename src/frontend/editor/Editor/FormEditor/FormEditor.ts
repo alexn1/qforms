@@ -1,7 +1,11 @@
 import {Editor} from '../Editor';
+import {DataSourceEditor} from '../DataSourceEditor/DataSourceEditor';
+import {ActionEditor} from '../ActionEditor/ActionEditor';
+import {FieldEditor} from '../FieldEditor/FieldEditor';
+import {FrontHostApp} from '../../../common';
 
 export class FormEditor extends Editor {
-
+    fields: any[];
     constructor(data, page) {
         super(data, page);
         this.page   = page;
@@ -9,6 +13,7 @@ export class FormEditor extends Editor {
         this.fields      = [];
         this.actions     = [];
     }
+
 
     init() {
         // dataSources
@@ -25,6 +30,18 @@ export class FormEditor extends Editor {
         for (const data of this.data.fields) {
             this.createField(data);
         }
+    }
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    createAction(data) {
+        const action = new ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
     }
     createField(data) {
         const field = new FieldEditor(data, this);

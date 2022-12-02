@@ -1,7 +1,10 @@
 import {Editor} from '../Editor';
 import {ColumnEditor} from '../ColumnEditor/ColumnEditor';
+import {FrontHostApp} from '../../../common';
 
 export class TableEditor extends Editor {
+    database: any;
+    columns: any[];
     constructor(data, database) {
         super(data, database);
         this.database = database;

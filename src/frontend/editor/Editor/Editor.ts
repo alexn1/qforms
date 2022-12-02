@@ -1,7 +1,10 @@
-
-
 export class Editor {
-
+    data: any;
+    parent: any;
+    form: any;
+    page: any;
+    dataSources: any[];
+    actions: any[];
     constructor(data, parent = null) {
         if (!data) throw new Error('no data');
         this.data   = data;
@@ -61,12 +64,12 @@ export class Editor {
         if (i === -1) throw new Error('no such dataSource');
         this.dataSources.splice(i, 1);
     }
-    createAction(data) {
+    /*createAction(data) {
         const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
-    }
+    }*/
     removeAction(action) {
         // console.log('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);

@@ -2,8 +2,14 @@ import {Editor} from '../Editor';
 import {DatabaseEditor} from '../DatabaseEditor/DatabaseEditor';
 import {DataSourceEditor} from '../DataSourceEditor/DataSourceEditor';
 import {PageLinkEditor} from  '../PageLinkEditor/PageLinkEditor';
+import {FrontHostApp} from '../../../common';
+import {PageEditor} from '../PageEditor/PageEditor';
+import {ActionEditor} from '../ActionEditor/ActionEditor';
 
 export class ApplicationEditor extends Editor {
+    databases: any[];
+    actions: any[];
+    pageLinks: any[];
 
     constructor(data) {
         super(data);
@@ -34,6 +40,12 @@ export class ApplicationEditor extends Editor {
         for (const data of this.data.pageLinks) {
             this.createPageLink(data);
         }
+    }
+    createAction(data) {
+        const action = new ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
     }
     createDatabase(data) {
         const database = new DatabaseEditor(data, this);

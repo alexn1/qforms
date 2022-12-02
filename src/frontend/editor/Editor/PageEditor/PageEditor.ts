@@ -1,7 +1,12 @@
 import {Editor} from '../Editor';
+import {DataSourceEditor} from '../DataSourceEditor/DataSourceEditor';
+import {ActionEditor} from '../ActionEditor/ActionEditor';
+import {FormEditor} from '../FormEditor/FormEditor';
+import {FrontHostApp} from '../../../common';
 
 export class PageEditor extends Editor {
-
+    pageLink: any;
+    forms: any[];
     constructor(data, pageLink) {
         super(data);
         this.pageLink    = pageLink;
@@ -25,6 +30,18 @@ export class PageEditor extends Editor {
         for (const data of this.data.forms) {
             this.createForm(data);
         }
+    }
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    createAction(data) {
+        const action = new ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
     }
     createForm(data) {
         const form = new FormEditor(data, this);

@@ -1,9 +1,11 @@
 import {Editor} from '../Editor';
 import {ParamEditor} from '../ParamEditor/ParamEditor';
 import {TableEditor} from '../TableEditor/TableEditor';
+import {FrontHostApp} from '../../../common';
 
 export class DatabaseEditor extends Editor {
-
+    params: any[];
+    tables: any[];
     constructor(data, parent) {
         super(data, parent);
         this.params = [];

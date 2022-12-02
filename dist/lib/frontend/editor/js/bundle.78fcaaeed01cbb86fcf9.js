@@ -32728,6 +32728,1666 @@ exports.ActionList = ActionList;
 
 /***/ }),
 
+/***/ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ActionEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class ActionEditor extends Editor_1.Editor {
+    /*constructor(data, parent) {
+        super(data, parent);
+    }*/
+    /*async getView(view) {
+        return await FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action    : 'getView',
+            params    : {
+                view : view,
+                page : this.data !== undefined ? this.form.page.getName() : null,
+                form : this.data !== undefined ? this.form.getName()      : null,
+            }
+        });
+    }*/
+    getParams() {
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            return {
+                pageFileName: this.parent.page.pageLink.getAttr('fileName'),
+                form: this.parent.getAttr('name'),
+                action: this.getAttr('name'),
+            };
+        }
+        else if (this.parent instanceof PageEditor_1.PageEditor) {
+            return {
+                pageFileName: this.parent.pageLink.getAttr('fileName'),
+                action: this.getAttr('name'),
+            };
+        }
+        return {
+            action: this.getAttr('name'),
+        };
+    }
+    async setValue(name, value) {
+        //console.log('ActionEditor.setValue', name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: 'save',
+            params: Object.assign(Object.assign({}, this.getParams()), { attr: name, value: value })
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: 'delete',
+            params: Object.assign({}, this.getParams())
+        });
+    }
+    async delete() {
+        console.log('ActionEditor.delete', this.getName());
+        await this.deleteData();
+        this.parent.removeAction(this);
+    }
+    moveUp() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: 'moveUp',
+            params: Object.assign({}, this.getParams())
+        });
+    }
+    moveDown() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: 'moveDown',
+            params: Object.assign({}, this.getParams())
+        });
+    }
+}
+exports.ActionEditor = ActionEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ApplicationEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const DatabaseEditor_1 = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts");
+const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+const PageLinkEditor_1 = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+class ApplicationEditor extends Editor_1.Editor {
+    constructor(data) {
+        super(data);
+        this.databases = [];
+        this.dataSources = [];
+        this.actions = [];
+        this.pageLinks = [];
+    }
+    init() {
+        console.log('ApplicationEditor.init', this.data);
+        // databases
+        for (const data of this.data.databases) {
+            this.createDatabase(data);
+        }
+        // dataSources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+        // pageLinks
+        for (const data of this.data.pageLinks) {
+            this.createPageLink(data);
+        }
+    }
+    createAction(data) {
+        const action = new ActionEditor_1.ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }
+    createDatabase(data) {
+        const database = new DatabaseEditor_1.DatabaseEditor(data, this);
+        database.init();
+        this.databases.push(database);
+        return database;
+    }
+    createPageLink(data) {
+        const pageLink = new PageLinkEditor_1.PageLinkEditor(data, this);
+        pageLink.init();
+        this.pageLinks.push(pageLink);
+        return pageLink;
+    }
+    removeDatabase(database) {
+        console.log('ApplicationEditor.removeDatabase', database.getName());
+        const i = this.databases.indexOf(database);
+        if (i === -1)
+            throw new Error('no such database');
+        this.databases.splice(i, 1);
+    }
+    removePageLink(pageLink) {
+        console.log('ApplicationEditor.removePageLink', pageLink.getName());
+        const i = this.pageLinks.indexOf(pageLink);
+        if (i === -1)
+            throw new Error('no such pageLink');
+        this.pageLinks.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'save',
+            params: {
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async newPageAndPageLinkData(params) {
+        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: '_new',
+            params: params
+        });
+    }
+    async newPage(params) {
+        const { page: pageData, pageLink: pageLinkData } = await this.newPageAndPageLinkData(params);
+        const pageLink = this.createPageLink(pageLinkData);
+        return new PageEditor_1.PageEditor(pageData, pageLink);
+    }
+    async newDatabase(params) {
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: '_new',
+            params: params
+        });
+        return this.createDatabase(data);
+    }
+    async getView(view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'getView',
+            params: {
+                app: this.getName(),
+                view: view
+            }
+        });
+    }
+    async saveView(text, view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'saveView',
+            params: {
+                app: this.getName(),
+                view: view,
+                text: text
+            }
+        });
+    }
+    async saveController(text) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'saveController',
+            params: {
+                app: this.getName(),
+                text: text
+            }
+        });
+    }
+    async createView() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'createView',
+            params: {
+                app: this.getName()
+            }
+        });
+    }
+    async createController() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'createController',
+            params: {
+                app: this.getName()
+            }
+        });
+    }
+    async createModelBackJs() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Application',
+            action: 'createModelBackJs',
+            params: {
+                app: this.getName()
+            }
+        });
+    }
+    async newDataSource(params) {
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action: '_new',
+            params: params
+        });
+        return this.createDataSource(data);
+    }
+    async newAction(params) {
+        // params['pageFileName'] = this.page.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: '_new',
+            params: params
+        });
+        return this.createAction(data);
+    }
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+}
+exports.ApplicationEditor = ApplicationEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts ***!
+  \*****************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ColumnEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class ColumnEditor extends Editor_1.Editor {
+    constructor(data, table) {
+        super(data, table);
+        this.table = table;
+    }
+    async setValue(name, value) {
+        //console.log('ColumnEditor.setValue', name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action: 'save',
+            params: {
+                database: this.table.database.getName(),
+                table: this.table.getName(),
+                column: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action: 'delete',
+            params: {
+                database: this.table.database.getName(),
+                table: this.table.getName(),
+                column: this.getName(),
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeColumn(this);
+    }
+}
+exports.ColumnEditor = ColumnEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts":
+/*!*************************************************************************!*\
+  !*** ./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts ***!
+  \*************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DataSourceEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const KeyColumnEditor_1 = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts");
+const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+const ApplicationEditor_1 = __webpack_require__(/*! ../ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+class DataSourceEditor extends Editor_1.Editor {
+    constructor(data, parent) {
+        super(data, parent);
+        this.keyColumns = [];
+    }
+    init() {
+        for (const data of this.data.keyColumns) {
+            this.createKeyColumn(data);
+        }
+    }
+    createKeyColumn(data) {
+        const keyColumn = new KeyColumnEditor_1.KeyColumnEditor(data, this);
+        keyColumn.init();
+        this.keyColumns.push(keyColumn);
+        return keyColumn;
+    }
+    removeKeyColumn(keyColumn) {
+        console.log('DatabaseEditor.removeParam', keyColumn.getName());
+        const i = this.keyColumns.indexOf(keyColumn);
+        if (i === -1)
+            throw new Error('no such keyColumn');
+        this.keyColumns.splice(i, 1);
+    }
+    static async create(parent, params) {
+        if (parent instanceof FormEditor_1.FormEditor) {
+            const form = parent;
+            params['page'] = form.page.pageLink.getFileName();
+            params['form'] = form.getName();
+        }
+        if (parent instanceof PageEditor_1.PageEditor) {
+            const page = parent;
+            params['page'] = page.pageLink.getFileName();
+        }
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action: '_new',
+            params: params
+        });
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const args = {
+            controller: 'DataSource',
+            action: 'save',
+            params: {
+                dataSource: this.getName(),
+                attr: name,
+                value: value
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.pageFileName = this.parent.pageLink.getFileName();
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.form = this.parent.getName();
+            // @ts-ignore
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
+        }
+        const data = await common_1.FrontHostApp.doHttpRequest(args);
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        const args = {
+            controller: 'DataSource',
+            action: 'delete',
+            params: {
+                dataSource: this.getName()
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.page = this.parent.pageLink.getFileName();
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.form = this.parent.getName();
+            // @ts-ignore
+            args.params.page = this.parent.page.pageLink.getFileName();
+        }
+        await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async createModelBackJs() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action: 'createModelBackJs',
+            params: Object.assign(Object.assign(Object.assign({}, (this.parent instanceof PageEditor_1.PageEditor ? {
+                page: this.parent.getName(),
+                pageFileName: this.parent.pageLink.getFileName()
+            } : {})), (this.parent instanceof FormEditor_1.FormEditor ? {
+                form: this.parent.getName(),
+                page: this.parent.page.getName(),
+                pageFileName: this.parent.page.pageLink.getFileName()
+            } : {})), { dataSource: this.getName() })
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDataSource(this);
+    }
+    async moveUp() {
+        const args = {
+            controller: 'DataSource',
+            action: 'moveUp',
+            params: {
+                dataSource: this.getName()
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.page = this.parent.pageLink.getFileName();
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.form = this.parent.getName();
+            // @ts-ignore
+            args.params.page = this.parent.page.pageLink.getFileName();
+        }
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async moveDown() {
+        const args = {
+            controller: 'DataSource',
+            action: 'moveDown',
+            params: {
+                dataSource: this.getName()
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.page = this.parent.pageLink.getFileName();
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.form = this.parent.getName();
+            // @ts-ignore
+            args.params.page = this.parent.page.pageLink.getFileName();
+        }
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async newKeyColumnData(name) {
+        const args = {
+            controller: 'KeyColumn',
+            action: '_new',
+            params: {
+                dataSource: this.getName(),
+                class: 'KeyColumn',
+                name: name
+            }
+        };
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.page = this.parent.page.pageLink.getFileName();
+            // @ts-ignore
+            args.params.form = this.parent.getName();
+        }
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.page = this.parent.pageLink.getFileName();
+        }
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async newKeyColumn(name) {
+        const data = await this.newKeyColumnData(name);
+        return this.createKeyColumn(data);
+    }
+    async getView(view) {
+        const args = {
+            controller: 'DataSource',
+            action: 'getView',
+            params: {
+                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
+                view: view
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            // @ts-ignore
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            // @ts-ignore
+            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            // @ts-ignore
+            args.params.form = (this instanceof DataSourceEditor) ? this.parent.getName() : undefined;
+        }
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async saveController(text) {
+        const args = {
+            controller: 'DataSource',
+            action: 'saveController',
+            params: {
+                dataSource: this.getName(),
+                text: text
+            }
+        };
+        if (this.parent instanceof PageEditor_1.PageEditor) {
+            args.params.pageFileName = this.parent.pageLink.getFileName();
+        }
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            args.params.pageFileName = this.parent.page.pageLink.getFileName();
+            args.params.form = this.parent.getName();
+        }
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async createController() {
+        const args = {
+            controller: 'DataSource',
+            action: 'createController',
+            params: {
+                page: this.parent.page.getName(),
+                pageFileName: this.parent.page.pageLink.getFileName(),
+                form: this.parent.getName(),
+                dataSource: this.getName()
+            }
+        };
+        return await common_1.FrontHostApp.doHttpRequest(args);
+    }
+    getFullName() {
+        if (this.parent instanceof FormEditor_1.FormEditor) {
+            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
+        }
+        else if (this.parent instanceof PageEditor_1.PageEditor) {
+            return [this.parent.getName(), this.getName()].join('.');
+        }
+        else if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
+            return this.getName();
+        }
+    }
+}
+exports.DataSourceEditor = DataSourceEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts":
+/*!*********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DatabaseEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const ParamEditor_1 = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts");
+const TableEditor_1 = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class DatabaseEditor extends Editor_1.Editor {
+    constructor(data, parent) {
+        super(data, parent);
+        this.params = [];
+        this.tables = [];
+    }
+    init() {
+        // params
+        for (const data of this.data.params) {
+            this.createParam(data);
+        }
+        // tables
+        for (const data of this.data.tables) {
+            this.createTable(data);
+        }
+    }
+    createParam(data) {
+        const param = new ParamEditor_1.ParamEditor(data, this);
+        param.init();
+        this.params.push(param);
+        return param;
+    }
+    createTable(data) {
+        const table = new TableEditor_1.TableEditor(data, this);
+        table.init();
+        this.tables.push(table);
+        return table;
+    }
+    removeParam(param) {
+        console.log('DatabaseEditor.removeParam', param.getName());
+        const i = this.params.indexOf(param);
+        if (i === -1)
+            throw new Error('no such param');
+        this.params.splice(i, 1);
+    }
+    removeTable(table) {
+        console.log('DatabaseEditor.removeTable', table.getName());
+        const i = this.tables.indexOf(table);
+        if (i === -1)
+            throw new Error('no such table');
+        this.tables.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'save',
+            params: {
+                database: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'delete',
+            params: {
+                database: this.getName()
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeDatabase(this);
+    }
+    async newParam(name) {
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action: '_new',
+            params: {
+                database: this.getName(),
+                class: 'Param',
+                name: name
+            }
+        });
+        return this.createParam(data);
+    }
+    async newTable(params) {
+        if (!params.name)
+            throw new Error('newTable: no name');
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: '_new',
+            params: {
+                database: this.getName(),
+                class: 'Table',
+                name: params.name,
+                columns: params.columns
+            }
+        });
+        return this.createTable(data);
+    }
+    async getView(view) {
+        console.log('DatabaseEditor.getView', view);
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'getView',
+            params: {
+                view: view,
+                database: this.data !== undefined ? this.getName() : null
+            }
+        });
+    }
+    async getTableInfo(table) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'getTableInfo',
+            params: {
+                database: this.data !== undefined ? this.getName() : null,
+                table: table
+            }
+        });
+    }
+    moveUp() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'moveUp',
+            params: {
+                database: this.getName()
+            }
+        });
+    }
+    moveDown() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Database',
+            action: 'moveDown',
+            params: {
+                database: this.getName()
+            }
+        });
+    }
+}
+exports.DatabaseEditor = DatabaseEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/Editor.ts":
+/*!**********************************************!*\
+  !*** ./src/frontend/editor/Editor/Editor.ts ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Editor = void 0;
+class Editor {
+    constructor(data, parent = null) {
+        if (!data)
+            throw new Error('no data');
+        this.data = data;
+        this.parent = parent;
+    }
+    init() {
+    }
+    getClassName() {
+        return this.data['@class'];
+    }
+    getName() {
+        return this.getAttr('name');
+    }
+    getFullName(splitter = '.') {
+        let name;
+        if (this.form) {
+            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
+        }
+        else if (this.page) {
+            name = `${this.page.getName()}${splitter}${this.getName()}`;
+        }
+        else {
+            name = this.getName();
+        }
+        return name;
+    }
+    async setValue(name, value) {
+        throw new Error(`${this.constructor.name}.setValue not implemented`);
+    }
+    getAttr(name) {
+        return this.data['@attributes'][name];
+    }
+    getAttributes() {
+        return this.data['@attributes'];
+    }
+    setAttr(name, value) {
+        this.data['@attributes'][name] = value;
+    }
+    /*getObject(col, name) {
+        return this[col].find(obj => obj.getName() === name);
+    }*/
+    /*createDataSource(data) {
+        const dataSource = new DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }*/
+    removeDataSource(dataSource) {
+        // console.log('Editor.removeDataSource', dataSource.getName());
+        const i = this.dataSources.indexOf(dataSource);
+        if (i === -1)
+            throw new Error('no such dataSource');
+        this.dataSources.splice(i, 1);
+    }
+    /*createAction(data) {
+        const action = new ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }*/
+    removeAction(action) {
+        // console.log('Editor.removeField', action.getName());
+        const i = this.actions.indexOf(action);
+        if (i === -1)
+            throw new Error('no such action');
+        this.actions.splice(i, 1);
+    }
+}
+exports.Editor = Editor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FieldEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class FieldEditor extends Editor_1.Editor {
+    constructor(data, form) {
+        super(data, form);
+        this.form = form;
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'save',
+            params: {
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'delete',
+            params: {
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form: this.form.getName(),
+                field: this.getName()
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeField(this);
+    }
+    async getView(view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'getView',
+            params: {
+                view: view,
+                page: this.data !== undefined ? this.form.page.getName() : null,
+                form: this.data !== undefined ? this.form.getName() : null,
+                field: this.data !== undefined ? this.getName() : null
+            }
+        });
+    }
+    async saveView(text, view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'saveView',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                view: view,
+                text: text
+            }
+        });
+    }
+    async saveController(text) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'saveController',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                text: text
+            }
+        });
+    }
+    async createView() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'createView',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+    async createStyle() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'createStyle',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+    async createController() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'createController',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
+                field: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+    async changeClass(params) {
+        params['page'] = this.form.page.getName();
+        params['form'] = this.form.getName();
+        params['field'] = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'changeClass',
+            params: params
+        });
+        return this.data = data;
+    }
+    moveUp() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'moveUp',
+            params: {
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form: this.form.getName(),
+                field: this.getName()
+            }
+        });
+    }
+    moveDown() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: 'moveDown',
+            params: {
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form: this.form.getName(),
+                field: this.getName()
+            }
+        });
+    }
+}
+exports.FieldEditor = FieldEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts":
+/*!*************************************************************!*\
+  !*** ./src/frontend/editor/Editor/FormEditor/FormEditor.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.FormEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+const FieldEditor_1 = __webpack_require__(/*! ../FieldEditor/FieldEditor */ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class FormEditor extends Editor_1.Editor {
+    constructor(data, page) {
+        super(data, page);
+        this.page = page;
+        this.dataSources = [];
+        this.fields = [];
+        this.actions = [];
+    }
+    init() {
+        // dataSources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+        // fields
+        for (const data of this.data.fields) {
+            this.createField(data);
+        }
+    }
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    createAction(data) {
+        const action = new ActionEditor_1.ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }
+    createField(data) {
+        const field = new FieldEditor_1.FieldEditor(data, this);
+        field.init();
+        this.fields.push(field);
+        return field;
+    }
+    removeField(field) {
+        console.log('FormEditor.removeField', field.getName());
+        const i = this.fields.indexOf(field);
+        if (i === -1)
+            throw new Error('no such field');
+        this.fields.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'save',
+            params: {
+                pageFileName: this.page.pageLink.getFileName(),
+                form: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'delete',
+            params: {
+                pageFileName: this.page.pageLink.getFileName(),
+                form: this.getName()
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeForm(this);
+    }
+    moveUp() {
+        const args = {
+            controller: 'Form',
+            action: 'moveUp',
+            params: {
+                pageFileName: this.page.pageLink.getFileName(),
+                form: this.getName()
+            }
+        };
+        return common_1.FrontHostApp.doHttpRequest(args);
+    }
+    moveDown() {
+        const args = {
+            controller: 'Form',
+            action: 'moveDown',
+            params: {
+                pageFileName: this.page.pageLink.getFileName(),
+                form: this.getName()
+            }
+        };
+        return common_1.FrontHostApp.doHttpRequest(args);
+    }
+    async newField(params) {
+        params['pageFileName'] = this.page.pageLink.getFileName();
+        params['form'] = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Field',
+            action: '_new',
+            params: params
+        });
+        return this.createField(data);
+    }
+    async newAction(params) {
+        params['pageFileName'] = this.page.pageLink.getFileName();
+        params['form'] = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: '_new',
+            params: params
+        });
+        return this.createAction(data);
+    }
+    async newDataSource(params) {
+        params['page'] = this.page.pageLink.getFileName();
+        params['form'] = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'DataSource',
+            action: '_new',
+            params: params
+        });
+        return this.createDataSource(data);
+    }
+    async getView(view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'getView',
+            params: {
+                view: view,
+                page: this.data !== undefined ? this.page.getName() : null,
+                form: this.data !== undefined ? this.getName() : null
+            }
+        });
+    }
+    async saveView(text, view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'saveView',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+                view: view,
+                text: text
+            }
+        });
+    }
+    async saveController(text) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'saveController',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+                text: text
+            }
+        });
+    }
+    async createModelBackJs() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'createModelBackJs',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+            }
+        });
+    }
+    async createView() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'createView',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+    async createController() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'createController',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+    async createStyle() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: 'createStyle',
+            params: {
+                page: this.page.getName(),
+                form: this.getName(),
+                class: this.getClassName()
+            }
+        });
+    }
+}
+exports.FormEditor = FormEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.KeyColumnEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class KeyColumnEditor extends Editor_1.Editor {
+    constructor(data, dataSource) {
+        super(data, dataSource);
+        this.dataSource = dataSource;
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'KeyColumn',
+            action: 'save',
+            params: {
+                form: this.dataSource.parent.getName(),
+                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
+                dataSource: this.dataSource.getName(),
+                keyColumn: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'KeyColumn',
+            action: 'delete',
+            params: Object.assign(Object.assign(Object.assign({}, (this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {})), (this.getForm() ? { form: this.getForm().getName() } : {})), { dataSource: this.dataSource.getName(), keyColumn: this.getName() })
+        });
+    }
+    getPage() {
+        if (this.dataSource.parent.constructor.name === 'FormEditor') {
+            return this.dataSource.parent.page;
+        }
+        if (this.dataSource.parent.constructor.name === 'PageEditor') {
+            return this.dataSource.parent;
+        }
+        return null;
+    }
+    getForm() {
+        if (this.dataSource.parent.constructor.name === 'FormEditor') {
+            return this.dataSource.parent;
+        }
+        return null;
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeKeyColumn(this);
+    }
+}
+exports.KeyColumnEditor = KeyColumnEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts":
+/*!*************************************************************!*\
+  !*** ./src/frontend/editor/Editor/PageEditor/PageEditor.ts ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PageEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class PageEditor extends Editor_1.Editor {
+    constructor(data, pageLink) {
+        super(data);
+        this.pageLink = pageLink;
+        this.dataSources = [];
+        this.actions = [];
+        this.forms = [];
+    }
+    init() {
+        // data sources
+        for (const data of this.data.dataSources) {
+            this.createDataSource(data);
+        }
+        // actions
+        for (const data of this.data.actions) {
+            this.createAction(data);
+        }
+        // forms
+        for (const data of this.data.forms) {
+            this.createForm(data);
+        }
+    }
+    createDataSource(data) {
+        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        dataSource.init();
+        this.dataSources.push(dataSource);
+        return dataSource;
+    }
+    createAction(data) {
+        const action = new ActionEditor_1.ActionEditor(data, this);
+        action.init();
+        this.actions.push(action);
+        return action;
+    }
+    createForm(data) {
+        const form = new FormEditor_1.FormEditor(data, this);
+        form.init();
+        this.forms.push(form);
+        return form;
+    }
+    removeForm(form) {
+        console.log('Page.removeForm', form.getName());
+        const i = this.forms.indexOf(form);
+        if (i === -1)
+            throw new Error('no such form');
+        this.forms.splice(i, 1);
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'save',
+            params: {
+                fileName: this.pageLink.getFileName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'delete',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async delete() {
+        console.log('PageEditor.delete', this.getName());
+        await this.deleteData();
+        this.pageLink.remove();
+    }
+    async newForm(params) {
+        params['pageFileName'] = this.pageLink.getFileName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Form',
+            action: '_new',
+            params: params
+        });
+        return this.createForm(data);
+    }
+    async getView(view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'getView',
+            params: {
+                view: view,
+                page: this.data !== undefined ? this.getName() : null
+            }
+        });
+    }
+    async saveView(text, view) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'saveView',
+            params: {
+                page: this.getName(),
+                view: view,
+                text: text
+            }
+        });
+    }
+    async saveController(text) {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'saveController',
+            params: {
+                page: this.getName(),
+                text: text
+            }
+        });
+    }
+    async createView() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'createView',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async createController() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'createController',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async createStyle() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'createStyle',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async createModelBackJs() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Page',
+            action: 'createModelBackJs',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async newAction(params) {
+        params['pageFileName'] = this.pageLink.getFileName();
+        // params['form']         = this.getName();
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Action',
+            action: '_new',
+            params: params
+        });
+        return this.createAction(data);
+    }
+}
+exports.PageEditor = PageEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts":
+/*!*********************************************************************!*\
+  !*** ./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts ***!
+  \*********************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PageLinkEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class PageLinkEditor extends Editor_1.Editor {
+    constructor(data, parent) {
+        super(data, parent);
+        this.application = parent;
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action: 'save',
+            params: {
+                pageLink: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async moveUp() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action: 'moveUp',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    async moveDown() {
+        return await common_1.FrontHostApp.doHttpRequest({
+            controller: 'PageLink',
+            action: 'moveDown',
+            params: {
+                page: this.getName()
+            }
+        });
+    }
+    getFileName() {
+        return this.data['@attributes'].fileName;
+    }
+    remove() {
+        console.log('PageLinkEditor.remove', this.getName());
+        this.parent.removePageLink(this);
+    }
+}
+exports.PageLinkEditor = PageLinkEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.ParamEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class ParamEditor extends Editor_1.Editor {
+    constructor(data, database) {
+        super(data, database);
+        this.database = database;
+    }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action: 'save',
+            params: {
+                database: this.database.getName(),
+                param: this.getName(),
+                attr: name,
+                value: value
+            }
+        });
+        this.setAttr(name, value);
+        return data;
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Param',
+            action: 'delete',
+            params: {
+                database: this.database.getName(),
+                param: this.getName()
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeParam(this);
+    }
+}
+exports.ParamEditor = ParamEditor;
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/Editor/TableEditor/TableEditor.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TableEditor = void 0;
+const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+const ColumnEditor_1 = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts");
+const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+class TableEditor extends Editor_1.Editor {
+    constructor(data, database) {
+        super(data, database);
+        this.database = database;
+        this.columns = [];
+    }
+    init() {
+        for (const data of this.data.columns) {
+            this.createColumn(data);
+        }
+    }
+    createColumn(data) {
+        const column = new ColumnEditor_1.ColumnEditor(data, this);
+        column.init();
+        this.columns.push(column);
+        return column;
+    }
+    removeColumn(column) {
+        console.log('TableEditor.removeColumn', column.getName());
+        const i = this.columns.indexOf(column);
+        if (i === -1)
+            throw new Error('no such column');
+        this.columns.splice(i, 1);
+    }
+    async newColumn(name) {
+        if (!name)
+            throw new Error(`newColumn: no name`);
+        const data = await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Column',
+            action: '_new',
+            params: {
+                database: this.database.getName(),
+                table: this.getName(),
+                name: name
+            }
+        });
+        return this.createColumn(data);
+    }
+    async deleteData() {
+        await common_1.FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: 'delete',
+            params: {
+                database: this.database.getName(),
+                table: this.getName()
+            }
+        });
+    }
+    async delete() {
+        await this.deleteData();
+        this.parent.removeTable(this);
+    }
+    moveUp() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: 'moveUp',
+            params: {
+                database: this.database.getName(),
+                table: this.getName()
+            }
+        });
+    }
+    moveDown() {
+        return common_1.FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: 'moveDown',
+            params: {
+                database: this.database.getName(),
+                table: this.getName()
+            }
+        });
+    }
+}
+exports.TableEditor = TableEditor;
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts":
 /*!**********************************************************************!*\
   !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts ***!
@@ -32738,7 +34398,7 @@ exports.ActionList = ActionList;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.EditorFrontHostApp = void 0;
 const FrontHostApp_1 = __webpack_require__(/*! ../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-const ApplicationEditor_1 = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.js");
+const ApplicationEditor_1 = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
 const ApplicationController_1 = __webpack_require__(/*! ../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.js");
 const EditorFrontHostAppView_1 = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
 const PageLinkController_1 = __webpack_require__(/*! ../ModelController/PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.js");
@@ -33224,1078 +34884,6 @@ class TreeWidget extends common_1.ReactComponent {
     }
 }
 exports.TreeWidget = TreeWidget;
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.js":
-/*!***************************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.js ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplicationEditor": () => (/* binding */ ApplicationEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-/* harmony import */ var _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.js");
-/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.js");
-/* harmony import */ var _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.js");
-
-
-
-
-
-class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data) {
-        super(data);
-        this.databases   = [];
-        this.dataSources = [];
-        this.actions     = [];
-        this.pageLinks   = [];
-    }
-
-    init() {
-        console.log('ApplicationEditor.init', this.data);
-        // databases
-        for (const data of this.data.databases) {
-            this.createDatabase(data);
-        }
-
-        // dataSources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-
-        // pageLinks
-        for (const data of this.data.pageLinks) {
-            this.createPageLink(data);
-        }
-    }
-    createDatabase(data) {
-        const database = new _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__.DatabaseEditor(data, this);
-        database.init();
-        this.databases.push(database);
-        return database;
-    }
-    createPageLink(data) {
-        const pageLink = new _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__.PageLinkEditor(data, this);
-        pageLink.init();
-        this.pageLinks.push(pageLink);
-        return pageLink;
-    }
-    removeDatabase(database) {
-        console.log('ApplicationEditor.removeDatabase', database.getName());
-        const i = this.databases.indexOf(database);
-        if (i === -1) throw new Error('no such database');
-        this.databases.splice(i, 1);
-    }
-
-    removePageLink(pageLink) {
-        console.log('ApplicationEditor.removePageLink', pageLink.getName());
-        const i = this.pageLinks.indexOf(pageLink);
-        if (i === -1) throw new Error('no such pageLink');
-        this.pageLinks.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'save',
-            params    : {
-                attr : name,
-                value: value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async newPageAndPageLinkData(params) {
-        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action    : '_new',
-            params    : params
-        });
-    }
-
-    async newPage(params) {
-        const {page: pageData, pageLink: pageLinkData} = await this.newPageAndPageLinkData(params);
-        const pageLink = this.createPageLink(pageLinkData);
-        return new PageEditor(pageData, pageLink);
-    }
-
-    async newDatabase(params) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : '_new',
-            params    : params
-        });
-        return this.createDatabase(data);
-    }
-
-    async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'getView',
-            params    : {
-                app : this.getName(),
-                view: view
-            }
-        });
-    }
-
-    async saveView(text, view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'saveView',
-            params    : {
-                app : this.getName(),
-                view: view,
-                text: text
-            }
-        });
-    }
-
-    async saveController(text) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'saveController',
-            params    : {
-                app : this.getName(),
-                text: text
-            }
-        });
-    }
-
-    async createView() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createView',
-            params    : {
-                app: this.getName()
-            }
-        });
-    }
-
-    async createController() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createController',
-            params    : {
-                app: this.getName()
-            }
-        });
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action    : 'createModelBackJs',
-            params    : {
-                app: this.getName()
-            }
-        });
-    }
-
-    async newDataSource(params) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : '_new',
-            params    : params
-        });
-        return this.createDataSource(data);
-    }
-
-    async newAction(params) {
-        // params['pageFileName'] = this.page.pageLink.getFileName();
-        // params['form']         = this.getName();
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : '_new',
-            params    : params
-        });
-        return this.createAction(data);
-    }
-
-    createDataSource(data) {
-        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.js":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.js ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ColumnEditor": () => (/* binding */ ColumnEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-
-
-class ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, table) {
-        super(data, table);
-        this.table = table;
-    }
-
-    async setValue(name, value) {
-        //console.log('ColumnEditor.setValue', name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : 'save',
-            params    : {
-                database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-                attr    : name,
-                value   : value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : 'delete',
-            params    : {
-                database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-            }
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeColumn(this);
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.js":
-/*!*************************************************************************!*\
-  !*** ./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.js ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DataSourceEditor": () => (/* binding */ DataSourceEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-/* harmony import */ var _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.js");
-
-
-
-class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.keyColumns = [];
-    }
-
-    init() {
-        for (const data of this.data.keyColumns) {
-            this.createKeyColumn(data);
-        }
-    }
-
-    createKeyColumn(data) {
-        const keyColumn = new _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__.KeyColumnEditor(data, this);
-        keyColumn.init();
-        this.keyColumns.push(keyColumn);
-        return keyColumn;
-    }
-    removeKeyColumn(keyColumn) {
-        console.log('DatabaseEditor.removeParam', keyColumn.getName());
-        const i = this.keyColumns.indexOf(keyColumn);
-        if (i === -1) throw new Error('no such keyColumn');
-        this.keyColumns.splice(i, 1);
-    }
-    static async create(parent, params) {
-        if (parent instanceof FormEditor) {
-            const form = parent;
-            params['page']  = form.page.pageLink.getFileName();
-            params['form']  = form.getName();
-        }
-        if (parent instanceof PageEditor) {
-            const page = parent;
-            params['page']  = page.pageLink.getFileName();
-        }
-        return await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : '_new',
-            params    : params
-        });
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const args = {
-            controller: 'DataSource',
-            action    : 'save',
-            params    : {
-                dataSource: this.getName(),
-                attr      : name,
-                value     : value
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.form         = this.parent.getName();
-            args.params.pageFileName = this.parent.page.pageLink.getFileName();
-        }
-        const data = await FrontHostApp.doHttpRequest(args);
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'delete',
-            params    : {
-                dataSource: this.getName()
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.form = this.parent.getName();
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        await FrontHostApp.doHttpRequest(args);
-    }
-
-    async createModelBackJs() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action    : 'createModelBackJs',
-            params    : {
-                ...(this.parent instanceof PageEditor ? {
-                    page        : this.parent.getName(),
-                    pageFileName: this.parent.pageLink.getFileName()
-                } : {}),
-                ...(this.parent instanceof FormEditor ? {
-                    form        : this.parent.getName(),
-                    page        : this.parent.page.getName(),
-                    pageFileName: this.parent.page.pageLink.getFileName()
-                } : {}),
-                dataSource: this.getName(),
-            }
-        });
-    }
-
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDataSource(this);
-    }
-
-    async moveUp() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'moveUp',
-            params    : {
-                dataSource: this.getName()
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.form = this.parent.getName();
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async moveDown() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'moveDown',
-            params    : {
-                dataSource: this.getName()
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.form = this.parent.getName();
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async newKeyColumnData(name) {
-        const args = {
-            controller: 'KeyColumn',
-            action    : '_new',
-            params    : {
-                dataSource: this.getName(),
-                class     : 'KeyColumn',
-                name      : name
-            }
-        };
-        if (this.parent instanceof FormEditor) {
-            args.params.page = this.parent.page.pageLink.getFileName();
-            args.params.form = this.parent.getName();
-        }
-        if (this.parent instanceof PageEditor) {
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-    async newKeyColumn(name) {
-        const data = await this.newKeyColumnData(name);
-        return this.createKeyColumn(data);
-    }
-    async getView(view) {
-        const args = {
-            controller: 'DataSource',
-            action    : 'getView',
-            params    : {
-                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
-                view      : view
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
-            args.params.form         = (this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined;
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async saveController(text) {
-        const args = {
-            controller: 'DataSource',
-            action    : 'saveController',
-            params    : {
-                dataSource: this.getName(),
-                text      : text
-            }
-        };
-        if (this.parent instanceof PageEditor) {
-            args.params.pageFileName = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof FormEditor) {
-            args.params.pageFileName = this.parent.page.pageLink.getFileName();
-            args.params.form         = this.parent.getName();
-        }
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    async createController() {
-        const args = {
-            controller: 'DataSource',
-            action    : 'createController',
-            params    : {
-                page        : this.parent.page.getName(),
-                pageFileName: this.parent.page.pageLink.getFileName(),
-                form        : this.parent.getName(),
-                dataSource  : this.getName()
-            }
-        };
-        return await FrontHostApp.doHttpRequest(args);
-    }
-
-    getFullName() {
-        if (this.parent instanceof FormEditor) {
-            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof PageEditor) {
-            return [this.parent.getName(), this.getName()].join('.');
-        } else if (this.parent instanceof ApplicationEditor) {
-            return this.getName();
-        }
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.js":
-/*!*********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatabaseEditor": () => (/* binding */ DatabaseEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-/* harmony import */ var _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.js");
-/* harmony import */ var _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.js");
-
-
-
-
-class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.params = [];
-        this.tables = [];
-    }
-
-    init() {
-
-        // params
-        for (const data of this.data.params) {
-            this.createParam(data);
-        }
-
-        // tables
-        for (const data of this.data.tables) {
-            this.createTable(data);
-        }
-    }
-
-    createParam(data) {
-        const param = new _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__.ParamEditor(data, this);
-        param.init();
-        this.params.push(param);
-        return param;
-    }
-
-    createTable(data) {
-        const table = new _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__.TableEditor(data, this);
-        table.init();
-        this.tables.push(table);
-        return table;
-    }
-    removeParam(param) {
-        console.log('DatabaseEditor.removeParam', param.getName());
-        const i = this.params.indexOf(param);
-        if (i === -1) throw new Error('no such param');
-        this.params.splice(i, 1);
-    }
-    removeTable(table) {
-        console.log('DatabaseEditor.removeTable', table.getName());
-        const i = this.tables.indexOf(table);
-        if (i === -1) throw new Error('no such table');
-        this.tables.splice(i, 1);
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'save',
-            params    : {
-                database: this.getName(),
-                attr    : name,
-                value   : value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'delete',
-            params    : {
-                database: this.getName()
-            }
-        });
-    }
-
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDatabase(this);
-    }
-
-    async newParam(name) {
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : '_new',
-            params    : {
-                database: this.getName(),
-                class   : 'Param',
-                name    : name
-            }
-        });
-        return this.createParam(data);
-    }
-
-    async newTable(params) {
-        if (!params.name) throw new Error('newTable: no name');
-        const data =  await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : '_new',
-            params    : {
-                database: this.getName(),
-                class   : 'Table',
-                name    : params.name,
-                columns : params.columns
-            }
-        });
-        return this.createTable(data);
-    }
-
-    async getView(view) {
-        console.log('DatabaseEditor.getView', view);
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getView',
-            params    : {
-                view    : view,
-                database: this.data !== undefined ? this.getName() : null
-            }
-        });
-    }
-
-    async getTableInfo(table) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action    : 'getTableInfo',
-            params    : {
-                database: this.data !== undefined ? this.getName() : null,
-                table   : table
-            }
-        });
-    }
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveUp',
-            params    : {
-                database: this.getName()
-            }
-        });
-    }
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveDown',
-            params    : {
-                database: this.getName()
-            }
-        });
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/Editor.js":
-/*!**********************************************!*\
-  !*** ./src/frontend/editor/Editor/Editor.js ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Editor": () => (/* binding */ Editor)
-/* harmony export */ });
-
-
-class Editor {
-
-    constructor(data, parent = null) {
-        if (!data) throw new Error('no data');
-        this.data   = data;
-        this.parent = parent;
-    }
-
-    init() {
-    }
-
-    getClassName() {
-        return this.data['@class'];
-    }
-
-    getName() {
-        return this.getAttr('name');
-    }
-
-    getFullName(splitter = '.') {
-        let name;
-        if (this.form) {
-            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
-        } else if (this.page) {
-            name = `${this.page.getName()}${splitter}${this.getName()}`;
-        } else {
-            name = this.getName();
-        }
-        return name;
-    }
-
-    async setValue(name, value) {
-        throw new Error(`${this.constructor.name}.setValue not implemented`);
-    }
-
-    getAttr(name) {
-        return this.data['@attributes'][name];
-    }
-    getAttributes() {
-        return this.data['@attributes'];
-    }
-
-    setAttr(name, value) {
-        this.data['@attributes'][name] = value;
-    }
-
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.getName() === name);
-    }*/
-    /*createDataSource(data) {
-        const dataSource = new DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }*/
-    removeDataSource(dataSource) {
-        // console.log('Editor.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1) throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
-    }
-    createAction(data) {
-        const action = new ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    removeAction(action) {
-        // console.log('Editor.removeField', action.getName());
-        const i = this.actions.indexOf(action);
-        if (i === -1) throw new Error('no such action');
-        this.actions.splice(i, 1);
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.js":
-/*!***********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.js ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "KeyColumnEditor": () => (/* binding */ KeyColumnEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-
-
-class KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, dataSource) {
-        super(data, dataSource);
-        this.dataSource = dataSource;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action    : 'save',
-            params    : {
-                form        : this.dataSource.parent.getName(),
-                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
-                dataSource  : this.dataSource.getName(),
-                keyColumn   : this.getName(),
-                attr        : name,
-                value       : value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action    : 'delete',
-            params    : {
-                // page      : this.dataSource.parent.page.pageLink.getFileName(),
-                ...(this.getPage() ? {page: this.getPage().pageLink.getFileName()} : {}),
-                // form      : this.dataSource.parent.getName(),
-                ...(this.getForm() ? {form: this.getForm().getName()}: {}),
-                dataSource: this.dataSource.getName(),
-                keyColumn : this.getName()
-            }
-        });
-    }
-    getPage() {
-        if (this.dataSource.parent.constructor.name === 'FormEditor') {
-            return this.dataSource.parent.page;
-        }
-        if (this.dataSource.parent.constructor.name === 'PageEditor') {
-            return this.dataSource.parent;
-        }
-        return null;
-    }
-    getForm() {
-        if (this.dataSource.parent.constructor.name === 'FormEditor') {
-            return this.dataSource.parent;
-        }
-        return null;
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeKeyColumn(this);
-    }
-
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.js":
-/*!*********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.js ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PageLinkEditor": () => (/* binding */ PageLinkEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-
-
-class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, parent) {
-        super(data, parent);
-        this.application = parent;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'save',
-            params    : {
-                pageLink: this.getName(),
-                attr    : name,
-                value   : value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async moveUp() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'moveUp',
-            params    : {
-                page: this.getName()
-            }
-        });
-    }
-
-    async moveDown() {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action    : 'moveDown',
-            params    : {
-                page: this.getName()
-            }
-        });
-    }
-
-    getFileName() {
-        return this.data['@attributes'].fileName;
-    }
-    remove() {
-        console.log('PageLinkEditor.remove', this.getName());
-        this.parent.removePageLink(this);
-    }
-
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.js":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ParamEditor/ParamEditor.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ParamEditor": () => (/* binding */ ParamEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-
-
-class ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-    }
-
-    async setValue(name, value) {
-        //console.log(name + ' = ' + value);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : 'save',
-            params    : {
-                database: this.database.getName(),
-                param   : this.getName(),
-                attr    : name,
-                value   : value
-            }
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action    : 'delete',
-            params    : {
-                database: this.database.getName(),
-                param   : this.getName()
-            }
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeParam(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/TableEditor/TableEditor.js":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/Editor/TableEditor/TableEditor.js ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TableEditor": () => (/* binding */ TableEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.js");
-/* harmony import */ var _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.js");
-
-
-
-class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-        this.columns = [];
-    }
-
-    init() {
-        for (const data of this.data.columns) {
-            this.createColumn(data);
-        }
-    }
-
-    createColumn(data) {
-        const column = new _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__.ColumnEditor(data, this);
-        column.init();
-        this.columns.push(column);
-        return column;
-    }
-    removeColumn(column) {
-        console.log('TableEditor.removeColumn', column.getName());
-        const i = this.columns.indexOf(column);
-        if (i === -1) throw new Error('no such column');
-        this.columns.splice(i, 1);
-    }
-
-    async newColumn(name) {
-        if (!name) throw new Error(`newColumn: no name`);
-        const data = await FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action    : '_new',
-            params    : {
-                database: this.database.getName(),
-                table   : this.getName(),
-                name    : name
-            }
-        });
-        return this.createColumn(data);
-    }
-    async deleteData() {
-        await FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : 'delete',
-            params    : {
-                database: this.database.getName(),
-                table   : this.getName()
-            }
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeTable(this);
-    }
-
-    moveUp() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveUp',
-            params     : {
-                database: this.database.getName(),
-                table   : this.getName()
-            }
-        });
-    }
-
-    moveDown() {
-        return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveDown',
-            params     : {
-                database: this.database.getName(),
-                table   : this.getName()
-            }
-        });
-    }
-
-}
 
 
 /***/ }),

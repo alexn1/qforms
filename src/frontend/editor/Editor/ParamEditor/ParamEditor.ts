@@ -1,7 +1,8 @@
 import {Editor} from '../Editor';
+import {FrontHostApp} from '../../../common';
 
 export class ParamEditor extends Editor {
-
+    database: any;
     constructor(data, database) {
         super(data, database);
         this.database = database;

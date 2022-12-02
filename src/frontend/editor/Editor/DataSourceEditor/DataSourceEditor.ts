@@ -1,8 +1,12 @@
 import {Editor} from '../Editor';
 import {KeyColumnEditor} from '../KeyColumnEditor/KeyColumnEditor';
+import {FormEditor} from '../FormEditor/FormEditor';
+import {PageEditor} from '../PageEditor/PageEditor';
+import {FrontHostApp} from '../../../common';
+import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
 
 export class DataSourceEditor extends Editor {
-
+    keyColumns: any[];
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
@@ -55,10 +59,13 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.form         = this.parent.getName();
+            // @ts-ignore
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
         const data = await FrontHostApp.doHttpRequest(args);
@@ -75,10 +82,13 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.form = this.parent.getName();
+            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         await FrontHostApp.doHttpRequest(args);
@@ -117,10 +127,13 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.form = this.parent.getName();
+            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
@@ -135,10 +148,13 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.form = this.parent.getName();
+            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
@@ -155,10 +171,13 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
+            // @ts-ignore
             args.params.form = this.parent.getName();
         }
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest(args);
@@ -177,17 +196,20 @@ export class DataSourceEditor extends Editor {
             }
         };
         if (this.parent instanceof PageEditor) {
+            // @ts-ignore
             args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
         }
         if (this.parent instanceof FormEditor) {
+            // @ts-ignore
             args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            // @ts-ignore
             args.params.form         = (this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined;
         }
         return await FrontHostApp.doHttpRequest(args);
     }
 
     async saveController(text) {
-        const args = {
+        const args: any = {
             controller: 'DataSource',
             action    : 'saveController',
             params    : {

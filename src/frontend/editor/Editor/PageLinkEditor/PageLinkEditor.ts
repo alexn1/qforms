@@ -1,7 +1,8 @@
 import {Editor} from '../Editor';
+import {FrontHostApp} from '../../../common';
 
 export class PageLinkEditor extends Editor {
-
+    application: any;
     constructor(data, parent) {
         super(data, parent);
         this.application = parent;
