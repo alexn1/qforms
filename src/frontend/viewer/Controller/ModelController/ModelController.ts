@@ -1,6 +1,9 @@
 import {Controller} from '../Controller';
 
 export class ModelController extends Controller {
+    model: any;
+    parent: any;
+    deinited: boolean;
     constructor(model, parent) {
         super();
         this.model    = model;

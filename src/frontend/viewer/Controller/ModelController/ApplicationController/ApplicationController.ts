@@ -2,8 +2,19 @@ import {ModelController} from '../ModelController';
 import {Page} from '../../../Model/Page/Page';
 import {ApplicationView} from './ApplicationView';
 import {WebSocketClient} from '../../../WebSocketClient';
+import {FrontHostApp, Search, Helper} from '../../../../common';
+import {PageController} from '../PageController/PageController';
 
 export class ApplicationController extends ModelController {
+    frontHostApp: any;
+    lastId: number;
+    activePage: any;
+    modals: any[];
+    statusbar: any;
+    homePageName: string | null;
+    webSocketClient: any;
+    view: any;
+
     constructor(model, frontHostApp) {
         // console.log('ApplicationController.constructor', model, view);
         super(model, null);
@@ -350,4 +361,5 @@ export class ApplicationController extends ModelController {
     }
 }
 
+// @ts-ignore
 window.ApplicationController = ApplicationController;

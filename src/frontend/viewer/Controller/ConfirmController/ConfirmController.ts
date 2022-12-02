@@ -1,6 +1,8 @@
 import {Controller} from '../Controller';
+import {ConfirmView} from './ConfirmView';
 
 export class ConfirmController extends Controller {
+    options: any;
     constructor(options) {
         super();
         this.options = options;

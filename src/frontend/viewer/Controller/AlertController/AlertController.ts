@@ -1,6 +1,8 @@
 import {Controller} from '../Controller';
+import {AlertView} from './AlertView';
 
 export class AlertController extends Controller {
+    options: any;
     constructor(options) {
         super();
         this.options = options;

@@ -9,7 +9,7 @@ export class PageController extends ModelController {
         this.forms = [];
     }
 
-    static create(model, parent, id, options) {
+    static create(model, parent, id, options = null) {
         // console.log('PageController.create', model.getName());
         const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;

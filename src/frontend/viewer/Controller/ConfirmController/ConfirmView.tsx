@@ -1,12 +1,14 @@
-export class AlertView extends View {
+import {View} from '../View';
+
+export class ConfirmView extends View {
     constructor(props) {
         super(props);
         this.el = React.createRef();
     }
-    getHeaderStyle() {
-        return this.getCtrl().options.titleStyle/* || {color: 'red'}*/;
-    }
     render() {
+        // console.log('ConfirmView.render', this.getCtrl().options);
+        if (!this.getCtrl().options.yesButton) throw new Error('no yesButton option');
+        if (!this.getCtrl().options.noButton) throw new Error('no noButton option');
         return (
             <div className={this.getCssClassNames()}
                  ref={this.el}
@@ -16,8 +18,8 @@ export class AlertView extends View {
                 <div className={`${this.getCssBlockName()}__container`}>
                     <div className={`${this.getCssBlockName()}__content flex-column`}>
                         <div className={`${this.getCssBlockName()}__header`}>
-                            <div className={`${this.getCssBlockName()}__title`} style={this.getHeaderStyle()}>
-                                {this.getCtrl().options.title || 'Alert'}
+                            <div className={`${this.getCssBlockName()}__title`} style={this.getCtrl().options.titleStyle}>
+                                {this.getCtrl().options.title || 'Confirm'}
                             </div>
                             <div className={`${this.getCssBlockName()}__close`} onClick={this.getCtrl().onCloseClick}>
                                 <CloseIcon2/>
@@ -27,7 +29,14 @@ export class AlertView extends View {
                             {this.getCtrl().options.message}
                         </div>
                         <div className={`${this.getCssBlockName()}__footer`}>
-                            <Button classList={[`${this.getCssBlockName()}__ok-button`]} title={'OK'} onClick={this.getCtrl().onOkButtonClick}/>
+                            <Button classList={[`${this.getCssBlockName()}__no-button`]}
+                                    title={this.getCtrl().options.noButton}
+                                    onClick={this.getCtrl().onCloseClick}
+                            />
+                            <Button classList={[`${this.getCssBlockName()}__yes-button`]}
+                                    title={this.getCtrl().options.yesButton}
+                                    onClick={this.getCtrl().onYesClick}
+                            />
                         </div>
                     </div>
                 </div>

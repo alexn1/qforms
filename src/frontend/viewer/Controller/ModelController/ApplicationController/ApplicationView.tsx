@@ -1,4 +1,5 @@
-export {ModelView} from '../ModelView';
+import {ModelView} from '../ModelView';
+import {PageController} from '../PageController/PageController';
 
 export class ApplicationView extends ModelView {
     renderActivePage() {
@@ -51,4 +52,5 @@ export class ApplicationView extends ModelView {
     }
 }
 
+// @ts-ignore
 window.ApplicationView = ApplicationView;
