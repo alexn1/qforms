@@ -1,3 +1,4 @@
+/// <reference types="react" />
 interface ScriptsProps {
     scripts: any[];
 }
