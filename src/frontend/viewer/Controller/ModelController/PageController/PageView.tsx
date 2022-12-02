@@ -1,4 +1,6 @@
+import React from 'react';
 import {ModelView} from '../ModelView';
+import {Button, DropdownButton, MoreVertIcon, Tab2, OpenInNewIcon, CloseIcon2} from '../../../../common';
 
 export class PageView extends ModelView {
     constructor(props) {
@@ -230,4 +232,6 @@ export class PageView extends ModelView {
         }
     }
 }
+
+// @ts-ignore
 window.PageView = PageView;

@@ -73,4 +73,5 @@ export class Tab2 extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Tab = Tab;

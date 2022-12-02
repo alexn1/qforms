@@ -25,3 +25,6 @@ export {LeftIcon} from './icon/LeftIcon';
 export {RightIcon} from './icon/RightIcon';
 export {OpenInNewIcon} from './icon/OpenInNewIcon';
 export {TextArea} from './widget/TextArea';
+export {MoreVertIcon} from './icon/MoreVertIcon';
+export {Tab2} from './widget/Tab2/Tab2';
+export {CloseIcon2} from './icon/CloseIcon2';

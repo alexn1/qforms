@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../common';
+
 export class View extends ReactComponent {
     constructor(props) {
         super(props);

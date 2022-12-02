@@ -3,21 +3,21 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/viewer/main.js',
+    entry: './src/frontend/viewer/main.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/viewer/js'),
         filename: 'bundle.[contenthash].js',
     },
-    resolve: {
-        extensions: ['.jsx', '.js'],
-    },
     /*resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
+        extensions: ['.jsx', '.js'],
     },*/
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js'],
+    },
     module: {
         rules: [
-            {
+            /*{
                 test: /\.(js)x?$/,
                 exclude: /node_modules/,
                 use: [
@@ -30,8 +30,8 @@ module.exports = {
                         }
                     },
                 ],
-            },
-            /*{
+            },*/
+            {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 use: {
@@ -46,7 +46,7 @@ module.exports = {
                         }
                     }
                 }
-            }*/
+            }
         ],
     },
 };

@@ -1,6 +1,8 @@
 import {View} from '../View';
+import {Model} from '../../Model/Model';
 
 export class ModelView extends View {
+    renderActionIcon?: any;
     getActionsForDropdownButton() {
         return this.props.ctrl.getModel().getCol('actions').map(data => {
             const actionName = Model.getName(data);
@@ -26,4 +28,5 @@ export class ModelView extends View {
     }
 }
 
+// @ts-ignore
 window.ModelView = ModelView;
