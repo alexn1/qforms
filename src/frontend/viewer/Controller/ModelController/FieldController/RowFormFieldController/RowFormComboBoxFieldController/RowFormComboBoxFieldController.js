@@ -1,4 +1,5 @@
 import {RowFormFieldController} from '../RowFormFieldController';
+import {RowFormComboBoxFieldView} from './RowFormComboBoxFieldView';
 
 export class RowFormComboBoxFieldController extends RowFormFieldController {
     init() {

@@ -1,3 +1,10 @@
+import {ReactComponent} from '../../ReactComponent';
+import {Helper} from '../../Helper';
+import {CloseIcon} from '../../icon/CloseIcon';
+import {DateIcon} from '../../icon/DateIcon';
+import {CloseIcon2} from '../../icon/CloseIcon2';
+import {DatePicker} from '../DatePicker/DatePicker';
+
 // oldDates boolean true
 export class DropdownDatePicker extends ReactComponent {
     constructor(props) {
@@ -59,6 +66,7 @@ export class DropdownDatePicker extends ReactComponent {
         const value = this.getValue();
         if (value) {
             let format = this.getFormat();
+            // @ts-ignore
             if (ApplicationController.isDebugMode()) {
                 const time = Helper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
@@ -94,6 +102,7 @@ export class DropdownDatePicker extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -152,4 +161,5 @@ export class DropdownDatePicker extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.DropdownDatePicker = DropdownDatePicker;

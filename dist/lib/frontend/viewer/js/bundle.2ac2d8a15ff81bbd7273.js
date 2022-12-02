@@ -853,6 +853,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormComboBoxFieldController": () => (/* binding */ RowFormComboBoxFieldController)
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.js");
+/* harmony import */ var _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.jsx");
+
 
 class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
   init() {
@@ -873,7 +875,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
   }
 
   getViewClass() {
-    return super.getViewClass() || RowFormComboBoxFieldView;
+    return super.getViewClass() || _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldView;
   }
 
   getItems() {
@@ -984,6 +986,93 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
   };
 }
 window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.jsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.jsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* binding */ RowFormComboBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+class RowFormComboBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldView {
+  onChange = async widgetValue => {
+    // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
+    this.rerender();
+    await this.props.ctrl.onChange(widgetValue);
+  };
+
+  isCreateButtonVisible() {
+    if (this.getCtrl().getForm().getMode() !== 'edit') {
+      return false;
+    }
+
+    if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {
+      return false;
+    }
+
+    if (this.getCtrl().getModel().getAttr('newRowMode') === 'editPage') {
+      return !!this.getCtrl().getModel().getAttr('itemEditPage') && !!this.getCtrl().getModel().getAttr('itemCreateForm');
+    }
+
+    if (this.getCtrl().getModel().getAttr('newRowMode') === 'createPage') {
+      return !!this.getCtrl().getModel().getAttr('itemCreatePage') && !!this.getCtrl().getModel().getAttr('itemCreateForm');
+    }
+  }
+
+  renderSelect() {
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Select, {
+      classList: [`${this.getCssBlockName()}__select`],
+      onCreate: this.onWidgetCreate // nullable={ctrl.getModel().isNullable()}
+      ,
+      value: ctrl.getValueForWidget(),
+      readOnly: !ctrl.isEditable(),
+      onChange: this.onChange,
+      items: ctrl.getItems(),
+      placeholder: ctrl.getPlaceholder(),
+      onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null
+    });
+  }
+
+  renderEditButton() {
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      classList: [`${this.getCssBlockName()}__edit-button`],
+      onClick: ctrl.onEditButtonClick,
+      enabled: !!ctrl.getValue(),
+      children: "..."
+    });
+  }
+
+  renderCreateButton() {
+    const ctrl = this.getCtrl();
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(Button, {
+      classList: [`${this.getCssBlockName()}__create-button`],
+      onClick: ctrl.onCreateButtonClick,
+      children: "+"
+    });
+  }
+
+  render() {
+    // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: this.getCssClassNames(),
+      children: [this.renderSelect(), this.getCtrl().getModel().getAttr('itemEditPage') && !!this.getCtrl().getValue() && this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()]
+    });
+  }
+
+}
+window.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
 
 /***/ }),
 
@@ -1434,14 +1523,102 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormTextBoxFieldController": () => (/* binding */ RowFormTextBoxFieldController)
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.js");
+/* harmony import */ var _RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.jsx");
+
 
 class RowFormTextBoxFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
   getViewClass() {
-    return super.getViewClass() || RowFormTextBoxFieldView;
+    return super.getViewClass() || _RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldView;
   }
 
 }
 window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.jsx":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.jsx ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* binding */ RowFormTextBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+
+class RowFormTextBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldView {
+  constructor(props) {
+    super(props);
+    this.state = {
+      classList: []
+    };
+  }
+
+  onClear = async e => {
+    this.getCtrl().onChange('');
+    setTimeout(() => {
+      this.getWidget().getElement().focus();
+    }, 0);
+  };
+
+  isCloseVisible() {
+    // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
+    const ctrl = this.getCtrl();
+    if (!ctrl.isEditable()) return false;
+    return ctrl.getValueForWidget() !== '';
+  }
+
+  onFocus = async e => {
+    // console.log('RowFormTextBoxFieldView.onFocus');
+    this.addCssClass('focus');
+    await this.rerender();
+  };
+  onBlur = async e => {
+    // console.log('RowFormTextBoxFieldView.onBlur');
+    const value = e.target.value;
+    this.removeCssClass('focus');
+    this.getCtrl().onBlur(value);
+  };
+
+  renderTextBox() {
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(TextBox, {
+      classList: [`${this.getCssBlockName()}__input`],
+      value: ctrl.getValueForWidget(),
+      readOnly: !ctrl.isEditable(),
+      enabled: ctrl.isEditable(),
+      autoFocus: ctrl.isAutoFocus(),
+      placeholder: ctrl.getPlaceholder() || null,
+      autocomplete: ctrl.getAutocomplete(),
+      onCreate: this.onWidgetCreate,
+      onChange: ctrl.onChange,
+      onFocus: this.onFocus,
+      onBlur: this.onBlur
+    });
+  }
+
+  renderCloseIcon() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`,
+      onMouseDown: this.onClear,
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)(CloseIcon, {})
+    });
+  }
+
+  render() {
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsxs)("div", {
+      className: this.getCssClassNames(),
+      children: [this.renderTextBox(), this.renderCloseIcon()]
+    });
+  }
+
+}
+window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
 
 /***/ }),
 

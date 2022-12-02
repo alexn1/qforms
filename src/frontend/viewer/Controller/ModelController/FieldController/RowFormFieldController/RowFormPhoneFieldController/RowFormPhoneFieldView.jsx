@@ -1,3 +1,5 @@
+import {RowFormFieldView} from '../RowFormFieldView';
+
 export class RowFormPhoneFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);

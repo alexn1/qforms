@@ -1,3 +1,5 @@
+import {RowFormFieldView} from '../RowFormFieldView';
+
 export class RowFormPasswordFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);

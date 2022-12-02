@@ -16,3 +16,5 @@ export {Modal} from './widget/Modal/Modal';
 export {Password} from './widget/Password/Password';
 export {Menu} from './widget/Menu/Menu';
 export {Statusbar} from './widget/Statusbar/Statusbar';
+export {Tooltip} from './widget/Tooltip/Tooltip';
+export {DropdownDatePicker} from './widget/DropdownDatePicker/DropdownDatePicker';

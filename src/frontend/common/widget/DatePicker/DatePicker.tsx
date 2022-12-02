@@ -1,3 +1,8 @@
+import {ReactComponent} from '../../ReactComponent';
+import {Helper} from '../../Helper';
+import {LeftIcon} from '../../icon/LeftIcon';
+import {RightIcon} from '../../icon/RightIcon';
+
 // props
 //  visible boolean true
 //  selectedDate array [2021, 0, 1]
@@ -8,6 +13,7 @@
 //  selectToday boolean false
 //  highlightedDate array [2021, 0, 1]
 export class DatePicker extends ReactComponent {
+    MONTH: string[];
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
@@ -65,6 +71,7 @@ export class DatePicker extends ReactComponent {
 
     createSelectedDate() {
         if (!this.isDateSelected()) throw new Error('date not selected');
+        // @ts-ignore
         return new Date(...this.props.selectedDate);
     }
 
@@ -150,6 +157,7 @@ export class DatePicker extends ReactComponent {
         const today = Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        // @ts-ignore
         const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
         return (
             <table className={`${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`}
@@ -215,4 +223,5 @@ export class DatePicker extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.DatePicker = DatePicker;

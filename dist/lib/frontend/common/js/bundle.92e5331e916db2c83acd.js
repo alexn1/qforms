@@ -31832,6 +31832,107 @@ exports.CloseIcon = CloseIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.CloseIcon2 = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const CloseIcon2 = (props) => {
+    const size = props.size || 24;
+    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] }));
+};
+exports.CloseIcon2 = CloseIcon2;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DateIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
+  \***********************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DateIcon = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+class DateIcon extends React.Component {
+    render() {
+        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] }));
+    }
+}
+exports.DateIcon = DateIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LeftIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.LeftIcon = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const LeftIcon = (props) => {
+    const size = props.size || 24;
+    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] }));
+};
+exports.LeftIcon = LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/RightIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RightIcon = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const RightIcon = (props) => {
+    const size = props.size || 24;
+    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] }));
+};
+exports.RightIcon = RightIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
 /*!*****************************************************!*\
   !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
@@ -32176,6 +32277,201 @@ window.ComboBox = ComboBox;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DatePicker = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+const LeftIcon_1 = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+const RightIcon_1 = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+// props
+//  visible boolean true
+//  selectedDate array [2021, 0, 1]
+//  minDate array [2021, 0, 1]
+//  onMouseDown function
+//  onDateSelected function
+//  getDateStyle function
+//  selectToday boolean false
+//  highlightedDate array [2021, 0, 1]
+class DatePicker extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('DatePicker.constructor', props);
+        super(props);
+        this.onClick = e => {
+            console.log('DatePicker.onClick', e.target);
+            if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+                return this.onDateClick(e.target);
+            }
+        };
+        this.onMouseDown = e => {
+            // console.log('DatePicker.onMouseDown');
+            if (this.props.onMouseDown) {
+                return this.props.onMouseDown(e);
+            }
+        };
+        this.onNextClick = e => {
+            // console.log('DatePicker.next');
+            this.setState(prevState => {
+                const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                next.setMonth(next.getMonth() + 1);
+                return {
+                    selectedMonth: [next.getFullYear(), next.getMonth()]
+                };
+            });
+        };
+        this.onPrevClick = e => {
+            // console.log('DatePicker.prev');
+            this.setState(prevState => {
+                const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                prev.setMonth(prev.getMonth() - 1);
+                return {
+                    selectedMonth: [prev.getFullYear(), prev.getMonth()]
+                };
+            });
+        };
+        if (this.props.minDate && !(this.props.minDate instanceof Array))
+            throw new Error('minDate must be array');
+        this.state = { selectedMonth: this.calcSelectedMonth() };
+        this.MONTH = [
+            'Январь', 'Февраль',
+            'Март', 'Апрель', 'Май',
+            'Июнь', 'Июль', 'Август',
+            'Сентябрь', 'Октябрь', 'Ноябрь',
+            'Декабрь'
+        ];
+    }
+    static createDateFromArr(arr) {
+        return new Date(arr[0], arr[1], arr[2]);
+    }
+    isVisible() {
+        if (this.props.visible === false)
+            return false;
+        return true;
+    }
+    calcSelectedMonth() {
+        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        if (this.props.selectedDate) {
+            return [this.props.selectedDate[0], this.props.selectedDate[1]];
+        }
+        else if (this.props.highlightedDate) {
+            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
+        }
+        else {
+            const dates = [Helper_1.Helper.today().getTime()];
+            if (this.props.minDate)
+                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
+            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
+            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
+            const date = new Date(Math.min(...dates));
+            // console.log('date:', date);
+            return [date.getFullYear(), date.getMonth()];
+        }
+    }
+    static getTodayArr() {
+        return DatePicker.dateToArray(new Date());
+    }
+    static dateToArray(date) {
+        return [date.getFullYear(), date.getMonth(), date.getDate()];
+    }
+    static getDay(date) {
+        let day = date.getDay() - 1;
+        if (day === -1)
+            day = 6;
+        if (day === 0)
+            day = 7;
+        return day;
+    }
+    createSelectedDate() {
+        if (!this.isDateSelected())
+            throw new Error('date not selected');
+        // @ts-ignore
+        return new Date(...this.props.selectedDate);
+    }
+    isDateSelected() {
+        return !!this.props.selectedDate;
+    }
+    getFirstDateOfTable() {
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
+        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        return date;
+    }
+    createMinDate() {
+        if (!this.props.minDate)
+            throw new Error('no min date');
+        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
+    }
+    isMinDate() {
+        return !!this.props.minDate;
+    }
+    isPrevAllowed() {
+        const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+    }
+    isMonthAllowed(month) {
+        if (this.isMinDate()) {
+            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return true;
+    }
+    onDateClick(target) {
+        // console.log('DatePicker.onDateClick', target.dataset.date);
+        if (this.props.onDateSelected) {
+            this.props.onDateSelected(JSON.parse(target.dataset.date));
+        }
+    }
+    render() {
+        // console.log('DatePicker.render', this.props, this.state);
+        const date = this.getFirstDateOfTable();
+        const today = Helper_1.Helper.today();
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        // @ts-ignore
+        const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
+        return ((0, jsx_runtime_1.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0, jsx_runtime_1.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon_1.RightIcon, { size: 18 }) }))] })) })), (0, jsx_runtime_1.jsx)("thead", { children: (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0, jsx_runtime_1.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0, jsx_runtime_1.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+                            const classList = [];
+                            if (j === 5 || j === 6)
+                                classList.push('weekend');
+                            if (this.isSelectToday() && date.getTime() === today.getTime())
+                                classList.push('today');
+                            if (date.getMonth() !== this.state.selectedMonth[1])
+                                classList.push('out');
+                            if (!minDate)
+                                classList.push('selectable');
+                            else if (date.getTime() >= minDate.getTime())
+                                classList.push('selectable');
+                            if (selectedDate && date.getTime() === selectedDate.getTime())
+                                classList.push('selected');
+                            if (highlightedDate && highlightedDate.getTime() === date.getTime())
+                                classList.push('highlight');
+                            const text = date.getDate().toString();
+                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
+                            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
+                            date.setDate(date.getDate() + 1);
+                            return (0, jsx_runtime_1.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text);
+                        }) }, i))) })] })));
+    }
+    isSelectToday() {
+        if (this.props.selectToday === false)
+            return false;
+        return true;
+    }
+}
+exports.DatePicker = DatePicker;
+// @ts-ignore
+window.DatePicker = DatePicker;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
 /*!**********************************************************************!*\
   !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
@@ -32239,6 +32535,158 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
 exports.DropdownButton = DropdownButton;
 // @ts-ignore
 window.DropdownButton = DropdownButton;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.DropdownDatePicker = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+const CloseIcon_1 = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+const DateIcon_1 = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+const CloseIcon2_1 = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+const DatePicker_1 = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+// oldDates boolean true
+class DropdownDatePicker extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('DropdownDatePicker.constructor', props);
+        super(props);
+        this.onInputClick = (e) => {
+            // console.log('DropdownDatePicker.onInputClick', e);
+            if (this.props.readOnly)
+                return;
+            this.setState(prevState => ({ open: !prevState.open }));
+        };
+        this.onInputKeyDown = e => {
+            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onCloseDown = async (e) => {
+            // console.log('DropdownDatePicker.onCloseDown', e);
+            this.setState({ value: null });
+            if (this.props.onChange) {
+                this.props.onChange(null);
+            }
+        };
+        this.onBlur = (e) => {
+            // console.log('DropdownDatePicker.onBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onDatePickerMouseDown = (e) => {
+            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onDatePickerDateSelected = (date) => {
+            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            const value = new Date(date[0], date[1], date[2]);
+            this.setState({ open: false, value });
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.state = {
+            open: false,
+            value: props.value || null,
+        };
+        if (props.value && !(props.value instanceof Date)) {
+            throw new Error(`need Date type, got ${typeof props.value}`);
+        }
+    }
+    getFormat() {
+        // if (this.props.format) return this.props.format;
+        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+        return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+    }
+    getStringValue() {
+        const value = this.getValue();
+        if (value) {
+            let format = this.getFormat();
+            // @ts-ignore
+            if (ApplicationController.isDebugMode()) {
+                const time = Helper_1.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
+                    format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+                }
+            }
+            return Helper_1.Helper.formatDate(value, format);
+        }
+        return '';
+    }
+    /*getMinDate() {
+        if (this.props.getMinDate) {
+            return this.props.getMinDate();
+        } else if (this.props.oldDates === false) {
+            return DatePicker.getTodayArr();
+        }
+        return null;
+    }*/
+    getSelectedMonth() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth()];
+        }
+        return null;
+    }
+    getSelectedDate() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
+        }
+        return null;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    getClassList() {
+        return [
+            ...super.getClassList(),
+            ...(this.props.readOnly ? ['read-only'] : [])
+        ];
+    }
+    renderInput() {
+        return (0, jsx_runtime_1.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown });
+    }
+    renderCloseIcon() {
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) }));
+    }
+    renderDateIcon() {
+        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0, jsx_runtime_1.jsx)(DateIcon_1.DateIcon, {}) }));
+    }
+    renderDatePicker() {
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) })), (0, jsx_runtime_1.jsx)(DatePicker_1.DatePicker
+                // minDate={this.getMinDate()}
+                , { 
+                    // minDate={this.getMinDate()}
+                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] }));
+    }
+    render() {
+        // console.log('DropdownDatePicker.render', this.props, this.state);
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] }));
+    }
+}
+exports.DropdownDatePicker = DropdownDatePicker;
+// @ts-ignore
+window.DropdownDatePicker = DropdownDatePicker;
 
 
 /***/ }),
@@ -33033,6 +33481,35 @@ exports.TextBox = TextBox;
 window.TextBox = TextBox;
 
 
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Tooltip = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Tooltip extends ReactComponent_1.ReactComponent {
+    // constructor(props) {
+    //     console.log('Tooltip.constructor', props);
+    //     super(props);
+    // }
+    render() {
+        // console.log('Tooltip.render', this.state, this.props);
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' &&
+                    (0, jsx_runtime_1.jsx)("div", { children: "tooltip" }), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
+    }
+}
+exports.Tooltip = Tooltip;
+// @ts-ignore
+window.Tooltip = Tooltip;
+
+
 /***/ })
 
 /******/ 	});
@@ -33071,7 +33548,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -33108,6 +33585,10 @@ var Menu_1 = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/commo
 Object.defineProperty(exports, "Menu", ({ enumerable: true, get: function () { return Menu_1.Menu; } }));
 var Statusbar_1 = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
 Object.defineProperty(exports, "Statusbar", ({ enumerable: true, get: function () { return Statusbar_1.Statusbar; } }));
+var Tooltip_1 = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+Object.defineProperty(exports, "Tooltip", ({ enumerable: true, get: function () { return Tooltip_1.Tooltip; } }));
+var DropdownDatePicker_1 = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+Object.defineProperty(exports, "DropdownDatePicker", ({ enumerable: true, get: function () { return DropdownDatePicker_1.DropdownDatePicker; } }));
 
 })();
 

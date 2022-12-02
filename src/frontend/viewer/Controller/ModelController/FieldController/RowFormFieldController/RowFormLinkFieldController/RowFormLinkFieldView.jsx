@@ -1,3 +1,5 @@
+import {RowFormFieldView} from '../RowFormFieldView';
+
 export class RowFormLinkFieldView extends RowFormFieldView {
     render() {
         const ctrl = this.props.ctrl;

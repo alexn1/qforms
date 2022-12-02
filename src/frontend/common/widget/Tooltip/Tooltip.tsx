@@ -1,3 +1,5 @@
+import {ReactComponent} from '../../ReactComponent';
+
 export class Tooltip extends ReactComponent {
     // constructor(props) {
     //     console.log('Tooltip.constructor', props);
@@ -16,4 +18,5 @@ export class Tooltip extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Tooltip = Tooltip;
