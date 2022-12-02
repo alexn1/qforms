@@ -2,6 +2,8 @@ import {Model} from '../Model';
 import {Database} from '../Database/Database';
 
 export class Application extends Model {
+    databases: any[];
+    dataSources: any[];
     constructor(data) {
         super(data);
         this.databases   = [];

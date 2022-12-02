@@ -15,4 +15,6 @@ export class Column  extends Model {
         return this.getAttr('type');
     }
 }
+
+// @ts-ignore
 window.Column = Column;

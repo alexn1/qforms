@@ -1,4 +1,5 @@
 import {Field} from '../Field';
+import {Helper} from '../../../../common';
 
 export class ComboBoxField extends Field {
 
@@ -46,4 +47,6 @@ export class ComboBoxField extends Field {
         return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }
+
+// @ts-ignore
 window.ComboBoxField = ComboBoxField;

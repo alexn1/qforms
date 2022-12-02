@@ -1,4 +1,5 @@
 import {Field} from '../Field';
+import {Helper} from '../../../../common';
 
 export class DateField extends Field {
     getFormat() {
@@ -29,4 +30,5 @@ export class DateField extends Field {
     }
 }
 
+// @ts-ignore
 window.DateField = DateField;

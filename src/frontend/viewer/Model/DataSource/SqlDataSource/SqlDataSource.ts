@@ -1,6 +1,9 @@
 import {DataSource} from '../DataSource';
 
 export class SqlDataSource extends DataSource {
+    frame: number;
+    count: number;
+    lastFrame: number;
     constructor(data, parent) {
         super(data, parent);
         this.frame  = 1;

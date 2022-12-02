@@ -2,6 +2,8 @@ import {Model} from '../Model';
 import {Column} from '../Column/Column';
 
 export class Table extends Model {
+    columns: any[];
+
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];
@@ -44,4 +46,6 @@ export class Table extends Model {
         return this.emit('refresh', {source});
     }
 }
+
+// @ts-ignore
 window.Table = Table;

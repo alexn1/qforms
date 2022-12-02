@@ -1,4 +1,6 @@
 import {Model} from '../Model';
+import {Helper} from '../../../common';
+import {RowForm} from '../Form/RowForm/RowForm';
 
 export class Field extends Model {
     // constructor(data, parent) {
@@ -25,7 +27,7 @@ export class Field extends Model {
         const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
         // console.log('js', this.getFullName(), js);
-        module.Helper
+        // module.Helper
         try {
             const value = eval(js);
             if (value !== undefined) {
@@ -192,4 +194,6 @@ export class Field extends Model {
         return caption;
     }
 }
+
+// @ts-ignore
 window.Field = Field;

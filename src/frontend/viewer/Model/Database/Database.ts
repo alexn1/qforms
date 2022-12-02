@@ -2,6 +2,7 @@ import {Model} from '../Model';
 import {Table} from '../Table/Table';
 
 export class Database extends Model {
+    tables: any[];
     constructor(...args) {
         super(...args);
         this.tables = [];
@@ -35,4 +36,6 @@ export class Database extends Model {
         return promises;
     }
 }
+
+// @ts-ignore
 window.Database = Database;

@@ -1,6 +1,12 @@
 import {Model} from '../Model';
+import {FrontHostApp} from '../../../common';
+import {DataSource} from '../DataSource/DataSource';
 
 export class Page extends Model {
+    options: any;
+    dataSources: any[];
+    forms: any[];
+    params: any;
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
@@ -176,4 +182,6 @@ export class Page extends Model {
         return !!this.options.selectMode;
     }
 }
+
+// @ts-ignore
 window.Page = Page;

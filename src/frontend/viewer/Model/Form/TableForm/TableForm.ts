@@ -4,4 +4,5 @@ export class TableForm extends Form {
 
 }
 
+// @ts-ignore
 window.TableForm = TableForm;

@@ -1,4 +1,5 @@
 import {Field} from '../Field';
+import {Helper} from '../../../../common';
 
 export class CheckBoxListField extends Field {
 
@@ -46,4 +47,6 @@ export class CheckBoxListField extends Field {
         return this.getDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
     }
 }
+
+// @ts-ignore
 window.CheckBoxListField = CheckBoxListField;

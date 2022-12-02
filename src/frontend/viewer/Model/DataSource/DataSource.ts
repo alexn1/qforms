@@ -1,6 +1,14 @@
 import {Model} from '../Model';
+import {Form} from '../Form/Form';
+import {Page} from '../Page/Page';
+import {Application} from '../Application/Application';
+import {Helper} from '../../../common';
 
 export class DataSource extends Model {
+    rows: any;
+    rowsByKey: any;
+    news: any[];
+    changes: any;
 
     constructor(data, parent) {
         super(data, parent);
@@ -305,7 +313,7 @@ export class DataSource extends Model {
         return type;
     }
 
-    async insert() {
+    async insert(row?: any): Promise<any> {
         console.log('DataSource.insert', this.news);
         if (!this.news.length) throw new Error('no new rows to insert');
         const inserts = [];
@@ -507,4 +515,5 @@ export class DataSource extends Model {
 
 }
 
+// @ts-ignore
 window.DataSource = DataSource;

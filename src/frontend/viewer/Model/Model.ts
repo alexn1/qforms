@@ -1,7 +1,13 @@
 import {EventEmitter} from '../EventEmitter';
+import {FrontHostApp} from '../../common';
 
 export class Model extends EventEmitter {
-    constructor(data, parent) {
+    data: any;
+    parent: any;
+    deinited: boolean;
+    dataSources: any[];
+
+    constructor(data, parent = null) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
         this.data     = data;
@@ -83,4 +89,6 @@ export class Model extends EventEmitter {
         return this.data;
     }
 }
+
+// @ts-ignore
 window.Model = Model;

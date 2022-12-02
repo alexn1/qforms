@@ -1,6 +1,7 @@
 import {Form} from '../Form';
 
 export class RowForm extends Form {
+    fields: any;
     init() {
         super.init();
         if (this.isNewMode()) {
@@ -63,4 +64,6 @@ export class RowForm extends Form {
     }
 
 }
+
+// @ts-ignore
 window.RowForm = RowForm;

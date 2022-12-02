@@ -1,6 +1,10 @@
 import {Model} from '../Model';
+import {FrontHostApp} from '../../../common';
 
 export class Form extends Model {
+    dataSources: any[];
+    fields: any[];
+
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
@@ -126,4 +130,6 @@ export class Form extends Model {
         return values;
     }
 }
+
+// @ts-ignore
 window.Form = Form;
