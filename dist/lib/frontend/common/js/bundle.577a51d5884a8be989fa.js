@@ -31252,6 +31252,7 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
+        console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }

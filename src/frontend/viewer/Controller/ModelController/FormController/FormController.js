@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class FormController extends ModelController {
     static create(model, parent) {
         // console.log('FormController.create', model.getFullName());

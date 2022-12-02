@@ -194,6 +194,478 @@ class LoginView extends _View__WEBPACK_IMPORTED_MODULE_0__.View {
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.js":
+/*!*******************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.js ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* binding */ ApplicationController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.js");
+
+class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+  constructor(model, frontHostApp) {
+    // console.log('ApplicationController.constructor', model, view);
+    super(model, null);
+    this.frontHostApp = frontHostApp;
+    this.lastId = 0;
+    this.activePage = null; // active non modal page
+
+    this.modals = [];
+    this.statusbar = null;
+    this.homePageName = null;
+    this.webSocketClient = null;
+  }
+
+  static create(model, frontHostApp) {
+    // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
+    const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
+    const Class = CustomClass ? CustomClass : ApplicationController;
+    return new Class(model, frontHostApp);
+  }
+
+  static isDebugMode() {
+    return Search.getObj()['debug'] === '1';
+  }
+
+  init() {
+    // console.log('ApplicationController.init');
+    super.init(); // this.model.on('logout' , this.onLogout);
+
+    this.model.on('request', this.onRequest);
+    const pageData = this.model.data.pages[0];
+    this.activePage = pageData ? this.createPage(pageData, {
+      modal: false,
+      params: this.getGlobalParams()
+    }) : null;
+    document.title = this.getTitle();
+    document.documentElement.classList.add(Helper.inIframe() ? 'iframe' : 'not-iframe');
+    const activePageName = this.getActivePageName();
+    this.homePageName = activePageName ? activePageName : document.title;
+  }
+
+  deinit() {
+    // this.model.off('logout', this.onLogout);
+    this.model.off('request', this.onRequest);
+    super.deinit();
+  }
+
+  getViewClass() {
+    return super.getViewClass() || ApplicationView;
+  }
+
+  createView(rootElement) {
+    // console.log('ApplicationController.createView');
+    this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {
+      ctrl: this
+    });
+
+    if (this.statusbar) {
+      this.statusbar.setLastQueryTime(this.model.getAttr('time'));
+    }
+  }
+
+  onRequest = async e => {
+    console.log('onRequest', e);
+
+    if (this.statusbar) {
+      this.statusbar.setLastQueryTime(e.time);
+    } // console.log('e.remoteAppVersion', e.remoteAppVersion);
+    // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+
+
+    if (this.getModel().getData().versions.app && this.getModel().getData().versions.app !== e.remoteAppVersion) {
+      this.createVersionNotificationIfNotExists();
+    }
+  };
+
+  createVersionNotificationIfNotExists() {
+    // console.log('ApplicationController.createVersionNotificationIfNotExists');
+    if (!document.querySelector('.version-notification')) {
+      const div = document.createElement('div');
+      div.innerHTML = this.getModel().getText().application.versionNotification;
+      div.className = 'version-notification';
+      document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
+    } else {// console.log(`version notification already exists`);
+    }
+  }
+
+  getGlobalParams() {
+    return {// foo: 'bar'
+    };
+  } // options
+  // - modal      : boolean,
+  // - newMode    : boolean,
+  // - selectMode : boolean,
+  // - selectedKey: string,
+  // - onCreate   : function,
+  // - onSelect   : function,
+  // - onClose    : function,
+  // - params     : object,
+
+
+  createPage(pageData, options) {
+    if (options.modal === undefined) throw new Error('no options.modal'); // model
+
+    const pageModel = new Page(pageData, this.model, options);
+    pageModel.init(); // controller
+
+    const pc = PageController.create(pageModel, this, `c${this.getNextId()}`);
+    pc.init();
+    return pc;
+  }
+
+  async openPage(options) {
+    console.log('ApplicationController.openPage', options);
+    if (!options.name) throw new Error('no name');
+    if (options.key) throw new Error('openPage: key param is deprecated'); // if this page with this key is already opened, then show it
+
+    const pageController = this.findPageControllerByPageNameAndKey(options.name, null); // console.log('pageController:', pageController);
+
+    if (pageController) {
+      this.onPageSelect(pageController);
+      return pageController;
+    }
+
+    const {
+      page: pageData
+    } = await this.model.request({
+      action: 'page',
+      page: options.name,
+      newMode: !!options.newMode,
+      params: options.params || {}
+    }); // modal by default
+
+    if (options.modal === undefined) {
+      options.modal = true;
+    }
+
+    if (!options.onClose) {
+      const activeElement = document.activeElement;
+
+      options.onClose = () => {
+        if (activeElement) activeElement.focus();
+      };
+    }
+
+    const pc = this.createPage(pageData, options); // console.log('pc:', pc);
+    // show
+
+    pc.isModal() ? this.addModal(pc) : this.addPage(pc);
+    await this.rerender();
+    return pc;
+  }
+
+  addModal(ctrl) {
+    this.modals.push(ctrl);
+  }
+
+  removeModal(ctrl) {
+    // console.log('ApplicationController.removeModal', ctrl);
+    const i = this.modals.indexOf(ctrl);
+    if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
+    this.modals.splice(i, 1);
+  }
+
+  getNextId() {
+    this.lastId++;
+    return this.lastId;
+  }
+
+  getNewId() {
+    return `c${this.getNextId()}`;
+  }
+
+  addPage(pc) {
+    if (this.activePage) {
+      this.closePage(this.activePage);
+    }
+
+    this.activePage = pc;
+    document.title = this.getTitle();
+  }
+
+  findPageControllerByPageNameAndKey(pageName, key) {
+    if (this.activePage && this.activePage.model.getName() === pageName && this.activePage.model.getKey() === key) {
+      return this.activePage;
+    }
+
+    return null;
+  }
+
+  onPageSelect(pc) {
+    console.log('ApplicationController.onPageSelect', pc.model.getName());
+  }
+
+  async closePage(pageController) {
+    console.log('ApplicationController.closePage', pageController.model.getFullName());
+
+    if (this.modals.indexOf(pageController) > -1) {
+      this.modals.splice(this.modals.indexOf(pageController), 1);
+    } else if (this.activePage === pageController) {
+      this.activePage = null;
+      document.title = '';
+    } else {
+      throw new Error('page not found');
+    }
+
+    await this.rerender();
+    pageController.deinit();
+    pageController.model.deinit();
+  }
+
+  async onActionClick(name) {
+    console.log('ApplicationController.onActionClick', name);
+  }
+
+  getMenuItemsProp() {
+    // console.log('ApplicationController.getMenuItemsProp');
+    return [// pages & actions
+    ...(this.model.data.menu ? Object.keys(this.model.data.menu).map(key => ({
+      name: key,
+      title: key,
+      items: this.model.data.menu[key].map(item => ({
+        type: item.type,
+        name: item.page || item.action,
+        title: item.caption
+      }))
+    })) : []), // user
+    ...(this.model.getUser() ? [{
+      name: 'user',
+      title: `${this.model.getDomain()}/${this.model.getUser().login}`,
+      items: [{
+        type: 'custom',
+        name: 'logout',
+        title: 'Logout'
+      }]
+    }] : [])];
+  }
+
+  onStatusbarCreate = statusbar => {
+    this.statusbar = statusbar;
+  };
+  onLogout = async () => {
+    console.log('ApplicationController.onLogout');
+    const result = await this.model.request({
+      action: 'logout'
+    });
+    location.href = this.getRootPath();
+  };
+  onMenuItemClick = async (menu, type, name) => {
+    console.log('ApplicationController.onMenuItemClick', menu, type, name);
+
+    if (type === 'page') {
+      await this.openPage({
+        name: name,
+        modal: false
+      });
+      history.pushState({
+        pageName: name
+      }, '', PageController.createLink({
+        page: name
+      }));
+    } else if (type === 'action') {
+      try {
+        const result = await this.onActionClick(name);
+
+        if (!result) {
+          throw new Error(`no handler for action '${name}'`);
+        }
+      } catch (err) {
+        console.error(err);
+        await this.alert({
+          message: err.message
+        });
+      }
+    } else if (type === 'custom' && name === 'logout') {
+      await this.onLogout();
+    } else {
+      throw new Error(`unknown menu type/name: ${type}/${name}`);
+    }
+  };
+  /*getFocusCtrl() {
+      if (this.modals.length > 0) {
+          return this.modals[this.modals.length - 1];
+      }
+      return this.activePage;
+  }*/
+
+  getActivePageName() {
+    if (this.activePage) {
+      return this.activePage.getModel().getName();
+    }
+
+    return null;
+  }
+
+  async onWindowPopState(e) {
+    console.log('ApplicationController.onWindowPopState', e.state);
+    await this.openPage({
+      name: e.state ? e.state.pageName : this.homePageName,
+      modal: false
+    });
+  }
+
+  getTitle() {
+    // console.log('ApplicationController.getTitle', this.activePage);
+    if (this.activePage) {
+      return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
+    }
+
+    return this.getModel().getCaption();
+  }
+
+  invalidate() {
+    if (this.activePage) this.activePage.invalidate();
+    this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
+  }
+
+  async alert(options) {
+    if (!options.title) {
+      options.title = this.getModel().getText().application.alert;
+    }
+
+    const activeElement = document.activeElement;
+
+    try {
+      return await this.frontHostApp.alert(options);
+    } finally {
+      if (activeElement) activeElement.focus();
+    }
+  }
+
+  async confirm(options) {
+    if (!options.title) {
+      options.title = this.getModel().getText().application.confirm;
+    }
+
+    if (!options.yesButton) {
+      options.yesButton = this.getModel().getText().confirm.yes;
+    }
+
+    if (!options.noButton) {
+      options.noButton = this.getModel().getText().confirm.no;
+    }
+
+    const activeElement = document.activeElement;
+
+    try {
+      return await this.frontHostApp.confirm(options);
+    } finally {
+      if (activeElement) activeElement.focus();
+    }
+  }
+
+  getRootPath() {
+    return '/';
+  }
+
+  async openModal(ctrl) {
+    this.addModal(ctrl);
+    await this.rerender();
+  }
+
+  async closeModal(ctrl) {
+    this.removeModal(ctrl);
+    await this.rerender();
+  }
+
+  getHostApp() {
+    return this.frontHostApp;
+  }
+
+  async connect() {
+    const data = this.getModel().getData();
+    this.webSocketClient = new WebSocketClient({
+      applicationController: this,
+      protocol: data.nodeEnv === 'development' ? 'ws' : 'wss',
+      route: data.route,
+      uuid: data.uuid,
+      userId: data.user ? data.user.id : null
+    });
+    await this.webSocketClient.connect();
+  }
+
+  async rpc(name, params) {
+    const result = await this.getModel().rpc(name, params);
+    /*if (result.errorMessage) {
+        this.getHostApp().logError(new Error(result.errorMessage));
+        await this.alert({
+            title     : this.getModel().getText().application.error,
+            titleStyle: {color: 'red'},
+            message   : result.errorMessage
+        });
+    }*/
+
+    return result;
+  }
+
+  getDomain() {
+    return this.getModel().getDomain();
+  }
+
+  getBaseUrl() {
+    return `/${this.getDomain()}`;
+  }
+
+}
+window.QForms.ApplicationController = ApplicationController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ModelController.js":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ModelController.js ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModelController": () => (/* binding */ ModelController)
+/* harmony export */ });
+class ModelController extends Controller {
+  constructor(model, parent) {
+    super();
+    this.model = model;
+    this.parent = parent;
+    this.deinited = false;
+  }
+
+  init() {}
+
+  deinit() {
+    if (this.deinited) throw new Error(`${this.model.getFullName()}: controller already deinited`);
+    this.deinited = true;
+  }
+
+  getModel() {
+    return this.model;
+  }
+
+  getParent() {
+    return this.parent;
+  }
+
+  getTitle() {
+    return this.getModel().getCaption();
+  }
+
+  getViewClass() {
+    // console.log(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
+    const model = this.getModel();
+    if (!model.isAttr('viewClass')) throw new Error(`${this.constructor.name} not supports view`);
+    const viewClassName = model.getAttr('viewClass');
+    return viewClassName ? eval(viewClassName) : null;
+  }
+
+}
+window.QForms.ModelController = ModelController;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/View.jsx":
 /*!*************************************************!*\
   !*** ./src/frontend/viewer/Controller/View.jsx ***!
@@ -476,6 +948,606 @@ window.QForms.Column = Column;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/DataSource/DataSource.js":
+/*!************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/DataSource.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSource": () => (/* binding */ DataSource)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+
+class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+  constructor(data, parent) {
+    super(data, parent);
+    this.rows = null;
+    this.rowsByKey = null; // for row search by key
+
+    this.news = []; // new rows
+
+    this.changes = new Map();
+  }
+
+  init() {
+    // console.log('DataSource.init', this.getFullName(), this.getClassName());
+    this.setRows(this.data.rows);
+
+    if (this.getAttr('table')) {
+      const table = this.getTable();
+      table.on('insert', this.onTableInsert);
+      table.on('update', this.onTableUpdate);
+      table.on('delete', this.onTableDelete);
+      table.on('refresh', this.onTableRefresh);
+    }
+  }
+
+  deinit() {
+    if (this.getAttr('table')) {
+      const table = this.getTable();
+      table.off('insert', this.onTableInsert);
+      table.off('update', this.onTableUpdate);
+      table.off('delete', this.onTableDelete);
+      table.off('refresh', this.onTableRefresh);
+    }
+
+    super.deinit();
+  }
+
+  setRows(rows) {
+    this.rows = rows;
+    this.fillRowsByKey();
+  }
+
+  addRow(row) {
+    this.rows.push(row);
+    const key = this.getRowKey(row);
+    this.rowsByKey[key] = row;
+  }
+
+  addRows(rows) {
+    for (let i = 0; i < rows.length; i++) {
+      this.rows.push(rows[i]);
+    }
+
+    this.fillRowsByKey();
+  }
+
+  getRowsLength() {
+    return this.rows.length;
+  }
+
+  fillRowsByKey() {
+    // console.log('DataSource.fillRowsByKey', this.getFullName())
+    this.rowsByKey = {};
+
+    for (let i = 0; i < this.rows.length; i++) {
+      const row = this.rows[i];
+      const key = this.getRowKey(row);
+      this.rowsByKey[key] = row;
+    } // console.log('this.rowsByKey:', this.getFullName(), this.rowsByKey);
+
+  } // deinit() {
+  //     console.log('DataSource.deinit', this.getFullName());
+  //     super.deinit();
+  // }
+
+
+  getType(column) {
+    // console.log('DataSource.getType', this.getClassName(), column);
+    throw new Error('DataSource column type not implemented');
+  }
+
+  discardRowColumn(row, column) {
+    if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+      delete this.changes.get(row)[column];
+    }
+  }
+
+  changeRowColumn(row, column, newValue) {
+    if (!this.changes.has(row)) this.changes.set(row, {});
+    this.changes.get(row)[column] = newValue;
+  }
+
+  setValue(row, column, value) {
+    // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
+    if (value === undefined) throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
+
+    if (typeof value === 'object' && value !== null) {
+      throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
+    }
+
+    if (row[column] !== value) {
+      this.changeRowColumn(row, column, value);
+
+      if (row[column] === undefined && value === null) {
+        // workaround for new rows
+        this.discardRowColumn(row, column);
+      }
+    } else {
+      this.discardRowColumn(row, column);
+    }
+
+    if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length) this.changes.delete(row); // console.log('changes:', this.changes);
+  }
+
+  isChanged() {
+    // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
+    return !!this.changes.size;
+  }
+
+  hasNew() {
+    return !!this.news.length;
+  }
+
+  isRowColumnChanged(row, column) {
+    // console.log('DataSource.isRowColumnChanged', this.getFullName());
+    return row[column] !== this.getValue(row, column);
+  }
+
+  getValue(row, column) {
+    // console.log('DataSource.getValue', column);
+    let value;
+
+    if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+      value = this.changes.get(row)[column];
+    } else {
+      value = row[column];
+    }
+
+    if (value !== undefined && typeof value !== 'string') {
+      throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`);
+    } // console.log('DataSource.getValue:', value);
+
+
+    return value;
+  }
+
+  getKeyValues(row) {
+    return this.data.keyColumns.reduce((key, column) => {
+      key[column] = JSON.parse(row[column]);
+      return key;
+    }, {});
+  }
+
+  getRowKey(row) {
+    // console.log('DataSource.getRowKey', row);
+    const arr = [];
+
+    for (const column of this.data.keyColumns) {
+      if (row[column] === undefined) return null;
+      if (row[column] === null) throw new Error('wrong value null for data source value');
+
+      try {
+        const value = JSON.parse(row[column]);
+        arr.push(value);
+      } catch (err) {
+        console.log('getRowKey: cannot parse: ', row[column]);
+        throw err;
+      }
+    }
+
+    return JSON.stringify(arr);
+  }
+
+  removeRow(key) {
+    const row = this.getRow(key);
+    if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
+    const i = this.rows.indexOf(row);
+    if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
+    this.rows.splice(i, 1);
+    delete this.rowsByKey[key];
+  }
+
+  newRow(row) {
+    console.log('DataSource.newRow', this.getFullName(), row);
+
+    if (this.rows.length > 0) {
+      throw new Error('rows can be added to empty data sources only in new mode');
+    }
+
+    this.news.push(row);
+  }
+
+  getSingleRow(withChanges = false) {
+    if (this.news[0]) return this.news[0];
+    const row = this.rows[0];
+    if (!row) throw new Error('no single row');
+    if (withChanges) return this.getRowWithChanges(row);
+    return row;
+  }
+
+  getForm() {
+    return this.parent instanceof Form ? this.parent : null;
+  }
+
+  getPage() {
+    if (this.parent instanceof Page) return this.parent;
+    if (this.parent instanceof Form) return this.parent.getPage();
+    return null;
+  }
+
+  getApp() {
+    if (this.parent instanceof Application) return this.parent;
+    return this.parent.getApp();
+  }
+  /*getNamespace() {
+      if (this.parent instanceof Form) {
+          return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
+      }
+      if (this.parent instanceof Page) {
+          return this.parent.getName() + '.' + this.getName();
+      }
+      return this.getName();
+  }*/
+
+
+  getRow(key) {
+    return this.rowsByKey[key] || null;
+  }
+  /*getRowByKey(key) {
+      return this.rowsByKey[key] || null;
+  }*/
+
+
+  getRows() {
+    return this.rows;
+  }
+
+  getRowByIndex(i) {
+    return this.rows[i];
+  }
+
+  discard() {
+    console.log('DataSource.discard', this.getFullName());
+    if (!this.isChanged()) throw new Error(`no changes in data source ${this.getFullName()}`);
+    this.changes.clear();
+  }
+
+  static keyToParams(key, paramName = 'key') {
+    if (typeof key !== 'string') throw new Error('key not string');
+    const params = {};
+    const arr = JSON.parse(key);
+
+    if (arr.length === 1) {
+      params[paramName] = arr[0];
+    } else if (arr.length > 1) {
+      for (let i = 0; i < arr.length; i++) {
+        params[`${paramName}${i + 1}`] = arr[i];
+      }
+    } else {
+      throw new Error(`invalid key: ${key}`);
+    }
+
+    return params;
+  }
+
+  getChangesByKey() {
+    const changes = {};
+
+    for (const row of this.changes.keys()) {
+      changes[this.getRowKey(row)] = this.changes.get(row);
+    }
+
+    return changes;
+  }
+
+  getRowWithChanges(row) {
+    if (this.changes.has(row)) {
+      return { ...row,
+        ...this.changes.get(row)
+      };
+    }
+
+    return row;
+  }
+
+  hasNewRows() {
+    return this.news.length > 0;
+  }
+
+  static copyNewValues(row, newValues) {
+    for (const name in newValues) {
+      row[name] = newValues[name];
+    }
+  }
+
+  updateRow(key, newValues) {
+    console.log('DataSource.updateRow', this.getFullName(), key, newValues);
+    if (!key) throw new Error('no key');
+    const row = this.getRow(key);
+    if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
+    const newKey = this.getRowKey(newValues);
+    DataSource.copyNewValues(row, newValues); // copy new values to original row object
+
+    if (key !== newKey) {
+      delete this.rowsByKey[key];
+      this.rowsByKey[newKey] = row;
+    } // console.log(`key: ${key} to ${newKey}`);
+    // console.log('this.rowsByKey:', this.rowsByKey);
+    // console.log('this.data.rows:', this.data.rows);
+
+  }
+
+  getTable() {
+    if (!this.getAttr('table')) throw new Error(`${this.getFullName()}: table attr empty`);
+    return this.getDatabase().getTable(this.getAttr('table'));
+  }
+
+  getDatabase() {
+    // console.log('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
+    if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
+    return this.getApp().getDatabase(this.getAttr('database'));
+  }
+
+  getType(columnName) {
+    // console.log('DataSource.getType', columnName);
+    const type = this.getTable().getColumn(columnName).getType(); // console.log('type:', type);
+
+    return type;
+  }
+
+  async insert() {
+    console.log('DataSource.insert', this.news);
+    if (!this.news.length) throw new Error('no new rows to insert');
+    const inserts = [];
+
+    for (const row of this.news) {
+      const newValues = this.getRowWithChanges(row); // console.log('newValues:', newValues);
+
+      DataSource.copyNewValues(row, newValues); // console.log('row:', row);
+
+      const key = this.getRowKey(row);
+      if (!key) throw new Error('invalid insert row, no key'); // console.log('key:', key);
+
+      inserts.push(key);
+    }
+
+    this.changes.clear();
+
+    for (const row of this.news) {
+      this.addRow(row);
+    }
+
+    this.news = [];
+    console.log('rows:', this.getRows());
+    console.log('inserts:', inserts); // events
+
+    if (this.parent.onDataSourceInsert) {
+      this.parent.onDataSourceInsert({
+        source: this,
+        inserts
+      });
+    }
+
+    this.emit('insert', {
+      source: this,
+      inserts
+    });
+    const database = this.getAttr('database');
+    const table = this.getAttr('table');
+
+    if (database && table) {
+      const result = {
+        [database]: {
+          [table]: {
+            insert: inserts
+          }
+        }
+      };
+      await this.getApp().emitResult(result, this);
+      return result;
+    }
+
+    return null;
+  }
+
+  async delete(key) {
+    console.log('DataSource.delete', key);
+    if (!key) throw new Error('no key');
+    this.removeRow(key); // events
+
+    const deletes = [key];
+
+    if (this.parent.onDataSourceDelete) {
+      this.parent.onDataSourceDelete({
+        source: this,
+        deletes
+      });
+    }
+
+    this.emit('delete', {
+      source: this,
+      deletes
+    });
+    const database = this.getAttr('database');
+    const table = this.getAttr('table');
+
+    if (database && table) {
+      const result = {
+        [database]: {
+          [table]: {
+            delete: deletes
+          }
+        }
+      };
+      await this.getApp().emitResult(result, this);
+      return result;
+    }
+
+    return null;
+  }
+
+  async update() {
+    console.log('DataSource.update', this.getFullName());
+
+    if (this.news.length) {
+      await this.insert();
+      return;
+    }
+
+    if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
+    const changes = this.getChangesByKey(); // console.log('changes:', changes);
+    // apply changes to rows
+
+    const updates = {};
+
+    for (const key in changes) {
+      // console.log('key:', key);
+      const row = this.getRow(key); // console.log('row:', row);
+
+      const newValues = this.getRowWithChanges(row); // console.log('newValues:', newValues);
+
+      const newKey = this.getRowKey(newValues); // console.log('newKey:', newKey);
+
+      this.updateRow(key, newValues);
+      updates[key] = newKey;
+    }
+
+    this.changes.clear(); // events
+
+    if (this.parent.onDataSourceUpdate) {
+      this.parent.onDataSourceUpdate({
+        source: this,
+        updates
+      });
+    }
+
+    this.emit('update', {
+      source: this,
+      updates
+    });
+    const database = this.getAttr('database');
+    const table = this.getAttr('table');
+
+    if (database && table) {
+      const reuslt = {
+        [database]: {
+          [table]: {
+            update: updates
+          }
+        }
+      };
+      await this.getApp().emitResult(reuslt, this);
+      return reuslt;
+    }
+
+    return null;
+  }
+
+  onTableInsert = async e => {
+    if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+
+    if (e.source === this) {
+      // console.error('onTableInsert stop self insert', this.getFullName());
+      return;
+    }
+
+    console.log('DataSource.onTableInsert', this.getFullName(), e);
+    if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
+
+    for (const key of e.inserts) {
+      if (this.getRow(key)) {
+        console.log('rows:', this.rows);
+        console.log('rowsByKey:', this.rowsByKey);
+        throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
+      }
+
+      const newValues = e.source.getRow(key);
+      const newRow = {};
+      DataSource.copyNewValues(newRow, newValues); // console.log('newRow:', newRow);
+
+      this.addRow(newRow);
+    } // events
+
+
+    if (this.parent.onDataSourceInsert) {
+      this.parent.onDataSourceInsert(e);
+    }
+
+    this.emit('insert', e);
+  };
+  onTableUpdate = async e => {
+    if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+
+    if (e.source === this) {
+      // console.error('onTableUpdate stop self update', this.getFullName());
+      return;
+    }
+
+    console.log('DataSource.onTableUpdate', this.getFullName(), e);
+    if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
+
+    for (const key in e.updates) {
+      if (this.getRow(key)) {
+        const newKey = e.updates[key];
+        const sourceRow = e.source.getRow(newKey);
+        this.updateRow(key, sourceRow);
+      }
+    } // events
+
+
+    if (this.parent.onDataSourceUpdate) {
+      this.parent.onDataSourceUpdate(e);
+    }
+
+    this.emit('update', e);
+  };
+  onTableDelete = async e => {
+    if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+
+    if (e.source === this) {
+      // console.error('onTableDelete stop self update', this.getFullName());
+      return;
+    }
+
+    console.log('DataSource.onTableDelete', this.getFullName(), e);
+    if (!e.deletes.length) throw new Error(`${this.getFullName()}: no deletes`);
+
+    for (const key of e.deletes) {
+      if (this.getRow(key)) {
+        this.removeRow(key);
+      }
+    } // events
+
+
+    if (this.parent.onDataSourceDelete) {
+      this.parent.onDataSourceDelete(e);
+    }
+
+    this.emit('delete', e);
+  };
+  onTableRefresh = async e => {
+    throw new Error('DataSource.onTableRefresh: not implemented');
+  };
+
+  isSurrogate() {
+    return this.isAttr('database');
+  }
+
+  moveRow(row, offset) {
+    console.log('DataSource.moveRow');
+    Helper.moveArrItem(this.rows, row, offset); // refresh event
+
+    const event = {
+      source: this
+    };
+
+    if (this.parent.onDataSourceRefresh) {
+      this.parent.onDataSourceRefresh(event);
+    }
+
+    this.emit('refresh', event);
+  }
+
+}
+console.log('window.DataSource = DataSource');
+window.DataSource = DataSource;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Database/Database.js":
 /*!********************************************************!*\
   !*** ./src/frontend/viewer/Model/Database/Database.js ***!
@@ -616,7 +1688,7 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
     for (const data of this.data.dataSources) {
       try {
         const Class = FrontHostApp.getClassByName(data.class);
-        if (!Class) throw new Error(`no class ${data.class} class`);
+        if (!Class) throw new Error(`no ${data.class} class`);
         const dataSource = new Class(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
@@ -737,6 +1809,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ViewerFrontHostApp": () => (/* binding */ ViewerFrontHostApp)
 /* harmony export */ });
 /* harmony import */ var _Model_Application_Application__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.js");
+/* harmony import */ var _Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Controller/ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.js");
+
 
 class ViewerFrontHostApp extends FrontHostApp {
   constructor(options = {}) {
@@ -752,7 +1826,7 @@ class ViewerFrontHostApp extends FrontHostApp {
     const application = new _Model_Application_Application__WEBPACK_IMPORTED_MODULE_0__.Application(this.getData());
     application.init(); // applicationController
 
-    const applicationController = this.applicationController = ApplicationController.create(application, this);
+    const applicationController = this.applicationController = _Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_1__.ApplicationController.create(application, this);
     applicationController.init(); // view
 
     const rootElementName = `.${applicationController.getViewClass().name}__root`;
@@ -4633,11 +5707,14 @@ var __webpack_exports__ = {};
   \*************************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
 /* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.js");
 /* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.js");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.js");
+
 
 
 /*

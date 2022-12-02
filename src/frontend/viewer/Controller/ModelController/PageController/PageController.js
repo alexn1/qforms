@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class PageController extends ModelController {
     constructor(model, parent, id) {
         //console.log('PageController.constructor', model);

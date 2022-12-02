@@ -1,3 +1,5 @@
+import {ModelController} from '../ModelController';
+
 export class ApplicationController extends ModelController {
     constructor(model, frontHostApp) {
         // console.log('ApplicationController.constructor', model, view);

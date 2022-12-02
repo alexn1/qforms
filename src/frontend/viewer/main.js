@@ -1,5 +1,6 @@
 export {LoginFrontHostApp} from './LoginFrontHostApp';
 export {ViewerFrontHostApp} from './ViewerFrontHostApp';
+export {DataSource} from './Model/DataSource/DataSource';
 
 /*
 document.addEventListener('DOMContentLoaded', async () => {

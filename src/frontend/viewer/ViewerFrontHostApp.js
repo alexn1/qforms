@@ -1,4 +1,5 @@
 import {Application} from './Model/Application/Application';
+import {ApplicationController} from './Controller/ModelController/ApplicationController/ApplicationController';
 
 export class ViewerFrontHostApp extends FrontHostApp {
     constructor(options = {}) {

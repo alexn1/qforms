@@ -506,4 +506,5 @@ export class DataSource extends Model {
     }
 
 }
-window.QForms.DataSource = DataSource;
+console.log('window.DataSource = DataSource');
+window.DataSource = DataSource;
