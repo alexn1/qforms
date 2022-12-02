@@ -1,3 +1,5 @@
+import {Model} from '../Model';
+
 export class Column  extends Model {
     constructor(data, parent) {
         super(data, parent);

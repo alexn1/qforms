@@ -1,3 +1,6 @@
+import {Model} from '../Model';
+import {Column} from '../Column/Column';
+
 export class Table extends Model {
     constructor(data, parent) {
         super(data, parent);

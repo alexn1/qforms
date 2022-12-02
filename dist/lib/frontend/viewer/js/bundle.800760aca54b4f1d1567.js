@@ -442,6 +442,40 @@ window.QForms.Application = Application;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Column/Column.js":
+/*!****************************************************!*\
+  !*** ./src/frontend/viewer/Model/Column/Column.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Column": () => (/* binding */ Column)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+
+class Column extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+  constructor(data, parent) {
+    super(data, parent);
+    if (!this.getAttr('type')) throw new Error(`column ${this.getFullName()}: no type`);
+
+    if (!['string', 'number', 'boolean', 'object', 'date'].includes(this.getAttr('type'))) {
+      throw new Error(`${this.getFullName()}: wrong column type: ${this.getAttr('type')}`);
+    }
+  }
+
+  init() {// console.log('Column.init', this.getFullName());
+  }
+
+  getType() {
+    return this.getAttr('type');
+  }
+
+}
+window.QForms.Column = Column;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Database/Database.js":
 /*!********************************************************!*\
   !*** ./src/frontend/viewer/Model/Database/Database.js ***!
@@ -453,6 +487,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Database": () => (/* binding */ Database)
 /* harmony export */ });
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+/* harmony import */ var _Table_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Table/Table */ "./src/frontend/viewer/Model/Table/Table.js");
+
 
 class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   constructor(...args) {
@@ -463,7 +499,7 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
   init() {
     // console.log('Database.init', this.getName());
     for (const data of this.data.tables) {
-      const table = new Table(data, this);
+      const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(data, this);
       table.init();
       this.addTable(table);
     }
@@ -611,6 +647,82 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
 
 }
 window.QForms.Model = Model;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Table/Table.js":
+/*!**************************************************!*\
+  !*** ./src/frontend/viewer/Model/Table/Table.js ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Table": () => (/* binding */ Table)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.js");
+/* harmony import */ var _Column_Column__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Column/Column */ "./src/frontend/viewer/Model/Column/Column.js");
+
+
+class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+  constructor(data, parent) {
+    super(data, parent);
+    this.columns = [];
+  }
+
+  init() {
+    // console.log('Table.init', this.getFullName());
+    for (const data of this.data.columns) {
+      const column = new _Column_Column__WEBPACK_IMPORTED_MODULE_1__.Column(data, this);
+      column.init();
+      this.addColumn(column);
+    }
+  }
+
+  addColumn(column) {
+    this.columns.push(column);
+  }
+
+  getColumn(name) {
+    const column = this.columns.find(column => column.getName() === name);
+    if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
+    return column;
+  }
+
+  emitResult(result, source = null) {
+    console.log('Table.emitResult');
+    return [...(result.insert ? [this.emitInsert(source, result.insert)] : []), ...(result.update ? [this.emitUpdate(source, result.update)] : []), ...(result.delete ? [this.emitDelete(source, result.delete)] : []), ...(result.refresh ? [this.emitRefresh(source)] : [])];
+  }
+
+  emitInsert(source, inserts) {
+    return this.emit('insert', {
+      source,
+      inserts
+    });
+  }
+
+  emitUpdate(source, updates) {
+    return this.emit('update', {
+      source,
+      updates
+    });
+  }
+
+  emitDelete(source, deletes) {
+    return this.emit('delete', {
+      source,
+      deletes
+    });
+  }
+
+  emitRefresh(source) {
+    return this.emit('refresh', {
+      source
+    });
+  }
+
+}
+window.QForms.Table = Table;
 
 /***/ }),
 

@@ -1,3 +1,5 @@
+import {Model} from '../Model';
+
 export class Page extends Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);

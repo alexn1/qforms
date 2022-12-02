@@ -1,3 +1,5 @@
+import {Field} from '../Field';
+
 export class CheckBoxListField extends Field {
 
     getDisplayValue(row) {

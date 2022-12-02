@@ -1,3 +1,5 @@
+import {DataSource} from '../DataSource';
+
 export class SqlDataSource extends DataSource {
     constructor(data, parent) {
         super(data, parent);

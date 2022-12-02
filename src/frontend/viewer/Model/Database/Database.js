@@ -1,4 +1,5 @@
 import {Model} from '../Model';
+import {Table} from '../Table/Table';
 
 export class Database extends Model {
     constructor(...args) {

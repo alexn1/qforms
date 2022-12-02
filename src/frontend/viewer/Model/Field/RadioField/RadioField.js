@@ -1,3 +1,5 @@
+import {Field} from '../Field';
+
 export class RadioField extends Field {
     getDisplayValue(row) {
         const displayColumn = this.getAttr('displayColumn');

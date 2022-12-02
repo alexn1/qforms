@@ -1,3 +1,5 @@
+import {Model} from '../Model';
+
 export class DataSource extends Model {
 
     constructor(data, parent) {

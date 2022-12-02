@@ -1,3 +1,5 @@
+import {Field} from '../Field';
+
 export class DateTimeField extends Field {
     getFormat() {
         return this.getAttr('format');
