@@ -32971,7 +32971,7 @@ const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/
 class ModalView extends common_1.ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(Modal, { children: react_1.default.createElement(ctrl.getViewClass(), { ctrl }) });
+        return (0, jsx_runtime_1.jsx)(common_1.Modal, { children: react_1.default.createElement(ctrl.getViewClass(), { ctrl }) });
     }
 }
 exports.ModalView = ModalView;
@@ -32995,7 +32995,7 @@ class DatabaseView extends common_1.ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(Grid, { classList: ['flex-max'], columns: [
+        return (0, jsx_runtime_1.jsx)(common_1.Grid, { classList: ['flex-max'], columns: [
                 { name: 'name', title: 'name', width: 100 },
                 { name: 'type', title: 'type', width: 60 },
                 { name: 'key', title: 'key', width: 60 },
@@ -33009,7 +33009,7 @@ class DatabaseView extends common_1.ReactComponent {
         // console.log('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'DatabaseView frame' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && (0, jsx_runtime_1.jsx)(Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" }))] })) })) })), (0, jsx_runtime_1.jsx)(TreeWidget_1.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] }));
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'DatabaseView frame' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" }))] })) })) })), (0, jsx_runtime_1.jsx)(TreeWidget_1.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] }));
     }
 }
 exports.DatabaseView = DatabaseView;
@@ -33053,12 +33053,12 @@ class PropertyGrid extends common_1.ReactComponent {
     }
     renderInput(name) {
         const obj = this.getObj();
-        return (0, jsx_runtime_1.jsx)(TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: value => this.onChange(name, value), autocomplete: 'off' });
+        return (0, jsx_runtime_1.jsx)(common_1.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: value => this.onChange(name, value), autocomplete: 'off' });
     }
     renderSelect(name) {
         const obj = this.getObj();
         const options = this.getOptions();
-        return (0, jsx_runtime_1.jsx)(ComboBox, { name: name, value: obj[name], items: options[name].map(value => ({
+        return (0, jsx_runtime_1.jsx)(common_1.ComboBox, { name: name, value: obj[name], items: options[name].map(value => ({
                 value: value,
                 title: value
             })), onChange: value => this.onChange(name, value) });
@@ -33081,12 +33081,16 @@ exports.PropertyGrid = PropertyGrid;
 /*!*****************************************************!*\
   !*** ./src/frontend/editor/TreeWidget/TreeItem.tsx ***!
   \*****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.TreeItem = void 0;
 const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
 const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 class TreeItem extends common_1.ReactComponent {
     constructor(props) {
@@ -33119,7 +33123,7 @@ class TreeItem extends common_1.ReactComponent {
         this.state = {
             opened: props.item.opened !== undefined ? props.item.opened : false
         };
-        this.li = React.createRef();
+        this.li = react_1.default.createRef();
     }
     isSelected() {
         return this.props.tree.getSelectedItem() === this.props.item;
@@ -33132,6 +33136,7 @@ class TreeItem extends common_1.ReactComponent {
     }
     open() {
         console.log('TreeItem.open', this.props.item.getTitle());
+        // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();

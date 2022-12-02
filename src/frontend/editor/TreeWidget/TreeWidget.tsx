@@ -11,7 +11,7 @@ export class TreeWidget extends ReactComponent {
     async select(item) {
         console.log('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item)) return;
-        return new Promise(resolve => {
+        return new Promise<void>(resolve => {
             this.setState({selectedItem: item}, () => {
                 if (this.props.onItemSelect) this.props.onItemSelect(item);
                 resolve();

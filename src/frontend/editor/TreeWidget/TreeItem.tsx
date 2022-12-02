@@ -1,6 +1,10 @@
+import React from 'react';
 import {ReactComponent} from '../../common';
 
 export class TreeItem extends ReactComponent {
+    li: React.RefObject<any>;
+    parent: any;
+
     constructor(props) {
         super(props);
         this.state = {
@@ -44,6 +48,7 @@ export class TreeItem extends ReactComponent {
     }
     open() {
         console.log('TreeItem.open', this.props.item.getTitle());
+        // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();

@@ -1,5 +1,5 @@
 import React from 'react';
-import {ReactComponent} from '../../common';
+import {ReactComponent, Modal} from '../../common';
 
 export class ModalView extends ReactComponent {
     render() {

@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../common';
+import {ReactComponent, TextBox, ComboBox} from '../../common';
 
 export class PropertyGrid extends ReactComponent {
     constructor(props) {
