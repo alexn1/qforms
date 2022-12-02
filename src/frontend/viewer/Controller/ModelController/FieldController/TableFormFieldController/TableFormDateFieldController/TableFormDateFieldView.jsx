@@ -1,3 +1,5 @@
+import {TableFormFieldView} from '../TableFormFieldView';
+
 export class TableFormDateFieldView extends TableFormFieldView {
     render() {
         const row = this.props.row;

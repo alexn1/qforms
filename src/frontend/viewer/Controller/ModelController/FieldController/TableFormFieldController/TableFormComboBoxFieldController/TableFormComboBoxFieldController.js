@@ -1,3 +1,5 @@
+import {TableFormFieldController} from '../TableFormFieldController';
+
 export class TableFormComboBoxFieldController extends TableFormFieldController {
 
     init() {

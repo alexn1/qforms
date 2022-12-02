@@ -1,3 +1,5 @@
+import {FieldView} from '../FieldView';
+
 export class TableFormFieldView extends FieldView {
     constructor(props) {
         super(props);

@@ -1,4 +1,5 @@
 import {TableFormFieldController} from '../TableFormFieldController';
+import {TableFormTextBoxFieldView} from './TableFormTextBoxFieldView';
 
 export class TableFormTextBoxFieldController extends TableFormFieldController {
     getViewClass() {

@@ -22,3 +22,4 @@ export {DatePicker} from './widget/DatePicker/DatePicker';
 export {Select} from './widget/Select/Select';
 export {CloseIcon} from './icon/CloseIcon';
 export {LeftIcon} from './icon/LeftIcon';
+export {RightIcon} from './icon/RightIcon';

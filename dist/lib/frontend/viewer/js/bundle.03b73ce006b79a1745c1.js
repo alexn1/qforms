@@ -207,6 +207,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.js");
 /* harmony import */ var _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.js");
 /* harmony import */ var _ApplicationView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.jsx");
+/* harmony import */ var _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.js");
+
 
 
 
@@ -583,7 +585,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
 
   async connect() {
     const data = this.getModel().getData();
-    this.webSocketClient = new WebSocketClient({
+    this.webSocketClient = new _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__.WebSocketClient({
       applicationController: this,
       protocol: data.nodeEnv === 'development' ? 'ws' : 'wss',
       route: data.route,
@@ -1632,9 +1634,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TableFormDateFieldController": () => (/* binding */ TableFormDateFieldController)
 /* harmony export */ });
-class TableFormDateFieldController extends TableFormFieldController {
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.js");
+/* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.jsx");
+
+
+class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
   getViewClass() {
-    return super.getViewClass() || TableFormDateFieldView;
+    return super.getViewClass() || _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldView;
   }
 
   getValueForWidget(row) {
@@ -1645,6 +1651,39 @@ class TableFormDateFieldController extends TableFormFieldController {
 
 }
 window.TableFormDateFieldController = TableFormDateFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.jsx":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.jsx ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateFieldView": () => (/* binding */ TableFormDateFieldView)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class TableFormDateFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: this.getStyle(row),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        ref: this.span,
+        children: ctrl.getValueForWidget(row)
+      })
+    });
+  }
+
+}
+window.TableFormDateFieldView = TableFormDateFieldView;
 
 /***/ }),
 
@@ -1671,6 +1710,35 @@ window.TableFormFieldController = TableFormFieldController;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.jsx":
+/*!************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.jsx ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormFieldView": () => (/* binding */ TableFormFieldView)
+/* harmony export */ });
+/* harmony import */ var _FieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.jsx");
+
+class TableFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_0__.FieldView {
+  constructor(props) {
+    super(props);
+    this.span = React.createRef();
+  }
+
+  getSpanOffsetWidth() {
+    // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
+    if (!this.span.current) return 0;
+    return this.span.current.offsetWidth;
+  }
+
+}
+window.TableFormFieldView = TableFormFieldView;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.js":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.js ***!
@@ -1682,10 +1750,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* binding */ TableFormTextBoxFieldController)
 /* harmony export */ });
 /* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.js");
+/* harmony import */ var _TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.jsx");
+
 
 class TableFormTextBoxFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
   getViewClass() {
-    return super.getViewClass() || TableFormTextBoxFieldView;
+    return super.getViewClass() || _TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldView;
   }
   /*beginEdit(view) {
       view.firstElementChild.style.MozUserSelect = 'text';
@@ -1706,6 +1776,39 @@ class TableFormTextBoxFieldController extends _TableFormFieldController__WEBPACK
 
 }
 window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.jsx":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.jsx ***!
+  \***************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* binding */ TableFormTextBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.jsx");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
+class TableFormTextBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldView {
+  render() {
+    const row = this.props.row;
+    const ctrl = this.props.ctrl;
+    return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("div", {
+      className: `${this.getCssClassNames()} ellipsis`,
+      style: this.getStyle(row),
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_1__.jsx)("span", {
+        ref: this.span,
+        children: ctrl.getValueForWidget(row)
+      })
+    });
+  }
+
+}
+window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
 
 /***/ }),
 
@@ -5832,6 +5935,124 @@ class ViewerFrontHostApp extends FrontHostApp {
 
 }
 window.ViewerFrontHostApp = ViewerFrontHostApp;
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/WebSocketClient.js":
+/*!************************************************!*\
+  !*** ./src/frontend/viewer/WebSocketClient.js ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "WebSocketClient": () => (/* binding */ WebSocketClient)
+/* harmony export */ });
+class WebSocketClient {
+  constructor(options = {}) {
+    // console.log('WebSocketClient.constructor', options);
+    this.options = options;
+    if (!options.applicationController) throw new Error('no options.applicationController');
+    if (!options.protocol) throw new Error('no options.protocol');
+    this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
+    this.webSocket = null;
+    this.refreshTimeoutId = null;
+    this.RECONNECT_TIMEOUT = 10; // sec
+
+    this.REFRESH_TIMEOUT = 60 * 60; // sec
+  }
+
+  createUriParamsString(options) {
+    const params = {
+      route: options.route,
+      uuid: options.uuid,
+      userId: options.userId,
+      version: this.getApp().getModel().getData().versions.app
+    };
+    return Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
+  }
+
+  connect() {
+    console.log('WebSocketClient.connect', this.url);
+    return new Promise((resolve, reject) => {
+      this.webSocket = new WebSocket(this.url);
+
+      this.webSocket.onclose = async e => {
+        this.webSocket = null;
+        reject(new Error(`Connection failed ${e.code}`));
+      };
+
+      this.webSocket.onopen = e => {
+        this.webSocket.onclose = this.onClose.bind(this);
+        this.webSocket.onmessage = this.onMessage.bind(this);
+        this.startRefreshTimeout();
+        resolve(e);
+      };
+    });
+  }
+
+  async onRefreshTimeout() {
+    // console.log('WebSocketClient.onRefreshTimeout');
+    this.refreshTimeoutId = null;
+    this.send('ping');
+    this.startRefreshTimeout();
+  }
+
+  send(data) {
+    console.log('WebSocketClient.send', data);
+    this.webSocket.send(data);
+  }
+
+  startRefreshTimeout() {
+    this.refreshTimeoutId = setTimeout(this.onRefreshTimeout.bind(this), this.REFRESH_TIMEOUT * 1000);
+  }
+
+  resetRefreshTimeout() {
+    if (this.refreshTimeoutId) {
+      clearTimeout(this.refreshTimeoutId);
+      this.refreshTimeoutId = null;
+    }
+  }
+
+  async reconnect() {
+    console.log('WebSocketClient.reconnect');
+
+    try {
+      await this.connect();
+    } catch (err) {
+      console.error(err);
+      console.log(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
+      setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
+    }
+  }
+
+  async onClose(e) {
+    console.error('WebSocketClient.onClose', e);
+    this.getApp().getHostApp().logError(new Error(`websocket close ${this.getApp().getModel().getDomain()}/${this.getApp().getModel().getName()}`));
+    this.resetRefreshTimeout();
+    this.webSocket.onclose = null;
+    this.webSocket.onmessage = null;
+    this.webSocket = null;
+    await this.reconnect();
+  }
+
+  async onMessage(e) {
+    console.log('WebSocketClient.onMessage', JSON.parse(e.data));
+    const packet = JSON.parse(e.data);
+
+    if (packet.type === 'result') {
+      this.getApp().getView().disableRerender();
+      await this.getApp().getModel().emitResult(packet.data);
+      this.getApp().getView().enableRerender();
+      this.getApp().getView().rerender();
+    }
+  }
+
+  getApp() {
+    return this.options.applicationController;
+  }
+
+}
 
 /***/ }),
 

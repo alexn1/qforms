@@ -1,3 +1,5 @@
+import {TableFormFieldController} from '../TableFormFieldController';
+
 export class TableFormDateTimeFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormDateTimeFieldView;

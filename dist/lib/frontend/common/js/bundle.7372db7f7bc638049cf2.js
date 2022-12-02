@@ -31925,6 +31925,8 @@ const RightIcon = (props) => {
     return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] }));
 };
 exports.RightIcon = RightIcon;
+// @ts-ignore
+window.RightIcon = exports.RightIcon;
 
 
 /***/ }),
@@ -33729,7 +33731,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -33778,6 +33780,8 @@ var CloseIcon_1 = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/co
 Object.defineProperty(exports, "CloseIcon", ({ enumerable: true, get: function () { return CloseIcon_1.CloseIcon; } }));
 var LeftIcon_1 = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
 Object.defineProperty(exports, "LeftIcon", ({ enumerable: true, get: function () { return LeftIcon_1.LeftIcon; } }));
+var RightIcon_1 = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+Object.defineProperty(exports, "RightIcon", ({ enumerable: true, get: function () { return RightIcon_1.RightIcon; } }));
 
 })();
 

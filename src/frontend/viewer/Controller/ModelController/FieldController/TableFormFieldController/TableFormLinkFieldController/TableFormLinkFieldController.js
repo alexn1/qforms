@@ -1,3 +1,5 @@
+import {TableFormFieldController} from '../TableFormFieldController';
+
 export class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormLinkFieldView;
