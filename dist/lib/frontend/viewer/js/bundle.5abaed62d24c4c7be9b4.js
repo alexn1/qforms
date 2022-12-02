@@ -5126,6 +5126,32 @@ window.Field = Field;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.js":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.js ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextAreaField": () => (/* binding */ TextAreaField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.js");
+
+class TextAreaField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+  getRows() {
+    return this.data.rows;
+  }
+
+  getCols() {
+    return this.data.cols;
+  }
+
+}
+window.TextAreaField = TextAreaField;
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.js":
 /*!**********************************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.js ***!
@@ -9858,6 +9884,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormController": () => (/* reexport safe */ _Controller_ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_16__.TableFormController),
 /* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_17__.TableFormDateFieldController),
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_5__.TableFormTextBoxFieldController),
+/* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_18__.TextAreaField),
 /* harmony export */   "TextBoxField": () => (/* reexport safe */ _Model_Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_11__.TextBoxField),
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp)
 /* harmony export */ });
@@ -9879,6 +9906,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.js");
 /* harmony import */ var _Controller_ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Controller/ModelController/FormController/TableFormController/TableFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormController.js");
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.js");
+/* harmony import */ var _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Model/Field/TextAreaField/TextAreaField */ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.js");
+
 
 
 

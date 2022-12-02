@@ -16,6 +16,7 @@ export {RowFormComboBoxFieldController} from './Controller/ModelController/Field
 export {RowFormTextBoxFieldController} from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController';
 export {TableFormController} from './Controller/ModelController/FormController/TableFormController/TableFormController';
 export {TableFormDateFieldController} from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController';
+export {TextAreaField} from './Model/Field/TextAreaField/TextAreaField';
 
 
 /*
