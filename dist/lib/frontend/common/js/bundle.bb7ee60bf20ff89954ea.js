@@ -31916,6 +31916,52 @@ window.LeftIcon = exports.LeftIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
+  \***************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.MoreVertIcon = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+class MoreVertIcon extends React.Component {
+    render() {
+        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] }));
+    }
+}
+exports.MoreVertIcon = MoreVertIcon;
+// @ts-ignore
+window.MoreVertIcon = MoreVertIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
 /*!****************************************************!*\
   !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
@@ -33354,6 +33400,135 @@ window.Password = Password;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PhoneBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class PhoneBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyPress = e => {
+            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === '+'
+                && e.target.value.length
+                && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+                e.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('PhoneBox.onChange', e.target.value);
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const len = e.target.value.length;
+            // console.log('start/end/len:', start, end, len);
+            // disable edition in middle
+            if (start !== end || start !== len) {
+                return;
+            }
+            // value pipeline
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // state
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(value);
+            this.setState({ value: this.state.value }); // for render only
+            // event
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.onBlur = e => {
+            // console.log('PhoneBox.onBlur');
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // console.log('value:', value);
+            // event
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.el = react_1.default.createRef();
+        this.state = {
+            value: PhoneBox.formatPhoneNumber(this.props.value || '')
+        };
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        if (nextProps.value !== undefined) {
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+    }
+    static clearValue(value) {
+        return value.replace(/[^\+0-9]/g, '');
+    }
+    static ifNoCodeAddRussianCode(value) {
+        if (value === '') {
+        }
+        else if (value.match(/^8/)) {
+            return value.replace(/^8/, '+7');
+        }
+        else if (value.match(/^7/)) {
+            return `+${value}`;
+        }
+        else if (value[0] !== '+') {
+            return `+7${value}`;
+        }
+        return value;
+    }
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+        // console.log('arr:', arr);
+        if (arr) {
+            if (arr[5]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+            }
+            if (arr[4]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+            }
+            if (arr[3]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}`;
+            }
+            if (arr[2]) {
+                return `${arr[1]} ${arr[2]}`;
+            }
+            if (arr[1]) {
+                return `${arr[1]}`;
+            }
+        }
+        return value;
+    }
+}
+exports.PhoneBox = PhoneBox;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Select/Select.tsx":
 /*!******************************************************!*\
   !*** ./src/frontend/common/widget/Select/Select.tsx ***!
@@ -33641,6 +33816,77 @@ window.Tab = Tab;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.Tab2 = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class Tab2 extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = e => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = e => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose &&
+                    (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name));
+    }
+    render() {
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
+    }
+}
+exports.Tab2 = Tab2;
+// @ts-ignore
+window.Tab = Tab;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/TextArea.tsx":
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/TextArea.tsx ***!
@@ -33743,6 +33989,215 @@ window.TextBox = TextBox;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.TimeBox = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
+const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+class TimeBox extends ReactComponent_1.ReactComponent {
+    constructor(props) {
+        // console.log('TimeBox.constructor', props);
+        super(props);
+        this.onKeyPress = event => {
+            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+                console.log('cancel', event.key);
+                event.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('TimeBox.onChange', e.target.value);
+            const target = e.target;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            if (target.value.length > 5) {
+                return;
+            }
+            const inEnd = start === end && start === target.value.length;
+            const stringValue = this.formatValue(target.value);
+            // console.log('before:', target.selectionStart, target.selectionEnd);
+            this.setState({ value: stringValue }, () => {
+                // console.log('after:', target.selectionStart, target.selectionEnd);
+                // console.log('inEnd:', inEnd);
+                if (!inEnd) {
+                    target.selectionStart = start;
+                    target.selectionEnd = end;
+                }
+                if (this.props.onChange) {
+                    let nValue;
+                    try {
+                        nValue = this.getValue();
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                        nValue = NaN;
+                    }
+                    // console.log('nValue:', nValue);
+                    this.props.onChange(nValue);
+                }
+            });
+        };
+        this.onBlur = e => {
+            // console.log('TimeBox.onBlur');
+            if (this.props.onBlur) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                }
+                catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
+                this.props.onBlur(nValue);
+            }
+        };
+        if (props.value && typeof props.value !== 'number') {
+            throw new Error(`need number type, got ${typeof props.value}`);
+        }
+        this.state = {
+            value: TimeBox.getStringValue(props.value)
+        };
+        this.el = react_1.default.createRef();
+    }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        switch (pure.length) {
+            case 0: break;
+            case 1:
+                min = pure;
+                break;
+            case 2:
+                min = pure;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                break;
+        }
+        return [
+            min,
+            ...(sec ? [sec] : [])
+        ].join(':');
+    }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({ value: TimeBox.getStringValue(value) });
+    }
+    /*onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }*/
+    /*onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }*/
+    static getStringValue(value) {
+        // console.log('TimeBox.getStringValue', value);
+        if (value === null)
+            return '';
+        if (value !== undefined) {
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
+            if (h < 10)
+                h = '0' + h;
+            if (m < 10)
+                m = '0' + m;
+            return `${h}:${m}`;
+        }
+        return '';
+    }
+    static getIntegerValue(stringValue) {
+        // console.log('TimeBox.getIntegerValue', stringValue);
+        // try {
+        if (stringValue === '')
+            return null;
+        const arr = stringValue.split(':');
+        if (!arr[0])
+            throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1])
+            throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2)
+            throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2)
+            throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23)
+            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59)
+            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
+    }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        if (this.props.value !== nextProps.value) {
+            // @ts-ignore
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.props.readOnly !== nextProps.readOnly)
+            return true;
+        if (this.props.placeholder !== nextProps.placeholder)
+            return true;
+        if (this.state.value !== nextState.value)
+            return true;
+        return false;
+    }
+    render() {
+        // console.log('TimeBox.render', this.state.value);
+        return (0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur });
+    }
+}
+exports.TimeBox = TimeBox;
+// @ts-ignore
+window.TimeBox = TimeBox;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
@@ -33808,7 +34263,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TextArea = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
+exports.PhoneBox = exports.TimeBox = exports.CloseIcon2 = exports.Tab2 = exports.MoreVertIcon = exports.TextArea = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
@@ -33863,6 +34318,16 @@ var OpenInNewIcon_1 = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/fro
 Object.defineProperty(exports, "OpenInNewIcon", ({ enumerable: true, get: function () { return OpenInNewIcon_1.OpenInNewIcon; } }));
 var TextArea_1 = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
 Object.defineProperty(exports, "TextArea", ({ enumerable: true, get: function () { return TextArea_1.TextArea; } }));
+var MoreVertIcon_1 = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+Object.defineProperty(exports, "MoreVertIcon", ({ enumerable: true, get: function () { return MoreVertIcon_1.MoreVertIcon; } }));
+var Tab2_1 = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+Object.defineProperty(exports, "Tab2", ({ enumerable: true, get: function () { return Tab2_1.Tab2; } }));
+var CloseIcon2_1 = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+Object.defineProperty(exports, "CloseIcon2", ({ enumerable: true, get: function () { return CloseIcon2_1.CloseIcon2; } }));
+var TimeBox_1 = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+Object.defineProperty(exports, "TimeBox", ({ enumerable: true, get: function () { return TimeBox_1.TimeBox; } }));
+var PhoneBox_1 = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+Object.defineProperty(exports, "PhoneBox", ({ enumerable: true, get: function () { return PhoneBox_1.PhoneBox; } }));
 
 })();
 
