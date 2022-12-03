@@ -40,10 +40,11 @@ module.exports = {
                         onlyCompileBundledFiles: true,
                         compilerOptions: {
                             target: "ES2017",
-                            declaration: false,
+                            declaration: true,
                             esModuleInterop: true,
                             jsx: "react-jsx",
-                            noImplicitAny: false
+                            noImplicitAny: false,
+                            outDir: "./dist/lib/frontend"
                         }
                     }
                 }

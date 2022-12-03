@@ -1,0 +1,37 @@
+import { ModelController } from '../ModelController';
+export declare class PageController extends ModelController {
+    id: any;
+    forms: any[];
+    constructor(model: any, parent: any, id: any);
+    static create(model: any, parent: any, id: any, options?: any): any;
+    init(): void;
+    deinit(): void;
+    onSaveAndCloseClick: () => Promise<void>;
+    onClosePageClick: (e: any) => Promise<void>;
+    onOpenPageClick: (e: any) => Promise<void>;
+    createOpenInNewLink(name: any, key: any): string;
+    close(): Promise<void>;
+    validate(): void;
+    isValid(): boolean;
+    onFormChange(e: any): Promise<void>;
+    onFormDiscard(formController: any): void;
+    onFormUpdate(e: any): void;
+    onFormInsert(e: any): void;
+    openPage(options: any): Promise<any>;
+    isChanged(): boolean;
+    getApp(): any;
+    getViewClass(): any;
+    static createLink(params?: any): string;
+    getForm(name: any): any;
+    onActionClick(name: any): Promise<void>;
+    onKeyDown: (e: any) => Promise<void>;
+    getTitle(): string;
+    getSelectedRowKey(): any;
+    onSelectClick: (e: any) => Promise<void>;
+    onResetClick: (e: any) => Promise<void>;
+    selectRow(key: any): Promise<void>;
+    invalidate(): void;
+    getId(): any;
+    isModal(): any;
+    isAutoFocus(): boolean;
+}
