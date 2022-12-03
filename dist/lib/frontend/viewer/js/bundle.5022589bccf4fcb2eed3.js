@@ -39728,9 +39728,9 @@ var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
 var exports = __webpack_exports__;
-/*!*************************************!*\
-  !*** ./src/frontend/viewer/main.ts ***!
-  \*************************************/
+/*!**************************************!*\
+  !*** ./src/frontend/viewer/index.ts ***!
+  \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
@@ -39774,13 +39774,6 @@ var TextAreaField_1 = __webpack_require__(/*! ./Model/Field/TextAreaField/TextAr
 Object.defineProperty(exports, "TextAreaField", ({ enumerable: true, get: function () { return TextAreaField_1.TextAreaField; } }));
 var RowFormTextAreaFieldController_1 = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts");
 Object.defineProperty(exports, "RowFormTextAreaFieldController", ({ enumerable: true, get: function () { return RowFormTextAreaFieldController_1.RowFormTextAreaFieldController; } }));
-/*
-document.addEventListener('DOMContentLoaded', async () => {
-    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    const frontHostApp = new ViewerFrontHostApp({data});
-    await frontHostApp.run();
-});
-*/
 
 })();
 

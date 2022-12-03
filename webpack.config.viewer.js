@@ -3,7 +3,7 @@ const path = require('path');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/viewer/main.ts',
+    entry: './src/frontend/viewer/index.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/viewer/js'),

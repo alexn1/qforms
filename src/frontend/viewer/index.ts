@@ -18,11 +18,3 @@ export {TableFormController} from './Controller/ModelController/FormController/T
 export {TableFormDateFieldController} from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController';
 export {TextAreaField} from './Model/Field/TextAreaField/TextAreaField';
 export {RowFormTextAreaFieldController} from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController';
-
-/*
-document.addEventListener('DOMContentLoaded', async () => {
-    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    const frontHostApp = new ViewerFrontHostApp({data});
-    await frontHostApp.run();
-});
-*/
