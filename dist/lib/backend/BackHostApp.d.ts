@@ -1,4 +1,4 @@
-import { Context } from '../backend/Context';
+import { Context } from './Context';
 import { Application } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';

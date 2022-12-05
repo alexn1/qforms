@@ -12,7 +12,7 @@ const http = require('http');
 const colors = require('colors/safe');
 const Helper_1 = require("./Helper");
 const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
-const Context_1 = require("../backend/Context");
+const Context_1 = require("./Context");
 const Application_1 = require("./viewer/Model/Application/Application");
 const MonitorModule_1 = require("./monitor/MonitorModule");
 const IndexModule_1 = require("./index/IndexModule");
@@ -22,7 +22,7 @@ const EditorModule_1 = require("./editor/EditorModule");
 const CommonModule_1 = require("./common/CommonModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
-const ApplicationEditor_1 = require("../backend/editor/Editor/ApplicationEditor/ApplicationEditor");
+const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 class BackHostApp {

@@ -11,7 +11,7 @@ const colors       = require('colors/safe');
 
 import {Helper} from './Helper';
 import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
-import {Context} from '../backend/Context';
+import {Context} from './Context';
 import {Application} from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import {MonitorModule} from './monitor/MonitorModule';
@@ -24,7 +24,7 @@ import {FileSessionStore} from './FileSessionStore';
 import {Result} from "./Result";
 
 const pkg     = require('../../package.json');
-import {ApplicationEditor} from '../backend/editor/Editor/ApplicationEditor/ApplicationEditor';
+import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 

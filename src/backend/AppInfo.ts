@@ -1,6 +1,6 @@
 import {JsonFile} from './JsonFile';
 
-export type AppInfo = {
+export interface AppInfo {
     appFile     : JsonFile;
     name        : string;
     caption     : string;
@@ -12,4 +12,4 @@ export type AppInfo = {
     fileNameExt : string;
     extName     : string;
     dirPath     : string;
-};
+}

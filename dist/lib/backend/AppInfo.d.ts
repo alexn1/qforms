@@ -1,5 +1,5 @@
 import { JsonFile } from './JsonFile';
-export declare type AppInfo = {
+export interface AppInfo {
     appFile: JsonFile;
     name: string;
     caption: string;
@@ -11,4 +11,4 @@ export declare type AppInfo = {
     fileNameExt: string;
     extName: string;
     dirPath: string;
-};
+}
