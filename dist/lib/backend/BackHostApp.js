@@ -1,4 +1,7 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BackHostApp = void 0;
 const WebSocketServer_1 = require("./WebSocketServer");
@@ -7,9 +10,9 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const express = require('express');
 const http = require('http');
 const colors = require('colors/safe');
+const express_1 = __importDefault(require("express"));
 const Helper_1 = require("./Helper");
 const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("./Context");
@@ -69,7 +72,7 @@ class BackHostApp {
             this.logPool = PostgreSqlDatabase_1.PostgreSqlDatabase.createPool(log);
         }
         // express server
-        this.express = express();
+        this.express = (0, express_1.default)();
         this.express.set('handleException', handleException);
         this.express.set('view engine', 'ejs');
         this.express.set('views', backendDirPath);
@@ -156,7 +159,7 @@ class BackHostApp {
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
         // handle static for index and monitor
-        this.express.use(express.static(this.frontendDirPath));
+        this.express.use(express_1.default.static(this.frontendDirPath));
         this.initCustomRoutes();
         // 404 and 500 error handlers
         this.express.use(this._e404.bind(this));

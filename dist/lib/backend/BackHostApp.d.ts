@@ -1,3 +1,4 @@
+import { Express, Request, Response } from 'express';
 import { Context } from './Context';
 import { Application } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
@@ -10,7 +11,7 @@ import { Result } from "./Result";
 export declare class BackHostApp {
     params: any;
     applications: any;
-    express: any;
+    express: Express;
     httpServer: any;
     wsServer: any;
     appsDirPath: string;
@@ -45,7 +46,7 @@ export declare class BackHostApp {
     static createLog(cnn: any, values: any): Promise<void>;
     createLog2(values: any): Promise<void>;
     moduleGet(req: any, res: any, next: any): Promise<void>;
-    indexGet(req: any, res: any, next: any): Promise<void>;
+    indexGet(req: Request, res: Response, next: any): Promise<void>;
     indexPost(req: any, res: any, next: any): Promise<void>;
     monitorGet(req: any, res: any, next: any): Promise<void>;
     modulePost(req: any, res: any, next: any): Promise<void>;

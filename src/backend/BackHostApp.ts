@@ -5,9 +5,10 @@ const path         = require('path');
 const bodyParser   = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session      = require('express-session');
-const express      = require('express');
 const http         = require('http');
 const colors       = require('colors/safe');
+
+import express, {Express, Request, Response} from 'express';
 
 import {Helper} from './Helper';
 import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -23,7 +24,7 @@ import {CommonModule} from './common/CommonModule';
 import {FileSessionStore} from './FileSessionStore';
 import {Result} from "./Result";
 
-const pkg     = require('../../package.json');
+const pkg = require('../../package.json');
 import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
@@ -31,7 +32,7 @@ const fetch = require('node-fetch');
 export class BackHostApp {
     params: any;
     applications: any;          // application by route
-    express: any;
+    express: Express;
     httpServer: any;
     wsServer: any;
     appsDirPath: string;
@@ -455,7 +456,7 @@ export class BackHostApp {
         }
     }
 
-    async indexGet(req, res, next) {
+    async indexGet(req: Request, res: Response, next) {
         console.log(colors.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
