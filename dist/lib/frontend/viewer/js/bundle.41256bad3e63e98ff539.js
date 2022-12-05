@@ -39776,12 +39776,9 @@ var TextAreaField_1 = __webpack_require__(/*! ./Model/Field/TextAreaField/TextAr
 Object.defineProperty(exports, "TextAreaField", ({ enumerable: true, get: function () { return TextAreaField_1.TextAreaField; } }));
 var RowFormTextAreaFieldController_1 = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts");
 Object.defineProperty(exports, "RowFormTextAreaFieldController", ({ enumerable: true, get: function () { return RowFormTextAreaFieldController_1.RowFormTextAreaFieldController; } }));
-// @ts-ignore
-window.qforms = { ViewerFrontHostApp, PageController, PageView };
-// @ts-ignore
-// console.log('window.qforms', window.qforms);
 
 })();
 
+window.qforms = __webpack_exports__;
 /******/ })()
 ;

@@ -8,6 +8,10 @@ module.exports = {
         clean: true,
         path: path.resolve(__dirname, './dist/lib/frontend/viewer/js'),
         filename: 'bundle.[contenthash].js',
+        library: {
+            name: 'qforms',
+            type: 'window'
+        }
     },
     /*resolve: {
         extensions: ['.jsx', '.js'],
