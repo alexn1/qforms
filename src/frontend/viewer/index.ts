@@ -20,6 +20,6 @@ export {TextAreaField} from './Model/Field/TextAreaField/TextAreaField';
 export {RowFormTextAreaFieldController} from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController';
 
 // @ts-ignore
-window.qforms = {ViewerFrontHostApp};
+window.qforms = {ViewerFrontHostApp, PageController, PageView};
 // @ts-ignore
 // console.log('window.qforms', window.qforms);
