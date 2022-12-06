@@ -39735,13 +39735,15 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Helper = exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
+exports.Helper = exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.ApplicationView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
 var LoginFrontHostApp_1 = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 Object.defineProperty(exports, "LoginFrontHostApp", ({ enumerable: true, get: function () { return LoginFrontHostApp_1.LoginFrontHostApp; } }));
 var ViewerFrontHostApp_1 = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");
 Object.defineProperty(exports, "ViewerFrontHostApp", ({ enumerable: true, get: function () { return ViewerFrontHostApp_1.ViewerFrontHostApp; } }));
 var DataSource_1 = __webpack_require__(/*! ./Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 Object.defineProperty(exports, "DataSource", ({ enumerable: true, get: function () { return DataSource_1.DataSource; } }));
+var ApplicationView_1 = __webpack_require__(/*! ./Controller/ModelController/ApplicationController/ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
+Object.defineProperty(exports, "ApplicationView", ({ enumerable: true, get: function () { return ApplicationView_1.ApplicationView; } }));
 var PageView_1 = __webpack_require__(/*! ./Controller/ModelController/PageController/PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
 Object.defineProperty(exports, "PageView", ({ enumerable: true, get: function () { return PageView_1.PageView; } }));
 var RowFormController_1 = __webpack_require__(/*! ./Controller/ModelController/FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");

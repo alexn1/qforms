@@ -1,6 +1,7 @@
 export {LoginFrontHostApp} from './LoginFrontHostApp';
 export {ViewerFrontHostApp} from './ViewerFrontHostApp';
 export {DataSource} from './Model/DataSource/DataSource';
+export {ApplicationView} from './Controller/ModelController/ApplicationController/ApplicationView';
 export {PageView} from './Controller/ModelController/PageController/PageView';
 export {RowFormController} from './Controller/ModelController/FormController/RowFormController/RowFormController';
 export {TableFormTextBoxFieldController} from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController';
