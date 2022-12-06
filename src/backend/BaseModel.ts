@@ -20,7 +20,9 @@ export class BaseModel {
     }
 
     static getEnvList(data) {
-        const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
+        const list = data.env
+            ? Object.keys(data.env).filter(env => env !== 'local')
+            : [];
         return ['local', ...list];
     }
 
@@ -97,7 +99,8 @@ export class BaseModel {
 
     addModelData(colName, data) {
         const name = BaseModel.getName(data);
-        if (this.getColItemData(colName, name)) throw new Error(`${name} already exists in ${colName}`);
+        if (this.getColItemData(colName, name))
+            throw new Error(`${name} already exists in ${colName}`);
         this.getCol(colName).push(data);
     }
 
@@ -108,7 +111,12 @@ export class BaseModel {
     replaceDataColItem(colName, oldData, newData) {
         const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
-        if (i === -1) throw new Error(`replaceDataColItem: no ${BaseModel.getName(oldData)} in ${colName}`);
+        if (i === -1)
+            throw new Error(
+                `replaceDataColItem: no ${BaseModel.getName(
+                    oldData,
+                )} in ${colName}`,
+            );
         dataCol[i] = newData;
         return i;
     }
@@ -116,5 +124,4 @@ export class BaseModel {
     getParent() {
         return this.parent;
     }
-
 }

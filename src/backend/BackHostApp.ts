@@ -1,37 +1,37 @@
-import {WebSocketServer} from "./WebSocketServer";
+import { WebSocketServer } from './WebSocketServer';
 
-const fs           = require('fs');
-const path         = require('path');
-const bodyParser   = require('body-parser');
+const fs = require('fs');
+const path = require('path');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const session      = require('express-session');
-const http         = require('http');
-const colors       = require('colors/safe');
+const session = require('express-session');
+const http = require('http');
+const colors = require('colors/safe');
 
-import express, {Express, Request, Response} from 'express';
+import express, { Express, Request, Response } from 'express';
 
-import {Helper} from './Helper';
-import {PostgreSqlDatabase} from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
-import {Context} from './Context';
-import {Application} from './viewer/Model/Application/Application';
+import { Helper } from './Helper';
+import { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
+import { Context } from './Context';
+import { Application } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
-import {MonitorModule} from './monitor/MonitorModule';
-import {IndexModule} from './index/IndexModule';
-import {MyError} from './MyError';
-import {ViewerModule} from './viewer/ViewerModule';
-import {EditorModule} from './editor/EditorModule';
-import {CommonModule} from './common/CommonModule';
-import {FileSessionStore} from './FileSessionStore';
-import {Result} from "./Result";
+import { MonitorModule } from './monitor/MonitorModule';
+import { IndexModule } from './index/IndexModule';
+import { MyError } from './MyError';
+import { ViewerModule } from './viewer/ViewerModule';
+import { EditorModule } from './editor/EditorModule';
+import { CommonModule } from './common/CommonModule';
+import { FileSessionStore } from './FileSessionStore';
+import { Result } from './Result';
 
 const pkg = require('../../package.json');
-import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
+import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 
 export class BackHostApp {
     params: any;
-    applications: any;          // application by route
+    applications: any; // application by route
     express: Express;
     httpServer: any;
     wsServer: any;
@@ -62,7 +62,9 @@ export class BackHostApp {
         // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
-            throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
+            throw new Error(
+                `min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`,
+            );
         }
     }
 
@@ -71,24 +73,32 @@ export class BackHostApp {
         this.startTime = new Date();
         this.initProcess();
 
-        this.appsDirPath      = path.resolve(this.params.appsDirPath    || './apps');
-        this.runtimeDirPath   = path.resolve(this.params.runtimeDirPath || './runtime');
-        this.logErrorUrl      = this.params.logErrorUrl || null;
+        this.appsDirPath = path.resolve(this.params.appsDirPath || './apps');
+        this.runtimeDirPath = path.resolve(
+            this.params.runtimeDirPath || './runtime',
+        );
+        this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
-        const host            = this.params.host            || 'localhost';
-        const port            = this.params.port            || 3000;
-        const log             = this.params.log;
+        const host = this.params.host || 'localhost';
+        const port = this.params.port || 3000;
+        const log = this.params.log;
 
         if (!fs.existsSync(this.appsDirPath)) {
-            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
+            console.error(
+                colors.red(
+                    `Application folder '${this.appsDirPath}' doesn't exist`,
+                ),
+            );
             process.exit(1);
             return;
         }
 
         // path
         const backendDirPath = __dirname;
-        this.frontendDirPath = path.resolve(path.join(backendDirPath,  '../frontend'));
-        this.sessionDirPath = path.join(this.runtimeDirPath,  'session');
+        this.frontendDirPath = path.resolve(
+            path.join(backendDirPath, '../frontend'),
+        );
+        this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
 
         // runtime & temp
         Helper.createDirIfNotExistsSync(this.runtimeDirPath);
@@ -102,8 +112,8 @@ export class BackHostApp {
         // express server
         this.express = express();
         this.express.set('handleException', handleException);
-        this.express.set('view engine'    , 'ejs');
-        this.express.set('views'          , backendDirPath);
+        this.express.set('view engine', 'ejs');
+        this.express.set('views', backendDirPath);
         this.express.enable('strict routing');
 
         this.initExpressServer();
@@ -134,15 +144,15 @@ export class BackHostApp {
         // ws
         this.wsServer = new WebSocketServer({
             hostApp: this,
-            httpServer: this.httpServer
+            httpServer: this.httpServer,
         });
     }
 
     initProcess() {
-        process.on('message'           , this.onProcessMessage.bind(this));
-        process.on('SIGINT'            , this.onProcessSIGINT.bind(this));
-        process.on('SIGTERM'           , this.onProcessSIGTERM.bind(this));
-        process.on('exit'              , this.onProcessExit.bind(this));
+        process.on('message', this.onProcessMessage.bind(this));
+        process.on('SIGINT', this.onProcessSIGINT.bind(this));
+        process.on('SIGTERM', this.onProcessSIGTERM.bind(this));
+        process.on('exit', this.onProcessExit.bind(this));
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
 
@@ -160,19 +170,23 @@ export class BackHostApp {
 
     initExpressServer() {
         // middlewares
-        this.express.use(bodyParser.json({
-            limit  : '20mb',
-            reviver: Helper.dateTimeReviver
-        }));
+        this.express.use(
+            bodyParser.json({
+                limit: '20mb',
+                reviver: Helper.dateTimeReviver,
+            }),
+        );
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(cookieParser());
-        this.express.use(session({
-            store             : new FileSessionStore(this.sessionDirPath),
-            secret            : this.getSecretSync(),
-            key               : 'sid',
-            resave            : false,
-            saveUninitialized : false
-        }));
+        this.express.use(
+            session({
+                store: new FileSessionStore(this.sessionDirPath),
+                secret: this.getSecretSync(),
+                key: 'sid',
+                resave: false,
+                saveUninitialized: false,
+            }),
+        );
 
         // test
         // this.express.get( '/test', this._getTest.bind(this));
@@ -182,7 +196,10 @@ export class BackHostApp {
         this.express.options('/error', (req, res, next) => {
             console.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
-            res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
+            res.header(
+                'Access-Control-Allow-Headers',
+                'Content-Type, Content-Length',
+            );
             res.end();
         });
         this.express.post('/error', this.postError.bind(this));
@@ -191,17 +208,26 @@ export class BackHostApp {
         if (this.isDevelopment()) {
             // google chrome always redirect from /index to /index/ even with disabled cache
             // so we use /index2
-            this.express.get( '/index2' , this.indexGet.bind(this));
-            this.express.post('/index2' , this.indexPost.bind(this));
+            this.express.get('/index2', this.indexGet.bind(this));
+            this.express.post('/index2', this.indexPost.bind(this));
         }
 
         // monitor module
-        this.express.get('/monitor' , this.monitorGet.bind(this));
+        this.express.get('/monitor', this.monitorGet.bind(this));
 
         // viewer/editor module
-        this.express.get( '/:module/:appDirName/:appFileName/:env/:domain/' , this.moduleGet.bind(this));
-        this.express.post('/:module/:appDirName/:appFileName/:env/:domain/' , this.modulePost.bind(this));
-        this.express.get( '/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
+        this.express.get(
+            '/:module/:appDirName/:appFileName/:env/:domain/',
+            this.moduleGet.bind(this),
+        );
+        this.express.post(
+            '/:module/:appDirName/:appFileName/:env/:domain/',
+            this.modulePost.bind(this),
+        );
+        this.express.get(
+            '/:module/:appDirName/:appFileName/:env/:domain/*',
+            this.moduleGetFile.bind(this),
+        );
 
         // handle static for index and monitor
         this.express.use(express.static(this.frontendDirPath));
@@ -233,8 +259,14 @@ export class BackHostApp {
         }
 
         this.appQueue[context.getRoute()] = [];
-        const app = this.applications[context.getRoute()] = await this.createApplication(context);
-        console.log('application created, start resolve loop', context.getRoute(), this.appQueue[context.getRoute()].length);
+        const app = (this.applications[
+            context.getRoute()
+        ] = await this.createApplication(context));
+        console.log(
+            'application created, start resolve loop',
+            context.getRoute(),
+            this.appQueue[context.getRoute()].length,
+        );
         for (const p of this.appQueue[context.getRoute()]) {
             // @ts-ignore
             p.resolve(app);
@@ -246,7 +278,8 @@ export class BackHostApp {
 
     getApplication(context: Context): Application {
         const application = this.applications[context.getRoute()];
-        if (!application) throw new Error(`no application for route: ${context.getRoute()}`);
+        if (!application)
+            throw new Error(`no application for route: ${context.getRoute()}`);
         return application;
     }
 
@@ -255,18 +288,29 @@ export class BackHostApp {
     }
 
     getAppFilePath(context: Context) {
-        return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
+        return path.join(
+            this.appsDirPath,
+            context.getAppDirName(),
+            context.getAppFileName() + '.json',
+        );
     }
 
     async createApplication(context: Context): Promise<Application> {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(
+            this.getAppFilePath(context),
+        );
 
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
 
         // application
-        const application = new ApplicationClass(appInfo.appFile.data, appInfo, this, context);
+        const application = new ApplicationClass(
+            appInfo.appFile.data,
+            appInfo,
+            this,
+            context,
+        );
         await application.init(context);
         return application;
     }
@@ -278,14 +322,15 @@ export class BackHostApp {
 
     async createApp(req) {
         console.log('createApp');
-        if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
+        if (!req.body.folder)
+            throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
         const folder = req.body.folder;
         const name = req.body.name;
-        const appDirPath  = path.join(this.appsDirPath, folder);
+        const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper.createDirIfNotExists(appDirPath);
-        await ApplicationEditor.createAppFile(appFilePath, {name});
+        await ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await Application.getAppInfos(this.appsDirPath);
         return appInfos;
     }
@@ -294,42 +339,52 @@ export class BackHostApp {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err.context ? err.context.getRoute() : null;
-            const data = req ? {
-                headers        : req.headers,
-                method         : req.method,
-                host           : req.headers.host,
-                originalUrl    : req.originalUrl,
-                uri            : req.params['0'],
-                platformVersion: pkg.version,
-                appVersion     : route ? this.applications[route].getVersion() : null,
-                route          : route,
-                body           : req.body,
-                status         : err.status || null,
-                data           : err.data || null
-            } : null;
+            const data = req
+                ? {
+                      headers: req.headers,
+                      method: req.method,
+                      host: req.headers.host,
+                      originalUrl: req.originalUrl,
+                      uri: req.params['0'],
+                      platformVersion: pkg.version,
+                      appVersion: route
+                          ? this.applications[route].getVersion()
+                          : null,
+                      route: route,
+                      body: req.body,
+                      status: err.status || null,
+                      data: err.data || null,
+                  }
+                : null;
 
             if (this.logPool) {
                 await BackHostApp.createLog(this.logPool, {
-                    type   : 'error',
-                    source : 'server',
-                    ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    type: 'error',
+                    source: 'server',
+                    ip: req
+                        ? req.headers['x-forwarded-for'] ||
+                          req.connection.remoteAddress
+                        : null,
                     message: err.message,
-                    stack  : err.stack.toString(),
-                    data   : data ? JSON.stringify(data, null, 4) : null
+                    stack: err.stack.toString(),
+                    data: data ? JSON.stringify(data, null, 4) : null,
                 });
-            } else  if (this.logErrorUrl) {
+            } else if (this.logErrorUrl) {
                 console.log(`fetch ${this.logErrorUrl}`);
                 await fetch(this.logErrorUrl, {
-                    method : 'POST',
-                    headers: {'Content-Type': 'application/json'},
-                    body   : JSON.stringify({
-                        type   : 'error',
-                        source : 'server',
-                        ip     : req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        type: 'error',
+                        source: 'server',
+                        ip: req
+                            ? req.headers['x-forwarded-for'] ||
+                              req.connection.remoteAddress
+                            : null,
                         message: err.message,
-                        stack  : err.stack.toString(),
-                        data   : data
-                    })
+                        stack: err.stack.toString(),
+                        data: data,
+                    }),
                 });
             }
         } catch (err) {
@@ -343,41 +398,51 @@ export class BackHostApp {
             const application = this.getApplication(context);
             let args = '';
             if (req.body.params) {
-                args = Object.keys(req.body.params).map(name => `${name}: ${req.body.params[name]}`).join(', ');
+                args = Object.keys(req.body.params)
+                    .map(name => `${name}: ${req.body.params[name]}`)
+                    .join(', ');
             } else if (req.body.row) {
-                args = Object.keys(req.body.row).map(name => `${name}: ${req.body.row[name]}`).join(', ');
+                args = Object.keys(req.body.row)
+                    .map(name => `${name}: ${req.body.row[name]}`)
+                    .join(', ');
             }
             let message = [
                 application.getName(),
                 ...(req.body.page ? [req.body.page] : []),
                 ...(req.body.form ? [req.body.form] : []),
-                ...(req.body.ds   ? [req.body.ds  ] : []),
-                `${req.body.action}(${args})`
+                ...(req.body.ds ? [req.body.ds] : []),
+                `${req.body.action}(${args})`,
             ].join('.');
             if (time) {
                 message += `, time: ${time}`;
             }
             await BackHostApp.createLog(this.logPool, {
-                type   : 'log',
-                source : 'server',
-                ip     : req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                type: 'log',
+                source: 'server',
+                ip:
+                    req.headers['x-forwarded-for'] ||
+                    req.connection.remoteAddress,
                 message: message,
-                data   : JSON.stringify(req.body, null, 4)
+                data: JSON.stringify(req.body, null, 4),
             });
         } catch (err) {
             console.error(colors.red(err));
         }
     }
 
-    async logEvent(context: Context, message: string, data = null): Promise<void> {
+    async logEvent(
+        context: Context,
+        message: string,
+        data = null,
+    ): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
             await this.createLog2({
-                type   : 'log',
-                source : 'server',
-                ip     : context.getIp(),
+                type: 'log',
+                source: 'server',
+                ip: context.getIp(),
                 message: message,
-                data   : data
+                data: data,
             });
         } catch (err) {
             console.error(colors.red(err));
@@ -395,51 +460,70 @@ export class BackHostApp {
         await PostgreSqlDatabase.queryResult(
             cnn,
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
-            values
+            values,
         );
     }
 
     async createLog2(values) {
         if (this.logPool) {
             await BackHostApp.createLog(this.logPool, {
-                type   : values.type,
-                source : values.source,
-                ip     : values.ip,
+                type: values.type,
+                source: values.source,
+                ip: values.ip,
                 message: values.message,
-                data   : values.data ? JSON.stringify(values.data) : null
+                data: values.data ? JSON.stringify(values.data) : null,
             });
         } else if (this.logErrorUrl) {
             console.log(`fetch ${this.logErrorUrl}`);
             await fetch(this.logErrorUrl, {
-                method : 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body   : JSON.stringify({
-                    type   : values.type,
-                    source : values.source,
-                    ip     : values.ip,
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: values.type,
+                    source: values.source,
+                    ip: values.ip,
                     message: values.message,
-                    data   : values.data
-                })
+                    data: values.data,
+                }),
             });
         }
     }
 
     async moduleGet(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        console.log(
+            colors.magenta.underline('BackHostApp.moduleGet'),
+            req.params,
+        );
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
-                const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(
+                    context,
+                );
+                context.setVersionHeaders(
+                    pkg.version,
+                    application.getVersion(),
+                );
                 if (application.isAvailable()) {
-                    await this.viewerModule.handleViewerGet(context, application);
+                    await this.viewerModule.handleViewerGet(
+                        context,
+                        application,
+                    );
                 } else {
                     next();
                 }
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, res, domain: this.getDomainFromRequest(req)});
+                    context = new Context({
+                        req,
+                        res,
+                        domain: this.getDomainFromRequest(req),
+                    });
                     await this.editorModule.handleEditorGet(req, res, context);
                 } else {
                     next();
@@ -460,12 +544,14 @@ export class BackHostApp {
         console.log(colors.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
-            res.end(this.indexModule.render({
-                version: pkg.version,
-                links  : this.indexModule.getLinks(),
-                scripts: this.indexModule.getScripts(),
-                data   : data,
-            }));
+            res.end(
+                this.indexModule.render({
+                    version: pkg.version,
+                    links: this.indexModule.getLinks(),
+                    scripts: this.indexModule.getScripts(),
+                    data: data,
+                }),
+            );
             /*res.render('index/index', {
                 hostApp: this,
                 version: pkg.version,
@@ -482,10 +568,12 @@ export class BackHostApp {
         console.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
-            await res.json({appInfos: appInfos.map(appInfo => ({
+            await res.json({
+                appInfos: appInfos.map(appInfo => ({
                     fullName: appInfo.fullName,
-                    envs    : appInfo.envs
-                }))});
+                    envs: appInfo.envs,
+                })),
+            });
         } catch (err) {
             next(err);
         }
@@ -501,10 +589,10 @@ export class BackHostApp {
             if (this.monitorModule.authorize(req)) {
                 const response = this.monitorModule.fill();
                 res.render('monitor/index', {
-                    version : pkg.version,
+                    version: pkg.version,
                     response: response,
-                    links   : this.monitorModule.getLinks(),
-                    scripts : this.monitorModule.getScripts(),
+                    links: this.monitorModule.getLinks(),
+                    scripts: this.monitorModule.getScripts(),
                 });
             } else {
                 res.statusCode = 401;
@@ -516,20 +604,44 @@ export class BackHostApp {
         }
     }
 
-    async modulePost(req, res, next)  {
-        console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+    async modulePost(req, res, next) {
+        console.log(
+            colors.magenta.underline('BackHostApp.modulePost'),
+            req.params,
+            req.body,
+        );
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
-                const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
-                const time = await this.viewerModule.handleViewerPost(context, application);
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(
+                    context,
+                );
+                context.setVersionHeaders(
+                    pkg.version,
+                    application.getVersion(),
+                );
+                const time = await this.viewerModule.handleViewerPost(
+                    context,
+                    application,
+                );
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context({req, res, domain: this.getDomainFromRequest(req)});
-                    const time = await this.editorModule.handleEditorPost(req, res, context);
+                    context = new Context({
+                        req,
+                        res,
+                        domain: this.getDomainFromRequest(req),
+                    });
+                    const time = await this.editorModule.handleEditorPost(
+                        req,
+                        res,
+                        context,
+                    );
                     // await this.logRequest(req, context, time);
                 } else {
                     next();
@@ -548,15 +660,31 @@ export class BackHostApp {
 
     async moduleGetFile(req, res, next) {
         if (process.env.NODE_ENV === 'development') {
-            console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+            console.log(
+                colors.magenta.underline('BackHostApp.moduleGetFile'),
+                req.originalUrl,
+            );
         }
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context({req, res, domain: this.getDomainFromRequest(req)});
-                const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
-                await this.viewerModule.handleViewerGetFile(context, application, next);
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(
+                    context,
+                );
+                context.setVersionHeaders(
+                    pkg.version,
+                    application.getVersion(),
+                );
+                await this.viewerModule.handleViewerGetFile(
+                    context,
+                    application,
+                    next,
+                );
             } catch (err) {
                 err.message = `moduleGetFile error: ${err.message}`;
                 next(err);
@@ -572,24 +700,44 @@ export class BackHostApp {
 
     async _e404(req, res, next) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
-        next(new MyError({
-            message: `${req.method} ${req.originalUrl} not found`,
-            status : 404
-        }));
+        next(
+            new MyError({
+                message: `${req.method} ${req.originalUrl} not found`,
+                status: 404,
+            }),
+        );
     }
 
     async _e500(err, req, res, next) {
-        console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
+        console.log(
+            colors.magenta('module.exports.e500:'),
+            req.method,
+            req.originalUrl,
+        );
         console.error(colors.red(err));
-        const error = typeof err === 'string' ? new MyError({message: err}) : err;
+        const error =
+            typeof err === 'string' ? new MyError({ message: err }) : err;
         res.status(error.status || 500);
-        if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
-            res.end(this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error');
+        if (
+            req.headers['content-type'] &&
+            req.headers['content-type'].indexOf('application/json') !== -1
+        ) {
+            res.end(
+                this.isDevelopment() || error.status === 404
+                    ? error.message
+                    : 'Internal Software Error',
+            );
         } else {
             res.render('error', {
-                status : error.status,
-                message: this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error',
-                stack  : this.isDevelopment() && error.status !== 404 ? error.stack : null
+                status: error.status,
+                message:
+                    this.isDevelopment() || error.status === 404
+                        ? error.message
+                        : 'Internal Software Error',
+                stack:
+                    this.isDevelopment() && error.status !== 404
+                        ? error.stack
+                        : null,
             });
         }
         await this.logError(error, req);
@@ -613,7 +761,11 @@ export class BackHostApp {
             if (process.send) {
                 process.send('online');
             }
-            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+            let msg = `QForms server v${
+                pkg.version
+            } listening on http://${host}:${port}${
+                this.isDevelopment() ? '/index2' : ''
+            }\n`;
             msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
             msg += `\tappsDirPath: ${this.appsDirPath}\n`;
             if (this.isDevelopment()) {
@@ -635,14 +787,18 @@ export class BackHostApp {
 
     async onProcessSIGINT() {
         console.log('BackHostApp.onProcessSIGINT');
-        console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        console.log(
+            'Received INT signal (Ctrl+C), shutting down gracefully...',
+        );
         await this.shutdown();
         process.exit(0);
     }
 
     onProcessSIGTERM() {
         console.log('BackHostApp.onProcessSIGTERM');
-        console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
+        console.log(
+            'Received SIGTERM (kill) signal, shutting down forcefully.',
+        );
         process.exit(1);
     }
 
@@ -669,7 +825,11 @@ export class BackHostApp {
     }
 
     onHttpServerError(err) {
-        console.error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
+        console.error(
+            colors.red('BackHostApp.onHttpServerError'),
+            err.code,
+            err.message,
+        );
         /*if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
         } else {
@@ -692,16 +852,25 @@ export class BackHostApp {
         if (this.logPool) {
             try {
                 await BackHostApp.createLog(this.logPool, {
-                    type   : req.body.type,
-                    source : req.body.source,
-                    ip     : req.body.ip || (req.headers['x-forwarded-for'] || req.connection.remoteAddress),
+                    type: req.body.type,
+                    source: req.body.source,
+                    ip:
+                        req.body.ip ||
+                        req.headers['x-forwarded-for'] ||
+                            req.connection.remoteAddress,
                     message: req.body.message,
-                    stack  : req.body.stack,
-                    data   : req ? JSON.stringify({
-                        headers: req.headers,
-                        domain : this.getDomainFromRequest(req),
-                        ...req.body.data,
-                    }, null, 4) : null
+                    stack: req.body.stack,
+                    data: req
+                        ? JSON.stringify(
+                              {
+                                  headers: req.headers,
+                                  domain: this.getDomainFromRequest(req),
+                                  ...req.body.data,
+                              },
+                              null,
+                              4,
+                          )
+                        : null,
                 });
                 res.header('Access-Control-Allow-Origin', '*');
                 res.end('ok');
@@ -714,20 +883,18 @@ export class BackHostApp {
     getFrontendDirPath() {
         return this.frontendDirPath;
     }
-    initCustomRoutes() {
-
-    }
+    initCustomRoutes() {}
 
     alias(
         method: string,
         path: string,
         [module, appDirName, appFileName, env, domain],
         cb: string,
-        query?: any
+        query?: any,
     ) {
         this.express[method](path, async (req, res, next) => {
-            req.params.module      = module;
-            req.params.appDirName  = appDirName;
+            req.params.module = module;
+            req.params.appDirName = appDirName;
             req.params.appFileName = appFileName;
             if (env) {
                 req.params.env = env;
@@ -737,7 +904,9 @@ export class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    req.query[name] = query[name] ? query[name] : req.params[name];
+                    req.query[name] = query[name]
+                        ? query[name]
+                        : req.params[name];
                 }
             }
             await this[cb](req, res, next);
@@ -745,8 +914,8 @@ export class BackHostApp {
     }
 
     getPostAlias(path, arr, query?) {
-        this.alias('get' , path , arr, 'moduleGet' , query);
-        this.alias('post', path , arr, 'modulePost', query);
+        this.alias('get', path, arr, 'moduleGet', query);
+        this.alias('post', path, arr, 'modulePost', query);
     }
 
     getNodeEnv(): string {
@@ -765,11 +934,21 @@ export class BackHostApp {
         return this.params;
     }
 
-    broadcastResult(sourceApplication: Application, context: Context, result: Result) {
+    broadcastResult(
+        sourceApplication: Application,
+        context: Context,
+        result: Result,
+    ) {
         console.log('BackHostApp.broadcastResult');
         for (const route in this.applications) {
-            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
-                sourceApplication.broadcastDomesticResultToClients(context, result);
+            if (
+                context.getRoute() === route &&
+                this.applications[route] === sourceApplication
+            ) {
+                sourceApplication.broadcastDomesticResultToClients(
+                    context,
+                    result,
+                );
             } else {
                 const application = this.applications[route];
                 application.broadcastForeignResultToClients(context, result);
@@ -780,6 +959,4 @@ export class BackHostApp {
     static test() {
         console.log('BackHostApp.test');
     }
-
 }
-
