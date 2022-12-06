@@ -23,7 +23,7 @@ export declare class PageController extends ModelController {
     getViewClass(): any;
     static createLink(params?: any): string;
     getForm(name: any): any;
-    onActionClick(name: any): Promise<void>;
+    onActionClick(name: any): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;
     getSelectedRowKey(): any;

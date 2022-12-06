@@ -39735,7 +39735,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
+exports.Helper = exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
 var LoginFrontHostApp_1 = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 Object.defineProperty(exports, "LoginFrontHostApp", ({ enumerable: true, get: function () { return LoginFrontHostApp_1.LoginFrontHostApp; } }));
 var ViewerFrontHostApp_1 = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");
@@ -39776,6 +39776,8 @@ var TextAreaField_1 = __webpack_require__(/*! ./Model/Field/TextAreaField/TextAr
 Object.defineProperty(exports, "TextAreaField", ({ enumerable: true, get: function () { return TextAreaField_1.TextAreaField; } }));
 var RowFormTextAreaFieldController_1 = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts");
 Object.defineProperty(exports, "RowFormTextAreaFieldController", ({ enumerable: true, get: function () { return RowFormTextAreaFieldController_1.RowFormTextAreaFieldController; } }));
+var Helper_1 = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
 
 })();
 

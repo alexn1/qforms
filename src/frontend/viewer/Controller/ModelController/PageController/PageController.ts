@@ -179,7 +179,7 @@ export class PageController extends ModelController {
     getForm(name) {
         return this.forms.find(form => form.model.getName() === name);
     }
-    async onActionClick(name) {
+    async onActionClick(name): Promise<any> {
         console.log('PageController.onActionClick', name);
     }
     onKeyDown = async e => {

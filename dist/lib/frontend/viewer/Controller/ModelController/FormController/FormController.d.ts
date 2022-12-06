@@ -13,7 +13,7 @@ export declare class FormController extends ModelController {
     onFieldChange(e: any): Promise<void>;
     getUpdated(): any;
     invalidate(): void;
-    onActionClick(name: any, row: any): Promise<void>;
+    onActionClick(name: any, row: any): Promise<any>;
     getField(name: any): any;
     getApp(): any;
     getSelectedRowKey(): any;

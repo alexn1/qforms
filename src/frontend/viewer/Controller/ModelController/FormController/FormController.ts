@@ -53,7 +53,7 @@ export class FormController extends ModelController {
     invalidate() {
         this.state.updated = Date.now();
     }
-    async onActionClick(name, row) {
+    async onActionClick(name, row): Promise<any> {
         console.log('FormController.onActionClick', name, row);
     }
     getField(name) {
