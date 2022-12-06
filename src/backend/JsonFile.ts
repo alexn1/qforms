@@ -1,5 +1,5 @@
-import {Helper} from './Helper';
-import {BaseModel} from './BaseModel';
+import { Helper } from './Helper';
+import { BaseModel } from './BaseModel';
 
 export class JsonFile {
     filePath: string;
@@ -8,8 +8,8 @@ export class JsonFile {
 
     constructor(filePath, data = null) {
         this.filePath = filePath;
-        this.data     = data;
-        this.content  = null;
+        this.data = data;
+        this.content = null;
     }
 
     async create(): Promise<void> {

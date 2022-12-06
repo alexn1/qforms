@@ -6,7 +6,7 @@ main(); async function main() {
         ...Helper.getCommandLineParams(),
         monitor: {
             username: 'admin',
-            password: '123qwe'
+            password: '123qwe',
         },
     });
     try {

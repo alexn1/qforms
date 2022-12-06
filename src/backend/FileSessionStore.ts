@@ -1,7 +1,9 @@
+import { Helper } from './Helper';
+
 const path = require('path');
-const session  = require('express-session');
-import {Helper} from './Helper';
-const colors     = require('colors/safe');
+const session = require('express-session');
+
+// const colors = require('colors/safe');
 
 export class FileSessionStore extends session.Store {
     store: any;
