@@ -10,8 +10,8 @@ module.exports = {
         filename: 'bundle.[contenthash].js',
         library: {
             name: 'qforms',
-            type: 'window'
-        }
+            type: 'window',
+        },
     },
     /*resolve: {
         extensions: ['.jsx', '.js'],
@@ -43,16 +43,16 @@ module.exports = {
                     options: {
                         onlyCompileBundledFiles: true,
                         compilerOptions: {
-                            target: "ES2017",
+                            target: 'ES2017',
                             declaration: true,
                             esModuleInterop: true,
-                            jsx: "react-jsx",
+                            jsx: 'react-jsx',
                             noImplicitAny: false,
-                            outDir: "./dist/lib/frontend"
-                        }
-                    }
-                }
-            }
+                            outDir: './dist/lib/frontend',
+                        },
+                    },
+                },
+            },
         ],
     },
 };
