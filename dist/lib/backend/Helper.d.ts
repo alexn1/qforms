@@ -46,4 +46,5 @@ export declare class Helper {
     static templateArray(arr: any): any;
     static createEmptyPromise(): Promise<unknown>;
     static test(): void;
+    static formatNumber(value: any): string;
 }

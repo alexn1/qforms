@@ -481,5 +481,8 @@ class Helper {
     static test() {
         console.log('Helper.test');
     }
+    static formatNumber(value) {
+        return new Intl.NumberFormat('ru-RU').format(value);
+    }
 }
 exports.Helper = Helper;

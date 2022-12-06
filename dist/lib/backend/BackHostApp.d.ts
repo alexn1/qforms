@@ -38,7 +38,7 @@ export declare class BackHostApp {
     getApplicationByRoute(route: any): Application;
     getAppFilePath(context: Context): any;
     createApplication(context: Context): Promise<Application>;
-    getApplicationClass(appInfo: AppInfo): typeof Application;
+    getApplicationClass(appInfo: AppInfo): any;
     createApp(req: any): Promise<AppInfo[]>;
     logError(err: any, req?: any): Promise<void>;
     logRequest(req: any, context: Context, time: any): Promise<void>;
@@ -61,7 +61,7 @@ export declare class BackHostApp {
     onUnhandledRejection(err: any): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
-    getDomainFromRequest(req: any): string;
+    getDomainFromRequest(req: any): string | null;
     postError(req: any, res: any, next: any): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;

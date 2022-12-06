@@ -68,6 +68,7 @@ export { PostgreSqlDatabaseEditor } from './editor/Editor/DatabaseEditor/Postgre
 export { TableEditor } from './editor/Editor/TableEditor/TableEditor';
 export { ParamEditor } from './editor/Editor/ParamEditor/ParamEditor';
 export { ColumnEditor } from './editor/Editor/ColumnEditor/ColumnEditor';
+export { AppInfo } from './AppInfo';
 export { ActionEditorController } from './editor/EditorController/ActionEditorController/ActionEditorController';
 export { DatabaseEditorController } from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
 export { DataSourceEditorController } from './editor/EditorController/DataSourceEditorController/DataSourceEditorController';

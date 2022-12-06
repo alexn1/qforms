@@ -1,4 +1,6 @@
 // common
+import {AppInfo} from './AppInfo';
+
 export {Helper} from './Helper';
 export {Result} from './Result';
 export {Context} from './Context';
@@ -71,6 +73,7 @@ export {PostgreSqlDatabaseEditor} from './editor/Editor/DatabaseEditor/PostgreSq
 export {TableEditor} from './editor/Editor/TableEditor/TableEditor';
 export {ParamEditor} from './editor/Editor/ParamEditor/ParamEditor';
 export {ColumnEditor} from './editor/Editor/ColumnEditor/ColumnEditor';
+export {AppInfo} from './AppInfo';
 
 // editor
 export {ActionEditorController} from './editor/EditorController/ActionEditorController/ActionEditorController';

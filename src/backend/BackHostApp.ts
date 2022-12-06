@@ -271,7 +271,7 @@ export class BackHostApp {
         return application;
     }
 
-    getApplicationClass(appInfo: AppInfo) {
+    getApplicationClass(appInfo: AppInfo): any {
         // console.log('BackHostApp.getApplicationClass', appInfo);
         return Application;
     }
@@ -677,7 +677,7 @@ export class BackHostApp {
         }*/
     }
 
-    getDomainFromRequest(req: any): string {
+    getDomainFromRequest(req: any): string | null {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
