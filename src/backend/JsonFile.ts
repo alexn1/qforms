@@ -3,7 +3,9 @@ import { BaseModel } from './BaseModel';
 
 export class JsonFile {
     filePath: string;
+
     content: string;
+
     data: any;
 
     constructor(filePath, data = null) {
