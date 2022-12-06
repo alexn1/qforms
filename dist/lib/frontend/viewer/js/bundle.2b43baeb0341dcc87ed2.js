@@ -32103,7 +32103,7 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PhoneBox = exports.TimeBox = exports.Tab2 = exports.TextArea = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.CloseIcon2 = exports.MoreVertIcon = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Search = exports.ReactComponent = exports.Helper = exports.FrontHostApp = void 0;
+exports.PhoneBox = exports.TimeBox = exports.Tab2 = exports.TextArea = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.VisibilityOffIcon = exports.VisibilityIcon = exports.CloseIcon2 = exports.MoreVertIcon = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Search = exports.ReactComponent = exports.Helper = exports.FrontHostApp = void 0;
 var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
 var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
@@ -32125,6 +32125,10 @@ var MoreVertIcon_1 = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/front
 Object.defineProperty(exports, "MoreVertIcon", ({ enumerable: true, get: function () { return MoreVertIcon_1.MoreVertIcon; } }));
 var CloseIcon2_1 = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 Object.defineProperty(exports, "CloseIcon2", ({ enumerable: true, get: function () { return CloseIcon2_1.CloseIcon2; } }));
+var VisibilityIcon_1 = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+Object.defineProperty(exports, "VisibilityIcon", ({ enumerable: true, get: function () { return VisibilityIcon_1.VisibilityIcon; } }));
+var VisibilityOffIcon_1 = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+Object.defineProperty(exports, "VisibilityOffIcon", ({ enumerable: true, get: function () { return VisibilityOffIcon_1.VisibilityOffIcon; } }));
 // widget
 var Box_1 = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
 Object.defineProperty(exports, "Box", ({ enumerable: true, get: function () { return Box_1.Box; } }));
@@ -35764,6 +35768,97 @@ window.RowFormFieldView = RowFormFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RowFormPasswordFieldController = void 0;
+const RowFormFieldController_1 = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+const RowFormPasswordFieldView_1 = __webpack_require__(/*! ./RowFormPasswordFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx");
+class RowFormPasswordFieldController extends RowFormFieldController_1.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || RowFormPasswordFieldView_1.RowFormPasswordFieldView;
+    }
+}
+exports.RowFormPasswordFieldController = RowFormPasswordFieldController;
+// @ts-ignore
+window.RowFormPasswordFieldController = RowFormPasswordFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.RowFormPasswordFieldView = void 0;
+const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+const RowFormFieldView_1 = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onCloseClick = async (e) => {
+            // console.log('RowFormPasswordFieldView.onCloseClick');
+            const ctrl = this.props.ctrl;
+            this.getWidget().state.value = '';
+            this.getWidget().setState({ value: '' });
+            ctrl.onChange('');
+            this.getWidget().getElement().focus();
+        };
+        this.onFocus = async (e) => {
+            // console.log('RowFormPasswordFieldView.onFocus');
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (e) => {
+            // console.log('RowFormPasswordFieldView.onBlur');
+            this.removeCssClass('focus');
+            await this.rerender();
+        };
+        this.onIconClick = e => {
+            this.setState(prevState => {
+                return {
+                    type: prevState.type === 'password' ? 'text' : 'password'
+                };
+            });
+        };
+        this.state = {
+            classList: [],
+            type: 'password'
+        };
+    }
+    isCloseVisible() {
+        // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
+        const ctrl = this.props.ctrl;
+        if (!ctrl.isEditable())
+            return false;
+        if (!this.getWidget()) {
+            return this.props.value !== undefined;
+        }
+        // console.log('this.getWidget().state.value:', this.getWidget().state.value);
+        return this.getWidget().state.value !== '';
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__input`], type: this.state.type, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon, {}) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0, jsx_runtime_1.jsx)(common_1.VisibilityIcon, {}) : (0, jsx_runtime_1.jsx)(common_1.VisibilityOffIcon, {}) }))] }));
+    }
+}
+exports.RowFormPasswordFieldView = RowFormPasswordFieldView;
+// @ts-ignore
+window.RowFormPasswordFieldView = RowFormPasswordFieldView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts ***!
@@ -36473,11 +36568,12 @@ class RowFormView extends FormView_1.FormView {
         return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0, jsx_runtime_1.jsx)(common_1.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`);
     }
     renderGroup(fieldCtrl) {
-        return [
+        return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [this.renderLabel(fieldCtrl), this.renderField(fieldCtrl), this.renderError(fieldCtrl)] });
+        /*return [
             this.renderLabel(fieldCtrl),
             this.renderField(fieldCtrl),
             this.renderError(fieldCtrl)
-        ];
+        ];*/
         /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
             {this.renderLabel(fieldCtrl)}
             {this.renderField(fieldCtrl)}
@@ -38845,6 +38941,25 @@ window.Field = Field;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PasswordField = void 0;
+const Field_1 = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+class PasswordField extends Field_1.Field {
+}
+exports.PasswordField = PasswordField;
+// @ts-ignore
+window.PasswordField = PasswordField;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.ts":
 /*!************************************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.ts ***!
@@ -39735,7 +39850,7 @@ var exports = __webpack_exports__;
   \**************************************/
 
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Helper = exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormController = exports.PageView = exports.ApplicationView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
+exports.RowFormPasswordFieldController = exports.PasswordField = exports.Button = exports.Helper = exports.RowFormTextAreaFieldController = exports.TextAreaField = exports.TableFormDateFieldController = exports.TableFormController = exports.RowFormTextBoxFieldController = exports.RowFormComboBoxFieldController = exports.RowFormDateFieldController = exports.SqlDataSource = exports.TextBoxField = exports.ComboBoxField = exports.DateField = exports.TableForm = exports.RowForm = exports.PageController = exports.TableFormTextBoxFieldController = exports.RowFormView = exports.RowFormController = exports.PageView = exports.ApplicationView = exports.DataSource = exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
 var LoginFrontHostApp_1 = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 Object.defineProperty(exports, "LoginFrontHostApp", ({ enumerable: true, get: function () { return LoginFrontHostApp_1.LoginFrontHostApp; } }));
 var ViewerFrontHostApp_1 = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");
@@ -39748,6 +39863,8 @@ var PageView_1 = __webpack_require__(/*! ./Controller/ModelController/PageContro
 Object.defineProperty(exports, "PageView", ({ enumerable: true, get: function () { return PageView_1.PageView; } }));
 var RowFormController_1 = __webpack_require__(/*! ./Controller/ModelController/FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
 Object.defineProperty(exports, "RowFormController", ({ enumerable: true, get: function () { return RowFormController_1.RowFormController; } }));
+var RowFormView_1 = __webpack_require__(/*! ./Controller/ModelController/FormController/RowFormController/RowFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx");
+Object.defineProperty(exports, "RowFormView", ({ enumerable: true, get: function () { return RowFormView_1.RowFormView; } }));
 var TableFormTextBoxFieldController_1 = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.ts");
 Object.defineProperty(exports, "TableFormTextBoxFieldController", ({ enumerable: true, get: function () { return TableFormTextBoxFieldController_1.TableFormTextBoxFieldController; } }));
 var PageController_1 = __webpack_require__(/*! ./Controller/ModelController/PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
@@ -39780,6 +39897,12 @@ var RowFormTextAreaFieldController_1 = __webpack_require__(/*! ./Controller/Mode
 Object.defineProperty(exports, "RowFormTextAreaFieldController", ({ enumerable: true, get: function () { return RowFormTextAreaFieldController_1.RowFormTextAreaFieldController; } }));
 var Helper_1 = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
 Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
+var Button_1 = __webpack_require__(/*! ../common/widget/Button */ "./src/frontend/common/widget/Button.tsx");
+Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
+var PasswordField_1 = __webpack_require__(/*! ./Model/Field/PasswordField/PasswordField */ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts");
+Object.defineProperty(exports, "PasswordField", ({ enumerable: true, get: function () { return PasswordField_1.PasswordField; } }));
+var RowFormPasswordFieldController_1 = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts");
+Object.defineProperty(exports, "RowFormPasswordFieldController", ({ enumerable: true, get: function () { return RowFormPasswordFieldController_1.RowFormPasswordFieldController; } }));
 
 })();
 

@@ -10,6 +10,8 @@ export {RightIcon} from './icon/RightIcon';
 export {OpenInNewIcon} from './icon/OpenInNewIcon';
 export {MoreVertIcon} from './icon/MoreVertIcon';
 export {CloseIcon2} from './icon/CloseIcon2';
+export {VisibilityIcon} from './icon/VisibilityIcon';
+export {VisibilityOffIcon} from './icon/VisibilityOffIcon';
 
 // widget
 export {Box} from './widget/Box/Box';

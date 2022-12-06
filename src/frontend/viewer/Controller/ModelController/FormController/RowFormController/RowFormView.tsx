@@ -122,11 +122,16 @@ export class RowFormView extends FormView {
         </div>;
     }
     renderGroup(fieldCtrl) {
-        return [
+        return <>
+            {this.renderLabel(fieldCtrl)}
+            {this.renderField(fieldCtrl)}
+            {this.renderError(fieldCtrl)}
+        </>
+        /*return [
             this.renderLabel(fieldCtrl),
             this.renderField(fieldCtrl),
             this.renderError(fieldCtrl)
-        ];
+        ];*/
         /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
             {this.renderLabel(fieldCtrl)}
             {this.renderField(fieldCtrl)}
