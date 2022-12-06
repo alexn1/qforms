@@ -27,7 +27,7 @@ export class JsonFile {
         await Helper.writeFile2(this.filePath, this.content);
     }
 
-    async read():Promise<void> {
+    async read(): Promise<void> {
         const content = await Helper.readTextFile(this.filePath);
         this.content = content;
         this.data = JSON.parse(content);
