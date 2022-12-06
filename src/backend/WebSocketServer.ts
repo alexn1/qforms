@@ -18,9 +18,11 @@ export class WebSocketServer {
         this.server.on('error', this.onError.bind(this));
         this.server.on('connection', this.onConnection.bind(this));
     }
+
     async onError(err) {
         console.log('WebSocketServer.onError', err);
     }
+
     async onConnection(webSocket) {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         const parts = url.parse(webSocket.upgradeReq.url, true);
@@ -58,6 +60,7 @@ export class WebSocketServer {
         // console.log('this.clients', this.clients);
         context.destroy();
     }
+
     async onClose(webSocket, code, reason) {
         console.log(
             'WebSocketServer.onSocketClose',
@@ -70,6 +73,7 @@ export class WebSocketServer {
             .getApplicationByRoute(webSocket.route)
             .removeClient(webSocket);
     }
+
     async onMessage(webSocket, data, flags) {
         console.log(
             'WebSocketServer.onMessage',
@@ -79,6 +83,7 @@ export class WebSocketServer {
             flags,
         );
     }
+
     getHostApp(): BackHostApp {
         return this.options.hostApp;
     }
