@@ -6,7 +6,7 @@ async function main() {
     // console.log('main');
     const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.Helper.getCommandLineParams()), { monitor: {
             username: 'admin',
-            password: '123qwe'
+            password: '123qwe',
         } }));
     try {
         await backHostApp.run();

@@ -1,4 +1,4 @@
-import { BackHostApp } from "./BackHostApp";
+import { BackHostApp } from './BackHostApp';
 export declare class WebSocketServer {
     options: any;
     server: any;

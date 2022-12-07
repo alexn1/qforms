@@ -98,7 +98,7 @@ class BackHostApp {
         // ws
         this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
-            httpServer: this.httpServer
+            httpServer: this.httpServer,
         });
     }
     initProcess() {
@@ -123,7 +123,7 @@ class BackHostApp {
         // middlewares
         this.express.use(bodyParser.json({
             limit: '20mb',
-            reviver: Helper_1.Helper.dateTimeReviver
+            reviver: Helper_1.Helper.dateTimeReviver,
         }));
         this.express.use(bodyParser.urlencoded({ extended: false }));
         this.express.use(cookieParser());
@@ -132,7 +132,7 @@ class BackHostApp {
             secret: this.getSecretSync(),
             key: 'sid',
             resave: false,
-            saveUninitialized: false
+            saveUninitialized: false,
         }));
         // test
         // this.express.get( '/test', this._getTest.bind(this));
@@ -183,7 +183,7 @@ class BackHostApp {
             return promise;
         }
         this.appQueue[context.getRoute()] = [];
-        const app = this.applications[context.getRoute()] = await this.createApplication(context);
+        const app = (this.applications[context.getRoute()] = await this.createApplication(context));
         console.log('application created, start resolve loop', context.getRoute(), this.appQueue[context.getRoute()].length);
         for (const p of this.appQueue[context.getRoute()]) {
             // @ts-ignore
@@ -237,27 +237,34 @@ class BackHostApp {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err.context ? err.context.getRoute() : null;
-            const data = req ? {
-                headers: req.headers,
-                method: req.method,
-                host: req.headers.host,
-                originalUrl: req.originalUrl,
-                uri: req.params['0'],
-                platformVersion: pkg.version,
-                appVersion: route ? this.applications[route].getVersion() : null,
-                route: route,
-                body: req.body,
-                status: err.status || null,
-                data: err.data || null
-            } : null;
+            const data = req
+                ? {
+                    headers: req.headers,
+                    method: req.method,
+                    host: req.headers.host,
+                    originalUrl: req.originalUrl,
+                    uri: req.params['0'],
+                    platformVersion: pkg.version,
+                    appVersion: route
+                        ? this.applications[route].getVersion()
+                        : null,
+                    route: route,
+                    body: req.body,
+                    status: err.status || null,
+                    data: err.data || null,
+                }
+                : null;
             if (this.logPool) {
                 await BackHostApp.createLog(this.logPool, {
                     type: 'error',
                     source: 'server',
-                    ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    ip: req
+                        ? req.headers['x-forwarded-for'] ||
+                            req.connection.remoteAddress
+                        : null,
                     message: err.message,
                     stack: err.stack.toString(),
-                    data: data ? JSON.stringify(data, null, 4) : null
+                    data: data ? JSON.stringify(data, null, 4) : null,
                 });
             }
             else if (this.logErrorUrl) {
@@ -268,11 +275,14 @@ class BackHostApp {
                     body: JSON.stringify({
                         type: 'error',
                         source: 'server',
-                        ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                        ip: req
+                            ? req.headers['x-forwarded-for'] ||
+                                req.connection.remoteAddress
+                            : null,
                         message: err.message,
                         stack: err.stack.toString(),
-                        data: data
-                    })
+                        data: data,
+                    }),
                 });
             }
         }
@@ -287,17 +297,21 @@ class BackHostApp {
             const application = this.getApplication(context);
             let args = '';
             if (req.body.params) {
-                args = Object.keys(req.body.params).map(name => `${name}: ${req.body.params[name]}`).join(', ');
+                args = Object.keys(req.body.params)
+                    .map(name => `${name}: ${req.body.params[name]}`)
+                    .join(', ');
             }
             else if (req.body.row) {
-                args = Object.keys(req.body.row).map(name => `${name}: ${req.body.row[name]}`).join(', ');
+                args = Object.keys(req.body.row)
+                    .map(name => `${name}: ${req.body.row[name]}`)
+                    .join(', ');
             }
             let message = [
                 application.getName(),
                 ...(req.body.page ? [req.body.page] : []),
                 ...(req.body.form ? [req.body.form] : []),
                 ...(req.body.ds ? [req.body.ds] : []),
-                `${req.body.action}(${args})`
+                `${req.body.action}(${args})`,
             ].join('.');
             if (time) {
                 message += `, time: ${time}`;
@@ -305,9 +319,10 @@ class BackHostApp {
             await BackHostApp.createLog(this.logPool, {
                 type: 'log',
                 source: 'server',
-                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                ip: req.headers['x-forwarded-for'] ||
+                    req.connection.remoteAddress,
                 message: message,
-                data: JSON.stringify(req.body, null, 4)
+                data: JSON.stringify(req.body, null, 4),
             });
         }
         catch (err) {
@@ -322,7 +337,7 @@ class BackHostApp {
                 source: 'server',
                 ip: context.getIp(),
                 message: message,
-                data: data
+                data: data,
             });
         }
         catch (err) {
@@ -348,7 +363,7 @@ class BackHostApp {
                 source: values.source,
                 ip: values.ip,
                 message: values.message,
-                data: values.data ? JSON.stringify(values.data) : null
+                data: values.data ? JSON.stringify(values.data) : null,
             });
         }
         else if (this.logErrorUrl) {
@@ -361,8 +376,8 @@ class BackHostApp {
                     source: values.source,
                     ip: values.ip,
                     message: values.message,
-                    data: values.data
-                })
+                    data: values.data,
+                }),
             });
         }
     }
@@ -371,7 +386,11 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
@@ -383,7 +402,11 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context_1.Context({
+                        req,
+                        res,
+                        domain: this.getDomainFromRequest(req),
+                    });
                     await this.editorModule.handleEditorGet(req, res, context);
                 }
                 else {
@@ -429,10 +452,12 @@ class BackHostApp {
         console.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
-            await res.json({ appInfos: appInfos.map(appInfo => ({
+            await res.json({
+                appInfos: appInfos.map(appInfo => ({
                     fullName: appInfo.fullName,
-                    envs: appInfo.envs
-                })) });
+                    envs: appInfo.envs,
+                })),
+            });
         }
         catch (err) {
             next(err);
@@ -469,7 +494,11 @@ class BackHostApp {
         let context = null;
         try {
             if (req.params.module === 'viewer') {
-                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
@@ -477,7 +506,11 @@ class BackHostApp {
             }
             else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {
-                    context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
+                    context = new Context_1.Context({
+                        req,
+                        res,
+                        domain: this.getDomainFromRequest(req),
+                    });
                     const time = await this.editorModule.handleEditorPost(req, res, context);
                     // await this.logRequest(req, context, time);
                 }
@@ -505,7 +538,11 @@ class BackHostApp {
         if (req.params.module === 'viewer') {
             let context = null;
             try {
-                context = new Context_1.Context({ req, res, domain: this.getDomainFromRequest(req) });
+                context = new Context_1.Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
                 const application = await this.createApplicationIfNotExists(context);
                 context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);
@@ -528,7 +565,7 @@ class BackHostApp {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(new MyError_1.MyError({
             message: `${req.method} ${req.originalUrl} not found`,
-            status: 404
+            status: 404,
         }));
     }
     async _e500(err, req, res, next) {
@@ -536,14 +573,21 @@ class BackHostApp {
         console.error(colors.red(err));
         const error = typeof err === 'string' ? new MyError_1.MyError({ message: err }) : err;
         res.status(error.status || 500);
-        if (req.headers['content-type'] && req.headers['content-type'].indexOf('application/json') !== -1) {
-            res.end(this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error');
+        if (req.headers['content-type'] &&
+            req.headers['content-type'].indexOf('application/json') !== -1) {
+            res.end(this.isDevelopment() || error.status === 404
+                ? error.message
+                : 'Internal Software Error');
         }
         else {
             res.render('error', {
                 status: error.status,
-                message: this.isDevelopment() || error.status === 404 ? error.message : 'Internal Software Error',
-                stack: this.isDevelopment() && error.status !== 404 ? error.stack : null
+                message: this.isDevelopment() || error.status === 404
+                    ? error.message
+                    : 'Internal Software Error',
+                stack: this.isDevelopment() && error.status !== 404
+                    ? error.stack
+                    : null,
             });
         }
         await this.logError(error, req);
@@ -639,10 +683,14 @@ class BackHostApp {
                 await BackHostApp.createLog(this.logPool, {
                     type: req.body.type,
                     source: req.body.source,
-                    ip: req.body.ip || (req.headers['x-forwarded-for'] || req.connection.remoteAddress),
+                    ip: req.body.ip ||
+                        req.headers['x-forwarded-for'] ||
+                        req.connection.remoteAddress,
                     message: req.body.message,
                     stack: req.body.stack,
-                    data: req ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4) : null
+                    data: req
+                        ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4)
+                        : null,
                 });
                 res.header('Access-Control-Allow-Origin', '*');
                 res.end('ok');
@@ -655,8 +703,7 @@ class BackHostApp {
     getFrontendDirPath() {
         return this.frontendDirPath;
     }
-    initCustomRoutes() {
-    }
+    initCustomRoutes() { }
     alias(method, path, [module, appDirName, appFileName, env, domain], cb, query) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
@@ -670,7 +717,9 @@ class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    req.query[name] = query[name] ? query[name] : req.params[name];
+                    req.query[name] = query[name]
+                        ? query[name]
+                        : req.params[name];
                 }
             }
             await this[cb](req, res, next);
@@ -695,7 +744,8 @@ class BackHostApp {
     broadcastResult(sourceApplication, context, result) {
         console.log('BackHostApp.broadcastResult');
         for (const route in this.applications) {
-            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
+            if (context.getRoute() === route &&
+                this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
             }
             else {

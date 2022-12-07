@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileSessionStore = void 0;
+const Helper_1 = require("./Helper");
 const path = require('path');
 const session = require('express-session');
-const Helper_1 = require("./Helper");
-const colors = require('colors/safe');
+// const colors = require('colors/safe');
 class FileSessionStore extends session.Store {
     constructor(dirPath) {
         // console.log('FileSessionStore.constructor', dirPath);

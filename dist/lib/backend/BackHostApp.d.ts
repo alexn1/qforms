@@ -7,7 +7,7 @@ import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { CommonModule } from './common/CommonModule';
-import { Result } from "./Result";
+import { Result } from './Result';
 export declare class BackHostApp {
     params: any;
     applications: any;
