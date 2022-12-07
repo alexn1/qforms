@@ -17,5 +17,6 @@ module.exports = {
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
         "spaced-comment": "off",
+        "max-len": ["warn", 100]
     },
 };

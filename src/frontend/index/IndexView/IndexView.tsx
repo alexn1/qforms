@@ -48,7 +48,13 @@ export class IndexView extends ReactComponent {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    {/* <button name="create" type="button" className="btn btn-primary">Create</button>*/}
+                                    {/*<button
+                                        name="create"
+                                        type="button"
+                                        className="btn btn-primary"
+                                    >
+                                        Create
+                                    </button>*/}
                                     <Button
                                         name="create"
                                         classList={['btn', 'btn-primary']}
