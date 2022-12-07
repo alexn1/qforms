@@ -31163,11 +31163,12 @@ if (false) {} else {
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FrontHostApp = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
 class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
@@ -31252,6 +31253,7 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
+        // console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
@@ -31269,7 +31271,6 @@ class FrontHostApp {
         return confirm(options.message);
     }
 }
-exports.FrontHostApp = FrontHostApp;
 // @ts-ignore
 window.FrontHostApp = FrontHostApp;
 
@@ -31280,16 +31281,16 @@ window.FrontHostApp = FrontHostApp;
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
   \***************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Helper": () => (/* binding */ Helper)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Helper = void 0;
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 // @ts-ignore
 window.QForms = {};
 class Helper {
@@ -31378,12 +31379,12 @@ class Helper {
         let component;
         // @ts-ignore
         props.onCreate = c => component = c;
-        const reactElement = react_1.default.createElement(type, props, children);
-        react_dom_1.default.render(reactElement, rootElement);
+        const reactElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
-        react_dom_1.default.unmountComponentAtNode(root);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
         return new Promise(resolve => {
@@ -31597,7 +31598,6 @@ class Helper {
         });
     }
 }
-exports.Helper = Helper;
 // @ts-ignore
 window.QForms.Helper = window.Helper = Helper;
 
@@ -31608,13 +31608,15 @@ window.QForms.Helper = window.Helper = Helper;
 /*!************************************************!*\
   !*** ./src/frontend/common/ReactComponent.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ReactComponent": () => (/* binding */ ReactComponent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ReactComponent = void 0;
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-class ReactComponent extends react_1.Component {
+class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
         if (props.onCreate)
@@ -31714,9 +31716,280 @@ class ReactComponent extends react_1.Component {
         this.setState({ disabled: undefined });
     }
 }
-exports.ReactComponent = ReactComponent;
 // @ts-ignore
 window.ReactComponent = ReactComponent;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/Search.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Search.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
+class Search {
+    static getObj() {
+        if (!window.location.search.split('?')[1])
+            return {};
+        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+            const kv = item.split('=');
+            acc[kv[0]] = decodeURIComponent(kv[1]);
+            return acc;
+        }, {});
+    }
+    static objToString(obj) {
+        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        if (!search)
+            return '';
+        return `?${search}`;
+    }
+    static filter(names) {
+        const newObj = {};
+        const obj = Search.getObj();
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return Search.objToString(newObj);
+    }
+}
+// @ts-ignore
+window.Search = Search;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/ArrowIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const ArrowIcon = (props) => {
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) }));
+};
+// @ts-ignore
+window.ArrowIcon = ArrowIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon = (props) => {
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] }));
+};
+// @ts-ignore
+window.CloseIcon = CloseIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon2 = (props) => {
+    const size = props.size || 24;
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] }));
+};
+// @ts-ignore
+window.CloseIcon2 = CloseIcon2;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DateIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] }));
+    }
+}
+// @ts-ignore
+window.DateIcon = DateIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LeftIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const LeftIcon = (props) => {
+    const size = props.size || 24;
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] }));
+};
+// @ts-ignore
+window.LeftIcon = LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] }));
+    }
+}
+// @ts-ignore
+window.MoreVertIcon = MoreVertIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const OpenInNewIcon = () => {
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] }));
+};
+// @ts-ignore
+window.OpenInNewIcon = OpenInNewIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/RightIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const RightIcon = (props) => {
+    const size = props.size || 24;
+    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] }));
+};
+// @ts-ignore
+window.RightIcon = RightIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] }));
+    }
+}
+// @ts-ignore
+window.VisibilityIcon = VisibilityIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityOffIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] }));
+    }
+}
+// @ts-ignore
+window.VisibilityOffIcon = VisibilityOffIcon;
 
 
 /***/ }),
@@ -31725,33 +31998,172 @@ window.ReactComponent = ReactComponent;
 /*!**************************************!*\
   !*** ./src/frontend/common/index.ts ***!
   \**************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_15__.Button),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__.CheckBox),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__.DatePicker),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__.DropdownDatePicker),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__.Password),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__.PhoneBox),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
+/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__.Select),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__.TimeBox),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = exports.TextBox = exports.Button = exports.ComboBox = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
-var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
-var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
-var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
-// export {Search} from './Search';
-// export {Box} from './widget/Box/Box';
-// export {CheckBox} from './widget/CheckBox/CheckBox';
-var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
-var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
-// export {Tab} from './widget/Tab/Tab';
-// export {DropdownButton} from './widget/DropdownButton/DropdownButton';
-var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
-// export {Grid} from './widget/Grid/Grid';
-// export {GridRow} from './widget/GridRow/GridRow';
-// export {GridCell} from './widget/GridCell/GridCell';
-var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
+
+
+// icon
+
+
+
+
+
+
+
+
+// widget
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Box/Box.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+
+
+
+class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Box.constructor', props);
+        super(props);
+        this.update = () => {
+            console.log('Box.update');
+            this.setState({
+                backgroundColor: 'green'
+            });
+        };
+        this.state = {
+            backgroundColor: 'purple'
+        };
+    }
+    // componentWillMount() {
+    //     console.log('Box.componentWillMount');
+    // }
+    componentDidMount() {
+        console.log('Box.componentDidMount');
+    }
+    componentWillUnmount() {
+        console.log('Box.componentWillUnmount');
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        return true;
+    }
+    componentDidUpdate() {
+        console.log('Box.componentDidUpdate');
+    }
+    render() {
+        console.log('Box.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
+    }
+}
+// @ts-ignore
+window.Box = Box;
 
 
 /***/ }),
@@ -31760,20 +32172,24 @@ Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { 
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Button": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Button = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Button extends ReactComponent_1.ReactComponent {
+
+class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
     }
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
@@ -31803,12 +32219,77 @@ class Button extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('Button.render', this.props.title, this.props);
-        return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
-exports.Button = Button;
 // @ts-ignore
 window.Button = Button;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = e => {
+            // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+            if (!this.props.readOnly) {
+                this.setState(prevState => {
+                    if (this.props.onChange) {
+                        this.props.onChange(!prevState.checked, e);
+                    }
+                    return { checked: !prevState.checked };
+                });
+            }
+        };
+        this.onClick = e => {
+            if (!this.props.readOnly) {
+                if (this.props.onChange)
+                    this.props.onChange(true);
+                this.setState({ checked: true });
+            }
+        };
+        if (this.props.checked !== undefined &&
+            this.props.checked !== null &&
+            typeof this.props.checked !== 'boolean') {
+            throw new Error(`wrong checked prop: ${this.props.checked}`);
+        }
+        this.state = {
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+        };
+    }
+    getValue() {
+        return this.state.checked;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
+        return true;
+    }
+    render() {
+        if (this.state.checked === null) {
+            return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" }));
+        }
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange });
+    }
+}
+// @ts-ignore
+window.CheckBox = CheckBox;
 
 
 /***/ }),
@@ -31817,14 +32298,17 @@ window.Button = Button;
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/ComboBox.tsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ComboBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class ComboBox extends ReactComponent_1.ReactComponent {
+class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
@@ -31883,13 +32367,925 @@ class ComboBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('ComboBox.render', this.state.value);
-        return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable &&
-                    (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items && this.props.items.map(item => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items && this.props.items.map(item => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value))] })));
     }
 }
-exports.ComboBox = ComboBox;
 // @ts-ignore
 window.ComboBox = ComboBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+
+
+
+
+
+// props
+//  visible boolean true
+//  selectedDate array [2021, 0, 1]
+//  minDate array [2021, 0, 1]
+//  onMouseDown function
+//  onDateSelected function
+//  getDateStyle function
+//  selectToday boolean false
+//  highlightedDate array [2021, 0, 1]
+class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DatePicker.constructor', props);
+        super(props);
+        this.onClick = e => {
+            console.log('DatePicker.onClick', e.target);
+            if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+                return this.onDateClick(e.target);
+            }
+        };
+        this.onMouseDown = e => {
+            // console.log('DatePicker.onMouseDown');
+            if (this.props.onMouseDown) {
+                return this.props.onMouseDown(e);
+            }
+        };
+        this.onNextClick = e => {
+            // console.log('DatePicker.next');
+            this.setState(prevState => {
+                const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                next.setMonth(next.getMonth() + 1);
+                return {
+                    selectedMonth: [next.getFullYear(), next.getMonth()]
+                };
+            });
+        };
+        this.onPrevClick = e => {
+            // console.log('DatePicker.prev');
+            this.setState(prevState => {
+                const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                prev.setMonth(prev.getMonth() - 1);
+                return {
+                    selectedMonth: [prev.getFullYear(), prev.getMonth()]
+                };
+            });
+        };
+        if (this.props.minDate && !(this.props.minDate instanceof Array))
+            throw new Error('minDate must be array');
+        this.state = { selectedMonth: this.calcSelectedMonth() };
+        this.MONTH = [
+            'Январь', 'Февраль',
+            'Март', 'Апрель', 'Май',
+            'Июнь', 'Июль', 'Август',
+            'Сентябрь', 'Октябрь', 'Ноябрь',
+            'Декабрь'
+        ];
+    }
+    static createDateFromArr(arr) {
+        return new Date(arr[0], arr[1], arr[2]);
+    }
+    isVisible() {
+        if (this.props.visible === false)
+            return false;
+        return true;
+    }
+    calcSelectedMonth() {
+        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        if (this.props.selectedDate) {
+            return [this.props.selectedDate[0], this.props.selectedDate[1]];
+        }
+        else if (this.props.highlightedDate) {
+            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
+        }
+        else {
+            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+            if (this.props.minDate)
+                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
+            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
+            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
+            const date = new Date(Math.min(...dates));
+            // console.log('date:', date);
+            return [date.getFullYear(), date.getMonth()];
+        }
+    }
+    static getTodayArr() {
+        return DatePicker.dateToArray(new Date());
+    }
+    static dateToArray(date) {
+        return [date.getFullYear(), date.getMonth(), date.getDate()];
+    }
+    static getDay(date) {
+        let day = date.getDay() - 1;
+        if (day === -1)
+            day = 6;
+        if (day === 0)
+            day = 7;
+        return day;
+    }
+    createSelectedDate() {
+        if (!this.isDateSelected())
+            throw new Error('date not selected');
+        // @ts-ignore
+        return new Date(...this.props.selectedDate);
+    }
+    isDateSelected() {
+        return !!this.props.selectedDate;
+    }
+    getFirstDateOfTable() {
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
+        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        return date;
+    }
+    createMinDate() {
+        if (!this.props.minDate)
+            throw new Error('no min date');
+        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
+    }
+    isMinDate() {
+        return !!this.props.minDate;
+    }
+    isPrevAllowed() {
+        const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+    }
+    isMonthAllowed(month) {
+        if (this.isMinDate()) {
+            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return true;
+    }
+    onDateClick(target) {
+        // console.log('DatePicker.onDateClick', target.dataset.date);
+        if (this.props.onDateSelected) {
+            this.props.onDateSelected(JSON.parse(target.dataset.date));
+        }
+    }
+    render() {
+        // console.log('DatePicker.render', this.props, this.state);
+        const date = this.getFirstDateOfTable();
+        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        // @ts-ignore
+        const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+                            const classList = [];
+                            if (j === 5 || j === 6)
+                                classList.push('weekend');
+                            if (this.isSelectToday() && date.getTime() === today.getTime())
+                                classList.push('today');
+                            if (date.getMonth() !== this.state.selectedMonth[1])
+                                classList.push('out');
+                            if (!minDate)
+                                classList.push('selectable');
+                            else if (date.getTime() >= minDate.getTime())
+                                classList.push('selectable');
+                            if (selectedDate && date.getTime() === selectedDate.getTime())
+                                classList.push('selected');
+                            if (highlightedDate && highlightedDate.getTime() === date.getTime())
+                                classList.push('highlight');
+                            const text = date.getDate().toString();
+                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
+                            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
+                            date.setDate(date.getDate() + 1);
+                            return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text);
+                        }) }, i))) })] })));
+    }
+    isSelectToday() {
+        if (this.props.selectToday === false)
+            return false;
+        return true;
+    }
+}
+// @ts-ignore
+window.DatePicker = DatePicker;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+
+
+
+class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onButtonClick = e => {
+            // console.log('DropdownButton.onButtonClick');
+            this.setState(state => ({ open: !state.open }));
+        };
+        this.onButtonBlur = e => {
+            // console.log('DropdownButton.onButtonBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onKeyDown = e => {
+            // console.log('DropdownButton.onKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onUlMouseDown = e => {
+            // console.log('DropdownButton.onUlMouseDown');
+            e.preventDefault();
+        };
+        this.onLiClick = async (e) => {
+            // console.log('DropdownButton.onLiClick', e.currentTarget);
+            const li = e.currentTarget;
+            this.setState({ open: false }, () => {
+                if (this.props.onClick) {
+                    this.props.onClick(li);
+                }
+            });
+        };
+        this.state = {
+            open: false,
+            disabled: false
+        };
+    }
+    isEnabled() {
+        if (this.props.enabled !== undefined)
+            return this.props.enabled;
+        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+        return !this.state.disabled;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions && this.props.actions.map(action => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name)) }))] })));
+    }
+}
+// @ts-ignore
+window.DropdownButton = DropdownButton;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+
+
+
+
+
+
+
+// oldDates boolean true
+class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DropdownDatePicker.constructor', props);
+        super(props);
+        this.onInputClick = (e) => {
+            // console.log('DropdownDatePicker.onInputClick', e);
+            if (this.props.readOnly)
+                return;
+            this.setState(prevState => ({ open: !prevState.open }));
+        };
+        this.onInputKeyDown = e => {
+            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onCloseDown = async (e) => {
+            // console.log('DropdownDatePicker.onCloseDown', e);
+            this.setState({ value: null });
+            if (this.props.onChange) {
+                this.props.onChange(null);
+            }
+        };
+        this.onBlur = (e) => {
+            // console.log('DropdownDatePicker.onBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onDatePickerMouseDown = (e) => {
+            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onDatePickerDateSelected = (date) => {
+            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            const value = new Date(date[0], date[1], date[2]);
+            this.setState({ open: false, value });
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.state = {
+            open: false,
+            value: props.value || null,
+        };
+        if (props.value && !(props.value instanceof Date)) {
+            throw new Error(`need Date type, got ${typeof props.value}`);
+        }
+    }
+    getFormat() {
+        // if (this.props.format) return this.props.format;
+        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+        return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+    }
+    getStringValue() {
+        const value = this.getValue();
+        if (value) {
+            let format = this.getFormat();
+            // @ts-ignore
+            if (ApplicationController.isDebugMode()) {
+                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
+                    format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+                }
+            }
+            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+        }
+        return '';
+    }
+    /*getMinDate() {
+        if (this.props.getMinDate) {
+            return this.props.getMinDate();
+        } else if (this.props.oldDates === false) {
+            return DatePicker.getTodayArr();
+        }
+        return null;
+    }*/
+    getSelectedMonth() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth()];
+        }
+        return null;
+    }
+    getSelectedDate() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
+        }
+        return null;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    getClassList() {
+        return [
+            ...super.getClassList(),
+            ...(this.props.readOnly ? ['read-only'] : [])
+        ];
+    }
+    renderInput() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown });
+    }
+    renderCloseIcon() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) }));
+    }
+    renderDateIcon() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) }));
+    }
+    renderDatePicker() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker
+                // minDate={this.getMinDate()}
+                , { 
+                    // minDate={this.getMinDate()}
+                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] }));
+    }
+    render() {
+        // console.log('DropdownDatePicker.render', this.props, this.state);
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] }));
+    }
+}
+// @ts-ignore
+window.DropdownDatePicker = DropdownDatePicker;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+
+
+
+
+
+
+class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('Grid.constructor', props);
+        super(props);
+        this.onCellMouseDown = async (e) => {
+            console.log('Grid.onCellMouseDown', this.isLink());
+            e.preventDefault(); // prevent text selection on double click
+            if (this.isDisabled())
+                return;
+            this.getElement().focus();
+            // if (this.isLink()) return;
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            await this.selectCell(key, j);
+            if (button === 0 && this.props.onClick) {
+                this.props.onClick(row, key);
+            }
+        };
+        this.onRowMouseDown = async (e) => {
+            console.log('Grid.onRowMouseDown', this.isLink());
+            // if (this.isLink()) return;
+            const key = e.currentTarget.dataset.row;
+            await this.selectRow(key);
+        };
+        this.onCellDoubleClick = async (e) => {
+            // console.log('Grid.onCellDoubleClick');
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (button === 0 && this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onRowDoubleClick = async (e) => {
+            // console.log('Grid.onRowDoubleClick');
+            const i = parseInt(e.currentTarget.dataset.r);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onKeyDown = async (e) => {
+            // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+            if (this.isDisabled())
+                return;
+            switch (e.keyCode) {
+                case 37:
+                    e.preventDefault();
+                    await this.onLeft();
+                    break;
+                case 38:
+                    e.preventDefault();
+                    await this.onUp();
+                    break;
+                case 39:
+                    e.preventDefault();
+                    await this.onRight();
+                    break;
+                case 40:
+                    e.preventDefault();
+                    await this.onDown();
+                    break;
+                case 13:
+                    e.preventDefault();
+                    await this.onEnter();
+                    break;
+                case 46:
+                    e.preventDefault();
+                    await this.onDelete();
+                    break;
+                case 67:
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        await this.onCopy();
+                    }
+                    break;
+            }
+        };
+        this.onResizeDoubleClick = async (e) => {
+            console.log('Grid.onResizeDoubleClick', e.target);
+            const i = parseInt(e.target.dataset.i);
+            const column = this.props.columns[i];
+            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+                return;
+            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+            // @ts-ignore
+            this.state.resized = Date.now();
+            await this.rerender();
+        };
+        this.onCellViewCreate = c => {
+            // console.log('Grid.onCellViewCreate', c.props.column.name);
+            const columnName = c.props.column.name;
+            if (this.columns[columnName] === undefined)
+                this.columns[columnName] = [];
+            this.columns[columnName].push(c);
+        };
+        this.onCellViewUnmount = c => {
+            // console.log('Grid.onCellViewUnmount', c.props.column.name);
+            const columnName = c.props.column.name;
+            const i = this.columns[columnName].indexOf(c);
+            if (i === -1)
+                throw new Error('cannot find FieldView in Grid.columns');
+            this.columns[columnName].splice(i, 1);
+        };
+        this.onBodyScroll = async (e) => {
+            // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+            this.head.current.scrollLeft = e.target.scrollLeft;
+        };
+        this.onLinkClick = async (e) => {
+            console.log('Grid.onLinkClick', e.ctrlKey);
+            if (e.ctrlKey)
+                return;
+            e.preventDefault();
+            /*if (!this.isLink()) return;
+            const key = e.currentTarget.dataset.key;
+            if (this.props.onLinkClick) {
+                await this.props.onLinkClick(key);
+            }*/
+        };
+        this.state = {
+            key: this.props.selectedKey || null,
+            column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+            columnWidth: {},
+            resized: Date.now(),
+        };
+        this.columns = {}; // each column is the array of each cell view
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    getActiveColumn() {
+        return this.state.column;
+    }
+    setActiveColumn(column) {
+        // @ts-ignore
+        this.state.column = column;
+    }
+    getActiveRowKey() {
+        return this.state.key;
+    }
+    setActiveRowKey(key) {
+        // console.log('Grid.setActiveRowKey', key);
+        // @ts-ignore
+        this.state.key = key;
+    }
+    isRowActive(i, key) {
+        return this.getActiveRowKey() === key;
+    }
+    async onCopy() {
+        console.log('Grid.onCopy');
+        const row = this.findRow(this.getActiveRowKey());
+        const column = this.props.columns[this.getActiveColumn()].name;
+        const text = row[column];
+        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
+    }
+    findRow(key) {
+        return this.props.rows.find(row => this.getRowKey(row) === key);
+    }
+    async onLeft() {
+        console.log('Grid.onLeft');
+        const j = this.getActiveColumn();
+        if (j - 1 >= 0) {
+            this.setActiveColumn(j - 1);
+            await this.rerender();
+        }
+    }
+    async onUp() {
+        console.log('Grid.onUp');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i - 1 >= 0) {
+            const pRow = this.props.rows[i - 1];
+            const pKey = this.getRowKey(pRow);
+            this.setActiveRowKey(pKey);
+            await this.rerender();
+        }
+    }
+    async onRight() {
+        console.log('Grid.onRight');
+        const j = this.getActiveColumn();
+        if (j + 1 <= this.props.columns.length - 1) {
+            this.setActiveColumn(j + 1);
+            await this.rerender();
+        }
+    }
+    async onDown() {
+        console.log('Grid.onDown');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i + 1 <= this.props.rows.length - 1) {
+            const nRow = this.props.rows[i + 1];
+            const nKey = this.getRowKey(nRow);
+            this.setActiveRowKey(nKey);
+            await this.rerender();
+        }
+    }
+    async onEnter() {
+        console.log('Grid.onEnter');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDoubleClick) {
+            await this.props.onDoubleClick(row, key);
+        }
+    }
+    async onDelete() {
+        console.log('Grid.onDelete');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDeleteKeyDown) {
+            await this.props.onDeleteKeyDown(row, key);
+        }
+    }
+    async selectCell(key, j) {
+        // console.log('Grid.selectCell', key, j);
+        if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
+            return;
+        this.setActiveRowKey(key);
+        this.setActiveColumn(j);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    async selectRow(key) {
+        // console.log('Grid.selectRow', key);
+        if (this.getActiveRowKey() === key)
+            return;
+        this.setActiveRowKey(key);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    getMaxColumnWidth(column) {
+        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2;
+    }
+    getColumnWidth(i) {
+        const column = this.props.columns[i];
+        if (this.state.columnWidth[column.name] !== undefined) {
+            return this.state.columnWidth[column.name];
+        }
+        return column.width;
+    }
+    renderColumns() {
+        return this.props.columns.map((column, i) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name));
+    }
+    renderRows() {
+        return this.props.rows.map((row, i) => {
+            const key = this.getRowKey(row);
+            return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key);
+        });
+    }
+    getRowKey(row) {
+        if (this.props.getRowKey) {
+            return this.props.getRowKey(row);
+        }
+        return this.props.rows.indexOf(row).toString();
+    }
+    renderCell(row, column) {
+        let view;
+        if (this.props.renderGridCellView) {
+            view = this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
+        }
+        if (view)
+            return view;
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount });
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('Grid.render', this.props.name);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` })] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+    }
+    isLink() {
+        return !!this.props.createLinkCallback;
+    }
+}
+// @ts-ignore
+window.Grid = Grid;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+
+class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    getSpanOffsetWidth() {
+        if (!this.span.current)
+            return 0;
+        return this.span.current.offsetWidth;
+    }
+    renderCellValue(rawValue) {
+        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
+        if (typeof value === 'boolean')
+            return value.toString();
+        return value;
+    }
+    render() {
+        const row = this.props.row;
+        const column = this.props.column;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
+    }
+}
+// @ts-ignore
+window.GridCell = GridCell;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridRow/GridRow.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    isCellActive(j) {
+        return this.props.active && this.props.activeColumn === j;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            if (nextProps.resized - this.props.resized)
+                return true;
+            if (this.props.active !== nextProps.active)
+                return true;
+            if (this.props.active && this.props.activeColumn !== nextProps.activeColumn)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('GridRow.render', this.props.i);
+        const grid = this.props.grid;
+        const row = this.props.row;
+        const i = this.props.i;
+        const key = this.props.rowKey;
+        const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name)), !!grid.props.extraColumn &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick })] }));
+    }
+}
+// @ts-ignore
+window.GridRow = GridRow;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Menu": () => (/* binding */ Menu)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Menu.constructor', props);
+        super(props);
+        this.onMenuClick = async (e) => {
+            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            await this.toggleMenu(e.currentTarget.dataset.menu);
+        };
+        this.onBlur = async (e) => {
+            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            await this.closeMenu(e.currentTarget.dataset.menu);
+        };
+        this.onMouseDown = (e) => {
+            // console.log('Menu.onMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onMenuItemClick = async (e) => {
+            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            e.persist();
+            const { menu, type, name } = e.target.dataset;
+            await this.closeMenu(menu);
+            if (this.props.onClick) {
+                this.props.onClick(menu, type, name);
+            }
+        };
+        this.state = {};
+    }
+    toggleMenu(menu) {
+        return new Promise(resolve => {
+            this.setState(prevState => ({
+                [menu]: !prevState[menu]
+            }), resolve);
+        });
+    }
+    closeMenu(menu) {
+        return new Promise(resolve => this.setState({ [menu]: false }, resolve));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items && this.props.items.map(menu => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name)) }))] }), menu.name)) })));
+    }
+}
+// @ts-ignore
+window.Menu = Menu;
 
 
 /***/ }),
@@ -31898,21 +33294,646 @@ window.ComboBox = ComboBox;
 /*!****************************************************!*\
   !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Modal extends ReactComponent_1.ReactComponent {
+class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     render() {
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
     }
 }
-exports.Modal = Modal;
 // @ts-ignore
 window.Modal = Modal;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Password": () => (/* binding */ Password)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+
+
+
+
+
+
+class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = e => {
+            this._setValue(e.target.value);
+        };
+        this.onCloseClick = e => {
+            this._setValue('');
+            this.getInputElement().focus();
+        };
+        this.onIconClick = e => {
+            this.setState(prevState => {
+                return {
+                    type: prevState.type === 'password' ? 'text' : 'password'
+                };
+            });
+            this.getInputElement().focus();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.props.value || '',
+            type: 'password'
+        };
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        return this.state.value !== '';
+    }
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) }))] }));
+    }
+}
+// @ts-ignore
+window.Password = Password;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyPress = e => {
+            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === '+'
+                && e.target.value.length
+                && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+                e.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('PhoneBox.onChange', e.target.value);
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const len = e.target.value.length;
+            // console.log('start/end/len:', start, end, len);
+            // disable edition in middle
+            if (start !== end || start !== len) {
+                return;
+            }
+            // value pipeline
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // state
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(value);
+            this.setState({ value: this.state.value }); // for render only
+            // event
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.onBlur = e => {
+            // console.log('PhoneBox.onBlur');
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // console.log('value:', value);
+            // event
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: PhoneBox.formatPhoneNumber(this.props.value || '')
+        };
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        if (nextProps.value !== undefined) {
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+    }
+    static clearValue(value) {
+        return value.replace(/[^\+0-9]/g, '');
+    }
+    static ifNoCodeAddRussianCode(value) {
+        if (value === '') {
+        }
+        else if (value.match(/^8/)) {
+            return value.replace(/^8/, '+7');
+        }
+        else if (value.match(/^7/)) {
+            return `+${value}`;
+        }
+        else if (value[0] !== '+') {
+            return `+7${value}`;
+        }
+        return value;
+    }
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+        // console.log('arr:', arr);
+        if (arr) {
+            if (arr[5]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+            }
+            if (arr[4]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+            }
+            if (arr[3]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}`;
+            }
+            if (arr[2]) {
+                return `${arr[1]} ${arr[2]}`;
+            }
+            if (arr[1]) {
+                return `${arr[1]}`;
+            }
+        }
+        return value;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+
+
+
+
+
+class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyDown = async (e) => {
+            // console.log('Select.onKeyDown');
+            if (this.isVisible()) {
+                this.setState({ visible: false });
+                e.stopPropagation();
+            }
+        };
+        this.onInputMouseDown = async (e) => {
+            console.log('Select.onInputMouseDown');
+            if (this.props.readOnly)
+                return;
+            if (this.props.onMouseDown) {
+                await this.props.onMouseDown(e);
+            }
+            else {
+                if (!this.isVisible()) {
+                    const [selected] = this.el.current.querySelectorAll('li.selected');
+                    // console.log('selected:', selected);
+                    if (selected) {
+                        // console.log('selected.offsetTop:', selected.offsetTop);
+                        const scrollTop = selected.offsetTop
+                            - this.dropdown.current.getBoundingClientRect().height / 2
+                            + selected.getBoundingClientRect().height / 2;
+                        console.log('scrollTop:', scrollTop);
+                        this.dropdown.current.scrollTop = scrollTop;
+                        console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+                    }
+                }
+                this.setState(prevState => {
+                    return { visible: !prevState.visible };
+                });
+            }
+        };
+        this.onInputBlur = async (e) => {
+            console.log('Select.onInputBlur', e.target);
+            this.setState({ visible: false });
+        };
+        this.onDropdownMouseDown = async (e) => {
+            e.preventDefault();
+        };
+        this.onDropdownClick = async (e) => {
+            console.log('Select.onDropdownClick', e.target.offsetTop);
+            const value = JSON.parse(e.target.dataset.value);
+            // console.log('value:', value);
+            this.setState({ value: value, visible: false }, async () => {
+                if (this.props.onChange) {
+                    await this.props.onChange(value.toString());
+                }
+            });
+        };
+        this.onCloseClick = async (e) => {
+            this.setState({ value: '' });
+            if (this.props.onChange) {
+                await this.props.onChange('');
+            }
+            this.getElement();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.getInitialValue(),
+            visible: false,
+        };
+    }
+    isVisible() {
+        return this.state.visible;
+    }
+    getInitialValue() {
+        // console.log('Select.getInitialValue', this.props.value);
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.getItems().find(item => item.value === this.props.value);
+            if (!item) {
+                if (this.isNullable() && value === '') {
+                }
+                else {
+                    console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
+                    console.log('items:', this.getItems());
+                }
+            }
+        }
+        else {
+            if (this.isNullable()) {
+                value = '';
+            }
+            else {
+                if (this.props.items.length) {
+                    value = this.props.items[0].value;
+                }
+                else {
+                    value = '';
+                }
+            }
+        }
+        if (value === null)
+            throw new Error('null is wrong value for Select');
+        // console.log('select value:', value);
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    isNullable() {
+        return this.props.nullable !== undefined ? this.props.nullable : true;
+    }
+    getVisibility() {
+        return this.isVisible() ? 'visible' : 'hidden';
+    }
+    getDisplay() {
+        return this.isVisible() ? 'block' : 'none';
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValueTitle(value) {
+        if (value === '')
+            return '';
+        const item = this.getItems().find(item => item.value === value);
+        if (!item)
+            throw new Error(`cannot find item by value: ${value}`);
+        // console.log('item:', item);
+        return item.title || item.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        if (this.props.readOnly)
+            return false;
+        return this.state.value !== '';
+    }
+    renderInput() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown });
+    }
+    renderClose() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) }));
+    }
+    renderIcon() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) }));
+    }
+    renderDropdown() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
+                // visibility: this.getVisibility(),
+                display: this.getDisplay()
+            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" })), this.getItems().map(item => {
+                    return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value);
+                })] }));
+    }
+    render() {
+        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] }));
+    }
+}
+// @ts-ignore
+window.Select = Select;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
+/*!************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Statusbar.constructor', props);
+        super(props);
+        this.state = {};
+    }
+    setLastQueryTime(lastQueryTime) {
+        this.setState({ lastQueryTime });
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Last query time: ", this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
+    }
+}
+// @ts-ignore
+window.Statusbar = Statusbar;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = e => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = e => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
+    }
+}
+// @ts-ignore
+window.Tab = Tab;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab2": () => (/* binding */ Tab2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = e => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = e => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
+    }
+}
+// @ts-ignore
+window.Tab = Tab;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextArea.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/TextArea.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextArea": () => (/* binding */ TextArea)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('TextArea.constructor', props);
+        super(props);
+        this.onChange = e => {
+            // console.log('TextArea.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                this.props.onChange(e.target.value);
+            }
+        };
+        this.state = {
+            value: this.props.value || ''
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextArea.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+    }
+}
+// @ts-ignore
+window.TextArea = TextArea;
 
 
 /***/ }),
@@ -31921,15 +33942,19 @@ window.Modal = Modal;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/TextBox.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBox": () => (/* binding */ TextBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TextBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class TextBox extends ReactComponent_1.ReactComponent {
+
+class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
@@ -31937,7 +33962,7 @@ class TextBox extends ReactComponent_1.ReactComponent {
             // console.log('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
         this.state = {
             value: this.props.value || ''
         };
@@ -31962,12 +33987,251 @@ class TextBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TextBox.render');
-        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
-exports.TextBox = TextBox;
 // @ts-ignore
 window.TextBox = TextBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('TimeBox.constructor', props);
+        super(props);
+        this.onKeyPress = event => {
+            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+                console.log('cancel', event.key);
+                event.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('TimeBox.onChange', e.target.value);
+            const target = e.target;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            if (target.value.length > 5) {
+                return;
+            }
+            const inEnd = start === end && start === target.value.length;
+            const stringValue = this.formatValue(target.value);
+            // console.log('before:', target.selectionStart, target.selectionEnd);
+            this.setState({ value: stringValue }, () => {
+                // console.log('after:', target.selectionStart, target.selectionEnd);
+                // console.log('inEnd:', inEnd);
+                if (!inEnd) {
+                    target.selectionStart = start;
+                    target.selectionEnd = end;
+                }
+                if (this.props.onChange) {
+                    let nValue;
+                    try {
+                        nValue = this.getValue();
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                        nValue = NaN;
+                    }
+                    // console.log('nValue:', nValue);
+                    this.props.onChange(nValue);
+                }
+            });
+        };
+        this.onBlur = e => {
+            // console.log('TimeBox.onBlur');
+            if (this.props.onBlur) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                }
+                catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
+                this.props.onBlur(nValue);
+            }
+        };
+        if (props.value && typeof props.value !== 'number') {
+            throw new Error(`need number type, got ${typeof props.value}`);
+        }
+        this.state = {
+            value: TimeBox.getStringValue(props.value)
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        switch (pure.length) {
+            case 0: break;
+            case 1:
+                min = pure;
+                break;
+            case 2:
+                min = pure;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                break;
+        }
+        return [
+            min,
+            ...(sec ? [sec] : [])
+        ].join(':');
+    }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({ value: TimeBox.getStringValue(value) });
+    }
+    /*onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }*/
+    /*onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }*/
+    static getStringValue(value) {
+        // console.log('TimeBox.getStringValue', value);
+        if (value === null)
+            return '';
+        if (value !== undefined) {
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
+            if (h < 10)
+                h = '0' + h;
+            if (m < 10)
+                m = '0' + m;
+            return `${h}:${m}`;
+        }
+        return '';
+    }
+    static getIntegerValue(stringValue) {
+        // console.log('TimeBox.getIntegerValue', stringValue);
+        // try {
+        if (stringValue === '')
+            return null;
+        const arr = stringValue.split(':');
+        if (!arr[0])
+            throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1])
+            throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2)
+            throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2)
+            throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23)
+            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59)
+            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
+    }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        if (this.props.value !== nextProps.value) {
+            // @ts-ignore
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.props.readOnly !== nextProps.readOnly)
+            return true;
+        if (this.props.placeholder !== nextProps.placeholder)
+            return true;
+        if (this.state.value !== nextState.value)
+            return true;
+        return false;
+    }
+    render() {
+        // console.log('TimeBox.render', this.state.value);
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur });
+    }
+}
+// @ts-ignore
+window.TimeBox = TimeBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    // constructor(props) {
+    //     console.log('Tooltip.constructor', props);
+    //     super(props);
+    // }
+    render() {
+        // console.log('Tooltip.render', this.state, this.props);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' &&
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
+    }
+}
+// @ts-ignore
+window.Tooltip = Tooltip;
 
 
 /***/ }),
@@ -31976,13 +34240,16 @@ window.TextBox = TextBox;
 /*!*************************************************!*\
   !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
+/* harmony import */ var _common_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/index */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.IndexFrontHostApp = void 0;
-const IndexView_1 = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
-const common_1 = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
 class IndexFrontHostApp {
     constructor(data) {
         this.onAppChange = fullName => {
@@ -32001,14 +34268,14 @@ class IndexFrontHostApp {
         };
         this.run = e => {
             if (this.currentAppFullName) {
-                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/`;
+                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
                 console.log('href:', href);
                 window.location.href = href;
             }
         };
         this.edit = e => {
             if (this.currentAppFullName) {
-                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/`;
+                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
                 console.log('href:', href);
                 window.location.href = href;
             }
@@ -32054,16 +34321,19 @@ class IndexFrontHostApp {
         // console.log('IndexFrontHostApp.init');
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
-        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.currentAppEnv =
+            appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
         this.createView(document.querySelector('#root'));
     }
     createView(root) {
-        this.view = common_1.Helper.createReactComponent(root, IndexView_1.IndexView, { ctrl: this });
+        this.view = _common_index__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
+            ctrl: this,
+        });
     }
     getAppItems() {
         return this.data.appInfos.map(appInfo => ({
             value: appInfo.fullName,
-            title: appInfo.fullName
+            title: appInfo.fullName,
         }));
     }
     getEnvItems() {
@@ -32080,10 +34350,10 @@ class IndexFrontHostApp {
         return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
     async createApp(folderName, appName) {
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common_index__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             action: 'new',
             folder: folderName,
-            name: appName
+            name: appName,
         });
         console.log('data:', data);
         if (data.appInfos) {
@@ -32093,7 +34363,6 @@ class IndexFrontHostApp {
         }
     }
 }
-exports.IndexFrontHostApp = IndexFrontHostApp;
 
 
 /***/ }),
@@ -32102,27 +34371,35 @@ exports.IndexFrontHostApp = IndexFrontHostApp;
 /*!****************************************************!*\
   !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexView": () => (/* binding */ IndexView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/index */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.IndexView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class IndexView extends common_1.ReactComponent {
+class IndexView extends _common_index__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderModals() {
         const ctrl = this.props.ctrl;
-        return ((0, jsx_runtime_1.jsx)("div", { children: ctrl.modals.map(modal => (0, jsx_runtime_1.jsx)(common_1.Modal, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) })), (0, jsx_runtime_1.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString())) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map(modal => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
     }
     render() {
         console.log('IndexView.render');
         const ctrl = this.props.ctrl;
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(common_1.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(common_1.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'development' &&
-                                        (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" })), ctrl.data.nodeEnv === 'development' &&
-                                        (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." }))] })] })) })), this.renderModals()] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: [
+                                            'btn',
+                                            'btn-default',
+                                            'btn-block',
+                                        ], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common_index__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: [
+                                            'btn',
+                                            'btn-default',
+                                            'btn-block',
+                                        ], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
     }
 }
-exports.IndexView = IndexView;
 
 
 /***/ })
@@ -32147,27 +34424,55 @@ exports.IndexView = IndexView;
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-var exports = __webpack_exports__;
 /*!************************************!*\
   !*** ./src/frontend/index/main.ts ***!
   \************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const IndexFrontHostApp_1 = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    new IndexFrontHostApp_1.IndexFrontHostApp(data).init();
+    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
 });
 
 })();
