@@ -27,8 +27,7 @@ export class IndexFrontHostApp {
         // console.log('IndexFrontHostApp.init');
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
-        this.currentAppEnv =
-            appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
         this.createView(document.querySelector('#root'));
     }
 
@@ -49,25 +48,22 @@ export class IndexFrontHostApp {
         // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
-            if (appInfo)
+            if (appInfo) {
                 return appInfo.envs.map(env => ({ value: env, title: env }));
+            }
         }
         return [];
     }
 
     getAppInfo(fullName) {
         // console.log('IndexFrontHostApp.getAppInfo', fullName);
-        return this.data.appInfos.find(
-            appInfo => appInfo.fullName === fullName,
-        );
+        return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
     }
 
     onAppChange = fullName => {
         console.log('IndexFrontHostApp.onAppChange', fullName);
         this.currentAppFullName = fullName;
-        const appInfo = this.data.appInfos.find(
-            app => app.fullName === fullName,
-        );
+        const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
         if (!appInfo) throw new Error(`no appInfo ${fullName}`);
         // console.log('appInfo:', appInfo);
         this.currentAppEnv = appInfo.envs[0];
