@@ -1,20 +1,20 @@
-import {ApplicationEditor} from "../ApplicationEditor/ApplicationEditor";
-import {PageEditor} from "../PageEditor/PageEditor";
+import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
+import { PageEditor } from '../PageEditor/PageEditor';
 
 const path = require('path');
-import {Editor} from '../Editor';
+import { Editor } from '../Editor';
 
 export class DataSourceEditor extends Editor {
     static createData(params): any {
         return {
-            '@class'     : 'DataSource',
+            '@class': 'DataSource',
             '@attributes': {
-                name    : params.name,
+                name: params.name,
                 database: params.database || 'default',
-                table   : params.table    || '',
+                table: params.table || '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : []),
             ],
         };
     }
@@ -27,8 +27,8 @@ export class DataSourceEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             _class: this.getClassName(),
-            page      : params.page ? params.page : '',
-            form      : params.form ? params.form : '',
+            page: params.page ? params.page : '',
+            form: params.form ? params.form : '',
             dataSource: this.getName(),
         });
         return js;

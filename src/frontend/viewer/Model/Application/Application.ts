@@ -1,13 +1,13 @@
-import {Model} from '../Model';
-import {Database} from '../Database/Database';
-import {FrontHostApp} from '../../../common';
+import { Model } from '../Model';
+import { Database } from '../Database/Database';
+import { FrontHostApp } from '../../../common';
 
 export class Application extends Model {
     databases: any[];
     dataSources: any[];
     constructor(data) {
         super(data);
-        this.databases   = [];
+        this.databases = [];
         this.dataSources = [];
     }
 
@@ -38,21 +38,22 @@ export class Application extends Model {
 
     async logout() {
         const data = await this.request({
-            'action': 'logout'
+            action: 'logout',
         });
-        this.emit('logout', {source: this});
+        this.emit('logout', { source: this });
     }
 
     async request(options) {
         // console.warn('Application.request', data);
         const start = Date.now();
         const [headers, body] = await FrontHostApp.doHttpRequest2(options);
-        if (!headers['qforms-platform-version']) throw new Error('no qforms-platform-version header');
+        if (!headers['qforms-platform-version'])
+            throw new Error('no qforms-platform-version header');
         if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
         this.emit('request', {
             time: Date.now() - start,
             remotePlatformVersion: headers['qforms-platform-version'],
-            remoteAppVersion: headers['qforms-app-version']
+            remoteAppVersion: headers['qforms-app-version'],
         });
         return body;
     }
@@ -80,10 +81,10 @@ export class Application extends Model {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.request({
-            uuid  : this.getAttr('uuid'),
+            uuid: this.getAttr('uuid'),
             action: 'rpc',
-            name  : name,
-            params: params
+            name: name,
+            params: params,
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

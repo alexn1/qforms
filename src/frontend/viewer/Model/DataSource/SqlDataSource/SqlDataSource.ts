@@ -1,4 +1,4 @@
-import {DataSource} from '../DataSource';
+import { DataSource } from '../DataSource';
 
 export class SqlDataSource extends DataSource {
     frame: number;
@@ -6,8 +6,8 @@ export class SqlDataSource extends DataSource {
     lastFrame: number;
     constructor(data, parent) {
         super(data, parent);
-        this.frame  = 1;
-        this.count  = data.count !== undefined ? data.count : null;
+        this.frame = 1;
+        this.count = data.count !== undefined ? data.count : null;
         this.lastFrame = 1;
     }
 
@@ -26,11 +26,13 @@ export class SqlDataSource extends DataSource {
         if (table === '') throw new Error('no data source table to insert');
 
         const result = await this.getApp().request({
-            uuid   : this.getApp().getAttr('uuid'),
+            uuid: this.getApp().getAttr('uuid'),
             action: 'insert',
-            page  : this.getForm().getPage().getName(),
-            form  : this.getForm().getName(),
-            row   : this.getRowWithChanges(row),
+            page: this.getForm()
+                .getPage()
+                .getName(),
+            form: this.getForm().getName(),
+            row: this.getRowWithChanges(row),
         });
 
         // key & values
@@ -52,7 +54,7 @@ export class SqlDataSource extends DataSource {
         this.addRow(row);
 
         // events
-        const event = {source : this, inserts: result[database][table].insert};
+        const event = { source: this, inserts: result[database][table].insert };
         if (this.parent.onDataSourceInsert) {
             this.parent.onDataSourceInsert(event);
         }
@@ -74,13 +76,14 @@ export class SqlDataSource extends DataSource {
 
         // specific to SqlDataSource
         const result = await this.getApp().request({
-            uuid   : this.getApp().getAttr('uuid'),
-            action : 'update',
-            page   : this.getForm().getPage().getName(),
-            form   : this.getForm().getName(),
+            uuid: this.getApp().getAttr('uuid'),
+            action: 'update',
+            page: this.getForm()
+                .getPage()
+                .getName(),
+            form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         });
-
 
         const [key] = Object.keys(result[database][table].updateEx);
         if (!key) throw new Error('no updated row');
@@ -91,7 +94,7 @@ export class SqlDataSource extends DataSource {
         this.updateRow(key, newValues);
 
         // events
-        const event = {source: this, updates: result[database][table].update};
+        const event = { source: this, updates: result[database][table].update };
         if (this.parent.onDataSourceUpdate) {
             this.parent.onDataSourceUpdate(event);
         }
@@ -109,16 +112,18 @@ export class SqlDataSource extends DataSource {
             throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
         }
         const result = await this.getApp().request({
-            uuid   : this.getApp().getAttr('uuid'),
+            uuid: this.getApp().getAttr('uuid'),
             action: '_delete',
-            page  : this.getForm().getPage().getName(),
-            form  : this.getForm().getName(),
-            params: {key},
+            page: this.getForm()
+                .getPage()
+                .getName(),
+            form: this.getForm().getName(),
+            params: { key },
         });
         await this.refill();
 
         // events
-        const event = {source: this, deletes: result[database][table].delete};
+        const event = { source: this, deletes: result[database][table].delete };
         if (this.parent.onDataSourceDelete) {
             this.parent.onDataSourceDelete(event);
         }
@@ -130,7 +135,8 @@ export class SqlDataSource extends DataSource {
 
     onTableUpdate = async e => {
         console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
@@ -146,11 +152,12 @@ export class SqlDataSource extends DataSource {
             this.parent.onDataSourceUpdate(e);
         }
         this.emit('update', e);
-    }
+    };
 
-    onTableInsert = async (e) => {
+    onTableInsert = async e => {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
         if (e.source === this) {
             // console.error('onTableInsert stop self insert', this.getFullName());
             return;
@@ -164,11 +171,12 @@ export class SqlDataSource extends DataSource {
             this.parent.onDataSourceInsert(e);
         }
         this.emit('insert', e);
-    }
+    };
 
-    onTableDelete = async (e) => {
+    onTableDelete = async e => {
         console.log('SqlDataSource.onTableDelete', this.getFullName(), e);
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
             // console.error('onTableDelete stop self delete', this.getFullName());
             return;
@@ -178,18 +186,19 @@ export class SqlDataSource extends DataSource {
             this.parent.onDataSourceDelete(e);
         }
         this.emit('delete', e);
-    }
+    };
 
     onTableRefresh = async e => {
         console.log('SqlDataSource.onTableRefresh', this.getFullName(), e);
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source) throw new Error('refresh is foreign result so source must be null');
         await this.refill();
         if (this.parent.onDataSourceRefresh) {
             this.parent.onDataSourceRefresh(e);
         }
         this.emit('refresh', e);
-    }
+    };
 
     getPageParams() {
         const page = this.getPage();
@@ -200,22 +209,24 @@ export class SqlDataSource extends DataSource {
         console.log('SqlDataSource.refresh', this.getFullName());
         await this.refill();
         if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh({source: this});
+            this.parent.onDataSourceRefresh({ source: this });
         }
     }
 
     async refill() {
         console.log('SqlDataSource.refill', this.getFullName());
-        if (this.isChanged()) throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
-        const data = await this.select(this.getLimit() ? {frame : this.frame} : {});
+        if (this.isChanged())
+            throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
+        const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
         this.count = data.count;
         this.setRows(data.rows);
         this.lastFrame = 1;
     }
 
     async fill(frame) {
-        if (this.isChanged()) throw new Error(`cannot fill changed data source: ${this.getFullName()}`);
-        const data = await this.select(this.getLimit() ? {frame} : {});
+        if (this.isChanged())
+            throw new Error(`cannot fill changed data source: ${this.getFullName()}`);
+        const data = await this.select(this.getLimit() ? { frame } : {});
         this.count = data.count;
         this.addRows(data.rows);
     }
@@ -231,14 +242,14 @@ export class SqlDataSource extends DataSource {
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
-            action        : 'select',
-            page          : page ? page.getName()           : null,
-            form          : form ? form.getName()           : null,
-            ds            : this.getName(),
-            params        : {
+            action: 'select',
+            page: page ? page.getName() : null,
+            form: form ? form.getName() : null,
+            ds: this.getName(),
+            params: {
                 ...this.getPageParams(),
                 ...params,
-            }
+            },
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);

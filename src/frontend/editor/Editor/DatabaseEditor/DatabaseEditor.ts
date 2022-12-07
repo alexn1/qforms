@@ -1,7 +1,7 @@
-import {Editor} from '../Editor';
-import {ParamEditor} from '../ParamEditor/ParamEditor';
-import {TableEditor} from '../TableEditor/TableEditor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { ParamEditor } from '../ParamEditor/ParamEditor';
+import { TableEditor } from '../TableEditor/TableEditor';
+import { FrontHostApp } from '../../../common';
 
 export class DatabaseEditor extends Editor {
     params: any[];
@@ -13,7 +13,6 @@ export class DatabaseEditor extends Editor {
     }
 
     init() {
-
         // params
         for (const data of this.data.params) {
             this.createParam(data);
@@ -55,12 +54,12 @@ export class DatabaseEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Database',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 database: this.getName(),
-                attr    : name,
-                value   : value
-            }
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -69,10 +68,10 @@ export class DatabaseEditor extends Editor {
     async deleteData() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
-            action    : 'delete',
-            params    : {
-                database: this.getName()
-            }
+            action: 'delete',
+            params: {
+                database: this.getName(),
+            },
         });
     }
 
@@ -84,27 +83,27 @@ export class DatabaseEditor extends Editor {
     async newParam(name) {
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
-            action    : '_new',
-            params    : {
+            action: '_new',
+            params: {
                 database: this.getName(),
-                class   : 'Param',
-                name    : name
-            }
+                class: 'Param',
+                name: name,
+            },
         });
         return this.createParam(data);
     }
 
     async newTable(params) {
         if (!params.name) throw new Error('newTable: no name');
-        const data =  await FrontHostApp.doHttpRequest({
+        const data = await FrontHostApp.doHttpRequest({
             controller: 'Table',
-            action    : '_new',
-            params    : {
+            action: '_new',
+            params: {
                 database: this.getName(),
-                class   : 'Table',
-                name    : params.name,
-                columns : params.columns
-            }
+                class: 'Table',
+                name: params.name,
+                columns: params.columns,
+            },
         });
         return this.createTable(data);
     }
@@ -113,41 +112,40 @@ export class DatabaseEditor extends Editor {
         console.log('DatabaseEditor.getView', view);
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
-            action    : 'getView',
-            params    : {
-                view    : view,
-                database: this.data !== undefined ? this.getName() : null
-            }
+            action: 'getView',
+            params: {
+                view: view,
+                database: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
 
     async getTableInfo(table) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Database',
-            action    : 'getTableInfo',
-            params    : {
+            action: 'getTableInfo',
+            params: {
                 database: this.data !== undefined ? this.getName() : null,
-                table   : table
-            }
+                table: table,
+            },
         });
     }
     moveUp() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveUp',
-            params    : {
-                database: this.getName()
-            }
+            controller: 'Database',
+            action: 'moveUp',
+            params: {
+                database: this.getName(),
+            },
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Database',
-            action     : 'moveDown',
-            params    : {
-                database: this.getName()
-            }
+            controller: 'Database',
+            action: 'moveDown',
+            params: {
+                database: this.getName(),
+            },
         });
     }
-
 }

@@ -38,9 +38,7 @@ export class WebSocketServer {
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
 
-        const [appDirName, appFileName, env, domain] = parts.query.route.split(
-            '/',
-        );
+        const [appDirName, appFileName, env, domain] = parts.query.route.split('/');
         const context = new Context({
             module: 'viewer',
             appDirName,
@@ -48,40 +46,24 @@ export class WebSocketServer {
             env,
             domain,
         });
-        const application = await this.getHostApp().createApplicationIfNotExists(
-            context,
-        );
+        const application = await this.getHostApp().createApplicationIfNotExists(context);
         application.addClient(webSocket);
 
         // say hello
-        webSocket.send(
-            JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }),
-        );
+        webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
         // console.log('this.clients', this.clients);
         context.destroy();
     }
 
     async onClose(webSocket, code, reason) {
-        console.log(
-            'WebSocketServer.onSocketClose',
-            webSocket.route,
-            webSocket.uuid,
-            code,
-            reason,
-        );
+        console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
         this.getHostApp()
             .getApplicationByRoute(webSocket.route)
             .removeClient(webSocket);
     }
 
     async onMessage(webSocket, data, flags) {
-        console.log(
-            'WebSocketServer.onMessage',
-            webSocket.route,
-            webSocket.uuid,
-            data,
-            flags,
-        );
+        console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
 
     getHostApp(): BackHostApp {

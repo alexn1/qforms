@@ -1,5 +1,5 @@
-import {Controller} from '../Controller';
-import {ConfirmView} from './ConfirmView';
+import { Controller } from '../Controller';
+import { ConfirmView } from './ConfirmView';
 
 export class ConfirmController extends Controller {
     options: any;
@@ -17,13 +17,13 @@ export class ConfirmController extends Controller {
     }
     onYesClick = e => {
         this.close(true);
-    }
+    };
     onCloseClick = e => {
         this.close(false);
-    }
+    };
     onKeyDown = async e => {
         if (e.key === 'Escape') {
             this.close(false);
         }
-    }
+    };
 }

@@ -1,8 +1,7 @@
-import {Editor} from '../Editor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FrontHostApp } from '../../../common';
 
 export class FieldEditor extends Editor {
-
     constructor(data, form) {
         super(data, form);
         this.form = form;
@@ -12,27 +11,27 @@ export class FieldEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName(),
-                attr        : name,
-                value       : value
-            }
+                form: this.form.getName(),
+                field: this.getName(),
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
         await FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'delete',
-            params     : {
-                pageFileName:this.form.page.pageLink.getFileName(),
-                form        :this.form.getName(),
-                field       :this.getName()
-            }
+            controller: 'Field',
+            action: 'delete',
+            params: {
+                pageFileName: this.form.page.pageLink.getFileName(),
+                form: this.form.getName(),
+                field: this.getName(),
+            },
         });
     }
     async delete() {
@@ -42,116 +41,115 @@ export class FieldEditor extends Editor {
     async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'getView',
-            params    : {
-                view : view,
-                page : this.data !== undefined ? this.form.page.getName() : null,
-                form : this.data !== undefined ? this.form.getName()      : null,
-                field: this.data !== undefined ? this.getName()           : null
-            }
+            action: 'getView',
+            params: {
+                view: view,
+                page: this.data !== undefined ? this.form.page.getName() : null,
+                form: this.data !== undefined ? this.form.getName() : null,
+                field: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
 
     async saveView(text, view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'saveView',
-            params    : {
-                page : this.form.page.getName(),
-                form : this.form.getName(),
+            action: 'saveView',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
                 field: this.getName(),
-                view : view,
-                text : text
-            }
+                view: view,
+                text: text,
+            },
         });
     }
 
     async saveController(text) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'saveController',
-            params    : {
-                page : this.form.page.getName(),
-                form : this.form.getName(),
+            action: 'saveController',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
                 field: this.getName(),
-                text : text
-            }
+                text: text,
+            },
         });
     }
 
     async createView() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'createView',
-            params    : {
-                page : this.form.page.getName(),
-                form : this.form.getName(),
+            action: 'createView',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
 
     async createStyle() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'createStyle',
-            params    : {
-                page : this.form.page.getName(),
-                form : this.form.getName(),
+            action: 'createStyle',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
 
     async createController() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'createController',
-            params    : {
-                page : this.form.page.getName(),
-                form : this.form.getName(),
+            action: 'createController',
+            params: {
+                page: this.form.page.getName(),
+                form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
 
     async changeClass(params) {
-        params['page']  = this.form.page.getName();
-        params['form']  = this.form.getName();
+        params['page'] = this.form.page.getName();
+        params['form'] = this.form.getName();
         params['field'] = this.getName();
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Field',
-            action    : 'changeClass',
-            params    : params
+            action: 'changeClass',
+            params: params,
         });
-        return this.data = data;
+        return (this.data = data);
     }
 
     moveUp() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'moveUp',
-            params     : {
+            controller: 'Field',
+            action: 'moveUp',
+            params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName()
-            }
+                form: this.form.getName(),
+                field: this.getName(),
+            },
         });
     }
 
     moveDown() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Field',
-            action     : 'moveDown',
-            params     : {
+            controller: 'Field',
+            action: 'moveDown',
+            params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
-                form        : this.form.getName(),
-                field       : this.getName()
-            }
+                form: this.form.getName(),
+                field: this.getName(),
+            },
         });
     }
-
 }

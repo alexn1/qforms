@@ -35,7 +35,8 @@ class Context {
         return null;
     }
     getClientTimezoneOffset() {
-        if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
+        if (this.getReq().session.tzOffset !== undefined &&
+            this.getReq().session.tzOffset !== null) {
             return this.getReq().session.tzOffset;
         }
         return null;
@@ -117,7 +118,6 @@ class Context {
     setParam(name, value) {
         this.params[name] = value;
     }
-    destroy() {
-    }
+    destroy() { }
 }
 exports.Context = Context;

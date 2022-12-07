@@ -9,12 +9,11 @@ class EditorController {
         this.appInfo = appInfo;
         this.hostApp = hostApp;
     }
-    async init(context) {
-    }
+    async init(context) { }
     async getView(params) {
         console.log('EditorController.getView');
         return {
-            data: {}
+            data: {},
         };
     }
     createApplicationEditor() {

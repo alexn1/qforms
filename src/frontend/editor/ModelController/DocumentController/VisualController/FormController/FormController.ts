@@ -1,9 +1,9 @@
-import {VisualController} from '../VisualController';
-import {FieldController} from '../FieldController/FieldController';
-import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
-import {NewFieldController} from '../../../../ModalController/NewFieldController/NewFieldController';
-import {VisualView} from '../VisualView';
+import { VisualController } from '../VisualController';
+import { FieldController } from '../FieldController/FieldController';
+import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import { NewFieldController } from '../../../../ModalController/NewFieldController/NewFieldController';
+import { VisualView } from '../VisualView';
 
 export class FormController extends VisualController {
     fields: any[];
@@ -11,12 +11,12 @@ export class FormController extends VisualController {
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];
-        this.actions     = [];
-        this.fields      = [];
+        this.actions = [];
+        this.fields = [];
         this.items = [
-            {getTitle: () => 'Data Sources', items: this.dataSources},
-            {getTitle: () => 'Actions'     , items: this.actions},
-            {getTitle: () => 'Fields'      , items: this.fields}
+            { getTitle: () => 'Data Sources', items: this.dataSources },
+            { getTitle: () => 'Actions', items: this.actions },
+            { getTitle: () => 'Fields', items: this.fields },
         ];
     }
     getTitle() {
@@ -40,7 +40,6 @@ export class FormController extends VisualController {
         return field;
     }
 
-
     removeField(fieldController) {
         console.log('FormController.removeField', fieldController.getTitle());
         const i = this.fields.indexOf(fieldController);
@@ -48,15 +47,14 @@ export class FormController extends VisualController {
         this.fields.splice(i, 1);
     }
 
-
     getActions() {
         return [
-            {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newField'     , 'caption': 'New Field'      },
-            {'action': 'newAction'    , 'caption': 'New Action'     },
-            {'action': 'moveUp'       , 'caption': 'Move Up'        },
-            {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': 'delete'       , 'caption': 'Delete'         },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newField', caption: 'New Field' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
 
@@ -88,66 +86,62 @@ export class FormController extends VisualController {
     }
 
     async actionNewDataSource() {
-        await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
-            const dataSource = await this.model.newDataSource({
-                name : values.name,
-                class: values.class
-            });
-            const dataSourceController = this.createDataSource(dataSource);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-            dataSourceController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewDataSourceController({
+                onCreate: async values => {
+                    const dataSource = await this.model.newDataSource({
+                        name: values.name,
+                        class: values.class,
+                    });
+                    const dataSourceController = this.createDataSource(dataSource);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                    dataSourceController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     async actionNewField() {
-        await EditorFrontHostApp.editorApp.openModal(new NewFieldController({onCreate: async values => {
-            const field = await this.model.newField({
-                class  : values.class,
-                name   : values.name,
-                caption: values.caption,
-                type   : values.type
-            });
-            const fieldController = this.createField(field);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
-            fieldController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewFieldController({
+                onCreate: async values => {
+                    const field = await this.model.newField({
+                        class: values.class,
+                        name: values.name,
+                        caption: values.caption,
+                        type: values.type,
+                    });
+                    const fieldController = this.createField(field);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
+                    fieldController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
-
-
 
     getPropList() {
         return {
-            list   : this.model.data['@attributes'],
+            list: this.model.data['@attributes'],
             options: {
-                editMethod: [
-                    'disabled',
-                    'table',
-                    'form'
-                ],
+                editMethod: ['disabled', 'table', 'form'],
                 newRowMode: [
                     'disabled',
                     'oneclick',
                     'editform',
                     'createform',
                     'oneclick editform',
-                    'oneclick createform'
+                    'oneclick createform',
                 ],
-                deleteRowMode: [
-                    'disabled',
-                    'enabled'
-                ],
-                refreshButton: [
-                    'true',
-                    'false'
-                ],
+                deleteRowMode: ['disabled', 'enabled'],
+                refreshButton: ['true', 'false'],
                 visible: ['true', 'false'],
                 newMode: ['', 'true', 'false'],
-                backOnly : ['true', 'false'],
-            }
+                backOnly: ['true', 'false'],
+            },
         };
     }
 

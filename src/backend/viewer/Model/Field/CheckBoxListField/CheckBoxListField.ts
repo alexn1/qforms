@@ -1,4 +1,4 @@
-import {Field} from '../Field';
+import { Field } from '../Field';
 
 export class CheckBoxListField extends Field {
     fillAttributes(response: any): void {

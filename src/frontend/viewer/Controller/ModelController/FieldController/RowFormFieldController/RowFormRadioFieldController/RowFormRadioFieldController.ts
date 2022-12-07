@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormRadioFieldView} from './RowFormRadioFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormRadioFieldView } from './RowFormRadioFieldView';
 
 export class RowFormRadioFieldController extends RowFormFieldController {
     getViewClass() {
@@ -10,7 +10,7 @@ export class RowFormRadioFieldController extends RowFormFieldController {
             return this.getRows().map(row => ({
                 // value: this.valueToString(this.getModel().getValueValue(row)),
                 value: this.getModel().getValueValue(row),
-                title: this.getModel().getDisplayValue(row)
+                title: this.getModel().getDisplayValue(row),
             }));
         } catch (err) {
             err.message = `${this.getModel().getFullName()}: ${err.message}`;
@@ -18,6 +18,8 @@ export class RowFormRadioFieldController extends RowFormFieldController {
         }
     }
     getRows() {
-        return this.getModel().getDataSource().getRows();
+        return this.getModel()
+            .getDataSource()
+            .getRows();
     }
 }

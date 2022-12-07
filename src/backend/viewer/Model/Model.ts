@@ -1,5 +1,5 @@
-import {Context} from "../../Context";
-import {BaseModel} from '../../BaseModel';
+import { Context } from '../../Context';
+import { BaseModel } from '../../BaseModel';
 
 export class Model extends BaseModel {
     fillCollections: any[];
@@ -8,9 +8,7 @@ export class Model extends BaseModel {
         this.fillCollections = [];
     }
 
-    async init(context: Context): Promise<void> {
-
-    }
+    async init(context: Context): Promise<void> {}
 
     async fill(context: Context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
@@ -78,13 +76,15 @@ export class Model extends BaseModel {
             }
         }
         return CustomClass;*/
-        return this.getParent() ? this.getParent().getChildModelCustomClass(model, colName, data) : null;
+        return this.getParent()
+            ? this.getParent().getChildModelCustomClass(model, colName, data)
+            : null;
     }
 
     async createChildModel(colName: string, data: any): Promise<any> {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);
         const className = BaseModel.getClassName(data);
-        const backend  = require('../../../backend');
+        const backend = require('../../../backend');
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class) throw new Error(`no class ${className}`);
         return new Class(data, this);
@@ -97,5 +97,4 @@ export class Model extends BaseModel {
     async rpc(name: string, context: Context): Promise<any> {
         throw new Error(`${this.constructor.name}.rpc not implemented`);
     }
-
 }

@@ -18,7 +18,13 @@ export class Result {
         if (!result[database][table].insertEx) result[database][table].insertEx = {};
         result[database][table].insertEx[key] = row;
     }
-    static addUpdateToResult(result: Result, database: string, table: string, oldKey, newKey): void {
+    static addUpdateToResult(
+        result: Result,
+        database: string,
+        table: string,
+        oldKey,
+        newKey,
+    ): void {
         // console.log('Result.addUpdateToResult');
         if (!result[database]) result[database] = {};
         if (!result[database][table]) result[database][table] = {};

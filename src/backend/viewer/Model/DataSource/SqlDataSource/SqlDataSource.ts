@@ -1,14 +1,16 @@
-import {DataSource} from '../DataSource';
-import {Helper} from '../../../../Helper';
-import {Table} from '../../Table/Table';
-import {Context} from '../../../../Context';
-import {Result} from "../../../../Result";
+import { DataSource } from '../DataSource';
+import { Helper } from '../../../../Helper';
+import { Table } from '../../Table/Table';
+import { Context } from '../../../../Context';
+import { Result } from '../../../../Result';
 
 export class SqlDataSource extends DataSource {
     table: Table;
     constructor(data, parent) {
         super(data, parent);
-        this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
+        this.table = this.getAttr('table')
+            ? this.getDatabase().getTable(this.getAttr('table'))
+            : null;
     }
 
     getKeyColumns(): string[] {
@@ -115,7 +117,8 @@ export class SqlDataSource extends DataSource {
     }
 
     async select(context: Context) {
-        if (this.getAccess(context).select !== true) throw new Error(`[${this.getFullName()}]: access denied`);
+        if (this.getAccess(context).select !== true)
+            throw new Error(`[${this.getFullName()}]: access denied`);
 
         // rows
         if (this.getAttr('limit') !== '') {
@@ -124,7 +127,9 @@ export class SqlDataSource extends DataSource {
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
-        const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
+        const query = this.isDefaultOnRowForm()
+            ? this.getSingleQuery(context)
+            : this.getMultipleQuery(context);
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
@@ -133,7 +138,11 @@ export class SqlDataSource extends DataSource {
         let count;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
+                count = await this.getDatabase().queryScalar(
+                    context,
+                    this.getCountQuery(context),
+                    params,
+                );
                 count = parseInt(count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -145,8 +154,12 @@ export class SqlDataSource extends DataSource {
 
     async insert(context: Context, _values: any = null): Promise<Result> {
         console.log('SqlDataSource.insert');
-        if (this.getAccess(context).insert !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
-        if (!this.table) throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
+        if (this.getAccess(context).insert !== true)
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (!this.table)
+            throw new Error(
+                `${this.getFullName()}: no link to table object: ${this.getAttr('table')}`,
+            );
 
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -181,7 +194,8 @@ export class SqlDataSource extends DataSource {
 
     async update(context: Context): Promise<Result> {
         console.log('SqlDataSource.update');
-        if (this.getAccess(context).update !== true) throw new Error(`[${this.getFullName()}]: access denied.`);
+        if (this.getAccess(context).update !== true)
+            throw new Error(`[${this.getFullName()}]: access denied.`);
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -196,7 +210,7 @@ export class SqlDataSource extends DataSource {
         const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
         const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
-        const params = {..._values, ..._where};
+        const params = { ..._values, ..._where };
         await this.getDatabase().queryResult(context, updateQuery, params);
 
         // new key
@@ -222,8 +236,9 @@ export class SqlDataSource extends DataSource {
     }
 
     async delete(context: Context): Promise<Result> {
-        if (this.getAccess(context).delete !== true) throw new Error(`${this.getFullName()}: access denied`);
-        const {key} = context.params;
+        if (this.getAccess(context).delete !== true)
+            throw new Error(`${this.getFullName()}: access denied`);
+        const { key } = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -235,10 +250,10 @@ export class SqlDataSource extends DataSource {
     }
 
     fillAttributes(response: any): void {
-        response.class    = this.getClassName();
-        response.name     = this.getAttr('name');
+        response.class = this.getClassName();
+        response.name = this.getAttr('name');
         response.database = this.getAttr('database');
-        response.table    = this.getAttr('table');
+        response.table = this.getAttr('table');
     }
 
     async fill(context: Context) {
@@ -262,14 +277,14 @@ export class SqlDataSource extends DataSource {
         //     if (!row) throw new Error(`${this.getFullName()}: RowForm single query must return row`);
         //     response.rows = [row];
         // } else {
-            try {
-                const [rows, count] = await this.select(context);
-                response.rows = rows;
-                response.count = count;
-            } catch (err) {
-                err.message = `select error of ${this.getFullName()}: ${err.message}`;
-                throw err;
-            }
+        try {
+            const [rows, count] = await this.select(context);
+            response.rows = rows;
+            response.count = count;
+        } catch (err) {
+            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            throw err;
+        }
         // }
 
         if (this.isDefaultOnRowForm() && response.rows[0]) {
@@ -312,7 +327,7 @@ export class SqlDataSource extends DataSource {
             select: true,
             insert: true,
             update: true,
-            delete: true
+            delete: true,
         };
     }
 

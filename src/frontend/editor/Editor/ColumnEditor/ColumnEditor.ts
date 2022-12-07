@@ -1,5 +1,5 @@
-import {Editor} from '../Editor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FrontHostApp } from '../../../common';
 
 export class ColumnEditor extends Editor {
     table: any;
@@ -12,14 +12,14 @@ export class ColumnEditor extends Editor {
         //console.log('ColumnEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-                attr    : name,
-                value   : value
-            }
+                table: this.table.getName(),
+                column: this.getName(),
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -28,17 +28,16 @@ export class ColumnEditor extends Editor {
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Column',
-            action    : 'delete',
-            params    : {
+            action: 'delete',
+            params: {
                 database: this.table.database.getName(),
-                table   : this.table.getName(),
-                column  : this.getName(),
-            }
+                table: this.table.getName(),
+                column: this.getName(),
+            },
         });
     }
     async delete() {
         await this.deleteData();
         this.parent.removeColumn(this);
     }
-
 }

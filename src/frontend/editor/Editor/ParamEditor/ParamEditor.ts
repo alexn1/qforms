@@ -1,5 +1,5 @@
-import {Editor} from '../Editor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FrontHostApp } from '../../../common';
 
 export class ParamEditor extends Editor {
     database: any;
@@ -12,13 +12,13 @@ export class ParamEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 database: this.database.getName(),
-                param   : this.getName(),
-                attr    : name,
-                value   : value
-            }
+                param: this.getName(),
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -27,11 +27,11 @@ export class ParamEditor extends Editor {
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Param',
-            action    : 'delete',
-            params    : {
+            action: 'delete',
+            params: {
                 database: this.database.getName(),
-                param   : this.getName()
-            }
+                param: this.getName(),
+            },
         });
     }
     async delete() {

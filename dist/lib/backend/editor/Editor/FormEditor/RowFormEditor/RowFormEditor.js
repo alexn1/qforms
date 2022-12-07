@@ -10,14 +10,10 @@ class RowFormEditor extends FormEditor_1.FormEditor {
             '@class': 'RowForm',
             '@attributes': Object.assign(Object.assign({}, FormEditor_1.FormEditor.createAttributes(params)), { newMode: params.newMode ? params.newMode : '', backOnly: params.backOnly ? params.backOnly : 'false', refreshButton: params.refreshButton || 'false' }),
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : []),
             ],
-            actions: [
-                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
-            ],
-            fields: [
-                ...(params.fields ? params.fields.map(Editor_1.Editor.createItemData) : [])
-            ],
+            actions: [...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])],
+            fields: [...(params.fields ? params.fields.map(Editor_1.Editor.createItemData) : [])],
         };
     }
 }

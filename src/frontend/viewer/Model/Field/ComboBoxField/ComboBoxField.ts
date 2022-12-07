@@ -1,8 +1,7 @@
-import {Field} from '../Field';
-import {Helper} from '../../../../common';
+import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class ComboBoxField extends Field {
-
     getDisplayValue(row) {
         let value = null;
         if (row[this.data.displayColumn]) {
@@ -15,7 +14,7 @@ export class ComboBoxField extends Field {
         } else {
             value = this.data.displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
-                return row.hasOwnProperty(name) ? (row[name] || '') : text;
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
             });
         }
         return value;
@@ -44,7 +43,9 @@ export class ComboBoxField extends Field {
     }
 
     findRowByRawValue(rawValue) {
-        return this.getComboBoxDataSource().getRows().find(row => row[this.data.valueColumn] === rawValue);
+        return this.getComboBoxDataSource()
+            .getRows()
+            .find(row => row[this.data.valueColumn] === rawValue);
     }
 }
 

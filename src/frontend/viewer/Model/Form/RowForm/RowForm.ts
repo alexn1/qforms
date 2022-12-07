@@ -1,4 +1,4 @@
-import {Form} from '../Form';
+import { Form } from '../Form';
 
 export class RowForm extends Form {
     fields: any;
@@ -12,7 +12,7 @@ export class RowForm extends Form {
 
     isNewMode() {
         const newMode = this.getAttr('newMode');
-        if (newMode ===  'true') return  true;
+        if (newMode === 'true') return true;
         if (newMode === 'false') return false;
         return this.getPage().isNewMode();
     }
@@ -58,11 +58,10 @@ export class RowForm extends Form {
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
             fields.forEach(name => {
-                this.getField(name).valueToPageParams(this.getRow())
+                this.getField(name).valueToPageParams(this.getRow());
             });
         }
     }
-
 }
 
 // @ts-ignore

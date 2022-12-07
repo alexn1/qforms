@@ -1,12 +1,11 @@
-import {FormWizard} from '../FormWizard';
+import { FormWizard } from '../FormWizard';
 
 export class PostgreSqlFormWizard extends FormWizard {
-
     getSingleQuery() {
         console.log('PostgreSqlFormWizard.getSingleQuery');
         const columns = this.getColumns().map(column => column.name);
         return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'
-            .replace('{table}',   this.tableName)
+            .replace('{table}', this.tableName)
             .replace('{columns}', columns.map(column => `    "${column}"`).join(',\n'));
     }
 

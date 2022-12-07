@@ -1,6 +1,6 @@
-import {Controller} from '../Controller';
-import {LoginView} from './LoginView';
-import {FrontHostApp} from '../../../common';
+import { Controller } from '../Controller';
+import { LoginView } from './LoginView';
+import { FrontHostApp } from '../../../common';
 
 export class LoginController extends Controller {
     frontHostApp: any;

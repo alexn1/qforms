@@ -1,4 +1,4 @@
-import {Helper} from '../../common';
+import { Helper } from '../../common';
 
 export class ModelController {
     model: any;
@@ -10,8 +10,7 @@ export class ModelController {
         this.parent = parent;
         this.view = null;
     }
-    init() {
-    }
+    init() {}
     getTitle() {
         return this.model.getName();
     }
@@ -22,8 +21,8 @@ export class ModelController {
     }
     getPropList() {
         return {
-            list   : this.model.data['@attributes'],
-            options: {}
+            list: this.model.data['@attributes'],
+            options: {},
         };
     }
     async setProperty(name, value): Promise<void> {

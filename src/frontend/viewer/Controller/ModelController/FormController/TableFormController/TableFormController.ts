@@ -1,6 +1,6 @@
-import {TableFormView} from './TableFormView';
-import {FormController} from '../FormController';
-import {DataSource} from '../../../../Model/DataSource/DataSource';
+import { TableFormView } from './TableFormView';
+import { FormController } from '../FormController';
+import { DataSource } from '../../../../Model/DataSource/DataSource';
 
 export class TableFormController extends FormController {
     state: any;
@@ -8,7 +8,7 @@ export class TableFormController extends FormController {
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            updated: Date.now()
+            updated: Date.now(),
         };
         this.grid = null;
     }
@@ -20,39 +20,45 @@ export class TableFormController extends FormController {
         // this.parent.on('hide', this.onHidePage);
         // this.parent.on('show', this.onShowPage);
         this.model.on('refresh', this.onModelRefresh);
-        this.model.on('update' , this.onModelUpdate);
-        this.model.on('delete' , this.onModelDelete);
-        this.model.on('insert' , this.onModelInsert);
+        this.model.on('update', this.onModelUpdate);
+        this.model.on('delete', this.onModelDelete);
+        this.model.on('insert', this.onModelInsert);
     }
     deinit() {
         // this.parent.off('hide', this.onHidePage);
         // this.parent.off('show', this.onShowPage);
         this.model.off('refresh', this.onModelRefresh);
-        this.model.off('update' , this.onModelUpdate);
-        this.model.off('delete' , this.onModelDelete);
-        this.model.off('insert' , this.onModelInsert);
+        this.model.off('update', this.onModelUpdate);
+        this.model.off('delete', this.onModelDelete);
+        this.model.off('insert', this.onModelInsert);
         super.deinit();
     }
     onGridCreate = grid => {
         this.grid = grid;
-    }
+    };
     onNewClick = async e => {
         console.log('TableFormController.onNewClick');
         await this.new();
-    }
+    };
     onRefreshClick = async e => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
         await this.model.refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
-    }
+    };
     onDeleteClick = async e => {
-        console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
-        const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
+        console.log(
+            'TableFormController.onDeleteClick',
+            this.model.getFullName(),
+            this.grid.getActiveRowKey(),
+        );
+        const result = await this.getApp().confirm({
+            message: this.model.getApp().getText().form.areYouSure,
+        });
         if (result) {
             await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
-    }
+    };
     onGridCellDblClick = async (row, key) => {
         // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
@@ -65,27 +71,33 @@ export class TableFormController extends FormController {
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
             case 'form':
-                if (this.getPage().getModel().isSelectMode()) {
+                if (
+                    this.getPage()
+                        .getModel()
+                        .isSelectMode()
+                ) {
                     await this.getPage().selectRow(key);
                 } else {
                     await this.edit(key);
                 }
-            break;
+                break;
         }
-    }
+    };
     onGridLinkClick = async key => {
         console.log('TableFormController.onGridLinkClick', key);
         await this.edit(key);
-    }
+    };
     onGridDeleteKeyDown = async (row, key) => {
         console.log('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
-            const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure});
+            const result = await this.getApp().confirm({
+                message: this.model.getApp().getText().form.areYouSure,
+            });
             if (result) {
                 await this.model.getDefaultDataSource().delete(key);
             }
         }
-    }
+    };
     /*onHidePage = async () => {
         this.grid.saveScroll();
     }*/
@@ -107,18 +119,18 @@ export class TableFormController extends FormController {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
             await this.openPage({
-                name   : this.model.getAttr('itemEditPage'),
+                name: this.model.getAttr('itemEditPage'),
                 newMode: true,
-                modal  : true
+                modal: true,
             });
         } else if (this.model.getAttr('newRowMode') === 'createform') {
             if (!this.model.getAttr('itemCreatePage')) {
                 throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
             await this.openPage({
-                name   : this.model.getAttr('itemCreatePage'),
+                name: this.model.getAttr('itemCreatePage'),
                 newMode: true,
-                modal  : true
+                modal: true,
             });
         } else if (this.model.getAttr('newRowMode') === 'oneclick editform') {
             if (!this.model.getAttr('itemEditPage')) {
@@ -131,12 +143,12 @@ export class TableFormController extends FormController {
             const table = this.model.getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name : this.model.getAttr('itemEditPage'),
+                name: this.model.getAttr('itemEditPage'),
                 // key  : key,
                 modal: true,
                 params: {
-                    ...DataSource.keyToParams(key)
-                }
+                    ...DataSource.keyToParams(key),
+                },
             });
         } else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
             if (!this.model.getAttr('itemCreatePage')) {
@@ -149,12 +161,12 @@ export class TableFormController extends FormController {
             const table = this.model.getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name : this.model.getAttr('itemCreatePage'),
+                name: this.model.getAttr('itemCreatePage'),
                 // key  : key,
                 modal: true,
                 params: {
-                    ...DataSource.keyToParams(key)
-                }
+                    ...DataSource.keyToParams(key),
+                },
             });
         }
     }
@@ -165,11 +177,11 @@ export class TableFormController extends FormController {
         }
         try {
             await this.openPage({
-                name : this.model.getAttr('itemEditPage'),
+                name: this.model.getAttr('itemEditPage'),
                 modal: true,
                 params: {
-                    ...DataSource.keyToParams(key)
-                }
+                    ...DataSource.keyToParams(key),
+                },
             });
         } catch (err) {
             // console.error(`${this.model.getFullName()}: edit form error handler:`, err);
@@ -183,7 +195,7 @@ export class TableFormController extends FormController {
         if (!this.view) return;
         this.invalidate();
         await this.rerender();
-    }
+    };
     onModelInsert = async e => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         if (!this.view) return;
@@ -194,7 +206,7 @@ export class TableFormController extends FormController {
         }
         this.invalidate();
         await this.rerender();
-    }
+    };
     onModelUpdate = async e => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
         if (!this.view) return;
@@ -210,7 +222,7 @@ export class TableFormController extends FormController {
         }
         this.invalidate();
         await this.rerender();
-    }
+    };
     onModelDelete = async e => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         if (!this.view) return;
@@ -223,13 +235,13 @@ export class TableFormController extends FormController {
         }
         this.invalidate();
         await this.rerender();
-    }
+    };
 
     onGridSelectionChange = async key => {
         // console.log('TableFormController.onGridSelectionChange', key);
         this.invalidate();
         await this.getPage().rerender();
-    }
+    };
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
@@ -238,21 +250,21 @@ export class TableFormController extends FormController {
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
         return !!this.grid && !!this.grid.getActiveRowKey();
-    }
+    };
     onFrameChanged = async value => {
         // console.log('TableFormController.onFrameChanged', parseInt(value));
         const frame = parseInt(value);
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();
         await this.rerender();
-    }
+    };
     onNextClick = async () => {
         console.log('TableFormController.onNextClick');
         const frame = this.model.getDefaultDataSource().getFrame() + 1;
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();
         await this.rerender();
-    }
+    };
 
     onPreviousClick = async () => {
         console.log('TableFormController.onPreviousClick');
@@ -260,7 +272,7 @@ export class TableFormController extends FormController {
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();
         this.rerender();
-    }
+    };
     canPrev() {
         return this.model.getDefaultDataSource().getFrame() > 1;
     }

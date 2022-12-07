@@ -1,6 +1,6 @@
-import {JsonFile} from './JsonFile';
-import {ApplicationEditor} from './editor/Editor/ApplicationEditor/ApplicationEditor';
-import {BaseModel} from './BaseModel';
+import { JsonFile } from './JsonFile';
+import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
+import { BaseModel } from './BaseModel';
 
 export class Converter {
     static async reformat(appFilePath) {

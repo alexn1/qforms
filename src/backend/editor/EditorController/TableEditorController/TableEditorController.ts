@@ -1,4 +1,4 @@
-import {EditorController} from '../EditorController';
+import { EditorController } from '../EditorController';
 
 export class TableEditorController extends EditorController {
     /*constructor(...args) {
@@ -36,5 +36,4 @@ export class TableEditorController extends EditorController {
         await appEditor.save();
         return 'ok';
     }
-
 }

@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormCheckBoxFieldView} from './RowFormCheckBoxFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormCheckBoxFieldView } from './RowFormCheckBoxFieldView';
 
 export class RowFormCheckBoxFieldController extends RowFormFieldController {
     getViewClass() {

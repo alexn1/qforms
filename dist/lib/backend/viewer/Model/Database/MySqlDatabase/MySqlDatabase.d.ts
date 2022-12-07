@@ -1,4 +1,4 @@
-import { Context } from "../../../../Context";
+import { Context } from '../../../../Context';
 import { Database } from '../Database';
 export declare class MySqlDatabase extends Database {
     pool: any;

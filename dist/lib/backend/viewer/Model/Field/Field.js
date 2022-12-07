@@ -70,9 +70,11 @@ class Field extends Model_1.Model {
     }
     getFullName() {
         return [
-            this.getForm().getPage().getName(),
+            this.getForm()
+                .getPage()
+                .getName(),
             this.getForm().getName(),
-            this.getName()
+            this.getName(),
         ].join('.');
     }
     getApp() {

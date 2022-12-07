@@ -28,10 +28,7 @@ class ViewerModule {
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
-        return [
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
-        ];
+        return [...this.hostApp.commonModule.css, ...this.css];
     }
     getScripts() {
         return [
@@ -40,12 +37,13 @@ class ViewerModule {
             '/lib/react/react.production.min.js',
             '/lib/react/react-dom.production.min.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     async handleViewerGet(context, application) {
         console.log('ViewerModule.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+        if (application.isAuthentication() &&
+            !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
             await this.loginGet(context, application);
         }
         else {
@@ -58,14 +56,8 @@ class ViewerModule {
                     application: application,
                     context: context,
                     response: response,
-                    links: [
-                        ...this.getLinks(),
-                        ...application.links
-                    ],
-                    scripts: [
-                        ...this.getScripts(),
-                        ...application.scripts
-                    ]
+                    links: [...this.getLinks(), ...application.links],
+                    scripts: [...this.getScripts(), ...application.scripts],
                 });
             }
             finally {
@@ -81,21 +73,15 @@ class ViewerModule {
             version: pkg.version,
             context: context,
             application: application,
-            links: [
-                ...this.getLinks(),
-                ...application.links
-            ],
-            scripts: [
-                ...this.getScripts(),
-                ...application.scripts
-            ],
+            links: [...this.getLinks(), ...application.links],
+            scripts: [...this.getScripts(), ...application.scripts],
             data: {
                 name: application.getName(),
                 text: application.getText(),
                 title: application.getTitle(context),
                 errMsg: null,
                 username: context.query.username,
-            }
+            },
         });
     }
     async handleViewerPost(context, application) {
@@ -104,7 +90,9 @@ class ViewerModule {
             await this.loginPost(context, application);
         }
         else {
-            if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+            if (application.isAuthentication() &&
+                !(context.getReq().session.user &&
+                    context.getReq().session.user[context.getRoute()])) {
                 throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
             }
             if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
@@ -147,14 +135,8 @@ class ViewerModule {
                     version: pkg.version,
                     context: context,
                     application: application,
-                    links: [
-                        ...this.getLinks(),
-                        ...application.links
-                    ],
-                    scripts: [
-                        ...this.getScripts(),
-                        ...application.scripts
-                    ],
+                    links: [...this.getLinks(), ...application.links],
+                    scripts: [...this.getScripts(), ...application.scripts],
                     data: {
                         name: application.getName(),
                         text: application.getText(),
@@ -162,7 +144,7 @@ class ViewerModule {
                         errMsg: application.getText().login.WrongUsernameOrPassword,
                         username: req.body.username,
                         password: req.body.password,
-                    }
+                    },
                 });
             }
         }

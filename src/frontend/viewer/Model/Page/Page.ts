@@ -1,6 +1,6 @@
-import {Model} from '../Model';
-import {FrontHostApp} from '../../../common';
-import {DataSource} from '../DataSource/DataSource';
+import { Model } from '../Model';
+import { FrontHostApp } from '../../../common';
+import { DataSource } from '../DataSource/DataSource';
 
 export class Page extends Model {
     options: any;
@@ -11,10 +11,10 @@ export class Page extends Model {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options     = options; // {id, modal, newMode, selectMode, params}
+        this.options = options; // {id, modal, newMode, selectMode, params}
         this.dataSources = [];
-        this.forms       = [];
-        this.params      = {};
+        this.forms = [];
+        this.params = {};
         if (options.onCreate) {
             options.onCreate(this);
         }
@@ -156,7 +156,7 @@ export class Page extends Model {
     onFormInsert(e) {
         console.log('Page.onFormInsert', e);
         for (const key of e.inserts) {
-            const keyParams = DataSource.keyToParams(key);// key params to page params
+            const keyParams = DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
                 this.setParam(name, keyParams[name]);
             }
@@ -165,12 +165,12 @@ export class Page extends Model {
     async rpc(name, params) {
         // console.log('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result =  await this.getApp().request({
-            uuid  : this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request({
+            uuid: this.getApp().getAttr('uuid'),
             action: 'rpc',
-            page  : this.getName(),
-            name  : name,
-            params: params
+            page: this.getName(),
+            name: name,
+            params: params,
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

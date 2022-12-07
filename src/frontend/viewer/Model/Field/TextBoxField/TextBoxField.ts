@@ -1,8 +1,6 @@
-import {Field} from '../Field';
+import { Field } from '../Field';
 
-export class TextBoxField extends Field {
-
-}
+export class TextBoxField extends Field {}
 
 // @ts-ignore
 window.TextBoxField = TextBoxField;

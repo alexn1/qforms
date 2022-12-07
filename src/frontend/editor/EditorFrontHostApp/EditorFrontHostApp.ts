@@ -1,11 +1,11 @@
-import {FrontHostApp} from '../../common/FrontHostApp';
-import {ApplicationEditor} from '../Editor/ApplicationEditor/ApplicationEditor';
-import {ApplicationController} from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
-import {EditorFrontHostAppView} from './EditorFrontHostAppView';
-import {PageLinkController} from '../ModelController/PageLinkController/PageLinkController';
-import {ModelController} from '../ModelController/ModelController';
-import {DocumentController} from '../ModelController/DocumentController/DocumentController';
-import {Helper} from '../../common';
+import { FrontHostApp } from '../../common/FrontHostApp';
+import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
+import { ApplicationController } from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
+import { EditorFrontHostAppView } from './EditorFrontHostAppView';
+import { PageLinkController } from '../ModelController/PageLinkController/PageLinkController';
+import { ModelController } from '../ModelController/ModelController';
+import { DocumentController } from '../ModelController/DocumentController/DocumentController';
+import { Helper } from '../../common';
 
 export class EditorFrontHostApp extends FrontHostApp {
     public static editorApp: any;
@@ -30,8 +30,8 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.view = null;
         this.actionList = null;
         this.treeWidget2 = null;
-        this.pg = null;                 // property grid
-        this.items = null;              // treeWidget2 items
+        this.pg = null; // property grid
+        this.items = null; // treeWidget2 items
         this.tabWidget = null;
         this.documents = [];
         this.modal = null;
@@ -51,18 +51,21 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.items = [applicationController];
 
         // view
-        this.view = Helper.createReactComponent(document.querySelector('.editor__root'), EditorFrontHostAppView, {ctrl: this});
+        this.view = Helper.createReactComponent(
+            document.querySelector('.editor__root'),
+            EditorFrontHostAppView,
+            { ctrl: this },
+        );
     }
 
-    deinit() {
-    }
+    deinit() {}
     onItemOpen2 = async item => {
         console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
         // console.log('parent:', item.view.parent);
         if (item instanceof PageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
-    }
+    };
     onItemSelect2 = async item => {
         console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof ModelController) {
@@ -75,7 +78,7 @@ export class EditorFrontHostApp extends FrontHostApp {
             this.clearActions();
             this.endEdit();
         }
-    }
+    };
 
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
@@ -87,34 +90,34 @@ export class EditorFrontHostApp extends FrontHostApp {
         const controller = this.treeWidget2.getSelectedItem();
         // console.log('controller', controller);
         controller.setProperty(name, value);
-    }
+    };
 
     beginEdit(obj, options) {
         console.log('EditorFrontHostApp.beginEdit', obj, options);
-        this.pg.setState({object: {obj, options}});
+        this.pg.setState({ object: { obj, options } });
     }
 
     endEdit() {
         console.log('EditorFrontHostApp.endEdit');
-        this.pg.setState({object: null});
+        this.pg.setState({ object: null });
     }
 
     static async fetchPageData(fileName) {
         console.log('EditorFrontHostApp.fetchPageData', fileName);
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'get',
-            params    : {fileName}
+            action: 'get',
+            params: { fileName },
         });
     }
 
     fillActions(item) {
         // console.log('EditorFrontHostApp.fillActions');
-        this.actionList.setState({item});
+        this.actionList.setState({ item });
     }
     clearActions() {
         // console.log('EditorFrontHostApp.clearActions');
-        this.actionList.setState({item: null});
+        this.actionList.setState({ item: null });
     }
 
     onItemDoubleClick2 = async item => {
@@ -122,7 +125,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         const controller = item instanceof PageLinkController ? item.pageController : item;
         if (!controller || !(controller instanceof DocumentController)) return;
         await this.openDocument(controller);
-    }
+    };
     async openDocument(controller) {
         console.log('EditorFrontHostApp.openDocument', controller.getTitle());
         let document = this.findDocument(controller);
@@ -155,7 +158,7 @@ export class EditorFrontHostApp extends FrontHostApp {
             this.tabWidget.state.active = this.documents.indexOf(activeDocument);
         }
         this.view.rerender();
-    }
+    };
     async openModal(modalController) {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
@@ -172,6 +175,5 @@ export class EditorFrontHostApp extends FrontHostApp {
         // console.log('item', item);
         const controller = item instanceof PageLinkController ? item.pageController : item;
         await controller.doAction(actionName);
-    }
+    };
 }
-

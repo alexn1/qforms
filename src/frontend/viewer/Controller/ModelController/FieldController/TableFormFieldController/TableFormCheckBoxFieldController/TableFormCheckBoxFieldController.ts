@@ -1,5 +1,5 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormCheckBoxFieldView} from './TableFormCheckBoxFieldView';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormCheckBoxFieldView } from './TableFormCheckBoxFieldView';
 
 export class TableFormCheckBoxFieldController extends TableFormFieldController {
     getViewClass() {

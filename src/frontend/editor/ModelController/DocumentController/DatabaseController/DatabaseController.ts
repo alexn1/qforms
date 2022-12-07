@@ -1,10 +1,10 @@
-import {DocumentController} from '../DocumentController';
-import {ParamController} from '../../ParamController/ParamController';
-import {TableController} from '../TableController/TableController';
-import {DatabaseView} from './DatabaseView';
-import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewParamController} from '../../../ModalController/NewParamController/NewParamController';
-import {NewTableController} from '../../../ModalController/NewTableController/NewTableController';
+import { DocumentController } from '../DocumentController';
+import { ParamController } from '../../ParamController/ParamController';
+import { TableController } from '../TableController/TableController';
+import { DatabaseView } from './DatabaseView';
+import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewParamController } from '../../../ModalController/NewParamController/NewParamController';
+import { NewTableController } from '../../../ModalController/NewTableController/NewTableController';
 
 export class DatabaseController extends DocumentController {
     tableName: any;
@@ -16,17 +16,17 @@ export class DatabaseController extends DocumentController {
         super(model, parent);
         this.tableName = null;
         this.tableInfo = null;
-        this.params  = [];
+        this.params = [];
         this.tables = [];
         this.items = [
             {
                 getTitle: () => 'Params',
-                items: this.params
+                items: this.params,
             },
             {
                 getTitle: () => 'Tables',
-                items: this.tables
-            }
+                items: this.tables,
+            },
         ];
     }
     getTitle() {
@@ -35,7 +35,7 @@ export class DatabaseController extends DocumentController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'purple'
+            color: 'purple',
         };
     }
     init() {
@@ -68,11 +68,11 @@ export class DatabaseController extends DocumentController {
     }
     getActions() {
         return [
-            {'action': 'newParam', 'caption': 'New Param'},
-            {'action': 'newTable', 'caption': 'New Table'},
-            {'action': 'moveUp'  , 'caption': 'Move Up'  },
-            {'action': 'moveDown', 'caption': 'Move Down'},
-            {'action': 'delete'  , 'caption': 'Delete'   }
+            { action: 'newParam', caption: 'New Param' },
+            { action: 'newTable', caption: 'New Table' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -101,31 +101,41 @@ export class DatabaseController extends DocumentController {
         }
     }
     async actionNewParam() {
-        await EditorFrontHostApp.editorApp.openModal(new NewParamController({onCreate: async values => {
-            const param = await this.model.newParam(values.name);
-            const paramController = this.createParam(param);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
-            paramController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewParamController({
+                onCreate: async values => {
+                    const param = await this.model.newParam(values.name);
+                    const paramController = this.createParam(param);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
+                    paramController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
     async actionNewTable() {
-        await EditorFrontHostApp.editorApp.openModal(new NewTableController({onCreate: async values => {
-            const table = await this.model.newTable({name: values.name});
-            const tableController = this.createTable2(table);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
-            tableController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewTableController({
+                onCreate: async values => {
+                    const table = await this.model.newTable({ name: values.name });
+                    const tableController = this.createTable2(table);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
+                    tableController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         // console.log('data:', result.data);
         // @ts-ignore
-        document.treeWidgetItems = result.data.tables.sort().map(tableName => ({getTitle: () => tableName}))
+        document.treeWidgetItems = result.data.tables
+            .sort()
+            .map(tableName => ({ getTitle: () => tableName }));
         return document;
     }
     onTableSelect2 = async item => {
@@ -136,26 +146,26 @@ export class DatabaseController extends DocumentController {
         this.tableInfo = data.tableInfo;
         this.document.view.rerender();
         // console.log('tableInfo:', this.tableInfo);
-    }
+    };
     onCreateTableClick = e => {
         console.log('DatabaseController.onCreateTableClick');
         this.newTableAction(this.tableName, this.tableInfo);
-    }
+    };
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
         const table = await this.model.newTable({
-            class  : 'Table',
-            name   : tableName,
+            class: 'Table',
+            name: tableName,
             columns: tableInfo.map(column => ({
-                class   : 'Column',
-                name    : column.name,
-                caption : column.name,
-                type    : column.type,
-                dbType  : column.dbType,
-                key     : column.key.toString(),
-                auto    : column.auto.toString(),
+                class: 'Column',
+                name: column.name,
+                caption: column.name,
+                type: column.type,
+                dbType: column.dbType,
+                key: column.key.toString(),
+                auto: column.auto.toString(),
                 nullable: column.nullable.toString(),
-            }))
+            })),
         });
         const tableController = this.createTable2(table);
         await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);

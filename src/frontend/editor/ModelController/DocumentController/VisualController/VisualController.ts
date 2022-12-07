@@ -1,8 +1,8 @@
-import {DocumentController} from '../DocumentController';
-import {DataSourceController} from '../DataSourceController/DataSourceController';
-import {ActionController} from '../../ActionController/ActionController';
-import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewActionController} from '../../../ModalController/NewActionController/NewActionController';
+import { DocumentController } from '../DocumentController';
+import { DataSourceController } from '../DataSourceController/DataSourceController';
+import { ActionController } from '../../ActionController/ActionController';
+import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewActionController } from '../../../ModalController/NewActionController/NewActionController';
 
 export class VisualController extends DocumentController {
     data: any;
@@ -21,7 +21,7 @@ export class VisualController extends DocumentController {
         return document;
     }
     async onControllerSave(value) {
-        console.log('ApplicationController.onControllerSave'/*, value*/);
+        console.log('ApplicationController.onControllerSave' /*, value*/);
         const result = await this.model.saveController(value);
         this.data.js = result.js;
         this.document.view.rerender();
@@ -31,22 +31,22 @@ export class VisualController extends DocumentController {
         const data = await this.model.createController();
         this.data.js = data.js;
         this.document.view.rerender();
-    }
+    };
     onCreateCustomView = async e => {
         console.log('VisualController.onCreateCustomView');
         const data = await this.model.createView();
         this.data.jsx = data.jsx;
         this.document.view.rerender();
-    }
+    };
     onCreateCustomStyle = async e => {
         console.log('VisualController.onCreateCustomStyle');
         const data = await this.model.createStyle();
         this.data.less = data.less;
         this.document.view.rerender();
-    }
+    };
     onCreateModelBack = async e => {
         const data = await this.model.createModelBackJs();
-    }
+    };
     createDataSource(model) {
         const dataSource = new DataSourceController(model, this);
         dataSource.init();
@@ -73,20 +73,24 @@ export class VisualController extends DocumentController {
     }
     async actionNewAction() {
         console.log('VisualController.actionNewAction');
-        await EditorFrontHostApp.editorApp.openModal(new NewActionController({onCreate: async values => {
-            const action = await this.model.newAction({
-                name   : values.name,
-                caption: values.caption
-            });
-            const actionController = this.createAction(action);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
-            actionController.view.parent.open();
-            if (this.pageLinkController) {
-                this.pageLinkController.view.rerender();
-            } else {
-                this.view.rerender();
-            }
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewActionController({
+                onCreate: async values => {
+                    const action = await this.model.newAction({
+                        name: values.name,
+                        caption: values.caption,
+                    });
+                    const actionController = this.createAction(action);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
+                    actionController.view.parent.open();
+                    if (this.pageLinkController) {
+                        this.pageLinkController.view.rerender();
+                    } else {
+                        this.view.rerender();
+                    }
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 }

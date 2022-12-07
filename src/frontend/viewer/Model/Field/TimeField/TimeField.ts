@@ -1,8 +1,6 @@
-import {Field} from '../Field';
+import { Field } from '../Field';
 
-export class TimeField extends Field {
-
-}
+export class TimeField extends Field {}
 
 // @ts-ignore
 window.TimeField = TimeField;

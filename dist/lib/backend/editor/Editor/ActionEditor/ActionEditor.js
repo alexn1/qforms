@@ -10,8 +10,8 @@ class ActionEditor extends Editor_1.Editor {
             '@class': 'Action',
             '@attributes': {
                 name: params.name,
-                caption: params.caption || params.name
-            }
+                caption: params.caption || params.name,
+            },
         };
     }
     getColName() {

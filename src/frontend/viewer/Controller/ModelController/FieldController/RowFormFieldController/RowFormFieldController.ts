@@ -1,16 +1,16 @@
 import React from 'react';
-import {FieldController} from '../FieldController';
-import {ApplicationController} from '../../ApplicationController/ApplicationController';
+import { FieldController } from '../FieldController';
+import { ApplicationController } from '../../ApplicationController/ApplicationController';
 
 export class RowFormFieldController extends FieldController {
     state: any;
     constructor(model, parent) {
         super(model, parent);
         this.state = {
-            value     : null,
+            value: null,
             parseError: null,
-            error     : null,
-            changed   : false,
+            error: null,
+            changed: false,
         };
     }
     init() {
@@ -42,7 +42,12 @@ export class RowFormFieldController extends FieldController {
         this.onChange(widgetValue, false);
     }
     onChange = async (widgetValue, fireEvent = true) => {
-        console.log('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
+        console.log(
+            'RowFormFieldController.onChange',
+            JSON.stringify(
+                typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue,
+            ),
+        );
         // this._onChange(widgetValue);
 
         this.resetErrors();
@@ -70,19 +75,23 @@ export class RowFormFieldController extends FieldController {
         // event
         if (fireEvent) {
             try {
-                this.emit('change', {value: widgetValue});
+                this.emit('change', { value: widgetValue });
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
+            this.parent.onFieldChange({ source: this });
         }
-    }
+    };
     onBlur = (widgetValue, fireEvent = true) => {
-        console.log('RowFormFieldController.onBlur', this.model.getFullName(), JSON.stringify(widgetValue));
+        console.log(
+            'RowFormFieldController.onBlur',
+            this.model.getFullName(),
+            JSON.stringify(widgetValue),
+        );
         if (!this.isEditable()) return;
 
         // this.resetErrors();
-        this.rerender();    // to clear field focus class
+        this.rerender(); // to clear field focus class
 
         if (!this.isValidateOnBlur()) return;
 
@@ -108,13 +117,13 @@ export class RowFormFieldController extends FieldController {
         // event
         if (fireEvent) {
             try {
-                this.emit('change', {value: widgetValue});
+                this.emit('change', { value: widgetValue });
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
+            this.parent.onFieldChange({ source: this });
         }
-    }
+    };
     getValueForWidget() {
         const value = this.getValue();
         // console.log('value:', this.model.getFullName(), value, typeof value);
@@ -122,7 +131,10 @@ export class RowFormFieldController extends FieldController {
     }
     setValueFromWidget(widgetValue) {
         // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof widgetValue, widgetValue);
-        if (typeof widgetValue !== 'string') throw new Error(`${this.model.getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
+        if (typeof widgetValue !== 'string')
+            throw new Error(
+                `${this.model.getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`,
+            );
         const value = this.stringToValue(widgetValue);
         // console.log('value:', value);
         this.setValue(value);
@@ -181,7 +193,9 @@ export class RowFormFieldController extends FieldController {
         return null;
     }
     getNullErrorText() {
-        return this.getModel().getApp().getText().form.required;
+        return this.getModel()
+            .getApp()
+            .getText().form.required;
     }
     isEditable() {
         return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
@@ -193,23 +207,33 @@ export class RowFormFieldController extends FieldController {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
         if (this.isParseError()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: parse error: ${this.getErrorMessage()}`);
+            console.log(
+                `FIELD CHANGED ${this.model.getFullName()}: parse error: ${this.getErrorMessage()}`,
+            );
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.getErrorMessage()}`);
+            console.log(
+                `FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.getErrorMessage()}`,
+            );
             return true;
         }
         if (this.model.hasColumn()) {
             const fieldRawValue = this.model.valueToRaw(this.getValue());
             const dsRawValue = this.model.getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-                console.log(`FIELD CHANGED ${this.model.getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
+                console.log(
+                    `FIELD CHANGED ${this.model.getFullName()}`,
+                    JSON.stringify(dsRawValue),
+                    JSON.stringify(fieldRawValue),
+                );
                 return true;
             }
             if (this.model.isChanged(row)) {
                 let original = row[this.model.getAttr('column')];
-                let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
+                let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[
+                    this.model.getAttr('column')
+                ];
                 if (original) original = original.substr(0, 100);
                 if (modified) modified = modified.substr(0, 100);
                 console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
@@ -265,13 +289,13 @@ export class RowFormFieldController extends FieldController {
         // event
         if (fireEvent) {
             try {
-                this.emit('change', {value});
+                this.emit('change', { value });
             } catch (err) {
                 console.error('unhandled change event error:', this.getModel().getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
+            this.parent.onFieldChange({ source: this });
         }
-    }
+    };
 }
 
 // @ts-ignore

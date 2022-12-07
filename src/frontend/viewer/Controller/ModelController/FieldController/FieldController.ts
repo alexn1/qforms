@@ -1,5 +1,5 @@
-import {ModelController} from '../ModelController';
-import {FrontHostApp} from '../../../../common';
+import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../../common';
 
 export class FieldController extends ModelController {
     /*constructor(model, parent) {
@@ -9,7 +9,9 @@ export class FieldController extends ModelController {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const page = model.getPage();
         const form = model.getForm();
-        const CustomClass = FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
+        const CustomClass = FrontHostApp.getClassByName(
+            `${page.getName()}${form.getName()}${model.getName()}FieldController`,
+        );
         const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
         const GeneralClass = FrontHostApp.getClassByName(generalClassName);
         if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
@@ -30,7 +32,10 @@ export class FieldController extends ModelController {
                 return value.toString();
             case 'undefined':
                 return '';
-            default: throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+            default:
+                throw new Error(
+                    `${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`,
+                );
         }
     }
     stringToValue(stringValue) {
@@ -44,11 +49,23 @@ export class FieldController extends ModelController {
             return JSON.parse(stringValue);
         } else if (fieldType === 'date') {
             const date = new Date(stringValue);
-            if (date.toString() === 'Invalid Date') throw new Error(`${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`);
+            if (date.toString() === 'Invalid Date')
+                throw new Error(
+                    `${
+                        this.getApp()
+                            .getModel()
+                            .getText().error.invalidDate
+                    }: ${stringValue}`,
+                );
             return date;
         } else if (fieldType === 'number') {
             const num = Number(stringValue);
-            if (isNaN(num)) throw new Error(this.getApp().getModel().getText().error.notNumber);
+            if (isNaN(num))
+                throw new Error(
+                    this.getApp()
+                        .getModel()
+                        .getText().error.notNumber,
+                );
             return num;
         }
         return stringValue;

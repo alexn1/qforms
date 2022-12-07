@@ -1,12 +1,12 @@
 const path = require('path');
 
-import {Model} from '../Model';
-import {DataSource} from '../DataSource/DataSource';
-import {Action} from '../Action/Action';
-import {Application} from '../Application/Application';
-import {Form} from '../Form/Form';
+import { Model } from '../Model';
+import { DataSource } from '../DataSource/DataSource';
+import { Action } from '../Action/Action';
+import { Application } from '../Application/Application';
+import { Form } from '../Form/Form';
 // import {Context} from '../../../Context';
-import {MyError} from '../../../MyError';
+import { MyError } from '../../../MyError';
 
 export class Page extends Model {
     dataSources: DataSource[];
@@ -16,8 +16,8 @@ export class Page extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
-        this.actions     = [];
-        this.forms       = [];
+        this.actions = [];
+        this.forms = [];
     }
 
     async init(context): Promise<void> {
@@ -31,9 +31,9 @@ export class Page extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.name      = this.getAttr('name');
-        response.caption   = this.getAttr('caption');
-        response.cssBlock  = this.getAttr('cssBlock');
+        response.name = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+        response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
     }
 
@@ -52,7 +52,7 @@ export class Page extends Model {
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
-            data   : {method: `${this.constructor.name}.rpc`},
+            data: { method: `${this.constructor.name}.rpc` },
             context,
         });
     }

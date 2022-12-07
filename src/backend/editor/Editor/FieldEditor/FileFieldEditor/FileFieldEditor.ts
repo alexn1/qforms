@@ -1,16 +1,14 @@
-import {FieldEditor} from '../FieldEditor';
+import { FieldEditor } from '../FieldEditor';
 
 export class FileFieldEditor extends FieldEditor {
-
     static createData(params) {
         return {
-            '@class'     : 'FileField',
+            '@class': 'FileField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
-                readOnly    : params.readOnly     ? params.readOnly     :        'false',
-                notNull     : params.notNull      ? params.notNull      :        'false',
-            }
+                readOnly: params.readOnly ? params.readOnly : 'false',
+                notNull: params.notNull ? params.notNull : 'false',
+            },
         };
     }
-
 }

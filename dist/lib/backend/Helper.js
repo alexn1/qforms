@@ -343,8 +343,7 @@ class Helper {
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
-                .exec(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
             if (a)
                 return new Date(value);
         }
@@ -445,14 +444,14 @@ class Helper {
         }, {});
     }
     static getWebSocketIP(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-ip'] ?
-            webSocket.upgradeReq.headers['x-real-ip'] :
-            webSocket.upgradeReq.socket.remoteAddress;
+        return webSocket.upgradeReq.headers['x-real-ip']
+            ? webSocket.upgradeReq.headers['x-real-ip']
+            : webSocket.upgradeReq.socket.remoteAddress;
     }
     static getWebSocketPort(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-port'] ?
-            webSocket.upgradeReq.headers['x-real-port'] :
-            webSocket.upgradeReq.socket.remotePort;
+        return webSocket.upgradeReq.headers['x-real-port']
+            ? webSocket.upgradeReq.headers['x-real-port']
+            : webSocket.upgradeReq.socket.remotePort;
     }
     static templateArray(arr) {
         return arr.map(item => {

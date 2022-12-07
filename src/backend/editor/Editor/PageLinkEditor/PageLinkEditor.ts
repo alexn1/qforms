@@ -1,16 +1,16 @@
-import {Editor} from '../Editor';
+import { Editor } from '../Editor';
 
 export class PageLinkEditor extends Editor {
     static createData(params) {
         return {
-            '@class'     : 'PageLink',
+            '@class': 'PageLink',
             '@attributes': {
-                name    : params.name,
+                name: params.name,
                 fileName: params.fileName || `pages/${params.name}/${params.name}.json`,
-                menu    : params.menu     || (params.startup === 'true' ? 'Menu' : ''),
-                startup : params.startup  || 'false'
-            }
-        }
+                menu: params.menu || (params.startup === 'true' ? 'Menu' : ''),
+                startup: params.startup || 'false',
+            },
+        };
     }
     getColName() {
         return 'pageLinks';

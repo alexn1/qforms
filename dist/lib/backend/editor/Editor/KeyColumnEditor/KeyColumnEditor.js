@@ -9,8 +9,8 @@ class KeyColumnEditor extends Editor_1.Editor {
         return {
             '@class': 'KeyColumn',
             '@attributes': {
-                'name': params.name
-            }
+                name: params.name,
+            },
         };
     }
     getColName() {

@@ -245,9 +245,7 @@ class BackHostApp {
                     originalUrl: req.originalUrl,
                     uri: req.params['0'],
                     platformVersion: pkg.version,
-                    appVersion: route
-                        ? this.applications[route].getVersion()
-                        : null,
+                    appVersion: route ? this.applications[route].getVersion() : null,
                     route: route,
                     body: req.body,
                     status: err.status || null,
@@ -258,10 +256,7 @@ class BackHostApp {
                 await BackHostApp.createLog(this.logPool, {
                     type: 'error',
                     source: 'server',
-                    ip: req
-                        ? req.headers['x-forwarded-for'] ||
-                            req.connection.remoteAddress
-                        : null,
+                    ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                     message: err.message,
                     stack: err.stack.toString(),
                     data: data ? JSON.stringify(data, null, 4) : null,
@@ -276,8 +271,7 @@ class BackHostApp {
                         type: 'error',
                         source: 'server',
                         ip: req
-                            ? req.headers['x-forwarded-for'] ||
-                                req.connection.remoteAddress
+                            ? req.headers['x-forwarded-for'] || req.connection.remoteAddress
                             : null,
                         message: err.message,
                         stack: err.stack.toString(),
@@ -319,8 +313,7 @@ class BackHostApp {
             await BackHostApp.createLog(this.logPool, {
                 type: 'log',
                 source: 'server',
-                ip: req.headers['x-forwarded-for'] ||
-                    req.connection.remoteAddress,
+                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
                 message: message,
                 data: JSON.stringify(req.body, null, 4),
             });
@@ -585,9 +578,7 @@ class BackHostApp {
                 message: this.isDevelopment() || error.status === 404
                     ? error.message
                     : 'Internal Software Error',
-                stack: this.isDevelopment() && error.status !== 404
-                    ? error.stack
-                    : null,
+                stack: this.isDevelopment() && error.status !== 404 ? error.stack : null,
             });
         }
         await this.logError(error, req);
@@ -717,9 +708,7 @@ class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
-                    req.query[name] = query[name]
-                        ? query[name]
-                        : req.params[name];
+                    req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }
             await this[cb](req, res, next);
@@ -744,8 +733,7 @@ class BackHostApp {
     broadcastResult(sourceApplication, context, result) {
         console.log('BackHostApp.broadcastResult');
         for (const route in this.applications) {
-            if (context.getRoute() === route &&
-                this.applications[route] === sourceApplication) {
+            if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
             }
             else {

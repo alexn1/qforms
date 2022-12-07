@@ -1,5 +1,5 @@
-import {Controller} from '../Controller';
-import {AlertView} from './AlertView';
+import { Controller } from '../Controller';
+import { AlertView } from './AlertView';
 
 export class AlertController extends Controller {
     options: any;
@@ -17,13 +17,13 @@ export class AlertController extends Controller {
     }
     onOkButtonClick = async e => {
         this.close(true);
-    }
+    };
     onCloseClick = async e => {
         this.close(false);
-    }
+    };
     onKeyDown = async e => {
         if (e.key === 'Escape') {
             this.close(false);
         }
-    }
+    };
 }

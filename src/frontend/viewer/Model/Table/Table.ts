@@ -1,5 +1,5 @@
-import {Model} from '../Model';
-import {Column} from '../Column/Column';
+import { Model } from '../Model';
+import { Column } from '../Column/Column';
 
 export class Table extends Model {
     columns: any[];
@@ -27,23 +27,23 @@ export class Table extends Model {
     emitResult(result, source = null) {
         console.log('Table.emitResult');
         return [
-            ...(result.insert  ? [this.emitInsert(source, result.insert)] : []),
-            ...(result.update  ? [this.emitUpdate(source, result.update)] : []),
-            ...(result.delete  ? [this.emitDelete(source, result.delete)] : []),
-            ...(result.refresh ? [this.emitRefresh(source              )] : [])
+            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete ? [this.emitDelete(source, result.delete)] : []),
+            ...(result.refresh ? [this.emitRefresh(source)] : []),
         ];
     }
     emitInsert(source, inserts) {
-        return this.emit('insert', {source, inserts});
+        return this.emit('insert', { source, inserts });
     }
     emitUpdate(source, updates) {
-        return this.emit('update', {source, updates});
+        return this.emit('update', { source, updates });
     }
     emitDelete(source, deletes) {
-        return this.emit('delete', {source, deletes});
+        return this.emit('delete', { source, deletes });
     }
     emitRefresh(source) {
-        return this.emit('refresh', {source});
+        return this.emit('refresh', { source });
     }
 }
 

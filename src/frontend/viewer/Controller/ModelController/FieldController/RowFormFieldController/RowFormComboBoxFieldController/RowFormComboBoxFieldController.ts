@@ -1,7 +1,7 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormComboBoxFieldView} from './RowFormComboBoxFieldView';
-import {ApplicationController} from '../../../ApplicationController/ApplicationController';
-import {Helper} from  '../../../../../../common';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
+import { ApplicationController } from '../../../ApplicationController/ApplicationController';
+import { Helper } from '../../../../../../common';
 
 export class RowFormComboBoxFieldController extends RowFormFieldController {
     init() {
@@ -26,7 +26,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
         try {
             return this.getRows().map(row => ({
                 value: this.valueToString(this.getModel().getValueValue(row)),
-                title: this.getModel().getDisplayValue(row)
+                title: this.getModel().getDisplayValue(row),
             }));
         } catch (err) {
             err.message = `${this.getModel().getFullName()}: ${err.message}`;
@@ -50,11 +50,11 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
             await this.openPage({
                 name: itemEditPage,
                 params: {
-                    key: value
-                }
+                    key: value,
+                },
             });
         }
-    }
+    };
     onCreateButtonClick = async e => {
         console.log('RowFormComboBoxFieldController.onCreateButtonClick');
         const newRowMode = this.getModel().getAttr('newRowMode');
@@ -73,7 +73,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
         // page
         const pc = await this.openPage({
             name: createPageName,
-            newMode: true
+            newMode: true,
         });
 
         // form
@@ -84,20 +84,20 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
             const [id] = Helper.decodeValue(key);
             // console.log('id:', id);
             await this.onChange(id.toString());
-        }
+        };
         form.on('insert', onInsert);
-    }
+    };
     onListInsert = async e => {
         console.log('RowFormComboBoxFieldController.onListInsert');
         await this.rerender();
-    }
+    };
     onListUpdate = async e => {
         // console.log('RowFormComboBoxFieldController.onListUpdate');
         await this.rerender();
-    }
+    };
     onListDelete = async e => {
         await this.rerender();
-    }
+    };
     onItemSelect = async e => {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {
@@ -105,10 +105,10 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
             const id = this.getValue();
             const selectedKey = id ? JSON.stringify([id]) : null;
             await this.openPage({
-                name       : this.getModel().getAttr('itemSelectPage'),
-                selectMode : true,
+                name: this.getModel().getAttr('itemSelectPage'),
+                selectMode: true,
                 selectedKey: selectedKey,
-                onSelect   : async key => {
+                onSelect: async key => {
                     if (key) {
                         const [id] = Helper.decodeValue(key);
                         // console.log('id:', id);
@@ -120,10 +120,10 @@ export class RowFormComboBoxFieldController extends RowFormFieldController {
                             await this.getView().onChange('');
                         }
                     }
-                }
+                },
             });
         }
-    }
+    };
 }
 
 // @ts-ignore

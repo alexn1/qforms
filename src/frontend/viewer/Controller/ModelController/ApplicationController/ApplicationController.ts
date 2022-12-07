@@ -1,9 +1,9 @@
-import {ModelController} from '../ModelController';
-import {Page} from '../../../Model/Page/Page';
-import {ApplicationView} from './ApplicationView';
-import {WebSocketClient} from '../../../WebSocketClient';
-import {FrontHostApp, Search, Helper} from '../../../../common';
-import {PageController} from '../PageController/PageController';
+import { ModelController } from '../ModelController';
+import { Page } from '../../../Model/Page/Page';
+import { ApplicationView } from './ApplicationView';
+import { WebSocketClient } from '../../../WebSocketClient';
+import { FrontHostApp, Search, Helper } from '../../../../common';
+import { PageController } from '../PageController/PageController';
 
 export class ApplicationController extends ModelController {
     frontHostApp: any;
@@ -20,9 +20,9 @@ export class ApplicationController extends ModelController {
         super(model, null);
         this.frontHostApp = frontHostApp;
         this.lastId = 0;
-        this.activePage = null;     // active non modal page
+        this.activePage = null; // active non modal page
         this.modals = [];
-        this.statusbar  = null;
+        this.statusbar = null;
         this.homePageName = null;
         this.webSocketClient = null;
     }
@@ -41,10 +41,12 @@ export class ApplicationController extends ModelController {
         // this.model.on('logout' , this.onLogout);
         this.model.on('request', this.onRequest);
         const pageData = this.model.data.pages[0];
-        this.activePage = pageData ? this.createPage(pageData, {
-            modal : false,
-            params: this.getGlobalParams()
-        }) : null;
+        this.activePage = pageData
+            ? this.createPage(pageData, {
+                  modal: false,
+                  params: this.getGlobalParams(),
+              })
+            : null;
         document.title = this.getTitle();
         document.documentElement.classList.add(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
@@ -60,7 +62,7 @@ export class ApplicationController extends ModelController {
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {ctrl: this});
+        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), { ctrl: this });
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
@@ -72,10 +74,13 @@ export class ApplicationController extends ModelController {
         }
         // console.log('e.remoteAppVersion', e.remoteAppVersion);
         // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
-        if (this.getModel().getData().versions.app && this.getModel().getData().versions.app !== e.remoteAppVersion) {
+        if (
+            this.getModel().getData().versions.app &&
+            this.getModel().getData().versions.app !== e.remoteAppVersion
+        ) {
             this.createVersionNotificationIfNotExists();
         }
-    }
+    };
     createVersionNotificationIfNotExists() {
         // console.log('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
@@ -127,11 +132,11 @@ export class ApplicationController extends ModelController {
             return pageController;
         }
 
-        const {page: pageData} = await this.model.request({
-            action : 'page',
-            page   : options.name,
+        const { page: pageData } = await this.model.request({
+            action: 'page',
+            page: options.name,
             newMode: !!options.newMode,
-            params : options.params || {}
+            params: options.params || {},
         });
 
         // modal by default
@@ -178,7 +183,11 @@ export class ApplicationController extends ModelController {
         document.title = this.getTitle();
     }
     findPageControllerByPageNameAndKey(pageName, key) {
-        if (this.activePage && this.activePage.model.getName() === pageName && this.activePage.model.getKey() === key) {
+        if (
+            this.activePage &&
+            this.activePage.model.getName() === pageName &&
+            this.activePage.model.getKey() === key
+        ) {
             return this.activePage;
         }
         return null;
@@ -193,7 +202,7 @@ export class ApplicationController extends ModelController {
         } else if (this.activePage === pageController) {
             this.activePage = null;
             document.title = '';
-        } else  {
+        } else {
             throw new Error('page not found');
         }
         await this.rerender();
@@ -207,42 +216,48 @@ export class ApplicationController extends ModelController {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.model.data.menu ? Object.keys(this.model.data.menu).map(key => ({
-                name : key,
-                title: key,
-                items: this.model.data.menu[key].map(item => ({
-                    type : item.type,
-                    name : item.page || item.action,
-                    title: item.caption
-                }))
-            })) : []),
+            ...(this.model.data.menu
+                ? Object.keys(this.model.data.menu).map(key => ({
+                      name: key,
+                      title: key,
+                      items: this.model.data.menu[key].map(item => ({
+                          type: item.type,
+                          name: item.page || item.action,
+                          title: item.caption,
+                      })),
+                  }))
+                : []),
             // user
-            ...(this.model.getUser() ? [{
-                name : 'user',
-                title: `${this.model.getDomain()}/${this.model.getUser().login}`,
-                items: [
-                    {
-                        type : 'custom',
-                        name : 'logout',
-                        title: 'Logout'
-                    }
-                ]
-            }] : [])
+            ...(this.model.getUser()
+                ? [
+                      {
+                          name: 'user',
+                          title: `${this.model.getDomain()}/${this.model.getUser().login}`,
+                          items: [
+                              {
+                                  type: 'custom',
+                                  name: 'logout',
+                                  title: 'Logout',
+                              },
+                          ],
+                      },
+                  ]
+                : []),
         ];
     }
     onStatusbarCreate = statusbar => {
         this.statusbar = statusbar;
-    }
+    };
     onLogout = async () => {
         console.log('ApplicationController.onLogout');
-        const result = await this.model.request({action: 'logout'});
+        const result = await this.model.request({ action: 'logout' });
         location.href = this.getRootPath();
-    }
+    };
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
-            await this.openPage({name: name, modal: false});
-            history.pushState({pageName: name}, '', PageController.createLink({page: name}));
+            await this.openPage({ name: name, modal: false });
+            history.pushState({ pageName: name }, '', PageController.createLink({ page: name }));
         } else if (type === 'action') {
             try {
                 const result = await this.onActionClick(name);
@@ -251,14 +266,14 @@ export class ApplicationController extends ModelController {
                 }
             } catch (err) {
                 console.error(err);
-                await this.alert({message: err.message});
+                await this.alert({ message: err.message });
             }
         } else if (type === 'custom' && name === 'logout') {
             await this.onLogout();
         } else {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
-    }
+    };
     /*getFocusCtrl() {
         if (this.modals.length > 0) {
             return this.modals[this.modals.length - 1];
@@ -274,8 +289,8 @@ export class ApplicationController extends ModelController {
     async onWindowPopState(e) {
         console.log('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
-            name : e.state ? e.state.pageName : this.homePageName,
-            modal: false
+            name: e.state ? e.state.pageName : this.homePageName,
+            modal: false,
         });
     }
     getTitle() {
@@ -287,7 +302,9 @@ export class ApplicationController extends ModelController {
     }
     invalidate() {
         if (this.activePage) this.activePage.invalidate();
-        this.modals.filter(ctrl => ctrl instanceof PageController).forEach(page => page.invalidate());
+        this.modals
+            .filter(ctrl => ctrl instanceof PageController)
+            .forEach(page => page.invalidate());
     }
     async alert(options) {
         if (!options.title) {
@@ -337,10 +354,10 @@ export class ApplicationController extends ModelController {
         const data = this.getModel().getData();
         this.webSocketClient = new WebSocketClient({
             applicationController: this,
-            protocol             : data.nodeEnv === 'development' ? 'ws' : 'wss',
-            route                : data.route,
-            uuid                 : data.uuid,
-            userId               : data.user ? data.user.id : null,
+            protocol: data.nodeEnv === 'development' ? 'ws' : 'wss',
+            route: data.route,
+            uuid: data.uuid,
+            userId: data.user ? data.user.id : null,
         });
         await this.webSocketClient.connect();
     }

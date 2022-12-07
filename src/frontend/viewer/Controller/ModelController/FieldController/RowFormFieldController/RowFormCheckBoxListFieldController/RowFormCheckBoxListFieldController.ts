@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormCheckBoxListFieldView} from './RowFormCheckBoxListFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormCheckBoxListFieldView } from './RowFormCheckBoxListFieldView';
 
 export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     init() {
@@ -26,14 +26,14 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     onListInsert = async e => {
         console.log('RowFormCheckBoxListFieldController.onListInsert');
         await this.rerender();
-    }
+    };
     onListUpdate = async e => {
         // console.log('RowFormCheckBoxListFieldController.onListUpdate');
         await this.rerender();
-    }
+    };
     onListDelete = async e => {
         await this.rerender();
-    }
+    };
     getValueForWidget() {
         // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
         const value = this.getValue();
@@ -46,7 +46,7 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController {
     getItemFromRow(row) {
         return {
             value: this.valueToString(this.getModel().getValueValue(row)),
-            title: this.getModel().getDisplayValue(row)
+            title: this.getModel().getDisplayValue(row),
         };
     }
 }

@@ -1,4 +1,4 @@
-import {Controller} from '../Controller';
+import { Controller } from '../Controller';
 
 export class ModalController extends Controller {
     options: any;

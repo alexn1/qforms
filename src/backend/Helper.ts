@@ -1,8 +1,8 @@
-const glob       = require('glob');
-const path       = require('path');
-const slash      = require('slash');
-const fs         = require('fs');
-const colors     = require('colors/safe');
+const glob = require('glob');
+const path = require('path');
+const slash = require('slash');
+const fs = require('fs');
+const colors = require('colors/safe');
 
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -57,7 +57,7 @@ export class Helper {
         return new Promise((resolve, reject) => {
             glob(path, (err, items) => {
                 if (err) {
-                   reject(err);
+                    reject(err);
                 } else {
                     resolve(items);
                 }
@@ -140,7 +140,7 @@ export class Helper {
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
                 if (err) {
-                    reject(err)
+                    reject(err);
                 } else {
                     resolve(content);
                 }
@@ -167,7 +167,7 @@ export class Helper {
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
                 if (err) {
-                    reject(err)
+                    reject(err);
                 } else {
                     resolve(data);
                 }
@@ -250,7 +250,7 @@ export class Helper {
         const newIndex = oldIndex + offset;
         if (newIndex < 0) throw new Error('cannot up top element');
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
-        arr.splice(newIndex, 0,   arr.splice(oldIndex, 1)[0]);
+        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
 
     /*static getTempSubDirPath3(tempDirPath) {
@@ -314,7 +314,7 @@ export class Helper {
         });
     }
     static writeFileSync(filePath, content) {
-        console.log(colors.blue('Helper.writeFileSync'), filePath/*, content*/);
+        console.log(colors.blue('Helper.writeFileSync'), filePath /*, content*/);
         return fs.writeFileSync(filePath, content, 'utf8');
     }
 
@@ -361,9 +361,9 @@ export class Helper {
 
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a =
-                /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
-                .exec(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
+                value,
+            );
             if (a) return new Date(value);
         }
         return value;
@@ -384,7 +384,8 @@ export class Helper {
     static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
-            if (typeof obj[name] !== 'string') throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
+            if (typeof obj[name] !== 'string')
+                throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
             dObj[name] = Helper.decodeValue(obj[name]);
         }
         return dObj;
@@ -413,7 +414,7 @@ export class Helper {
                     resolve();
                 }
             });
-        })
+        });
     }
     static addMinutes(date, minutes): void {
         // console.log('Helper.addMinutes', date, minutes);
@@ -433,18 +434,20 @@ export class Helper {
     }
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
-        const M    = date.getMonth() + 1;
-        const D    = date.getDate();
-        const h    = date.getHours();
-        const m    = date.getMinutes();
-        const s    = date.getSeconds();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
         const MM = M < 10 ? `0${M}` : M;
         const DD = D < 10 ? `0${D}` : D;
         const hh = h < 10 ? `0${h}` : h;
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
-        const values = {YYYY, M, D, h, m, s, MM, DD, hh, mm, ss};
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w\.]+)\}/g, (text, name) =>
+            values[name] ? values[name] : text,
+        );
     }
     static getFirstField(object) {
         const [key] = Object.keys(object);
@@ -459,15 +462,15 @@ export class Helper {
             }, {});
     }
     static getWebSocketIP(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-ip'] ?
-            webSocket.upgradeReq.headers['x-real-ip'] :
-            webSocket.upgradeReq.socket.remoteAddress;
+        return webSocket.upgradeReq.headers['x-real-ip']
+            ? webSocket.upgradeReq.headers['x-real-ip']
+            : webSocket.upgradeReq.socket.remoteAddress;
     }
 
     static getWebSocketPort(webSocket) {
-        return webSocket.upgradeReq.headers['x-real-port'] ?
-            webSocket.upgradeReq.headers['x-real-port'] :
-            webSocket.upgradeReq.socket.remotePort;
+        return webSocket.upgradeReq.headers['x-real-port']
+            ? webSocket.upgradeReq.headers['x-real-port']
+            : webSocket.upgradeReq.socket.remotePort;
     }
     static templateArray(arr) {
         return arr.map(item => {
@@ -485,12 +488,12 @@ export class Helper {
         let _resolve, _reject;
         const promise = new Promise(function(resolve, reject) {
             _resolve = resolve;
-            _reject  = reject;
+            _reject = reject;
         });
         // @ts-ignore
         promise.resolve = _resolve;
         // @ts-ignore
-        promise.reject  = _reject;
+        promise.reject = _reject;
         return promise;
     }
     static test() {
@@ -501,4 +504,3 @@ export class Helper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 }
-

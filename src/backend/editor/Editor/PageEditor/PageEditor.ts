@@ -1,8 +1,8 @@
 const path = require('path');
 
-import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
-import {JsonFile} from '../../../JsonFile';
-import {Editor} from '../Editor';
+import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
+import { JsonFile } from '../../../JsonFile';
+import { Editor } from '../Editor';
 
 export class PageEditor extends Editor {
     appEditor: ApplicationEditor;
@@ -10,27 +10,23 @@ export class PageEditor extends Editor {
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
-        this.pageFile  = pageFile;
+        this.pageFile = pageFile;
     }
     static createData(params) {
         return {
-            '@class'     :'Page',
+            '@class': 'Page',
             '@attributes': {
                 formatVersion: '0.1',
-                name     : params.name,
-                caption  : params.caption   !== undefined ? params.caption   : params.name,
-                cssBlock : params.cssBlock  !== undefined ? params.cssBlock  :          '',
-                viewClass: params.viewClass !== undefined ? params.viewClass :          '',
+                name: params.name,
+                caption: params.caption !== undefined ? params.caption : params.name,
+                cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
+                viewClass: params.viewClass !== undefined ? params.viewClass : '',
             },
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : []),
             ],
-            actions: [
-                ...(params.actions ? params.actions.map(Editor.createItemData) : [])
-            ],
-            forms: [
-                ...(params.forms ? params.forms.map(Editor.createItemData) : [])
-            ],
+            actions: [...(params.actions ? params.actions.map(Editor.createItemData) : [])],
+            forms: [...(params.forms ? params.forms.map(Editor.createItemData) : [])],
         };
     }
     setAttr(name, value) {
@@ -48,8 +44,8 @@ export class PageEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page  : this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            page: this.getName(),
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
     }
@@ -57,8 +53,8 @@ export class PageEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Page.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
-            page  : this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            page: this.getName(),
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return jsx;
     }
@@ -66,8 +62,8 @@ export class PageEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Page.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
-            page  : this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            page: this.getName(),
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return less;
     }
@@ -88,8 +84,8 @@ export class PageEditor extends Editor {
         this.data = this.pageFile.data = PageEditor.createData({
             ...this.attributes(),
             dataSources: this.data.dataSources,
-            actions    : this.data.actions,
-            forms      : this.data.forms,
+            actions: this.data.actions,
+            forms: this.data.forms,
         });
     }
 }

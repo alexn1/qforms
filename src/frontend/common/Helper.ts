@@ -26,18 +26,20 @@ export class Helper {
 
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
-        const M    = date.getMonth() + 1;
-        const D    = date.getDate();
-        const h    = date.getHours();
-        const m    = date.getMinutes();
-        const s    = date.getSeconds();
+        const M = date.getMonth() + 1;
+        const D = date.getDate();
+        const h = date.getHours();
+        const m = date.getMinutes();
+        const s = date.getSeconds();
         const MM = M < 10 ? `0${M}` : M;
         const DD = D < 10 ? `0${D}` : D;
         const hh = h < 10 ? `0${h}` : h;
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
-        const values = {YYYY, M, D, h, m, s, MM, DD, hh, mm, ss};
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+        const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
+        return format.replace(/\{([\w\.]+)\}/g, (text, name) =>
+            values[name] ? values[name] : text,
+        );
     }
 
     static formatNumber(value) {
@@ -86,9 +88,9 @@ export class Helper {
 
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a =
-                /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
-                .exec(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
+                value,
+            );
             if (a) return new Date(value);
         }
         return value;
@@ -97,7 +99,7 @@ export class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         // @ts-ignore
-        props.onCreate = c => component = c;
+        props.onCreate = c => (component = c);
         const reactElement = React.createElement(type, props, children);
         ReactDOM.render(reactElement, rootElement);
         return component;
@@ -171,7 +173,7 @@ export class Helper {
         const newIndex = oldIndex + offset;
         if (newIndex < 0) throw new Error('cannot up top element');
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
-        arr.splice(newIndex, 0,   arr.splice(oldIndex, 1)[0]);
+        arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
         // console.log('Helper.formatTime', sec);
@@ -239,7 +241,7 @@ export class Helper {
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
-        textArea.style.top = '0';       // Avoid scrolling to bottom
+        textArea.style.top = '0'; // Avoid scrolling to bottom
         textArea.style.left = '0';
         textArea.style.position = 'fixed';
         document.body.appendChild(textArea);
@@ -274,7 +276,7 @@ export class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static inIframe () {
+    static inIframe() {
         try {
             return window.self !== window.top;
         } catch (e) {
@@ -283,33 +285,33 @@ export class Helper {
     }
 
     static setCookie(name, value, time) {
-        var expires = "";
+        var expires = '';
         if (time) {
             var date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
+            expires = '; expires=' + date.toUTCString();
         }
-        document.cookie = name + "=" + (encodeURIComponent(value) || "")  + expires + "; path=/";
+        document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
     static getCookie(name) {
-        var nameEQ = name + "=";
+        var nameEQ = name + '=';
         var ca = document.cookie.split(';');
-        for(var i=0;i < ca.length;i++) {
+        for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
-            while (c.charAt(0)==' ') c = c.substring(1,c.length);
-            if (c.indexOf(nameEQ) == 0) return decodeURIComponent(c.substring(nameEQ.length,c.length));
+            while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) == 0)
+                return decodeURIComponent(c.substring(nameEQ.length, c.length));
         }
         return undefined;
     }
     static eraseCookie(name) {
-        document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     static delay(ms = 1000) {
         return new Promise(resolve => {
             setTimeout(resolve, ms);
         });
     }
-
 }
 // @ts-ignore
 window.QForms.Helper = window.Helper = Helper;

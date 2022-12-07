@@ -1,8 +1,6 @@
-import {Field} from '../Field';
+import { Field } from '../Field';
 
-export class PasswordField extends Field {
-
-}
+export class PasswordField extends Field {}
 
 // @ts-ignore
 window.PasswordField = PasswordField;

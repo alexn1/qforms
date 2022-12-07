@@ -234,7 +234,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                             auto: row.EXTRA === 'auto_increment',
                             nullable: row.IS_NULLABLE === 'YES',
                             comment: row.COLUMN_COMMENT,
-                            dbType: row.COLUMN_TYPE
+                            dbType: row.COLUMN_TYPE,
                             // COLUMN_TYPE   : row.COLUMN_TYPE,
                             // COLUMN_DEFAULT: row.COLUMN_DEFAULT,
                             // EXTRA         : row.EXTRA,

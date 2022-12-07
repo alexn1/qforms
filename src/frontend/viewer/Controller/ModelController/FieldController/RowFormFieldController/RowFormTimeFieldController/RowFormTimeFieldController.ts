@@ -1,6 +1,6 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormTimeFieldView} from './RowFormTimeFieldView';
-import {TimeBox} from '../../../../../../common';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormTimeFieldView } from './RowFormTimeFieldView';
+import { TimeBox } from '../../../../../../common';
 
 export class RowFormTimeFieldController extends RowFormFieldController {
     defaultValue: any;
@@ -25,7 +25,7 @@ export class RowFormTimeFieldController extends RowFormFieldController {
         if (typeof defaultValue === 'string') {
             this.defaultValue = TimeBox.getIntegerValue(defaultValue);
         } else {
-            if (defaultValue >= 24*60) throw new Error(`wrong default value: ${defaultValue}`);
+            if (defaultValue >= 24 * 60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;
         }
     }

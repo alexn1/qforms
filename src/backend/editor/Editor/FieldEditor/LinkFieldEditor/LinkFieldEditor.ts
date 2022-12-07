@@ -1,15 +1,13 @@
-import {FieldEditor} from '../FieldEditor';
+import { FieldEditor } from '../FieldEditor';
 
 export class LinkFieldEditor extends FieldEditor {
-
     static createData(params) {
         return {
-            '@class' : 'LinkField',
+            '@class': 'LinkField',
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
-                notNull     : params.notNull      ? params.notNull      :        'false',
-            }
+                notNull: params.notNull ? params.notNull : 'false',
+            },
         };
     }
-
 }

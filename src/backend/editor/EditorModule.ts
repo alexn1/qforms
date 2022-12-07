@@ -1,57 +1,61 @@
-import {Context} from "../Context";
+import { Context } from '../Context';
 
 const path = require('path');
-const pkg     = require('../../../package.json');
+const pkg = require('../../../package.json');
 
-import {BackHostApp} from '../BackHostApp';
-import {Helper} from "../Helper";
-import {Application} from "../viewer/Model/Application/Application";
+import { BackHostApp } from '../BackHostApp';
+import { Helper } from '../Helper';
+import { Application } from '../viewer/Model/Application/Application';
 
 import * as backend from '../index';
 
 const EDITOR_CONTROLLERS = [
     'Application',
-    'Database'   ,
-    'Param'      ,
+    'Database',
+    'Param',
     'Table',
     'Column',
-    'DataSource' ,
-    'KeyColumn'  ,
-    'Page'       ,
-    'PageLink'   ,
-    'Form'       ,
-    'Field'      ,
-    'Action'     ,
+    'DataSource',
+    'KeyColumn',
+    'Page',
+    'PageLink',
+    'Form',
+    'Field',
+    'Action',
 ];
 
 const EDITOR_ACTIONS = [
-    'save'             ,
-    '_new'             ,
-    'delete'           ,
-    'getView'          ,
-    'saveView'         ,
-    'saveController'   ,
-    'createView'       ,
-    'createStyle'      ,
-    'createController' ,
-    'get'              ,
-    'getTableInfo'     ,
-    'changeClass'      ,
-    'moveUp'           ,
-    'moveDown'         ,
+    'save',
+    '_new',
+    'delete',
+    'getView',
+    'saveView',
+    'saveController',
+    'createView',
+    'createStyle',
+    'createController',
+    'get',
+    'getTableInfo',
+    'changeClass',
+    'moveUp',
+    'moveDown',
     'createModelBackJs',
 ];
 
 export class EditorModule {
     hostApp: BackHostApp;
     css: string[];
-    js : string[];
+    js: string[];
     constructor(hostApp: BackHostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')).map(path => `/editor/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js' )).map(path => `/editor/${path}`);
+        this.css = (
+            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')
+        ).map(path => `/editor/${path}`);
+        this.js = (
+            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')
+        ).map(path => `/editor/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -59,8 +63,8 @@ export class EditorModule {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
+            ...this.hostApp.commonModule.css,
+            ...this.css,
         ];
     }
     getScripts() {
@@ -72,7 +76,7 @@ export class EditorModule {
             '/lib/codemirror-4.8/lib/codemirror.js',
             '/lib/codemirror-4.8/mode/javascript/javascript.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     async handleEditorGet(req, res, context: Context) {
@@ -81,19 +85,19 @@ export class EditorModule {
 
         // data
         const data = {
-            app        : appInfo.appFile.data,
-            nodeEnv    : this.hostApp.getNodeEnv(),
-            logErrorUrl: '/error'
+            app: appInfo.appFile.data,
+            nodeEnv: this.hostApp.getNodeEnv(),
+            logErrorUrl: '/error',
         };
         res.render('editor/index', {
-            version    : pkg.version,
-            data       : data,
-            runAppLink : `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
-            appDirName : context.getAppDirName(),
+            version: pkg.version,
+            data: data,
+            runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
+            appDirName: context.getAppDirName(),
             appFileName: context.getAppFileName(),
-            env        : context.getEnv(),
-            links      : this.getLinks(),
-            scripts    : this.getScripts()
+            env: context.getEnv(),
+            links: this.getLinks(),
+            scripts: this.getScripts(),
         });
     }
     async handleEditorPost(req, res, context: Context) {
@@ -119,4 +123,3 @@ export class EditorModule {
         await res.json(result);
     }
 }
-

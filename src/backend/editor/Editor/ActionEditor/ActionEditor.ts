@@ -1,14 +1,14 @@
-import {Editor} from '../Editor';
+import { Editor } from '../Editor';
 
 export class ActionEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
-            '@class'     : 'Action',
+            '@class': 'Action',
             '@attributes': {
-                name    : params.name,
-                caption : params.caption || params.name
-            }
+                name: params.name,
+                caption: params.caption || params.name,
+            },
         };
     }
     getColName() {

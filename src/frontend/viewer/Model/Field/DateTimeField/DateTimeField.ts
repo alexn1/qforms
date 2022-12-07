@@ -1,5 +1,5 @@
-import {Field} from '../Field';
-import {Helper} from '../../../../common';
+import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class DateTimeField extends Field {
     getFormat() {

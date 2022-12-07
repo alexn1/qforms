@@ -1,7 +1,6 @@
-import {Form} from '../Form';
+import { Form } from '../Form';
 
 export class TableForm extends Form {
-
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/
@@ -13,12 +12,11 @@ export class TableForm extends Form {
 
     fillAttributes(response: any): void {
         super.fillAttributes(response);
-        response.editMethod  = this.getAttr('editMethod');
-        response.itemEditPage  = this.getAttr('itemEditPage');
-        response.itemCreatePage  = this.getAttr('itemCreatePage');
-        response.newRowMode  = this.getAttr('newRowMode');
-        response.deleteRowMode  = this.getAttr('deleteRowMode');
-        response.refreshButton  = this.getAttr('refreshButton');
+        response.editMethod = this.getAttr('editMethod');
+        response.itemEditPage = this.getAttr('itemEditPage');
+        response.itemCreatePage = this.getAttr('itemCreatePage');
+        response.newRowMode = this.getAttr('newRowMode');
+        response.deleteRowMode = this.getAttr('deleteRowMode');
+        response.refreshButton = this.getAttr('refreshButton');
     }
-
 }

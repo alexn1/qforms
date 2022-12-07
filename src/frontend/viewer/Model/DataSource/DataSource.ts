@@ -1,8 +1,8 @@
-import {Model} from '../Model';
-import {Form} from '../Form/Form';
-import {Page} from '../Page/Page';
-import {Application} from '../Application/Application';
-import {Helper} from '../../../common';
+import { Model } from '../Model';
+import { Form } from '../Form/Form';
+import { Page } from '../Page/Page';
+import { Application } from '../Application/Application';
+import { Helper } from '../../../common';
 
 export class DataSource extends Model {
     rows: any;
@@ -12,10 +12,10 @@ export class DataSource extends Model {
 
     constructor(data, parent) {
         super(data, parent);
-        this.rows      = null;
-        this.rowsByKey = null;						// for row search by key
-        this.news      = [];                        // new rows
-        this.changes   = new Map();
+        this.rows = null;
+        this.rowsByKey = null; // for row search by key
+        this.news = []; // new rows
+        this.changes = new Map();
     }
 
     init() {
@@ -23,9 +23,9 @@ export class DataSource extends Model {
         this.setRows(this.data.rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.on('insert' , this.onTableInsert);
-            table.on('update' , this.onTableUpdate);
-            table.on('delete' , this.onTableDelete);
+            table.on('insert', this.onTableInsert);
+            table.on('update', this.onTableUpdate);
+            table.on('delete', this.onTableDelete);
             table.on('refresh', this.onTableRefresh);
         }
     }
@@ -33,9 +33,9 @@ export class DataSource extends Model {
     deinit() {
         if (this.getAttr('table')) {
             const table = this.getTable();
-            table.off('insert' , this.onTableInsert);
-            table.off('update' , this.onTableUpdate);
-            table.off('delete' , this.onTableDelete);
+            table.off('insert', this.onTableInsert);
+            table.off('update', this.onTableUpdate);
+            table.off('delete', this.onTableDelete);
             table.off('refresh', this.onTableRefresh);
         }
         super.deinit();
@@ -97,19 +97,24 @@ export class DataSource extends Model {
 
     setValue(row, column, value) {
         // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
-        if (value === undefined) throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
+        if (value === undefined)
+            throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
         if (typeof value === 'object' && value !== null) {
-            throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
+            throw new Error(
+                `setValue: ${this.getFullName()}.${column}: object must be in JSON format`,
+            );
         }
         if (row[column] !== value) {
             this.changeRowColumn(row, column, value);
-            if (row[column] === undefined && value === null) {  // workaround for new rows
+            if (row[column] === undefined && value === null) {
+                // workaround for new rows
                 this.discardRowColumn(row, column);
             }
         } else {
             this.discardRowColumn(row, column);
         }
-        if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length) this.changes.delete(row);
+        if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length)
+            this.changes.delete(row);
         // console.log('changes:', this.changes);
     }
 
@@ -136,7 +141,9 @@ export class DataSource extends Model {
             value = row[column];
         }
         if (value !== undefined && typeof value !== 'string') {
-            throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`);
+            throw new Error(
+                `getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`,
+            );
         }
         // console.log('DataSource.getValue:', value);
         return value;
@@ -244,7 +251,7 @@ export class DataSource extends Model {
         const arr = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
-        } else  if (arr.length > 1) {
+        } else if (arr.length > 1) {
             for (let i = 0; i < arr.length; i++) {
                 params[`${paramName}${i + 1}`] = arr[i];
             }
@@ -264,7 +271,7 @@ export class DataSource extends Model {
 
     getRowWithChanges(row) {
         if (this.changes.has(row)) {
-            return {...row, ...this.changes.get(row)};
+            return { ...row, ...this.changes.get(row) };
         }
         return row;
     }
@@ -285,7 +292,7 @@ export class DataSource extends Model {
         const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
         const newKey = this.getRowKey(newValues);
-        DataSource.copyNewValues(row, newValues);// copy new values to original row object
+        DataSource.copyNewValues(row, newValues); // copy new values to original row object
         if (key !== newKey) {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
@@ -302,13 +309,16 @@ export class DataSource extends Model {
 
     getDatabase() {
         // console.log('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
-        if (!this.getAttr('database')) throw new Error(`${this.getFullName()}: database attr empty`);
+        if (!this.getAttr('database'))
+            throw new Error(`${this.getFullName()}: database attr empty`);
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable().getColumn(columnName).getType();
+        const type = this.getTable()
+            .getColumn(columnName)
+            .getType();
         // console.log('type:', type);
         return type;
     }
@@ -337,15 +347,17 @@ export class DataSource extends Model {
 
         // events
         if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({source: this, inserts});
+            this.parent.onDataSourceInsert({ source: this, inserts });
         }
-        this.emit('insert', {source: this, inserts});
+        this.emit('insert', { source: this, inserts });
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            const result = {[database]: {
-                    [table]: {insert: inserts}
-                }};
+            const result = {
+                [database]: {
+                    [table]: { insert: inserts },
+                },
+            };
             await this.getApp().emitResult(result, this);
             return result;
         }
@@ -360,15 +372,17 @@ export class DataSource extends Model {
         // events
         const deletes = [key];
         if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({source: this, deletes});
+            this.parent.onDataSourceDelete({ source: this, deletes });
         }
-        this.emit('delete', {source: this, deletes});
+        this.emit('delete', { source: this, deletes });
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (database && table) {
-            const result = {[database]: {
-                    [table]: {delete: deletes}
-                }};
+            const result = {
+                [database]: {
+                    [table]: { delete: deletes },
+                },
+            };
             await this.getApp().emitResult(result, this);
             return result;
         }
@@ -402,18 +416,20 @@ export class DataSource extends Model {
 
         // events
         if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({source: this, updates});
+            this.parent.onDataSourceUpdate({ source: this, updates });
         }
-        this.emit('update', {source: this, updates});
+        this.emit('update', { source: this, updates });
 
         const database = this.getAttr('database');
-        const table    = this.getAttr('table');
+        const table = this.getAttr('table');
         if (database && table) {
-            const reuslt = {[database]: {
+            const reuslt = {
+                [database]: {
                     [table]: {
-                        update: updates
-                    }
-                }};
+                        update: updates,
+                    },
+                },
+            };
             await this.getApp().emitResult(reuslt, this);
             return reuslt;
         }
@@ -421,7 +437,8 @@ export class DataSource extends Model {
     }
 
     onTableInsert = async e => {
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableInsert stop self insert', this.getFullName());
             return;
@@ -447,10 +464,11 @@ export class DataSource extends Model {
             this.parent.onDataSourceInsert(e);
         }
         this.emit('insert', e);
-    }
+    };
 
     onTableUpdate = async e => {
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
@@ -470,10 +488,11 @@ export class DataSource extends Model {
             this.parent.onDataSourceUpdate(e);
         }
         this.emit('update', e);
-    }
+    };
 
     onTableDelete = async e => {
-        if (this.deinited) throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
             // console.error('onTableDelete stop self update', this.getFullName());
             return;
@@ -491,11 +510,11 @@ export class DataSource extends Model {
             this.parent.onDataSourceDelete(e);
         }
         this.emit('delete', e);
-    }
+    };
 
-    onTableRefresh = async (e): Promise<any> =>  {
+    onTableRefresh = async (e): Promise<any> => {
         throw new Error('DataSource.onTableRefresh: not implemented');
-    }
+    };
 
     isSurrogate() {
         return this.isAttr('database');
@@ -506,13 +525,12 @@ export class DataSource extends Model {
         Helper.moveArrItem(this.rows, row, offset);
 
         // refresh event
-        const event = {source: this};
+        const event = { source: this };
         if (this.parent.onDataSourceRefresh) {
             this.parent.onDataSourceRefresh(event);
         }
         this.emit('refresh', event);
     }
-
 }
 
 // @ts-ignore

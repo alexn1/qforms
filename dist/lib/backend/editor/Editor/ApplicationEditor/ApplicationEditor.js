@@ -32,18 +32,12 @@ class ApplicationEditor extends Editor_1.Editor {
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
             },
             env: params.env ? params.env : {},
-            databases: [
-                ...(params.databases ? params.databases.map(Editor_1.Editor.createItemData) : [])
-            ],
+            databases: [...(params.databases ? params.databases.map(Editor_1.Editor.createItemData) : [])],
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : []),
             ],
-            actions: [
-                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
-            ],
-            pageLinks: [
-                ...(params.pageLinks ? params.pageLinks.map(Editor_1.Editor.createItemData) : [])
-            ],
+            actions: [...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])],
+            pageLinks: [...(params.pageLinks ? params.pageLinks.map(Editor_1.Editor.createItemData) : [])],
         };
     }
     static async createAppFile(appFilePath, params) {
@@ -62,7 +56,7 @@ class ApplicationEditor extends Editor_1.Editor {
         const pageLinkData = this.newItemData('PageLink', 'pageLinks', params);
         return {
             page: pageData,
-            pageLink: pageLinkData
+            pageLink: pageLinkData,
         };
     }
     async save() {
@@ -90,7 +84,7 @@ class ApplicationEditor extends Editor_1.Editor {
         const templateFilePath = path.join(__dirname, 'Application.js.ejs');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             application: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
     }

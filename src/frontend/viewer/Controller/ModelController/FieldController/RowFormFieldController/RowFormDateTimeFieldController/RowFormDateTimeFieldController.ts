@@ -1,6 +1,6 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormDateTimeFieldView} from './RowFormDateTimeFieldView';
-import {TimeBox} from '../../../../../../common';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormDateTimeFieldView } from './RowFormDateTimeFieldView';
+import { TimeBox } from '../../../../../../common';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController {
     widget2: any;
@@ -46,7 +46,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
     onView2Create = widget2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
-    }
+    };
     /*_onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (widgetValue !== null) {
@@ -86,13 +86,13 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         // event
         if (fireEvent) {
             try {
-                this.emit('change', {value: widgetValue});
+                this.emit('change', { value: widgetValue });
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
+            this.parent.onFieldChange({ source: this });
         }
-    }
+    };
     onBlur2 = (widgetValue, fireEvent = true) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;
@@ -122,13 +122,13 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         // event
         if (fireEvent) {
             try {
-                this.emit('change', {value: widgetValue});
+                this.emit('change', { value: widgetValue });
             } catch (err) {
                 console.error('unhandled change event error:', this.model.getFullName(), err);
             }
-            this.parent.onFieldChange({source: this});
+            this.parent.onFieldChange({ source: this });
         }
-    }
+    };
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
     }
@@ -152,7 +152,9 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         this.setValue2(widgetValue);
     }
     getTimeErrorText() {
-        return this.getModel().getApp().getText().field.timeNotValid;
+        return this.getModel()
+            .getApp()
+            .getText().field.timeNotValid;
     }
     setValue2(widgetValue) {
         const value = widgetValue !== null ? widgetValue : this.defaultValue;
@@ -214,7 +216,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         if (super.getErrorMessage() === null && this.getErrorMessage2() === null) return null;
         return [
             ...(super.getErrorMessage() ? [super.getErrorMessage()] : []),
-            ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : [])
+            ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : []),
         ].join(', ');
     }
     isValidateOnChange2() {

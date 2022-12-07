@@ -1,5 +1,5 @@
-import {Editor} from '../Editor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FrontHostApp } from '../../../common';
 
 export class PageLinkEditor extends Editor {
     application: any;
@@ -12,12 +12,12 @@ export class PageLinkEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 pageLink: this.getName(),
-                attr    : name,
-                value   : value
-            }
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -26,20 +26,20 @@ export class PageLinkEditor extends Editor {
     async moveUp() {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
-            action    : 'moveUp',
-            params    : {
-                page: this.getName()
-            }
+            action: 'moveUp',
+            params: {
+                page: this.getName(),
+            },
         });
     }
 
     async moveDown() {
         return await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
-            action    : 'moveDown',
-            params    : {
-                page: this.getName()
-            }
+            action: 'moveDown',
+            params: {
+                page: this.getName(),
+            },
         });
     }
 
@@ -50,5 +50,4 @@ export class PageLinkEditor extends Editor {
         console.log('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
-
 }

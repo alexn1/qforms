@@ -1,8 +1,8 @@
-const path    = require('path');
-const ejs     = require('ejs');
+const path = require('path');
+const ejs = require('ejs');
 
-import {BaseModel} from '../../BaseModel';
-import {Helper} from '../../Helper';
+import { BaseModel } from '../../BaseModel';
+import { Helper } from '../../Helper';
 import * as backend from '../../../backend';
 
 export class Editor extends BaseModel {
@@ -53,7 +53,7 @@ export class Editor extends BaseModel {
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
-    async saveCustomFile(ext, text):  Promise<void> {
+    async saveCustomFile(ext, text): Promise<void> {
         const customFilePath = await this.getCustomFilePath(ext);
         await this.saveFile(customFilePath, text);
     }
@@ -87,11 +87,7 @@ export class Editor extends BaseModel {
         return new DataSourceClass(data, this);
     }*/
     moveDataColItem(colName, name, offset) {
-        Helper.moveArrItem(
-            this.getCol(colName),
-            this.getColItemData(colName, name),
-            offset
-        );
+        Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     /*async newActionData(params) {
         if (!params.name) throw new Error('no name');
@@ -131,7 +127,7 @@ export class Editor extends BaseModel {
     }
     newItemData(className, colName, params) {
         console.log('Editor.newItemData', className, colName, params);
-        const {name} = params;
+        const { name } = params;
         if (!name) throw new Error('no name');
         const editorClassName = `${className}Editor`;
         const Class = backend[editorClassName];
@@ -146,11 +142,13 @@ export class Editor extends BaseModel {
     static createItemData(data) {
         // console.log('Editor.createItemData', data);
         try {
-            const params = data['@attributes'] ? {
-                class: BaseModel.getClassName(data),
-                ...BaseModel.attributes(data),
-                ...data,
-            } : data;
+            const params = data['@attributes']
+                ? {
+                      class: BaseModel.getClassName(data),
+                      ...BaseModel.attributes(data),
+                      ...data,
+                  }
+                : data;
             if (!params.class) {
                 const name = data['@attributes'] ? BaseModel.getName(data) : data.name;
                 throw new Error(`${name}: no class in data`);
@@ -161,7 +159,5 @@ export class Editor extends BaseModel {
             err.message = `${name}: ${err.message}`;
             throw err;
         }
-
     }
 }
-

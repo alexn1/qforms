@@ -87,7 +87,9 @@ class Database extends Model_1.Model {
     getDeleteQuery(tableName, rowKeyValues) {
         console.log('Database.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
-        const whereString = keyColumns.map(keyColumn => `${keyColumn} = {${keyColumn}}`).join(' and ');
+        const whereString = keyColumns
+            .map(keyColumn => `${keyColumn} = {${keyColumn}}`)
+            .join(' and ');
         const query = `delete from ${tableName} where ${whereString}`;
         // console.log('query:', query);
         return query;

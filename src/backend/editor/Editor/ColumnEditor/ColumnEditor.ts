@@ -1,4 +1,4 @@
-import {Editor} from '../Editor';
+import { Editor } from '../Editor';
 
 export class ColumnEditor extends Editor {
     static createData(params) {
@@ -13,16 +13,16 @@ export class ColumnEditor extends Editor {
             throw new Error('nullable not string');
         }
         return {
-            '@class'     : 'Column',
+            '@class': 'Column',
             '@attributes': {
-                name    : params.name,
-                caption : params.caption  || params.name,
-                type    : params.type     || '',
-                dbType  : params.dbType   || '',
-                key     : params.key      || 'false',
-                auto    : params.auto     || 'false',
+                name: params.name,
+                caption: params.caption || params.name,
+                type: params.type || '',
+                dbType: params.dbType || '',
+                key: params.key || 'false',
+                auto: params.auto || 'false',
                 nullable: params.nullable || 'true',
-            }
+            },
         };
     }
     getColName() {

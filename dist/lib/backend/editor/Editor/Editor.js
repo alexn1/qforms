@@ -170,7 +170,8 @@ class Editor extends BaseModel_1.BaseModel {
     static createItemData(data) {
         // console.log('Editor.createItemData', data);
         try {
-            const params = data['@attributes'] ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;
+            const params = data['@attributes']
+                ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;
             if (!params.class) {
                 const name = data['@attributes'] ? BaseModel_1.BaseModel.getName(data) : data.name;
                 throw new Error(`${name}: no class in data`);

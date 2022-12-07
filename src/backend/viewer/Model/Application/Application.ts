@@ -1,26 +1,26 @@
-import {AppInfo} from "../../../AppInfo";
+import { AppInfo } from '../../../AppInfo';
 const { v4: uuidv4 } = require('uuid');
 
-const path  = require('path');
+const path = require('path');
 // const axios = require('axios');
 // const colors = require('colors/safe');
 
-import {BackHostApp} from '../../../BackHostApp';
-import {BaseModel} from '../../../BaseModel';
-import {Model} from '../Model';
-import {Action} from '../Action/Action';
-import {Database} from '../Database/Database';
-import {DataSource} from '../DataSource/DataSource';
-import {Helper} from '../../../Helper';
-import {Page} from '../Page/Page';
-import {PageLink} from '../PageLink/PageLink';
-import {Context} from '../../../Context';
-import {JsonFile} from '../../../JsonFile';
-import {MyError} from '../../../MyError';
-import {Result}  from "../../../Result";
+import { BackHostApp } from '../../../BackHostApp';
+import { BaseModel } from '../../../BaseModel';
+import { Model } from '../Model';
+import { Action } from '../Action/Action';
+import { Database } from '../Database/Database';
+import { DataSource } from '../DataSource/DataSource';
+import { Helper } from '../../../Helper';
+import { Page } from '../Page/Page';
+import { PageLink } from '../PageLink/PageLink';
+import { Context } from '../../../Context';
+import { JsonFile } from '../../../JsonFile';
+import { MyError } from '../../../MyError';
+import { Result } from '../../../Result';
 
 const text = require('../../text');
-const pkg  = require('../../../../../package.json');
+const pkg = require('../../../../../package.json');
 
 export class Application extends Model {
     appInfo: AppInfo;
@@ -36,23 +36,18 @@ export class Application extends Model {
     nav: any;
     clients: any[];
 
-    constructor(
-        data: any,
-        appInfo: AppInfo,
-        hostApp: BackHostApp,
-        context: Context
-    ) {
+    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context) throw new Error('no route');
-        this.appInfo     = appInfo;
-        this.hostApp     = hostApp;
-        this.env         = context.getEnv();
-        this.databases   = [];
-        this.actions     = [];
+        this.appInfo = appInfo;
+        this.hostApp = hostApp;
+        this.env = context.getEnv();
+        this.databases = [];
+        this.actions = [];
         this.dataSources = [];
-        this.pages       = {};
-        this.clients     = [];
+        this.pages = {};
+        this.clients = [];
     }
 
     async init(context: Context): Promise<void> {
@@ -60,7 +55,7 @@ export class Application extends Model {
         await this.createColItems('databases', context);
         await this.createColItems('actions', context);
         await this.createColItems('dataSources', context);
-        this.links   = await this.getLinks(context);
+        this.links = await this.getLinks(context);
         this.scripts = await this.getScripts(context);
         await this.createMenu(context);
     }
@@ -71,14 +66,16 @@ export class Application extends Model {
 
     async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
-            .map(src => `${virtualPath}/${src}`);
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css')).map(
+            src => `${virtualPath}/${src}`,
+        );
     }
 
     async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
-            .map(src => `${virtualPath}/${src}`);
+        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js')).map(
+            src => `${virtualPath}/${src}`,
+        );
     }
 
     async deinit() {
@@ -122,17 +119,17 @@ export class Application extends Model {
         const start = Date.now();
         const response = await super.fill(context);
 
-        response.route           = context.getRoute();
-        response.domain          = context.getDomain();
-        response.virtualPath     = context.getVirtualPath();
-        response.logErrorUrl     = this.hostApp.logErrorUrl || '/error';
+        response.route = context.getRoute();
+        response.domain = context.getDomain();
+        response.virtualPath = context.getVirtualPath();
+        response.logErrorUrl = this.hostApp.logErrorUrl || '/error';
         response.versions = {
             platform: pkg.version,
-            app     : this.getVersion()
+            app: this.getVersion(),
         };
 
-        await this.fillCollection(response, 'databases'  , context);
-        await this.fillCollection(response, 'actions'    , context);
+        await this.fillCollection(response, 'databases', context);
+        await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'dataSources', context);
 
         // nodeEnv
@@ -152,15 +149,17 @@ export class Application extends Model {
 
         // actions
         response.actions = this.getCol('actions').map(data => ({
-            name : BaseModel.getName(data),
-            caption: BaseModel.getAttr(data, 'caption')
+            name: BaseModel.getName(data),
+            caption: BaseModel.getAttr(data, 'caption'),
         }));
 
         // pages
         response.pages = await this.fillPages(context);
 
         // user
-        response.user = this.isAuthentication() ? await this.getClientUserFromServerUser(context) : null;
+        response.user = this.isAuthentication()
+            ? await this.getClientUserFromServerUser(context)
+            : null;
 
         // time
         response.time = Date.now() - start;
@@ -171,8 +170,8 @@ export class Application extends Model {
     async getClientUserFromServerUser(context: Context): Promise<any> {
         const user = context.getUser();
         return {
-            id   : user.id,
-            login: user.name
+            id: user.id,
+            login: user.name,
         };
     }
 
@@ -196,9 +195,9 @@ export class Application extends Model {
                     menu[pageLinkMenu] = [];
                 }
                 menu[pageLinkMenu].push({
-                    type   :'page',
-                    page   : pageLink.getAttr('name'),
-                    caption: pageFile.getAttr('caption')
+                    type: 'page',
+                    page: pageLink.getAttr('name'),
+                    caption: pageFile.getAttr('caption'),
                 });
 
                 // nav
@@ -206,8 +205,8 @@ export class Application extends Model {
                     nav[pageLinkMenu] = [];
                 }
                 nav[pageLinkMenu].push({
-                    page   : pageLink.getAttr('name'),
-                    caption: pageFile.getAttr('caption')
+                    page: pageLink.getAttr('name'),
+                    caption: pageFile.getAttr('caption'),
                 });
             }
         }
@@ -216,14 +215,14 @@ export class Application extends Model {
         const actions = this.getCol('actions');
         if (actions.length) {
             menu['Actions'] = actions.map(actionData => ({
-                type   : 'action',
-                action : BaseModel.getName(actionData),
-                caption: BaseModel.getAttr(actionData, 'caption')
+                type: 'action',
+                action: BaseModel.getName(actionData),
+                caption: BaseModel.getAttr(actionData, 'caption'),
             }));
         }
 
         this.menu = menu;
-        this.nav  = nav;
+        this.nav = nav;
     }
 
     createPageLink(name: string): PageLink {
@@ -237,7 +236,7 @@ export class Application extends Model {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
         const pageLink = this.createPageLink(pageLinkName);
-        const relFilePath  = pageLink.getAttr('fileName');
+        const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
         const content = await Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
@@ -259,7 +258,7 @@ export class Application extends Model {
         if (this.pages[pageLinkName]) {
             return this.pages[pageLinkName];
         }
-        return this.pages[pageLinkName] = await this.createPage(pageLinkName);
+        return (this.pages[pageLinkName] = await this.createPage(pageLinkName));
     }
 
     getStartupPageLinkNames(): string[] {
@@ -289,8 +288,8 @@ export class Application extends Model {
         console.log('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
-                id  : 1,
-                name: username
+                id: 1,
+                name: username,
             };
         }
         return null;
@@ -309,7 +308,7 @@ export class Application extends Model {
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
-            data   : {method: `${this.constructor.name}.rpc`},
+            data: { method: `${this.constructor.name}.rpc` },
             context,
         });
     }
@@ -349,28 +348,26 @@ export class Application extends Model {
     }
 
     // to init custom context params before each request get/post
-    async initContext(context: Context): Promise<void> {
-
-    }
+    async initContext(context: Context): Promise<void> {}
 
     static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
-        const dirName  = path.basename(path.dirname(appFilePath));
+        const dirName = path.basename(path.dirname(appFilePath));
         return {
-            appFile     : appFile,
-            name        : BaseModel.getName(data),
-            caption     : BaseModel.getAttr(data, 'caption'),
-            fullName    : [dirName, fileName].join('/'),
-            envs        : BaseModel.getEnvList(data),
-            fileName    : fileName,
-            dirName     : dirName,
-            filePath    : path.resolve(appFilePath),
-            fileNameExt : path.basename(appFilePath),
-            extName     : path.extname(appFilePath),
-            dirPath     : path.resolve(path.dirname(appFilePath))
+            appFile: appFile,
+            name: BaseModel.getName(data),
+            caption: BaseModel.getAttr(data, 'caption'),
+            fullName: [dirName, fileName].join('/'),
+            envs: BaseModel.getEnvList(data),
+            fileName: fileName,
+            dirName: dirName,
+            filePath: path.resolve(appFilePath),
+            fileNameExt: path.basename(appFilePath),
+            extName: path.extname(appFilePath),
+            dirPath: path.resolve(path.dirname(appFilePath)),
         };
     }
 
@@ -382,7 +379,7 @@ export class Application extends Model {
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath):  Promise<AppInfo[]> {
+    static async getAppInfos(appsDirPath): Promise<AppInfo[]> {
         // console.log('Application.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
@@ -428,18 +425,26 @@ export class Application extends Model {
     }
 
     broadcastDomesticResultToClients(context: Context, result: Result): void {
-        console.log('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        console.log(
+            'Application.broadcastDomesticResultToClients',
+            context.getReq().body.uuid,
+            result,
+        );
         if (!context.getReq().body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const uuid = context.getReq().body.uuid;
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== uuid) {
-                webSocket.send(JSON.stringify({type: 'result', data: result}));
+                webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
         }
     }
     broadcastForeignResultToClients(context: Context, result: Result): void {
-        console.log('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        console.log(
+            'Application.broadcastForeignResultToClients',
+            context.getReq().body.uuid,
+            result,
+        );
         if (!context.getReq().body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const fResult = this.composeForeignResult(result);
@@ -447,7 +452,7 @@ export class Application extends Model {
             const uuid = context.getReq().body.uuid;
             for (const webSocket of this.clients) {
                 if (webSocket.uuid !== uuid) {
-                    webSocket.send(JSON.stringify({type: 'result', data: fResult}));
+                    webSocket.send(JSON.stringify({ type: 'result', data: fResult }));
                 }
             }
         }
@@ -462,7 +467,7 @@ export class Application extends Model {
                     if (table) {
                         if (!fResult) fResult = new Result();
                         if (!fResult[databaseName]) fResult[databaseName] = {};
-                        fResult[databaseName][tableName] = {refresh: true};
+                        fResult[databaseName][tableName] = { refresh: true };
                     }
                 }
             }
@@ -488,8 +493,14 @@ export class Application extends Model {
             context.getRes().sendFile(filePath);
         } else {
             // next();
-            context.getRes().status(404).end('Not Found');
-            await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
+            context
+                .getRes()
+                .status(404)
+                .end('Not Found');
+            await this.getHostApp().logError(
+                new Error(`not found ${context.getUri()}`),
+                context.getReq(),
+            );
         }
         /*
         if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {

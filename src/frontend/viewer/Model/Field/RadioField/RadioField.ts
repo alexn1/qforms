@@ -1,5 +1,5 @@
-import {Field} from '../Field';
-import {Helper} from '../../../../common';
+import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class RadioField extends Field {
     getDisplayValue(row) {
@@ -15,7 +15,7 @@ export class RadioField extends Field {
         } else {
             value = displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
-                return row.hasOwnProperty(name) ? (row[name] || '') : text;
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
             });
         }
         return value;
@@ -46,6 +46,8 @@ export class RadioField extends Field {
 
     findRowByRawValue(rawValue) {
         const valueColumn = this.getAttr('valueColumn');
-        return this.getDataSource().getRows().find(row => row[valueColumn] === rawValue);
+        return this.getDataSource()
+            .getRows()
+            .find(row => row[valueColumn] === rawValue);
     }
 }

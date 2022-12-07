@@ -1,6 +1,6 @@
-import {Model} from '../Model';
+import { Model } from '../Model';
 
-export class Column  extends Model {
+export class Column extends Model {
     constructor(data, parent) {
         super(data, parent);
         if (!this.getAttr('type')) throw new Error(`column ${this.getFullName()}: no type`);

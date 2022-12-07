@@ -1,4 +1,4 @@
-import { Result } from "../../../Result";
+import { Result } from '../../../Result';
 import { Model } from '../Model';
 import { Context } from '../../../Context';
 import { Application } from '../Application/Application';

@@ -1,14 +1,19 @@
 export class Search {
     static getObj() {
         if (!window.location.search.split('?')[1]) return {};
-        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
-            const kv = item.split('=');
-            acc[kv[0]] = decodeURIComponent(kv[1]);
-            return acc;
-        }, {});
+        return window.location.search
+            .split('?')[1]
+            .split('&')
+            .reduce((acc, item) => {
+                const kv = item.split('=');
+                acc[kv[0]] = decodeURIComponent(kv[1]);
+                return acc;
+            }, {});
     }
     static objToString(obj) {
-        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        const search = Object.keys(obj)
+            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .join('&');
         if (!search) return '';
         return `?${search}`;
     }

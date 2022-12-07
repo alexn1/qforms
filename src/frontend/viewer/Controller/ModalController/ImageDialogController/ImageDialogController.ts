@@ -1,5 +1,5 @@
-import {ModalController} from '../ModalController';
-import {ImageDialogView} from './ImageDialogView';
+import { ModalController } from '../ModalController';
+import { ImageDialogView } from './ImageDialogView';
 
 export class ImageDialogController extends ModalController {
     constructor(options) {
@@ -16,14 +16,14 @@ export class ImageDialogController extends ModalController {
     }
     onCloseClick = async e => {
         await this.close();
-    }
+    };
     onKeyDown = async e => {
         if (e.key === 'Escape') {
             await this.close();
         }
-    }
+    };
     onImageClick = async e => {
         console.log('ImageDialogController.onImageClick');
         await this.close();
-    }
+    };
 }

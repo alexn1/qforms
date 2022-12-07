@@ -1,6 +1,6 @@
-import {Editor} from '../Editor';
-import {ColumnEditor} from '../ColumnEditor/ColumnEditor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { ColumnEditor } from '../ColumnEditor/ColumnEditor';
+import { FrontHostApp } from '../../../common';
 
 export class TableEditor extends Editor {
     database: any;
@@ -34,23 +34,23 @@ export class TableEditor extends Editor {
         if (!name) throw new Error(`newColumn: no name`);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
-            action    : '_new',
-            params    : {
+            action: '_new',
+            params: {
                 database: this.database.getName(),
-                table   : this.getName(),
-                name    : name
-            }
+                table: this.getName(),
+                name: name,
+            },
         });
         return this.createColumn(data);
     }
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Table',
-            action    : 'delete',
-            params    : {
+            action: 'delete',
+            params: {
                 database: this.database.getName(),
-                table   : this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
     async delete() {
@@ -60,24 +60,23 @@ export class TableEditor extends Editor {
 
     moveUp() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveUp',
-            params     : {
+            controller: 'Table',
+            action: 'moveUp',
+            params: {
                 database: this.database.getName(),
-                table   : this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
 
     moveDown() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Table',
-            action     : 'moveDown',
-            params     : {
+            controller: 'Table',
+            action: 'moveDown',
+            params: {
                 database: this.database.getName(),
-                table   : this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
-
 }

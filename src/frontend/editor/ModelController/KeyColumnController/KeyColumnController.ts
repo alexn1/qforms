@@ -1,17 +1,14 @@
-import {ModelController} from '../ModelController';
-import {FrontHostApp} from '../../../common';
-import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
+import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../common';
+import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class KeyColumnController extends ModelController {
-
     /*constructor(model, parent) {
         super(model, parent);
     }*/
 
     getActions() {
-        return [
-            {'action':'delete', 'caption':'Delete'}
-        ];
+        return [{ action: 'delete', caption: 'Delete' }];
     }
 
     async doAction(name) {
@@ -25,10 +22,10 @@ export class KeyColumnController extends ModelController {
     static async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
-            action    : 'getView',
-            params    : {
-                view: view
-            }
+            action: 'getView',
+            params: {
+                view: view,
+            },
         });
     }
     async delete() {

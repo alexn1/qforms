@@ -1,4 +1,4 @@
-import { Context } from "../Context";
+import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 export declare class EditorModule {
     hostApp: BackHostApp;

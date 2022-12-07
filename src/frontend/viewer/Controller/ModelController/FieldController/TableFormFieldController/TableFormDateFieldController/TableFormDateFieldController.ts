@@ -1,6 +1,6 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormDateFieldView} from './TableFormDateFieldView';
-import {Helper} from '../../../../../../common';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormDateFieldView } from './TableFormDateFieldView';
+import { Helper } from '../../../../../../common';
 
 export class TableFormDateFieldController extends TableFormFieldController {
     getViewClass() {
@@ -8,7 +8,8 @@ export class TableFormDateFieldController extends TableFormFieldController {
     }
     getValueForWidget(row) {
         const value = this.model.getValue(row);
-        if (value) return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        if (value)
+            return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
     }
 }

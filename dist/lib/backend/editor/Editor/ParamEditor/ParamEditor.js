@@ -10,8 +10,8 @@ class ParamEditor extends Editor_1.Editor {
             '@class': 'Param',
             '@attributes': {
                 name: params.name,
-                value: params.value || ''
-            }
+                value: params.value || '',
+            },
         };
     }
     getColName() {

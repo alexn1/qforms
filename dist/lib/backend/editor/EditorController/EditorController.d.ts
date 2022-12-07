@@ -1,7 +1,7 @@
-import { BackHostApp } from "../../BackHostApp";
+import { BackHostApp } from '../../BackHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
 import { AppInfo } from '../../AppInfo';
-import { Context } from "../../Context";
+import { Context } from '../../Context';
 export declare class EditorController {
     appInfo: AppInfo;
     hostApp: BackHostApp;

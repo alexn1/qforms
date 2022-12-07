@@ -24,7 +24,7 @@ class MonitorModule {
                     version: app.getVersion(),
                     pages: Object.keys(app.pages).map(name => {
                         return {
-                            name: name
+                            name: name,
                         };
                     }),
                     clients: app.clients.map(webSocket => {
@@ -32,18 +32,15 @@ class MonitorModule {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
                             ip: Helper_1.Helper.getWebSocketIP(webSocket),
-                            version: webSocket.customFields.version
+                            version: webSocket.customFields.version,
                         };
-                    })
+                    }),
                 };
-            })
+            }),
         };
     }
     getLinks() {
-        return [
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
-        ];
+        return [...this.hostApp.commonModule.css, ...this.css];
     }
     getScripts() {
         return [
@@ -52,15 +49,15 @@ class MonitorModule {
             // '/lib/react/react.production.min.js',
             // '/lib/react/react-dom.production.min.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     checkCredentials(req) {
         const base64string = req.headers.authorization.substr(6);
         const usernamePassword = new Buffer(base64string, 'base64').toString();
         const [username, password] = usernamePassword.split(':');
-        return username === this.hostApp.getParams().monitor.username &&
-            password === this.hostApp.getParams().monitor.password;
+        return (username === this.hostApp.getParams().monitor.username &&
+            password === this.hostApp.getParams().monitor.password);
     }
     authorize(req) {
         if (this.hostApp.isDevelopment()) {
@@ -69,9 +66,9 @@ class MonitorModule {
         if (!this.hostApp.getParams().monitor) {
             throw new Error('no monitor params');
         }
-        return req.headers.authorization &&
+        return (req.headers.authorization &&
             req.headers.authorization.substr(0, 5) === 'Basic' &&
-            this.checkCredentials(req);
+            this.checkCredentials(req));
     }
 }
 exports.MonitorModule = MonitorModule;

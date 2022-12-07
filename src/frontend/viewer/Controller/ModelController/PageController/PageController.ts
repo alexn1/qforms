@@ -1,10 +1,10 @@
-import {ModelController} from '../ModelController';
-import {FrontHostApp} from '../../../../common';
-import {FormController} from '../FormController/FormController';
-import {DataSource} from '../../../Model/DataSource/DataSource';
-import {RowFormController} from '../FormController/RowFormController/RowFormController';
-import {PageView} from './PageView';
-import {ApplicationController} from '../ApplicationController/ApplicationController';
+import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../../common';
+import { FormController } from '../FormController/FormController';
+import { DataSource } from '../../../Model/DataSource/DataSource';
+import { RowFormController } from '../FormController/RowFormController/RowFormController';
+import { PageView } from './PageView';
+import { ApplicationController } from '../ApplicationController/ApplicationController';
 
 export class PageController extends ModelController {
     id: any;
@@ -45,25 +45,31 @@ export class PageController extends ModelController {
         this.validate();
         if (this.isValid()) {
             try {
-                this.getApp().getView().disableRerender();
+                this.getApp()
+                    .getView()
+                    .disableRerender();
                 await this.getModel().update();
                 console.log('page model updated', this.getModel().getFullName());
             } finally {
-                this.getApp().getView().enableRerender();
+                this.getApp()
+                    .getView()
+                    .enableRerender();
             }
             await this.getApp().closePage(this);
             if (this.getModel().getOptions().onClose) {
-                this.getModel().getOptions().onClose();
+                this.getModel()
+                    .getOptions()
+                    .onClose();
             }
         } else {
             await this.rerender();
         }
-    }
+    };
 
     onClosePageClick = async e => {
         console.log('PageController.onClosePageClick', this.getModel().getFullName());
         await this.close();
-    }
+    };
 
     onOpenPageClick = async e => {
         const name = this.getModel().getName();
@@ -71,11 +77,11 @@ export class PageController extends ModelController {
         const link = this.createOpenInNewLink(name, key);
         // console.log('link', link);
         window.open(link, '_blank');
-    }
+    };
     createOpenInNewLink(name, key) {
         return PageController.createLink({
             page: name,
-            ...DataSource.keyToParams(key)
+            ...DataSource.keyToParams(key),
         });
     }
     async close() {
@@ -85,12 +91,16 @@ export class PageController extends ModelController {
         // const valid = this.isValid();
         // console.log('valid:', valid);
         if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
-            const result = await this.getApp().confirm({message: this.model.getApp().getText().form.areYouSure})
+            const result = await this.getApp().confirm({
+                message: this.model.getApp().getText().form.areYouSure,
+            });
             if (!result) return;
         }
         await this.getApp().closePage(this);
         if (this.getModel().getOptions().onClose) {
-            this.getModel().getOptions().onClose();
+            this.getModel()
+                .getOptions()
+                .onClose();
         }
     }
     validate() {
@@ -136,7 +146,7 @@ export class PageController extends ModelController {
         if (!options.params) {
             options.params = {};
         }
-        const params =  this.getModel().getParams();
+        const params = this.getModel().getParams();
         for (const name in params) {
             if (!options.params[name]) {
                 options.params[name] = params[name];
@@ -170,8 +180,8 @@ export class PageController extends ModelController {
                 [
                     // ...(query ? query.split('&') : []),
                     ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`)
-                ].join('&')
+                    ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`),
+                ].join('&'),
             ].join('?');
         }
         return window.location.pathname;
@@ -189,7 +199,7 @@ export class PageController extends ModelController {
                 await this.close();
             }
         }
-    }
+    };
     getTitle() {
         const model = this.getModel();
         const key = model.getKey();
@@ -205,7 +215,7 @@ export class PageController extends ModelController {
         return [
             model.getCaption(),
             ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
-            ...(keyPart ? [keyPart] : [])
+            ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }
     getSelectedRowKey() {
@@ -218,15 +228,17 @@ export class PageController extends ModelController {
     onSelectClick = async e => {
         console.log('PageController.onSelectClick');
         await this.selectRow(this.getSelectedRowKey());
-    }
+    };
     onResetClick = async e => {
         console.log('PageController.onResetClick');
         await this.selectRow(null);
-    }
+    };
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel().getOptions().onSelect(key);
+        await this.getModel()
+            .getOptions()
+            .onSelect(key);
     }
     invalidate() {
         this.forms.forEach(form => form.invalidate());

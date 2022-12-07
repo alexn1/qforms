@@ -20,14 +20,10 @@ class PageEditor extends Editor_1.Editor {
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
             },
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : []),
             ],
-            actions: [
-                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
-            ],
-            forms: [
-                ...(params.forms ? params.forms.map(Editor_1.Editor.createItemData) : [])
-            ],
+            actions: [...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])],
+            forms: [...(params.forms ? params.forms.map(Editor_1.Editor.createItemData) : [])],
         };
     }
     setAttr(name, value) {
@@ -46,7 +42,7 @@ class PageEditor extends Editor_1.Editor {
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
     }
@@ -55,7 +51,7 @@ class PageEditor extends Editor_1.Editor {
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
             page: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return jsx;
     }
@@ -64,7 +60,7 @@ class PageEditor extends Editor_1.Editor {
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
             page: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return less;
     }

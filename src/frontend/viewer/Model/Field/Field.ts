@@ -1,14 +1,13 @@
-import {Model} from '../Model';
-import {Helper} from '../../../common';
-import {RowForm} from '../Form/RowForm/RowForm';
+import { Model } from '../Model';
+import { Helper } from '../../../common';
+import { RowForm } from '../Form/RowForm/RowForm';
 
 export class Field extends Model {
     // constructor(data, parent) {
     //     super(data, parent);
     // }
 
-    init() {
-    }
+    init() {}
 
     replaceThis(value) {
         return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {
@@ -25,7 +24,8 @@ export class Field extends Model {
         if (!column) return;
         const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
         const js = Helper.templateToJsString(defaultValue, this.getPage().getParams());
-        if (typeof js !== 'string') throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
+        if (typeof js !== 'string')
+            throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
         // console.log('js', this.getFullName(), js);
         // module.Helper
         try {
@@ -99,7 +99,9 @@ export class Field extends Model {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
-        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
+        this.getForm()
+            .getDefaultDataSource()
+            .setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
     }
 
@@ -113,7 +115,9 @@ export class Field extends Model {
 
     getRawValue(row) {
         if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
+        return this.getForm()
+            .getDefaultDataSource()
+            .getValue(row, this.getAttr('column'));
     }
 
     getDefaultDataSource() {

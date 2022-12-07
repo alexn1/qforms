@@ -1,5 +1,5 @@
-import {Editor} from '../Editor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FrontHostApp } from '../../../common';
 
 export class KeyColumnEditor extends Editor {
     dataSource: any;
@@ -12,15 +12,15 @@ export class KeyColumnEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
-            action    : 'save',
-            params    : {
-                form        : this.dataSource.parent.getName(),
+            action: 'save',
+            params: {
+                form: this.dataSource.parent.getName(),
                 pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
-                dataSource  : this.dataSource.getName(),
-                keyColumn   : this.getName(),
-                attr        : name,
-                value       : value
-            }
+                dataSource: this.dataSource.getName(),
+                keyColumn: this.getName(),
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -29,15 +29,15 @@ export class KeyColumnEditor extends Editor {
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
-            action    : 'delete',
-            params    : {
+            action: 'delete',
+            params: {
                 // page      : this.dataSource.parent.page.pageLink.getFileName(),
-                ...(this.getPage() ? {page: this.getPage().pageLink.getFileName()} : {}),
+                ...(this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {}),
                 // form      : this.dataSource.parent.getName(),
-                ...(this.getForm() ? {form: this.getForm().getName()}: {}),
+                ...(this.getForm() ? { form: this.getForm().getName() } : {}),
                 dataSource: this.dataSource.getName(),
-                keyColumn : this.getName()
-            }
+                keyColumn: this.getName(),
+            },
         });
     }
     getPage() {
@@ -59,6 +59,4 @@ export class KeyColumnEditor extends Editor {
         await this.deleteData();
         this.parent.removeKeyColumn(this);
     }
-
-
 }

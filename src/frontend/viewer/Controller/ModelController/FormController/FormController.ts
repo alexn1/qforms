@@ -1,6 +1,6 @@
-import {ModelController} from '../ModelController';
-import {FrontHostApp} from '../../../../common';
-import {FieldController} from '../FieldController/FieldController';
+import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../../common';
+import { FieldController } from '../FieldController/FieldController';
 
 export class FormController extends ModelController {
     fields: any;
@@ -20,7 +20,7 @@ export class FormController extends ModelController {
     }
     init() {
         for (const field of this.model.fields) {
-            const ctrl = this.fields[field.getName()] = FieldController.create(field, this);
+            const ctrl = (this.fields[field.getName()] = FieldController.create(field, this));
             ctrl.init();
         }
     }

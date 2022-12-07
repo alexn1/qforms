@@ -1,13 +1,13 @@
-import {SqlDataSource} from "../DataSource/SqlDataSource/SqlDataSource";
+import { SqlDataSource } from '../DataSource/SqlDataSource/SqlDataSource';
 
 const path = require('path');
 
-import {Model} from '../Model';
-import {Application} from '../Application/Application';
-import {Page} from '../Page/Page';
-import {Form} from '../Form/Form';
-import {Column} from "../Column/Column";
-import {Helper} from '../../../Helper';
+import { Model } from '../Model';
+import { Application } from '../Application/Application';
+import { Page } from '../Page/Page';
+import { Form } from '../Form/Form';
+import { Column } from '../Column/Column';
+import { Helper } from '../../../Helper';
 
 export class Field extends Model {
     static async create(data, parent): Promise<Field> {
@@ -19,19 +19,19 @@ export class Field extends Model {
     // }
 
     fillAttributes(response: any): void {
-        response.class        = this.getClassName();
-        response.name         = this.getAttr('name');
-        response.caption      = this.getAttr('caption');
-        response.column       = this.getAttr('column');
+        response.class = this.getClassName();
+        response.name = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+        response.column = this.getAttr('column');
         response.defaultValue = this.getAttr('defaultValue');
-        response.value        = this.getAttr('value');
-        response.param        = this.getAttr('param');
-        response.visible      = this.getAttr('visible');
-        response.type         = this.getAttr('type');
-        response.width        = this.getAttr('width');
-        response.cssBlock     = this.getAttr('cssBlock');
-        response.viewClass    = this.getAttr('viewClass');
-        response.autoFocus    = this.getAttr('autoFocus');
+        response.value = this.getAttr('value');
+        response.param = this.getAttr('param');
+        response.visible = this.getAttr('visible');
+        response.type = this.getAttr('type');
+        response.width = this.getAttr('width');
+        response.cssBlock = this.getAttr('cssBlock');
+        response.viewClass = this.getAttr('viewClass');
+        response.autoFocus = this.getAttr('autoFocus');
     }
 
     getDirPath(): string {
@@ -77,9 +77,11 @@ export class Field extends Model {
 
     getFullName(): string {
         return [
-            this.getForm().getPage().getName(),
+            this.getForm()
+                .getPage()
+                .getName(),
             this.getForm().getName(),
-            this.getName()
+            this.getName(),
         ].join('.');
     }
 

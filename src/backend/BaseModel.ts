@@ -21,9 +21,7 @@ export class BaseModel {
     }
 
     static getEnvList(data) {
-        const list = data.env
-            ? Object.keys(data.env).filter(env => env !== 'local')
-            : [];
+        const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
         return ['local', ...list];
     }
 
@@ -113,11 +111,7 @@ export class BaseModel {
         const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
         if (i === -1)
-            throw new Error(
-                `replaceDataColItem: no ${BaseModel.getName(
-                    oldData,
-                )} in ${colName}`,
-            );
+            throw new Error(`replaceDataColItem: no ${BaseModel.getName(oldData)} in ${colName}`);
         dataCol[i] = newData;
         return i;
     }

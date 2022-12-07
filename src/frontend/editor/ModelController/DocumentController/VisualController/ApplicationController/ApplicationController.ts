@@ -1,13 +1,13 @@
-import {VisualController} from '../VisualController';
-import {DatabaseController} from '../../DatabaseController/DatabaseController';
-import {PageLinkController} from '../../../PageLinkController/PageLinkController';
-import {EditorFrontHostApp} from  '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewDatabaseController} from '../../../../ModalController/NewDatabaseController/NewDatabaseController';
-import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
-import {NewPageController} from '../../../../ModalController/NewPageController/NewPageController';
-import {PageController} from '../PageController/PageController';
-import {VisualView} from '../VisualView';
-import {DocumentView} from '../../DocumentView';
+import { VisualController } from '../VisualController';
+import { DatabaseController } from '../../DatabaseController/DatabaseController';
+import { PageLinkController } from '../../../PageLinkController/PageLinkController';
+import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewDatabaseController } from '../../../../ModalController/NewDatabaseController/NewDatabaseController';
+import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import { NewPageController } from '../../../../ModalController/NewPageController/NewPageController';
+import { PageController } from '../PageController/PageController';
+import { VisualView } from '../VisualView';
+import { DocumentView } from '../../DocumentView';
 
 export class ApplicationController extends VisualController {
     editorApp: any;
@@ -20,18 +20,18 @@ export class ApplicationController extends VisualController {
     constructor(model, editorApp) {
         super(model);
         this.editorApp = editorApp;
-        this.databases   = [];
+        this.databases = [];
         this.dataSources = [];
-        this.actions     = [];
-        this.pageLinks   = [];
+        this.actions = [];
+        this.pageLinks = [];
 
         // items
         this.opened = true;
         this.items = [
-            {getTitle: () => 'Databases'   , items: this.databases},
-            {getTitle: () => 'Data Sources', items: this.dataSources},
-            {getTitle: () => 'Actions'     , items: this.actions},
-            {getTitle: () => 'Pages'       , items: this.pageLinks, opened: true}
+            { getTitle: () => 'Databases', items: this.databases },
+            { getTitle: () => 'Data Sources', items: this.dataSources },
+            { getTitle: () => 'Actions', items: this.actions },
+            { getTitle: () => 'Pages', items: this.pageLinks, opened: true },
         ];
     }
     init() {
@@ -67,10 +67,10 @@ export class ApplicationController extends VisualController {
 
     getActions() {
         return [
-            {'action': 'newDatabase'  , 'caption': 'New Database'   },
-            {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newAction'    , 'caption': 'New Action'     },
-            {'action': 'newPage'      , 'caption': 'New Page'       },
+            { action: 'newDatabase', caption: 'New Database' },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'newPage', caption: 'New Page' },
         ];
     }
 
@@ -96,61 +96,73 @@ export class ApplicationController extends VisualController {
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
         // @ts-ignore
-        await EditorFrontHostApp.editorApp.openModal(new NewDatabaseController({onCreate: async values => {
-            // console.log('values: ', values);
-            const database = await this.model.newDatabase({
-                class : values.class,
-                name  : values.name,
-                params: [
-                    {class: 'Param', name: 'host'    , value: values.host    },
-                    {class: 'Param', name: 'database', value: values.database},
-                    {class: 'Param', name: 'user'    , value: values.user    },
-                    {class: 'Param', name: 'password', value: values.password}
-                ]
-            });
-            const databaseController = this.createDatabase(database);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
-            databaseController.view.parent.open();
-            this.view.rerender();
-            // @ts-ignore
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewDatabaseController({
+                onCreate: async values => {
+                    // console.log('values: ', values);
+                    const database = await this.model.newDatabase({
+                        class: values.class,
+                        name: values.name,
+                        params: [
+                            { class: 'Param', name: 'host', value: values.host },
+                            { class: 'Param', name: 'database', value: values.database },
+                            { class: 'Param', name: 'user', value: values.user },
+                            { class: 'Param', name: 'password', value: values.password },
+                        ],
+                    });
+                    const databaseController = this.createDatabase(database);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
+                    databaseController.view.parent.open();
+                    this.view.rerender();
+                    // @ts-ignore
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     async newDataSourceAction() {
-        await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
-            const dataSource = await this.model.newDataSource({
-                name : values.name,
-                class: values.class
-            });
-            const dataSourceController = this.createDataSource(dataSource);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-            dataSourceController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewDataSourceController({
+                onCreate: async values => {
+                    const dataSource = await this.model.newDataSource({
+                        name: values.name,
+                        class: values.class,
+                    });
+                    const dataSourceController = this.createDataSource(dataSource);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                    dataSourceController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     async newPageAction() {
-        await EditorFrontHostApp.editorApp.openModal(new NewPageController({onCreate: async values => {
-            const page = await this.model.newPage({
-                name   : values.name,
-                caption: values.caption || values.name,
-                startup: values.startup
-            });
-            const pageLinkController = this.createPageLink(page.pageLink);
-            const pageController = new PageController(page, pageLinkController);
-            pageController.init();
-            pageLinkController.setPageController(pageController);
-            EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewPageController({
+                onCreate: async values => {
+                    const page = await this.model.newPage({
+                        name: values.name,
+                        caption: values.caption || values.name,
+                        startup: values.startup,
+                    });
+                    const pageLinkController = this.createPageLink(page.pageLink);
+                    const pageController = new PageController(page, pageLinkController);
+                    pageController.init();
+                    pageLinkController.setPageController(pageController);
+                    EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     getPropList() {
         const propList = super.getPropList();
         propList.options['authentication'] = ['true', 'false'];
-        propList.options['lang']           = ['en'  , 'ru'   ];
+        propList.options['lang'] = ['en', 'ru'];
         return propList;
     }
     findPageLink(name) {

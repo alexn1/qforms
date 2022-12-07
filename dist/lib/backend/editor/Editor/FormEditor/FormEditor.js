@@ -21,14 +21,10 @@ class FormEditor extends Editor_1.Editor {
             '@class': 'Form',
             '@attributes': Object.assign({}, FormEditor.createAttributes(params)),
             dataSources: [
-                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : [])
+                ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : []),
             ],
-            actions: [
-                ...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])
-            ],
-            fields: [
-                ...(params.fields ? params.fields.map(Editor_1.Editor.createItemData) : [])
-            ],
+            actions: [...(params.actions ? params.actions.map(Editor_1.Editor.createItemData) : [])],
+            fields: [...(params.fields ? params.fields.map(Editor_1.Editor.createItemData) : [])],
         };
     }
     async createJs(params) {
@@ -37,7 +33,7 @@ class FormEditor extends Editor_1.Editor {
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.parent.getName(),
             form: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
     }
@@ -47,7 +43,7 @@ class FormEditor extends Editor_1.Editor {
         const jsx = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.parent.getName(),
             form: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return jsx;
     }
@@ -57,7 +53,7 @@ class FormEditor extends Editor_1.Editor {
         const less = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.parent.getName(),
             form: this.getName(),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return less;
     }
@@ -67,7 +63,7 @@ class FormEditor extends Editor_1.Editor {
         const js = await this.createFileByParams(filePath, templateFilePath, {
             page: this.parent.getName(),
             form: this.getName(),
-            _class: this.getClassName()
+            _class: this.getClassName(),
         });
         return js;
     }

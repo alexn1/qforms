@@ -1,5 +1,4 @@
-import {Field} from '../Field';
-
+import { Field } from '../Field';
 
 export class TextAreaField extends Field {
     getRows() {

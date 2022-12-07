@@ -17,7 +17,9 @@ class Table extends Model_1.Model {
     }
     getKeyColumns() {
         // console.log('Table.getKeyColumns');
-        const keyColumns = this.columns.filter(column => column.isKey()).map(column => column.getName());
+        const keyColumns = this.columns
+            .filter(column => column.isKey())
+            .map(column => column.getName());
         // const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
         if (keyColumns.length === 0)
             throw new Error(`no key columns in table: ${this.getName()}`);

@@ -1,7 +1,7 @@
-import {Context} from "../../../../Context";
+import { Context } from '../../../../Context';
 
 const mysql = require('mysql');
-import {Database} from '../Database';
+import { Database } from '../Database';
 
 export class MySqlDatabase extends Database {
     pool: any;
@@ -41,7 +41,7 @@ export class MySqlDatabase extends Database {
         console.log('MySqlDatabase.getConfig');
         return {
             ...super.getConfig(),
-            queryFormat: MySqlDatabase.queryFormat
+            queryFormat: MySqlDatabase.queryFormat,
         };
     }
 
@@ -80,25 +80,28 @@ export class MySqlDatabase extends Database {
         });
     }*/
 
-
     async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         Database.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    if (nest) {
-                        const rows = this._getRows(result, fields);   // for duplicate column names
-                        resolve(rows);
+            cnn.query(
+                { sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest },
+                params,
+                (err, result, fields) => {
+                    if (err) {
+                        reject(err);
                     } else {
-                        resolve(result);
+                        if (nest) {
+                            const rows = this._getRows(result, fields); // for duplicate column names
+                            resolve(rows);
+                        } else {
+                            resolve(result);
+                        }
                     }
-                }
-            });
+                },
+            );
         });
     }
 
@@ -108,13 +111,17 @@ export class MySqlDatabase extends Database {
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.query({sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest}, params, (err, result, fields) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve(result);
-                }
-            });
+            cnn.query(
+                { sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest },
+                params,
+                (err, result, fields) => {
+                    if (err) {
+                        reject(err);
+                    } else {
+                        resolve(result);
+                    }
+                },
+            );
         });
     }
 
@@ -133,7 +140,7 @@ export class MySqlDatabase extends Database {
         for (let i = 0; i < result.length; i++) {
             const r = result[i];
             const row = {};
-            for (let j=0; j < fields.length; j++) {
+            for (let j = 0; j < fields.length; j++) {
                 const f = fields[j];
                 const column = f.name + (f.numb > 0 ? f.numb : '');
                 row[column] = r[f.table][f.name];
@@ -195,9 +202,9 @@ export class MySqlDatabase extends Database {
 
     static typeCast(field, next) {
         if (
-            field.type === 'DATE'      ||
-            field.type === 'DATETIME'  ||
-            field.type === 'TIME'      ||
+            field.type === 'DATE' ||
+            field.type === 'DATETIME' ||
+            field.type === 'TIME' ||
             field.type === 'TIMESTAMP'
         ) {
             return field.string();
@@ -232,8 +239,7 @@ export class MySqlDatabase extends Database {
         return new Promise((resolve, reject) => {
             const cnn = mysql.createConnection(config);
             cnn.connect();
-            const query =
-                `SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
+            const query = `SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
 FROM information_schema.columns \
 WHERE table_schema = '${config.database}' and table_name = '${table}'`;
             cnn.query(query, (err, rows) => {
@@ -244,13 +250,13 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                     const tableInfo = rows.map(row => {
                         // console.log('row:', row);
                         return {
-                            name    : row.COLUMN_NAME,
-                            type    : this.getColumnTypeByDataType(row.COLUMN_TYPE),
-                            key     : row.COLUMN_KEY === 'PRI',
-                            auto    : row.EXTRA === 'auto_increment',
+                            name: row.COLUMN_NAME,
+                            type: this.getColumnTypeByDataType(row.COLUMN_TYPE),
+                            key: row.COLUMN_KEY === 'PRI',
+                            auto: row.EXTRA === 'auto_increment',
                             nullable: row.IS_NULLABLE === 'YES',
-                            comment : row.COLUMN_COMMENT,
-                            dbType  : row.COLUMN_TYPE
+                            comment: row.COLUMN_COMMENT,
+                            dbType: row.COLUMN_TYPE,
                             // COLUMN_TYPE   : row.COLUMN_TYPE,
                             // COLUMN_DEFAULT: row.COLUMN_DEFAULT,
                             // EXTRA         : row.EXTRA,
@@ -282,22 +288,23 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     async insertRow(context, table, values, autoColumnTypes = {}) {
         console.log(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
-        if (autoColumns.length > 1) throw new Error('mysql does not support more than one auto increment column');
+        if (autoColumns.length > 1)
+            throw new Error('mysql does not support more than one auto increment column');
 
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
 
-        const result = await this.queryResult(context, query,  values);
+        const result = await this.queryResult(context, query, values);
         // console.log('insert result:', result);
         if (autoColumns.length === 1) {
             if (!result.insertId) throw new Error('no insertId');
             return {
                 [autoColumns[0]]: result.insertId,
-                ...values
+                ...values,
             };
         }
         return {
-            ...values
+            ...values,
         };
         /*const key = JSON.stringify([result.insertId]);
         return key;*/

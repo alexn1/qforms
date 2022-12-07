@@ -32,7 +32,7 @@ class FileSessionStore extends session.Store {
             Helper_1.Helper.getFileContent(sessionFilePath).then(content => {
                 if (content) {
                     try {
-                        const session = this.store[sid] = JSON.parse(content);
+                        const session = (this.store[sid] = JSON.parse(content));
                         cb(null, session);
                     }
                     catch (err) {

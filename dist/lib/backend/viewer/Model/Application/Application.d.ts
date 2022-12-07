@@ -1,4 +1,4 @@
-import { AppInfo } from "../../../AppInfo";
+import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
 import { Action } from '../Action/Action';
@@ -8,7 +8,7 @@ import { Page } from '../Page/Page';
 import { PageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
-import { Result } from "../../../Result";
+import { Result } from '../../../Result';
 export declare class Application extends Model {
     appInfo: AppInfo;
     hostApp: any;

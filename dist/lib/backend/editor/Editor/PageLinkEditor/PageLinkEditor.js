@@ -10,8 +10,8 @@ class PageLinkEditor extends Editor_1.Editor {
                 name: params.name,
                 fileName: params.fileName || `pages/${params.name}/${params.name}.json`,
                 menu: params.menu || (params.startup === 'true' ? 'Menu' : ''),
-                startup: params.startup || 'false'
-            }
+                startup: params.startup || 'false',
+            },
         };
     }
     getColName() {

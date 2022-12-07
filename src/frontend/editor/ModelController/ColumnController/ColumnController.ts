@@ -1,15 +1,13 @@
-import {ModelController} from '../ModelController';
-import {FrontHostApp} from '../../../common';
-import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
+import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../common';
+import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class ColumnController extends ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
     getActions() {
-        return [
-            {'action': 'delete', 'caption': 'Delete'}
-        ];
+        return [{ action: 'delete', caption: 'Delete' }];
     }
     async doAction(name) {
         switch (name) {
@@ -21,18 +19,18 @@ export class ColumnController extends ModelController {
     static async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Column',
-            action    : 'getView',
-            params    : {
-                view: view
-            }
+            action: 'getView',
+            params: {
+                view: view,
+            },
         });
     }
     getPropList() {
         const propList = super.getPropList();
-        propList.options['key']      = ['true', 'false'];
-        propList.options['auto']     = ['true', 'false'];
+        propList.options['key'] = ['true', 'false'];
+        propList.options['auto'] = ['true', 'false'];
         propList.options['nullable'] = ['true', 'false'];
-        propList.options['type']     = ['', 'string', 'number', 'boolean', 'object', 'date'];
+        propList.options['type'] = ['', 'string', 'number', 'boolean', 'object', 'date'];
         /*propList.options['dbType']   = [
             '',
             'integer',

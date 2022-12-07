@@ -1,6 +1,6 @@
 const path = require('path');
-import {VisualEditorController} from '../VisualEditorController';
-import {Helper} from '../../../Helper';
+import { VisualEditorController } from '../VisualEditorController';
+import { Helper } from '../../../Helper';
 
 export class PageEditorController extends VisualEditorController {
     /*constructor(...args) {
@@ -52,30 +52,30 @@ export class PageEditorController extends VisualEditorController {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createJs(params);
-        return {js};
+        return { js };
     }
     async createView(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const jsx = await pageEditor.createJsx(params);
-        return {jsx};
+        return { jsx };
     }
     async createStyle(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const less = await pageEditor.createLess(params);
-        return {less};
+        return { less };
     }
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         await pageEditor.saveCustomFile('js', params.text);
-        return {js: params.text};
+        return { js: params.text };
     }
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
 }

@@ -1,5 +1,5 @@
-import {ModelController} from '../ModelController';
-import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
+import { ModelController } from '../ModelController';
+import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class ActionController extends ModelController {
     /*constructor(model, parent) {
@@ -7,9 +7,9 @@ export class ActionController extends ModelController {
     }*/
     getActions() {
         return [
-            {'action': 'moveUp'     , 'caption': 'Move Up'     },
-            {'action': 'moveDown'   , 'caption': 'Move Down'   },
-            {'action': 'delete', 'caption': 'Delete'}
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {

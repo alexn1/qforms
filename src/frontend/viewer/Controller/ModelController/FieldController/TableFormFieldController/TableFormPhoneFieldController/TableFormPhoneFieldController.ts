@@ -1,5 +1,5 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormPhoneFieldView} from './TableFormPhoneFieldView';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormPhoneFieldView } from './TableFormPhoneFieldView';
 
 export class TableFormPhoneFieldController extends TableFormFieldController {
     getViewClass() {

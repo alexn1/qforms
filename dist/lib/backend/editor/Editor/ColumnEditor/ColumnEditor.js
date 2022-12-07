@@ -25,7 +25,7 @@ class ColumnEditor extends Editor_1.Editor {
                 key: params.key || 'false',
                 auto: params.auto || 'false',
                 nullable: params.nullable || 'true',
-            }
+            },
         };
     }
     getColName() {

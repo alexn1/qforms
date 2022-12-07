@@ -1,6 +1,6 @@
-import {Context} from "../../../Context";
-import {Application} from "../../../viewer/Model/Application/Application";
-import {EditorController} from '../EditorController';
+import { Context } from '../../../Context';
+import { Application } from '../../../viewer/Model/Application/Application';
+import { EditorController } from '../EditorController';
 
 export class DatabaseEditorController extends EditorController {
     application: Application = null;
@@ -61,7 +61,7 @@ export class DatabaseEditorController extends EditorController {
     async getTableInfo(params) {
         const database = this.application.getDatabase(params.database);
         const tableInfo = await database.getTableInfo(params.table);
-        return {tableInfo};
+        return { tableInfo };
     }
 
     async moveUp(params) {
@@ -77,5 +77,4 @@ export class DatabaseEditorController extends EditorController {
         await appEditor.save();
         return 'ok';
     }
-
 }

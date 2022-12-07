@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormDateFieldView} from './RowFormDateFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormDateFieldView } from './RowFormDateFieldView';
 
 export class RowFormDateFieldController extends RowFormFieldController {
     getViewClass() {

@@ -74,8 +74,8 @@ class EditorModule {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
+            ...this.hostApp.commonModule.css,
+            ...this.css,
         ];
     }
     getScripts() {
@@ -87,7 +87,7 @@ class EditorModule {
             '/lib/codemirror-4.8/lib/codemirror.js',
             '/lib/codemirror-4.8/mode/javascript/javascript.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     async handleEditorGet(req, res, context) {
@@ -97,7 +97,7 @@ class EditorModule {
         const data = {
             app: appInfo.appFile.data,
             nodeEnv: this.hostApp.getNodeEnv(),
-            logErrorUrl: '/error'
+            logErrorUrl: '/error',
         };
         res.render('editor/index', {
             version: pkg.version,
@@ -107,7 +107,7 @@ class EditorModule {
             appFileName: context.getAppFileName(),
             env: context.getEnv(),
             links: this.getLinks(),
-            scripts: this.getScripts()
+            scripts: this.getScripts(),
         });
     }
     async handleEditorPost(req, res, context) {

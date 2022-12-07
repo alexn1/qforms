@@ -1,12 +1,12 @@
-const path  = require('path');
+const path = require('path');
 
-import {Model} from '../Model';
-import {DataSource} from '../DataSource/DataSource';
-import {Action} from '../Action/Action';
-import {Field} from '../Field/Field';
-import {Page} from '../Page/Page';
-import {Application} from '../Application/Application';
-import {MyError} from '../../../MyError';
+import { Model } from '../Model';
+import { DataSource } from '../DataSource/DataSource';
+import { Action } from '../Action/Action';
+import { Field } from '../Field/Field';
+import { Page } from '../Page/Page';
+import { Application } from '../Application/Application';
+import { MyError } from '../../../MyError';
 
 export class Form extends Model {
     dataSources: DataSource[];
@@ -20,9 +20,9 @@ export class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];
-        this.dataSources     = [];
-        this.actions         = [];
-        this.fields          = [];
+        this.dataSources = [];
+        this.actions = [];
+        this.fields = [];
     }
 
     async init(context): Promise<void> {
@@ -36,11 +36,11 @@ export class Form extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.class     = this.getClassName();
-        response.name      = this.getAttr('name');
-        response.caption   = this.getAttr('caption');
-        response.visible   = this.getAttr('visible');
-        response.cssBlock  = this.getAttr('cssBlock');
+        response.class = this.getClassName();
+        response.name = this.getAttr('name');
+        response.caption = this.getAttr('caption');
+        response.visible = this.getAttr('visible');
+        response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
     }
 
@@ -65,16 +65,16 @@ export class Form extends Model {
 
     _getSurrogateDataSourceResponse(context) {
         const row = {
-            id: 1
+            id: 1,
         };
         for (const field of this.fields) {
             field.fillDefaultValue(context, row);
         }
         return {
-            class     : 'DataSource',
-            name      : 'default',
+            class: 'DataSource',
+            name: 'default',
             keyColumns: ['id'],
-            rows      : [row],
+            rows: [row],
         };
     }
 
@@ -88,25 +88,27 @@ export class Form extends Model {
     }
 
     replaceThis(context, query) {
-        return query.replace(/\{([@\w\.]+)\}/g, (text, name) => {
-            if (name.indexOf('.') !== -1) {
-                const arr = name.split('.');
-                if (arr[0] === 'this') {
-                    arr[0] = this.getPage().getName();
+        return query
+            .replace(/\{([@\w\.]+)\}/g, (text, name) => {
+                if (name.indexOf('.') !== -1) {
+                    const arr = name.split('.');
+                    if (arr[0] === 'this') {
+                        arr[0] = this.getPage().getName();
+                    }
+                    return '{' + arr.join('.') + '}';
                 }
-                return '{' + arr.join('.') + '}';
-            }
-            return text;
-        }).replace(/\[([@\w\.]+)\]/g, (text, name) => {
-            if (name.indexOf('.') !== -1) {
-                const arr = name.split('.');
-                if (arr[0] === 'this') {
-                    arr[0] = this.getPage().getName();
+                return text;
+            })
+            .replace(/\[([@\w\.]+)\]/g, (text, name) => {
+                if (name.indexOf('.') !== -1) {
+                    const arr = name.split('.');
+                    if (arr[0] === 'this') {
+                        arr[0] = this.getPage().getName();
+                    }
+                    return '[' + arr.join('.') + ']';
                 }
-                return '[' + arr.join('.') + ']';
-            }
-            return text;
-        });
+                return text;
+            });
     }
 
     async rpc(name, context) {
@@ -114,7 +116,7 @@ export class Form extends Model {
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no rpc ${this.constructor.name}.${name}`,
-            data   : {method: `${this.constructor.name}.rpc`},
+            data: { method: `${this.constructor.name}.rpc` },
             context,
         });
     }

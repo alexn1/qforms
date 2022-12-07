@@ -1,8 +1,8 @@
 const { Pool, Client } = require('pg');
 const colors = require('colors');
 
-import {Database} from '../Database';
-import {Context} from '../../../../Context';
+import { Database } from '../Database';
+import { Context } from '../../../../Context';
 
 export class PostgreSqlDatabase extends Database {
     pool: any;
@@ -66,9 +66,16 @@ export class PostgreSqlDatabase extends Database {
     }
 
     async queryResult(context: Context, query: string, params: any = null): Promise<any> {
-        if (context.query.sql) console.log(colors.blue('PostgreSqlDatabase.queryResult'), {query, params}/*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        if (context.query.sql)
+            console.log(
+                colors.blue('PostgreSqlDatabase.queryResult'),
+                {
+                    query,
+                    params,
+                } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
+            );
         Database.checkParams(query, params);
-        const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
             console.log('values:', values);
@@ -79,9 +86,12 @@ export class PostgreSqlDatabase extends Database {
     }
 
     static async queryResult(cnn, query: string, params: any = null): Promise<any> {
-        console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query/*, params*//*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        console.log(
+            colors.blue('static PostgreSqlDatabase.queryResult'),
+            query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
+        );
         Database.checkParams(query, params);
-        const {sql, values} = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
         const result = await cnn.query(sql, values);
@@ -117,26 +127,28 @@ export class PostgreSqlDatabase extends Database {
         // console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
-            return {sql: query, values: null};
+            return { sql: query, values: null };
         }
         const usedValues = Database.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);
         const values = keys.map(key => params[key]);
-        const sql =  query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
+        const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
                 return `$${keys.indexOf(name) + 1}`;
             }
             return text;
         });
-        return {sql, values};
+        return { sql, values };
     }
 
     getDeleteQuery(tableName: string, rowKeyValues: any): string {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
-        const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
+        const whereString = keyColumns
+            .map(keyColumn => `"${keyColumn}" = {${keyColumn}}`)
+            .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
         // console.log('query:', query);
         return query;
@@ -171,7 +183,7 @@ export class PostgreSqlDatabase extends Database {
     async getTableList(): Promise<string[]> {
         console.log('PostgreSqlDatabase.getTableList');
         const rows = await this.query(
-            `select "table_name" from information_schema.tables where table_schema = 'public'`
+            `select "table_name" from information_schema.tables where table_schema = 'public'`,
         );
         const tableList = rows.map(row => row.table_name);
         // console.log('tableList:', tableList);
@@ -183,17 +195,18 @@ export class PostgreSqlDatabase extends Database {
         const keyColumns = await this.getTableKeyColumns(table);
         // console.log('keyColumns:', keyColumns);
         const rows = await this.query(
-            `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`
+            `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`,
         );
         // console.log('getTableInfo rows:', rows);
         const tableInfo = rows.map(row => ({
-            name    : row.column_name,
-            type    : this.getColumnTypeByDataType(row.data_type),
-            key     : !!keyColumns.find(keyColumn => keyColumn.attname === row.column_name),
-            auto    : row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
+            name: row.column_name,
+            type: this.getColumnTypeByDataType(row.data_type),
+            key: !!keyColumns.find(keyColumn => keyColumn.attname === row.column_name),
+            auto:
+                row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
             nullable: row.is_nullable === 'YES',
-            comment : null,
-            dbType  : row.data_type
+            comment: null,
+            dbType: row.data_type,
         }));
         // console.log('tableInfo:', tableInfo);
         return tableInfo;
@@ -229,7 +242,7 @@ export class PostgreSqlDatabase extends Database {
             `SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
 JOIN   pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
-WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
+WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
         );
         return rows;
     }
@@ -260,18 +273,27 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
             return autoColumns.reduce((acc, name, i) => {
                 // console.log('name:', name);
                 const r = result[i];
-                let [{currval: val}] = r.rows;
-                if (autoColumnTypes[name] === 'number' && typeof val === 'string') val = Number(val);
-                if (typeof val !== autoColumnTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
+                let [{ currval: val }] = r.rows;
+                if (autoColumnTypes[name] === 'number' && typeof val === 'string')
+                    val = Number(val);
+                if (typeof val !== autoColumnTypes[name])
+                    throw new Error(
+                        `wrong type of auto value: ${typeof val}, should be ${
+                            autoColumnTypes[name]
+                        }`,
+                    );
                 acc[name] = val;
                 return acc;
             }, {});
         } else {
-            let [{currval: val}] = result.rows;
+            let [{ currval: val }] = result.rows;
             const name = autoColumns[0];
             if (autoColumnTypes[name] === 'number' && typeof val === 'string') val = Number(val);
-            if (typeof val !== autoColumnTypes[name]) throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
-            return {[name]: val};
+            if (typeof val !== autoColumnTypes[name])
+                throw new Error(
+                    `wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`,
+                );
+            return { [name]: val };
         }
     }
 
@@ -279,7 +301,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
         console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
-        const result = await this.queryResult(context, query,  values);
+        const result = await this.queryResult(context, query, values);
         // console.log('insert result:', result);
 
         // auto
@@ -288,13 +310,11 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`
             console.log('auto:', auto);
             return {
                 ...auto,
-                ...values
+                ...values,
             };
         }
         return {
-            ...values
+            ...values,
         };
     }
-
-
 }

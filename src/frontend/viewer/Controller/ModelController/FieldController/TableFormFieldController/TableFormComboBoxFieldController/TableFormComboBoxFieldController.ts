@@ -1,8 +1,7 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormComboBoxFieldView} from './TableFormComboBoxFieldView';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormComboBoxFieldView } from './TableFormComboBoxFieldView';
 
 export class TableFormComboBoxFieldController extends TableFormFieldController {
-
     init() {
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();
@@ -38,8 +37,7 @@ export class TableFormComboBoxFieldController extends TableFormFieldController {
         // console.log('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
         this.getForm().invalidate();
         await this.getForm().rerender();
-    }
-
+    };
 }
 
 // @ts-ignore

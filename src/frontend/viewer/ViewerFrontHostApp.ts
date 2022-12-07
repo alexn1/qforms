@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
-import {Application} from './Model/Application/Application';
-import {ApplicationController} from './Controller/ModelController/ApplicationController/ApplicationController';
-import {FrontHostApp, Helper} from '../common';
-import {AlertController} from './Controller/AlertController/AlertController';
-import {ConfirmController} from './Controller/ConfirmController/ConfirmController';
+import { Application } from './Model/Application/Application';
+import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
+import { FrontHostApp, Helper } from '../common';
+import { AlertController } from './Controller/AlertController/AlertController';
+import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
 
 export class ViewerFrontHostApp extends FrontHostApp {
     options: any;
@@ -22,7 +22,10 @@ export class ViewerFrontHostApp extends FrontHostApp {
         application.init();
 
         // applicationController
-        const applicationController = this.applicationController = ApplicationController.create(application, this);
+        const applicationController = (this.applicationController = ApplicationController.create(
+            application,
+            this,
+        ));
         applicationController.init();
 
         // view
@@ -47,21 +50,21 @@ export class ViewerFrontHostApp extends FrontHostApp {
     logError(err) {
         console.error('FrontHostApp.logError', err);
         const values = {
-            type   : 'error',
-            source : 'client',
+            type: 'error',
+            source: 'client',
             message: err.message,
-            stack  : err.stack,
-            data   : {
-                href           : window.location.href,
+            stack: err.stack,
+            data: {
+                href: window.location.href,
                 platformVersion: this.getData().versions.platform,
-                appVersion     : this.getData().versions.app,
-            }
+                appVersion: this.getData().versions.app,
+            },
         };
         console.log(`POST ${this.getData().logErrorUrl}`, values);
         fetch(this.getData().logErrorUrl, {
-            method : 'POST',
-            headers: {'Content-Type': 'application/json;charset=utf-8'},
-            body   : JSON.stringify(values)
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify(values),
         }).catch(err => {
             console.error(err.message);
         });
@@ -76,15 +79,16 @@ export class ViewerFrontHostApp extends FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new AlertController({
+                    const ctrl = (this.alertCtrl = new AlertController({
                         ...options,
                         onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
-                        }});
+                        },
+                    }));
                     // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
                     // console.log('view', view);
                 } else {
                     reject(new Error('alert already exists'));
@@ -100,15 +104,16 @@ export class ViewerFrontHostApp extends FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = this.alertCtrl = new ConfirmController({
+                    const ctrl = (this.alertCtrl = new ConfirmController({
                         ...options,
                         onClose: result => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
-                        }});
+                        },
+                    }));
                     // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {ctrl});
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
                     // console.log('view', view);
                 } else {
                     reject(new Error('confirm already exists'));

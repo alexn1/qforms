@@ -1,5 +1,5 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormTextAreaFieldView} from './TableFormTextAreaFieldView';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormTextAreaFieldView } from './TableFormTextAreaFieldView';
 
 export class TableFormTextAreaFieldController extends TableFormFieldController {
     getViewClass() {

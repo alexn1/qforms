@@ -42,13 +42,11 @@ class Application extends Model_1.Model {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'css'))
-            .map(src => `${virtualPath}/${src}`);
+        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'css')).map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'js'))
-            .map(src => `${virtualPath}/${src}`);
+        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'js')).map(src => `${virtualPath}/${src}`);
     }
     async deinit() {
         console.log('Application.deinit: ' + this.getName());
@@ -89,7 +87,7 @@ class Application extends Model_1.Model {
         response.logErrorUrl = this.hostApp.logErrorUrl || '/error';
         response.versions = {
             platform: pkg.version,
-            app: this.getVersion()
+            app: this.getVersion(),
         };
         await this.fillCollection(response, 'databases', context);
         await this.fillCollection(response, 'actions', context);
@@ -107,12 +105,14 @@ class Application extends Model_1.Model {
         // actions
         response.actions = this.getCol('actions').map(data => ({
             name: BaseModel_1.BaseModel.getName(data),
-            caption: BaseModel_1.BaseModel.getAttr(data, 'caption')
+            caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
         }));
         // pages
         response.pages = await this.fillPages(context);
         // user
-        response.user = this.isAuthentication() ? await this.getClientUserFromServerUser(context) : null;
+        response.user = this.isAuthentication()
+            ? await this.getClientUserFromServerUser(context)
+            : null;
         // time
         response.time = Date.now() - start;
         return response;
@@ -121,7 +121,7 @@ class Application extends Model_1.Model {
         const user = context.getUser();
         return {
             id: user.id,
-            login: user.name
+            login: user.name,
         };
     }
     async createMenu(context) {
@@ -144,7 +144,7 @@ class Application extends Model_1.Model {
                 menu[pageLinkMenu].push({
                     type: 'page',
                     page: pageLink.getAttr('name'),
-                    caption: pageFile.getAttr('caption')
+                    caption: pageFile.getAttr('caption'),
                 });
                 // nav
                 if (!nav[pageLinkMenu]) {
@@ -152,7 +152,7 @@ class Application extends Model_1.Model {
                 }
                 nav[pageLinkMenu].push({
                     page: pageLink.getAttr('name'),
-                    caption: pageFile.getAttr('caption')
+                    caption: pageFile.getAttr('caption'),
                 });
             }
         }
@@ -162,7 +162,7 @@ class Application extends Model_1.Model {
             menu['Actions'] = actions.map(actionData => ({
                 type: 'action',
                 action: BaseModel_1.BaseModel.getName(actionData),
-                caption: BaseModel_1.BaseModel.getAttr(actionData, 'caption')
+                caption: BaseModel_1.BaseModel.getAttr(actionData, 'caption'),
             }));
         }
         this.menu = menu;
@@ -198,7 +198,7 @@ class Application extends Model_1.Model {
         if (this.pages[pageLinkName]) {
             return this.pages[pageLinkName];
         }
-        return this.pages[pageLinkName] = await this.createPage(pageLinkName);
+        return (this.pages[pageLinkName] = await this.createPage(pageLinkName));
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
@@ -227,7 +227,7 @@ class Application extends Model_1.Model {
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
-                name: username
+                name: username,
             };
         }
         return null;
@@ -282,8 +282,7 @@ class Application extends Model_1.Model {
         return database;
     }
     // to init custom context params before each request get/post
-    async initContext(context) {
-    }
+    async initContext(context) { }
     static makeAppInfoFromAppFile(appFile) {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
@@ -301,7 +300,7 @@ class Application extends Model_1.Model {
             filePath: path.resolve(appFilePath),
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),
-            dirPath: path.resolve(path.dirname(appFilePath))
+            dirPath: path.resolve(path.dirname(appFilePath)),
         };
     }
     static async loadAppInfo(appFilePath) {
@@ -418,7 +417,10 @@ class Application extends Model_1.Model {
         }
         else {
             // next();
-            context.getRes().status(404).end('Not Found');
+            context
+                .getRes()
+                .status(404)
+                .end('Not Found');
             await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
         /*

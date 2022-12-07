@@ -1,18 +1,18 @@
-import {Editor} from '../Editor';
-import {DataSourceEditor} from '../DataSourceEditor/DataSourceEditor';
-import {ActionEditor} from '../ActionEditor/ActionEditor';
-import {FormEditor} from '../FormEditor/FormEditor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { DataSourceEditor } from '../DataSourceEditor/DataSourceEditor';
+import { ActionEditor } from '../ActionEditor/ActionEditor';
+import { FormEditor } from '../FormEditor/FormEditor';
+import { FrontHostApp } from '../../../common';
 
 export class PageEditor extends Editor {
     pageLink: any;
     forms: any[];
     constructor(data, pageLink) {
         super(data);
-        this.pageLink    = pageLink;
+        this.pageLink = pageLink;
         this.dataSources = [];
-        this.actions     = [];
-        this.forms       = [];
+        this.actions = [];
+        this.forms = [];
     }
 
     init() {
@@ -59,12 +59,12 @@ export class PageEditor extends Editor {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 fileName: this.pageLink.getFileName(),
-                attr    : name,
-                value   : value
-            }
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -73,10 +73,10 @@ export class PageEditor extends Editor {
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'delete',
-            params    : {
-                page: this.getName()
-            }
+            action: 'delete',
+            params: {
+                page: this.getName(),
+            },
         });
     }
 
@@ -90,8 +90,8 @@ export class PageEditor extends Editor {
         params['pageFileName'] = this.pageLink.getFileName();
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Form',
-            action    : '_new',
-            params    : params
+            action: '_new',
+            params: params,
         });
         return this.createForm(data);
     }
@@ -99,72 +99,72 @@ export class PageEditor extends Editor {
     async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'getView',
-            params    : {
+            action: 'getView',
+            params: {
                 view: view,
-                page: this.data !== undefined ? this.getName() : null
-            }
+                page: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
 
     async saveView(text, view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'saveView',
-            params    : {
+            action: 'saveView',
+            params: {
                 page: this.getName(),
                 view: view,
-                text: text
-            }
+                text: text,
+            },
         });
     }
 
     async saveController(text) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'saveController',
-            params    : {
+            action: 'saveController',
+            params: {
                 page: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         });
     }
 
     async createView() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'createView',
-            params    : {
-                page: this.getName()
-            }
+            action: 'createView',
+            params: {
+                page: this.getName(),
+            },
         });
     }
 
     async createController() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'createController',
-            params    : {
-                page: this.getName()
-            }
+            action: 'createController',
+            params: {
+                page: this.getName(),
+            },
         });
     }
     async createStyle() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'createStyle',
-            params    : {
-                page: this.getName()
-            }
+            action: 'createStyle',
+            params: {
+                page: this.getName(),
+            },
         });
     }
     async createModelBackJs() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
-            action    : 'createModelBackJs',
-            params    : {
-                page: this.getName()
-            }
+            action: 'createModelBackJs',
+            params: {
+                page: this.getName(),
+            },
         });
     }
 
@@ -173,10 +173,9 @@ export class PageEditor extends Editor {
         // params['form']         = this.getName();
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
-            action    : '_new',
-            params    : params
+            action: '_new',
+            params: params,
         });
         return this.createAction(data);
     }
-
 }

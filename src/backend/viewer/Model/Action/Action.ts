@@ -1,4 +1,4 @@
-import {Model} from '../Model';
+import { Model } from '../Model';
 
 export class Action extends Model {
     static async create(data, parent): Promise<Action> {
@@ -6,7 +6,7 @@ export class Action extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.name    = this.getAttr('name');
+        response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
     }
 }

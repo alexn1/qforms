@@ -1,5 +1,5 @@
-import {Model} from '../Model';
-import {FrontHostApp} from '../../../common';
+import { Model } from '../Model';
+import { FrontHostApp } from '../../../common';
 
 export class Form extends Model {
     dataSources: any[];
@@ -8,7 +8,7 @@ export class Form extends Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
-        this.fields      = [];
+        this.fields = [];
     }
 
     init() {
@@ -64,7 +64,10 @@ export class Form extends Model {
     async update() {
         console.log('Form.update', this.getFullName(), this.isChanged());
         if (this.getPage().deinited) throw new Error('page already deinited');
-        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows()) throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
+        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows())
+            throw new Error(
+                `form model not changed or does not have new rows: ${this.getFullName()}`,
+            );
         await this.getDefaultDataSource().update();
     }
 
@@ -82,12 +85,12 @@ export class Form extends Model {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({
-            uuid  : this.getApp().getAttr('uuid'),
+            uuid: this.getApp().getAttr('uuid'),
             action: 'rpc',
-            page  : this.getPage().getName(),
-            form  : this.getName(),
-            name  : name,
-            params: params
+            page: this.getPage().getName(),
+            form: this.getName(),
+            name: name,
+            params: params,
         });
         if (result.errorMessage) throw new Error(result.errorMessage);
         return result;

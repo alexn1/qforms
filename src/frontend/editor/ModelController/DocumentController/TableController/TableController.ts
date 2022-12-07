@@ -1,11 +1,11 @@
-import {DocumentController} from '../DocumentController';
-import {ColumnController} from '../../ColumnController/ColumnController';
-import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import {FrontHostApp} from '../../../../common';
-import {NewColumnController} from '../../../ModalController/NewColumnController/NewColumnController';
-import {NewFormFromTableController} from '../../../ModalController/NewFormFromTableController/NewFormFromTableController';
-import {EditorHelper} from '../../../EditorHelper';
-import {TableView} from './TableView';
+import { DocumentController } from '../DocumentController';
+import { ColumnController } from '../../ColumnController/ColumnController';
+import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import { FrontHostApp } from '../../../../common';
+import { NewColumnController } from '../../../ModalController/NewColumnController/NewColumnController';
+import { NewFormFromTableController } from '../../../ModalController/NewFormFromTableController/NewFormFromTableController';
+import { EditorHelper } from '../../../EditorHelper';
+import { TableView } from './TableView';
 
 export class TableController extends DocumentController {
     columns: any[];
@@ -16,8 +16,8 @@ export class TableController extends DocumentController {
         this.items = [
             {
                 getTitle: () => 'Columns',
-                items: this.columns
-            }
+                items: this.columns,
+            },
         ];
     }
 
@@ -39,10 +39,10 @@ export class TableController extends DocumentController {
 
     getActions() {
         return [
-            {'action': 'newColumn', 'caption': 'New Column'},
-            {'action': 'moveUp'     , 'caption': 'Move Up'     },
-            {'action': 'moveDown'   , 'caption': 'Move Down'   },
-            {'action': 'delete', 'caption': 'Delete'},
+            { action: 'newColumn', caption: 'New Column' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
 
@@ -70,19 +70,23 @@ export class TableController extends DocumentController {
     }
 
     async actionNewColumn() {
-        await EditorFrontHostApp.editorApp.openModal(new NewColumnController({onCreate: async values => {
-            const column = await this.model.newColumn(values.name);
-            const columnController = this.createColumn(column);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
-            columnController.view.parent.open();
-            this.view.rerender();
-                EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewColumnController({
+                onCreate: async values => {
+                    const column = await this.model.newColumn(values.name);
+                    const columnController = this.createColumn(column);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
+                    columnController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
     onCreateFormButtonClick = async e => {
         console.log('TableController.onCreateFormButtonClick');
         await this.createFormAction();
-    }
+    };
     /*static async getView(view) {
         console.log('TableController.getView', view);
         return FrontHostApp.doHttpRequest({
@@ -95,43 +99,46 @@ export class TableController extends DocumentController {
     static async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Table',
-            action    : 'getView',
-            params    : {
-                view: view
-            }
+            action: 'getView',
+            params: {
+                view: view,
+            },
         });
     }
 
     async createFormAction() {
         console.log('TableController.createFormAction');
-        await EditorFrontHostApp.editorApp.openModal(new NewFormFromTableController({
-            tableController: this,
-            onCreate: async values => {
-                const formWizard = EditorHelper.create({
-                    model       : this.model,
-                    pageName    : values.page,
-                    className   : values.class,
-                    formName    : values.name,
-                    formCaption : values.caption || values.name,
-                });
-                const params = formWizard.getFormParams();
-                // console.log('params:', params);
-                const databaseController = this.parent;
-                const applicationController = databaseController.parent;
-                const pageLinkController = applicationController.findPageLink(values.page);
-                if (!pageLinkController.pageController) {
-                    await pageLinkController.loadPage();
-                }
-                const pageController = pageLinkController.pageController;
-                // console.log('pageController:', pageController);
-                const form = await pageController.model.newForm(params);
-                // console.log('form:', form);
-                const formController = pageController.createForm(form);
-                await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
-                formController.view.parent.open();
-                pageLinkController.view.rerender();
-                EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewFormFromTableController({
+                tableController: this,
+                onCreate: async values => {
+                    const formWizard = EditorHelper.create({
+                        model: this.model,
+                        pageName: values.page,
+                        className: values.class,
+                        formName: values.name,
+                        formCaption: values.caption || values.name,
+                    });
+                    const params = formWizard.getFormParams();
+                    // console.log('params:', params);
+                    const databaseController = this.parent;
+                    const applicationController = databaseController.parent;
+                    const pageLinkController = applicationController.findPageLink(values.page);
+                    if (!pageLinkController.pageController) {
+                        await pageLinkController.loadPage();
+                    }
+                    const pageController = pageLinkController.pageController;
+                    // console.log('pageController:', pageController);
+                    const form = await pageController.model.newForm(params);
+                    // console.log('form:', form);
+                    const formController = pageController.createForm(form);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+                    formController.view.parent.open();
+                    pageLinkController.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
     async delete() {
         console.log('TableController.delete', this.getTitle());

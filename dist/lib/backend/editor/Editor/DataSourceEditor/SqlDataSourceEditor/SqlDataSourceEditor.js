@@ -17,7 +17,7 @@ class SqlDataSourceEditor extends DataSourceEditor_1.DataSourceEditor {
                 limit: params.limit ? params.limit : '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : []),
             ],
         };
     }

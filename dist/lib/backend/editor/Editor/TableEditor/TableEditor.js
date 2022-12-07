@@ -8,11 +8,9 @@ class TableEditor extends Editor_1.Editor {
         return {
             '@class': 'Table',
             '@attributes': {
-                name: params.name
+                name: params.name,
             },
-            columns: [
-                ...(params.columns ? params.columns.map(Editor_1.Editor.createItemData) : [])
-            ],
+            columns: [...(params.columns ? params.columns.map(Editor_1.Editor.createItemData) : [])],
         };
     }
     getColName() {

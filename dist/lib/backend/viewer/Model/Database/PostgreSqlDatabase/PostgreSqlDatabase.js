@@ -61,7 +61,10 @@ class PostgreSqlDatabase extends Database_1.Database {
     }
     async queryResult(context, query, params = null) {
         if (context.query.sql)
-            console.log(colors.blue('PostgreSqlDatabase.queryResult'), { query, params } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+            console.log(colors.blue('PostgreSqlDatabase.queryResult'), {
+                query,
+                params,
+            } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         Database_1.Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
@@ -127,7 +130,9 @@ class PostgreSqlDatabase extends Database_1.Database {
     getDeleteQuery(tableName, rowKeyValues) {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
-        const whereString = keyColumns.map(keyColumn => `"${keyColumn}" = {${keyColumn}}`).join(' and ');
+        const whereString = keyColumns
+            .map(keyColumn => `"${keyColumn}" = {${keyColumn}}`)
+            .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
         // console.log('query:', query);
         return query;
@@ -178,7 +183,7 @@ class PostgreSqlDatabase extends Database_1.Database {
             auto: row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
             nullable: row.is_nullable === 'YES',
             comment: null,
-            dbType: row.data_type
+            dbType: row.data_type,
         }));
         // console.log('tableInfo:', tableInfo);
         return tableInfo;

@@ -1,7 +1,7 @@
-import {Editor} from '../Editor';
-import {FormEditor} from '../FormEditor/FormEditor';
-import {PageEditor} from '../PageEditor/PageEditor';
-import {FrontHostApp} from '../../../common';
+import { Editor } from '../Editor';
+import { FormEditor } from '../FormEditor/FormEditor';
+import { PageEditor } from '../PageEditor/PageEditor';
+import { FrontHostApp } from '../../../common';
 
 export class ActionEditor extends Editor {
     /*constructor(data, parent) {
@@ -24,13 +24,13 @@ export class ActionEditor extends Editor {
         if (this.parent instanceof FormEditor) {
             return {
                 pageFileName: this.parent.page.pageLink.getAttr('fileName'),
-                form        : this.parent.getAttr('name'),
-                action      : this.getAttr('name'),
+                form: this.parent.getAttr('name'),
+                action: this.getAttr('name'),
             };
         } else if (this.parent instanceof PageEditor) {
             return {
                 pageFileName: this.parent.pageLink.getAttr('fileName'),
-                action      : this.getAttr('name'),
+                action: this.getAttr('name'),
             };
         }
         return {
@@ -42,12 +42,12 @@ export class ActionEditor extends Editor {
         //console.log('ActionEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 ...this.getParams(),
-                attr        : name,
-                value       : value
-            }
+                attr: name,
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
@@ -56,10 +56,10 @@ export class ActionEditor extends Editor {
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Action',
-            action    : 'delete',
-            params    : {
+            action: 'delete',
+            params: {
                 ...this.getParams(),
-            }
+            },
         });
     }
     async delete() {
@@ -69,20 +69,20 @@ export class ActionEditor extends Editor {
     }
     moveUp() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Action',
-            action     : 'moveUp',
-            params     : {
+            controller: 'Action',
+            action: 'moveUp',
+            params: {
                 ...this.getParams(),
-            }
+            },
         });
     }
     moveDown() {
         return FrontHostApp.doHttpRequest({
-            controller : 'Action',
-            action     : 'moveDown',
-            params     : {
+            controller: 'Action',
+            action: 'moveDown',
+            params: {
                 ...this.getParams(),
-            }
+            },
         });
     }
 }

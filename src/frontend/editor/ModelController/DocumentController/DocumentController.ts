@@ -1,4 +1,4 @@
-import {ModelController} from '../ModelController';
+import { ModelController } from '../ModelController';
 
 export class DocumentController extends ModelController {
     document: any;
@@ -9,9 +9,9 @@ export class DocumentController extends ModelController {
     async createDocument() {
         const document = {
             controller: this,
-            view      : null,
+            view: null,
         };
-        return this.document = document;
+        return (this.document = document);
     }
     onDocumentClose() {
         console.log('DocumentController.onDocumentClose', this.getTitle());

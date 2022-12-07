@@ -1,4 +1,4 @@
-import { Context } from "../../Context";
+import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 export declare class Model extends BaseModel {
     fillCollections: any[];

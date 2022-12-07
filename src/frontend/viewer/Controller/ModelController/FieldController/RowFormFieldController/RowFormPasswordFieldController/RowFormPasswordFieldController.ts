@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormPasswordFieldView} from './RowFormPasswordFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormPasswordFieldView } from './RowFormPasswordFieldView';
 
 export class RowFormPasswordFieldController extends RowFormFieldController {
     getViewClass() {

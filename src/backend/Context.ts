@@ -11,13 +11,13 @@ export class Context {
         this.options = options;
 
         // query
-        this.query  = {
-            ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
+        this.query = {
+            ...(this.getReq() && this.getReq().query ? this.getReq().query : {}),
         };
 
         // params
         this.params = {
-            ...(this.getReq() && this.getReq().body.params ? this.getReq().body.params : {})
+            ...(this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}),
         };
 
         // files
@@ -32,7 +32,7 @@ export class Context {
         this.connections = {};
 
         // querytime
-        this.querytime = {params: {}};
+        this.querytime = { params: {} };
     }
     getRoute(): string {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
@@ -48,7 +48,10 @@ export class Context {
         return null;
     }
     getClientTimezoneOffset(): number {
-        if (this.getReq().session.tzOffset !== undefined && this.getReq().session.tzOffset !== null) {
+        if (
+            this.getReq().session.tzOffset !== undefined &&
+            this.getReq().session.tzOffset !== null
+        ) {
             return this.getReq().session.tzOffset;
         }
         return null;
@@ -62,12 +65,12 @@ export class Context {
     }
     getCookies(): any {
         return {
-            ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {})
+            ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}),
         };
     }
     getQuery(): any {
         return {
-        ...(this.getReq() && this.getReq().query ? this.getReq().query : {})
+            ...(this.getReq() && this.getReq().query ? this.getReq().query : {}),
         };
     }
     getParams(): any {
@@ -79,8 +82,8 @@ export class Context {
             ...this.query,
             ...this.params,
             ...(this.querytime ? this.querytime.params : {}),
-            ...(user ? {userId: user.id, userName: user.name} : {}),
-            ...(timeOffset !== null ? {timeOffset} : {})
+            ...(user ? { userId: user.id, userName: user.name } : {}),
+            ...(timeOffset !== null ? { timeOffset } : {}),
         };
     }
     getReq(): any {
@@ -136,11 +139,10 @@ export class Context {
     }
     setVersionHeaders(platformVersion: string, appVersion: string): void {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
-        this.getRes().setHeader('qforms-app-version'     , appVersion);
+        this.getRes().setHeader('qforms-app-version', appVersion);
     }
     setParam(name: string, value): void {
         this.params[name] = value;
     }
-    destroy(): void {
-    }
+    destroy(): void {}
 }

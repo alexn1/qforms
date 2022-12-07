@@ -7,31 +7,33 @@ export abstract class FormWizard {
 
     constructor(params) {
         console.log('FormWizard.constructor', params);
-        this.params        = params;
-        this.model         = params.model;
-        this.databaseName  = params.model.database.getName();
-        this.tableName     = params.model.getName();
-        this.tableColumns  = Object.keys(params.model.data.columns).map(name => params.model.data.columns[name]['@attributes']);
+        this.params = params;
+        this.model = params.model;
+        this.databaseName = params.model.database.getName();
+        this.tableName = params.model.getName();
+        this.tableColumns = Object.keys(params.model.data.columns).map(
+            name => params.model.data.columns[name]['@attributes'],
+        );
     }
 
     getDataSources() {
         return [
             {
-                class     : 'SqlDataSource',
-                name      : 'default',
-                database  : this.databaseName,
-                table     : this.tableName,
-                limit     : this.params.className === 'TableForm' ? '100' : '',
-                countQuery   : this.getCountQuery(),
-                singleQuery  : this.getSingleQuery(),
-                multipleQuery: this.getMultipleQuery()
-            }
+                class: 'SqlDataSource',
+                name: 'default',
+                database: this.databaseName,
+                table: this.tableName,
+                limit: this.params.className === 'TableForm' ? '100' : '',
+                countQuery: this.getCountQuery(),
+                singleQuery: this.getSingleQuery(),
+                multipleQuery: this.getMultipleQuery(),
+            },
         ];
     }
 
-    abstract getCountQuery()
-    abstract getSingleQuery()
-    abstract getMultipleQuery()
+    abstract getCountQuery();
+    abstract getSingleQuery();
+    abstract getMultipleQuery();
 
     getFieldClass(column) {
         if (column.type === 'date') return 'DateField';
@@ -51,8 +53,8 @@ export abstract class FormWizard {
         // console.log('FormWizard.getField', column);
         let field: any = {
             class: this.getFieldClass(column),
-            name : column.name,
-            caption: column.caption || column.name
+            name: column.name,
+            caption: column.caption || column.name,
         };
         if (column.key === 'true') {
             if (column.auto === 'false') {
@@ -94,11 +96,11 @@ export abstract class FormWizard {
 
     getFormParams() {
         return {
-            name       : this.params.formName,
-            caption    : this.params.formCaption,
-            class      : this.params.className,
+            name: this.params.formName,
+            caption: this.params.formCaption,
+            class: this.params.className,
             dataSources: this.getDataSources(),
-            fields     : this.getFields()
+            fields: this.getFields(),
         };
     }
 }

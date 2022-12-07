@@ -1,4 +1,4 @@
-import {Context} from './Context';
+import { Context } from './Context';
 
 export class MyError extends Error {
     context: Context;
@@ -7,8 +7,8 @@ export class MyError extends Error {
     constructor(options) {
         if (!options.message) throw new Error('MyError: no message');
         super(options.message);
-        this.status  = options.status;
-        this.data    = options.data;
+        this.status = options.status;
+        this.data = options.data;
         this.context = options.context;
     }
 }

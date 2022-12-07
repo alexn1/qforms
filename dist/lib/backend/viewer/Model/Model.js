@@ -7,8 +7,7 @@ class Model extends BaseModel_1.BaseModel {
         super(data, parent);
         this.fillCollections = [];
     }
-    async init(context) {
-    }
+    async init(context) { }
     async fill(context) {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const response = {};
@@ -71,7 +70,9 @@ class Model extends BaseModel_1.BaseModel {
             }
         }
         return CustomClass;*/
-        return this.getParent() ? this.getParent().getChildModelCustomClass(model, colName, data) : null;
+        return this.getParent()
+            ? this.getParent().getChildModelCustomClass(model, colName, data)
+            : null;
     }
     async createChildModel(colName, data) {
         const CustomClass = await this.getChildModelCustomClass(this, colName, data);

@@ -1,4 +1,4 @@
-import {Field} from '../Field';
+import { Field } from '../Field';
 
 export class RadioField extends Field {
     fillAttributes(response: any): void {

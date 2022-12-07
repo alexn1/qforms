@@ -1,7 +1,6 @@
-import {Form} from '../Form';
+import { Form } from '../Form';
 
 export class RowForm extends Form {
-
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());
@@ -15,7 +14,7 @@ export class RowForm extends Form {
     isNewMode(context): boolean {
         if (this.isAttr('newMode')) {
             const newMode = this.getAttr('newMode');
-            if (newMode ===  'true') return  true;
+            if (newMode === 'true') return true;
             if (newMode === 'false') return false;
         }
         return super.isNewMode(context);
@@ -23,8 +22,7 @@ export class RowForm extends Form {
 
     fillAttributes(response: any): void {
         super.fillAttributes(response);
-        response.newMode       = this.getAttr('newMode');
+        response.newMode = this.getAttr('newMode');
         response.refreshButton = this.getAttr('refreshButton');
     }
-
 }

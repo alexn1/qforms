@@ -7,7 +7,9 @@ const Result_1 = require("../../../../Result");
 class SqlDataSource extends DataSource_1.DataSource {
     constructor(data, parent) {
         super(data, parent);
-        this.table = this.getAttr('table') ? this.getDatabase().getTable(this.getAttr('table')) : null;
+        this.table = this.getAttr('table')
+            ? this.getDatabase().getTable(this.getAttr('table'))
+            : null;
     }
     getKeyColumns() {
         // console.log('SqlDataSource.getKeyColumns', this.getFullName());
@@ -116,7 +118,9 @@ class SqlDataSource extends DataSource_1.DataSource {
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
-        const query = this.isDefaultOnRowForm() ? this.getSingleQuery(context) : this.getMultipleQuery(context);
+        const query = this.isDefaultOnRowForm()
+            ? this.getSingleQuery(context)
+            : this.getMultipleQuery(context);
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
@@ -289,7 +293,7 @@ class SqlDataSource extends DataSource_1.DataSource {
             select: true,
             insert: true,
             update: true,
-            delete: true
+            delete: true,
         };
     }
     getValuesFromRow(row) {

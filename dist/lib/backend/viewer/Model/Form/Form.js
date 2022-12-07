@@ -48,7 +48,7 @@ class Form extends Model_1.Model {
     }*/
     _getSurrogateDataSourceResponse(context) {
         const row = {
-            id: 1
+            id: 1,
         };
         for (const field of this.fields) {
             field.fillDefaultValue(context, row);
@@ -69,7 +69,8 @@ class Form extends Model_1.Model {
         //console.log(params);
     }
     replaceThis(context, query) {
-        return query.replace(/\{([@\w\.]+)\}/g, (text, name) => {
+        return query
+            .replace(/\{([@\w\.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {
@@ -78,7 +79,8 @@ class Form extends Model_1.Model {
                 return '{' + arr.join('.') + '}';
             }
             return text;
-        }).replace(/\[([@\w\.]+)\]/g, (text, name) => {
+        })
+            .replace(/\[([@\w\.]+)\]/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {

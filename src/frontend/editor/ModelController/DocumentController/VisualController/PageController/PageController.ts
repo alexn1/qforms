@@ -1,11 +1,11 @@
-import {VisualController} from '../VisualController';
-import {FormController} from '../FormController/FormController';
-import {EditorFrontHostApp} from '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewDataSourceController} from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
-import {DataSourceEditor} from '../../../../Editor/DataSourceEditor/DataSourceEditor';
-import {NewFormController} from '../../../../ModalController/NewFormController/NewFormController';
-import {VisualView} from '../VisualView';
-import {ModelController} from '../../../ModelController';
+import { VisualController } from '../VisualController';
+import { FormController } from '../FormController/FormController';
+import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
+import { NewFormController } from '../../../../ModalController/NewFormController/NewFormController';
+import { VisualView } from '../VisualView';
+import { ModelController } from '../../../ModelController';
 
 export class PageController extends VisualController {
     options: any;
@@ -17,12 +17,12 @@ export class PageController extends VisualController {
         this.options = options;
         this.pageLinkController = pageLinkController;
         this.dataSources = [];
-        this.actions     = [];
-        this.forms       = [];
+        this.actions = [];
+        this.forms = [];
         this.items = [
-            {getTitle: () => 'Data Sources', items: this.dataSources},
-            {getTitle: () => 'Actions'     , items: this.actions},
-            {getTitle: () => 'Forms'       , items: this.forms}
+            { getTitle: () => 'Data Sources', items: this.dataSources },
+            { getTitle: () => 'Actions', items: this.actions },
+            { getTitle: () => 'Forms', items: this.forms },
         ];
     }
 
@@ -48,12 +48,12 @@ export class PageController extends VisualController {
 
     getActions() {
         return [
-            {'action': 'newDataSource', 'caption': 'New Data Source'},
-            {'action': 'newAction'    , 'caption': 'New Action'     },
-            {'action': 'newForm'      , 'caption': 'New Form'       },
-            {'action': 'moveUp'       , 'caption': 'Move Up'        },
-            {'action': 'moveDown'     , 'caption': 'Move Down'      },
-            {'action': 'delete'       , 'caption': 'Delete'         },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'newForm', caption: 'New Form' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
 
@@ -73,7 +73,11 @@ export class PageController extends VisualController {
                 break;
             case 'moveUp':
                 await this.model.pageLink.moveUp();
-                this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, -1);
+                this.pageLinkController.parent.moveColItem(
+                    'pageLinks',
+                    this.pageLinkController,
+                    -1,
+                );
                 EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
@@ -87,38 +91,46 @@ export class PageController extends VisualController {
     }
 
     async newDataSourceAction() {
-        await EditorFrontHostApp.editorApp.openModal(new NewDataSourceController({onCreate: async values => {
-            const dataSourceData = await DataSourceEditor.create(this.model, {
-                name : values.name,
-                class: values.class
-            });
-            const dataSource = this.model.createDataSource(dataSourceData);
-            const dataSourceController = this.createDataSource(dataSource);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-            dataSourceController.view.parent.open();
-            this.pageLinkController.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewDataSourceController({
+                onCreate: async values => {
+                    const dataSourceData = await DataSourceEditor.create(this.model, {
+                        name: values.name,
+                        class: values.class,
+                    });
+                    const dataSource = this.model.createDataSource(dataSourceData);
+                    const dataSourceController = this.createDataSource(dataSource);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                    dataSourceController.view.parent.open();
+                    this.pageLinkController.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     async actionNewForm() {
-        await EditorFrontHostApp.editorApp.openModal(new NewFormController({onCreate: async values => {
-            const form = await this.model.newForm({
-                name   : values.name,
-                caption: values.caption || values.name,
-                class  : values.class
-            });
-            const formController = this.createForm(form);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
-            formController.view.parent.open();
-            this.pageLinkController.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewFormController({
+                onCreate: async values => {
+                    const form = await this.model.newForm({
+                        name: values.name,
+                        caption: values.caption || values.name,
+                        class: values.class,
+                    });
+                    const formController = this.createForm(form);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+                    formController.view.parent.open();
+                    this.pageLinkController.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     getPropList() {
         const propList = super.getPropList();
-        propList.list['menu']    = this.getPageLink().getAttr('menu');
+        propList.list['menu'] = this.getPageLink().getAttr('menu');
         propList.list['startup'] = this.getPageLink().getAttr('startup');
         propList.options['startup'] = ['true', 'false'];
         return propList;
@@ -127,7 +139,7 @@ export class PageController extends VisualController {
     async setProperty(name, value) {
         if (name === 'startup' || name === 'menu') {
             this.getPageLink().setValue(name, value);
-        } else  {
+        } else {
             ModelController.prototype.setProperty.call(this, name, value);
         }
     }

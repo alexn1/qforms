@@ -1,8 +1,8 @@
-import {DocumentController} from '../DocumentController';
-import {KeyColumnController} from '../../KeyColumnController/KeyColumnController';
-import {EditorFrontHostApp} from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import {NewKeyColumnController} from '../../../ModalController/NewKeyColumnController/NewKeyColumnController';
-import {SqlDataSourceView} from './SqlDataSourceView';
+import { DocumentController } from '../DocumentController';
+import { KeyColumnController } from '../../KeyColumnController/KeyColumnController';
+import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
+import { NewKeyColumnController } from '../../../ModalController/NewKeyColumnController/NewKeyColumnController';
+import { SqlDataSourceView } from './SqlDataSourceView';
 
 export class DataSourceController extends DocumentController {
     keyColumns: any[];
@@ -13,8 +13,8 @@ export class DataSourceController extends DocumentController {
         this.items = [
             {
                 getTitle: () => 'Key Columns',
-                items: this.keyColumns
-            }
+                items: this.keyColumns,
+            },
         ];
     }
     getTitle() {
@@ -23,7 +23,7 @@ export class DataSourceController extends DocumentController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'brown'
+            color: 'brown',
         };
     }
     init() {
@@ -43,10 +43,10 @@ export class DataSourceController extends DocumentController {
     }
     getActions() {
         return [
-            {'action' : 'newItem', 'caption': 'New Key Column'},
-            {'action':  'moveUp', 'caption':   'Move Up'},
-            {'action':'moveDown', 'caption': 'Move Down'},
-            {'action' : 'delete', 'caption': 'Delete'}
+            { action: 'newItem', caption: 'New Key Column' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
 
@@ -72,20 +72,24 @@ export class DataSourceController extends DocumentController {
     }
 
     async actionNewKeyColumn() {
-        await EditorFrontHostApp.editorApp.openModal(new NewKeyColumnController({onCreate: async values => {
-            const keyColumn = await this.model.newKeyColumn(values.name);
-            const keyColumnController = this.createKeyColumn(keyColumn);
-            await EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
-            keyColumnController.view.parent.open();
-            this.view.rerender();
-            EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-        }}));
+        await EditorFrontHostApp.editorApp.openModal(
+            new NewKeyColumnController({
+                onCreate: async values => {
+                    const keyColumn = await this.model.newKeyColumn(values.name);
+                    const keyColumnController = this.createKeyColumn(keyColumn);
+                    await EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
+                    keyColumnController.view.parent.open();
+                    this.view.rerender();
+                    EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+                },
+            }),
+        );
     }
 
     getPropList() {
         const propList = {
-            list   : {},
-            options: {}
+            list: {},
+            options: {},
         };
 
         // list
@@ -113,5 +117,5 @@ export class DataSourceController extends DocumentController {
     }
     onCreateModelBack = async e => {
         const data = await this.model.createModelBackJs();
-    }
+    };
 }

@@ -10,14 +10,10 @@ class MySqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
         return {
             '@class': 'MySqlDatabase',
             '@attributes': {
-                name: params.name
+                name: params.name,
             },
-            params: [
-                ...(params.params ? params.params.map(Editor_1.Editor.createItemData) : [])
-            ],
-            tables: [
-                ...(params.tables ? params.tables.map(Editor_1.Editor.createItemData) : [])
-            ],
+            params: [...(params.params ? params.params.map(Editor_1.Editor.createItemData) : [])],
+            tables: [...(params.tables ? params.tables.map(Editor_1.Editor.createItemData) : [])],
         };
     }
 }

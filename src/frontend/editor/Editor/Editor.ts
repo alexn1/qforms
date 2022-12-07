@@ -7,12 +7,11 @@ export class Editor {
     actions: any[];
     constructor(data, parent = null) {
         if (!data) throw new Error('no data');
-        this.data   = data;
+        this.data = data;
         this.parent = parent;
     }
 
-    init() {
-    }
+    init() {}
 
     getClassName() {
         return this.data['@class'];
@@ -76,5 +75,4 @@ export class Editor {
         if (i === -1) throw new Error('no such action');
         this.actions.splice(i, 1);
     }
-
 }

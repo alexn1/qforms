@@ -1,9 +1,9 @@
-import {Editor} from '../Editor';
-import {KeyColumnEditor} from '../KeyColumnEditor/KeyColumnEditor';
-import {FormEditor} from '../FormEditor/FormEditor';
-import {PageEditor} from '../PageEditor/PageEditor';
-import {FrontHostApp} from '../../../common';
-import {ApplicationEditor} from '../ApplicationEditor/ApplicationEditor';
+import { Editor } from '../Editor';
+import { KeyColumnEditor } from '../KeyColumnEditor/KeyColumnEditor';
+import { FormEditor } from '../FormEditor/FormEditor';
+import { PageEditor } from '../PageEditor/PageEditor';
+import { FrontHostApp } from '../../../common';
+import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 
 export class DataSourceEditor extends Editor {
     keyColumns: any[];
@@ -33,17 +33,17 @@ export class DataSourceEditor extends Editor {
     static async create(parent, params) {
         if (parent instanceof FormEditor) {
             const form = parent;
-            params['page']  = form.page.pageLink.getFileName();
-            params['form']  = form.getName();
+            params['page'] = form.page.pageLink.getFileName();
+            params['form'] = form.getName();
         }
         if (parent instanceof PageEditor) {
             const page = parent;
-            params['page']  = page.pageLink.getFileName();
+            params['page'] = page.pageLink.getFileName();
         }
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
-            action    : '_new',
-            params    : params
+            action: '_new',
+            params: params,
         });
     }
 
@@ -51,12 +51,12 @@ export class DataSourceEditor extends Editor {
         //console.log(name + ' = ' + value);
         const args = {
             controller: 'DataSource',
-            action    : 'save',
-            params    : {
+            action: 'save',
+            params: {
                 dataSource: this.getName(),
-                attr      : name,
-                value     : value
-            }
+                attr: name,
+                value: value,
+            },
         };
         if (this.parent instanceof PageEditor) {
             // @ts-ignore
@@ -64,7 +64,7 @@ export class DataSourceEditor extends Editor {
         }
         if (this.parent instanceof FormEditor) {
             // @ts-ignore
-            args.params.form         = this.parent.getName();
+            args.params.form = this.parent.getName();
             // @ts-ignore
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
@@ -76,10 +76,10 @@ export class DataSourceEditor extends Editor {
     async deleteData() {
         const args = {
             controller: 'DataSource',
-            action    : 'delete',
-            params    : {
-                dataSource: this.getName()
-            }
+            action: 'delete',
+            params: {
+                dataSource: this.getName(),
+            },
         };
         if (this.parent instanceof PageEditor) {
             // @ts-ignore
@@ -97,19 +97,23 @@ export class DataSourceEditor extends Editor {
     async createModelBackJs() {
         return await FrontHostApp.doHttpRequest({
             controller: 'DataSource',
-            action    : 'createModelBackJs',
-            params    : {
-                ...(this.parent instanceof PageEditor ? {
-                    page        : this.parent.getName(),
-                    pageFileName: this.parent.pageLink.getFileName()
-                } : {}),
-                ...(this.parent instanceof FormEditor ? {
-                    form        : this.parent.getName(),
-                    page        : this.parent.page.getName(),
-                    pageFileName: this.parent.page.pageLink.getFileName()
-                } : {}),
+            action: 'createModelBackJs',
+            params: {
+                ...(this.parent instanceof PageEditor
+                    ? {
+                          page: this.parent.getName(),
+                          pageFileName: this.parent.pageLink.getFileName(),
+                      }
+                    : {}),
+                ...(this.parent instanceof FormEditor
+                    ? {
+                          form: this.parent.getName(),
+                          page: this.parent.page.getName(),
+                          pageFileName: this.parent.page.pageLink.getFileName(),
+                      }
+                    : {}),
                 dataSource: this.getName(),
-            }
+            },
         });
     }
 
@@ -121,10 +125,10 @@ export class DataSourceEditor extends Editor {
     async moveUp() {
         const args = {
             controller: 'DataSource',
-            action    : 'moveUp',
-            params    : {
-                dataSource: this.getName()
-            }
+            action: 'moveUp',
+            params: {
+                dataSource: this.getName(),
+            },
         };
         if (this.parent instanceof PageEditor) {
             // @ts-ignore
@@ -142,10 +146,10 @@ export class DataSourceEditor extends Editor {
     async moveDown() {
         const args = {
             controller: 'DataSource',
-            action    : 'moveDown',
-            params    : {
-                dataSource: this.getName()
-            }
+            action: 'moveDown',
+            params: {
+                dataSource: this.getName(),
+            },
         };
         if (this.parent instanceof PageEditor) {
             // @ts-ignore
@@ -163,12 +167,12 @@ export class DataSourceEditor extends Editor {
     async newKeyColumnData(name) {
         const args = {
             controller: 'KeyColumn',
-            action    : '_new',
-            params    : {
+            action: '_new',
+            params: {
                 dataSource: this.getName(),
-                class     : 'KeyColumn',
-                name      : name
-            }
+                class: 'KeyColumn',
+                name: name,
+            },
         };
         if (this.parent instanceof FormEditor) {
             // @ts-ignore
@@ -189,21 +193,25 @@ export class DataSourceEditor extends Editor {
     async getView(view) {
         const args = {
             controller: 'DataSource',
-            action    : 'getView',
-            params    : {
-                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
-                view      : view
-            }
+            action: 'getView',
+            params: {
+                dataSource: this instanceof DataSourceEditor ? this.getName() : undefined,
+                view: view,
+            },
         };
         if (this.parent instanceof PageEditor) {
             // @ts-ignore
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
+            args.params.pageFileName =
+                this instanceof DataSourceEditor ? this.parent.pageLink.getFileName() : undefined;
         }
         if (this.parent instanceof FormEditor) {
             // @ts-ignore
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            args.params.pageFileName =
+                this instanceof DataSourceEditor
+                    ? this.parent.page.pageLink.getFileName()
+                    : undefined;
             // @ts-ignore
-            args.params.form         = (this instanceof DataSourceEditor) ? this.parent.getName()                   : undefined;
+            args.params.form = this instanceof DataSourceEditor ? this.parent.getName() : undefined;
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -211,18 +219,18 @@ export class DataSourceEditor extends Editor {
     async saveController(text) {
         const args: any = {
             controller: 'DataSource',
-            action    : 'saveController',
-            params    : {
+            action: 'saveController',
+            params: {
                 dataSource: this.getName(),
-                text      : text
-            }
+                text: text,
+            },
         };
         if (this.parent instanceof PageEditor) {
             args.params.pageFileName = this.parent.pageLink.getFileName();
         }
         if (this.parent instanceof FormEditor) {
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
-            args.params.form         = this.parent.getName();
+            args.params.form = this.parent.getName();
         }
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -230,13 +238,13 @@ export class DataSourceEditor extends Editor {
     async createController() {
         const args = {
             controller: 'DataSource',
-            action    : 'createController',
-            params    : {
-                page        : this.parent.page.getName(),
+            action: 'createController',
+            params: {
+                page: this.parent.page.getName(),
                 pageFileName: this.parent.page.pageLink.getFileName(),
-                form        : this.parent.getName(),
-                dataSource  : this.getName()
-            }
+                form: this.parent.getName(),
+                dataSource: this.getName(),
+            },
         };
         return await FrontHostApp.doHttpRequest(args);
     }
@@ -250,5 +258,4 @@ export class DataSourceEditor extends Editor {
             return this.getName();
         }
     }
-
 }

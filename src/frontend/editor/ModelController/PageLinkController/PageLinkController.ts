@@ -1,7 +1,7 @@
-import {ModelController} from '../ModelController';
-import {EditorFrontHostApp} from '../../EditorFrontHostApp/EditorFrontHostApp';
-import {PageEditor} from '../../Editor/PageEditor/PageEditor';
-import {PageController} from '../DocumentController/VisualController/PageController/PageController';
+import { ModelController } from '../ModelController';
+import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
+import { PageEditor } from '../../Editor/PageEditor/PageEditor';
+import { PageController } from '../DocumentController/VisualController/PageController/PageController';
 
 export class PageLinkController extends ModelController {
     node: boolean;
@@ -20,7 +20,7 @@ export class PageLinkController extends ModelController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'red'
+            color: 'red',
         };
     }
     hasPage() {

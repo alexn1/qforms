@@ -1,5 +1,5 @@
-import {FormController} from '../FormController';
-import {RowFormView} from './RowFormView';
+import { FormController } from '../FormController';
+import { RowFormView } from './RowFormView';
 
 export class RowFormController extends FormController {
     state: any;
@@ -8,18 +8,18 @@ export class RowFormController extends FormController {
         super(model, parent);
         this.state = {
             updated: Date.now(),
-            mode   : 'edit',
-            hasNew : false,
+            mode: 'edit',
+            hasNew: false,
             changed: false,
-            valid  : true
+            valid: true,
         };
     }
 
     init() {
         super.init();
         this.model.on('refresh', this.onModelRefresh);
-        this.model.on('insert' , this.onModelInsert);
-        this.model.on('update' , this.onModelUpdate);
+        this.model.on('insert', this.onModelInsert);
+        this.model.on('update', this.onModelUpdate);
         if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') {
             this.state.mode = 'view';
         }
@@ -32,15 +32,15 @@ export class RowFormController extends FormController {
     deinit() {
         // console.log('RowFormController.deinit', this.model.getFullName());
         this.model.off('refresh', this.onModelRefresh);
-        this.model.off('insert' , this.onModelInsert);
-        this.model.off('update' , this.onModelUpdate);
+        this.model.off('insert', this.onModelInsert);
+        this.model.off('update', this.onModelUpdate);
         super.deinit();
     }
 
     calcState() {
-        this.state.hasNew  = this.model.hasNew();
+        this.state.hasNew = this.model.hasNew();
         this.state.changed = this.isChanged();
-        this.state.valid   = this.isValid();
+        this.state.valid = this.isValid();
         // console.log('hasNew:', hasNew);
         // console.log('changed:', changed);
         // console.log('valid:', valid);
@@ -59,7 +59,7 @@ export class RowFormController extends FormController {
         this.refill();
         this.invalidate();
         this.rerender();
-    }
+    };
 
     onModelInsert = async e => {
         console.log('RowFormController.onModelInsert', this.model.getFullName());
@@ -67,7 +67,7 @@ export class RowFormController extends FormController {
         this.invalidate();
         this.calcState();
         this.parent.onFormInsert(e);
-    }
+    };
 
     onModelUpdate = async e => {
         console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
@@ -75,7 +75,7 @@ export class RowFormController extends FormController {
         this.invalidate();
         this.calcState();
         this.parent.onFormUpdate(e);
-    }
+    };
 
     isValid() {
         // console.log('RowFormController.isValid', this.model.getFullName());
@@ -103,19 +103,25 @@ export class RowFormController extends FormController {
         this.calcState();
         if (this.isValid()) {
             try {
-                this.getApp().getView().disableRerender();
+                this.getApp()
+                    .getView()
+                    .disableRerender();
                 await this.model.update();
                 this.state.mode = 'view';
                 console.log('form model updated', this.getModel().getFullName());
             } finally {
-                this.getApp().getView().enableRerender();
-                await this.getApp().getView().rerender();
+                this.getApp()
+                    .getView()
+                    .enableRerender();
+                await this.getApp()
+                    .getView()
+                    .rerender();
             }
         } else {
             console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
             await this.rerender();
         }
-    }
+    };
 
     onDiscardClick = () => {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
@@ -144,12 +150,12 @@ export class RowFormController extends FormController {
 
         // event
         this.parent.onFormDiscard(this);
-    }
+    };
 
     onRefreshClick = async () => {
         // console.log('RowFormController.onRefreshClick', this.model.getFullName());
         await this.model.refresh();
-    }
+    };
 
     isChanged() {
         // console.log('RowFormController.isChanged', this.model.getFullName());
@@ -173,12 +179,12 @@ export class RowFormController extends FormController {
         console.log('RowFormController.onEditClick');
         this.state.mode = 'edit';
         this.rerender();
-    }
+    };
     onCancelClick = e => {
         console.log('RowFormController.onCancelClick');
         this.state.mode = 'view';
         this.rerender();
-    }
+    };
     getViewClass() {
         // console.log('RowFormController.getViewClass', this.model.getFullName());
         return super.getViewClass() || RowFormView;

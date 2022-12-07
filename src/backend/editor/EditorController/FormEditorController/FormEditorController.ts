@@ -1,4 +1,4 @@
-import {VisualEditorController} from '../VisualEditorController';
+import { VisualEditorController } from '../VisualEditorController';
 
 export class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
@@ -49,9 +49,9 @@ export class FormEditorController extends VisualEditorController {
                 const pageEditor = await appEditor.getPage(params.page);
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
                 // @ts-ignore
-                result.data.js   = await formEditor.getCustomFile('js');
+                result.data.js = await formEditor.getCustomFile('js');
                 // @ts-ignore
-                result.data.jsx  = await formEditor.getCustomFile('jsx');
+                result.data.jsx = await formEditor.getCustomFile('jsx');
                 // @ts-ignore
                 result.data.less = await formEditor.getCustomFile('less');
                 return result;
@@ -64,34 +64,34 @@ export class FormEditorController extends VisualEditorController {
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const js = await formEditor.createJs(params);
-        return {js};
+        return { js };
     }
     async createView(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const jsx = await formEditor.createJsx(params);
-        return {jsx};
+        return { jsx };
     }
     async createStyle(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const less = await formEditor.createLess(params);
-        return {less};
+        return { less };
     }
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         await formEditor.saveCustomFile('js', params.text);
-        return {js: params.text};
+        return { js: params.text };
     }
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const js = await formEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
 }

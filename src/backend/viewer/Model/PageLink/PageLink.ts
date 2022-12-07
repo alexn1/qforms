@@ -1,5 +1,5 @@
 const path = require('path');
-import {Model} from '../Model';
+import { Model } from '../Model';
 
 export class PageLink extends Model {
     getPageFilePath() {

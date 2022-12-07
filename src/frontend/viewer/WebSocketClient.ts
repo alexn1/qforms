@@ -10,20 +10,26 @@ export class WebSocketClient {
         this.options = options;
         if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');
-        this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
-        this.webSocket         = null;
-        this.refreshTimeoutId  = null;
-        this.RECONNECT_TIMEOUT = 10;        // sec
-        this.REFRESH_TIMEOUT   = 60*60;     // sec
+        this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(
+            options,
+        )}`;
+        this.webSocket = null;
+        this.refreshTimeoutId = null;
+        this.RECONNECT_TIMEOUT = 10; // sec
+        this.REFRESH_TIMEOUT = 60 * 60; // sec
     }
     createUriParamsString(options) {
         const params = {
-            route  : options.route,
-            uuid   : options.uuid,
-            userId : options.userId,
-            version: this.getApp().getModel().getData().versions.app
+            route: options.route,
+            uuid: options.uuid,
+            userId: options.userId,
+            version: this.getApp()
+                .getModel()
+                .getData().versions.app,
         };
-        return Object.keys(params).map(key => `${key}=${encodeURIComponent(params[key])}`).join('&');
+        return Object.keys(params)
+            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .join('&');
     }
     connect() {
         console.log('WebSocketClient.connect', this.url);
@@ -34,7 +40,7 @@ export class WebSocketClient {
                 reject(new Error(`Connection failed ${e.code}`));
             };
             this.webSocket.onopen = e => {
-                this.webSocket.onclose   = this.onClose.bind(this);
+                this.webSocket.onclose = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 this.startRefreshTimeout();
                 resolve(e);
@@ -52,7 +58,10 @@ export class WebSocketClient {
         this.webSocket.send(data);
     }
     startRefreshTimeout() {
-        this.refreshTimeoutId = setTimeout(this.onRefreshTimeout.bind(this), this.REFRESH_TIMEOUT * 1000);
+        this.refreshTimeoutId = setTimeout(
+            this.onRefreshTimeout.bind(this),
+            this.REFRESH_TIMEOUT * 1000,
+        );
     }
     resetRefreshTimeout() {
         if (this.refreshTimeoutId) {
@@ -73,7 +82,17 @@ export class WebSocketClient {
 
     async onClose(e) {
         console.error('WebSocketClient.onClose', e);
-        this.getApp().getHostApp().logError(new Error(`websocket close ${this.getApp().getModel().getDomain()}/${this.getApp().getModel().getName()}`));
+        this.getApp()
+            .getHostApp()
+            .logError(
+                new Error(
+                    `websocket close ${this.getApp()
+                        .getModel()
+                        .getDomain()}/${this.getApp()
+                        .getModel()
+                        .getName()}`,
+                ),
+            );
         this.resetRefreshTimeout();
         this.webSocket.onclose = null;
         this.webSocket.onmessage = null;
@@ -84,10 +103,18 @@ export class WebSocketClient {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            this.getApp().getView().disableRerender();
-            await this.getApp().getModel().emitResult(packet.data);
-            this.getApp().getView().enableRerender();
-            this.getApp().getView().rerender();
+            this.getApp()
+                .getView()
+                .disableRerender();
+            await this.getApp()
+                .getModel()
+                .emitResult(packet.data);
+            this.getApp()
+                .getView()
+                .enableRerender();
+            this.getApp()
+                .getView()
+                .rerender();
         }
     }
     getApp() {

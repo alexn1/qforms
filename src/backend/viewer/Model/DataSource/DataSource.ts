@@ -1,16 +1,16 @@
-import {Result} from "../../../Result";
+import { Result } from '../../../Result';
 
 const path = require('path');
 
-import {Model} from '../Model';
-import {Helper} from '../../../Helper';
-import {Context} from '../../../Context';
-import {Application} from '../Application/Application';
-import {Database} from '../Database/Database';
-import {Page} from '../Page/Page';
-import {Form} from '../Form/Form';
-import {RowForm} from '../Form/RowForm/RowForm';
-import {TableForm} from '../Form/TableForm/TableForm';
+import { Model } from '../Model';
+import { Helper } from '../../../Helper';
+import { Context } from '../../../Context';
+import { Application } from '../Application/Application';
+import { Database } from '../Database/Database';
+import { Page } from '../Page/Page';
+import { Form } from '../Form/Form';
+import { RowForm } from '../Form/RowForm/RowForm';
+import { TableForm } from '../Form/TableForm/TableForm';
 
 export class DataSource extends Model {
     keyColumns: any;
@@ -48,7 +48,10 @@ export class DataSource extends Model {
     getKeyColumns(): string[] {
         const keyColumns = this.getItemNames('keyColumns');
         // console.log('keyColumns:', keyColumns);
-        if (!keyColumns.length) throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
+        if (!keyColumns.length)
+            throw new Error(
+                `${this.getFullName()}: DataSource without table must have at least one key column`,
+            );
         return keyColumns;
     }
 
@@ -57,18 +60,24 @@ export class DataSource extends Model {
         if (rows[0]) {
             for (const keyColumn of this.keyColumns) {
                 if (!rows[0].hasOwnProperty(keyColumn)) {
-                    throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
+                    throw new Error(
+                        `${this.getFullName()}: no key column '${keyColumn}' in result set`,
+                    );
                 }
             }
             if (this.isDefaultOnForm()) {
                 const rowColumns = Object.keys(rows[0]);
-                const formColumns = this.getParent().fields.map(field => field.getAttr('column')).filter(column => !!column);
+                const formColumns = this.getParent()
+                    .fields.map(field => field.getAttr('column'))
+                    .filter(column => !!column);
                 for (const rowColumn of rowColumns) {
                     if (!formColumns.includes(rowColumn)) {
                         console.log('rowColumns:', rowColumns);
                         console.log('formColumns:', formColumns);
                         console.log('row:', rows[0]);
-                        throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
+                        throw new Error(
+                            `${this.getFullName()}: not used column "${rowColumn}" in result set`,
+                        );
                     }
                 }
             }
@@ -86,14 +95,18 @@ export class DataSource extends Model {
             const column = field.getAttr('column');
             if (column) {
                 if (!row.hasOwnProperty(column)) {
-                    throw new Error(`[${field.getFullName()}]: no column '${column}' in result set`);
+                    throw new Error(
+                        `[${field.getFullName()}]: no column '${column}' in result set`,
+                    );
                 }
                 continue;
             }
             if (field.getAttr('value')) {
                 continue;
             }
-            throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);
+            throw new Error(
+                `[${field.getFullName()}]: no column and no value attr for calculation`,
+            );
         }
     }
 
@@ -156,7 +169,9 @@ export class DataSource extends Model {
 
     getFullName(): string {
         if (this.isOnForm()) {
-            return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
+            return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join(
+                '.',
+            );
         } else if (this.parent instanceof Page) {
             return [this.parent.getName(), this.getName()].join('.');
         } else {
@@ -170,7 +185,7 @@ export class DataSource extends Model {
         const arr = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
-        } else  if (arr.length > 1) {
+        } else if (arr.length > 1) {
             for (let i = 0; i < arr.length; i++) {
                 params[`${paramName}${i + 1}`] = arr[i];
             }
@@ -182,7 +197,8 @@ export class DataSource extends Model {
 
     calcNewKeyValues(originalKeyValues, values) {
         const newKeyValues = this.keyColumns.reduce((acc, name) => {
-            if (originalKeyValues[name] === undefined) throw new Error(`no key column in values: ${name}`);
+            if (originalKeyValues[name] === undefined)
+                throw new Error(`no key column in values: ${name}`);
             acc[name] = values[name] !== undefined ? values[name] : originalKeyValues[name];
             return acc;
         }, {});
@@ -197,7 +213,7 @@ export class DataSource extends Model {
 
     fillAttributes(response: any): void {
         response.class = this.getClassName();
-        response.name  = this.getAttr('name');
+        response.name = this.getAttr('name');
         if (this.isAttr('database')) {
             response.database = this.getAttr('database');
         }

@@ -1,5 +1,5 @@
-import {TableFormFieldController} from '../TableFormFieldController';
-import {TableFormLinkFieldView} from './TableFormLinkFieldView';
+import { TableFormFieldController } from '../TableFormFieldController';
+import { TableFormLinkFieldView } from './TableFormLinkFieldView';
 
 export class TableFormLinkFieldController extends TableFormFieldController {
     getViewClass() {
@@ -8,8 +8,8 @@ export class TableFormLinkFieldController extends TableFormFieldController {
     onClick = e => {
         console.log('TableFormLinkFieldController.onClick', e);
         e.preventDefault();
-        this.emit('click', {source: this});
-    }
+        this.emit('click', { source: this });
+    };
 }
 
 // @ts-ignore

@@ -1,6 +1,7 @@
 import { BackHostApp, Helper } from './index';
 
-main(); async function main() {
+main();
+async function main() {
     // console.log('main');
     const backHostApp = new BackHostApp({
         ...Helper.getCommandLineParams(),

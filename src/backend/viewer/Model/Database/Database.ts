@@ -1,8 +1,8 @@
-import {Model} from '../Model';
-import {Param} from '../Param/Param';
-import {Application} from '../Application/Application';
-import {Table} from '../Table/Table';
-import {Context} from '../../../Context';
+import { Model } from '../Model';
+import { Param } from '../Param/Param';
+import { Application } from '../Application/Application';
+import { Table } from '../Table/Table';
+import { Context } from '../../../Context';
 
 export class Database extends Model {
     tables: Table[];
@@ -10,7 +10,7 @@ export class Database extends Model {
         //console.log('Database.constructor');
         super(data, parent);
         this.fillCollections = ['tables'];
-        this.tables          = [];
+        this.tables = [];
     }
 
     async init(context: Context): Promise<void> {
@@ -98,7 +98,9 @@ export class Database extends Model {
     getDeleteQuery(tableName, rowKeyValues): string {
         console.log('Database.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
-        const whereString = keyColumns.map(keyColumn => `${keyColumn} = {${keyColumn}}`).join(' and ');
+        const whereString = keyColumns
+            .map(keyColumn => `${keyColumn} = {${keyColumn}}`)
+            .join(' and ');
         const query = `delete from ${tableName} where ${whereString}`;
         // console.log('query:', query);
         return query;
@@ -110,10 +112,10 @@ export class Database extends Model {
 
     getConfig(): any {
         const config: any = {
-            host       : this.createParam('host').getValue(),
-            database   : this.createParam('database').getValue(),
-            user       : this.createParam('user').getValue(),
-            password   : this.createParam('password').getValue(),
+            host: this.createParam('host').getValue(),
+            database: this.createParam('database').getValue(),
+            user: this.createParam('user').getValue(),
+            password: this.createParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
             config.port = this.createParam('port').getValue();
@@ -145,7 +147,7 @@ export class Database extends Model {
     static getUsedParams(query) {
         const items = query.match(/\{([\w\.@]+)\}/g);
         if (!items) return [];
-        return items.map(str => str.substr(1, str.length-2));
+        return items.map(str => str.substr(1, str.length - 2));
     }
 
     static checkParams(query, params) {
@@ -153,7 +155,12 @@ export class Database extends Model {
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter(name => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);
-        if (notPassedParams.length > 0) throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
+        if (notPassedParams.length > 0)
+            throw new Error(
+                `not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(
+                    ',',
+                )}, query: ${query}`,
+            );
     }
 
     async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {

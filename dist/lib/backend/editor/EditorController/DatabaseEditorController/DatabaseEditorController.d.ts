@@ -1,5 +1,5 @@
-import { Context } from "../../../Context";
-import { Application } from "../../../viewer/Model/Application/Application";
+import { Context } from '../../../Context';
+import { Application } from '../../../viewer/Model/Application/Application';
 import { EditorController } from '../EditorController';
 export declare class DatabaseEditorController extends EditorController {
     application: Application;

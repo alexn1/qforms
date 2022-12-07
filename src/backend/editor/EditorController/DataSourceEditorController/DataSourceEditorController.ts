@@ -1,7 +1,6 @@
-import {EditorController} from '../EditorController';
+import { EditorController } from '../EditorController';
 
 export class DataSourceEditorController extends EditorController {
-
     /*constructor(...args) {
         super(...args);
     }*/
@@ -26,7 +25,7 @@ export class DataSourceEditorController extends EditorController {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
                 data = formEditor.newItemData(params.class, 'dataSources', params);
             } else {
-                data = pageEditor.newItemData(params.class,  'dataSources', params);
+                data = pageEditor.newItemData(params.class, 'dataSources', params);
             }
             await pageEditor.save();
         } else {
@@ -114,7 +113,7 @@ export class DataSourceEditorController extends EditorController {
     async createModelBackJs(params) {
         const dataSourceEditor = await this.createDataSourceEditor(params);
         const js = await dataSourceEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
 
     async getView(params) {
@@ -141,5 +140,4 @@ export class DataSourceEditorController extends EditorController {
         await dataSourceEditor.saveCustomFile('back.js', params.text);
         return null;
     }*/
-
 }

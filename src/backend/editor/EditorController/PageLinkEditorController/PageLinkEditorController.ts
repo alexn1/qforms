@@ -1,4 +1,4 @@
-import {EditorController} from '../EditorController';
+import { EditorController } from '../EditorController';
 
 export class PageLinkEditorController extends EditorController {
     async save(params) {

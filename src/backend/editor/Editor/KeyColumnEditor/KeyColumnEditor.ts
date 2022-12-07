@@ -1,13 +1,13 @@
-import {Editor} from '../Editor';
+import { Editor } from '../Editor';
 
 export class KeyColumnEditor extends Editor {
     static createData(params) {
         if (!params.name) throw new Error('no name');
         return {
-            '@class'     : 'KeyColumn',
+            '@class': 'KeyColumn',
             '@attributes': {
-                'name': params.name
-            }
+                name: params.name,
+            },
         };
     }
     getColName() {

@@ -1,22 +1,22 @@
-import {Context} from "../Context";
+import { Context } from '../Context';
 
 const path = require('path');
-const pkg     = require('../../../package.json');
+const pkg = require('../../../package.json');
 
-import {Helper} from "../Helper";
-import {BackHostApp} from '../BackHostApp';
-import {Application} from "./Model/Application/Application";
-import {MyError} from "../MyError";
-import {Model} from "./Model/Model";
-import {Result} from "../Result";
+import { Helper } from '../Helper';
+import { BackHostApp } from '../BackHostApp';
+import { Application } from './Model/Application/Application';
+import { MyError } from '../MyError';
+import { Model } from './Model/Model';
+import { Result } from '../Result';
 
 // post actions
 const ACTIONS = [
     'page',
-    'select',       // select
-    'insert',       // insert
-    'update',       // update
-    '_delete',      // delete
+    'select', // select
+    'insert', // insert
+    'update', // update
+    '_delete', // delete
     'rpc',
     'logout',
     'test',
@@ -25,21 +25,22 @@ const ACTIONS = [
 export class ViewerModule {
     hostApp: BackHostApp;
     css: string[];
-    js : string[];
+    js: string[];
     constructor(hostApp: BackHostApp) {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
-        this.js  = (await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js' )).map(path => `/viewer/${path}`);
+        this.css = (
+            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')
+        ).map(path => `/viewer/${path}`);
+        this.js = (
+            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')
+        ).map(path => `/viewer/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
-        return [
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
-        ];
+        return [...this.hostApp.commonModule.css, ...this.css];
     }
     getScripts() {
         return [
@@ -48,31 +49,31 @@ export class ViewerModule {
             '/lib/react/react.production.min.js',
             '/lib/react/react-dom.production.min.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     async handleViewerGet(context: Context, application: Application) {
-        console.log('ViewerModule.handleViewerGet', context.query/*, Object.keys(context.query).map(name => typeof context.query[name])*/);
-        if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
+        console.log(
+            'ViewerModule.handleViewerGet',
+            context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/,
+        );
+        if (
+            application.isAuthentication() &&
+            !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])
+        ) {
             await this.loginGet(context, application);
         } else {
             await application.connect(context);
             try {
                 await application.initContext(context);
-                const response =  await application.fill(context);
+                const response = await application.fill(context);
                 context.getRes().render('viewer/index', {
-                    version       : pkg.version,
-                    application   : application,
-                    context       : context,
-                    response      : response,
-                    links         : [
-                        ...this.getLinks(),
-                        ...application.links
-                    ],
-                    scripts       : [
-                        ...this.getScripts(),
-                        ...application.scripts
-                    ]
+                    version: pkg.version,
+                    application: application,
+                    context: context,
+                    response: response,
+                    links: [...this.getLinks(), ...application.links],
+                    scripts: [...this.getScripts(), ...application.scripts],
                 });
             } finally {
                 application.release(context);
@@ -84,24 +85,18 @@ export class ViewerModule {
         // const application = this.getApplication(context);
         // const users = await application.getUsers(context);
         context.getRes().render('viewer/login', {
-            version    : pkg.version,
-            context    : context,
+            version: pkg.version,
+            context: context,
             application: application,
-            links      : [
-                ...this.getLinks(),
-                ...application.links
-            ],
-            scripts: [
-                ...this.getScripts(),
-                ...application.scripts
-            ],
+            links: [...this.getLinks(), ...application.links],
+            scripts: [...this.getScripts(), ...application.scripts],
             data: {
-                name  : application.getName(),
-                text  : application.getText(),
-                title : application.getTitle(context),
+                name: application.getName(),
+                text: application.getText(),
+                title: application.getTitle(context),
                 errMsg: null,
                 username: context.query.username,
-            }
+            },
         });
     }
     async handleViewerPost(context: Context, application: Application) {
@@ -109,8 +104,14 @@ export class ViewerModule {
         if (context.getReq().body.action === 'login') {
             await this.loginPost(context, application);
         } else {
-            if (application.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-                throw new MyError({message: 'Unauthorized', status: 401, context});
+            if (
+                application.isAuthentication() &&
+                !(
+                    context.getReq().session.user &&
+                    context.getReq().session.user[context.getRoute()]
+                )
+            ) {
+                throw new MyError({ message: 'Unauthorized', status: 401, context });
             }
             if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
                 throw new Error(`unknown action: ${context.getReq().body.action}`);
@@ -128,40 +129,41 @@ export class ViewerModule {
         // const application = this.getApplication(context);
         await application.connect(context);
         try {
-            const user = await application.authenticate(context, req.body.username, req.body.password);
+            const user = await application.authenticate(
+                context,
+                req.body.username,
+                req.body.password,
+            );
             if (user) {
-                if (!user.id)   throw new Error('no user id');
+                if (!user.id) throw new Error('no user id');
                 if (!user.name) throw new Error('no user name');
                 if (req.session.user === undefined) {
                     req.session.user = {};
                 }
-                req.session.ip       = context.getIp();
+                req.session.ip = context.getIp();
                 req.session.tzOffset = JSON.parse(req.body.tzOffset);
                 req.session.user[context.getRoute()] = user;
                 res.redirect(req.url);
-                this.getHostApp().logEvent(context, `login ${application.getName()}/${context.getDomain()} ${user.name}`);
+                this.getHostApp().logEvent(
+                    context,
+                    `login ${application.getName()}/${context.getDomain()} ${user.name}`,
+                );
             } else {
                 // const users = await application.getUsers(context);
                 res.render('viewer/login', {
-                    version    : pkg.version,
-                    context    : context,
+                    version: pkg.version,
+                    context: context,
                     application: application,
-                    links         : [
-                        ...this.getLinks(),
-                        ...application.links
-                    ],
-                    scripts       : [
-                        ...this.getScripts(),
-                        ...application.scripts
-                    ],
+                    links: [...this.getLinks(), ...application.links],
+                    scripts: [...this.getScripts(), ...application.scripts],
                     data: {
-                        name  : application.getName(),
-                        text  : application.getText(),
-                        title : application.getTitle(context),
+                        name: application.getName(),
+                        text: application.getText(),
+                        title: application.getTitle(context),
                         errMsg: application.getText().login.WrongUsernameOrPassword,
                         username: req.body.username,
                         password: req.body.password,
-                    }
+                    },
                 });
             }
         } finally {
@@ -180,7 +182,7 @@ export class ViewerModule {
             const page = await application.getPage(context, req.body.page);
             const response = await page.fill(context);
             if (response === undefined) throw new Error('page action: response is undefined');
-            await res.json({page: response});
+            await res.json({ page: response });
         } finally {
             application.release(context);
         }
@@ -209,7 +211,7 @@ export class ViewerModule {
             const [rows, count] = await dataSource.select(context);
             const time = Date.now() - start;
             console.log('select time:', time);
-            await res.json({rows, count, time});
+            await res.json({ rows, count, time });
             return time;
         } finally {
             await dataSource.getDatabase().release(context);
@@ -342,7 +344,7 @@ export class ViewerModule {
             err.message = `rpc error ${req.body.name}: ${err.message}`;
             err.context = context;
             await this.hostApp.logError(err, req);
-            await res.json({errorMessage});
+            await res.json({ errorMessage });
         }
     }
 
@@ -376,5 +378,4 @@ export class ViewerModule {
     getHostApp() {
         return this.hostApp;
     }
-
 }

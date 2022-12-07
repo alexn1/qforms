@@ -1,5 +1,5 @@
-import {KeyColumnEditor} from '../../Editor/KeyColumnEditor/KeyColumnEditor';
-import {EditorController} from '../EditorController';
+import { KeyColumnEditor } from '../../Editor/KeyColumnEditor/KeyColumnEditor';
+import { EditorController } from '../EditorController';
 
 export class KeyColumnEditorController extends EditorController {
     /*constructor(...args) {
@@ -11,12 +11,18 @@ export class KeyColumnEditorController extends EditorController {
             const pageEditor = await appEditor.createPageEditor(params.page);
             if (params.form) {
                 const formEditor = pageEditor.createItemEditor('forms', params.form);
-                const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
+                const dataSourceEditor = formEditor.createItemEditor(
+                    'dataSources',
+                    params.dataSource,
+                );
                 const data = dataSourceEditor.newItemData('KeyColumn', 'keyColumns', params);
                 await pageEditor.save();
                 return data;
             } else {
-                const dataSourceEditor = pageEditor.createItemEditor('dataSources', params.dataSource);
+                const dataSourceEditor = pageEditor.createItemEditor(
+                    'dataSources',
+                    params.dataSource,
+                );
                 const data = dataSourceEditor.newItemData('KeyColumn', 'keyColumns', params);
                 await pageEditor.save();
                 return data;
@@ -34,7 +40,10 @@ export class KeyColumnEditorController extends EditorController {
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
         const formEditor = pageEditor.createItemEditor('forms', params.form);
         const dataSourceEditor = formEditor.createItemEditor('dataSources', params.dataSource);
-        const keyColumnEditor: KeyColumnEditor = dataSourceEditor.createItemEditor('keyColumns', params.keyColumn);
+        const keyColumnEditor: KeyColumnEditor = dataSourceEditor.createItemEditor(
+            'keyColumns',
+            params.keyColumn,
+        );
         keyColumnEditor.setAttr(params.attr, params.value);
         await pageEditor.save();
         return null;
@@ -65,5 +74,4 @@ export class KeyColumnEditorController extends EditorController {
 
         return data;
     }
-
 }

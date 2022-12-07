@@ -1,8 +1,7 @@
-import {Model} from '../Model';
-import {Application} from '../Application/Application';
+import { Model } from '../Model';
+import { Application } from '../Application/Application';
 
 export class Column extends Model {
-
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('Column.constructor', this.getName());
@@ -13,9 +12,9 @@ export class Column extends Model {
     }
 
     fillAttributes(response: any): void {
-        response.name    = this.getAttr('name');
+        response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
-        response.type    = this.getAttr('type');
+        response.type = this.getAttr('type');
     }
 
     isKey(): boolean {

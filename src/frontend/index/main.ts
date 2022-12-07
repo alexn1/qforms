@@ -1,4 +1,4 @@
-import {IndexFrontHostApp} from './IndexFrontHostApp';
+import { IndexFrontHostApp } from './IndexFrontHostApp';
 
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOMContentLoaded');

@@ -59,7 +59,7 @@ class FieldEditor extends Editor_1.Editor {
             form: this.parent.getName(),
             field: this.getName(),
             formClass: this.parent.constructor.name.replace('Editor', ''),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
     }
@@ -71,7 +71,7 @@ class FieldEditor extends Editor_1.Editor {
             form: this.parent.getName(),
             field: this.getName(),
             formClass: this.parent.constructor.name.replace('Editor', ''),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return jsx;
     }
@@ -83,7 +83,7 @@ class FieldEditor extends Editor_1.Editor {
             form: this.parent.getName(),
             field: this.getName(),
             formClass: this.parent.constructor.name.replace('Editor', ''),
-            _class: this.constructor.name.replace('Editor', '')
+            _class: this.constructor.name.replace('Editor', ''),
         });
         return less;
     }

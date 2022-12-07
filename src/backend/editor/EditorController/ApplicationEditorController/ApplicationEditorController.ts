@@ -1,8 +1,7 @@
-const path    = require('path');
-import {VisualEditorController} from '../VisualEditorController';
+const path = require('path');
+import { VisualEditorController } from '../VisualEditorController';
 
 export class ApplicationEditorController extends VisualEditorController {
-
     /*constructor(...args) {
         super(...args);
     }*/
@@ -25,16 +24,16 @@ export class ApplicationEditorController extends VisualEditorController {
     async createController(params) {
         const appEditor = this.createApplicationEditor();
         const js = await appEditor.createJs(params);
-        return {js};
+        return { js };
     }
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const js = await appEditor.createModelBackJs(params);
-        return {js};
+        return { js };
     }
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         await appEditor.saveCustomFile('js', params.text);
-        return {js: params.text};
+        return { js: params.text };
     }
 }

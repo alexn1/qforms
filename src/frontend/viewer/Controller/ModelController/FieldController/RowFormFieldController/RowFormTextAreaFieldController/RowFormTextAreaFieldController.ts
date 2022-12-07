@@ -1,5 +1,5 @@
-import {RowFormFieldController} from '../RowFormFieldController';
-import {RowFormTextAreaFieldView} from './RowFormTextAreaFieldView';
+import { RowFormFieldController } from '../RowFormFieldController';
+import { RowFormTextAreaFieldView } from './RowFormTextAreaFieldView';
 
 export class RowFormTextAreaFieldController extends RowFormFieldController {
     getViewClass() {

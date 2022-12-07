@@ -15,7 +15,7 @@ class DataSourceEditor extends Editor_1.Editor {
                 table: params.table || '',
             },
             keyColumns: [
-                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : [])
+                ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : []),
             ],
         };
     }

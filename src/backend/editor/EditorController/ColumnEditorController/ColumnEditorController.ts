@@ -1,7 +1,6 @@
-import {EditorController} from '../EditorController';
+import { EditorController } from '../EditorController';
 
 export class ColumnEditorController extends EditorController {
-
     /*constructor(...args) {
         console.log('ColumnEditorController.constructor');
         super(...args);
@@ -37,5 +36,4 @@ export class ColumnEditorController extends EditorController {
         await appEditor.save();
         return data;
     }
-
 }
