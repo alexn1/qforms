@@ -101,7 +101,7 @@ class EditorModule {
         };
         res.render('editor/index', {
             version: pkg.version,
-            data: data,
+            data: Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }),
             runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
             appDirName: context.getAppDirName(),
             appFileName: context.getAppFileName(),

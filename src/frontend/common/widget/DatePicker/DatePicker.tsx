@@ -168,7 +168,8 @@ export class DatePicker extends ReactComponent {
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         // @ts-ignore
         const highlightedDate = this.props.highlightedDate
-            ? new Date(...this.props.highlightedDate)
+            ? // @ts-ignore
+              new Date(...this.props.highlightedDate)
             : null;
         return (
             <table

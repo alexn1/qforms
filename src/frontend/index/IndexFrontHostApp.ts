@@ -1,5 +1,5 @@
 import { IndexView } from './IndexView/IndexView';
-import { Helper, FrontHostApp } from '../common/index';
+import { Helper, FrontHostApp } from '../common';
 
 export class IndexFrontHostApp {
     data: any;

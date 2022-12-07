@@ -31163,11 +31163,12 @@ if (false) {} else {
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FrontHostApp = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
 class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
@@ -31252,6 +31253,7 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
+        // console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
@@ -31269,7 +31271,6 @@ class FrontHostApp {
         return confirm(options.message);
     }
 }
-exports.FrontHostApp = FrontHostApp;
 // @ts-ignore
 window.FrontHostApp = FrontHostApp;
 
@@ -31280,16 +31281,16 @@ window.FrontHostApp = FrontHostApp;
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
   \***************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Helper": () => (/* binding */ Helper)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Helper = void 0;
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 // @ts-ignore
 window.QForms = {};
 class Helper {
@@ -31366,8 +31367,7 @@ class Helper {
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
-                .exec(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
             if (a)
                 return new Date(value);
         }
@@ -31377,13 +31377,13 @@ class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         // @ts-ignore
-        props.onCreate = c => component = c;
-        const reactElement = react_1.default.createElement(type, props, children);
-        react_dom_1.default.render(reactElement, rootElement);
+        props.onCreate = c => (component = c);
+        const reactElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
-        react_dom_1.default.unmountComponentAtNode(root);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
         return new Promise(resolve => {
@@ -31568,16 +31568,16 @@ class Helper {
         }
     }
     static setCookie(name, value, time) {
-        var expires = "";
+        var expires = '';
         if (time) {
             var date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
+            expires = '; expires=' + date.toUTCString();
         }
-        document.cookie = name + "=" + (encodeURIComponent(value) || "") + expires + "; path=/";
+        document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
     static getCookie(name) {
-        var nameEQ = name + "=";
+        var nameEQ = name + '=';
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
@@ -31597,7 +31597,6 @@ class Helper {
         });
     }
 }
-exports.Helper = Helper;
 // @ts-ignore
 window.QForms.Helper = window.Helper = Helper;
 
@@ -31608,13 +31607,15 @@ window.QForms.Helper = window.Helper = Helper;
 /*!************************************************!*\
   !*** ./src/frontend/common/ReactComponent.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ReactComponent": () => (/* binding */ ReactComponent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ReactComponent = void 0;
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-class ReactComponent extends react_1.Component {
+class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
         if (props.onCreate)
@@ -31635,7 +31636,7 @@ class ReactComponent extends react_1.Component {
         return [
             this.getCssBlockName(),
             ...(this.props.classList || []),
-            ...(this.state && this.state.classList ? this.state.classList : [])
+            ...(this.state && this.state.classList ? this.state.classList : []),
         ];
     }
     addCssClass(className) {
@@ -31714,7 +31715,6 @@ class ReactComponent extends react_1.Component {
         this.setState({ disabled: undefined });
     }
 }
-exports.ReactComponent = ReactComponent;
 // @ts-ignore
 window.ReactComponent = ReactComponent;
 
@@ -31725,23 +31725,29 @@ window.ReactComponent = ReactComponent;
 /*!***************************************!*\
   !*** ./src/frontend/common/Search.ts ***!
   \***************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Search = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
 class Search {
     static getObj() {
         if (!window.location.search.split('?')[1])
             return {};
-        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+        return window.location.search
+            .split('?')[1]
+            .split('&')
+            .reduce((acc, item) => {
             const kv = item.split('=');
             acc[kv[0]] = decodeURIComponent(kv[1]);
             return acc;
         }, {});
     }
     static objToString(obj) {
-        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        const search = Object.keys(obj)
+            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .join('&');
         if (!search)
             return '';
         return `?${search}`;
@@ -31757,9 +31763,237 @@ class Search {
         return Search.objToString(newObj);
     }
 }
-exports.Search = Search;
 // @ts-ignore
 window.Search = Search;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/ArrowIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const ArrowIcon = props => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
+};
+// @ts-ignore
+window.ArrowIcon = ArrowIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon = props => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
+};
+// @ts-ignore
+window.CloseIcon = CloseIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon2 = props => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
+};
+// @ts-ignore
+window.CloseIcon2 = CloseIcon2;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DateIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] })));
+    }
+}
+// @ts-ignore
+window.DateIcon = DateIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LeftIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const LeftIcon = props => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
+};
+// @ts-ignore
+window.LeftIcon = LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] })));
+    }
+}
+// @ts-ignore
+window.MoreVertIcon = MoreVertIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const OpenInNewIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] })));
+};
+// @ts-ignore
+window.OpenInNewIcon = OpenInNewIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/RightIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const RightIcon = props => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
+};
+// @ts-ignore
+window.RightIcon = RightIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] })));
+    }
+}
+// @ts-ignore
+window.VisibilityIcon = VisibilityIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityOffIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] })));
+    }
+}
+// @ts-ignore
+window.VisibilityOffIcon = VisibilityOffIcon;
 
 
 /***/ }),
@@ -31768,41 +32002,115 @@ window.Search = Search;
 /*!**************************************!*\
   !*** ./src/frontend/common/index.ts ***!
   \**************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_15__.Button),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__.CheckBox),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__.DatePicker),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__.DropdownDatePicker),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__.Password),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__.PhoneBox),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
+/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__.Select),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__.TimeBox),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.Search = exports.FrontHostApp = exports.ReactComponent = exports.Helper = void 0;
-var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
-var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
-var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
-var Search_1 = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
-Object.defineProperty(exports, "Search", ({ enumerable: true, get: function () { return Search_1.Search; } }));
-var Box_1 = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-Object.defineProperty(exports, "Box", ({ enumerable: true, get: function () { return Box_1.Box; } }));
-var CheckBox_1 = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-Object.defineProperty(exports, "CheckBox", ({ enumerable: true, get: function () { return CheckBox_1.CheckBox; } }));
-var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
-var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
-var Tab_1 = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-Object.defineProperty(exports, "Tab", ({ enumerable: true, get: function () { return Tab_1.Tab; } }));
-var DropdownButton_1 = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-Object.defineProperty(exports, "DropdownButton", ({ enumerable: true, get: function () { return DropdownButton_1.DropdownButton; } }));
-var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
-var Grid_1 = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-Object.defineProperty(exports, "Grid", ({ enumerable: true, get: function () { return Grid_1.Grid; } }));
-var GridRow_1 = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-Object.defineProperty(exports, "GridRow", ({ enumerable: true, get: function () { return GridRow_1.GridRow; } }));
-var GridCell_1 = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-Object.defineProperty(exports, "GridCell", ({ enumerable: true, get: function () { return GridCell_1.GridCell; } }));
-var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
+
+
+// icon
+
+
+
+
+
+
+
+
+// widget
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /***/ }),
@@ -31811,26 +32119,30 @@ Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { 
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/Box/Box.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Box = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-class Box extends ReactComponent_1.ReactComponent {
+
+class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('Box.constructor', props);
         super(props);
         this.update = () => {
             console.log('Box.update');
             this.setState({
-                backgroundColor: 'green'
+                backgroundColor: 'green',
             });
         };
         this.state = {
-            backgroundColor: 'purple'
+            backgroundColor: 'purple',
         };
     }
     // componentWillMount() {
@@ -31851,10 +32163,9 @@ class Box extends ReactComponent_1.ReactComponent {
     }
     render() {
         console.log('Box.render');
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, { name: "one" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "two" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "three" })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
     }
 }
-exports.Box = Box;
 // @ts-ignore
 window.Box = Box;
 
@@ -31865,20 +32176,24 @@ window.Box = Box;
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Button": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Button = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Button extends ReactComponent_1.ReactComponent {
+
+class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
     }
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
@@ -31903,15 +32218,14 @@ class Button extends ReactComponent_1.ReactComponent {
     getStyle() {
         return {
             display: !this.isVisible() ? 'none' : null,
-            width: this.props.width
+            width: this.props.width,
         };
     }
     render() {
         // console.log('Button.render', this.props.title, this.props);
-        return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
-exports.Button = Button;
 // @ts-ignore
 window.Button = Button;
 
@@ -31922,14 +32236,17 @@ window.Button = Button;
 /*!**********************************************************!*\
   !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
   \**********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CheckBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class CheckBox extends ReactComponent_1.ReactComponent {
+class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = e => {
@@ -31956,7 +32273,7 @@ class CheckBox extends ReactComponent_1.ReactComponent {
             throw new Error(`wrong checked prop: ${this.props.checked}`);
         }
         this.state = {
-            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
         };
     }
     getValue() {
@@ -31970,12 +32287,11 @@ class CheckBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         if (this.state.checked === null) {
-            return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" }));
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" })));
         }
-        return (0, jsx_runtime_1.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange }));
     }
 }
-exports.CheckBox = CheckBox;
 // @ts-ignore
 window.CheckBox = CheckBox;
 
@@ -31986,14 +32302,17 @@ window.CheckBox = CheckBox;
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/ComboBox.tsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ComboBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class ComboBox extends ReactComponent_1.ReactComponent {
+class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
@@ -32052,13 +32371,224 @@ class ComboBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('ComboBox.render', this.state.value);
-        return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable &&
-                    (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items && this.props.items.map(item => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
+                    this.props.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
-exports.ComboBox = ComboBox;
 // @ts-ignore
 window.ComboBox = ComboBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+
+
+
+
+
+// props
+//  visible boolean true
+//  selectedDate array [2021, 0, 1]
+//  minDate array [2021, 0, 1]
+//  onMouseDown function
+//  onDateSelected function
+//  getDateStyle function
+//  selectToday boolean false
+//  highlightedDate array [2021, 0, 1]
+class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DatePicker.constructor', props);
+        super(props);
+        this.onClick = e => {
+            console.log('DatePicker.onClick', e.target);
+            if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+                return this.onDateClick(e.target);
+            }
+        };
+        this.onMouseDown = e => {
+            // console.log('DatePicker.onMouseDown');
+            if (this.props.onMouseDown) {
+                return this.props.onMouseDown(e);
+            }
+        };
+        this.onNextClick = e => {
+            // console.log('DatePicker.next');
+            this.setState(prevState => {
+                const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                next.setMonth(next.getMonth() + 1);
+                return {
+                    selectedMonth: [next.getFullYear(), next.getMonth()],
+                };
+            });
+        };
+        this.onPrevClick = e => {
+            // console.log('DatePicker.prev');
+            this.setState(prevState => {
+                const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                prev.setMonth(prev.getMonth() - 1);
+                return {
+                    selectedMonth: [prev.getFullYear(), prev.getMonth()],
+                };
+            });
+        };
+        if (this.props.minDate && !(this.props.minDate instanceof Array))
+            throw new Error('minDate must be array');
+        this.state = { selectedMonth: this.calcSelectedMonth() };
+        this.MONTH = [
+            'Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь',
+        ];
+    }
+    static createDateFromArr(arr) {
+        return new Date(arr[0], arr[1], arr[2]);
+    }
+    isVisible() {
+        if (this.props.visible === false)
+            return false;
+        return true;
+    }
+    calcSelectedMonth() {
+        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        if (this.props.selectedDate) {
+            return [this.props.selectedDate[0], this.props.selectedDate[1]];
+        }
+        else if (this.props.highlightedDate) {
+            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
+        }
+        else {
+            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+            if (this.props.minDate)
+                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
+            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
+            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
+            const date = new Date(Math.min(...dates));
+            // console.log('date:', date);
+            return [date.getFullYear(), date.getMonth()];
+        }
+    }
+    static getTodayArr() {
+        return DatePicker.dateToArray(new Date());
+    }
+    static dateToArray(date) {
+        return [date.getFullYear(), date.getMonth(), date.getDate()];
+    }
+    static getDay(date) {
+        let day = date.getDay() - 1;
+        if (day === -1)
+            day = 6;
+        if (day === 0)
+            day = 7;
+        return day;
+    }
+    createSelectedDate() {
+        if (!this.isDateSelected())
+            throw new Error('date not selected');
+        // @ts-ignore
+        return new Date(...this.props.selectedDate);
+    }
+    isDateSelected() {
+        return !!this.props.selectedDate;
+    }
+    getFirstDateOfTable() {
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
+        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        return date;
+    }
+    createMinDate() {
+        if (!this.props.minDate)
+            throw new Error('no min date');
+        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
+    }
+    isMinDate() {
+        return !!this.props.minDate;
+    }
+    isPrevAllowed() {
+        const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+    }
+    isMonthAllowed(month) {
+        if (this.isMinDate()) {
+            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return true;
+    }
+    onDateClick(target) {
+        // console.log('DatePicker.onDateClick', target.dataset.date);
+        if (this.props.onDateSelected) {
+            this.props.onDateSelected(JSON.parse(target.dataset.date));
+        }
+    }
+    render() {
+        // console.log('DatePicker.render', this.props, this.state);
+        const date = this.getFirstDateOfTable();
+        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        // @ts-ignore
+        const highlightedDate = this.props.highlightedDate
+            ? // @ts-ignore
+                new Date(...this.props.highlightedDate)
+            : null;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+                            const classList = [];
+                            if (j === 5 || j === 6)
+                                classList.push('weekend');
+                            if (this.isSelectToday() && date.getTime() === today.getTime())
+                                classList.push('today');
+                            if (date.getMonth() !== this.state.selectedMonth[1])
+                                classList.push('out');
+                            if (!minDate)
+                                classList.push('selectable');
+                            else if (date.getTime() >= minDate.getTime())
+                                classList.push('selectable');
+                            if (selectedDate && date.getTime() === selectedDate.getTime())
+                                classList.push('selected');
+                            if (highlightedDate && highlightedDate.getTime() === date.getTime())
+                                classList.push('highlight');
+                            const text = date.getDate().toString();
+                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
+                            const style = this.props.getDateStyle
+                                ? this.props.getDateStyle(date)
+                                : null;
+                            date.setDate(date.getDate() + 1);
+                            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text));
+                        }) }, i))) })] })));
+    }
+    isSelectToday() {
+        if (this.props.selectToday === false)
+            return false;
+        return true;
+    }
+}
+// @ts-ignore
+window.DatePicker = DatePicker;
 
 
 /***/ }),
@@ -32067,15 +32597,19 @@ window.ComboBox = ComboBox;
 /*!**********************************************************************!*\
   !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
   \**********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DropdownButton = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-class DropdownButton extends ReactComponent_1.ReactComponent {
+
+class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onButtonClick = e => {
@@ -32110,7 +32644,7 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
         };
         this.state = {
             open: false,
-            disabled: false
+            disabled: false,
         };
     }
     isEnabled() {
@@ -32120,12 +32654,172 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
         return !this.state.disabled;
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0, jsx_runtime_1.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions && this.props.actions.map(action => (0, jsx_runtime_1.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name)) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
+                        this.props.actions.map(action => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
     }
 }
-exports.DropdownButton = DropdownButton;
 // @ts-ignore
 window.DropdownButton = DropdownButton;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+
+
+
+
+
+
+
+// oldDates boolean true
+class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DropdownDatePicker.constructor', props);
+        super(props);
+        this.onInputClick = e => {
+            // console.log('DropdownDatePicker.onInputClick', e);
+            if (this.props.readOnly)
+                return;
+            this.setState(prevState => ({ open: !prevState.open }));
+        };
+        this.onInputKeyDown = e => {
+            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onCloseDown = async (e) => {
+            // console.log('DropdownDatePicker.onCloseDown', e);
+            this.setState({ value: null });
+            if (this.props.onChange) {
+                this.props.onChange(null);
+            }
+        };
+        this.onBlur = e => {
+            // console.log('DropdownDatePicker.onBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onDatePickerMouseDown = e => {
+            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onDatePickerDateSelected = date => {
+            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            const value = new Date(date[0], date[1], date[2]);
+            this.setState({ open: false, value });
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.state = {
+            open: false,
+            value: props.value || null,
+        };
+        if (props.value && !(props.value instanceof Date)) {
+            throw new Error(`need Date type, got ${typeof props.value}`);
+        }
+    }
+    getFormat() {
+        // if (this.props.format) return this.props.format;
+        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+        return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+    }
+    getStringValue() {
+        const value = this.getValue();
+        if (value) {
+            let format = this.getFormat();
+            // @ts-ignore
+            if (ApplicationController.isDebugMode()) {
+                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
+                    format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+                }
+            }
+            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+        }
+        return '';
+    }
+    /*getMinDate() {
+        if (this.props.getMinDate) {
+            return this.props.getMinDate();
+        } else if (this.props.oldDates === false) {
+            return DatePicker.getTodayArr();
+        }
+        return null;
+    }*/
+    getSelectedMonth() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth()];
+        }
+        return null;
+    }
+    getSelectedDate() {
+        if (this.getValue()) {
+            return [
+                this.getValue().getFullYear(),
+                this.getValue().getMonth(),
+                this.getValue().getDate(),
+            ];
+        }
+        return null;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    getClassList() {
+        return [...super.getClassList(), ...(this.props.readOnly ? ['read-only'] : [])];
+    }
+    renderInput() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
+    }
+    renderCloseIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+    }
+    renderDateIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
+    }
+    renderDatePicker() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker
+                // minDate={this.getMinDate()}
+                , { 
+                    // minDate={this.getMinDate()}
+                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+    }
+    render() {
+        // console.log('DropdownDatePicker.render', this.props, this.state);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
+    }
+}
+// @ts-ignore
+window.DropdownDatePicker = DropdownDatePicker;
 
 
 /***/ }),
@@ -32134,21 +32828,25 @@ window.DropdownButton = DropdownButton;
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
   \**************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Grid = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-const GridRow_1 = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-const GridCell_1 = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-class Grid extends ReactComponent_1.ReactComponent {
+
+
+
+
+class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('Grid.constructor', props);
         super(props);
@@ -32275,13 +32973,15 @@ class Grid extends ReactComponent_1.ReactComponent {
         };
         this.state = {
             key: this.props.selectedKey || null,
-            column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+            column: this.props.selectedKey && this.props.columns && this.props.columns.length
+                ? 0
+                : null,
             columnWidth: {},
             resized: Date.now(),
         };
         this.columns = {}; // each column is the array of each cell view
-        this.el = react_1.default.createRef();
-        this.head = react_1.default.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     getActiveColumn() {
         return this.state.column;
@@ -32306,7 +33006,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
-        await Helper_1.Helper.copyTextToClipboard(text);
+        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
     }
     findRow(key) {
         return this.props.rows.find(row => this.getRowKey(row) === key);
@@ -32395,7 +33095,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         }
     }
     getMaxColumnWidth(column) {
-        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2;
+        return (Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2);
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
@@ -32405,12 +33105,12 @@ class Grid extends ReactComponent_1.ReactComponent {
         return column.width;
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0, jsx_runtime_1.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name));
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
     renderRows() {
         return this.props.rows.map((row, i) => {
             const key = this.getRowKey(row);
-            return (0, jsx_runtime_1.jsx)(GridRow_1.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key);
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
         });
     }
     getRowKey(row) {
@@ -32426,7 +33126,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         }
         if (view)
             return view;
-        return (0, jsx_runtime_1.jsx)(GridCell_1.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
@@ -32439,13 +33139,12 @@ class Grid extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('Grid.render', this.props.name);
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && (0, jsx_runtime_1.jsx)("div", { className: `${this.getCssBlockName()}__th` })] })) })) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
         return !!this.props.createLinkCallback;
     }
 }
-exports.Grid = Grid;
 // @ts-ignore
 window.Grid = Grid;
 
@@ -32456,22 +33155,24 @@ window.Grid = Grid;
 /*!**********************************************************!*\
   !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
   \**********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GridCell = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-class GridCell extends ReactComponent_1.ReactComponent {
+
+
+class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.span = react_1.default.createRef();
+        this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     getSpanOffsetWidth() {
         if (!this.span.current)
@@ -32479,7 +33180,7 @@ class GridCell extends ReactComponent_1.ReactComponent {
         return this.span.current.offsetWidth;
     }
     renderCellValue(rawValue) {
-        const value = this.props.grid.props.decodeValue ? Helper_1.Helper.decodeValue(rawValue) : rawValue;
+        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
         if (typeof value === 'boolean')
             return value.toString();
         return value;
@@ -32487,10 +33188,9 @@ class GridCell extends ReactComponent_1.ReactComponent {
     render() {
         const row = this.props.row;
         const column = this.props.column;
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0, jsx_runtime_1.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
     }
 }
-exports.GridCell = GridCell;
 // @ts-ignore
 window.GridCell = GridCell;
 
@@ -32501,14 +33201,17 @@ window.GridCell = GridCell;
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GridRow = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class GridRow extends ReactComponent_1.ReactComponent {
+class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
     }
@@ -32534,13 +33237,75 @@ class GridRow extends ReactComponent_1.ReactComponent {
         const i = this.props.i;
         const key = this.props.rowKey;
         const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
-        return (0, jsx_runtime_1.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name)), !!grid.props.extraColumn &&
-                    (0, jsx_runtime_1.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name))), !!grid.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick }))] })));
     }
 }
-exports.GridRow = GridRow;
 // @ts-ignore
 window.GridRow = GridRow;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Menu": () => (/* binding */ Menu)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Menu.constructor', props);
+        super(props);
+        this.onMenuClick = async (e) => {
+            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            await this.toggleMenu(e.currentTarget.dataset.menu);
+        };
+        this.onBlur = async (e) => {
+            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            await this.closeMenu(e.currentTarget.dataset.menu);
+        };
+        this.onMouseDown = e => {
+            // console.log('Menu.onMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onMenuItemClick = async (e) => {
+            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            e.persist();
+            const { menu, type, name } = e.target.dataset;
+            await this.closeMenu(menu);
+            if (this.props.onClick) {
+                this.props.onClick(menu, type, name);
+            }
+        };
+        this.state = {};
+    }
+    toggleMenu(menu) {
+        return new Promise(resolve => {
+            this.setState(prevState => ({
+                [menu]: !prevState[menu],
+            }), resolve);
+        });
+    }
+    closeMenu(menu) {
+        return new Promise(resolve => this.setState({ [menu]: false }, resolve));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
+                this.props.items.map(menu => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+    }
+}
+// @ts-ignore
+window.Menu = Menu;
 
 
 /***/ }),
@@ -32549,21 +33314,450 @@ window.GridRow = GridRow;
 /*!****************************************************!*\
   !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Modal extends ReactComponent_1.ReactComponent {
+class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     render() {
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
     }
 }
-exports.Modal = Modal;
 // @ts-ignore
 window.Modal = Modal;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Password": () => (/* binding */ Password)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+
+
+
+
+
+
+class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = e => {
+            this._setValue(e.target.value);
+        };
+        this.onCloseClick = e => {
+            this._setValue('');
+            this.getInputElement().focus();
+        };
+        this.onIconClick = e => {
+            this.setState(prevState => {
+                return {
+                    type: prevState.type === 'password' ? 'text' : 'password',
+                };
+            });
+            this.getInputElement().focus();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.props.value || '',
+            type: 'password',
+        };
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        return this.state.value !== '';
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) }))] })));
+    }
+}
+// @ts-ignore
+window.Password = Password;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyPress = e => {
+            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === '+' &&
+                e.target.value.length &&
+                Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+                e.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('PhoneBox.onChange', e.target.value);
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const len = e.target.value.length;
+            // console.log('start/end/len:', start, end, len);
+            // disable edition in middle
+            if (start !== end || start !== len) {
+                return;
+            }
+            // value pipeline
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // state
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(value);
+            this.setState({ value: this.state.value }); // for render only
+            // event
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.onBlur = e => {
+            // console.log('PhoneBox.onBlur');
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // console.log('value:', value);
+            // event
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: PhoneBox.formatPhoneNumber(this.props.value || ''),
+        };
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        if (nextProps.value !== undefined) {
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+    }
+    static clearValue(value) {
+        return value.replace(/[^\+0-9]/g, '');
+    }
+    static ifNoCodeAddRussianCode(value) {
+        if (value === '') {
+        }
+        else if (value.match(/^8/)) {
+            return value.replace(/^8/, '+7');
+        }
+        else if (value.match(/^7/)) {
+            return `+${value}`;
+        }
+        else if (value[0] !== '+') {
+            return `+7${value}`;
+        }
+        return value;
+    }
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+        // console.log('arr:', arr);
+        if (arr) {
+            if (arr[5]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+            }
+            if (arr[4]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+            }
+            if (arr[3]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}`;
+            }
+            if (arr[2]) {
+                return `${arr[1]} ${arr[2]}`;
+            }
+            if (arr[1]) {
+                return `${arr[1]}`;
+            }
+        }
+        return value;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+
+
+
+
+
+class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyDown = async (e) => {
+            // console.log('Select.onKeyDown');
+            if (this.isVisible()) {
+                this.setState({ visible: false });
+                e.stopPropagation();
+            }
+        };
+        this.onInputMouseDown = async (e) => {
+            console.log('Select.onInputMouseDown');
+            if (this.props.readOnly)
+                return;
+            if (this.props.onMouseDown) {
+                await this.props.onMouseDown(e);
+            }
+            else {
+                if (!this.isVisible()) {
+                    const [selected] = this.el.current.querySelectorAll('li.selected');
+                    // console.log('selected:', selected);
+                    if (selected) {
+                        // console.log('selected.offsetTop:', selected.offsetTop);
+                        const scrollTop = selected.offsetTop -
+                            this.dropdown.current.getBoundingClientRect().height / 2 +
+                            selected.getBoundingClientRect().height / 2;
+                        console.log('scrollTop:', scrollTop);
+                        this.dropdown.current.scrollTop = scrollTop;
+                        console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+                    }
+                }
+                this.setState(prevState => {
+                    return { visible: !prevState.visible };
+                });
+            }
+        };
+        this.onInputBlur = async (e) => {
+            console.log('Select.onInputBlur', e.target);
+            this.setState({ visible: false });
+        };
+        this.onDropdownMouseDown = async (e) => {
+            e.preventDefault();
+        };
+        this.onDropdownClick = async (e) => {
+            console.log('Select.onDropdownClick', e.target.offsetTop);
+            const value = JSON.parse(e.target.dataset.value);
+            // console.log('value:', value);
+            this.setState({ value: value, visible: false }, async () => {
+                if (this.props.onChange) {
+                    await this.props.onChange(value.toString());
+                }
+            });
+        };
+        this.onCloseClick = async (e) => {
+            this.setState({ value: '' });
+            if (this.props.onChange) {
+                await this.props.onChange('');
+            }
+            this.getElement();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.getInitialValue(),
+            visible: false,
+        };
+    }
+    isVisible() {
+        return this.state.visible;
+    }
+    getInitialValue() {
+        // console.log('Select.getInitialValue', this.props.value);
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.getItems().find(item => item.value === this.props.value);
+            if (!item) {
+                if (this.isNullable() && value === '') {
+                }
+                else {
+                    console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
+                    console.log('items:', this.getItems());
+                }
+            }
+        }
+        else {
+            if (this.isNullable()) {
+                value = '';
+            }
+            else {
+                if (this.props.items.length) {
+                    value = this.props.items[0].value;
+                }
+                else {
+                    value = '';
+                }
+            }
+        }
+        if (value === null)
+            throw new Error('null is wrong value for Select');
+        // console.log('select value:', value);
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    isNullable() {
+        return this.props.nullable !== undefined ? this.props.nullable : true;
+    }
+    getVisibility() {
+        return this.isVisible() ? 'visible' : 'hidden';
+    }
+    getDisplay() {
+        return this.isVisible() ? 'block' : 'none';
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValueTitle(value) {
+        if (value === '')
+            return '';
+        const item = this.getItems().find(item => item.value === value);
+        if (!item)
+            throw new Error(`cannot find item by value: ${value}`);
+        // console.log('item:', item);
+        return item.title || item.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        if (this.props.readOnly)
+            return false;
+        return this.state.value !== '';
+    }
+    renderInput() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown }));
+    }
+    renderClose() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+    }
+    renderIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) })));
+    }
+    renderDropdown() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
+                // visibility: this.getVisibility(),
+                display: this.getDisplay(),
+            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map(item => {
+                    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value));
+                })] })));
+    }
+    render() {
+        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
+    }
+}
+// @ts-ignore
+window.Select = Select;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
+/*!************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Statusbar.constructor', props);
+        super(props);
+        this.state = {};
+    }
+    setLastQueryTime(lastQueryTime) {
+        this.setState({ lastQueryTime });
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Last query time:", ' ', this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
+    }
+}
+// @ts-ignore
+window.Statusbar = Statusbar;
 
 
 /***/ }),
@@ -32572,14 +33766,17 @@ window.Modal = Modal;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Tab = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Tab extends ReactComponent_1.ReactComponent {
+class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = e => {
@@ -32607,7 +33804,7 @@ class Tab extends ReactComponent_1.ReactComponent {
             }
         };
         this.state = {
-            active: 0
+            active: 0,
         };
     }
     getActive() {
@@ -32622,19 +33819,138 @@ class Tab extends ReactComponent_1.ReactComponent {
         this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
     renderTitles() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose &&
-                    (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name)));
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0, jsx_runtime_1.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
     }
 }
-exports.Tab = Tab;
 // @ts-ignore
 window.Tab = Tab;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab2": () => (/* binding */ Tab2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = e => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = e => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0,
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name)));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
+    }
+}
+// @ts-ignore
+window.Tab = Tab;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextArea.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/TextArea.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextArea": () => (/* binding */ TextArea)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('TextArea.constructor', props);
+        super(props);
+        this.onChange = e => {
+            // console.log('TextArea.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                this.props.onChange(e.target.value);
+            }
+        };
+        this.state = {
+            value: this.props.value || '',
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextArea.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+    }
+}
+// @ts-ignore
+window.TextArea = TextArea;
 
 
 /***/ }),
@@ -32643,15 +33959,19 @@ window.Tab = Tab;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/TextBox.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBox": () => (/* binding */ TextBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TextBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class TextBox extends ReactComponent_1.ReactComponent {
+
+class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
@@ -32659,9 +33979,9 @@ class TextBox extends ReactComponent_1.ReactComponent {
             // console.log('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
         this.state = {
-            value: this.props.value || ''
+            value: this.props.value || '',
         };
     }
     getValue() {
@@ -32684,12 +34004,248 @@ class TextBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TextBox.render');
-        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
-exports.TextBox = TextBox;
 // @ts-ignore
 window.TextBox = TextBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('TimeBox.constructor', props);
+        super(props);
+        this.onKeyPress = event => {
+            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+                console.log('cancel', event.key);
+                event.preventDefault();
+            }
+        };
+        this.onChange = e => {
+            // console.log('TimeBox.onChange', e.target.value);
+            const target = e.target;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            if (target.value.length > 5) {
+                return;
+            }
+            const inEnd = start === end && start === target.value.length;
+            const stringValue = this.formatValue(target.value);
+            // console.log('before:', target.selectionStart, target.selectionEnd);
+            this.setState({ value: stringValue }, () => {
+                // console.log('after:', target.selectionStart, target.selectionEnd);
+                // console.log('inEnd:', inEnd);
+                if (!inEnd) {
+                    target.selectionStart = start;
+                    target.selectionEnd = end;
+                }
+                if (this.props.onChange) {
+                    let nValue;
+                    try {
+                        nValue = this.getValue();
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                        nValue = NaN;
+                    }
+                    // console.log('nValue:', nValue);
+                    this.props.onChange(nValue);
+                }
+            });
+        };
+        this.onBlur = e => {
+            // console.log('TimeBox.onBlur');
+            if (this.props.onBlur) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                }
+                catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
+                this.props.onBlur(nValue);
+            }
+        };
+        if (props.value && typeof props.value !== 'number') {
+            throw new Error(`need number type, got ${typeof props.value}`);
+        }
+        this.state = {
+            value: TimeBox.getStringValue(props.value),
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        switch (pure.length) {
+            case 0:
+                break;
+            case 1:
+                min = pure;
+                break;
+            case 2:
+                min = pure;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                break;
+        }
+        return [min, ...(sec ? [sec] : [])].join(':');
+    }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({ value: TimeBox.getStringValue(value) });
+    }
+    /*onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }*/
+    /*onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }*/
+    static getStringValue(value) {
+        // console.log('TimeBox.getStringValue', value);
+        if (value === null)
+            return '';
+        if (value !== undefined) {
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
+            if (h < 10)
+                h = '0' + h;
+            if (m < 10)
+                m = '0' + m;
+            return `${h}:${m}`;
+        }
+        return '';
+    }
+    static getIntegerValue(stringValue) {
+        // console.log('TimeBox.getIntegerValue', stringValue);
+        // try {
+        if (stringValue === '')
+            return null;
+        const arr = stringValue.split(':');
+        if (!arr[0])
+            throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1])
+            throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2)
+            throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2)
+            throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23)
+            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59)
+            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
+    }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        if (this.props.value !== nextProps.value) {
+            // @ts-ignore
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.props.readOnly !== nextProps.readOnly)
+            return true;
+        if (this.props.placeholder !== nextProps.placeholder)
+            return true;
+        if (this.state.value !== nextState.value)
+            return true;
+        return false;
+    }
+    render() {
+        // console.log('TimeBox.render', this.state.value);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
+    }
+}
+// @ts-ignore
+window.TimeBox = TimeBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    // constructor(props) {
+    //     console.log('Tooltip.constructor', props);
+    //     super(props);
+    // }
+    render() {
+        // console.log('Tooltip.render', this.state, this.props);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
+    }
+}
+// @ts-ignore
+window.Tooltip = Tooltip;
 
 
 /***/ }),
@@ -32698,14 +34254,17 @@ window.TextBox = TextBox;
 /*!*******************************************************!*\
   !*** ./src/frontend/editor/ActionList/ActionList.tsx ***!
   \*******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionList": () => (/* binding */ ActionList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ActionList = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class ActionList extends common_1.ReactComponent {
+class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onClick = async (li) => {
@@ -32713,17 +34272,18 @@ class ActionList extends common_1.ReactComponent {
             await this.props.onClick(li.dataset.action);
         };
         this.state = {
-            item: null
+            item: null,
         };
     }
     render() {
         // console.log('ActionList.render', this.state.item);
-        return (0, jsx_runtime_1.jsx)(common_1.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item ? this.state.item.getActions().map(action => {
-                return { name: action.action, title: action.caption };
-            }) : [] });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item
+                ? this.state.item.getActions().map(action => {
+                    return { name: action.action, title: action.caption };
+                })
+                : [] }));
     }
 }
-exports.ActionList = ActionList;
 
 
 /***/ }),
@@ -32732,16 +34292,21 @@ exports.ActionList = ActionList;
 /*!*****************************************************************!*\
   !*** ./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts ***!
   \*****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionEditor": () => (/* binding */ ActionEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ActionEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class ActionEditor extends Editor_1.Editor {
+
+
+class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     /*constructor(data, parent) {
         super(data, parent);
     }*/
@@ -32757,14 +34322,14 @@ class ActionEditor extends Editor_1.Editor {
         });
     }*/
     getParams() {
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__.FormEditor) {
             return {
                 pageFileName: this.parent.page.pageLink.getAttr('fileName'),
                 form: this.parent.getAttr('name'),
                 action: this.getAttr('name'),
             };
         }
-        else if (this.parent instanceof PageEditor_1.PageEditor) {
+        else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor) {
             return {
                 pageFileName: this.parent.pageLink.getAttr('fileName'),
                 action: this.getAttr('name'),
@@ -32776,19 +34341,19 @@ class ActionEditor extends Editor_1.Editor {
     }
     async setValue(name, value) {
         //console.log('ActionEditor.setValue', name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'save',
-            params: Object.assign(Object.assign({}, this.getParams()), { attr: name, value: value })
+            params: Object.assign(Object.assign({}, this.getParams()), { attr: name, value: value }),
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'delete',
-            params: Object.assign({}, this.getParams())
+            params: Object.assign({}, this.getParams()),
         });
     }
     async delete() {
@@ -32797,21 +34362,20 @@ class ActionEditor extends Editor_1.Editor {
         this.parent.removeAction(this);
     }
     moveUp() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'moveUp',
-            params: Object.assign({}, this.getParams())
+            params: Object.assign({}, this.getParams()),
         });
     }
     moveDown() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'moveDown',
-            params: Object.assign({}, this.getParams())
+            params: Object.assign({}, this.getParams()),
         });
     }
 }
-exports.ActionEditor = ActionEditor;
 
 
 /***/ }),
@@ -32820,19 +34384,27 @@ exports.ActionEditor = ActionEditor;
 /*!***************************************************************************!*\
   !*** ./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts ***!
   \***************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationEditor": () => (/* binding */ ApplicationEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApplicationEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const DatabaseEditor_1 = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts");
-const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-const PageLinkEditor_1 = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-class ApplicationEditor extends Editor_1.Editor {
+
+
+
+
+
+class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data) {
         super(data);
         this.databases = [];
@@ -32860,19 +34432,19 @@ class ApplicationEditor extends Editor_1.Editor {
         }
     }
     createAction(data) {
-        const action = new ActionEditor_1.ActionEditor(data, this);
+        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__.ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
     createDatabase(data) {
-        const database = new DatabaseEditor_1.DatabaseEditor(data, this);
+        const database = new _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__.DatabaseEditor(data, this);
         database.init();
         this.databases.push(database);
         return database;
     }
     createPageLink(data) {
-        const pageLink = new PageLinkEditor_1.PageLinkEditor(data, this);
+        const pageLink = new _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__.PageLinkEditor(data, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
@@ -32893,122 +34465,121 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'save',
             params: {
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async newPageAndPageLinkData(params) {
-        params['menu'] = (params['startup'] === 'true') ? 'Pages' : '';
-        return await common_1.FrontHostApp.doHttpRequest({
+        params['menu'] = params['startup'] === 'true' ? 'Pages' : '';
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: '_new',
-            params: params
+            params: params,
         });
     }
     async newPage(params) {
         const { page: pageData, pageLink: pageLinkData } = await this.newPageAndPageLinkData(params);
         const pageLink = this.createPageLink(pageLinkData);
-        return new PageEditor_1.PageEditor(pageData, pageLink);
+        return new _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__.PageEditor(pageData, pageLink);
     }
     async newDatabase(params) {
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createDatabase(data);
     }
     async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'getView',
             params: {
                 app: this.getName(),
-                view: view
-            }
+                view: view,
+            },
         });
     }
     async saveView(text, view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'saveView',
             params: {
                 app: this.getName(),
                 view: view,
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async saveController(text) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'saveController',
             params: {
                 app: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async createView() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'createView',
             params: {
-                app: this.getName()
-            }
+                app: this.getName(),
+            },
         });
     }
     async createController() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'createController',
             params: {
-                app: this.getName()
-            }
+                app: this.getName(),
+            },
         });
     }
     async createModelBackJs() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'createModelBackJs',
             params: {
-                app: this.getName()
-            }
+                app: this.getName(),
+            },
         });
     }
     async newDataSource(params) {
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createDataSource(data);
     }
     async newAction(params) {
         // params['pageFileName'] = this.page.pageLink.getFileName();
         // params['form']         = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createAction(data);
     }
     createDataSource(data) {
-        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
 }
-exports.ApplicationEditor = ApplicationEditor;
 
 
 /***/ }),
@@ -33017,21 +34588,24 @@ exports.ApplicationEditor = ApplicationEditor;
 /*!*****************************************************************!*\
   !*** ./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts ***!
   \*****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ColumnEditor": () => (/* binding */ ColumnEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ColumnEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class ColumnEditor extends Editor_1.Editor {
+class ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, table) {
         super(data, table);
         this.table = table;
     }
     async setValue(name, value) {
         //console.log('ColumnEditor.setValue', name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'save',
             params: {
@@ -33039,21 +34613,21 @@ class ColumnEditor extends Editor_1.Editor {
                 table: this.table.getName(),
                 column: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'delete',
             params: {
                 database: this.table.database.getName(),
                 table: this.table.getName(),
                 column: this.getName(),
-            }
+            },
         });
     }
     async delete() {
@@ -33061,7 +34635,6 @@ class ColumnEditor extends Editor_1.Editor {
         this.parent.removeColumn(this);
     }
 }
-exports.ColumnEditor = ColumnEditor;
 
 
 /***/ }),
@@ -33070,18 +34643,25 @@ exports.ColumnEditor = ColumnEditor;
 /*!*************************************************************************!*\
   !*** ./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts ***!
   \*************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSourceEditor": () => (/* binding */ DataSourceEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DataSourceEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const KeyColumnEditor_1 = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts");
-const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-const PageEditor_1 = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-const ApplicationEditor_1 = __webpack_require__(/*! ../ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
-class DataSourceEditor extends Editor_1.Editor {
+
+
+
+
+class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
@@ -33092,7 +34672,7 @@ class DataSourceEditor extends Editor_1.Editor {
         }
     }
     createKeyColumn(data) {
-        const keyColumn = new KeyColumnEditor_1.KeyColumnEditor(data, this);
+        const keyColumn = new _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__.KeyColumnEditor(data, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
@@ -33105,19 +34685,19 @@ class DataSourceEditor extends Editor_1.Editor {
         this.keyColumns.splice(i, 1);
     }
     static async create(parent, params) {
-        if (parent instanceof FormEditor_1.FormEditor) {
+        if (parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             const form = parent;
             params['page'] = form.page.pageLink.getFileName();
             params['form'] = form.getName();
         }
-        if (parent instanceof PageEditor_1.PageEditor) {
+        if (parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             const page = parent;
             params['page'] = page.pageLink.getFileName();
         }
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action: '_new',
-            params: params
+            params: params,
         });
     }
     async setValue(name, value) {
@@ -33128,20 +34708,20 @@ class DataSourceEditor extends Editor_1.Editor {
             params: {
                 dataSource: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
             args.params.pageFileName = this.parent.pageLink.getFileName();
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
             args.params.form = this.parent.getName();
             // @ts-ignore
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
         }
-        const data = await common_1.FrontHostApp.doHttpRequest(args);
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
         this.setAttr(name, value);
         return data;
     }
@@ -33150,33 +34730,37 @@ class DataSourceEditor extends Editor_1.Editor {
             controller: 'DataSource',
             action: 'delete',
             params: {
-                dataSource: this.getName()
-            }
+                dataSource: this.getName(),
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
             args.params.form = this.parent.getName();
             // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
-        await common_1.FrontHostApp.doHttpRequest(args);
+        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async createModelBackJs() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action: 'createModelBackJs',
-            params: Object.assign(Object.assign(Object.assign({}, (this.parent instanceof PageEditor_1.PageEditor ? {
-                page: this.parent.getName(),
-                pageFileName: this.parent.pageLink.getFileName()
-            } : {})), (this.parent instanceof FormEditor_1.FormEditor ? {
-                form: this.parent.getName(),
-                page: this.parent.page.getName(),
-                pageFileName: this.parent.page.pageLink.getFileName()
-            } : {})), { dataSource: this.getName() })
+            params: Object.assign(Object.assign(Object.assign({}, (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor
+                ? {
+                    page: this.parent.getName(),
+                    pageFileName: this.parent.pageLink.getFileName(),
+                }
+                : {})), (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor
+                ? {
+                    form: this.parent.getName(),
+                    page: this.parent.page.getName(),
+                    pageFileName: this.parent.page.pageLink.getFileName(),
+                }
+                : {})), { dataSource: this.getName() }),
         });
     }
     async delete() {
@@ -33188,40 +34772,40 @@ class DataSourceEditor extends Editor_1.Editor {
             controller: 'DataSource',
             action: 'moveUp',
             params: {
-                dataSource: this.getName()
-            }
+                dataSource: this.getName(),
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
             args.params.form = this.parent.getName();
             // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async moveDown() {
         const args = {
             controller: 'DataSource',
             action: 'moveDown',
             params: {
-                dataSource: this.getName()
-            }
+                dataSource: this.getName(),
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
             args.params.form = this.parent.getName();
             // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
         }
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async newKeyColumnData(name) {
         const args = {
@@ -33230,20 +34814,20 @@ class DataSourceEditor extends Editor_1.Editor {
             params: {
                 dataSource: this.getName(),
                 class: 'KeyColumn',
-                name: name
-            }
+                name: name,
+            },
         };
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
             args.params.page = this.parent.page.pageLink.getFileName();
             // @ts-ignore
             args.params.form = this.parent.getName();
         }
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
             args.params.page = this.parent.pageLink.getFileName();
         }
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async newKeyColumn(name) {
         const data = await this.newKeyColumnData(name);
@@ -33254,21 +34838,25 @@ class DataSourceEditor extends Editor_1.Editor {
             controller: 'DataSource',
             action: 'getView',
             params: {
-                dataSource: (this instanceof DataSourceEditor) ? this.getName() : undefined,
-                view: view
-            }
+                dataSource: this instanceof DataSourceEditor ? this.getName() : undefined,
+                view: view,
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             // @ts-ignore
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.pageLink.getFileName() : undefined;
+            args.params.pageFileName =
+                this instanceof DataSourceEditor ? this.parent.pageLink.getFileName() : undefined;
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             // @ts-ignore
-            args.params.pageFileName = (this instanceof DataSourceEditor) ? this.parent.page.pageLink.getFileName() : undefined;
+            args.params.pageFileName =
+                this instanceof DataSourceEditor
+                    ? this.parent.page.pageLink.getFileName()
+                    : undefined;
             // @ts-ignore
-            args.params.form = (this instanceof DataSourceEditor) ? this.parent.getName() : undefined;
+            args.params.form = this instanceof DataSourceEditor ? this.parent.getName() : undefined;
         }
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async saveController(text) {
         const args = {
@@ -33276,17 +34864,17 @@ class DataSourceEditor extends Editor_1.Editor {
             action: 'saveController',
             params: {
                 dataSource: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         };
-        if (this.parent instanceof PageEditor_1.PageEditor) {
+        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             args.params.pageFileName = this.parent.pageLink.getFileName();
         }
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             args.params.pageFileName = this.parent.page.pageLink.getFileName();
             args.params.form = this.parent.getName();
         }
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async createController() {
         const args = {
@@ -33296,24 +34884,23 @@ class DataSourceEditor extends Editor_1.Editor {
                 page: this.parent.page.getName(),
                 pageFileName: this.parent.page.pageLink.getFileName(),
                 form: this.parent.getName(),
-                dataSource: this.getName()
-            }
+                dataSource: this.getName(),
+            },
         };
-        return await common_1.FrontHostApp.doHttpRequest(args);
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     getFullName() {
-        if (this.parent instanceof FormEditor_1.FormEditor) {
+        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
             return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof PageEditor_1.PageEditor) {
+        else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
             return [this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
+        else if (this.parent instanceof _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__.ApplicationEditor) {
             return this.getName();
         }
     }
 }
-exports.DataSourceEditor = DataSourceEditor;
 
 
 /***/ }),
@@ -33322,16 +34909,21 @@ exports.DataSourceEditor = DataSourceEditor;
 /*!*********************************************************************!*\
   !*** ./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts ***!
   \*********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseEditor": () => (/* binding */ DatabaseEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts");
+/* harmony import */ var _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DatabaseEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const ParamEditor_1 = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts");
-const TableEditor_1 = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class DatabaseEditor extends Editor_1.Editor {
+
+
+class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, parent) {
         super(data, parent);
         this.params = [];
@@ -33348,13 +34940,13 @@ class DatabaseEditor extends Editor_1.Editor {
         }
     }
     createParam(data) {
-        const param = new ParamEditor_1.ParamEditor(data, this);
+        const param = new _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__.ParamEditor(data, this);
         param.init();
         this.params.push(param);
         return param;
     }
     createTable(data) {
-        const table = new TableEditor_1.TableEditor(data, this);
+        const table = new _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__.TableEditor(data, this);
         table.init();
         this.tables.push(table);
         return table;
@@ -33375,25 +34967,25 @@ class DatabaseEditor extends Editor_1.Editor {
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'save',
             params: {
                 database: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'delete',
             params: {
-                database: this.getName()
-            }
+                database: this.getName(),
+            },
         });
     }
     async delete() {
@@ -33401,73 +34993,72 @@ class DatabaseEditor extends Editor_1.Editor {
         this.parent.removeDatabase(this);
     }
     async newParam(name) {
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: '_new',
             params: {
                 database: this.getName(),
                 class: 'Param',
-                name: name
-            }
+                name: name,
+            },
         });
         return this.createParam(data);
     }
     async newTable(params) {
         if (!params.name)
             throw new Error('newTable: no name');
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: '_new',
             params: {
                 database: this.getName(),
                 class: 'Table',
                 name: params.name,
-                columns: params.columns
-            }
+                columns: params.columns,
+            },
         });
         return this.createTable(data);
     }
     async getView(view) {
         console.log('DatabaseEditor.getView', view);
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'getView',
             params: {
                 view: view,
-                database: this.data !== undefined ? this.getName() : null
-            }
+                database: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
     async getTableInfo(table) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'getTableInfo',
             params: {
                 database: this.data !== undefined ? this.getName() : null,
-                table: table
-            }
+                table: table,
+            },
         });
     }
     moveUp() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'moveUp',
             params: {
-                database: this.getName()
-            }
+                database: this.getName(),
+            },
         });
     }
     moveDown() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'moveDown',
             params: {
-                database: this.getName()
-            }
+                database: this.getName(),
+            },
         });
     }
 }
-exports.DatabaseEditor = DatabaseEditor;
 
 
 /***/ }),
@@ -33476,11 +35067,12 @@ exports.DatabaseEditor = DatabaseEditor;
 /*!**********************************************!*\
   !*** ./src/frontend/editor/Editor/Editor.ts ***!
   \**********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Editor = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Editor": () => (/* binding */ Editor)
+/* harmony export */ });
 class Editor {
     constructor(data, parent = null) {
         if (!data)
@@ -33488,8 +35080,7 @@ class Editor {
         this.data = data;
         this.parent = parent;
     }
-    init() {
-    }
+    init() { }
     getClassName() {
         return this.data['@class'];
     }
@@ -33551,7 +35142,6 @@ class Editor {
         this.actions.splice(i, 1);
     }
 }
-exports.Editor = Editor;
 
 
 /***/ }),
@@ -33560,21 +35150,24 @@ exports.Editor = Editor;
 /*!***************************************************************!*\
   !*** ./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts ***!
   \***************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldEditor": () => (/* binding */ FieldEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FieldEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class FieldEditor extends Editor_1.Editor {
+class FieldEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, form) {
         super(data, form);
         this.form = form;
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'save',
             params: {
@@ -33582,21 +35175,21 @@ class FieldEditor extends Editor_1.Editor {
                 form: this.form.getName(),
                 field: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'delete',
             params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form: this.form.getName(),
-                field: this.getName()
-            }
+                field: this.getName(),
+            },
         });
     }
     async delete() {
@@ -33604,19 +35197,19 @@ class FieldEditor extends Editor_1.Editor {
         this.parent.removeField(this);
     }
     async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'getView',
             params: {
                 view: view,
                 page: this.data !== undefined ? this.form.page.getName() : null,
                 form: this.data !== undefined ? this.form.getName() : null,
-                field: this.data !== undefined ? this.getName() : null
-            }
+                field: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
     async saveView(text, view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'saveView',
             params: {
@@ -33624,93 +35217,92 @@ class FieldEditor extends Editor_1.Editor {
                 form: this.form.getName(),
                 field: this.getName(),
                 view: view,
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async saveController(text) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'saveController',
             params: {
                 page: this.form.page.getName(),
                 form: this.form.getName(),
                 field: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async createView() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'createView',
             params: {
                 page: this.form.page.getName(),
                 form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
     async createStyle() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'createStyle',
             params: {
                 page: this.form.page.getName(),
                 form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
     async createController() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'createController',
             params: {
                 page: this.form.page.getName(),
                 form: this.form.getName(),
                 field: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
     async changeClass(params) {
         params['page'] = this.form.page.getName();
         params['form'] = this.form.getName();
         params['field'] = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'changeClass',
-            params: params
+            params: params,
         });
-        return this.data = data;
+        return (this.data = data);
     }
     moveUp() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'moveUp',
             params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form: this.form.getName(),
-                field: this.getName()
-            }
+                field: this.getName(),
+            },
         });
     }
     moveDown() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'moveDown',
             params: {
                 pageFileName: this.form.page.pageLink.getFileName(),
                 form: this.form.getName(),
-                field: this.getName()
-            }
+                field: this.getName(),
+            },
         });
     }
 }
-exports.FieldEditor = FieldEditor;
 
 
 /***/ }),
@@ -33719,17 +35311,23 @@ exports.FieldEditor = FieldEditor;
 /*!*************************************************************!*\
   !*** ./src/frontend/editor/Editor/FormEditor/FormEditor.ts ***!
   \*************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormEditor": () => (/* binding */ FormEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+/* harmony import */ var _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FieldEditor/FieldEditor */ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FormEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-const FieldEditor_1 = __webpack_require__(/*! ../FieldEditor/FieldEditor */ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class FormEditor extends Editor_1.Editor {
+
+
+
+class FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, page) {
         super(data, page);
         this.page = page;
@@ -33752,19 +35350,19 @@ class FormEditor extends Editor_1.Editor {
         }
     }
     createDataSource(data) {
-        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
     createAction(data) {
-        const action = new ActionEditor_1.ActionEditor(data, this);
+        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
     createField(data) {
-        const field = new FieldEditor_1.FieldEditor(data, this);
+        const field = new _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__.FieldEditor(data, this);
         field.init();
         this.fields.push(field);
         return field;
@@ -33778,27 +35376,27 @@ class FormEditor extends Editor_1.Editor {
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'save',
             params: {
                 pageFileName: this.page.pageLink.getFileName(),
                 form: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'delete',
             params: {
                 pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName()
-            }
+                form: this.getName(),
+            },
         });
     }
     async delete() {
@@ -33811,10 +35409,10 @@ class FormEditor extends Editor_1.Editor {
             action: 'moveUp',
             params: {
                 pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName()
-            }
+                form: this.getName(),
+            },
         };
-        return common_1.FrontHostApp.doHttpRequest(args);
+        return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     moveDown() {
         const args = {
@@ -33822,120 +35420,119 @@ class FormEditor extends Editor_1.Editor {
             action: 'moveDown',
             params: {
                 pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName()
-            }
+                form: this.getName(),
+            },
         };
-        return common_1.FrontHostApp.doHttpRequest(args);
+        return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
     }
     async newField(params) {
         params['pageFileName'] = this.page.pageLink.getFileName();
         params['form'] = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createField(data);
     }
     async newAction(params) {
         params['pageFileName'] = this.page.pageLink.getFileName();
         params['form'] = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createAction(data);
     }
     async newDataSource(params) {
         params['page'] = this.page.pageLink.getFileName();
         params['form'] = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'DataSource',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createDataSource(data);
     }
     async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'getView',
             params: {
                 view: view,
                 page: this.data !== undefined ? this.page.getName() : null,
-                form: this.data !== undefined ? this.getName() : null
-            }
+                form: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
     async saveView(text, view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'saveView',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
                 view: view,
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async saveController(text) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'saveController',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async createModelBackJs() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'createModelBackJs',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
-            }
+            },
         });
     }
     async createView() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'createView',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
     async createController() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'createController',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
     async createStyle() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'createStyle',
             params: {
                 page: this.page.getName(),
                 form: this.getName(),
-                class: this.getClassName()
-            }
+                class: this.getClassName(),
+            },
         });
     }
 }
-exports.FormEditor = FormEditor;
 
 
 /***/ }),
@@ -33944,21 +35541,24 @@ exports.FormEditor = FormEditor;
 /*!***********************************************************************!*\
   !*** ./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts ***!
   \***********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KeyColumnEditor": () => (/* binding */ KeyColumnEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.KeyColumnEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class KeyColumnEditor extends Editor_1.Editor {
+class KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, dataSource) {
         super(data, dataSource);
         this.dataSource = dataSource;
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action: 'save',
             params: {
@@ -33967,17 +35567,17 @@ class KeyColumnEditor extends Editor_1.Editor {
                 dataSource: this.dataSource.getName(),
                 keyColumn: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action: 'delete',
-            params: Object.assign(Object.assign(Object.assign({}, (this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {})), (this.getForm() ? { form: this.getForm().getName() } : {})), { dataSource: this.dataSource.getName(), keyColumn: this.getName() })
+            params: Object.assign(Object.assign(Object.assign({}, (this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {})), (this.getForm() ? { form: this.getForm().getName() } : {})), { dataSource: this.dataSource.getName(), keyColumn: this.getName() }),
         });
     }
     getPage() {
@@ -34000,7 +35600,6 @@ class KeyColumnEditor extends Editor_1.Editor {
         this.parent.removeKeyColumn(this);
     }
 }
-exports.KeyColumnEditor = KeyColumnEditor;
 
 
 /***/ }),
@@ -34009,17 +35608,23 @@ exports.KeyColumnEditor = KeyColumnEditor;
 /*!*************************************************************!*\
   !*** ./src/frontend/editor/Editor/PageEditor/PageEditor.ts ***!
   \*************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageEditor": () => (/* binding */ PageEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
+/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PageEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const DataSourceEditor_1 = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-const ActionEditor_1 = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-const FormEditor_1 = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class PageEditor extends Editor_1.Editor {
+
+
+
+class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, pageLink) {
         super(data);
         this.pageLink = pageLink;
@@ -34042,19 +35647,19 @@ class PageEditor extends Editor_1.Editor {
         }
     }
     createDataSource(data) {
-        const dataSource = new DataSourceEditor_1.DataSourceEditor(data, this);
+        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
     createAction(data) {
-        const action = new ActionEditor_1.ActionEditor(data, this);
+        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
     createForm(data) {
-        const form = new FormEditor_1.FormEditor(data, this);
+        const form = new _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__.FormEditor(data, this);
         form.init();
         this.forms.push(form);
         return form;
@@ -34068,25 +35673,25 @@ class PageEditor extends Editor_1.Editor {
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'save',
             params: {
                 fileName: this.pageLink.getFileName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'delete',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async delete() {
@@ -34096,92 +35701,91 @@ class PageEditor extends Editor_1.Editor {
     }
     async newForm(params) {
         params['pageFileName'] = this.pageLink.getFileName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createForm(data);
     }
     async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'getView',
             params: {
                 view: view,
-                page: this.data !== undefined ? this.getName() : null
-            }
+                page: this.data !== undefined ? this.getName() : null,
+            },
         });
     }
     async saveView(text, view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'saveView',
             params: {
                 page: this.getName(),
                 view: view,
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async saveController(text) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'saveController',
             params: {
                 page: this.getName(),
-                text: text
-            }
+                text: text,
+            },
         });
     }
     async createView() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'createView',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async createController() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'createController',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async createStyle() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'createStyle',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async createModelBackJs() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'createModelBackJs',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async newAction(params) {
         params['pageFileName'] = this.pageLink.getFileName();
         // params['form']         = this.getName();
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: '_new',
-            params: params
+            params: params,
         });
         return this.createAction(data);
     }
 }
-exports.PageEditor = PageEditor;
 
 
 /***/ }),
@@ -34190,48 +35794,51 @@ exports.PageEditor = PageEditor;
 /*!*********************************************************************!*\
   !*** ./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts ***!
   \*********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageLinkEditor": () => (/* binding */ PageLinkEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PageLinkEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class PageLinkEditor extends Editor_1.Editor {
+class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, parent) {
         super(data, parent);
         this.application = parent;
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'save',
             params: {
                 pageLink: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async moveUp() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'moveUp',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     async moveDown() {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'moveDown',
             params: {
-                page: this.getName()
-            }
+                page: this.getName(),
+            },
         });
     }
     getFileName() {
@@ -34242,7 +35849,6 @@ class PageLinkEditor extends Editor_1.Editor {
         this.parent.removePageLink(this);
     }
 }
-exports.PageLinkEditor = PageLinkEditor;
 
 
 /***/ }),
@@ -34251,41 +35857,44 @@ exports.PageLinkEditor = PageLinkEditor;
 /*!***************************************************************!*\
   !*** ./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts ***!
   \***************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ParamEditor": () => (/* binding */ ParamEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ParamEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class ParamEditor extends Editor_1.Editor {
+class ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;
     }
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'save',
             params: {
                 database: this.database.getName(),
                 param: this.getName(),
                 attr: name,
-                value: value
-            }
+                value: value,
+            },
         });
         this.setAttr(name, value);
         return data;
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'delete',
             params: {
                 database: this.database.getName(),
-                param: this.getName()
-            }
+                param: this.getName(),
+            },
         });
     }
     async delete() {
@@ -34293,7 +35902,6 @@ class ParamEditor extends Editor_1.Editor {
         this.parent.removeParam(this);
     }
 }
-exports.ParamEditor = ParamEditor;
 
 
 /***/ }),
@@ -34302,15 +35910,19 @@ exports.ParamEditor = ParamEditor;
 /*!***************************************************************!*\
   !*** ./src/frontend/editor/Editor/TableEditor/TableEditor.ts ***!
   \***************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableEditor": () => (/* binding */ TableEditor)
+/* harmony export */ });
+/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
+/* harmony import */ var _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableEditor = void 0;
-const Editor_1 = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-const ColumnEditor_1 = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class TableEditor extends Editor_1.Editor {
+
+class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
     constructor(data, database) {
         super(data, database);
         this.database = database;
@@ -34322,7 +35934,7 @@ class TableEditor extends Editor_1.Editor {
         }
     }
     createColumn(data) {
-        const column = new ColumnEditor_1.ColumnEditor(data, this);
+        const column = new _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__.ColumnEditor(data, this);
         column.init();
         this.columns.push(column);
         return column;
@@ -34337,25 +35949,25 @@ class TableEditor extends Editor_1.Editor {
     async newColumn(name) {
         if (!name)
             throw new Error(`newColumn: no name`);
-        const data = await common_1.FrontHostApp.doHttpRequest({
+        const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: '_new',
             params: {
                 database: this.database.getName(),
                 table: this.getName(),
-                name: name
-            }
+                name: name,
+            },
         });
         return this.createColumn(data);
     }
     async deleteData() {
-        await common_1.FrontHostApp.doHttpRequest({
+        await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'delete',
             params: {
                 database: this.database.getName(),
-                table: this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
     async delete() {
@@ -34363,27 +35975,26 @@ class TableEditor extends Editor_1.Editor {
         this.parent.removeTable(this);
     }
     moveUp() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'moveUp',
             params: {
                 database: this.database.getName(),
-                table: this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
     moveDown() {
-        return common_1.FrontHostApp.doHttpRequest({
+        return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'moveDown',
             params: {
                 database: this.database.getName(),
-                table: this.getName()
-            }
+                table: this.getName(),
+            },
         });
     }
 }
-exports.TableEditor = TableEditor;
 
 
 /***/ }),
@@ -34392,33 +36003,42 @@ exports.TableEditor = TableEditor;
 /*!**********************************************************************!*\
   !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts ***!
   \**********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorFrontHostApp": () => (/* binding */ EditorFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
+/* harmony import */ var _ModelController_DocumentController_VisualController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.ts");
+/* harmony import */ var _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
+/* harmony import */ var _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ModelController/PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts");
+/* harmony import */ var _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ModelController/ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _ModelController_DocumentController_DocumentController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ModelController/DocumentController/DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.EditorFrontHostApp = void 0;
-const FrontHostApp_1 = __webpack_require__(/*! ../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-const ApplicationEditor_1 = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
-const ApplicationController_1 = __webpack_require__(/*! ../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.ts");
-const EditorFrontHostAppView_1 = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
-const PageLinkController_1 = __webpack_require__(/*! ../ModelController/PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts");
-const ModelController_1 = __webpack_require__(/*! ../ModelController/ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const DocumentController_1 = __webpack_require__(/*! ../ModelController/DocumentController/DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
+
+
+
+
+
+
+class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp {
     constructor(data, runAppLink) {
         super();
         this.onItemOpen2 = async (item) => {
             console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
             // console.log('parent:', item.view.parent);
-            if (item instanceof PageLinkController_1.PageLinkController && !item.hasPage()) {
+            if (item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
         };
         this.onItemSelect2 = async (item) => {
             console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-            if (item instanceof ModelController_1.ModelController) {
-                if (item instanceof PageLinkController_1.PageLinkController && !item.hasPage()) {
+            if (item instanceof _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__.ModelController) {
+                if (item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController && !item.hasPage()) {
                     await item.loadPage();
                 }
                 this.fillActions(item);
@@ -34437,8 +36057,8 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         };
         this.onItemDoubleClick2 = async (item) => {
             console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
-            const controller = item instanceof PageLinkController_1.PageLinkController ? item.pageController : item;
-            if (!controller || !(controller instanceof DocumentController_1.DocumentController))
+            const controller = item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController ? item.pageController : item;
+            if (!controller || !(controller instanceof _ModelController_DocumentController_DocumentController__WEBPACK_IMPORTED_MODULE_6__.DocumentController))
                 return;
             await this.openDocument(controller);
         };
@@ -34467,7 +36087,7 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
             console.log('EditorFrontHostApp.onActionClick', actionName);
             const item = this.treeWidget2.getSelectedItem();
             // console.log('item', item);
-            const controller = item instanceof PageLinkController_1.PageLinkController ? item.pageController : item;
+            const controller = item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController ? item.pageController : item;
             await controller.doAction(actionName);
         };
         console.log('EditorFrontHostApp.constructor', data);
@@ -34489,18 +36109,17 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
     async run() {
         console.log('EditorFrontHostApp.run');
         // app
-        const app = new ApplicationEditor_1.ApplicationEditor(this.data.app);
+        const app = new _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__.ApplicationEditor(this.data.app);
         app.init();
         // console.log('app:', app);
         // application controller
-        const applicationController = new ApplicationController_1.ApplicationController(app, this);
+        const applicationController = new _ModelController_DocumentController_VisualController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_2__.ApplicationController(app, this);
         applicationController.init();
         this.items = [applicationController];
         // view
-        this.view = common_1.Helper.createReactComponent(document.querySelector('.editor__root'), EditorFrontHostAppView_1.EditorFrontHostAppView, { ctrl: this });
+        this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(document.querySelector('.editor__root'), _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView, { ctrl: this });
     }
-    deinit() {
-    }
+    deinit() { }
     fillPropertyGrid(ctrl) {
         const propList = ctrl.getPropList();
         this.beginEdit(propList['list'], propList['options']);
@@ -34515,10 +36134,10 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
     }
     static async fetchPageData(fileName) {
         console.log('EditorFrontHostApp.fetchPageData', fileName);
-        return await FrontHostApp_1.FrontHostApp.doHttpRequest({
+        return await _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'get',
-            params: { fileName }
+            params: { fileName },
         });
     }
     fillActions(item) {
@@ -34554,7 +36173,6 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         await this.view.rerender();
     }
 }
-exports.EditorFrontHostApp = EditorFrontHostApp;
 
 
 /***/ }),
@@ -34563,30 +36181,35 @@ exports.EditorFrontHostApp = EditorFrontHostApp;
 /*!***************************************************************************!*\
   !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx ***!
   \***************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorFrontHostAppView": () => (/* binding */ EditorFrontHostAppView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.tsx");
+/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
+/* harmony import */ var _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx");
+/* harmony import */ var _ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ModalController/ModalView */ "./src/frontend/editor/ModalController/ModalView.tsx");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.EditorFrontHostAppView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-const ActionList_1 = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.tsx");
-const TreeWidget_1 = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
-const PropertyGrid_1 = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx");
-const ModalView_1 = __webpack_require__(/*! ../ModalController/ModalView */ "./src/frontend/editor/ModalController/ModalView.tsx");
-class EditorFrontHostAppView extends common_1.ReactComponent {
+
+
+
+
+
+class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     renderDocumentView(document) {
         if (!document.controller.getDocumentViewClass())
-            return (0, jsx_runtime_1.jsxs)("div", { children: ["no document view for ", document.controller.constructor.name] });
-        return react_1.default.createElement(document.controller.getDocumentViewClass(), {
+            return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["no document view for ", document.controller.constructor.name] });
+        return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
             // @ts-ignore
-            onCreate: c => document.view = c,
+            onCreate: c => (document.view = c),
             document: document,
-            ctrl: document.controller
+            ctrl: document.controller,
         });
     }
     getTabs() {
@@ -34594,21 +36217,20 @@ class EditorFrontHostAppView extends common_1.ReactComponent {
         return this.props.ctrl.documents.map(document => ({
             name: document.controller.model.getFullName(),
             title: document.controller.model.getFullName(),
-            content: this.renderDocumentView(document)
+            content: this.renderDocumentView(document),
         }));
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0, jsx_runtime_1.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0, jsx_runtime_1.jsx)("div", { children: (0, jsx_runtime_1.jsx)(ActionList_1.ActionList, { onCreate: c => ctrl.actionList = c, onClick: ctrl.onActionClick }) })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsx)(TreeWidget_1.TreeWidget, { classList: ['full'], onCreate: c => ctrl.treeWidget2 = c, items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0, jsx_runtime_1.jsx)(common_1.Tab, { classList: ['Tab-blue', 'full'], tabs: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList, { onCreate: c => (ctrl.actionList = c), onClick: ctrl.onActionClick }) })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget, { classList: ['full'], onCreate: c => (ctrl.treeWidget2 = c), items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['Tab-blue', 'full'], tabs: [
                                 {
                                     name: 'properties',
                                     title: 'Properties',
-                                    content: (0, jsx_runtime_1.jsx)(PropertyGrid_1.PropertyGrid, { onCreate: c => ctrl.pg = c, onChange: ctrl.onPropertyGrid2Change })
-                                }
-                            ] })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0, jsx_runtime_1.jsx)(common_1.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: c => ctrl.tabWidget = c, tabs: this.getTabs() }) })), ctrl.modal && react_1.default.createElement(ModalView_1.ModalView, { ctrl: ctrl.modal })] }));
+                                    content: ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid, { onCreate: c => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
+                                },
+                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: c => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__.ModalView, { ctrl: ctrl.modal })] })));
     }
 }
-exports.EditorFrontHostAppView = EditorFrontHostAppView;
 
 
 /***/ }),
@@ -34617,24 +36239,29 @@ exports.EditorFrontHostAppView = EditorFrontHostAppView;
 /*!*********************************************!*\
   !*** ./src/frontend/editor/EditorHelper.ts ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditorHelper": () => (/* binding */ EditorHelper)
+/* harmony export */ });
+/* harmony import */ var _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormWizard/MySqlFormWizard/MySqlFormWizard */ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts");
+/* harmony import */ var _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard */ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.EditorHelper = void 0;
-const MySqlFormWizard_1 = __webpack_require__(/*! ./FormWizard/MySqlFormWizard/MySqlFormWizard */ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts");
-const PostgreSqlFormWizard_1 = __webpack_require__(/*! ./FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard */ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts");
 class EditorHelper {
     static create(params) {
         console.log('FormWizard.create', params);
         switch (params.model.database.getClassName()) {
-            case 'MySqlDatabase': return new MySqlFormWizard_1.MySqlFormWizard(params);
-            case 'PostgreSqlDatabase': return new PostgreSqlFormWizard_1.PostgreSqlFormWizard(params);
-            default: throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
+            case 'MySqlDatabase':
+                return new _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__.MySqlFormWizard(params);
+            case 'PostgreSqlDatabase':
+                return new _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__.PostgreSqlFormWizard(params);
+            default:
+                throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
         }
     }
 }
-exports.EditorHelper = EditorHelper;
 
 
 /***/ }),
@@ -34643,11 +36270,12 @@ exports.EditorHelper = EditorHelper;
 /*!******************************************************!*\
   !*** ./src/frontend/editor/FormWizard/FormWizard.ts ***!
   \******************************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FormWizard = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormWizard": () => (/* binding */ FormWizard)
+/* harmony export */ });
 class FormWizard {
     constructor(params) {
         console.log('FormWizard.constructor', params);
@@ -34667,8 +36295,8 @@ class FormWizard {
                 limit: this.params.className === 'TableForm' ? '100' : '',
                 countQuery: this.getCountQuery(),
                 singleQuery: this.getSingleQuery(),
-                multipleQuery: this.getMultipleQuery()
-            }
+                multipleQuery: this.getMultipleQuery(),
+            },
         ];
     }
     getFieldClass(column) {
@@ -34691,7 +36319,7 @@ class FormWizard {
         let field = {
             class: this.getFieldClass(column),
             name: column.name,
-            caption: column.caption || column.name
+            caption: column.caption || column.name,
         };
         if (column.key === 'true') {
             if (column.auto === 'false') {
@@ -34737,11 +36365,10 @@ class FormWizard {
             caption: this.params.formCaption,
             class: this.params.className,
             dataSources: this.getDataSources(),
-            fields: this.getFields()
+            fields: this.getFields(),
         };
     }
 }
-exports.FormWizard = FormWizard;
 
 
 /***/ }),
@@ -34750,31 +36377,40 @@ exports.FormWizard = FormWizard;
 /*!***************************************************************************!*\
   !*** ./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts ***!
   \***************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MySqlFormWizard": () => (/* binding */ MySqlFormWizard)
+/* harmony export */ });
+/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.MySqlFormWizard = void 0;
-const FormWizard_1 = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
-class MySqlFormWizard extends FormWizard_1.FormWizard {
+class MySqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
     getSingleQuery() {
         const columns = this.tableColumns.map(column => column.name);
         return 'select\n{columns}\nfrom `{table}`\nwhere id = {key}'
             .replace('{table}', this.tableName)
-            .replace('{columns}', columns.map(column => { return '    `' + column + '`'; }).join(',\n'));
+            .replace('{columns}', columns
+            .map(column => {
+            return '    `' + column + '`';
+        })
+            .join(',\n'));
     }
     getMultipleQuery() {
         const columns = this.tableColumns.map(column => column.name);
         return 'select\n{columns}\nfrom `{table}`\nlimit {offset}, {limit}'
             .replace('{table}', this.tableName)
-            .replace('{columns}', columns.map(column => { return '    `' + column + '`'; }).join(',\n'));
+            .replace('{columns}', columns
+            .map(column => {
+            return '    `' + column + '`';
+        })
+            .join(',\n'));
     }
     getCountQuery() {
         console.log('MySqlFormWizard.getCountQuery');
         return 'select count(*) from `{table}`'.replace('{table}', this.tableName);
     }
 }
-exports.MySqlFormWizard = MySqlFormWizard;
 
 
 /***/ }),
@@ -34783,13 +36419,15 @@ exports.MySqlFormWizard = MySqlFormWizard;
 /*!*************************************************************************************!*\
   !*** ./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts ***!
   \*************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PostgreSqlFormWizard": () => (/* binding */ PostgreSqlFormWizard)
+/* harmony export */ });
+/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PostgreSqlFormWizard = void 0;
-const FormWizard_1 = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
-class PostgreSqlFormWizard extends FormWizard_1.FormWizard {
+class PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
     getSingleQuery() {
         console.log('PostgreSqlFormWizard.getSingleQuery');
         const columns = this.getColumns().map(column => column.name);
@@ -34808,7 +36446,6 @@ class PostgreSqlFormWizard extends FormWizard_1.FormWizard {
         return `select count(*) from "${this.tableName}"`;
     }
 }
-exports.PostgreSqlFormWizard = PostgreSqlFormWizard;
 
 
 /***/ }),
@@ -34817,19 +36454,21 @@ exports.PostgreSqlFormWizard = PostgreSqlFormWizard;
 /*!********************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts ***!
   \********************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassController": () => (/* binding */ ChangeClassController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ChangeClassController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const ChangeClassView_1 = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx");
-class ChangeClassController extends ModalController_1.ModalController {
+class ChangeClassController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return ChangeClassView_1.ChangeClassView;
+        return _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__.ChangeClassView;
     }
 }
-exports.ChangeClassController = ChangeClassController;
 
 
 /***/ }),
@@ -34838,14 +36477,17 @@ exports.ChangeClassController = ChangeClassController;
 /*!***************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx ***!
   \***************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassView": () => (/* binding */ ChangeClassView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ChangeClassView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class ChangeClassView extends common_1.ReactComponent {
+class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -34858,7 +36500,7 @@ class ChangeClassView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
                                     { value: 'TextBoxField' },
                                     { value: 'ComboBoxField' },
                                     { value: 'TextAreaField' },
@@ -34874,10 +36516,9 @@ class ChangeClassView extends common_1.ReactComponent {
                                     { value: 'PhoneField' },
                                     { value: 'PasswordField' },
                                     { value: 'RadioField' },
-                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: c => this.class = c })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] }));
+                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: c => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
     }
 }
-exports.ChangeClassView = ChangeClassView;
 
 
 /***/ }),
@@ -34886,12 +36527,14 @@ exports.ChangeClassView = ChangeClassView;
 /*!****************************************************************!*\
   !*** ./src/frontend/editor/ModalController/ModalController.ts ***!
   \****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalController": () => (/* binding */ ModalController)
+/* harmony export */ });
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModalController = void 0;
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 class ModalController {
     constructor(options) {
         this.onClose = async (e) => {
@@ -34908,13 +36551,12 @@ class ModalController {
         this.options = options;
     }
     async close() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.onModalClose();
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp.editorApp.onModalClose();
     }
     getViewClass() {
         throw new Error('ModalController.getViewClass not implemented');
     }
 }
-exports.ModalController = ModalController;
 
 
 /***/ }),
@@ -34923,24 +36565,24 @@ exports.ModalController = ModalController;
 /*!***********************************************************!*\
   !*** ./src/frontend/editor/ModalController/ModalView.tsx ***!
   \***********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalView": () => (/* binding */ ModalView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModalView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class ModalView extends common_1.ReactComponent {
+
+class ModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(common_1.Modal, { children: react_1.default.createElement(ctrl.getViewClass(), { ctrl }) });
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { ctrl }) });
     }
 }
-exports.ModalView = ModalView;
 
 
 /***/ }),
@@ -34949,19 +36591,21 @@ exports.ModalView = ModalView;
 /*!****************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewActionController/NewActionController.ts ***!
   \****************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionController": () => (/* binding */ NewActionController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewActionView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewActionController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewActionView_1 = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx");
-class NewActionController extends ModalController_1.ModalController {
+class NewActionController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewActionView_1.NewActionView;
+        return _NewActionView__WEBPACK_IMPORTED_MODULE_1__.NewActionView;
     }
 }
-exports.NewActionController = NewActionController;
 
 
 /***/ }),
@@ -34970,14 +36614,17 @@ exports.NewActionController = NewActionController;
 /*!***********************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx ***!
   \***********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionView": () => (/* binding */ NewActionView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewActionView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewActionView extends common_1.ReactComponent {
+class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -34992,10 +36639,9 @@ class NewActionView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewActionView = NewActionView;
 
 
 /***/ }),
@@ -35004,19 +36650,21 @@ exports.NewActionView = NewActionView;
 /*!****************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts ***!
   \****************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnController": () => (/* binding */ NewColumnController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewColumnController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewColumnView_1 = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx");
-class NewColumnController extends ModalController_1.ModalController {
+class NewColumnController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewColumnView_1.NewColumnView;
+        return _NewColumnView__WEBPACK_IMPORTED_MODULE_1__.NewColumnView;
     }
 }
-exports.NewColumnController = NewColumnController;
 
 
 /***/ }),
@@ -35025,30 +36673,32 @@ exports.NewColumnController = NewColumnController;
 /*!***********************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx ***!
   \***********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnView": () => (/* binding */ NewColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewColumnView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewColumnView extends common_1.ReactComponent {
+class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
             // console.log('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
-                name: this.name.getValue()
+                name: this.name.getValue(),
             });
         };
         this.name = null;
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "columnName", onCreate: c => this.name = c })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "columnName", onCreate: c => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewColumnView = NewColumnView;
 
 
 /***/ }),
@@ -35057,19 +36707,21 @@ exports.NewColumnView = NewColumnView;
 /*!************************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts ***!
   \************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceController": () => (/* binding */ NewDataSourceController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewDataSourceController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewDataSourceView_1 = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx");
-class NewDataSourceController extends ModalController_1.ModalController {
+class NewDataSourceController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewDataSourceView_1.NewDataSourceView;
+        return _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__.NewDataSourceView;
     }
 }
-exports.NewDataSourceController = NewDataSourceController;
 
 
 /***/ }),
@@ -35078,14 +36730,17 @@ exports.NewDataSourceController = NewDataSourceController;
 /*!*******************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx ***!
   \*******************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceView": () => (/* binding */ NewDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewDataSourceView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewDataSourceView extends common_1.ReactComponent {
+class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35100,13 +36755,12 @@ class NewDataSourceView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'name', onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
                                         { value: 'DataSource', title: 'DataSource' },
                                         { value: 'SqlDataSource', title: 'SqlDataSource' },
-                                    ], onCreate: c => this.class = c, value: 'SqlDataSource' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                    ], onCreate: c => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewDataSourceView = NewDataSourceView;
 
 
 /***/ }),
@@ -35115,19 +36769,21 @@ exports.NewDataSourceView = NewDataSourceView;
 /*!********************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts ***!
   \********************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseController": () => (/* binding */ NewDatabaseController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewDatabaseController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewDatabaseView_1 = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx");
-class NewDatabaseController extends ModalController_1.ModalController {
+class NewDatabaseController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewDatabaseView_1.NewDatabaseView;
+        return _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__.NewDatabaseView;
     }
 }
-exports.NewDatabaseController = NewDatabaseController;
 
 
 /***/ }),
@@ -35136,14 +36792,17 @@ exports.NewDatabaseController = NewDatabaseController;
 /*!***************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx ***!
   \***************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewDatabaseView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewDatabaseView extends common_1.ReactComponent {
+class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35154,7 +36813,7 @@ class NewDatabaseView extends common_1.ReactComponent {
                 host: this.host.getValue(),
                 database: this.database.getValue(),
                 user: this.user.getValue(),
-                password: this.password.getValue()
+                password: this.password.getValue(),
             });
         };
         this.class = null;
@@ -35166,13 +36825,12 @@ class NewDatabaseView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: 'class', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: 'class', items: [
                                         { value: 'MySqlDatabase', title: 'MySqlDatabase' },
-                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' }
-                                    ], onCreate: c => this.class = c, value: 'PostgreSqlDatabase' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'name', value: 'default', onCreate: c => this.name = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'host', value: 'localhost', onCreate: c => this.host = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'database', value: 'test', onCreate: c => this.database = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'user', value: 'test', onCreate: c => this.user = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: 'password', value: '123qwe', onCreate: c => this.password = c, autocomplete: 'off' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
+                                    ], onCreate: c => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', value: 'default', onCreate: c => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'host', value: 'localhost', onCreate: c => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'database', value: 'test', onCreate: c => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'user', value: 'test', onCreate: c => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'password', value: '123qwe', onCreate: c => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewDatabaseView = NewDatabaseView;
 
 
 /***/ }),
@@ -35181,19 +36839,21 @@ exports.NewDatabaseView = NewDatabaseView;
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts ***!
   \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldController": () => (/* binding */ NewFieldController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFieldController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewFieldView_1 = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx");
-class NewFieldController extends ModalController_1.ModalController {
+class NewFieldController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewFieldView_1.NewFieldView;
+        return _NewFieldView__WEBPACK_IMPORTED_MODULE_1__.NewFieldView;
     }
 }
-exports.NewFieldController = NewFieldController;
 
 
 /***/ }),
@@ -35202,14 +36862,17 @@ exports.NewFieldController = NewFieldController;
 /*!*********************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx ***!
   \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldView": () => (/* binding */ NewFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFieldView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewFieldView extends common_1.ReactComponent {
+class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35218,7 +36881,7 @@ class NewFieldView extends common_1.ReactComponent {
                 class: this.class.getValue(),
                 name: this.name.getValue(),
                 caption: this.caption.getValue() || this.name.getValue(),
-                type: this.type.getValue()
+                type: this.type.getValue(),
             });
         };
         this.class = null;
@@ -35228,7 +36891,7 @@ class NewFieldView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
                                         { value: 'TextBoxField' },
                                         { value: 'ComboBoxField' },
                                         { value: 'TextAreaField' },
@@ -35244,17 +36907,16 @@ class NewFieldView extends common_1.ReactComponent {
                                         { value: 'PhoneField' },
                                         { value: 'PasswordField' },
                                         { value: 'RadioField' },
-                                    ], onCreate: c => this.class = c })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "type", value: '', items: [
+                                    ], onCreate: c => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "type", value: '', items: [
                                         { value: '', title: '' },
                                         { value: 'string', title: 'string' },
                                         { value: 'number', title: 'number' },
                                         { value: 'boolean', title: 'boolean' },
                                         { value: 'object', title: 'object' },
                                         { value: 'date', title: 'date' },
-                                    ], onCreate: c => this.type = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                    ], onCreate: c => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewFieldView = NewFieldView;
 
 
 /***/ }),
@@ -35263,19 +36925,21 @@ exports.NewFieldView = NewFieldView;
 /*!************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFormController/NewFormController.ts ***!
   \************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFormController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewFormView_1 = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx");
-class NewFormController extends ModalController_1.ModalController {
+class NewFormController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewFormView_1.NewFormView;
+        return _NewFormView__WEBPACK_IMPORTED_MODULE_1__.NewFormView;
     }
 }
-exports.NewFormController = NewFormController;
 
 
 /***/ }),
@@ -35284,14 +36948,17 @@ exports.NewFormController = NewFormController;
 /*!*******************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx ***!
   \*******************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormView": () => (/* binding */ NewFormView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFormView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewFormView extends common_1.ReactComponent {
+class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35308,14 +36975,13 @@ class NewFormView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "formClass", value: 'TableForm', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "formClass", value: 'TableForm', items: [
                                         { value: 'RowForm', title: 'RowForm' },
                                         { value: 'TableForm', title: 'TableForm' },
                                         { value: 'Form', title: 'Form' },
-                                    ], onCreate: c => this.class = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                    ], onCreate: c => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewFormView = NewFormView;
 
 
 /***/ }),
@@ -35324,19 +36990,21 @@ exports.NewFormView = NewFormView;
 /*!******************************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
   \******************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableController": () => (/* binding */ NewFormFromTableController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFormFromTableController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewFormFromTableView_1 = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx");
-class NewFormFromTableController extends ModalController_1.ModalController {
+class NewFormFromTableController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewFormFromTableView_1.NewFormFromTableView;
+        return _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__.NewFormFromTableView;
     }
 }
-exports.NewFormFromTableController = NewFormFromTableController;
 
 
 /***/ }),
@@ -35345,14 +37013,17 @@ exports.NewFormFromTableController = NewFormFromTableController;
 /*!*************************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx ***!
   \*************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableView": () => (/* binding */ NewFormFromTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewFormFromTableView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewFormFromTableView extends common_1.ReactComponent {
+class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35372,15 +37043,17 @@ class NewFormFromTableView extends common_1.ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         const tableController = ctrl.options.tableController;
-        const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({ value: pageLink.getName(), title: pageLink.getName() }));
+        const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({
+            value: pageLink.getName(),
+            title: pageLink.getName(),
+        }));
         console.log('pages:', pages);
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: c => this.page = c })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "class", value: 'TableForm', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: c => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", value: 'TableForm', items: [
                                         { value: 'RowForm', title: 'RowForm' },
                                         { value: 'TableForm', title: 'TableForm' },
-                                    ], onCreate: c => this.class = c })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                    ], onCreate: c => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewFormFromTableView = NewFormFromTableView;
 
 
 /***/ }),
@@ -35389,19 +37062,21 @@ exports.NewFormFromTableView = NewFormFromTableView;
 /*!**********************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts ***!
   \**********************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnController": () => (/* binding */ NewKeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewKeyColumnController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewKeyColumnView_1 = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx");
-class NewKeyColumnController extends ModalController_1.ModalController {
+class NewKeyColumnController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewKeyColumnView_1.NewKeyColumnView;
+        return _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__.NewKeyColumnView;
     }
 }
-exports.NewKeyColumnController = NewKeyColumnController;
 
 
 /***/ }),
@@ -35410,30 +37085,32 @@ exports.NewKeyColumnController = NewKeyColumnController;
 /*!*****************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx ***!
   \*****************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnView": () => (/* binding */ NewKeyColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewKeyColumnView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewKeyColumnView extends common_1.ReactComponent {
+class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
             // console.log('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
-                name: this.name.getValue()
+                name: this.name.getValue(),
             });
         };
         this.name = null;
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewKeyColumnView = NewKeyColumnView;
 
 
 /***/ }),
@@ -35442,19 +37119,21 @@ exports.NewKeyColumnView = NewKeyColumnView;
 /*!************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewPageController/NewPageController.ts ***!
   \************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageController": () => (/* binding */ NewPageController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewPageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewPageController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewPageView_1 = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx");
-class NewPageController extends ModalController_1.ModalController {
+class NewPageController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewPageView_1.NewPageView;
+        return _NewPageView__WEBPACK_IMPORTED_MODULE_1__.NewPageView;
     }
 }
-exports.NewPageController = NewPageController;
 
 
 /***/ }),
@@ -35463,14 +37142,17 @@ exports.NewPageController = NewPageController;
 /*!*******************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx ***!
   \*******************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageView": () => (/* binding */ NewPageView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewPageView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewPageView extends common_1.ReactComponent {
+class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -35487,13 +37169,12 @@ class NewPageView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "caption", onCreate: c => this.caption = c, autocomplete: 'off' })] }), (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: "startup", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "startup", items: [
                                         { value: 'false', title: 'false' },
-                                        { value: 'true', title: 'true' }
-                                    ], onCreate: c => this.startup = c })] })] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+                                        { value: 'true', title: 'true' },
+                                    ], onCreate: c => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewPageView = NewPageView;
 
 
 /***/ }),
@@ -35502,19 +37183,21 @@ exports.NewPageView = NewPageView;
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewParamController/NewParamController.ts ***!
   \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamController": () => (/* binding */ NewParamController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewParamView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewParamController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewParamView_1 = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx");
-class NewParamController extends ModalController_1.ModalController {
+class NewParamController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewParamView_1.NewParamView;
+        return _NewParamView__WEBPACK_IMPORTED_MODULE_1__.NewParamView;
     }
 }
-exports.NewParamController = NewParamController;
 
 
 /***/ }),
@@ -35523,30 +37206,32 @@ exports.NewParamController = NewParamController;
 /*!*********************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx ***!
   \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamView": () => (/* binding */ NewParamView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewParamView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewParamView extends common_1.ReactComponent {
+class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
             // console.log('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
-                name: this.name.getValue()
+                name: this.name.getValue(),
             });
         };
         this.name = null;
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "name", onCreate: c => this.name = c, autocomplete: 'off', autoFocus: true })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewParamView = NewParamView;
 
 
 /***/ }),
@@ -35555,19 +37240,21 @@ exports.NewParamView = NewParamView;
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewTableController/NewTableController.ts ***!
   \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableController": () => (/* binding */ NewTableController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
+/* harmony import */ var _NewTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewTableController = void 0;
-const ModalController_1 = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-const NewTableView_1 = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx");
-class NewTableController extends ModalController_1.ModalController {
+class NewTableController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     getViewClass() {
-        return NewTableView_1.NewTableView;
+        return _NewTableView__WEBPACK_IMPORTED_MODULE_1__.NewTableView;
     }
 }
-exports.NewTableController = NewTableController;
 
 
 /***/ }),
@@ -35576,30 +37263,32 @@ exports.NewTableController = NewTableController;
 /*!*********************************************************************************!*\
   !*** ./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx ***!
   \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableView": () => (/* binding */ NewTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.NewTableView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class NewTableView extends common_1.ReactComponent {
+class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
             // console.log('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
-                name: this.name.getValue()
+                name: this.name.getValue(),
             });
         };
         this.name = null;
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { id: "tableName", onCreate: c => this.name = c })] }) })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "tableName", onCreate: c => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
-exports.NewTableView = NewTableView;
 
 
 /***/ }),
@@ -35608,22 +37297,25 @@ exports.NewTableView = NewTableView;
 /*!**********************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/ActionController/ActionController.ts ***!
   \**********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ActionController": () => (/* binding */ ActionController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ActionController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-class ActionController extends ModelController_1.ModelController {
+class ActionController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
     getActions() {
         return [
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' }
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -35634,23 +37326,22 @@ class ActionController extends ModelController_1.ModelController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('actions', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('actions', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
     async delete() {
         await this.model.delete();
         this.parent.removeAction(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
-exports.ActionController = ActionController;
 
 
 /***/ }),
@@ -35659,22 +37350,24 @@ exports.ActionController = ActionController;
 /*!**********************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/ColumnController/ColumnController.ts ***!
   \**********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ColumnController": () => (/* binding */ ColumnController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ColumnController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-class ColumnController extends ModelController_1.ModelController {
+
+class ColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
     getActions() {
-        return [
-            { 'action': 'delete', 'caption': 'Delete' }
-        ];
+        return [{ action: 'delete', caption: 'Delete' }];
     }
     async doAction(name) {
         switch (name) {
@@ -35684,12 +37377,12 @@ class ColumnController extends ModelController_1.ModelController {
         }
     }
     static async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'getView',
             params: {
-                view: view
-            }
+                view: view,
+            },
         });
     }
     getPropList() {
@@ -35712,11 +37405,10 @@ class ColumnController extends ModelController_1.ModelController {
     async delete() {
         await this.model.delete();
         this.parent.removeColumn(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
-exports.ColumnController = ColumnController;
 
 
 /***/ }),
@@ -35725,17 +37417,23 @@ exports.ColumnController = ColumnController;
 /*!*************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DataSourceController/DataSourceController.ts ***!
   \*************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSourceController": () => (/* binding */ DataSourceController)
+/* harmony export */ });
+/* harmony import */ var _DocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
+/* harmony import */ var _KeyColumnController_KeyColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../KeyColumnController/KeyColumnController */ "./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../ModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts");
+/* harmony import */ var _SqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SqlDataSourceView */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DataSourceController = void 0;
-const DocumentController_1 = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
-const KeyColumnController_1 = __webpack_require__(/*! ../../KeyColumnController/KeyColumnController */ "./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewKeyColumnController_1 = __webpack_require__(/*! ../../../ModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts");
-const SqlDataSourceView_1 = __webpack_require__(/*! ./SqlDataSourceView */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.tsx");
-class DataSourceController extends DocumentController_1.DocumentController {
+
+
+
+class DataSourceController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onCreateModelBack = async (e) => {
@@ -35745,8 +37443,8 @@ class DataSourceController extends DocumentController_1.DocumentController {
         this.items = [
             {
                 getTitle: () => 'Key Columns',
-                items: this.keyColumns
-            }
+                items: this.keyColumns,
+            },
         ];
     }
     getTitle() {
@@ -35755,14 +37453,14 @@ class DataSourceController extends DocumentController_1.DocumentController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'brown'
+            color: 'brown',
         };
     }
     init() {
         this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
     }
     createKeyColumn(model) {
-        const keyColumn = new KeyColumnController_1.KeyColumnController(model, this);
+        const keyColumn = new _KeyColumnController_KeyColumnController__WEBPACK_IMPORTED_MODULE_1__.KeyColumnController(model, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
@@ -35776,10 +37474,10 @@ class DataSourceController extends DocumentController_1.DocumentController {
     }
     getActions() {
         return [
-            { 'action': 'newItem', 'caption': 'New Key Column' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' }
+            { action: 'newItem', caption: 'New Key Column' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -35793,29 +37491,31 @@ class DataSourceController extends DocumentController_1.DocumentController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('dataSources', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('dataSources', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
     async actionNewKeyColumn() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewKeyColumnController_1.NewKeyColumnController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__.NewKeyColumnController({
+            onCreate: async (values) => {
                 const keyColumn = await this.model.newKeyColumn(values.name);
                 const keyColumnController = this.createKeyColumn(keyColumn);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
                 keyColumnController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     getPropList() {
         const propList = {
             list: {},
-            options: {}
+            options: {},
         };
         // list
         for (const name in this.model.data['@attributes']) {
@@ -35827,7 +37527,7 @@ class DataSourceController extends DocumentController_1.DocumentController {
     }
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource')
-            return SqlDataSourceView_1.SqlDataSourceView;
+            return _SqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.SqlDataSourceView;
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
@@ -35837,11 +37537,10 @@ class DataSourceController extends DocumentController_1.DocumentController {
     async delete() {
         await this.model.delete();
         this.parent.removeDataSource(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
-exports.DataSourceController = DataSourceController;
 
 
 /***/ }),
@@ -35850,19 +37549,21 @@ exports.DataSourceController = DataSourceController;
 /*!***********************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.tsx ***!
   \***********************************************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SqlDataSourceView": () => (/* binding */ SqlDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _DocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.SqlDataSourceView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const DocumentView_1 = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
-const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-class SqlDataSourceView extends DocumentView_1.DocumentView {
+
+
+class SqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView {
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
@@ -35875,11 +37576,11 @@ class SqlDataSourceView extends DocumentView_1.DocumentView {
             await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
             await this.rerender();
         };
-        this.singleRef = react_1.default.createRef();
-        this.multipleRef = react_1.default.createRef();
-        this.countRef = react_1.default.createRef();
+        this.singleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.multipleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.state = {
-            selected: 'singleQuery'
+            selected: 'singleQuery',
         };
         this.singleQuery = null;
         this.multipleQuery = null;
@@ -35887,9 +37588,9 @@ class SqlDataSourceView extends DocumentView_1.DocumentView {
     }
     componentDidMount() {
         const ctrl = this.props.ctrl;
-        this.singleQuery = DocumentView_1.DocumentView.createCM(this.singleRef.current, ctrl.model.getAttr('singleQuery'));
-        this.multipleQuery = DocumentView_1.DocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
-        this.countQuery = DocumentView_1.DocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
+        this.singleQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.singleRef.current, ctrl.model.getAttr('singleQuery'));
+        this.multipleQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
+        this.countQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
         this.singleQuery.on('change', this.onChange);
         this.multipleQuery.on('change', this.onChange);
         this.countQuery.on('change', this.onChange);
@@ -35917,10 +37618,9 @@ class SqlDataSourceView extends DocumentView_1.DocumentView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'SqlDataSourceView full flex-column' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.singleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.multipleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.countRef }) }))] }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'SqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
-exports.SqlDataSourceView = SqlDataSourceView;
 
 
 /***/ }),
@@ -35929,19 +37629,27 @@ exports.SqlDataSourceView = SqlDataSourceView;
 /*!*********************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseController.ts ***!
   \*********************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseController": () => (/* binding */ DatabaseController)
+/* harmony export */ });
+/* harmony import */ var _DocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
+/* harmony import */ var _ParamController_ParamController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ParamController/ParamController */ "./src/frontend/editor/ModelController/ParamController/ParamController.ts");
+/* harmony import */ var _TableController_TableController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableController/TableController */ "./src/frontend/editor/ModelController/DocumentController/TableController/TableController.ts");
+/* harmony import */ var _DatabaseView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DatabaseView */ "./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseView.tsx");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../ModalController/NewParamController/NewParamController */ "./src/frontend/editor/ModalController/NewParamController/NewParamController.ts");
+/* harmony import */ var _ModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../ModalController/NewTableController/NewTableController */ "./src/frontend/editor/ModalController/NewTableController/NewTableController.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DatabaseController = void 0;
-const DocumentController_1 = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
-const ParamController_1 = __webpack_require__(/*! ../../ParamController/ParamController */ "./src/frontend/editor/ModelController/ParamController/ParamController.ts");
-const TableController_1 = __webpack_require__(/*! ../TableController/TableController */ "./src/frontend/editor/ModelController/DocumentController/TableController/TableController.ts");
-const DatabaseView_1 = __webpack_require__(/*! ./DatabaseView */ "./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseView.tsx");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewParamController_1 = __webpack_require__(/*! ../../../ModalController/NewParamController/NewParamController */ "./src/frontend/editor/ModalController/NewParamController/NewParamController.ts");
-const NewTableController_1 = __webpack_require__(/*! ../../../ModalController/NewTableController/NewTableController */ "./src/frontend/editor/ModalController/NewTableController/NewTableController.ts");
-class DatabaseController extends DocumentController_1.DocumentController {
+
+
+
+
+
+class DatabaseController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onTableSelect2 = async (item) => {
@@ -35964,12 +37672,12 @@ class DatabaseController extends DocumentController_1.DocumentController {
         this.items = [
             {
                 getTitle: () => 'Params',
-                items: this.params
+                items: this.params,
             },
             {
                 getTitle: () => 'Tables',
-                items: this.tables
-            }
+                items: this.tables,
+            },
         ];
     }
     getTitle() {
@@ -35978,7 +37686,7 @@ class DatabaseController extends DocumentController_1.DocumentController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'purple'
+            color: 'purple',
         };
     }
     init() {
@@ -35986,13 +37694,13 @@ class DatabaseController extends DocumentController_1.DocumentController {
         this.model.tables.forEach(table => this.createTable2(table));
     }
     createParam(model) {
-        const param = new ParamController_1.ParamController(model, this);
+        const param = new _ParamController_ParamController__WEBPACK_IMPORTED_MODULE_1__.ParamController(model, this);
         param.init();
         this.params.push(param);
         return param;
     }
     createTable2(model) {
-        const table = new TableController_1.TableController(model, this);
+        const table = new _TableController_TableController__WEBPACK_IMPORTED_MODULE_2__.TableController(model, this);
         table.init();
         this.tables.push(table);
         return table;
@@ -36013,11 +37721,11 @@ class DatabaseController extends DocumentController_1.DocumentController {
     }
     getActions() {
         return [
-            { 'action': 'newParam', 'caption': 'New Param' },
-            { 'action': 'newTable', 'caption': 'New Table' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' }
+            { action: 'newParam', caption: 'New Param' },
+            { action: 'newTable', caption: 'New Table' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -36034,43 +37742,49 @@ class DatabaseController extends DocumentController_1.DocumentController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('databases', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('databases', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
                 throw new Error(`unknown action: ${name}`);
         }
     }
     async actionNewParam() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewParamController_1.NewParamController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__.NewParamController({
+            onCreate: async (values) => {
                 const param = await this.model.newParam(values.name);
                 const paramController = this.createParam(param);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
                 paramController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async actionNewTable() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewTableController_1.NewTableController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__.NewTableController({
+            onCreate: async (values) => {
                 const table = await this.model.newTable({ name: values.name });
                 const tableController = this.createTable2(table);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
                 tableController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         // console.log('data:', result.data);
         // @ts-ignore
-        document.treeWidgetItems = result.data.tables.sort().map(tableName => ({ getTitle: () => tableName }));
+        document.treeWidgetItems = result.data.tables
+            .sort()
+            .map(tableName => ({ getTitle: () => tableName }));
         return document;
     }
     async newTableAction(tableName, tableInfo) {
@@ -36087,10 +37801,10 @@ class DatabaseController extends DocumentController_1.DocumentController {
                 key: column.key.toString(),
                 auto: column.auto.toString(),
                 nullable: column.nullable.toString(),
-            }))
+            })),
         });
         const tableController = this.createTable2(table);
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
         tableController.view.parent.open();
         this.view.rerender();
         // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
@@ -36099,14 +37813,13 @@ class DatabaseController extends DocumentController_1.DocumentController {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDatabase(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return DatabaseView_1.DatabaseView;
+        return _DatabaseView__WEBPACK_IMPORTED_MODULE_3__.DatabaseView;
     }
 }
-exports.DatabaseController = DatabaseController;
 
 
 /***/ }),
@@ -36115,19 +37828,23 @@ exports.DatabaseController = DatabaseController;
 /*!****************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseView.tsx ***!
   \****************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseView": () => (/* binding */ DatabaseView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DatabaseView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-const TreeWidget_1 = __webpack_require__(/*! ../../../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
-class DatabaseView extends common_1.ReactComponent {
+
+class DatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(common_1.Grid, { classList: ['flex-max'], columns: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
                 { name: 'name', title: 'name', width: 100 },
                 { name: 'type', title: 'type', width: 60 },
                 { name: 'key', title: 'key', width: 60 },
@@ -36135,16 +37852,15 @@ class DatabaseView extends common_1.ReactComponent {
                 { name: 'nullable', title: 'nullable', width: 60 },
                 { name: 'dbType', title: 'dbType', width: 200 },
                 { name: 'comment', title: 'comment', width: 100 },
-            ], rows: ctrl.tableInfo, getRowKey: row => row.name });
+            ], rows: ctrl.tableInfo, getRowKey: row => row.name }));
     }
     render() {
         // console.log('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'DatabaseView frame' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" }))] })) })) })), (0, jsx_runtime_1.jsx)(TreeWidget_1.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'DatabaseView frame' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" })))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] })));
     }
 }
-exports.DatabaseView = DatabaseView;
 
 
 /***/ }),
@@ -36153,13 +37869,15 @@ exports.DatabaseView = DatabaseView;
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DocumentController.ts ***!
   \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DocumentController": () => (/* binding */ DocumentController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DocumentController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-class DocumentController extends ModelController_1.ModelController {
+class DocumentController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.document = null;
@@ -36169,14 +37887,13 @@ class DocumentController extends ModelController_1.ModelController {
             controller: this,
             view: null,
         };
-        return this.document = document;
+        return (this.document = document);
     }
     onDocumentClose() {
         console.log('DocumentController.onDocumentClose', this.getTitle());
         this.document = null;
     }
 }
-exports.DocumentController = DocumentController;
 
 
 /***/ }),
@@ -36185,22 +37902,27 @@ exports.DocumentController = DocumentController;
 /*!*********************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx ***!
   \*********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DocumentView": () => (/* binding */ DocumentView)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DocumentView = void 0;
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-class DocumentView extends common_1.ReactComponent {
+class DocumentView extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
     static createCM(textarea, value) {
         // @ts-ignore
-        const cm = CodeMirror.fromTextArea(textarea, { lineNumbers: true, styleActiveLine: true, matchBrackets: true });
+        const cm = CodeMirror.fromTextArea(textarea, {
+            lineNumbers: true,
+            styleActiveLine: true,
+            matchBrackets: true,
+        });
         cm.setOption('theme', 'cobalt');
         cm.setValue(value);
         return cm;
     }
 }
-exports.DocumentView = DocumentView;
 
 
 /***/ }),
@@ -36209,20 +37931,29 @@ exports.DocumentView = DocumentView;
 /*!***************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/TableController/TableController.ts ***!
   \***************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableController": () => (/* binding */ TableController)
+/* harmony export */ });
+/* harmony import */ var _DocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
+/* harmony import */ var _ColumnController_ColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ColumnController/ColumnController */ "./src/frontend/editor/ModelController/ColumnController/ColumnController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../ModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts");
+/* harmony import */ var _ModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../ModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts");
+/* harmony import */ var _EditorHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EditorHelper */ "./src/frontend/editor/EditorHelper.ts");
+/* harmony import */ var _TableView__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./TableView */ "./src/frontend/editor/ModelController/DocumentController/TableController/TableView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableController = void 0;
-const DocumentController_1 = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
-const ColumnController_1 = __webpack_require__(/*! ../../ColumnController/ColumnController */ "./src/frontend/editor/ModelController/ColumnController/ColumnController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-const NewColumnController_1 = __webpack_require__(/*! ../../../ModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts");
-const NewFormFromTableController_1 = __webpack_require__(/*! ../../../ModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts");
-const EditorHelper_1 = __webpack_require__(/*! ../../../EditorHelper */ "./src/frontend/editor/EditorHelper.ts");
-const TableView_1 = __webpack_require__(/*! ./TableView */ "./src/frontend/editor/ModelController/DocumentController/TableController/TableView.tsx");
-class TableController extends DocumentController_1.DocumentController {
+
+
+
+
+
+
+class TableController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.DocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onCreateFormButtonClick = async (e) => {
@@ -36233,15 +37964,15 @@ class TableController extends DocumentController_1.DocumentController {
         this.items = [
             {
                 getTitle: () => 'Columns',
-                items: this.columns
-            }
+                items: this.columns,
+            },
         ];
     }
     init() {
         this.model.columns.forEach(column => this.createColumn(column));
     }
     createColumn(model) {
-        const column = new ColumnController_1.ColumnController(model, this);
+        const column = new _ColumnController_ColumnController__WEBPACK_IMPORTED_MODULE_1__.ColumnController(model, this);
         column.init();
         this.columns.push(column);
         return column;
@@ -36255,10 +37986,10 @@ class TableController extends DocumentController_1.DocumentController {
     }
     getActions() {
         return [
-            { 'action': 'newColumn', 'caption': 'New Column' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' },
+            { action: 'newColumn', caption: 'New Column' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -36272,26 +38003,28 @@ class TableController extends DocumentController_1.DocumentController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('tables', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('tables', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
                 throw new Error(`unknown action: ${name}`);
         }
     }
     async actionNewColumn() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewColumnController_1.NewColumnController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__.NewColumnController({
+            onCreate: async (values) => {
                 const column = await this.model.newColumn(values.name);
                 const columnController = this.createColumn(column);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
                 columnController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     /*static async getView(view) {
         console.log('TableController.getView', view);
@@ -36302,20 +38035,20 @@ class TableController extends DocumentController_1.DocumentController {
         });
     }*/
     static async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'getView',
             params: {
-                view: view
-            }
+                view: view,
+            },
         });
     }
     async createFormAction() {
         console.log('TableController.createFormAction');
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewFormFromTableController_1.NewFormFromTableController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
             tableController: this,
             onCreate: async (values) => {
-                const formWizard = EditorHelper_1.EditorHelper.create({
+                const formWizard = _EditorHelper__WEBPACK_IMPORTED_MODULE_6__.EditorHelper.create({
                     model: this.model,
                     pageName: values.page,
                     className: values.class,
@@ -36335,25 +38068,24 @@ class TableController extends DocumentController_1.DocumentController {
                 const form = await pageController.model.newForm(params);
                 // console.log('form:', form);
                 const formController = pageController.createForm(form);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                 formController.view.parent.open();
                 pageLinkController.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            }
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
         }));
     }
     async delete() {
         console.log('TableController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeTable2(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return TableView_1.TableView;
+        return _TableView__WEBPACK_IMPORTED_MODULE_7__.TableView;
     }
 }
-exports.TableController = TableController;
 
 
 /***/ }),
@@ -36362,31 +38094,33 @@ exports.TableController = TableController;
 /*!**********************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/TableController/TableView.tsx ***!
   \**********************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableView": () => (/* binding */ TableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TableView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-class TableView extends common_1.ReactComponent {
+class TableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
-        return ctrl.columns.map(column => (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('name') }), (0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('caption') }), (0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('type') }), (0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('key') }), (0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('auto') }), (0, jsx_runtime_1.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName()));
+        return ctrl.columns.map(column => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('name') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('caption') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('type') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('key') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('auto') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName())));
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "client frame" }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "frame__container flex-column" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Grid, { classList: ['flex-max'], columns: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "client frame" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "frame__container flex-column" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
                                 { name: 'name', title: 'name', width: 100 },
                                 { name: 'caption', title: 'caption', width: 100 },
                                 { name: 'type', title: 'type', width: 60 },
                                 { name: 'key', title: 'key', width: 60 },
                                 { name: 'auto', title: 'auto', width: 60 },
                                 { name: 'nullable', title: 'nullable', width: 60 },
-                            ], rows: ctrl.columns.map(column => column.model.getAttributes()), getRowKey: row => row.name }), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateFormButtonClick }, { children: "Create Form" }))] })) })) }));
+                            ], rows: ctrl.columns.map(column => column.model.getAttributes()), getRowKey: row => row.name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateFormButtonClick }, { children: "Create Form" }))] })) })) })));
     }
 }
-exports.TableView = TableView;
 
 
 /***/ }),
@@ -36395,21 +38129,31 @@ exports.TableView = TableView;
 /*!********************************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.ts ***!
   \********************************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* binding */ ApplicationController)
+/* harmony export */ });
+/* harmony import */ var _VisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
+/* harmony import */ var _DatabaseController_DatabaseController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../DatabaseController/DatabaseController */ "./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseController.ts");
+/* harmony import */ var _PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts");
+/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _ModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../ModalController/NewPageController/NewPageController */ "./src/frontend/editor/ModalController/NewPageController/NewPageController.ts");
+/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts");
+/* harmony import */ var _VisualView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ApplicationController = void 0;
-const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
-const DatabaseController_1 = __webpack_require__(/*! ../../DatabaseController/DatabaseController */ "./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseController.ts");
-const PageLinkController_1 = __webpack_require__(/*! ../../../PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewDatabaseController_1 = __webpack_require__(/*! ../../../../ModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts");
-const NewDataSourceController_1 = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
-const NewPageController_1 = __webpack_require__(/*! ../../../../ModalController/NewPageController/NewPageController */ "./src/frontend/editor/ModalController/NewPageController/NewPageController.ts");
-const PageController_1 = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts");
-const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
-class ApplicationController extends VisualController_1.VisualController {
+
+
+
+
+
+
+
+class ApplicationController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
     constructor(model, editorApp) {
         super(model);
         this.editorApp = editorApp;
@@ -36423,7 +38167,7 @@ class ApplicationController extends VisualController_1.VisualController {
             { getTitle: () => 'Databases', items: this.databases },
             { getTitle: () => 'Data Sources', items: this.dataSources },
             { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Pages', items: this.pageLinks, opened: true }
+            { getTitle: () => 'Pages', items: this.pageLinks, opened: true },
         ];
     }
     init() {
@@ -36433,13 +38177,13 @@ class ApplicationController extends VisualController_1.VisualController {
         this.model.pageLinks.forEach(pageLink => this.createPageLink(pageLink));
     }
     createDatabase(model) {
-        const database = new DatabaseController_1.DatabaseController(model, this);
+        const database = new _DatabaseController_DatabaseController__WEBPACK_IMPORTED_MODULE_1__.DatabaseController(model, this);
         database.init();
         this.databases.push(database);
         return database;
     }
     createPageLink(model) {
-        const pageLink = new PageLinkController_1.PageLinkController(model, this);
+        const pageLink = new _PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_2__.PageLinkController(model, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
@@ -36459,10 +38203,10 @@ class ApplicationController extends VisualController_1.VisualController {
     }
     getActions() {
         return [
-            { 'action': 'newDatabase', 'caption': 'New Database' },
-            { 'action': 'newDataSource', 'caption': 'New Data Source' },
-            { 'action': 'newAction', 'caption': 'New Action' },
-            { 'action': 'newPage', 'caption': 'New Page' },
+            { action: 'newDatabase', caption: 'New Database' },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'newPage', caption: 'New Page' },
         ];
     }
     async doAction(name) {
@@ -36486,7 +38230,8 @@ class ApplicationController extends VisualController_1.VisualController {
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
         // @ts-ignore
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDatabaseController_1.NewDatabaseController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
+            onCreate: async (values) => {
                 // console.log('values: ', values);
                 const database = await this.model.newDatabase({
                     class: values.class,
@@ -36495,44 +38240,49 @@ class ApplicationController extends VisualController_1.VisualController {
                         { class: 'Param', name: 'host', value: values.host },
                         { class: 'Param', name: 'database', value: values.database },
                         { class: 'Param', name: 'user', value: values.user },
-                        { class: 'Param', name: 'password', value: values.password }
-                    ]
+                        { class: 'Param', name: 'password', value: values.password },
+                    ],
                 });
                 const databaseController = this.createDatabase(database);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
                 databaseController.view.parent.open();
                 this.view.rerender();
                 // @ts-ignore
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async newDataSourceAction() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDataSourceController_1.NewDataSourceController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__.NewDataSourceController({
+            onCreate: async (values) => {
                 const dataSource = await this.model.newDataSource({
                     name: values.name,
-                    class: values.class
+                    class: values.class,
                 });
                 const dataSourceController = this.createDataSource(dataSource);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
                 dataSourceController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async newPageAction() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewPageController_1.NewPageController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__.NewPageController({
+            onCreate: async (values) => {
                 const page = await this.model.newPage({
                     name: values.name,
                     caption: values.caption || values.name,
-                    startup: values.startup
+                    startup: values.startup,
                 });
                 const pageLinkController = this.createPageLink(page.pageLink);
-                const pageController = new PageController_1.PageController(page, pageLinkController);
+                const pageController = new _PageController_PageController__WEBPACK_IMPORTED_MODULE_7__.PageController(page, pageLinkController);
                 pageController.init();
                 pageLinkController.setPageController(pageController);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     getPropList() {
         const propList = super.getPropList();
@@ -36545,10 +38295,9 @@ class ApplicationController extends VisualController_1.VisualController {
     }
     getDocumentViewClass() {
         // @ts-ignore
-        return VisualView_1.VisualView;
+        return _VisualView__WEBPACK_IMPORTED_MODULE_8__.VisualView;
     }
 }
-exports.ApplicationController = ApplicationController;
 
 
 /***/ }),
@@ -36557,16 +38306,21 @@ exports.ApplicationController = ApplicationController;
 /*!********************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/FieldController/FieldController.ts ***!
   \********************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldController": () => (/* binding */ FieldController)
+/* harmony export */ });
+/* harmony import */ var _VisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../ModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts");
+/* harmony import */ var _VisualView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FieldController = void 0;
-const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const ChangeClassController_1 = __webpack_require__(/*! ../../../../ModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts");
-const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
-class FieldController extends VisualController_1.VisualController {
+
+
+class FieldController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -36576,15 +38330,15 @@ class FieldController extends VisualController_1.VisualController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'blue'
+            color: 'blue',
         };
     }
     getActions() {
         return [
-            { 'action': 'changeClass', 'caption': 'Change Class' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' }
+            { action: 'changeClass', caption: 'Change Class' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -36598,24 +38352,24 @@ class FieldController extends VisualController_1.VisualController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('fields', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('fields', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
     async actionChangeClass() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new ChangeClassController_1.ChangeClassController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.openModal(new _ModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__.ChangeClassController({
             fieldCtrl: this,
             onCreate: async (values) => {
                 const data = await this.model.changeClass({ class: values.class });
                 console.log(data);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
                 this.view.rerender();
-            }
+            },
         }));
     }
     getPropList() {
@@ -36636,14 +38390,13 @@ class FieldController extends VisualController_1.VisualController {
     async delete() {
         await this.model.delete();
         this.parent.removeField(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return VisualView_1.VisualView;
+        return _VisualView__WEBPACK_IMPORTED_MODULE_3__.VisualView;
     }
 }
-exports.FieldController = FieldController;
 
 
 /***/ }),
@@ -36652,18 +38405,25 @@ exports.FieldController = FieldController;
 /*!******************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/FormController/FormController.ts ***!
   \******************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormController": () => (/* binding */ FormController)
+/* harmony export */ });
+/* harmony import */ var _VisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
+/* harmony import */ var _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/FieldController/FieldController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _ModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts");
+/* harmony import */ var _VisualView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FormController = void 0;
-const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
-const FieldController_1 = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/FieldController/FieldController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewDataSourceController_1 = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
-const NewFieldController_1 = __webpack_require__(/*! ../../../../ModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts");
-const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
-class FormController extends VisualController_1.VisualController {
+
+
+
+
+class FormController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];
@@ -36672,7 +38432,7 @@ class FormController extends VisualController_1.VisualController {
         this.items = [
             { getTitle: () => 'Data Sources', items: this.dataSources },
             { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Fields', items: this.fields }
+            { getTitle: () => 'Fields', items: this.fields },
         ];
     }
     getTitle() {
@@ -36690,7 +38450,7 @@ class FormController extends VisualController_1.VisualController {
         this.model.actions.forEach(action => this.createAction(action));
     }
     createField(model) {
-        const field = new FieldController_1.FieldController(model, this);
+        const field = new _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_1__.FieldController(model, this);
         field.init();
         this.fields.push(field);
         return field;
@@ -36704,12 +38464,12 @@ class FormController extends VisualController_1.VisualController {
     }
     getActions() {
         return [
-            { 'action': 'newDataSource', 'caption': 'New Data Source' },
-            { 'action': 'newField', 'caption': 'New Field' },
-            { 'action': 'newAction', 'caption': 'New Action' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newField', caption: 'New Field' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -36729,72 +38489,66 @@ class FormController extends VisualController_1.VisualController {
             case 'moveUp':
                 await this.model.moveUp();
                 this.parent.moveColItem('forms', this, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.moveDown();
                 this.parent.moveColItem('forms', this, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
         }
     }
     async actionNewDataSource() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDataSourceController_1.NewDataSourceController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+            onCreate: async (values) => {
                 const dataSource = await this.model.newDataSource({
                     name: values.name,
-                    class: values.class
+                    class: values.class,
                 });
                 const dataSourceController = this.createDataSource(dataSource);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
                 dataSourceController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async actionNewField() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewFieldController_1.NewFieldController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__.NewFieldController({
+            onCreate: async (values) => {
                 const field = await this.model.newField({
                     class: values.class,
                     name: values.name,
                     caption: values.caption,
-                    type: values.type
+                    type: values.type,
                 });
                 const fieldController = this.createField(field);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
                 fieldController.view.parent.open();
                 this.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     getPropList() {
         return {
             list: this.model.data['@attributes'],
             options: {
-                editMethod: [
-                    'disabled',
-                    'table',
-                    'form'
-                ],
+                editMethod: ['disabled', 'table', 'form'],
                 newRowMode: [
                     'disabled',
                     'oneclick',
                     'editform',
                     'createform',
                     'oneclick editform',
-                    'oneclick createform'
+                    'oneclick createform',
                 ],
-                deleteRowMode: [
-                    'disabled',
-                    'enabled'
-                ],
-                refreshButton: [
-                    'true',
-                    'false'
-                ],
+                deleteRowMode: ['disabled', 'enabled'],
+                refreshButton: ['true', 'false'],
                 visible: ['true', 'false'],
                 newMode: ['', 'true', 'false'],
                 backOnly: ['true', 'false'],
-            }
+            },
         };
     }
     async setProperty(name, value) {
@@ -36803,14 +38557,13 @@ class FormController extends VisualController_1.VisualController {
     async delete() {
         await this.model.delete();
         this.parent.removeForm(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return VisualView_1.VisualView;
+        return _VisualView__WEBPACK_IMPORTED_MODULE_5__.VisualView;
     }
 }
-exports.FormController = FormController;
 
 
 /***/ }),
@@ -36819,20 +38572,29 @@ exports.FormController = FormController;
 /*!******************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts ***!
   \******************************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageController": () => (/* binding */ PageController)
+/* harmony export */ });
+/* harmony import */ var _VisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
+/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/FormController/FormController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
+/* harmony import */ var _ModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts");
+/* harmony import */ var _VisualView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PageController = void 0;
-const VisualController_1 = __webpack_require__(/*! ../VisualController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts");
-const FormController_1 = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/FormController/FormController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewDataSourceController_1 = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
-const DataSourceEditor_1 = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-const NewFormController_1 = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts");
-const VisualView_1 = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
-const ModelController_1 = __webpack_require__(/*! ../../../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-class PageController extends VisualController_1.VisualController {
+
+
+
+
+
+
+class PageController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
     constructor(model, pageLinkController = null, options = {}) {
         super(model);
         this.options = options;
@@ -36843,7 +38605,7 @@ class PageController extends VisualController_1.VisualController {
         this.items = [
             { getTitle: () => 'Data Sources', items: this.dataSources },
             { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Forms', items: this.forms }
+            { getTitle: () => 'Forms', items: this.forms },
         ];
     }
     init() {
@@ -36853,7 +38615,7 @@ class PageController extends VisualController_1.VisualController {
         this.model.forms.forEach(form => this.createForm(form));
     }
     createForm(model) {
-        const form = new FormController_1.FormController(model, this);
+        const form = new _FormController_FormController__WEBPACK_IMPORTED_MODULE_1__.FormController(model, this);
         form.init();
         this.forms.push(form);
         return form;
@@ -36867,12 +38629,12 @@ class PageController extends VisualController_1.VisualController {
     }
     getActions() {
         return [
-            { 'action': 'newDataSource', 'caption': 'New Data Source' },
-            { 'action': 'newAction', 'caption': 'New Action' },
-            { 'action': 'newForm', 'caption': 'New Form' },
-            { 'action': 'moveUp', 'caption': 'Move Up' },
-            { 'action': 'moveDown', 'caption': 'Move Down' },
-            { 'action': 'delete', 'caption': 'Delete' },
+            { action: 'newDataSource', caption: 'New Data Source' },
+            { action: 'newAction', caption: 'New Action' },
+            { action: 'newForm', caption: 'New Form' },
+            { action: 'moveUp', caption: 'Move Up' },
+            { action: 'moveDown', caption: 'Move Down' },
+            { action: 'delete', caption: 'Delete' },
         ];
     }
     async doAction(name) {
@@ -36892,44 +38654,48 @@ class PageController extends VisualController_1.VisualController {
             case 'moveUp':
                 await this.model.pageLink.moveUp();
                 this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, -1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             case 'moveDown':
                 await this.model.pageLink.moveDown();
                 this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, 1);
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
                 console.log(name);
         }
     }
     async newDataSourceAction() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDataSourceController_1.NewDataSourceController({ onCreate: async (values) => {
-                const dataSourceData = await DataSourceEditor_1.DataSourceEditor.create(this.model, {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+            onCreate: async (values) => {
+                const dataSourceData = await _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__.DataSourceEditor.create(this.model, {
                     name: values.name,
-                    class: values.class
+                    class: values.class,
                 });
                 const dataSource = this.model.createDataSource(dataSourceData);
                 const dataSourceController = this.createDataSource(dataSource);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
                 dataSourceController.view.parent.open();
                 this.pageLinkController.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     async actionNewForm() {
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewFormController_1.NewFormController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__.NewFormController({
+            onCreate: async (values) => {
                 const form = await this.model.newForm({
                     name: values.name,
                     caption: values.caption || values.name,
-                    class: values.class
+                    class: values.class,
                 });
                 const formController = this.createForm(form);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                 formController.view.parent.open();
                 this.pageLinkController.view.rerender();
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
     getPropList() {
         const propList = super.getPropList();
@@ -36943,7 +38709,7 @@ class PageController extends VisualController_1.VisualController {
             this.getPageLink().setValue(name, value);
         }
         else {
-            ModelController_1.ModelController.prototype.setProperty.call(this, name, value);
+            _ModelController__WEBPACK_IMPORTED_MODULE_7__.ModelController.prototype.setProperty.call(this, name, value);
         }
     }
     getPageLink() {
@@ -36952,14 +38718,13 @@ class PageController extends VisualController_1.VisualController {
     async delete() {
         await this.model.delete();
         this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return VisualView_1.VisualView;
+        return _VisualView__WEBPACK_IMPORTED_MODULE_6__.VisualView;
     }
 }
-exports.PageController = PageController;
 
 
 /***/ }),
@@ -36968,17 +38733,23 @@ exports.PageController = PageController;
 /*!*****************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/VisualController.ts ***!
   \*****************************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisualController": () => (/* binding */ VisualController)
+/* harmony export */ });
+/* harmony import */ var _DocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
+/* harmony import */ var _DataSourceController_DataSourceController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceController/DataSourceController */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/DataSourceController.ts");
+/* harmony import */ var _ActionController_ActionController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ActionController/ActionController */ "./src/frontend/editor/ModelController/ActionController/ActionController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _ModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../ModalController/NewActionController/NewActionController */ "./src/frontend/editor/ModalController/NewActionController/NewActionController.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.VisualController = void 0;
-const DocumentController_1 = __webpack_require__(/*! ../DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
-const DataSourceController_1 = __webpack_require__(/*! ../DataSourceController/DataSourceController */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/DataSourceController.ts");
-const ActionController_1 = __webpack_require__(/*! ../../ActionController/ActionController */ "./src/frontend/editor/ModelController/ActionController/ActionController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const NewActionController_1 = __webpack_require__(/*! ../../../ModalController/NewActionController/NewActionController */ "./src/frontend/editor/ModalController/NewActionController/NewActionController.ts");
-class VisualController extends DocumentController_1.DocumentController {
+
+
+
+class VisualController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.DocumentController {
     constructor(model, parent = null) {
         super(model, parent);
         this.onCreateCustomController = async (e) => {
@@ -37018,7 +38789,7 @@ class VisualController extends DocumentController_1.DocumentController {
         this.document.view.rerender();
     }
     createDataSource(model) {
-        const dataSource = new DataSourceController_1.DataSourceController(model, this);
+        const dataSource = new _DataSourceController_DataSourceController__WEBPACK_IMPORTED_MODULE_1__.DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
@@ -37031,7 +38802,7 @@ class VisualController extends DocumentController_1.DocumentController {
         this.dataSources.splice(i, 1);
     }
     createAction(model) {
-        const action = new ActionController_1.ActionController(model, this);
+        const action = new _ActionController_ActionController__WEBPACK_IMPORTED_MODULE_2__.ActionController(model, this);
         action.init();
         this.actions.push(action);
         return action;
@@ -37045,13 +38816,14 @@ class VisualController extends DocumentController_1.DocumentController {
     }
     async actionNewAction() {
         console.log('VisualController.actionNewAction');
-        await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewActionController_1.NewActionController({ onCreate: async (values) => {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
+            onCreate: async (values) => {
                 const action = await this.model.newAction({
                     name: values.name,
-                    caption: values.caption
+                    caption: values.caption,
                 });
                 const actionController = this.createAction(action);
-                await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
+                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
                 actionController.view.parent.open();
                 if (this.pageLinkController) {
                     this.pageLinkController.view.rerender();
@@ -37059,11 +38831,11 @@ class VisualController extends DocumentController_1.DocumentController {
                 else {
                     this.view.rerender();
                 }
-                EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            } }));
+                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
+            },
+        }));
     }
 }
-exports.VisualController = VisualController;
 
 
 /***/ }),
@@ -37072,19 +38844,21 @@ exports.VisualController = VisualController;
 /*!************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx ***!
   \************************************************************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisualView": () => (/* binding */ VisualView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _DocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.VisualView = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const DocumentView_1 = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
-const common_1 = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-class VisualView extends DocumentView_1.DocumentView {
+
+
+class VisualView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView {
     constructor(props) {
         super(props);
         this.onControllerSave = async (e) => {
@@ -37095,7 +38869,7 @@ class VisualView extends DocumentView_1.DocumentView {
             // console.log('VisualView.onChange', this.isChanged());
             await this.rerender();
         };
-        this.textarea = react_1.default.createRef();
+        this.textarea = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.cm = null;
     }
     getTextarea() {
@@ -37107,7 +38881,7 @@ class VisualView extends DocumentView_1.DocumentView {
         // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            this.cm = DocumentView_1.DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            this.cm = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.getTextarea(), ctrl.data.js);
             this.cm.on('change', this.onChange);
         }
     }
@@ -37116,7 +38890,7 @@ class VisualView extends DocumentView_1.DocumentView {
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !this.cm) {
-            this.cm = DocumentView_1.DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            this.cm = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
     }
     componentWillUnmount() {
@@ -37133,11 +38907,9 @@ class VisualView extends DocumentView_1.DocumentView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'VisualView full' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "full flex-column" }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), !ctrl.data.js && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomController }, { children: "Controller.front.js" })), !ctrl.data.jsx && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomView }, { children: "View.jsx" })), !ctrl.data.less && (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateCustomStyle }, { children: "View.less" })), ctrl.data.js &&
-                                (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onControllerSave, enabled: this.isChanged() }, { children: "Save" }))] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'edit flex-max full' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'cm-container full' }, { children: ctrl.data.js && (0, jsx_runtime_1.jsx)("textarea", { ref: this.textarea }) })) }))] })) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'VisualView full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "full flex-column" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), !ctrl.data.js && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomController }, { children: "Controller.front.js" }))), !ctrl.data.jsx && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomView }, { children: "View.jsx" }))), !ctrl.data.less && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomStyle }, { children: "View.less" }))), ctrl.data.js && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onControllerSave, enabled: this.isChanged() }, { children: "Save" })))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'edit flex-max full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'cm-container full' }, { children: ctrl.data.js && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.textarea }) })) }))] })) })));
     }
 }
-exports.VisualView = VisualView;
 
 
 /***/ }),
@@ -37146,22 +38918,24 @@ exports.VisualView = VisualView;
 /*!****************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts ***!
   \****************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KeyColumnController": () => (/* binding */ KeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.KeyColumnController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-class KeyColumnController extends ModelController_1.ModelController {
+
+class KeyColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
     getActions() {
-        return [
-            { 'action': 'delete', 'caption': 'Delete' }
-        ];
+        return [{ action: 'delete', caption: 'Delete' }];
     }
     async doAction(name) {
         switch (name) {
@@ -37171,22 +38945,21 @@ class KeyColumnController extends ModelController_1.ModelController {
         }
     }
     static async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action: 'getView',
             params: {
-                view: view
-            }
+                view: view,
+            },
         });
     }
     async delete() {
         await this.model.delete();
         this.parent.removeKeyColumn(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
-exports.KeyColumnController = KeyColumnController;
 
 
 /***/ }),
@@ -37195,12 +38968,14 @@ exports.KeyColumnController = KeyColumnController;
 /*!****************************************************************!*\
   !*** ./src/frontend/editor/ModelController/ModelController.ts ***!
   \****************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModelController": () => (/* binding */ ModelController)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ModelController = void 0;
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 class ModelController {
     constructor(model, parent = null) {
         // super();
@@ -37208,8 +38983,7 @@ class ModelController {
         this.parent = parent;
         this.view = null;
     }
-    init() {
-    }
+    init() { }
     getTitle() {
         return this.model.getName();
     }
@@ -37221,7 +38995,7 @@ class ModelController {
     getPropList() {
         return {
             list: this.model.data['@attributes'],
-            options: {}
+            options: {},
         };
     }
     async setProperty(name, value) {
@@ -37238,10 +39012,9 @@ class ModelController {
         return null;
     }
     moveColItem(colName, item, offset) {
-        common_1.Helper.moveArrItem(this[colName], item, offset);
+        _common__WEBPACK_IMPORTED_MODULE_0__.Helper.moveArrItem(this[colName], item, offset);
     }
 }
-exports.ModelController = ModelController;
 
 
 /***/ }),
@@ -37250,16 +39023,21 @@ exports.ModelController = ModelController;
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts ***!
   \**************************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageLinkController": () => (/* binding */ PageLinkController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+/* harmony import */ var _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Editor/PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
+/* harmony import */ var _DocumentController_VisualController_PageController_PageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DocumentController/VisualController/PageController/PageController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PageLinkController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-const PageEditor_1 = __webpack_require__(/*! ../../Editor/PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-const PageController_1 = __webpack_require__(/*! ../DocumentController/VisualController/PageController/PageController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts");
-class PageLinkController extends ModelController_1.ModelController {
+
+
+class PageLinkController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.node = true;
@@ -37274,7 +39052,7 @@ class PageLinkController extends ModelController_1.ModelController {
     getStyle() {
         return {
             // fontWeight: 'bold',
-            color: 'red'
+            color: 'red',
         };
     }
     hasPage() {
@@ -37285,12 +39063,12 @@ class PageLinkController extends ModelController_1.ModelController {
         if (this.pageController)
             throw new Error('page already loaded');
         const pageLink = this.model;
-        const pageData = await EditorFrontHostApp_1.EditorFrontHostApp.fetchPageData(pageLink.getFileName());
+        const pageData = await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.fetchPageData(pageLink.getFileName());
         // page
-        const page = new PageEditor_1.PageEditor(pageData, pageLink);
+        const page = new _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor(pageData, pageLink);
         page.init();
         // pageController
-        const pageController = new PageController_1.PageController(page, this);
+        const pageController = new _DocumentController_VisualController_PageController_PageController__WEBPACK_IMPORTED_MODULE_3__.PageController(page, this);
         pageController.init();
         this.setPageController(pageController);
         // console.log('pageController:', pageController);
@@ -37316,7 +39094,6 @@ class PageLinkController extends ModelController_1.ModelController {
         this.parent.removePageLink(this);
     }
 }
-exports.PageLinkController = PageLinkController;
 
 
 /***/ }),
@@ -37325,22 +39102,24 @@ exports.PageLinkController = PageLinkController;
 /*!********************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/ParamController/ParamController.ts ***!
   \********************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ParamController": () => (/* binding */ ParamController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ParamController = void 0;
-const ModelController_1 = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-const EditorFrontHostApp_1 = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-class ParamController extends ModelController_1.ModelController {
+
+class ParamController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
     getActions() {
-        return [
-            { 'action': 'delete', 'caption': 'Delete' }
-        ];
+        return [{ action: 'delete', caption: 'Delete' }];
     }
     async doAction(name) {
         switch (name) {
@@ -37350,22 +39129,21 @@ class ParamController extends ModelController_1.ModelController {
         }
     }
     static async getView(view) {
-        return await common_1.FrontHostApp.doHttpRequest({
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'getView',
             params: {
-                view: view
-            }
+                view: view,
+            },
         });
     }
     async delete() {
         await this.model.delete();
         this.parent.removeParam(this);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
 }
-exports.ParamController = ParamController;
 
 
 /***/ }),
@@ -37374,14 +39152,17 @@ exports.ParamController = ParamController;
 /*!***********************************************************!*\
   !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.tsx ***!
   \***********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PropertyGrid": () => (/* binding */ PropertyGrid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PropertyGrid = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class PropertyGrid extends common_1.ReactComponent {
+class PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (name, value) => {
@@ -37406,26 +39187,25 @@ class PropertyGrid extends common_1.ReactComponent {
     }
     renderInput(name) {
         const obj = this.getObj();
-        return (0, jsx_runtime_1.jsx)(common_1.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: value => this.onChange(name, value), autocomplete: 'off' });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: value => this.onChange(name, value), autocomplete: 'off' }));
     }
     renderSelect(name) {
         const obj = this.getObj();
         const options = this.getOptions();
-        return (0, jsx_runtime_1.jsx)(common_1.ComboBox, { name: name, value: obj[name], items: options[name].map(value => ({
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { name: name, value: obj[name], items: options[name].map(value => ({
                 value: value,
-                title: value
-            })), onChange: value => this.onChange(name, value) });
+                title: value,
+            })), onChange: value => this.onChange(name, value) }));
     }
     renderRows() {
         const obj = this.getObj();
         const options = this.getOptions();
-        return Object.keys(obj).map(name => (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("td", { children: name }), (0, jsx_runtime_1.jsx)("td", { children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name) })] }, name));
+        return Object.keys(obj).map(name => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name) })] }, name)));
     }
     render() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'PropertyGrid full frame' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsx)("table", Object.assign({ className: 'PropertyGrid__table', cellPadding: 0, cellSpacing: 0 }, { children: (0, jsx_runtime_1.jsx)("tbody", { children: this.getObj() && this.renderRows() }) })) })) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'PropertyGrid full frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: 'PropertyGrid__table', cellPadding: 0, cellSpacing: 0 }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: this.getObj() && this.renderRows() }) })) })) })));
     }
 }
-exports.PropertyGrid = PropertyGrid;
 
 
 /***/ }),
@@ -37434,18 +39214,19 @@ exports.PropertyGrid = PropertyGrid;
 /*!*****************************************************!*\
   !*** ./src/frontend/editor/TreeWidget/TreeItem.tsx ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeItem": () => (/* binding */ TreeItem)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TreeItem = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-class TreeItem extends common_1.ReactComponent {
+
+class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onDivMouseDown = e => {
@@ -37474,9 +39255,9 @@ class TreeItem extends common_1.ReactComponent {
             }
         };
         this.state = {
-            opened: props.item.opened !== undefined ? props.item.opened : false
+            opened: props.item.opened !== undefined ? props.item.opened : false,
         };
-        this.li = react_1.default.createRef();
+        this.li = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     isSelected() {
         return this.props.tree.getSelectedItem() === this.props.item;
@@ -37507,15 +39288,13 @@ class TreeItem extends common_1.ReactComponent {
         const isNode = item.node || hasItems;
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
-        return (0, jsx_runtime_1.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : null }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : null, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0, jsx_runtime_1.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0, jsx_runtime_1.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems &&
-                    (0, jsx_runtime_1.jsx)("ul", { children: items.map(item => (0, jsx_runtime_1.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: c => {
-                                // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
-                                c.parent = this;
-                                item.view = c;
-                            } }, item.getTitle())) })] }), title);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : null, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: c => {
+                            // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                            c.parent = this;
+                            item.view = c;
+                        } }, item.getTitle()))) }))] }), title));
     }
 }
-exports.TreeItem = TreeItem;
 
 
 /***/ }),
@@ -37524,19 +39303,23 @@ exports.TreeItem = TreeItem;
 /*!*******************************************************!*\
   !*** ./src/frontend/editor/TreeWidget/TreeWidget.tsx ***!
   \*******************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TreeWidget": () => (/* binding */ TreeWidget)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TreeItem */ "./src/frontend/editor/TreeWidget/TreeItem.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TreeWidget = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const common_1 = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-const TreeItem_1 = __webpack_require__(/*! ./TreeItem */ "./src/frontend/editor/TreeWidget/TreeItem.tsx");
-class TreeWidget extends common_1.ReactComponent {
+
+class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            selectedItem: null
+            selectedItem: null,
         };
     }
     async select(item) {
@@ -37568,15 +39351,16 @@ class TreeWidget extends common_1.ReactComponent {
     }
     scrollToSelected() {
         console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
-        this.getSelectedItem().view.getElement().scrollIntoView();
+        this.getSelectedItem()
+            .view.getElement()
+            .scrollIntoView();
     }
     render() {
         console.log('TreeWidget.render' /*, this.props.items*/);
         const items = this.props.items;
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("ul", { children: items.map(item => (0, jsx_runtime_1.jsx)(TreeItem_1.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: c => item.view = c }, item.getTitle())) }) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: c => (item.view = c) }, item.getTitle()))) }) })));
     }
 }
-exports.TreeWidget = TreeWidget;
 
 
 /***/ })
@@ -37601,28 +39385,56 @@ exports.TreeWidget = TreeWidget;
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-var exports = __webpack_exports__;
 /*!*************************************!*\
   !*** ./src/frontend/editor/main.ts ***!
   \*************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-const EditorFrontHostApp_1 = __webpack_require__(/*! ./EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('editor.ejs DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    const runAppLink = "<%=runAppLink%>";
-    const editorFrontHostApp = new EditorFrontHostApp_1.EditorFrontHostApp(data, runAppLink);
+    const runAppLink = '<%=runAppLink%>';
+    const editorFrontHostApp = new _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp(data, data.runAppLink);
     await editorFrontHostApp.run();
 });
 
