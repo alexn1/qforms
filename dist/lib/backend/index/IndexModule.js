@@ -28,15 +28,12 @@ class IndexModule {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map(appInfo => ({
                 fullName: appInfo.fullName,
-                envs: appInfo.envs
-            }))
+                envs: appInfo.envs,
+            })),
         };
     }
     getLinks() {
-        return [
-            ...(this.hostApp.commonModule.css),
-            ...(this.css)
-        ];
+        return [...this.hostApp.commonModule.css, ...this.css];
     }
     getScripts() {
         return [
@@ -45,7 +42,7 @@ class IndexModule {
             // '/lib/react/react.production.min.js',
             // '/lib/react/react-dom.production.min.js',
             // ...(this.hostApp.commonModule.js),
-            ...(this.js)
+            ...this.js,
         ];
     }
     render({ version, links, scripts, data }) {
@@ -53,7 +50,7 @@ class IndexModule {
         const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: links }));
         const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: scripts }));
         const data2 = JSON.stringify(data /*, null, 4*/);
-        return (`<!DOCTYPE html>
+        return `<!DOCTYPE html>
 <html>
 <head>
     <!-- ${version}> -->
@@ -75,7 +72,7 @@ class IndexModule {
 <body>
 <div id="root"></div>
 </body>
-</html>`);
+</html>`;
     }
 }
 exports.IndexModule = IndexModule;
