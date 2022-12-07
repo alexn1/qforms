@@ -8,7 +8,7 @@ import {
 
 export class IndexView extends ReactComponent {
     renderModals() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return (
             <div>
                 {ctrl.modals.map(modal => (
