@@ -1,11 +1,11 @@
-import {ReactComponent} from '../ReactComponent';
+import { ReactComponent } from '../ReactComponent';
 
 export class CheckBoxList extends ReactComponent {
     constructor(props) {
         super(props);
         if (!this.props.name) throw new Error('no CheckBoxList name');
         this.state = {
-            value: this.props.value || []
+            value: this.props.value || [],
         };
     }
     getItems() {
@@ -19,30 +19,33 @@ export class CheckBoxList extends ReactComponent {
         const checked = e.target.checked;
         const itemValue = e.target.dataset.value;
         // console.log('itemValue:', itemValue);
-        this.setState(prevState => {
-            const prevValue =  prevState.value || [];
-            const value = [...prevValue];
-            if (checked) {
-                if (value.indexOf(itemValue) > -1) {
-                    console.log('value:', itemValue, checked, value);
-                    throw new Error('CheckBoxList value error');
+        this.setState(
+            prevState => {
+                const prevValue = prevState.value || [];
+                const value = [...prevValue];
+                if (checked) {
+                    if (value.indexOf(itemValue) > -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.push(itemValue);
+                } else {
+                    if (value.indexOf(itemValue) === -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.splice(value.indexOf(itemValue), 1);
                 }
-                value.push(itemValue);
-            } else {
-                if (value.indexOf(itemValue) === -1) {
-                    console.log('value:', itemValue, checked, value);
-                    throw new Error('CheckBoxList value error');
+                // console.log('value:', value);
+                return { value };
+            },
+            () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.getValue());
                 }
-                value.splice(value.indexOf(itemValue), 1);
-            }
-            // console.log('value:', value);
-            return {value};
-        }, () => {
-            if (this.props.onChange) {
-                this.props.onChange(this.getValue());
-            }
-        });
-    }
+            },
+        );
+    };
     isValueChecked(value) {
         return this.getValue().indexOf(value) > -1;
     }
@@ -56,22 +59,27 @@ export class CheckBoxList extends ReactComponent {
         return true;
     }
     render() {
-        return <ul className={this.getCssClassNames()}>
-            {this.getItems().map(item => {
-                if (item.value === undefined) throw new Error('no item value');
-                return <li>
-                    <input type={'checkbox'}
-                           id={this.composeItemId(item.value)}
-                           checked={this.isValueChecked(item.value)}
-                           onChange={this.onCheckBoxChange}
-                           data-value={item.value}
-                           readOnly={this.props.readOnly}
-                    />
-                    <label for={this.composeItemId(item.value)}>
-                        {item.title || item.value}
-                    </label>
-                </li>
-            })}
-        </ul>;
+        return (
+            <ul className={this.getCssClassNames()}>
+                {this.getItems().map(item => {
+                    if (item.value === undefined) throw new Error('no item value');
+                    return (
+                        <li>
+                            <input
+                                type={'checkbox'}
+                                id={this.composeItemId(item.value)}
+                                checked={this.isValueChecked(item.value)}
+                                onChange={this.onCheckBoxChange}
+                                data-value={item.value}
+                                readOnly={this.props.readOnly}
+                            />
+                            <label for={this.composeItemId(item.value)}>
+                                {item.title || item.value}
+                            </label>
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     }
 }

@@ -1,13 +1,13 @@
 import React from 'react';
-import {ReactComponent} from '../ReactComponent';
+import { ReactComponent } from '../ReactComponent';
 
 export class PhoneBox extends ReactComponent {
     constructor(props) {
         super(props);
         this.el = React.createRef();
         this.state = {
-            value: PhoneBox.formatPhoneNumber(this.props.value || '')
-        }
+            value: PhoneBox.formatPhoneNumber(this.props.value || ''),
+        };
     }
     getValue() {
         return PhoneBox.clearValue(this.state.value);
@@ -19,18 +19,18 @@ export class PhoneBox extends ReactComponent {
             e.preventDefault();
         }
         if (
-            e.key === '+'
-            && e.target.value.length
-            && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length
+            e.key === '+' &&
+            e.target.value.length &&
+            Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length
         ) {
             e.preventDefault();
         }
-    }
+    };
     onChange = e => {
         // console.log('PhoneBox.onChange', e.target.value);
         const start = e.target.selectionStart;
-        const end   = e.target.selectionEnd;
-        const len   = e.target.value.length;
+        const end = e.target.selectionEnd;
+        const len = e.target.value.length;
         // console.log('start/end/len:', start, end, len);
 
         // disable edition in middle
@@ -45,13 +45,13 @@ export class PhoneBox extends ReactComponent {
         // state
         // @ts-ignore
         this.state.value = PhoneBox.formatPhoneNumber(value);
-        this.setState({value: this.state.value});       // for render only
+        this.setState({ value: this.state.value }); // for render only
 
         // event
         if (this.props.onChange) {
             this.props.onChange(value);
         }
-    }
+    };
     onBlur = e => {
         // console.log('PhoneBox.onBlur');
         let value = PhoneBox.clearValue(e.target.value);
@@ -62,7 +62,7 @@ export class PhoneBox extends ReactComponent {
         if (this.props.onBlur) {
             this.props.onBlur(value);
         }
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {

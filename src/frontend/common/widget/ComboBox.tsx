@@ -1,11 +1,11 @@
-import {ReactComponent} from '../ReactComponent';
+import { ReactComponent } from '../ReactComponent';
 
 export class ComboBox extends ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         if (!props.items) throw new Error('no ComboBox items');
-        this.state = {value: this.getInitialValue()};
+        this.state = { value: this.getInitialValue() };
     }
     getInitialValue() {
         let value = null;
@@ -35,17 +35,17 @@ export class ComboBox extends ReactComponent {
     }
     onChange = async e => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
-        this.setState({value: e.target.value});
+        this.setState({ value: e.target.value });
         if (this.props.onChange) {
             await this.props.onChange(e.target.value);
         }
-    }
+    };
     onMouseDown = async e => {
         // console.log('ComboBox.onMouseDown', e.button);
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
         }
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
@@ -66,12 +66,13 @@ export class ComboBox extends ReactComponent {
                 onDoubleClick={this.props.onDoubleClick}
                 onMouseDown={this.onMouseDown}
             >
-                {this.props.nullable &&
-                    <option value={''}>{this.props.placeholder}</option>
-                }
-                {this.props.items && this.props.items.map(item =>
-                    <option key={item.value} value={item.value}>{item.title || item.value}</option>
-                )}
+                {this.props.nullable && <option value={''}>{this.props.placeholder}</option>}
+                {this.props.items &&
+                    this.props.items.map(item => (
+                        <option key={item.value} value={item.value}>
+                            {item.title || item.value}
+                        </option>
+                    ))}
             </select>
         );
     }

@@ -1,4 +1,4 @@
-import {Component, RefObject} from 'react';
+import { Component, RefObject } from 'react';
 
 export class ReactComponent extends Component<any, any> {
     allowRerender: boolean;
@@ -22,7 +22,7 @@ export class ReactComponent extends Component<any, any> {
         return [
             this.getCssBlockName(),
             ...(this.props.classList || []),
-            ...(this.state && this.state.classList ? this.state.classList : [])
+            ...(this.state && this.state.classList ? this.state.classList : []),
         ];
     }
     addCssClass(className) {
@@ -85,11 +85,11 @@ export class ReactComponent extends Component<any, any> {
     disable() {
         // console.log('ReactComponent.disable');
         if (!this.state) throw new Error('no state');
-        this.setState({disabled: true});
+        this.setState({ disabled: true });
     }
     enable() {
         if (!this.state) throw new Error('no state');
-        this.setState({disabled: undefined});
+        this.setState({ disabled: undefined });
     }
 }
 

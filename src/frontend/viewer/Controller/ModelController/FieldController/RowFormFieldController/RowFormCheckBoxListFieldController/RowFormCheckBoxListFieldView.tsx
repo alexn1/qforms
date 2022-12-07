@@ -1,4 +1,4 @@
-import {RowFormFieldView} from '../RowFormFieldView';
+import { RowFormFieldView } from '../RowFormFieldView';
 
 export class RowFormCheckBoxListFieldView extends RowFormFieldView {
     getItems() {
@@ -14,19 +14,19 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView {
     }
     renderCheckBoxList() {
         const ctrl = this.getCtrl();
-        return <CheckBoxList
-            name={ctrl.getModel().getFullName()}
-            classList={[`${this.getCssBlockName()}__checkboxlist`]}
-            onCreate={this.onWidgetCreate}
-            value={ctrl.getValueForWidget()}
-            readOnly={!ctrl.isEditable()}
-            onChange={ctrl.onChange}
-            items={this.getItems()}
-        />;
+        return (
+            <CheckBoxList
+                name={ctrl.getModel().getFullName()}
+                classList={[`${this.getCssBlockName()}__checkboxlist`]}
+                onCreate={this.onWidgetCreate}
+                value={ctrl.getValueForWidget()}
+                readOnly={!ctrl.isEditable()}
+                onChange={ctrl.onChange}
+                items={this.getItems()}
+            />
+        );
     }
     render() {
-        return <div className={this.getCssClassNames()}>
-            {this.renderCheckBoxList()}
-        </div>;
+        return <div className={this.getCssClassNames()}>{this.renderCheckBoxList()}</div>;
     }
 }

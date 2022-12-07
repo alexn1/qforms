@@ -1,22 +1,24 @@
-import {RowFormFieldView} from '../RowFormFieldView';
-import {TextBox, CloseIcon, VisibilityIcon, VisibilityOffIcon} from '../../../../../../common';
+import { RowFormFieldView } from '../RowFormFieldView';
+import { TextBox, CloseIcon, VisibilityIcon, VisibilityOffIcon } from '../../../../../../common';
 
 export class RowFormPasswordFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);
         this.state = {
             classList: [],
-            type: 'password'
+            type: 'password',
         };
     }
     onCloseClick = async e => {
         // console.log('RowFormPasswordFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
         this.getWidget().state.value = '';
-        this.getWidget().setState({value: ''});
+        this.getWidget().setState({ value: '' });
         ctrl.onChange('');
-        this.getWidget().getElement().focus();
-    }
+        this.getWidget()
+            .getElement()
+            .focus();
+    };
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
         const ctrl = this.props.ctrl;
@@ -31,45 +33,50 @@ export class RowFormPasswordFieldView extends RowFormFieldView {
         // console.log('RowFormPasswordFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
-    }
+    };
     onBlur = async e => {
         // console.log('RowFormPasswordFieldView.onBlur');
         this.removeCssClass('focus');
         await this.rerender();
-    }
+    };
     onIconClick = e => {
         this.setState(prevState => {
             return {
-                type: prevState.type === 'password' ? 'text' : 'password'
+                type: prevState.type === 'password' ? 'text' : 'password',
             };
         });
-    }
+    };
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getCssClassNames()}>
-            <TextBox
-                classList={[`${this.getCssBlockName()}__input`]}
-                type={this.state.type}
-                value={ctrl.getValueForWidget()}
-                readOnly={!ctrl.isEditable()}
-                disabled={!ctrl.isEditable()}
-                autoFocus={ctrl.isAutoFocus()}
-                placeholder={ctrl.getPlaceholder() || null}
-                autocomplete={ctrl.getAutocomplete()}
-                onCreate={this.onWidgetCreate}
-                onChange={ctrl.onChange}
-                onFocus={this.onFocus}
-                onBlur={this.onBlur}
-            />
-            <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`}
-                 onClick={this.onCloseClick}
-            >
-                <CloseIcon/>
+        return (
+            <div className={this.getCssClassNames()}>
+                <TextBox
+                    classList={[`${this.getCssBlockName()}__input`]}
+                    type={this.state.type}
+                    value={ctrl.getValueForWidget()}
+                    readOnly={!ctrl.isEditable()}
+                    disabled={!ctrl.isEditable()}
+                    autoFocus={ctrl.isAutoFocus()}
+                    placeholder={ctrl.getPlaceholder() || null}
+                    autocomplete={ctrl.getAutocomplete()}
+                    onCreate={this.onWidgetCreate}
+                    onChange={ctrl.onChange}
+                    onFocus={this.onFocus}
+                    onBlur={this.onBlur}
+                />
+                <div
+                    className={`${this.getCssBlockName()}__close ${
+                        this.isCloseVisible() ? 'visible' : ''
+                    }`}
+                    onClick={this.onCloseClick}
+                >
+                    <CloseIcon />
+                </div>
+                <div className={`${this.getCssBlockName()}__icon`} onClick={this.onIconClick}>
+                    {this.state.type === 'password' ? <VisibilityIcon /> : <VisibilityOffIcon />}
+                </div>
             </div>
-            <div className={`${this.getCssBlockName()}__icon`} onClick={this.onIconClick}>
-                {this.state.type === 'password' ? <VisibilityIcon/> : <VisibilityOffIcon/>}
-            </div>
-        </div>;
+        );
     }
 }
 

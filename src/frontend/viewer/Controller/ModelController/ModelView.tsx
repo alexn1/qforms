@@ -1,20 +1,25 @@
-import {View} from '../View';
-import {Model} from '../../Model/Model';
+import { View } from '../View';
+import { Model } from '../../Model/Model';
 
 export class ModelView extends View {
     renderActionIcon?: any;
     getActionsForDropdownButton() {
-        return this.props.ctrl.getModel().getCol('actions').map(data => {
-            const actionName = Model.getName(data);
-            return {
-                name : actionName,
-                title: this.renderActionIcon ? [
-                    <div key={'icon'}>{this.renderActionIcon(actionName)}</div>,
-                    <div key={'title'}>{Model.getAttr(data, 'caption')}</div>
-                ] : Model.getAttr(data, 'caption'),
-                enabled: this.getCtrl().isActionEnabled(actionName)
-            };
-        });
+        return this.props.ctrl
+            .getModel()
+            .getCol('actions')
+            .map(data => {
+                const actionName = Model.getName(data);
+                return {
+                    name: actionName,
+                    title: this.renderActionIcon
+                        ? [
+                              <div key={'icon'}>{this.renderActionIcon(actionName)}</div>,
+                              <div key={'title'}>{Model.getAttr(data, 'caption')}</div>,
+                          ]
+                        : Model.getAttr(data, 'caption'),
+                    enabled: this.getCtrl().isActionEnabled(actionName),
+                };
+            });
     }
     getCssBlockName() {
         const model = this.props.ctrl.getModel();
@@ -23,9 +28,7 @@ export class ModelView extends View {
         }
         return super.getCssBlockName();
     }
-    getStyle(row?: any): any {
-
-    }
+    getStyle(row?: any): any {}
 }
 
 // @ts-ignore

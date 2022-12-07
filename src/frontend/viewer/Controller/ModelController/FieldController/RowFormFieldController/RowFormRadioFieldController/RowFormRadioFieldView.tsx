@@ -1,4 +1,4 @@
-import {RowFormFieldView} from '../RowFormFieldView';
+import { RowFormFieldView } from '../RowFormFieldView';
 
 export class RowFormRadioFieldView extends RowFormFieldView {
     /*onChange = async widgetValue => {
@@ -12,7 +12,7 @@ export class RowFormRadioFieldView extends RowFormFieldView {
         if (this.getCtrl().getValue() !== value) {
             await this.getCtrl().onChangePure(value);
         }
-    }
+    };
     /*render() {
         return <div className={this.getCssClassNames()}>
             <Radio  classList={[
@@ -30,16 +30,25 @@ export class RowFormRadioFieldView extends RowFormFieldView {
     render() {
         // console.log('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         const value = this.getCtrl().getValue();
-        return <div className={this.getCssClassNames()}>
-            {this.getCtrl().getItems().map(item => {
-                return <input className={`${this.getCssBlockName()}__toggle ${value === item.value ? 'selected' : ''}`}
-                              type={'button'}
-                              value={item.title || item.value}
-                              disabled={!this.getCtrl().isEditable()}
-                              data-value={JSON.stringify(item.value)}
-                              onClick={this.onClick}
-                />;
-            })}
-        </div>;
+        return (
+            <div className={this.getCssClassNames()}>
+                {this.getCtrl()
+                    .getItems()
+                    .map(item => {
+                        return (
+                            <input
+                                className={`${this.getCssBlockName()}__toggle ${
+                                    value === item.value ? 'selected' : ''
+                                }`}
+                                type={'button'}
+                                value={item.title || item.value}
+                                disabled={!this.getCtrl().isEditable()}
+                                data-value={JSON.stringify(item.value)}
+                                onClick={this.onClick}
+                            />
+                        );
+                    })}
+            </div>
+        );
     }
 }

@@ -1,6 +1,6 @@
 import React from 'react';
-import {TableFormFieldView} from '../TableFormFieldView';
-import {CheckBox} from '../../../../../../common';
+import { TableFormFieldView } from '../TableFormFieldView';
+import { CheckBox } from '../../../../../../common';
 
 export class TableFormCheckBoxFieldView extends TableFormFieldView {
     span: React.RefObject<any>;

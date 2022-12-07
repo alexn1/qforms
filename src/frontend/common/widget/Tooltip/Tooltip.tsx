@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class Tooltip extends ReactComponent {
     // constructor(props) {
@@ -9,9 +9,7 @@ export class Tooltip extends ReactComponent {
         // console.log('Tooltip.render', this.state, this.props);
         return (
             <div className={`Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
-                {this.props.type !== 'alert' &&
-                    <div>tooltip</div>
-                }
+                {this.props.type !== 'alert' && <div>tooltip</div>}
                 <span className={this.props.position}>{this.props.tip || 'tip'}</span>
             </div>
         );

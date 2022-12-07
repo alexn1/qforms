@@ -1,23 +1,23 @@
-import {ReactComponent} from '../ReactComponent';
+import { ReactComponent } from '../ReactComponent';
 
 export class TextArea extends ReactComponent {
     constructor(props) {
         // console.log('TextArea.constructor', props);
         super(props);
         this.state = {
-            value: this.props.value || ''
-        }
+            value: this.props.value || '',
+        };
     }
     getValue() {
         return this.state.value;
     }
     onChange = e => {
         // console.log('TextArea.onChange', e.target.value);
-        this.setState({value: e.target.value});
+        this.setState({ value: e.target.value });
         if (this.props.onChange) {
             this.props.onChange(e.target.value);
         }
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore

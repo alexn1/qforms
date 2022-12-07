@@ -1,5 +1,5 @@
 import React from 'react';
-import {FieldView} from '../FieldView';
+import { FieldView } from '../FieldView';
 
 export class TableFormFieldView extends FieldView {
     span: React.RefObject<any>;

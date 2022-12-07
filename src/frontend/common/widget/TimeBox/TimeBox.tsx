@@ -1,5 +1,5 @@
 import React from 'react';
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class TimeBox extends ReactComponent {
     constructor(props) {
@@ -9,7 +9,7 @@ export class TimeBox extends ReactComponent {
             throw new Error(`need number type, got ${typeof props.value}`);
         }
         this.state = {
-            value: TimeBox.getStringValue(props.value)
+            value: TimeBox.getStringValue(props.value),
         };
         this.el = React.createRef();
     }
@@ -19,13 +19,14 @@ export class TimeBox extends ReactComponent {
             console.log('cancel', event.key);
             event.preventDefault();
         }
-    }
+    };
     formatValue(value) {
         let min = '';
         let sec = '';
         const pure = value.replace(':', '');
         switch (pure.length) {
-            case 0: break;
+            case 0:
+                break;
             case 1:
                 min = pure;
                 break;
@@ -41,28 +42,25 @@ export class TimeBox extends ReactComponent {
                 sec = pure.substr(2, 2);
                 break;
         }
-        return [
-            min,
-            ...(sec ? [sec] : [])
-        ].join(':');
+        return [min, ...(sec ? [sec] : [])].join(':');
     }
     onChange = e => {
         // console.log('TimeBox.onChange', e.target.value);
         const target = e.target;
         const start = target.selectionStart;
-        const end   = target.selectionEnd;
+        const end = target.selectionEnd;
         if (target.value.length > 5) {
             return;
         }
         const inEnd = start === end && start === target.value.length;
         const stringValue = this.formatValue(target.value);
         // console.log('before:', target.selectionStart, target.selectionEnd);
-        this.setState({value: stringValue}, () => {
+        this.setState({ value: stringValue }, () => {
             // console.log('after:', target.selectionStart, target.selectionEnd);
             // console.log('inEnd:', inEnd);
             if (!inEnd) {
                 target.selectionStart = start;
-                target.selectionEnd   = end;
+                target.selectionEnd = end;
             }
             if (this.props.onChange) {
                 let nValue;
@@ -76,12 +74,12 @@ export class TimeBox extends ReactComponent {
                 this.props.onChange(nValue);
             }
         });
-    }
+    };
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
     }
     setValue(value) {
-        this.setState({value: TimeBox.getStringValue(value)});
+        this.setState({ value: TimeBox.getStringValue(value) });
     }
     onBlur = e => {
         // console.log('TimeBox.onBlur');
@@ -96,7 +94,7 @@ export class TimeBox extends ReactComponent {
             // console.log('nValue:', nValue);
             this.props.onBlur(nValue);
         }
-    }
+    };
     /*onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
@@ -121,8 +119,8 @@ export class TimeBox extends ReactComponent {
         // console.log('TimeBox.getStringValue', value);
         if (value === null) return '';
         if (value !== undefined) {
-            let h: number|string = Math.floor(value / 60);
-            let m: number|string = Math.floor(value - h * 60);
+            let h: number | string = Math.floor(value / 60);
+            let m: number | string = Math.floor(value - h * 60);
             if (h < 10) h = '0' + h;
             if (m < 10) m = '0' + m;
             return `${h}:${m}`;
@@ -132,17 +130,17 @@ export class TimeBox extends ReactComponent {
     static getIntegerValue(stringValue) {
         // console.log('TimeBox.getIntegerValue', stringValue);
         // try {
-            if (stringValue === '') return null;
-            const arr = stringValue.split(':');
-            if (!arr[0]) throw new Error(`no hours: ${stringValue}`);
-            if (!arr[1]) throw new Error(`no minutes: ${stringValue}`);
-            if (arr[0].length !== 2) throw new Error(`hours incomplete: ${stringValue}`);
-            if (arr[1].length !== 2) throw new Error(`minutes incomplete: ${stringValue}`);
-            const hh = parseInt(arr[0]);
-            const mm = parseInt(arr[1]);
-            if (hh > 23) throw new Error(`hours out of range: ${mm}, ${stringValue}`);
-            if (mm > 59) throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
-            return hh*60 + mm;
+        if (stringValue === '') return null;
+        const arr = stringValue.split(':');
+        if (!arr[0]) throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1]) throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2) throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2) throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23) throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59) throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
         // } catch (err) {
         //     console.error(err.message);
         //     return NaN;
@@ -167,20 +165,22 @@ export class TimeBox extends ReactComponent {
     }
     render() {
         // console.log('TimeBox.render', this.state.value);
-        return <input
-            ref={this.el}
-            className={this.getCssClassNames()}
-            type={'text'}
-            id={this.props.id}
-            readOnly={this.props.readOnly}
-            placeholder={this.props.placeholder}
-            value={this.state.value}
-            onChange={this.onChange}
-            // onKeyDown={this.onKeyDown}
-            // onKeyUp={this.onKeyUp}
-            onKeyPress={this.onKeyPress}
-            onBlur={this.onBlur}
-        />;
+        return (
+            <input
+                ref={this.el}
+                className={this.getCssClassNames()}
+                type={'text'}
+                id={this.props.id}
+                readOnly={this.props.readOnly}
+                placeholder={this.props.placeholder}
+                value={this.state.value}
+                onChange={this.onChange}
+                // onKeyDown={this.onKeyDown}
+                // onKeyUp={this.onKeyUp}
+                onKeyPress={this.onKeyPress}
+                onBlur={this.onBlur}
+            />
+        );
     }
 }
 

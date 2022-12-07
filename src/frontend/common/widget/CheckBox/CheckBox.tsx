@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class CheckBox extends ReactComponent {
     constructor(props) {
@@ -6,11 +6,12 @@ export class CheckBox extends ReactComponent {
         if (
             this.props.checked !== undefined &&
             this.props.checked !== null &&
-            typeof this.props.checked !== 'boolean') {
+            typeof this.props.checked !== 'boolean'
+        ) {
             throw new Error(`wrong checked prop: ${this.props.checked}`);
         }
         this.state = {
-            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
         };
     }
     getValue() {
@@ -23,16 +24,16 @@ export class CheckBox extends ReactComponent {
                 if (this.props.onChange) {
                     this.props.onChange(!prevState.checked, e);
                 }
-                return {checked: !prevState.checked};
+                return { checked: !prevState.checked };
             });
         }
-    }
+    };
     onClick = e => {
         if (!this.props.readOnly) {
             if (this.props.onChange) this.props.onChange(true);
-            this.setState({checked: true});
+            this.setState({ checked: true });
         }
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
@@ -41,18 +42,27 @@ export class CheckBox extends ReactComponent {
     }
     render() {
         if (this.state.checked === null) {
-            return <div className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`} onClick={this.onClick}
-            >?</div>;
+            return (
+                <div
+                    className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`}
+                    onClick={this.onClick}
+                >
+                    ?
+                </div>
+            );
         }
-        return <input className={this.getCssClassNames()}
-            type="checkbox"
-            id={this.props.id}
-            checked={this.state.checked}
-            readOnly={this.props.readOnly}
-            disabled={this.props.disabled}
-            data-tag={this.props.tag}
-            onChange={this.onChange}
-        />;
+        return (
+            <input
+                className={this.getCssClassNames()}
+                type="checkbox"
+                id={this.props.id}
+                checked={this.state.checked}
+                readOnly={this.props.readOnly}
+                disabled={this.props.disabled}
+                data-tag={this.props.tag}
+                onChange={this.onChange}
+            />
+        );
     }
 }
 // @ts-ignore

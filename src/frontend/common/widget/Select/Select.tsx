@@ -1,17 +1,17 @@
 import React from 'react';
-import {ReactComponent} from '../../ReactComponent';
-import {CloseIcon} from '../../icon/CloseIcon';
-import {ArrowIcon} from '../../icon/ArrowIcon';
+import { ReactComponent } from '../../ReactComponent';
+import { CloseIcon } from '../../icon/CloseIcon';
+import { ArrowIcon } from '../../icon/ArrowIcon';
 
 export class Select extends ReactComponent {
     dropdown: React.RefObject<any>;
 
     constructor(props) {
         super(props);
-        this.el       = React.createRef();
+        this.el = React.createRef();
         this.dropdown = React.createRef();
         this.state = {
-            value  : this.getInitialValue(),
+            value: this.getInitialValue(),
             visible: false,
         };
     }
@@ -61,10 +61,10 @@ export class Select extends ReactComponent {
     onKeyDown = async e => {
         // console.log('Select.onKeyDown');
         if (this.isVisible()) {
-            this.setState({visible: false});
+            this.setState({ visible: false });
             e.stopPropagation();
         }
-    }
+    };
     onInputMouseDown = async e => {
         console.log('Select.onInputMouseDown');
         if (this.props.readOnly) return;
@@ -76,43 +76,44 @@ export class Select extends ReactComponent {
                 // console.log('selected:', selected);
                 if (selected) {
                     // console.log('selected.offsetTop:', selected.offsetTop);
-                    const scrollTop = selected.offsetTop
-                        - this.dropdown.current.getBoundingClientRect().height / 2
-                        + selected.getBoundingClientRect().height / 2;
+                    const scrollTop =
+                        selected.offsetTop -
+                        this.dropdown.current.getBoundingClientRect().height / 2 +
+                        selected.getBoundingClientRect().height / 2;
                     console.log('scrollTop:', scrollTop);
                     this.dropdown.current.scrollTop = scrollTop;
                     console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
                 }
             }
             this.setState(prevState => {
-                return {visible: !prevState.visible};
+                return { visible: !prevState.visible };
             });
         }
-    }
+    };
     onInputBlur = async e => {
         console.log('Select.onInputBlur', e.target);
-        this.setState({visible: false});
-    }
+        this.setState({ visible: false });
+    };
     onDropdownMouseDown = async e => {
         e.preventDefault();
-    }
+    };
     onDropdownClick = async e => {
         console.log('Select.onDropdownClick', e.target.offsetTop);
         const value = JSON.parse(e.target.dataset.value);
         // console.log('value:', value);
-        this.setState({value: value, visible: false}, async () => {
+        this.setState({ value: value, visible: false }, async () => {
             if (this.props.onChange) {
                 await this.props.onChange(value.toString());
             }
         });
-    }
+    };
     onCloseClick = async e => {
-        this.setState({value: ''});
+        this.setState({ value: '' });
         if (this.props.onChange) {
             await this.props.onChange('');
         }
-        this.getElement()
-    }
+        this.getElement();
+    };
     getItems() {
         return this.props.items || [];
     }
@@ -134,54 +135,81 @@ export class Select extends ReactComponent {
         return this.state.value !== '';
     }
     renderInput() {
-        return <input className={`${this.getCssBlockName()}__input`}
-              readOnly={true}
-              disabled={this.props.readOnly}
-              placeholder={this.props.placeholder}
-              onBlur={this.onInputBlur}
-              value={this.getValueTitle(this.getValue())}
-              onMouseDown={this.onInputMouseDown}
-              onKeyDown={this.onKeyDown}
-        />;
+        return (
+            <input
+                className={`${this.getCssBlockName()}__input`}
+                readOnly={true}
+                disabled={this.props.readOnly}
+                placeholder={this.props.placeholder}
+                onBlur={this.onInputBlur}
+                value={this.getValueTitle(this.getValue())}
+                onMouseDown={this.onInputMouseDown}
+                onKeyDown={this.onKeyDown}
+            />
+        );
     }
     renderClose() {
-        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible': ''}`} onClick={this.onCloseClick}>
-            <CloseIcon/>
-        </div>;
+        return (
+            <div
+                className={`${this.getCssBlockName()}__close ${
+                    this.isCloseVisible() ? 'visible' : ''
+                }`}
+                onClick={this.onCloseClick}
+            >
+                <CloseIcon />
+            </div>
+        );
     }
     renderIcon() {
-        return <div className={`${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}`}>
-            <ArrowIcon/>
-        </div>;
+        return (
+            <div className={`${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}`}>
+                <ArrowIcon />
+            </div>
+        );
     }
     renderDropdown() {
-        return <ul ref={this.dropdown} className={`${this.getCssBlockName()}__dropdown`}
-                   style={{
-                       // visibility: this.getVisibility(),
-                       display: this.getDisplay()
-                   }}
-                   onMouseDown={this.onDropdownMouseDown}
-                   onClick={this.onDropdownClick}
-        >
-            {this.isNullable() &&
-                <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>&nbsp;</li>
-            }
-            {this.getItems().map(item => {
-                return <li key={item.value}
-                           className={`${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`}
-                           data-value={JSON.stringify(item.value)}
-                >{item.title || item.value}</li>;
-            })}
-        </ul>;
+        return (
+            <ul
+                ref={this.dropdown}
+                className={`${this.getCssBlockName()}__dropdown`}
+                style={{
+                    // visibility: this.getVisibility(),
+                    display: this.getDisplay(),
+                }}
+                onMouseDown={this.onDropdownMouseDown}
+                onClick={this.onDropdownClick}
+            >
+                {this.isNullable() && (
+                    <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>
+                        &nbsp;
+                    </li>
+                )}
+                {this.getItems().map(item => {
+                    return (
+                        <li
+                            key={item.value}
+                            className={`${this.getCssBlockName()}__item ellipsis ${
+                                this.getValue() === item.value ? 'selected' : ''
+                            }`}
+                            data-value={JSON.stringify(item.value)}
+                        >
+                            {item.title || item.value}
+                        </li>
+                    );
+                })}
+            </ul>
+        );
     }
     render() {
         // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
-        return <div ref={this.el} className={this.getCssClassNames()}>
-            {this.renderInput()}
-            {this.isNullable() && this.renderClose()}
-            {this.renderIcon()}
-            {this.renderDropdown()}
-        </div>;
+        return (
+            <div ref={this.el} className={this.getCssClassNames()}>
+                {this.renderInput()}
+                {this.isNullable() && this.renderClose()}
+                {this.renderIcon()}
+                {this.renderDropdown()}
+            </div>
+        );
     }
 }
 

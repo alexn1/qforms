@@ -1,4 +1,4 @@
-import {TableFormFieldView} from '../TableFormFieldView';
+import { TableFormFieldView } from '../TableFormFieldView';
 import React from 'react';
 
 export class TableFormDateTimeFieldView extends TableFormFieldView {

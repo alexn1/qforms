@@ -1,4 +1,4 @@
-import {RowFormFieldView} from '../RowFormFieldView';
+import { RowFormFieldView } from '../RowFormFieldView';
 
 export class RowFormTimeFieldView extends RowFormFieldView {
     onCloseClick = async e => {
@@ -7,7 +7,7 @@ export class RowFormTimeFieldView extends RowFormFieldView {
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
         ctrl.onChange(null);*/
-    }
+    };
     isCloseVisible() {
         // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly) return false;
@@ -19,19 +19,24 @@ export class RowFormTimeFieldView extends RowFormFieldView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getCssClassNames()}>
-            <TimeBox
-                onCreate={this.onWidgetCreate}
-                value={ctrl.getValueForWidget()}
-                readOnly={!ctrl.isEditable()}
-                onChange={ctrl.onChange}
-                onBlur={ctrl.onBlur}
-                placeholder={ctrl.getPlaceholder()}
-            />
-            <div className={`close ${this.isCloseVisible() ? 'visible' : ''}`} onClick={this.onCloseClick}>
-                <CloseIcon/>
+        return (
+            <div className={this.getCssClassNames()}>
+                <TimeBox
+                    onCreate={this.onWidgetCreate}
+                    value={ctrl.getValueForWidget()}
+                    readOnly={!ctrl.isEditable()}
+                    onChange={ctrl.onChange}
+                    onBlur={ctrl.onBlur}
+                    placeholder={ctrl.getPlaceholder()}
+                />
+                <div
+                    className={`close ${this.isCloseVisible() ? 'visible' : ''}`}
+                    onClick={this.onCloseClick}
+                >
+                    <CloseIcon />
+                </div>
             </div>
-        </div>
+        );
     }
 }
 

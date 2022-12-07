@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {ReactComponent} from '../../ReactComponent';
-import {Helper} from '../../Helper';
+import { ReactComponent } from '../../ReactComponent';
+import { Helper } from '../../Helper';
 
 export class GridCell extends ReactComponent {
     span: React.RefObject<any>;

@@ -1,10 +1,4 @@
-import {
-    ReactComponent,
-    Modal,
-    Button,
-    TextBox,
-    ComboBox,
-} from '../../common/index';
+import { ReactComponent, Modal, Button, TextBox, ComboBox } from '../../common/index';
 
 export class IndexView extends ReactComponent {
     renderModals() {
@@ -16,21 +10,14 @@ export class IndexView extends ReactComponent {
                         <div className="modal-dialog modal-sm">
                             <div className="modal-content">
                                 <div className="modal-header">
-                                    <Button
-                                        classList={['close']}
-                                        onClick={ctrl.closeModal}
-                                    >
+                                    <Button classList={['close']} onClick={ctrl.closeModal}>
                                         <span>&times;</span>
                                     </Button>
-                                    <h4 className="modal-title">
-                                        New Application
-                                    </h4>
+                                    <h4 className="modal-title">New Application</h4>
                                 </div>
                                 <div className="modal-body">
                                     <div>
-                                        <label htmlFor="folderName">
-                                            Folder Name
-                                        </label>
+                                        <label htmlFor="folderName">Folder Name</label>
                                         <TextBox
                                             id="folderName"
                                             onCreate={ctrl.onFolderNameCreate}
@@ -38,13 +25,8 @@ export class IndexView extends ReactComponent {
                                         />
                                     </div>
                                     <div>
-                                        <label htmlFor="appName">
-                                            Application Name
-                                        </label>
-                                        <TextBox
-                                            id="appName"
-                                            onChange={ctrl.onAppNameChange}
-                                        />
+                                        <label htmlFor="appName">Application Name</label>
+                                        <TextBox id="appName" onChange={ctrl.onAppNameChange} />
                                     </div>
                                 </div>
                                 <div className="modal-footer">
@@ -109,11 +91,7 @@ export class IndexView extends ReactComponent {
                             </Button>
                             {ctrl.data.nodeEnv === 'development' && (
                                 <Button
-                                    classList={[
-                                        'btn',
-                                        'btn-default',
-                                        'btn-block',
-                                    ]}
+                                    classList={['btn', 'btn-default', 'btn-block']}
                                     onClick={ctrl.edit}
                                 >
                                     Edit
@@ -121,11 +99,7 @@ export class IndexView extends ReactComponent {
                             )}
                             {ctrl.data.nodeEnv === 'development' && (
                                 <Button
-                                    classList={[
-                                        'btn',
-                                        'btn-default',
-                                        'btn-block',
-                                    ]}
+                                    classList={['btn', 'btn-default', 'btn-block']}
                                     onClick={ctrl.btnCreate_Click}
                                 >
                                     New...

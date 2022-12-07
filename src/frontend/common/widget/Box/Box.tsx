@@ -1,12 +1,12 @@
-import {ReactComponent} from '../../ReactComponent';
-import {Button} from '../Button';
+import { ReactComponent } from '../../ReactComponent';
+import { Button } from '../Button';
 
 export class Box extends ReactComponent {
     constructor(props) {
         // console.log('Box.constructor', props);
         super(props);
         this.state = {
-            backgroundColor: 'purple'
+            backgroundColor: 'purple',
         };
     }
     // componentWillMount() {
@@ -21,9 +21,9 @@ export class Box extends ReactComponent {
     update = () => {
         console.log('Box.update');
         this.setState({
-            backgroundColor: 'green'
+            backgroundColor: 'green',
         });
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
         console.log('Box.shouldComponentUpdate', nextProps, nextState);
         return true;
@@ -35,9 +35,9 @@ export class Box extends ReactComponent {
         console.log('Box.render');
         return (
             <div className="Box">
-                <Button name="one"/>
-                <Button name="two"/>
-                <Button name="three"/>
+                <Button name="one" />
+                <Button name="two" />
+                <Button name="three" />
             </div>
         );
     }

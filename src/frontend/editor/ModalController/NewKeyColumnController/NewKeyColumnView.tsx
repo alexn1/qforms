@@ -1,4 +1,4 @@
-import {ReactComponent, TextBox} from '../../../common';
+import { ReactComponent, TextBox } from '../../../common';
 
 export class NewKeyColumnView extends ReactComponent {
     name: any;
@@ -9,26 +9,39 @@ export class NewKeyColumnView extends ReactComponent {
     onCreate = async e => {
         // console.log('NewParamView.onCreate');
         await this.props.ctrl.onCreate({
-            name: this.name.getValue()
+            name: this.name.getValue(),
         });
-    }
+    };
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={`${this.getCssClassNames()} NewModelView`}>
-            <div className={'NewModelView__header'}>
-                <div className={'NewModelView__title'}>New Key Column</div>
-                <button type="button" className="close" onClick={ctrl.onClose}><span>&times;</span></button>
-            </div>
-            <div className={'NewModelView__body'}>
-                <div>
-                    <label htmlFor="name">Name</label>
-                    <TextBox id="name" onCreate={c => this.name = c} autocomplete={'off'} autoFocus={true}/>
+        return (
+            <div className={`${this.getCssClassNames()} NewModelView`}>
+                <div className={'NewModelView__header'}>
+                    <div className={'NewModelView__title'}>New Key Column</div>
+                    <button type="button" className="close" onClick={ctrl.onClose}>
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div className={'NewModelView__body'}>
+                    <div>
+                        <label htmlFor="name">Name</label>
+                        <TextBox
+                            id="name"
+                            onCreate={c => (this.name = c)}
+                            autocomplete={'off'}
+                            autoFocus={true}
+                        />
+                    </div>
+                </div>
+                <div className={'NewModelView__footer'}>
+                    <button type="button" onClick={ctrl.onClose}>
+                        Close
+                    </button>
+                    <button name="create" type="button" onClick={this.onCreate}>
+                        Create
+                    </button>
                 </div>
             </div>
-            <div className={'NewModelView__footer'}>
-                <button type="button" onClick={ctrl.onClose}>Close</button>
-                <button name="create" type="button" onClick={this.onCreate}>Create</button>
-            </div>
-        </div>;
+        );
     }
 }

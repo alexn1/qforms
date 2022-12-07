@@ -1,7 +1,7 @@
-import {ReactComponent} from '../../ReactComponent';
-import {Helper} from '../../Helper';
-import {LeftIcon} from '../../icon/LeftIcon';
-import {RightIcon} from '../../icon/RightIcon';
+import { ReactComponent } from '../../ReactComponent';
+import { Helper } from '../../Helper';
+import { LeftIcon } from '../../icon/LeftIcon';
+import { RightIcon } from '../../icon/RightIcon';
 
 // props
 //  visible boolean true
@@ -17,14 +17,22 @@ export class DatePicker extends ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
-        if (this.props.minDate && !(this.props.minDate instanceof Array)) throw new Error('minDate must be array');
-        this.state = {selectedMonth: this.calcSelectedMonth()};
+        if (this.props.minDate && !(this.props.minDate instanceof Array))
+            throw new Error('minDate must be array');
+        this.state = { selectedMonth: this.calcSelectedMonth() };
         this.MONTH = [
-            'Январь', 'Февраль',
-            'Март', 'Апрель', 'Май',
-            'Июнь', 'Июль', 'Август',
-            'Сентябрь', 'Октябрь', 'Ноябрь',
-            'Декабрь'
+            'Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь',
         ];
     }
 
@@ -45,7 +53,8 @@ export class DatePicker extends ReactComponent {
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         } else {
             const dates = [Helper.today().getTime()];
-            if (this.props.minDate) dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
+            if (this.props.minDate)
+                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
             // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
             const date = new Date(Math.min(...dates));
@@ -81,7 +90,7 @@ export class DatePicker extends ReactComponent {
 
     getFirstDateOfTable() {
         const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
-        date.setDate(date.getDate() - DatePicker.getDay(date));            // first day of table
+        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
         return date;
     }
 
@@ -113,14 +122,14 @@ export class DatePicker extends ReactComponent {
         if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
             return this.onDateClick(e.target);
         }
-    }
+    };
 
     onMouseDown = e => {
         // console.log('DatePicker.onMouseDown');
         if (this.props.onMouseDown) {
             return this.props.onMouseDown(e);
         }
-    }
+    };
 
     onDateClick(target) {
         // console.log('DatePicker.onDateClick', target.dataset.date);
@@ -135,10 +144,10 @@ export class DatePicker extends ReactComponent {
             const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             next.setMonth(next.getMonth() + 1);
             return {
-                selectedMonth: [next.getFullYear(), next.getMonth()]
+                selectedMonth: [next.getFullYear(), next.getMonth()],
             };
         });
-    }
+    };
 
     onPrevClick = e => {
         // console.log('DatePicker.prev');
@@ -146,10 +155,10 @@ export class DatePicker extends ReactComponent {
             const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             prev.setMonth(prev.getMonth() - 1);
             return {
-                selectedMonth: [prev.getFullYear(), prev.getMonth()]
+                selectedMonth: [prev.getFullYear(), prev.getMonth()],
             };
         });
-    }
+    };
 
     render() {
         // console.log('DatePicker.render', this.props, this.state);
@@ -158,24 +167,33 @@ export class DatePicker extends ReactComponent {
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         // @ts-ignore
-        const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
+        const highlightedDate = this.props.highlightedDate
+            ? new Date(...this.props.highlightedDate)
+            : null;
         return (
-            <table className={`${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`}
+            <table
+                className={`${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`}
                 onClick={this.onClick}
                 onMouseDown={this.onMouseDown}
             >
                 <caption className={`${this.getCssBlockName()}__caption`}>
                     <div className={`${this.getCssBlockName()}__caption-content`}>
-                        <div className={`${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`}
-                             onClick={this.onPrevClick}
+                        <div
+                            className={`${this.getCssBlockName()}__caption-link ${
+                                this.isPrevAllowed() ? 'enabled' : ''
+                            }`}
+                            onClick={this.onPrevClick}
                         >
-                            <LeftIcon size={18}/>
+                            <LeftIcon size={18} />
                         </div>
-                        <span className={`${this.getCssBlockName()}__caption-title`}>{`${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}`}</span>
-                        <div className={`${this.getCssBlockName()}__caption-link enabled`}
-                             onClick={this.onNextClick}
+                        <span className={`${this.getCssBlockName()}__caption-title`}>{`${
+                            this.MONTH[this.state.selectedMonth[1]]
+                        }, ${this.state.selectedMonth[0]}`}</span>
+                        <div
+                            className={`${this.getCssBlockName()}__caption-link enabled`}
+                            onClick={this.onNextClick}
                         >
-                            <RightIcon size={18}/>
+                            <RightIcon size={18} />
                         </div>
                     </div>
                 </caption>
@@ -191,27 +209,43 @@ export class DatePicker extends ReactComponent {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.from(Array(6).keys()).map(i => (<tr key={i}>
-                        {Array.from(Array(7).keys()).map(j => {
-                            const classList = [];
-                            if (j === 5 || j === 6) classList.push('weekend');
-                            if (this.isSelectToday() && date.getTime() === today.getTime()) classList.push('today');
-                            if (date.getMonth() !== this.state.selectedMonth[1]) classList.push('out');
-                            if (!minDate) classList.push('selectable'); else if (date.getTime() >= minDate.getTime()) classList.push('selectable');
-                            if (selectedDate && date.getTime() === selectedDate.getTime()) classList.push('selected');
-                            if (highlightedDate && highlightedDate.getTime() === date.getTime()) classList.push('highlight');
-                            const text = date.getDate().toString();
-                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
-                            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
-                            date.setDate(date.getDate() + 1);
-                            return <td
-                                key={text}
-                                className={`${this.getCssBlockName()}__td  ${classList.join(' ')}`}
-                                style={style}
-                                data-date={dataDate}
-                            >{text}</td>;
-                        })}
-                    </tr>))}
+                    {Array.from(Array(6).keys()).map(i => (
+                        <tr key={i}>
+                            {Array.from(Array(7).keys()).map(j => {
+                                const classList = [];
+                                if (j === 5 || j === 6) classList.push('weekend');
+                                if (this.isSelectToday() && date.getTime() === today.getTime())
+                                    classList.push('today');
+                                if (date.getMonth() !== this.state.selectedMonth[1])
+                                    classList.push('out');
+                                if (!minDate) classList.push('selectable');
+                                else if (date.getTime() >= minDate.getTime())
+                                    classList.push('selectable');
+                                if (selectedDate && date.getTime() === selectedDate.getTime())
+                                    classList.push('selected');
+                                if (highlightedDate && highlightedDate.getTime() === date.getTime())
+                                    classList.push('highlight');
+                                const text = date.getDate().toString();
+                                const dataDate = JSON.stringify(DatePicker.dateToArray(date));
+                                const style = this.props.getDateStyle
+                                    ? this.props.getDateStyle(date)
+                                    : null;
+                                date.setDate(date.getDate() + 1);
+                                return (
+                                    <td
+                                        key={text}
+                                        className={`${this.getCssBlockName()}__td  ${classList.join(
+                                            ' ',
+                                        )}`}
+                                        style={style}
+                                        data-date={dataDate}
+                                    >
+                                        {text}
+                                    </td>
+                                );
+                            })}
+                        </tr>
+                    ))}
                 </tbody>
             </table>
         );

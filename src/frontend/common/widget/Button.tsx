@@ -1,11 +1,11 @@
-import {createRef} from 'react';
-import {ReactComponent} from '../ReactComponent';
+import { createRef } from 'react';
+import { ReactComponent } from '../ReactComponent';
 
 export class Button extends ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
-        this.state = {disabled: undefined};
+        this.state = { disabled: undefined };
         this.el = createRef();
     }
     /*isDisabled() {
@@ -30,13 +30,14 @@ export class Button extends ReactComponent {
     getStyle() {
         return {
             display: !this.isVisible() ? 'none' : null,
-            width  : this.props.width
+            width: this.props.width,
         };
     }
     render() {
         // console.log('Button.render', this.props.title, this.props);
         return (
-            <button className={this.getCssClassNames()}
+            <button
+                className={this.getCssClassNames()}
                 ref={this.el}
                 id={this.props.id}
                 type={this.props.type}
@@ -47,7 +48,9 @@ export class Button extends ReactComponent {
                 onBlur={this.props.onBlur}
                 onKeyDown={this.props.onKeyDown}
                 style={this.getStyle()}
-            >{this.props.title || this.props.children}</button>
+            >
+                {this.props.title || this.props.children}
+            </button>
         );
     }
 }

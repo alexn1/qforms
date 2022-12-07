@@ -1,4 +1,4 @@
-import {ModelView} from '../ModelView';
+import { ModelView } from '../ModelView';
 
 export class FormView extends ModelView {
     constructor(props) {
@@ -16,11 +16,19 @@ export class FormView extends ModelView {
             }
         } catch (err) {
             console.error(err);
-            await this.getCtrl().getApp().alert({message: err.message});
+            await this.getCtrl()
+                .getApp()
+                .alert({ message: err.message });
         }
-    }
+    };
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
+        console.log(
+            'FormView.shouldComponentUpdate',
+            this.getCtrl()
+                .getModel()
+                .getFullName(),
+            nextProps.updated - this.props.updated,
+        );
         if (nextProps.updated - this.props.updated) return true;
         return false;
     }

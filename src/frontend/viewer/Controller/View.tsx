@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../common';
+import { ReactComponent } from '../../common';
 
 export class View extends ReactComponent {
     constructor(props) {

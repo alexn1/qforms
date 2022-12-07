@@ -1,4 +1,4 @@
-import {ReactComponent} from '../ReactComponent';
+import { ReactComponent } from '../ReactComponent';
 
 export class Radio extends ReactComponent {
     constructor(props) {
@@ -6,7 +6,7 @@ export class Radio extends ReactComponent {
         super(props);
         if (!props.name) throw new Error('no name');
         this.state = {
-            value: this.getInitialValue()
+            value: this.getInitialValue(),
         };
         console.log('value:', JSON.stringify(this.getValue()));
     }
@@ -27,25 +27,24 @@ export class Radio extends ReactComponent {
     }
     onChange = async e => {
         // console.log('Radio.onChange', e.target.value);
-        this.setState({value: e.target.value});
+        this.setState({ value: e.target.value });
         if (this.props.onChange) {
             await this.props.onChange(e.target.value);
         }
-    }
+    };
     renderItem(item, i) {
         return [
-            <input type={'radio'}
-                   name={this.props.name}
-                   id={`${this.props.name}${i}`}
-                   value={item.value}
-                   onChange={this.onChange}
-                   checked={item.value === this.getValue()}
-                   readOnly={this.isReadOnly()}
-                   disabled={this.isReadOnly()}
+            <input
+                type={'radio'}
+                name={this.props.name}
+                id={`${this.props.name}${i}`}
+                value={item.value}
+                onChange={this.onChange}
+                checked={item.value === this.getValue()}
+                readOnly={this.isReadOnly()}
+                disabled={this.isReadOnly()}
             />,
-            <label htmlFor={`${this.props.name}${i}`}>
-                {item.title || item.value}
-            </label>
+            <label htmlFor={`${this.props.name}${i}`}>{item.title || item.value}</label>,
         ];
     }
     isReadOnly() {
@@ -59,8 +58,10 @@ export class Radio extends ReactComponent {
     }
     render() {
         const items = this.props.items || [];
-        return <div className={this.getCssClassNames()}>
-            {items.map((item, i) => this.renderItem(item, i))}
-        </div>;
+        return (
+            <div className={this.getCssClassNames()}>
+                {items.map((item, i) => this.renderItem(item, i))}
+            </div>
+        );
     }
 }

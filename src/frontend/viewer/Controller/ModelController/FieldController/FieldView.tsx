@@ -1,4 +1,4 @@
-import {ModelView} from '../ModelView';
+import { ModelView } from '../ModelView';
 
 export class FieldView extends ModelView {
     getStyle(row) {

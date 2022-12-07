@@ -1,17 +1,17 @@
-import {RowFormFieldView} from '../RowFormFieldView';
+import { RowFormFieldView } from '../RowFormFieldView';
 
 export class RowFormImageFieldView extends RowFormFieldView {
     onImageClick = async e => {
         const ctrl = this.props.ctrl;
         console.log('RowFormImageFieldView.onImageClick');
-    }
+    };
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={this.getCssClassNames()} style={this.getStyle(ctrl.getRow())}>
-            <Image src={ctrl.getValueForWidget()}
-                   onClick={this.onImageClick}
-            />
-        </div>;
+        return (
+            <div className={this.getCssClassNames()} style={this.getStyle(ctrl.getRow())}>
+                <Image src={ctrl.getValueForWidget()} onClick={this.onImageClick} />
+            </div>
+        );
     }
 }
 

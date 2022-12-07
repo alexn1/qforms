@@ -1,4 +1,4 @@
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class Statusbar extends ReactComponent {
     constructor(props) {
@@ -7,12 +7,15 @@ export class Statusbar extends ReactComponent {
         this.state = {};
     }
     setLastQueryTime(lastQueryTime) {
-        this.setState({lastQueryTime});
+        this.setState({ lastQueryTime });
     }
     render() {
         return (
             <div className="Statusbar">
-                <div>Last query time: {this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-' }</div>
+                <div>
+                    Last query time:{' '}
+                    {this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'}
+                </div>
             </div>
         );
     }

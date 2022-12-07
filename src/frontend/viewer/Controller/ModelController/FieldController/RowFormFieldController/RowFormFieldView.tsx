@@ -1,4 +1,4 @@
-import {FieldView} from '../FieldView';
+import { FieldView } from '../FieldView';
 export class RowFormFieldView extends FieldView {
     widget: any;
     constructor(props) {
@@ -12,14 +12,14 @@ export class RowFormFieldView extends FieldView {
         const ctrl = this.getCtrl();
         return [
             ...super.getClassList(),
-            ...(ctrl.isEditable()                ? ['editable'] : []),
-            ...(ctrl.isChanged()                ? ['changed'] : []),
-            ...(ctrl.getErrorMessage() !== null ? ['error']   : []),
+            ...(ctrl.isEditable() ? ['editable'] : []),
+            ...(ctrl.isChanged() ? ['changed'] : []),
+            ...(ctrl.getErrorMessage() !== null ? ['error'] : []),
         ];
     }
     onWidgetCreate = widget => {
         this.widget = widget;
-    }
+    };
 }
 
 // @ts-ignore

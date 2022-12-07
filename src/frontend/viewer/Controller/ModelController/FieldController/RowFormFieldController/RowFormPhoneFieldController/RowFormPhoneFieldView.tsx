@@ -1,18 +1,20 @@
-import {RowFormFieldView} from '../RowFormFieldView';
+import { RowFormFieldView } from '../RowFormFieldView';
 
 export class RowFormPhoneFieldView extends RowFormFieldView {
     constructor(props) {
         super(props);
         this.state = {
-            classList: []
+            classList: [],
         };
     }
     onClear = async e => {
         this.getCtrl().onChange('');
         setTimeout(() => {
-            this.getWidget().getElement().focus();
+            this.getWidget()
+                .getElement()
+                .focus();
         }, 0);
-    }
+    };
     isCloseVisible() {
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
@@ -21,44 +23,58 @@ export class RowFormPhoneFieldView extends RowFormFieldView {
     onFocus = async e => {
         this.addCssClass('focus');
         await this.rerender();
-    }
+    };
     onBlur = async value => {
         // console.log('RowFormPhoneFieldView.onBlur', value);
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);
-    }
+    };
     renderPhoneBox() {
         const ctrl = this.getCtrl();
-        return <PhoneBox classList={[`${this.getCssBlockName()}__input`]}
-                         value={ctrl.getValueForWidget()}
-                         readOnly={!ctrl.isEditable()}
-                         disabled={!ctrl.isEditable()}
-                         autoFocus={ctrl.isAutoFocus()}
-                         placeholder={ctrl.getPlaceholder() || null}
-                         autocomplete={ctrl.getAutocomplete()}
-                         onCreate={this.onWidgetCreate}
-                         onChange={ctrl.onChange}
-                         onFocus={this.onFocus}
-                         onBlur={this.onBlur}
-        />;
+        return (
+            <PhoneBox
+                classList={[`${this.getCssBlockName()}__input`]}
+                value={ctrl.getValueForWidget()}
+                readOnly={!ctrl.isEditable()}
+                disabled={!ctrl.isEditable()}
+                autoFocus={ctrl.isAutoFocus()}
+                placeholder={ctrl.getPlaceholder() || null}
+                autocomplete={ctrl.getAutocomplete()}
+                onCreate={this.onWidgetCreate}
+                onChange={ctrl.onChange}
+                onFocus={this.onFocus}
+                onBlur={this.onBlur}
+            />
+        );
     }
     renderClearButton() {
-        return <div className={`${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`} onMouseDown={this.onClear}>
-            <CloseIcon/>
-        </div>;
+        return (
+            <div
+                className={`${this.getCssBlockName()}__close ${
+                    this.isCloseVisible() ? 'visible' : ''
+                }`}
+                onMouseDown={this.onClear}
+            >
+                <CloseIcon />
+            </div>
+        );
     }
     renderPhoneIcon() {
-        return <div className={`${this.getCssBlockName()}__icon`} >
-            <PhoneIcon/>
-        </div>;
+        return (
+            <div className={`${this.getCssBlockName()}__icon`}>
+                <PhoneIcon />
+            </div>
+        );
     }
     render() {
         // console.log('RowFormPhoneFieldView.render');
-        return <div className={this.getCssClassNames()}>
-            {this.renderPhoneBox()}
-            {this.renderClearButton()}
-            {this.renderPhoneIcon()}
-        </div>;
+        return (
+            <div className={this.getCssClassNames()}>
+                {this.renderPhoneBox()}
+                {this.renderClearButton()}
+                {this.renderPhoneIcon()}
+            </div>
+        );
     }
 }
 

@@ -1,10 +1,10 @@
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class Image extends ReactComponent {
     constructor(props) {
         super(props);
         this.img = React.createRef();
-        this.state = {classList: null};
+        this.state = { classList: null };
     }
     getNaturalSize() {
         return [this.img.current.naturalWidth, this.img.current.naturalHeight];
@@ -16,12 +16,12 @@ export class Image extends ReactComponent {
         }
         this.setState(prevState => {
             if (prevState.classList) {
-                return {classList: null};
+                return { classList: null };
             } else {
-                return {classList: ['Image_full']};
+                return { classList: ['Image_full'] };
             }
         });
-    }
+    };
     render() {
         return (
             <img

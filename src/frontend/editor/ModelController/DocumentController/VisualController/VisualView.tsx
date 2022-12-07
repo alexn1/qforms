@@ -1,6 +1,6 @@
 import * as React from 'react';
-import {DocumentView} from '../DocumentView';
-import {Button} from '../../../../common';
+import { DocumentView } from '../DocumentView';
+import { Button } from '../../../../common';
 
 export class VisualView extends DocumentView {
     textarea: React.RefObject<any>;
@@ -39,11 +39,11 @@ export class VisualView extends DocumentView {
     onControllerSave = async e => {
         const ctrl = this.props.ctrl;
         await ctrl.onControllerSave(this.cm.getValue());
-    }
+    };
     onChange = async (instance, changeObj) => {
         // console.log('VisualView.onChange', this.isChanged());
         await this.rerender();
-    }
+    };
     isChanged() {
         if (!this.cm) {
             return false;
@@ -52,23 +52,35 @@ export class VisualView extends DocumentView {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return <div className={'VisualView full'}>
-            <div className="full flex-column">
-                <div className="toolbar">
-                    <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
-                    {!ctrl.data.js && <Button onClick={ctrl.onCreateCustomController}>Controller.front.js</Button>}
-                    {!ctrl.data.jsx && <Button onClick={ctrl.onCreateCustomView}>View.jsx</Button>}
-                    {!ctrl.data.less && <Button onClick={ctrl.onCreateCustomStyle}>View.less</Button>}
-                    {ctrl.data.js &&
-                        <Button onClick={this.onControllerSave} enabled={this.isChanged()}>Save</Button>
-                    }
-                </div>
-                <div className={'edit flex-max full'}>
-                    <div className={'cm-container full'}>
-                        {ctrl.data.js && <textarea ref={this.textarea}/>}
+        return (
+            <div className={'VisualView full'}>
+                <div className="full flex-column">
+                    <div className="toolbar">
+                        <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
+                        {!ctrl.data.js && (
+                            <Button onClick={ctrl.onCreateCustomController}>
+                                Controller.front.js
+                            </Button>
+                        )}
+                        {!ctrl.data.jsx && (
+                            <Button onClick={ctrl.onCreateCustomView}>View.jsx</Button>
+                        )}
+                        {!ctrl.data.less && (
+                            <Button onClick={ctrl.onCreateCustomStyle}>View.less</Button>
+                        )}
+                        {ctrl.data.js && (
+                            <Button onClick={this.onControllerSave} enabled={this.isChanged()}>
+                                Save
+                            </Button>
+                        )}
+                    </div>
+                    <div className={'edit flex-max full'}>
+                        <div className={'cm-container full'}>
+                            {ctrl.data.js && <textarea ref={this.textarea} />}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>;
+        );
     }
 }

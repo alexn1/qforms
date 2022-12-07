@@ -1,10 +1,10 @@
-import {ReactComponent} from '../../ReactComponent';
+import { ReactComponent } from '../../ReactComponent';
 
 export class Tab extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            active: 0
+            active: 0,
         };
     }
     getActive() {
@@ -22,7 +22,7 @@ export class Tab extends ReactComponent {
                 this.selectTab(i);
             }
         }
-    }
+    };
     onLiClick = e => {
         // console.log('Tab.onLiClick', e.target);
         if (e.target.classList.contains('close')) {
@@ -30,15 +30,15 @@ export class Tab extends ReactComponent {
             // console.log('close tab:', i);
             if (this.props.onTabClose) this.props.onTabClose(i);
         }
-    }
+    };
     selectTab(i) {
         if (i === this.getActive()) return;
         const start = Date.now();
-        this.setState({active: i}, () => console.log('selectTab time:', Date.now() - start));
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
 
     renderTitles() {
-        return this.props.tabs.map((tab, i) =>
+        return this.props.tabs.map((tab, i) => (
             <li
                 key={tab.name}
                 className={i === this.getActive() ? 'active' : null}
@@ -47,26 +47,22 @@ export class Tab extends ReactComponent {
                 data-i={i}
             >
                 <span>{tab.title}</span>
-                {this.props.canClose &&
-                <span className="close">&times;</span>
-                }
-            </li>);
+                {this.props.canClose && <span className="close">&times;</span>}
+            </li>
+        ));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) =>
+        return this.props.tabs.map((tab, i) => (
             <div key={tab.name} className={i === this.getActive() ? 'active' : null}>
                 {tab.content}
-            </div>);
+            </div>
+        ));
     }
     render() {
         return (
             <div className={this.getCssClassNames()}>
-                <ul>
-                    {this.props.tabs && this.renderTitles()}
-                </ul>
-                <div>
-                    {this.props.tabs && this.renderContents()}
-                </div>
+                <ul>{this.props.tabs && this.renderTitles()}</ul>
+                <div>{this.props.tabs && this.renderContents()}</div>
             </div>
         );
     }

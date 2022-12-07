@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {ReactComponent} from '../../common';
+import { ReactComponent } from '../../common';
 
 export class TreeItem extends ReactComponent {
     li: React.RefObject<any>;
@@ -8,7 +8,7 @@ export class TreeItem extends ReactComponent {
     constructor(props) {
         super(props);
         this.state = {
-            opened: props.item.opened !== undefined ? props.item.opened : false
+            opened: props.item.opened !== undefined ? props.item.opened : false,
         };
         this.li = React.createRef();
     }
@@ -17,13 +17,13 @@ export class TreeItem extends ReactComponent {
         const item = this.props.item;
         const tree = this.props.tree;
         tree.select(item);
-    }
+    };
     onDivDoubleClick = e => {
         // console.log('TreeItem.onDivDoubleClick');
         const item = this.props.item;
         const tree = this.props.tree;
         tree.onDoubleClick(item);
-    }
+    };
     onNodeMouseDown = e => {
         // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
         const item = this.props.item;
@@ -31,12 +31,12 @@ export class TreeItem extends ReactComponent {
         const opened = this.state.opened;
         e.stopPropagation();
         this.setState(prevState => {
-            return {opened: !prevState.opened};
+            return { opened: !prevState.opened };
         });
         if (!opened) {
             tree.onOpen(item);
         }
-    }
+    };
     isSelected() {
         return this.props.tree.getSelectedItem() === this.props.item;
     }
@@ -65,33 +65,36 @@ export class TreeItem extends ReactComponent {
         const isNode = item.node || hasItems;
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
-        return <li key={title} ref={this.li} className={this.isOpened() ? 'opened' : null}>
-            <div className={this.isSelected() ? 'active' : null}
-                 style={{paddingLeft: this.props.paddingLeft}}
-                 onMouseDown={this.onDivMouseDown}
-                 onDoubleClick={this.onDivDoubleClick}
-            >
-                <span className={isNode ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown}/>
-                &nbsp;
-                <span style={style}>{title}</span>
-            </div>
-            {hasItems &&
-            <ul>
-                {items.map(item =>
-                    <TreeItem
-                        key={item.getTitle()}
-                        tree={tree}
-                        item={item}
-                        paddingLeft={this.props.paddingLeft+15}
-                        onCreate={c => {
-                            // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
-                            c.parent = this;
-                            item.view = c;
-                        }}
-                    />
+        return (
+            <li key={title} ref={this.li} className={this.isOpened() ? 'opened' : null}>
+                <div
+                    className={this.isSelected() ? 'active' : null}
+                    style={{ paddingLeft: this.props.paddingLeft }}
+                    onMouseDown={this.onDivMouseDown}
+                    onDoubleClick={this.onDivDoubleClick}
+                >
+                    <span className={isNode ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown} />
+                    &nbsp;
+                    <span style={style}>{title}</span>
+                </div>
+                {hasItems && (
+                    <ul>
+                        {items.map(item => (
+                            <TreeItem
+                                key={item.getTitle()}
+                                tree={tree}
+                                item={item}
+                                paddingLeft={this.props.paddingLeft + 15}
+                                onCreate={c => {
+                                    // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                                    c.parent = this;
+                                    item.view = c;
+                                }}
+                            />
+                        ))}
+                    </ul>
                 )}
-            </ul>
-            }
-        </li>;
+            </li>
+        );
     }
 }
