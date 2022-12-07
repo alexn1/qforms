@@ -48,7 +48,7 @@ export class IndexView extends ReactComponent {
                                     </div>
                                 </div>
                                 <div className="modal-footer">
-                                    {/*<button name="create" type="button" className="btn btn-primary">Create</button>*/}
+                                    {/* <button name="create" type="button" className="btn btn-primary">Create</button>*/}
                                     <Button
                                         name="create"
                                         classList={['btn', 'btn-primary']}
@@ -72,7 +72,7 @@ export class IndexView extends ReactComponent {
     }
     render() {
         console.log('IndexView.render');
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return (
             <div className="IndexView">
                 <div className="container" style={{ backgroundColor: '#eee' }}>
