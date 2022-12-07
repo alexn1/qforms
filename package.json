@@ -68,7 +68,7 @@
     "build-jsx-watch": "babel --out-dir dist/lib/frontend/common/jsx src/frontend/common/jsx --watch",
     "test-jsx": "babel --out-dir apps/test/build/js apps/test/jsx --watch",
     "test-less": "lessc ./apps/test/less/all.less ./apps/test/build/css/all.css",
-    "tsc-build-watch": "tsc --build tsconfig.json --watch",
+    "tsc-build-watch": "tsc --build tsconfig.back.json --watch",
     "build": "gulp build",
     "webpack-development": "webpack --mode development",
     "nodemon-start": "NODE_ENV=development nodemon --watch dist dist/lib/backend/start.js",
