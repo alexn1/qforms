@@ -1,11 +1,15 @@
 module.exports = {
-    extends: ['airbnb', 'airbnb-typescript'],
-    // extends: ['eslint:recommended'],
+    extends: [
+        'eslint:recommended',
+        'airbnb',
+        'airbnb-typescript',
+    ],
     parserOptions: {
         project: './tsconfig.json',
     },
     rules: {
         'import/prefer-default-export': 'off',
         '@typescript-eslint/indent': ['error', 4],
+        'no-console': 'off',
     },
 };
