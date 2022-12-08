@@ -1,4 +1,7 @@
 import { ReactComponent } from '../../ReactComponent';
+import { LeftIcon } from '../../icon/LeftIcon';
+import { RightIcon } from '../../icon/RightIcon';
+import { CloseIcon2 } from '../../icon/CloseIcon2';
 
 export class Slider extends ReactComponent {
     constructor(props) {
@@ -70,4 +73,5 @@ export class Slider extends ReactComponent {
     }
 }
 
+// @ts-ignore
 window.Slider = Slider;

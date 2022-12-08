@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import { DownIcon } from '../../icon/DownIcon';
 
 export class Expand extends ReactComponent {
     constructor(props) {
@@ -37,3 +38,6 @@ export class Expand extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
+window.Expand = Expand;

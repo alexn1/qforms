@@ -40,3 +40,5 @@ export { CancelIcon } from './icon/CancelIcon';
 export { PhoneIcon } from './icon/PhoneIcon';
 export { PasswordIcon } from './icon/PasswordIcon';
 export { CheckBoxList } from './widget/CheckBoxList';
+export { Slider } from './widget/Slider/Slider';
+export { Expand } from './widget/Expand/Expand';

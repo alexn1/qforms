@@ -31908,6 +31908,34 @@ window.DoneIcon = DoneIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/DownIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+
+
+
+class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = _DoneIcon__WEBPACK_IMPORTED_MODULE_2__.DoneIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/LeftIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
@@ -32170,6 +32198,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_37__.DoneIcon),
 /* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_18__.DropdownButton),
 /* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_28__.DropdownDatePicker),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_43__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
 /* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_20__.Grid),
 /* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_22__.GridCell),
@@ -32190,6 +32219,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
 /* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_30__.Select),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_42__.Slider),
 /* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_26__.Statusbar),
 /* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_17__.Tab),
 /* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_32__.Tab2),
@@ -32243,6 +32273,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
 /* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
 /* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
 
 
 
@@ -32258,6 +32290,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // widget
+
+
 
 
 
@@ -33082,6 +33116,51 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
 }
 // @ts-ignore
 window.DropdownDatePicker = DropdownDatePicker;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Expand": () => (/* binding */ Expand)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+
+
+
+class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onTitleClick = e => {
+            console.log('Expand.onTitleClick');
+            this.setState(prevState => {
+                return { opened: !prevState.opened };
+            });
+        };
+        this.state = {
+            opened: this.props.opened !== undefined ? this.props.opened : false,
+        };
+    }
+    isOpened() {
+        return this.state.opened;
+    }
+    isHighlighted() {
+        return !!this.props.highlighted;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.props.title }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__content` }, { children: this.props.children }))] })));
+    }
+}
+// @ts-ignore
+window.Expand = Expand;
 
 
 /***/ }),
@@ -34038,6 +34117,77 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
 }
 // @ts-ignore
 window.Select = Select;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Slider": () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+
+
+
+
+
+class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onPrevClick = e => {
+            // console.log('Slider.onPrevClick');
+            this.setState(prevState => {
+                let image = prevState.image - 1;
+                if (image < 0) {
+                    image = this.props.images.length - 1;
+                }
+                return { image };
+            });
+        };
+        this.onNextClick = e => {
+            // console.log('Slider.onNextClick');
+            this.setState(prevState => {
+                let image = prevState.image + 1;
+                if (image > this.props.images.length - 1) {
+                    image = 0;
+                }
+                return { image };
+            });
+        };
+        this.onImageClick = e => {
+            console.log('Slider.onImageClick');
+            if (this.state.classList) {
+                this.setState({ classList: null });
+            }
+            else {
+                this.setState({ classList: ['full'] });
+            }
+        };
+        this.onCloseClick = e => {
+            this.setState({ classList: null });
+        };
+        if (!this.props.images)
+            throw new Error('Slider: no images');
+        this.state = { image: 0, classList: null };
+    }
+    render() {
+        // console.log('Slider.render', this.props.images);
+        const images = this.props.images || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
+    }
+}
+// @ts-ignore
+window.Slider = Slider;
 
 
 /***/ }),
