@@ -134,3 +134,6 @@ export class PhoneBox extends ReactComponent {
         return value;
     }
 }
+
+// @ts-ignore
+window.PhoneBox = PhoneBox;

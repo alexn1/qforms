@@ -31930,6 +31930,32 @@ window.LeftIcon = LeftIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/LocationIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })] })));
+    }
+}
+// @ts-ignore
+window.LocationIcon = LocationIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
 /*!***************************************************!*\
   !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
@@ -32132,44 +32158,46 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_15__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_37__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__.CheckBox),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_13__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_16__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_38__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_14__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_41__.CheckBoxList),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__.ComboBox),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__.DatePicker),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_36__.DoneIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__.DropdownDatePicker),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_15__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_29__.DatePicker),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_37__.DoneIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_18__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_28__.DropdownDatePicker),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__.GridRow),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_20__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_22__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_21__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_35__.Image),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_36__.Image),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__.Modal),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_25__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_23__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_39__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_38__.PhoneIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_24__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_40__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_34__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_39__.PhoneIcon),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__.Select),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_34__.TimeBox2),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__.Tooltip),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_30__.Select),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_26__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_17__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_32__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_31__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_19__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_33__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_35__.TimeBox2),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_27__.Tooltip),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
 /* harmony export */ });
@@ -32185,34 +32213,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 /* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
 /* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
-/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
-/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
 
 
 
@@ -32226,7 +32256,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 // widget
+
 
 
 
@@ -32438,6 +32470,92 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
 }
 // @ts-ignore
 window.CheckBox = CheckBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCheckBoxChange = e => {
+            // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+            const checked = e.target.checked;
+            const itemValue = e.target.dataset.value;
+            // console.log('itemValue:', itemValue);
+            this.setState(prevState => {
+                const prevValue = prevState.value || [];
+                const value = [...prevValue];
+                if (checked) {
+                    if (value.indexOf(itemValue) > -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.push(itemValue);
+                }
+                else {
+                    if (value.indexOf(itemValue) === -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.splice(value.indexOf(itemValue), 1);
+                }
+                // console.log('value:', value);
+                return { value };
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.getValue());
+                }
+            });
+        };
+        if (!this.props.name)
+            throw new Error('no CheckBoxList name');
+        this.state = {
+            value: this.props.value || [],
+        };
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValue() {
+        return this.state.value || [];
+    }
+    isValueChecked(value) {
+        return this.getValue().indexOf(value) > -1;
+    }
+    composeItemId(value) {
+        return `${this.props.name}.${value}`;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('nextProps.value:', nextProps.value);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map(item => {
+                if (item.value === undefined)
+                    throw new Error('no item value');
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }));
+            }) })));
+    }
+}
+// @ts-ignore
+window.CheckBoxList = CheckBoxList;
 
 
 /***/ }),
@@ -33732,6 +33850,8 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return value;
     }
 }
+// @ts-ignore
+window.PhoneBox = PhoneBox;
 
 
 /***/ }),
@@ -35584,6 +35704,121 @@ class RowFormCheckBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
 }
 // @ts-ignore
 window.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts ***!
+  \************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* binding */ RowFormCheckBoxListFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormCheckBoxListFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx");
+
+
+class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onListInsert = async (e) => {
+            console.log('RowFormCheckBoxListFieldController.onListInsert');
+            await this.rerender();
+        };
+        this.onListUpdate = async (e) => {
+            // console.log('RowFormCheckBoxListFieldController.onListUpdate');
+            await this.rerender();
+        };
+        this.onListDelete = async (e) => {
+            await this.rerender();
+        };
+    }
+    init() {
+        // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
+        super.init();
+        const dataSource = this.model.getDataSource();
+        dataSource.on('insert', this.onListInsert);
+        dataSource.on('update', this.onListUpdate);
+        dataSource.on('delete', this.onListDelete);
+    }
+    deinit() {
+        const dataSource = this.model.getDataSource();
+        dataSource.off('insert', this.onListInsert);
+        dataSource.off('update', this.onListUpdate);
+        dataSource.off('delete', this.onListDelete);
+        super.deinit();
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldView;
+    }
+    getRows() {
+        return this.model.getDataSource().getRows();
+    }
+    getValueForWidget() {
+        // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
+        const value = this.getValue();
+        // console.log('value:', value);
+        return value;
+    }
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
+    }
+    getItemFromRow(row) {
+        return {
+            value: this.valueToString(this.getModel().getValueValue(row)),
+            title: this.getModel().getDisplayValue(row),
+        };
+    }
+}
+// @ts-ignore
+window.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx ***!
+  \*******************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* binding */ RowFormCheckBoxListFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class RowFormCheckBoxListFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    getItems() {
+        const ctrl = this.getCtrl();
+        try {
+            return ctrl.getRows().map(row => {
+                return ctrl.getItemFromRow(row);
+            });
+        }
+        catch (err) {
+            err.message = `${ctrl.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
+    renderCheckBoxList() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBoxList, { name: ctrl.getModel().getFullName(), classList: [`${this.getCssBlockName()}__checkboxlist`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, items: this.getItems() }));
+    }
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.renderCheckBoxList() }));
+    }
+}
+// @ts-ignore
+window.RowFormCheckBoxListFieldView = RowFormCheckBoxListFieldView;
 
 
 /***/ }),
@@ -40139,6 +40374,73 @@ window.CheckBoxField = CheckBoxField;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts":
+/*!********************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxListField": () => (/* binding */ CheckBoxListField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getDisplayValue(row) {
+        let value = null;
+        if (row[this.data.displayColumn]) {
+            try {
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.displayColumn]);
+            }
+            catch (err) {
+                console.log('cannot parse:', row[this.data.displayColumn]);
+                throw err;
+            }
+        }
+        else {
+            value = this.data.displayColumn;
+            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
+            });
+        }
+        return value;
+    }
+    getValueValue(row) {
+        if (!row[this.data.valueColumn]) {
+            throw new Error('no valueColumn in CheckBoxList data source');
+        }
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.valueColumn]);
+    }
+    getDataSource() {
+        const name = this.data.dataSourceName;
+        if (!name)
+            throw new Error(`${this.getFullName()}: no dataSourceName`);
+        if (this.getForm().getDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        }
+        if (this.getPage().getDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        }
+        if (this.getApp().getDataSource(name)) {
+            return this.getApp().getDataSource(name);
+        }
+        throw new Error(`${this.getFullName()}: no data source: ${name}`);
+    }
+    findRowByRawValue(rawValue) {
+        return this.getDataSource()
+            .getRows()
+            .find(row => row[this.data.valueColumn] === rawValue);
+    }
+}
+// @ts-ignore
+window.CheckBoxListField = CheckBoxListField;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts":
 /*!************************************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts ***!
@@ -41598,6 +41900,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ApplicationView": () => (/* reexport safe */ _Controller_ModelController_ApplicationController_ApplicationView__WEBPACK_IMPORTED_MODULE_3__.ApplicationView),
 /* harmony export */   "Button": () => (/* reexport safe */ _common_widget_Button__WEBPACK_IMPORTED_MODULE_23__.Button),
 /* harmony export */   "CheckBoxField": () => (/* reexport safe */ _Model_Field_CheckBoxField_CheckBoxField__WEBPACK_IMPORTED_MODULE_33__.CheckBoxField),
+/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _Model_Field_CheckBoxListField_CheckBoxListField__WEBPACK_IMPORTED_MODULE_45__.CheckBoxListField),
 /* harmony export */   "ComboBoxField": () => (/* reexport safe */ _Model_Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_12__.ComboBoxField),
 /* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
 /* harmony export */   "DateField": () => (/* reexport safe */ _Model_Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_11__.DateField),
@@ -41613,6 +41916,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RadioField": () => (/* reexport safe */ _Model_Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_36__.RadioField),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _Model_Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_9__.RowForm),
 /* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_39__.RowFormCheckBoxFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldController__WEBPACK_IMPORTED_MODULE_47__.RowFormCheckBoxListFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_46__.RowFormCheckBoxListFieldView),
 /* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_16__.RowFormComboBoxFieldController),
 /* harmony export */   "RowFormController": () => (/* reexport safe */ _Controller_ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__.RowFormController),
 /* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldController__WEBPACK_IMPORTED_MODULE_15__.RowFormDateFieldController),
@@ -41686,6 +41991,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./Model/Field/PhoneField/PhoneField */ "./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts");
+/* harmony import */ var _Model_Field_CheckBoxListField_CheckBoxListField__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./Model/Field/CheckBoxListField/CheckBoxListField */ "./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx");
+/* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldController__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts");
+
+
+
 
 
 

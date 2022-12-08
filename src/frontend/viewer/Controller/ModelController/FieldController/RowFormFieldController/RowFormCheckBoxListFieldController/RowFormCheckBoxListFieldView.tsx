@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import { CheckBoxList } from '../../../../../../common';
 
 export class RowFormCheckBoxListFieldView extends RowFormFieldView {
     getItems() {
@@ -30,3 +31,6 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView {
         return <div className={this.getCssClassNames()}>{this.renderCheckBoxList()}</div>;
     }
 }
+
+// @ts-ignore
+window.RowFormCheckBoxListFieldView = RowFormCheckBoxListFieldView;

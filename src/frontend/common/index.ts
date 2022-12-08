@@ -12,6 +12,7 @@ export { MoreVertIcon } from './icon/MoreVertIcon';
 export { CloseIcon2 } from './icon/CloseIcon2';
 export { VisibilityIcon } from './icon/VisibilityIcon';
 export { VisibilityOffIcon } from './icon/VisibilityOffIcon';
+export { LocationIcon } from './icon/LocationIcon';
 
 // widget
 export { Box } from './widget/Box/Box';
@@ -42,3 +43,4 @@ export { DoneIcon } from './icon/DoneIcon';
 export { CancelIcon } from './icon/CancelIcon';
 export { PhoneIcon } from './icon/PhoneIcon';
 export { PasswordIcon } from './icon/PasswordIcon';
+export { CheckBoxList } from './widget/CheckBoxList';

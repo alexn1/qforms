@@ -55,6 +55,7 @@ export class CheckBoxList extends ReactComponent {
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // console.log('nextProps.value:', nextProps.value);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
@@ -73,7 +74,7 @@ export class CheckBoxList extends ReactComponent {
                                 data-value={item.value}
                                 readOnly={this.props.readOnly}
                             />
-                            <label for={this.composeItemId(item.value)}>
+                            <label htmlFor={this.composeItemId(item.value)}>
                                 {item.title || item.value}
                             </label>
                         </li>
@@ -83,3 +84,6 @@ export class CheckBoxList extends ReactComponent {
         );
     }
 }
+
+// @ts-ignore
+window.CheckBoxList = CheckBoxList;

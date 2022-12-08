@@ -43,3 +43,6 @@ export { Tab2 } from '../common';
 export { PhoneField } from './Model/Field/PhoneField/PhoneField';
 export { RowFormPhoneFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController';
 export { TableFormPhoneFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController';
+export { CheckBoxListField } from './Model/Field/CheckBoxListField/CheckBoxListField';
+export { RowFormCheckBoxListFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView';
+export { RowFormCheckBoxListFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController';
