@@ -29,3 +29,4 @@ export { TableFormComboBoxFieldView } from './Controller/ModelController/FieldCo
 export { TableFormDateTimeFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView';
 export { LoginController } from './Controller/LoginController/LoginController';
 export { TableFormDateTimeFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController';
+export { RowFormDateTimeFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldController';

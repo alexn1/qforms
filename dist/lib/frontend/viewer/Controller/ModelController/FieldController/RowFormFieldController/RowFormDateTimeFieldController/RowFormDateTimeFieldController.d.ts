@@ -1,0 +1,33 @@
+import { RowFormFieldController } from '../RowFormFieldController';
+export declare class RowFormDateTimeFieldController extends RowFormFieldController {
+    widget2: any;
+    defaultValue: number;
+    state: any;
+    constructor(model: any, parent: any);
+    getViewClass(): any;
+    getValueForWidget(): any;
+    getValueForTime(): any;
+    setValueFromWidget(widgetValue: any): void;
+    onView2Create: (widget2: any) => void;
+    onChange2: (widgetValue: any, fireEvent?: boolean) => void;
+    onBlur2: (widgetValue: any, fireEvent?: boolean) => void;
+    getPlaceholder2(): string;
+    getDefaultValue(): number;
+    setDefaultValue2(defaultValue: any): void;
+    setValueFromView2(widgetValue: any): void;
+    getTimeErrorText(): any;
+    setValue2(widgetValue: any): void;
+    validate2(): void;
+    getError2(): string;
+    isParseError2(): boolean;
+    resetErrors2(): void;
+    setError2(error2: any): void;
+    getErrorMessage2(): any;
+    isValid2(): boolean;
+    refill(): void;
+    isParseError(): boolean;
+    isValid(): boolean;
+    getErrorMessage(): string;
+    isValidateOnChange2(): boolean;
+    isValidateOnBlur2(): boolean;
+}

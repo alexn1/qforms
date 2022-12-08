@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import { DropdownDatePicker, TimeBox2 } from '../../../../../../common';
 
 export class RowFormDateTimeFieldView extends RowFormFieldView {
     onClear2 = async () => {
@@ -7,7 +8,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView {
     };
     isCloseVisible() {
         if (this.props.readOnly) return false;
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         if (!ctrl.widget2) {
             return this.props.value !== undefined;
         }

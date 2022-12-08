@@ -1,5 +1,7 @@
 import React from 'react';
 import { TimeBox } from '../TimeBox';
+import { CloseIcon } from '../../../icon/CloseIcon';
+import { TimeIcon } from '../../../icon/TimeIcon';
 
 export class TimeBox2 extends TimeBox {
     inputEl: React.RefObject<any>;

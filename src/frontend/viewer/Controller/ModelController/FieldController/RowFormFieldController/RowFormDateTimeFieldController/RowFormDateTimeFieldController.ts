@@ -6,8 +6,8 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
     widget2: any;
     defaultValue: number;
     state: any;
-    constructor(...args) {
-        super(...args);
+    constructor(model, parent) {
+        super(model, parent);
         this.widget2 = null;
         this.defaultValue = 0;
         this.state.parseError2 = null;
