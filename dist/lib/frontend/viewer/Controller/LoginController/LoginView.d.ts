@@ -9,3 +9,8 @@ export declare class LoginView extends View {
     onChange: (e: any) => void;
     render(): JSX.Element;
 }
+declare global {
+    interface Window {
+        LoginView: typeof LoginView;
+    }
+}

@@ -49,6 +49,7 @@ module.exports = {
                             jsx: 'react-jsx',
                             noImplicitAny: false,
                             outDir: './dist/lib/frontend',
+                            moduleResolution: 'node',
                         },
                     },
                 },

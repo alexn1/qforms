@@ -86,3 +86,11 @@ export class LoginView extends View {
         );
     }
 }
+
+declare global {
+    interface Window {
+        LoginView: typeof LoginView;
+    }
+}
+
+window.LoginView = LoginView;
