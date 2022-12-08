@@ -6,3 +6,6 @@ export class TableFormPhoneFieldController extends TableFormFieldController {
         return super.getViewClass() || TableFormPhoneFieldView;
     }
 }
+
+// @ts-ignore
+window.TableFormPhoneFieldController = TableFormPhoneFieldController;

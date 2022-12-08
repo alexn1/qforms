@@ -31790,6 +31790,31 @@ window.ArrowIcon = ArrowIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/CancelIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })] })));
+    }
+}
+// @ts-ignore
+window.CancelIcon = CancelIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/CloseIcon.tsx":
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
@@ -31858,6 +31883,31 @@ window.DateIcon = DateIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/DoneIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = DoneIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/LeftIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
@@ -31922,6 +31972,57 @@ const OpenInNewIcon = () => {
 };
 // @ts-ignore
 window.OpenInNewIcon = OpenInNewIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })] })));
+    }
+}
+// @ts-ignore
+window.PasswordIcon = PasswordIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })] })));
+    }
+}
+// @ts-ignore
+window.PhoneIcon = PhoneIcon;
 
 
 /***/ }),
@@ -32033,11 +32134,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__.Box),
 /* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_15__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_37__.CancelIcon),
 /* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__.CheckBox),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
 /* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__.ComboBox),
 /* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__.DatePicker),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_36__.DoneIcon),
 /* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__.DropdownButton),
 /* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__.DropdownDatePicker),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
@@ -32052,7 +32155,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
 /* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_39__.PasswordIcon),
 /* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_38__.PhoneIcon),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
@@ -32104,6 +32209,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
 /* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
 /* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
 
 
 
@@ -32118,6 +32227,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // widget
+
+
+
+
 
 
 
@@ -36632,6 +36745,114 @@ window.RowFormPasswordFieldView = RowFormPasswordFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPhoneFieldController": () => (/* binding */ RowFormPhoneFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx");
+
+
+class RowFormPhoneFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldView;
+    }
+    getPhoneFormatErrorText() {
+        return this.getModel()
+            .getApp()
+            .getText().form.phoneNumberFormatError;
+    }
+    getError() {
+        const error = super.getError();
+        if (error)
+            return error;
+        // russian phone format validator
+        const value = this.getValue();
+        if (value && value.substr(0, 2) === '+7' && value.length < 12) {
+            return this.getPhoneFormatErrorText();
+        }
+        return null;
+    }
+}
+// @ts-ignore
+window.RowFormPhoneFieldController = RowFormPhoneFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx ***!
+  \*****************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPhoneFieldView": () => (/* binding */ RowFormPhoneFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class RowFormPhoneFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onClear = async (e) => {
+            this.getCtrl().onChange('');
+            setTimeout(() => {
+                this.getWidget()
+                    .getElement()
+                    .focus();
+            }, 0);
+        };
+        this.onFocus = async (e) => {
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (value) => {
+            // console.log('RowFormPhoneFieldView.onBlur', value);
+            this.removeCssClass('focus');
+            this.getCtrl().onBlur(value);
+        };
+        this.state = {
+            classList: [],
+        };
+    }
+    isCloseVisible() {
+        const ctrl = this.getCtrl();
+        if (!ctrl.isEditable())
+            return false;
+        return ctrl.getValueForWidget() !== '';
+    }
+    renderPhoneBox() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.PhoneBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+    }
+    renderClearButton() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })));
+    }
+    renderPhoneIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.PhoneIcon, {}) })));
+    }
+    render() {
+        // console.log('RowFormPhoneFieldView.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
+    }
+}
+// @ts-ignore
+window.RowFormPhoneFieldView = RowFormPhoneFieldView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController.ts":
 /*!**********************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController.ts ***!
@@ -37208,6 +37429,57 @@ class TableFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_1__.FieldVi
 }
 // @ts-ignore
 window.TableFormFieldView = TableFormFieldView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormPhoneFieldController": () => (/* binding */ TableFormPhoneFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx");
+
+
+class TableFormPhoneFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormPhoneFieldView;
+    }
+}
+// @ts-ignore
+window.TableFormPhoneFieldController = TableFormPhoneFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormPhoneFieldView": () => (/* binding */ TableFormPhoneFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormPhoneFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: _common__WEBPACK_IMPORTED_MODULE_2__.PhoneBox.formatPhoneNumber(this.getCtrl().getValueForWidget(row)) })) })));
+    }
+}
 
 
 /***/ }),
@@ -40283,6 +40555,26 @@ window.PasswordField = PasswordField;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts":
+/*!******************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneField": () => (/* binding */ PhoneField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+
+class PhoneField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+// @ts-ignore
+window.PhoneField = PhoneField;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Field/RadioField/RadioField.ts":
 /*!******************************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/RadioField/RadioField.ts ***!
@@ -41317,6 +41609,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PageController": () => (/* reexport safe */ _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_8__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_4__.PageView),
 /* harmony export */   "PasswordField": () => (/* reexport safe */ _Model_Field_PasswordField_PasswordField__WEBPACK_IMPORTED_MODULE_24__.PasswordField),
+/* harmony export */   "PhoneField": () => (/* reexport safe */ _Model_Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_42__.PhoneField),
 /* harmony export */   "RadioField": () => (/* reexport safe */ _Model_Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_36__.RadioField),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _Model_Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_9__.RowForm),
 /* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_39__.RowFormCheckBoxFieldController),
@@ -41326,6 +41619,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_31__.RowFormDateTimeFieldController),
 /* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormFileFieldController_RowFormFileFieldController__WEBPACK_IMPORTED_MODULE_40__.RowFormFileFieldController),
 /* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormPasswordFieldController_RowFormPasswordFieldController__WEBPACK_IMPORTED_MODULE_25__.RowFormPasswordFieldController),
+/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_43__.RowFormPhoneFieldController),
 /* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormRadioFieldController_RowFormRadioFieldController__WEBPACK_IMPORTED_MODULE_38__.RowFormRadioFieldController),
 /* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_21__.RowFormTextAreaFieldController),
 /* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_17__.RowFormTextBoxFieldController),
@@ -41341,6 +41635,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_19__.TableFormDateFieldController),
 /* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_30__.TableFormDateTimeFieldController),
 /* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_28__.TableFormDateTimeFieldView),
+/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_44__.TableFormPhoneFieldController),
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_7__.TableFormTextBoxFieldController),
 /* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_20__.TextAreaField),
 /* harmony export */   "TextBoxField": () => (/* reexport safe */ _Model_Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_13__.TextBoxField),
@@ -41388,6 +41683,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormFileFieldController_RowFormFileFieldController__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _Model_Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./Model/Field/PhoneField/PhoneField */ "./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts");
+
+
+
 
 
 

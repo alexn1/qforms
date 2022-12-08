@@ -38,3 +38,7 @@ export { TimeBox } from './widget/TimeBox/TimeBox';
 export { PhoneBox } from './widget/PhoneBox';
 export { TimeBox2 } from './widget/TimeBox/TimeBox2/TimeBox2';
 export { Image } from './widget/Image/Image';
+export { DoneIcon } from './icon/DoneIcon';
+export { CancelIcon } from './icon/CancelIcon';
+export { PhoneIcon } from './icon/PhoneIcon';
+export { PasswordIcon } from './icon/PasswordIcon';

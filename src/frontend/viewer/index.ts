@@ -40,3 +40,6 @@ export { RowFormRadioFieldController } from './Controller/ModelController/FieldC
 export { RowFormCheckBoxFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController';
 export { RowFormFileFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController';
 export { Tab2 } from '../common';
+export { PhoneField } from './Model/Field/PhoneField/PhoneField';
+export { RowFormPhoneFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController';
+export { TableFormPhoneFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController';
