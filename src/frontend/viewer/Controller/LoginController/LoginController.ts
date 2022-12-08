@@ -29,3 +29,11 @@ export class LoginController extends Controller {
         return this.getViewClass().name;
     }
 }
+
+declare global {
+    interface Window {
+        LoginController: typeof LoginController;
+    }
+}
+
+window.LoginController = LoginController;

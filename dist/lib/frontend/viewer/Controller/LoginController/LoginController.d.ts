@@ -9,3 +9,8 @@ export declare class LoginController extends Controller {
     getFrontHostApp(): any;
     getViewClassCssBlockName(): string;
 }
+declare global {
+    interface Window {
+        LoginController: typeof LoginController;
+    }
+}

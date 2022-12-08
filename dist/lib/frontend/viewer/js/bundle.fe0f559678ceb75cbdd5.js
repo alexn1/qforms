@@ -34506,6 +34506,7 @@ class LoginController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         return this.getViewClass().name;
     }
 }
+window.LoginController = LoginController;
 
 
 /***/ }),
@@ -36047,6 +36048,62 @@ window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* binding */ TableFormCheckBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormCheckBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { ref: this.span, checked: ctrl.getValueForWidget(row), readOnly: true, disabled: true }) })));
+    }
+}
+// @ts-ignore
+window.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* binding */ TableFormComboBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+
+
+class TableFormComboBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+// @ts-ignore
+window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.ts":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.ts ***!
@@ -36103,6 +36160,66 @@ class TableFormDateFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODUL
 }
 // @ts-ignore
 window.TableFormDateFieldView = TableFormDateFieldView;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts ***!
+  \**********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* binding */ TableFormDateTimeFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldView;
+    }
+    getValueForWidget(row) {
+        const value = this.model.getValue(row);
+        if (value)
+            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        return '';
+    }
+}
+// @ts-ignore
+window.TableFormDateTimeFieldController = TableFormDateTimeFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* binding */ TableFormDateTimeFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+
+
+class TableFormDateTimeFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+// @ts-ignore
+window.TableFormDateTimeFieldView = TableFormDateTimeFieldView;
 
 
 /***/ }),
@@ -40104,6 +40221,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
 /* harmony export */   "DateField": () => (/* reexport safe */ _Model_Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_11__.DateField),
 /* harmony export */   "Helper": () => (/* reexport safe */ _common_Helper__WEBPACK_IMPORTED_MODULE_22__.Helper),
+/* harmony export */   "LoginController": () => (/* reexport safe */ _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_29__.LoginController),
 /* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
 /* harmony export */   "PageController": () => (/* reexport safe */ _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_8__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_4__.PageView),
@@ -40118,8 +40236,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormView": () => (/* reexport safe */ _Controller_ModelController_FormController_RowFormController_RowFormView__WEBPACK_IMPORTED_MODULE_6__.RowFormView),
 /* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__.SqlDataSource),
 /* harmony export */   "TableForm": () => (/* reexport safe */ _Model_Form_TableForm_TableForm__WEBPACK_IMPORTED_MODULE_10__.TableForm),
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_26__.TableFormCheckBoxFieldView),
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_27__.TableFormComboBoxFieldView),
 /* harmony export */   "TableFormController": () => (/* reexport safe */ _Controller_ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_18__.TableFormController),
 /* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_19__.TableFormDateFieldController),
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_30__.TableFormDateTimeFieldController),
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_28__.TableFormDateTimeFieldView),
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_7__.TableFormTextBoxFieldController),
 /* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_20__.TextAreaField),
 /* harmony export */   "TextBoxField": () => (/* reexport safe */ _Model_Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_13__.TextBoxField),
@@ -40151,6 +40273,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _common_widget_Button__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../common/widget/Button */ "./src/frontend/common/widget/Button.tsx");
 /* harmony import */ var _Model_Field_PasswordField_PasswordField__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./Model/Field/PasswordField/PasswordField */ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormPasswordFieldController_RowFormPasswordFieldController__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
+/* harmony import */ var _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./Controller/LoginController/LoginController */ "./src/frontend/viewer/Controller/LoginController/LoginController.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts");
+
+
+
+
+
 
 
 
