@@ -1,6 +1,5 @@
 import { BackHostApp, Helper } from './index';
 
-main();
 async function main() {
     // console.log('main');
     const backHostApp = new BackHostApp({
@@ -16,3 +15,4 @@ async function main() {
         await backHostApp.logError(err);
     }
 }
+await main();
