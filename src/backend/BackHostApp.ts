@@ -5,7 +5,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const http = require('http');
+import http from 'http';
 const colors = require('colors/safe');
 
 import express, { Express, Request, Response } from 'express';
@@ -71,15 +71,13 @@ export class BackHostApp {
     async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
-        this.initProcess();
-
         this.appsDirPath = path.resolve(this.params.appsDirPath || './apps');
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host = this.params.host || 'localhost';
         const port = this.params.port || 3000;
-        const log = this.params.log;
+        const { log } = this.params;
 
         if (!fs.existsSync(this.appsDirPath)) {
             console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
@@ -131,13 +129,30 @@ export class BackHostApp {
         await this.editorModule.init();
 
         // http
-        this.httpServer = this.createAndRunHttpServer(host, port);
+        this.httpServer = await this.createAndRunHttpServer(host, port);
+
+        this.httpServer.on('error', this.onHttpServerError.bind(this));
+
+        if (process.send) {
+            process.send('online');
+        }
+        let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${
+            this.isDevelopment() ? '/index2' : ''
+        }\n`;
+        msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
+        msg += `\tappsDirPath: ${this.appsDirPath}\n`;
+        if (this.isDevelopment()) {
+            msg += `\tmonitor: http://${host}:${port}/monitor\n`;
+        }
+        msg += `\tstarted at: ${new Date().toISOString()}\n`;
+        console.log(msg);
 
         // ws
         this.wsServer = new WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
         });
+        this.initProcess();
     }
 
     initProcess() {
@@ -673,25 +688,23 @@ export class BackHostApp {
         res.json({foo: 'bar'});
     }*/
 
-    createAndRunHttpServer(host, port) {
-        const httpServer = http.createServer(this.express);
-        httpServer.on('error', this.onHttpServerError.bind(this));
-        httpServer.listen(port, host, () => {
-            if (process.send) {
-                process.send('online');
+    createAndRunHttpServer(host, port): Promise<any> {
+        return new Promise((resolve, reject) => {
+            try {
+                const httpServer = http.createServer(this.express);
+                const tempErrorHandler = err => {
+                    console.error('tempErrorHandler', err);
+                    httpServer.off('error', tempErrorHandler);
+                    reject(err);
+                };
+                httpServer.on('error', tempErrorHandler);
+                httpServer.listen(port, host, () => {
+                    resolve(httpServer);
+                });
+            } catch (err) {
+                reject(err);
             }
-            let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${
-                this.isDevelopment() ? '/index2' : ''
-            }\n`;
-            msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
-            msg += `\tappsDirPath: ${this.appsDirPath}\n`;
-            if (this.isDevelopment()) {
-                msg += `\tmonitor: http://${host}:${port}/monitor\n`;
-            }
-            msg += `\tstarted at: ${new Date().toISOString()}\n`;
-            console.log(msg);
         });
-        return httpServer;
     }
 
     async onProcessMessage(message) {

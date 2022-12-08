@@ -53,7 +53,7 @@ export declare class BackHostApp {
     moduleGetFile(req: any, res: any, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
-    createAndRunHttpServer(host: any, port: any): any;
+    createAndRunHttpServer(host: any, port: any): Promise<any>;
     onProcessMessage(message: any): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): void;
