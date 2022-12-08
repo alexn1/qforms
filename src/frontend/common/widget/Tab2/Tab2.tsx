@@ -80,4 +80,4 @@ export class Tab2 extends ReactComponent {
 }
 
 // @ts-ignore
-window.Tab = Tab;
+window.Tab2 = Tab2;

@@ -51,3 +51,11 @@ export class RadioField extends Field {
             .find(row => row[valueColumn] === rawValue);
     }
 }
+
+declare global {
+    interface Window {
+        RadioField: typeof RadioField;
+    }
+}
+
+window.RadioField = RadioField;

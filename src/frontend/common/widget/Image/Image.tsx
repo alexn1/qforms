@@ -1,6 +1,8 @@
+import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 
 export class Image extends ReactComponent {
+    img: React.RefObject<any>;
     constructor(props) {
         super(props);
         this.img = React.createRef();
@@ -37,4 +39,5 @@ export class Image extends ReactComponent {
     }*/
 }
 
+// @ts-ignore
 window.Image = Image;

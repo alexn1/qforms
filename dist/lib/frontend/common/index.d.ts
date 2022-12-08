@@ -33,3 +33,4 @@ export { Tab2 } from './widget/Tab2/Tab2';
 export { TimeBox } from './widget/TimeBox/TimeBox';
 export { PhoneBox } from './widget/PhoneBox';
 export { TimeBox2 } from './widget/TimeBox/TimeBox2/TimeBox2';
+export { Image } from './widget/Image/Image';

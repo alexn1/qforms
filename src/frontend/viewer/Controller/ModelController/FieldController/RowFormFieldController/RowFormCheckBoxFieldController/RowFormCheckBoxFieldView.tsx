@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import { CheckBox } from '../../../../../../common';
 
 export class RowFormCheckBoxFieldView extends RowFormFieldView {
     onCheckBoxChange = (checked, e) => {

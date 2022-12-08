@@ -23,3 +23,6 @@ export class RowFormRadioFieldController extends RowFormFieldController {
             .getRows();
     }
 }
+
+// @ts-ignore
+window.RowFormRadioFieldController = RowFormRadioFieldController;

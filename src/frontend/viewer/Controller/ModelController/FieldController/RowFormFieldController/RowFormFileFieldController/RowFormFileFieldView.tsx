@@ -1,6 +1,6 @@
 import React from 'react';
 import { RowFormFieldView } from '../RowFormFieldView';
-import { Helper } from '../../../../../../common';
+import { Helper, Image, Button } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
 
 export class RowFormFileFieldView extends RowFormFieldView {

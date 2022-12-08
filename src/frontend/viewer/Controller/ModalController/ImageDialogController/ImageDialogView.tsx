@@ -1,4 +1,6 @@
+import React from 'react';
 import { View } from '../../View';
+import { CloseIcon2 } from '../../../../common';
 
 export class ImageDialogView extends View {
     constructor(props) {
@@ -7,7 +9,7 @@ export class ImageDialogView extends View {
     }
     render() {
         console.log('ImageDialogView.render');
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return (
             <div
                 className={this.getCssClassNames()}
