@@ -46,3 +46,7 @@ export { TableFormPhoneFieldController } from './Controller/ModelController/Fiel
 export { CheckBoxListField } from './Model/Field/CheckBoxListField/CheckBoxListField';
 export { RowFormCheckBoxListFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView';
 export { RowFormCheckBoxListFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController';
+export { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
+export { Database } from './Model/Database/Database';
+export { Table } from './Model/Table/Table';
+export { Column } from './Model/Column/Column';
