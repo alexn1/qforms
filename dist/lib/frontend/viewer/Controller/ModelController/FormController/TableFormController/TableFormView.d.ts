@@ -17,11 +17,7 @@ export declare class TableFormView extends FormView {
         onUnmount: any;
         ctrl: any;
     }, any, any>>;
-    getGridColumns(): {
-        name: any;
-        title: any;
-        width: any;
-    }[];
+    getGridColumns(): any[];
     getRows(): any;
     getGridExtraColumn(): boolean;
     getGridClass(): typeof Grid;

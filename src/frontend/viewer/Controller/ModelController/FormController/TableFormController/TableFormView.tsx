@@ -111,8 +111,8 @@ export class TableFormView extends FormView {
         // console.log(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
     };
-    getGridColumns() {
-        const ctrl = this.props.ctrl;
+    getGridColumns(): any[] {
+        const { ctrl } = this.props;
         return Object.keys(ctrl.fields)
             .filter(name => ctrl.getField(name).isVisible())
             .map(name => {
