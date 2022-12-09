@@ -35650,10 +35650,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     renderActivePage() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         if (ctrl.activePage) {
             return this.renderView(ctrl.activePage);
         }
+        return null;
     }
     renderView(ctrl, props = {}) {
         return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), Object.assign({ parent: this, ctrl: ctrl, onCreate: ctrl.onViewCreate }, props));

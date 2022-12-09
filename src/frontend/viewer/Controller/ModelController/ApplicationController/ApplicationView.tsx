@@ -5,10 +5,11 @@ import { Modal, Menu, Statusbar } from '../../../../common';
 
 export class ApplicationView extends ModelView {
     renderActivePage() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         if (ctrl.activePage) {
             return this.renderView(ctrl.activePage);
         }
+        return null;
     }
     renderView(ctrl, props = {}) {
         return React.createElement(ctrl.getViewClass(), {
