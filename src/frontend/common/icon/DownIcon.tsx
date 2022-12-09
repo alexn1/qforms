@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { DoneIcon } from './DoneIcon';
 
 export class DownIcon extends React.Component<any, any> {
     render() {

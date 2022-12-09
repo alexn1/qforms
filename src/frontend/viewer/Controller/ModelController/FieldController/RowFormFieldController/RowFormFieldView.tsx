@@ -1,4 +1,5 @@
 import { FieldView } from '../FieldView';
+
 export class RowFormFieldView extends FieldView {
     widget: any;
     constructor(props) {

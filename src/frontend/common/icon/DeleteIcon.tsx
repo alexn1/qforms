@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-class DeleteIcon extends React.Component {
+export class DeleteIcon extends React.Component {
     render() {
         return (
             <svg

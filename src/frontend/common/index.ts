@@ -18,6 +18,7 @@ export { DoneIcon } from './icon/DoneIcon';
 export { CancelIcon } from './icon/CancelIcon';
 export { PhoneIcon } from './icon/PhoneIcon';
 export { PasswordIcon } from './icon/PasswordIcon';
+export { DeleteIcon } from './icon/DeleteIcon';
 
 // widget
 export { Box } from './widget/Box/Box';

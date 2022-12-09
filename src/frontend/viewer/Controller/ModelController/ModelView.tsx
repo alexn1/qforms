@@ -2,7 +2,7 @@ import { View } from '../View';
 import { Model } from '../../Model/Model';
 
 export class ModelView extends View {
-    renderActionIcon?: any;
+    renderActionIcon: any = undefined;
     getActionsForDropdownButton() {
         return this.props.ctrl
             .getModel()
