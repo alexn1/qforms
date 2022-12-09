@@ -3,5 +3,6 @@ export declare class PageView extends ModelView {
     constructor(props: any);
     onActionsClick: (li: any) => Promise<void>;
     renderHeader(): any;
-    renderForms(); any;
+    renderForms(): any;
+    renderForm(formCtrl, props?): any;
 }
