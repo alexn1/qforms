@@ -32103,6 +32103,31 @@ window.RightIcon = RightIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })] })));
+    }
+}
+// @ts-ignore
+window.SettingsIcon = SettingsIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/TimeIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
@@ -32186,48 +32211,49 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_13__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_16__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_38__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_14__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_41__.CheckBoxList),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_18__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_21__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_19__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_42__.CheckBoxList),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_15__.ComboBox),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_29__.DatePicker),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_37__.DoneIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_18__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_28__.DropdownDatePicker),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_43__.Expand),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_20__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_34__.DatePicker),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__.DoneIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_23__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_33__.DropdownDatePicker),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_44__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_20__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_22__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_21__.GridRow),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_25__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_27__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_26__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_36__.Image),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_41__.Image),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
 /* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_25__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_23__.Modal),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_30__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_28__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_24__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_40__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_34__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_39__.PhoneIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_29__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_39__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_30__.Select),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_42__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_26__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_17__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_32__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_31__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_19__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_33__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_35__.TimeBox2),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_27__.Tooltip),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_35__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_43__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_31__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_22__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_37__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_36__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_24__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_38__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_40__.TimeBox2),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_32__.Tooltip),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
 /* harmony export */ });
@@ -32244,37 +32270,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
 /* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
 /* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
-/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
-/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
-/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
-/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
-/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
-/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./icon/SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
 
 
 
@@ -32289,11 +32316,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
 // widget
-
-
-
-
 
 
 
@@ -42067,6 +42095,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PasswordField": () => (/* reexport safe */ _Model_Field_PasswordField_PasswordField__WEBPACK_IMPORTED_MODULE_24__.PasswordField),
 /* harmony export */   "PhoneField": () => (/* reexport safe */ _Model_Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_42__.PhoneField),
 /* harmony export */   "RadioField": () => (/* reexport safe */ _Model_Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_36__.RadioField),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.ReactComponent),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _Model_Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_9__.RowForm),
 /* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_39__.RowFormCheckBoxFieldController),
 /* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldController__WEBPACK_IMPORTED_MODULE_47__.RowFormCheckBoxListFieldController),
@@ -42082,6 +42111,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_21__.RowFormTextAreaFieldController),
 /* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_17__.RowFormTextBoxFieldController),
 /* harmony export */   "RowFormView": () => (/* reexport safe */ _Controller_ModelController_FormController_RowFormController_RowFormView__WEBPACK_IMPORTED_MODULE_6__.RowFormView),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.SettingsIcon),
 /* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__.SqlDataSource),
 /* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Tab2),
 /* harmony export */   "Table": () => (/* reexport safe */ _Model_Table_Table__WEBPACK_IMPORTED_MODULE_50__.Table),
@@ -42152,6 +42182,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_Database_Database__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./Model/Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
 /* harmony import */ var _Model_Table_Table__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./Model/Table/Table */ "./src/frontend/viewer/Model/Table/Table.ts");
 /* harmony import */ var _Model_Column_Column__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./Model/Column/Column */ "./src/frontend/viewer/Model/Column/Column.ts");
+
+
 
 
 

@@ -50,3 +50,5 @@ export { ApplicationController } from './Controller/ModelController/ApplicationC
 export { Database } from './Model/Database/Database';
 export { Table } from './Model/Table/Table';
 export { Column } from './Model/Column/Column';
+export { SettingsIcon } from '../common';
+export { ReactComponent } from '../common';

@@ -4,4 +4,11 @@ export declare class ApplicationView extends ModelView {
     // onActionsClick: (li: any) => Promise<void>;
     // renderHeader(): any;
     // renderForms(); any;
+    renderActivePage(): any;
+    renderView(): any;
+    renderModals(): any;
+    renderHeader(): any;
+    renderMain(): any;
+    renderFooter(): any;
+
 }
