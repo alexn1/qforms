@@ -9,7 +9,7 @@ module.exports = {
     },
     rules: {
         'import/prefer-default-export': 'off',
-        '@typescript-eslint/indent': ['error', 4],
+        '@typescript-eslint/indent': "off",
         'no-console': 'off',
         '@typescript-eslint/lines-between-class-members': 'off',
         'arrow-parens': ['warn', 'as-needed'],
@@ -17,6 +17,6 @@ module.exports = {
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
         "spaced-comment": "off",
-        "max-len": ["warn", 100],
+        "max-len": "off",
     },
 };
