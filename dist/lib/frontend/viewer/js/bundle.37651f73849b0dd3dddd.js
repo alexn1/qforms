@@ -38803,7 +38803,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
                             })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return Object.keys(ctrl.fields)
             .filter(name => ctrl.getField(name).isVisible())
             .map(name => {
@@ -42164,6 +42164,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_28__.TableFormDateTimeFieldView),
 /* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_44__.TableFormPhoneFieldController),
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_7__.TableFormTextBoxFieldController),
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_54__.TableFormTextBoxFieldView),
 /* harmony export */   "TableFormView": () => (/* reexport safe */ _Controller_ModelController_FormController_TableFormController_TableFormView__WEBPACK_IMPORTED_MODULE_52__.TableFormView),
 /* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_20__.TextAreaField),
 /* harmony export */   "TextBoxField": () => (/* reexport safe */ _Model_Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_13__.TextBoxField),
@@ -42223,6 +42224,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_Column_Column__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./Model/Column/Column */ "./src/frontend/viewer/Model/Column/Column.ts");
 /* harmony import */ var _Controller_ModelController_FormController_TableFormController_TableFormView__WEBPACK_IMPORTED_MODULE_52__ = __webpack_require__(/*! ./Controller/ModelController/FormController/TableFormController/TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormFieldView__WEBPACK_IMPORTED_MODULE_53__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx");
+
 
 
 
