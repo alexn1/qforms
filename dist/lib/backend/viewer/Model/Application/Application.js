@@ -311,7 +311,7 @@ class Application extends Model_1.Model {
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),
             dirPath: path.resolve(path.dirname(appFilePath)),
-            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), appName) : null,
+            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), dirName) : null,
         };
     }
     static async loadAppInfo(appFilePath, hostApp) {

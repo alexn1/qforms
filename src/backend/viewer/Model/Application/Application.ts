@@ -74,7 +74,7 @@ export class Application extends Model {
     async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getFrontendDirPath();
-        console.log('publicDirPath:', publicDirPath);
+        // console.log('publicDirPath:', publicDirPath);
         return (await Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
     }
 
@@ -363,10 +363,9 @@ export class Application extends Model {
         const data = appFile.data;
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
-        const appName = BaseModel.getName(data);
         return {
             appFile: appFile,
-            name: appName,
+            name: BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
             envs: BaseModel.getEnvList(data),
@@ -376,7 +375,7 @@ export class Application extends Model {
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),
             dirPath: path.resolve(path.dirname(appFilePath)),
-            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), appName) : null,
+            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), dirName) : null,
         };
     }
 
