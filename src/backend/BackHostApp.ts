@@ -873,4 +873,8 @@ export class BackHostApp {
     static test() {
         console.log('BackHostApp.test');
     }
+
+    getDistDirPath(): string {
+        return this.distDirPath;
+    }
 }
