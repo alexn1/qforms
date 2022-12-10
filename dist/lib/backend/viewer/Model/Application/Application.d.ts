@@ -30,7 +30,7 @@ export declare class Application extends Model {
     deinit(): Promise<void>;
     getDirPath(): string;
     getDistDirPath(): string;
-    getFrontendDirPath(): any;
+    getPublicDirPath(): string;
     getText(): any;
     getVersion(): any;
     fillAttributes(response: any): void;

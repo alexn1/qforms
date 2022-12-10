@@ -42,12 +42,12 @@ class Application extends Model_1.Model {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.Helper.getFilePaths(this.getFrontendDirPath(), 'css')).map(src => `${virtualPath}/${src}`);
+        return (await Helper_1.Helper.getFilePaths(this.getPublicDirPath(), 'css')).map(src => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
-        const publicDirPath = this.getFrontendDirPath();
-        console.log('publicDirPath:', publicDirPath);
+        const publicDirPath = this.getPublicDirPath();
+        // console.log('publicDirPath:', publicDirPath);
         return (await Helper_1.Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
     }
     async deinit() {
@@ -63,12 +63,11 @@ class Application extends Model_1.Model {
     getDistDirPath() {
         return this.appInfo.distDirPath;
     }
-    getFrontendDirPath() {
+    getPublicDirPath() {
         const distDirPath = this.getDistDirPath();
         if (!distDirPath)
             throw new Error('no distDirPath');
         return path.join(distDirPath, 'public');
-        //return path.join(this.getDirPath(), 'frontend');
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
@@ -298,10 +297,9 @@ class Application extends Model_1.Model {
         const data = appFile.data;
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
-        const appName = BaseModel_1.BaseModel.getName(data);
         return {
             appFile: appFile,
-            name: appName,
+            name: BaseModel_1.BaseModel.getName(data),
             caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
             envs: BaseModel_1.BaseModel.getEnvList(data),
@@ -422,7 +420,7 @@ class Application extends Model_1.Model {
     }
     async handleGetFile(context, next) {
         // console.log('Application.handleGetFile', context.getUri());
-        const filePath = path.join(this.getFrontendDirPath(), context.getUri());
+        const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await Helper_1.Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         }

@@ -66,14 +66,14 @@ export class Application extends Model {
 
     async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'css')).map(
+        return (await Helper.getFilePaths(this.getPublicDirPath(), 'css')).map(
             src => `${virtualPath}/${src}`,
         );
     }
 
     async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        const publicDirPath = this.getFrontendDirPath();
+        const publicDirPath = this.getPublicDirPath();
         // console.log('publicDirPath:', publicDirPath);
         return (await Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
     }
@@ -95,11 +95,10 @@ export class Application extends Model {
         return this.appInfo.distDirPath;
     }
 
-    getFrontendDirPath() {
+    getPublicDirPath(): string {
         const distDirPath = this.getDistDirPath();
         if (!distDirPath) throw new Error('no distDirPath');
         return path.join(distDirPath, 'public');
-        //return path.join(this.getDirPath(), 'frontend');
     }
 
     getText(): any {
@@ -496,7 +495,7 @@ export class Application extends Model {
 
     async handleGetFile(context: Context, next) {
         // console.log('Application.handleGetFile', context.getUri());
-        const filePath = path.join(this.getFrontendDirPath(), context.getUri());
+        const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         } else {
