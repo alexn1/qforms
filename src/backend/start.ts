@@ -15,4 +15,4 @@ async function main() {
         await backHostApp.logError(err);
     }
 }
-await main();
+main();

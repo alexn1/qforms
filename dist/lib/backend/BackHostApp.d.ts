@@ -15,6 +15,7 @@ export declare class BackHostApp {
     httpServer: any;
     wsServer: any;
     appsDirPath: string;
+    distDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;

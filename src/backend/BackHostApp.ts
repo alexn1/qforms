@@ -36,6 +36,7 @@ export class BackHostApp {
     httpServer: any;
     wsServer: any;
     appsDirPath: string;
+    distDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
@@ -72,6 +73,7 @@ export class BackHostApp {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.appsDirPath = path.resolve(this.params.appsDirPath || './apps');
+        this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
@@ -141,6 +143,8 @@ export class BackHostApp {
         }\n`;
         msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
         msg += `\tappsDirPath: ${this.appsDirPath}\n`;
+        msg += `\tdistDirPath: ${this.distDirPath}\n`;
+
         if (this.isDevelopment()) {
             msg += `\tmonitor: http://${host}:${port}/monitor\n`;
         }
