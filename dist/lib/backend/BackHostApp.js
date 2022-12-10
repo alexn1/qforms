@@ -220,7 +220,7 @@ class BackHostApp {
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application_1.Application.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application_1.Application.loadAppInfo(this.getAppFilePath(context), this);
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -244,7 +244,7 @@ class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application_1.Application.getAppInfos(this.appsDirPath);
+        const appInfos = await Application_1.Application.getAppInfos(this.appsDirPath, this);
         return appInfos;
     }
     async logError(err, req = null) {
@@ -759,6 +759,9 @@ class BackHostApp {
     }
     static test() {
         console.log('BackHostApp.test');
+    }
+    getDistDirPath() {
+        return this.distDirPath;
     }
 }
 exports.BackHostApp = BackHostApp;

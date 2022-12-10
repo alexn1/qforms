@@ -12,4 +12,5 @@ export interface AppInfo {
     fileNameExt: string;
     extName: string;
     dirPath: string;
+    distDirPath: string | null;
 }

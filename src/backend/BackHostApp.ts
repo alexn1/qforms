@@ -302,7 +302,7 @@ export class BackHostApp {
 
     async createApplication(context: Context): Promise<Application> {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context));
+        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context), this);
 
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
@@ -328,7 +328,7 @@ export class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application.getAppInfos(this.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.appsDirPath, this);
         return appInfos;
     }
 

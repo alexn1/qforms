@@ -73,9 +73,9 @@ export class Application extends Model {
 
     async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getFrontendDirPath(), 'js')).map(
-            src => `${virtualPath}/${src}`,
-        );
+        const publicDirPath = this.getFrontendDirPath();
+        console.log('publicDirPath:', publicDirPath);
+        return (await Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
     }
 
     async deinit() {
@@ -91,8 +91,15 @@ export class Application extends Model {
         return this.appInfo.dirPath;
     }
 
+    getDistDirPath(): string {
+        return this.appInfo.distDirPath;
+    }
+
     getFrontendDirPath() {
-        return path.join(this.getDirPath(), 'frontend');
+        const distDirPath = this.getDistDirPath();
+        if (!distDirPath) throw new Error('no distDirPath');
+        return path.join(distDirPath, 'public');
+        //return path.join(this.getDirPath(), 'frontend');
     }
 
     getText(): any {
@@ -350,15 +357,16 @@ export class Application extends Model {
     // to init custom context params before each request get/post
     async initContext(context: Context): Promise<void> {}
 
-    static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo {
+    static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
+        const appName = BaseModel.getName(data);
         return {
             appFile: appFile,
-            name: BaseModel.getName(data),
+            name: appName,
             caption: BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
             envs: BaseModel.getEnvList(data),
@@ -368,24 +376,25 @@ export class Application extends Model {
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),
             dirPath: path.resolve(path.dirname(appFilePath)),
+            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), appName) : null,
         };
     }
 
-    static async loadAppInfo(appFilePath): Promise<AppInfo> {
+    static async loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo> {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = Application.makeAppInfoFromAppFile(appFile);
+        const appInfo = Application.makeAppInfoFromAppFile(appFile, hostApp);
         return appInfo;
     }
 
-    static async getAppInfos(appsDirPath): Promise<AppInfo[]> {
+    static async getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]> {
         // console.log('Application.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.loadAppInfo(appFilePath);
+            const appInfo = await Application.loadAppInfo(appFilePath, hostApp);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

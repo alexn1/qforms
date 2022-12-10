@@ -11,7 +11,7 @@ class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = Application_1.Application.makeAppInfoFromAppFile(appFile);
+        this.appInfo = Application_1.Application.makeAppInfoFromAppFile(appFile, null);
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);

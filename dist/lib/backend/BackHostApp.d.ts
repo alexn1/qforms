@@ -74,4 +74,5 @@ export declare class BackHostApp {
     getParams(): any;
     broadcastResult(sourceApplication: Application, context: Context, result: Result): void;
     static test(): void;
+    getDistDirPath(): string;
 }

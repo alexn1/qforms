@@ -29,6 +29,7 @@ export declare class Application extends Model {
     getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
+    getDistDirPath(): string;
     getFrontendDirPath(): any;
     getText(): any;
     getVersion(): any;
@@ -52,9 +53,9 @@ export declare class Application extends Model {
     findDatabase(name: string): Database;
     getDatabase(name: string): Database;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile): AppInfo;
-    static loadAppInfo(appFilePath: any): Promise<AppInfo>;
-    static getAppInfos(appsDirPath: any): Promise<AppInfo[]>;
+    static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
+    static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
+    static getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]>;
     getDataSource(name: any): DataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;

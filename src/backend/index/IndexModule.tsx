@@ -25,7 +25,7 @@ export class IndexModule {
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath);
+        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
