@@ -61,3 +61,4 @@ export { PhoneBox } from '../common';
 export { RowFormFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView';
 export { Grid } from '../common';
 export { TableFormTextBoxFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView';
+export { TableFormDateFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView';
