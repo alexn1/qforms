@@ -504,3 +504,6 @@ export class Helper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 }
+
+// @ts-ignore
+global.Helper = Helper;

@@ -485,3 +485,5 @@ class Helper {
     }
 }
 exports.Helper = Helper;
+// @ts-ignore
+global.Helper = Helper;
