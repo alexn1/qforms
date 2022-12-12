@@ -197,7 +197,7 @@ export class RowFormFieldController extends FieldController {
             .getApp()
             .getText().form.required;
     }
-    isEditable() {
+    isEditable(): boolean {
         return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
     }
     isParseError() {
