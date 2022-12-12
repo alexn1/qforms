@@ -63,3 +63,4 @@ export { Grid } from '../common';
 export { TableFormTextBoxFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView';
 export { TableFormDateFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView';
 export { PasswordIcon } from '../common';
+export { RowFormFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController';
