@@ -62,3 +62,4 @@ export { RowFormFieldView } from './Controller/ModelController/FieldController/R
 export { Grid } from '../common';
 export { TableFormTextBoxFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView';
 export { TableFormDateFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView';
+export { PasswordIcon } from '../common';
