@@ -1,7 +1,7 @@
 /// <reference types="react" />
 import { FormView } from '../FormView';
 export declare class RowFormView extends FormView {
-    renderToolbar(): JSX.Element;
+    renderToolbar(): any;
     isActionsEnabled(): boolean;
     isActionsVisible(): boolean;
     renderLabel(fieldCtrl: any): JSX.Element;

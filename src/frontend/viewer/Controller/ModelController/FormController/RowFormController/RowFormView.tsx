@@ -2,7 +2,7 @@ import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
 
 export class RowFormView extends FormView {
-    renderToolbar() {
+    renderToolbar(): any {
         // console.log('RowFormView.renderToolbar');
         const ctrl = this.props.ctrl;
         const text = ctrl
