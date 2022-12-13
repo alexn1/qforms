@@ -37521,7 +37521,7 @@ class RowFormRadioFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.getCtrl()
                 .getItems()
                 .map(item => {
-                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__toggle ${value === item.value ? 'selected' : ''}`, type: 'button', value: item.title || item.value, disabled: !this.getCtrl().isEditable(), "data-value": JSON.stringify(item.value), onClick: this.onClick }));
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__toggle ${value === item.value ? 'selected' : ''}`, type: 'button', value: item.title || item.value, disabled: !this.getCtrl().isEditable(), "data-value": JSON.stringify(item.value), onClick: this.onClick }, item.value));
             }) })));
     }
 }

@@ -37,6 +37,7 @@ export class RowFormRadioFieldView extends RowFormFieldView {
                     .map(item => {
                         return (
                             <input
+                                key={item.value}
                                 className={`${this.getCssBlockName()}__toggle ${
                                     value === item.value ? 'selected' : ''
                                 }`}
