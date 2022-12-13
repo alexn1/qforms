@@ -9,7 +9,7 @@ export declare class RowFormView extends FormView {
     renderFieldView(fieldCtrl: any): any;
     static renderFieldView(fieldCtrl: any): any;
     renderError(fieldCtrl: any): JSX.Element;
-    renderGroup(fieldCtrl: any): JSX.Element;
+    renderGroup(fieldCtrl: any): JSX.Element[];
     renderGroups(): JSX.Element;
     render(): JSX.Element;
 }

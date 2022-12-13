@@ -38534,12 +38534,18 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`));
     }
     renderGroup(fieldCtrl) {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.Fragment, { children: [this.renderLabel(fieldCtrl), this.renderField(fieldCtrl), this.renderError(fieldCtrl)] }));
-        /*return [
+        /*return (
+            <>
+                {this.renderLabel(fieldCtrl)}
+                {this.renderField(fieldCtrl)}
+                {this.renderError(fieldCtrl)}
+            </>
+        );*/
+        return [
             this.renderLabel(fieldCtrl),
             this.renderField(fieldCtrl),
-            this.renderError(fieldCtrl)
-        ];*/
+            this.renderError(fieldCtrl),
+        ];
         /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
             {this.renderLabel(fieldCtrl)}
             {this.renderField(fieldCtrl)}
