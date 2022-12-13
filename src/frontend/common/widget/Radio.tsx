@@ -53,6 +53,7 @@ export class Radio extends ReactComponent {
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }

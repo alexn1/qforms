@@ -64,3 +64,5 @@ export { TableFormTextBoxFieldView } from './Controller/ModelController/FieldCon
 export { TableFormDateFieldView } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView';
 export { PasswordIcon } from '../common';
 export { RowFormFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController';
+export { Radio } from '../common';
+export { LoginView } from './Controller/LoginController/LoginView';

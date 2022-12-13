@@ -32264,6 +32264,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
 /* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_40__.PhoneBox),
 /* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget_Radio__WEBPACK_IMPORTED_MODULE_46__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
@@ -32327,6 +32328,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
 /* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
 /* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _widget_Radio__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./widget/Radio */ "./src/frontend/common/widget/Radio.tsx");
 
 
 
@@ -32348,6 +32350,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // widget
+
 
 
 
@@ -33985,6 +33988,79 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
 }
 // @ts-ignore
 window.PhoneBox = PhoneBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Radio.tsx":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/widget/Radio.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Radio": () => (/* binding */ Radio)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Radio.constructor', props.value);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('Radio.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        if (!props.name)
+            throw new Error('no name');
+        this.state = {
+            value: this.getInitialValue(),
+        };
+        console.log('value:', JSON.stringify(this.getValue()));
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find(item => item.value === this.props.value);
+            if (!item) {
+                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
+                console.log('items:', this.props.items);
+            }
+        }
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    renderItem(item, i) {
+        return [
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'radio', name: this.props.name, id: `${this.props.name}${i}`, value: item.value, onChange: this.onChange, checked: item.value === this.getValue(), readOnly: this.isReadOnly(), disabled: this.isReadOnly() }),
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: `${this.props.name}${i}` }, { children: item.title || item.value })),
+        ];
+    }
+    isReadOnly() {
+        if (this.props.readOnly !== undefined)
+            return this.props.readOnly;
+        return false;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        const items = this.props.items || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: items.map((item, i) => this.renderItem(item, i)) })));
+    }
+}
 
 
 /***/ }),
@@ -42125,6 +42201,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Helper": () => (/* reexport safe */ _common_Helper__WEBPACK_IMPORTED_MODULE_22__.Helper),
 /* harmony export */   "LoginController": () => (/* reexport safe */ _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_29__.LoginController),
 /* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
+/* harmony export */   "LoginView": () => (/* reexport safe */ _Controller_LoginController_LoginView__WEBPACK_IMPORTED_MODULE_57__.LoginView),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.OpenInNewIcon),
 /* harmony export */   "PageController": () => (/* reexport safe */ _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_8__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_4__.PageView),
@@ -42132,6 +42209,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PasswordIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.PasswordIcon),
 /* harmony export */   "PhoneBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.PhoneBox),
 /* harmony export */   "PhoneField": () => (/* reexport safe */ _Model_Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_42__.PhoneField),
+/* harmony export */   "Radio": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Radio),
 /* harmony export */   "RadioField": () => (/* reexport safe */ _Model_Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_36__.RadioField),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.ReactComponent),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _Model_Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_9__.RowForm),
@@ -42230,6 +42308,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_54__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormFieldController__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _Controller_LoginController_LoginView__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./Controller/LoginController/LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
+
+
 
 
 

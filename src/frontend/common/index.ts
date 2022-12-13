@@ -48,3 +48,4 @@ export { Image } from './widget/Image/Image';
 export { CheckBoxList } from './widget/CheckBoxList';
 export { Slider } from './widget/Slider/Slider';
 export { Expand } from './widget/Expand/Expand';
+export { Radio } from './widget/Radio';
