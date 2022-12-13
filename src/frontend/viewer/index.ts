@@ -68,3 +68,6 @@ export { Radio } from '../common';
 export { LoginView } from './Controller/LoginController/LoginView';
 export { LinkField } from './Model/Field/LinkField/LinkField';
 export { RowFormLinkFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController';
+export { RowFormDateFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView';
+export { RowFormTextAreaFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView';
+export { RowFormTextBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView';
