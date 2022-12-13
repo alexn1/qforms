@@ -66,3 +66,5 @@ export { PasswordIcon } from '../common';
 export { RowFormFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController';
 export { Radio } from '../common';
 export { LoginView } from './Controller/LoginController/LoginView';
+export { LinkField } from './Model/Field/LinkField/LinkField';
+export { RowFormLinkFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController';

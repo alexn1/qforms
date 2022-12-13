@@ -37163,6 +37163,65 @@ window.RowFormFileFieldView = RowFormFileFieldView;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts ***!
+  \********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormLinkFieldController": () => (/* binding */ RowFormLinkFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormLinkFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx");
+
+
+class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onClick = e => {
+            console.log('RowFormLinkFieldController.onClick', e);
+            // @ts-ignore
+            this.emit({ source: this });
+        };
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormLinkFieldView;
+    }
+}
+// @ts-ignore
+window.RowFormLinkFieldController = RowFormLinkFieldController;
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx ***!
+  \***************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormLinkFieldView": () => (/* binding */ RowFormLinkFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+
+
+class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.getValueForWidget(), onClick: ctrl.onClick, target: '_blank' }, { children: ctrl.getValueForWidget() })) })));
+    }
+}
+// @ts-ignore
+window.RowFormLinkFieldView = RowFormLinkFieldView;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts ***!
@@ -41122,6 +41181,26 @@ window.FileField = FileField;
 
 /***/ }),
 
+/***/ "./src/frontend/viewer/Model/Field/LinkField/LinkField.ts":
+/*!****************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/LinkField/LinkField.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LinkField": () => (/* binding */ LinkField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+
+class LinkField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+// @ts-ignore
+window.LinkField = LinkField;
+
+
+/***/ }),
+
 /***/ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts":
 /*!************************************************************************!*\
   !*** ./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts ***!
@@ -42199,6 +42278,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "FileField": () => (/* reexport safe */ _Model_Field_FileField_FileField__WEBPACK_IMPORTED_MODULE_37__.FileField),
 /* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Grid),
 /* harmony export */   "Helper": () => (/* reexport safe */ _common_Helper__WEBPACK_IMPORTED_MODULE_22__.Helper),
+/* harmony export */   "LinkField": () => (/* reexport safe */ _Model_Field_LinkField_LinkField__WEBPACK_IMPORTED_MODULE_58__.LinkField),
 /* harmony export */   "LoginController": () => (/* reexport safe */ _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_29__.LoginController),
 /* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.LoginFrontHostApp),
 /* harmony export */   "LoginView": () => (/* reexport safe */ _Controller_LoginController_LoginView__WEBPACK_IMPORTED_MODULE_57__.LoginView),
@@ -42223,6 +42303,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormFieldController__WEBPACK_IMPORTED_MODULE_56__.RowFormFieldController),
 /* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormFieldView__WEBPACK_IMPORTED_MODULE_53__.RowFormFieldView),
 /* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormFileFieldController_RowFormFileFieldController__WEBPACK_IMPORTED_MODULE_40__.RowFormFileFieldController),
+/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormLinkFieldController_RowFormLinkFieldController__WEBPACK_IMPORTED_MODULE_59__.RowFormLinkFieldController),
 /* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormPasswordFieldController_RowFormPasswordFieldController__WEBPACK_IMPORTED_MODULE_25__.RowFormPasswordFieldController),
 /* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_43__.RowFormPhoneFieldController),
 /* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormRadioFieldController_RowFormRadioFieldController__WEBPACK_IMPORTED_MODULE_38__.RowFormRadioFieldController),
@@ -42309,6 +42390,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_55__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormFieldController__WEBPACK_IMPORTED_MODULE_56__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _Controller_LoginController_LoginView__WEBPACK_IMPORTED_MODULE_57__ = __webpack_require__(/*! ./Controller/LoginController/LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
+/* harmony import */ var _Model_Field_LinkField_LinkField__WEBPACK_IMPORTED_MODULE_58__ = __webpack_require__(/*! ./Model/Field/LinkField/LinkField */ "./src/frontend/viewer/Model/Field/LinkField/LinkField.ts");
+/* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormLinkFieldController_RowFormLinkFieldController__WEBPACK_IMPORTED_MODULE_59__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts");
+
+
 
 
 
