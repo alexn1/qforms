@@ -73,3 +73,4 @@ export { RowFormTextAreaFieldView } from './Controller/ModelController/FieldCont
 export { RowFormTextBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView';
 export { Search } from '../common';
 export { RowFormDateTimeFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView';
+export { RowFormComboBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView';
