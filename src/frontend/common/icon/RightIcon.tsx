@@ -1,4 +1,4 @@
-export const RightIcon = props => {
+export const RightIcon = (props: { size?: number }) => {
     const size = props.size || 24;
     return (
         <svg

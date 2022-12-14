@@ -78,3 +78,6 @@ export { EditIcon } from '../common';
 export { Select } from '../common';
 export { ArrowIcon } from '../common';
 export { LocationIcon } from '../common';
+export { DownIcon } from '../common';
+export { LeftIcon } from '../common';
+export { RightIcon } from '../common';

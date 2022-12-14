@@ -247,7 +247,7 @@ export class DataSource extends Model {
 
     static keyToParams(key, paramName = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');
-        const params = {};
+        const params: any = {};
         const arr = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];

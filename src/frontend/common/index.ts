@@ -21,6 +21,7 @@ export { PasswordIcon } from './icon/PasswordIcon';
 export { DeleteIcon } from './icon/DeleteIcon';
 export { EditIcon } from './icon/EditIcon';
 export { ArrowIcon } from './icon/ArrowIcon';
+export { DownIcon } from './icon/DownIcon';
 
 // widget
 export { Box } from './widget/Box/Box';

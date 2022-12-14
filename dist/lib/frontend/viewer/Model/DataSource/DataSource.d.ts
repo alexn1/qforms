@@ -32,7 +32,7 @@ export declare class DataSource extends Model {
     getRows(): any;
     getRowByIndex(i: any): any;
     discard(): void;
-    static keyToParams(key: any, paramName?: string): {};
+    static keyToParams(key: any, paramName?: string): any;
     getChangesByKey(): {};
     getRowWithChanges(row: any): any;
     hasNewRows(): boolean;

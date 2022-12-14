@@ -1,1 +1,3 @@
-export declare const RightIcon: (props: any) => JSX.Element;
+export declare const RightIcon: (props: {
+    size?: number;
+}) => JSX.Element;

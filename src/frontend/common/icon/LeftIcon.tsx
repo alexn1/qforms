@@ -1,4 +1,10 @@
-export const LeftIcon = props => {
+import React from 'react';
+
+interface LeftIconProps {
+    size?: number;
+}
+
+export const LeftIcon: React.FunctionComponent<LeftIconProps> = (props: LeftIconProps) => {
     const size = props.size || 24;
     return (
         <svg
