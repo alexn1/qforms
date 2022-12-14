@@ -26,7 +26,7 @@ export declare class Helper {
     static dateTimeReviver(key: any, value: any): any;
     static decodeValue(rawValue: any): any;
     static encodeValue(value: any): string;
-    static decodeObject(obj: any): {};
+    static decodeObject(obj: any): any;
     static SECOND(): number;
     static MINUTE(): number;
     static HOUR(): number;

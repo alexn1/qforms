@@ -5,7 +5,7 @@ export declare class Helper {
     static getStartOfDay(date: any): Date;
     static encodeObject(obj: any): {};
     static encodeValue(value: any): string;
-    static decodeObject(eObj: any): {};
+    static decodeObject(eObj: any): any;
     static decodeValue(raw: any): any;
     static dateTimeReviver(key: any, value: any): any;
     static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): any;

@@ -68,7 +68,7 @@ export class Helper {
         return JSON.stringify(value);
     }
 
-    static decodeObject(eObj) {
+    static decodeObject(eObj): any {
         if (!eObj) throw new Error('Helper.decodeObject: no object');
         const obj = {};
         for (const name in eObj) {

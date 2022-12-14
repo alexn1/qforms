@@ -1,5 +1,5 @@
 export class Search {
-    static getObj() {
+    static getObj(): any {
         if (!window.location.search.split('?')[1]) return {};
         return window.location.search
             .split('?')[1]
