@@ -17,6 +17,8 @@ export { CancelIcon } from './icon/CancelIcon';
 export { PhoneIcon } from './icon/PhoneIcon';
 export { PasswordIcon } from './icon/PasswordIcon';
 export { DeleteIcon } from './icon/DeleteIcon';
+export { EditIcon } from './icon/EditIcon';
+export { ArrowIcon } from './icon/ArrowIcon';
 export { Box } from './widget/Box/Box';
 export { CheckBox } from './widget/CheckBox/CheckBox';
 export { ComboBox } from './widget/ComboBox';
