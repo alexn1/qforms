@@ -5,4 +5,5 @@ export declare class PageView extends ModelView {
     renderHeader(): any;
     renderForms(): any;
     renderForm(formCtrl: any, props?: any): any;
+    renderTitle(): any;
 }
