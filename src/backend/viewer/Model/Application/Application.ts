@@ -118,6 +118,7 @@ export class Application extends Model {
         response.theme = this.getAttr('theme');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
     }
 
     async fill(context: Context): Promise<any> {

@@ -16,8 +16,8 @@ export class ApplicationController extends ModelController {
     view: any;
 
     constructor(model, frontHostApp) {
-        // console.log('ApplicationController.constructor', model, view);
         super(model, null);
+        console.log(`${this.constructor.name}.constructor`, model);
         this.frontHostApp = frontHostApp;
         this.lastId = 0;
         this.activePage = null; // active non modal page
@@ -27,10 +27,22 @@ export class ApplicationController extends ModelController {
         this.webSocketClient = null;
     }
     static create(model, frontHostApp) {
-        // console.log('ApplicationController.create', 'debug:', ApplicationController.isDebugMode());
-        const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
-        const Class = CustomClass ? CustomClass : ApplicationController;
-        return new Class(model, frontHostApp);
+        // console.log(
+        //     'ApplicationController.create',
+        //     'debug:',
+        //     ApplicationController.isDebugMode(),
+        //     model,
+        // );
+        const { ctrlClass } = model.data;
+        if (ctrlClass) {
+            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, frontHostApp);
+        }
+        return new ApplicationController(model, frontHostApp);
+        // const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
+        // const Class = CustomClass ? CustomClass : ApplicationController;
+        // return new Class(model, frontHostApp);
     }
     static isDebugMode() {
         return Search.getObj()['debug'] === '1';

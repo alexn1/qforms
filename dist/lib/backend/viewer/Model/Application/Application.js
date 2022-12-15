@@ -84,6 +84,7 @@ class Application extends Model_1.Model {
         response.theme = this.getAttr('theme');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
         // console.log('Application.fill');
