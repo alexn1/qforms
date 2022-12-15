@@ -13,6 +13,7 @@ export declare class PageEditor extends Editor {
             caption: any;
             cssBlock: any;
             viewClass: any;
+            ctrlClass: any;
         };
         dataSources: any[];
         actions: any[];

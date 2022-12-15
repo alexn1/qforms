@@ -38,6 +38,7 @@ export declare class ApplicationEditor extends Editor {
                 caption: any;
                 cssBlock: any;
                 viewClass: any;
+                ctrlClass: any;
             };
             dataSources: any[];
             actions: any[];

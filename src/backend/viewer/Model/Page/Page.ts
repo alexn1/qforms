@@ -35,6 +35,7 @@ export class Page extends Model {
         response.caption = this.getAttr('caption');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
     }
 
     async fill(context): Promise<any> {
