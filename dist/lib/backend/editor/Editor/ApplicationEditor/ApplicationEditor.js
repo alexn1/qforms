@@ -31,6 +31,7 @@ class ApplicationEditor extends Editor_1.Editor {
                 cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
                 ctrlClass: params.ctrlClass !== undefined ? params.ctrlClass : '',
+                modelClass: params.modelClass !== undefined ? params.modelClass : '',
             },
             env: params.env ? params.env : {},
             databases: [...(params.databases ? params.databases.map(Editor_1.Editor.createItemData) : [])],

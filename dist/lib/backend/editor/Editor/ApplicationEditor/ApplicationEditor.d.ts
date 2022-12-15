@@ -20,6 +20,7 @@ export declare class ApplicationEditor extends Editor {
             cssBlock: any;
             viewClass: any;
             ctrlClass: any;
+            modelClass: any;
         };
         env: any;
         databases: any[];
