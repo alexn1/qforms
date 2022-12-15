@@ -42366,6 +42366,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Search": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Search),
 /* harmony export */   "Select": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Select),
 /* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Slider),
 /* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__.SqlDataSource),
 /* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Tab2),
 /* harmony export */   "Table": () => (/* reexport safe */ _Model_Table_Table__WEBPACK_IMPORTED_MODULE_50__.Table),
@@ -42452,6 +42453,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
+
 
 
 

@@ -83,3 +83,4 @@ export { LeftIcon } from '../common';
 export { RightIcon } from '../common';
 export { Expand } from '../common';
 export { CloseIcon2 } from '../common';
+export { Slider } from '../common';

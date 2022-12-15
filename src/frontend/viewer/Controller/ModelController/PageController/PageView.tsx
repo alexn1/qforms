@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { ModelView } from '../ModelView';
 import {
     Button,
@@ -69,7 +69,7 @@ export class PageView extends ModelView {
     renderRowForms() {
         return this.getRowForms().map(form => this.renderForm(form));
     }
-    renderTitle() {
+    renderTitle(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         return (
