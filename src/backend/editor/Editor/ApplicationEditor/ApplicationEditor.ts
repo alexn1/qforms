@@ -30,6 +30,7 @@ export class ApplicationEditor extends Editor {
                 theme: params.theme || 'standard',
                 cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
+                ctrlClass: params.ctrlClass !== undefined ? params.ctrlClass : '',
             },
             env: params.env ? params.env : {},
             databases: [...(params.databases ? params.databases.map(Editor.createItemData) : [])],
