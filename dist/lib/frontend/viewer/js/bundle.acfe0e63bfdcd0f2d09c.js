@@ -39183,7 +39183,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     constructor(model, parent, id) {
-        //console.log('PageController.constructor', model);
         super(model, parent);
         this.onSaveAndCloseClick = async () => {
             console.log('PageController.onSaveAndCloseClick');
@@ -39239,6 +39238,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             console.log('PageController.onResetClick');
             await this.selectRow(null);
         };
+        console.log(`${this.constructor.name}.constructor`, model);
         if (!id)
             throw new Error('no id');
         this.id = id;

@@ -10,8 +10,8 @@ export class PageController extends ModelController {
     id: any;
     forms: any[];
     constructor(model, parent, id) {
-        //console.log('PageController.constructor', model);
         super(model, parent);
+        console.log(`${this.constructor.name}.constructor`, model);
         if (!id) throw new Error('no id');
         this.id = id;
         this.forms = [];
