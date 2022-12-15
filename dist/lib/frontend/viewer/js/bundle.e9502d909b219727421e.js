@@ -39246,9 +39246,18 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     static create(model, parent, id, options = null) {
         // console.log('PageController.create', model.getName());
-        const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(`${model.getName()}PageController`);
+        const { ctrlClass } = model.data;
+        if (ctrlClass) {
+            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, parent, id, options);
+        }
+        // @ts-ignore
+        return new PageController(model, parent, id, options);
+        /*const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
         const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id, options);
+        return new Class(model, parent, id, options);*/
     }
     init() {
         for (const form of this.model.forms) {
