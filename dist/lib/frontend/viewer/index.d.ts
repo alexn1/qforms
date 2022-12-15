@@ -81,3 +81,5 @@ export { LocationIcon } from '../common';
 export { DownIcon } from '../common';
 export { LeftIcon } from '../common';
 export { RightIcon } from '../common';
+export { Expand } from '../common';
+export { CloseIcon2 } from '../common';

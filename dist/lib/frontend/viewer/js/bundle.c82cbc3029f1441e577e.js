@@ -38520,7 +38520,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
     renderToolbar() {
         // console.log('RowFormView.renderToolbar');
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         const text = ctrl
             .getModel()
             .getApp()
@@ -42308,6 +42308,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "CancelIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.CancelIcon),
 /* harmony export */   "CheckBoxField": () => (/* reexport safe */ _Model_Field_CheckBoxField_CheckBoxField__WEBPACK_IMPORTED_MODULE_33__.CheckBoxField),
 /* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _Model_Field_CheckBoxListField_CheckBoxListField__WEBPACK_IMPORTED_MODULE_45__.CheckBoxListField),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.CloseIcon2),
 /* harmony export */   "Column": () => (/* reexport safe */ _Model_Column_Column__WEBPACK_IMPORTED_MODULE_51__.Column),
 /* harmony export */   "ComboBoxField": () => (/* reexport safe */ _Model_Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_12__.ComboBoxField),
 /* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
@@ -42318,6 +42319,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.DoneIcon),
 /* harmony export */   "DownIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.DownIcon),
 /* harmony export */   "EditIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Expand),
 /* harmony export */   "FileField": () => (/* reexport safe */ _Model_Field_FileField_FileField__WEBPACK_IMPORTED_MODULE_37__.FileField),
 /* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_41__.Grid),
 /* harmony export */   "Helper": () => (/* reexport safe */ _common_Helper__WEBPACK_IMPORTED_MODULE_22__.Helper),
@@ -42450,6 +42452,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_62__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
+
+
 
 
 

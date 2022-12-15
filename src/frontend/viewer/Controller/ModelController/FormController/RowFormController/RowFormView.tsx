@@ -1,10 +1,11 @@
+import { ReactNode } from 'react';
 import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
 
 export class RowFormView extends FormView {
     renderToolbar(): any {
         // console.log('RowFormView.renderToolbar');
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         const text = ctrl
             .getModel()
             .getApp()
@@ -145,7 +146,7 @@ export class RowFormView extends FormView {
             </div>
         );
     }
-    renderGroup(fieldCtrl) {
+    renderGroup(fieldCtrl): ReactNode {
         /*return (
             <>
                 {this.renderLabel(fieldCtrl)}
