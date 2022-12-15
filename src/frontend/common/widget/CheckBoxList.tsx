@@ -65,7 +65,7 @@ export class CheckBoxList extends ReactComponent {
                 {this.getItems().map(item => {
                     if (item.value === undefined) throw new Error('no item value');
                     return (
-                        <li>
+                        <li key={item.value}>
                             <input
                                 type={'checkbox'}
                                 id={this.composeItemId(item.value)}
