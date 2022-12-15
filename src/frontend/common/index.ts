@@ -22,6 +22,8 @@ export { DeleteIcon } from './icon/DeleteIcon';
 export { EditIcon } from './icon/EditIcon';
 export { ArrowIcon } from './icon/ArrowIcon';
 export { DownIcon } from './icon/DownIcon';
+export { DateIcon } from './icon/DateIcon';
+export { TimeIcon } from './icon/TimeIcon';
 
 // widget
 export { Box } from './widget/Box/Box';
