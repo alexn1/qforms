@@ -24,6 +24,7 @@ class Field extends Model_1.Model {
         response.width = this.getAttr('width');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
         response.autoFocus = this.getAttr('autoFocus');
     }
     getDirPath() {
@@ -39,7 +40,7 @@ class Field extends Model_1.Model {
         let value;
         try {
             // @ts-ignore
-            global.Helper = Helper_1.Helper;
+            // global.Helper = Helper;
             value = eval(js);
             if (value !== undefined) {
                 row[column] = this.valueToRaw(value);

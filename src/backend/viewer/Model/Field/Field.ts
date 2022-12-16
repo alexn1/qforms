@@ -31,6 +31,7 @@ export class Field extends Model {
         response.width = this.getAttr('width');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
         response.autoFocus = this.getAttr('autoFocus');
     }
 

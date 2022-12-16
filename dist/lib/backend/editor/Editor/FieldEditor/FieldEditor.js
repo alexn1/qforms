@@ -43,6 +43,7 @@ class FieldEditor extends Editor_1.Editor {
             width: params.width !== undefined ? params.width : '',
             cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
             viewClass: params.viewClass !== undefined ? params.viewClass : '',
+            ctrlClass: params.ctrlClass !== undefined ? params.ctrlClass : '',
             autoFocus: params.autoFocus !== undefined ? params.autoFocus : 'false',
         };
     }
