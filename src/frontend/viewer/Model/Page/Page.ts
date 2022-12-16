@@ -43,6 +43,7 @@ export class Page extends Model {
         // forms
         for (const data of this.data.forms) {
             const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
+            if (!FormClass) throw new Error(`no ${Model.getClassName(data)} class`);
             const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);

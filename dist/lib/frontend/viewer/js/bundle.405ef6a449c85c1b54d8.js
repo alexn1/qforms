@@ -41813,6 +41813,8 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         // forms
         for (const data of this.data.forms) {
             const FormClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data));
+            if (!FormClass)
+                throw new Error(`no ${_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data)} class`);
             const form = new FormClass(data, this);
             form.init();
             this.forms.push(form);
