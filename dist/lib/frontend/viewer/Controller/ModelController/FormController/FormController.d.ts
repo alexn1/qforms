@@ -1,9 +1,11 @@
 import { ModelController } from '../ModelController';
+import { PageController } from '../PageController/PageController';
+import { Form } from '../../../Model/Form/Form';
 export declare class FormController extends ModelController {
     fields: any;
     state: any;
-    static create(model: any, parent: any): FormController;
-    constructor(model: any, parent: any);
+    static create(model: Form, parent: PageController): FormController;
+    constructor(model: Form, parent: PageController);
     init(): void;
     deinit(): void;
     isValid(): boolean;

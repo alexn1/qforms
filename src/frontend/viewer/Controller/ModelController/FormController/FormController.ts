@@ -1,11 +1,13 @@
 import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { FieldController } from '../FieldController/FieldController';
+import { PageController } from '../PageController/PageController';
+import { Form } from '../../../Model/Form/Form';
 
 export class FormController extends ModelController {
     fields: any;
     state: any;
-    static create(model, parent): FormController {
+    static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
         const customClassName = `${page.getName()}${model.getName()}FormController`;
@@ -14,7 +16,7 @@ export class FormController extends ModelController {
         const Class = CustomClass ? CustomClass : GeneralClass;
         return new Class(model, parent);
     }
-    constructor(model, parent) {
+    constructor(model: Form, parent: PageController) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model);
         this.fields = {};
