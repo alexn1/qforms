@@ -31376,11 +31376,10 @@ class Helper {
     static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
-        // @ts-ignore
-        props.onCreate = c => (component = c);
-        // const reactElement = React.createElement(type, props, children);
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children),
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: c => {
+                    component = c;
+                } }), children),
         ]);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;

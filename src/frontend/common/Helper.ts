@@ -98,10 +98,17 @@ export class Helper {
     static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
-        // @ts-ignore
-        props.onCreate = c => (component = c);
         const reactRootElement = React.createElement(React.StrictMode, {}, [
-            React.createElement(type, props, children),
+            React.createElement(
+                type,
+                {
+                    ...props,
+                    onCreate: c => {
+                        component = c;
+                    },
+                } as any,
+                children,
+            ),
         ]);
         ReactDOM.render(reactRootElement, rootElement);
         return component;
