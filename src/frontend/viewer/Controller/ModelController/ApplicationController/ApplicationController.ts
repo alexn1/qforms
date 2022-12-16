@@ -4,18 +4,19 @@ import { ApplicationView } from './ApplicationView';
 import { WebSocketClient } from '../../../WebSocketClient';
 import { FrontHostApp, Search, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
+import { Application } from '../../../Model/Application/Application';
 
 export class ApplicationController extends ModelController {
-    frontHostApp: any;
+    frontHostApp: FrontHostApp;
     lastId: number;
-    activePage: any;
+    activePage: PageController;
     modals: any[];
     statusbar: any;
     homePageName: string | null;
     webSocketClient: any;
     view: any;
 
-    constructor(model, frontHostApp) {
+    constructor(model: Application, frontHostApp: FrontHostApp) {
         super(model, null);
         console.log(`${this.constructor.name}.constructor`, model);
         this.frontHostApp = frontHostApp;
@@ -26,7 +27,7 @@ export class ApplicationController extends ModelController {
         this.homePageName = null;
         this.webSocketClient = null;
     }
-    static create(model, frontHostApp): ApplicationController {
+    static create(model: Application, frontHostApp: FrontHostApp): ApplicationController {
         // console.log(
         //     'ApplicationController.create',
         //     'debug:',
@@ -118,7 +119,7 @@ export class ApplicationController extends ModelController {
     // - onSelect   : function,
     // - onClose    : function,
     // - params     : object,
-    createPage(pageData, options) {
+    createPage(pageData, options): PageController {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         // model

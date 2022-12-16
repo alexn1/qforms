@@ -1,16 +1,18 @@
 import { ModelController } from '../ModelController';
+import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
+import { Application } from '../../../Model/Application/Application';
 export declare class ApplicationController extends ModelController {
-    frontHostApp: any;
+    frontHostApp: FrontHostApp;
     lastId: number;
-    activePage: any;
+    activePage: PageController;
     modals: any[];
     statusbar: any;
     homePageName: string | null;
     webSocketClient: any;
     view: any;
-    constructor(model: any, frontHostApp: any);
-    static create(model: any, frontHostApp: any): ApplicationController;
+    constructor(model: Application, frontHostApp: FrontHostApp);
+    static create(model: Application, frontHostApp: FrontHostApp): ApplicationController;
     static isDebugMode(): boolean;
     init(): void;
     deinit(): void;
@@ -20,13 +22,13 @@ export declare class ApplicationController extends ModelController {
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};
     createPage(pageData: any, options: any): PageController;
-    openPage(options: any): Promise<any>;
+    openPage(options: any): Promise<PageController>;
     addModal(ctrl: any): void;
     removeModal(ctrl: any): void;
     getNextId(): number;
     getNewId(): string;
     addPage(pc: any): void;
-    findPageControllerByPageNameAndKey(pageName: any, key: any): any;
+    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController;
     onPageSelect(pc: any): void;
     closePage(pageController: any): Promise<void>;
     onActionClick(name: any): Promise<any>;
@@ -47,7 +49,7 @@ export declare class ApplicationController extends ModelController {
     getRootPath(): string;
     openModal(ctrl: any): Promise<void>;
     closeModal(ctrl: any): Promise<void>;
-    getHostApp(): any;
+    getHostApp(): FrontHostApp;
     connect(): Promise<void>;
     rpc(name: any, params: any): Promise<any>;
     getDomain(): any;
