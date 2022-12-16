@@ -3,7 +3,7 @@ import { LoginView } from './LoginView';
 export declare class LoginController extends Controller {
     frontHostApp: any;
     constructor(frontHostApp: any);
-    static create(frontHostApp: any): any;
+    static create(frontHostApp: any): LoginController;
     getViewClass(): typeof LoginView;
     getText(): any;
     getFrontHostApp(): any;

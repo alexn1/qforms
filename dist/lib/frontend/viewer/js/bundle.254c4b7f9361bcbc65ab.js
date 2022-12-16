@@ -31253,11 +31253,12 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
-        // console.log('getClassByName', className);
+        /*// console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
-        return null;
+        return null;*/
+        return window[className];
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
@@ -35177,7 +35178,7 @@ class LoginController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         if (!data.name)
             throw new Error('no app name');
         const CustomClass = _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.getClassByName(`${data.name}LoginController`);
-        const Class = CustomClass ? CustomClass : LoginController;
+        const Class = CustomClass || LoginController;
         return new Class(frontHostApp);
     }
     getViewClass() {
@@ -39105,7 +39106,7 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        return viewClassName ? eval(viewClassName) : null;
+        return window[viewClassName];
     }
 }
 // @ts-ignore

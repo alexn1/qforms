@@ -96,12 +96,13 @@ export class FrontHostApp {
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
-    static getClassByName(className) {
-        // console.log('getClassByName', className);
+    static getClassByName(className): any {
+        /*// console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
-        return null;
+        return null;*/
+        return window[className];
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);

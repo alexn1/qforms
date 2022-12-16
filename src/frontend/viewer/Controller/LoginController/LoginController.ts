@@ -9,11 +9,13 @@ export class LoginController extends Controller {
         console.log(`${this.constructor.name}.constructor`);
         this.frontHostApp = frontHostApp;
     }
-    static create(frontHostApp) {
+    static create(frontHostApp): LoginController {
         const data = frontHostApp.getData();
         if (!data.name) throw new Error('no app name');
-        const CustomClass = FrontHostApp.getClassByName(`${data.name}LoginController`);
-        const Class = CustomClass ? CustomClass : LoginController;
+        const CustomClass = FrontHostApp.getClassByName(
+            `${data.name}LoginController`,
+        ) as typeof LoginController;
+        const Class = CustomClass || LoginController;
         return new Class(frontHostApp);
     }
     getViewClass() {

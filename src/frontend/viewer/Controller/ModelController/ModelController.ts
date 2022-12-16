@@ -25,14 +25,14 @@ export class ModelController extends Controller {
     getTitle() {
         return this.getModel().getCaption();
     }
-    getViewClass() {
+    getViewClass(): any {
         // console.log(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
         const model = this.getModel();
         if (!model.isAttr('viewClass')) {
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        return viewClassName ? eval(viewClassName) : null;
+        return window[viewClassName];
     }
 }
 

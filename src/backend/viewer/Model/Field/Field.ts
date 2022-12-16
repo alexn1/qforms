@@ -47,7 +47,7 @@ export class Field extends Model {
         let value;
         try {
             // @ts-ignore
-            global.Helper = Helper;
+            // global.Helper = Helper;
             value = eval(js);
             if (value !== undefined) {
                 row[column] = this.valueToRaw(value);
