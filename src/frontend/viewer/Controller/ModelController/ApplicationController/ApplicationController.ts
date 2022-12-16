@@ -132,7 +132,7 @@ export class ApplicationController extends ModelController {
 
         return pc;
     }
-    async openPage(options) {
+    async openPage(options): Promise<PageController> {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
         if (options.key) throw new Error('openPage: key param is deprecated');
@@ -172,30 +172,30 @@ export class ApplicationController extends ModelController {
 
         return pc;
     }
-    addModal(ctrl) {
+    addModal(ctrl): void {
         this.modals.push(ctrl);
     }
-    removeModal(ctrl) {
+    removeModal(ctrl): void {
         // console.log('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
         this.modals.splice(i, 1);
     }
-    getNextId() {
+    getNextId(): number {
         this.lastId++;
         return this.lastId;
     }
-    getNewId() {
+    getNewId(): string {
         return `c${this.getNextId()}`;
     }
-    addPage(pc) {
+    addPage(pc): void {
         if (this.activePage) {
             this.closePage(this.activePage);
         }
         this.activePage = pc;
         document.title = this.getTitle();
     }
-    findPageControllerByPageNameAndKey(pageName, key) {
+    findPageControllerByPageNameAndKey(pageName, key): PageController | null {
         if (
             this.activePage &&
             this.activePage.model.getName() === pageName &&
@@ -208,7 +208,7 @@ export class ApplicationController extends ModelController {
     onPageSelect(pc) {
         console.log('ApplicationController.onPageSelect', pc.model.getName());
     }
-    async closePage(pageController) {
+    async closePage(pageController: PageController): Promise<void> {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);

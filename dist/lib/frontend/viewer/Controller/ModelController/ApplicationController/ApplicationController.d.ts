@@ -28,9 +28,9 @@ export declare class ApplicationController extends ModelController {
     getNextId(): number;
     getNewId(): string;
     addPage(pc: any): void;
-    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController;
+    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController | null;
     onPageSelect(pc: any): void;
-    closePage(pageController: any): Promise<void>;
+    closePage(pageController: PageController): Promise<void>;
     onActionClick(name: any): Promise<any>;
     getMenuItemsProp(): {
         name: string;
