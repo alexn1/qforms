@@ -5,21 +5,27 @@ import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
 import { PageView } from './PageView';
 import { ApplicationController } from '../ApplicationController/ApplicationController';
+import { Page } from '../../../Model/Page/Page';
 
 export class PageController extends ModelController {
     id: any;
     forms: any[];
-    constructor(model, parent, id) {
+    constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
-        console.log(`${this.constructor.name}.constructor`, model);
+        console.log(`${this.constructor.name}.constructor`, model, id);
         if (!id) throw new Error('no id');
         this.id = id;
         this.forms = [];
     }
 
-    static create(model, parent, id, options = null) {
+    static create(
+        model: Page,
+        parent: ApplicationController,
+        id: string,
+        options = null,
+    ): PageController {
         // console.log('PageController.create', model.getName());
-        const { ctrlClass } = model.data;
+        const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = FrontHostApp.getClassByName(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);

@@ -2,7 +2,7 @@ import { ModelController } from '../ModelController';
 export declare class FormController extends ModelController {
     fields: any;
     state: any;
-    static create(model: any, parent: any): any;
+    static create(model: any, parent: any): FormController;
     constructor(model: any, parent: any);
     init(): void;
     deinit(): void;

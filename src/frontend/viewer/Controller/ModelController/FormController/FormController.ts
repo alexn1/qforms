@@ -5,7 +5,7 @@ import { FieldController } from '../FieldController/FieldController';
 export class FormController extends ModelController {
     fields: any;
     state: any;
-    static create(model, parent) {
+    static create(model, parent): FormController {
         // console.log('FormController.create', model.getFullName());
         const page = model.getPage();
         const customClassName = `${page.getName()}${model.getName()}FormController`;
@@ -16,6 +16,7 @@ export class FormController extends ModelController {
     }
     constructor(model, parent) {
         super(model, parent);
+        console.log(`${this.constructor.name}.constructor`, model);
         this.fields = {};
     }
     init() {

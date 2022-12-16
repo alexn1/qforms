@@ -26,7 +26,7 @@ export class ApplicationController extends ModelController {
         this.homePageName = null;
         this.webSocketClient = null;
     }
-    static create(model, frontHostApp) {
+    static create(model, frontHostApp): ApplicationController {
         // console.log(
         //     'ApplicationController.create',
         //     'debug:',

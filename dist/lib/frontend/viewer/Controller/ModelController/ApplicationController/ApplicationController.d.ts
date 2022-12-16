@@ -1,4 +1,5 @@
 import { ModelController } from '../ModelController';
+import { PageController } from '../PageController/PageController';
 export declare class ApplicationController extends ModelController {
     frontHostApp: any;
     lastId: number;
@@ -9,7 +10,7 @@ export declare class ApplicationController extends ModelController {
     webSocketClient: any;
     view: any;
     constructor(model: any, frontHostApp: any);
-    static create(model: any, frontHostApp: any): any;
+    static create(model: any, frontHostApp: any): ApplicationController;
     static isDebugMode(): boolean;
     init(): void;
     deinit(): void;
@@ -18,7 +19,7 @@ export declare class ApplicationController extends ModelController {
     onRequest: (e: any) => Promise<void>;
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};
-    createPage(pageData: any, options: any): any;
+    createPage(pageData: any, options: any): PageController;
     openPage(options: any): Promise<any>;
     addModal(ctrl: any): void;
     removeModal(ctrl: any): void;

@@ -38194,6 +38194,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     constructor(model, parent) {
         super(model, parent);
+        console.log(`${this.constructor.name}.constructor`, model);
         this.fields = {};
     }
     init() {
@@ -39241,7 +39242,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             console.log('PageController.onResetClick');
             await this.selectRow(null);
         };
-        console.log(`${this.constructor.name}.constructor`, model);
+        console.log(`${this.constructor.name}.constructor`, model, id);
         if (!id)
             throw new Error('no id');
         this.id = id;
@@ -39249,7 +39250,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     static create(model, parent, id, options = null) {
         // console.log('PageController.create', model.getName());
-        const { ctrlClass } = model.data;
+        const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(ctrlClass);
             if (!CustomClass)

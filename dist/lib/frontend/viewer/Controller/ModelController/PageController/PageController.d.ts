@@ -1,9 +1,11 @@
 import { ModelController } from '../ModelController';
+import { ApplicationController } from '../ApplicationController/ApplicationController';
+import { Page } from '../../../Model/Page/Page';
 export declare class PageController extends ModelController {
     id: any;
     forms: any[];
-    constructor(model: any, parent: any, id: any);
-    static create(model: any, parent: any, id: any, options?: any): any;
+    constructor(model: Page, parent: ApplicationController, id: string);
+    static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
     init(): void;
     deinit(): void;
     onSaveAndCloseClick: () => Promise<void>;
