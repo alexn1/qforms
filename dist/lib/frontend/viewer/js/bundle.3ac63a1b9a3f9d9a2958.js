@@ -35865,15 +35865,30 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     }*/
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
-        const page = model.getPage();
-        const form = model.getForm();
-        const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(`${page.getName()}${form.getName()}${model.getName()}FieldController`);
-        const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, parent);
+        }
+        const generalClassName = `${parent
+            .getModel()
+            .getClassName()}${model.getClassName()}Controller`;
         const GeneralClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(generalClassName);
         if (!GeneralClass)
             throw new Error(`no class ${generalClassName}`);
-        const Class = CustomClass ? CustomClass : GeneralClass;
-        return new Class(model, parent);
+        return new GeneralClass(model, parent);
+        /*const page = model.getPage();
+        const form = model.getForm();
+        const CustomClass = FrontHostApp.getClassByName(
+            `${page.getName()}${form.getName()}${model.getName()}FieldController`,
+        );
+        const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
+        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
+        if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
+        const Class = CustomClass || GeneralClass;
+        return new Class(model, parent);*/
     }
     valueToString(value) {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
