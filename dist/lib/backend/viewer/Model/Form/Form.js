@@ -30,6 +30,7 @@ class Form extends Model_1.Model {
         response.visible = this.getAttr('visible');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());

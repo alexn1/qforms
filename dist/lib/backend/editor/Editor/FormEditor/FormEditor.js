@@ -13,6 +13,7 @@ class FormEditor extends Editor_1.Editor {
             visible: params.visible !== undefined ? params.visible : 'true',
             cssBlock: params.cssBlock !== undefined ? params.cssBlock : '',
             viewClass: params.viewClass !== undefined ? params.viewClass : '',
+            ctrlClass: params.ctrlClass !== undefined ? params.ctrlClass : '',
         };
     }
     static createData(params) {

@@ -42,6 +42,7 @@ export class Form extends Model {
         response.visible = this.getAttr('visible');
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
+        response.ctrlClass = this.getAttr('ctrlClass');
     }
 
     async fill(context) {
