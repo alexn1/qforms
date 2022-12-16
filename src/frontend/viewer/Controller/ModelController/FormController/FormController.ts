@@ -9,12 +9,19 @@ export class FormController extends ModelController {
     state: any;
     static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());
-        const page = model.getPage();
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            return new CustomClass(model, parent);
+        }
+        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+        return new GeneralClass(model, parent);
+        /*const page = model.getPage();
         const customClassName = `${page.getName()}${model.getName()}FormController`;
         const CustomClass = FrontHostApp.getClassByName(customClassName);
         const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
         const Class = CustomClass ? CustomClass : GeneralClass;
-        return new Class(model, parent);
+        return new Class(model, parent);*/
     }
     constructor(model: Form, parent: PageController) {
         super(model, parent);
