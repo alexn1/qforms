@@ -31378,8 +31378,11 @@ class Helper {
         let component;
         // @ts-ignore
         props.onCreate = c => (component = c);
-        const reactElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children);
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactElement, rootElement);
+        // const reactElement = React.createElement(type, props, children);
+        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children),
+        ]);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {

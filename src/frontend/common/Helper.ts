@@ -100,8 +100,10 @@ export class Helper {
         let component;
         // @ts-ignore
         props.onCreate = c => (component = c);
-        const reactElement = React.createElement(type, props, children);
-        ReactDOM.render(reactElement, rootElement);
+        const reactRootElement = React.createElement(React.StrictMode, {}, [
+            React.createElement(type, props, children),
+        ]);
+        ReactDOM.render(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
