@@ -1,11 +1,12 @@
 FROM node:14-alpine
+#FROM node:14
 
 WORKDIR /app
 
 COPY package.json .
 COPY package-lock.json .
 
-RUN npm ci --omit=dev
+RUN npm ci --production
 
 COPY . .
 
