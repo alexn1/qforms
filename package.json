@@ -80,7 +80,8 @@
         "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
         "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch",
         "docker-build": "docker build -t qforms .",
-        "docker-run": "docker run -d -p 3000:3000 -v runtime:/app/runtime --rm qforms"
+        "docker-run": "docker run -p 3000:3000 -v runtime:/app/runtime --rm qforms",
+        "docker-run-detach": "docker run -d -p 3000:3000 -v runtime:/app/runtime --rm qforms"
     },
     "repository": {
         "type": "git",
