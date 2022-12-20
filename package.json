@@ -78,7 +78,9 @@
         "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js",
         "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js",
         "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
-        "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch"
+        "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch",
+        "docker-build": "docker build -t qforms .",
+        "docker-run": "docker run -d -p 3000:3000 -v runtime:/app/runtime qforms"
     },
     "repository": {
         "type": "git",
