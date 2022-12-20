@@ -1,0 +1,12 @@
+.idea
+.git
+node_modules
+/db
+/doc
+/gui
+/gulp
+/runtime
+/src
+/test
+Dockerfile
+Makefile
