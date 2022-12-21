@@ -26,6 +26,7 @@ import { Result } from './Result';
 
 const pkg = require('../../package.json');
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
+import { BaseModel } from './BaseModel';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 
@@ -315,6 +316,12 @@ export class BackHostApp {
 
     getApplicationClass(appInfo: AppInfo): any {
         // console.log('BackHostApp.getApplicationClass', appInfo);
+        const modelClass = BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
+        if (modelClass) {
+            const CustomClass = global[modelClass];
+            if (!CustomClass) throw new Error(`no class ${modelClass}`);
+            return CustomClass;
+        }
         return Application;
     }
 

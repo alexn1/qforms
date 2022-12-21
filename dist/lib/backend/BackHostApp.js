@@ -26,6 +26,7 @@ const CommonModule_1 = require("./common/CommonModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
+const BaseModel_1 = require("./BaseModel");
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
 class BackHostApp {
@@ -230,6 +231,13 @@ class BackHostApp {
     }
     getApplicationClass(appInfo) {
         // console.log('BackHostApp.getApplicationClass', appInfo);
+        const modelClass = BaseModel_1.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
+        if (modelClass) {
+            const CustomClass = global[modelClass];
+            if (!CustomClass)
+                throw new Error(`no class ${modelClass}`);
+            return CustomClass;
+        }
         return Application_1.Application;
     }
     async createApp(req) {
