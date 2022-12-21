@@ -1,4 +1,5 @@
 import { Controller } from '../Controller';
+import { ModelView } from './ModelView';
 
 export class ModelController extends Controller {
     model: any;
@@ -32,7 +33,12 @@ export class ModelController extends Controller {
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        return window[viewClassName];
+
+        const viewClass: any = window[viewClassName];
+        if (viewClass && !(viewClass.prototype instanceof ModelView)) {
+            throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+        }
+        return viewClass;
     }
 }
 

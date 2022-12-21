@@ -39091,6 +39091,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ModelController": () => (/* binding */ ModelController)
 /* harmony export */ });
 /* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+
 
 class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
     constructor(model, parent) {
@@ -39121,7 +39123,11 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        return window[viewClassName];
+        const viewClass = window[viewClassName];
+        if (viewClass && !(viewClass.prototype instanceof _ModelView__WEBPACK_IMPORTED_MODULE_1__.ModelView)) {
+            throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+        }
+        return viewClass;
     }
 }
 // @ts-ignore
