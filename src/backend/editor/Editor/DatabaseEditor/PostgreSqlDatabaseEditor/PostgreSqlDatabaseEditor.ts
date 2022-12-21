@@ -7,7 +7,7 @@ export class PostgreSqlDatabaseEditor extends DatabaseEditor {
         return {
             '@class': 'PostgreSqlDatabase',
             '@attributes': {
-                name: params.name,
+                ...DatabaseEditor.createAttributes(params),
             },
             params: [...(params.params ? params.params.map(Editor.createItemData) : [])],
             tables: [...(params.tables ? params.tables.map(Editor.createItemData) : [])],

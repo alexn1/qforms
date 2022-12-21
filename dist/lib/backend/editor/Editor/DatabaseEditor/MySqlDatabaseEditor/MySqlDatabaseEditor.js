@@ -9,9 +9,7 @@ class MySqlDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
             throw new Error('no name');
         return {
             '@class': 'MySqlDatabase',
-            '@attributes': {
-                name: params.name,
-            },
+            '@attributes': Object.assign({}, DatabaseEditor_1.DatabaseEditor.createAttributes(params)),
             params: [...(params.params ? params.params.map(Editor_1.Editor.createItemData) : [])],
             tables: [...(params.tables ? params.tables.map(Editor_1.Editor.createItemData) : [])],
         };
