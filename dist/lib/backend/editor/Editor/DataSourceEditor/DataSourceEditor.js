@@ -9,14 +9,20 @@ class DataSourceEditor extends Editor_1.Editor {
     static createData(params) {
         return {
             '@class': 'DataSource',
-            '@attributes': {
-                name: params.name,
-                database: params.database || 'default',
-                table: params.table || '',
-            },
+            '@attributes': Object.assign({}, DataSourceEditor.createAttributes(params)),
             keyColumns: [
                 ...(params.keyColumns ? params.keyColumns.map(Editor_1.Editor.createItemData) : []),
             ],
+        };
+    }
+    static createAttributes(params) {
+        if (!params.name)
+            throw new Error('no name');
+        return {
+            name: params.name,
+            database: params.database || 'default',
+            table: params.table || '',
+            modelClass: params.modelClass !== undefined ? params.modelClass : '',
         };
     }
     async getCollectionDirPath() {

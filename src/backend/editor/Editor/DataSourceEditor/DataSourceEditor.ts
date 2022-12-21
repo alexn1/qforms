@@ -9,13 +9,20 @@ export class DataSourceEditor extends Editor {
         return {
             '@class': 'DataSource',
             '@attributes': {
-                name: params.name,
-                database: params.database || 'default',
-                table: params.table || '',
+                ...DataSourceEditor.createAttributes(params),
             },
             keyColumns: [
                 ...(params.keyColumns ? params.keyColumns.map(Editor.createItemData) : []),
             ],
+        };
+    }
+    static createAttributes(params): any {
+        if (!params.name) throw new Error('no name');
+        return {
+            name: params.name,
+            database: params.database || 'default',
+            table: params.table || '',
+            modelClass: params.modelClass !== undefined ? params.modelClass : '',
         };
     }
     async getCollectionDirPath() {
