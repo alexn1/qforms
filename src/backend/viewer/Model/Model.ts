@@ -64,22 +64,22 @@ export class Model extends BaseModel {
         }
     }
 
-    async getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any> {
-        /*let CustomClass = null;
-        const dirPath = this.getDirPath();
-        if (dirPath) {
-            const modelName = BaseModel.getName(data);
-            const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
-            const exists = await Helper.exists(customClassFilePath);
-            if (exists) {
-                CustomClass = require(customClassFilePath);
-            }
-        }
-        return CustomClass;*/
+    /*async getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any> {
+        // let CustomClass = null;
+        // const dirPath = this.getDirPath();
+        // if (dirPath) {
+        //     const modelName = BaseModel.getName(data);
+        //     const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
+        //     const exists = await Helper.exists(customClassFilePath);
+        //     if (exists) {
+        //         CustomClass = require(customClassFilePath);
+        //     }
+        // }
+        // return CustomClass;
         return this.getParent()
             ? this.getParent().getChildModelCustomClass(model, colName, data)
             : null;
-    }
+    }*/
 
     async createChildModel(colName: string, itemData: any): Promise<any> {
         const modelClass = BaseModel.getAttr(itemData, 'modelClass');
@@ -89,10 +89,12 @@ export class Model extends BaseModel {
             return new CustomClass(itemData, this);
         }
 
-        const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
+        // const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
+        // const Class = CustomClass ? CustomClass : backend[className];
+
         const className = BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
-        const Class = CustomClass ? CustomClass : backend[className];
+        const Class = backend[className];
         if (!Class) throw new Error(`no class ${className}`);
         return new Class(itemData, this);
     }

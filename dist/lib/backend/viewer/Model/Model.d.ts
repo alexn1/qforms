@@ -10,7 +10,6 @@ export declare class Model extends BaseModel {
     fillCollection(response: any, colName: string, context: Context): Promise<void>;
     createColItems(colName: string, context: Context): Promise<void>;
     createColItem(colName: string, itemData: any, context: Context): Promise<void>;
-    getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any>;
     createChildModel(colName: string, itemData: any): Promise<any>;
     getDirPath(): string;
     rpc(name: string, context: Context): Promise<any>;
