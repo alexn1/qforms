@@ -14,6 +14,7 @@ export declare class PageEditor extends Editor {
             cssBlock: any;
             viewClass: any;
             ctrlClass: any;
+            modelClass: any;
         };
         dataSources: any[];
         actions: any[];

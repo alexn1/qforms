@@ -12,6 +12,7 @@ export declare class PageEditorController extends VisualEditorController {
                 cssBlock: any;
                 viewClass: any;
                 ctrlClass: any;
+                modelClass: any;
             };
             dataSources: any[];
             actions: any[];
