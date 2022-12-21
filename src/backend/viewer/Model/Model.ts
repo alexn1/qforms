@@ -46,19 +46,19 @@ export class Model extends BaseModel {
 
     async createColItems(colName: string, context: Context): Promise<void> {
         // console.log(`Model.createColItems ${this.getName()}.${colName}`);
-        for (const data of this.getCol(colName)) {
-            await this.createColItem(colName, data, context);
+        for (const itemData of this.getCol(colName)) {
+            await this.createColItem(colName, itemData, context);
         }
     }
 
-    async createColItem(colName: string, data: any, context: Context): Promise<void> {
+    async createColItem(colName: string, itemData: any, context: Context): Promise<void> {
         try {
-            const model = await this.createChildModel(colName, data);
+            const model = await this.createChildModel(colName, itemData);
             await model.init(context);
             this[colName].push(model);
         } catch (err) {
-            const name = BaseModel.getName(data);
-            const className = BaseModel.getClassName(data);
+            const name = BaseModel.getName(itemData);
+            const className = BaseModel.getClassName(itemData);
             err.message = `${className}[${name}]: ${err.message}`;
             throw err;
         }
@@ -81,13 +81,20 @@ export class Model extends BaseModel {
             : null;
     }
 
-    async createChildModel(colName: string, data: any): Promise<any> {
-        const CustomClass = await this.getChildModelCustomClass(this, colName, data);
-        const className = BaseModel.getClassName(data);
+    async createChildModel(colName: string, itemData: any): Promise<any> {
+        const modelClass = BaseModel.getAttr(itemData, 'modelClass');
+        if (modelClass) {
+            const CustomClass = global[modelClass];
+            if (!CustomClass) throw new Error(`no class ${modelClass}`);
+            return new CustomClass(itemData, this);
+        }
+
+        const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
+        const className = BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
         const Class = CustomClass ? CustomClass : backend[className];
         if (!Class) throw new Error(`no class ${className}`);
-        return new Class(data, this);
+        return new Class(itemData, this);
     }
 
     getDirPath(): string {
