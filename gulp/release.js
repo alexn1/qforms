@@ -18,12 +18,12 @@ async function release() {
     if (stderr) throw new Error(stderr);*/
 
     // commit
-    try {
+    /*try {
         await Lib.exec(`git commit -am "release v${releaseVersion}"`);
         await Lib.exec('git push origin master');
     } catch (err) {
         console.error(err.message);
-    }
+    }*/
 
     // release branch
     await Lib.exec('git checkout release');
