@@ -1,5 +1,5 @@
 const fs = require('fs');
-const child_process = require("child_process");
+const child_process = require('child_process');
 
 class Lib {
     static getJsonFileData(filePath) {
@@ -11,7 +11,7 @@ class Lib {
                     try {
                         const data = JSON.parse(text);
                         resolve(data);
-                    } catch(err) {
+                    } catch (err) {
                         reject(err);
                     }
                 }
@@ -40,7 +40,7 @@ class Lib {
         // console.log('putJsonFileData version:', data.version);
         return new Promise(function(resolve, reject) {
             try {
-                const text = JSON.stringify(data, null, 2) + '\n';
+                const text = JSON.stringify(data, null, 4) + '\n';
                 fs.writeFile(filePath, text, function(err) {
                     if (err) {
                         reject(err);
@@ -48,7 +48,7 @@ class Lib {
                         resolve();
                     }
                 });
-            } catch(err) {
+            } catch (err) {
                 reject(err);
             }
         });
