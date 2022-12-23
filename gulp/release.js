@@ -1,7 +1,6 @@
 const Lib = require('./Lib');
 
 async function release() {
-
     // master branch
     await Lib.exec('git checkout master');
     await Lib.exec('git pull origin master');
@@ -15,8 +14,8 @@ async function release() {
     // await Lib.putJsonFileData('package.json', packageJson1);
 
     // build
-    let stderr = await Lib.exec('gulp build --backend');
-    if (stderr) throw new Error(stderr);
+    /*let stderr = await Lib.exec('gulp build --backend');
+    if (stderr) throw new Error(stderr);*/
 
     // commit
     try {
