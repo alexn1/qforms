@@ -38204,6 +38204,8 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const GeneralClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(`${model.getClassName()}Controller`);

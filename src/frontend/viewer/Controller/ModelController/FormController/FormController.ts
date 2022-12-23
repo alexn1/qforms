@@ -12,6 +12,7 @@ export class FormController extends ModelController {
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
