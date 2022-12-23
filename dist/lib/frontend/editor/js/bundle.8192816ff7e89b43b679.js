@@ -31253,11 +31253,12 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
-        // console.log('getClassByName', className);
+        /*// console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
-        return null;
+        return null;*/
+        return window[className];
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
@@ -31376,10 +31377,12 @@ class Helper {
     static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
-        // @ts-ignore
-        props.onCreate = c => (component = c);
-        const reactElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, props, children);
-        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactElement, rootElement);
+        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: c => {
+                    component = c;
+                } }), children),
+        ]);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
@@ -31790,6 +31793,31 @@ window.ArrowIcon = ArrowIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/CancelIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })] })));
+    }
+}
+// @ts-ignore
+window.CancelIcon = CancelIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/CloseIcon.tsx":
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
@@ -31858,6 +31886,107 @@ window.DateIcon = DateIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/DeleteIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/DeleteIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteIcon": () => (/* binding */ DeleteIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" })] })));
+    }
+}
+// @ts-ignore
+window.DeleteIcon = DeleteIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DoneIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = DoneIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DownIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = DoneIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/EditIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/EditIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditIcon": () => (/* binding */ EditIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" })] })));
+    }
+}
+// @ts-ignore
+window.EditIcon = EditIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/LeftIcon.tsx":
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
@@ -31870,12 +31999,38 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const LeftIcon = props => {
+const LeftIcon = (props) => {
     const size = props.size || 24;
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
 };
 // @ts-ignore
 window.LeftIcon = LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LocationIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })] })));
+    }
+}
+// @ts-ignore
+window.LocationIcon = LocationIcon;
 
 
 /***/ }),
@@ -31926,6 +32081,57 @@ window.OpenInNewIcon = OpenInNewIcon;
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })] })));
+    }
+}
+// @ts-ignore
+window.PasswordIcon = PasswordIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })] })));
+    }
+}
+// @ts-ignore
+window.PhoneIcon = PhoneIcon;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/icon/RightIcon.tsx":
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/RightIcon.tsx ***!
@@ -31938,12 +32144,62 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const RightIcon = props => {
+const RightIcon = (props) => {
     const size = props.size || 24;
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
 };
 // @ts-ignore
 window.RightIcon = RightIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })] })));
+    }
+}
+// @ts-ignore
+window.SettingsIcon = SettingsIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/TimeIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeIcon": () => (/* binding */ TimeIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", { fill: "none", height: "24", width: "24", x: "0" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12.5,7H11v6l5.2,3.2l0.8-1.3l-4.5-2.7V7z" }) }) })] })));
+    }
+}
+// @ts-ignore
+window.TimeIcon = TimeIcon;
 
 
 /***/ }),
@@ -32006,38 +32262,56 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_15__.Button),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__.CheckBox),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_27__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__.CheckBoxList),
 /* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
 /* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__.ComboBox),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__.DatePicker),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__.DropdownDatePicker),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__.ComboBox),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__.GridRow),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__.Image),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__.Modal),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__.Password),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__.PhoneBox),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget_Radio__WEBPACK_IMPORTED_MODULE_51__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__.Select),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__.TimeBox),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__.Tooltip),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__.Tooltip),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
 /* harmony export */ });
@@ -32053,28 +32327,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
 /* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
 /* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./icon/SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon/DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon/EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _widget_Radio__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./widget/Radio */ "./src/frontend/common/widget/Radio.tsx");
 
 
 
@@ -32088,7 +32380,25 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
 // widget
+
+
+
+
+
+
 
 
 
@@ -32294,6 +32604,92 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
 }
 // @ts-ignore
 window.CheckBox = CheckBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCheckBoxChange = e => {
+            // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+            const checked = e.target.checked;
+            const itemValue = e.target.dataset.value;
+            // console.log('itemValue:', itemValue);
+            this.setState(prevState => {
+                const prevValue = prevState.value || [];
+                const value = [...prevValue];
+                if (checked) {
+                    if (value.indexOf(itemValue) > -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.push(itemValue);
+                }
+                else {
+                    if (value.indexOf(itemValue) === -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.splice(value.indexOf(itemValue), 1);
+                }
+                // console.log('value:', value);
+                return { value };
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.getValue());
+                }
+            });
+        };
+        if (!this.props.name)
+            throw new Error('no CheckBoxList name');
+        this.state = {
+            value: this.props.value || [],
+        };
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValue() {
+        return this.state.value || [];
+    }
+    isValueChecked(value) {
+        return this.getValue().indexOf(value) > -1;
+    }
+    composeItemId(value) {
+        return `${this.props.name}.${value}`;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('nextProps.value:', nextProps.value);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map(item => {
+                if (item.value === undefined)
+                    throw new Error('no item value');
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
+            }) })));
+    }
+}
+// @ts-ignore
+window.CheckBoxList = CheckBoxList;
 
 
 /***/ }),
@@ -32824,6 +33220,51 @@ window.DropdownDatePicker = DropdownDatePicker;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Expand": () => (/* binding */ Expand)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+
+
+
+class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onTitleClick = e => {
+            console.log('Expand.onTitleClick');
+            this.setState(prevState => {
+                return { opened: !prevState.opened };
+            });
+        };
+        this.state = {
+            opened: this.props.opened !== undefined ? this.props.opened : false,
+        };
+    }
+    isOpened() {
+        return this.state.opened;
+    }
+    isHighlighted() {
+        return !!this.props.highlighted;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.props.title }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__content` }, { children: this.props.children }))] })));
+    }
+}
+// @ts-ignore
+window.Expand = Expand;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Grid/Grid.tsx":
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
@@ -33246,6 +33687,55 @@ window.GridRow = GridRow;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Image/Image.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Image": () => (/* binding */ Image)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onImgClick = async (e) => {
+            console.log('Image.onImgClick');
+            if (this.props.onClick) {
+                return await this.props.onClick();
+            }
+            this.setState(prevState => {
+                if (prevState.classList) {
+                    return { classList: null };
+                }
+                else {
+                    return { classList: ['Image_full'] };
+                }
+            });
+        };
+        this.img = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = { classList: null };
+    }
+    getNaturalSize() {
+        return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: this.getCssClassNames(), ref: this.img, src: this.props.src, onClick: this.onImgClick }));
+    }
+}
+// @ts-ignore
+window.Image = Image;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Menu/Menu.tsx":
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
@@ -33539,6 +34029,81 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return value;
     }
 }
+// @ts-ignore
+window.PhoneBox = PhoneBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Radio.tsx":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/widget/Radio.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Radio": () => (/* binding */ Radio)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Radio.constructor', props.value);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('Radio.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        if (!props.name)
+            throw new Error('no name');
+        this.state = {
+            value: this.getInitialValue(),
+        };
+        console.log('value:', JSON.stringify(this.getValue()));
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find(item => item.value === this.props.value);
+            if (!item) {
+                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
+                console.log('items:', this.props.items);
+            }
+        }
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    renderItem(item, i) {
+        return [
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'radio', name: this.props.name, id: `${this.props.name}${i}`, value: item.value, onChange: this.onChange, checked: item.value === this.getValue(), readOnly: this.isReadOnly(), disabled: this.isReadOnly() }),
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: `${this.props.name}${i}` }, { children: item.title || item.value })),
+        ];
+    }
+    isReadOnly() {
+        if (this.props.readOnly !== undefined)
+            return this.props.readOnly;
+        return false;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        const items = this.props.items || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: items.map((item, i) => this.renderItem(item, i)) })));
+    }
+}
 
 
 /***/ }),
@@ -33729,6 +34294,77 @@ window.Select = Select;
 
 /***/ }),
 
+/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Slider": () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+
+
+
+
+
+class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onPrevClick = e => {
+            // console.log('Slider.onPrevClick');
+            this.setState(prevState => {
+                let image = prevState.image - 1;
+                if (image < 0) {
+                    image = this.props.images.length - 1;
+                }
+                return { image };
+            });
+        };
+        this.onNextClick = e => {
+            // console.log('Slider.onNextClick');
+            this.setState(prevState => {
+                let image = prevState.image + 1;
+                if (image > this.props.images.length - 1) {
+                    image = 0;
+                }
+                return { image };
+            });
+        };
+        this.onImageClick = e => {
+            console.log('Slider.onImageClick');
+            if (this.state.classList) {
+                this.setState({ classList: null });
+            }
+            else {
+                this.setState({ classList: ['full'] });
+            }
+        };
+        this.onCloseClick = e => {
+            this.setState({ classList: null });
+        };
+        if (!this.props.images)
+            throw new Error('Slider: no images');
+        this.state = { image: 0, classList: null };
+    }
+    render() {
+        // console.log('Slider.render', this.props.images);
+        const images = this.props.images || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
+    }
+}
+// @ts-ignore
+window.Slider = Slider;
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
 /*!************************************************************!*\
   !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
@@ -33901,7 +34537,7 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
 }
 // @ts-ignore
-window.Tab = Tab;
+window.Tab2 = Tab2;
 
 
 /***/ }),
@@ -34216,6 +34852,58 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
 }
 // @ts-ignore
 window.TimeBox = TimeBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx":
+/*!******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox2": () => (/* binding */ TimeBox2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _TimeBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
+
+
+
+class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
+    constructor(props) {
+        super(props);
+        this.onClear = e => {
+            // console.log('TimeBox2.onClear');
+            this.setState({ value: '' }, () => {
+                if (this.props.onClear) {
+                    this.props.onClear();
+                }
+            });
+        };
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    isCloseVisible() {
+        return !!this.state.value;
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', 
+                    // id={this.props.id}
+                    readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+                    // onKeyDown={this.onKeyDown}
+                    // onKeyUp={this.onKeyUp}
+                    onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
+    }
+}
 
 
 /***/ }),
@@ -39433,7 +40121,6 @@ __webpack_require__.r(__webpack_exports__);
 document.addEventListener('DOMContentLoaded', async () => {
     console.log('editor.ejs DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    const runAppLink = '<%=runAppLink%>';
     const editorFrontHostApp = new _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp(data, data.runAppLink);
     await editorFrontHostApp.run();
 });
