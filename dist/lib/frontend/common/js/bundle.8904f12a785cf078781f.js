@@ -31163,11 +31163,12 @@ if (false) {} else {
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
   \*********************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.FrontHostApp = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
 class FrontHostApp {
     constructor() {
         // console.log('FrontHostApp.constructor');
@@ -31252,11 +31253,12 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     static getClassByName(className) {
-        // console.log('getClassByName', className);
+        /*// console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
             return eval(className);
         }
-        return null;
+        return null;*/
+        return window[className];
     }
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
@@ -31270,7 +31272,6 @@ class FrontHostApp {
         return confirm(options.message);
     }
 }
-exports.FrontHostApp = FrontHostApp;
 // @ts-ignore
 window.FrontHostApp = FrontHostApp;
 
@@ -31281,39 +31282,16 @@ window.FrontHostApp = FrontHostApp;
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
   \***************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Helper": () => (/* binding */ Helper)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Helper = void 0;
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const react_dom_1 = __importDefault(__webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js"));
 // @ts-ignore
 window.QForms = {};
 class Helper {
@@ -31390,8 +31368,7 @@ class Helper {
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/
-                .exec(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
             if (a)
                 return new Date(value);
         }
@@ -31400,14 +31377,16 @@ class Helper {
     static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
-        // @ts-ignore
-        props.onCreate = c => component = c;
-        const reactElement = React.createElement(type, props, children);
-        react_dom_1.default.render(reactElement, rootElement);
+        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: c => {
+                    component = c;
+                } }), children),
+        ]);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
-        react_dom_1.default.unmountComponentAtNode(root);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
         return new Promise(resolve => {
@@ -31592,16 +31571,16 @@ class Helper {
         }
     }
     static setCookie(name, value, time) {
-        var expires = "";
+        var expires = '';
         if (time) {
             var date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
-            expires = "; expires=" + date.toUTCString();
+            expires = '; expires=' + date.toUTCString();
         }
-        document.cookie = name + "=" + (encodeURIComponent(value) || "") + expires + "; path=/";
+        document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
     static getCookie(name) {
-        var nameEQ = name + "=";
+        var nameEQ = name + '=';
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
             var c = ca[i];
@@ -31621,7 +31600,6 @@ class Helper {
         });
     }
 }
-exports.Helper = Helper;
 // @ts-ignore
 window.QForms.Helper = window.Helper = Helper;
 
@@ -31632,13 +31610,15 @@ window.QForms.Helper = window.Helper = Helper;
 /*!************************************************!*\
   !*** ./src/frontend/common/ReactComponent.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ReactComponent": () => (/* binding */ ReactComponent)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ReactComponent = void 0;
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-class ReactComponent extends react_1.Component {
+class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
         if (props.onCreate)
@@ -31659,7 +31639,7 @@ class ReactComponent extends react_1.Component {
         return [
             this.getCssBlockName(),
             ...(this.props.classList || []),
-            ...(this.state && this.state.classList ? this.state.classList : [])
+            ...(this.state && this.state.classList ? this.state.classList : []),
         ];
     }
     addCssClass(className) {
@@ -31738,7 +31718,6 @@ class ReactComponent extends react_1.Component {
         this.setState({ disabled: undefined });
     }
 }
-exports.ReactComponent = ReactComponent;
 // @ts-ignore
 window.ReactComponent = ReactComponent;
 
@@ -31749,23 +31728,29 @@ window.ReactComponent = ReactComponent;
 /*!***************************************!*\
   !*** ./src/frontend/common/Search.ts ***!
   \***************************************/
-/***/ ((__unused_webpack_module, exports) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Search = void 0;
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
 class Search {
     static getObj() {
         if (!window.location.search.split('?')[1])
             return {};
-        return window.location.search.split('?')[1].split('&').reduce((acc, item) => {
+        return window.location.search
+            .split('?')[1]
+            .split('&')
+            .reduce((acc, item) => {
             const kv = item.split('=');
             acc[kv[0]] = decodeURIComponent(kv[1]);
             return acc;
         }, {});
     }
     static objToString(obj) {
-        const search = Object.keys(obj).map(name => `${name}=${encodeURIComponent(obj[name])}`).join('&');
+        const search = Object.keys(obj)
+            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .join('&');
         if (!search)
             return '';
         return `?${search}`;
@@ -31781,7 +31766,6 @@ class Search {
         return Search.objToString(newObj);
     }
 }
-exports.Search = Search;
 // @ts-ignore
 window.Search = Search;
 
@@ -31792,18 +31776,44 @@ window.Search = Search;
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ArrowIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ArrowIcon = (props) => {
-    return (0, jsx_runtime_1.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0, jsx_runtime_1.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) }));
+const ArrowIcon = props => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
 };
-exports.ArrowIcon = ArrowIcon;
 // @ts-ignore
-window.ArrowIcon = exports.ArrowIcon;
+window.ArrowIcon = ArrowIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CancelIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })] })));
+    }
+}
+// @ts-ignore
+window.CancelIcon = CancelIcon;
 
 
 /***/ }),
@@ -31812,18 +31822,19 @@ window.ArrowIcon = exports.ArrowIcon;
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CloseIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const CloseIcon = (props) => {
-    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0, jsx_runtime_1.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0, jsx_runtime_1.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] }));
+const CloseIcon = props => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
 };
-exports.CloseIcon = CloseIcon;
 // @ts-ignore
-window.CloseIcon = exports.CloseIcon;
+window.CloseIcon = CloseIcon;
 
 
 /***/ }),
@@ -31832,19 +31843,20 @@ window.CloseIcon = exports.CloseIcon;
 /*!*************************************************!*\
   !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CloseIcon2 = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const CloseIcon2 = (props) => {
+const CloseIcon2 = props => {
     const size = props.size || 24;
-    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
 };
-exports.CloseIcon2 = CloseIcon2;
 // @ts-ignore
-window.CloseIcon2 = exports.CloseIcon2;
+window.CloseIcon2 = CloseIcon2;
 
 
 /***/ }),
@@ -31853,44 +31865,124 @@ window.CloseIcon2 = exports.CloseIcon2;
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/DateIcon.tsx ***!
   \***********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DateIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-class DateIcon extends React.Component {
+class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     render() {
-        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] })));
     }
 }
-exports.DateIcon = DateIcon;
 // @ts-ignore
 window.DateIcon = DateIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DeleteIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/DeleteIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteIcon": () => (/* binding */ DeleteIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" })] })));
+    }
+}
+// @ts-ignore
+window.DeleteIcon = DeleteIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DoneIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = DoneIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DownIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })] })));
+    }
+}
+// @ts-ignore
+window.DoneIcon = DoneIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/EditIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/EditIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditIcon": () => (/* binding */ EditIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" })] })));
+    }
+}
+// @ts-ignore
+window.EditIcon = EditIcon;
 
 
 /***/ }),
@@ -31899,19 +31991,46 @@ window.DateIcon = DateIcon;
 /*!***********************************************!*\
   !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.LeftIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const LeftIcon = (props) => {
     const size = props.size || 24;
-    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
 };
-exports.LeftIcon = LeftIcon;
 // @ts-ignore
-window.LeftIcon = exports.LeftIcon;
+window.LeftIcon = LeftIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LocationIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })] })));
+    }
+}
+// @ts-ignore
+window.LocationIcon = LocationIcon;
 
 
 /***/ }),
@@ -31920,42 +32039,21 @@ window.LeftIcon = exports.LeftIcon;
 /*!***************************************************!*\
   !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
   \***************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.MoreVertIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-class MoreVertIcon extends React.Component {
+class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     render() {
-        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] })));
     }
 }
-exports.MoreVertIcon = MoreVertIcon;
 // @ts-ignore
 window.MoreVertIcon = MoreVertIcon;
 
@@ -31966,18 +32064,70 @@ window.MoreVertIcon = MoreVertIcon;
 /*!****************************************************!*\
   !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.OpenInNewIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const OpenInNewIcon = () => {
-    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] })));
 };
-exports.OpenInNewIcon = OpenInNewIcon;
 // @ts-ignore
-window.OpenInNewIcon = exports.OpenInNewIcon;
+window.OpenInNewIcon = OpenInNewIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })] })));
+    }
+}
+// @ts-ignore
+window.PasswordIcon = PasswordIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })] })));
+    }
+}
+// @ts-ignore
+window.PhoneIcon = PhoneIcon;
 
 
 /***/ }),
@@ -31986,19 +32136,70 @@ window.OpenInNewIcon = exports.OpenInNewIcon;
 /*!************************************************!*\
   !*** ./src/frontend/common/icon/RightIcon.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.RightIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 const RightIcon = (props) => {
     const size = props.size || 24;
-    return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] }));
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
 };
-exports.RightIcon = RightIcon;
 // @ts-ignore
-window.RightIcon = exports.RightIcon;
+window.RightIcon = RightIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })] })));
+    }
+}
+// @ts-ignore
+window.SettingsIcon = SettingsIcon;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/TimeIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeIcon": () => (/* binding */ TimeIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", { fill: "none", height: "24", width: "24", x: "0" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12.5,7H11v6l5.2,3.2l0.8-1.3l-4.5-2.7V7z" }) }) })] })));
+    }
+}
+// @ts-ignore
+window.TimeIcon = TimeIcon;
 
 
 /***/ }),
@@ -32007,42 +32208,21 @@ window.RightIcon = exports.RightIcon;
 /*!*****************************************************!*\
   !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
   \*****************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.VisibilityIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-class VisibilityIcon extends React.Component {
+class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     render() {
-        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] })));
     }
 }
-exports.VisibilityIcon = VisibilityIcon;
 // @ts-ignore
 window.VisibilityIcon = VisibilityIcon;
 
@@ -32053,42 +32233,21 @@ window.VisibilityIcon = VisibilityIcon;
 /*!********************************************************!*\
   !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
   \********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.VisibilityOffIcon = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-class VisibilityOffIcon extends React.Component {
+class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
     render() {
-        return (0, jsx_runtime_1.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0, jsx_runtime_1.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0, jsx_runtime_1.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] })));
     }
 }
-exports.VisibilityOffIcon = VisibilityOffIcon;
 // @ts-ignore
 window.VisibilityOffIcon = VisibilityOffIcon;
 
@@ -32099,26 +32258,30 @@ window.VisibilityOffIcon = VisibilityOffIcon;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/Box/Box.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Box = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-class Box extends ReactComponent_1.ReactComponent {
+
+class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('Box.constructor', props);
         super(props);
         this.update = () => {
             console.log('Box.update');
             this.setState({
-                backgroundColor: 'green'
+                backgroundColor: 'green',
             });
         };
         this.state = {
-            backgroundColor: 'purple'
+            backgroundColor: 'purple',
         };
     }
     // componentWillMount() {
@@ -32139,10 +32302,9 @@ class Box extends ReactComponent_1.ReactComponent {
     }
     render() {
         console.log('Box.render');
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, { name: "one" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "two" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "three" })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
     }
 }
-exports.Box = Box;
 // @ts-ignore
 window.Box = Box;
 
@@ -32153,20 +32315,24 @@ window.Box = Box;
 /*!***********************************************!*\
   !*** ./src/frontend/common/widget/Button.tsx ***!
   \***********************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Button": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Button = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Button extends ReactComponent_1.ReactComponent {
+
+class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
     }
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
@@ -32191,15 +32357,14 @@ class Button extends ReactComponent_1.ReactComponent {
     getStyle() {
         return {
             display: !this.isVisible() ? 'none' : null,
-            width: this.props.width
+            width: this.props.width,
         };
     }
     render() {
         // console.log('Button.render', this.props.title, this.props);
-        return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
-exports.Button = Button;
 // @ts-ignore
 window.Button = Button;
 
@@ -32210,14 +32375,17 @@ window.Button = Button;
 /*!**********************************************************!*\
   !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
   \**********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.CheckBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class CheckBox extends ReactComponent_1.ReactComponent {
+class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = e => {
@@ -32244,7 +32412,7 @@ class CheckBox extends ReactComponent_1.ReactComponent {
             throw new Error(`wrong checked prop: ${this.props.checked}`);
         }
         this.state = {
-            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
         };
     }
     getValue() {
@@ -32258,14 +32426,99 @@ class CheckBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         if (this.state.checked === null) {
-            return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" }));
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" })));
         }
-        return (0, jsx_runtime_1.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange }));
     }
 }
-exports.CheckBox = CheckBox;
 // @ts-ignore
 window.CheckBox = CheckBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCheckBoxChange = e => {
+            // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+            const checked = e.target.checked;
+            const itemValue = e.target.dataset.value;
+            // console.log('itemValue:', itemValue);
+            this.setState(prevState => {
+                const prevValue = prevState.value || [];
+                const value = [...prevValue];
+                if (checked) {
+                    if (value.indexOf(itemValue) > -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.push(itemValue);
+                }
+                else {
+                    if (value.indexOf(itemValue) === -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.splice(value.indexOf(itemValue), 1);
+                }
+                // console.log('value:', value);
+                return { value };
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.getValue());
+                }
+            });
+        };
+        if (!this.props.name)
+            throw new Error('no CheckBoxList name');
+        this.state = {
+            value: this.props.value || [],
+        };
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValue() {
+        return this.state.value || [];
+    }
+    isValueChecked(value) {
+        return this.getValue().indexOf(value) > -1;
+    }
+    composeItemId(value) {
+        return `${this.props.name}.${value}`;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('nextProps.value:', nextProps.value);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map(item => {
+                if (item.value === undefined)
+                    throw new Error('no item value');
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
+            }) })));
+    }
+}
+// @ts-ignore
+window.CheckBoxList = CheckBoxList;
 
 
 /***/ }),
@@ -32274,14 +32527,17 @@ window.CheckBox = CheckBox;
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/ComboBox.tsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.ComboBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class ComboBox extends ReactComponent_1.ReactComponent {
+class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
@@ -32340,11 +32596,10 @@ class ComboBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('ComboBox.render', this.state.value);
-        return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable &&
-                    (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items && this.props.items.map(item => (0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
+                    this.props.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
-exports.ComboBox = ComboBox;
 // @ts-ignore
 window.ComboBox = ComboBox;
 
@@ -32355,16 +32610,22 @@ window.ComboBox = ComboBox;
 /*!**************************************************************!*\
   !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
   \**************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DatePicker = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-const LeftIcon_1 = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-const RightIcon_1 = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+
+
+
 // props
 //  visible boolean true
 //  selectedDate array [2021, 0, 1]
@@ -32374,7 +32635,7 @@ const RightIcon_1 = __webpack_require__(/*! ../../icon/RightIcon */ "./src/front
 //  getDateStyle function
 //  selectToday boolean false
 //  highlightedDate array [2021, 0, 1]
-class DatePicker extends ReactComponent_1.ReactComponent {
+class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
@@ -32396,7 +32657,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
                 return {
-                    selectedMonth: [next.getFullYear(), next.getMonth()]
+                    selectedMonth: [next.getFullYear(), next.getMonth()],
                 };
             });
         };
@@ -32406,7 +32667,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
                 return {
-                    selectedMonth: [prev.getFullYear(), prev.getMonth()]
+                    selectedMonth: [prev.getFullYear(), prev.getMonth()],
                 };
             });
         };
@@ -32414,11 +32675,18 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             throw new Error('minDate must be array');
         this.state = { selectedMonth: this.calcSelectedMonth() };
         this.MONTH = [
-            'Январь', 'Февраль',
-            'Март', 'Апрель', 'Май',
-            'Июнь', 'Июль', 'Август',
-            'Сентябрь', 'Октябрь', 'Ноябрь',
-            'Декабрь'
+            'Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь',
         ];
     }
     static createDateFromArr(arr) {
@@ -32438,7 +32706,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
         }
         else {
-            const dates = [Helper_1.Helper.today().getTime()];
+            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
             if (this.props.minDate)
                 dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
             // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
@@ -32505,12 +32773,15 @@ class DatePicker extends ReactComponent_1.ReactComponent {
     render() {
         // console.log('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
-        const today = Helper_1.Helper.today();
+        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
         const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
         // @ts-ignore
-        const highlightedDate = this.props.highlightedDate ? new Date(...this.props.highlightedDate) : null;
-        return ((0, jsx_runtime_1.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0, jsx_runtime_1.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon_1.RightIcon, { size: 18 }) }))] })) })), (0, jsx_runtime_1.jsx)("thead", { children: (0, jsx_runtime_1.jsxs)("tr", { children: [(0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0, jsx_runtime_1.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0, jsx_runtime_1.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0, jsx_runtime_1.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+        const highlightedDate = this.props.highlightedDate
+            ? // @ts-ignore
+                new Date(...this.props.highlightedDate)
+            : null;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
                             const classList = [];
                             if (j === 5 || j === 6)
                                 classList.push('weekend');
@@ -32528,9 +32799,11 @@ class DatePicker extends ReactComponent_1.ReactComponent {
                                 classList.push('highlight');
                             const text = date.getDate().toString();
                             const dataDate = JSON.stringify(DatePicker.dateToArray(date));
-                            const style = this.props.getDateStyle ? this.props.getDateStyle(date) : null;
+                            const style = this.props.getDateStyle
+                                ? this.props.getDateStyle(date)
+                                : null;
                             date.setDate(date.getDate() + 1);
-                            return (0, jsx_runtime_1.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text);
+                            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text));
                         }) }, i))) })] })));
     }
     isSelectToday() {
@@ -32539,7 +32812,6 @@ class DatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
 }
-exports.DatePicker = DatePicker;
 // @ts-ignore
 window.DatePicker = DatePicker;
 
@@ -32550,15 +32822,19 @@ window.DatePicker = DatePicker;
 /*!**********************************************************************!*\
   !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
   \**********************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DropdownButton = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Button_1 = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-class DropdownButton extends ReactComponent_1.ReactComponent {
+
+class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onButtonClick = e => {
@@ -32593,7 +32869,7 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
         };
         this.state = {
             open: false,
-            disabled: false
+            disabled: false,
         };
     }
     isEnabled() {
@@ -32603,10 +32879,10 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
         return !this.state.disabled;
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0, jsx_runtime_1.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions && this.props.actions.map(action => (0, jsx_runtime_1.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name)) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
+                        this.props.actions.map(action => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
     }
 }
-exports.DropdownButton = DropdownButton;
 // @ts-ignore
 window.DropdownButton = DropdownButton;
 
@@ -32617,24 +32893,32 @@ window.DropdownButton = DropdownButton;
 /*!******************************************************************************!*\
   !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
   \******************************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.DropdownDatePicker = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-const CloseIcon_1 = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-const DateIcon_1 = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-const CloseIcon2_1 = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-const DatePicker_1 = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+
+
+
+
+
 // oldDates boolean true
-class DropdownDatePicker extends ReactComponent_1.ReactComponent {
+class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('DropdownDatePicker.constructor', props);
         super(props);
-        this.onInputClick = (e) => {
+        this.onInputClick = e => {
             // console.log('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
@@ -32654,19 +32938,19 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
                 this.props.onChange(null);
             }
         };
-        this.onBlur = (e) => {
+        this.onBlur = e => {
             // console.log('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
-        this.onDatePickerMouseDown = (e) => {
+        this.onDatePickerMouseDown = e => {
             // console.log('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
-        this.onDatePickerDateSelected = (date) => {
+        this.onDatePickerDateSelected = date => {
             // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
@@ -32693,12 +32977,12 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
             let format = this.getFormat();
             // @ts-ignore
             if (ApplicationController.isDebugMode()) {
-                const time = Helper_1.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
                 }
             }
-            return Helper_1.Helper.formatDate(value, format);
+            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
         }
         return '';
     }
@@ -32718,7 +33002,11 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
     }
     getSelectedDate() {
         if (this.getValue()) {
-            return [this.getValue().getFullYear(), this.getValue().getMonth(), this.getValue().getDate()];
+            return [
+                this.getValue().getFullYear(),
+                this.getValue().getMonth(),
+                this.getValue().getDate(),
+            ];
         }
         return null;
     }
@@ -32732,35 +33020,76 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
     getClassList() {
-        return [
-            ...super.getClassList(),
-            ...(this.props.readOnly ? ['read-only'] : [])
-        ];
+        return [...super.getClassList(), ...(this.props.readOnly ? ['read-only'] : [])];
     }
     renderInput() {
-        return (0, jsx_runtime_1.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
     }
     renderCloseIcon() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
     }
     renderDateIcon() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0, jsx_runtime_1.jsx)(DateIcon_1.DateIcon, {}) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
     }
     renderDatePicker() {
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) })), (0, jsx_runtime_1.jsx)(DatePicker_1.DatePicker
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker
                 // minDate={this.getMinDate()}
                 , { 
                     // minDate={this.getMinDate()}
-                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] }));
+                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
         // console.log('DropdownDatePicker.render', this.props, this.state);
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
     }
 }
-exports.DropdownDatePicker = DropdownDatePicker;
 // @ts-ignore
 window.DropdownDatePicker = DropdownDatePicker;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Expand": () => (/* binding */ Expand)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+
+
+
+class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onTitleClick = e => {
+            console.log('Expand.onTitleClick');
+            this.setState(prevState => {
+                return { opened: !prevState.opened };
+            });
+        };
+        this.state = {
+            opened: this.props.opened !== undefined ? this.props.opened : false,
+        };
+    }
+    isOpened() {
+        return this.state.opened;
+    }
+    isHighlighted() {
+        return !!this.props.highlighted;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.props.title }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__content` }, { children: this.props.children }))] })));
+    }
+}
+// @ts-ignore
+window.Expand = Expand;
 
 
 /***/ }),
@@ -32769,41 +33098,25 @@ window.DropdownDatePicker = DropdownDatePicker;
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
   \**************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Grid = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-const GridRow_1 = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-const GridCell_1 = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-class Grid extends ReactComponent_1.ReactComponent {
+
+
+
+
+class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('Grid.constructor', props);
         super(props);
@@ -32930,13 +33243,15 @@ class Grid extends ReactComponent_1.ReactComponent {
         };
         this.state = {
             key: this.props.selectedKey || null,
-            column: this.props.selectedKey && this.props.columns && this.props.columns.length ? 0 : null,
+            column: this.props.selectedKey && this.props.columns && this.props.columns.length
+                ? 0
+                : null,
             columnWidth: {},
             resized: Date.now(),
         };
         this.columns = {}; // each column is the array of each cell view
-        this.el = React.createRef();
-        this.head = React.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     getActiveColumn() {
         return this.state.column;
@@ -32961,7 +33276,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
-        await Helper_1.Helper.copyTextToClipboard(text);
+        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
     }
     findRow(key) {
         return this.props.rows.find(row => this.getRowKey(row) === key);
@@ -33050,7 +33365,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         }
     }
     getMaxColumnWidth(column) {
-        return Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2;
+        return (Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2);
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
@@ -33060,12 +33375,12 @@ class Grid extends ReactComponent_1.ReactComponent {
         return column.width;
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0, jsx_runtime_1.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name));
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
     renderRows() {
         return this.props.rows.map((row, i) => {
             const key = this.getRowKey(row);
-            return (0, jsx_runtime_1.jsx)(GridRow_1.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key);
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
         });
     }
     getRowKey(row) {
@@ -33081,7 +33396,7 @@ class Grid extends ReactComponent_1.ReactComponent {
         }
         if (view)
             return view;
-        return (0, jsx_runtime_1.jsx)(GridCell_1.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
@@ -33094,13 +33409,12 @@ class Grid extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('Grid.render', this.props.name);
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && (0, jsx_runtime_1.jsx)("div", { className: `${this.getCssBlockName()}__th` })] })) })) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
         return !!this.props.createLinkCallback;
     }
 }
-exports.Grid = Grid;
 // @ts-ignore
 window.Grid = Grid;
 
@@ -33111,42 +33425,24 @@ window.Grid = Grid;
 /*!**********************************************************!*\
   !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
   \**********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GridCell = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const Helper_1 = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
-class GridCell extends ReactComponent_1.ReactComponent {
+
+
+class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.span = React.createRef();
+        this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     getSpanOffsetWidth() {
         if (!this.span.current)
@@ -33154,7 +33450,7 @@ class GridCell extends ReactComponent_1.ReactComponent {
         return this.span.current.offsetWidth;
     }
     renderCellValue(rawValue) {
-        const value = this.props.grid.props.decodeValue ? Helper_1.Helper.decodeValue(rawValue) : rawValue;
+        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
         if (typeof value === 'boolean')
             return value.toString();
         return value;
@@ -33162,10 +33458,9 @@ class GridCell extends ReactComponent_1.ReactComponent {
     render() {
         const row = this.props.row;
         const column = this.props.column;
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0, jsx_runtime_1.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
     }
 }
-exports.GridCell = GridCell;
 // @ts-ignore
 window.GridCell = GridCell;
 
@@ -33176,14 +33471,17 @@ window.GridCell = GridCell;
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.GridRow = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class GridRow extends ReactComponent_1.ReactComponent {
+class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
     }
@@ -33209,13 +33507,60 @@ class GridRow extends ReactComponent_1.ReactComponent {
         const i = this.props.i;
         const key = this.props.rowKey;
         const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
-        return (0, jsx_runtime_1.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name)), !!grid.props.extraColumn &&
-                    (0, jsx_runtime_1.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick })] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name))), !!grid.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick }))] })));
     }
 }
-exports.GridRow = GridRow;
 // @ts-ignore
 window.GridRow = GridRow;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Image/Image.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Image": () => (/* binding */ Image)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onImgClick = async (e) => {
+            console.log('Image.onImgClick');
+            if (this.props.onClick) {
+                return await this.props.onClick();
+            }
+            this.setState(prevState => {
+                if (prevState.classList) {
+                    return { classList: null };
+                }
+                else {
+                    return { classList: ['Image_full'] };
+                }
+            });
+        };
+        this.img = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = { classList: null };
+    }
+    getNaturalSize() {
+        return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: this.getCssClassNames(), ref: this.img, src: this.props.src, onClick: this.onImgClick }));
+    }
+}
+// @ts-ignore
+window.Image = Image;
 
 
 /***/ }),
@@ -33224,14 +33569,17 @@ window.GridRow = GridRow;
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
   \**************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Menu": () => (/* binding */ Menu)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Menu = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Menu extends ReactComponent_1.ReactComponent {
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('Menu.constructor', props);
         super(props);
@@ -33243,7 +33591,7 @@ class Menu extends ReactComponent_1.ReactComponent {
             // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
-        this.onMouseDown = (e) => {
+        this.onMouseDown = e => {
             // console.log('Menu.onMouseDown');
             e.preventDefault();
             // e.stopPropagation();
@@ -33263,7 +33611,7 @@ class Menu extends ReactComponent_1.ReactComponent {
     toggleMenu(menu) {
         return new Promise(resolve => {
             this.setState(prevState => ({
-                [menu]: !prevState[menu]
+                [menu]: !prevState[menu],
             }), resolve);
         });
     }
@@ -33271,10 +33619,10 @@ class Menu extends ReactComponent_1.ReactComponent {
         return new Promise(resolve => this.setState({ [menu]: false }, resolve));
     }
     render() {
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items && this.props.items.map(menu => (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0, jsx_runtime_1.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => (0, jsx_runtime_1.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name)) }))] }), menu.name)) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
+                this.props.items.map(menu => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
     }
 }
-exports.Menu = Menu;
 // @ts-ignore
 window.Menu = Menu;
 
@@ -33285,19 +33633,21 @@ window.Menu = Menu;
 /*!****************************************************!*\
   !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
   \****************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Modal = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Modal extends ReactComponent_1.ReactComponent {
+class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     render() {
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
     }
 }
-exports.Modal = Modal;
 // @ts-ignore
 window.Modal = Modal;
 
@@ -33308,41 +33658,25 @@ window.Modal = Modal;
 /*!**********************************************************!*\
   !*** ./src/frontend/common/widget/Password/Password.tsx ***!
   \**********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Password": () => (/* binding */ Password)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
 
 
-var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    var desc = Object.getOwnPropertyDescriptor(m, k);
-    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
-      desc = { enumerable: true, get: function() { return m[k]; } };
-    }
-    Object.defineProperty(o, k2, desc);
-}) : (function(o, m, k, k2) {
-    if (k2 === undefined) k2 = k;
-    o[k2] = m[k];
-}));
-var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
-    Object.defineProperty(o, "default", { enumerable: true, value: v });
-}) : function(o, v) {
-    o["default"] = v;
-});
-var __importStar = (this && this.__importStar) || function (mod) {
-    if (mod && mod.__esModule) return mod;
-    var result = {};
-    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
-    __setModuleDefault(result, mod);
-    return result;
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Password = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const React = __importStar(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const CloseIcon_1 = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-const VisibilityIcon_1 = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-const VisibilityOffIcon_1 = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-class Password extends ReactComponent_1.ReactComponent {
+
+
+
+
+class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = e => {
@@ -33355,16 +33689,16 @@ class Password extends ReactComponent_1.ReactComponent {
         this.onIconClick = e => {
             this.setState(prevState => {
                 return {
-                    type: prevState.type === 'password' ? 'text' : 'password'
+                    type: prevState.type === 'password' ? 'text' : 'password',
                 };
             });
             this.getInputElement().focus();
         };
-        this.el = React.createRef();
-        this.inputEl = React.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.state = {
             value: this.props.value || '',
-            type: 'password'
+            type: 'password',
         };
     }
     getInputElement() {
@@ -33390,10 +33724,9 @@ class Password extends ReactComponent_1.ReactComponent {
         return this.state.value !== '';
     }
     render() {
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0, jsx_runtime_1.jsx)(VisibilityIcon_1.VisibilityIcon, {}) : (0, jsx_runtime_1.jsx)(VisibilityOffIcon_1.VisibilityOffIcon, {}) }))] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) }))] })));
     }
 }
-exports.Password = Password;
 // @ts-ignore
 window.Password = Password;
 
@@ -33404,18 +33737,19 @@ window.Password = Password;
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
   \*************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PhoneBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class PhoneBox extends ReactComponent_1.ReactComponent {
+
+class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onKeyPress = e => {
@@ -33424,9 +33758,9 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
                 e.preventDefault();
             }
-            if (e.key === '+'
-                && e.target.value.length
-                && Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+            if (e.key === '+' &&
+                e.target.value.length &&
+                Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
                 e.preventDefault();
             }
         };
@@ -33462,9 +33796,9 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
                 this.props.onBlur(value);
             }
         };
-        this.el = react_1.default.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.state = {
-            value: PhoneBox.formatPhoneNumber(this.props.value || '')
+            value: PhoneBox.formatPhoneNumber(this.props.value || ''),
         };
     }
     getValue() {
@@ -33480,7 +33814,7 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TextBox.render');
-        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     static clearValue(value) {
         return value.replace(/[^\+0-9]/g, '');
@@ -33524,7 +33858,81 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
         return value;
     }
 }
-exports.PhoneBox = PhoneBox;
+// @ts-ignore
+window.PhoneBox = PhoneBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Radio.tsx":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/widget/Radio.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Radio": () => (/* binding */ Radio)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Radio.constructor', props.value);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('Radio.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        if (!props.name)
+            throw new Error('no name');
+        this.state = {
+            value: this.getInitialValue(),
+        };
+        console.log('value:', JSON.stringify(this.getValue()));
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find(item => item.value === this.props.value);
+            if (!item) {
+                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
+                console.log('items:', this.props.items);
+            }
+        }
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    renderItem(item, i) {
+        return [
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'radio', name: this.props.name, id: `${this.props.name}${i}`, value: item.value, onChange: this.onChange, checked: item.value === this.getValue(), readOnly: this.isReadOnly(), disabled: this.isReadOnly() }),
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: `${this.props.name}${i}` }, { children: item.title || item.value })),
+        ];
+    }
+    isReadOnly() {
+        if (this.props.readOnly !== undefined)
+            return this.props.readOnly;
+        return false;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        const items = this.props.items || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: items.map((item, i) => this.renderItem(item, i)) })));
+    }
+}
 
 
 /***/ }),
@@ -33533,20 +33941,23 @@ exports.PhoneBox = PhoneBox;
 /*!******************************************************!*\
   !*** ./src/frontend/common/widget/Select/Select.tsx ***!
   \******************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Select = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-const CloseIcon_1 = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-const ArrowIcon_1 = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-class Select extends ReactComponent_1.ReactComponent {
+
+
+
+class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onKeyDown = async (e) => {
@@ -33569,9 +33980,9 @@ class Select extends ReactComponent_1.ReactComponent {
                     // console.log('selected:', selected);
                     if (selected) {
                         // console.log('selected.offsetTop:', selected.offsetTop);
-                        const scrollTop = selected.offsetTop
-                            - this.dropdown.current.getBoundingClientRect().height / 2
-                            + selected.getBoundingClientRect().height / 2;
+                        const scrollTop = selected.offsetTop -
+                            this.dropdown.current.getBoundingClientRect().height / 2 +
+                            selected.getBoundingClientRect().height / 2;
                         console.log('scrollTop:', scrollTop);
                         this.dropdown.current.scrollTop = scrollTop;
                         console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
@@ -33606,8 +34017,8 @@ class Select extends ReactComponent_1.ReactComponent {
             }
             this.getElement();
         };
-        this.el = react_1.default.createRef();
-        this.dropdown = react_1.default.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.state = {
             value: this.getInitialValue(),
             visible: false,
@@ -33685,31 +34096,100 @@ class Select extends ReactComponent_1.ReactComponent {
         return this.state.value !== '';
     }
     renderInput() {
-        return (0, jsx_runtime_1.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown }));
     }
     renderClose() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(CloseIcon_1.CloseIcon, {}) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
     }
     renderIcon() {
-        return (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0, jsx_runtime_1.jsx)(ArrowIcon_1.ArrowIcon, {}) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) })));
     }
     renderDropdown() {
-        return (0, jsx_runtime_1.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
                 // visibility: this.getVisibility(),
-                display: this.getDisplay()
-            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() &&
-                    (0, jsx_runtime_1.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" })), this.getItems().map(item => {
-                    return (0, jsx_runtime_1.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value);
-                })] }));
+                display: this.getDisplay(),
+            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map(item => {
+                    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value));
+                })] })));
     }
     render() {
         // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
-        return (0, jsx_runtime_1.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
     }
 }
-exports.Select = Select;
 // @ts-ignore
 window.Select = Select;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Slider": () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+
+
+
+
+
+class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onPrevClick = e => {
+            // console.log('Slider.onPrevClick');
+            this.setState(prevState => {
+                let image = prevState.image - 1;
+                if (image < 0) {
+                    image = this.props.images.length - 1;
+                }
+                return { image };
+            });
+        };
+        this.onNextClick = e => {
+            // console.log('Slider.onNextClick');
+            this.setState(prevState => {
+                let image = prevState.image + 1;
+                if (image > this.props.images.length - 1) {
+                    image = 0;
+                }
+                return { image };
+            });
+        };
+        this.onImageClick = e => {
+            console.log('Slider.onImageClick');
+            if (this.state.classList) {
+                this.setState({ classList: null });
+            }
+            else {
+                this.setState({ classList: ['full'] });
+            }
+        };
+        this.onCloseClick = e => {
+            this.setState({ classList: null });
+        };
+        if (!this.props.images)
+            throw new Error('Slider: no images');
+        this.state = { image: 0, classList: null };
+    }
+    render() {
+        // console.log('Slider.render', this.props.images);
+        const images = this.props.images || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
+    }
+}
+// @ts-ignore
+window.Slider = Slider;
 
 
 /***/ }),
@@ -33718,14 +34198,17 @@ window.Select = Select;
 /*!************************************************************!*\
   !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
   \************************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Statusbar = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Statusbar extends ReactComponent_1.ReactComponent {
+class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('Statusbar.constructor', props);
         super(props);
@@ -33735,10 +34218,9 @@ class Statusbar extends ReactComponent_1.ReactComponent {
         this.setState({ lastQueryTime });
     }
     render() {
-        return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0, jsx_runtime_1.jsxs)("div", { children: ["Last query time: ", this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Last query time:", ' ', this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
     }
 }
-exports.Statusbar = Statusbar;
 // @ts-ignore
 window.Statusbar = Statusbar;
 
@@ -33749,14 +34231,17 @@ window.Statusbar = Statusbar;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Tab = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Tab extends ReactComponent_1.ReactComponent {
+class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = e => {
@@ -33784,7 +34269,7 @@ class Tab extends ReactComponent_1.ReactComponent {
             }
         };
         this.state = {
-            active: 0
+            active: 0,
         };
     }
     getActive() {
@@ -33799,17 +34284,15 @@ class Tab extends ReactComponent_1.ReactComponent {
         this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
     renderTitles() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose &&
-                    (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name)));
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0, jsx_runtime_1.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
     }
 }
-exports.Tab = Tab;
 // @ts-ignore
 window.Tab = Tab;
 
@@ -33820,14 +34303,17 @@ window.Tab = Tab;
 /*!**************************************************!*\
   !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
   \**************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab2": () => (/* binding */ Tab2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Tab2 = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Tab2 extends ReactComponent_1.ReactComponent {
+class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = e => {
@@ -33855,7 +34341,7 @@ class Tab2 extends ReactComponent_1.ReactComponent {
             }
         };
         this.state = {
-            active: 0
+            active: 0,
         };
     }
     getActive() {
@@ -33870,19 +34356,17 @@ class Tab2 extends ReactComponent_1.ReactComponent {
         this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
     renderTitles() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose &&
-                    (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) => (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name)));
     }
     render() {
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
     }
 }
-exports.Tab2 = Tab2;
 // @ts-ignore
-window.Tab = Tab;
+window.Tab2 = Tab2;
 
 
 /***/ }),
@@ -33891,14 +34375,17 @@ window.Tab = Tab;
 /*!*************************************************!*\
   !*** ./src/frontend/common/widget/TextArea.tsx ***!
   \*************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextArea": () => (/* binding */ TextArea)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TextArea = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class TextArea extends ReactComponent_1.ReactComponent {
+class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         // console.log('TextArea.constructor', props);
         super(props);
@@ -33910,7 +34397,7 @@ class TextArea extends ReactComponent_1.ReactComponent {
             }
         };
         this.state = {
-            value: this.props.value || ''
+            value: this.props.value || '',
         };
     }
     getValue() {
@@ -33924,10 +34411,9 @@ class TextArea extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TextArea.render');
-        return ((0, jsx_runtime_1.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
     }
 }
-exports.TextArea = TextArea;
 // @ts-ignore
 window.TextArea = TextArea;
 
@@ -33938,15 +34424,19 @@ window.TextArea = TextArea;
 /*!************************************************!*\
   !*** ./src/frontend/common/widget/TextBox.tsx ***!
   \************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBox": () => (/* binding */ TextBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TextBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-const ReactComponent_1 = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class TextBox extends ReactComponent_1.ReactComponent {
+
+class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
@@ -33954,9 +34444,9 @@ class TextBox extends ReactComponent_1.ReactComponent {
             // console.log('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
-        this.el = (0, react_1.createRef)();
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
         this.state = {
-            value: this.props.value || ''
+            value: this.props.value || '',
         };
     }
     getValue() {
@@ -33979,10 +34469,9 @@ class TextBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TextBox.render');
-        return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
-exports.TextBox = TextBox;
 // @ts-ignore
 window.TextBox = TextBox;
 
@@ -33993,18 +34482,19 @@ window.TextBox = TextBox;
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
   \********************************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.TimeBox = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const react_1 = __importDefault(__webpack_require__(/*! react */ "./node_modules/react/index.js"));
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class TimeBox extends ReactComponent_1.ReactComponent {
+
+class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         // console.log('TimeBox.constructor', props);
         super(props);
@@ -34066,16 +34556,17 @@ class TimeBox extends ReactComponent_1.ReactComponent {
             throw new Error(`need number type, got ${typeof props.value}`);
         }
         this.state = {
-            value: TimeBox.getStringValue(props.value)
+            value: TimeBox.getStringValue(props.value),
         };
-        this.el = react_1.default.createRef();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     formatValue(value) {
         let min = '';
         let sec = '';
         const pure = value.replace(':', '');
         switch (pure.length) {
-            case 0: break;
+            case 0:
+                break;
             case 1:
                 min = pure;
                 break;
@@ -34091,10 +34582,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
                 sec = pure.substr(2, 2);
                 break;
         }
-        return [
-            min,
-            ...(sec ? [sec] : [])
-        ].join(':');
+        return [min, ...(sec ? [sec] : [])].join(':');
     }
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
@@ -34185,15 +34673,66 @@ class TimeBox extends ReactComponent_1.ReactComponent {
     }
     render() {
         // console.log('TimeBox.render', this.state.value);
-        return (0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
             // onKeyDown={this.onKeyDown}
             // onKeyUp={this.onKeyUp}
-            onKeyPress: this.onKeyPress, onBlur: this.onBlur });
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
     }
 }
-exports.TimeBox = TimeBox;
 // @ts-ignore
 window.TimeBox = TimeBox;
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx":
+/*!******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox2": () => (/* binding */ TimeBox2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _TimeBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
+
+
+
+class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
+    constructor(props) {
+        super(props);
+        this.onClear = e => {
+            // console.log('TimeBox2.onClear');
+            this.setState({ value: '' }, () => {
+                if (this.props.onClear) {
+                    this.props.onClear();
+                }
+            });
+        };
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    isCloseVisible() {
+        return !!this.state.value;
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', 
+                    // id={this.props.id}
+                    readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+                    // onKeyDown={this.onKeyDown}
+                    // onKeyUp={this.onKeyUp}
+                    onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
+    }
+}
 
 
 /***/ }),
@@ -34202,25 +34741,26 @@ window.TimeBox = TimeBox;
 /*!********************************************************!*\
   !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
   \********************************************************/
-/***/ ((__unused_webpack_module, exports, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.Tooltip = void 0;
-const jsx_runtime_1 = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-const ReactComponent_1 = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-class Tooltip extends ReactComponent_1.ReactComponent {
+class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     // constructor(props) {
     //     console.log('Tooltip.constructor', props);
     //     super(props);
     // }
     render() {
         // console.log('Tooltip.render', this.state, this.props);
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' &&
-                    (0, jsx_runtime_1.jsx)("div", { children: "tooltip" }), (0, jsx_runtime_1.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
-exports.Tooltip = Tooltip;
 // @ts-ignore
 window.Tooltip = Tooltip;
 
@@ -34247,89 +34787,209 @@ window.Tooltip = Tooltip;
 /******/ 		};
 /******/ 	
 /******/ 		// Execute the module function
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
 /******/ 	
 /******/ 		// Return the exports of the module
 /******/ 		return module.exports;
 /******/ 	}
 /******/ 	
 /************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/************************************************************************/
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-var exports = __webpack_exports__;
 /*!**************************************!*\
   !*** ./src/frontend/common/index.ts ***!
   \**************************************/
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_27__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__.CheckBoxList),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__.ComboBox),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__.Expand),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget_Radio__WEBPACK_IMPORTED_MODULE_51__.Radio),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
+/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./icon/SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon/DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon/EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _widget_Radio__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./widget/Radio */ "./src/frontend/common/widget/Radio.tsx");
 
-Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.PhoneBox = exports.TimeBox = exports.Tab2 = exports.TextArea = exports.Select = exports.DatePicker = exports.DropdownDatePicker = exports.Tooltip = exports.Statusbar = exports.Menu = exports.Password = exports.Modal = exports.GridCell = exports.GridRow = exports.Grid = exports.TextBox = exports.DropdownButton = exports.Tab = exports.Button = exports.ComboBox = exports.CheckBox = exports.Box = exports.CloseIcon2 = exports.MoreVertIcon = exports.OpenInNewIcon = exports.RightIcon = exports.LeftIcon = exports.CloseIcon = exports.Search = exports.ReactComponent = exports.Helper = exports.FrontHostApp = void 0;
-var FrontHostApp_1 = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-Object.defineProperty(exports, "FrontHostApp", ({ enumerable: true, get: function () { return FrontHostApp_1.FrontHostApp; } }));
-var Helper_1 = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
-Object.defineProperty(exports, "Helper", ({ enumerable: true, get: function () { return Helper_1.Helper; } }));
-var ReactComponent_1 = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-Object.defineProperty(exports, "ReactComponent", ({ enumerable: true, get: function () { return ReactComponent_1.ReactComponent; } }));
-var Search_1 = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
-Object.defineProperty(exports, "Search", ({ enumerable: true, get: function () { return Search_1.Search; } }));
+
+
+
 // icon
-var CloseIcon_1 = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-Object.defineProperty(exports, "CloseIcon", ({ enumerable: true, get: function () { return CloseIcon_1.CloseIcon; } }));
-var LeftIcon_1 = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-Object.defineProperty(exports, "LeftIcon", ({ enumerable: true, get: function () { return LeftIcon_1.LeftIcon; } }));
-var RightIcon_1 = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-Object.defineProperty(exports, "RightIcon", ({ enumerable: true, get: function () { return RightIcon_1.RightIcon; } }));
-var OpenInNewIcon_1 = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
-Object.defineProperty(exports, "OpenInNewIcon", ({ enumerable: true, get: function () { return OpenInNewIcon_1.OpenInNewIcon; } }));
-var MoreVertIcon_1 = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
-Object.defineProperty(exports, "MoreVertIcon", ({ enumerable: true, get: function () { return MoreVertIcon_1.MoreVertIcon; } }));
-var CloseIcon2_1 = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-Object.defineProperty(exports, "CloseIcon2", ({ enumerable: true, get: function () { return CloseIcon2_1.CloseIcon2; } }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // widget
-var Box_1 = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-Object.defineProperty(exports, "Box", ({ enumerable: true, get: function () { return Box_1.Box; } }));
-var CheckBox_1 = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-Object.defineProperty(exports, "CheckBox", ({ enumerable: true, get: function () { return CheckBox_1.CheckBox; } }));
-var ComboBox_1 = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-Object.defineProperty(exports, "ComboBox", ({ enumerable: true, get: function () { return ComboBox_1.ComboBox; } }));
-var Button_1 = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-Object.defineProperty(exports, "Button", ({ enumerable: true, get: function () { return Button_1.Button; } }));
-var Tab_1 = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-Object.defineProperty(exports, "Tab", ({ enumerable: true, get: function () { return Tab_1.Tab; } }));
-var DropdownButton_1 = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-Object.defineProperty(exports, "DropdownButton", ({ enumerable: true, get: function () { return DropdownButton_1.DropdownButton; } }));
-var TextBox_1 = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-Object.defineProperty(exports, "TextBox", ({ enumerable: true, get: function () { return TextBox_1.TextBox; } }));
-var Grid_1 = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-Object.defineProperty(exports, "Grid", ({ enumerable: true, get: function () { return Grid_1.Grid; } }));
-var GridRow_1 = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-Object.defineProperty(exports, "GridRow", ({ enumerable: true, get: function () { return GridRow_1.GridRow; } }));
-var GridCell_1 = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-Object.defineProperty(exports, "GridCell", ({ enumerable: true, get: function () { return GridCell_1.GridCell; } }));
-var Modal_1 = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-Object.defineProperty(exports, "Modal", ({ enumerable: true, get: function () { return Modal_1.Modal; } }));
-var Password_1 = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-Object.defineProperty(exports, "Password", ({ enumerable: true, get: function () { return Password_1.Password; } }));
-var Menu_1 = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-Object.defineProperty(exports, "Menu", ({ enumerable: true, get: function () { return Menu_1.Menu; } }));
-var Statusbar_1 = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-Object.defineProperty(exports, "Statusbar", ({ enumerable: true, get: function () { return Statusbar_1.Statusbar; } }));
-var Tooltip_1 = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-Object.defineProperty(exports, "Tooltip", ({ enumerable: true, get: function () { return Tooltip_1.Tooltip; } }));
-var DropdownDatePicker_1 = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-Object.defineProperty(exports, "DropdownDatePicker", ({ enumerable: true, get: function () { return DropdownDatePicker_1.DropdownDatePicker; } }));
-var DatePicker_1 = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-Object.defineProperty(exports, "DatePicker", ({ enumerable: true, get: function () { return DatePicker_1.DatePicker; } }));
-var Select_1 = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-Object.defineProperty(exports, "Select", ({ enumerable: true, get: function () { return Select_1.Select; } }));
-var TextArea_1 = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-Object.defineProperty(exports, "TextArea", ({ enumerable: true, get: function () { return TextArea_1.TextArea; } }));
-var Tab2_1 = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-Object.defineProperty(exports, "Tab2", ({ enumerable: true, get: function () { return Tab2_1.Tab2; } }));
-var TimeBox_1 = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-Object.defineProperty(exports, "TimeBox", ({ enumerable: true, get: function () { return TimeBox_1.TimeBox; } }));
-var PhoneBox_1 = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
-Object.defineProperty(exports, "PhoneBox", ({ enumerable: true, get: function () { return PhoneBox_1.PhoneBox; } }));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 })();
 
