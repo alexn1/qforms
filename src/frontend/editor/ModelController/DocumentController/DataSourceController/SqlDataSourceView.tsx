@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { DocumentView } from '../DocumentView';
 import { Button } from '../../../../common';
+import './SqlDataSourceView.less';
 
 export class SqlDataSourceView extends DocumentView {
     singleRef: React.RefObject<any>;

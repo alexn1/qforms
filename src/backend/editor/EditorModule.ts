@@ -51,11 +51,17 @@ export class EditorModule {
     }
     async init() {
         this.css = (
-            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'css')
-        ).map(path => `/editor/${path}`);
+            await Helper.getFilePaths(
+                path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
+                'css',
+            )
+        ).map(path => `/editor/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor'), 'js')
-        ).map(path => `/editor/${path}`);
+            await Helper.getFilePaths(
+                path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
+                'js',
+            )
+        ).map(path => `/editor/public/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -63,7 +69,7 @@ export class EditorModule {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',
-            ...this.hostApp.commonModule.css,
+            // ...this.hostApp.commonModule.css,
             ...this.css,
         ];
     }

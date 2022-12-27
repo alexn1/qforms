@@ -1,5 +1,6 @@
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
@@ -7,8 +8,8 @@ module.exports = {
     entry: './src/frontend/editor/main.ts',
     output: {
         clean: true,
-        path: path.resolve(__dirname, './dist/lib/frontend/editor/js'),
-        filename: 'bundle.[contenthash].js',
+        path: path.resolve(__dirname, './dist/lib/frontend/editor/public'),
+        filename: 'js/bundle.[contenthash].js',
     },
     /*resolve: {
         extensions: ['.jsx', '.js'],
@@ -49,6 +50,10 @@ module.exports = {
                     },
                 },
             },
+            {
+                test: /\.less$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader', 'less-loader'],
+            },
         ],
     },
     optimization: {
@@ -60,4 +65,9 @@ module.exports = {
             }),
         ],
     },
+    plugins: [
+        new MiniCssExtractPlugin({
+            filename: 'css/bundle.[contenthash].css',
+        }),
+    ],
 };

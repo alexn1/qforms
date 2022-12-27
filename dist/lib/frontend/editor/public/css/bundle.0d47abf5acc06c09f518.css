@@ -1,0 +1,1432 @@
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
+  \**********************************************************************************************************************************/
+.Box {
+  background-color: blue;
+  height: 200px;
+  width: 200px;
+}
+
+/*!********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
+  \********************************************************************************************************************************************/
+div.CheckBox {
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+}
+div.CheckBox.disabled {
+  cursor: default;
+}
+div.CheckBox:not(.disabled):hover {
+  background-color: #eee;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab/Tab.less ***!
+  \**********************************************************************************************************************************/
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab > ul > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab > ul > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab > ul > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab > ul > li.active {
+  background-color: white;
+}
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
+}
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
+  display: block;
+}
+.Tab.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab.Tab-blue > ul > li.active {
+  background-color: var(--accent-color);
+}
+.Tab.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid var(--accent-color);
+}
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab > ul > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab > ul > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab > ul > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab > ul > li.active {
+  background-color: white;
+}
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
+}
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
+  display: block;
+}
+.Tab.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab.Tab-blue > ul > li.active {
+  background-color: var(--accent-color);
+}
+.Tab.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid var(--accent-color);
+}
+
+/*!********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
+  \********************************************************************************************************************************************************/
+.DropdownButton {
+  position: relative;
+  display: inline-block;
+}
+.DropdownButton.show > .DropdownButton__dropdown {
+  visibility: visible;
+}
+.DropdownButton__button:disabled svg {
+  fill: #aaa;
+}
+.DropdownButton__dropdown {
+  position: absolute;
+  background-color: white;
+  visibility: hidden;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 5px 0;
+  list-style: none;
+  font-size: 12px;
+  margin: 0;
+  white-space: nowrap;
+}
+.DropdownButton__item {
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
+  padding: 10px;
+  color: #333;
+}
+.DropdownButton__item svg {
+  fill: #333;
+}
+.DropdownButton__item:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+.DropdownButton__item:hover svg {
+  fill: white;
+}
+.DropdownButton__item.disabled {
+  color: #aaa;
+}
+.DropdownButton__item.disabled svg {
+  fill: #aaa;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Grid/Grid.less ***!
+  \************************************************************************************************************************************/
+.Grid {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: null;
+  min-height: 100px;
+  border-color: #7c7c8b;
+  border-width: 0 1px 1px 1px;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  /*user-select        : none;
+  -moz-user-select   : none;
+  -webkit-user-select: none;
+  -ms-user-select    : none;
+  -khtml-user-select : none;*/
+}
+.Grid__table {
+  display: table;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.Grid__tr {
+  display: table-row;
+  border-bottom: 0 solid white;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.Grid.disabled .Grid__tr {
+  cursor: default;
+}
+.Grid__td,
+.Grid__th {
+  display: table-cell;
+  vertical-align: middle;
+}
+.Grid__td:not(:last-child),
+.Grid__th:not(:last-child) {
+  border-right: 1px solid white !important;
+}
+.Grid__th {
+  padding: 0 5px;
+  background: none;
+  text-shadow: none;
+  background-color: #7c7c8b;
+  color: white;
+  text-transform: none;
+  position: relative;
+  background-clip: padding-box;
+  /* prevent hiding border when position: relative */
+}
+.Grid__td {
+  color: null;
+  text-shadow: none;
+  padding: 3px 5px;
+  cursor: inherit;
+  /*&.edit {
+    color           : inherit;
+    cursor          : text;
+    background-color: @tdEditBackgroundColor;
+  }*/
+}
+.Grid__td.active {
+  text-shadow: none;
+  background-color: var(--accent-color);
+}
+.Grid__td.active > div {
+  color: white !important;
+  background-color: var(--accent-color) !important;
+}
+.Grid__td.active > div > a {
+  color: white;
+}
+.Grid__td.active > div > select {
+  color: black;
+}
+.Grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 22px;
+  background-color: #7c7c8b;
+  box-sizing: border-box;
+  border-bottom: 0 solid red;
+}
+.Grid__head {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.Grid__head .Grid__tr {
+  height: 22px;
+  border-bottom: 0 solid red;
+}
+.Grid__resize {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 7px;
+  height: 100%;
+  background-color: transparent;
+  cursor: w-resize;
+  z-index: 2;
+}
+.Grid__body {
+  width: 100%;
+  position: absolute;
+  top: 23px;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+.Grid__body .Grid__tr {
+  border-bottom: 0 solid #eee;
+}
+.Grid__body .Grid__tr.active {
+  background-color: #c8e2fe !important;
+  color: null !important;
+}
+.Grid__body .Grid__tr.active .Grid__td > div {
+  color: null !important;
+}
+.Grid__body .Grid__tr:nth-child(even) {
+  background-color: rgba(66, 139, 202, 0.06);
+}
+.Grid:not(.disabled) .Grid__tr:hover {
+  background-color: #E1F0FC !important;
+}
+
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Modal/Modal.less ***!
+  \**************************************************************************************************************************************/
+.Modal {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+}
+.Modal__container {
+  background-color: white;
+  margin: auto;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+/*!********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Password/Password.less ***!
+  \********************************************************************************************************************************************/
+.Password {
+  position: relative;
+}
+.Password__input {
+  width: 100%;
+}
+.Password__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 20px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.Password__close.visible {
+  visibility: visible;
+}
+.Password__close:hover svg line {
+  stroke: black;
+}
+.Password__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  cursor: pointer;
+}
+.Password__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.Password__icon:hover svg {
+  fill: #333;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
+  \************************************************************************************************************************************/
+.Menu {
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  min-height: 46px;
+}
+.Menu > div {
+  overflow: hidden;
+}
+.Menu > div.active > button {
+  background-color: black;
+  color: white;
+}
+.Menu > div.active > div {
+  display: block;
+}
+.Menu > div > button {
+  font-size: inherit;
+  border: none;
+  outline: none;
+  color: #bbb;
+  padding: 14px 16px;
+  background-color: inherit;
+  margin: 0;
+  /* Important for vertical align on mobile phones */
+  cursor: pointer;
+}
+.Menu > div > button:hover {
+  color: white;
+}
+.Menu > div > div {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+.Menu > div > div > a {
+  color: black;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+.Menu > div > div > a:hover {
+  background-color: #ddd;
+}
+
+/*!**********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Statusbar/Statusbar.less ***!
+  \**********************************************************************************************************************************************/
+.Statusbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #eee;
+  padding-left: 5px;
+  font-size: small;
+}
+
+/*!******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tooltip/Tooltip.less ***!
+  \******************************************************************************************************************************************/
+.Tooltip {
+  display: inline-block;
+  position: relative;
+}
+.Tooltip.hidden {
+  visibility: hidden;
+}
+.Tooltip.alert {
+  width: 12px;
+  height: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.Tooltip.alert::before {
+  content: '!';
+}
+.Tooltip > span {
+  visibility: hidden;
+  position: absolute;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.Tooltip > span::after {
+  content: "";
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+}
+.Tooltip > span.top {
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+.Tooltip > span.top::after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: #555 transparent transparent transparent;
+}
+.Tooltip > span.right {
+  top: -5px;
+  left: 125%;
+}
+.Tooltip > span.right::after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-color: transparent #555 transparent transparent;
+}
+.Tooltip > span.bottom {
+  top: 135%;
+  left: 50%;
+  margin-left: -60px;
+}
+.Tooltip > span.bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent transparent #555 transparent;
+}
+.Tooltip > span.left {
+  top: -5px;
+  bottom: auto;
+  right: 128%;
+}
+.Tooltip > span.left::after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-color: transparent transparent transparent #555;
+}
+.Tooltip:hover > span {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*!************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DatePicker/DatePicker.less ***!
+  \************************************************************************************************************************************************/
+.DatePicker {
+  color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  background-color: white;
+  border-spacing: 0;
+  display: none;
+  padding: 10px;
+  cursor: default;
+}
+.DatePicker.visible {
+  display: block;
+}
+.DatePicker__caption svg {
+  fill: #333;
+}
+.DatePicker__caption-title {
+  padding: 10px;
+}
+.DatePicker__caption-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.DatePicker__caption-link {
+  visibility: hidden;
+}
+.DatePicker__caption-link.enabled {
+  visibility: visible;
+}
+.DatePicker__caption-link:hover {
+  cursor: pointer;
+  background-color: var(--accent-color);
+}
+.DatePicker__caption-link:hover svg {
+  fill: white;
+}
+.DatePicker__th {
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+  color: #999;
+}
+.DatePicker__th.weekend {
+  color: rgba(255, 0, 0, 0.5);
+}
+.DatePicker__td {
+  padding: 6px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid white;
+}
+.DatePicker__td.out {
+  color: #bbb;
+}
+.DatePicker__td.today {
+  border: 1px solid var(--accent-color);
+}
+.DatePicker__td.selectable {
+  cursor: pointer;
+}
+.DatePicker__td.selectable:hover {
+  color: white;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+.DatePicker__td:not(.selectable) {
+  text-decoration: line-through;
+}
+.DatePicker__td.selected {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+}
+.DatePicker__td.highlight {
+  color: white;
+  background-color: orange;
+  border: 1px solid orange;
+}
+
+/*!****************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
+  \****************************************************************************************************************************************************************/
+.DropdownDatePicker {
+  position: relative;
+}
+.DropdownDatePicker__input {
+  padding-right: 40px !important;
+  width: 100%;
+}
+.DropdownDatePicker__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.DropdownDatePicker__icon svg {
+  fill: #aaa;
+}
+.DropdownDatePicker__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 24px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.DropdownDatePicker__close.visible {
+  visibility: visible;
+}
+.DropdownDatePicker__close:hover svg line {
+  stroke: black;
+}
+.DropdownDatePicker__date-picker-container {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.DropdownDatePicker__date-picker-container .DatePicker {
+  font-size: 16px;
+  padding: 12px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__caption-title {
+  padding: 12px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__th {
+  padding: 8px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__td {
+  padding: 8px;
+}
+@media (min-width: 1024px) {
+  .DropdownDatePicker__date-picker-container {
+    position: absolute;
+    margin: 1px 0 0 0;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    background-color: unset;
+    display: unset;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__caption-title {
+    padding: 10px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__th {
+    padding: 6px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__td {
+    padding: 6px;
+  }
+}
+.DropdownDatePicker__date-picker-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  fill: white;
+}
+@media (min-width: 1024px) {
+  .DropdownDatePicker__date-picker-close {
+    display: none;
+  }
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Select/Select.less ***!
+  \****************************************************************************************************************************************/
+.Select {
+  position: relative;
+}
+.Select__input {
+  display: block;
+  width: 100%;
+  padding-right: 40px !important;
+}
+.Select__input:not(:disabled) {
+  cursor: pointer;
+}
+.Select__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  right: 20px;
+  top: 0;
+  cursor: pointer;
+  visibility: hidden;
+}
+.Select__close.visible {
+  visibility: visible;
+}
+.Select__close:hover line {
+  stroke: #333;
+}
+.Select__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.Select__icon svg {
+  margin: 0 auto;
+  width: 10px;
+  height: 6px;
+  fill: #aaa;
+}
+.Select__icon.up svg {
+  transform: rotate(180deg);
+}
+.Select__dropdown {
+  position: absolute;
+  background-color: white;
+  margin: 1px 0 0 0;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0 0 5px gray;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+}
+.Select__item {
+  cursor: pointer;
+  padding: 1px 5px;
+}
+.Select__item:hover {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+.Select__item.selected {
+  background-color: #eee;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab2/Tab2.less ***!
+  \************************************************************************************************************************************/
+.Tab2 {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab2__buttons {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-bottom: 1px solid #bbb;
+  box-sizing: border-box;
+}
+.Tab2__button {
+  cursor: pointer;
+  margin-bottom: -1px;
+  border-top: 2px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid #bbb;
+}
+.Tab2__button:not(.active) {
+  color: #555;
+}
+.Tab2__button.active {
+  border-top: 2px solid #bbb;
+  border-left: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  border-bottom: 1px solid white;
+}
+.Tab2__button > span {
+  margin: 7px 10px 2px 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab2__button > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab2__page {
+  display: none;
+}
+.Tab2__page.active {
+  display: block;
+}
+.Tab2.Tab-blue > ul > li.active {
+  border-top: 2px solid var(--accent-color);
+}
+
+/*!****************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
+  \****************************************************************************************************************************************************/
+.TimeBox2 {
+  position: relative;
+}
+.TimeBox2__input {
+  width: 100%;
+}
+.TimeBox2__close-icon {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  visibility: hidden;
+}
+.TimeBox2__close-icon.visible {
+  visibility: visible;
+}
+.TimeBox2__close-icon:hover svg line {
+  stroke: black;
+}
+.TimeBox2__time-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.TimeBox2__time-icon svg {
+  fill: #aaa;
+}
+
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Image/Image.less ***!
+  \**************************************************************************************************************************************/
+.Image {
+  cursor: pointer;
+}
+.Image_full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100%;
+  background-color: black;
+  object-fit: contain;
+  z-index: 100;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Slider/Slider.less ***!
+  \****************************************************************************************************************************************/
+.Slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.Slider.full {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+.Slider.full .Slider_image {
+  object-fit: contain;
+  cursor: zoom-out;
+}
+.Slider.full .Slider__close {
+  display: block;
+}
+.Slider .Slider_image {
+  cursor: zoom-in;
+}
+@media (min-width: 1024px) {
+  .Slider:not(.full) .Slider__arrow {
+    padding: 10px 0;
+  }
+  .Slider:not(.full) .Slider__arrow svg {
+    width: unset;
+    height: unset;
+  }
+}
+.Slider_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Slider__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ccc;
+  padding: 5px;
+  font-weight: bold;
+}
+.Slider__arrow {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  cursor: pointer;
+  padding: 20px 0;
+}
+.Slider__arrow svg {
+  fill: #ccc;
+  width: 40px;
+  height: 40px;
+}
+.Slider__arrow:hover svg {
+  fill: #fff;
+}
+.Slider__arrow:active svg {
+  fill: #eee;
+}
+.Slider__arrow.left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Slider__arrow.right {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Slider__close {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  cursor: pointer;
+}
+.Slider__close svg {
+  width: 40px;
+  height: 40px;
+  fill: #aaa;
+}
+.Slider__close:hover svg {
+  fill: #fff;
+}
+.Slider__close:active svg {
+  fill: #eee;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Expand/Expand.less ***!
+  \****************************************************************************************************************************************/
+.Expand {
+  padding: 5px 0;
+}
+.Expand.opened .Expand__icon {
+  transform: rotate(180deg);
+}
+.Expand.opened .Expand__content {
+  display: block;
+}
+.Expand.highlighted .Expand__title {
+  font-weight: bold;
+}
+.Expand__header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.Expand__icon {
+  fill: #555;
+}
+.Expand__title {
+  color: #555;
+}
+.Expand__content {
+  display: none;
+  padding-top: 10px;
+}
+
+/*!*********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.less ***!
+  \*********************************************************************************************************************************************************************************************/
+.SqlDataSourceView .toolbar {
+  background-color: white;
+  padding: 5px;
+}
+.SqlDataSourceView .edit {
+  overflow: auto;
+  position: relative;
+}
+.SqlDataSourceView .edit > div {
+  position: absolute;
+}
+.SqlDataSourceView .edit .cm-container > div {
+  height: 100%;
+}
+
+/*!********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/TableController/TableView.less ***!
+  \********************************************************************************************************************************************************************************/
+.TableView {
+  height: 100%;
+  background-color: white;
+}
+.TableView .client {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+/*!*****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/TreeWidget/TreeWidget.less ***!
+  \*****************************************************************************************************************************************/
+.TreeWidget {
+  cursor: default;
+  -moz-user-select: none;
+  overflow: auto;
+}
+.TreeWidget ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+.TreeWidget li > ul {
+  display: none;
+}
+.TreeWidget li.opened > ul {
+  display: block;
+}
+.TreeWidget li > div {
+  padding: 1px;
+}
+.TreeWidget li > .active {
+  background-color: #428bca;
+}
+.TreeWidget li > .active > span {
+  color: white !important;
+}
+.TreeWidget .node {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+  background-image: url(../539b6ba27b8c34db9f27.png);
+  background-repeat: no-repeat;
+  background-position: 0 0;
+}
+.TreeWidget .leaf {
+  display: inline-block;
+  height: 11px;
+  width: 11px;
+}
+.TreeWidget .opened > div > span.node {
+  background-position: 0 -11px;
+}
+
+/*!**************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseView.less ***!
+  \**************************************************************************************************************************************************************************************/
+.DatabaseView {
+  height: 100%;
+  background-color: white;
+}
+.DatabaseView .sidebar {
+  position: absolute;
+  width: 200px;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background-color: lightgoldenrodyellow;
+}
+.DatabaseView .client {
+  position: absolute;
+  top: 0;
+  left: 200px;
+  bottom: 0;
+  right: 0;
+}
+
+/*!**********************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.less ***!
+  \**********************************************************************************************************************************************************************************/
+.VisualView .toolbar {
+  background-color: white;
+  padding: 5px;
+}
+.VisualView .edit {
+  overflow: auto;
+}
+.VisualView .edit .cm-container > div {
+  height: 100%;
+}
+
+/*!*********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/PropertyGrid/PropertyGrid.less ***!
+  \*********************************************************************************************************************************************/
+.PropertyGrid {
+  background-color: #eee;
+  overflow: auto;
+}
+.PropertyGrid__table {
+  background-color: white;
+  width: 100%;
+  table-layout: fixed;
+}
+.PropertyGrid__table > tbody > tr > td {
+  border: 1px solid #d3d3d3;
+  font-weight: bold;
+}
+.PropertyGrid__table > tbody > tr > td > input {
+  font-weight: normal;
+  border-width: 0;
+  outline: none;
+  padding-left: 4px;
+  width: 100%;
+}
+.PropertyGrid__table > tbody > tr > td > select {
+  font-weight: normal;
+  border-width: 0;
+  outline: none;
+  padding: 0;
+  width: 100%;
+}
+
+/*!*********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModalController/ModalView.less ***!
+  \*********************************************************************************************************************************************/
+.ModalView {
+  background-color: white;
+  width: 300px;
+  margin: auto;
+}
+
+/*!************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModalController/NewModelView.less ***!
+  \************************************************************************************************************************************************/
+.NewModelView {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 20px;
+  background-color: #eeeeee;
+  width: 300px;
+  margin: auto;
+  padding: 20px;
+}
+.NewModelView input,
+.NewModelView select {
+  width: 100%;
+}
+.NewModelView__header {
+  display: flex;
+  grid-gap: 10px;
+  align-items: center;
+}
+.NewModelView__title {
+  flex-grow: 1;
+}
+.NewModelView__body {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 5px;
+}
+.NewModelView__footer {
+  display: flex;
+  flex-direction: row-reverse;
+  grid-gap: 10px;
+}
+
+/*!*************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
+  \*************************************************************************************************************************************************************/
+.EditorFrontHostAppView {
+  height: 100%;
+  font-family: sans-serif;
+  font-size: small;
+  display: grid;
+  grid-template-columns: 350px 1fr;
+}
+.EditorFrontHostAppView__sidebar {
+  display: grid;
+  grid-template-rows: max-content 1fr 1fr;
+}
+.EditorFrontHostAppView__client {
+  background-color: #d3d3d3;
+}
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/editor.less ***!
+  \********************************************************************************************************************************/
+.editor {
+  height: 100%;
+}
+.editor__body {
+  margin: 0;
+  height: 100%;
+}
+.editor__root {
+  height: 100%;
+}
+
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/error.less ***!
+  \*******************************************************************************************************************************/
+.error,
+.error:focus {
+  box-shadow: 0 0 2px red  !important;
+  color: red;
+}
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/global.less ***!
+  \********************************************************************************************************************************/
+hr {
+  margin: 10px 0;
+}
+nav {
+  margin: 0 !important;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/style/tree-bar.less ***!
+  \**********************************************************************************************************************************/
+.tree-bar {
+  padding: 5px;
+  background-color: #f5f5f5;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/ellipsis.less ***!
+  \**********************************************************************************************************************************/
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex.less ***!
+  \******************************************************************************************************************************/
+.flex {
+  display: flex;
+}
+
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-column.less ***!
+  \*************************************************************************************************************************************/
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-max.less ***!
+  \**********************************************************************************************************************************/
+.flex-max {
+  flex: 1 1 auto;
+}
+
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/frame.less ***!
+  \*******************************************************************************************************************************/
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+.hidden {
+  overflow: hidden;
+}
+.x-hidden {
+  overflow-x: hidden;
+}
+.y-hidden {
+  overflow-y: hidden;
+}
+.x-scroll {
+  overflow-x: scroll;
+}
+.y-scroll {
+  overflow-y: scroll;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/full.less ***!
+  \******************************************************************************************************************************/
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/global.less ***!
+  \********************************************************************************************************************************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: 0 !important;
+}
+input[type='text'],
+select,
+img,
+svg {
+  display: block;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-5.less ***!
+  \************************************************************************************************************************************/
+.grid-gap-5 {
+  grid-gap: 5px;
+}
+
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-10.less ***!
+  \*************************************************************************************************************************************/
+.grid-gap-10 {
+  grid-gap: 10px;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/wait.less ***!
+  \******************************************************************************************************************************/
+.wait,
+.wait * {
+  cursor: wait !important;
+}
+

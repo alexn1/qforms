@@ -1,5 +1,6 @@
 import { ReactComponent } from '../../common';
 import { TreeItem } from './TreeItem';
+import './TreeWidget.less';
 
 export class TreeWidget extends ReactComponent {
     constructor(props) {

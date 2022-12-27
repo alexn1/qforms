@@ -1,4 +1,5 @@
 import { ReactComponent, TextBox, ComboBox } from '../../common';
+import './PropertyGrid.less';
 
 export class PropertyGrid extends ReactComponent {
     constructor(props) {
