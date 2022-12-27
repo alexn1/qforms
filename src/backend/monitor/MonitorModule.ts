@@ -13,13 +13,16 @@ export class MonitorModule {
     async init() {
         this.css = (
             await Helper.getFilePaths(
-                path.join(this.hostApp.getFrontendDirPath(), 'monitor'),
+                path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
                 'css',
             )
-        ).map(path => `/monitor/${path}`);
+        ).map(path => `/monitor/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')
-        ).map(path => `/monitor/${path}`);
+            await Helper.getFilePaths(
+                path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
+                'js',
+            )
+        ).map(path => `/monitor/public/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }

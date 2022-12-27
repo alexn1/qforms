@@ -1,4 +1,5 @@
 import { ReactComponent, Helper } from '../../common';
+import './MonitorView.less';
 
 export class MonitorView extends ReactComponent {
     renderApplication(app) {

@@ -8,8 +8,8 @@ class MonitorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'css')).map(path => `/monitor/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor'), 'js')).map(path => `/monitor/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map(path => `/monitor/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map(path => `/monitor/public/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }

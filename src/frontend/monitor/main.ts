@@ -1,5 +1,6 @@
 import { MonitorView } from './MonitorView/MonitorView';
 import { Helper } from '../common';
+import './style/monitor.less';
 
 document.addEventListener('DOMContentLoaded', () => {
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
