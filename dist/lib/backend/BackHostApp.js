@@ -22,7 +22,7 @@ const IndexModule_1 = require("./index/IndexModule");
 const MyError_1 = require("./MyError");
 const ViewerModule_1 = require("./viewer/ViewerModule");
 const EditorModule_1 = require("./editor/EditorModule");
-const CommonModule_1 = require("./common/CommonModule");
+// import { CommonModule } from './common/CommonModule';
 const FileSessionStore_1 = require("./FileSessionStore");
 const pkg = require('../../package.json');
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
@@ -80,8 +80,8 @@ class BackHostApp {
         this.express.enable('strict routing');
         this.initExpressServer();
         // commonModule
-        this.commonModule = new CommonModule_1.CommonModule(this);
-        await this.commonModule.init();
+        // this.commonModule = new CommonModule(this);
+        // await this.commonModule.init();
         // indexModule
         this.indexModule = new IndexModule_1.IndexModule(this);
         await this.indexModule.init();

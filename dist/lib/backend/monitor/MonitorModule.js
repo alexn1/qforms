@@ -40,7 +40,10 @@ class MonitorModule {
         };
     }
     getLinks() {
-        return [...this.hostApp.commonModule.css, ...this.css];
+        return [
+            // ...this.hostApp.commonModule.css,
+            ...this.css,
+        ];
     }
     getScripts() {
         return [

@@ -6,7 +6,6 @@ import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
-import { CommonModule } from './common/CommonModule';
 import { Result } from './Result';
 export declare class BackHostApp {
     params: any;
@@ -20,7 +19,6 @@ export declare class BackHostApp {
     runtimeDirPath: string;
     sessionDirPath: string;
     logPool: any;
-    commonModule: CommonModule;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
