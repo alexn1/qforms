@@ -1,5 +1,6 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { TextArea } from '../../../../../../common';
+import './RowFormTextAreaFieldView.less';
 
 export class RowFormTextAreaFieldView extends RowFormFieldView {
     constructor(props) {

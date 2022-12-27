@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './Box.less';
 export declare class Box extends ReactComponent {
     constructor(props: any);
     componentDidMount(): void;

@@ -2,6 +2,7 @@ import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 import { CloseIcon } from '../../icon/CloseIcon';
 import { ArrowIcon } from '../../icon/ArrowIcon';
+import './Select.less';
 
 export class Select extends ReactComponent {
     dropdown: React.RefObject<any>;

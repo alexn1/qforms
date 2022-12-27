@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './DropdownDatePicker.less';
 export declare class DropdownDatePicker extends ReactComponent {
     constructor(props: any);
     onInputClick: (e: any) => void;

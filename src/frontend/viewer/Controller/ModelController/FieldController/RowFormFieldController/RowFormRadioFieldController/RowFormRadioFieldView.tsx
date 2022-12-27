@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormRadioFieldView.less';
 
 export class RowFormRadioFieldView extends RowFormFieldView {
     /*onChange = async widgetValue => {

@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './Tab.less';
 export declare class Tab extends ReactComponent {
     constructor(props: any);
     getActive(): any;

@@ -1,5 +1,6 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { DropdownDatePicker } from '../../../../../../common';
+import './RowFormDateFieldView.less';
 
 export class RowFormDateFieldView extends RowFormFieldView {
     render() {

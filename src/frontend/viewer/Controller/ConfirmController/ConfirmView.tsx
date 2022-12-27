@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from '../View';
 import { CloseIcon2, Button } from '../../../common';
+import './ConfirmView.less';
 
 export class ConfirmView extends View {
     constructor(props) {

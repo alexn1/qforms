@@ -4,6 +4,7 @@ import { CloseIcon } from '../../icon/CloseIcon';
 import { DateIcon } from '../../icon/DateIcon';
 import { CloseIcon2 } from '../../icon/CloseIcon2';
 import { DatePicker } from '../DatePicker/DatePicker';
+import './DropdownDatePicker.less';
 
 // oldDates boolean true
 export class DropdownDatePicker extends ReactComponent {

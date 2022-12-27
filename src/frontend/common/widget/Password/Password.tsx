@@ -3,6 +3,7 @@ import { ReactComponent } from '../../ReactComponent';
 import { CloseIcon } from '../../icon/CloseIcon';
 import { VisibilityIcon } from '../../icon/VisibilityIcon';
 import { VisibilityOffIcon } from '../../icon/VisibilityOffIcon';
+import './Password.less';
 
 export class Password extends ReactComponent {
     inputEl: React.RefObject<any>;

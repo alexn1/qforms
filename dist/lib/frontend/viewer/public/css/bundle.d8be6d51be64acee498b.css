@@ -1,0 +1,2258 @@
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Box/Box.less ***!
+  \**********************************************************************************************************************************/
+.Box {
+  background-color: blue;
+  height: 200px;
+  width: 200px;
+}
+
+/*!********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
+  \********************************************************************************************************************************************/
+div.CheckBox {
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  cursor: pointer;
+  background-color: white;
+}
+div.CheckBox.disabled {
+  cursor: default;
+}
+div.CheckBox:not(.disabled):hover {
+  background-color: #eee;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab/Tab.less ***!
+  \**********************************************************************************************************************************/
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab > ul > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab > ul > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab > ul > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab > ul > li.active {
+  background-color: white;
+}
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
+}
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
+  display: block;
+}
+.Tab.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab.Tab-blue > ul > li.active {
+  background-color: var(--accent-color);
+}
+.Tab.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid var(--accent-color);
+}
+.Tab {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  flex-shrink: 0;
+}
+.Tab > ul > li {
+  float: left;
+  background-color: #eee;
+  margin-right: 1px;
+  /*border-radius: 3px 3px 0 0;*/
+  cursor: pointer;
+}
+.Tab > ul > li > span {
+  margin: 5px 10px 0 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab > ul > li > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab > ul > li.active {
+  background-color: white;
+}
+.Tab > div {
+  clear: left;
+  flex: auto;
+  position: relative;
+}
+.Tab > div > div {
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  /*background: lightblue;*/
+}
+.Tab > div > div.active {
+  display: block;
+}
+.Tab.Tab-blue > ul > li {
+  border-radius: 3px 3px 0 0;
+}
+.Tab.Tab-blue > ul > li.active {
+  background-color: var(--accent-color);
+}
+.Tab.Tab-blue > ul > li.active > span {
+  color: white;
+}
+.Tab.Tab-blue > div > div {
+  box-sizing: border-box;
+  border-top: 3px solid var(--accent-color);
+}
+
+/*!********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
+  \********************************************************************************************************************************************************/
+.DropdownButton {
+  position: relative;
+  display: inline-block;
+}
+.DropdownButton.show > .DropdownButton__dropdown {
+  visibility: visible;
+}
+.DropdownButton__button:disabled svg {
+  fill: #aaa;
+}
+.DropdownButton__dropdown {
+  position: absolute;
+  background-color: white;
+  visibility: hidden;
+  z-index: 1;
+  cursor: pointer;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  padding: 5px 0;
+  list-style: none;
+  font-size: 12px;
+  margin: 0;
+  white-space: nowrap;
+}
+.DropdownButton__item {
+  display: flex;
+  align-items: center;
+  grid-gap: 5px;
+  padding: 10px;
+  color: #333;
+}
+.DropdownButton__item svg {
+  fill: #333;
+}
+.DropdownButton__item:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+.DropdownButton__item:hover svg {
+  fill: white;
+}
+.DropdownButton__item.disabled {
+  color: #aaa;
+}
+.DropdownButton__item.disabled svg {
+  fill: #aaa;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Grid/Grid.less ***!
+  \************************************************************************************************************************************/
+.Grid {
+  font-family: sans-serif;
+  font-size: 12px;
+  font-weight: null;
+  min-height: 100px;
+  border-color: #7c7c8b;
+  border-width: 0 1px 1px 1px;
+  background-color: white;
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
+  /*user-select        : none;
+  -moz-user-select   : none;
+  -webkit-user-select: none;
+  -ms-user-select    : none;
+  -khtml-user-select : none;*/
+}
+.Grid__table {
+  display: table;
+  width: 100%;
+  border-spacing: 0;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+.Grid__tr {
+  display: table-row;
+  border-bottom: 0 solid white;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+.Grid.disabled .Grid__tr {
+  cursor: default;
+}
+.Grid__td,
+.Grid__th {
+  display: table-cell;
+  vertical-align: middle;
+}
+.Grid__td:not(:last-child),
+.Grid__th:not(:last-child) {
+  border-right: 1px solid white !important;
+}
+.Grid__th {
+  padding: 0 5px;
+  background: none;
+  text-shadow: none;
+  background-color: #7c7c8b;
+  color: white;
+  text-transform: none;
+  position: relative;
+  background-clip: padding-box;
+  /* prevent hiding border when position: relative */
+}
+.Grid__td {
+  color: null;
+  text-shadow: none;
+  padding: 3px 5px;
+  cursor: inherit;
+  /*&.edit {
+    color           : inherit;
+    cursor          : text;
+    background-color: @tdEditBackgroundColor;
+  }*/
+}
+.Grid__td.active {
+  text-shadow: none;
+  background-color: var(--accent-color);
+}
+.Grid__td.active > div {
+  color: white !important;
+  background-color: var(--accent-color) !important;
+}
+.Grid__td.active > div > a {
+  color: white;
+}
+.Grid__td.active > div > select {
+  color: black;
+}
+.Grid::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: 22px;
+  background-color: #7c7c8b;
+  box-sizing: border-box;
+  border-bottom: 0 solid red;
+}
+.Grid__head {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.Grid__head .Grid__tr {
+  height: 22px;
+  border-bottom: 0 solid red;
+}
+.Grid__resize {
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 7px;
+  height: 100%;
+  background-color: transparent;
+  cursor: w-resize;
+  z-index: 2;
+}
+.Grid__body {
+  width: 100%;
+  position: absolute;
+  top: 23px;
+  bottom: 0;
+  overflow-y: scroll;
+  overflow-x: auto;
+}
+.Grid__body .Grid__tr {
+  border-bottom: 0 solid #eee;
+}
+.Grid__body .Grid__tr.active {
+  background-color: #c8e2fe !important;
+  color: null !important;
+}
+.Grid__body .Grid__tr.active .Grid__td > div {
+  color: null !important;
+}
+.Grid__body .Grid__tr:nth-child(even) {
+  background-color: rgba(66, 139, 202, 0.06);
+}
+.Grid:not(.disabled) .Grid__tr:hover {
+  background-color: #E1F0FC !important;
+}
+
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Modal/Modal.less ***!
+  \**************************************************************************************************************************************/
+.Modal {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+}
+.Modal__container {
+  background-color: white;
+  margin: auto;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+
+/*!********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Password/Password.less ***!
+  \********************************************************************************************************************************************/
+.Password {
+  position: relative;
+}
+.Password__input {
+  width: 100%;
+}
+.Password__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 20px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.Password__close.visible {
+  visibility: visible;
+}
+.Password__close:hover svg line {
+  stroke: black;
+}
+.Password__icon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0;
+  top: 0;
+  width: 20px;
+  height: 100%;
+  cursor: pointer;
+}
+.Password__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.Password__icon:hover svg {
+  fill: #333;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Menu/Menu.less ***!
+  \************************************************************************************************************************************/
+.Menu {
+  overflow: hidden;
+  background-color: #333;
+  display: flex;
+  min-height: 46px;
+}
+.Menu > div {
+  overflow: hidden;
+}
+.Menu > div.active > button {
+  background-color: black;
+  color: white;
+}
+.Menu > div.active > div {
+  display: block;
+}
+.Menu > div > button {
+  font-size: inherit;
+  border: none;
+  outline: none;
+  color: #bbb;
+  padding: 14px 16px;
+  background-color: inherit;
+  margin: 0;
+  /* Important for vertical align on mobile phones */
+  cursor: pointer;
+}
+.Menu > div > button:hover {
+  color: white;
+}
+.Menu > div > div {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  z-index: 2;
+}
+.Menu > div > div > a {
+  color: black;
+  padding: 6px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+  cursor: pointer;
+}
+.Menu > div > div > a:hover {
+  background-color: #ddd;
+}
+
+/*!**********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Statusbar/Statusbar.less ***!
+  \**********************************************************************************************************************************************/
+.Statusbar {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  background-color: #eee;
+  padding-left: 5px;
+  font-size: small;
+}
+
+/*!******************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tooltip/Tooltip.less ***!
+  \******************************************************************************************************************************************/
+.Tooltip {
+  display: inline-block;
+  position: relative;
+}
+.Tooltip.hidden {
+  visibility: hidden;
+}
+.Tooltip.alert {
+  width: 12px;
+  height: 12px;
+  font-size: 10px;
+  font-weight: bold;
+  background-color: red;
+  border-radius: 50%;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+.Tooltip.alert::before {
+  content: '!';
+}
+.Tooltip > span {
+  visibility: hidden;
+  position: absolute;
+  width: 120px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.Tooltip > span::after {
+  content: "";
+  position: absolute;
+  border-width: 5px;
+  border-style: solid;
+}
+.Tooltip > span.top {
+  bottom: 125%;
+  left: 50%;
+  margin-left: -60px;
+}
+.Tooltip > span.top::after {
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: #555 transparent transparent transparent;
+}
+.Tooltip > span.right {
+  top: -5px;
+  left: 125%;
+}
+.Tooltip > span.right::after {
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-color: transparent #555 transparent transparent;
+}
+.Tooltip > span.bottom {
+  top: 135%;
+  left: 50%;
+  margin-left: -60px;
+}
+.Tooltip > span.bottom::after {
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-color: transparent transparent #555 transparent;
+}
+.Tooltip > span.left {
+  top: -5px;
+  bottom: auto;
+  right: 128%;
+}
+.Tooltip > span.left::after {
+  top: 50%;
+  left: 100%;
+  margin-top: -5px;
+  border-color: transparent transparent transparent #555;
+}
+.Tooltip:hover > span {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*!************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DatePicker/DatePicker.less ***!
+  \************************************************************************************************************************************************/
+.DatePicker {
+  color: #333;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+  font-size: 12px;
+  background-color: white;
+  border-spacing: 0;
+  display: none;
+  padding: 10px;
+  cursor: default;
+}
+.DatePicker.visible {
+  display: block;
+}
+.DatePicker__caption svg {
+  fill: #333;
+}
+.DatePicker__caption-title {
+  padding: 10px;
+}
+.DatePicker__caption-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.DatePicker__caption-link {
+  visibility: hidden;
+}
+.DatePicker__caption-link.enabled {
+  visibility: visible;
+}
+.DatePicker__caption-link:hover {
+  cursor: pointer;
+  background-color: var(--accent-color);
+}
+.DatePicker__caption-link:hover svg {
+  fill: white;
+}
+.DatePicker__th {
+  padding: 6px;
+  text-align: center;
+  font-weight: bold;
+  color: #999;
+}
+.DatePicker__th.weekend {
+  color: rgba(255, 0, 0, 0.5);
+}
+.DatePicker__td {
+  padding: 6px;
+  text-align: center;
+  background-color: white;
+  border: 1px solid white;
+}
+.DatePicker__td.out {
+  color: #bbb;
+}
+.DatePicker__td.today {
+  border: 1px solid var(--accent-color);
+}
+.DatePicker__td.selectable {
+  cursor: pointer;
+}
+.DatePicker__td.selectable:hover {
+  color: white;
+  background-color: var(--accent-color);
+  border: 1px solid var(--accent-color);
+}
+.DatePicker__td:not(.selectable) {
+  text-decoration: line-through;
+}
+.DatePicker__td.selected {
+  background-color: #ddd;
+  border: 1px solid #ddd;
+}
+.DatePicker__td.highlight {
+  color: white;
+  background-color: orange;
+  border: 1px solid orange;
+}
+
+/*!****************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
+  \****************************************************************************************************************************************************************/
+.DropdownDatePicker {
+  position: relative;
+}
+.DropdownDatePicker__input {
+  padding-right: 40px !important;
+  width: 100%;
+}
+.DropdownDatePicker__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.DropdownDatePicker__icon svg {
+  fill: #aaa;
+}
+.DropdownDatePicker__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 24px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.DropdownDatePicker__close.visible {
+  visibility: visible;
+}
+.DropdownDatePicker__close:hover svg line {
+  stroke: black;
+}
+.DropdownDatePicker__date-picker-container {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.DropdownDatePicker__date-picker-container .DatePicker {
+  font-size: 16px;
+  padding: 12px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__caption-title {
+  padding: 12px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__th {
+  padding: 8px;
+}
+.DropdownDatePicker__date-picker-container .DatePicker__td {
+  padding: 8px;
+}
+@media (min-width: 1024px) {
+  .DropdownDatePicker__date-picker-container {
+    position: absolute;
+    margin: 1px 0 0 0;
+    top: unset;
+    left: unset;
+    right: unset;
+    bottom: unset;
+    background-color: unset;
+    display: unset;
+    align-items: unset;
+    justify-content: unset;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker {
+    font-size: 12px;
+    padding: 10px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__caption-title {
+    padding: 10px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__th {
+    padding: 6px;
+  }
+  .DropdownDatePicker__date-picker-container .DatePicker__td {
+    padding: 6px;
+  }
+}
+.DropdownDatePicker__date-picker-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 15px;
+  fill: white;
+}
+@media (min-width: 1024px) {
+  .DropdownDatePicker__date-picker-close {
+    display: none;
+  }
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Select/Select.less ***!
+  \****************************************************************************************************************************************/
+.Select {
+  position: relative;
+}
+.Select__input {
+  display: block;
+  width: 100%;
+  padding-right: 40px !important;
+}
+.Select__input:not(:disabled) {
+  cursor: pointer;
+}
+.Select__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  right: 20px;
+  top: 0;
+  cursor: pointer;
+  visibility: hidden;
+}
+.Select__close.visible {
+  visibility: visible;
+}
+.Select__close:hover line {
+  stroke: #333;
+}
+.Select__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.Select__icon svg {
+  margin: 0 auto;
+  width: 10px;
+  height: 6px;
+  fill: #aaa;
+}
+.Select__icon.up svg {
+  transform: rotate(180deg);
+}
+.Select__dropdown {
+  position: absolute;
+  background-color: white;
+  margin: 1px 0 0 0;
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  box-shadow: 0 0 5px gray;
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1;
+}
+.Select__item {
+  cursor: pointer;
+  padding: 1px 5px;
+}
+.Select__item:hover {
+  background-color: var(--accent-color) !important;
+  color: white !important;
+}
+.Select__item.selected {
+  background-color: #eee;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Tab2/Tab2.less ***!
+  \************************************************************************************************************************************/
+.Tab2 {
+  display: flex;
+  flex-direction: column;
+  /*background-color: lightcoral;*/
+}
+.Tab2__buttons {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  border-bottom: 1px solid #bbb;
+  box-sizing: border-box;
+}
+.Tab2__button {
+  cursor: pointer;
+  margin-bottom: -1px;
+  border-top: 2px solid white;
+  border-left: 1px solid white;
+  border-right: 1px solid white;
+  border-bottom: 1px solid #bbb;
+}
+.Tab2__button:not(.active) {
+  color: #555;
+}
+.Tab2__button.active {
+  border-top: 2px solid #bbb;
+  border-left: 1px solid #bbb;
+  border-right: 1px solid #bbb;
+  border-bottom: 1px solid white;
+}
+.Tab2__button > span {
+  margin: 7px 10px 2px 10px;
+  display: inline-block;
+  max-width: 300px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  -moz-user-select: none;
+}
+.Tab2__button > span.close {
+  margin: 3px 10px 3px 0;
+}
+.Tab2__page {
+  display: none;
+}
+.Tab2__page.active {
+  display: block;
+}
+.Tab2.Tab-blue > ul > li.active {
+  border-top: 2px solid var(--accent-color);
+}
+
+/*!****************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
+  \****************************************************************************************************************************************************/
+.TimeBox2 {
+  position: relative;
+}
+.TimeBox2__input {
+  width: 100%;
+}
+.TimeBox2__close-icon {
+  position: absolute;
+  top: 0;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 10px;
+  height: 100%;
+  cursor: pointer;
+  visibility: hidden;
+}
+.TimeBox2__close-icon.visible {
+  visibility: visible;
+}
+.TimeBox2__close-icon:hover svg line {
+  stroke: black;
+}
+.TimeBox2__time-icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.TimeBox2__time-icon svg {
+  fill: #aaa;
+}
+
+/*!**************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Image/Image.less ***!
+  \**************************************************************************************************************************************/
+.Image {
+  cursor: pointer;
+}
+.Image_full {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100%;
+  background-color: black;
+  object-fit: contain;
+  z-index: 100;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Slider/Slider.less ***!
+  \****************************************************************************************************************************************/
+.Slider {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+.Slider.full {
+  background-color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+}
+.Slider.full .Slider_image {
+  object-fit: contain;
+  cursor: zoom-out;
+}
+.Slider.full .Slider__close {
+  display: block;
+}
+.Slider .Slider_image {
+  cursor: zoom-in;
+}
+@media (min-width: 1024px) {
+  .Slider:not(.full) .Slider__arrow {
+    padding: 10px 0;
+  }
+  .Slider:not(.full) .Slider__arrow svg {
+    width: unset;
+    height: unset;
+  }
+}
+.Slider_image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.Slider__label {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: #ccc;
+  padding: 5px;
+  font-weight: bold;
+}
+.Slider__arrow {
+  background: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  cursor: pointer;
+  padding: 20px 0;
+}
+.Slider__arrow svg {
+  fill: #ccc;
+  width: 40px;
+  height: 40px;
+}
+.Slider__arrow:hover svg {
+  fill: #fff;
+}
+.Slider__arrow:active svg {
+  fill: #eee;
+}
+.Slider__arrow.left {
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Slider__arrow.right {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.Slider__close {
+  background: rgba(0, 0, 0, 0.7);
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+  cursor: pointer;
+}
+.Slider__close svg {
+  width: 40px;
+  height: 40px;
+  fill: #aaa;
+}
+.Slider__close:hover svg {
+  fill: #fff;
+}
+.Slider__close:active svg {
+  fill: #eee;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/Expand/Expand.less ***!
+  \****************************************************************************************************************************************/
+.Expand {
+  padding: 5px 0;
+}
+.Expand.opened .Expand__icon {
+  transform: rotate(180deg);
+}
+.Expand.opened .Expand__content {
+  display: block;
+}
+.Expand.highlighted .Expand__title {
+  font-weight: bold;
+}
+.Expand__header {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+.Expand__icon {
+  fill: #555;
+}
+.Expand__title {
+  color: #555;
+}
+.Expand__content {
+  display: none;
+  padding-top: 10px;
+}
+
+/*!********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/LoginController/LoginView.less ***!
+  \********************************************************************************************************************************************************/
+.LoginView {
+  height: 100%;
+}
+.LoginView__body {
+  font-family: sans-serif;
+  margin: 0;
+  height: 100%;
+  background-color: #283858;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+.LoginView__form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  padding: 40px;
+  grid-gap: 15px;
+  width: 360px;
+  border-radius: 12px;
+}
+.LoginView__logo-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 5px;
+  padding: 20px 0;
+}
+.LoginView__logo svg {
+  fill: #333;
+}
+.LoginView__title {
+  color: #333;
+  text-transform: uppercase;
+}
+.LoginView__field {
+  border: none;
+  font-size: 14px;
+  border-bottom: 1px solid #ededed;
+  height: 44px;
+}
+.LoginView__field:focus {
+  border-bottom: 1px solid #398bce;
+}
+.LoginView__field2 input {
+  border: none;
+  font-size: 14px;
+  border-bottom: 1px solid #ededed;
+  height: 44px;
+}
+.LoginView__field2 input:focus {
+  border-bottom: 1px solid #398bce;
+}
+.LoginView__button {
+  font-size: 14px;
+  border: none;
+  height: 44px;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: #398bce;
+  color: white;
+}
+.LoginView__button:hover {
+  background-color: #2a70aa;
+}
+.LoginView__button:active {
+  background-color: #205581;
+}
+.LoginView__button:disabled {
+  background-color: #b4d3ec;
+  cursor: default;
+}
+.LoginView__err-msg {
+  color: red;
+  font-size: 14px;
+  height: 16px;
+}
+
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less ***!
+  \*******************************************************************************************************************************************************************************************/
+.RowFormView {
+  padding: 5px;
+  font-size: small;
+  max-width: 1024px;
+}
+.Modal .RowFormView {
+  width: unset;
+}
+.RowFormView__groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr) minmax(240px, 2fr) 24px);
+  grid-row-gap: 5px;
+}
+.RowFormView__label {
+  margin-left: 5px;
+  margin-top: 5px;
+  align-items: start;
+  font-weight: bold;
+  color: #333;
+}
+.RowFormView__field {
+  align-items: start;
+}
+.RowFormView__error {
+  margin-left: 5px;
+  margin-top: 3px;
+  align-items: start;
+}
+
+/*!**********************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/PageController/PageView.less ***!
+  \**********************************************************************************************************************************************************************/
+.PageView .Tab2__page .TableFormView {
+  padding-top: 5px;
+}
+.PageView__main > .frame__container {
+  padding: 10px;
+}
+.PageView__header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.PageView__header .PageView__title {
+  flex-grow: 1;
+}
+.Modal .PageView__header {
+  background-color: var(--accent-color);
+  display: flex;
+  grid-gap: 5px;
+  align-items: center;
+}
+.Modal .PageView__header .PageView__title {
+  color: white;
+}
+.PageView__title {
+  margin: 0;
+  color: #777;
+  font-size: 20px;
+}
+.PageView__star {
+  color: red;
+}
+.PageView__toolbar {
+  display: flex;
+  grid-gap: 5px;
+}
+.PageView__table-forms {
+  min-height: 300px;
+}
+.PageView__open,
+.PageView__close {
+  cursor: pointer;
+}
+.PageView__open svg,
+.PageView__close svg {
+  fill: white;
+}
+.PageView__open:hover,
+.PageView__close:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+.PageView__open:active,
+.PageView__close:active {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.PageView__footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  grid-gap: 5px;
+  border-top: 1px solid #bbb;
+}
+
+/*!************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less ***!
+  \************************************************************************************************************************************************************************************/
+.ApplicationView {
+  height: 100%;
+  --accent-color: #398bce;
+  --accent-color-disabled: #b4d3ec;
+}
+.ApplicationView__body {
+  margin: 0;
+  height: 100%;
+}
+.ApplicationView__root {
+  height: 100%;
+}
+.ApplicationView__container {
+  height: 100%;
+  font-family: sans-serif;
+  display: grid;
+  grid-template-rows: max-content auto max-content;
+}
+
+/*!********************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/AlertController/AlertView.less ***!
+  \********************************************************************************************************************************************************/
+.AlertView {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+  font-family: sans-serif;
+}
+.AlertView__container {
+  background-color: white;
+  color: #555;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+.AlertView__content {
+  min-width: 320px;
+  min-height: 240px;
+}
+.AlertView__header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: lightblue;
+  border-radius: 5px 5px 0 0;
+}
+.AlertView__title {
+  flex-grow: 1;
+}
+.AlertView__close {
+  cursor: pointer;
+}
+.AlertView__close svg {
+  fill: #555;
+}
+.AlertView__close:hover svg {
+  fill: black;
+}
+.AlertView__main {
+  padding: 10px;
+}
+.AlertView__footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  grid-gap: 5px;
+}
+.AlertView__ok-button {
+  min-width: 100px;
+}
+.AlertView__ok-button:not(:disabled) {
+  cursor: pointer;
+}
+
+/*!************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ConfirmController/ConfirmView.less ***!
+  \************************************************************************************************************************************************************/
+.ConfirmView {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.32);
+  display: flex;
+  font-family: sans-serif;
+}
+.ConfirmView__container {
+  background-color: white;
+  color: #555;
+  border-radius: 5px;
+  margin: auto;
+  box-shadow: 0 11px 15px -7px rgba(0, 0, 0, 0.2), 0 24px 38px 3px rgba(0, 0, 0, 0.14), 0 9px 46px 8px rgba(0, 0, 0, 0.12);
+}
+.ConfirmView__content {
+  min-width: 320px;
+  min-height: 240px;
+}
+.ConfirmView__header {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  background-color: lightblue;
+  border-radius: 5px 5px 0 0;
+}
+.ConfirmView__title {
+  flex-grow: 1;
+}
+.ConfirmView__close {
+  cursor: pointer;
+}
+.ConfirmView__close svg {
+  fill: #555;
+}
+.ConfirmView__close:hover svg {
+  fill: black;
+}
+.ConfirmView__main {
+  padding: 10px;
+}
+.ConfirmView__footer {
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  grid-gap: 5px;
+}
+.ConfirmView__yes-button {
+  min-width: 100px;
+}
+.ConfirmView__yes-button:not(:disabled) {
+  cursor: pointer;
+}
+.ConfirmView__no-button {
+  min-width: 100px;
+}
+.ConfirmView__no-button:not(:disabled) {
+  cursor: pointer;
+}
+
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/application.less ***!
+  \*************************************************************************************************************************************/
+
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/field.less ***!
+  \*******************************************************************************************************************************/
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/form.less ***!
+  \******************************************************************************************************************************/
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/page.less ***!
+  \******************************************************************************************************************************/
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/paging.less ***!
+  \********************************************************************************************************************************/
+.paging {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paging__countBlock {
+  font-size: 14px;
+}
+.paging__gotoBlock {
+  display: flex;
+}
+.paging__gotoBlock select {
+  height: 26px;
+  margin: 0 5px;
+  border: none;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-button.less ***!
+  \****************************************************************************************************************************************/
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 3px;
+  border: none;
+  background-color: unset;
+  height: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+.toolbar-button svg {
+  fill: #333;
+}
+.toolbar-button:not(:disabled) {
+  cursor: pointer;
+  color: var(--accent-color);
+}
+.toolbar-button:not(:disabled):hover {
+  background-color: #ededed;
+}
+.toolbar-button:not(:disabled):active {
+  background-color: #e1e1e1;
+}
+.toolbar-button:disabled svg {
+  fill: #aaa;
+}
+.toolbar-button.default {
+  color: white;
+  background-color: var(--accent-color);
+}
+.toolbar-button.default svg {
+  fill: white;
+}
+.toolbar-button.default:hover {
+  background-color: #2a70aa;
+}
+.toolbar-button.default:active {
+  background-color: #205581;
+}
+.toolbar-button.default:disabled {
+  background-color: #b4d3ec;
+}
+
+/*!*************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-dropdown-button.less ***!
+  \*************************************************************************************************************************************************/
+.toolbar-dropdown-button .DropdownButton__button {
+  height: 30px;
+  border: none;
+  background-color: unset;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
+  cursor: pointer;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled) svg {
+  fill: var(--accent-color);
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):hover {
+  background-color: #ededed;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):active {
+  background-color: #e1e1e1;
+}
+
+/*!**********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/version-notification.less ***!
+  \**********************************************************************************************************************************************/
+.version-notification {
+  position: fixed;
+  background-color: yellow;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  font-family: sans-serif;
+  font-size: small;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/ellipsis.less ***!
+  \**********************************************************************************************************************************/
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex.less ***!
+  \******************************************************************************************************************************/
+.flex {
+  display: flex;
+}
+
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-column.less ***!
+  \*************************************************************************************************************************************/
+.flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/flex-max.less ***!
+  \**********************************************************************************************************************************/
+.flex-max {
+  flex: 1 1 auto;
+}
+
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/frame.less ***!
+  \*******************************************************************************************************************************/
+.frame {
+  position: relative;
+  overflow: hidden;
+}
+.frame__container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  overflow: auto;
+}
+.hidden {
+  overflow: hidden;
+}
+.x-hidden {
+  overflow-x: hidden;
+}
+.y-hidden {
+  overflow-y: hidden;
+}
+.x-scroll {
+  overflow-x: scroll;
+}
+.y-scroll {
+  overflow-y: scroll;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/full.less ***!
+  \******************************************************************************************************************************/
+.full {
+  height: 100%;
+  width: 100%;
+}
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/global.less ***!
+  \********************************************************************************************************************************/
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: 0 !important;
+}
+input[type='text'],
+select,
+img,
+svg {
+  display: block;
+}
+
+/*!************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-5.less ***!
+  \************************************************************************************************************************************/
+.grid-gap-5 {
+  grid-gap: 5px;
+}
+
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/grid-gap-10.less ***!
+  \*************************************************************************************************************************************/
+.grid-gap-10 {
+  grid-gap: 10px;
+}
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/style/wait.less ***!
+  \******************************************************************************************************************************/
+.wait,
+.wait * {
+  cursor: wait !important;
+}
+
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.less ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+.RowFormDateFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+}
+.RowFormDateFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormDateFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormDateFieldView.error .DropdownDatePicker__input {
+  color: red;
+}
+.RowFormDateFieldView__date-picker {
+  width: 100%;
+  height: 100%;
+}
+.RowFormDateFieldView__date-picker > .DropdownDatePicker__input {
+  height: 100%;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormDateFieldView__date-picker.read-only > .DropdownDatePicker__input {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormDateFieldView__date-picker:not(.read-only) > .DropdownDatePicker__input {
+  cursor: pointer;
+}
+.debug .RowFormDateFieldView.changed .DropdownDatePicker__input {
+  background-color: #eefdea;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.RowFormComboBoxFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  display: flex;
+  border: 1px solid #bbb;
+}
+.RowFormComboBoxFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormComboBoxFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormComboBoxFieldView.error > .RowFormComboBoxFieldView__select > .Select__input {
+  color: red;
+}
+.RowFormComboBoxFieldView__select {
+  width: 100%;
+}
+.RowFormComboBoxFieldView__select .Select__input {
+  background-color: white;
+  border: none;
+  height: 100%;
+  padding: 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormComboBoxFieldView__select .Select__input[disabled] {
+  background-color: #eee;
+  color: gray;
+  cursor: text;
+}
+.RowFormComboBoxFieldView__edit-button {
+  border: none;
+  background-color: #ccc;
+  width: 22px;
+  font-size: 10px;
+}
+.RowFormComboBoxFieldView__edit-button:hover:enabled {
+  background-color: #ddd;
+}
+.RowFormComboBoxFieldView__edit-button:active {
+  background-color: #bbb;
+}
+.RowFormComboBoxFieldView__edit-button:not(:disabled) {
+  cursor: pointer;
+}
+.RowFormComboBoxFieldView__create-button {
+  border: none;
+  background-color: #ccc;
+  width: 22px;
+  font-size: 10px;
+}
+.RowFormComboBoxFieldView__create-button:hover:enabled {
+  background-color: #ddd;
+}
+.RowFormComboBoxFieldView__create-button:active {
+  background-color: #bbb;
+}
+.RowFormComboBoxFieldView__create-button:not(:disabled) {
+  cursor: pointer;
+}
+.debug .RowFormComboBoxFieldView.changed > .RowFormComboBoxFieldView__select {
+  background-color: #eefdea;
+}
+
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.less ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+.RowFormTextBoxFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #bbb;
+}
+.RowFormTextBoxFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormTextBoxFieldView.focus {
+  border: 1px solid var(--accent-color);
+}
+.RowFormTextBoxFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormTextBoxFieldView.error > .RowFormTextBoxFieldView__input {
+  color: red;
+}
+.RowFormTextBoxFieldView__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0 16px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormTextBoxFieldView__input[readonly] {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormTextBoxFieldView__input[disabled] {
+  cursor: text;
+}
+.RowFormTextBoxFieldView__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormTextBoxFieldView__close.visible {
+  visibility: visible;
+}
+.RowFormTextBoxFieldView__close:hover svg line {
+  stroke: black;
+}
+.debug .RowFormTextBoxFieldView.changed > .RowFormTextBoxFieldView__input {
+  background-color: #eefdea;
+}
+
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less ***!
+  \***********************************************************************************************************************************************************************************************/
+
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.RowFormTextAreaFieldView {
+  border: 1px solid #bbb;
+}
+.RowFormTextAreaFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormTextAreaFieldView.focus {
+  border: 1px solid var(--accent-color);
+}
+.RowFormTextAreaFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormTextAreaFieldView.error > .RowFormTextAreaFieldView__textarea {
+  color: red;
+}
+.RowFormTextAreaFieldView__textarea {
+  width: 100%;
+  display: block;
+  border-width: 0;
+  padding: 3px 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormTextAreaFieldView__textarea[readonly] {
+  background-color: #eee;
+  color: gray;
+}
+.debug .RowFormTextAreaFieldView.changed > .RowFormTextAreaFieldView__textarea {
+  background-color: #eefdea;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.RowFormPasswordFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #bbb;
+}
+.RowFormPasswordFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormPasswordFieldView.focus {
+  border: 1px solid var(--accent-color);
+}
+.RowFormPasswordFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormPasswordFieldView.error > .RowFormPasswordFieldView__input {
+  color: red;
+}
+.RowFormPasswordFieldView__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0 40px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormPasswordFieldView__input[readonly] {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormPasswordFieldView__input[disabled] {
+  cursor: text;
+}
+.RowFormPasswordFieldView__close {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 20px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormPasswordFieldView__close.visible {
+  visibility: visible;
+}
+.RowFormPasswordFieldView__close:hover svg line {
+  stroke: black;
+}
+.RowFormPasswordFieldView__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 20px;
+  cursor: pointer;
+}
+.RowFormPasswordFieldView__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.RowFormPasswordFieldView__icon:hover svg {
+  fill: #333;
+}
+.debug .RowFormPasswordFieldView.changed > .RowFormPasswordFieldView__input {
+  background-color: #eefdea;
+}
+
+/*!***************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.less ***!
+  \***************************************************************************************************************************************************************************************************************************************************/
+.TableFormCheckBoxFieldView input {
+  pointer-events: none;
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.RowFormDateTimeFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+}
+.RowFormDateTimeFieldView.datetime {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+.RowFormDateTimeFieldView.date > .RowFormDateTimeFieldView__time-box {
+  display: none;
+}
+.RowFormDateTimeFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormDateTimeFieldView.error > .RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
+  color: red;
+}
+.RowFormDateTimeFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormDateTimeFieldView__dropdown-date-picker {
+  height: 100%;
+}
+.RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
+  height: 100%;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormDateTimeFieldView__dropdown-date-picker:not(.read-only) > .DropdownDatePicker__input {
+  cursor: pointer;
+}
+.RowFormDateTimeFieldView__dropdown-date-picker.read-only > .DropdownDatePicker__input {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormDateTimeFieldView__time-box {
+  border-left: solid 1px #ddd;
+}
+.RowFormDateTimeFieldView__time-box .TimeBox2__input {
+  height: 100%;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormDateTimeFieldView__time-box .TimeBox2__input:read-only {
+  background-color: #eee;
+  color: gray;
+}
+.debug .RowFormDateTimeFieldView.changed > .RowFormDateTimeFieldView__dropdown-date-picker > .DropdownDatePicker__input {
+  background-color: #eefdea;
+}
+.debug .RowFormDateTimeFieldView.changed > .RowFormDateTimeFieldView__time-box > .TimeBox2__input {
+  background-color: #eefdea;
+}
+
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+.RowFormRadioFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  display: grid;
+  grid-auto-columns: minmax(0, 1fr);
+  grid-auto-flow: column;
+  grid-gap: 1px;
+  border: 1px solid #bbb;
+  background-color: #bbb;
+  /*&.editable:hover {
+    border: 1px solid var(--accent-color);
+  }*/
+}
+.RowFormRadioFieldView__radio {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+.RowFormRadioFieldView__radio input {
+  margin: 0;
+  display: block;
+}
+.RowFormRadioFieldView__radio label {
+  padding: 0 10px 0 3px;
+  display: block;
+}
+.RowFormRadioFieldView__radio:not(.readOnly) input,
+.RowFormRadioFieldView__radio:not(.readOnly) label {
+  cursor: pointer;
+}
+.RowFormRadioFieldView__toggle {
+  border: none;
+  background-color: white;
+  color: #aaa;
+}
+.RowFormRadioFieldView__toggle:disabled {
+  background-color: #eee;
+  color: #bbb;
+}
+.RowFormRadioFieldView__toggle:disabled.selected {
+  background-color: var(--accent-color-disabled);
+  color: white;
+}
+.RowFormRadioFieldView__toggle:not(:disabled) {
+  cursor: pointer;
+}
+.RowFormRadioFieldView__toggle:not(:disabled).selected {
+  background-color: var(--accent-color);
+  color: white;
+}
+.RowFormRadioFieldView__toggle:not(:disabled):not(.selected):hover {
+  color: var(--accent-color);
+}
+
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.less ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.RowFormCheckBoxFieldView {
+  height: 26px;
+}
+.RowFormCheckBoxFieldView > input.CheckBox {
+  display: block;
+  margin: 0;
+  height: 100%;
+  accent-color: var(--accent-color);
+}
+.RowFormCheckBoxFieldView > input.CheckBox:not(:disabled) {
+  cursor: pointer;
+}
+
+/*!************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less ***!
+  \************************************************************************************************************************************************************************************/
+.ImageDialogView {
+  position: fixed;
+  z-index: 3;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: black;
+}
+.ImageDialogView__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  cursor: zoom-out;
+}
+.ImageDialogView__close {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 10px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  cursor: pointer;
+}
+.ImageDialogView__close svg {
+  width: 40px;
+  height: 40px;
+  fill: #aaa;
+}
+.ImageDialogView__close:hover svg {
+  fill: #fff;
+}
+.ImageDialogView__close:active svg {
+  fill: #eee;
+}
+
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+.RowFormFileFieldView {
+  background-color: #eee;
+}
+.RowFormFileFieldView.editable {
+  background-color: white;
+}
+.RowFormFileFieldView.editable .RowFormFileFieldView__image-icon {
+  cursor: pointer;
+}
+.RowFormFileFieldView__image-block {
+  position: relative;
+  font-size: 10px;
+}
+.RowFormFileFieldView__image-icon {
+  fill: #ccc;
+  border: 6px solid #ccc;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 6px;
+  border-radius: 5px;
+}
+.RowFormFileFieldView__image {
+  width: 100%;
+  display: block;
+  cursor: zoom-in !important;
+}
+.RowFormFileFieldView__size {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #eee;
+}
+.RowFormFileFieldView__length {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #eee;
+}
+.RowFormFileFieldView__toolbar {
+  margin-top: 5px;
+  display: flex;
+}
+.RowFormFileFieldView__toolbar input {
+  display: block;
+  flex-grow: 1;
+}
+.RowFormFileFieldView__toolbar button {
+  display: block;
+}
+
+/*!***************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.less ***!
+  \***************************************************************************************************************************************************************************************************************************************/
+.RowFormPhoneFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  position: relative;
+  border: 1px solid #bbb;
+}
+.RowFormPhoneFieldView.editable:hover {
+  border: 1px solid var(--accent-color);
+}
+.RowFormPhoneFieldView.focus {
+  border: 1px solid var(--accent-color);
+}
+.RowFormPhoneFieldView.error {
+  border: 1px solid red !important;
+}
+.RowFormPhoneFieldView.error > .RowFormPhoneFieldView__input {
+  color: red;
+}
+.RowFormPhoneFieldView__input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding: 0 16px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormPhoneFieldView__input[readonly] {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormPhoneFieldView__input[disabled] {
+  cursor: text;
+}
+.RowFormPhoneFieldView__close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  width: 20px;
+  height: 100%;
+  top: 0;
+  right: 20px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormPhoneFieldView__close.visible {
+  visibility: visible;
+}
+.RowFormPhoneFieldView__close:hover svg line {
+  stroke: black;
+}
+.RowFormPhoneFieldView__icon {
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  width: 20px;
+  pointer-events: none;
+}
+.RowFormPhoneFieldView__icon svg {
+  fill: #aaa;
+  width: 18px;
+  height: 18px;
+}
+.debug .RowFormPhoneFieldView.changed > .RowFormPhoneFieldView__input {
+  background-color: #eefdea;
+}
+
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.less ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+.RowFormCheckBoxListFieldView__checkboxlist {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.RowFormCheckBoxListFieldView__checkboxlist > li {
+  display: flex;
+  align-items: center;
+}
+.RowFormCheckBoxListFieldView__checkboxlist > li > input {
+  cursor: pointer;
+  margin: 0;
+}
+.RowFormCheckBoxListFieldView__checkboxlist > li > label {
+  padding: 3px;
+  cursor: pointer;
+}
+
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+.RowFormLinkFieldView {
+  padding: 3px 5px 0 5px;
+}
+.RowFormLinkFieldView > a {
+  color: blue;
+}
+

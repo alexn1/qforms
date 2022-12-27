@@ -1,5 +1,6 @@
 import { ReactComponent } from '../../ReactComponent';
 import { Button } from '../Button';
+import './Box.less';
 
 export class Box extends ReactComponent {
     constructor(props) {

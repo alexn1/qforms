@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
+import './RowFormView.less';
 
 export class RowFormView extends FormView {
     renderToolbar(): any {

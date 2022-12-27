@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './Tooltip.less';
 
 export class Tooltip extends ReactComponent {
     // constructor(props) {

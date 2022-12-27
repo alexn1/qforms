@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './DatePicker.less';
 export declare class DatePicker extends ReactComponent {
     MONTH: string[];
     constructor(props: any);

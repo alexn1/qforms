@@ -3,6 +3,7 @@ import { ReactComponent } from '../../ReactComponent';
 import { Helper } from '../../Helper';
 import { GridRow } from '../GridRow/GridRow';
 import { GridCell } from '../GridCell/GridCell';
+import './Grid.less';
 
 export class Grid extends ReactComponent {
     columns: any;

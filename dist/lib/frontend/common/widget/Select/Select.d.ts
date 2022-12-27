@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
+import './Select.less';
 export declare class Select extends ReactComponent {
     dropdown: React.RefObject<any>;
     constructor(props: any);

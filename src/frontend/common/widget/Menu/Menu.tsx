@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './Menu.less';
 
 export class Menu extends ReactComponent {
     constructor(props) {

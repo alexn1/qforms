@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormLinkFieldView.less';
 
 export class RowFormLinkFieldView extends RowFormFieldView {
     render() {

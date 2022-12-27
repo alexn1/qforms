@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
+import './Image.less';
 export declare class Image extends ReactComponent {
     img: React.RefObject<any>;
     constructor(props: any);

@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './Menu.less';
 export declare class Menu extends ReactComponent {
     constructor(props: any);
     onMenuClick: (e: any) => Promise<void>;

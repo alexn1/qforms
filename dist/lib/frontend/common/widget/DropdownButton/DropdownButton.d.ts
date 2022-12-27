@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './DropdownButton.less';
 export declare class DropdownButton extends ReactComponent {
     constructor(props: any);
     onButtonClick: (e: any) => void;

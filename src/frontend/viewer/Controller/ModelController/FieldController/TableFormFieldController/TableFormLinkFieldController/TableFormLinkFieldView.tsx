@@ -1,4 +1,5 @@
 import { TableFormFieldView } from '../TableFormFieldView';
+import './TableFormLinkFieldView.less';
 
 export class TableFormLinkFieldView extends TableFormFieldView {
     render() {

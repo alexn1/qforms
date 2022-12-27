@@ -1,6 +1,7 @@
 import React from 'react';
 import { FormView } from '../FormView';
 import { Grid } from '../../../../../common';
+import './TableFormView.less';
 export declare class TableFormView extends FormView {
     renderToolbar(): JSX.Element;
     renderPaging(): JSX.Element;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from '../View';
 import { CloseIcon2, Button } from '../../../common';
+import './AlertView.less';
 
 export class AlertView extends View {
     constructor(props) {

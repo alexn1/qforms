@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './DropDownIcon.less';
 
 export class DropDownIcon extends ReactComponent {
     render() {

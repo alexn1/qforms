@@ -2,6 +2,7 @@ import React from 'react';
 import { RowFormFieldView } from '../RowFormFieldView';
 import { Helper, Image, Button } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
+import './RowFormFileFieldView.less';
 
 export class RowFormFileFieldView extends RowFormFieldView {
     image: React.RefObject<any>;

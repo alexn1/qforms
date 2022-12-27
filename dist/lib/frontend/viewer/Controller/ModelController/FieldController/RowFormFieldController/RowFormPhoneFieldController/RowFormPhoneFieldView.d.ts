@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormPhoneFieldView.less';
 export declare class RowFormPhoneFieldView extends RowFormFieldView {
     constructor(props: any);
     onClear: (e: any) => Promise<void>;

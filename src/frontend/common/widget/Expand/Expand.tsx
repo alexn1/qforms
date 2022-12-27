@@ -1,5 +1,6 @@
 import { ReactComponent } from '../../ReactComponent';
 import { DownIcon } from '../../icon/DownIcon';
+import './Expand.less';
 
 export class Expand extends ReactComponent {
     constructor(props) {

@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ReactComponent } from '../../ReactComponent';
+import './Grid.less';
 export declare class Grid extends ReactComponent {
     columns: any;
     head: React.RefObject<any>;

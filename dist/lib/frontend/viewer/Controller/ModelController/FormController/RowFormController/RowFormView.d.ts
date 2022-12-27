@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import { FormView } from '../FormView';
+import './RowFormView.less';
 export declare class RowFormView extends FormView {
     renderToolbar(): any;
     isActionsEnabled(): boolean;

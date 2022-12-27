@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './Statusbar.less';
 
 export class Statusbar extends ReactComponent {
     constructor(props) {

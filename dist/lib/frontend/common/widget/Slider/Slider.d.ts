@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './Slider.less';
 export declare class Slider extends ReactComponent {
     constructor(props: any);
     onPrevClick: (e: any) => void;

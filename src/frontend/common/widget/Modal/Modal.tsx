@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './Modal.less';
 
 export class Modal extends ReactComponent {
     render() {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from '../../View';
 import { CloseIcon2 } from '../../../../common';
+import './ImageDialogView.less';
 
 export class ImageDialogView extends View {
     constructor(props) {

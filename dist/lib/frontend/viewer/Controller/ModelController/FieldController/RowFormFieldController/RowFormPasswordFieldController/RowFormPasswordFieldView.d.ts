@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormPasswordFieldView.less';
 export declare class RowFormPasswordFieldView extends RowFormFieldView {
     constructor(props: any);
     onCloseClick: (e: any) => Promise<void>;

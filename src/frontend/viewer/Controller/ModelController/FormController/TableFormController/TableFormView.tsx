@@ -11,6 +11,7 @@ import {
     RightIcon,
     Grid,
 } from '../../../../../common';
+import './TableFormView.less';
 
 export class TableFormView extends FormView {
     renderToolbar() {

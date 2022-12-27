@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { ReactComponent } from '../../ReactComponent';
+import './Password.less';
 export declare class Password extends ReactComponent {
     inputEl: React.RefObject<any>;
     constructor(props: any);

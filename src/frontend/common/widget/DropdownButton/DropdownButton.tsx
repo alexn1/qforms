@@ -1,5 +1,6 @@
 import { ReactComponent } from '../../ReactComponent';
 import { Button } from '../Button';
+import './DropdownButton.less';
 
 export class DropdownButton extends ReactComponent {
     constructor(props) {

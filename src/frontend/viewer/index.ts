@@ -62,16 +62,6 @@ export { RowFormDateTimeFieldView } from './Controller/ModelController/FieldCont
 export { RowFormComboBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView';
 export { RowFormPhoneFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView';
 
-// style
-import './style/application.less';
-import './style/field.less';
-import './style/form.less';
-import './style/page.less';
-import './style/paging.less';
-import './style/toolbar-button.less';
-import './style/toolbar-dropdown-button.less';
-import './style/version-notification.less';
-
 // common
 // export { Helper } from '../common/Helper';
 // export { Button } from '../common/widget/Button';

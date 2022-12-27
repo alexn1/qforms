@@ -1,4 +1,5 @@
 import { ReactComponent } from '../../ReactComponent';
+import './Tab.less';
 
 export class Tab extends ReactComponent {
     constructor(props) {

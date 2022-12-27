@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormTimeFieldView.less';
 
 export class RowFormTimeFieldView extends RowFormFieldView {
     onCloseClick = async e => {

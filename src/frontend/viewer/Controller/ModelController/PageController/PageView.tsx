@@ -8,6 +8,7 @@ import {
     OpenInNewIcon,
     CloseIcon2,
 } from '../../../../common';
+import './PageView.less';
 
 export class PageView extends ModelView {
     constructor(props) {

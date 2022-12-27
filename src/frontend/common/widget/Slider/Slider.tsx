@@ -2,6 +2,7 @@ import { ReactComponent } from '../../ReactComponent';
 import { LeftIcon } from '../../icon/LeftIcon';
 import { RightIcon } from '../../icon/RightIcon';
 import { CloseIcon2 } from '../../icon/CloseIcon2';
+import './Slider.less';
 
 export class Slider extends ReactComponent {
     constructor(props) {

@@ -1,6 +1,7 @@
 import React from 'react';
 import { View } from '../View';
 import { TextBox, Password } from '../../../common';
+import './LoginView.less';
 
 export class LoginView extends View {
     errMsgRef: React.RefObject<any>;

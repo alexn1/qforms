@@ -1,5 +1,6 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { CheckBoxList } from '../../../../../../common';
+import './RowFormCheckBoxListFieldView.less';
 
 export class RowFormCheckBoxListFieldView extends RowFormFieldView {
     getItems() {

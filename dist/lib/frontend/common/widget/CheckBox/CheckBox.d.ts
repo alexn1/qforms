@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { ReactComponent } from '../../ReactComponent';
+import './CheckBox.less';
 export declare class CheckBox extends ReactComponent {
     constructor(props: any);
     getValue(): any;

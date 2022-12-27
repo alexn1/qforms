@@ -1,4 +1,5 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormImageFieldView.less';
 
 export class RowFormImageFieldView extends RowFormFieldView {
     onImageClick = async e => {

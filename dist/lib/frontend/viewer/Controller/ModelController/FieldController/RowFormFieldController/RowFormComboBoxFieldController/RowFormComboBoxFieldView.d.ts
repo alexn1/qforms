@@ -1,5 +1,6 @@
 /// <reference types="react" />
 import { RowFormFieldView } from '../RowFormFieldView';
+import './RowFormComboBoxFieldView.less';
 export declare class RowFormComboBoxFieldView extends RowFormFieldView {
     onChange: (widgetValue: any) => Promise<void>;
     isCreateButtonVisible(): boolean;
