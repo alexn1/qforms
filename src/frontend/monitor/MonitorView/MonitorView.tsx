@@ -1,4 +1,6 @@
-import { ReactComponent, Helper } from '../../common';
+import { Helper } from '../../common/Helper';
+import { ReactComponent } from '../../common/ReactComponent';
+
 import './MonitorView.less';
 
 export class MonitorView extends ReactComponent {

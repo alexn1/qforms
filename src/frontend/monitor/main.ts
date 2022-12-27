@@ -1,5 +1,5 @@
 import { MonitorView } from './MonitorView/MonitorView';
-import { Helper } from '../common';
+import { Helper } from '../common/Helper';
 import './style/monitor.less';
 
 document.addEventListener('DOMContentLoaded', () => {
