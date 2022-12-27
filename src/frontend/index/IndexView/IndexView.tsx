@@ -1,4 +1,5 @@
 import { ReactComponent, Modal, Button, TextBox, ComboBox } from '../../common';
+import './IndexView.less';
 
 export class IndexView extends ReactComponent {
     renderModals() {

@@ -16,8 +16,8 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'css')).map(path => `/index/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index'), 'js')).map(path => `/index/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map(path => `/index/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map(path => `/index/public/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
@@ -33,7 +33,10 @@ class IndexModule {
         };
     }
     getLinks() {
-        return [...this.hostApp.commonModule.css, ...this.css];
+        return [
+            // ...this.hostApp.commonModule.css,
+            ...this.css,
+        ];
     }
     getScripts() {
         return [
