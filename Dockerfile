@@ -12,7 +12,7 @@ COPY apps apps
 
 EXPOSE 3000
 
-VOLUME [ "/app/runtime" ]
+VOLUME ["/app/apps", "/app/runtime"]
 
 ENV NODE_ENV development
 

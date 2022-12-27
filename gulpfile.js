@@ -9,3 +9,4 @@ module.exports.publish = require('./gulp/publish');
 module.exports.release_publish = require('./gulp/release-publish');
 module.exports.docker_build = require('./gulp/docker-build');
 module.exports.docker_run = require('./gulp/docker-run');
+module.exports.build_prod = require('./gulp/build-prod');
