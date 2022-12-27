@@ -1,0 +1,119 @@
+/*!*************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/application.less ***!
+  \*************************************************************************************************************************************/
+
+/*!*******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/field.less ***!
+  \*******************************************************************************************************************************/
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/form.less ***!
+  \******************************************************************************************************************************/
+
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/page.less ***!
+  \******************************************************************************************************************************/
+
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/paging.less ***!
+  \********************************************************************************************************************************/
+.paging {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.paging__countBlock {
+  font-size: 14px;
+}
+.paging__gotoBlock {
+  display: flex;
+}
+.paging__gotoBlock select {
+  height: 26px;
+  margin: 0 5px;
+  border: none;
+}
+
+/*!****************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-button.less ***!
+  \****************************************************************************************************************************************/
+.toolbar-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  grid-gap: 3px;
+  border: none;
+  background-color: unset;
+  height: 30px;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+}
+.toolbar-button svg {
+  fill: #333;
+}
+.toolbar-button:not(:disabled) {
+  cursor: pointer;
+  color: var(--accent-color);
+}
+.toolbar-button:not(:disabled):hover {
+  background-color: #ededed;
+}
+.toolbar-button:not(:disabled):active {
+  background-color: #e1e1e1;
+}
+.toolbar-button:disabled svg {
+  fill: #aaa;
+}
+.toolbar-button.default {
+  color: white;
+  background-color: var(--accent-color);
+}
+.toolbar-button.default svg {
+  fill: white;
+}
+.toolbar-button.default:hover {
+  background-color: #2a70aa;
+}
+.toolbar-button.default:active {
+  background-color: #205581;
+}
+.toolbar-button.default:disabled {
+  background-color: #b4d3ec;
+}
+
+/*!*************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/toolbar-dropdown-button.less ***!
+  \*************************************************************************************************************************************************/
+.toolbar-dropdown-button .DropdownButton__button {
+  height: 30px;
+  border: none;
+  background-color: unset;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled) {
+  cursor: pointer;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled) svg {
+  fill: var(--accent-color);
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):hover {
+  background-color: #ededed;
+}
+.toolbar-dropdown-button .DropdownButton__button:not(:disabled):active {
+  background-color: #e1e1e1;
+}
+
+/*!**********************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/style/version-notification.less ***!
+  \**********************************************************************************************************************************************/
+.version-notification {
+  position: fixed;
+  background-color: yellow;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 5px 10px;
+  font-family: sans-serif;
+  font-size: small;
+}
+

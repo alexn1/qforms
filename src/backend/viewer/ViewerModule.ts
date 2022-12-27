@@ -31,16 +31,25 @@ export class ViewerModule {
     }
     async init() {
         this.css = (
-            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')
-        ).map(path => `/viewer/${path}`);
+            await Helper.getFilePaths(
+                path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
+                'css',
+            )
+        ).map(path => `/viewer/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')
-        ).map(path => `/viewer/${path}`);
+            await Helper.getFilePaths(
+                path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
+                'js',
+            )
+        ).map(path => `/viewer/public/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
-        return [...this.hostApp.commonModule.css, ...this.css];
+        return [
+            // ...this.hostApp.commonModule.css,
+            ...this.css,
+        ];
     }
     getScripts() {
         return [

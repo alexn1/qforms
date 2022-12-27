@@ -90,3 +90,13 @@ export { PhoneIcon } from '../common';
 export { TimeIcon } from '../common';
 export { DropdownDatePicker } from '../common';
 export { DatePicker } from '../common';
+
+// style
+import './style/application.less';
+import './style/field.less';
+import './style/form.less';
+import './style/page.less';
+import './style/paging.less';
+import './style/toolbar-button.less';
+import './style/toolbar-dropdown-button.less';
+import './style/version-notification.less';

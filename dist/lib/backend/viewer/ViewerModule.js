@@ -22,13 +22,16 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'css')).map(path => `/viewer/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer'), 'js')).map(path => `/viewer/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map(path => `/viewer/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map(path => `/viewer/public/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
-        return [...this.hostApp.commonModule.css, ...this.css];
+        return [
+            // ...this.hostApp.commonModule.css,
+            ...this.css,
+        ];
     }
     getScripts() {
         return [
