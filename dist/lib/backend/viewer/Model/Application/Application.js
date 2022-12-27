@@ -420,7 +420,7 @@ class Application extends Model_1.Model {
         return true;
     }
     async handleGetFile(context, next) {
-        console.log('Application.handleGetFile', context.getUri());
+        // console.log('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await Helper_1.Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
