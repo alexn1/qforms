@@ -1,5 +1,4 @@
 FROM node:16-alpine
-#FROM node:16
 
 WORKDIR /app
 
@@ -8,7 +7,8 @@ COPY package-lock.json .
 
 RUN npm ci --omit=dev
 
-COPY . .
+COPY dist dist
+COPY apps apps
 
 EXPOSE 3000
 
