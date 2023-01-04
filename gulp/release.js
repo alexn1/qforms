@@ -1,17 +1,18 @@
 const Lib = require('./Lib');
 
+async function getVersion() {
+    const packageJson = await Lib.getJsonFileData('package.json');
+    return packageJson.version;
+}
+
 async function release() {
     // master branch
     await Lib.exec('git checkout master');
     await Lib.exec('git pull origin master');
     await Lib.exec('git push origin master');
 
-    // edit package.json
-    const packageJson1 = await Lib.getJsonFileData('package.json');
-    const releaseVersion = packageJson1.version;
+    const releaseVersion = await getVersion();
     console.log('releaseVersion:', releaseVersion);
-    // const releaseVersion = packageJson1.version = Lib.versionWithoutDev(packageJson1.version);
-    // await Lib.putJsonFileData('package.json', packageJson1);
 
     // build
     /*let stderr = await Lib.exec('gulp build --backend');
