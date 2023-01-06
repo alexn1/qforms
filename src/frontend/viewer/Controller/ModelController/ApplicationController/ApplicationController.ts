@@ -367,7 +367,7 @@ export class ApplicationController extends ModelController {
         const data = this.getModel().getData();
         this.webSocketClient = new WebSocketClient({
             applicationController: this,
-            protocol: data.nodeEnv === 'development' ? 'ws' : 'wss',
+            protocol: window.location.protocol === 'https:' ? 'wss' : 'ws',
             route: data.route,
             uuid: data.uuid,
             userId: data.user ? data.user.id : null,

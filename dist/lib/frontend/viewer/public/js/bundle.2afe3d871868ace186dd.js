@@ -36482,7 +36482,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         const data = this.getModel().getData();
         this.webSocketClient = new _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__.WebSocketClient({
             applicationController: this,
-            protocol: data.nodeEnv === 'development' ? 'ws' : 'wss',
+            protocol: window.location.protocol === 'https:' ? 'wss' : 'ws',
             route: data.route,
             uuid: data.uuid,
             userId: data.user ? data.user.id : null,
@@ -42850,6 +42850,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// common style
 
 
 
