@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgreSqlDatabase = void 0;
+const Database_1 = require("../Database");
 const { Pool, Client } = require('pg');
 const colors = require('colors');
-const Database_1 = require("../Database");
 class PostgreSqlDatabase extends Database_1.Database {
     constructor(data, parent) {
         super(data, parent);

@@ -65,6 +65,7 @@ export { KeyColumnEditor } from './editor/Editor/KeyColumnEditor/KeyColumnEditor
 export { DatabaseEditor } from './editor/Editor/DatabaseEditor/DatabaseEditor';
 export { MySqlDatabaseEditor } from './editor/Editor/DatabaseEditor/MySqlDatabaseEditor/MySqlDatabaseEditor';
 export { PostgreSqlDatabaseEditor } from './editor/Editor/DatabaseEditor/PostgreSqlDatabaseEditor/PostgreSqlDatabaseEditor';
+export { MongoDbDatabaseEditor } from './editor/Editor/DatabaseEditor/MongoDbDatabaseEditor/MongoDbDatabaseEditor';
 export { TableEditor } from './editor/Editor/TableEditor/TableEditor';
 export { ParamEditor } from './editor/Editor/ParamEditor/ParamEditor';
 export { ColumnEditor } from './editor/Editor/ColumnEditor/ColumnEditor';

@@ -69,13 +69,15 @@
     "scripts": {
         "start": "NODE_ENV=development node dist/lib/backend/start.js",
         "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/lib/backend/start.js",
-        "tsc-build": "tsc --build tsconfig.back.json --verbose",
         "tsc-build-watch": "tsc --build tsconfig.back.json --watch --verbose",
+        "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch",
+        "webpack-editor-watch": "NODE_ENV=development webpack --config webpack.config.editor.js --watch",
+        "tsc-build": "tsc --build tsconfig.back.json --verbose",
         "webpack-index": "NODE_ENV=development webpack --config webpack.config.index.js",
         "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js",
         "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js",
-        "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
-        "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch"
+        "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js"
+        
     },
     "repository": {
         "type": "git",

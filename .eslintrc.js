@@ -15,5 +15,6 @@ module.exports = {
         'react/jsx-indent-props': 'off',
         'spaced-comment': 'off',
         'max-len': 'off',
+        'react/jsx-curly-brace-presence': 'off',
     },
 };

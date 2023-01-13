@@ -45,6 +45,7 @@ export class NewDatabaseView extends ReactComponent {
                             items={[
                                 { value: 'MySqlDatabase', title: 'MySqlDatabase' },
                                 { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
+                                { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
                             ]}
                             onCreate={c => (this.class = c)}
                             value={'PostgreSqlDatabase'}

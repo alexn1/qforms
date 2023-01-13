@@ -19,8 +19,10 @@ export class DatabaseEditor extends Editor {
         }
 
         // tables
-        for (const data of this.data.tables) {
-            this.createTable(data);
+        if (this.data.tables) {
+            for (const data of this.data.tables) {
+                this.createTable(data);
+            }
         }
     }
 

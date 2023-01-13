@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySqlDatabase = void 0;
-const mysql = require('mysql');
 const Database_1 = require("../Database");
+const mysql = require('mysql');
 class MySqlDatabase extends Database_1.Database {
     constructor(data, parent) {
         super(data, parent);

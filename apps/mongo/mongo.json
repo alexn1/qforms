@@ -15,7 +15,45 @@
         "modelClass": ""
     },
     "env": {},
-    "databases": [],
+    "databases": [
+        {
+            "@class": "MongoDbDatabase",
+            "@attributes": {
+                "name": "default",
+                "modelClass": ""
+            },
+            "params": [
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "host",
+                        "value": "localhost"
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "database",
+                        "value": "test"
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "user",
+                        "value": "test"
+                    }
+                },
+                {
+                    "@class": "Param",
+                    "@attributes": {
+                        "name": "password",
+                        "value": "123qwe"
+                    }
+                }
+            ]
+        }
+    ],
     "dataSources": [],
     "actions": [],
     "pageLinks": [

@@ -1,8 +1,8 @@
-const { Pool, Client } = require('pg');
-const colors = require('colors');
-
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
+
+const { Pool, Client } = require('pg');
+const colors = require('colors');
 
 export class PostgreSqlDatabase extends Database {
     pool: any;
