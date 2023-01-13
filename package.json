@@ -68,7 +68,7 @@
     },
     "scripts": {
         "start": "NODE_ENV=development node dist/lib/backend/start.js",
-        "nodemon-start": "NODE_ENV=development nodemon --watch dist dist/lib/backend/start.js",
+        "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/lib/backend/start.js",
         "tsc-build": "tsc --build tsconfig.back.json --verbose",
         "tsc-build-watch": "tsc --build tsconfig.back.json --watch --verbose",
         "webpack-index": "NODE_ENV=development webpack --config webpack.config.index.js",

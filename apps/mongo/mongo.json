@@ -1,0 +1,32 @@
+{
+    "@class": "Application",
+    "@attributes": {
+        "formatVersion": "0.1",
+        "name": "mongo",
+        "caption": "mongo",
+        "authentication": "false",
+        "user": "admin",
+        "password": "admin",
+        "lang": "en",
+        "theme": "standard",
+        "cssBlock": "",
+        "viewClass": "",
+        "ctrlClass": "",
+        "modelClass": ""
+    },
+    "env": {},
+    "databases": [],
+    "dataSources": [],
+    "actions": [],
+    "pageLinks": [
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Page1",
+                "fileName": "pages/Page1/Page1.json",
+                "menu": "Pages",
+                "startup": "true"
+            }
+        }
+    ]
+}
