@@ -54,7 +54,7 @@ export class Database extends Model {
     async queryScalar(context, query, params) {
         const rows = await this.queryRows(context, query, params);
         const row = rows[0];
-        if (!row) throw new Error(`queryScalar must return one row`);
+        if (!row) throw new Error('queryScalar must return one row');
         const [column] = Object.keys(row);
         if (!column) throw new Error('no column in result set');
         const value = row[column];

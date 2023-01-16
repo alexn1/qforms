@@ -16,5 +16,7 @@ module.exports = {
         'spaced-comment': 'off',
         'max-len': 'off',
         'react/jsx-curly-brace-presence': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
+        'class-methods-use-this': 'off',
     },
 };
