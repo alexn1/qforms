@@ -66,7 +66,7 @@ export class PostgreSqlDatabase extends Database {
     }
 
     async queryResult(context: Context, query: string, params: any = null): Promise<any> {
-        if (context.query.sql)
+        if (context.query.sql) {
             console.log(
                 colors.blue('PostgreSqlDatabase.queryResult'),
                 {
@@ -74,6 +74,7 @@ export class PostgreSqlDatabase extends Database {
                     params,
                 } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
             );
+        }
         Database.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
