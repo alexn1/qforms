@@ -18,7 +18,7 @@ export class PostgreSqlDatabase extends Database {
     }*/
 
     async deinit(): Promise<void> {
-        console.log('PostgreSqlDatabase.deinit: ' + this.getName());
+        console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         if (!this.pool) return;
         console.log('ending pool:', this.pool.totalCount);
         await this.pool.end();
