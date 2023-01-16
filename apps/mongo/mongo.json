@@ -52,7 +52,7 @@
                     }
                 }
             ],
-            "tables": {}
+            "tables": []
         }
     ],
     "dataSources": [],
