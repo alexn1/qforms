@@ -11,6 +11,7 @@ class MongoDbDatabaseEditor extends DatabaseEditor_1.DatabaseEditor {
             '@class': 'MongoDbDatabase',
             '@attributes': Object.assign({}, DatabaseEditor_1.DatabaseEditor.createAttributes(params)),
             params: [...(params.params ? params.params.map(Editor_1.Editor.createItemData) : [])],
+            tables: [...(params.tables ? params.tables.map(Editor_1.Editor.createItemData) : [])],
         };
     }
 }

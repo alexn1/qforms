@@ -4,5 +4,6 @@ export declare class MongoDbDatabaseEditor extends DatabaseEditor {
         '@class': string;
         '@attributes': any;
         params: any[];
+        tables: any[];
     };
 }

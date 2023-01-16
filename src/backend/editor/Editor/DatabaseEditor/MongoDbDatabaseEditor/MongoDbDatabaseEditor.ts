@@ -10,6 +10,7 @@ export class MongoDbDatabaseEditor extends DatabaseEditor {
                 ...DatabaseEditor.createAttributes(params),
             },
             params: [...(params.params ? params.params.map(Editor.createItemData) : [])],
+            tables: [...(params.tables ? params.tables.map(Editor.createItemData) : [])],
         };
     }
 }

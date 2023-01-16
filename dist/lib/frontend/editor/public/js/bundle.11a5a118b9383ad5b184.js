@@ -36151,10 +36151,8 @@ class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             this.createParam(data);
         }
         // tables
-        if (this.data.tables) {
-            for (const data of this.data.tables) {
-                this.createTable(data);
-            }
+        for (const data of this.data.tables) {
+            this.createTable(data);
         }
     }
     createParam(data) {

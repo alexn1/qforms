@@ -51,7 +51,8 @@
                         "value": "123qwe"
                     }
                 }
-            ]
+            ],
+            "tables": {}
         }
     ],
     "dataSources": [],
