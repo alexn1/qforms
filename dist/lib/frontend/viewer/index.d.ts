@@ -13,6 +13,7 @@ export { DateField } from './Model/Field/DateField/DateField';
 export { ComboBoxField } from './Model/Field/ComboBoxField/ComboBoxField';
 export { TextBoxField } from './Model/Field/TextBoxField/TextBoxField';
 export { SqlDataSource } from './Model/DataSource/SqlDataSource/SqlDataSource';
+export { NoSqlDataSource } from './Model/DataSource/NoSqlDataSource/NoSqlDataSource';
 export { RowFormDateFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController';
 export { RowFormComboBoxFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController';
 export { RowFormTextBoxFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController';
