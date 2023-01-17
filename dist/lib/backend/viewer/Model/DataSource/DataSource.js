@@ -36,8 +36,9 @@ class DataSource extends Model_1.Model {
     getKeyColumns() {
         const keyColumns = this.getItemNames('keyColumns');
         // console.log('keyColumns:', keyColumns);
-        if (!keyColumns.length)
+        if (!keyColumns.length) {
             throw new Error(`${this.getFullName()}: DataSource without table must have at least one key column`);
+        }
         return keyColumns;
     }
     prepareRows(context, rows) {
@@ -194,7 +195,7 @@ class DataSource extends Model_1.Model {
     }
     async fill(context) {
         //console.log('DataSource.fill', this.getFullName());
-        let response = await super.fill(context);
+        const response = await super.fill(context);
         // keyColumns
         response.keyColumns = this.keyColumns;
         // rows from JSON file

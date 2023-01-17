@@ -48,10 +48,12 @@ export class DataSource extends Model {
     getKeyColumns(): string[] {
         const keyColumns = this.getItemNames('keyColumns');
         // console.log('keyColumns:', keyColumns);
-        if (!keyColumns.length)
+        if (!keyColumns.length) {
             throw new Error(
                 `${this.getFullName()}: DataSource without table must have at least one key column`,
             );
+        }
+
         return keyColumns;
     }
 
@@ -224,7 +226,7 @@ export class DataSource extends Model {
 
     async fill(context: Context) {
         //console.log('DataSource.fill', this.getFullName());
-        let response = await super.fill(context);
+        const response = await super.fill(context);
 
         // keyColumns
         response.keyColumns = this.keyColumns;
