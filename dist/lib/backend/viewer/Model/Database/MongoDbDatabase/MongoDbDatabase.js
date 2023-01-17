@@ -17,6 +17,11 @@ class MongoDbDatabase extends Database_1.Database {
         const client = new mongodb_1.MongoClient(`mongodb://${user}:${password}@${host}:27017`);
         await client.connect();
         context.connections[name] = client;
+        /* const db = client.db(database);
+        const collection = db.collection('MyCollection');
+        const findResult = await collection.find({}).toArray();
+        console.log(typeof findResult);
+        console.log('findResult:', findResult); */
     }
     async release(context) {
         console.log('MongoDbDatabase.release', this.getName());
