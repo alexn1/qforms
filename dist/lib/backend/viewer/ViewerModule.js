@@ -64,7 +64,7 @@ class ViewerModule {
                 });
             }
             finally {
-                application.release(context);
+                await application.release(context);
             }
         }
     }
@@ -152,7 +152,7 @@ class ViewerModule {
             }
         }
         finally {
-            application.release(context);
+            await application.release(context);
         }
     }
     // action (fill page)
@@ -170,7 +170,7 @@ class ViewerModule {
             await res.json({ page: response });
         }
         finally {
-            application.release(context);
+            await application.release(context);
         }
     }
     // action
@@ -233,7 +233,7 @@ class ViewerModule {
             }
         }
         finally {
-            database.release(context);
+            await database.release(context);
         }
     }
     // action
@@ -264,7 +264,7 @@ class ViewerModule {
             }
         }
         finally {
-            database.release(context);
+            await database.release(context);
         }
     }
     // action
@@ -295,7 +295,7 @@ class ViewerModule {
             }
         }
         finally {
-            database.release(context);
+            await database.release(context);
         }
     }
     // action

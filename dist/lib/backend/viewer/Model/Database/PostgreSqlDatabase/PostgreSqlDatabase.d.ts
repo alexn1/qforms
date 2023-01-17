@@ -7,7 +7,7 @@ export declare class PostgreSqlDatabase extends Database {
     getPool(): any;
     static createPool(config: any): any;
     connect(context: Context): Promise<void>;
-    release(context: Context): void;
+    release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
     static queryResult(cnn: any, query: string, params?: any): Promise<any>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;

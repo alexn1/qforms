@@ -20,5 +20,5 @@ export declare class MySqlDatabase extends Database {
     getColumnTypeByDataType(dataType: any): string;
     insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<any>;
     connect(context: Context): Promise<void>;
-    release(context: Context): void;
+    release(context: Context): Promise<void>;
 }

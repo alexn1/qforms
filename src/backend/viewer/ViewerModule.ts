@@ -85,7 +85,7 @@ export class ViewerModule {
                     scripts: [...this.getScripts(), ...application.scripts],
                 });
             } finally {
-                application.release(context);
+                await application.release(context);
             }
         }
     }
@@ -176,7 +176,7 @@ export class ViewerModule {
                 });
             }
         } finally {
-            application.release(context);
+            await application.release(context);
         }
     }
 
@@ -193,7 +193,7 @@ export class ViewerModule {
             if (response === undefined) throw new Error('page action: response is undefined');
             await res.json({ page: response });
         } finally {
-            application.release(context);
+            await application.release(context);
         }
     }
 
@@ -252,7 +252,7 @@ export class ViewerModule {
                 throw err;
             }
         } finally {
-            database.release(context);
+            await database.release(context);
         }
     }
 
@@ -281,7 +281,7 @@ export class ViewerModule {
                 throw err;
             }
         } finally {
-            database.release(context);
+            await database.release(context);
         }
     }
 
@@ -310,7 +310,7 @@ export class ViewerModule {
                 throw err;
             }
         } finally {
-            database.release(context);
+            await database.release(context);
         }
     }
 

@@ -59,7 +59,7 @@ export declare class Application extends Model {
     getDataSource(name: any): DataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
-    release(context: any): void;
+    release(context: any): Promise<void>;
     addClient(webSocket: any): void;
     removeClient(webSocket: any): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;

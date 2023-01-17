@@ -414,9 +414,9 @@ export class Application extends Model {
             await db.connect(context);
         }
     }
-    release(context): void {
+    async release(context): Promise<void> {
         for (const db of this.databases) {
-            db.release(context);
+            await db.release(context);
         }
     }
     addClient(webSocket): void {

@@ -40,8 +40,8 @@ export class Database extends Model {
         return context.connections[name];
     }
 
-    release(context: Context): void {
-        throw new Error('Database.getConnection not release');
+    async release(context: Context): Promise<void> {
+        throw new Error(`${this.constructor.name}.release not implemented`);
     }
 
     async queryResult(context, query, params = null) {

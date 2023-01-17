@@ -344,9 +344,9 @@ class Application extends Model_1.Model {
             await db.connect(context);
         }
     }
-    release(context) {
+    async release(context) {
         for (const db of this.databases) {
-            db.release(context);
+            await db.release(context);
         }
     }
     addClient(webSocket) {

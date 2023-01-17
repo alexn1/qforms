@@ -11,7 +11,7 @@ export declare class Database extends Model {
     fillAttributes(response: any): void;
     connect(context: Context): Promise<void>;
     getConnection(context: any): any;
-    release(context: Context): void;
+    release(context: Context): Promise<void>;
     queryResult(context: any, query: any, params?: any): Promise<void>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;
     queryScalar(context: any, query: any, params: any): Promise<any>;

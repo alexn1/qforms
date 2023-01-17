@@ -18,5 +18,6 @@ module.exports = {
         'react/jsx-curly-brace-presence': 'off',
         '@typescript-eslint/no-unused-vars': 'off',
         'class-methods-use-this': 'off',
+        'object-curly-newline': 'off',
     },
 };

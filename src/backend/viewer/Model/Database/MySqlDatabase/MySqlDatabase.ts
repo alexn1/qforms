@@ -344,7 +344,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[name] = await MySqlDatabase.Pool_getConnection(this.getPool());
     }
 
-    release(context: Context): void {
+    async release(context: Context): Promise<void> {
         console.log('MySqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         this.getConnection(context).release();

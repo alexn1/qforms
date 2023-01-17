@@ -32,8 +32,8 @@ class Database extends Model_1.Model {
         }
         return context.connections[name];
     }
-    release(context) {
-        throw new Error('Database.getConnection not release');
+    async release(context) {
+        throw new Error(`${this.constructor.name}.release not implemented`);
     }
     async queryResult(context, query, params = null) {
         throw new Error('Database.queryResult not implemented');

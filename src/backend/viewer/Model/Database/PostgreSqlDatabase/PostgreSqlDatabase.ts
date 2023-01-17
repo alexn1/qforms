@@ -58,7 +58,7 @@ export class PostgreSqlDatabase extends Database {
         return context.connections[name];
     }*/
 
-    release(context: Context): void {
+    async release(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         this.getConnection(context).release();

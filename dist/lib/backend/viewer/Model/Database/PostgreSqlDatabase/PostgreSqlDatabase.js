@@ -52,7 +52,7 @@ class PostgreSqlDatabase extends Database_1.Database {
         }
         return context.connections[name];
     }*/
-    release(context) {
+    async release(context) {
         console.log('PostgreSqlDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
