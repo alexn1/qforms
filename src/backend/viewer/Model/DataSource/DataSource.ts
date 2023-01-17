@@ -1,7 +1,6 @@
+import path from 'path';
+
 import { Result } from '../../../Result';
-
-const path = require('path');
-
 import { Model } from '../Model';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';

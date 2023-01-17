@@ -8,8 +8,8 @@ export declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];
     constructor(data: any, parent: any);
-    getDirPath(): any;
-    getJsonFilePath(): any;
+    getDirPath(): string;
+    getJsonFilePath(): string;
     init(context: any): Promise<void>;
     getKeyColumns(): string[];
     prepareRows(context: Context, rows: any[]): void;

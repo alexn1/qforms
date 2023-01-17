@@ -108,13 +108,14 @@ class SqlDataSource extends DataSource_1.DataSource {
         return context.getParams();
     }
     async select(context) {
-        if (this.getAccess(context).select !== true)
+        if (this.getAccess(context).select !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
+        }
         // rows
         if (this.getAttr('limit') !== '') {
             if (!context.params.frame)
                 throw new Error('no frame param');
-            const limit = parseInt(this.getAttr('limit'));
+            const limit = parseInt(this.getAttr('limit'), 10);
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
@@ -129,7 +130,7 @@ class SqlDataSource extends DataSource_1.DataSource {
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
-                count = parseInt(count);
+                count = parseInt(count, 10);
             }
             catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -140,10 +141,12 @@ class SqlDataSource extends DataSource_1.DataSource {
     }
     async insert(context, _values = null) {
         console.log('SqlDataSource.insert');
-        if (this.getAccess(context).insert !== true)
+        if (this.getAccess(context).insert !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
-        if (!this.table)
+        }
+        if (!this.table) {
             throw new Error(`${this.getFullName()}: no link to table object: ${this.getAttr('table')}`);
+        }
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
@@ -172,8 +175,9 @@ class SqlDataSource extends DataSource_1.DataSource {
     }
     async update(context) {
         console.log('SqlDataSource.update');
-        if (this.getAccess(context).update !== true)
+        if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
+        }
         if (!this.table)
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const database = this.getAttr('database');
@@ -210,8 +214,9 @@ class SqlDataSource extends DataSource_1.DataSource {
         return result;
     }
     async delete(context) {
-        if (this.getAccess(context).delete !== true)
+        if (this.getAccess(context).delete !== true) {
             throw new Error(`${this.getFullName()}: access denied`);
+        }
         const { key } = context.params;
         const keyValues = this.getKeyValuesFromKey(key);
         const database = this.getAttr('database');
@@ -230,11 +235,11 @@ class SqlDataSource extends DataSource_1.DataSource {
     }
     async fill(context) {
         //console.log('SqlDataSource.fill', this.getFullName());
-        let response = await super.fill(context);
+        const response = await super.fill(context);
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
             if (this.getAttr('limit') !== '') {
-                response.limit = parseInt(this.getAttr('limit'));
+                response.limit = parseInt(this.getAttr('limit'), 10);
             }
             response.rows = [];
             response.count = 0;
