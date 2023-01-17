@@ -35,10 +35,17 @@
                     "@attributes": {
                         "name": "default",
                         "database": "default",
-                        "table": "",
+                        "table": "MyCollection",
                         "modelClass": ""
                     },
-                    "keyColumns": []
+                    "keyColumns": [
+                        {
+                            "@class": "KeyColumn",
+                            "@attributes": {
+                                "name": "_id"
+                            }
+                        }
+                    ]
                 }
             ],
             "actions": [],
