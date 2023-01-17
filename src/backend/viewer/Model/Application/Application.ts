@@ -1,7 +1,6 @@
+import path from 'path';
 import { AppInfo } from '../../../AppInfo';
-const { v4: uuidv4 } = require('uuid');
 
-const path = require('path');
 // const axios = require('axios');
 // const colors = require('colors/safe');
 
@@ -18,6 +17,8 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
 import { Result } from '../../../Result';
+
+const { v4: uuidv4 } = require('uuid');
 
 const text = require('../../text');
 const pkg = require('../../../../../package.json');

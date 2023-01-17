@@ -1,8 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Application = void 0;
-const { v4: uuidv4 } = require('uuid');
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const BaseModel_1 = require("../../../BaseModel");
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
@@ -10,6 +12,7 @@ const PageLink_1 = require("../PageLink/PageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../Result");
+const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 class Application extends Model_1.Model {
@@ -67,7 +70,7 @@ class Application extends Model_1.Model {
         const distDirPath = this.getDistDirPath();
         if (!distDirPath)
             throw new Error('no distDirPath');
-        return path.join(distDirPath, 'public');
+        return path_1.default.join(distDirPath, 'public');
     }
     getText() {
         const lang = this.getAttr('lang') || 'en';
@@ -188,7 +191,7 @@ class Application extends Model_1.Model {
         }
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
-        const pageFilePath = path.join(this.getDirPath(), relFilePath);
+        const pageFilePath = path_1.default.join(this.getDirPath(), relFilePath);
         const content = await Helper_1.Helper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
@@ -296,8 +299,8 @@ class Application extends Model_1.Model {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
-        const fileName = path.basename(appFilePath, path.extname(appFilePath));
-        const dirName = path.basename(path.dirname(appFilePath));
+        const fileName = path_1.default.basename(appFilePath, path_1.default.extname(appFilePath));
+        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
         return {
             appFile: appFile,
             name: BaseModel_1.BaseModel.getName(data),
@@ -306,11 +309,11 @@ class Application extends Model_1.Model {
             envs: BaseModel_1.BaseModel.getEnvList(data),
             fileName: fileName,
             dirName: dirName,
-            filePath: path.resolve(appFilePath),
-            fileNameExt: path.basename(appFilePath),
-            extName: path.extname(appFilePath),
-            dirPath: path.resolve(path.dirname(appFilePath)),
-            distDirPath: hostApp ? path.join(hostApp.getDistDirPath(), dirName) : null,
+            filePath: path_1.default.resolve(appFilePath),
+            fileNameExt: path_1.default.basename(appFilePath),
+            extName: path_1.default.extname(appFilePath),
+            dirPath: path_1.default.resolve(path_1.default.dirname(appFilePath)),
+            distDirPath: hostApp ? path_1.default.join(hostApp.getDistDirPath(), dirName) : null,
         };
     }
     static async loadAppInfo(appFilePath, hostApp) {
@@ -322,7 +325,7 @@ class Application extends Model_1.Model {
     }
     static async getAppInfos(appsDirPath, hostApp) {
         // console.log('Application.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper_1.Helper._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await Helper_1.Helper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -421,7 +424,7 @@ class Application extends Model_1.Model {
     }
     async handleGetFile(context, next) {
         // console.log('Application.handleGetFile', context.getUri());
-        const filePath = path.join(this.getPublicDirPath(), context.getUri());
+        const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
         if (await Helper_1.Helper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         }
