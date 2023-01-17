@@ -139,8 +139,9 @@ class Database extends Model_1.Model {
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter(name => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);
-        if (notPassedParams.length > 0)
+        if (notPassedParams.length > 0) {
             throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
+        }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
         throw new Error('Database.insertRow not implemented');
