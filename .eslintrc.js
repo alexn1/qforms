@@ -19,5 +19,6 @@ module.exports = {
         '@typescript-eslint/no-unused-vars': 'off',
         'class-methods-use-this': 'off',
         'object-curly-newline': 'off',
+        'no-await-in-loop': 'off',
     },
 };
