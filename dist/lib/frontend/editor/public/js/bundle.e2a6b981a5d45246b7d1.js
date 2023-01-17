@@ -38668,6 +38668,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 /* harmony import */ var _ModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../ModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts");
 /* harmony import */ var _SqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./SqlDataSourceView */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.tsx");
+/* harmony import */ var _NoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./NoSqlDataSourceView */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.tsx");
+
 
 
 
@@ -38768,6 +38770,8 @@ class DataSourceController extends _DocumentController__WEBPACK_IMPORTED_MODULE_
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource')
             return _SqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.SqlDataSourceView;
+        if (this.model.getClassName() === 'NoSqlDataSource')
+            return _NoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__.NoSqlDataSourceView;
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
@@ -38779,6 +38783,29 @@ class DataSourceController extends _DocumentController__WEBPACK_IMPORTED_MODULE_
         this.parent.removeDataSource(this);
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.tsx":
+/*!*************************************************************************************************************!*\
+  !*** ./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.tsx ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NoSqlDataSourceView": () => (/* binding */ NoSqlDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _DocumentView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+
+
+class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_1__.DocumentView {
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: "NoSqlDataSourceView" }));
     }
 }
 

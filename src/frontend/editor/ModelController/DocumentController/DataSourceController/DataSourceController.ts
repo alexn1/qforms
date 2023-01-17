@@ -3,6 +3,7 @@ import { KeyColumnController } from '../../KeyColumnController/KeyColumnControll
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewKeyColumnController } from '../../../ModalController/NewKeyColumnController/NewKeyColumnController';
 import { SqlDataSourceView } from './SqlDataSourceView';
+import { NoSqlDataSourceView } from './NoSqlDataSourceView';
 
 export class DataSourceController extends DocumentController {
     keyColumns: any[];
@@ -103,6 +104,7 @@ export class DataSourceController extends DocumentController {
     }
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
+        if (this.model.getClassName() === 'NoSqlDataSource') return NoSqlDataSourceView;
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
