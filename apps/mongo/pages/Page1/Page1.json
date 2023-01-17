@@ -11,5 +11,118 @@
     },
     "dataSources": [],
     "actions": [],
-    "forms": []
+    "forms": [
+        {
+            "@class": "TableForm",
+            "@attributes": {
+                "name": "Form1",
+                "caption": "Form1",
+                "visible": "true",
+                "cssBlock": "",
+                "viewClass": "",
+                "ctrlClass": "",
+                "modelClass": "",
+                "editMethod": "disabled",
+                "itemEditPage": "",
+                "itemCreatePage": "",
+                "newRowMode": "disabled",
+                "deleteRowMode": "disabled",
+                "refreshButton": "false"
+            },
+            "dataSources": [
+                {
+                    "@class": "DataSource",
+                    "@attributes": {
+                        "name": "default",
+                        "database": "default",
+                        "table": "",
+                        "modelClass": ""
+                    },
+                    "keyColumns": [
+                        {
+                            "@class": "KeyColumn",
+                            "@attributes": {
+                                "name": "_id"
+                            }
+                        }
+                    ]
+                }
+            ],
+            "actions": [],
+            "fields": [
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "_id",
+                        "caption": "_id",
+                        "column": "_id",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                },
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "firstName",
+                        "caption": "firstName",
+                        "column": "firstName",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                },
+                {
+                    "@class": "TextBoxField",
+                    "@attributes": {
+                        "name": "lastName",
+                        "caption": "lastName",
+                        "column": "lastName",
+                        "defaultValue": "",
+                        "value": "",
+                        "param": "false",
+                        "visible": "true",
+                        "type": "",
+                        "width": "",
+                        "cssBlock": "",
+                        "viewClass": "",
+                        "ctrlClass": "",
+                        "autoFocus": "false",
+                        "readOnly": "false",
+                        "notNull": "false",
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
+                    }
+                }
+            ]
+        }
+    ]
 }

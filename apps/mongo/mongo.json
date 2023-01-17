@@ -52,7 +52,52 @@
                     }
                 }
             ],
-            "tables": []
+            "tables": [
+                {
+                    "@class": "Table",
+                    "@attributes": {
+                        "name": "sample"
+                    },
+                    "columns": [
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "_id",
+                                "caption": "_id",
+                                "type": "string",
+                                "dbType": "",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "firstName",
+                                "caption": "firstName",
+                                "type": "string",
+                                "dbType": "",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        },
+                        {
+                            "@class": "Column",
+                            "@attributes": {
+                                "name": "lastName",
+                                "caption": "lastName",
+                                "type": "string",
+                                "dbType": "",
+                                "key": "false",
+                                "auto": "false",
+                                "nullable": "true"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "dataSources": [],
