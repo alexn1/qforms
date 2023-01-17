@@ -38805,6 +38805,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_1__.DocumentView {
     render() {
+        const { ctrl } = this.props;
         return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: "NoSqlDataSourceView" }));
     }
 }
@@ -38856,7 +38857,7 @@ class SqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Docum
         this.countQuery = null;
     }
     componentDidMount() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         this.singleQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.singleRef.current, ctrl.model.getAttr('singleQuery'));
         this.multipleQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
         this.countQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
@@ -38870,7 +38871,7 @@ class SqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Docum
         this.countQuery.off('change', this.onChange);
     }
     isChanged() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         const cm = this[this.state.selected];
         if (!cm)
             return false;
@@ -38886,7 +38887,7 @@ class SqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Docum
         return this.state.selected === name;
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'SqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }

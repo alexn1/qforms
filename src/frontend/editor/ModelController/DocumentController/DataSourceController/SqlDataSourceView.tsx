@@ -10,6 +10,7 @@ export class SqlDataSourceView extends DocumentView {
     singleQuery: any;
     multipleQuery: any;
     countQuery: any;
+
     constructor(props) {
         super(props);
         this.singleRef = React.createRef();
@@ -22,8 +23,9 @@ export class SqlDataSourceView extends DocumentView {
         this.multipleQuery = null;
         this.countQuery = null;
     }
+
     componentDidMount() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         this.singleQuery = DocumentView.createCM(
             this.singleRef.current,
             ctrl.model.getAttr('singleQuery'),
@@ -40,38 +42,46 @@ export class SqlDataSourceView extends DocumentView {
         this.multipleQuery.on('change', this.onChange);
         this.countQuery.on('change', this.onChange);
     }
+
     componentWillUnmount() {
         this.singleQuery.off('change', this.onChange);
         this.multipleQuery.off('change', this.onChange);
         this.countQuery.off('change', this.onChange);
     }
+
     isChanged() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         const cm = this[this.state.selected];
         if (!cm) return false;
         return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
     }
+
     onChange = async (i, o) => {
         // console.log('SqlDataSourceView.onChange');
         await this.rerender();
     };
+
     getButtonClass(name) {
         return this.state.selected === name ? 'btn-primary' : 'btn-default';
     }
+
     getVisibility(name) {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
+
     onSaveClick = async e => {
         console.log('SqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
         await this.rerender();
     };
+
     isSelected(name) {
         return this.state.selected === name;
     }
+
     render() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return (
             <div className={'SqlDataSourceView full flex-column'}>
                 <div className="toolbar">
