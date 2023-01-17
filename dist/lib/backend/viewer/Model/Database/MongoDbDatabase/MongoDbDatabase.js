@@ -31,13 +31,13 @@ class MongoDbDatabase extends Database_1.Database {
         await client.close();
         context.connections[this.getName()] = null;
     }
-    async collectionFind(context, collectionName) {
+    async collectionFind(context, collectionName, filter, options) {
         const client = this.getConnection(context);
         const { database } = this.getConfig();
         const db = client.db(database);
         const collection = db.collection(collectionName);
-        const result = await collection.find().toArray();
-        return result;
+        const rows = await collection.find(filter, options).toArray();
+        return rows;
     }
 }
 exports.MongoDbDatabase = MongoDbDatabase;

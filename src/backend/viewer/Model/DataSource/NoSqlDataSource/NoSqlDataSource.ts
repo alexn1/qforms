@@ -12,14 +12,18 @@ export class NoSqlDataSource extends DataSource {
             return response;
         }
 
-        const database = this.getDatabase() as MongoDbDatabase;
+        // collectionName
         const collectionName = this.getAttr('table');
         if (!collectionName) {
             throw new Error('NoSqlDataSource: no table');
         }
 
+        // database
+        const database = this.getDatabase() as MongoDbDatabase;
+
         // query
-        const rows = await database.collectionFind(context, collectionName);
+        const filter = {};
+        const rows = await database.collectionFind(context, collectionName, filter);
         this.prepareRows(context, rows);
         response.rows = rows;
         return response;

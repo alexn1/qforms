@@ -1,4 +1,4 @@
-import { MongoClient } from 'mongodb';
+import { MongoClient, Filter } from 'mongodb';
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
 
@@ -32,12 +32,17 @@ export class MongoDbDatabase extends Database {
         context.connections[this.getName()] = null;
     }
 
-    async collectionFind(context: Context, collectionName: string): Promise<any> {
-        const client = this.getConnection(context);
+    async collectionFind(
+        context: Context,
+        collectionName: string,
+        filter: any,
+        options?: any,
+    ): Promise<any> {
+        const client = this.getConnection(context) as MongoClient;
         const { database } = this.getConfig();
         const db = client.db(database);
         const collection = db.collection(collectionName);
-        const result = await collection.find().toArray();
-        return result;
+        const rows = await collection.find(filter, options).toArray();
+        return rows;
     }
 }

@@ -10,13 +10,16 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             response.rows = [];
             return response;
         }
-        const database = this.getDatabase();
+        // collectionName
         const collectionName = this.getAttr('table');
         if (!collectionName) {
             throw new Error('NoSqlDataSource: no table');
         }
+        // database
+        const database = this.getDatabase();
         // query
-        const rows = await database.collectionFind(context, collectionName);
+        const filter = {};
+        const rows = await database.collectionFind(context, collectionName, filter);
         this.prepareRows(context, rows);
         response.rows = rows;
         return response;
