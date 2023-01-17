@@ -4,15 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BackHostApp = void 0;
+const http_1 = __importDefault(require("http"));
+const express_1 = __importDefault(require("express"));
 const WebSocketServer_1 = require("./WebSocketServer");
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const http_1 = __importDefault(require("http"));
-const colors = require('colors/safe');
-const express_1 = __importDefault(require("express"));
 const Helper_1 = require("./Helper");
 const PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("./Context");
@@ -29,6 +28,7 @@ const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/Applicati
 const BaseModel_1 = require("./BaseModel");
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
+const colors = require('colors/safe');
 class BackHostApp {
     constructor(params = {}) {
         // console.log('BackHostApp.constructor');

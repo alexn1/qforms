@@ -1,3 +1,6 @@
+import http from 'http';
+import express, { Express, Request, Response } from 'express';
+
 import { WebSocketServer } from './WebSocketServer';
 
 const fs = require('fs');
@@ -5,10 +8,6 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-import http from 'http';
-const colors = require('colors/safe');
-
-import express, { Express, Request, Response } from 'express';
 
 import { Helper } from './Helper';
 import { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -29,6 +28,7 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 // const Test    = require('./test/Test');
 const fetch = require('node-fetch');
+const colors = require('colors/safe');
 
 export class BackHostApp {
     params: any;
