@@ -34,21 +34,21 @@
                     "@class": "Param",
                     "@attributes": {
                         "name": "database",
-                        "value": "test"
+                        "value": "sample"
                     }
                 },
                 {
                     "@class": "Param",
                     "@attributes": {
                         "name": "user",
-                        "value": "test"
+                        "value": "root"
                     }
                 },
                 {
                     "@class": "Param",
                     "@attributes": {
                         "name": "password",
-                        "value": "123qwe"
+                        "value": "example"
                     }
                 }
             ],

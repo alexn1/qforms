@@ -6,6 +6,7 @@ import { Context } from '../../../Context';
 
 export class Database extends Model {
     tables: Table[];
+
     constructor(data, parent?) {
         //console.log('Database.constructor');
         super(data, parent);
