@@ -14,9 +14,9 @@ class MySqlDatabase extends Database_1.Database {
         return new MySqlDatabase(data, parent);
     }*/
     async deinit() {
-        console.log('MySqlDatabase.deinit: ' + this.getName());
+        console.log(`MySqlDatabase.deinit: ${this.getName()}`);
         if (this.pool !== null) {
-            return new Promise(resolve => {
+            await new Promise(resolve => {
                 this.pool.end(() => {
                     resolve();
                 });

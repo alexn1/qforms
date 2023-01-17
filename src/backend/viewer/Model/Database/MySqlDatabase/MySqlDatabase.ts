@@ -17,9 +17,9 @@ export class MySqlDatabase extends Database {
     }*/
 
     async deinit(): Promise<void> {
-        console.log('MySqlDatabase.deinit: ' + this.getName());
+        console.log(`MySqlDatabase.deinit: ${this.getName()}`);
         if (this.pool !== null) {
-            return new Promise(resolve => {
+            await new Promise<void>(resolve => {
                 this.pool.end(() => {
                     resolve();
                 });
