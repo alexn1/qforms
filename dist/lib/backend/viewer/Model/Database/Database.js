@@ -20,7 +20,7 @@ class Database extends Model_1.Model {
         response.name = this.getAttr('name');
     }
     async connect(context) {
-        throw new Error('Database.connect not implemented');
+        throw new Error(`${this.constructor.name}.connect not implemented`);
     }
     getConnection(context) {
         // console.log('Database.getConnection');

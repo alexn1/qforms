@@ -26,7 +26,7 @@ export class Database extends Model {
     }
 
     async connect(context: Context): Promise<void> {
-        throw new Error('Database.connect not implemented');
+        throw new Error(`${this.constructor.name}.connect not implemented`);
     }
 
     getConnection(context): any {
