@@ -31,5 +31,13 @@ class MongoDbDatabase extends Database_1.Database {
         await client.close();
         context.connections[this.getName()] = null;
     }
+    async collectionFind(context, collectionName) {
+        const client = this.getConnection(context);
+        const { database } = this.getConfig();
+        const db = client.db(database);
+        const collection = db.collection(collectionName);
+        const result = await collection.find().toArray();
+        return result;
+    }
 }
 exports.MongoDbDatabase = MongoDbDatabase;

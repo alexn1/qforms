@@ -240,6 +240,7 @@ export class SqlDataSource extends DataSource {
             response.count = 0;
             return response;
         }
+
         if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
         }
@@ -256,9 +257,11 @@ export class SqlDataSource extends DataSource {
         if (this.isDefaultOnRowForm() && response.rows[0]) {
             this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
         }
+
         if (this.getAttr('limit') !== '') {
             response.limit = context.params.limit;
         }
+
         return response;
     }
 

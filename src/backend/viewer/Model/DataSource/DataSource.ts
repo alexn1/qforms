@@ -223,7 +223,7 @@ export class DataSource extends Model {
         }
     }
 
-    async fill(context: Context) {
+    async fill(context: Context): Promise<any> {
         //console.log('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
