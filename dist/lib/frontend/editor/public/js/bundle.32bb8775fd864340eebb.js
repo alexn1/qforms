@@ -37210,6 +37210,21 @@ class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
             },
         });
     }
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: 'save',
+            params: {
+                database: this.database.getName(),
+                table: this.getName(),
+                attr: name,
+                value: value,
+            },
+        });
+        this.setAttr(name, value);
+        return data;
+    }
 }
 
 

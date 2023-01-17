@@ -56,7 +56,7 @@
                 {
                     "@class": "Table",
                     "@attributes": {
-                        "name": "sample"
+                        "name": "MyCollection"
                     },
                     "columns": [
                         {

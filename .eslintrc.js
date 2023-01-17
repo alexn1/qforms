@@ -21,5 +21,6 @@ module.exports = {
         'object-curly-newline': 'off',
         'no-await-in-loop': 'off',
         'import/no-cycle': 'off',
+        'object-shorthand': 'off',
     },
 };

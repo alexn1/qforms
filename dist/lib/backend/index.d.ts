@@ -42,6 +42,7 @@ export { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';
 export { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 export { DataSourceEditor } from './editor/Editor/DataSourceEditor/DataSourceEditor';
 export { SqlDataSourceEditor } from './editor/Editor/DataSourceEditor/SqlDataSourceEditor/SqlDataSourceEditor';
+export { NoSqlDataSourceEditor } from './editor/Editor/DataSourceEditor/NoSqlDataSourceEditor/NoSqlDataSourceEditor';
 export { FieldEditor } from './editor/Editor/FieldEditor/FieldEditor';
 export { CheckBoxFieldEditor } from './editor/Editor/FieldEditor/CheckBoxFieldEditor/CheckBoxFieldEditor';
 export { CheckBoxListFieldEditor } from './editor/Editor/FieldEditor/CheckBoxListFieldEditor/CheckBoxListFieldEditor';

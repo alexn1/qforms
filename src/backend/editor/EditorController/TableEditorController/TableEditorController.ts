@@ -36,4 +36,14 @@ export class TableEditorController extends EditorController {
         await appEditor.save();
         return 'ok';
     }
+
+    async save(params) {
+        console.log('TableEditorController.save');
+        const appEditor = this.createApplicationEditor();
+        const databaseEditor = appEditor.createItemEditor('databases', params.database);
+        const tableEditor = databaseEditor.createItemEditor('tables', params.table);
+        tableEditor.setAttr(params.attr, params.value);
+        await appEditor.save();
+        return null;
+    }
 }

@@ -79,4 +79,20 @@ export class TableEditor extends Editor {
             },
         });
     }
+
+    async setValue(name, value) {
+        //console.log(name + ' = ' + value);
+        const data = await FrontHostApp.doHttpRequest({
+            controller: 'Table',
+            action: 'save',
+            params: {
+                database: this.database.getName(),
+                table: this.getName(),
+                attr: name,
+                value: value,
+            },
+        });
+        this.setAttr(name, value);
+        return data;
+    }
 }
