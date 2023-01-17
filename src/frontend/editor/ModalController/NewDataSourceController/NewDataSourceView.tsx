@@ -42,6 +42,7 @@ export class NewDataSourceView extends ReactComponent {
                             items={[
                                 { value: 'DataSource', title: 'DataSource' },
                                 { value: 'SqlDataSource', title: 'SqlDataSource' },
+                                { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
                             ]}
                             onCreate={c => (this.class = c)}
                             value={'SqlDataSource'}

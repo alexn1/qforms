@@ -29,25 +29,7 @@
                 "deleteRowMode": "disabled",
                 "refreshButton": "false"
             },
-            "dataSources": [
-                {
-                    "@class": "DataSource",
-                    "@attributes": {
-                        "name": "default",
-                        "database": "default",
-                        "table": "",
-                        "modelClass": ""
-                    },
-                    "keyColumns": [
-                        {
-                            "@class": "KeyColumn",
-                            "@attributes": {
-                                "name": "_id"
-                            }
-                        }
-                    ]
-                }
-            ],
+            "dataSources": [],
             "actions": [],
             "fields": [
                 {

@@ -18,6 +18,7 @@ export { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/P
 export { MongoDbDatabase } from './viewer/Model/Database/MongoDbDatabase/MongoDbDatabase';
 export { DataSource } from './viewer/Model/DataSource/DataSource';
 export { SqlDataSource } from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
+export { NoSqlDataSource } from './viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource';
 export { Field } from './viewer/Model/Field/Field';
 export { CheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';
 export { CheckBoxListField } from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';
