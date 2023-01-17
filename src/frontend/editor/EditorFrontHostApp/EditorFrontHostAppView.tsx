@@ -8,8 +8,10 @@ import './EditorFrontHostAppView.less';
 
 export class EditorFrontHostAppView extends ReactComponent {
     renderDocumentView(document) {
-        if (!document.controller.getDocumentViewClass())
+        if (!document.controller.getDocumentViewClass()) {
             return <div>no document view for {document.controller.constructor.name}</div>;
+        }
+
         return React.createElement(document.controller.getDocumentViewClass(), {
             // @ts-ignore
             onCreate: c => (document.view = c),
@@ -17,6 +19,7 @@ export class EditorFrontHostAppView extends ReactComponent {
             ctrl: document.controller,
         });
     }
+
     getTabs() {
         console.log('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
         return this.props.ctrl.documents.map(document => ({
@@ -25,8 +28,9 @@ export class EditorFrontHostAppView extends ReactComponent {
             content: this.renderDocumentView(document),
         }));
     }
+
     render() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return (
             <div className="EditorFrontHostAppView">
                 <div className={'EditorFrontHostAppView__sidebar'}>

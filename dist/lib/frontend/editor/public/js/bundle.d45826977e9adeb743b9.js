@@ -37436,8 +37436,9 @@ __webpack_require__.r(__webpack_exports__);
 
 class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     renderDocumentView(document) {
-        if (!document.controller.getDocumentViewClass())
+        if (!document.controller.getDocumentViewClass()) {
             return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["no document view for ", document.controller.constructor.name] });
+        }
         return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
             // @ts-ignore
             onCreate: c => (document.view = c),
@@ -37454,7 +37455,7 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
         }));
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const { ctrl } = this.props;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList, { onCreate: c => (ctrl.actionList = c), onClick: ctrl.onActionClick }) })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget, { classList: ['full'], onCreate: c => (ctrl.treeWidget2 = c), items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['Tab-blue', 'full'], tabs: [
                                 {
                                     name: 'properties',

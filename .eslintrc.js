@@ -22,5 +22,7 @@ module.exports = {
         'no-await-in-loop': 'off',
         'import/no-cycle': 'off',
         'object-shorthand': 'off',
+        'react/jsx-one-expression-per-line': 'off',
+        'no-return-assign': 'off',
     },
 };
