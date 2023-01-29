@@ -36,7 +36,10 @@
                         "name": "default",
                         "database": "default",
                         "table": "MyCollection",
-                        "modelClass": ""
+                        "modelClass": "",
+                        "selectQuery": "",
+                        "countQuery": "",
+                        "limit": ""
                     },
                     "keyColumns": [
                         {
