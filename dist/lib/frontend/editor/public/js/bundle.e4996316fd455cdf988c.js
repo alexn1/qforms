@@ -374,6 +374,18 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.less":
+/*!**************************************************************************************************************!*\
+  !*** ./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.less ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.less":
 /*!************************************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.less ***!
@@ -38800,13 +38812,66 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NoSqlDataSourceView": () => (/* binding */ NoSqlDataSourceView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _DocumentView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _DocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DocumentView */ "./src/frontend/editor/ModelController/DocumentController/DocumentView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _NoSqlDataSourceView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NoSqlDataSourceView.less */ "./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.less");
 
 
-class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_1__.DocumentView {
+
+
+
+class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView {
+    constructor(props) {
+        super(props);
+        this.onChange = async (i, o) => {
+            // console.log('NoSqlDataSourceView.onChange');
+            await this.rerender();
+        };
+        this.onSaveClick = async (e) => {
+            console.log('NoSqlDataSourceView.onSaveClick');
+            const ctrl = this.props.ctrl;
+            await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
+            await this.rerender();
+        };
+        this.selectRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            selected: 'selectQuery',
+        };
+        this.selectQuery = null;
+        this.countQuery = null;
+    }
+    componentDidMount() {
+        const { ctrl } = this.props;
+        this.selectQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.selectRef.current, 'selectQuery');
+        this.countQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.countRef.current, 'countQuery');
+        this.selectQuery.on('change', this.onChange);
+        this.countQuery.on('change', this.onChange);
+    }
+    componentWillUnmount() {
+        this.selectQuery.off('change', this.onChange);
+        this.countQuery.off('change', this.onChange);
+    }
+    isChanged() {
+        const { ctrl } = this.props;
+        const cm = this[this.state.selected];
+        if (!cm)
+            return false;
+        return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
+    }
+    getButtonClass(name) {
+        return this.state.selected === name ? 'btn-primary' : 'btn-default';
+    }
+    getVisibility(name) {
+        return this.state.selected === name ? 'visible' : 'hidden';
+    }
+    isSelected(name) {
+        return this.state.selected === name;
+    }
     render() {
         const { ctrl } = this.props;
-        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: "NoSqlDataSourceView" }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: { fontWeight: this.isSelected('selectQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 

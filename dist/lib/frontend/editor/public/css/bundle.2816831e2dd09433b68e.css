@@ -1089,6 +1089,24 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
+/*!***********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.less ***!
+  \***********************************************************************************************************************************************************************************************/
+.NoSqlDataSourceView .toolbar {
+  background-color: white;
+  padding: 5px;
+}
+.NoSqlDataSourceView .edit {
+  overflow: auto;
+  position: relative;
+}
+.NoSqlDataSourceView .edit > div {
+  position: absolute;
+}
+.NoSqlDataSourceView .edit .cm-container > div {
+  height: 100%;
+}
+
 /*!********************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/TableController/TableView.less ***!
   \********************************************************************************************************************************************************************************/
