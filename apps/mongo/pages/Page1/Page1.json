@@ -37,7 +37,7 @@
                         "database": "default",
                         "table": "",
                         "modelClass": "",
-                        "selectQuery": "db.collection('MyCollection').find()",
+                        "selectQuery": "db.collection('MyCollection').find(\n  {firstName: 'Alexander'}\n)",
                         "countQuery": "mongo db count query",
                         "limit": ""
                     },
