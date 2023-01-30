@@ -35,9 +35,9 @@
                     "@attributes": {
                         "name": "default",
                         "database": "default",
-                        "table": "MyCollection",
+                        "table": "",
                         "modelClass": "",
-                        "selectQuery": "mongo db select query",
+                        "selectQuery": "db.collection('MyCollection').find()",
                         "countQuery": "mongo db count query",
                         "limit": ""
                     },

@@ -1,4 +1,4 @@
-import { MongoClient, Filter } from 'mongodb';
+import { MongoClient, FindCursor } from 'mongodb';
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
 
@@ -16,12 +16,6 @@ export class MongoDbDatabase extends Database {
         const client = new MongoClient(`mongodb://${user}:${password}@${host}:27017`);
         await client.connect();
         context.connections[name] = client;
-
-        /* const db = client.db(database);
-        const collection = db.collection('MyCollection');
-        const findResult = await collection.find({}).toArray();
-        console.log(typeof findResult);
-        console.log('findResult:', findResult); */
     }
 
     async release(context: Context): Promise<void> {
@@ -32,17 +26,24 @@ export class MongoDbDatabase extends Database {
         context.connections[this.getName()] = null;
     }
 
-    async collectionFind(
-        context: Context,
-        collectionName: string,
-        filter: any,
-        options?: any,
-    ): Promise<any> {
+    async query(context: Context, query: string): Promise<any[]> {
+        console.log('MongoDbDatabase.query', query);
         const client = this.getConnection(context) as MongoClient;
         const { database } = this.getConfig();
         const db = client.db(database);
-        const collection = db.collection(collectionName);
-        const rows = await collection.find(filter, options).toArray();
-        return rows;
+
+        // eval query as function
+        const fn = eval(`(db) => (${query})`);
+
+        // exec query
+        const result = await fn(db);
+
+        // for find() query
+        if (result instanceof FindCursor) {
+            return await result.toArray();
+        }
+
+        // for findOne query
+        return [result];
     }
 }

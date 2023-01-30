@@ -17,11 +17,6 @@ class MongoDbDatabase extends Database_1.Database {
         const client = new mongodb_1.MongoClient(`mongodb://${user}:${password}@${host}:27017`);
         await client.connect();
         context.connections[name] = client;
-        /* const db = client.db(database);
-        const collection = db.collection('MyCollection');
-        const findResult = await collection.find({}).toArray();
-        console.log(typeof findResult);
-        console.log('findResult:', findResult); */
     }
     async release(context) {
         console.log('MongoDbDatabase.release', this.getName());
@@ -31,13 +26,21 @@ class MongoDbDatabase extends Database_1.Database {
         await client.close();
         context.connections[this.getName()] = null;
     }
-    async collectionFind(context, collectionName, filter, options) {
+    async query(context, query) {
+        console.log('MongoDbDatabase.query', query);
         const client = this.getConnection(context);
         const { database } = this.getConfig();
         const db = client.db(database);
-        const collection = db.collection(collectionName);
-        const rows = await collection.find(filter, options).toArray();
-        return rows;
+        // eval query as function
+        const fn = eval(`(db) => (${query})`);
+        // exec query
+        const result = await fn(db);
+        // for find() query
+        if (result instanceof mongodb_1.FindCursor) {
+            return await result.toArray();
+        }
+        // for findOne query
+        return [result];
     }
 }
 exports.MongoDbDatabase = MongoDbDatabase;
