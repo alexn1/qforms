@@ -37,8 +37,8 @@
                         "database": "default",
                         "table": "MyCollection",
                         "modelClass": "",
-                        "selectQuery": "",
-                        "countQuery": "",
+                        "selectQuery": "mongo db select query",
+                        "countQuery": "mongo db count query",
                         "limit": ""
                     },
                     "keyColumns": [

@@ -22,8 +22,14 @@ export class NoSqlDataSourceView extends DocumentView {
 
     componentDidMount() {
         const { ctrl } = this.props;
-        this.selectQuery = DocumentView.createCM(this.selectRef.current, 'selectQuery');
-        this.countQuery = DocumentView.createCM(this.countRef.current, 'countQuery');
+        this.selectQuery = DocumentView.createCM(
+            this.selectRef.current,
+            ctrl.model.getAttr('selectQuery'),
+        );
+        this.countQuery = DocumentView.createCM(
+            this.countRef.current,
+            ctrl.model.getAttr('countQuery'),
+        );
         this.selectQuery.on('change', this.onChange);
         this.countQuery.on('change', this.onChange);
     }

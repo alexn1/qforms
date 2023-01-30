@@ -95,7 +95,7 @@ export class DataSourceController extends DocumentController {
 
         // list
         for (const name in this.model.data['@attributes']) {
-            if (!['countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
+            if (!['countQuery', 'singleQuery', 'multipleQuery', 'selectQuery'].includes(name)) {
                 propList.list[name] = this.model.data['@attributes'][name];
             }
         }

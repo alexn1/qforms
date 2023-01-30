@@ -38773,7 +38773,7 @@ class DataSourceController extends _DocumentController__WEBPACK_IMPORTED_MODULE_
         };
         // list
         for (const name in this.model.data['@attributes']) {
-            if (!['countQuery', 'singleQuery', 'multipleQuery'].includes(name)) {
+            if (!['countQuery', 'singleQuery', 'multipleQuery', 'selectQuery'].includes(name)) {
                 propList.list[name] = this.model.data['@attributes'][name];
             }
         }
@@ -38844,8 +38844,8 @@ class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Doc
     }
     componentDidMount() {
         const { ctrl } = this.props;
-        this.selectQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.selectRef.current, 'selectQuery');
-        this.countQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.countRef.current, 'countQuery');
+        this.selectQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.selectRef.current, ctrl.model.getAttr('selectQuery'));
+        this.countQuery = _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
         this.selectQuery.on('change', this.onChange);
         this.countQuery.on('change', this.onChange);
     }
