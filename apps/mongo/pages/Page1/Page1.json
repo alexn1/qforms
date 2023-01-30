@@ -49,20 +49,6 @@
                             }
                         }
                     ]
-                },
-                {
-                    "@class": "SqlDataSource",
-                    "@attributes": {
-                        "name": "sds1",
-                        "database": "default",
-                        "table": "",
-                        "modelClass": "",
-                        "singleQuery": "",
-                        "multipleQuery": "",
-                        "countQuery": "",
-                        "limit": ""
-                    },
-                    "keyColumns": []
                 }
             ],
             "actions": [],

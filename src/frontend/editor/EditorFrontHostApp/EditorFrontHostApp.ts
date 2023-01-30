@@ -59,6 +59,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     }
 
     deinit() {}
+
     onItemOpen2 = async item => {
         console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
         // console.log('parent:', item.view.parent);
@@ -66,6 +67,7 @@ export class EditorFrontHostApp extends FrontHostApp {
             await item.loadPage();
         }
     };
+
     onItemSelect2 = async item => {
         console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof ModelController) {

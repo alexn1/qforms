@@ -40128,6 +40128,7 @@ class VisualController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.
         this.document.view.rerender();
     }
     createDataSource(model) {
+        console.log('VisualController.createDataSource', model);
         const dataSource = new _DataSourceController_DataSourceController__WEBPACK_IMPORTED_MODULE_1__.DataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
