@@ -35,8 +35,8 @@ class MongoDbDatabase extends Database_1.Database {
         const fn = eval(`(db) => (${query})`);
         // exec query
         const result = await fn(db);
-        // for find() query
-        if (result instanceof mongodb_1.FindCursor) {
+        // for find() and aggregate()
+        if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             return await result.toArray();
         }
         // for findOne query

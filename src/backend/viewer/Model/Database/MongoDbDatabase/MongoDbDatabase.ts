@@ -1,4 +1,4 @@
-import { MongoClient, FindCursor } from 'mongodb';
+import { MongoClient, FindCursor, AggregationCursor } from 'mongodb';
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
 
@@ -38,8 +38,8 @@ export class MongoDbDatabase extends Database {
         // exec query
         const result = await fn(db);
 
-        // for find() query
-        if (result instanceof FindCursor) {
+        // for find() and aggregate()
+        if (result instanceof FindCursor || result instanceof AggregationCursor) {
             return await result.toArray();
         }
 
