@@ -11,7 +11,7 @@ export declare class SqlDataSource extends DataSource {
     getMultipleQuery(context: Context): any;
     templateQuery(context: Context, _query: string): string;
     getSelectParams(context: any): any;
-    select(context: Context): Promise<any[]>;
+    select(context: Context): Promise<[any[], number | null]>;
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
@@ -20,12 +20,6 @@ export declare class SqlDataSource extends DataSource {
     getTable(): Table;
     getAutoColumns(): string[];
     getAutoColumnTypes(): {};
-    getAccess(context: Context): {
-        select: boolean;
-        insert: boolean;
-        update: boolean;
-        delete: boolean;
-    };
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
     getBuffer(context: Context, file: any): Promise<any>;

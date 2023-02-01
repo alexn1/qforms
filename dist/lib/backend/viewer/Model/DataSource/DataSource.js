@@ -245,5 +245,13 @@ class DataSource extends Model_1.Model {
     getForm() {
         return this.isOnForm() ? this.getParent() : null;
     }
+    getAccess(context) {
+        return {
+            select: true,
+            insert: true,
+            update: true,
+            delete: true,
+        };
+    }
 }
 exports.DataSource = DataSource;

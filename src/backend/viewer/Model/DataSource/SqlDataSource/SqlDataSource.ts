@@ -79,7 +79,7 @@ export class SqlDataSource extends DataSource {
         return context.getParams();
     }
 
-    async select(context: Context) {
+    async select(context: Context): Promise<[any[], number | null]> {
         if (this.getAccess(context).select !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
@@ -99,7 +99,7 @@ export class SqlDataSource extends DataSource {
         this.prepareRows(context, rows);
 
         // count
-        let count;
+        let count = null;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
                 count = await this.getDatabase().queryScalar(
@@ -285,15 +285,6 @@ export class SqlDataSource extends DataSource {
             acc[name] = this.table.getColumn(name).getAttr('type');
             return acc;
         }, {});
-    }
-
-    getAccess(context: Context) {
-        return {
-            select: true,
-            insert: true,
-            update: true,
-            delete: true,
-        };
     }
 
     getValuesFromRow(row) {

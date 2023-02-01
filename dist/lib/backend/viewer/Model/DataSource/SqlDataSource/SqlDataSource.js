@@ -91,7 +91,7 @@ class SqlDataSource extends DataSource_1.DataSource {
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.prepareRows(context, rows);
         // count
-        let count;
+        let count = null;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
@@ -248,14 +248,6 @@ class SqlDataSource extends DataSource_1.DataSource {
             acc[name] = this.table.getColumn(name).getAttr('type');
             return acc;
         }, {});
-    }
-    getAccess(context) {
-        return {
-            select: true,
-            insert: true,
-            update: true,
-            delete: true,
-        };
     }
     getValuesFromRow(row) {
         console.log('SqlDataSource.getValuesFromRow', row);

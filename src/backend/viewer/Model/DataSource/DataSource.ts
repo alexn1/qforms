@@ -10,6 +10,7 @@ import { Page } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { TableForm } from '../Form/TableForm/TableForm';
+import { IAccessResult } from '../../IAccessResult';
 
 export class DataSource extends Model {
     keyColumns: any;
@@ -278,5 +279,14 @@ export class DataSource extends Model {
     }
     getForm(): Form {
         return this.isOnForm() ? this.getParent() : null;
+    }
+
+    getAccess(context: Context): IAccessResult {
+        return {
+            select: true,
+            insert: true,
+            update: true,
+            delete: true,
+        };
     }
 }

@@ -4,6 +4,7 @@ import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { Form } from '../Form/Form';
+import { IAccessResult } from '../../IAccessResult';
 export declare class DataSource extends Model {
     keyColumns: any;
     rows: any[];
@@ -35,4 +36,5 @@ export declare class DataSource extends Model {
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     getForm(): Form;
+    getAccess(context: Context): IAccessResult;
 }

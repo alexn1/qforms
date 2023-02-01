@@ -39,7 +39,7 @@
                         "modelClass": "",
                         "selectQuery": "db.collection('MyCollection').find(\n  {firstName: 'Alexander'}\n)",
                         "countQuery": "db.collection('MyCollection').aggregate([{$count: 'count'}])",
-                        "limit": ""
+                        "limit": "10"
                     },
                     "keyColumns": [
                         {

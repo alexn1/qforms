@@ -8,8 +8,16 @@ export class NoSqlDataSource extends DataSource {
 
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
+            if (this.getAttr('limit') !== '') {
+                response.limit = parseInt(this.getAttr('limit'), 10);
+            }
             response.rows = [];
+            response.count = 0;
             return response;
+        }
+
+        if (this.getAttr('limit') !== '') {
+            context.params.frame = 1;
         }
 
         // selectQuery
@@ -39,5 +47,13 @@ export class NoSqlDataSource extends DataSource {
         }
 
         return response;
+    }
+
+    async select(context: Context): Promise<[any[], number | null]> {
+        if (this.getAccess(context).select !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied`);
+        }
+
+        return [[], null];
     }
 }

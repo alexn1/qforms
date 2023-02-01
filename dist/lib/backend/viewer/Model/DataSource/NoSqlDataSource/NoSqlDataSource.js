@@ -7,8 +7,15 @@ class NoSqlDataSource extends DataSource_1.DataSource {
         const response = await super.fill(context);
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
+            if (this.getAttr('limit') !== '') {
+                response.limit = parseInt(this.getAttr('limit'), 10);
+            }
             response.rows = [];
+            response.count = 0;
             return response;
+        }
+        if (this.getAttr('limit') !== '') {
+            context.params.frame = 1;
         }
         // selectQuery
         const selectQuery = this.getAttr('selectQuery');
@@ -33,6 +40,12 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             response.count = count;
         }
         return response;
+    }
+    async select(context) {
+        if (this.getAccess(context).select !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied`);
+        }
+        return [[], null];
     }
 }
 exports.NoSqlDataSource = NoSqlDataSource;
