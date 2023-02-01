@@ -50,10 +50,6 @@ export class NoSqlDataSource extends DataSource {
         return response;
     }
 
-    getDatabase(): MongoDbDatabase {
-        return super.getDatabase() as MongoDbDatabase;
-    }
-
     async select(context: Context): Promise<[any[], number | null]> {
         if (this.getAccess(context).select !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
@@ -91,6 +87,10 @@ export class NoSqlDataSource extends DataSource {
         }
 
         return [rows, count];
+    }
+
+    getDatabase(): MongoDbDatabase {
+        return super.getDatabase() as MongoDbDatabase;
     }
 
     getSelectQuery(): string {

@@ -6,8 +6,8 @@ export declare class NoSqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
-    getDatabase(): MongoDbDatabase;
     select(context: Context): Promise<[any[], number | null]>;
+    getDatabase(): MongoDbDatabase;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;
 }

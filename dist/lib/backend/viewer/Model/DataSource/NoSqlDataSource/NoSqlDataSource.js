@@ -40,9 +40,6 @@ class NoSqlDataSource extends DataSource_1.DataSource {
         }
         return response;
     }
-    getDatabase() {
-        return super.getDatabase();
-    }
     async select(context) {
         if (this.getAccess(context).select !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
@@ -75,6 +72,9 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             }
         }
         return [rows, count];
+    }
+    getDatabase() {
+        return super.getDatabase();
     }
     getSelectQuery() {
         const selectQuery = this.getAttr('selectQuery');
