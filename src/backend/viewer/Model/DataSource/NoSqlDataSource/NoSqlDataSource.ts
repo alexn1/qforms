@@ -1,8 +1,18 @@
 import { DataSource } from '../DataSource';
 import { Context } from '../../../../Context';
 import { MongoDbDatabase } from '../../Database/MongoDbDatabase/MongoDbDatabase';
+import { Table } from '../../Table/Table';
+import { Database } from '../../Database/Database';
 
 export class NoSqlDataSource extends DataSource {
+    table: Table;
+    constructor(data, parent) {
+        super(data, parent);
+        this.table = this.getAttr('table')
+            ? this.getDatabase().getTable(this.getAttr('table'))
+            : null;
+    }
+
     async fill(context: Context): Promise<any> {
         const response = await super.fill(context);
 
@@ -20,33 +30,28 @@ export class NoSqlDataSource extends DataSource {
             context.params.frame = 1;
         }
 
-        // selectQuery
-        const selectQuery = this.getAttr('selectQuery');
-        if (!selectQuery) {
-            throw new Error('no selectQuery');
+        try {
+            const [rows, count] = await this.select(context);
+            response.rows = rows;
+            response.count = count;
+        } catch (err) {
+            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            throw err;
         }
 
-        // database
-        const database = this.getDatabase() as MongoDbDatabase;
+        if (this.isDefaultOnRowForm() && response.rows[0]) {
+            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
+        }
 
-        // exec selectQuery
-        const rows = await database.query(context, selectQuery);
-        this.prepareRows(context, rows);
-        response.rows = rows;
-
-        // countQuery
-        const countQuery = this.getAttr('countQuery');
-        if (countQuery) {
-            const countResult = await database.query(context, countQuery);
-            // console.log('countResult:', countResult);
-            const [obj] = countResult;
-            // console.log('obj:', obj);
-            const count = obj[Object.keys(obj)[0]];
-            console.log('count:', count);
-            response.count = count;
+        if (this.getAttr('limit') !== '') {
+            response.limit = context.params.limit;
         }
 
         return response;
+    }
+
+    getDatabase(): MongoDbDatabase {
+        return super.getDatabase() as MongoDbDatabase;
     }
 
     async select(context: Context): Promise<[any[], number | null]> {
@@ -54,6 +59,51 @@ export class NoSqlDataSource extends DataSource {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
 
-        return [[], null];
+        // rows
+        if (this.getAttr('limit') !== '') {
+            if (!context.params.frame) throw new Error('no frame param');
+            const limit = parseInt(this.getAttr('limit'), 10);
+            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.limit = limit;
+        }
+
+        // exec selectQuery
+        const rows = await this.getDatabase().query(context, this.getSelectQuery());
+        this.prepareRows(context, rows);
+
+        // count
+        let count = null;
+        if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
+            try {
+                const countResult = await this.getDatabase().query(
+                    context,
+                    this.getCountQuery(context),
+                );
+                // console.log('countResult:', countResult);
+                const [obj] = countResult;
+                // console.log('obj:', obj);
+                count = obj[Object.keys(obj)[0]];
+                // console.log('count:', count);
+            } catch (err) {
+                err.message = `${this.getFullName()}: ${err.message}`;
+                throw err;
+            }
+        }
+
+        return [rows, count];
+    }
+
+    getSelectQuery(): string {
+        const selectQuery = this.getAttr('selectQuery');
+        if (!selectQuery) {
+            throw new Error('no selectQuery');
+        }
+        return selectQuery;
+    }
+
+    getCountQuery(context: Context): string {
+        let query = this.getAttr('countQuery');
+        if (!query) throw new Error(`${this.getFullName()}: no countQuery`);
+        return query;
     }
 }

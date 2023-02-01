@@ -5,8 +5,9 @@ import { Result } from '../../../../Result';
 export declare class SqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
+    fill(context: Context): Promise<any>;
     getKeyColumns(): string[];
-    getCountQuery(context: Context): any;
+    getCountQuery(context: Context): string;
     getSingleQuery(context: Context): any;
     getMultipleQuery(context: Context): any;
     templateQuery(context: Context, _query: string): string;
@@ -16,7 +17,6 @@ export declare class SqlDataSource extends DataSource {
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;
-    fill(context: Context): Promise<any>;
     getTable(): Table;
     getAutoColumns(): string[];
     getAutoColumnTypes(): {};

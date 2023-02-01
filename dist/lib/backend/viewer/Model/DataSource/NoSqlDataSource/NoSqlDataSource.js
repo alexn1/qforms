@@ -3,6 +3,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.NoSqlDataSource = void 0;
 const DataSource_1 = require("../DataSource");
 class NoSqlDataSource extends DataSource_1.DataSource {
+    constructor(data, parent) {
+        super(data, parent);
+        this.table = this.getAttr('table')
+            ? this.getDatabase().getTable(this.getAttr('table'))
+            : null;
+    }
     async fill(context) {
         const response = await super.fill(context);
         // if form data source named default then check mode
@@ -17,35 +23,71 @@ class NoSqlDataSource extends DataSource_1.DataSource {
         if (this.getAttr('limit') !== '') {
             context.params.frame = 1;
         }
-        // selectQuery
-        const selectQuery = this.getAttr('selectQuery');
-        if (!selectQuery) {
-            throw new Error('no selectQuery');
-        }
-        // database
-        const database = this.getDatabase();
-        // exec selectQuery
-        const rows = await database.query(context, selectQuery);
-        this.prepareRows(context, rows);
-        response.rows = rows;
-        // countQuery
-        const countQuery = this.getAttr('countQuery');
-        if (countQuery) {
-            const countResult = await database.query(context, countQuery);
-            // console.log('countResult:', countResult);
-            const [obj] = countResult;
-            // console.log('obj:', obj);
-            const count = obj[Object.keys(obj)[0]];
-            console.log('count:', count);
+        try {
+            const [rows, count] = await this.select(context);
+            response.rows = rows;
             response.count = count;
         }
+        catch (err) {
+            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            throw err;
+        }
+        if (this.isDefaultOnRowForm() && response.rows[0]) {
+            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
+        }
+        if (this.getAttr('limit') !== '') {
+            response.limit = context.params.limit;
+        }
         return response;
+    }
+    getDatabase() {
+        return super.getDatabase();
     }
     async select(context) {
         if (this.getAccess(context).select !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
-        return [[], null];
+        // rows
+        if (this.getAttr('limit') !== '') {
+            if (!context.params.frame)
+                throw new Error('no frame param');
+            const limit = parseInt(this.getAttr('limit'), 10);
+            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.limit = limit;
+        }
+        // exec selectQuery
+        const rows = await this.getDatabase().query(context, this.getSelectQuery());
+        this.prepareRows(context, rows);
+        // count
+        let count = null;
+        if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
+            try {
+                const countResult = await this.getDatabase().query(context, this.getCountQuery(context));
+                // console.log('countResult:', countResult);
+                const [obj] = countResult;
+                // console.log('obj:', obj);
+                count = obj[Object.keys(obj)[0]];
+                // console.log('count:', count);
+            }
+            catch (err) {
+                err.message = `${this.getFullName()}: ${err.message}`;
+                throw err;
+            }
+        }
+        return [rows, count];
+    }
+    getSelectQuery() {
+        const selectQuery = this.getAttr('selectQuery');
+        if (!selectQuery) {
+            throw new Error('no selectQuery');
+        }
+        return selectQuery;
+    }
+    getCountQuery(context) {
+        let query = this.getAttr('countQuery');
+        if (!query)
+            throw new Error(`${this.getFullName()}: no countQuery`);
+        return query;
     }
 }
 exports.NoSqlDataSource = NoSqlDataSource;

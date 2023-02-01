@@ -13,14 +13,52 @@ export class SqlDataSource extends DataSource {
             : null;
     }
 
+    async fill(context: Context) {
+        //console.log('SqlDataSource.fill', this.getFullName());
+        const response = await super.fill(context);
+
+        // if form data source named default then check mode
+        if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
+            if (this.getAttr('limit') !== '') {
+                response.limit = parseInt(this.getAttr('limit'), 10);
+            }
+            response.rows = [];
+            response.count = 0;
+            return response;
+        }
+
+        if (this.getAttr('limit') !== '') {
+            context.params.frame = 1;
+        }
+
+        try {
+            const [rows, count] = await this.select(context);
+            response.rows = rows;
+            response.count = count;
+        } catch (err) {
+            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            throw err;
+        }
+
+        if (this.isDefaultOnRowForm() && response.rows[0]) {
+            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
+        }
+
+        if (this.getAttr('limit') !== '') {
+            response.limit = context.params.limit;
+        }
+
+        return response;
+    }
+
     getKeyColumns(): string[] {
         // console.log('SqlDataSource.getKeyColumns', this.getFullName());
         return this.table ? this.table.getKeyColumns() : super.getKeyColumns();
     }
 
-    getCountQuery(context: Context) {
+    getCountQuery(context: Context): string {
         let query = this.getAttr('countQuery');
-        if (!query) throw new Error(`no countQuery: ${this.getFullName()}`);
+        if (!query) throw new Error(`${this.getFullName()}: no countQuery`);
         if (this.isOnForm()) {
             query = this.parent.replaceThis(context, query);
         }
@@ -113,6 +151,7 @@ export class SqlDataSource extends DataSource {
                 throw err;
             }
         }
+        
         return [rows, count];
     }
 
@@ -225,44 +264,6 @@ export class SqlDataSource extends DataSource {
         response.name = this.getAttr('name');
         response.database = this.getAttr('database');
         response.table = this.getAttr('table');
-    }
-
-    async fill(context: Context) {
-        //console.log('SqlDataSource.fill', this.getFullName());
-        const response = await super.fill(context);
-
-        // if form data source named default then check mode
-        if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
-            if (this.getAttr('limit') !== '') {
-                response.limit = parseInt(this.getAttr('limit'), 10);
-            }
-            response.rows = [];
-            response.count = 0;
-            return response;
-        }
-
-        if (this.getAttr('limit') !== '') {
-            context.params.frame = 1;
-        }
-
-        try {
-            const [rows, count] = await this.select(context);
-            response.rows = rows;
-            response.count = count;
-        } catch (err) {
-            err.message = `select error of ${this.getFullName()}: ${err.message}`;
-            throw err;
-        }
-
-        if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
-        }
-
-        if (this.getAttr('limit') !== '') {
-            response.limit = context.params.limit;
-        }
-
-        return response;
     }
 
     getTable(): Table {
