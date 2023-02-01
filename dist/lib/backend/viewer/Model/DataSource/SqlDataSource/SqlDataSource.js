@@ -230,9 +230,6 @@ class SqlDataSource extends DataSource_1.DataSource {
         }
         return response;
     }
-    async getRows() {
-        return null;
-    }
     getTable() {
         const tableName = this.getAttr('table');
         if (!tableName)

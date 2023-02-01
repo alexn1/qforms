@@ -17,7 +17,6 @@ export declare class SqlDataSource extends DataSource {
     delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
-    getRows(): Promise<any>;
     getTable(): Table;
     getAutoColumns(): string[];
     getAutoColumnTypes(): {};

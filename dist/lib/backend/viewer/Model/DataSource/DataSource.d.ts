@@ -25,7 +25,7 @@ export declare class DataSource extends Model {
     calcNewKey(key: any, values: any): string;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
-    getRows(): Promise<any[]>;
+    private getRows;
     isOnForm(): boolean;
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;

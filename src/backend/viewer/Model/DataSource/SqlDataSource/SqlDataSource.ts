@@ -265,10 +265,6 @@ export class SqlDataSource extends DataSource {
         return response;
     }
 
-    async getRows() {
-        return null;
-    }
-
     getTable(): Table {
         const tableName = this.getAttr('table');
         if (!tableName) throw new Error(`${this.getFullName()}: no table name`);

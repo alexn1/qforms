@@ -235,7 +235,7 @@ export class DataSource extends Model {
         return response;
     }
 
-    async getRows() {
+    private async getRows(): Promise<any[]> {
         // console.log('DataSource.getRows');
         /*const jsonFilePath = this.getJsonFilePath();
         const exists = await Helper.exists(jsonFilePath);
