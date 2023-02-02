@@ -75,7 +75,10 @@ export class ApplicationController extends ModelController {
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), { ctrl: this });
+        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {
+            ctrl: this,
+            key: this.getModel().getName(),
+        });
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }

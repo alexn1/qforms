@@ -36230,7 +36230,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent(rootElement, this.getViewClass(), { ctrl: this });
+        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent(rootElement, this.getViewClass(), {
+            ctrl: this,
+            key: this.getModel().getName(),
+        });
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
