@@ -37360,7 +37360,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         applicationController.init();
         this.items = [applicationController];
         // view
-        this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(document.querySelector('.editor__root'), _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView, { ctrl: this });
+        this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(document.querySelector('.editor__root'), _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView, { ctrl: this, key: 'editor' });
     }
     deinit() { }
     fillPropertyGrid(ctrl) {

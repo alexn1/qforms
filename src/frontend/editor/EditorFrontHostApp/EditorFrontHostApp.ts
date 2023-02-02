@@ -54,7 +54,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.view = Helper.createReactComponent(
             document.querySelector('.editor__root'),
             EditorFrontHostAppView,
-            { ctrl: this },
+            { ctrl: this, key: 'editor' },
         );
     }
 
