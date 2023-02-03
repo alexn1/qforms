@@ -2,8 +2,8 @@
     "@class": "Page",
     "@attributes": {
         "formatVersion": "0.1",
-        "name": "Page1",
-        "caption": "Page1",
+        "name": "Page2",
+        "caption": "Page2",
         "cssBlock": "",
         "viewClass": "",
         "ctrlClass": "",
@@ -13,7 +13,7 @@
     "actions": [],
     "forms": [
         {
-            "@class": "TableForm",
+            "@class": "RowForm",
             "@attributes": {
                 "name": "Form1",
                 "caption": "Form1",
@@ -22,35 +22,11 @@
                 "viewClass": "",
                 "ctrlClass": "",
                 "modelClass": "",
-                "editMethod": "form",
-                "itemEditPage": "Page2",
-                "itemCreatePage": "",
-                "newRowMode": "disabled",
-                "deleteRowMode": "disabled",
+                "newMode": "",
+                "backOnly": "false",
                 "refreshButton": "false"
             },
-            "dataSources": [
-                {
-                    "@class": "NoSqlDataSource",
-                    "@attributes": {
-                        "name": "default",
-                        "database": "default",
-                        "table": "",
-                        "modelClass": "",
-                        "selectQuery": "db.collection('MyCollection').find(\n  {firstName: 'Alexander'}\n)",
-                        "countQuery": "db.collection('MyCollection').aggregate([{$count: 'count'}])",
-                        "limit": "10"
-                    },
-                    "keyColumns": [
-                        {
-                            "@class": "KeyColumn",
-                            "@attributes": {
-                                "name": "_id"
-                            }
-                        }
-                    ]
-                }
-            ],
+            "dataSources": [],
             "actions": [],
             "fields": [
                 {
@@ -80,9 +56,9 @@
                 {
                     "@class": "TextBoxField",
                     "@attributes": {
-                        "name": "firstName",
-                        "caption": "firstName",
-                        "column": "firstName",
+                        "name": "lastName",
+                        "caption": "lastName",
+                        "column": "lastName",
                         "defaultValue": "",
                         "value": "",
                         "param": "false",
@@ -104,9 +80,9 @@
                 {
                     "@class": "TextBoxField",
                     "@attributes": {
-                        "name": "lastName",
-                        "caption": "lastName",
-                        "column": "lastName",
+                        "name": "secondName",
+                        "caption": "secondName",
+                        "column": "secondName",
                         "defaultValue": "",
                         "value": "",
                         "param": "false",

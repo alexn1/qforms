@@ -111,6 +111,15 @@
                 "menu": "Pages",
                 "startup": "true"
             }
+        },
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Page2",
+                "fileName": "pages/Page2/Page2.json",
+                "menu": "",
+                "startup": "false"
+            }
         }
     ]
 }
