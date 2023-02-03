@@ -1288,6 +1288,8 @@ div.CheckBox:not(.disabled):hover {
   font-size: small;
   display: grid;
   grid-template-columns: 350px 1fr;
+  --accent-color: #398bce;
+  --accent-color-disabled: #b4d3ec;
 }
 .EditorFrontHostAppView__sidebar {
   display: grid;

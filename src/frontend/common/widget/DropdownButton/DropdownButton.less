@@ -1,57 +1,53 @@
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DropdownButton {
-  position: relative;
-  display: inline-block;
-  &.show > .DropdownButton__dropdown {
-    visibility: visible;
-  }
+    position: relative;
+    display: inline-block;
+    &.show > .DropdownButton__dropdown {
+        visibility: visible;
+    }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DropdownButton__button {
-  &:disabled {
-    svg {
-      fill: #aaa;
+    &:disabled {
+        svg {
+            fill: #aaa;
+        }
     }
-  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DropdownButton__dropdown {
-  position: absolute;
-  background-color: white;
-  visibility: hidden;
-  z-index: 1;
-  cursor: pointer;
-  box-shadow: 0 0 5px rgba(0,0,0,0.3);
-  padding: 5px 0;
-  list-style: none;
-  font-size: 12px;
-  margin: 0;
-  white-space  : nowrap;
+    position: absolute;
+    background-color: white;
+    visibility: hidden;
+    z-index: 1;
+    cursor: pointer;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+    padding: 5px 0;
+    list-style: none;
+    font-size: 12px;
+    margin: 0;
+    white-space: nowrap;
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .DropdownButton__item {
-  display: flex;
-  align-items: center;
-  grid-gap: 5px;
-  padding: 10px;
-  color: #333;
-  svg {
-    fill: #333;
-  }
-  &:hover {
-    background-color: var(--accent-color);
-    color: white;
+    display: flex;
+    align-items: center;
+    grid-gap: 5px;
+    padding: 10px;
+    color: #333;
     svg {
-      fill: white;
+        fill: #333;
     }
-  }
-  &.disabled {
-    color: #aaa;
-    svg {
-      fill: #aaa;
+    &:hover {
+        background-color: var(--accent-color);
+        color: white;
+        svg {
+            fill: white;
+        }
     }
-  }
+    &.disabled {
+        color: #aaa;
+        svg {
+            fill: #aaa;
+        }
+    }
 }
