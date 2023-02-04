@@ -26,7 +26,28 @@
                 "backOnly": "false",
                 "refreshButton": "false"
             },
-            "dataSources": [],
+            "dataSources": [
+                {
+                    "@class": "NoSqlDataSource",
+                    "@attributes": {
+                        "name": "default",
+                        "database": "default",
+                        "table": "",
+                        "modelClass": "",
+                        "selectQuery": "db.collection('MyCollection').findOne()",
+                        "countQuery": "",
+                        "limit": ""
+                    },
+                    "keyColumns": [
+                        {
+                            "@class": "KeyColumn",
+                            "@attributes": {
+                                "name": "_id"
+                            }
+                        }
+                    ]
+                }
+            ],
             "actions": [],
             "fields": [
                 {
@@ -56,9 +77,9 @@
                 {
                     "@class": "TextBoxField",
                     "@attributes": {
-                        "name": "lastName",
-                        "caption": "lastName",
-                        "column": "lastName",
+                        "name": "firstName",
+                        "caption": "firstName",
+                        "column": "firstName",
                         "defaultValue": "",
                         "value": "",
                         "param": "false",
@@ -80,9 +101,9 @@
                 {
                     "@class": "TextBoxField",
                     "@attributes": {
-                        "name": "secondName",
-                        "caption": "secondName",
-                        "column": "secondName",
+                        "name": "lastName",
+                        "caption": "lastName",
+                        "column": "lastName",
                         "defaultValue": "",
                         "value": "",
                         "param": "false",

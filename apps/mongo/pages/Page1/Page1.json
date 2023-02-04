@@ -37,7 +37,7 @@
                         "database": "default",
                         "table": "",
                         "modelClass": "",
-                        "selectQuery": "db.collection('MyCollection').find(\n  {firstName: 'Alexander'}\n)",
+                        "selectQuery": "db.collection('MyCollection').find(\n  /*{firstName: 'Alexander'}*/\n)",
                         "countQuery": "db.collection('MyCollection').aggregate([{$count: 'count'}])",
                         "limit": "10"
                     },
