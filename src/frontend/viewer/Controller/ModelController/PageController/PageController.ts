@@ -10,6 +10,7 @@ import { Page } from '../../../Model/Page/Page';
 export class PageController extends ModelController {
     id: any;
     forms: any[];
+
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model, id);
@@ -98,7 +99,8 @@ export class PageController extends ModelController {
             ...DataSource.keyToParams(key),
         });
     }
-    async close() {
+
+    async close(): Promise<void> {
         // console.log('PageController.close', this.model.getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
@@ -117,14 +119,16 @@ export class PageController extends ModelController {
                 .onClose();
         }
     }
-    validate() {
+
+    validate(): void {
         for (const form of this.forms) {
             if (form instanceof RowFormController) {
                 form.validate();
             }
         }
     }
-    isValid() {
+
+    isValid(): boolean {
         // console.log('PageController.isValid', this.model.getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
@@ -133,21 +137,23 @@ export class PageController extends ModelController {
         }
         return true;
     }
-    async onFormChange(e) {
+
+    async onFormChange(e): Promise<void> {
         // console.log('PageController.onFormChange', this.model.getFullName());
         this.rerender();
     }
-    onFormDiscard(formController) {
+
+    onFormDiscard(formController: FormController): void {
         console.log('PageController.onFormDiscard', this.model.getFullName());
         this.rerender();
     }
 
-    onFormUpdate(e) {
+    onFormUpdate(e): void {
         console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
         this.rerender();
     }
 
-    onFormInsert(e) {
+    onFormInsert(e): void {
         console.log('PageController.onFormInsert:', this.model.getFullName());
         // console.log('hasNew:', this.model.hasNew());
         for (const form of this.forms) {
@@ -169,7 +175,7 @@ export class PageController extends ModelController {
         return await this.getApp().openPage(options);
     }
 
-    isChanged() {
+    isChanged(): boolean {
         // console.log('PageController.isChanged', this.model.getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
@@ -179,13 +185,13 @@ export class PageController extends ModelController {
         }
         return false;
     }
-    getApp() {
+    getApp(): ApplicationController {
         return this.parent;
     }
     getViewClass() {
         return super.getViewClass() || PageView;
     }
-    static createLink(params = null) {
+    static createLink(params = null): string {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
         if (params) {
@@ -200,12 +206,15 @@ export class PageController extends ModelController {
         }
         return window.location.pathname;
     }
-    getForm(name) {
+
+    getForm(name): FormController {
         return this.forms.find(form => form.model.getName() === name);
     }
+
     async onActionClick(name): Promise<any> {
         console.log('PageController.onActionClick', name);
     }
+
     onKeyDown = async e => {
         // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
@@ -214,7 +223,8 @@ export class PageController extends ModelController {
             }
         }
     };
-    getTitle() {
+
+    getTitle(): string {
         const model = this.getModel();
         const key = model.getKey();
         let keyPart;
@@ -232,6 +242,7 @@ export class PageController extends ModelController {
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }
+
     getSelectedRowKey() {
         for (const form of this.forms) {
             const selectedRowKey = form.getSelectedRowKey();
@@ -239,14 +250,17 @@ export class PageController extends ModelController {
         }
         return null;
     }
+
     onSelectClick = async e => {
         console.log('PageController.onSelectClick');
         await this.selectRow(this.getSelectedRowKey());
     };
+
     onResetClick = async e => {
         console.log('PageController.onResetClick');
         await this.selectRow(null);
     };
+
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
@@ -254,15 +268,19 @@ export class PageController extends ModelController {
             .getOptions()
             .onSelect(key);
     }
+
     invalidate() {
         this.forms.forEach(form => form.invalidate());
     }
+
     getId() {
         return this.id;
     }
+
     isModal() {
         return this.getModel().isModal();
     }
+
     isAutoFocus() {
         for (const form of this.forms) {
             if (form.isAutoFocus()) {

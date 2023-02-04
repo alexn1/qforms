@@ -1,4 +1,5 @@
 import { ModelController } from '../ModelController';
+import { FormController } from '../FormController/FormController';
 import { ApplicationController } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
 export declare class PageController extends ModelController {
@@ -16,15 +17,15 @@ export declare class PageController extends ModelController {
     validate(): void;
     isValid(): boolean;
     onFormChange(e: any): Promise<void>;
-    onFormDiscard(formController: any): void;
+    onFormDiscard(formController: FormController): void;
     onFormUpdate(e: any): void;
     onFormInsert(e: any): void;
-    openPage(options: any): Promise<any>;
+    openPage(options: any): Promise<PageController>;
     isChanged(): boolean;
-    getApp(): any;
+    getApp(): ApplicationController;
     getViewClass(): any;
     static createLink(params?: any): string;
-    getForm(name: any): any;
+    getForm(name: any): FormController;
     onActionClick(name: any): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;
