@@ -93,6 +93,7 @@ export class PageController extends ModelController {
         // console.log('link', link);
         window.open(link, '_blank');
     };
+
     createOpenInNewLink(name, key) {
         return PageController.createLink({
             page: name,
