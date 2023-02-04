@@ -113,7 +113,7 @@ export class SqlDataSource extends DataSource {
         return query;
     }
 
-    getSelectParams(context) {
+    getSelectParams(context: Context) {
         return context.getParams();
     }
 
@@ -151,7 +151,7 @@ export class SqlDataSource extends DataSource {
                 throw err;
             }
         }
-        
+
         return [rows, count];
     }
 

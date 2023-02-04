@@ -26,15 +26,15 @@ class MongoDbDatabase extends Database_1.Database {
         await client.close();
         context.connections[this.getName()] = null;
     }
-    async query(context, query) {
-        console.log('MongoDbDatabase.query', query);
+    async query(context, query, params) {
+        console.log('MongoDbDatabase.query', query, params);
         const client = this.getConnection(context);
         const { database } = this.getConfig();
         const db = client.db(database);
         // eval query as function
-        const fn = eval(`(db) => (${query})`);
+        const fn = eval(`(db, params, ObjectId) => (${query})`);
         // exec query
-        const result = await fn(db);
+        const result = await fn(db, params, mongodb_1.ObjectId);
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             return await result.toArray();

@@ -10,4 +10,5 @@ export declare class NoSqlDataSource extends DataSource {
     getDatabase(): MongoDbDatabase;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;
+    getSelectParams(context: Context): any;
 }

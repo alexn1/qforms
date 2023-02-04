@@ -34,7 +34,7 @@
                         "database": "default",
                         "table": "",
                         "modelClass": "",
-                        "selectQuery": "db.collection('MyCollection').findOne()",
+                        "selectQuery": "db.collection('MyCollection').findOne({_id: new ObjectId(params.key)})",
                         "countQuery": "",
                         "limit": ""
                     },

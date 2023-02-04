@@ -53,13 +53,13 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             context.params.limit = limit;
         }
         // exec selectQuery
-        const rows = await this.getDatabase().query(context, this.getSelectQuery());
+        const rows = await this.getDatabase().query(context, this.getSelectQuery(), this.getSelectParams(context));
         this.prepareRows(context, rows);
         // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                const countResult = await this.getDatabase().query(context, this.getCountQuery(context));
+                const countResult = await this.getDatabase().query(context, this.getCountQuery(context), this.getSelectParams(context));
                 // console.log('countResult:', countResult);
                 const [obj] = countResult;
                 // console.log('obj:', obj);
@@ -88,6 +88,9 @@ class NoSqlDataSource extends DataSource_1.DataSource {
         if (!query)
             throw new Error(`${this.getFullName()}: no countQuery`);
         return query;
+    }
+    getSelectParams(context) {
+        return context.getParams();
     }
 }
 exports.NoSqlDataSource = NoSqlDataSource;

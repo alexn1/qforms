@@ -64,7 +64,11 @@ export class NoSqlDataSource extends DataSource {
         }
 
         // exec selectQuery
-        const rows = await this.getDatabase().query(context, this.getSelectQuery());
+        const rows = await this.getDatabase().query(
+            context,
+            this.getSelectQuery(),
+            this.getSelectParams(context),
+        );
         this.prepareRows(context, rows);
 
         // count
@@ -74,6 +78,7 @@ export class NoSqlDataSource extends DataSource {
                 const countResult = await this.getDatabase().query(
                     context,
                     this.getCountQuery(context),
+                    this.getSelectParams(context),
                 );
                 // console.log('countResult:', countResult);
                 const [obj] = countResult;
@@ -105,5 +110,9 @@ export class NoSqlDataSource extends DataSource {
         let query = this.getAttr('countQuery');
         if (!query) throw new Error(`${this.getFullName()}: no countQuery`);
         return query;
+    }
+
+    getSelectParams(context: Context) {
+        return context.getParams();
     }
 }

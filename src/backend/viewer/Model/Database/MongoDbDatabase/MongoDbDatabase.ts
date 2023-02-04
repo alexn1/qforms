@@ -1,4 +1,4 @@
-import { MongoClient, FindCursor, AggregationCursor } from 'mongodb';
+import { MongoClient, FindCursor, AggregationCursor, ObjectId } from 'mongodb';
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
 
@@ -26,17 +26,17 @@ export class MongoDbDatabase extends Database {
         context.connections[this.getName()] = null;
     }
 
-    async query(context: Context, query: string): Promise<any[]> {
-        console.log('MongoDbDatabase.query', query);
+    async query(context: Context, query: string, params: any): Promise<any[]> {
+        console.log('MongoDbDatabase.query', query, params);
         const client = this.getConnection(context) as MongoClient;
         const { database } = this.getConfig();
         const db = client.db(database);
 
         // eval query as function
-        const fn = eval(`(db) => (${query})`);
+        const fn = eval(`(db, params, ObjectId) => (${query})`);
 
         // exec query
-        const result = await fn(db);
+        const result = await fn(db, params, ObjectId);
 
         // for find() and aggregate()
         if (result instanceof FindCursor || result instanceof AggregationCursor) {

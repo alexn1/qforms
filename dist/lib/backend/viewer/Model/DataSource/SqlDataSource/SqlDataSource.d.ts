@@ -11,7 +11,7 @@ export declare class SqlDataSource extends DataSource {
     getSingleQuery(context: Context): any;
     getMultipleQuery(context: Context): any;
     templateQuery(context: Context, _query: string): string;
-    getSelectParams(context: any): any;
+    getSelectParams(context: Context): any;
     select(context: Context): Promise<[any[], number | null]>;
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
