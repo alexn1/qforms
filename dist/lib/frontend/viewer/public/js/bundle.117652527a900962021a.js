@@ -38981,8 +38981,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     constructor(model, parent) {
         super(model, parent);
-        console.log(`${this.constructor.name}.constructor`, model);
         this.fields = {};
+        console.log(`${this.constructor.name}.constructor`, model);
+        // this.fields = {};
     }
     init() {
         for (const field of this.model.fields) {
@@ -39988,6 +39989,7 @@ __webpack_require__.r(__webpack_exports__);
 class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     constructor(model, parent, id) {
         super(model, parent);
+        this.forms = [];
         this.onSaveAndCloseClick = async () => {
             console.log('PageController.onSaveAndCloseClick');
             this.validate();
@@ -40043,10 +40045,10 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             await this.selectRow(null);
         };
         console.log(`${this.constructor.name}.constructor`, model, id);
-        if (!id)
+        if (!id) {
             throw new Error('no id');
+        }
         this.id = id;
-        this.forms = [];
     }
     static create(model, parent, id, options = null) {
         // console.log('PageController.create', model.getName());

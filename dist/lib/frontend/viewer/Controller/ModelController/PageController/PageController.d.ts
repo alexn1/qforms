@@ -5,7 +5,7 @@ import { ApplicationController } from '../ApplicationController/ApplicationContr
 import { Page } from '../../../Model/Page/Page';
 export declare class PageController extends ModelController {
     id: string;
-    forms: any[];
+    forms: FormController[];
     constructor(model: Page, parent: ApplicationController, id: string);
     static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
     init(): void;

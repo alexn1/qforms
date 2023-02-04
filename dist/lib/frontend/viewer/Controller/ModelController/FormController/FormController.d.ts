@@ -1,8 +1,11 @@
 import { ModelController } from '../ModelController';
+import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 export declare class FormController extends ModelController {
-    fields: any;
+    fields: {
+        [k: string]: FieldController;
+    };
     state: any;
     static create(model: Form, parent: PageController): FormController;
     constructor(model: Form, parent: PageController);
@@ -16,7 +19,7 @@ export declare class FormController extends ModelController {
     getUpdated(): any;
     invalidate(): void;
     onActionClick(name: any, row: any): Promise<any>;
-    getField(name: any): any;
+    getField(name: any): FieldController;
     getApp(): any;
     getSelectedRowKey(): any;
     isAutoFocus(): boolean;

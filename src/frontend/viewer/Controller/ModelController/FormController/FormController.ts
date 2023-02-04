@@ -5,7 +5,7 @@ import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 
 export class FormController extends ModelController {
-    fields: any;
+    fields: {[k: string]: FieldController} = {};
     state: any;
     static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());
@@ -27,7 +27,7 @@ export class FormController extends ModelController {
     constructor(model: Form, parent: PageController) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model);
-        this.fields = {};
+        // this.fields = {};
     }
     init() {
         for (const field of this.model.fields) {

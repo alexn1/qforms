@@ -9,14 +9,15 @@ import { Page } from '../../../Model/Page/Page';
 
 export class PageController extends ModelController {
     id: string;
-    forms: any[];
+    forms: FormController[] = [];
 
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model, id);
-        if (!id) throw new Error('no id');
+        if (!id) {
+            throw new Error('no id');
+        }
         this.id = id;
-        this.forms = [];
     }
 
     static create(
