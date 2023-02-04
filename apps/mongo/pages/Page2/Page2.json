@@ -32,7 +32,7 @@
                     "@attributes": {
                         "name": "default",
                         "database": "default",
-                        "table": "",
+                        "table": "MyCollection",
                         "modelClass": "",
                         "selectQuery": "db.collection('MyCollection').findOne({_id: new ObjectId(params.key)})",
                         "countQuery": "",
