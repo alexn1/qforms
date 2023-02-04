@@ -1,9 +1,10 @@
 import { ModelController } from '../ModelController';
 import { FormController } from '../FormController/FormController';
+import { PageView } from './PageView';
 import { ApplicationController } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
 export declare class PageController extends ModelController {
-    id: any;
+    id: string;
     forms: any[];
     constructor(model: Page, parent: ApplicationController, id: string);
     static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
@@ -23,7 +24,7 @@ export declare class PageController extends ModelController {
     openPage(options: any): Promise<PageController>;
     isChanged(): boolean;
     getApp(): ApplicationController;
-    getViewClass(): any;
+    getViewClass(): PageView<PageController>;
     static createLink(params?: any): string;
     getForm(name: any): FormController;
     onActionClick(name: any): Promise<any>;
@@ -34,7 +35,7 @@ export declare class PageController extends ModelController {
     onResetClick: (e: any) => Promise<void>;
     selectRow(key: any): Promise<void>;
     invalidate(): void;
-    getId(): any;
-    isModal(): any;
+    getId(): string;
+    isModal(): boolean;
     isAutoFocus(): boolean;
 }

@@ -8,7 +8,7 @@ import { ApplicationController } from '../ApplicationController/ApplicationContr
 import { Page } from '../../../Model/Page/Page';
 
 export class PageController extends ModelController {
-    id: any;
+    id: string;
     forms: any[];
 
     constructor(model: Page, parent: ApplicationController, id: string) {
@@ -189,7 +189,7 @@ export class PageController extends ModelController {
     getApp(): ApplicationController {
         return this.parent;
     }
-    getViewClass() {
+    getViewClass(): PageView<PageController> {
         return super.getViewClass() || PageView;
     }
     static createLink(params = null): string {
@@ -274,15 +274,15 @@ export class PageController extends ModelController {
         this.forms.forEach(form => form.invalidate());
     }
 
-    getId() {
+    getId(): string {
         return this.id;
     }
 
-    isModal() {
+    isModal(): boolean {
         return this.getModel().isModal();
     }
 
-    isAutoFocus() {
+    isAutoFocus(): boolean {
         for (const form of this.forms) {
             if (form.isAutoFocus()) {
                 return true;
