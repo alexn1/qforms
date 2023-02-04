@@ -5,25 +5,17 @@ import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
 
 export class DataSource extends Model {
-    rows: any;
-    rowsByKey: any;
-    news: any[];
-    changes: any;
-
-    frame: number;
+    rows: any = null;
+    rowsByKey: any = null;
+    news: any[] = [];
+    changes: any = new Map();
+    frame: number = 1;
     count: number;
-    lastFrame: number;
+    lastFrame: number = 1;
 
     constructor(data, parent) {
         super(data, parent);
-        this.rows = null;
-        this.rowsByKey = null; // for row search by key
-        this.news = []; // new rows
-        this.changes = new Map();
-
-        this.frame = 1;
         this.count = data.count !== undefined ? data.count : null;
-        this.lastFrame = 1;
     }
 
     init() {

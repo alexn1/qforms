@@ -40727,6 +40727,12 @@ __webpack_require__.r(__webpack_exports__);
 class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     constructor(data, parent) {
         super(data, parent);
+        this.rows = null;
+        this.rowsByKey = null;
+        this.news = [];
+        this.changes = new Map();
+        this.frame = 1;
+        this.lastFrame = 1;
         this.onTableInsert = async (e) => {
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
@@ -40802,13 +40808,13 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.onTableRefresh = async (e) => {
             throw new Error('DataSource.onTableRefresh: not implemented');
         };
-        this.rows = null;
-        this.rowsByKey = null; // for row search by key
-        this.news = []; // new rows
-        this.changes = new Map();
-        this.frame = 1;
+        // this.rows = null;
+        // this.rowsByKey = null; // for row search by key
+        // this.news = []; // new rows
+        // this.changes = new Map();
+        // this.frame = 1;
+        // this.lastFrame = 1;
         this.count = data.count !== undefined ? data.count : null;
-        this.lastFrame = 1;
     }
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
