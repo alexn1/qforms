@@ -249,27 +249,6 @@ export class SqlDataSource extends DataSource {
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
-
-    /*async selectSingle(params = {}) {
-        console.log('SqlDataSource.selectSingle', this.getFullName(), params);
-        const page = this.getPage();
-        const form = this.getForm();
-        const data = await this.getApp().request({
-            action: 'selectSingle',
-            page  : page ? page.getName()           : null,
-            form  : form ? form.getName()           : null,
-            ds    : this.getName(),
-            params: {
-                ...this.getPageParams(),
-                ...params,
-            }
-        });
-        if (!data.row) throw new Error('selectSingle must return row');
-        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
-        return data;
-    }*/
-
-
 }
 
 // @ts-ignore
