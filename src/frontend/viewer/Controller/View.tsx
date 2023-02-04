@@ -1,7 +1,6 @@
 import { ReactComponent } from '../../common';
-// import { Controller } from './Controller';
 
-export class View extends ReactComponent {
+export abstract class View extends ReactComponent {
     constructor(props) {
         super(props);
         if (!props.ctrl) throw new Error(`${this.constructor.name}: no ctrl`);

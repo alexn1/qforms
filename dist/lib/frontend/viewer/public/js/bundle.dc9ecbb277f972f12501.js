@@ -35844,12 +35844,15 @@ __webpack_require__.r(__webpack_exports__);
 
 class Controller extends _EventEmitter__WEBPACK_IMPORTED_MODULE_1__.EventEmitter {
     constructor() {
-        super();
+        super(...arguments);
+        this.view = null;
+        /* constructor() {
+            super();
+        } */
         this.onViewCreate = view => {
             // console.log('Controller.onViewCreate');
             this.view = view;
         };
-        this.view = null;
     }
     async rerender() {
         if (this.view) {
@@ -40445,7 +40448,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
-// import { Controller } from './Controller';
 class View extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
     constructor(props) {
         super(props);
