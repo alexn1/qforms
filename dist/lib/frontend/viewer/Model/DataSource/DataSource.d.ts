@@ -5,6 +5,9 @@ export declare class DataSource extends Model {
     rowsByKey: any;
     news: any[];
     changes: any;
+    frame: number;
+    count: number;
+    lastFrame: number;
     constructor(data: any, parent: any);
     init(): void;
     deinit(): void;
@@ -62,4 +65,11 @@ export declare class DataSource extends Model {
     onTableRefresh: (e: any) => Promise<any>;
     isSurrogate(): any;
     moveRow(row: any, offset: any): void;
+    getLimit(): number;
+    getCount(): number;
+    getFrame(): number;
+    getLastFrame(): number;
+    setFrame(frame: any): void;
+    getFramesCount(): number;
+    hasMore(): boolean;
 }

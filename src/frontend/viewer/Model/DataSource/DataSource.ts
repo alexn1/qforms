@@ -10,12 +10,20 @@ export class DataSource extends Model {
     news: any[];
     changes: any;
 
+    frame: number;
+    count: number;
+    lastFrame: number;
+
     constructor(data, parent) {
         super(data, parent);
         this.rows = null;
         this.rowsByKey = null; // for row search by key
         this.news = []; // new rows
         this.changes = new Map();
+
+        this.frame = 1;
+        this.count = data.count !== undefined ? data.count : null;
+        this.lastFrame = 1;
     }
 
     init() {
@@ -530,6 +538,41 @@ export class DataSource extends Model {
             this.parent.onDataSourceRefresh(event);
         }
         this.emit('refresh', event);
+    }
+
+    getLimit() {
+        if (this.getAttr('limit')) {
+            return parseInt(this.getAttr('limit'));
+        }
+        return null;
+    }
+
+    getCount() {
+        if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
+        return this.count;
+    }
+
+    getFrame() {
+        return this.frame;
+    }
+
+    getLastFrame() {
+        return this.lastFrame;
+    }
+
+    setFrame(frame) {
+        this.frame = frame;
+    }
+
+    getFramesCount() {
+        if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
+        if (this.count === 0) return 1;
+        if (this.getLimit()) return Math.ceil(this.count / this.getLimit());
+        return 1;
+    }
+
+    hasMore() {
+        return this.lastFrame < this.getFramesCount();
     }
 }
 

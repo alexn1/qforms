@@ -40806,6 +40806,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.rowsByKey = null; // for row search by key
         this.news = []; // new rows
         this.changes = new Map();
+        this.frame = 1;
+        this.count = data.count !== undefined ? data.count : null;
+        this.lastFrame = 1;
     }
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
@@ -41212,6 +41215,38 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
         this.emit('refresh', event);
     }
+    getLimit() {
+        if (this.getAttr('limit')) {
+            return parseInt(this.getAttr('limit'));
+        }
+        return null;
+    }
+    getCount() {
+        if (this.count === null)
+            throw new Error(`${this.getFullName()}: no count info`);
+        return this.count;
+    }
+    getFrame() {
+        return this.frame;
+    }
+    getLastFrame() {
+        return this.lastFrame;
+    }
+    setFrame(frame) {
+        this.frame = frame;
+    }
+    getFramesCount() {
+        if (this.count === null)
+            throw new Error(`${this.getFullName()}: no count info`);
+        if (this.count === 0)
+            return 1;
+        if (this.getLimit())
+            return Math.ceil(this.count / this.getLimit());
+        return 1;
+    }
+    hasMore() {
+        return this.lastFrame < this.getFramesCount();
+    }
 }
 // @ts-ignore
 window.DataSource = DataSource;
@@ -41252,8 +41287,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 
 class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        /* constructor(data, parent) {
+            super(data, parent);
+        } */
+        super(...arguments);
         this.onTableUpdate = async (e) => {
             console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
             if (this.deinited)
@@ -41315,9 +41353,24 @@ class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource 
             }
             this.emit('refresh', e);
         };
-        this.frame = 1;
-        this.count = data.count !== undefined ? data.count : null;
-        this.lastFrame = 1;
+        /*async selectSingle(params = {}) {
+            console.log('SqlDataSource.selectSingle', this.getFullName(), params);
+            const page = this.getPage();
+            const form = this.getForm();
+            const data = await this.getApp().request({
+                action: 'selectSingle',
+                page  : page ? page.getName()           : null,
+                form  : form ? form.getName()           : null,
+                ds    : this.getName(),
+                params: {
+                    ...this.getPageParams(),
+                    ...params,
+                }
+            });
+            if (!data.row) throw new Error('selectSingle must return row');
+            // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+            return data;
+        }*/
     }
     /*init() {
         super.init();
@@ -41478,55 +41531,6 @@ class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource 
             throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
-    }
-    /*async selectSingle(params = {}) {
-        console.log('SqlDataSource.selectSingle', this.getFullName(), params);
-        const page = this.getPage();
-        const form = this.getForm();
-        const data = await this.getApp().request({
-            action: 'selectSingle',
-            page  : page ? page.getName()           : null,
-            form  : form ? form.getName()           : null,
-            ds    : this.getName(),
-            params: {
-                ...this.getPageParams(),
-                ...params,
-            }
-        });
-        if (!data.row) throw new Error('selectSingle must return row');
-        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
-        return data;
-    }*/
-    getFramesCount() {
-        if (this.count === null)
-            throw new Error(`${this.getFullName()}: no count info`);
-        if (this.count === 0)
-            return 1;
-        if (this.getLimit())
-            return Math.ceil(this.count / this.getLimit());
-        return 1;
-    }
-    getLimit() {
-        if (this.getAttr('limit'))
-            return parseInt(this.getAttr('limit'));
-        return null;
-    }
-    getCount() {
-        if (this.count === null)
-            throw new Error(`${this.getFullName()}: no count info`);
-        return this.count;
-    }
-    getFrame() {
-        return this.frame;
-    }
-    getLastFrame() {
-        return this.lastFrame;
-    }
-    setFrame(frame) {
-        this.frame = frame;
-    }
-    hasMore() {
-        return this.lastFrame < this.getFramesCount();
     }
 }
 // @ts-ignore
@@ -42361,7 +42365,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.fields.find(field => field.getName() === name);
     }
     hasDefaultSqlDataSource() {
-        return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
+        return ['SqlDataSource', 'NoSqlDataSource'].includes(this.getDefaultDataSource().getClassName());
     }
     decodeRow(row) {
         const values = {};

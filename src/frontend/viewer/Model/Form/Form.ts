@@ -120,7 +120,7 @@ export class Form extends Model {
         return this.fields.find(field => field.getName() === name);
     }
     hasDefaultSqlDataSource() {
-        return this.getDefaultDataSource().getClassName() === 'SqlDataSource';
+        return ['SqlDataSource', 'NoSqlDataSource'].includes(this.getDefaultDataSource().getClassName());
     }
     decodeRow(row) {
         const values = {};
