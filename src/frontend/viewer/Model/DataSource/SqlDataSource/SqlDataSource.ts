@@ -249,6 +249,10 @@ export class SqlDataSource extends DataSource {
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
+
+    isPersistent() {
+        return true;
+    }
 }
 
 // @ts-ignore

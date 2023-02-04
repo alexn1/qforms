@@ -40445,6 +40445,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
+// import { Controller } from './Controller';
 class View extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
     constructor(props) {
         super(props);
@@ -40808,12 +40809,6 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.onTableRefresh = async (e) => {
             throw new Error('DataSource.onTableRefresh: not implemented');
         };
-        // this.rows = null;
-        // this.rowsByKey = null; // for row search by key
-        // this.news = []; // new rows
-        // this.changes = new Map();
-        // this.frame = 1;
-        // this.lastFrame = 1;
         this.count = data.count !== undefined ? data.count : null;
     }
     init() {
@@ -41253,6 +41248,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     hasMore() {
         return this.lastFrame < this.getFramesCount();
     }
+    isPersistent() {
+        return false;
+    }
 }
 // @ts-ignore
 window.DataSource = DataSource;
@@ -41273,6 +41271,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 
 class NoSqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
+    isPersistent() {
+        return true;
+    }
 }
 // @ts-ignore
 window.NoSqlDataSource = NoSqlDataSource;
@@ -41359,24 +41360,6 @@ class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource 
             }
             this.emit('refresh', e);
         };
-        /*async selectSingle(params = {}) {
-            console.log('SqlDataSource.selectSingle', this.getFullName(), params);
-            const page = this.getPage();
-            const form = this.getForm();
-            const data = await this.getApp().request({
-                action: 'selectSingle',
-                page  : page ? page.getName()           : null,
-                form  : form ? form.getName()           : null,
-                ds    : this.getName(),
-                params: {
-                    ...this.getPageParams(),
-                    ...params,
-                }
-            });
-            if (!data.row) throw new Error('selectSingle must return row');
-            // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
-            return data;
-        }*/
     }
     /*init() {
         super.init();
@@ -41537,6 +41520,9 @@ class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource 
             throw new Error('rows must be array');
         // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
         return data;
+    }
+    isPersistent() {
+        return true;
     }
 }
 // @ts-ignore

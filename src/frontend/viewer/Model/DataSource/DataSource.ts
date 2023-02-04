@@ -566,6 +566,10 @@ export class DataSource extends Model {
     hasMore() {
         return this.lastFrame < this.getFramesCount();
     }
+
+    isPersistent() {
+        return false;
+    }
 }
 
 // @ts-ignore

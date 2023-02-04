@@ -13,4 +13,5 @@ export declare class SqlDataSource extends DataSource {
     fill(frame: any): Promise<void>;
     more(): Promise<void>;
     select(params?: {}): Promise<any>;
+    isPersistent(): boolean;
 }

@@ -72,4 +72,5 @@ export declare class DataSource extends Model {
     setFrame(frame: any): void;
     getFramesCount(): number;
     hasMore(): boolean;
+    isPersistent(): boolean;
 }
