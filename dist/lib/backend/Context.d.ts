@@ -18,7 +18,7 @@ export declare class Context {
     getRes(): any;
     getBody(): any;
     getModule(): string;
-    getDomain(): any;
+    getDomain(): string;
     getAppDirName(): string;
     getAppFileName(): string;
     getEnv(): string;

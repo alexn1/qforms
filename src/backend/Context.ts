@@ -34,12 +34,15 @@ export class Context {
         // querytime
         this.querytime = { params: {} };
     }
+
     getRoute(): string {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
     }
+
     getVirtualPath(): string {
         return `/${this.getModule()}/${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;
     }
+
     getUser(): any {
         const route = this.getRoute();
         if (this.getReq().session.user && this.getReq().session.user[route]) {
@@ -47,6 +50,7 @@ export class Context {
         }
         return null;
     }
+
     getClientTimezoneOffset(): number {
         if (
             this.getReq().session.tzOffset !== undefined &&
@@ -56,6 +60,7 @@ export class Context {
         }
         return null;
     }
+
     getTimeOffset(): number {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
         if (clientTimezoneOffset !== null) {
@@ -63,16 +68,19 @@ export class Context {
         }
         return null;
     }
+
     getCookies(): any {
         return {
             ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}),
         };
     }
+
     getQuery(): any {
         return {
             ...(this.getReq() && this.getReq().query ? this.getReq().query : {}),
         };
     }
+
     getParams(): any {
         // console.log('Context.getParams:');
         const user = this.getUser();
@@ -86,63 +94,78 @@ export class Context {
             ...(timeOffset !== null ? { timeOffset } : {}),
         };
     }
+
     getReq(): any {
         return this.options.req;
     }
+
     getRes(): any {
         return this.options.res;
     }
+
     getBody(): any {
         return this.getReq().body;
     }
+
     getModule(): string {
         if (this.options.module) {
             return this.options.module;
         }
         return this.getReq().params.module;
     }
-    getDomain() {
+
+    getDomain(): string {
         if (this.options.domain) {
             return this.options.domain;
         }
         return this.getReq().params.domain;
     }
+
     getAppDirName(): string {
         if (this.options.appDirName) {
             return this.options.appDirName;
         }
         return this.getReq().params.appDirName;
     }
+
     getAppFileName(): string {
         if (this.options.appFileName) {
             return this.options.appFileName;
         }
         return this.getReq().params.appFileName;
     }
+
     getEnv(): string {
         if (this.options.env) {
             return this.options.env;
         }
         return this.getReq().params.env;
     }
+
     getUri(): string {
         return this.getReq().params['0'];
     }
+
     getIp(): string {
         return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
     }
+
     getHost(): string {
         return this.getReq().headers.host;
     }
+
     getProtocol(): string {
         return this.getReq().headers['x-forwarded-proto'] || 'http';
     }
+
     setVersionHeaders(platformVersion: string, appVersion: string): void {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
         this.getRes().setHeader('qforms-app-version', appVersion);
     }
+
     setParam(name: string, value): void {
         this.params[name] = value;
     }
+
     destroy(): void {}
 }

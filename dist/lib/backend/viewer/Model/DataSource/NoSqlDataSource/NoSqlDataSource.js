@@ -53,7 +53,9 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             context.params.limit = limit;
         }
         // exec selectQuery
+        const start = Date.now();
         const rows = await this.getDatabase().query(context, this.getSelectQuery(), this.getSelectParams(context));
+        console.log('query time:', Date.now() - start);
         this.prepareRows(context, rows);
         // count
         let count = null;

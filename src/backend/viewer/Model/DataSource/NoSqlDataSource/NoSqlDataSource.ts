@@ -64,11 +64,13 @@ export class NoSqlDataSource extends DataSource {
         }
 
         // exec selectQuery
+        const start = Date.now();
         const rows = await this.getDatabase().query(
             context,
             this.getSelectQuery(),
             this.getSelectParams(context),
         );
+        console.log('query time:', Date.now() - start);
         this.prepareRows(context, rows);
 
         // count
@@ -112,7 +114,7 @@ export class NoSqlDataSource extends DataSource {
         return query;
     }
 
-    getSelectParams(context: Context) {
+    getSelectParams(context: Context): any {
         return context.getParams();
     }
 }

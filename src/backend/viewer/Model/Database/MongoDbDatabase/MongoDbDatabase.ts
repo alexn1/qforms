@@ -13,7 +13,7 @@ export class MongoDbDatabase extends Database {
 
         // console.log('config', this.getConfig());
         const { host, database, user, password } = this.getConfig();
-        const client = new MongoClient(`mongodb://${user}:${password}@${host}:27017`);
+        const client = new MongoClient(`mongodb://${user}:${password}@${host}:${this.getPort()}`);
         await client.connect();
         context.connections[name] = client;
     }
@@ -45,5 +45,9 @@ export class MongoDbDatabase extends Database {
 
         // for findOne query
         return [result];
+    }
+
+    getPort(): number {
+        return 27017;
     }
 }
