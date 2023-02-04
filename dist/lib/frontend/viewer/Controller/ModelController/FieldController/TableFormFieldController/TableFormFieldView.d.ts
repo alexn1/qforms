@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldView } from '../FieldView';
-export declare class TableFormFieldView extends FieldView {
+import { TableFormFieldController } from './TableFormFieldController';
+export declare class TableFormFieldView<T extends TableFormFieldController> extends FieldView<T> {
     span: React.RefObject<any>;
     constructor(props: any);
     getSpanOffsetWidth(): any;

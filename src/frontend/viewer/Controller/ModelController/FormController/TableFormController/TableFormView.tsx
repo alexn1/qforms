@@ -11,9 +11,10 @@ import {
     RightIcon,
     Grid,
 } from '../../../../../common';
+import { TableFormController } from './TableFormController';
 import './TableFormView.less';
 
-export class TableFormView extends FormView {
+export class TableFormView<T extends TableFormController> extends FormView<T> {
     renderToolbar() {
         const ctrl = this.props.ctrl;
         const model = ctrl.model;

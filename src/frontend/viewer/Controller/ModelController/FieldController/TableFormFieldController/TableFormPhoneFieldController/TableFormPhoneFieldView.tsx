@@ -1,7 +1,10 @@
 import { TableFormFieldView } from '../TableFormFieldView';
 import { PhoneBox } from '../../../../../../common';
+import { TableFormPhoneFieldController } from './TableFormPhoneFieldController';
 
-export class TableFormPhoneFieldView extends TableFormFieldView {
+export class TableFormPhoneFieldView<
+    T extends TableFormPhoneFieldController
+> extends TableFormFieldView<T> {
     span: React.RefObject<any>;
     render() {
         const row = this.props.row;

@@ -6,6 +6,10 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
     widget2: any;
     defaultValue: number;
     state: any;
+    getHighlightedDate: any;
+    getSelectToday: any;
+    getMinDate: any;
+
     constructor(model, parent) {
         super(model, parent);
         this.widget2 = null;
@@ -13,12 +17,15 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         this.state.parseError2 = null;
         this.state.error2 = null;
     }
+
     getViewClass() {
         return super.getViewClass() || RowFormDateTimeFieldView;
     }
+
     getValueForWidget() {
         return this.getValue();
     }
+
     getValueForTime() {
         // console.log('RowFormDateTimeFieldController.getValueForTime', this.model.getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
@@ -32,6 +39,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         return null;
     }
+
     setValueFromWidget(widgetValue) {
         if (widgetValue === null) {
             this.state.parseError2 = null;
@@ -43,10 +51,12 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
         }
         this.setValue(widgetValue);
     }
+
     onView2Create = widget2 => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
     };
+
     /*_onChange(widgetValue) {
         // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
         if (widgetValue !== null) {
@@ -57,6 +67,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
             }, 0);
         }
     }*/
+
     onChange2 = (widgetValue, fireEvent = true) => {
         // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
         this.resetErrors();
@@ -93,6 +104,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController {
             this.parent.onFieldChange({ source: this });
         }
     };
+
     onBlur2 = (widgetValue, fireEvent = true) => {
         console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
         if (!this.isEditable()) return;

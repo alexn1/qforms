@@ -1,7 +1,10 @@
 import React from 'react';
 import { TableFormFieldView } from '../TableFormFieldView';
+import { TableFormComboBoxFieldController } from './TableFormComboBoxFieldController';
 
-export class TableFormComboBoxFieldView extends TableFormFieldView {
+export class TableFormComboBoxFieldView<
+    T extends TableFormComboBoxFieldController
+> extends TableFormFieldView<T> {
     span: React.RefObject<any>;
     render() {
         const row = this.props.row;

@@ -2,9 +2,12 @@ import React from 'react';
 import { RowFormFieldView } from '../RowFormFieldView';
 import { Helper, Image, Button } from '../../../../../../common';
 import { ImageDialogController } from '../../../../ModalController/ImageDialogController/ImageDialogController';
+import { RowFormFileFieldController } from './RowFormFileFieldController';
 import './RowFormFileFieldView.less';
 
-export class RowFormFileFieldView extends RowFormFieldView {
+export class RowFormFileFieldView<T extends RowFormFileFieldController> extends RowFormFieldView<
+    T
+> {
     image: React.RefObject<any>;
     div: React.RefObject<any>;
     input: React.RefObject<any>;

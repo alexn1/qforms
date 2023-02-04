@@ -1,7 +1,8 @@
 import React from 'react';
 import { View } from '../View';
 import './LoginView.less';
-export declare class LoginView extends View {
+import { LoginController } from './LoginController';
+export declare class LoginView<T extends LoginController> extends View<T> {
     errMsgRef: React.RefObject<any>;
     constructor(props: any);
     onLoginFormSubmit: (e: any) => void;

@@ -1,7 +1,7 @@
 import { Controller } from '../Controller';
 import { ModelView } from './ModelView';
 
-export class ModelController extends Controller {
+export abstract class ModelController extends Controller {
     model: any;
     parent: any;
     deinited: boolean;
@@ -39,6 +39,10 @@ export class ModelController extends Controller {
             throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
         }
         return viewClass;
+    }
+
+    isActionEnabled(name): boolean {
+        return false;
     }
 }
 

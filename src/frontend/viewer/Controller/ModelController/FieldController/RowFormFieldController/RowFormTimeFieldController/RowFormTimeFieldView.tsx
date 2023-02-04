@@ -1,7 +1,10 @@
 import { RowFormFieldView } from '../RowFormFieldView';
+import { RowFormTimeFieldController } from './RowFormTimeFieldController';
 import './RowFormTimeFieldView.less';
 
-export class RowFormTimeFieldView extends RowFormFieldView {
+export class RowFormTimeFieldView<T extends RowFormTimeFieldController> extends RowFormFieldView<
+    T
+> {
     onCloseClick = async e => {
         console.log('RowFormTimeFieldView.onCloseClick');
         /*const ctrl = this.props.ctrl;

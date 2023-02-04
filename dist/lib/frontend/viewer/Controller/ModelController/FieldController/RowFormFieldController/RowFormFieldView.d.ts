@@ -1,5 +1,6 @@
 import { FieldView } from '../FieldView';
-export declare class RowFormFieldView extends FieldView {
+import { RowFormFieldController } from './RowFormFieldController';
+export declare class RowFormFieldView<T extends RowFormFieldController> extends FieldView<T> {
     widget: any;
     constructor(props: any);
     getWidget(): any;

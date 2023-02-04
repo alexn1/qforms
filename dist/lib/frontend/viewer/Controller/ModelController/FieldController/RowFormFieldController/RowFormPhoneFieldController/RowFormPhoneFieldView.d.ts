@@ -1,7 +1,8 @@
 /// <reference types="react" />
 import { RowFormFieldView } from '../RowFormFieldView';
+import { RowFormPhoneFieldController } from './RowFormPhoneFieldController';
 import './RowFormPhoneFieldView.less';
-export declare class RowFormPhoneFieldView extends RowFormFieldView {
+export declare class RowFormPhoneFieldView<T extends RowFormPhoneFieldController> extends RowFormFieldView<T> {
     constructor(props: any);
     onClear: (e: any) => Promise<void>;
     isCloseVisible(): boolean;

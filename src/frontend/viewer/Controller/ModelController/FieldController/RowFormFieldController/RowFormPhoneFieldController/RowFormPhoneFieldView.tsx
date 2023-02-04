@@ -1,8 +1,11 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { PhoneBox, CloseIcon, PhoneIcon } from '../../../../../../common';
+import { RowFormPhoneFieldController } from './RowFormPhoneFieldController';
 import './RowFormPhoneFieldView.less';
 
-export class RowFormPhoneFieldView extends RowFormFieldView {
+export class RowFormPhoneFieldView<T extends RowFormPhoneFieldController> extends RowFormFieldView<
+    T
+> {
     constructor(props) {
         super(props);
         this.state = {

@@ -1,6 +1,9 @@
 import { TableFormFieldView } from '../TableFormFieldView';
+import { TableFormTimeFieldController } from './TableFormTimeFieldController';
 
-export class TableFormTimeFieldView extends TableFormFieldView {
+export class TableFormTimeFieldView<
+    T extends TableFormTimeFieldController
+> extends TableFormFieldView<T> {
     span: React.RefObject<any>;
     render() {
         const row = this.props.row;

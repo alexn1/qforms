@@ -1,5 +1,5 @@
 import { Controller } from '../Controller';
-export declare class ModelController extends Controller {
+export declare abstract class ModelController extends Controller {
     model: any;
     parent: any;
     deinited: boolean;
@@ -10,4 +10,5 @@ export declare class ModelController extends Controller {
     getParent(): any;
     getTitle(): any;
     getViewClass(): any;
+    isActionEnabled(name: any): boolean;
 }

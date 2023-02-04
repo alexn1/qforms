@@ -3,6 +3,9 @@ export declare class RowFormDateTimeFieldController extends RowFormFieldControll
     widget2: any;
     defaultValue: number;
     state: any;
+    getHighlightedDate: any;
+    getSelectToday: any;
+    getMinDate: any;
     constructor(model: any, parent: any);
     getViewClass(): any;
     getValueForWidget(): any;

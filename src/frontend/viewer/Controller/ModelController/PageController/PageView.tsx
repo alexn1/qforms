@@ -8,9 +8,10 @@ import {
     OpenInNewIcon,
     CloseIcon2,
 } from '../../../../common';
+import { PageController } from './PageController';
 import './PageView.less';
 
-export class PageView extends ModelView {
+export class PageView<T extends PageController> extends ModelView<T> {
     constructor(props) {
         super(props);
         this.checkParent();

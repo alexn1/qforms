@@ -1,5 +1,6 @@
 import { View } from '../View';
-export declare class ModelView extends View {
+import { ModelController } from './ModelController';
+export declare class ModelView<T extends ModelController> extends View<T> {
     renderActionIcon: any;
     getActionsForDropdownButton(): any;
     getCssBlockName(): any;

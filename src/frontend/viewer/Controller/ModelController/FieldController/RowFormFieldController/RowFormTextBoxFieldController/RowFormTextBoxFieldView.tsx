@@ -1,8 +1,11 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { TextBox, CloseIcon } from '../../../../../../common';
+import { RowFormTextBoxFieldController } from './RowFormTextBoxFieldController';
 import './RowFormTextBoxFieldView.less';
 
-export class RowFormTextBoxFieldView extends RowFormFieldView {
+export class RowFormTextBoxFieldView<
+    T extends RowFormTextBoxFieldController
+> extends RowFormFieldView<T> {
     constructor(props) {
         super(props);
         this.state = {

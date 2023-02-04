@@ -1,7 +1,8 @@
 /// <reference types="react" />
 import { View } from '../../View';
 import './ImageDialogView.less';
-export declare class ImageDialogView extends View {
+import { ImageDialogController } from './ImageDialogController';
+export declare class ImageDialogView<T extends ImageDialogController> extends View<T> {
     constructor(props: any);
     render(): JSX.Element;
     componentDidMount(): void;

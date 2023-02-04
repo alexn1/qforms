@@ -1,8 +1,12 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { CheckBoxList } from '../../../../../../common';
+import { RowFormCheckBoxListFieldController } from './RowFormCheckBoxListFieldController';
+
 import './RowFormCheckBoxListFieldView.less';
 
-export class RowFormCheckBoxListFieldView extends RowFormFieldView {
+export class RowFormCheckBoxListFieldView<
+    T extends RowFormCheckBoxListFieldController
+> extends RowFormFieldView<T> {
     getItems() {
         const ctrl = this.getCtrl();
         try {

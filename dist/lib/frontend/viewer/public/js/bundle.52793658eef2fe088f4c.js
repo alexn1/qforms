@@ -39897,6 +39897,9 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         }
         return viewClass;
     }
+    isActionEnabled(name) {
+        return false;
+    }
 }
 // @ts-ignore
 window.ModelController = ModelController;

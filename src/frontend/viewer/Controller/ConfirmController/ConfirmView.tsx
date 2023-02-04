@@ -2,8 +2,9 @@ import React from 'react';
 import { View } from '../View';
 import { CloseIcon2, Button } from '../../../common';
 import './ConfirmView.less';
+import { ConfirmController } from './ConfirmController';
 
-export class ConfirmView extends View {
+export class ConfirmView<T extends ConfirmController> extends View<T> {
     constructor(props) {
         super(props);
         this.el = React.createRef();

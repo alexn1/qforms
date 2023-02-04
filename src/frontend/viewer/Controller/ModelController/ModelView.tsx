@@ -1,7 +1,8 @@
 import { View } from '../View';
 import { Model } from '../../Model/Model';
+import { ModelController } from './ModelController';
 
-export class ModelView extends View {
+export class ModelView<T extends ModelController> extends View<T> {
     renderActionIcon: any = undefined;
     getActionsForDropdownButton() {
         return this.props.ctrl

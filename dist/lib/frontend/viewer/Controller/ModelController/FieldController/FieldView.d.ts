@@ -1,4 +1,5 @@
 import { ModelView } from '../ModelView';
-export declare class FieldView extends ModelView {
+import { FieldController } from './FieldController';
+export declare class FieldView<T extends FieldController> extends ModelView<T> {
     getStyle(row: any): any;
 }

@@ -3,8 +3,9 @@ import { ModelView } from '../ModelView';
 import { PageController } from '../PageController/PageController';
 import { Modal, Menu, Statusbar } from '../../../../common';
 import './ApplicationView.less';
+import { ApplicationController } from './ApplicationController';
 
-export class ApplicationView extends ModelView {
+export class ApplicationView<T extends ApplicationController> extends ModelView<T> {
     renderActivePage() {
         const { ctrl } = this.props;
         if (ctrl.activePage) {

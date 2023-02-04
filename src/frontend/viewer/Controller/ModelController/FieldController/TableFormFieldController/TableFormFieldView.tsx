@@ -1,7 +1,8 @@
 import React from 'react';
 import { FieldView } from '../FieldView';
+import { TableFormFieldController } from './TableFormFieldController';
 
-export class TableFormFieldView extends FieldView {
+export class TableFormFieldView<T extends TableFormFieldController> extends FieldView<T> {
     span: React.RefObject<any>;
     constructor(props) {
         super(props);

@@ -1,6 +1,7 @@
 import { ModelView } from '../ModelView';
+import { FormController } from './FormController';
 
-export class FormView extends ModelView {
+export class FormView<T extends FormController> extends ModelView<T> {
     constructor(props) {
         super(props);
         this.checkParent();

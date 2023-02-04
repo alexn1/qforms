@@ -1,9 +1,10 @@
 import { ReactNode } from 'react';
 import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
+import { RowFormController } from './RowFormController';
 import './RowFormView.less';
 
-export class RowFormView extends FormView {
+export class RowFormView<T extends RowFormController> extends FormView<T> {
     renderToolbar(): any {
         // console.log('RowFormView.renderToolbar');
         const { ctrl } = this.props;

@@ -2,8 +2,9 @@ import React from 'react';
 import { View } from '../../View';
 import { CloseIcon2 } from '../../../../common';
 import './ImageDialogView.less';
+import { ImageDialogController } from './ImageDialogController';
 
-export class ImageDialogView extends View {
+export class ImageDialogView<T extends ImageDialogController> extends View<T> {
     constructor(props) {
         super(props);
         this.el = React.createRef();
