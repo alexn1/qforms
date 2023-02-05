@@ -23,7 +23,6 @@ export class FormController extends ModelController {
     constructor(model: Form, parent: PageController) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model);
-        // this.fields = {};
     }
 
     init() {

@@ -38977,7 +38977,6 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         super(model, parent);
         this.fields = {};
         console.log(`${this.constructor.name}.constructor`, model);
-        // this.fields = {};
     }
     init() {
         for (const field of this.model.fields) {
