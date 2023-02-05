@@ -18,12 +18,6 @@ export class FormController extends ModelController {
         }
         const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
         return new GeneralClass(model, parent);
-        /*const page = model.getPage();
-        const customClassName = `${page.getName()}${model.getName()}FormController`;
-        const CustomClass = FrontHostApp.getClassByName(customClassName);
-        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
-        const Class = CustomClass ? CustomClass : GeneralClass;
-        return new Class(model, parent);*/
     }
 
     constructor(model: Form, parent: PageController) {

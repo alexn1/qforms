@@ -38972,12 +38972,6 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
         const GeneralClass = _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
         return new GeneralClass(model, parent);
-        /*const page = model.getPage();
-        const customClassName = `${page.getName()}${model.getName()}FormController`;
-        const CustomClass = FrontHostApp.getClassByName(customClassName);
-        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
-        const Class = CustomClass ? CustomClass : GeneralClass;
-        return new Class(model, parent);*/
     }
     constructor(model, parent) {
         super(model, parent);
