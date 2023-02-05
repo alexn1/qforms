@@ -42497,7 +42497,6 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
             throw new Error(`${data.class} no name`);
         super();
         this.data = data;
-        // this.data = data;
         this.parent = parent;
         this.deinited = false;
     }

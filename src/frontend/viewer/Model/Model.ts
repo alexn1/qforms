@@ -2,17 +2,12 @@ import { EventEmitter } from '../EventEmitter';
 import { FrontHostApp } from '../../common';
 
 export class Model extends EventEmitter {
-    // data: any;
-    parent: any;
-    deinited: boolean;
+    deinited: boolean = false;
     dataSources: any[];
 
-    constructor(public data, parent = null) {
+    constructor(public data, public parent = null) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
-        // this.data = data;
-        this.parent = parent;
-        this.deinited = false;
     }
 
     init() {}
