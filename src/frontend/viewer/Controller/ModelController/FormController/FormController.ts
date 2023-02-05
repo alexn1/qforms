@@ -5,7 +5,7 @@ import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 
 export class FormController extends ModelController {
-    fields: {[k: string]: FieldController} = {};
+    fields: {[name: string]: FieldController} = {};
     state: any;
     static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());
