@@ -48,5 +48,8 @@ class MongoDbDatabase extends Database_1.Database {
     getPort() {
         return 27017;
     }
+    async deinit() {
+        console.log(`MongoDbDatabase.deinit: ${this.getName()}`);
+    }
 }
 exports.MongoDbDatabase = MongoDbDatabase;

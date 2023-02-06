@@ -53,4 +53,8 @@ export class MongoDbDatabase extends Database {
     getPort(): number {
         return 27017;
     }
+
+    async deinit(): Promise<void> {
+        console.log(`MongoDbDatabase.deinit: ${this.getName()}`);
+    }
 }
