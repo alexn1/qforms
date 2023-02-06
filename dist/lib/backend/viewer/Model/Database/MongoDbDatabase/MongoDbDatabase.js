@@ -14,7 +14,9 @@ class MongoDbDatabase extends Database_1.Database {
         }
         // console.log('config', this.getConfig());
         const { host, database, user, password } = this.getConfig();
-        const client = new mongodb_1.MongoClient(`mongodb://${user}:${password}@${host}:${this.getPort()}`);
+        const URL = `mongodb://${user}:${password}@${host}:${this.getPort()}`;
+        const client = new mongodb_1.MongoClient(URL);
+        console.log(`MongoDbDatabase: connecting to ${URL}`);
         await client.connect();
         context.connections[name] = client;
     }
