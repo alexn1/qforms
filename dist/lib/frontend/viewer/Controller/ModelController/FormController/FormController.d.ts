@@ -4,7 +4,7 @@ import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 export declare class FormController extends ModelController {
     fields: {
-        [k: string]: FieldController;
+        [name: string]: FieldController;
     };
     state: any;
     static create(model: Form, parent: PageController): FormController;
