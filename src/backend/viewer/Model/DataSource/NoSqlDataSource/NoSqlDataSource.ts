@@ -59,7 +59,7 @@ export class NoSqlDataSource extends DataSource {
         if (this.getAttr('limit') !== '') {
             if (!context.params.frame) throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'), 10);
-            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.skip = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
 

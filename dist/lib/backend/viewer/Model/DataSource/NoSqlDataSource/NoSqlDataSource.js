@@ -49,7 +49,7 @@ class NoSqlDataSource extends DataSource_1.DataSource {
             if (!context.params.frame)
                 throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'), 10);
-            context.params.offset = (context.params.frame - 1) * limit;
+            context.params.skip = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
         // exec selectQuery

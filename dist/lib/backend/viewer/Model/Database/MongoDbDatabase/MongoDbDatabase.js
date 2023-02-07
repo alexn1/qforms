@@ -12,15 +12,17 @@ class MongoDbDatabase extends Database_1.Database {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        // console.log('config', this.getConfig());
-        const { host, database, user, password } = this.getConfig();
-        const host2 = process.env.DB_HOST || host;
-        const userPassword = user && password ? `${user}:${password}@` : '';
-        const URL = `mongodb://${userPassword}${host2}:${this.getPort()}`;
-        const client = new mongodb_1.MongoClient(URL);
+        const client = new mongodb_1.MongoClient(this.getUrl());
         console.log(`MongoDbDatabase: connecting to ${URL}`);
         await client.connect();
         context.connections[name] = client;
+    }
+    getUrl() {
+        // console.log('config', this.getConfig());
+        const { host, user, password } = this.getConfig();
+        const userPassword = user && password ? `${user}:${password}@` : '';
+        const host2 = process.env.DB_HOST || host;
+        return `mongodb://${userPassword}${host2}:${this.getPort()}`;
     }
     async release(context) {
         console.log('MongoDbDatabase.release', this.getName());
