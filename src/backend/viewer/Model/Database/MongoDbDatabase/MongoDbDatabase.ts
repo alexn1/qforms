@@ -12,9 +12,10 @@ export class MongoDbDatabase extends Database {
         }
 
         // console.log('config', this.getConfig());
-        const { host, database, user, password } = this.getConfig();
-        const URL = `mongodb://${user}:${password}@${process.env.DB_HOST ||
-            host}:${this.getPort()}`;
+        const { host, user, password } = this.getConfig();
+        const host2 = process.env.DB_HOST || host;
+        const userPassword = user && password ? `${user}:${password}@` : '';
+        const URL = `mongodb://${userPassword}${host2}:${this.getPort()}`;
         const client = new MongoClient(URL);
         console.log(`MongoDbDatabase: connecting to ${URL}`);
         await client.connect();
