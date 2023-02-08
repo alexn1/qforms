@@ -41271,9 +41271,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
 
 class NoSqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
-    isPersistent() {
-        return true;
-    }
 }
 // @ts-ignore
 window.NoSqlDataSource = NoSqlDataSource;
@@ -41294,24 +41291,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 
 class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts":
-/*!**************************************************************************************************!*\
-  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts ***!
-  \**************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SqlDataSource": () => (/* binding */ SqlDataSource)
-/* harmony export */ });
-/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
-
-class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
     constructor() {
         /* constructor(data, parent) {
             super(data, parent);
@@ -41542,6 +41521,24 @@ class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.P
     isPersistent() {
         return true;
     }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SqlDataSource": () => (/* binding */ SqlDataSource)
+/* harmony export */ });
+/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
+
+class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
 }
 // @ts-ignore
 window.SqlDataSource = SqlDataSource;
