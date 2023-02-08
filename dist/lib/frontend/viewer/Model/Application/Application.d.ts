@@ -1,8 +1,8 @@
 import { Model } from '../Model';
+import { DataSource } from '../../Model/DataSource/DataSource';
 export declare class Application extends Model {
     databases: any[];
-    dataSources: any[];
-    constructor(data: any);
+    dataSources: DataSource[];
     init(): void;
     deinit(): void;
     addDatabase(database: any): void;

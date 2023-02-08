@@ -22,6 +22,6 @@ export declare class Model extends EventEmitter {
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;
-    getParent(): any;
+    getParent(): Model;
     getData(): any;
 }

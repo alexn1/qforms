@@ -1,15 +1,15 @@
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp } from '../../../common';
+import { DataSource } from '../../Model/DataSource/DataSource';
 
 export class Application extends Model {
-    databases: any[];
-    dataSources: any[];
-    constructor(data) {
+    databases: any[] = [];
+    dataSources: DataSource[] = [];
+
+    /* constructor(data) {
         super(data);
-        this.databases = [];
-        this.dataSources = [];
-    }
+    } */
 
     init() {
         // console.log('Application.init');

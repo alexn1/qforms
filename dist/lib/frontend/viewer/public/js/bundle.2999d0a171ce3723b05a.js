@@ -40568,11 +40568,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    constructor(data) {
-        super(data);
+    constructor() {
+        super(...arguments);
         this.databases = [];
         this.dataSources = [];
     }
+    /* constructor(data) {
+        super(data);
+    } */
     init() {
         // console.log('Application.init');
         if (!this.data.theme)

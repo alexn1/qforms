@@ -1,10 +1,11 @@
 import { Model } from '../Model';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
+import { Field } from '../../Model/Field/Field';
 
 export class Form extends Model {
-    dataSources: any[];
-    fields: any[];
+    dataSources: DataSource[];
+    fields: Field[];
 
     constructor(data, parent) {
         super(data, parent);

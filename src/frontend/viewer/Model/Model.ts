@@ -94,10 +94,10 @@ export class Model extends EventEmitter {
         return this.data.actions.length > 0;
     }
 
-    getParent() {
+    getParent(): Model {
         return this.parent;
     }
-    
+
     getData() {
         return this.data;
     }
