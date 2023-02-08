@@ -66,9 +66,9 @@
                                 "caption": "_id",
                                 "type": "string",
                                 "dbType": "",
-                                "key": "false",
+                                "key": "true",
                                 "auto": "false",
-                                "nullable": "true"
+                                "nullable": "false"
                             }
                         },
                         {
