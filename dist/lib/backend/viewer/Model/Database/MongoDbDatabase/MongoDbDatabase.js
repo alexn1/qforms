@@ -12,8 +12,9 @@ class MongoDbDatabase extends Database_1.Database {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        const client = new mongodb_1.MongoClient(this.getUrl());
-        console.log(`MongoDbDatabase: connecting to ${URL}`);
+        const url = this.getUrl();
+        const client = new mongodb_1.MongoClient(url);
+        console.log(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
         context.connections[name] = client;
     }
