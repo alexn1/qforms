@@ -6,10 +6,11 @@ import { RowFormController } from '../FormController/RowFormController/RowFormCo
 import { PageView } from './PageView';
 import { ApplicationController } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
+import { Form } from '../../../Model/Form/Form';
 
-export class PageController extends ModelController {
+export class PageController extends ModelController<Page> {
     id: string;
-    forms: FormController[] = [];
+    forms: FormController<Form>[] = [];
 
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
@@ -145,7 +146,7 @@ export class PageController extends ModelController {
         this.rerender();
     }
 
-    onFormDiscard(formController: FormController): void {
+    onFormDiscard(formController: FormController<Form>): void {
         console.log('PageController.onFormDiscard', this.model.getFullName());
         this.rerender();
     }
@@ -190,7 +191,7 @@ export class PageController extends ModelController {
     getApp(): ApplicationController {
         return this.parent;
     }
-    getViewClass(): PageView<PageController> {
+    getViewClass(): PageView {
         return super.getViewClass() || PageView;
     }
     static createLink(params = null): string {
@@ -209,7 +210,7 @@ export class PageController extends ModelController {
         return window.location.pathname;
     }
 
-    getForm(name): FormController {
+    getForm(name): FormController<Form> {
         return this.forms.find(form => form.model.getName() === name);
     }
 

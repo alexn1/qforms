@@ -2,7 +2,7 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormPasswordFieldController } from './RowFormPasswordFieldController';
 import './RowFormPasswordFieldView.less';
-export declare class RowFormPasswordFieldView<T extends RowFormPasswordFieldController> extends RowFormFieldView<T> {
+export declare class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFieldController> {
     constructor(props: any);
     onCloseClick: (e: any) => Promise<void>;
     isCloseVisible(): boolean;

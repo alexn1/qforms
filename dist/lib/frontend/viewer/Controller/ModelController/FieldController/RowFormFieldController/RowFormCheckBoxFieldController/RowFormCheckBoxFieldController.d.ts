@@ -1,5 +1,6 @@
 import { RowFormFieldController } from '../RowFormFieldController';
-export declare class RowFormCheckBoxFieldController extends RowFormFieldController {
+import { CheckBoxField } from '../../../../../Model/Field/CheckBoxField/CheckBoxField';
+export declare class RowFormCheckBoxFieldController extends RowFormFieldController<CheckBoxField> {
     getViewClass(): any;
     getValueForWidget(): any;
     setValueFromWidget(widgetValue: any): void;

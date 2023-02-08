@@ -3,9 +3,7 @@ import { DropdownDatePicker } from '../../../../../../common';
 import { RowFormDateFieldController } from './RowFormDateFieldController';
 import './RowFormDateFieldView.less';
 
-export class RowFormDateFieldView<T extends RowFormDateFieldController> extends RowFormFieldView<
-    T
-> {
+export class RowFormDateFieldView extends RowFormFieldView<RowFormDateFieldController> {
     render() {
         const ctrl = this.props.ctrl;
         return (

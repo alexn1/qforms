@@ -2,12 +2,13 @@ import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
+import { Form } from '../../../Model/Form/Form';
 
-export class FieldController extends ModelController {
+export class FieldController<TModel extends Field> extends ModelController<TModel> {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
-    static create(model: Field, parent: FormController): FieldController {
+    static create(model: Field, parent: FormController<Form>): FieldController<Field> {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {

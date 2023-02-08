@@ -1,10 +1,11 @@
 import { Controller } from '../Controller';
 import { ModelView } from './ModelView';
+import { Model } from '../../Model/Model';
 
-export abstract class ModelController extends Controller {
+export abstract class ModelController<TModel extends Model> extends Controller {
     deinited: boolean = false;
 
-    constructor(public model, public parent) {
+    constructor(public model: TModel, public parent) {
         super();
     }
 
@@ -16,7 +17,7 @@ export abstract class ModelController extends Controller {
         this.deinited = true;
     }
 
-    getModel() {
+    getModel(): TModel {
         return this.model;
     }
 

@@ -1,7 +1,8 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormComboBoxFieldView } from './TableFormComboBoxFieldView';
+import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 
-export class TableFormComboBoxFieldController extends TableFormFieldController {
+export class TableFormComboBoxFieldController extends TableFormFieldController<ComboBoxField> {
     init() {
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();

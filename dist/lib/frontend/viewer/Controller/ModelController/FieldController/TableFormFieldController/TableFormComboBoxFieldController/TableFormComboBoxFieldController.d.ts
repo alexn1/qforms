@@ -1,5 +1,6 @@
 import { TableFormFieldController } from '../TableFormFieldController';
-export declare class TableFormComboBoxFieldController extends TableFormFieldController {
+import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
+export declare class TableFormComboBoxFieldController extends TableFormFieldController<ComboBoxField> {
     init(): void;
     deinit(): void;
     getViewClass(): any;

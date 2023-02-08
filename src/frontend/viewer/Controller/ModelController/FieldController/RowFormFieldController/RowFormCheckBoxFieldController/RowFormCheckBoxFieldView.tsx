@@ -3,9 +3,7 @@ import { CheckBox } from '../../../../../../common';
 import { RowFormCheckBoxFieldController } from './RowFormCheckBoxFieldController';
 import './RowFormCheckBoxFieldView.less';
 
-export class RowFormCheckBoxFieldView<
-    T extends RowFormCheckBoxFieldController
-> extends RowFormFieldView<T> {
+export class RowFormCheckBoxFieldView extends RowFormFieldView<RowFormCheckBoxFieldController> {
     onCheckBoxChange = (checked, e) => {
         this.getCtrl().onChange(checked);
     };

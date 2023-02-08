@@ -3,9 +3,7 @@ import { TextArea } from '../../../../../../common';
 import { RowFormTextAreaFieldController } from './RowFormTextAreaFieldController';
 import './RowFormTextAreaFieldView.less';
 
-export class RowFormTextAreaFieldView<
-    T extends RowFormTextAreaFieldController
-> extends RowFormFieldView<T> {
+export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFieldController> {
     constructor(props) {
         super(props);
         this.state = {

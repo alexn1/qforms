@@ -1,5 +1,6 @@
 import { RowFormFieldController } from '../RowFormFieldController';
-export declare class RowFormCheckBoxListFieldController extends RowFormFieldController {
+import { CheckBoxListField } from '../../../../../Model/Field/CheckBoxListField/CheckBoxListField';
+export declare class RowFormCheckBoxListFieldController extends RowFormFieldController<CheckBoxListField> {
     init(): void;
     deinit(): void;
     getViewClass(): any;

@@ -2,7 +2,7 @@ import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormRadioFieldController } from './RowFormRadioFieldController';
 import './RowFormRadioFieldView.less';
 
-export class RowFormRadioFieldView<T extends RowFormRadioFieldController> extends RowFormFieldView<T> {
+export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldController> {
     /*onChange = async widgetValue => {
         // console.log('RowFormRadioFieldView.onChange', widgetValue);
         this.rerender();

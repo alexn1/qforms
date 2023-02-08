@@ -1,8 +1,9 @@
 import { ModelController } from '../ModelController';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
-export declare class FieldController extends ModelController {
-    static create(model: Field, parent: FormController): FieldController;
+import { Form } from '../../../Model/Form/Form';
+export declare class FieldController<TModel extends Field> extends ModelController<TModel> {
+    static create(model: Field, parent: FormController<Form>): FieldController<Field>;
     valueToString(value: any): string;
     stringToValue(stringValue: any): any;
     getViewStyle(row: any): any;

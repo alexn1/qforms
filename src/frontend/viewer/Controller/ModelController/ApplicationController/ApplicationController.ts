@@ -6,7 +6,7 @@ import { FrontHostApp, Search, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 
-export class ApplicationController extends ModelController {
+export class ApplicationController extends ModelController<Application> {
     frontHostApp: FrontHostApp;
     lastId: number;
     activePage: PageController;

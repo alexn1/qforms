@@ -2,7 +2,7 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormPhoneFieldController } from './RowFormPhoneFieldController';
 import './RowFormPhoneFieldView.less';
-export declare class RowFormPhoneFieldView<T extends RowFormPhoneFieldController> extends RowFormFieldView<T> {
+export declare class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldController> {
     constructor(props: any);
     onClear: (e: any) => Promise<void>;
     isCloseVisible(): boolean;

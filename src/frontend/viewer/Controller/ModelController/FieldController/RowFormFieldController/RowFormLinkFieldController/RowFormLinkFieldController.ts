@@ -1,7 +1,8 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormLinkFieldView } from './RowFormLinkFieldView';
+import { LinkField } from '../../../../../Model/Field/LinkField/LinkField';
 
-export class RowFormLinkFieldController extends RowFormFieldController {
+export class RowFormLinkFieldController extends RowFormFieldController<LinkField> {
     getViewClass() {
         return super.getViewClass() || RowFormLinkFieldView;
     }

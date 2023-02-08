@@ -1,8 +1,10 @@
 import { FormController } from '../FormController';
-export declare class RowFormController extends FormController {
+import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
+import { PageController } from '../../PageController/PageController';
+export declare class RowFormController extends FormController<RowForm> {
     state: any;
     fields: any;
-    constructor(model: any, parent: any);
+    constructor(model: RowForm, parent: PageController);
     init(): void;
     deinit(): void;
     calcState(): void;

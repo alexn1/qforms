@@ -4,9 +4,9 @@ import { CheckBox } from '../../../../../../common';
 import { TableFormCheckBoxFieldController } from './TableFormCheckBoxFieldController';
 import './TableFormCheckBoxFieldView.less';
 
-export class TableFormCheckBoxFieldView<
-    T extends TableFormCheckBoxFieldController
-> extends TableFormFieldView<T> {
+export class TableFormCheckBoxFieldView extends TableFormFieldView<
+    TableFormCheckBoxFieldController
+> {
     span: React.RefObject<any>;
 
     render() {

@@ -1,8 +1,9 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormDateFieldView } from './TableFormDateFieldView';
 import { Helper } from '../../../../../../common';
+import { DateField } from '../../../../../Model/Field/DateField/DateField';
 
-export class TableFormDateFieldController extends TableFormFieldController {
+export class TableFormDateFieldController extends TableFormFieldController<DateField> {
     getViewClass() {
         return super.getViewClass() || TableFormDateFieldView;
     }

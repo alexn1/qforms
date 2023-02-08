@@ -1,7 +1,8 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormLinkFieldView } from './TableFormLinkFieldView';
+import { LinkField } from '../../../../../Model/Field/LinkField/LinkField';
 
-export class TableFormLinkFieldController extends TableFormFieldController {
+export class TableFormLinkFieldController extends TableFormFieldController<LinkField> {
     getViewClass() {
         return super.getViewClass() || TableFormLinkFieldView;
     }

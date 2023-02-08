@@ -1,10 +1,11 @@
 import React from 'react';
 import { FieldController } from '../FieldController';
 import { ApplicationController } from '../../ApplicationController/ApplicationController';
+import { Field} from '../../../../Model/Field/Field'
 
-export class RowFormFieldController extends FieldController {
+export class RowFormFieldController<TField extends Field> extends FieldController<TField> {
     state: any;
-    constructor(model, parent) {
+    constructor(model: TField, parent) {
         super(model, parent);
         this.state = {
             value: null,

@@ -3,9 +3,7 @@ import { Select, Button } from '../../../../../../common';
 import { RowFormComboBoxFieldController } from './RowFormComboBoxFieldController';
 import './RowFormComboBoxFieldView.less';
 
-export class RowFormComboBoxFieldView<
-    T extends RowFormComboBoxFieldController
-> extends RowFormFieldView<T> {
+export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFieldController> {
     onChange = async widgetValue => {
         // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
         this.rerender();

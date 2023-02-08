@@ -1,8 +1,9 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormDateTimeFieldView } from './RowFormDateTimeFieldView';
 import { TimeBox } from '../../../../../../common';
+import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
 
-export class RowFormDateTimeFieldController extends RowFormFieldController {
+export class RowFormDateTimeFieldController extends RowFormFieldController<DateTimeField> {
     widget2: any;
     defaultValue: number;
     state: any;

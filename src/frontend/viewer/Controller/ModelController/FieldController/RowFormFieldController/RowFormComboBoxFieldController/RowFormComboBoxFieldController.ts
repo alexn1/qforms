@@ -2,8 +2,9 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
 import { ApplicationController } from '../../../ApplicationController/ApplicationController';
 import { Helper } from '../../../../../../common';
+import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 
-export class RowFormComboBoxFieldController extends RowFormFieldController {
+export class RowFormComboBoxFieldController extends RowFormFieldController<ComboBoxField> {
     init() {
         // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();

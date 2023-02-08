@@ -3,9 +3,7 @@ import { TextBox, CloseIcon } from '../../../../../../common';
 import { RowFormTextBoxFieldController } from './RowFormTextBoxFieldController';
 import './RowFormTextBoxFieldView.less';
 
-export class RowFormTextBoxFieldView<
-    T extends RowFormTextBoxFieldController
-> extends RowFormFieldView<T> {
+export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFieldController> {
     constructor(props) {
         super(props);
         this.state = {

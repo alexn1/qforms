@@ -61,7 +61,7 @@ export class Model extends EventEmitter {
         return this.getName();
     }
 
-    getCaption() {
+    getCaption(): string {
         return this.getAttr('caption');
     }
 

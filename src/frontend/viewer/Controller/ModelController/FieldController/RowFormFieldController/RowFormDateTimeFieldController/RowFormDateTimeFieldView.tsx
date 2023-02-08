@@ -3,9 +3,7 @@ import { DropdownDatePicker, TimeBox2 } from '../../../../../../common';
 import { RowFormDateTimeFieldController } from './RowFormDateTimeFieldController';
 import './RowFormDateTimeFieldView.less';
 
-export class RowFormDateTimeFieldView<
-    T extends RowFormDateTimeFieldController
-> extends RowFormFieldView<T> {
+export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFieldController> {
     onClear2 = async () => {
         // console.log('RowFormDateTimeFieldView.onClear2');
         this.getCtrl().onChange2(null);

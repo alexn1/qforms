@@ -1,10 +1,12 @@
 import { FormController } from '../FormController';
 import { RowFormView } from './RowFormView';
+import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
+import { PageController } from '../../PageController/PageController';
 
-export class RowFormController extends FormController {
+export class RowFormController extends FormController<RowForm> {
     state: any;
     fields: any;
-    constructor(model, parent) {
+    constructor(model: RowForm, parent: PageController) {
         super(model, parent);
         this.state = {
             updated: Date.now(),

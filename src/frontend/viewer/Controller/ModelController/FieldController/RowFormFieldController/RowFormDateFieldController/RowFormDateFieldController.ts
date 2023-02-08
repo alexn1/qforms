@@ -1,7 +1,8 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormDateFieldView } from './RowFormDateFieldView';
+import { DateField } from '../../../../../Model/Field/DateField/DateField';
 
-export class RowFormDateFieldController extends RowFormFieldController {
+export class RowFormDateFieldController extends RowFormFieldController<DateField> {
     getViewClass() {
         return super.getViewClass() || RowFormDateFieldView;
     }

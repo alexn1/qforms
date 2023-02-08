@@ -1,5 +1,6 @@
 import { RowFormFieldController } from '../RowFormFieldController';
-export declare class RowFormComboBoxFieldController extends RowFormFieldController {
+import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
+export declare class RowFormComboBoxFieldController extends RowFormFieldController<ComboBoxField> {
     init(): void;
     deinit(): void;
     getViewClass(): any;

@@ -1,11 +1,12 @@
 import { TableFormView } from './TableFormView';
 import { FormController } from '../FormController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
+import {TableForm} from '../../../../Model/Form/TableForm/TableForm';
 
-export class TableFormController extends FormController {
+export class TableFormController extends FormController<TableForm> {
     state: any;
     grid: any;
-    constructor(model, parent) {
+    constructor(model: TableForm, parent) {
         super(model, parent);
         this.state = {
             updated: Date.now(),

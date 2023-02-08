@@ -3,12 +3,13 @@ import { FrontHostApp } from '../../../../common';
 import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
+import { Field } from '../../../Model/Field/Field';
 
-export class FormController extends ModelController {
-    fields: { [name: string]: FieldController } = {};
+export class FormController<TForm extends Form> extends ModelController<TForm> {
+    fields: { [name: string]: FieldController<Field> } = {};
     state: any;
 
-    static create(model: Form, parent: PageController): FormController {
+    static create(model: Form, parent: PageController): FormController<Form> {
         // console.log('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
@@ -20,7 +21,7 @@ export class FormController extends ModelController {
         return new GeneralClass(model, parent);
     }
 
-    constructor(model: Form, parent: PageController) {
+    constructor(model: TForm, parent: PageController) {
         super(model, parent);
         console.log(`${this.constructor.name}.constructor`, model);
     }

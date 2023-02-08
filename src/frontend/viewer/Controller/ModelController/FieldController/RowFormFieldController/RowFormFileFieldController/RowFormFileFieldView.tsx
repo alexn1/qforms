@@ -5,9 +5,7 @@ import { ImageDialogController } from '../../../../ModalController/ImageDialogCo
 import { RowFormFileFieldController } from './RowFormFileFieldController';
 import './RowFormFileFieldView.less';
 
-export class RowFormFileFieldView<T extends RowFormFileFieldController> extends RowFormFieldView<
-    T
-> {
+export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldController> {
     image: React.RefObject<any>;
     div: React.RefObject<any>;
     input: React.RefObject<any>;

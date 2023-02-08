@@ -2,7 +2,7 @@ import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
-export declare class ApplicationController extends ModelController {
+export declare class ApplicationController extends ModelController<Application> {
     frontHostApp: FrontHostApp;
     lastId: number;
     activePage: PageController;
@@ -42,7 +42,7 @@ export declare class ApplicationController extends ModelController {
     onMenuItemClick: (menu: any, type: any, name: any) => Promise<void>;
     getActivePageName(): any;
     onWindowPopState(e: any): Promise<void>;
-    getTitle(): any;
+    getTitle(): string;
     invalidate(): void;
     alert(options: any): Promise<any>;
     confirm(options: any): Promise<any>;

@@ -1,4 +1,5 @@
 import { RowFormFieldController } from '../RowFormFieldController';
-export declare class RowFormFileFieldController extends RowFormFieldController {
+import { FileField } from '../../../../../Model/Field/FileField/FileField';
+export declare class RowFormFileFieldController extends RowFormFieldController<FileField> {
     getViewClass(): any;
 }

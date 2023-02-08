@@ -1,14 +1,15 @@
 import { Controller } from '../Controller';
-export declare abstract class ModelController extends Controller {
-    model: any;
+import { Model } from '../../Model/Model';
+export declare abstract class ModelController<TModel extends Model> extends Controller {
+    model: TModel;
     parent: any;
     deinited: boolean;
-    constructor(model: any, parent: any);
+    constructor(model: TModel, parent: any);
     init(): void;
     deinit(): void;
-    getModel(): any;
+    getModel(): TModel;
     getParent(): any;
-    getTitle(): any;
+    getTitle(): string;
     getViewClass(): any;
     isActionEnabled(name: any): boolean;
 }

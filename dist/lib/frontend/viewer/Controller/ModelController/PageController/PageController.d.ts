@@ -3,9 +3,10 @@ import { FormController } from '../FormController/FormController';
 import { PageView } from './PageView';
 import { ApplicationController } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
-export declare class PageController extends ModelController {
+import { Form } from '../../../Model/Form/Form';
+export declare class PageController extends ModelController<Page> {
     id: string;
-    forms: FormController[];
+    forms: FormController<Form>[];
     constructor(model: Page, parent: ApplicationController, id: string);
     static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
     init(): void;
@@ -18,15 +19,15 @@ export declare class PageController extends ModelController {
     validate(): void;
     isValid(): boolean;
     onFormChange(e: any): Promise<void>;
-    onFormDiscard(formController: FormController): void;
+    onFormDiscard(formController: FormController<Form>): void;
     onFormUpdate(e: any): void;
     onFormInsert(e: any): void;
     openPage(options: any): Promise<PageController>;
     isChanged(): boolean;
     getApp(): ApplicationController;
-    getViewClass(): PageView<PageController>;
+    getViewClass(): PageView;
     static createLink(params?: any): string;
-    getForm(name: any): FormController;
+    getForm(name: any): FormController<Form>;
     onActionClick(name: any): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;

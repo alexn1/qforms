@@ -1,13 +1,14 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTimeFieldView } from './RowFormTimeFieldView';
 import { TimeBox } from '../../../../../../common';
+import { TimeField } from '../../../../../Model/Field/TimeField/TimeField';
 
-export class RowFormTimeFieldController extends RowFormFieldController {
-    defaultValue: any;
-    constructor(...args) {
+export class RowFormTimeFieldController extends RowFormFieldController<TimeField> {
+    defaultValue: any = null;
+    /* constructor(...args) {
         super(...args);
         this.defaultValue = null;
-    }
+    } */
     getViewClass() {
         return super.getViewClass() || RowFormTimeFieldView;
     }

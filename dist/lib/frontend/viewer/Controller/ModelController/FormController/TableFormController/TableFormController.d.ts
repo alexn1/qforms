@@ -1,8 +1,9 @@
 import { FormController } from '../FormController';
-export declare class TableFormController extends FormController {
+import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
+export declare class TableFormController extends FormController<TableForm> {
     state: any;
     grid: any;
-    constructor(model: any, parent: any);
+    constructor(model: TableForm, parent: any);
     getViewClass(): any;
     init(): void;
     deinit(): void;

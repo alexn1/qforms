@@ -17,7 +17,7 @@ export declare class Model extends EventEmitter {
     getClassName(): any;
     getName(): any;
     getFullName(): any;
-    getCaption(): any;
+    getCaption(): string;
     getDataSource(name: any): any;
     createDataSources(): void;
     deinitDataSources(): void;

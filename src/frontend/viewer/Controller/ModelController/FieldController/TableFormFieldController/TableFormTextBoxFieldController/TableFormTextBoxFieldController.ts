@@ -1,7 +1,8 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormTextBoxFieldView } from './TableFormTextBoxFieldView';
+import { TextBoxField } from '../../../../../Model/Field/TextBoxField/TextBoxField';
 
-export class TableFormTextBoxFieldController extends TableFormFieldController {
+export class TableFormTextBoxFieldController extends TableFormFieldController<TextBoxField> {
     getViewClass() {
         return super.getViewClass() || TableFormTextBoxFieldView;
     }

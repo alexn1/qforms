@@ -1,4 +1,5 @@
 import { TableFormFieldController } from '../TableFormFieldController';
-export declare class TableFormPhoneFieldController extends TableFormFieldController {
+import { PhoneField } from '../../../../../Model/Field/PhoneField/PhoneField';
+export declare class TableFormPhoneFieldController extends TableFormFieldController<PhoneField> {
     getViewClass(): any;
 }

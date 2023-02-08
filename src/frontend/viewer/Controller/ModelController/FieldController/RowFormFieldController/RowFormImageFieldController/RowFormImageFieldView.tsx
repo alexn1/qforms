@@ -2,9 +2,7 @@ import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormImageFieldController } from './RowFormImageFieldController';
 import './RowFormImageFieldView.less';
 
-export class RowFormImageFieldView<T extends RowFormImageFieldController> extends RowFormFieldView<
-    T
-> {
+export class RowFormImageFieldView extends RowFormFieldView<RowFormImageFieldController> {
     onImageClick = async e => {
         const ctrl = this.props.ctrl;
         console.log('RowFormImageFieldView.onImageClick');

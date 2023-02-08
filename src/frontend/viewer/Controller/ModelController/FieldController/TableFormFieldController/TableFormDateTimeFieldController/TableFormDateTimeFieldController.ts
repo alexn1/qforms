@@ -1,8 +1,9 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormDateTimeFieldView } from './TableFormDateTimeFieldView';
 import { Helper } from '../../../../../../common';
+import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
 
-export class TableFormDateTimeFieldController extends TableFormFieldController {
+export class TableFormDateTimeFieldController extends TableFormFieldController<DateTimeField> {
     getViewClass() {
         return super.getViewClass() || TableFormDateTimeFieldView;
     }

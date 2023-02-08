@@ -3,9 +3,7 @@ import { TextBox, CloseIcon, VisibilityIcon, VisibilityOffIcon } from '../../../
 import { RowFormPasswordFieldController } from './RowFormPasswordFieldController';
 import './RowFormPasswordFieldView.less';
 
-export class RowFormPasswordFieldView<
-    T extends RowFormPasswordFieldController
-> extends RowFormFieldView<T> {
+export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFieldController> {
     constructor(props) {
         super(props);
         this.state = {
