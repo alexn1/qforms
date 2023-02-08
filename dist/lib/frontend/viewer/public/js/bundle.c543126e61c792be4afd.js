@@ -41258,19 +41258,19 @@ window.DataSource = DataSource;
 
 /***/ }),
 
-/***/ "./src/frontend/viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource.ts":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource.ts ***!
-  \*********************************************************************************/
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts":
+/*!******************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts ***!
+  \******************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "NoSqlDataSource": () => (/* binding */ NoSqlDataSource)
 /* harmony export */ });
-/* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
 
-class NoSqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
+class NoSqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
     isPersistent() {
         return true;
     }
@@ -41281,19 +41281,37 @@ window.NoSqlDataSource = NoSqlDataSource;
 
 /***/ }),
 
-/***/ "./src/frontend/viewer/Model/DataSource/SqlDataSource/SqlDataSource.ts":
-/*!*****************************************************************************!*\
-  !*** ./src/frontend/viewer/Model/DataSource/SqlDataSource/SqlDataSource.ts ***!
-  \*****************************************************************************/
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PersistentDataSource": () => (/* binding */ PersistentDataSource)
+/* harmony export */ });
+/* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+
+class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts ***!
+  \**************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "SqlDataSource": () => (/* binding */ SqlDataSource)
 /* harmony export */ });
-/* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
 
-class SqlDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
+class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
     constructor() {
         /* constructor(data, parent) {
             super(data, parent);
@@ -43229,7 +43247,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Menu": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Menu),
 /* harmony export */   "Modal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Modal),
 /* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.MoreVertIcon),
-/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _Model_DataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_15__.NoSqlDataSource),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _Model_DataSource_PersistentDataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_15__.NoSqlDataSource),
 /* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.OpenInNewIcon),
 /* harmony export */   "PageController": () => (/* reexport safe */ _Controller_ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_8__.PageController),
 /* harmony export */   "PageView": () => (/* reexport safe */ _Controller_ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_4__.PageView),
@@ -43271,7 +43289,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Select": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Select),
 /* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.SettingsIcon),
 /* harmony export */   "Slider": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Slider),
-/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__.SqlDataSource),
+/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model_DataSource_PersistentDataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__.SqlDataSource),
 /* harmony export */   "Statusbar": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Statusbar),
 /* harmony export */   "Tab": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Tab),
 /* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_64__.Tab2),
@@ -43316,8 +43334,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model_Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Model/Field/DateField/DateField */ "./src/frontend/viewer/Model/Field/DateField/DateField.ts");
 /* harmony import */ var _Model_Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Model/Field/ComboBoxField/ComboBoxField */ "./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts");
 /* harmony import */ var _Model_Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Model/Field/TextBoxField/TextBoxField */ "./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.ts");
-/* harmony import */ var _Model_DataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Model/DataSource/SqlDataSource/SqlDataSource */ "./src/frontend/viewer/Model/DataSource/SqlDataSource/SqlDataSource.ts");
-/* harmony import */ var _Model_DataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Model/DataSource/NoSqlDataSource/NoSqlDataSource */ "./src/frontend/viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource.ts");
+/* harmony import */ var _Model_DataSource_PersistentDataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts");
+/* harmony import */ var _Model_DataSource_PersistentDataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldController__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController.ts");
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.ts");

@@ -1,8 +1,8 @@
-import { DataSource } from '../DataSource';
+import { PersistentDataSource } from '../PersistentDataSource';
 
-export class SqlDataSource extends DataSource {
+export class SqlDataSource extends PersistentDataSource {
     /* constructor(data, parent) {
-        super(data, parent);        
+        super(data, parent);
     } */
 
     /*init() {
