@@ -22,7 +22,7 @@ export class RowFormController extends FormController<RowForm> {
         this.model.on('refresh', this.onModelRefresh);
         this.model.on('insert', this.onModelInsert);
         this.model.on('update', this.onModelUpdate);
-        if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') {
+        if (this.model.getDefaultDataSource().isPersistent()) {
             this.state.mode = 'view';
         }
         this.calcState();
@@ -145,7 +145,7 @@ export class RowFormController extends FormController<RowForm> {
 
         // ui
         this.calcState();
-        if (this.getModel().hasDefaultSqlDataSource()) {
+        if (this.getModel().hasDefaultPersistentDataSource()) {
             this.state.mode = 'view';
         }
         this.rerender();

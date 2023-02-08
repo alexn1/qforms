@@ -1,5 +1,6 @@
 import { Model } from '../Model';
 import { FrontHostApp } from '../../../common';
+import { DataSource } from '../../Model/DataSource/DataSource';
 
 export class Form extends Model {
     dataSources: any[];
@@ -100,7 +101,7 @@ export class Form extends Model {
         return null;
     }
 
-    getDefaultDataSource() {
+    getDefaultDataSource(): DataSource {
         const dataSource = this.getDataSource('default');
         if (!dataSource) throw new Error(`${this.getFullName()}: no default data source`);
         return dataSource;
@@ -119,8 +120,8 @@ export class Form extends Model {
     getField(name) {
         return this.fields.find(field => field.getName() === name);
     }
-    hasDefaultSqlDataSource() {
-        return ['SqlDataSource', 'NoSqlDataSource'].includes(this.getDefaultDataSource().getClassName());
+    hasDefaultPersistentDataSource() {
+        return this.getDefaultDataSource().isPersistent();
     }
     decodeRow(row) {
         const values = {};

@@ -40,7 +40,7 @@ export class RowForm extends Form {
     getKey() {
         // console.log('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource') {
+        if (dataSource.isPersistent()) {
             const row = this.getRow();
             return dataSource.getRowKey(row);
         }

@@ -24,7 +24,7 @@
                 "modelClass": "",
                 "newMode": "",
                 "backOnly": "false",
-                "refreshButton": "false"
+                "refreshButton": "true"
             },
             "dataSources": [
                 {

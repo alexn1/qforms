@@ -16,8 +16,8 @@ import './TableFormView.less';
 
 export class TableFormView<T extends TableFormController> extends FormView<T> {
     renderToolbar() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.model;
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
@@ -33,7 +33,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                     </Button>
                 )}
                 {model.data.refreshButton === 'true' &&
-                    dataSource.constructor.name === 'SqlDataSource' && (
+                    dataSource.isPersistent() && (
                         <Button
                             key="refresh"
                             classList={['toolbar-button']}
@@ -161,7 +161,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
     }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <div
                 className={`${this.getCssClassNames()} full flex-column grid-gap-5`}
@@ -169,7 +169,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             >
                 {this.renderToolbar()}
                 {this.renderGrid()}
-                {ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()}
+                {ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()}
             </div>
         );
     }

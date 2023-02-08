@@ -7,7 +7,7 @@ export declare class RowForm extends Form {
     onDataSourceUpdate(e: any): void;
     onDataSourceInsert(e: any): void;
     getRow(withChanges?: any): any;
-    getKey(): any;
+    getKey(): string;
     createRow(): {};
     discard(fields: any): void;
 }

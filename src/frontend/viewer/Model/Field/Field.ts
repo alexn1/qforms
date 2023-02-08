@@ -187,7 +187,7 @@ export class Field extends Model {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');
-            if (columnName && this.parent.hasDefaultSqlDataSource()) {
+            if (columnName && this.parent.hasDefaultPersistentDataSource()) {
                 const ds = this.parent.getDataSource('default');
                 if (ds.getAttr('table')) {
                     const column = ds.getTable().getColumn(columnName);

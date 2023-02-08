@@ -73,4 +73,5 @@ export declare class DataSource extends Model {
     getFramesCount(): number;
     hasMore(): boolean;
     isPersistent(): boolean;
+    refresh(): Promise<void>;
 }

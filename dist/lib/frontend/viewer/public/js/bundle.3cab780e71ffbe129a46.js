@@ -39176,7 +39176,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             });
             // ui
             this.calcState();
-            if (this.getModel().hasDefaultSqlDataSource()) {
+            if (this.getModel().hasDefaultPersistentDataSource()) {
                 this.state.mode = 'view';
             }
             this.rerender();
@@ -39210,7 +39210,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         this.model.on('refresh', this.onModelRefresh);
         this.model.on('insert', this.onModelInsert);
         this.model.on('update', this.onModelUpdate);
-        if (this.model.getDefaultDataSource().getClassName() === 'SqlDataSource') {
+        if (this.model.getDefaultDataSource().isPersistent()) {
             this.state.mode = 'view';
         }
         this.calcState();
@@ -39330,7 +39330,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
             .getModel()
             .getApp()
             .getText();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.model.hasDefaultSqlDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.model.hasDefaultSqlDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.model.hasDefaultSqlDataSource() &&
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.model.hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.model.hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.model.hasDefaultPersistentDataSource() &&
                     ctrl.getModel().getAttr('refreshButton') === 'true' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.refresh }) }), "refresh")), this.isActionsVisible() && ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.MoreVertIcon, {}) })))] })));
     }
     isActionsEnabled() {
@@ -39340,7 +39340,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
     isActionsVisible() {
         if (this.getCtrl()
             .getModel()
-            .hasDefaultSqlDataSource()) {
+            .hasDefaultPersistentDataSource()) {
             return !!this.getCtrl()
                 .getModel()
                 .getKey();
@@ -39406,7 +39406,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
             .getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} flex-column grid-gap-5`, style: this.getStyle() }, { children: [(this.getCtrl()
                     .getModel()
-                    .hasDefaultSqlDataSource() ||
+                    .hasDefaultPersistentDataSource() ||
                     this.getCtrl()
                         .getModel()
                         .hasActions()) &&
@@ -39763,11 +39763,11 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         };
     }
     renderToolbar() {
-        const ctrl = this.props.ctrl;
-        const model = ctrl.model;
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' &&
-                    dataSource.constructor.name === 'SqlDataSource' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon, {}) })))] })));
+                    dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon, {}) })))] })));
     }
     renderPaging() {
         const ctrl = this.props.ctrl;
@@ -39832,8 +39832,8 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
     }
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultSqlDataSource() && this.renderPaging()] })));
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }
 }
 // @ts-ignore
@@ -41251,6 +41251,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     isPersistent() {
         return false;
     }
+    async refresh() {
+        throw new Error('DataSource.refresh not implemented');
+    }
 }
 // @ts-ignore
 window.DataSource = DataSource;
@@ -42043,7 +42046,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');
-            if (columnName && this.parent.hasDefaultSqlDataSource()) {
+            if (columnName && this.parent.hasDefaultPersistentDataSource()) {
                 const ds = this.parent.getDataSource('default');
                 if (ds.getAttr('table')) {
                     const column = ds.getTable().getColumn(columnName);
@@ -42371,8 +42374,8 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getField(name) {
         return this.fields.find(field => field.getName() === name);
     }
-    hasDefaultSqlDataSource() {
-        return ['SqlDataSource', 'NoSqlDataSource'].includes(this.getDefaultDataSource().getClassName());
+    hasDefaultPersistentDataSource() {
+        return this.getDefaultDataSource().isPersistent();
     }
     decodeRow(row) {
         const values = {};
@@ -42438,7 +42441,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
     getKey() {
         // console.log('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
-        if (dataSource.getClassName() === 'SqlDataSource') {
+        if (dataSource.isPersistent()) {
             const row = this.getRow();
             return dataSource.getRowKey(row);
         }
@@ -42695,7 +42698,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     hasRowFormWithDefaultSqlDataSource() {
         for (const form of this.forms) {
-            if (form.getClassName() === 'RowForm' && form.hasDefaultSqlDataSource()) {
+            if (form.getClassName() === 'RowForm' && form.hasDefaultPersistentDataSource()) {
                 return true;
             }
         }

@@ -27,7 +27,7 @@
                 "itemCreatePage": "",
                 "newRowMode": "disabled",
                 "deleteRowMode": "disabled",
-                "refreshButton": "false"
+                "refreshButton": "true"
             },
             "dataSources": [
                 {

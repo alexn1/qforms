@@ -570,6 +570,10 @@ export class DataSource extends Model {
     isPersistent() {
         return false;
     }
+
+    async refresh() {
+        throw new Error('DataSource.refresh not implemented');
+    }
 }
 
 // @ts-ignore

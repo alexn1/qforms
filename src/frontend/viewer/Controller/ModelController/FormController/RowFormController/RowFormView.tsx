@@ -14,7 +14,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             .getText();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
-                {ctrl.model.hasDefaultSqlDataSource() && (
+                {ctrl.model.hasDefaultPersistentDataSource() && (
                     <Button
                         key="edit"
                         classList={['toolbar-button']}
@@ -25,7 +25,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         <div>{text.form.edit}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultSqlDataSource() && (
+                {ctrl.model.hasDefaultPersistentDataSource() && (
                     <Button
                         key="save"
                         classList={['toolbar-button']}
@@ -37,7 +37,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         <div>{text.form.save}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && (
+                {ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && (
                     <Button
                         key="cancel"
                         classList={['toolbar-button']}
@@ -50,7 +50,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         <div>{text.form.cancel}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultSqlDataSource() && ctrl.model.getKey() && (
+                {ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && (
                     <Button
                         key="discard"
                         classList={['toolbar-button']}
@@ -64,7 +64,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         <div>{text.form.discard}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultSqlDataSource() &&
+                {ctrl.model.hasDefaultPersistentDataSource() &&
                     ctrl.getModel().getAttr('refreshButton') === 'true' && (
                         <Button
                             key="refresh"
@@ -98,7 +98,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
         if (
             this.getCtrl()
                 .getModel()
-                .hasDefaultSqlDataSource()
+                .hasDefaultPersistentDataSource()
         ) {
             return !!this.getCtrl()
                 .getModel()
@@ -194,7 +194,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             >
                 {(this.getCtrl()
                     .getModel()
-                    .hasDefaultSqlDataSource() ||
+                    .hasDefaultPersistentDataSource() ||
                     this.getCtrl()
                         .getModel()
                         .hasActions()) &&
