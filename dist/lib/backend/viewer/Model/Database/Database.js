@@ -4,12 +4,17 @@ exports.Database = void 0;
 const Model_1 = require("../Model");
 const Param_1 = require("../Param/Param");
 class Database extends Model_1.Model {
-    constructor(data, parent) {
+    constructor() {
+        super(...arguments);
+        this.tables = [];
+        this.fillCollections = ['tables'];
+    }
+    /* constructor(data, parent?) {
         //console.log('Database.constructor');
         super(data, parent);
-        this.fillCollections = ['tables'];
-        this.tables = [];
-    }
+        // this.fillCollections = ['tables'];
+        // this.tables = [];
+    } */
     async init(context) {
         await this.createColItems('tables', context);
     }

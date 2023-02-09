@@ -5,14 +5,15 @@ import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
 
 export class Database extends Model {
-    tables: Table[];
+    tables: Table[] = [];
+    fillCollections = ['tables'];
 
-    constructor(data, parent?) {
+    /* constructor(data, parent?) {
         //console.log('Database.constructor');
         super(data, parent);
-        this.fillCollections = ['tables'];
-        this.tables = [];
-    }
+        // this.fillCollections = ['tables'];
+        // this.tables = [];
+    } */
 
     async init(context: Context): Promise<void> {
         await this.createColItems('tables', context);

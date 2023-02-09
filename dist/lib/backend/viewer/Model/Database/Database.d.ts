@@ -5,7 +5,7 @@ import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
 export declare class Database extends Model {
     tables: Table[];
-    constructor(data: any, parent?: any);
+    fillCollections: string[];
     init(context: Context): Promise<void>;
     deinit(): Promise<void>;
     fillAttributes(response: any): void;
