@@ -40,7 +40,7 @@ export class SqlDatabase extends Database {
     }
 
     static checkParams(query, params) {
-        const usedParams = Database.getUsedParams(query);
+        const usedParams = SqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter(name => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);

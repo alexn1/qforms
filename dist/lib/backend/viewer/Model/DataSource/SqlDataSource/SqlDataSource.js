@@ -271,5 +271,8 @@ class SqlDataSource extends DataSource_1.DataSource {
     async getBuffer(context, file) {
         return file.data;
     }
+    getDatabase() {
+        return super.getDatabase();
+    }
 }
 exports.SqlDataSource = SqlDataSource;

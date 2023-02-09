@@ -1,6 +1,6 @@
 import { Context } from '../../../../../Context';
-import { Database } from '../../Database';
-export declare class MySqlDatabase extends Database {
+import { SqlDatabase } from '../SqlDatabase';
+export declare class MySqlDatabase extends SqlDatabase {
     pool: any;
     constructor(data: any, parent?: any);
     deinit(): Promise<void>;

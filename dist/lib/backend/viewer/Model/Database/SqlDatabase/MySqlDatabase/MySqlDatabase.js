@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySqlDatabase = void 0;
-const Database_1 = require("../../Database");
+const SqlDatabase_1 = require("../SqlDatabase");
 const mysql = require('mysql');
-class MySqlDatabase extends Database_1.Database {
+class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
     constructor(data, parent) {
         super(data, parent);
         //console.log('new MySqlDatabase');
@@ -71,7 +71,7 @@ class MySqlDatabase extends Database_1.Database {
     }*/
     async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
-        Database_1.Database.checkParams(query, params);
+        SqlDatabase_1.SqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -93,7 +93,7 @@ class MySqlDatabase extends Database_1.Database {
     }
     async queryResult(context, query, params = null) {
         console.log('MySqlDatabase.queryResult', query, params);
-        Database_1.Database.checkParams(query, params);
+        SqlDatabase_1.SqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {

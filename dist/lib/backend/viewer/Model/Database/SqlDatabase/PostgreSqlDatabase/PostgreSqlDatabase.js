@@ -1,29 +1,30 @@
-import { Pool, Client } from 'pg';
-import { SqlDatabase } from '../SqlDatabase';
-import { Context } from '../../../../../Context';
-
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.PostgreSqlDatabase = void 0;
+const pg_1 = require("pg");
+const SqlDatabase_1 = require("../SqlDatabase");
 const colors = require('colors');
-
-export class PostgreSqlDatabase extends SqlDatabase {
-    pool: Pool = null;
+class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
+    constructor() {
+        super(...arguments);
+        this.pool = null;
+    }
     /* constructor(data, parent?) {
         console.log('new PostgreSqlDatabase');
-        super(data, parent);        
+        super(data, parent);
     } */
-
     /*static async create(data, parent) {
         // console.log('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
     }*/
-
-    async deinit(): Promise<void> {
+    async deinit() {
         console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
-        if (!this.pool) return;
+        if (!this.pool)
+            return;
         console.log('ending pool:', this.pool.totalCount);
         await this.pool.end();
     }
-
-    getPool(): any {
+    getPool() {
         // console.log('PostgreSqlDatabase.getPool');
         if (this.pool === null) {
             const config = this.getConfig();
@@ -32,39 +33,34 @@ export class PostgreSqlDatabase extends SqlDatabase {
         }
         return this.pool;
     }
-
-    static createPool(config: any): Pool {
-        return new Pool(config);
+    static createPool(config) {
+        return new pg_1.Pool(config);
     }
-
-    async connect(context: Context): Promise<void> {
+    async connect(context) {
         console.log('PostgreSqlDatabase.connect', this.getName());
-        if (!context) throw new Error('no context');
+        if (!context)
+            throw new Error('no context');
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
         context.connections[name] = await this.getPool().connect();
     }
-
-    async release(context: Context): Promise<void> {
+    async release(context) {
         console.log('PostgreSqlDatabase.release', this.getName());
-        if (!context) throw new Error('no context');
+        if (!context)
+            throw new Error('no context');
         this.getConnection(context).release();
         context.connections[this.getName()] = null;
     }
-
-    async queryResult(context: Context, query: string, params: any = null): Promise<any> {
+    async queryResult(context, query, params = null) {
         if (context.query.sql) {
-            console.log(
-                colors.blue('PostgreSqlDatabase.queryResult'),
-                {
-                    query,
-                    params,
-                } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
-            );
+            console.log(colors.blue('PostgreSqlDatabase.queryResult'), {
+                query,
+                params,
+            } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         }
-        SqlDatabase.checkParams(query, params);
+        SqlDatabase_1.SqlDatabase.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
@@ -74,13 +70,9 @@ export class PostgreSqlDatabase extends SqlDatabase {
         // console.log('cnn.query result:', result);
         return result;
     }
-
-    static async queryResult(cnn, query: string, params: any = null): Promise<any> {
-        console.log(
-            colors.blue('static PostgreSqlDatabase.queryResult'),
-            query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
-        );
-        SqlDatabase.checkParams(query, params);
+    static async queryResult(cnn, query, params = null) {
+        console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        SqlDatabase_1.SqlDatabase.checkParams(query, params);
         const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -88,38 +80,36 @@ export class PostgreSqlDatabase extends SqlDatabase {
         // console.log('cnn.query result:', result);
         return result;
     }
-
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+    async queryRows(context, query, params = null) {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
-
-    async begin(context: Context): Promise<void> {
+    async begin(context) {
         console.log('PostgreSqlDatabase.begin', this.getName());
-        if (!context) throw new Error('no context');
+        if (!context)
+            throw new Error('no context');
         await this.getConnection(context).query('begin');
     }
-
-    async commit(context: Context): Promise<void> {
+    async commit(context) {
         console.log('PostgreSqlDatabase.commit', this.getName());
-        if (!context) throw new Error('no context');
+        if (!context)
+            throw new Error('no context');
         await this.getConnection(context).query('commit');
     }
-
-    async rollback(context: Context, err): Promise<void> {
+    async rollback(context, err) {
         console.log(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
-        if (!context) throw new Error('no context');
+        if (!context)
+            throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
-
-    static formatQuery(query: string, params: any) {
+    static formatQuery(query, params) {
         // console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
             return { sql: query, values: null };
         }
-        const usedValues = SqlDatabase.getUsedParams(query);
+        const usedValues = SqlDatabase_1.SqlDatabase.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);
@@ -132,8 +122,7 @@ export class PostgreSqlDatabase extends SqlDatabase {
         });
         return { sql, values };
     }
-
-    getDeleteQuery(tableName: string, rowKeyValues: any): string {
+    getDeleteQuery(tableName, rowKeyValues) {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
@@ -143,57 +132,50 @@ export class PostgreSqlDatabase extends SqlDatabase {
         // console.log('query:', query);
         return query;
     }
-
-    getUpdateQuery(tableName: string, values: any, where: any): string {
+    getUpdateQuery(tableName, values, where) {
         return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
-
-    static getUpdateQuery(tableName: string, values: any, where: any): string {
+    static getUpdateQuery(tableName, values, where) {
         // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
-        if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
-        if (whereKeys.length === 0) throw new Error('getUpdateQuery: no where');
+        if (valueKeys.length === 0)
+            throw new Error('getUpdateQuery: no values');
+        if (whereKeys.length === 0)
+            throw new Error('getUpdateQuery: no where');
         const valuesString = valueKeys.map(name => `"${name}" = {val_${name}}`).join(', ');
         const whereString = whereKeys.map(name => `"${name}" = {key_${name}}`).join(' and ');
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
-
-    getInsertQuery(tableName: string, values: any): string {
+    getInsertQuery(tableName, values) {
         // console.log('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
-        if (!columns.length) return `insert into "${tableName}" default values`;
+        if (!columns.length)
+            return `insert into "${tableName}" default values`;
         const columnsString = columns.map(column => `"${column}"`).join(', ');
         const valuesString = columns.map(column => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
         // console.log('query:', query);
         return query;
     }
-
-    async getTableList(): Promise<string[]> {
+    async getTableList() {
         console.log('PostgreSqlDatabase.getTableList');
-        const rows = await this.query(
-            `select "table_name" from information_schema.tables where table_schema = 'public'`,
-        );
+        const rows = await this.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
         const tableList = rows.map(row => row.table_name);
         // console.log('tableList:', tableList);
         return tableList;
     }
-
-    async getTableInfo(table: string) {
+    async getTableInfo(table) {
         console.log('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
         // console.log('keyColumns:', keyColumns);
-        const rows = await this.query(
-            `select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`,
-        );
+        const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
         // console.log('getTableInfo rows:', rows);
         const tableInfo = rows.map(row => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
             key: !!keyColumns.find(keyColumn => keyColumn.attname === row.column_name),
-            auto:
-                row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
+            auto: row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
             nullable: row.is_nullable === 'YES',
             comment: null,
             dbType: row.data_type,
@@ -201,8 +183,7 @@ export class PostgreSqlDatabase extends SqlDatabase {
         // console.log('tableInfo:', tableInfo);
         return tableInfo;
     }
-
-    getColumnTypeByDataType(dataType: string): string {
+    getColumnTypeByDataType(dataType) {
         switch (dataType) {
             case 'integer':
             case 'numeric':
@@ -225,35 +206,30 @@ export class PostgreSqlDatabase extends SqlDatabase {
                 return null;
         }
     }
-
-    async getTableKeyColumns(table: string) {
+    async getTableKeyColumns(table) {
         console.log('PostgreSqlDatabase.getTableKeyColumns');
-        const rows = await this.query(
-            `SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
+        const rows = await this.query(`SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
 JOIN   pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
-WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
-        );
+WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         return rows;
     }
-
-    async query(query: string): Promise<any[]> {
+    async query(query) {
         const config = this.getConfig();
-        const client = new Client(config);
+        const client = new pg_1.Client(config);
         await client.connect();
         const results = await client.query(query);
         await client.end();
         return results.rows;
     }
-
     /*getDefaultPort(): number {
         return 5432;
     }*/
-
-    async queryAutoValues(context: Context, table: string, autoColumnTypes: any) {
+    async queryAutoValues(context, table, autoColumnTypes) {
         console.log('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
-        if (!autoColumns.length) throw new Error('no auto columns');
+        if (!autoColumns.length)
+            throw new Error('no auto columns');
         const queries = autoColumns.map(column => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
         // console.log('query:', query);
@@ -267,55 +243,47 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
                 if (autoColumnTypes[name] === 'number' && typeof val === 'string')
                     val = Number(val);
                 if (typeof val !== autoColumnTypes[name])
-                    throw new Error(
-                        `wrong type of auto value: ${typeof val}, should be ${
-                            autoColumnTypes[name]
-                        }`,
-                    );
+                    throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
                 acc[name] = val;
                 return acc;
             }, {});
-        } else {
+        }
+        else {
             let [{ currval: val }] = result.rows;
             const name = autoColumns[0];
-            if (autoColumnTypes[name] === 'number' && typeof val === 'string') val = Number(val);
+            if (autoColumnTypes[name] === 'number' && typeof val === 'string')
+                val = Number(val);
             if (typeof val !== autoColumnTypes[name])
-                throw new Error(
-                    `wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`,
-                );
+                throw new Error(`wrong type of auto value: ${typeof val}, should be ${autoColumnTypes[name]}`);
             return { [name]: val };
         }
     }
-
-    async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
+    async insertRow(context, table, values, autoColumnTypes = {}) {
         console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
         // console.log('insert result:', result);
-
         // auto
         if (Object.keys(autoColumnTypes).length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumnTypes);
             console.log('auto:', auto);
-            return {
-                ...auto,
-                ...values,
-            };
+            return Object.assign(Object.assign({}, auto), values);
         }
-        return {
-            ...values,
-        };
+        return Object.assign({}, values);
     }
-
-    async queryScalar(context: Context, query: string, params): Promise<any> {
+    async queryScalar(context, query, params) {
         const rows = await this.queryRows(context, query, params);
         const row = rows[0];
-        if (!row) throw new Error('queryScalar must return one row');
+        if (!row)
+            throw new Error('queryScalar must return one row');
         const [column] = Object.keys(row);
-        if (!column) throw new Error('no column in result set');
+        if (!column)
+            throw new Error('no column in result set');
         const value = row[column];
-        if (value === undefined) throw new Error('scalar value undefined');
+        if (value === undefined)
+            throw new Error('scalar value undefined');
         return value;
     }
 }
+exports.PostgreSqlDatabase = PostgreSqlDatabase;

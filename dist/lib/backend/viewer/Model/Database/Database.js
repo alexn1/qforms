@@ -12,8 +12,6 @@ class Database extends Model_1.Model {
     /* constructor(data, parent?) {
         //console.log('Database.constructor');
         super(data, parent);
-        // this.fillCollections = ['tables'];
-        // this.tables = [];
     } */
     async init(context) {
         await this.createColItems('tables', context);
@@ -58,37 +56,6 @@ class Database extends Model_1.Model {
     async rollback(context, err) {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
-    getUpdateQuery(tableName, values, where) {
-        console.log('Database.getUpdateQuery', tableName);
-        const valueKeys = Object.keys(values);
-        const whereKeys = Object.keys(where);
-        if (valueKeys.length === 0)
-            throw new Error('getUpdateQuery: no values');
-        if (whereKeys.length === 0)
-            throw new Error('getUpdateQuery: no where');
-        const valuesString = valueKeys.map(name => `${name} = {val_${name}}`).join(', ');
-        const whereString = whereKeys.map(name => `${name} = {key_${name}}`).join(' and ');
-        return `update ${tableName} set ${valuesString} where ${whereString}`;
-    }
-    getInsertQuery(tableName, values) {
-        console.log('Database.getInsertQuery');
-        const columns = Object.keys(values);
-        const columnsString = columns.join(', ');
-        const valuesString = columns.map(column => `{${column}}`).join(', ');
-        const query = `insert into ${tableName}(${columnsString}) values (${valuesString})`;
-        // console.log('query:', query);
-        return query;
-    }
-    getDeleteQuery(tableName, rowKeyValues) {
-        console.log('Database.getDeleteQuery');
-        const keyColumns = Object.keys(rowKeyValues);
-        const whereString = keyColumns
-            .map(keyColumn => `${keyColumn} = {${keyColumn}}`)
-            .join(' and ');
-        const query = `delete from ${tableName} where ${whereString}`;
-        // console.log('query:', query);
-        return query;
-    }
     createParam(name) {
         return new Param_1.Param(this.getColItemData('params', name), this);
     }
@@ -122,21 +89,6 @@ class Database extends Model_1.Model {
         return table;
         // if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
         // return this.tables[name];
-    }
-    static getUsedParams(query) {
-        const items = query.match(/\{([\w\.@]+)\}/g);
-        if (!items)
-            return [];
-        return items.map(str => str.substr(1, str.length - 2));
-    }
-    static checkParams(query, params) {
-        const usedParams = Database.getUsedParams(query);
-        const paramNames = params ? Object.keys(params) : [];
-        const notPassedParams = usedParams.filter(name => paramNames.indexOf(name) === -1);
-        // console.log('notPassedParams:', notPassedParams);
-        if (notPassedParams.length > 0) {
-            throw new Error(`not passed params: ${notPassedParams.join(',')}, passed: ${paramNames.join(',')}, query: ${query}`);
-        }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
         throw new Error(`${this.constructor.name}.insertRow not implemented`);

@@ -82,7 +82,7 @@ export class MySqlDatabase extends SqlDatabase {
 
     async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
-        Database.checkParams(query, params);
+        SqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -107,7 +107,7 @@ export class MySqlDatabase extends SqlDatabase {
 
     async queryResult(context, query, params = null): Promise<any> {
         console.log('MySqlDatabase.queryResult', query, params);
-        Database.checkParams(query, params);
+        SqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {

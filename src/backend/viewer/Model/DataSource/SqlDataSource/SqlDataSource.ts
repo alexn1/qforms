@@ -3,6 +3,7 @@ import { Helper } from '../../../../Helper';
 import { Table } from '../../Table/Table';
 import { Context } from '../../../../Context';
 import { Result } from '../../../../Result';
+import { SqlDatabase } from '../../Database/SqlDatabase/SqlDatabase';
 
 export class SqlDataSource extends DataSource {
     table: Table;
@@ -311,5 +312,9 @@ export class SqlDataSource extends DataSource {
 
     async getBuffer(context: Context, file) {
         return file.data;
+    }
+
+    getDatabase(): SqlDatabase {
+        return super.getDatabase() as SqlDatabase;
     }
 }

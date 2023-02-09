@@ -15,7 +15,7 @@ export { Application } from './viewer/Model/Application/Application';
 export { Database } from './viewer/Model/Database/Database';
 export { MySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
-export { MongoDbDatabase } from './viewer/Model/Database/MongoDbDatabase/MongoDbDatabase';
+export { MongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 export { DataSource } from './viewer/Model/DataSource/DataSource';
 export { SqlDataSource } from './viewer/Model/DataSource/SqlDataSource/SqlDataSource';
 export { NoSqlDataSource } from './viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource';

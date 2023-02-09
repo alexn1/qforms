@@ -2,6 +2,7 @@ import { DataSource } from '../DataSource';
 import { Table } from '../../Table/Table';
 import { Context } from '../../../../Context';
 import { Result } from '../../../../Result';
+import { SqlDatabase } from '../../Database/SqlDatabase/SqlDatabase';
 export declare class SqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
@@ -23,4 +24,5 @@ export declare class SqlDataSource extends DataSource {
     getValuesFromRow(row: any): {};
     decodeChanges(changes: any): {};
     getBuffer(context: Context, file: any): Promise<any>;
+    getDatabase(): SqlDatabase;
 }

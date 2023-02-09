@@ -1,8 +1,7 @@
 import { DataSource } from '../DataSource';
 import { Context } from '../../../../Context';
-import { MongoDbDatabase } from '../../Database/MongoDbDatabase/MongoDbDatabase';
+import { MongoDbDatabase } from '../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 import { Table } from '../../Table/Table';
-import { Database } from '../../Database/Database';
 
 export class NoSqlDataSource extends DataSource {
     table: Table;
