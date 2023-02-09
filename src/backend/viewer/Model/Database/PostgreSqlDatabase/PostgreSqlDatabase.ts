@@ -1,16 +1,16 @@
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
+import { Pool, Client } from 'pg';
 
-const { Pool, Client } = require('pg');
+// const { Pool, Client } = require('pg');
 const colors = require('colors');
 
 export class PostgreSqlDatabase extends Database {
-    pool: any;
-    constructor(data, parent?) {
-        super(data, parent);
-        // console.log('new PostgreSqlDatabase');
-        this.pool = null;
-    }
+    pool: Pool = null;
+    /* constructor(data, parent?) {
+        console.log('new PostgreSqlDatabase');
+        super(data, parent);        
+    } */
 
     /*static async create(data, parent) {
         // console.log('PostgreSqlDatabase.create');
@@ -34,7 +34,7 @@ export class PostgreSqlDatabase extends Database {
         return this.pool;
     }
 
-    static createPool(config: any): any {
+    static createPool(config: any): Pool {
         return new Pool(config);
     }
 

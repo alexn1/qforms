@@ -2,14 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PostgreSqlDatabase = void 0;
 const Database_1 = require("../Database");
-const { Pool, Client } = require('pg');
+const pg_1 = require("pg");
+// const { Pool, Client } = require('pg');
 const colors = require('colors');
 class PostgreSqlDatabase extends Database_1.Database {
-    constructor(data, parent) {
-        super(data, parent);
-        // console.log('new PostgreSqlDatabase');
+    constructor() {
+        super(...arguments);
         this.pool = null;
     }
+    /* constructor(data, parent?) {
+        console.log('new PostgreSqlDatabase');
+        super(data, parent);
+    } */
     /*static async create(data, parent) {
         // console.log('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
@@ -31,7 +35,7 @@ class PostgreSqlDatabase extends Database_1.Database {
         return this.pool;
     }
     static createPool(config) {
-        return new Pool(config);
+        return new pg_1.Pool(config);
     }
     async connect(context) {
         console.log('PostgreSqlDatabase.connect', this.getName());
@@ -222,7 +226,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
     }
     async query(query) {
         const config = this.getConfig();
-        const client = new Client(config);
+        const client = new pg_1.Client(config);
         await client.connect();
         const results = await client.query(query);
         await client.end();

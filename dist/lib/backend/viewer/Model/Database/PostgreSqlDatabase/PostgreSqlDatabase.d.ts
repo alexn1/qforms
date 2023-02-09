@@ -1,11 +1,11 @@
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
+import { Pool } from 'pg';
 export declare class PostgreSqlDatabase extends Database {
-    pool: any;
-    constructor(data: any, parent?: any);
+    pool: Pool;
     deinit(): Promise<void>;
     getPool(): any;
-    static createPool(config: any): any;
+    static createPool(config: any): Pool;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
