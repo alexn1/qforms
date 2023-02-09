@@ -24,7 +24,7 @@ class MongoDbDatabase extends Database_1.Database {
         const { host, user, password } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
-        return `mongodb://${userPassword}${host2}:${this.getPort()}`;
+        return `mongodb://${userPassword}${host2}:${this.getDefaultPort()}`;
     }
     async release(context) {
         console.log('MongoDbDatabase.release', this.getName());
@@ -51,7 +51,7 @@ class MongoDbDatabase extends Database_1.Database {
         // for findOne query
         return [result];
     }
-    getPort() {
+    getDefaultPort() {
         return 27017;
     }
     async begin(context) {

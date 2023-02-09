@@ -29,7 +29,7 @@ export class MongoDbDatabase extends Database {
         const { host, user, password } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
-        return `mongodb://${userPassword}${host2}:${this.getPort()}`;
+        return `mongodb://${userPassword}${host2}:${this.getDefaultPort()}`;
     }
 
     async release(context: Context): Promise<void> {
@@ -62,7 +62,7 @@ export class MongoDbDatabase extends Database {
         return [result];
     }
 
-    getPort(): number {
+    getDefaultPort(): number {
         return 27017;
     }
 

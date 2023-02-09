@@ -23,6 +23,7 @@ export declare class Database extends Model {
     getDeleteQuery(tableName: any, rowKeyValues: any): string;
     createParam(name: any): Param;
     getConfig(): any;
+    getDefaultPort(): number;
     getApp(): Application;
     findTable(name: any): Table;
     getTable(name: any): Table;

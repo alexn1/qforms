@@ -5,7 +5,7 @@ export declare class MongoDbDatabase extends Database {
     getUrl(): string;
     release(context: Context): Promise<void>;
     query(context: Context, query: string, params: any): Promise<any[]>;
-    getPort(): number;
+    getDefaultPort(): number;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;

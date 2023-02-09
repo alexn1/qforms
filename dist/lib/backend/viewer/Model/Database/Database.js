@@ -14,7 +14,7 @@ class Database extends Model_1.Model {
         await this.createColItems('tables', context);
     }
     async deinit() {
-        throw new Error('Database.deinit not implemented');
+        throw new Error(`${this.constructor.name}.deinit not implemented`);
     }
     fillAttributes(response) {
         response.name = this.getAttr('name');
@@ -36,22 +36,22 @@ class Database extends Model_1.Model {
         throw new Error(`${this.constructor.name}.release not implemented`);
     }
     async queryResult(context, query, params = null) {
-        throw new Error('Database.queryResult not implemented');
+        throw new Error(`${this.constructor.name}.queryResult not implemented`);
     }
     async queryRows(context, query, params = null) {
-        throw new Error('Database.queryRows not implemented');
+        throw new Error(`${this.constructor.name}.queryRows not implemented`);
     }
     async queryScalar(context, query, params = null) {
-        throw new Error('Database.queryScalar not implemented');
+        throw new Error(`${this.constructor.name}.queryScalar not implemented`);
     }
     async begin(context) {
-        throw new Error('Database.begin not implemented');
+        throw new Error(`${this.constructor.name}.begin not implemented`);
     }
     async commit(context) {
-        throw new Error('Database.commit not implemented');
+        throw new Error(`${this.constructor.name}.commit not implemented`);
     }
     async rollback(context, err) {
-        throw new Error('Database.rollback not implemented');
+        throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
     getUpdateQuery(tableName, values, where) {
         console.log('Database.getUpdateQuery', tableName);
@@ -99,9 +99,9 @@ class Database extends Model_1.Model {
         }
         return config;
     }
-    /*getDefaultPort(): number {
-        return null;
-    }*/
+    getDefaultPort() {
+        throw new Error(`${this.constructor.name}.getDefaultPort not implemented`);
+    }
     getApp() {
         return this.parent;
     }
@@ -134,13 +134,13 @@ class Database extends Model_1.Model {
         }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
-        throw new Error('Database.insertRow not implemented');
+        throw new Error(`${this.constructor.name}.insertRow not implemented`);
     }
     async getTableList() {
-        throw new Error('Database.getTableList not implemented');
+        throw new Error(`${this.constructor.name}.getTableList not implemented`);
     }
     async getTableInfo(table) {
-        throw new Error('Database.getTableInfo not implemented');
+        throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
 }
 exports.Database = Database;
