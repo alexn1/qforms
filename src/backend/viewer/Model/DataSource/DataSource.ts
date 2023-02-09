@@ -269,13 +269,13 @@ export class DataSource extends Model {
         return this.getApp().getDatabase(databaseName);
     }
     async insert(context: Context, _values: any = null): Promise<Result> {
-        throw new Error('DataSource.insert not implemented');
+        throw new Error(`${this.constructor.name}.insert not implemented`);
     }
     async update(context: Context): Promise<Result> {
-        throw new Error('DataSource.update not implemented');
+        throw new Error(`${this.constructor.name}.update not implemented`);
     }
     async delete(context: Context): Promise<Result> {
-        throw new Error('DataSource.delete not implemented');
+        throw new Error(`${this.constructor.name}.delete not implemented`);
     }
     getForm(): Form {
         return this.isOnForm() ? this.getParent() : null;
