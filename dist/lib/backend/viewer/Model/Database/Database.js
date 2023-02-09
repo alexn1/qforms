@@ -41,18 +41,8 @@ class Database extends Model_1.Model {
     async queryRows(context, query, params = null) {
         throw new Error('Database.queryRows not implemented');
     }
-    async queryScalar(context, query, params) {
-        const rows = await this.queryRows(context, query, params);
-        const row = rows[0];
-        if (!row)
-            throw new Error('queryScalar must return one row');
-        const [column] = Object.keys(row);
-        if (!column)
-            throw new Error('no column in result set');
-        const value = row[column];
-        if (value === undefined)
-            throw new Error('scalar value undefined');
-        return value;
+    async queryScalar(context, query, params = null) {
+        throw new Error('Database.queryScalar not implemented');
     }
     async begin(context) {
         throw new Error('Database.begin not implemented');

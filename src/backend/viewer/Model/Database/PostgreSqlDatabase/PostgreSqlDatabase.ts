@@ -48,16 +48,6 @@ export class PostgreSqlDatabase extends Database {
         context.connections[name] = await this.getPool().connect();
     }
 
-    /*getConnection(context: Context): any {
-        // console.log('PostgreSqlDatabase.getConnection');
-        if (!context) throw new Error('no context');
-        const name = this.getName();
-        if (!context.connections[name]) {
-            throw new Error(`not connected: ${name}`);
-        }
-        return context.connections[name];
-    }*/
-
     async release(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
@@ -317,5 +307,16 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
         return {
             ...values,
         };
+    }
+
+    async queryScalar(context: Context, query: string, params): Promise<any> {
+        const rows = await this.queryRows(context, query, params);
+        const row = rows[0];
+        if (!row) throw new Error('queryScalar must return one row');
+        const [column] = Object.keys(row);
+        if (!column) throw new Error('no column in result set');
+        const value = row[column];
+        if (value === undefined) throw new Error('scalar value undefined');
+        return value;
     }
 }

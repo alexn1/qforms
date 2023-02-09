@@ -16,7 +16,8 @@ class MongoDbDatabase extends Database_1.Database {
         const client = new mongodb_1.MongoClient(url);
         console.log(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
-        context.connections[name] = client;
+        const session = client.startSession();
+        context.connections[name] = { client, session };
     }
     getUrl() {
         // console.log('config', this.getConfig());
@@ -29,13 +30,14 @@ class MongoDbDatabase extends Database_1.Database {
         console.log('MongoDbDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
-        const client = this.getConnection(context);
+        const { client, session } = this.getConnection(context);
+        session.endSession();
         await client.close();
         context.connections[this.getName()] = null;
     }
     async query(context, query, params) {
         console.log('MongoDbDatabase.query', query, params);
-        const client = this.getConnection(context);
+        const client = this.getConnection(context).client;
         const { database } = this.getConfig();
         const db = client.db(database);
         // eval query as function
@@ -51,6 +53,18 @@ class MongoDbDatabase extends Database_1.Database {
     }
     getPort() {
         return 27017;
+    }
+    async begin(context) {
+        console.log('MongoDbDatabase.begin');
+        this.getConnection(context).session.startTransaction();
+    }
+    async commit(context) {
+        console.log('MongoDbDatabase.commit');
+        this.getConnection(context).session.commitTransaction();
+    }
+    async rollback(context, err) {
+        console.log('MongoDbDatabase.rollback');
+        this.getConnection(context).session.abortTransaction();
     }
     async deinit() {
         console.log(`MongoDbDatabase.deinit: ${this.getName()}`);

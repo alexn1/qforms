@@ -10,14 +10,14 @@ export declare class Database extends Model {
     deinit(): Promise<void>;
     fillAttributes(response: any): void;
     connect(context: Context): Promise<void>;
-    getConnection(context: any): any;
+    getConnection(context: Context): any;
     release(context: Context): Promise<void>;
     queryResult(context: any, query: any, params?: any): Promise<void>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;
-    queryScalar(context: any, query: any, params: any): Promise<any>;
+    queryScalar(context: Context, query: string, params?: any): Promise<any>;
     begin(context: Context): Promise<void>;
-    commit(context: any): Promise<void>;
-    rollback(context: any, err: any): Promise<void>;
+    commit(context: Context): Promise<void>;
+    rollback(context: Context, err: any): Promise<void>;
     getUpdateQuery(tableName: any, values: any, where: any): string;
     getInsertQuery(tableName: any, values: any): string;
     getDeleteQuery(tableName: any, rowKeyValues: any): string;

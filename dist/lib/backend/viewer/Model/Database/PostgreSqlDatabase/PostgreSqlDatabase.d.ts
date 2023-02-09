@@ -37,4 +37,5 @@ export declare class PostgreSqlDatabase extends Database {
     query(query: string): Promise<any[]>;
     queryAutoValues(context: Context, table: string, autoColumnTypes: any): Promise<{}>;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<any>;
+    queryScalar(context: Context, query: string, params: any): Promise<any>;
 }

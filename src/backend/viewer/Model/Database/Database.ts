@@ -30,7 +30,7 @@ export class Database extends Model {
         throw new Error(`${this.constructor.name}.connect not implemented`);
     }
 
-    getConnection(context): any {
+    getConnection(context: Context): any {
         // console.log('Database.getConnection');
         if (!context) throw new Error('no context');
         const name = this.getName();
@@ -52,26 +52,19 @@ export class Database extends Model {
         throw new Error('Database.queryRows not implemented');
     }
 
-    async queryScalar(context, query, params) {
-        const rows = await this.queryRows(context, query, params);
-        const row = rows[0];
-        if (!row) throw new Error('queryScalar must return one row');
-        const [column] = Object.keys(row);
-        if (!column) throw new Error('no column in result set');
-        const value = row[column];
-        if (value === undefined) throw new Error('scalar value undefined');
-        return value;
+    async queryScalar(context: Context, query: string, params: any = null): Promise<any> {
+        throw new Error('Database.queryScalar not implemented');
     }
 
     async begin(context: Context): Promise<void> {
         throw new Error('Database.begin not implemented');
     }
 
-    async commit(context): Promise<void> {
+    async commit(context: Context): Promise<void> {
         throw new Error('Database.commit not implemented');
     }
 
-    async rollback(context, err): Promise<void> {
+    async rollback(context: Context, err): Promise<void> {
         throw new Error('Database.rollback not implemented');
     }
 

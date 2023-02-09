@@ -1,6 +1,11 @@
-import { MongoClient, FindCursor, AggregationCursor, ObjectId } from 'mongodb';
+import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession } from 'mongodb';
 import { Database } from '../Database';
 import { Context } from '../../../../Context';
+
+interface MongoDbDatabaseConnection {
+    client: MongoClient;
+    session: ClientSession;
+}
 
 export class MongoDbDatabase extends Database {
     async connect(context: Context): Promise<void> {
@@ -15,7 +20,8 @@ export class MongoDbDatabase extends Database {
         const client = new MongoClient(url);
         console.log(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
-        context.connections[name] = client;
+        const session = client.startSession();
+        context.connections[name] = { client, session };
     }
 
     getUrl() {
@@ -29,14 +35,15 @@ export class MongoDbDatabase extends Database {
     async release(context: Context): Promise<void> {
         console.log('MongoDbDatabase.release', this.getName());
         if (!context) throw new Error('no context');
-        const client = this.getConnection(context);
+        const { client, session } = this.getConnection(context) as MongoDbDatabaseConnection;
+        session.endSession();
         await client.close();
         context.connections[this.getName()] = null;
     }
 
     async query(context: Context, query: string, params: any): Promise<any[]> {
         console.log('MongoDbDatabase.query', query, params);
-        const client = this.getConnection(context) as MongoClient;
+        const client = (this.getConnection(context) as MongoDbDatabaseConnection).client;
         const { database } = this.getConfig();
         const db = client.db(database);
 
@@ -57,6 +64,21 @@ export class MongoDbDatabase extends Database {
 
     getPort(): number {
         return 27017;
+    }
+
+    async begin(context: Context): Promise<void> {
+        console.log('MongoDbDatabase.begin');
+        (this.getConnection(context) as MongoDbDatabaseConnection).session.startTransaction();
+    }
+
+    async commit(context: Context): Promise<void> {
+        console.log('MongoDbDatabase.commit');
+        (this.getConnection(context) as MongoDbDatabaseConnection).session.commitTransaction();
+    }
+
+    async rollback(context: Context, err): Promise<void> {
+        console.log('MongoDbDatabase.rollback');
+        (this.getConnection(context) as MongoDbDatabaseConnection).session.abortTransaction();
     }
 
     async deinit(): Promise<void> {
