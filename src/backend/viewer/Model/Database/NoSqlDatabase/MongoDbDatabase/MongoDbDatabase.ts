@@ -1,13 +1,13 @@
 import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession } from 'mongodb';
-import { Database } from '../Database';
-import { Context } from '../../../../Context';
+import { NoSqlDatabase } from '../NoSqlDatabase';
+import { Context } from '../../../../../Context';
 
 interface IMongoDbDatabaseConnection {
     client: MongoClient;
     session: ClientSession;
 }
 
-export class MongoDbDatabase extends Database {
+export class MongoDbDatabase extends NoSqlDatabase {
     async connect(context: Context): Promise<void> {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
