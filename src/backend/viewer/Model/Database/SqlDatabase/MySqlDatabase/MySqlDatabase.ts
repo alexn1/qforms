@@ -1,9 +1,9 @@
-import { Context } from '../../../../Context';
-import { Database } from '../Database';
+import { Context } from '../../../../../Context';
+import { SqlDatabase } from '../SqlDatabase';
 
 const mysql = require('mysql');
 
-export class MySqlDatabase extends Database {
+export class MySqlDatabase extends SqlDatabase {
     pool: any;
     constructor(data, parent?) {
         super(data, parent);

@@ -8,7 +8,7 @@ export { JsonFile } from './JsonFile';
 export { Model } from './viewer/Model/Model';
 export { Application } from './viewer/Model/Application/Application';
 export { Database } from './viewer/Model/Database/Database';
-export { MySqlDatabase } from './viewer/Model/Database/MySqlDatabase/MySqlDatabase';
+export { MySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { PostgreSqlDatabase } from './viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase';
 export { MongoDbDatabase } from './viewer/Model/Database/MongoDbDatabase/MongoDbDatabase';
 export { DataSource } from './viewer/Model/DataSource/DataSource';

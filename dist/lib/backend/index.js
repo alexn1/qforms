@@ -23,7 +23,7 @@ var Application_1 = require("./viewer/Model/Application/Application");
 Object.defineProperty(exports, "Application", { enumerable: true, get: function () { return Application_1.Application; } });
 var Database_1 = require("./viewer/Model/Database/Database");
 Object.defineProperty(exports, "Database", { enumerable: true, get: function () { return Database_1.Database; } });
-var MySqlDatabase_1 = require("./viewer/Model/Database/MySqlDatabase/MySqlDatabase");
+var MySqlDatabase_1 = require("./viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase");
 Object.defineProperty(exports, "MySqlDatabase", { enumerable: true, get: function () { return MySqlDatabase_1.MySqlDatabase; } });
 var PostgreSqlDatabase_1 = require("./viewer/Model/Database/PostgreSqlDatabase/PostgreSqlDatabase");
 Object.defineProperty(exports, "PostgreSqlDatabase", { enumerable: true, get: function () { return PostgreSqlDatabase_1.PostgreSqlDatabase; } });

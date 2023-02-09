@@ -1,11 +1,10 @@
-import { Database } from '../Database';
-import { Context } from '../../../../Context';
 import { Pool, Client } from 'pg';
+import { SqlDatabase } from '../SqlDatabase';
+import { Context } from '../../../../../Context';
 
-// const { Pool, Client } = require('pg');
 const colors = require('colors');
 
-export class PostgreSqlDatabase extends Database {
+export class PostgreSqlDatabase extends SqlDatabase {
     pool: Pool = null;
     /* constructor(data, parent?) {
         console.log('new PostgreSqlDatabase');
