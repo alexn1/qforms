@@ -1,28 +1,50 @@
+// configuring eslint for typescript, react and prettier
+// https://www.robertcooper.me/using-eslint-and-prettier-in-a-typescript-project
+
 module.exports = {
-    extends: ['eslint:recommended', 'airbnb', 'airbnb-typescript'],
-    parserOptions: {
-        project: './tsconfig.json',
+    env: {
+        browser: true,
+        node: true,
+        es2021: true,
     },
-    ignorePatterns: ['.eslintrc.js'],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/recommended',
+        'prettier',
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended',
+        'plugin:prettier/recommended',
+    ],
+    parser: '@typescript-eslint/parser',
+    parserOptions: {
+        ecmaVersion: 12,
+        sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true,
+        },
+    },
+    overrides: [
+        {
+            files: ['**/*.js'],
+            rules: {
+                '@typescript-eslint/no-var-requires': 'off',
+            },
+        },
+    ],
+    settings: {
+        react: {
+            version: 'detect',
+        },
+    },
     rules: {
-        'import/prefer-default-export': 'off',
-        '@typescript-eslint/indent': 'off',
-        'no-console': 'off',
-        '@typescript-eslint/lines-between-class-members': 'off',
-        'arrow-parens': ['warn', 'as-needed'],
-        'react/react-in-jsx-scope': 'off',
-        'react/jsx-indent': 'off',
-        'react/jsx-indent-props': 'off',
-        'spaced-comment': 'off',
-        'max-len': 'off',
-        'react/jsx-curly-brace-presence': 'off',
-        '@typescript-eslint/no-unused-vars': 'off',
-        'class-methods-use-this': 'off',
-        'object-curly-newline': 'off',
-        'no-await-in-loop': 'off',
-        'import/no-cycle': 'off',
-        'object-shorthand': 'off',
-        'react/jsx-one-expression-per-line': 'off',
-        'no-return-assign': 'off',
+        'spaced-comment': ['warn', 'always'],
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        '@typescript-eslint/ban-ts-comment': 'off',
+        '@typescript-eslint/no-non-null-assertion': 'off',
+        'prettier/prettier': 'warn',
+        'react-hooks/rules-of-hooks': 'warn',
+        'react/display-name': 'off',
+        'react/prop-types': 'off',
     },
 };
