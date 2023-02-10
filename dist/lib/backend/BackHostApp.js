@@ -48,7 +48,7 @@ class BackHostApp {
     async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
-        this.appsDirPath = path.resolve(this.params.appsDirPath || './apps');
+        this.appsDirPath = path.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl = this.params.logErrorUrl || null;
