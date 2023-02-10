@@ -5,6 +5,7 @@ export class WebSocketClient {
     refreshTimeoutId: any;
     RECONNECT_TIMEOUT: number;
     REFRESH_TIMEOUT: number;
+
     constructor(options: any = {}) {
         // console.log('WebSocketClient.constructor', options);
         this.options = options;
@@ -18,6 +19,7 @@ export class WebSocketClient {
         this.RECONNECT_TIMEOUT = 10; // sec
         this.REFRESH_TIMEOUT = 60 * 60; // sec
     }
+
     createUriParamsString(options) {
         const params = {
             route: options.route,
@@ -28,18 +30,19 @@ export class WebSocketClient {
                 .getData().versions.app,
         };
         return Object.keys(params)
-            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .map((key) => `${key}=${encodeURIComponent(params[key])}`)
             .join('&');
     }
+
     connect() {
         console.log('WebSocketClient.connect', this.url);
         return new Promise((resolve, reject) => {
             this.webSocket = new WebSocket(this.url);
-            this.webSocket.onclose = async e => {
+            this.webSocket.onclose = async (e) => {
                 this.webSocket = null;
                 reject(new Error(`Connection failed ${e.code}`));
             };
-            this.webSocket.onopen = e => {
+            this.webSocket.onopen = (e) => {
                 this.webSocket.onclose = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 this.startRefreshTimeout();
@@ -47,28 +50,33 @@ export class WebSocketClient {
             };
         });
     }
+
     async onRefreshTimeout() {
         // console.log('WebSocketClient.onRefreshTimeout');
         this.refreshTimeoutId = null;
         this.send('ping');
         this.startRefreshTimeout();
     }
+
     send(data) {
         console.log('WebSocketClient.send', data);
         this.webSocket.send(data);
     }
+
     startRefreshTimeout() {
         this.refreshTimeoutId = setTimeout(
             this.onRefreshTimeout.bind(this),
             this.REFRESH_TIMEOUT * 1000,
         );
     }
+
     resetRefreshTimeout() {
         if (this.refreshTimeoutId) {
             clearTimeout(this.refreshTimeoutId);
             this.refreshTimeoutId = null;
         }
     }
+
     async reconnect() {
         console.log('WebSocketClient.reconnect');
         try {
@@ -99,6 +107,7 @@ export class WebSocketClient {
         this.webSocket = null;
         await this.reconnect();
     }
+
     async onMessage(e) {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
@@ -117,6 +126,7 @@ export class WebSocketClient {
                 .rerender();
         }
     }
+
     getApp() {
         return this.options.applicationController;
     }
