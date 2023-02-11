@@ -27,9 +27,11 @@ export class ViewerModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
+
     constructor(hostApp: BackHostApp) {
         this.hostApp = hostApp;
     }
+
     async init() {
         this.css = (
             await Helper.getFilePaths(
@@ -46,12 +48,14 @@ export class ViewerModule {
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
+
     getLinks() {
         return [
             // ...this.hostApp.commonModule.css,
             ...this.css,
         ];
     }
+
     getScripts() {
         return [
             // '/lib/react/react.development.js',
@@ -62,6 +66,7 @@ export class ViewerModule {
             ...this.js,
         ];
     }
+
     async handleViewerGet(context: Context, application: Application) {
         console.log(
             'ViewerModule.handleViewerGet',
@@ -90,6 +95,7 @@ export class ViewerModule {
             }
         }
     }
+
     async loginGet(context: Context, application: Application) {
         console.log('ViewerModule.loginGet');
         // const application = this.getApplication(context);
@@ -109,6 +115,7 @@ export class ViewerModule {
             },
         });
     }
+
     async handleViewerPost(context: Context, application: Application) {
         // console.log('ViewerModule.handleViewerPost');
         if (context.getReq().body.action === 'login') {
@@ -129,6 +136,7 @@ export class ViewerModule {
             return await this[context.getReq().body.action](context, application);
         }
     }
+
     async loginPost(context: Context, application: Application): Promise<void> {
         console.log('ViewerModule.loginPost');
         const req = context.getReq();
