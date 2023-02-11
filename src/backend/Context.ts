@@ -1,3 +1,13 @@
+import { Request, Response } from 'express';
+
+declare module 'express' {
+    export interface Request {
+        session: any;
+        headers: any;
+        files: any;
+    }
+}
+
 export class Context {
     options: any;
     query: any;
@@ -95,11 +105,11 @@ export class Context {
         };
     }
 
-    getReq(): any {
+    getReq(): Request {
         return this.options.req;
     }
 
-    getRes(): any {
+    getRes(): Response {
         return this.options.res;
     }
 

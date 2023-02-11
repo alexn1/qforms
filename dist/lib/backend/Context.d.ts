@@ -1,3 +1,11 @@
+import { Request, Response } from 'express';
+declare module 'express' {
+    interface Request {
+        session: any;
+        headers: any;
+        files: any;
+    }
+}
 export declare class Context {
     options: any;
     query: any;
@@ -14,8 +22,8 @@ export declare class Context {
     getCookies(): any;
     getQuery(): any;
     getParams(): any;
-    getReq(): any;
-    getRes(): any;
+    getReq(): Request;
+    getRes(): Response;
     getBody(): any;
     getModule(): string;
     getDomain(): string;
