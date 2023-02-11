@@ -2,17 +2,9 @@ import { Helper } from './Helper';
 import { BaseModel } from './BaseModel';
 
 export class JsonFile {
-    filePath: string;
+    content: string | null = null;
 
-    content: string;
-
-    data: any;
-
-    constructor(filePath, data = null) {
-        this.filePath = filePath;
-        this.data = data;
-        this.content = null;
-    }
+    constructor(public filePath: string, public data: any = null) {}
 
     async create(): Promise<void> {
         const exists = await Helper.exists(this.filePath);
