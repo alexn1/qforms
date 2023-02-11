@@ -1,8 +1,15 @@
 import { DataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
 import { Table } from '../../Table/Table';
+import { Context } from '../../../../Context';
+
+export type SelectResult = [any[], number | null];
 
 export class PersistentDataSource<TDatabase extends Database = Database> extends DataSource {
+    async select(context: Context): Promise<SelectResult> {
+        throw new Error(`${this.constructor.name}.select not implemented`);
+    }
+
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {

@@ -36,4 +36,5 @@ export declare class DataSource extends Model {
     getForm(): Form | null;
     getAccess(context: Context): IAccessResult;
     getDatabase(): Database;
+    getLimit(): number;
 }

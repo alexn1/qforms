@@ -15,14 +15,15 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         const response = await super.fill(context);
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
-            if (this.getAttr('limit') !== '') {
-                response.limit = parseInt(this.getAttr('limit'), 10);
+            const limit = this.getLimit();
+            if (limit) {
+                response.limit = limit;
             }
             response.rows = [];
             response.count = 0;
             return response;
         }
-        if (this.getAttr('limit') !== '') {
+        if (this.getLimit()) {
             context.params.frame = 1;
         }
         try {
@@ -37,20 +38,20 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         if (this.isDefaultOnRowForm() && response.rows[0]) {
             this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
         }
-        if (this.getAttr('limit') !== '') {
+        if (this.getLimit()) {
             response.limit = context.params.limit;
         }
         return response;
     }
     async select(context) {
-        if (this.getAccess(context).select !== true) {
+        if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
         // rows
-        if (this.getAttr('limit') !== '') {
+        const limit = this.getLimit();
+        if (limit) {
             if (!context.params.frame)
                 throw new Error('no frame param');
-            const limit = parseInt(this.getAttr('limit'), 10);
             context.setParam('skip', (context.params.frame - 1) * limit);
             context.setParam('limit', limit);
         }
@@ -61,7 +62,7 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         this.prepareRows(context, rows);
         // count
         let count = null;
-        if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
+        if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getSelectParams(context));
                 // console.log('count:', count);

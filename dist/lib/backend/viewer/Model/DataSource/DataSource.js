@@ -244,14 +244,20 @@ class DataSource extends Model_1.Model {
     }
     getAccess(context) {
         return {
-            select: true,
-            insert: true,
+            create: true,
+            read: true,
             update: true,
             delete: true,
         };
     }
     getDatabase() {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
+    }
+    getLimit() {
+        if (this.getAttr('limit') !== '') {
+            return parseInt(this.getAttr('limit'));
+        }
+        return null;
     }
 }
 exports.DataSource = DataSource;

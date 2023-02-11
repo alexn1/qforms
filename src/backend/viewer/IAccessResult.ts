@@ -1,6 +1,6 @@
 export interface IAccessResult {
-    select: boolean;
-    insert: boolean;
+    create: boolean;
+    read: boolean;
     update: boolean;
     delete: boolean;
 }

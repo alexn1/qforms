@@ -436,7 +436,7 @@ export class DataSource extends Model {
         return null;
     }
 
-    onTableInsert = async e => {
+    onTableInsert = async (e) => {
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
@@ -466,7 +466,7 @@ export class DataSource extends Model {
         this.emit('insert', e);
     };
 
-    onTableUpdate = async e => {
+    onTableUpdate = async (e) => {
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
@@ -490,7 +490,7 @@ export class DataSource extends Model {
         this.emit('update', e);
     };
 
-    onTableDelete = async e => {
+    onTableDelete = async (e) => {
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
@@ -532,7 +532,7 @@ export class DataSource extends Model {
         this.emit('refresh', event);
     }
 
-    getLimit() {
+    getLimit(): number | null {
         if (this.getAttr('limit')) {
             return parseInt(this.getAttr('limit'));
         }

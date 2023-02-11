@@ -17,14 +17,15 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         const response = await super.fill(context);
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
-            if (this.getAttr('limit') !== '') {
-                response.limit = parseInt(this.getAttr('limit'), 10);
+            const limit = this.getLimit();
+            if (limit) {
+                response.limit = limit;
             }
             response.rows = [];
             response.count = 0;
             return response;
         }
-        if (this.getAttr('limit') !== '') {
+        if (this.getLimit()) {
             context.params.frame = 1;
         }
         try {
@@ -39,7 +40,7 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         if (this.isDefaultOnRowForm() && response.rows[0]) {
             this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
         }
-        if (this.getAttr('limit') !== '') {
+        if (this.getLimit()) {
             response.limit = context.params.limit;
         }
         return response;
@@ -106,14 +107,14 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         return context.getParams();
     }
     async select(context) {
-        if (this.getAccess(context).select !== true) {
+        if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
         // rows
-        if (this.getAttr('limit') !== '') {
+        const limit = this.getLimit();
+        if (limit) {
             if (!context.params.frame)
                 throw new Error('no frame param');
-            const limit = parseInt(this.getAttr('limit'), 10);
             context.params.offset = (context.params.frame - 1) * limit;
             context.params.limit = limit;
         }
@@ -125,7 +126,7 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         this.prepareRows(context, rows);
         // count
         let count = null;
-        if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
+        if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
                 count = parseInt(count, 10);
@@ -139,7 +140,7 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
     }
     async insert(context, _values = null) {
         console.log('SqlDataSource.insert');
-        if (this.getAccess(context).insert !== true) {
+        if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
         if (!this.table) {

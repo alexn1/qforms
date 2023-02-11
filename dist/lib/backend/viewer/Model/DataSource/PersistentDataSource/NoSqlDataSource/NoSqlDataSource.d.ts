@@ -1,4 +1,4 @@
-import { PersistentDataSource } from '../PersistentDataSource';
+import { PersistentDataSource, SelectResult } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
 import { Table } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
@@ -7,7 +7,7 @@ export declare class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase>
     table: Table;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
-    select(context: Context): Promise<[any[], number | null]>;
+    select(context: Context): Promise<SelectResult>;
     update(context: Context): Promise<Result>;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;

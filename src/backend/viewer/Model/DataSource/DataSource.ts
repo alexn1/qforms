@@ -277,8 +277,8 @@ export class DataSource extends Model {
 
     getAccess(context: Context): IAccessResult {
         return {
-            select: true,
-            insert: true,
+            create: true,
+            read: true,
             update: true,
             delete: true,
         };
@@ -286,5 +286,12 @@ export class DataSource extends Model {
 
     getDatabase(): Database {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
+    }
+
+    getLimit() {
+        if (this.getAttr('limit') !== '') {
+            return parseInt(this.getAttr('limit'));
+        }
+        return null;
     }
 }
