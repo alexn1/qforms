@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MySqlDatabase = void 0;
+const mysql_1 = require("mysql");
 const SqlDatabase_1 = require("../SqlDatabase");
-const mysql = require('mysql');
 class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
     constructor(data, parent) {
         super(data, parent);
@@ -16,7 +16,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
     async deinit() {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
         if (this.pool !== null) {
-            await new Promise(resolve => {
+            await new Promise((resolve) => {
                 this.pool.end(() => {
                     resolve();
                 });
@@ -27,7 +27,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         //console.log('MySqlDatabase.getPool');
         if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
-            this.pool = mysql.createPool(this.getConfig());
+            this.pool = (0, mysql_1.createPool)(this.getConfig());
         }
         //console.log('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
@@ -135,7 +135,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         console.log('MySqlDatabase.begin');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.beginTransaction(err => {
+            cnn.beginTransaction((err) => {
                 if (err) {
                     reject(err);
                 }
@@ -149,7 +149,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         console.log('MySqlDatabase.commit');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.commit(err => {
+            cnn.commit((err) => {
                 if (err) {
                     reject(err);
                 }
@@ -172,7 +172,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         console.log('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
-                return mysql.escape(params[name]);
+                return (0, mysql_1.escape)(params[name]);
             }
             throw new Error(`no query param: ${name}`);
         });
@@ -194,7 +194,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         console.log('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
-            const cnn = mysql.createConnection(config);
+            const cnn = (0, mysql_1.createConnection)(config);
             cnn.connect();
             cnn.query('show tables', (err, rows, fields) => {
                 cnn.end();
@@ -203,7 +203,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
                 }
                 else {
                     //console.log('rows:', rows);
-                    const tables = rows.map(row => row[fields[0].name]);
+                    const tables = rows.map((row) => row[fields[0].name]);
                     console.log('tables:', tables);
                     resolve(tables);
                 }
@@ -214,7 +214,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         console.log('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
-            const cnn = mysql.createConnection(config);
+            const cnn = (0, mysql_1.createConnection)(config);
             cnn.connect();
             const query = `SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
 FROM information_schema.columns \
@@ -225,7 +225,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                     reject(err);
                 }
                 else {
-                    const tableInfo = rows.map(row => {
+                    const tableInfo = rows.map((row) => {
                         // console.log('row:', row);
                         return {
                             name: row.COLUMN_NAME,

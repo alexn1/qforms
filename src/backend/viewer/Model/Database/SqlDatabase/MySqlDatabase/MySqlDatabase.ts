@@ -1,7 +1,6 @@
+import { createPool, createConnection, escape } from 'mysql';
 import { Context } from '../../../../../Context';
 import { SqlDatabase } from '../SqlDatabase';
-
-const mysql = require('mysql');
 
 export class MySqlDatabase extends SqlDatabase {
     pool: any;
@@ -19,7 +18,7 @@ export class MySqlDatabase extends SqlDatabase {
     async deinit(): Promise<void> {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
         if (this.pool !== null) {
-            await new Promise<void>(resolve => {
+            await new Promise<void>((resolve) => {
                 this.pool.end(() => {
                     resolve();
                 });
@@ -31,7 +30,7 @@ export class MySqlDatabase extends SqlDatabase {
         //console.log('MySqlDatabase.getPool');
         if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
-            this.pool = mysql.createPool(this.getConfig());
+            this.pool = createPool(this.getConfig());
         }
         //console.log('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
@@ -154,7 +153,7 @@ export class MySqlDatabase extends SqlDatabase {
         console.log('MySqlDatabase.begin');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.beginTransaction(err => {
+            cnn.beginTransaction((err) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -168,7 +167,7 @@ export class MySqlDatabase extends SqlDatabase {
         console.log('MySqlDatabase.commit');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.commit(err => {
+            cnn.commit((err) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -192,7 +191,7 @@ export class MySqlDatabase extends SqlDatabase {
         console.log('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
-                return mysql.escape(params[name]);
+                return escape(params[name]);
             }
             throw new Error(`no query param: ${name}`);
         });
@@ -217,7 +216,7 @@ export class MySqlDatabase extends SqlDatabase {
         console.log('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
-            const cnn = mysql.createConnection(config);
+            const cnn = createConnection(config);
             cnn.connect();
             cnn.query('show tables', (err, rows, fields) => {
                 cnn.end();
@@ -225,7 +224,7 @@ export class MySqlDatabase extends SqlDatabase {
                     reject(err);
                 } else {
                     //console.log('rows:', rows);
-                    const tables = rows.map(row => row[fields[0].name]);
+                    const tables = rows.map((row) => row[fields[0].name]);
                     console.log('tables:', tables);
                     resolve(tables);
                 }
@@ -237,7 +236,7 @@ export class MySqlDatabase extends SqlDatabase {
         console.log('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
-            const cnn = mysql.createConnection(config);
+            const cnn = createConnection(config);
             cnn.connect();
             const query = `SELECT COLUMN_NAME, COLUMN_TYPE, IS_NULLABLE, COLUMN_KEY, COLUMN_DEFAULT, EXTRA, COLUMN_COMMENT \
 FROM information_schema.columns \
@@ -247,7 +246,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 if (err) {
                     reject(err);
                 } else {
-                    const tableInfo = rows.map(row => {
+                    const tableInfo = rows.map((row) => {
                         // console.log('row:', row);
                         return {
                             name: row.COLUMN_NAME,
