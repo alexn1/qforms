@@ -1,5 +1,5 @@
 import { Database } from '../Database';
-export declare class SqlDatabase extends Database {
+export declare class SqlDatabase<TConnection = any> extends Database<TConnection> {
     getUpdateQuery(tableName: any, values: any, where: any): string;
     getInsertQuery(tableName: any, values: any): string;
     getDeleteQuery(tableName: any, rowKeyValues: any): string;

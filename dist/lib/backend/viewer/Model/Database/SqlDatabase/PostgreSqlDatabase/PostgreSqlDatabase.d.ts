@@ -1,10 +1,10 @@
-import { Pool } from 'pg';
+import { Pool, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
-export declare class PostgreSqlDatabase extends SqlDatabase {
+export declare class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
     pool: Pool;
     deinit(): Promise<void>;
-    getPool(): any;
+    getPool(): Pool;
     static createPool(config: any): Pool;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;

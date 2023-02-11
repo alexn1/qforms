@@ -111,9 +111,9 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         }
         const usedValues = SqlDatabase_1.SqlDatabase.getUsedParams(query);
         // console.log('usedValues:', usedValues);
-        const keys = Object.keys(params).filter(key => usedValues.indexOf(key) > -1);
+        const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);
-        const values = keys.map(key => params[key]);
+        const values = keys.map((key) => params[key]);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
                 return `$${keys.indexOf(name) + 1}`;
@@ -126,7 +126,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         // console.log('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
-            .map(keyColumn => `"${keyColumn}" = {${keyColumn}}`)
+            .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
         // console.log('query:', query);
@@ -143,8 +143,8 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
             throw new Error('getUpdateQuery: no values');
         if (whereKeys.length === 0)
             throw new Error('getUpdateQuery: no where');
-        const valuesString = valueKeys.map(name => `"${name}" = {val_${name}}`).join(', ');
-        const whereString = whereKeys.map(name => `"${name}" = {key_${name}}`).join(' and ');
+        const valuesString = valueKeys.map((name) => `"${name}" = {val_${name}}`).join(', ');
+        const whereString = whereKeys.map((name) => `"${name}" = {key_${name}}`).join(' and ');
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
@@ -152,8 +152,8 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         const columns = Object.keys(values);
         if (!columns.length)
             return `insert into "${tableName}" default values`;
-        const columnsString = columns.map(column => `"${column}"`).join(', ');
-        const valuesString = columns.map(column => `{${column}}`).join(', ');
+        const columnsString = columns.map((column) => `"${column}"`).join(', ');
+        const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
         // console.log('query:', query);
         return query;
@@ -161,7 +161,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
     async getTableList() {
         console.log('PostgreSqlDatabase.getTableList');
         const rows = await this.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
-        const tableList = rows.map(row => row.table_name);
+        const tableList = rows.map((row) => row.table_name);
         // console.log('tableList:', tableList);
         return tableList;
     }
@@ -171,10 +171,10 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         // console.log('keyColumns:', keyColumns);
         const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
         // console.log('getTableInfo rows:', rows);
-        const tableInfo = rows.map(row => ({
+        const tableInfo = rows.map((row) => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
-            key: !!keyColumns.find(keyColumn => keyColumn.attname === row.column_name),
+            key: !!keyColumns.find((keyColumn) => keyColumn.attname === row.column_name),
             auto: row.column_default && row.column_default.substr(0, 7) === 'nextval' ? true : false,
             nullable: row.is_nullable === 'YES',
             comment: null,
@@ -230,7 +230,7 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         const autoColumns = Object.keys(autoColumnTypes);
         if (!autoColumns.length)
             throw new Error('no auto columns');
-        const queries = autoColumns.map(column => `select currval('"${table}_${column}_seq"')`);
+        const queries = autoColumns.map((column) => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
         // console.log('query:', query);
         const result = await this.queryResult(context, query);
