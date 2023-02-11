@@ -6,23 +6,22 @@ import { Database } from '../Database/Database';
 import { Form } from '../Form/Form';
 import { IAccessResult } from '../../IAccessResult';
 export declare class DataSource extends Model {
-    keyColumns: any;
+    keyColumns: string[];
     rows: any[];
-    constructor(data: any, parent: any);
     getDirPath(): string;
     getJsonFilePath(): string;
-    init(context: any): Promise<void>;
+    init(context: Context): Promise<void>;
     getKeyColumns(): string[];
     prepareRows(context: Context, rows: any[]): void;
-    checkColumns(row: any): void;
-    encodeRows(rows: any): void;
-    encodeRow(row: any): void;
+    checkColumns(row: Object): void;
+    encodeRows(rows: Object[]): void;
+    encodeRow(row: Object): void;
     getApp(): Application;
-    getKeyValuesFromKey(key: any): {};
+    getKeyValuesFromKey(key: string): {};
     getKeyFromValues(values: any): string;
     getFullName(): string;
     static keyToParams(key: string, paramName?: string): {};
-    calcNewKeyValues(originalKeyValues: any, values: any): any;
+    calcNewKeyValues(originalKeyValues: any, values: any): {};
     calcNewKey(key: any, values: any): string;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
@@ -35,6 +34,6 @@ export declare class DataSource extends Model {
     insert(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
-    getForm(): Form;
+    getForm(): Form | null;
     getAccess(context: Context): IAccessResult;
 }

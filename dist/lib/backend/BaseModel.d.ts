@@ -3,7 +3,7 @@ export declare class BaseModel {
     parent: any;
     constructor(data: any, parent?: any);
     static getClassName(data: any): string;
-    static getAttr(data: any, name: any): any;
+    static getAttr(data: any, name: string): string;
     static getName(data: any): string;
     static getEnvList(data: any): string[];
     getClassName(): string;

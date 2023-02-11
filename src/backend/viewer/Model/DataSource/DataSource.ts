@@ -13,23 +13,22 @@ import { TableForm } from '../Form/TableForm/TableForm';
 import { IAccessResult } from '../../IAccessResult';
 
 export class DataSource extends Model {
-    keyColumns: any;
-    rows: any[];
-    constructor(data, parent) {
-        super(data, parent);
-        this.keyColumns = [];
-        this.rows = [];
-    }
+    keyColumns: string[] = [];
+    rows: any[] = [];
 
-    getDirPath() {
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
+
+    getDirPath(): string {
         return path.join(this.parent.getDirPath(), 'dataSources', this.getName());
     }
 
-    getJsonFilePath() {
+    getJsonFilePath(): string {
         return path.join(this.getDirPath(), `${this.getName()}.json`);
     }
 
-    async init(context) {
+    async init(context: Context): Promise<void> {
         // console.log('DataSource.init', this.getFullName());
         await super.init(context);
 
@@ -92,7 +91,7 @@ export class DataSource extends Model {
         this.encodeRows(rows);
     }
 
-    checkColumns(row) {
+    checkColumns(row: any): void {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
             if (column) {
@@ -112,13 +111,13 @@ export class DataSource extends Model {
         }
     }
 
-    encodeRows(rows) {
+    encodeRows(rows: any[]) {
         for (const row of rows) {
             this.encodeRow(row);
         }
     }
 
-    encodeRow(row) {
+    encodeRow(row: any): void {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
         if (this.isDefaultOnForm()) {
@@ -145,7 +144,7 @@ export class DataSource extends Model {
         return values;
     }*/
 
-    getKeyValuesFromKey(key) {
+    getKeyValuesFromKey(key: string) {
         const arr = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
@@ -247,19 +246,19 @@ export class DataSource extends Model {
         return this.rows;
     }
 
-    isOnForm() {
+    isOnForm(): boolean {
         return this.parent instanceof Form;
     }
 
-    isDefaultOnForm() {
+    isDefaultOnForm(): boolean {
         return this.getName() === 'default' && this.isOnForm();
     }
 
-    isDefaultOnRowForm() {
+    isDefaultOnRowForm(): boolean {
         return this.getName() === 'default' && this.parent instanceof RowForm;
     }
 
-    isDefaultOnTableForm() {
+    isDefaultOnTableForm(): boolean {
         return this.getName() === 'default' && this.parent instanceof TableForm;
     }
 
@@ -277,7 +276,7 @@ export class DataSource extends Model {
     async delete(context: Context): Promise<Result> {
         throw new Error(`${this.constructor.name}.delete not implemented`);
     }
-    getForm(): Form {
+    getForm(): Form | null {
         return this.isOnForm() ? this.getParent() : null;
     }
 

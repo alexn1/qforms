@@ -12,11 +12,14 @@ const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 const TableForm_1 = require("../Form/TableForm/TableForm");
 class DataSource extends Model_1.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.keyColumns = [];
         this.rows = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
     getDirPath() {
         return path_1.default.join(this.parent.getDirPath(), 'dataSources', this.getName());
     }

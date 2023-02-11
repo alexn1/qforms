@@ -119,6 +119,17 @@ export class NoSqlDataSource extends DataSource {
     }
 
     async update(context: Context): Promise<Result> {
-        return new Result();
+        console.log('NoSqlDataSource.update');
+        if (this.getAccess(context).update !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        }
+
+        if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+
+        const result = new Result();
+
+        return result;
     }
 }

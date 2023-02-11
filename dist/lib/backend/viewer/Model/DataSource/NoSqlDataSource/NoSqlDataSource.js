@@ -96,7 +96,16 @@ class NoSqlDataSource extends DataSource_1.DataSource {
         return context.getParams();
     }
     async update(context) {
-        return new Result_1.Result();
+        console.log('NoSqlDataSource.update');
+        if (this.getAccess(context).update !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        }
+        if (!this.table)
+            throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        const result = new Result_1.Result();
+        return result;
     }
 }
 exports.NoSqlDataSource = NoSqlDataSource;

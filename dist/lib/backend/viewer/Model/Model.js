@@ -3,10 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Model = void 0;
 const BaseModel_1 = require("../../BaseModel");
 class Model extends BaseModel_1.BaseModel {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.fillCollections = [];
     }
+    /* constructor(data: any, parent?: any) {
+        super(data, parent);
+    } */
     async init(context) { }
     async fill(context) {
         // console.log('Model.fill', this.constructor.name, this.getName());

@@ -12,7 +12,7 @@ export class BaseModel {
         return data['@class'];
     }
 
-    static getAttr(data, name) {
+    static getAttr(data: any, name: string): string {
         return data['@attributes'][name];
     }
 
@@ -20,7 +20,7 @@ export class BaseModel {
         return BaseModel.getAttr(data, 'name');
     }
 
-    static getEnvList(data) {
+    static getEnvList(data): string[] {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }

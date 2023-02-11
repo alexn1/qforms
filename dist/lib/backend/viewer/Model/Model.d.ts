@@ -2,7 +2,6 @@ import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 export declare class Model extends BaseModel {
     fillCollections: any[];
-    constructor(data: any, parent?: any);
     init(context: Context): Promise<void>;
     fill(context: Context): Promise<any>;
     fillAttributes(response: any): void;

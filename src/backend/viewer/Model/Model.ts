@@ -2,11 +2,11 @@ import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 
 export class Model extends BaseModel {
-    fillCollections: any[];
-    constructor(data: any, parent?: any) {
+    fillCollections: any[] = [];
+
+    /* constructor(data: any, parent?: any) {
         super(data, parent);
-        this.fillCollections = [];
-    }
+    } */
 
     async init(context: Context): Promise<void> {}
 
