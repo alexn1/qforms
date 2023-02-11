@@ -17,19 +17,11 @@ export class PersistentDataSource<TDatabase extends Database = Database> extends
             const column = field.getAttr('column');
             if (row.hasOwnProperty(column)) {
                 const value = field.rawToValue(row[column]);
-                values[column] = field.valueToSqlValue(value);
+                values[column] = field.valueToDbValue(value);
             }
         }
         return values;
     }
-
-    /* getDatabase(): TDatabase {
-        return super.getDatabase() as MongoDbDatabase;
-    } */
-
-    /* getDatabase(): SqlDatabase {
-        return super.getDatabase() as SqlDatabase;
-    } */
 
     getDatabase(): TDatabase {
         const databaseName = this.getAttr('database');

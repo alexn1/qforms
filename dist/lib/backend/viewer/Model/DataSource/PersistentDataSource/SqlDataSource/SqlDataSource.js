@@ -178,15 +178,15 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         }
         if (!this.table)
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const databaseName = this.getAttr('database');
+        const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
         // console.log('changes:', changes);
         const key = Object.keys(changes)[0];
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         // update row
-        const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
+        const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
         const _values = Helper_1.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = Helper_1.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
@@ -207,8 +207,8 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         // console.log('row:', row);
         // result
         const result = new Result_1.Result();
-        Result_1.Result.addUpdateToResult(result, database, table, key, newKey);
-        Result_1.Result.addUpdateExToResult(result, database, table, key, row);
+        Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
+        Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, row);
         return result;
     }
     async delete(context) {

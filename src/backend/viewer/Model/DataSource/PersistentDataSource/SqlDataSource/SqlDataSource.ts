@@ -208,8 +208,8 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         }
 
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const databaseName = this.getAttr('database');
+        const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
 
         // console.log('changes:', changes);
@@ -218,7 +218,7 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         const values = changes[key];
 
         // update row
-        const updateQuery = this.getDatabase().getUpdateQuery(this.getAttr('table'), values, where);
+        const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
         const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = { ..._values, ..._where };
@@ -241,8 +241,8 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
 
         // result
         const result = new Result();
-        Result.addUpdateToResult(result, database, table, key, newKey);
-        Result.addUpdateExToResult(result, database, table, key, row);
+        Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
+        Result.addUpdateExToResult(result, databaseName, tableName, key, row);
         return result;
     }
 
@@ -294,6 +294,4 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     async getBuffer(context: Context, file) {
         return file.data;
     }
-
-
 }

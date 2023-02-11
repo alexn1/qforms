@@ -20,5 +20,5 @@ export declare class Field extends Model {
     getDatabaseTableColumn(): Column;
     getType(): string;
     getDbType(): string;
-    valueToSqlValue(value: any): any;
+    valueToDbValue(value: any): any;
 }
