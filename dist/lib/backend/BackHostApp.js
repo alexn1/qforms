@@ -256,9 +256,10 @@ class BackHostApp {
         return appInfos;
     }
     async logError(err, req = null) {
+        var _a, _b;
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
-            const route = err.context ? err.context.getRoute() : null;
+            const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
             const data = req
                 ? {
                     headers: req.headers,
@@ -270,8 +271,8 @@ class BackHostApp {
                     appVersion: route ? this.applications[route].getVersion() : null,
                     route: route,
                     body: req.body,
-                    status: err.status || null,
-                    data: err.data || null,
+                    status: err instanceof MyError_1.MyError ? err.status || null : null,
+                    data: err instanceof MyError_1.MyError ? err.data || null : null,
                 }
                 : null;
             if (this.logPool) {
@@ -280,7 +281,7 @@ class BackHostApp {
                     source: 'server',
                     ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
                     message: err.message,
-                    stack: err.stack.toString(),
+                    stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
                     data: data ? JSON.stringify(data, null, 4) : null,
                 });
             }
@@ -296,7 +297,7 @@ class BackHostApp {
                             ? req.headers['x-forwarded-for'] || req.connection.remoteAddress
                             : null,
                         message: err.message,
-                        stack: err.stack.toString(),
+                        stack: (_b = err.stack) === null || _b === void 0 ? void 0 : _b.toString(),
                         data: data,
                     }),
                 });

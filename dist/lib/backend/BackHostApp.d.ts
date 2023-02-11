@@ -39,7 +39,7 @@ export declare class BackHostApp {
     createApplication(context: Context): Promise<Application>;
     getApplicationClass(appInfo: AppInfo): any;
     createApp(req: any): Promise<AppInfo[]>;
-    logError(err: any, req?: Request | null): Promise<void>;
+    logError(err: Error, req?: Request | null): Promise<void>;
     logRequest(req: any, context: Context, time: any): Promise<void>;
     logEvent(context: Context, message: string, data?: any): Promise<void>;
     static createLog(cnn: any, values: any): Promise<void>;
