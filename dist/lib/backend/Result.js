@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Result = exports.DResult = exports.TResult = exports.UpdateEx = exports.Update = exports.InsertEx = void 0;
+exports.Result = exports.DatabaseResult = exports.TableResult = exports.UpdateEx = exports.Update = exports.InsertEx = void 0;
 class InsertEx {
 }
 exports.InsertEx = InsertEx;
@@ -10,27 +10,27 @@ exports.Update = Update;
 class UpdateEx {
 }
 exports.UpdateEx = UpdateEx;
-class TResult {
+class TableResult {
 }
-exports.TResult = TResult;
-class DResult {
+exports.TableResult = TableResult;
+class DatabaseResult {
 }
-exports.DResult = DResult;
+exports.DatabaseResult = DatabaseResult;
 class Result {
     static addInsertToResult(result, dName, tName, key) {
         if (!result[dName])
-            result[dName] = new DResult();
+            result[dName] = new DatabaseResult();
         if (!result[dName][tName])
-            result[dName][tName] = new TResult();
+            result[dName][tName] = new TableResult();
         if (!result[dName][tName].insert)
             result[dName][tName].insert = [];
         result[dName][tName].insert.push(key);
     }
     static addInsertExToResult(result, dName, tName, key, row) {
         if (!result[dName])
-            result[dName] = new DResult();
+            result[dName] = new DatabaseResult();
         if (!result[dName][tName])
-            result[dName][tName] = new TResult();
+            result[dName][tName] = new TableResult();
         if (!result[dName][tName].insertEx)
             result[dName][tName].insertEx = new InsertEx();
         result[dName][tName].insertEx[key] = row;
@@ -38,9 +38,9 @@ class Result {
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
         // console.log('Result.addUpdateToResult');
         if (!result[dName])
-            result[dName] = new DResult();
+            result[dName] = new DatabaseResult();
         if (!result[dName][tName])
-            result[dName][tName] = new TResult();
+            result[dName][tName] = new TableResult();
         if (!result[dName][tName].update)
             result[dName][tName].update = new Update();
         result[dName][tName].update[oldKey] = newKey;
@@ -48,18 +48,18 @@ class Result {
     static addUpdateExToResult(result, dName, tName, oldKey, row) {
         // console.log('Result.addUpdateExToResult');
         if (!result[dName])
-            result[dName] = new DResult();
+            result[dName] = new DatabaseResult();
         if (!result[dName][tName])
-            result[dName][tName] = new TResult();
+            result[dName][tName] = new TableResult();
         if (!result[dName][tName].updateEx)
             result[dName][tName].updateEx = new UpdateEx();
         result[dName][tName].updateEx[oldKey] = row;
     }
     static addDeleteToResult(result, dName, tName, key) {
         if (!result[dName])
-            result[dName] = new DResult();
+            result[dName] = new DatabaseResult();
         if (!result[dName][tName])
-            result[dName][tName] = new TResult();
+            result[dName][tName] = new TableResult();
         if (!result[dName][tName].delete)
             result[dName][tName].delete = [];
         result[dName][tName].delete.push(key);

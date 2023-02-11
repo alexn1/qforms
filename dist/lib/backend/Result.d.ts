@@ -11,22 +11,22 @@ export declare class Update {
 export declare class UpdateEx {
     [oldKey: Key]: Row;
 }
-export declare class TResult {
+export declare class TableResult {
     insert?: Insert;
     insertEx?: InsertEx;
     update?: Update;
     updateEx?: UpdateEx;
     delete?: Delete;
 }
-export declare class DResult {
-    [name: string]: TResult;
+export declare class DatabaseResult {
+    [name: string]: TableResult;
 }
 export declare class Result {
-    [name: string]: DResult;
+    [name: string]: DatabaseResult;
     static addInsertToResult(result: Result, dName: string, tName: string, key: Key): void;
     static addInsertExToResult(result: Result, dName: string, tName: string, key: Key, row: Row): void;
     static addUpdateToResult(result: Result, dName: string, tName: string, oldKey: Key, newKey: Key): void;
     static addUpdateExToResult(result: Result, dName: string, tName: string, oldKey: Key, row: Row): void;
     static addDeleteToResult(result: Result, dName: string, tName: string, key: Key): void;
-    static addTableToResult(result: Result, dName: string, tName: string, tResult: TResult): void;
+    static addTableToResult(result: Result, dName: string, tName: string, tResult: TableResult): void;
 }
