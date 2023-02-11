@@ -3,10 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BaseModel = void 0;
 class BaseModel {
     constructor(data, parent) {
-        if (!data)
-            throw new Error(`new ${this.constructor.name}: no data`);
         this.data = data;
         this.parent = parent;
+        if (!data)
+            throw new Error(`new ${this.constructor.name}: no data`);
     }
     static getClassName(data) {
         return data['@class'];

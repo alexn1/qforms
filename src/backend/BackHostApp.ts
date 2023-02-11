@@ -399,11 +399,11 @@ export class BackHostApp {
             let args = '';
             if (req.body.params) {
                 args = Object.keys(req.body.params)
-                    .map(name => `${name}: ${req.body.params[name]}`)
+                    .map((name) => `${name}: ${req.body.params[name]}`)
                     .join(', ');
             } else if (req.body.row) {
                 args = Object.keys(req.body.row)
-                    .map(name => `${name}: ${req.body.row[name]}`)
+                    .map((name) => `${name}: ${req.body.row[name]}`)
                     .join(', ');
             }
             let message = [
@@ -552,7 +552,7 @@ export class BackHostApp {
         try {
             const appInfos = await this.createApp(req);
             await res.json({
-                appInfos: appInfos.map(appInfo => ({
+                appInfos: appInfos.map((appInfo) => ({
                     fullName: appInfo.fullName,
                     envs: appInfo.envs,
                 })),
@@ -705,7 +705,7 @@ export class BackHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const httpServer = http.createServer(this.express);
-                const tempErrorHandler = err => {
+                const tempErrorHandler = (err) => {
                     console.error('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
                     reject(err);

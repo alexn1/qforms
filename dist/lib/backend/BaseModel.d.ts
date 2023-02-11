@@ -1,6 +1,6 @@
 export declare class BaseModel {
     data: any;
-    parent: any;
+    parent?: any;
     constructor(data: any, parent?: any);
     static getClassName(data: any): string;
     static getAttr(data: any, name: string): string;
