@@ -67,7 +67,7 @@ class Database extends Model_1.Model {
             password: this.createParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
-            config.port = this.createParam('port').getValue();
+            config.port = parseInt(this.createParam('port').getValue());
         }
         return config;
     }

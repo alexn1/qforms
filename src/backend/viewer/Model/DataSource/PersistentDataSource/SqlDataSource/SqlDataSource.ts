@@ -269,12 +269,6 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         response.table = this.getAttr('table');
     }
 
-    getTable(): Table {
-        const tableName = this.getAttr('table');
-        if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
-        return this.getDatabase().getTable(tableName);
-    }
-
     /*getDbType(column): string {
         return this.getTable().getColumn(column).getDbType();
     }*/

@@ -18,7 +18,6 @@ export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;
-    getTable(): Table;
     getAutoColumns(): string[];
     getAutoColumnTypes(): {};
     getBuffer(context: Context, file: any): Promise<any>;

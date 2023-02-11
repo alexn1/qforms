@@ -35,15 +35,34 @@ class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
         await client.close();
         context.connections[this.getName()] = null;
     }
-    async queryRows(context, query, params = null) {
-        console.log('MongoDbDatabase.query', query, params);
+    async updateOne(context, colName, filter, update) {
+        const _filter = Object.keys(filter).reduce((acc, name) => {
+            acc[name] = name === '_id' ? new mongodb_1.ObjectId(filter[name]) : filter[name];
+            return acc;
+        }, {});
+        console.log('colName', colName);
+        console.log('_filter:', _filter);
+        console.log('update', update);
+        return await this.getDbLink(context)
+            .collection(colName)
+            .updateOne(_filter, update);
+    }
+    getDbLink(context) {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();
-        const db = client.db(database);
+        return client.db(database);
+    }
+    async queryResult(context, query, params = null) {
+        const db = this.getDbLink(context);
         // eval query as function
         const fn = eval(`(db, params, ObjectId) => (${query})`);
         // exec query
         const result = await fn(db, params, mongodb_1.ObjectId);
+        return result;
+    }
+    async queryRows(context, query, params = null) {
+        console.log('MongoDbDatabase.query', query, params);
+        const result = await this.queryResult(context, query, params);
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             return await result.toArray();

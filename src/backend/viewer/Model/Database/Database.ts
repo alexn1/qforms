@@ -4,6 +4,14 @@ import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
 
+interface IConfig {
+    host: string;
+    database: string;
+    user: string;
+    password: string;
+    port?: number;
+}
+
 export class Database<TConnection = any> extends Model {
     tables: Table[] = [];
     fillCollections = ['tables'];
@@ -43,7 +51,7 @@ export class Database<TConnection = any> extends Model {
         throw new Error(`${this.constructor.name}.release not implemented`);
     }
 
-    async queryResult(context, query, params = null) {
+    async queryResult(context: Context, query: string, params: any = null): Promise<any> {
         throw new Error(`${this.constructor.name}.queryResult not implemented`);
     }
 
@@ -71,15 +79,15 @@ export class Database<TConnection = any> extends Model {
         return new Param(this.getColItemData('params', name), this);
     }
 
-    getConfig(): any {
-        const config: any = {
+    getConfig(): IConfig {
+        const config: IConfig = {
             host: this.createParam('host').getValue(),
             database: this.createParam('database').getValue(),
             user: this.createParam('user').getValue(),
             password: this.createParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
-            config.port = this.createParam('port').getValue();
+            config.port = parseInt(this.createParam('port').getValue());
         }
         return config;
     }

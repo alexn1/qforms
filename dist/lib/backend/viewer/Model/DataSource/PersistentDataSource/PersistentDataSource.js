@@ -28,5 +28,11 @@ class PersistentDataSource extends DataSource_1.DataSource {
             throw new Error(`${this.getFullName()}: no database name`);
         return this.getApp().getDatabase(databaseName);
     }
+    getTable() {
+        const tableName = this.getAttr('table');
+        if (!tableName)
+            throw new Error(`${this.getFullName()}: no table name`);
+        return this.getDatabase().getTable(tableName);
+    }
 }
 exports.PersistentDataSource = PersistentDataSource;

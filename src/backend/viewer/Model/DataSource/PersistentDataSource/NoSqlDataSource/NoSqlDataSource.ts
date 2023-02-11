@@ -117,17 +117,20 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
         }
 
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const databaseName = this.getAttr('database');
+        const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
-
         // console.log('changes:', changes);
+
         const key = Object.keys(changes)[0];
-        const where = this.getKeyValuesFromKey(key);
+        const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
 
+        const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
+            $set: values,
+        });
+        console.log('updateResult', updateResult);
         const result = new Result();
-
         return result;
     }
 }

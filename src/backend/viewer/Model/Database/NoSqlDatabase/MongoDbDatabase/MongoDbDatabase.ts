@@ -1,4 +1,4 @@
-import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession } from 'mongodb';
+import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db } from 'mongodb';
 import { NoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
 
@@ -41,17 +41,39 @@ export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
         context.connections[this.getName()] = null;
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
-        console.log('MongoDbDatabase.query', query, params);
+    async updateOne(context: Context, colName: string, filter: any, update: any): Promise<any> {
+        const _filter = Object.keys(filter).reduce((acc, name) => {
+            acc[name] = name === '_id' ? new ObjectId(filter[name]) : filter[name];
+            return acc;
+        }, {});
+        console.log('colName', colName);
+        console.log('_filter:', _filter);
+        console.log('update', update);
+        return await this.getDbLink(context)
+            .collection(colName)
+            .updateOne(_filter, update);
+    }
+
+    private getDbLink(context: Context): Db {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();
-        const db = client.db(database);
+        return client.db(database);
+    }
+
+    async queryResult(context: Context, query: string, params: any = null): Promise<any> {
+        const db = this.getDbLink(context);
 
         // eval query as function
         const fn = eval(`(db, params, ObjectId) => (${query})`);
 
         // exec query
         const result = await fn(db, params, ObjectId);
+        return result;
+    }
+
+    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+        console.log('MongoDbDatabase.query', query, params);
+        const result = await this.queryResult(context, query, params);
 
         // for find() and aggregate()
         if (result instanceof FindCursor || result instanceof AggregationCursor) {

@@ -3,6 +3,13 @@ import { Param } from '../Param/Param';
 import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
+interface IConfig {
+    host: string;
+    database: string;
+    user: string;
+    password: string;
+    port?: number;
+}
 export declare class Database<TConnection = any> extends Model {
     tables: Table[];
     fillCollections: string[];
@@ -12,14 +19,14 @@ export declare class Database<TConnection = any> extends Model {
     connect(context: Context): Promise<void>;
     getConnection(context: Context): TConnection;
     release(context: Context): Promise<void>;
-    queryResult(context: any, query: any, params?: any): Promise<void>;
+    queryResult(context: Context, query: string, params?: any): Promise<any>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;
     queryScalar(context: Context, query: string, params?: any): Promise<any>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
     createParam(name: any): Param;
-    getConfig(): any;
+    getConfig(): IConfig;
     getDefaultPort(): number;
     getApp(): Application;
     findTable(name: string): Table;
@@ -28,3 +35,4 @@ export declare class Database<TConnection = any> extends Model {
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
 }
+export {};
