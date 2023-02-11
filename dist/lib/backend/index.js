@@ -31,9 +31,9 @@ var MongoDbDatabase_1 = require("./viewer/Model/Database/NoSqlDatabase/MongoDbDa
 Object.defineProperty(exports, "MongoDbDatabase", { enumerable: true, get: function () { return MongoDbDatabase_1.MongoDbDatabase; } });
 var DataSource_1 = require("./viewer/Model/DataSource/DataSource");
 Object.defineProperty(exports, "DataSource", { enumerable: true, get: function () { return DataSource_1.DataSource; } });
-var SqlDataSource_1 = require("./viewer/Model/DataSource/SqlDataSource/SqlDataSource");
+var SqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource");
 Object.defineProperty(exports, "SqlDataSource", { enumerable: true, get: function () { return SqlDataSource_1.SqlDataSource; } });
-var NoSqlDataSource_1 = require("./viewer/Model/DataSource/NoSqlDataSource/NoSqlDataSource");
+var NoSqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource");
 Object.defineProperty(exports, "NoSqlDataSource", { enumerable: true, get: function () { return NoSqlDataSource_1.NoSqlDataSource; } });
 var Field_1 = require("./viewer/Model/Field/Field");
 Object.defineProperty(exports, "Field", { enumerable: true, get: function () { return Field_1.Field; } });

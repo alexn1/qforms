@@ -1,10 +1,10 @@
-import { DataSource } from '../DataSource';
-import { Context } from '../../../../Context';
-import { MongoDbDatabase } from '../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
-import { Table } from '../../Table/Table';
-import { Result } from '../../../../Result';
+import { PersistentDataSource } from '../PersistentDataSource';
+import { Context } from '../../../../../Context';
+import { MongoDbDatabase } from '../../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
+import { Table } from '../../../Table/Table';
+import { Result } from '../../../../../Result';
 
-export class NoSqlDataSource extends DataSource {
+export class NoSqlDataSource extends PersistentDataSource {
     table: Table;
     constructor(data, parent) {
         super(data, parent);

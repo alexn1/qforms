@@ -13,9 +13,9 @@ export declare class DataSource extends Model {
     init(context: Context): Promise<void>;
     getKeyColumns(): string[];
     prepareRows(context: Context, rows: any[]): void;
-    checkColumns(row: Object): void;
-    encodeRows(rows: Object[]): void;
-    encodeRow(row: Object): void;
+    checkColumns(row: any): void;
+    encodeRows(rows: any[]): void;
+    encodeRow(row: any): void;
     getApp(): Application;
     getKeyValuesFromKey(key: string): {};
     getKeyFromValues(values: any): string;
