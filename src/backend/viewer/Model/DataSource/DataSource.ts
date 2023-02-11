@@ -70,8 +70,8 @@ export class DataSource extends Model {
             if (this.isDefaultOnForm()) {
                 const rowColumns = Object.keys(rows[0]);
                 const formColumns = this.getParent()
-                    .fields.map(field => field.getAttr('column'))
-                    .filter(column => !!column);
+                    .fields.map((field) => field.getAttr('column'))
+                    .filter((column) => !!column);
                 for (const rowColumn of rowColumns) {
                     if (!formColumns.includes(rowColumn)) {
                         console.log('rowColumns:', rowColumns);
@@ -158,7 +158,7 @@ export class DataSource extends Model {
         return values;
     }
 
-    getKeyFromValues(values) {
+    getKeyFromValues(values): string {
         const arr = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
@@ -181,7 +181,7 @@ export class DataSource extends Model {
         }
     }
 
-    static keyToParams(key, paramName = 'key') {
+    static keyToParams(key: string, paramName: string = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);

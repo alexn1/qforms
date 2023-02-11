@@ -2,6 +2,7 @@ import { DataSource } from '../DataSource';
 import { Context } from '../../../../Context';
 import { MongoDbDatabase } from '../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 import { Table } from '../../Table/Table';
+import { Result } from '../../../../Result';
 export declare class NoSqlDataSource extends DataSource {
     table: Table;
     constructor(data: any, parent: any);
@@ -11,4 +12,5 @@ export declare class NoSqlDataSource extends DataSource {
     getSelectQuery(): string;
     getCountQuery(context: Context): string;
     getSelectParams(context: Context): any;
+    update(context: Context): Promise<Result>;
 }

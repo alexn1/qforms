@@ -2,6 +2,7 @@ import { DataSource } from '../DataSource';
 import { Context } from '../../../../Context';
 import { MongoDbDatabase } from '../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 import { Table } from '../../Table/Table';
+import { Result } from '../../../../Result';
 
 export class NoSqlDataSource extends DataSource {
     table: Table;
@@ -115,5 +116,9 @@ export class NoSqlDataSource extends DataSource {
 
     getSelectParams(context: Context): any {
         return context.getParams();
+    }
+
+    async update(context: Context): Promise<Result> {
+        return new Result();
     }
 }

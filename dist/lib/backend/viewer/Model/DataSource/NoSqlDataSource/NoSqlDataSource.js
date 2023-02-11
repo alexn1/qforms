@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NoSqlDataSource = void 0;
 const DataSource_1 = require("../DataSource");
+const Result_1 = require("../../../../Result");
 class NoSqlDataSource extends DataSource_1.DataSource {
     constructor(data, parent) {
         super(data, parent);
@@ -93,6 +94,9 @@ class NoSqlDataSource extends DataSource_1.DataSource {
     }
     getSelectParams(context) {
         return context.getParams();
+    }
+    async update(context) {
+        return new Result_1.Result();
     }
 }
 exports.NoSqlDataSource = NoSqlDataSource;

@@ -21,7 +21,7 @@ export class BaseModel {
     }
 
     static getEnvList(data) {
-        const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
+        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }
 
@@ -41,12 +41,12 @@ export class BaseModel {
         return this.data['@attributes'];
     }
 
-    getAttr(name) {
+    getAttr(name): string {
         if (!this.isAttr(name)) throw new Error(`no attribute '${name}'`);
         return this.data['@attributes'][name];
     }
 
-    setAttr(name, value): void {
+    setAttr(name: string, value: string): void {
         this.data['@attributes'][name] = value;
     }
 
@@ -54,7 +54,7 @@ export class BaseModel {
         return this.data['@attributes'][name] !== undefined;
     }
 
-    isData(colName, name): boolean {
+    isData(colName: string, name: string): boolean {
         if (!colName) throw new Error('isData: no colName');
         if (!name) throw new Error('isData: no name');
         return !!this.getColItemData(colName, name);
@@ -75,7 +75,7 @@ export class BaseModel {
     }
 
     getItemNames(colName) {
-        return this.getCol(colName).map(data => BaseModel.getName(data));
+        return this.getCol(colName).map((data) => BaseModel.getName(data));
     }
 
     getColItemData(colName, name) {
@@ -93,7 +93,7 @@ export class BaseModel {
     }
 
     static findColDataByName(col, name) {
-        return col.find(data => BaseModel.getName(data) === name);
+        return col.find((data) => BaseModel.getName(data) === name);
     }
 
     addModelData(colName, data) {

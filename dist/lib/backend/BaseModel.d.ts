@@ -10,10 +10,10 @@ export declare class BaseModel {
     getName(): string;
     static attributes(data: any): any;
     attributes(): any;
-    getAttr(name: any): any;
-    setAttr(name: any, value: any): void;
+    getAttr(name: any): string;
+    setAttr(name: string, value: string): void;
     isAttr(name: any): boolean;
-    isData(colName: any, name: any): boolean;
+    isData(colName: string, name: string): boolean;
     getData(): any;
     getCol(name: any): any;
     getItemNames(colName: any): any;

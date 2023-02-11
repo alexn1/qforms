@@ -19,6 +19,6 @@ export declare class Field extends Model {
     isTimezone(): boolean;
     getDatabaseTableColumn(): Column;
     getType(): string;
-    getDbType(): any;
+    getDbType(): string;
     valueToSqlValue(value: any): any;
 }

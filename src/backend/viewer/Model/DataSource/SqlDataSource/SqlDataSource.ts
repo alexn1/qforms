@@ -7,6 +7,7 @@ import { SqlDatabase } from '../../Database/SqlDatabase/SqlDatabase';
 
 export class SqlDataSource extends DataSource {
     table: Table;
+
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table')
@@ -278,7 +279,7 @@ export class SqlDataSource extends DataSource {
     }*/
 
     getAutoColumns(): string[] {
-        return this.keyColumns.filter(name => this.table.getColumn(name).isAuto());
+        return this.keyColumns.filter((name) => this.table.getColumn(name).isAuto());
     }
 
     getAutoColumnTypes() {

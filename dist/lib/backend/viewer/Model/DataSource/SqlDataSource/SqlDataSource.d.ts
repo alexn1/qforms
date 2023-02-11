@@ -9,8 +9,8 @@ export declare class SqlDataSource extends DataSource {
     fill(context: Context): Promise<any>;
     getKeyColumns(): string[];
     getCountQuery(context: Context): string;
-    getSingleQuery(context: Context): any;
-    getMultipleQuery(context: Context): any;
+    getSingleQuery(context: Context): string;
+    getMultipleQuery(context: Context): string;
     templateQuery(context: Context, _query: string): string;
     getSelectParams(context: Context): any;
     select(context: Context): Promise<[any[], number | null]>;

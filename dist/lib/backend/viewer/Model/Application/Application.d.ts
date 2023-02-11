@@ -65,7 +65,7 @@ export declare class Application extends Model {
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
     composeForeignResult(result: Result): Result;
-    getTitle(context: any): any;
+    getTitle(context: any): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;

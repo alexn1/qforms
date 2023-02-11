@@ -21,7 +21,7 @@ export declare class DataSource extends Model {
     getKeyValuesFromKey(key: any): {};
     getKeyFromValues(values: any): string;
     getFullName(): string;
-    static keyToParams(key: any, paramName?: string): {};
+    static keyToParams(key: string, paramName?: string): {};
     calcNewKeyValues(originalKeyValues: any, values: any): any;
     calcNewKey(key: any, values: any): string;
     fillAttributes(response: any): void;

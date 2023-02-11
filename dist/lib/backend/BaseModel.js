@@ -18,7 +18,7 @@ class BaseModel {
         return BaseModel.getAttr(data, 'name');
     }
     static getEnvList(data) {
-        const list = data.env ? Object.keys(data.env).filter(env => env !== 'local') : [];
+        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }
     getClassName() {
@@ -65,7 +65,7 @@ class BaseModel {
         return arr;
     }
     getItemNames(colName) {
-        return this.getCol(colName).map(data => BaseModel.getName(data));
+        return this.getCol(colName).map((data) => BaseModel.getName(data));
     }
     getColItemData(colName, name) {
         const data = BaseModel.findColDataByName(this.getCol(colName), name);
@@ -82,7 +82,7 @@ class BaseModel {
         return data;
     }
     static findColDataByName(col, name) {
-        return col.find(data => BaseModel.getName(data) === name);
+        return col.find((data) => BaseModel.getName(data) === name);
     }
     addModelData(colName, data) {
         const name = BaseModel.getName(data);

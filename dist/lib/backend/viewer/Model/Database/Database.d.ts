@@ -23,7 +23,7 @@ export declare class Database<TConnection = any> extends Model {
     getDefaultPort(): number;
     getApp(): Application;
     findTable(name: string): Table;
-    getTable(name: any): Table;
+    getTable(name: string): Table;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;

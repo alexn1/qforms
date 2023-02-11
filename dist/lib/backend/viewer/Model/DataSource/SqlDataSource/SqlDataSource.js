@@ -240,7 +240,7 @@ class SqlDataSource extends DataSource_1.DataSource {
         return this.getTable().getColumn(column).getDbType();
     }*/
     getAutoColumns() {
-        return this.keyColumns.filter(name => this.table.getColumn(name).isAuto());
+        return this.keyColumns.filter((name) => this.table.getColumn(name).isAuto());
     }
     getAutoColumnTypes() {
         const columns = this.getAutoColumns();

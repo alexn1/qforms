@@ -96,7 +96,7 @@ export class Database<TConnection = any> extends Model {
         return this.tables.find((table) => table.getName() === name);
     }
 
-    getTable(name): Table {
+    getTable(name: string): Table {
         if (!name) throw new Error('getTable: no name');
         const table = this.findTable(name);
         if (!table) throw new Error(`no table with name: ${name}`);

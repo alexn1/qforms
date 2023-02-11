@@ -1,52 +1,93 @@
+export type Key = string;
+export type Row = Object;
+export type Insert = Key[];
+export type Delete = Key[];
+
+export class InsertEx {
+    [key: Key]: Row;
+}
+
+export class Update {
+    [oldKey: Key]: Key;
+}
+
+export class UpdateEx {
+    [oldKey: Key]: Row;
+}
+
+export class TResult {
+    insert?: Insert;
+    insertEx?: InsertEx;
+    update?: Update;
+    updateEx?: UpdateEx;
+    delete?: Delete;
+}
+
+export class DResult {
+    [name: string]: TResult;
+}
+
 export class Result {
-    // result {
-    //   insert  : {table: ["1", "2"]},
-    //   insertEx: {table: {"1": {field: 1, field2: 2}}}
-    //   update  : {table: {"1": "2"}},
-    //   updateEx: {table: {"1": {field: 1, field2: 2}}}
-    //   delete  : {table:["1", "2"]},
-    // }
-    static addInsertToResult(result: Result, database: string, table: string, key): void {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].insert) result[database][table].insert = [];
-        result[database][table].insert.push(key);
+    [name: string]: DResult;
+
+    static addInsertToResult(result: Result, dName: string, tName: string, key: Key): void {
+        if (!result[dName]) result[dName] = new DResult();
+        if (!result[dName][tName]) result[dName][tName] = new TResult();
+        if (!result[dName][tName].insert) result[dName][tName].insert = [];
+        result[dName][tName].insert.push(key);
     }
-    static addInsertExToResult(result: Result, database: string, table: string, key, row): void {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].insertEx) result[database][table].insertEx = {};
-        result[database][table].insertEx[key] = row;
+
+    static addInsertExToResult(
+        result: Result,
+        dName: string,
+        tName: string,
+        key: Key,
+        row: Row,
+    ): void {
+        if (!result[dName]) result[dName] = new DResult();
+        if (!result[dName][tName]) result[dName][tName] = new TResult();
+        if (!result[dName][tName].insertEx) result[dName][tName].insertEx = new InsertEx();
+        result[dName][tName].insertEx[key] = row;
     }
+
     static addUpdateToResult(
         result: Result,
-        database: string,
-        table: string,
-        oldKey,
-        newKey,
+        dName: string,
+        tName: string,
+        oldKey: Key,
+        newKey: Key,
     ): void {
         // console.log('Result.addUpdateToResult');
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].update) result[database][table].update = {};
-        result[database][table].update[oldKey] = newKey;
+        if (!result[dName]) result[dName] = new DResult();
+        if (!result[dName][tName]) result[dName][tName] = new TResult();
+        if (!result[dName][tName].update) result[dName][tName].update = new Update();
+        result[dName][tName].update[oldKey] = newKey;
     }
-    static addUpdateExToResult(result: Result, database: string, table: string, oldKey, row): void {
+
+    static addUpdateExToResult(
+        result: Result,
+        dName: string,
+        tName: string,
+        oldKey: Key,
+        row: Row,
+    ): void {
         // console.log('Result.addUpdateExToResult');
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].updateEx) result[database][table].updateEx = {};
-        result[database][table].updateEx[oldKey] = row;
+        if (!result[dName]) result[dName] = new DResult();
+        if (!result[dName][tName]) result[dName][tName] = new TResult();
+        if (!result[dName][tName].updateEx) result[dName][tName].updateEx = new UpdateEx();
+        result[dName][tName].updateEx[oldKey] = row;
     }
-    static addDeleteToResult(result: Result, database: string, table: string, key): void {
-        if (!result[database]) result[database] = {};
-        if (!result[database][table]) result[database][table] = {};
-        if (!result[database][table].delete) result[database][table].delete = [];
-        result[database][table].delete.push(key);
+
+    static addDeleteToResult(result: Result, dName: string, tName: string, key: Key): void {
+        if (!result[dName]) result[dName] = new DResult();
+        if (!result[dName][tName]) result[dName][tName] = new TResult();
+        if (!result[dName][tName].delete) result[dName][tName].delete = [];
+        result[dName][tName].delete.push(key);
     }
-    static addTableToResult(result: Result, database: string, table: string, value): void {
-        if (!result[database]) result[database] = {};
-        if (result[database][table]) throw new Error(`table ${table} already exists`);
-        result[database][table] = value;
+
+    static addTableToResult(result: Result, dName: string, tName: string, tResult: TResult): void {
+        if (!result[dName]) result[dName] = {};
+        if (result[dName][tName]) throw new Error(`table ${tName} already exists`);
+        result[dName][tName] = tResult;
     }
 }

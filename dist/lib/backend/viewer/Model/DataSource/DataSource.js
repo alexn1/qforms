@@ -55,8 +55,8 @@ class DataSource extends Model_1.Model {
             if (this.isDefaultOnForm()) {
                 const rowColumns = Object.keys(rows[0]);
                 const formColumns = this.getParent()
-                    .fields.map(field => field.getAttr('column'))
-                    .filter(column => !!column);
+                    .fields.map((field) => field.getAttr('column'))
+                    .filter((column) => !!column);
                 for (const rowColumn of rowColumns) {
                     if (!formColumns.includes(rowColumn)) {
                         console.log('rowColumns:', rowColumns);
