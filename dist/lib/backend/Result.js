@@ -1,12 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Result = exports.DatabaseResult = exports.TableResult = exports.UpdateEx = exports.Update = exports.InsertEx = void 0;
-class InsertEx {
+exports.Result = exports.DatabaseResult = exports.TableResult = exports.UpdateEx = exports.UpdateResult = exports.InsertExResult = void 0;
+class InsertExResult {
 }
-exports.InsertEx = InsertEx;
-class Update {
+exports.InsertExResult = InsertExResult;
+class UpdateResult {
 }
-exports.Update = Update;
+exports.UpdateResult = UpdateResult;
 class UpdateEx {
 }
 exports.UpdateEx = UpdateEx;
@@ -32,7 +32,7 @@ class Result {
         if (!result[dName][tName])
             result[dName][tName] = new TableResult();
         if (!result[dName][tName].insertEx)
-            result[dName][tName].insertEx = new InsertEx();
+            result[dName][tName].insertEx = new InsertExResult();
         result[dName][tName].insertEx[key] = row;
     }
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
@@ -42,7 +42,7 @@ class Result {
         if (!result[dName][tName])
             result[dName][tName] = new TableResult();
         if (!result[dName][tName].update)
-            result[dName][tName].update = new Update();
+            result[dName][tName].update = new UpdateResult();
         result[dName][tName].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, dName, tName, oldKey, row) {

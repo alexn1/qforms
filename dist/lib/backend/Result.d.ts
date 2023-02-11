@@ -1,22 +1,22 @@
 export type Key = string;
 export type Row = Object;
-export type Insert = Key[];
-export type Delete = Key[];
-export declare class InsertEx {
+export type InsertResult = Key[];
+export type DeleteResult = Key[];
+export declare class InsertExResult {
     [key: Key]: Row;
 }
-export declare class Update {
+export declare class UpdateResult {
     [oldKey: Key]: Key;
 }
 export declare class UpdateEx {
     [oldKey: Key]: Row;
 }
 export declare class TableResult {
-    insert?: Insert;
-    insertEx?: InsertEx;
-    update?: Update;
+    insert?: InsertResult;
+    insertEx?: InsertExResult;
+    update?: UpdateResult;
     updateEx?: UpdateEx;
-    delete?: Delete;
+    delete?: DeleteResult;
 }
 export declare class DatabaseResult {
     [name: string]: TableResult;

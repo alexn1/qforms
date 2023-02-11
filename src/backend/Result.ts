@@ -1,13 +1,13 @@
 export type Key = string;
 export type Row = Object;
-export type Insert = Key[];
-export type Delete = Key[];
+export type InsertResult = Key[];
+export type DeleteResult = Key[];
 
-export class InsertEx {
+export class InsertExResult {
     [key: Key]: Row;
 }
 
-export class Update {
+export class UpdateResult {
     [oldKey: Key]: Key;
 }
 
@@ -16,11 +16,11 @@ export class UpdateEx {
 }
 
 export class TableResult {
-    insert?: Insert;
-    insertEx?: InsertEx;
-    update?: Update;
+    insert?: InsertResult;
+    insertEx?: InsertExResult;
+    update?: UpdateResult;
     updateEx?: UpdateEx;
-    delete?: Delete;
+    delete?: DeleteResult;
 }
 
 export class DatabaseResult {
@@ -46,7 +46,7 @@ export class Result {
     ): void {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
-        if (!result[dName][tName].insertEx) result[dName][tName].insertEx = new InsertEx();
+        if (!result[dName][tName].insertEx) result[dName][tName].insertEx = new InsertExResult();
         result[dName][tName].insertEx[key] = row;
     }
 
@@ -60,7 +60,7 @@ export class Result {
         // console.log('Result.addUpdateToResult');
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
-        if (!result[dName][tName].update) result[dName][tName].update = new Update();
+        if (!result[dName][tName].update) result[dName][tName].update = new UpdateResult();
         result[dName][tName].update[oldKey] = newKey;
     }
 
