@@ -3,6 +3,7 @@ import { Context } from '../../../../../Context';
 import { Table } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
+import { DataSource } from '../../DataSource';
 
 export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
     table: Table;
@@ -59,8 +60,8 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
         if (this.getAttr('limit') !== '') {
             if (!context.params.frame) throw new Error('no frame param');
             const limit = parseInt(this.getAttr('limit'), 10);
-            context.params.skip = (context.params.frame - 1) * limit;
-            context.params.limit = limit;
+            context.setParam('skip', (context.params.frame - 1) * limit);
+            context.setParam('limit', limit);
         }
 
         // exec selectQuery
@@ -92,6 +93,49 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
         return [rows, count];
     }
 
+    async update(context: Context): Promise<Result> {
+        console.log('NoSqlDataSource.update');
+        if (this.getAccess(context).update !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        }
+
+        if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
+        const databaseName = this.getAttr('database');
+        const tableName = this.getAttr('table');
+        const changes = this.decodeChanges(context.getBody().changes);
+        // console.log('changes:', changes);
+
+        const key = Object.keys(changes)[0];
+        console.log('key:', key);
+        const filter = this.getKeyValuesFromKey(key);
+        const values = changes[key];
+
+        const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
+            $set: values,
+        });
+        console.log('updateResult', updateResult);
+
+        // new key
+        const newKey = this.calcNewKey(key, values);
+        const newKeyParams = DataSource.keyToParams(newKey);
+        console.log('newKey:', newKey);
+
+        const [row] = await this.getDatabase().queryRows(
+            context,
+            this.getSelectQuery(),
+            newKeyParams,
+        );
+        if (!row) throw new Error('select query does not return row');
+        this.prepareRows(context, [row]);
+        // console.log('row:', row);
+
+        // result
+        const result = new Result();
+        Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
+        Result.addUpdateExToResult(result, databaseName, tableName, key, row);
+        return result;
+    }
+
     getSelectQuery(): string {
         const selectQuery = this.getAttr('selectQuery');
         if (!selectQuery) {
@@ -108,29 +152,5 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
 
     getSelectParams(context: Context): any {
         return context.getParams();
-    }
-
-    async update(context: Context): Promise<Result> {
-        console.log('NoSqlDataSource.update');
-        if (this.getAccess(context).update !== true) {
-            throw new Error(`[${this.getFullName()}]: access denied.`);
-        }
-
-        if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
-        const databaseName = this.getAttr('database');
-        const tableName = this.getAttr('table');
-        const changes = this.decodeChanges(context.getBody().changes);
-        // console.log('changes:', changes);
-
-        const key = Object.keys(changes)[0];
-        const filter = this.getKeyValuesFromKey(key);
-        const values = changes[key];
-
-        const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
-            $set: values,
-        });
-        console.log('updateResult', updateResult);
-        const result = new Result();
-        return result;
     }
 }

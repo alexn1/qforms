@@ -8,8 +8,8 @@ export declare class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase>
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
     select(context: Context): Promise<[any[], number | null]>;
+    update(context: Context): Promise<Result>;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;
     getSelectParams(context: Context): any;
-    update(context: Context): Promise<Result>;
 }

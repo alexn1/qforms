@@ -206,7 +206,7 @@ export class DataSource extends Model {
         return newKeyValues;
     }
 
-    calcNewKey(key, values) {
+    calcNewKey(key: string, values) {
         const keyValues = this.getKeyValuesFromKey(key);
         const newKeyValues = this.calcNewKeyValues(keyValues, values);
         return this.getKeyFromValues(newKeyValues);

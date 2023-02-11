@@ -22,7 +22,7 @@ export declare class DataSource extends Model {
     getFullName(): string;
     static keyToParams(key: string, paramName?: string): {};
     calcNewKeyValues(originalKeyValues: any, values: any): {};
-    calcNewKey(key: any, values: any): string;
+    calcNewKey(key: string, values: any): string;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     private getRows;
