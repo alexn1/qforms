@@ -1,3 +1,3 @@
 import { Database } from '../Database';
-export declare class NoSqlDatabase extends Database {
+export declare class NoSqlDatabase<TConnection = any> extends Database<TConnection> {
 }

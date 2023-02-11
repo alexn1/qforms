@@ -4,7 +4,7 @@ import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
 
-export class Database extends Model {
+export class Database<TConnection = any> extends Model {
     tables: Table[] = [];
     fillCollections = ['tables'];
 
@@ -29,7 +29,7 @@ export class Database extends Model {
         throw new Error(`${this.constructor.name}.connect not implemented`);
     }
 
-    getConnection(context: Context): any {
+    getConnection(context: Context): TConnection {
         // console.log('Database.getConnection');
         if (!context) throw new Error('no context');
         const name = this.getName();
@@ -93,7 +93,7 @@ export class Database extends Model {
     }
 
     findTable(name: string): Table {
-        return this.tables.find(table => table.getName() === name);
+        return this.tables.find((table) => table.getName() === name);
     }
 
     getTable(name): Table {

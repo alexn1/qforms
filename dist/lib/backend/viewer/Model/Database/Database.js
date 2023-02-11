@@ -78,7 +78,7 @@ class Database extends Model_1.Model {
         return this.parent;
     }
     findTable(name) {
-        return this.tables.find(table => table.getName() === name);
+        return this.tables.find((table) => table.getName() === name);
     }
     getTable(name) {
         if (!name)

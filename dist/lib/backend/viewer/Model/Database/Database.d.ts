@@ -3,14 +3,14 @@ import { Param } from '../Param/Param';
 import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
-export declare class Database extends Model {
+export declare class Database<TConnection = any> extends Model {
     tables: Table[];
     fillCollections: string[];
     init(context: Context): Promise<void>;
     deinit(): Promise<void>;
     fillAttributes(response: any): void;
     connect(context: Context): Promise<void>;
-    getConnection(context: Context): any;
+    getConnection(context: Context): TConnection;
     release(context: Context): Promise<void>;
     queryResult(context: any, query: any, params?: any): Promise<void>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;

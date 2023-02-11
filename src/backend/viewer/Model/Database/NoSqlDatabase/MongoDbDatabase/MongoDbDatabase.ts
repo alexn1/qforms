@@ -7,7 +7,7 @@ interface IMongoDbDatabaseConnection {
     session: ClientSession;
 }
 
-export class MongoDbDatabase extends NoSqlDatabase {
+export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
     async connect(context: Context): Promise<void> {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
@@ -35,7 +35,7 @@ export class MongoDbDatabase extends NoSqlDatabase {
     async release(context: Context): Promise<void> {
         console.log('MongoDbDatabase.release', this.getName());
         if (!context) throw new Error('no context');
-        const { client, session } = this.getConnection(context) as IMongoDbDatabaseConnection;
+        const { client, session } = this.getConnection(context);
         session.endSession();
         await client.close();
         context.connections[this.getName()] = null;
@@ -43,7 +43,7 @@ export class MongoDbDatabase extends NoSqlDatabase {
 
     async query(context: Context, query: string, params: any): Promise<any[]> {
         console.log('MongoDbDatabase.query', query, params);
-        const client = (this.getConnection(context) as IMongoDbDatabaseConnection).client;
+        const client = this.getConnection(context).client;
         const { database } = this.getConfig();
         const db = client.db(database);
 
@@ -68,17 +68,17 @@ export class MongoDbDatabase extends NoSqlDatabase {
 
     async begin(context: Context): Promise<void> {
         console.log('MongoDbDatabase.begin');
-        (this.getConnection(context) as IMongoDbDatabaseConnection).session.startTransaction();
+        this.getConnection(context).session.startTransaction();
     }
 
     async commit(context: Context): Promise<void> {
         console.log('MongoDbDatabase.commit');
-        (this.getConnection(context) as IMongoDbDatabaseConnection).session.commitTransaction();
+        this.getConnection(context).session.commitTransaction();
     }
 
     async rollback(context: Context, err): Promise<void> {
         console.log('MongoDbDatabase.rollback');
-        (this.getConnection(context) as IMongoDbDatabaseConnection).session.abortTransaction();
+        this.getConnection(context).session.abortTransaction();
     }
 
     async deinit(): Promise<void> {
