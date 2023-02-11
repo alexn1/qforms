@@ -35,7 +35,7 @@ class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
         await client.close();
         context.connections[this.getName()] = null;
     }
-    async query(context, query, params) {
+    async queryRows(context, query, params = null) {
         console.log('MongoDbDatabase.query', query, params);
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();
@@ -50,6 +50,18 @@ class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
         }
         // for findOne query
         return [result];
+    }
+    async queryScalar(context, query, params = null) {
+        const rows = await this.queryRows(context, query, params);
+        // console.log('rows:', rows);
+        const [firstRow] = rows;
+        if (!firstRow)
+            throw new Error('queryScalar: no first row');
+        // console.log('firstRow:', firstRow);
+        const firstField = Object.keys(firstRow)[0];
+        if (!firstField)
+            throw new Error('queryScalar: no first field');
+        return firstRow[firstField];
     }
     getDefaultPort() {
         return 27017;

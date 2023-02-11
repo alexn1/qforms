@@ -1,3 +1,7 @@
 import { DataSource } from '../DataSource';
-export declare class PersistentDataSource extends DataSource {
+import { Database } from '../../Database/Database';
+export declare class PersistentDataSource<TDatabase extends Database = Database> extends DataSource {
+    decodeChanges(changes: any): {};
+    getValuesFromRow(row: any): {};
+    getDatabase(): TDatabase;
 }

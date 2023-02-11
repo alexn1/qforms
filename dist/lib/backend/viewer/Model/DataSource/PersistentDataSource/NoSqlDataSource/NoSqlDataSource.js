@@ -55,18 +55,14 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         }
         // exec selectQuery
         const start = Date.now();
-        const rows = await this.getDatabase().query(context, this.getSelectQuery(), this.getSelectParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(), this.getSelectParams(context));
         console.log('query time:', Date.now() - start);
         this.prepareRows(context, rows);
         // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                const countResult = await this.getDatabase().query(context, this.getCountQuery(context), this.getSelectParams(context));
-                // console.log('countResult:', countResult);
-                const [obj] = countResult;
-                // console.log('obj:', obj);
-                count = obj[Object.keys(obj)[0]];
+                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getSelectParams(context));
                 // console.log('count:', count);
             }
             catch (err) {
@@ -75,9 +71,6 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
             }
         }
         return [rows, count];
-    }
-    getDatabase() {
-        return super.getDatabase();
     }
     getSelectQuery() {
         const selectQuery = this.getAttr('selectQuery');

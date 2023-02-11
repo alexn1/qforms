@@ -250,30 +250,8 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
             return acc;
         }, {});
     }
-    getValuesFromRow(row) {
-        console.log('SqlDataSource.getValuesFromRow', row);
-        const values = {};
-        for (const field of this.getForm().fields) {
-            const column = field.getAttr('column');
-            if (row.hasOwnProperty(column)) {
-                const value = field.rawToValue(row[column]);
-                values[column] = field.valueToSqlValue(value);
-            }
-        }
-        return values;
-    }
-    decodeChanges(changes) {
-        const dChanges = {};
-        for (const key in changes) {
-            dChanges[key] = this.getValuesFromRow(changes[key]);
-        }
-        return dChanges;
-    }
     async getBuffer(context, file) {
         return file.data;
-    }
-    getDatabase() {
-        return super.getDatabase();
     }
 }
 exports.SqlDataSource = SqlDataSource;

@@ -230,12 +230,6 @@ class DataSource extends Model_1.Model {
     isDefaultOnTableForm() {
         return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;
     }
-    getDatabase() {
-        const databaseName = this.getAttr('database');
-        if (!databaseName)
-            throw new Error(`${this.getFullName()}: no database name`);
-        return this.getApp().getDatabase(databaseName);
-    }
     async insert(context, _values = null) {
         throw new Error(`${this.constructor.name}.insert not implemented`);
     }
@@ -255,6 +249,9 @@ class DataSource extends Model_1.Model {
             update: true,
             delete: true,
         };
+    }
+    getDatabase() {
+        throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 }
 exports.DataSource = DataSource;

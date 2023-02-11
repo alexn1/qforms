@@ -6,7 +6,7 @@ import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 
-export class SqlDataSource extends PersistentDataSource {
+export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     table: Table;
 
     constructor(data, parent) {
@@ -291,32 +291,9 @@ export class SqlDataSource extends PersistentDataSource {
         }, {});
     }
 
-    getValuesFromRow(row) {
-        console.log('SqlDataSource.getValuesFromRow', row);
-        const values = {};
-        for (const field of this.getForm().fields) {
-            const column = field.getAttr('column');
-            if (row.hasOwnProperty(column)) {
-                const value = field.rawToValue(row[column]);
-                values[column] = field.valueToSqlValue(value);
-            }
-        }
-        return values;
-    }
-
-    decodeChanges(changes) {
-        const dChanges = {};
-        for (const key in changes) {
-            dChanges[key] = this.getValuesFromRow(changes[key]);
-        }
-        return dChanges;
-    }
-
     async getBuffer(context: Context, file) {
         return file.data;
     }
 
-    getDatabase(): SqlDatabase {
-        return super.getDatabase() as SqlDatabase;
-    }
+
 }

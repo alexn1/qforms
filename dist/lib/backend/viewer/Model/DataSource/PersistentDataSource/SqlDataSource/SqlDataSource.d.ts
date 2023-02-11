@@ -3,7 +3,7 @@ import { Table } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
-export declare class SqlDataSource extends PersistentDataSource {
+export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     table: Table;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
@@ -21,8 +21,5 @@ export declare class SqlDataSource extends PersistentDataSource {
     getTable(): Table;
     getAutoColumns(): string[];
     getAutoColumnTypes(): {};
-    getValuesFromRow(row: any): {};
-    decodeChanges(changes: any): {};
     getBuffer(context: Context, file: any): Promise<any>;
-    getDatabase(): SqlDatabase;
 }

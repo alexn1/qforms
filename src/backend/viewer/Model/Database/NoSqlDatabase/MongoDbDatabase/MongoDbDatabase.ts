@@ -41,7 +41,7 @@ export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
         context.connections[this.getName()] = null;
     }
 
-    async query(context: Context, query: string, params: any): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         console.log('MongoDbDatabase.query', query, params);
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();
@@ -60,6 +60,17 @@ export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
 
         // for findOne query
         return [result];
+    }
+
+    async queryScalar(context: Context, query: string, params: any = null): Promise<any> {
+        const rows = await this.queryRows(context, query, params);
+        // console.log('rows:', rows);
+        const [firstRow] = rows;
+        if (!firstRow) throw new Error('queryScalar: no first row');
+        // console.log('firstRow:', firstRow);
+        const firstField = Object.keys(firstRow)[0];
+        if (!firstField) throw new Error('queryScalar: no first field');
+        return firstRow[firstField];
     }
 
     getDefaultPort(): number {

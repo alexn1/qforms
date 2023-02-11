@@ -1,10 +1,10 @@
 import { PersistentDataSource } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
-import { MongoDbDatabase } from '../../../Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 import { Table } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
+import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 
-export class NoSqlDataSource extends PersistentDataSource {
+export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
     table: Table;
     constructor(data, parent) {
         super(data, parent);
@@ -65,7 +65,7 @@ export class NoSqlDataSource extends PersistentDataSource {
 
         // exec selectQuery
         const start = Date.now();
-        const rows = await this.getDatabase().query(
+        const rows = await this.getDatabase().queryRows(
             context,
             this.getSelectQuery(),
             this.getSelectParams(context),
@@ -77,15 +77,11 @@ export class NoSqlDataSource extends PersistentDataSource {
         let count = null;
         if (this.isDefaultOnTableForm() && this.getAttr('limit')) {
             try {
-                const countResult = await this.getDatabase().query(
+                count = await this.getDatabase().queryScalar(
                     context,
                     this.getCountQuery(context),
                     this.getSelectParams(context),
                 );
-                // console.log('countResult:', countResult);
-                const [obj] = countResult;
-                // console.log('obj:', obj);
-                count = obj[Object.keys(obj)[0]];
                 // console.log('count:', count);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -94,10 +90,6 @@ export class NoSqlDataSource extends PersistentDataSource {
         }
 
         return [rows, count];
-    }
-
-    getDatabase(): MongoDbDatabase {
-        return super.getDatabase() as MongoDbDatabase;
     }
 
     getSelectQuery(): string {

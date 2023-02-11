@@ -262,11 +262,6 @@ export class DataSource extends Model {
         return this.getName() === 'default' && this.parent instanceof TableForm;
     }
 
-    getDatabase(): Database {
-        const databaseName = this.getAttr('database');
-        if (!databaseName) throw new Error(`${this.getFullName()}: no database name`);
-        return this.getApp().getDatabase(databaseName);
-    }
     async insert(context: Context, _values: any = null): Promise<Result> {
         throw new Error(`${this.constructor.name}.insert not implemented`);
     }
@@ -287,5 +282,9 @@ export class DataSource extends Model {
             update: true,
             delete: true,
         };
+    }
+
+    getDatabase(): Database {
+        throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 }
