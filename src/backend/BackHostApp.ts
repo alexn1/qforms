@@ -625,12 +625,12 @@ export class BackHostApp {
         }
     }
 
-    async moduleGetFile(req, res, next) {
+    async moduleGetFile(req: Request, res: Response, next) {
         if (process.env.NODE_ENV === 'development') {
             console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         }
         if (req.params.module === 'viewer') {
-            let context = null;
+            let context: Context | null = null;
             try {
                 context = new Context({
                     req,
@@ -851,7 +851,7 @@ export class BackHostApp {
         this.alias('post', path, arr, 'modulePost', query);
     }
 
-    getNodeEnv(): string {
+    getNodeEnv(): string | null {
         return process.env.NODE_ENV || null;
     }
 

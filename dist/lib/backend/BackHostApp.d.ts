@@ -49,7 +49,7 @@ export declare class BackHostApp {
     indexPost(req: any, res: any, next: any): Promise<void>;
     monitorGet(req: any, res: any, next: any): Promise<void>;
     modulePost(req: Request, res: Response, next: any): Promise<void>;
-    moduleGetFile(req: any, res: any, next: any): Promise<void>;
+    moduleGetFile(req: Request, res: Response, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
     createAndRunHttpServer(host: any, port: any): Promise<any>;
@@ -66,7 +66,7 @@ export declare class BackHostApp {
     initCustomRoutes(): void;
     alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [any, any, any, any, any], cb: string, query?: any): void;
     getPostAlias(path: any, arr: any, query?: any): void;
-    getNodeEnv(): string;
+    getNodeEnv(): string | null;
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;
