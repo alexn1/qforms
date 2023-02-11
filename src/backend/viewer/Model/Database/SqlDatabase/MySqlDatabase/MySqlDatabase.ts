@@ -1,19 +1,14 @@
-import { createPool, createConnection, escape } from 'mysql';
+import { createPool, createConnection, escape, Pool, Connection, PoolConnection } from 'mysql';
 import { Context } from '../../../../../Context';
 import { SqlDatabase } from '../SqlDatabase';
 
-export class MySqlDatabase extends SqlDatabase {
-    pool: any;
-    constructor(data, parent?) {
-        super(data, parent);
-        //console.log('new MySqlDatabase');
-        this.pool = null;
-    }
+export class MySqlDatabase extends SqlDatabase<PoolConnection> {
+    pool: Pool = null;
 
-    /*static async create(data, parent) {
-        //console.log('MySqlDatabase.create');
-        return new MySqlDatabase(data, parent);
-    }*/
+    /* constructor(data, parent?) {
+        super(data, parent);
+        console.log('new MySqlDatabase');
+    } */
 
     async deinit(): Promise<void> {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
@@ -26,7 +21,7 @@ export class MySqlDatabase extends SqlDatabase {
         }
     }
 
-    getPool() {
+    getPool(): Pool {
         //console.log('MySqlDatabase.getPool');
         if (this.pool === null) {
             //console.log('creating connection pool for: ' + database);
@@ -48,7 +43,7 @@ export class MySqlDatabase extends SqlDatabase {
         return 3306;
     }*/
 
-    static async Pool_getConnection(pool): Promise<any> {
+    static async Pool_getConnection(pool: Pool): Promise<PoolConnection> {
         return new Promise((resolve, reject) => {
             pool.getConnection((err, cnn) => {
                 if (err) {
@@ -59,25 +54,6 @@ export class MySqlDatabase extends SqlDatabase {
             });
         });
     }
-
-    /*
-    getConnection(context): Promise<any> {
-        //console.log('MySqlDatabase.getConnection');
-        return new Promise((resolve, reject) => {
-            if (context.connections[this.getName()] === undefined) {
-                this.getPool().getConnection((err, cnn) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        context.connections[this.getName()] = cnn;
-                        resolve(context.connections[this.getName()]);
-                    }
-                });
-            } else {
-                resolve(context.connections[this.getName()]);
-            }
-        });
-    }*/
 
     async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
         console.log('MySqlDatabase.queryRows', query, params);
@@ -187,7 +163,7 @@ export class MySqlDatabase extends SqlDatabase {
         });
     }
 
-    static queryFormat(query, params = {}): string {
+    static queryFormat(query: string, params = {}): string {
         console.log('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {

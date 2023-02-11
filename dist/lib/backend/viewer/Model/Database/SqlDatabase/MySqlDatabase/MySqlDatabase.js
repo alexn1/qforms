@@ -4,15 +4,14 @@ exports.MySqlDatabase = void 0;
 const mysql_1 = require("mysql");
 const SqlDatabase_1 = require("../SqlDatabase");
 class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
-    constructor(data, parent) {
-        super(data, parent);
-        //console.log('new MySqlDatabase');
+    constructor() {
+        super(...arguments);
         this.pool = null;
     }
-    /*static async create(data, parent) {
-        //console.log('MySqlDatabase.create');
-        return new MySqlDatabase(data, parent);
-    }*/
+    /* constructor(data, parent?) {
+        super(data, parent);
+        console.log('new MySqlDatabase');
+    } */
     async deinit() {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
         if (this.pool !== null) {
@@ -51,24 +50,6 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
             });
         });
     }
-    /*
-    getConnection(context): Promise<any> {
-        //console.log('MySqlDatabase.getConnection');
-        return new Promise((resolve, reject) => {
-            if (context.connections[this.getName()] === undefined) {
-                this.getPool().getConnection((err, cnn) => {
-                    if (err) {
-                        reject(err);
-                    } else {
-                        context.connections[this.getName()] = cnn;
-                        resolve(context.connections[this.getName()]);
-                    }
-                });
-            } else {
-                resolve(context.connections[this.getName()]);
-            }
-        });
-    }*/
     async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
         SqlDatabase_1.SqlDatabase.checkParams(query, params);
