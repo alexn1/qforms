@@ -1,6 +1,6 @@
-import { createPool, createConnection, escape, Pool, Connection, PoolConnection } from 'mysql';
-import { Context } from '../../../../../Context';
+import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysql';
 import { SqlDatabase } from '../SqlDatabase';
+import { Context } from '../../../../../Context';
 
 export class MySqlDatabase extends SqlDatabase<PoolConnection> {
     pool: Pool = null;
@@ -176,16 +176,10 @@ export class MySqlDatabase extends SqlDatabase<PoolConnection> {
     }
 
     static typeCast(field, next) {
-        if (
-            field.type === 'DATE' ||
-            field.type === 'DATETIME' ||
-            field.type === 'TIME' ||
-            field.type === 'TIMESTAMP'
-        ) {
+        if (['DATE', 'DATETIME', 'TIME', 'TIMESTAMP'].includes(field.type)) {
             return field.string();
-        } else {
-            return next();
         }
+        return next();
     }
 
     async getTableList(): Promise<string[]> {

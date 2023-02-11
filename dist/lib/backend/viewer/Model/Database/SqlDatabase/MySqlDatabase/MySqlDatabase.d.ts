@@ -1,6 +1,6 @@
 import { Pool, PoolConnection } from 'mysql';
-import { Context } from '../../../../../Context';
 import { SqlDatabase } from '../SqlDatabase';
+import { Context } from '../../../../../Context';
 export declare class MySqlDatabase extends SqlDatabase<PoolConnection> {
     pool: Pool;
     deinit(): Promise<void>;

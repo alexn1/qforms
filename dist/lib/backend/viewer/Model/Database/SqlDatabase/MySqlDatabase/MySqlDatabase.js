@@ -161,15 +161,10 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         return sql;
     }
     static typeCast(field, next) {
-        if (field.type === 'DATE' ||
-            field.type === 'DATETIME' ||
-            field.type === 'TIME' ||
-            field.type === 'TIMESTAMP') {
+        if (['DATE', 'DATETIME', 'TIME', 'TIMESTAMP'].includes(field.type)) {
             return field.string();
         }
-        else {
-            return next();
-        }
+        return next();
     }
     async getTableList() {
         console.log('MySqlDatabase.getTableList');
