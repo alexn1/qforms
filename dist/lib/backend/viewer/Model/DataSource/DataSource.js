@@ -230,8 +230,8 @@ class DataSource extends Model_1.Model {
     isDefaultOnTableForm() {
         return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;
     }
-    async insert(context, _values = null) {
-        throw new Error(`${this.constructor.name}.insert not implemented`);
+    async create(context, _values = null) {
+        throw new Error(`${this.constructor.name}.create not implemented`);
     }
     async update(context) {
         throw new Error(`${this.constructor.name}.update not implemented`);

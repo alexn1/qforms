@@ -29,12 +29,12 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
             context.params.frame = 1;
         }
         try {
-            const [rows, count] = await this.select(context);
+            const [rows, count] = await this.read(context);
             response.rows = rows;
             response.count = count;
         }
         catch (err) {
-            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            err.message = `read error of ${this.getFullName()}: ${err.message}`;
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
@@ -106,7 +106,7 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
     getSelectParams(context) {
         return context.getParams();
     }
-    async select(context) {
+    async read(context) {
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
@@ -138,8 +138,8 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         }
         return [rows, count];
     }
-    async insert(context, _values = null) {
-        console.log('SqlDataSource.insert');
+    async create(context, _values = null) {
+        console.log('SqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }

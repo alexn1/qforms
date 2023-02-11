@@ -1,4 +1,4 @@
-import { PersistentDataSource, SelectResult } from '../PersistentDataSource';
+import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
 import { DataSource } from '../../DataSource';
 import { Helper } from '../../../../../Helper';
 import { Table } from '../../../Table/Table';
@@ -36,11 +36,11 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         }
 
         try {
-            const [rows, count] = await this.select(context);
+            const [rows, count] = await this.read(context);
             response.rows = rows;
             response.count = count;
         } catch (err) {
-            err.message = `select error of ${this.getFullName()}: ${err.message}`;
+            err.message = `read error of ${this.getFullName()}: ${err.message}`;
             throw err;
         }
 
@@ -121,7 +121,7 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         return context.getParams();
     }
 
-    async select(context: Context): Promise<SelectResult> {
+    async read(context: Context): Promise<ReadResult> {
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }
@@ -159,8 +159,8 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         return [rows, count];
     }
 
-    async insert(context: Context, _values: any = null): Promise<Result> {
-        console.log('SqlDataSource.insert');
+    async create(context: Context, _values: any = null): Promise<Result> {
+        console.log('SqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }

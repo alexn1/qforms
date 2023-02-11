@@ -1,4 +1,4 @@
-import { PersistentDataSource, SelectResult } from '../PersistentDataSource';
+import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
 import { Table } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
@@ -33,7 +33,7 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
         }
 
         try {
-            const [rows, count] = await this.select(context);
+            const [rows, count] = await this.read(context);
             response.rows = rows;
             response.count = count;
         } catch (err) {
@@ -52,7 +52,7 @@ export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
         return response;
     }
 
-    async select(context: Context): Promise<SelectResult> {
+    async read(context: Context): Promise<ReadResult> {
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }

@@ -22,8 +22,8 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map(path => `/viewer/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map(path => `/viewer/public/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
@@ -220,7 +220,7 @@ class ViewerModule {
             await application.initContext(context);
             await database.begin(context);
             try {
-                const result = await dataSource.insert(context);
+                const result = await dataSource.create(context);
                 if (result === undefined)
                     throw new Error('insert action: result is undefined');
                 await database.commit(context);

@@ -262,8 +262,8 @@ export class DataSource extends Model {
         return this.getName() === 'default' && this.parent instanceof TableForm;
     }
 
-    async insert(context: Context, _values: any = null): Promise<Result> {
-        throw new Error(`${this.constructor.name}.insert not implemented`);
+    async create(context: Context, _values: any = null): Promise<Result> {
+        throw new Error(`${this.constructor.name}.create not implemented`);
     }
     async update(context: Context): Promise<Result> {
         throw new Error(`${this.constructor.name}.update not implemented`);

@@ -35,13 +35,13 @@ export class ViewerModule {
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'css',
             )
-        ).map(path => `/viewer/public/${path}`);
+        ).map((path) => `/viewer/public/${path}`);
         this.js = (
             await Helper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'js',
             )
-        ).map(path => `/viewer/public/${path}`);
+        ).map((path) => `/viewer/public/${path}`);
         // console.log('viewer.css:', this.css);
         // console.log('viewer.js:' , this.js);
     }
@@ -242,7 +242,7 @@ export class ViewerModule {
             await application.initContext(context);
             await database.begin(context);
             try {
-                const result = await dataSource.insert(context);
+                const result = await dataSource.create(context);
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);

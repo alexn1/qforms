@@ -1,4 +1,4 @@
-import { PersistentDataSource, SelectResult } from '../PersistentDataSource';
+import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
 import { Table } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
@@ -13,8 +13,8 @@ export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     getMultipleQuery(context: Context): string;
     templateQuery(context: Context, _query: string): string;
     getSelectParams(context: Context): any;
-    select(context: Context): Promise<SelectResult>;
-    insert(context: Context, _values?: any): Promise<Result>;
+    read(context: Context): Promise<ReadResult>;
+    create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;

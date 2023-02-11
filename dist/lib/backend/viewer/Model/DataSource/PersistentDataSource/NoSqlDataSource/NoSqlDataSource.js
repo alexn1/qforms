@@ -27,7 +27,7 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
             context.params.frame = 1;
         }
         try {
-            const [rows, count] = await this.select(context);
+            const [rows, count] = await this.read(context);
             response.rows = rows;
             response.count = count;
         }
@@ -43,7 +43,7 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         }
         return response;
     }
-    async select(context) {
+    async read(context) {
         if (this.getAccess(context).read !== true) {
             throw new Error(`[${this.getFullName()}]: access denied`);
         }

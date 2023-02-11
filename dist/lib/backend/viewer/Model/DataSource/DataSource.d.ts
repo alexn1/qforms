@@ -30,7 +30,7 @@ export declare class DataSource extends Model {
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;
     isDefaultOnTableForm(): boolean;
-    insert(context: Context, _values?: any): Promise<Result>;
+    create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     getForm(): Form | null;
