@@ -272,7 +272,7 @@ export class Application extends Model {
 
     async fillPages(context: Context): Promise<any[]> {
         // console.log('Application.fillPages', context.query.page);
-        const pages = [];
+        const pages: any[] = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
             const response = await page.fill(context);
@@ -339,7 +339,7 @@ export class Application extends Model {
         return this;
     }
 
-    findDatabase(name: string): Database {
+    findDatabase(name: string): Database | undefined {
         return this.databases.find((database) => database.getName() === name);
     }
 
@@ -386,7 +386,7 @@ export class Application extends Model {
     static async getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]> {
         // console.log('Application.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
-        const appInfos = [];
+        const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
             const appInfo = await Application.loadAppInfo(appFilePath, hostApp);
@@ -397,7 +397,7 @@ export class Application extends Model {
         return appInfos;
     }
 
-    getDataSource(name): DataSource {
+    getDataSource(name): DataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
@@ -461,8 +461,8 @@ export class Application extends Model {
             }
         }
     }
-    composeForeignResult(result: Result): Result {
-        let fResult = null;
+    composeForeignResult(result: Result): Result | null {
+        let fResult: Result | null = null;
         for (const databaseName in result) {
             const database = this.findDatabase(databaseName);
             if (database) {

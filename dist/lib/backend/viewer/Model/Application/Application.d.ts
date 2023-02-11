@@ -50,13 +50,13 @@ export declare class Application extends Model {
     getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): Application;
-    findDatabase(name: string): Database;
+    findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
     static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]>;
-    getDataSource(name: any): DataSource;
+    getDataSource(name: any): DataSource | undefined;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: any): Promise<void>;
@@ -64,7 +64,7 @@ export declare class Application extends Model {
     removeClient(webSocket: any): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
-    composeForeignResult(result: Result): Result;
+    composeForeignResult(result: Result): Result | null;
     getTitle(context: any): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;

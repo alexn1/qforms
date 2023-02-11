@@ -17,6 +17,7 @@ export declare class TableResult {
     update?: UpdateResult;
     updateEx?: UpdateEx;
     delete?: DeleteResult;
+    refresh?: boolean;
 }
 export declare class DatabaseResult {
     [name: string]: TableResult;

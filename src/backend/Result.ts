@@ -21,6 +21,7 @@ export class TableResult {
     update?: UpdateResult;
     updateEx?: UpdateEx;
     delete?: DeleteResult;
+    refresh?: boolean;
 }
 
 export class DatabaseResult {

@@ -341,7 +341,7 @@ export class BackHostApp {
         return appInfos;
     }
 
-    async logError(err, req = null) {
+    async logError(err, req: Request | null = null) {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err.context ? err.context.getRoute() : null;
@@ -483,9 +483,9 @@ export class BackHostApp {
         }
     }
 
-    async moduleGet(req, res, next) {
+    async moduleGet(req: Request, res: Response, next) {
         console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context = null;
+        let context: Context | null = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
@@ -587,9 +587,9 @@ export class BackHostApp {
         }
     }
 
-    async modulePost(req, res, next) {
+    async modulePost(req: Request, res: Response, next) {
         console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
-        let context = null;
+        let context: Context | null = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
