@@ -11,7 +11,7 @@ import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../Result';
 export declare class Application extends Model {
     appInfo: AppInfo;
-    hostApp: any;
+    hostApp: BackHostApp;
     env: string;
     databases: Database[];
     actions: Action[];
@@ -24,15 +24,15 @@ export declare class Application extends Model {
     clients: any[];
     constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context);
     init(context: Context): Promise<void>;
-    getHostApp(): any;
+    getHostApp(): BackHostApp;
     getLinks(context: Context): Promise<any[]>;
     getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
-    getDistDirPath(): string;
+    getDistDirPath(): string | null;
     getPublicDirPath(): string;
     getText(): any;
-    getVersion(): any;
+    getVersion(): string | null;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     getClientUserFromServerUser(context: Context): Promise<any>;

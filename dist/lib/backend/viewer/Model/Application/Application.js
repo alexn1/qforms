@@ -18,18 +18,18 @@ const pkg = require('../../../../../package.json');
 class Application extends Model_1.Model {
     constructor(data, appInfo, hostApp, context) {
         super(data);
-        if (!hostApp)
-            throw new Error('no hostApp');
-        if (!context)
-            throw new Error('no route');
         this.appInfo = appInfo;
         this.hostApp = hostApp;
-        this.env = context.getEnv();
         this.databases = [];
         this.actions = [];
         this.dataSources = [];
         this.pages = {};
         this.clients = [];
+        if (!hostApp)
+            throw new Error('no hostApp');
+        if (!context)
+            throw new Error('no route');
+        this.env = context.getEnv();
     }
     async init(context) {
         await super.init(context);
@@ -45,13 +45,13 @@ class Application extends Model_1.Model {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.Helper.getFilePaths(this.getPublicDirPath(), 'css')).map(src => `${virtualPath}/${src}`);
+        return (await Helper_1.Helper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         // console.log('publicDirPath:', publicDirPath);
-        return (await Helper_1.Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
+        return (await Helper_1.Helper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
         console.log('Application.deinit: ' + this.getName());
@@ -115,7 +115,7 @@ class Application extends Model_1.Model {
         // uuid
         response.uuid = uuidv4();
         // actions
-        response.actions = this.getCol('actions').map(data => ({
+        response.actions = this.getCol('actions').map((data) => ({
             name: BaseModel_1.BaseModel.getName(data),
             caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
         }));
@@ -171,7 +171,7 @@ class Application extends Model_1.Model {
         // actions
         const actions = this.getCol('actions');
         if (actions.length) {
-            menu['Actions'] = actions.map(actionData => ({
+            menu['Actions'] = actions.map((actionData) => ({
                 type: 'action',
                 action: BaseModel_1.BaseModel.getName(actionData),
                 caption: BaseModel_1.BaseModel.getAttr(actionData, 'caption'),
@@ -214,8 +214,8 @@ class Application extends Model_1.Model {
     }
     getStartupPageLinkNames() {
         return this.getCol('pageLinks')
-            .filter(data => BaseModel_1.BaseModel.getAttr(data, 'startup') === 'true')
-            .map(data => BaseModel_1.BaseModel.getName(data));
+            .filter((data) => BaseModel_1.BaseModel.getAttr(data, 'startup') === 'true')
+            .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     async fillPages(context) {
         // console.log('Application.fillPages', context.query.page);
@@ -283,7 +283,7 @@ class Application extends Model_1.Model {
         return this;
     }
     findDatabase(name) {
-        return this.databases.find(database => database.getName() === name);
+        return this.databases.find((database) => database.getName() === name);
     }
     getDatabase(name) {
         if (!name)
@@ -337,7 +337,7 @@ class Application extends Model_1.Model {
         return appInfos;
     }
     getDataSource(name) {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
     getViewClassName() {
         return this.getAttr('viewClass') || 'ApplicationView';

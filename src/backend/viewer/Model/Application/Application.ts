@@ -24,31 +24,24 @@ const text = require('../../text');
 const pkg = require('../../../../../package.json');
 
 export class Application extends Model {
-    appInfo: AppInfo;
-    hostApp: any;
+    // appInfo: AppInfo;
+    // hostApp: BackHostApp;
     env: string;
-    databases: Database[];
-    actions: Action[];
-    dataSources: DataSource[];
-    pages: any;
+    databases: Database[] = [];
+    actions: Action[] = [];
+    dataSources: DataSource[] = [];
+    pages: any = {};
     links: any[];
     scripts: any[];
     menu: any;
     nav: any;
-    clients: any[];
+    clients: any[] = [];
 
-    constructor(data: any, appInfo: AppInfo, hostApp: BackHostApp, context: Context) {
+    constructor(data: any, public appInfo: AppInfo, public hostApp: BackHostApp, context: Context) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context) throw new Error('no route');
-        this.appInfo = appInfo;
-        this.hostApp = hostApp;
         this.env = context.getEnv();
-        this.databases = [];
-        this.actions = [];
-        this.dataSources = [];
-        this.pages = {};
-        this.clients = [];
     }
 
     async init(context: Context): Promise<void> {
@@ -61,14 +54,14 @@ export class Application extends Model {
         await this.createMenu(context);
     }
 
-    getHostApp() {
+    getHostApp(): BackHostApp {
         return this.hostApp;
     }
 
     async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         return (await Helper.getFilePaths(this.getPublicDirPath(), 'css')).map(
-            src => `${virtualPath}/${src}`,
+            (src) => `${virtualPath}/${src}`,
         );
     }
 
@@ -76,10 +69,12 @@ export class Application extends Model {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         // console.log('publicDirPath:', publicDirPath);
-        return (await Helper.getFilePaths(publicDirPath, 'js')).map(src => `${virtualPath}/${src}`);
+        return (await Helper.getFilePaths(publicDirPath, 'js')).map(
+            (src) => `${virtualPath}/${src}`,
+        );
     }
 
-    async deinit() {
+    async deinit(): Promise<void> {
         console.log('Application.deinit: ' + this.getName());
 
         // databases
@@ -92,7 +87,7 @@ export class Application extends Model {
         return this.appInfo.dirPath;
     }
 
-    getDistDirPath(): string {
+    getDistDirPath(): string | null {
         return this.appInfo.distDirPath;
     }
 
@@ -107,7 +102,7 @@ export class Application extends Model {
         return text[lang];
     }
 
-    getVersion() {
+    getVersion(): string | null {
         return null;
     }
 
@@ -156,7 +151,7 @@ export class Application extends Model {
         response.uuid = uuidv4();
 
         // actions
-        response.actions = this.getCol('actions').map(data => ({
+        response.actions = this.getCol('actions').map((data) => ({
             name: BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption'),
         }));
@@ -222,7 +217,7 @@ export class Application extends Model {
         // actions
         const actions = this.getCol('actions');
         if (actions.length) {
-            menu['Actions'] = actions.map(actionData => ({
+            menu['Actions'] = actions.map((actionData) => ({
                 type: 'action',
                 action: BaseModel.getName(actionData),
                 caption: BaseModel.getAttr(actionData, 'caption'),
@@ -271,8 +266,8 @@ export class Application extends Model {
 
     getStartupPageLinkNames(): string[] {
         return this.getCol('pageLinks')
-            .filter(data => BaseModel.getAttr(data, 'startup') === 'true')
-            .map(data => BaseModel.getName(data));
+            .filter((data) => BaseModel.getAttr(data, 'startup') === 'true')
+            .map((data) => BaseModel.getName(data));
     }
 
     async fillPages(context: Context): Promise<any[]> {
@@ -345,7 +340,7 @@ export class Application extends Model {
     }
 
     findDatabase(name: string): Database {
-        return this.databases.find(database => database.getName() === name);
+        return this.databases.find((database) => database.getName() === name);
     }
 
     getDatabase(name: string): Database {
@@ -403,7 +398,7 @@ export class Application extends Model {
     }
 
     getDataSource(name): DataSource {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
     getViewClassName(): string {
