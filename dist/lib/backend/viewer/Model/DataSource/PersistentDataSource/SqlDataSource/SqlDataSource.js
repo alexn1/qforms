@@ -8,9 +8,10 @@ const Result_1 = require("../../../../../Result");
 class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
-        this.table = this.getAttr('table')
-            ? this.getDatabase().getTable(this.getAttr('table'))
-            : null;
+        this.table = null;
+        if (this.getAttr('table')) {
+            this.table = this.getDatabase().getTable(this.getAttr('table'));
+        }
     }
     async fill(context) {
         //console.log('SqlDataSource.fill', this.getFullName());

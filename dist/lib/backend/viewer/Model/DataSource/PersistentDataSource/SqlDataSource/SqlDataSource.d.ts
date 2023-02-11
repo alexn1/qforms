@@ -1,4 +1,5 @@
-import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
+import { PersistentDataSource } from '../PersistentDataSource';
+import { ReadResult } from '../../DataSource';
 import { Table } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';

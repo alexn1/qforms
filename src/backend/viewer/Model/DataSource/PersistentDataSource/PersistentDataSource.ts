@@ -1,14 +1,12 @@
 import { DataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
 import { Table } from '../../Table/Table';
-import { Context } from '../../../../Context';
 
-export type ReadResult = [any[], number | null];
+
+
 
 export class PersistentDataSource<TDatabase extends Database = Database> extends DataSource {
-    async read(context: Context): Promise<ReadResult> {
-        throw new Error(`${this.constructor.name}.select not implemented`);
-    }
+    
 
     decodeChanges(changes) {
         const dChanges = {};

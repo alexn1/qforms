@@ -1,5 +1,5 @@
-import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
-import { DataSource } from '../../DataSource';
+import { PersistentDataSource } from '../PersistentDataSource';
+import { DataSource, ReadResult } from '../../DataSource';
 import { Helper } from '../../../../../Helper';
 import { Table } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
@@ -7,13 +7,13 @@ import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 
 export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
-    table: Table;
+    table: Table = null;
 
     constructor(data, parent) {
         super(data, parent);
-        this.table = this.getAttr('table')
-            ? this.getDatabase().getTable(this.getAttr('table'))
-            : null;
+        if (this.getAttr('table')) {
+            this.table = this.getDatabase().getTable(this.getAttr('table'));
+        }
     }
 
     async fill(context: Context) {

@@ -5,6 +5,7 @@ import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { Form } from '../Form/Form';
 import { IAccessResult } from '../../IAccessResult';
+export type ReadResult = [any[], number | null];
 export declare class DataSource extends Model {
     keyColumns: string[];
     rows: any[];
@@ -30,6 +31,7 @@ export declare class DataSource extends Model {
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;
     isDefaultOnTableForm(): boolean;
+    read(context: Context): Promise<ReadResult>;
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;

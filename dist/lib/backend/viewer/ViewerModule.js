@@ -195,7 +195,7 @@ class ViewerModule {
         await dataSource.getDatabase().connect(context);
         try {
             await application.initContext(context);
-            const [rows, count] = await dataSource.select(context);
+            const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             console.log('select time:', time);
             await res.json({ rows, count, time });

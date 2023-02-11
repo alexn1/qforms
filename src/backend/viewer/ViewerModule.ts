@@ -9,6 +9,7 @@ import { Application } from './Model/Application/Application';
 import { MyError } from '../MyError';
 import { Model } from './Model/Model';
 import { Result } from '../Result';
+import { DataSource } from './Model/DataSource/DataSource';
 
 // post actions
 const ACTIONS = [
@@ -203,7 +204,7 @@ export class ViewerModule {
         const req = context.getReq();
         const res = context.getRes();
         const start = Date.now();
-        let dataSource;
+        let dataSource: DataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
@@ -217,7 +218,7 @@ export class ViewerModule {
         await dataSource.getDatabase().connect(context);
         try {
             await application.initContext(context);
-            const [rows, count] = await dataSource.select(context);
+            const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             console.log('select time:', time);
             await res.json({ rows, count, time });

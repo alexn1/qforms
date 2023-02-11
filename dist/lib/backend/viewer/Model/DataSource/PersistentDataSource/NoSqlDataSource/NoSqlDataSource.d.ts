@@ -1,8 +1,9 @@
-import { PersistentDataSource, ReadResult } from '../PersistentDataSource';
+import { PersistentDataSource } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
 import { Table } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
+import { ReadResult } from '../../DataSource';
 export declare class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
     table: Table;
     constructor(data: any, parent: any);

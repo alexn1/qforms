@@ -12,6 +12,8 @@ import { RowForm } from '../Form/RowForm/RowForm';
 import { TableForm } from '../Form/TableForm/TableForm';
 import { IAccessResult } from '../../IAccessResult';
 
+export type ReadResult = [any[], number | null];
+
 export class DataSource extends Model {
     keyColumns: string[] = [];
     rows: any[] = [];
@@ -260,6 +262,10 @@ export class DataSource extends Model {
 
     isDefaultOnTableForm(): boolean {
         return this.getName() === 'default' && this.parent instanceof TableForm;
+    }
+
+    async read(context: Context): Promise<ReadResult> {
+        throw new Error(`${this.constructor.name}.select not implemented`);
     }
 
     async create(context: Context, _values: any = null): Promise<Result> {

@@ -230,6 +230,9 @@ class DataSource extends Model_1.Model {
     isDefaultOnTableForm() {
         return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;
     }
+    async read(context) {
+        throw new Error(`${this.constructor.name}.select not implemented`);
+    }
     async create(context, _values = null) {
         throw new Error(`${this.constructor.name}.create not implemented`);
     }
