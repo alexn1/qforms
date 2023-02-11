@@ -1,8 +1,6 @@
+import path from 'path';
+
 import { Context } from '../Context';
-
-const path = require('path');
-const pkg = require('../../../package.json');
-
 import { Helper } from '../Helper';
 import { BackHostApp } from '../BackHostApp';
 import { Application } from './Model/Application/Application';
@@ -10,6 +8,8 @@ import { MyError } from '../MyError';
 import { Model } from './Model/Model';
 import { Result } from '../Result';
 import { DataSource } from './Model/DataSource/DataSource';
+
+const pkg = require('../../../package.json');
 
 // post actions
 const ACTIONS = [
