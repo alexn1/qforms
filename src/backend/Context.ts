@@ -61,7 +61,7 @@ export class Context {
         return null;
     }
 
-    getClientTimezoneOffset(): number {
+    getClientTimezoneOffset(): number | null {
         if (
             this.getReq().session.tzOffset !== undefined &&
             this.getReq().session.tzOffset !== null
@@ -71,7 +71,7 @@ export class Context {
         return null;
     }
 
-    getTimeOffset(): number {
+    getTimeOffset(): number | null {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
         if (clientTimezoneOffset !== null) {
             return new Date().getTimezoneOffset() - clientTimezoneOffset;
