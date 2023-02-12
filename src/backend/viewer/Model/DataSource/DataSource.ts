@@ -13,13 +13,6 @@ import { TableForm } from '../Form/TableForm/TableForm';
 
 export type ReadResult = [any[], number | null];
 
-export interface IAccess {
-    create: boolean;
-    read: boolean;
-    update: boolean;
-    delete: boolean;
-}
-
 export class BkDataSource extends Model {
     keyColumns: string[] = [];
     rows: any[] = [];
@@ -289,7 +282,12 @@ export class BkDataSource extends Model {
         return this.isOnForm() ? this.getParent() : null;
     }
 
-    getAccess(context: Context): IAccess {
+    getAccess(context: Context): {
+        create: boolean;
+        read: boolean;
+        update: boolean;
+        delete: boolean;
+    } {
         return {
             create: true,
             read: true,
