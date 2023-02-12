@@ -7,7 +7,7 @@ import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 
 export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
-    table: BkTable = null;
+    table: BkTable | null = null;
 
     constructor(data, parent) {
         super(data, parent);
@@ -141,15 +141,15 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
         this.prepareRows(context, rows);
 
         // count
-        let count = null;
+        let count: number | null = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
-                count = await this.getDatabase().queryScalar(
+                const value = await this.getDatabase().queryScalar(
                     context,
                     this.getCountQuery(context),
                     params,
                 );
-                count = parseInt(count, 10);
+                count = parseInt(value, 10);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
                 throw err;
@@ -275,13 +275,17 @@ export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
     }*/
 
     getAutoColumns(): string[] {
-        return this.keyColumns.filter((name) => this.table.getColumn(name).isAuto());
+        if (!this.table) throw new Error('getAutoColumns: no table');
+        const table = this.table;
+        return this.keyColumns.filter((name) => table.getColumn(name).isAuto());
     }
 
     getAutoColumnTypes() {
+        if (!this.table) throw new Error('getAutoColumnTypes: no table');
+        const table = this.table;
         const columns = this.getAutoColumns();
         return columns.reduce((acc, name) => {
-            acc[name] = this.table.getColumn(name).getAttr('type');
+            acc[name] = table.getColumn(name).getAttr('type');
             return acc;
         }, {});
     }

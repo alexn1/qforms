@@ -129,8 +129,8 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
-                count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
-                count = parseInt(count, 10);
+                const value = await this.getDatabase().queryScalar(context, this.getCountQuery(context), params);
+                count = parseInt(value, 10);
             }
             catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
@@ -237,12 +237,18 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         return this.getTable().getColumn(column).getDbType();
     }*/
     getAutoColumns() {
-        return this.keyColumns.filter((name) => this.table.getColumn(name).isAuto());
+        if (!this.table)
+            throw new Error('getAutoColumns: no table');
+        const table = this.table;
+        return this.keyColumns.filter((name) => table.getColumn(name).isAuto());
     }
     getAutoColumnTypes() {
+        if (!this.table)
+            throw new Error('getAutoColumnTypes: no table');
+        const table = this.table;
         const columns = this.getAutoColumns();
         return columns.reduce((acc, name) => {
-            acc[name] = this.table.getColumn(name).getAttr('type');
+            acc[name] = table.getColumn(name).getAttr('type');
             return acc;
         }, {});
     }

@@ -5,7 +5,7 @@ import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
-    table: BkTable;
+    table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
     getKeyColumns(): string[];

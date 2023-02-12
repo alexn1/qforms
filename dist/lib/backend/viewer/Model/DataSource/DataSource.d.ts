@@ -24,7 +24,7 @@ export declare class DataSource extends Model {
     encodeRow(row: any): void;
     getApp(): Application;
     getKeyValuesFromKey(key: string): {};
-    getKeyFromValues(values: any): string | null;
+    getKeyFromValues(values: any): string;
     getFullName(): string;
     static keyToParams(key: string, paramName?: string): {};
     calcNewKeyValues(originalKeyValues: any, values: any): {};

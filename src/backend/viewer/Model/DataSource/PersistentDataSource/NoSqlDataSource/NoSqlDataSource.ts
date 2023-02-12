@@ -6,8 +6,8 @@ import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { DataSource, ReadResult } from '../../DataSource';
 
 export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
-    table: BkTable;
-    
+    table: BkTable | null;
+
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table')

@@ -165,12 +165,14 @@ export class DataSource extends Model {
         return values;
     }
 
-    getKeyFromValues(values): string | null {
+    getKeyFromValues(values): string {
         const arr: string[] = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
             const value = values[column];
-            if (value === null || value === undefined) return null;
+            if (value === null || value === undefined) {
+                throw new Error(`getKeyFromValues: no value of ${column} column`);
+            }
             arr.push(value);
         }
         return JSON.stringify(arr);
