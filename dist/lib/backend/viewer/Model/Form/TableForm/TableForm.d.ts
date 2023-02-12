@@ -1,4 +1,4 @@
 import { Form } from '../Form';
-export declare class TableForm extends Form {
+export declare class BkTableForm extends Form {
     fillAttributes(response: any): void;
 }

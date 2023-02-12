@@ -37,7 +37,7 @@ export { PasswordField } from './viewer/Model/Field/PasswordField/PasswordField'
 export { RadioField } from './viewer/Model/Field/RadioField/RadioField';
 export { Form } from './viewer/Model/Form/Form';
 export { BkRowForm } from './viewer/Model/Form/RowForm/RowForm';
-export { TableForm } from './viewer/Model/Form/TableForm/TableForm';
+export { BkTableForm } from './viewer/Model/Form/TableForm/TableForm';
 export { BkPage } from './viewer/Model/Page/Page';
 export { BkPageLink } from './viewer/Model/PageLink/PageLink';
 export { BkColumn } from './viewer/Model/Column/Column';

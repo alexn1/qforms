@@ -229,7 +229,7 @@ class BkDataSource extends Model_1.Model {
         return this.getName() === 'default' && this.parent instanceof RowForm_1.BkRowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;
+        return this.getName() === 'default' && this.parent instanceof TableForm_1.BkTableForm;
     }
     async read(context) {
         throw new Error(`${this.constructor.name}.select not implemented`);

@@ -9,7 +9,7 @@ import { Database } from '../Database/Database';
 import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
-import { TableForm } from '../Form/TableForm/TableForm';
+import { BkTableForm } from '../Form/TableForm/TableForm';
 
 export type ReadResult = [any[], number | null];
 
@@ -262,7 +262,7 @@ export class BkDataSource extends Model {
     }
 
     isDefaultOnTableForm(): boolean {
-        return this.getName() === 'default' && this.parent instanceof TableForm;
+        return this.getName() === 'default' && this.parent instanceof BkTableForm;
     }
 
     async read(context: Context): Promise<ReadResult> {

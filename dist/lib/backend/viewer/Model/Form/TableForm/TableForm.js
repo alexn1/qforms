@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TableForm = void 0;
+exports.BkTableForm = void 0;
 const Form_1 = require("../Form");
-class TableForm extends Form_1.Form {
+class BkTableForm extends Form_1.Form {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/
@@ -20,4 +20,4 @@ class TableForm extends Form_1.Form {
         response.refreshButton = this.getAttr('refreshButton');
     }
 }
-exports.TableForm = TableForm;
+exports.BkTableForm = BkTableForm;
