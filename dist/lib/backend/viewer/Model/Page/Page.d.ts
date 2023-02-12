@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { Form } from '../Form/Form';
 import { Context } from '../../../Context';
 export declare class BkPage extends Model {
@@ -13,7 +13,7 @@ export declare class BkPage extends Model {
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
-    getApp(): Application;
+    getApp(): BkApplication;
     getForm(name: string): Form | undefined;
     getDataSource(name: string): DataSource | undefined;
 }

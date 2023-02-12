@@ -23,7 +23,7 @@ const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 
-export class Application extends Model {
+export class BkApplication extends Model {
     // appInfo: AppInfo;
     // hostApp: BackHostApp;
     env: string;
@@ -335,7 +335,7 @@ export class Application extends Model {
         throw new Error(`no env ${name} in ${env}`);
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this;
     }
 
@@ -379,17 +379,17 @@ export class Application extends Model {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = Application.makeAppInfoFromAppFile(appFile, hostApp);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, hostApp);
         return appInfo;
     }
 
     static async getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]> {
-        // console.log('Application.getAppInfos', appsDirPath);
+        // console.log('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.loadAppInfo(appFilePath, hostApp);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath, hostApp);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

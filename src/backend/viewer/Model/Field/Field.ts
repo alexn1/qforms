@@ -3,7 +3,7 @@ import { SqlDataSource } from '../DataSource/PersistentDataSource/SqlDataSource/
 const path = require('path');
 
 import { Model } from '../Model';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
@@ -82,7 +82,7 @@ export class Field extends Model {
         );
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.parent.parent;
     }
 

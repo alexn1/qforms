@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { BkColumn } from '../Column/Column';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { Context } from '../../../Context';
 
 export class BkTable extends Model {
@@ -26,7 +26,7 @@ export class BkTable extends Model {
         return keyColumns;
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.parent;
     }
 

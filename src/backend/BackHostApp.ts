@@ -12,7 +12,7 @@ const session = require('express-session');
 import { Helper } from './Helper';
 import { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
 import { Context } from './Context';
-import { Application } from './viewer/Model/Application/Application';
+import { BkApplication } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
@@ -285,13 +285,13 @@ export class BackHostApp {
         return app;
     }
 
-    getApplication(context: Context): Application {
+    getApplication(context: Context): BkApplication {
         const application = this.applications[context.getRoute()];
         if (!application) throw new Error(`no application for route: ${context.getRoute()}`);
         return application;
     }
 
-    getApplicationByRoute(route): Application {
+    getApplicationByRoute(route: string): BkApplication {
         return this.applications[route];
     }
 
@@ -303,9 +303,9 @@ export class BackHostApp {
         );
     }
 
-    async createApplication(context: Context): Promise<Application> {
+    async createApplication(context: Context): Promise<BkApplication> {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application.loadAppInfo(this.getAppFilePath(context), this);
+        const appInfo = await BkApplication.loadAppInfo(this.getAppFilePath(context), this);
 
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
@@ -324,7 +324,7 @@ export class BackHostApp {
             if (!CustomClass) throw new Error(`no class ${modelClass}`);
             return CustomClass;
         }
-        return Application;
+        return BkApplication;
     }
 
     async createApp(req) {
@@ -337,7 +337,7 @@ export class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application.getAppInfos(this.appsDirPath, this);
+        const appInfos = await BkApplication.getAppInfos(this.appsDirPath, this);
         return appInfos;
     }
 
@@ -867,7 +867,7 @@ export class BackHostApp {
         return this.params;
     }
 
-    broadcastResult(sourceApplication: Application, context: Context, result: Result) {
+    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result) {
         console.log('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {

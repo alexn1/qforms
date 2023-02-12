@@ -9,7 +9,7 @@ import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../Result';
-export declare class Application extends Model {
+export declare class BkApplication extends Model {
     appInfo: AppInfo;
     hostApp: BackHostApp;
     env: string;
@@ -49,7 +49,7 @@ export declare class Application extends Model {
     rpc(name: string, context: Context): Promise<any>;
     getEnv(): string;
     getEnvVarValue(name: string): any;
-    getApp(): Application;
+    getApp(): BkApplication;
     findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     initContext(context: Context): Promise<void>;

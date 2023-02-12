@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Application = void 0;
+exports.BkApplication = void 0;
 const path_1 = __importDefault(require("path"));
 const BaseModel_1 = require("../../../BaseModel");
 const Model_1 = require("../Model");
@@ -15,7 +15,7 @@ const Result_1 = require("../../../Result");
 const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
-class Application extends Model_1.Model {
+class BkApplication extends Model_1.Model {
     constructor(data, appInfo, hostApp, context) {
         super(data);
         this.appInfo = appInfo;
@@ -320,16 +320,16 @@ class Application extends Model_1.Model {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = Application.makeAppInfoFromAppFile(appFile, hostApp);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, hostApp);
         return appInfo;
     }
     static async getAppInfos(appsDirPath, hostApp) {
-        // console.log('Application.getAppInfos', appsDirPath);
+        // console.log('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper_1.Helper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await Application.loadAppInfo(appFilePath, hostApp);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath, hostApp);
             if (appInfo) {
                 appInfos.push(appInfo);
             }
@@ -440,4 +440,4 @@ class Application extends Model_1.Model {
         */
     }
 }
-exports.Application = Application;
+exports.BkApplication = BkApplication;

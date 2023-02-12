@@ -5,7 +5,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { BkPage } from '../Page/Page';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { MyError } from '../../../MyError';
 
 export class Form extends Model {
@@ -115,7 +115,7 @@ export class Form extends Model {
         });
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.parent;
     }
 

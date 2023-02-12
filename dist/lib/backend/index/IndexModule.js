@@ -16,17 +16,17 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map(path => `/index/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map(path => `/index/public/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application_1.Application.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
+        const appInfos = await Application_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
-            appInfos: appInfos.map(appInfo => ({
+            appInfos: appInfos.map((appInfo) => ({
                 fullName: appInfo.fullName,
                 envs: appInfo.envs,
             })),

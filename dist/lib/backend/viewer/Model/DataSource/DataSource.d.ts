@@ -1,7 +1,7 @@
 import { Result } from '../../../Result';
 import { Model } from '../Model';
 import { Context } from '../../../Context';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { Form } from '../Form/Form';
 export type ReadResult = [any[], number | null];
@@ -22,7 +22,7 @@ export declare class DataSource extends Model {
     checkColumns(row: any): void;
     encodeRows(rows: any[]): void;
     encodeRow(row: any): void;
-    getApp(): Application;
+    getApp(): BkApplication;
     getKeyValuesFromKey(key: string): {};
     getKeyFromValues(values: any): string;
     getFullName(): string;

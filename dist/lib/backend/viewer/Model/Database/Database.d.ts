@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { BkParam } from '../Param/Param';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 interface IConfig {
@@ -28,7 +28,7 @@ export declare class Database<TConnection = any> extends Model {
     createParam(name: any): BkParam;
     getConfig(): IConfig;
     getDefaultPort(): number;
-    getApp(): Application;
+    getApp(): BkApplication;
     findTable(name: string): BkTable | undefined;
     getTable(name: string): BkTable;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;

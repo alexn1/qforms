@@ -6,7 +6,7 @@ export { BackHostApp } from './BackHostApp';
 export { Converter } from './Converter';
 export { JsonFile } from './JsonFile';
 export { Model } from './viewer/Model/Model';
-export { Application } from './viewer/Model/Application/Application';
+export { BkApplication } from './viewer/Model/Application/Application';
 export { Database } from './viewer/Model/Database/Database';
 export { MySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';

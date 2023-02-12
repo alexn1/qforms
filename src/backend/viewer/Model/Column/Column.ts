@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 
 export class BkColumn extends Model {
     fillAttributes(response: any): void {
@@ -16,7 +16,7 @@ export class BkColumn extends Model {
         return this.getAttr('auto') === 'true';
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.parent.parent;
     }
 

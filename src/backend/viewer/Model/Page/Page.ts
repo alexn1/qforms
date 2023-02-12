@@ -3,7 +3,7 @@ import path from 'path';
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { Form } from '../Form/Form';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
@@ -51,7 +51,7 @@ export class BkPage extends Model {
         });
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent;
     }
 

@@ -1,8 +1,8 @@
 import { Context } from '../../../Context';
-import { Application } from '../../../viewer/Model/Application/Application';
+import { BkApplication } from '../../../viewer/Model/Application/Application';
 import { EditorController } from '../EditorController';
 export declare class DatabaseEditorController extends EditorController {
-    application: Application;
+    application: BkApplication | null;
     init(context: Context): Promise<void>;
     _new(params: any): Promise<any>;
     save(params: any): Promise<string>;

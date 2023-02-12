@@ -3,7 +3,7 @@ import path from 'path';
 import { Context } from '../Context';
 import { Helper } from '../Helper';
 import { BackHostApp } from '../BackHostApp';
-import { Application } from './Model/Application/Application';
+import { BkApplication } from './Model/Application/Application';
 import { MyError } from '../MyError';
 import { Model } from './Model/Model';
 import { Result } from '../Result';
@@ -67,7 +67,7 @@ export class ViewerModule {
         ];
     }
 
-    async handleViewerGet(context: Context, application: Application) {
+    async handleViewerGet(context: Context, application: BkApplication) {
         console.log(
             'ViewerModule.handleViewerGet',
             context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/,
@@ -96,7 +96,7 @@ export class ViewerModule {
         }
     }
 
-    async loginGet(context: Context, application: Application) {
+    async loginGet(context: Context, application: BkApplication) {
         console.log('ViewerModule.loginGet');
         // const application = this.getApplication(context);
         // const users = await application.getUsers(context);
@@ -116,7 +116,7 @@ export class ViewerModule {
         });
     }
 
-    async handleViewerPost(context: Context, application: Application) {
+    async handleViewerPost(context: Context, application: BkApplication) {
         // console.log('ViewerModule.handleViewerPost');
         if (context.getReq().body.action === 'login') {
             await this.loginPost(context, application);
@@ -137,7 +137,7 @@ export class ViewerModule {
         }
     }
 
-    async loginPost(context: Context, application: Application): Promise<void> {
+    async loginPost(context: Context, application: BkApplication): Promise<void> {
         console.log('ViewerModule.loginPost');
         const req = context.getReq();
         const res = context.getRes();
@@ -190,7 +190,7 @@ export class ViewerModule {
     }
 
     // action (fill page)
-    async page(context: Context, application: Application) {
+    async page(context: Context, application: BkApplication) {
         console.log('ViewerModule.page', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
@@ -207,7 +207,7 @@ export class ViewerModule {
     }
 
     // action
-    async select(context: Context, application: Application) {
+    async select(context: Context, application: BkApplication) {
         console.log('ViewerModule.select', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
@@ -237,7 +237,7 @@ export class ViewerModule {
     }
 
     // action
-    async insert(context: Context, application: Application) {
+    async insert(context: Context, application: BkApplication) {
         console.log('ViewerModule.insert', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
@@ -266,7 +266,7 @@ export class ViewerModule {
     }
 
     // action
-    async update(context: Context, application: Application) {
+    async update(context: Context, application: BkApplication) {
         console.log('ViewerModule.update', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
@@ -295,7 +295,7 @@ export class ViewerModule {
     }
 
     // action
-    async _delete(context: Context, application: Application) {
+    async _delete(context: Context, application: BkApplication) {
         console.log('ViewerModule._delete', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
@@ -324,7 +324,7 @@ export class ViewerModule {
     }
 
     // action
-    async rpc(context: Context, application: Application) {
+    async rpc(context: Context, application: BkApplication) {
         console.log('ViewerModule.rpc', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
@@ -367,7 +367,7 @@ export class ViewerModule {
     }
 
     // action
-    async logout(context: Context, application: Application) {
+    async logout(context: Context, application: BkApplication) {
         console.log('ViewerModule.logout');
         const req = context.getReq();
         const res = context.getRes();
@@ -380,7 +380,7 @@ export class ViewerModule {
     }
 
     // action
-    async test(context: Context, application: Application) {
+    async test(context: Context, application: BkApplication) {
         console.log('ViewerModule.test', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
@@ -389,7 +389,7 @@ export class ViewerModule {
         await res.json(null);
     }
 
-    async handleViewerGetFile(context: Context, application: Application, next) {
+    async handleViewerGetFile(context: Context, application: BkApplication, next) {
         await application.handleGetFile(context, next);
     }
 

@@ -1,6 +1,6 @@
 import { Model } from '../Model';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 export declare class BkParam extends Model {
     getValue(): string;
-    getApp(): Application;
+    getApp(): BkApplication;
 }

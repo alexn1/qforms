@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { BkParam } from '../Param/Param';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 
@@ -96,7 +96,7 @@ export class Database<TConnection = any> extends Model {
         throw new Error(`${this.constructor.name}.getDefaultPort not implemented`);
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent;
     }
 

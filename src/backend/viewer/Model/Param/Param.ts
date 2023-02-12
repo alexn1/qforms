@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 
 export class BkParam extends Model {
     getValue() {
@@ -11,7 +11,7 @@ export class BkParam extends Model {
         });
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.getApp();
     }
 }

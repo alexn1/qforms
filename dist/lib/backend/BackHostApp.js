@@ -221,7 +221,7 @@ class BackHostApp {
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application_1.Application.loadAppInfo(this.getAppFilePath(context), this);
+        const appInfo = await Application_1.BkApplication.loadAppInfo(this.getAppFilePath(context), this);
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -238,7 +238,7 @@ class BackHostApp {
                 throw new Error(`no class ${modelClass}`);
             return CustomClass;
         }
-        return Application_1.Application;
+        return Application_1.BkApplication;
     }
     async createApp(req) {
         console.log('createApp');
@@ -252,7 +252,7 @@ class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application_1.Application.getAppInfos(this.appsDirPath, this);
+        const appInfos = await Application_1.BkApplication.getAppInfos(this.appsDirPath, this);
         return appInfos;
     }
     async logError(err, req = null) {

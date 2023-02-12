@@ -1,7 +1,7 @@
 const path = require('path');
 import { Editor } from '../Editor';
 import { Helper } from '../../../Helper';
-import { Application } from '../../../viewer/Model/Application/Application';
+import { BkApplication } from '../../../viewer/Model/Application/Application';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
@@ -12,7 +12,7 @@ export class ApplicationEditor extends Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = Application.makeAppInfoFromAppFile(appFile, null);
+        this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile, null);
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);

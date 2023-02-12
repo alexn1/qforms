@@ -65,8 +65,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map(path => `/editor/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map(path => `/editor/public/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -92,7 +92,7 @@ class EditorModule {
     }
     async handleEditorGet(req, res, context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await Application_1.Application.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await Application_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
         // data
         const data = {
             app: appInfo.appFile.data,
@@ -122,7 +122,7 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await Application_1.Application.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await Application_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;

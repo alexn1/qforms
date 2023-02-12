@@ -4,7 +4,7 @@ import { Result } from '../../../Result';
 import { Model } from '../Model';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
-import { Application } from '../Application/Application';
+import { BkApplication } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
@@ -140,7 +140,7 @@ export class DataSource extends Model {
         }
     }
 
-    getApp(): Application {
+    getApp(): BkApplication {
         return this.parent.getApp();
     }
 

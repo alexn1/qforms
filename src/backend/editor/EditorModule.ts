@@ -5,7 +5,7 @@ const pkg = require('../../../package.json');
 
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
-import { Application } from '../viewer/Model/Application/Application';
+import { BkApplication } from '../viewer/Model/Application/Application';
 
 import * as backend from '../index';
 
@@ -55,13 +55,13 @@ export class EditorModule {
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'css',
             )
-        ).map(path => `/editor/public/${path}`);
+        ).map((path) => `/editor/public/${path}`);
         this.js = (
             await Helper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'js',
             )
-        ).map(path => `/editor/public/${path}`);
+        ).map((path) => `/editor/public/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
@@ -87,7 +87,7 @@ export class EditorModule {
     }
     async handleEditorGet(req, res, context: Context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await Application.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
 
         // data
         const data = {
@@ -121,7 +121,7 @@ export class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
 
-        const appInfo = await Application.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;

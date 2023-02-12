@@ -1,7 +1,7 @@
 const path = require('path');
 
 import ReactDOMServer from 'react-dom/server';
-import { Application } from '../viewer/Model/Application/Application';
+import { BkApplication } from '../viewer/Model/Application/Application';
 import { Helper } from '../Helper';
 import { App } from './App';
 import { Links } from './Links';
@@ -20,22 +20,22 @@ export class IndexModule {
                 path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
                 'css',
             )
-        ).map(path => `/index/public/${path}`);
+        ).map((path) => `/index/public/${path}`);
         this.js = (
             await Helper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
                 'js',
             )
-        ).map(path => `/index/public/${path}`);
+        ).map((path) => `/index/public/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
+        const appInfos = await BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
-            appInfos: appInfos.map(appInfo => ({
+            appInfos: appInfos.map((appInfo) => ({
                 fullName: appInfo.fullName,
                 envs: appInfo.envs,
             })),

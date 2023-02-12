@@ -1,6 +1,6 @@
 import { Express, Request, Response } from 'express';
 import { Context } from './Context';
-import { Application } from './viewer/Model/Application/Application';
+import { BkApplication } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
@@ -33,10 +33,10 @@ export declare class BackHostApp {
     getSecretSync(): any;
     initExpressServer(): void;
     createApplicationIfNotExists(context: Context): Promise<any>;
-    getApplication(context: Context): Application;
-    getApplicationByRoute(route: any): Application;
+    getApplication(context: Context): BkApplication;
+    getApplicationByRoute(route: string): BkApplication;
     getAppFilePath(context: Context): any;
-    createApplication(context: Context): Promise<Application>;
+    createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): any;
     createApp(req: any): Promise<AppInfo[]>;
     logError(err: Error, req?: Request | null): Promise<void>;
@@ -70,7 +70,7 @@ export declare class BackHostApp {
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;
-    broadcastResult(sourceApplication: Application, context: Context, result: Result): void;
+    broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     static test(): void;
     getDistDirPath(): string;
 }
