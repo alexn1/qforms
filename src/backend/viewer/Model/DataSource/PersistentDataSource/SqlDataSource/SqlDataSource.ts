@@ -6,7 +6,7 @@ import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 
-export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
+export class BkSqlDataSource extends PersistentDataSource<SqlDatabase> {
     table: BkTable | null = null;
 
     constructor(data, parent) {

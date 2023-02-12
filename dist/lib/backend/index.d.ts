@@ -12,7 +12,7 @@ export { MySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase
 export { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
 export { MongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 export { DataSource } from './viewer/Model/DataSource/DataSource';
-export { SqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
+export { BkSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
 export { BkNoSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
 export { Field } from './viewer/Model/Field/Field';
 export { CheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';

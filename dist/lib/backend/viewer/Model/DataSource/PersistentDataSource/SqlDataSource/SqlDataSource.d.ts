@@ -4,7 +4,7 @@ import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
-export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
+export declare class BkSqlDataSource extends PersistentDataSource<SqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;

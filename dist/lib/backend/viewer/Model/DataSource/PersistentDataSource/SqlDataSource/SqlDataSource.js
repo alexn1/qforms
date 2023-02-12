@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SqlDataSource = void 0;
+exports.BkSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
 const DataSource_1 = require("../../DataSource");
 const Helper_1 = require("../../../../../Helper");
 const Result_1 = require("../../../../../Result");
-class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
+class BkSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = null;
@@ -256,4 +256,4 @@ class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         return file.data;
     }
 }
-exports.SqlDataSource = SqlDataSource;
+exports.BkSqlDataSource = BkSqlDataSource;
