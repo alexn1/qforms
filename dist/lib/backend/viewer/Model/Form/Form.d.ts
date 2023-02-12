@@ -1,11 +1,11 @@
 import { Model } from '../Model';
-import { DataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
 export declare class Form extends Model {
-    dataSources: DataSource[];
+    dataSources: BkDataSource[];
     actions: BkAction[];
     fields: Field[];
     constructor(data: any, parent: any);
@@ -29,5 +29,5 @@ export declare class Form extends Model {
     getFullName(): string;
     isNewMode(context: any): boolean;
     getField(name: any): Field | undefined;
-    getDataSource(name: any): DataSource | undefined;
+    getDataSource(name: string): BkDataSource;
 }

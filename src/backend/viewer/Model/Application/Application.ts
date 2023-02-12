@@ -9,7 +9,7 @@ import { BaseModel } from '../../../BaseModel';
 import { Model } from '../Model';
 import { BkAction } from '../Action/Action';
 import { Database } from '../Database/Database';
-import { DataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../Helper';
 import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';
@@ -29,7 +29,7 @@ export class BkApplication extends Model {
     env: string;
     databases: Database[] = [];
     actions: BkAction[] = [];
-    dataSources: DataSource[] = [];
+    dataSources: BkDataSource[] = [];
     pages: any = {};
     links: any[];
     scripts: any[];
@@ -397,8 +397,10 @@ export class BkApplication extends Model {
         return appInfos;
     }
 
-    getDataSource(name): DataSource | undefined {
-        return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    getDataSource(name: string): BkDataSource {
+        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
+        if (!ds) throw new Error(`no DataSource with name: ${name}`);
+        return ds;
     }
 
     getViewClassName(): string {

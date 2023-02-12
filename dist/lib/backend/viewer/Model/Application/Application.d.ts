@@ -3,7 +3,7 @@ import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
 import { BkAction } from '../Action/Action';
 import { Database } from '../Database/Database';
-import { DataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/DataSource';
 import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
@@ -15,7 +15,7 @@ export declare class BkApplication extends Model {
     env: string;
     databases: Database[];
     actions: BkAction[];
-    dataSources: DataSource[];
+    dataSources: BkDataSource[];
     pages: any;
     links: any[];
     scripts: any[];
@@ -56,7 +56,7 @@ export declare class BkApplication extends Model {
     static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
     static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]>;
-    getDataSource(name: any): DataSource | undefined;
+    getDataSource(name: string): BkDataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: any): Promise<void>;

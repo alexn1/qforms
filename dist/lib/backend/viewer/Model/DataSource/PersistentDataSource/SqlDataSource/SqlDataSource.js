@@ -158,7 +158,7 @@ class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
         if (!key)
             throw new Error('insert: cannot calc row key');
         console.log('key:', key);
-        const keyParams = DataSource_1.DataSource.keyToParams(key);
+        const keyParams = DataSource_1.BkDataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
@@ -195,7 +195,7 @@ class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource_1.DataSource.keyToParams(newKey);
+        const newKeyParams = DataSource_1.BkDataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);

@@ -1,10 +1,10 @@
-import { DataSource } from '../DataSource';
+import { BkDataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends Database = Database,
-> extends DataSource {
+> extends BkDataSource {
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {

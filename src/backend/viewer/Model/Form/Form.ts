@@ -1,7 +1,7 @@
 const path = require('path');
 
 import { Model } from '../Model';
-import { DataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { BkPage } from '../Page/Page';
@@ -9,7 +9,7 @@ import { BkApplication } from '../Application/Application';
 import { MyError } from '../../../MyError';
 
 export class Form extends Model {
-    dataSources: DataSource[] = [];
+    dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     fields: Field[] = [];
 
@@ -132,7 +132,9 @@ export class Form extends Model {
     getField(name): Field | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
-    getDataSource(name): DataSource | undefined {
-        return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    getDataSource(name: string): BkDataSource {
+        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
+        if (!ds) throw new Error(`no data source with name: ${name}`);
+        return ds;
     }
 }

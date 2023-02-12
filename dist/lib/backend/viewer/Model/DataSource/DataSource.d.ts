@@ -11,7 +11,7 @@ export interface IAccess {
     update: boolean;
     delete: boolean;
 }
-export declare class DataSource extends Model {
+export declare class BkDataSource extends Model {
     keyColumns: string[];
     rows: any[];
     getDirPath(): string;

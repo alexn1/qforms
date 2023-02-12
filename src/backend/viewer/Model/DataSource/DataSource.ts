@@ -20,7 +20,7 @@ export interface IAccess {
     delete: boolean;
 }
 
-export class DataSource extends Model {
+export class BkDataSource extends Model {
     keyColumns: string[] = [];
     rows: any[] = [];
 

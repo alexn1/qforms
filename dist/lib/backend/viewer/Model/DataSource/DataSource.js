@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DataSource = void 0;
+exports.BkDataSource = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
@@ -11,7 +11,7 @@ const Page_1 = require("../Page/Page");
 const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 const TableForm_1 = require("../Form/TableForm/TableForm");
-class DataSource extends Model_1.Model {
+class BkDataSource extends Model_1.Model {
     constructor() {
         super(...arguments);
         this.keyColumns = [];
@@ -264,4 +264,4 @@ class DataSource extends Model_1.Model {
         return null;
     }
 }
-exports.DataSource = DataSource;
+exports.BkDataSource = BkDataSource;

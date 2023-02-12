@@ -1,5 +1,5 @@
 import { BkPersistentDataSource } from '../PersistentDataSource';
-import { DataSource, ReadResult } from '../../DataSource';
+import { BkDataSource, ReadResult } from '../../DataSource';
 import { Helper } from '../../../../../Helper';
 import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
@@ -184,7 +184,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         if (!key) throw new Error('insert: cannot calc row key');
         console.log('key:', key);
 
-        const keyParams = DataSource.keyToParams(key);
+        const keyParams = BkDataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
 
         const singleQuery = this.getSingleQuery(context);
@@ -227,7 +227,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
 
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource.keyToParams(newKey);
+        const newKeyParams = BkDataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);

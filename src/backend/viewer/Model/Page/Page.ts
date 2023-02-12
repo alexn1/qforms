@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { Model } from '../Model';
-import { DataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { BkApplication } from '../Application/Application';
 import { Form } from '../Form/Form';
@@ -9,7 +9,7 @@ import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
 export class BkPage extends Model {
-    dataSources: DataSource[] = [];
+    dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     forms: Form[] = [];
 
@@ -55,11 +55,13 @@ export class BkPage extends Model {
         return this.parent;
     }
 
-    getForm(name: string): Form | undefined {
+    getForm(name: string): Form {
         return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name: string): DataSource | undefined {
-        return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    getDataSource(name: string): BkDataSource {
+        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
+        if (!ds) throw new Error(`no data source with name: ${name}`);
+        return ds;
     }
 }

@@ -7,7 +7,7 @@ import { BkApplication } from './Model/Application/Application';
 import { MyError } from '../MyError';
 import { Model } from './Model/Model';
 import { Result } from '../Result';
-import { DataSource } from './Model/DataSource/DataSource';
+import { BkDataSource } from './Model/DataSource/DataSource';
 
 const pkg = require('../../../package.json');
 
@@ -212,7 +212,7 @@ export class ViewerModule {
         const req = context.getReq();
         const res = context.getRes();
         const start = Date.now();
-        let dataSource: DataSource;
+        let dataSource: BkDataSource;
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {

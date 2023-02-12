@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkPersistentDataSource = void 0;
 const DataSource_1 = require("../DataSource");
-class BkPersistentDataSource extends DataSource_1.DataSource {
+class BkPersistentDataSource extends DataSource_1.BkDataSource {
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {

@@ -3,7 +3,7 @@ import { Context } from '../../../../../Context';
 import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
-import { DataSource, ReadResult } from '../../DataSource';
+import { BkDataSource, ReadResult } from '../../DataSource';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<NoSqlDatabase> {
     table: BkTable | null;
@@ -119,7 +119,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<NoSqlDatabase> {
 
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource.keyToParams(newKey);
+        const newKeyParams = BkDataSource.keyToParams(newKey);
         console.log('newKey:', newKey);
 
         const [row] = await this.getDatabase().queryRows(

@@ -95,7 +95,7 @@ class BkNoSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
         console.log('updateResult', updateResult);
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource_1.DataSource.keyToParams(newKey);
+        const newKeyParams = DataSource_1.BkDataSource.keyToParams(newKey);
         console.log('newKey:', newKey);
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), newKeyParams);
         if (!row)
