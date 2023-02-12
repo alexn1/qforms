@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Param = void 0;
+exports.BkParam = void 0;
 const Model_1 = require("../Model");
-class Param extends Model_1.Model {
+class BkParam extends Model_1.Model {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');
@@ -15,4 +15,4 @@ class Param extends Model_1.Model {
         return this.parent.getApp();
     }
 }
-exports.Param = Param;
+exports.BkParam = BkParam;

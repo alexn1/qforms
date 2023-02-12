@@ -57,7 +57,7 @@ class Database extends Model_1.Model {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
     createParam(name) {
-        return new Param_1.Param(this.getColItemData('params', name), this);
+        return new Param_1.BkParam(this.getColItemData('params', name), this);
     }
     getConfig() {
         const config = {

@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Param } from '../Param/Param';
+import { BkParam } from '../Param/Param';
 import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
@@ -75,8 +75,8 @@ export class Database<TConnection = any> extends Model {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
 
-    createParam(name): Param {
-        return new Param(this.getColItemData('params', name), this);
+    createParam(name): BkParam {
+        return new BkParam(this.getColItemData('params', name), this);
     }
 
     getConfig(): IConfig {

@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { Param } from '../Param/Param';
+import { BkParam } from '../Param/Param';
 import { Application } from '../Application/Application';
 import { Table } from '../Table/Table';
 import { Context } from '../../../Context';
@@ -25,7 +25,7 @@ export declare class Database<TConnection = any> extends Model {
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
-    createParam(name: any): Param;
+    createParam(name: any): BkParam;
     getConfig(): IConfig;
     getDefaultPort(): number;
     getApp(): Application;
