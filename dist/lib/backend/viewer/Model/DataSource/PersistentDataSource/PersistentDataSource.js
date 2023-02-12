@@ -12,8 +12,11 @@ class PersistentDataSource extends DataSource_1.DataSource {
     }
     getValuesFromRow(row) {
         console.log('PersistentDataSource.getValuesFromRow', row);
+        const form = this.getForm();
+        if (!form)
+            throw new Error('not form ds');
         const values = {};
-        for (const field of this.getForm().fields) {
+        for (const field of form.fields) {
             const column = field.getAttr('column');
             if (row.hasOwnProperty(column)) {
                 const value = field.rawToValue(row[column]);

@@ -2,12 +2,9 @@ import { DataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
 import { Table } from '../../Table/Table';
 
-
-
-
-export class PersistentDataSource<TDatabase extends Database = Database> extends DataSource {
-    
-
+export abstract class PersistentDataSource<
+    TDatabase extends Database = Database
+> extends DataSource {
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
@@ -18,8 +15,10 @@ export class PersistentDataSource<TDatabase extends Database = Database> extends
 
     getValuesFromRow(row) {
         console.log('PersistentDataSource.getValuesFromRow', row);
+        const form = this.getForm();
+        if (!form) throw new Error('not form ds');
         const values = {};
-        for (const field of this.getForm().fields) {
+        for (const field of form.fields) {
             const column = field.getAttr('column');
             if (row.hasOwnProperty(column)) {
                 const value = field.rawToValue(row[column]);
