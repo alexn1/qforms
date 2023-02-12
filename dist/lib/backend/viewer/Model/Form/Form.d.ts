@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { Action } from '../Action/Action';
 import { Field } from '../Field/Field';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { Application } from '../Application/Application';
 export declare class Form extends Model {
     dataSources: DataSource[];
@@ -25,9 +25,9 @@ export declare class Form extends Model {
     replaceThis(context: any, query: any): any;
     rpc(name: any, context: any): Promise<any>;
     getApp(): Application;
-    getPage(): Page;
+    getPage(): BkPage;
     getFullName(): string;
     isNewMode(context: any): boolean;
-    getField(name: any): Field;
-    getDataSource(name: any): DataSource;
+    getField(name: any): Field | undefined;
+    getDataSource(name: any): DataSource | undefined;
 }

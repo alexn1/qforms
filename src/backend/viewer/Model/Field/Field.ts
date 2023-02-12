@@ -4,7 +4,7 @@ const path = require('path');
 
 import { Model } from '../Model';
 import { Application } from '../Application/Application';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { Column } from '../Column/Column';
 import { Helper } from '../../../Helper';
@@ -77,20 +77,16 @@ export class Field extends Model {
     }
 
     getFullName(): string {
-        return [
-            this.getForm()
-                .getPage()
-                .getName(),
-            this.getForm().getName(),
-            this.getName(),
-        ].join('.');
+        return [this.getForm().getPage().getName(), this.getForm().getName(), this.getName()].join(
+            '.',
+        );
     }
 
     getApp(): Application {
         return this.parent.parent.parent;
     }
 
-    getPage(): Page {
+    getPage(): BkPage {
         return this.parent.parent;
     }
 

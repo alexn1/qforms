@@ -4,7 +4,7 @@ import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { Action } from '../Action/Action';
 import { Field } from '../Field/Field';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { MyError } from '../../../MyError';
 
@@ -126,7 +126,7 @@ export class Form extends Model {
         return this.parent.parent;
     }
 
-    getPage(): Page {
+    getPage(): BkPage {
         return this.parent;
     }
 
@@ -136,10 +136,10 @@ export class Form extends Model {
     isNewMode(context): boolean {
         return !!context.getBody().newMode;
     }
-    getField(name): Field {
+    getField(name): Field | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
-    getDataSource(name): DataSource {
+    getDataSource(name): DataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

@@ -4,7 +4,7 @@ import { Action } from '../Action/Action';
 import { Application } from '../Application/Application';
 import { Form } from '../Form/Form';
 import { Context } from '../../../Context';
-export declare class Page extends Model {
+export declare class BkPage extends Model {
     dataSources: DataSource[];
     actions: Action[];
     forms: Form[];

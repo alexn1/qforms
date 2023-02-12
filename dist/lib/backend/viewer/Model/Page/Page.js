@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Page = void 0;
+exports.BkPage = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
-class Page extends Model_1.Model {
+class BkPage extends Model_1.Model {
     constructor() {
         super(...arguments);
         this.dataSources = [];
@@ -58,4 +58,4 @@ class Page extends Model_1.Model {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
-exports.Page = Page;
+exports.BkPage = BkPage;

@@ -6,7 +6,7 @@ import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { TableForm } from '../Form/TableForm/TableForm';
@@ -175,7 +175,7 @@ export class DataSource extends Model {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join(
                 '.',
             );
-        } else if (this.parent instanceof Page) {
+        } else if (this.parent instanceof BkPage) {
             return [this.parent.getName(), this.getName()].join('.');
         } else {
             return this.getName();

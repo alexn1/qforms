@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { Application } from '../Application/Application';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { Column } from '../Column/Column';
 export declare class Field extends Model {
@@ -10,7 +10,7 @@ export declare class Field extends Model {
     dumpRowValueToParams(row: any, params: any): void;
     getFullName(): string;
     getApp(): Application;
-    getPage(): Page;
+    getPage(): BkPage;
     getForm(): Form;
     isParam(): boolean;
     valueToRaw(value: any): any;

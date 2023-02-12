@@ -33,7 +33,7 @@ export { RadioField } from './viewer/Model/Field/RadioField/RadioField';
 export { Form } from './viewer/Model/Form/Form';
 export { RowForm } from './viewer/Model/Form/RowForm/RowForm';
 export { TableForm } from './viewer/Model/Form/TableForm/TableForm';
-export { Page } from './viewer/Model/Page/Page';
+export { BkPage } from './viewer/Model/Page/Page';
 export { PageLink } from './viewer/Model/PageLink/PageLink';
 export { Column } from './viewer/Model/Column/Column';
 export { Table } from './viewer/Model/Table/Table';

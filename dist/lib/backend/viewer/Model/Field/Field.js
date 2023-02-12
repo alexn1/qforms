@@ -70,13 +70,7 @@ class Field extends Model_1.Model {
         }
     }
     getFullName() {
-        return [
-            this.getForm()
-                .getPage()
-                .getName(),
-            this.getForm().getName(),
-            this.getName(),
-        ].join('.');
+        return [this.getForm().getPage().getName(), this.getForm().getName(), this.getName()].join('.');
     }
     getApp() {
         return this.parent.parent.parent;

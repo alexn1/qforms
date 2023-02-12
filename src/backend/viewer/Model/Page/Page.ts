@@ -8,7 +8,7 @@ import { Form } from '../Form/Form';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
-export class Page extends Model {
+export class BkPage extends Model {
     dataSources: DataSource[] = [];
     actions: Action[] = [];
     forms: Form[] = [];

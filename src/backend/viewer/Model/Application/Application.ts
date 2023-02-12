@@ -11,7 +11,7 @@ import { Action } from '../Action/Action';
 import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../Helper';
-import { Page } from '../Page/Page';
+import { BkPage } from '../Page/Page';
 import { PageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
@@ -233,7 +233,7 @@ export class Application extends Model {
         return new PageLink(data, this);
     }
 
-    async createPage(pageLinkName: string): Promise<Page> {
+    async createPage(pageLinkName: string): Promise<BkPage> {
         // console.log('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
@@ -252,7 +252,7 @@ export class Application extends Model {
         return true;
     }
 
-    async getPage(context: Context, pageLinkName: string): Promise<Page> {
+    async getPage(context: Context, pageLinkName: string): Promise<BkPage> {
         // console.log('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {

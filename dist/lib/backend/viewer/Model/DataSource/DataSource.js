@@ -150,7 +150,7 @@ class DataSource extends Model_1.Model {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof Page_1.Page) {
+        else if (this.parent instanceof Page_1.BkPage) {
             return [this.parent.getName(), this.getName()].join('.');
         }
         else {
