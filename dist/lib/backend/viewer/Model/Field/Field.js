@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Field = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 class Field extends Model_1.Model {
@@ -28,7 +31,7 @@ class Field extends Model_1.Model {
         response.autoFocus = this.getAttr('autoFocus');
     }
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'fields', this.getName());
+        return path_1.default.join(this.parent.getDirPath(), 'fields', this.getName());
     }
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');

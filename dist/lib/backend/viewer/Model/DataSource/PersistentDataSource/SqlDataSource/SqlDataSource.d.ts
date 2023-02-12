@@ -1,10 +1,10 @@
-import { PersistentDataSource } from '../PersistentDataSource';
+import { BkPersistentDataSource } from '../PersistentDataSource';
 import { ReadResult } from '../../DataSource';
 import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
-export declare class BkSqlDataSource extends PersistentDataSource<SqlDatabase> {
+export declare class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;

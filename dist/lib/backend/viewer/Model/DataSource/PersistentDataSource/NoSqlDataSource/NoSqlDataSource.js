@@ -4,7 +4,7 @@ exports.BkNoSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
 const Result_1 = require("../../../../../Result");
 const DataSource_1 = require("../../DataSource");
-class BkNoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
+class BkNoSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table')

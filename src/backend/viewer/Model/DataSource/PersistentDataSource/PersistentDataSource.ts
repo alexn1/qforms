@@ -2,7 +2,7 @@ import { DataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
 
-export abstract class PersistentDataSource<
+export abstract class BkPersistentDataSource<
     TDatabase extends Database = Database,
 > extends DataSource {
     decodeChanges(changes) {

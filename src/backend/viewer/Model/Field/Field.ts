@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 import { Model } from '../Model';
 import { BkApplication } from '../Application/Application';
@@ -6,7 +6,7 @@ import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
-import { PersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
+import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
 
 export class Field extends Model {
     /* static async create(data, parent): Promise<Field> {
@@ -106,7 +106,7 @@ export class Field extends Model {
     }
     getDatabaseTableColumn(): BkColumn {
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: column attr is empty`);
-        const defaultDataSource = this.getForm().getDataSource('default') as PersistentDataSource;
+        const defaultDataSource = this.getForm().getDataSource('default') as BkPersistentDataSource;
         if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
         return defaultDataSource.getTable().getColumn(this.getAttr('column'));
     }

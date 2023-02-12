@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PersistentDataSource = void 0;
+exports.BkPersistentDataSource = void 0;
 const DataSource_1 = require("../DataSource");
-class PersistentDataSource extends DataSource_1.DataSource {
+class BkPersistentDataSource extends DataSource_1.DataSource {
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
@@ -38,4 +38,4 @@ class PersistentDataSource extends DataSource_1.DataSource {
         return this.getDatabase().getTable(tableName);
     }
 }
-exports.PersistentDataSource = PersistentDataSource;
+exports.BkPersistentDataSource = BkPersistentDataSource;

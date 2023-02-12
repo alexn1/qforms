@@ -5,7 +5,7 @@ const PersistentDataSource_1 = require("../PersistentDataSource");
 const DataSource_1 = require("../../DataSource");
 const Helper_1 = require("../../../../../Helper");
 const Result_1 = require("../../../../../Result");
-class BkSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
+class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = null;
