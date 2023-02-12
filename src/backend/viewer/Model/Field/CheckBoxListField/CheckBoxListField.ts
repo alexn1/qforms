@@ -1,6 +1,6 @@
 import { Field } from '../Field';
 
-export class CheckBoxListField extends Field {
+export class BkCheckBoxListField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

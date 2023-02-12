@@ -1,6 +1,6 @@
 import { Field } from '../Field';
 
-export class TextBoxField extends Field {
+export class BkTextBoxField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

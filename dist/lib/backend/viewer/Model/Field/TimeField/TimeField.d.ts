@@ -1,4 +1,4 @@
 import { Field } from '../Field';
-export declare class TimeField extends Field {
+export declare class BkTimeField extends Field {
     fillAttributes(response: any): void;
 }

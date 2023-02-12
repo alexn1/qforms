@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LabelField = void 0;
+exports.BkLabelField = void 0;
 const Field_1 = require("../Field");
-class LabelField extends Field_1.Field {
+class BkLabelField extends Field_1.Field {
 }
-exports.LabelField = LabelField;
+exports.BkLabelField = BkLabelField;

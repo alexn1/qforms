@@ -1,6 +1,6 @@
 import { Field } from '../Field';
 
-export class ComboBoxField extends Field {
+export class BkComboBoxField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

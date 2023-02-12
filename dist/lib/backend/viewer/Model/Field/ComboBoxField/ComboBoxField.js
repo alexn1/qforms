@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ComboBoxField = void 0;
+exports.BkComboBoxField = void 0;
 const Field_1 = require("../Field");
-class ComboBoxField extends Field_1.Field {
+class BkComboBoxField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -18,4 +18,4 @@ class ComboBoxField extends Field_1.Field {
         response.itemSelectPage = this.getAttr('itemSelectPage');
     }
 }
-exports.ComboBoxField = ComboBoxField;
+exports.BkComboBoxField = BkComboBoxField;

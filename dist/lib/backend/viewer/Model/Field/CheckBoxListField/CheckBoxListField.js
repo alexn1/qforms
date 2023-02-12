@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CheckBoxListField = void 0;
+exports.BkCheckBoxListField = void 0;
 const Field_1 = require("../Field");
-class CheckBoxListField extends Field_1.Field {
+class BkCheckBoxListField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -12,4 +12,4 @@ class CheckBoxListField extends Field_1.Field {
         response.displayColumn = this.getAttr('displayColumn');
     }
 }
-exports.CheckBoxListField = CheckBoxListField;
+exports.BkCheckBoxListField = BkCheckBoxListField;

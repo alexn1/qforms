@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.DateTimeField = void 0;
+exports.BkDateTimeField = void 0;
 const Field_1 = require("../Field");
 const Helper_1 = require("../../../../Helper");
-class DateTimeField extends Field_1.Field {
+class BkDateTimeField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -36,4 +36,4 @@ class DateTimeField extends Field_1.Field {
         return value;
     }
 }
-exports.DateTimeField = DateTimeField;
+exports.BkDateTimeField = BkDateTimeField;

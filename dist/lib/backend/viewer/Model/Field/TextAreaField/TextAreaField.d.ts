@@ -1,4 +1,4 @@
 import { Field } from '../Field';
-export declare class TextAreaField extends Field {
+export declare class BkTextAreaField extends Field {
     fillAttributes(response: any): void;
 }

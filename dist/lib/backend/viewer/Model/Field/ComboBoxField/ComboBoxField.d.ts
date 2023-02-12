@@ -1,4 +1,4 @@
 import { Field } from '../Field';
-export declare class ComboBoxField extends Field {
+export declare class BkComboBoxField extends Field {
     fillAttributes(response: any): void;
 }

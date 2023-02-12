@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TimeField = void 0;
+exports.BkTimeField = void 0;
 const Field_1 = require("../Field");
-class TimeField extends Field_1.Field {
+class BkTimeField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -12,4 +12,4 @@ class TimeField extends Field_1.Field {
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
 }
-exports.TimeField = TimeField;
+exports.BkTimeField = BkTimeField;

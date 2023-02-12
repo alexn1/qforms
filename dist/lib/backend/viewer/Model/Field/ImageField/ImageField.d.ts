@@ -1,4 +1,4 @@
 import { Field } from '../Field';
-export declare class ImageField extends Field {
+export declare class BkImageField extends Field {
     fillAttributes(response: any): void;
 }

@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.TextBoxField = void 0;
+exports.BkTextBoxField = void 0;
 const Field_1 = require("../Field");
-class TextBoxField extends Field_1.Field {
+class BkTextBoxField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');
@@ -13,4 +13,4 @@ class TextBoxField extends Field_1.Field {
         response.autocomplete = this.getAttr('autocomplete');
     }
 }
-exports.TextBoxField = TextBoxField;
+exports.BkTextBoxField = BkTextBoxField;

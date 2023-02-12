@@ -1,7 +1,7 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../Helper';
 
-export class DateField extends Field {
+export class BkDateField extends Field {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

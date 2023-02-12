@@ -1,11 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.LinkField = void 0;
+exports.BkLinkField = void 0;
 const Field_1 = require("../Field");
-class LinkField extends Field_1.Field {
+class BkLinkField extends Field_1.Field {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.notNull = this.getAttr('notNull');
     }
 }
-exports.LinkField = LinkField;
+exports.BkLinkField = BkLinkField;
