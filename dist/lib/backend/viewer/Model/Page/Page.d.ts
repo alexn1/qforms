@@ -13,6 +13,6 @@ export declare class Page extends Model {
     fill(context: any): Promise<any>;
     rpc(name: any, context: any): Promise<any>;
     getApp(): Application;
-    getForm(name: any): Form;
-    getDataSource(name: any): DataSource;
+    getForm(name: any): Form | undefined;
+    getDataSource(name: any): DataSource | undefined;
 }

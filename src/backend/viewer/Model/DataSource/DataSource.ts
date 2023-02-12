@@ -159,8 +159,8 @@ export class DataSource extends Model {
         return values;
     }
 
-    getKeyFromValues(values): string {
-        const arr = [];
+    getKeyFromValues(values): string | null {
+        const arr: string[] = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
             const value = values[column];

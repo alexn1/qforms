@@ -59,11 +59,11 @@ export class Page extends Model {
         return this.parent;
     }
 
-    getForm(name): Form {
+    getForm(name): Form | undefined {
         return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name): DataSource {
+    getDataSource(name): DataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
