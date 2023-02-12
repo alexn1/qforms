@@ -1,9 +1,11 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Page = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
-// import {Context} from '../../../Context';
 const MyError_1 = require("../../../MyError");
 class Page extends Model_1.Model {
     constructor() {
@@ -12,16 +14,13 @@ class Page extends Model_1.Model {
         this.actions = [];
         this.forms = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
     async init(context) {
         await this.createColItems('dataSources', context);
         await this.createColItems('actions', context);
         await this.createColItems('forms', context);
     }
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'pages', this.getName());
+        return path_1.default.join(this.parent.getDirPath(), 'pages', this.getName());
     }
     fillAttributes(response) {
         response.name = this.getAttr('name');

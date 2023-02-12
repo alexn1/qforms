@@ -1,11 +1,11 @@
-const path = require('path');
+import path from 'path';
 
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { Action } from '../Action/Action';
 import { Application } from '../Application/Application';
 import { Form } from '../Form/Form';
-// import {Context} from '../../../Context';
+import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
 export class Page extends Model {
@@ -13,11 +13,7 @@ export class Page extends Model {
     actions: Action[] = [];
     forms: Form[] = [];
 
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
-
-    async init(context): Promise<void> {
+    async init(context: Context): Promise<void> {
         await this.createColItems('dataSources', context);
         await this.createColItems('actions', context);
         await this.createColItems('forms', context);
@@ -35,7 +31,7 @@ export class Page extends Model {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
 
-    async fill(context): Promise<any> {
+    async fill(context: Context): Promise<any> {
         // console.log('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
@@ -45,7 +41,7 @@ export class Page extends Model {
         return response;
     }
 
-    async rpc(name, context): Promise<any> {
+    async rpc(name: string, context: Context): Promise<any> {
         console.log('Page.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new MyError({
@@ -59,11 +55,11 @@ export class Page extends Model {
         return this.parent;
     }
 
-    getForm(name): Form | undefined {
+    getForm(name: string): Form | undefined {
         return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name): DataSource | undefined {
+    getDataSource(name: string): DataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
