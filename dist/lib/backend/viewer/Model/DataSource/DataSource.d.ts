@@ -2,7 +2,7 @@ import { Result } from '../../../Result';
 import { Model } from '../Model';
 import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
-import { Database } from '../Database/Database';
+import { BkDatabase } from '../Database/Database';
 import { BkForm } from '../Form/Form';
 export type ReadResult = [any[], number | null];
 export declare class BkDataSource extends Model {
@@ -41,6 +41,6 @@ export declare class BkDataSource extends Model {
         update: boolean;
         delete: boolean;
     };
-    getDatabase(): Database;
+    getDatabase(): BkDatabase;
     getLimit(): number;
 }

@@ -2,7 +2,7 @@ import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
 import { BkAction } from '../Action/Action';
-import { Database } from '../Database/Database';
+import { BkDatabase } from '../Database/Database';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';
@@ -13,7 +13,7 @@ export declare class BkApplication extends Model {
     appInfo: AppInfo;
     hostApp: BackHostApp;
     env: string;
-    databases: Database[];
+    databases: BkDatabase[];
     actions: BkAction[];
     dataSources: BkDataSource[];
     pages: any;
@@ -50,8 +50,8 @@ export declare class BkApplication extends Model {
     getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): BkApplication;
-    findDatabase(name: string): Database | undefined;
-    getDatabase(name: string): Database;
+    findDatabase(name: string): BkDatabase;
+    getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
     static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
@@ -65,7 +65,7 @@ export declare class BkApplication extends Model {
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
     composeForeignResult(result: Result): Result | null;
-    getTitle(context: any): string;
+    getTitle(context: Context): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;

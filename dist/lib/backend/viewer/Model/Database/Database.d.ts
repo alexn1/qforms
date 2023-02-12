@@ -10,7 +10,7 @@ interface IConfig {
     password: string;
     port?: number;
 }
-export declare class Database<TConnection = any> extends Model {
+export declare class BkDatabase<TConnection = any> extends Model {
     tables: BkTable[];
     fillCollections: string[];
     init(context: Context): Promise<void>;

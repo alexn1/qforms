@@ -8,7 +8,7 @@ import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
 import { Model } from '../Model';
 import { BkAction } from '../Action/Action';
-import { Database } from '../Database/Database';
+import { BkDatabase } from '../Database/Database';
 import { BkDataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../Helper';
 import { BkPage } from '../Page/Page';
@@ -27,7 +27,7 @@ export class BkApplication extends Model {
     // appInfo: AppInfo;
     // hostApp: BackHostApp;
     env: string;
-    databases: Database[] = [];
+    databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
     pages: any = {};
@@ -339,15 +339,15 @@ export class BkApplication extends Model {
         return this;
     }
 
-    findDatabase(name: string): Database | undefined {
-        return this.databases.find((database) => database.getName() === name);
+    findDatabase(name: string): BkDatabase {
+        const db = this.databases.find((database) => database.getName() === name);
+        if (!db) throw new Error(`no database with name: ${name}`);
+        return db;
     }
 
-    getDatabase(name: string): Database {
+    getDatabase(name: string): BkDatabase {
         if (!name) throw new Error('getDatabase: no name');
-        const database = this.findDatabase(name);
-        if (!database) throw new Error(`no database with name: ${name}`);
-        return database;
+        return this.findDatabase(name);
     }
 
     // to init custom context params before each request get/post
@@ -480,7 +480,7 @@ export class BkApplication extends Model {
         }
         return fResult;
     }
-    getTitle(context) {
+    getTitle(context: Context) {
         return this.getAttr('caption');
     }
 
@@ -488,7 +488,7 @@ export class BkApplication extends Model {
         return 'LoginView';
     }
 
-    isAvailable() {
+    isAvailable(): boolean {
         return true;
     }
 

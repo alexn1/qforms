@@ -283,15 +283,15 @@ class BkApplication extends Model_1.Model {
         return this;
     }
     findDatabase(name) {
-        return this.databases.find((database) => database.getName() === name);
+        const db = this.databases.find((database) => database.getName() === name);
+        if (!db)
+            throw new Error(`no database with name: ${name}`);
+        return db;
     }
     getDatabase(name) {
         if (!name)
             throw new Error('getDatabase: no name');
-        const database = this.findDatabase(name);
-        if (!database)
-            throw new Error(`no database with name: ${name}`);
-        return database;
+        return this.findDatabase(name);
     }
     // to init custom context params before each request get/post
     async initContext(context) { }

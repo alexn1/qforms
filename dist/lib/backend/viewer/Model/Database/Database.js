@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Database = void 0;
+exports.BkDatabase = void 0;
 const Model_1 = require("../Model");
 const Param_1 = require("../Param/Param");
-class Database extends Model_1.Model {
+class BkDatabase extends Model_1.Model {
     constructor() {
         super(...arguments);
         this.tables = [];
@@ -100,4 +100,4 @@ class Database extends Model_1.Model {
         throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
 }
-exports.Database = Database;
+exports.BkDatabase = BkDatabase;

@@ -12,7 +12,7 @@ export { JsonFile } from './JsonFile';
 // viewer
 export { Model } from './viewer/Model/Model';
 export { BkApplication } from './viewer/Model/Application/Application';
-export { Database } from './viewer/Model/Database/Database';
+export { BkDatabase } from './viewer/Model/Database/Database';
 export { BkMySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { BkPostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
 export { BkMongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';

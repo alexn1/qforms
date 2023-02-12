@@ -12,7 +12,7 @@ interface IConfig {
     port?: number;
 }
 
-export class Database<TConnection = any> extends Model {
+export class BkDatabase<TConnection = any> extends Model {
     tables: BkTable[] = [];
     fillCollections = ['tables'];
 

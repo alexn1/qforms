@@ -5,7 +5,7 @@ import { Model } from '../Model';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
-import { Database } from '../Database/Database';
+import { BkDatabase } from '../Database/Database';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
@@ -296,7 +296,7 @@ export class BkDataSource extends Model {
         };
     }
 
-    getDatabase(): Database {
+    getDatabase(): BkDatabase {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 

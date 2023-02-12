@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SqlDatabase = void 0;
 const Database_1 = require("../Database");
-class SqlDatabase extends Database_1.Database {
+class SqlDatabase extends Database_1.BkDatabase {
     getUpdateQuery(tableName, values, where) {
         console.log('SqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
