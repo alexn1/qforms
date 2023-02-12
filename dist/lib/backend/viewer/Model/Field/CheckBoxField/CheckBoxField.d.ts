@@ -1,4 +1,4 @@
-import { Field } from '../Field';
-export declare class BkCheckBoxField extends Field {
+import { BkField } from '../Field';
+export declare class BkCheckBoxField extends BkField {
     fillAttributes(response: any): void;
 }

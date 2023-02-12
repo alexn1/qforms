@@ -1,3 +1,3 @@
-import { Field } from '../Field';
+import { BkField } from '../Field';
 
-export class BkLabelField extends Field {}
+export class BkLabelField extends BkField {}

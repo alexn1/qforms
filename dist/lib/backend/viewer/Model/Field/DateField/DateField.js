@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDateField = void 0;
 const Field_1 = require("../Field");
 const Helper_1 = require("../../../../Helper");
-class BkDateField extends Field_1.Field {
+class BkDateField extends Field_1.BkField {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

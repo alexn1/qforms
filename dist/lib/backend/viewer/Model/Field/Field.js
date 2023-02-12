@@ -3,11 +3,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Field = void 0;
+exports.BkField = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
-class Field extends Model_1.Model {
+class BkField extends Model_1.Model {
     /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     } */
@@ -123,4 +123,4 @@ class Field extends Model_1.Model {
         return value;
     }
 }
-exports.Field = Field;
+exports.BkField = BkField;

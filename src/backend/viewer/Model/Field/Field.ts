@@ -8,7 +8,7 @@ import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
 
-export class Field extends Model {
+export class BkField extends Model {
     /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     } */

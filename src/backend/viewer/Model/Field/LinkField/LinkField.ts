@@ -1,6 +1,6 @@
-import { Field } from '../Field';
+import { BkField } from '../Field';
 
-export class BkLinkField extends Field {
+export class BkLinkField extends BkField {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.notNull = this.getAttr('notNull');

@@ -1,6 +1,6 @@
-import { Field } from '../Field';
+import { BkField } from '../Field';
 
-export class BkFileField extends Field {
+export class BkFileField extends BkField {
     fillAttributes(response: any): void {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

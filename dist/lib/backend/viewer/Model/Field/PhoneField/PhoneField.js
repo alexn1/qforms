@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkPhoneField = void 0;
 const Field_1 = require("../Field");
-class BkPhoneField extends Field_1.Field {
+class BkPhoneField extends Field_1.BkField {
     fillAttributes(response) {
         super.fillAttributes(response);
         response.readOnly = this.getAttr('readOnly');

@@ -14,7 +14,7 @@ export { BkMongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDb
 export { BkDataSource } from './viewer/Model/DataSource/DataSource';
 export { BkSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
 export { BkNoSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
-export { Field } from './viewer/Model/Field/Field';
+export { BkField } from './viewer/Model/Field/Field';
 export { BkCheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';
 export { BkCheckBoxListField } from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';
 export { BkComboBoxField } from './viewer/Model/Field/ComboBoxField/ComboBoxField';

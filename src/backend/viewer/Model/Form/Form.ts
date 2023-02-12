@@ -3,22 +3,23 @@ import path from 'path';
 import { Model } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
-import { Field } from '../Field/Field';
+import { BkField } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
 import { MyError } from '../../../MyError';
+import { Context } from '../../../Context';
 
 export class BkForm extends Model {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
-    fields: Field[] = [];
+    fields: BkField[] = [];
 
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];
     }
 
-    async init(context): Promise<void> {
+    async init(context: Context): Promise<void> {
         await this.createColItems('dataSources', context);
         await this.createColItems('actions', context);
         await this.createColItems('fields', context);
@@ -38,7 +39,7 @@ export class BkForm extends Model {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
 
-    async fill(context) {
+    async fill(context: Context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
         if (this.getDataSource('default')) {
             return super.fill(context);
@@ -57,7 +58,7 @@ export class BkForm extends Model {
         return this.getDataSource('default');
     }*/
 
-    _getSurrogateDataSourceResponse(context) {
+    _getSurrogateDataSourceResponse(context: Context) {
         const row = {
             id: 1,
         };
@@ -81,7 +82,7 @@ export class BkForm extends Model {
         //console.log(params);
     }
 
-    replaceThis(context, query) {
+    replaceThis(context: Context, query) {
         return query
             .replace(/\{([@\w\.]+)\}/g, (text, name) => {
                 if (name.indexOf('.') !== -1) {
@@ -105,7 +106,7 @@ export class BkForm extends Model {
             });
     }
 
-    async rpc(name, context) {
+    async rpc(name: string, context: Context) {
         console.log('Form.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new MyError({
@@ -126,10 +127,10 @@ export class BkForm extends Model {
     getFullName(): string {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
-    isNewMode(context): boolean {
+    isNewMode(context: Context): boolean {
         return !!context.getBody().newMode;
     }
-    getField(name): Field | undefined {
+    getField(name: string): BkField | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
     getDataSource(name: string): BkDataSource {

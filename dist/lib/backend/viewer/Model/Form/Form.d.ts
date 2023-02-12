@@ -1,19 +1,20 @@
 import { Model } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
-import { Field } from '../Field/Field';
+import { BkField } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
+import { Context } from '../../../Context';
 export declare class BkForm extends Model {
     dataSources: BkDataSource[];
     actions: BkAction[];
-    fields: Field[];
+    fields: BkField[];
     constructor(data: any, parent: any);
-    init(context: any): Promise<void>;
+    init(context: Context): Promise<void>;
     getDirPath(): string;
     fillAttributes(response: any): void;
-    fill(context: any): Promise<any>;
-    _getSurrogateDataSourceResponse(context: any): {
+    fill(context: Context): Promise<any>;
+    _getSurrogateDataSourceResponse(context: Context): {
         class: string;
         name: string;
         keyColumns: string[];
@@ -22,12 +23,12 @@ export declare class BkForm extends Model {
         }[];
     };
     dumpRowToParams(row: any, params: any): void;
-    replaceThis(context: any, query: any): any;
-    rpc(name: any, context: any): Promise<any>;
+    replaceThis(context: Context, query: any): any;
+    rpc(name: string, context: Context): Promise<any>;
     getApp(): BkApplication;
     getPage(): BkPage;
     getFullName(): string;
-    isNewMode(context: any): boolean;
-    getField(name: any): Field | undefined;
+    isNewMode(context: Context): boolean;
+    getField(name: string): BkField | undefined;
     getDataSource(name: string): BkDataSource;
 }
