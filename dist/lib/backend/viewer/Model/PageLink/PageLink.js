@@ -1,12 +1,15 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PageLink = void 0;
-const path = require('path');
+exports.BkPageLink = void 0;
+const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
-class PageLink extends Model_1.Model {
+class BkPageLink extends Model_1.Model {
     getPageFilePath() {
-        const pageFilePath = path.join(this.getParent().getDirPath(), this.getAttr('fileName'));
+        const pageFilePath = path_1.default.join(this.getParent().getDirPath(), this.getAttr('fileName'));
         return pageFilePath;
     }
 }
-exports.PageLink = PageLink;
+exports.BkPageLink = BkPageLink;

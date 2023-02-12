@@ -5,7 +5,7 @@ import { BkAction } from '../Action/Action';
 import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { BkPage } from '../Page/Page';
-import { PageLink } from '../PageLink/PageLink';
+import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../Result';
@@ -37,7 +37,7 @@ export declare class Application extends Model {
     fill(context: Context): Promise<any>;
     getClientUserFromServerUser(context: Context): Promise<any>;
     createMenu(context: Context): Promise<void>;
-    createPageLink(name: string): PageLink;
+    createPageLink(name: string): BkPageLink;
     createPage(pageLinkName: string): Promise<BkPage>;
     authorizePage(user: any, pageName: string): boolean;
     getPage(context: Context, pageLinkName: string): Promise<BkPage>;

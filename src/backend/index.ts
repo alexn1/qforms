@@ -39,7 +39,7 @@ export { Form } from './viewer/Model/Form/Form';
 export { RowForm } from './viewer/Model/Form/RowForm/RowForm';
 export { TableForm } from './viewer/Model/Form/TableForm/TableForm';
 export { BkPage } from './viewer/Model/Page/Page';
-export { PageLink } from './viewer/Model/PageLink/PageLink';
+export { BkPageLink } from './viewer/Model/PageLink/PageLink';
 export { BkColumn } from './viewer/Model/Column/Column';
 export { Table } from './viewer/Model/Table/Table';
 export { BkAction } from './viewer/Model/Action/Action';

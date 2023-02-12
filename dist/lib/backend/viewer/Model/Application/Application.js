@@ -182,7 +182,7 @@ class Application extends Model_1.Model {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new PageLink_1.PageLink(data, this);
+        return new PageLink_1.BkPageLink(data, this);
     }
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);

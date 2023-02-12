@@ -12,7 +12,7 @@ import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../Helper';
 import { BkPage } from '../Page/Page';
-import { PageLink } from '../PageLink/PageLink';
+import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
@@ -228,9 +228,9 @@ export class Application extends Model {
         this.nav = nav;
     }
 
-    createPageLink(name: string): PageLink {
+    createPageLink(name: string): BkPageLink {
         const data = this.getColItemData('pageLinks', name);
-        return new PageLink(data, this);
+        return new BkPageLink(data, this);
     }
 
     async createPage(pageLinkName: string): Promise<BkPage> {
