@@ -94,7 +94,7 @@ export class BkModel extends BaseModel {
 
         const className = BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
-        const Class = backend[className] || backend[`Bk${className}`];
+        const Class = /*backend[className] ||*/ backend[`Bk${className}`];
         if (!Class) throw new Error(`no class ${className}`);
         return new Class(itemData, this);
     }

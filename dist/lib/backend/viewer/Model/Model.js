@@ -89,7 +89,7 @@ class BkModel extends BaseModel_1.BaseModel {
         // const Class = CustomClass ? CustomClass : backend[className];
         const className = BaseModel_1.BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
-        const Class = backend[className] || backend[`Bk${className}`];
+        const Class = /*backend[className] ||*/ backend[`Bk${className}`];
         if (!Class)
             throw new Error(`no class ${className}`);
         return new Class(itemData, this);
