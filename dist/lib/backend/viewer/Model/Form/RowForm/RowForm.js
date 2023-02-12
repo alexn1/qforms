@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkRowForm = void 0;
 const Form_1 = require("../Form");
-class BkRowForm extends Form_1.Form {
+class BkRowForm extends Form_1.BkForm {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());

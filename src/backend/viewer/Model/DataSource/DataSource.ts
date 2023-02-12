@@ -7,7 +7,7 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { BkPage } from '../Page/Page';
-import { Form } from '../Form/Form';
+import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';
 
@@ -250,7 +250,7 @@ export class BkDataSource extends Model {
     }
 
     isOnForm(): boolean {
-        return this.parent instanceof Form;
+        return this.parent instanceof BkForm;
     }
 
     isDefaultOnForm(): boolean {
@@ -278,7 +278,7 @@ export class BkDataSource extends Model {
     async delete(context: Context): Promise<Result> {
         throw new Error(`${this.constructor.name}.delete not implemented`);
     }
-    getForm(): Form | null {
+    getForm(): BkForm | null {
         return this.isOnForm() ? this.getParent() : null;
     }
 

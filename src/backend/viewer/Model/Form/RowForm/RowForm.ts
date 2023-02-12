@@ -1,7 +1,7 @@
-import { Form } from '../Form';
+import { BkForm } from '../Form';
 import { Context } from '../../../../Context';
 
-export class BkRowForm extends Form {
+export class BkRowForm extends BkForm {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());

@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 import { Model } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
@@ -8,7 +8,7 @@ import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
 import { MyError } from '../../../MyError';
 
-export class Form extends Model {
+export class BkForm extends Model {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     fields: Field[] = [];

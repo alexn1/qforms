@@ -30,7 +30,7 @@ export { TextBoxField } from './viewer/Model/Field/TextBoxField/TextBoxField';
 export { PhoneField } from './viewer/Model/Field/PhoneField/PhoneField';
 export { PasswordField } from './viewer/Model/Field/PasswordField/PasswordField';
 export { RadioField } from './viewer/Model/Field/RadioField/RadioField';
-export { Form } from './viewer/Model/Form/Form';
+export { BkForm } from './viewer/Model/Form/Form';
 export { BkRowForm } from './viewer/Model/Form/RowForm/RowForm';
 export { BkTableForm } from './viewer/Model/Form/TableForm/TableForm';
 export { BkPage } from './viewer/Model/Page/Page';

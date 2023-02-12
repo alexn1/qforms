@@ -3,7 +3,7 @@ import { Model } from '../Model';
 import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
 import { Database } from '../Database/Database';
-import { Form } from '../Form/Form';
+import { BkForm } from '../Form/Form';
 export type ReadResult = [any[], number | null];
 export declare class BkDataSource extends Model {
     keyColumns: string[];
@@ -34,7 +34,7 @@ export declare class BkDataSource extends Model {
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
-    getForm(): Form | null;
+    getForm(): BkForm | null;
     getAccess(context: Context): {
         create: boolean;
         read: boolean;

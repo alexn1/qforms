@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
-import { Form } from '../Form/Form';
+import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 export declare class Field extends Model {
     fillAttributes(response: any): void;
@@ -11,7 +11,7 @@ export declare class Field extends Model {
     getFullName(): string;
     getApp(): BkApplication;
     getPage(): BkPage;
-    getForm(): Form;
+    getForm(): BkForm;
     isParam(): boolean;
     valueToRaw(value: any): any;
     rawToValue(raw: any): any;

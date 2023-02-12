@@ -220,7 +220,7 @@ class BkDataSource extends Model_1.Model {
         return this.rows;
     }
     isOnForm() {
-        return this.parent instanceof Form_1.Form;
+        return this.parent instanceof Form_1.BkForm;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();

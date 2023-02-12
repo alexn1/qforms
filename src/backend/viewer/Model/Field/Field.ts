@@ -3,7 +3,7 @@ import path from 'path';
 import { Model } from '../Model';
 import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
-import { Form } from '../Form/Form';
+import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
@@ -89,27 +89,33 @@ export class Field extends Model {
         return this.parent.parent;
     }
 
-    getForm(): Form {
+    getForm(): BkForm {
         return this.parent;
     }
+
     isParam(): boolean {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
+
     valueToRaw(value): any {
         return Helper.encodeValue(value);
     }
+
     rawToValue(raw): any {
         return Helper.decodeValue(raw);
     }
+
     isTimezone() {
         return this.getAttr('timezone') === 'true';
     }
+
     getDatabaseTableColumn(): BkColumn {
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: column attr is empty`);
         const defaultDataSource = this.getForm().getDataSource('default') as BkPersistentDataSource;
         if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
         return defaultDataSource.getTable().getColumn(this.getAttr('column'));
     }
+
     getType(): string {
         if (this.getAttr('column')) {
             return this.getDatabaseTableColumn().getAttr('type');
@@ -119,9 +125,11 @@ export class Field extends Model {
         }
         throw new Error(`${this.getFullName()}: type attr is empty`);
     }
+
     getDbType() {
         return this.getDatabaseTableColumn().getAttr('dbType');
     }
+
     valueToDbValue(value) {
         if (this.getDbType() === 'json') {
             return JSON.stringify(value);

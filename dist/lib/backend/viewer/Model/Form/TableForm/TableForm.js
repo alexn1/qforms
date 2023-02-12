@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkTableForm = void 0;
 const Form_1 = require("../Form");
-class BkTableForm extends Form_1.Form {
+class BkTableForm extends Form_1.BkForm {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/

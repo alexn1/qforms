@@ -4,14 +4,14 @@ import { Model } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { BkApplication } from '../Application/Application';
-import { Form } from '../Form/Form';
+import { BkForm } from '../Form/Form';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
 export class BkPage extends Model {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
-    forms: Form[] = [];
+    forms: BkForm[] = [];
 
     async init(context: Context): Promise<void> {
         await this.createColItems('dataSources', context);
@@ -55,8 +55,10 @@ export class BkPage extends Model {
         return this.parent;
     }
 
-    getForm(name: string): Form {
-        return this.forms.find((form) => form.getName() === name);
+    getForm(name: string): BkForm {
+        const f = this.forms.find((form) => form.getName() === name);
+        if (!f) throw new Error(`no form with name: ${name}`);
+        return f;
     }
 
     getDataSource(name: string): BkDataSource {

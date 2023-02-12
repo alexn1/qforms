@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Form = void 0;
-const path = require('path');
+exports.BkForm = void 0;
+const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
-class Form extends Model_1.Model {
+class BkForm extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];
@@ -18,7 +21,7 @@ class Form extends Model_1.Model {
         await this.createColItems('fields', context);
     }
     getDirPath() {
-        return path.join(this.parent.getDirPath(), 'forms', this.getName());
+        return path_1.default.join(this.parent.getDirPath(), 'forms', this.getName());
     }
     fillAttributes(response) {
         response.class = this.getClassName();
@@ -121,4 +124,4 @@ class Form extends Model_1.Model {
         return ds;
     }
 }
-exports.Form = Form;
+exports.BkForm = BkForm;

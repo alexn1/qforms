@@ -4,7 +4,7 @@ import { BkAction } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
-export declare class Form extends Model {
+export declare class BkForm extends Model {
     dataSources: BkDataSource[];
     actions: BkAction[];
     fields: Field[];
