@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
@@ -8,7 +8,7 @@ import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
 
-export class BkField extends Model {
+export class BkField extends BkModel {
     /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     } */

@@ -7,7 +7,7 @@ exports.BkForm = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
-class BkForm extends Model_1.Model {
+class BkForm extends Model_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
         this.dataSources = [];

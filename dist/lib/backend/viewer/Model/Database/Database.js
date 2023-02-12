@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDatabase = void 0;
 const Model_1 = require("../Model");
 const Param_1 = require("../Param/Param");
-class BkDatabase extends Model_1.Model {
+class BkDatabase extends Model_1.BkModel {
     constructor() {
         super(...arguments);
         this.tables = [];

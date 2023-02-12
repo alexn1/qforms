@@ -6,7 +6,7 @@ import { AppInfo } from '../../../AppInfo';
 
 import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkAction } from '../Action/Action';
 import { BkDatabase } from '../Database/Database';
 import { BkDataSource } from '../DataSource/DataSource';
@@ -23,7 +23,7 @@ const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 
-export class BkApplication extends Model {
+export class BkApplication extends BkModel {
     // appInfo: AppInfo;
     // hostApp: BackHostApp;
     env: string;

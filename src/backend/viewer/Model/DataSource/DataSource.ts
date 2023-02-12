@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { Result } from '../../../Result';
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
@@ -13,7 +13,7 @@ import { BkTableForm } from '../Form/TableForm/TableForm';
 
 export type ReadResult = [any[], number | null];
 
-export class BkDataSource extends Model {
+export class BkDataSource extends BkModel {
     keyColumns: string[] = [];
     rows: any[] = [];
 

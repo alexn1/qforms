@@ -1,9 +1,9 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkColumn } from '../Column/Column';
 import { BkApplication } from '../Application/Application';
 import { Context } from '../../../Context';
 
-export class BkTable extends Model {
+export class BkTable extends BkModel {
     columns: BkColumn[] = [];
 
     constructor(data, parent) {

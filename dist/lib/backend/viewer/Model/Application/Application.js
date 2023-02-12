@@ -15,7 +15,7 @@ const Result_1 = require("../../../Result");
 const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
-class BkApplication extends Model_1.Model {
+class BkApplication extends Model_1.BkModel {
     constructor(data, appInfo, hostApp, context) {
         super(data);
         this.appInfo = appInfo;

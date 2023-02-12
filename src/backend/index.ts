@@ -10,7 +10,7 @@ export { Converter } from './Converter';
 export { JsonFile } from './JsonFile';
 
 // viewer
-export { Model } from './viewer/Model/Model';
+export { BkModel } from './viewer/Model/Model';
 export { BkApplication } from './viewer/Model/Application/Application';
 export { BkDatabase } from './viewer/Model/Database/Database';
 export { BkMySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';

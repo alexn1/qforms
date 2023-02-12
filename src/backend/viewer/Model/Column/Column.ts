@@ -1,7 +1,7 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkApplication } from '../Application/Application';
 
-export class BkColumn extends Model {
+export class BkColumn extends BkModel {
     fillAttributes(response: any): void {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');

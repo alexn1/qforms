@@ -1,4 +1,4 @@
-import { Model } from '../Model';
-export declare class BkAction extends Model {
+import { BkModel } from '../Model';
+export declare class BkAction extends BkModel {
     fillAttributes(response: any): void;
 }

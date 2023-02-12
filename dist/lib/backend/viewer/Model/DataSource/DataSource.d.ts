@@ -1,11 +1,11 @@
 import { Result } from '../../../Result';
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
 import { BkDatabase } from '../Database/Database';
 import { BkForm } from '../Form/Form';
 export type ReadResult = [any[], number | null];
-export declare class BkDataSource extends Model {
+export declare class BkDataSource extends BkModel {
     keyColumns: string[];
     rows: any[];
     getDirPath(): string;

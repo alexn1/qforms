@@ -1,7 +1,7 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkApplication } from '../Application/Application';
 
-export class BkParam extends Model {
+export class BkParam extends BkModel {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');

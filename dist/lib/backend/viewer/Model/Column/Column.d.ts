@@ -1,6 +1,6 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkApplication } from '../Application/Application';
-export declare class BkColumn extends Model {
+export declare class BkColumn extends BkModel {
     fillAttributes(response: any): void;
     isKey(): boolean;
     isAuto(): boolean;

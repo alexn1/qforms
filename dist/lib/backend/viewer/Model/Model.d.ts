@@ -1,6 +1,6 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
-export declare class Model extends BaseModel {
+export declare class BkModel extends BaseModel {
     fillCollections: any[];
     init(context: Context): Promise<void>;
     fill(context: Context): Promise<any>;

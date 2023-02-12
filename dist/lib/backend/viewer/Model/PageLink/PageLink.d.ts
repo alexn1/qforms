@@ -1,4 +1,4 @@
-import { Model } from '../Model';
-export declare class BkPageLink extends Model {
+import { BkModel } from '../Model';
+export declare class BkPageLink extends BkModel {
     getPageFilePath(): string;
 }

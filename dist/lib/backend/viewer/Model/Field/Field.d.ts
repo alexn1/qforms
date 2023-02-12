@@ -1,9 +1,9 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
-export declare class BkField extends Model {
+export declare class BkField extends BkModel {
     fillAttributes(response: any): void;
     getDirPath(): string;
     fillDefaultValue(context: any, row: any): void;

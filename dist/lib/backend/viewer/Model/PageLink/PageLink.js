@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkPageLink = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
-class BkPageLink extends Model_1.Model {
+class BkPageLink extends Model_1.BkModel {
     getPageFilePath() {
         const pageFilePath = path_1.default.join(this.getParent().getDirPath(), this.getAttr('fileName'));
         return pageFilePath;

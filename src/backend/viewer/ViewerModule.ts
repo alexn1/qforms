@@ -5,7 +5,7 @@ import { Helper } from '../Helper';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './Model/Application/Application';
 import { MyError } from '../MyError';
-import { Model } from './Model/Model';
+import { BkModel } from './Model/Model';
 import { Result } from '../Result';
 import { BkDataSource } from './Model/DataSource/DataSource';
 
@@ -330,7 +330,7 @@ export class ViewerModule {
         const res = context.getRes();
         // const application = this.getApplication(context);
         // await application.initContext(context);
-        let model: Model;
+        let model: BkModel;
         if (req.body.page) {
             if (req.body.form) {
                 const page = await application.getPage(context, req.body.page);

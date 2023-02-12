@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkTable = void 0;
 const Model_1 = require("../Model");
-class BkTable extends Model_1.Model {
+class BkTable extends Model_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];

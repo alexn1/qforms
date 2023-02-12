@@ -1,11 +1,11 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { BkField } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { BkApplication } from '../Application/Application';
 import { Context } from '../../../Context';
-export declare class BkForm extends Model {
+export declare class BkForm extends BkModel {
     dataSources: BkDataSource[];
     actions: BkAction[];
     fields: BkField[];

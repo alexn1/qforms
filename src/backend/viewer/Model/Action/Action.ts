@@ -1,6 +1,6 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 
-export class BkAction extends Model {
+export class BkAction extends BkModel {
     /* static async create(data, parent): Promise<Action> {
         return new Action(data, parent);
     } */

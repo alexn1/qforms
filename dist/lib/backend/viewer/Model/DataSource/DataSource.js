@@ -11,7 +11,7 @@ const Page_1 = require("../Page/Page");
 const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 const TableForm_1 = require("../Form/TableForm/TableForm");
-class BkDataSource extends Model_1.Model {
+class BkDataSource extends Model_1.BkModel {
     constructor() {
         super(...arguments);
         this.keyColumns = [];

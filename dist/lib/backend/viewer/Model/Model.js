@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Model = void 0;
+exports.BkModel = void 0;
 const BaseModel_1 = require("../../BaseModel");
-class Model extends BaseModel_1.BaseModel {
+class BkModel extends BaseModel_1.BaseModel {
     constructor() {
         super(...arguments);
         this.fillCollections = [];
@@ -101,4 +101,4 @@ class Model extends BaseModel_1.BaseModel {
         throw new Error(`${this.constructor.name}.rpc not implemented`);
     }
 }
-exports.Model = Model;
+exports.BkModel = BkModel;

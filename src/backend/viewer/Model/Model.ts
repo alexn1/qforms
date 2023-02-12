@@ -1,7 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 
-export class Model extends BaseModel {
+export class BkModel extends BaseModel {
     fillCollections: any[] = [];
 
     /* constructor(data: any, parent?: any) {

@@ -1,6 +1,6 @@
 import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkAction } from '../Action/Action';
 import { BkDatabase } from '../Database/Database';
 import { BkDataSource } from '../DataSource/DataSource';
@@ -9,7 +9,7 @@ import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../Result';
-export declare class BkApplication extends Model {
+export declare class BkApplication extends BkModel {
     appInfo: AppInfo;
     hostApp: BackHostApp;
     env: string;

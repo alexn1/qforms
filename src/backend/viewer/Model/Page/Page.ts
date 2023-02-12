@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { BkApplication } from '../Application/Application';
@@ -8,7 +8,7 @@ import { BkForm } from '../Form/Form';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
-export class BkPage extends Model {
+export class BkPage extends BkModel {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     forms: BkForm[] = [];

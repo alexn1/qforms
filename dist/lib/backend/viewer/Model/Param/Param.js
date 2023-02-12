@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkParam = void 0;
 const Model_1 = require("../Model");
-class BkParam extends Model_1.Model {
+class BkParam extends Model_1.BkModel {
     getValue() {
         // console.log('Param.getValue', this.getName());
         const value = this.getAttr('value');

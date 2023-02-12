@@ -7,7 +7,7 @@ exports.BkField = void 0;
 const path_1 = __importDefault(require("path"));
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
-class BkField extends Model_1.Model {
+class BkField extends Model_1.BkModel {
     /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
     } */

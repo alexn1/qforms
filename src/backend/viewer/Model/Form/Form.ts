@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkDataSource } from '../DataSource/DataSource';
 import { BkAction } from '../Action/Action';
 import { BkField } from '../Field/Field';
@@ -9,7 +9,7 @@ import { BkApplication } from '../Application/Application';
 import { MyError } from '../../../MyError';
 import { Context } from '../../../Context';
 
-export class BkForm extends Model {
+export class BkForm extends BkModel {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     fields: BkField[] = [];

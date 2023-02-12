@@ -1,4 +1,4 @@
-import { Model } from '../Model';
+import { BkModel } from '../Model';
 import { BkParam } from '../Param/Param';
 import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
@@ -10,7 +10,7 @@ interface IConfig {
     password: string;
     port?: number;
 }
-export declare class BkDatabase<TConnection = any> extends Model {
+export declare class BkDatabase<TConnection = any> extends BkModel {
     tables: BkTable[];
     fillCollections: string[];
     init(context: Context): Promise<void>;
