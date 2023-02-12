@@ -1,11 +1,10 @@
 import { MongoClient, ClientSession } from 'mongodb';
 import { NoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
-interface IMongoDbDatabaseConnection {
+export declare class BkMongoDbDatabase extends NoSqlDatabase<{
     client: MongoClient;
     session: ClientSession;
-}
-export declare class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
+}> {
     connect(context: Context): Promise<void>;
     getUrl(): string;
     release(context: Context): Promise<void>;
@@ -20,4 +19,3 @@ export declare class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConne
     rollback(context: Context, err: any): Promise<void>;
     deinit(): Promise<void>;
 }
-export {};

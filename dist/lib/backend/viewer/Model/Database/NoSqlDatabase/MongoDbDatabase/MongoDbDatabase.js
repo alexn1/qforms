@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MongoDbDatabase = void 0;
+exports.BkMongoDbDatabase = void 0;
 const mongodb_1 = require("mongodb");
 const NoSqlDatabase_1 = require("../NoSqlDatabase");
-class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
+class BkMongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
     async connect(context) {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context)
@@ -43,9 +43,7 @@ class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .updateOne(_filter, update);
+        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
     getDbLink(context) {
         const client = this.getConnection(context).client;
@@ -101,4 +99,4 @@ class MongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
         console.log(`MongoDbDatabase.deinit: ${this.getName()}`);
     }
 }
-exports.MongoDbDatabase = MongoDbDatabase;
+exports.BkMongoDbDatabase = BkMongoDbDatabase;

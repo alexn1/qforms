@@ -2,12 +2,10 @@ import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db
 import { NoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
 
-interface IMongoDbDatabaseConnection {
+export class BkMongoDbDatabase extends NoSqlDatabase<{
     client: MongoClient;
     session: ClientSession;
-}
-
-export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
+}> {
     async connect(context: Context): Promise<void> {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
@@ -49,9 +47,7 @@ export class MongoDbDatabase extends NoSqlDatabase<IMongoDbDatabaseConnection> {
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .updateOne(_filter, update);
+        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
     private getDbLink(context: Context): Db {

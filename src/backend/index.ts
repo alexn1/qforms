@@ -15,7 +15,7 @@ export { BkApplication } from './viewer/Model/Application/Application';
 export { Database } from './viewer/Model/Database/Database';
 export { MySqlDatabase } from './viewer/Model/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
-export { MongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
+export { BkMongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 export { BkDataSource } from './viewer/Model/DataSource/DataSource';
 export { BkSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
 export { BkNoSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
