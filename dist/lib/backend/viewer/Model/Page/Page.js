@@ -6,12 +6,15 @@ const Model_1 = require("../Model");
 // import {Context} from '../../../Context';
 const MyError_1 = require("../../../MyError");
 class Page extends Model_1.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.dataSources = [];
         this.actions = [];
         this.forms = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
     async init(context) {
         await this.createColItems('dataSources', context);
         await this.createColItems('actions', context);
@@ -50,10 +53,10 @@ class Page extends Model_1.Model {
         return this.parent;
     }
     getForm(name) {
-        return this.forms.find(form => form.getName() === name);
+        return this.forms.find((form) => form.getName() === name);
     }
     getDataSource(name) {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
 exports.Page = Page;

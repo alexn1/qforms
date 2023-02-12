@@ -9,16 +9,13 @@ import { Form } from '../Form/Form';
 import { MyError } from '../../../MyError';
 
 export class Page extends Model {
-    dataSources: DataSource[];
-    actions: Action[];
-    forms: Form[];
+    dataSources: DataSource[] = [];
+    actions: Action[] = [];
+    forms: Form[] = [];
 
-    constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
-        this.dataSources = [];
-        this.actions = [];
-        this.forms = [];
-    }
+    } */
 
     async init(context): Promise<void> {
         await this.createColItems('dataSources', context);
@@ -63,10 +60,10 @@ export class Page extends Model {
     }
 
     getForm(name): Form {
-        return this.forms.find(form => form.getName() === name);
+        return this.forms.find((form) => form.getName() === name);
     }
 
     getDataSource(name): DataSource {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

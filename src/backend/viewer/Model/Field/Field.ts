@@ -10,9 +10,9 @@ import { Column } from '../Column/Column';
 import { Helper } from '../../../Helper';
 
 export class Field extends Model {
-    static async create(data, parent): Promise<Field> {
+    /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
-    }
+    } */
 
     // constructor(data, parent) {
     //     super(data, parent);

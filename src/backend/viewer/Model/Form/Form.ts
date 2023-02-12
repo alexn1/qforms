@@ -13,9 +13,9 @@ export class Form extends Model {
     actions: Action[];
     fields: Field[];
 
-    static async create(data, parent): Promise<any> {
+    /* static async create(data, parent): Promise<any> {
         throw new Error('Form is abstract');
-    }
+    } */
 
     constructor(data, parent) {
         super(data, parent);
@@ -137,9 +137,9 @@ export class Form extends Model {
         return !!context.getBody().newMode;
     }
     getField(name): Field {
-        return this.fields.find(field => field.getName() === name);
+        return this.fields.find((field) => field.getName() === name);
     }
     getDataSource(name): DataSource {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

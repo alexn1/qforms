@@ -5,9 +5,9 @@ const path = require('path');
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
 class Form extends Model_1.Model {
-    static async create(data, parent) {
+    /* static async create(data, parent): Promise<any> {
         throw new Error('Form is abstract');
-    }
+    } */
     constructor(data, parent) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];
@@ -115,10 +115,10 @@ class Form extends Model_1.Model {
         return !!context.getBody().newMode;
     }
     getField(name) {
-        return this.fields.find(field => field.getName() === name);
+        return this.fields.find((field) => field.getName() === name);
     }
     getDataSource(name) {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
 exports.Form = Form;

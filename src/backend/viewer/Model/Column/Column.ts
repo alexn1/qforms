@@ -7,9 +7,9 @@ export class Column extends Model {
     //     // console.log('Column.constructor', this.getName());
     // }
 
-    static async create(data, parent): Promise<Column> {
+    /* static async create(data, parent): Promise<Column> {
         return new Column(data, parent);
-    }
+    } */
 
     fillAttributes(response: any): void {
         response.name = this.getAttr('name');

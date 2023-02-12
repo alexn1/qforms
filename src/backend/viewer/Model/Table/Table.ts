@@ -12,9 +12,9 @@ export class Table extends Model {
         this.columns = [];
     }
 
-    static async create(data, parent) {
+    /* static async create(data, parent) {
         return new Table(data, parent);
-    }
+    } */
 
     async init(context) {
         await this.createColItems('columns', context);
@@ -23,8 +23,8 @@ export class Table extends Model {
     getKeyColumns(): string[] {
         // console.log('Table.getKeyColumns');
         const keyColumns = this.columns
-            .filter(column => column.isKey())
-            .map(column => column.getName());
+            .filter((column) => column.isKey())
+            .map((column) => column.getName());
         // const keyColumns = Object.keys(this.columns).filter(name => this.columns[name].isKey());
         if (keyColumns.length === 0) throw new Error(`no key columns in table: ${this.getName()}`);
         return keyColumns;
@@ -35,7 +35,7 @@ export class Table extends Model {
     }
 
     getColumn(name): Column {
-        const column = this.columns.find(column => column.getName() === name);
+        const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;
     }

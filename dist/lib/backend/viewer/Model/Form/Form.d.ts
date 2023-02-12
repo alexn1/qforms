@@ -8,7 +8,6 @@ export declare class Form extends Model {
     dataSources: DataSource[];
     actions: Action[];
     fields: Field[];
-    static create(data: any, parent: any): Promise<any>;
     constructor(data: any, parent: any);
     init(context: any): Promise<void>;
     getDirPath(): string;

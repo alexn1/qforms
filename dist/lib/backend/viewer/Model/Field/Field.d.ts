@@ -4,7 +4,6 @@ import { Page } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { Column } from '../Column/Column';
 export declare class Field extends Model {
-    static create(data: any, parent: any): Promise<Field>;
     fillAttributes(response: any): void;
     getDirPath(): string;
     fillDefaultValue(context: any, row: any): void;

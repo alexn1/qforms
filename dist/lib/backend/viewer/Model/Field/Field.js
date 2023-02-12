@@ -5,9 +5,9 @@ const path = require('path');
 const Model_1 = require("../Model");
 const Helper_1 = require("../../../Helper");
 class Field extends Model_1.Model {
-    static async create(data, parent) {
+    /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
-    }
+    } */
     // constructor(data, parent) {
     //     super(data, parent);
     // }

@@ -4,7 +4,6 @@ import { Application } from '../Application/Application';
 export declare class Table extends Model {
     columns: Column[];
     constructor(data: any, parent: any);
-    static create(data: any, parent: any): Promise<Table>;
     init(context: any): Promise<void>;
     getKeyColumns(): string[];
     getApp(): Application;

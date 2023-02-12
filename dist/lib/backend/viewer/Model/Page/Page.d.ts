@@ -7,7 +7,6 @@ export declare class Page extends Model {
     dataSources: DataSource[];
     actions: Action[];
     forms: Form[];
-    constructor(data: any, parent: any);
     init(context: any): Promise<void>;
     getDirPath(): string;
     fillAttributes(response: any): void;
