@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkMongoDbDatabase = void 0;
 const mongodb_1 = require("mongodb");
 const NoSqlDatabase_1 = require("../NoSqlDatabase");
-class BkMongoDbDatabase extends NoSqlDatabase_1.NoSqlDatabase {
+class BkMongoDbDatabase extends NoSqlDatabase_1.BkNoSqlDatabase {
     async connect(context) {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context)

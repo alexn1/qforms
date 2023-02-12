@@ -2,9 +2,9 @@ import { BkPersistentDataSource } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
 import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
-import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
+import { BkNoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { ReadResult } from '../../DataSource';
-export declare class BkNoSqlDataSource extends BkPersistentDataSource<NoSqlDatabase> {
+export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
