@@ -99,7 +99,7 @@ export class Model extends BaseModel {
         return new Class(itemData, this);
     }
 
-    getDirPath(): string {
+    getDirPath(): string | null {
         return null;
     }
 
