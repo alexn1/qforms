@@ -226,7 +226,7 @@ class BkDataSource extends Model_1.Model {
         return this.getName() === 'default' && this.isOnForm();
     }
     isDefaultOnRowForm() {
-        return this.getName() === 'default' && this.parent instanceof RowForm_1.RowForm;
+        return this.getName() === 'default' && this.parent instanceof RowForm_1.BkRowForm;
     }
     isDefaultOnTableForm() {
         return this.getName() === 'default' && this.parent instanceof TableForm_1.TableForm;

@@ -1,6 +1,7 @@
 import { Form } from '../Form';
+import { Context } from '../../../../Context';
 
-export class RowForm extends Form {
+export class BkRowForm extends Form {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());
@@ -11,7 +12,7 @@ export class RowForm extends Form {
     //     return super.fill(context);
     // }
 
-    isNewMode(context): boolean {
+    isNewMode(context: Context): boolean {
         if (this.isAttr('newMode')) {
             const newMode = this.getAttr('newMode');
             if (newMode === 'true') return true;

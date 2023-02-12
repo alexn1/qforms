@@ -8,7 +8,7 @@ import { BkApplication } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
-import { RowForm } from '../Form/RowForm/RowForm';
+import { BkRowForm } from '../Form/RowForm/RowForm';
 import { TableForm } from '../Form/TableForm/TableForm';
 
 export type ReadResult = [any[], number | null];
@@ -265,7 +265,7 @@ export class BkDataSource extends Model {
     }
 
     isDefaultOnRowForm(): boolean {
-        return this.getName() === 'default' && this.parent instanceof RowForm;
+        return this.getName() === 'default' && this.parent instanceof BkRowForm;
     }
 
     isDefaultOnTableForm(): boolean {

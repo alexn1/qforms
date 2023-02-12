@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.RowForm = void 0;
+exports.BkRowForm = void 0;
 const Form_1 = require("../Form");
-class RowForm extends Form_1.Form {
+class BkRowForm extends Form_1.Form {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());
@@ -27,4 +27,4 @@ class RowForm extends Form_1.Form {
         response.refreshButton = this.getAttr('refreshButton');
     }
 }
-exports.RowForm = RowForm;
+exports.BkRowForm = BkRowForm;

@@ -1,5 +1,6 @@
 import { Form } from '../Form';
-export declare class RowForm extends Form {
-    isNewMode(context: any): boolean;
+import { Context } from '../../../../Context';
+export declare class BkRowForm extends Form {
+    isNewMode(context: Context): boolean;
     fillAttributes(response: any): void;
 }
