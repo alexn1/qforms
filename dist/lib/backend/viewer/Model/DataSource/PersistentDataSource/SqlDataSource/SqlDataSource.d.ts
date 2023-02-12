@@ -1,11 +1,11 @@
 import { PersistentDataSource } from '../PersistentDataSource';
 import { ReadResult } from '../../DataSource';
-import { Table } from '../../../Table/Table';
+import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 export declare class SqlDataSource extends PersistentDataSource<SqlDatabase> {
-    table: Table;
+    table: BkTable;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
     getKeyColumns(): string[];

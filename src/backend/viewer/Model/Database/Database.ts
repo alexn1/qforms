@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { BkParam } from '../Param/Param';
 import { Application } from '../Application/Application';
-import { Table } from '../Table/Table';
+import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 
 interface IConfig {
@@ -13,7 +13,7 @@ interface IConfig {
 }
 
 export class Database<TConnection = any> extends Model {
-    tables: Table[] = [];
+    tables: BkTable[] = [];
     fillCollections = ['tables'];
 
     /* constructor(data, parent?) {
@@ -100,11 +100,11 @@ export class Database<TConnection = any> extends Model {
         return this.parent;
     }
 
-    findTable(name: string): Table {
+    findTable(name: string): BkTable | undefined {
         return this.tables.find((table) => table.getName() === name);
     }
 
-    getTable(name: string): Table {
+    getTable(name: string): BkTable {
         if (!name) throw new Error('getTable: no name');
         const table = this.findTable(name);
         if (!table) throw new Error(`no table with name: ${name}`);

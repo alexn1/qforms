@@ -41,7 +41,7 @@ export { TableForm } from './viewer/Model/Form/TableForm/TableForm';
 export { BkPage } from './viewer/Model/Page/Page';
 export { BkPageLink } from './viewer/Model/PageLink/PageLink';
 export { BkColumn } from './viewer/Model/Column/Column';
-export { Table } from './viewer/Model/Table/Table';
+export { BkTable } from './viewer/Model/Table/Table';
 export { BkAction } from './viewer/Model/Action/Action';
 
 // editor

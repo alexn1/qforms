@@ -1,13 +1,13 @@
 import { PersistentDataSource } from '../PersistentDataSource';
 import { DataSource, ReadResult } from '../../DataSource';
 import { Helper } from '../../../../../Helper';
-import { Table } from '../../../Table/Table';
+import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 
 export class SqlDataSource extends PersistentDataSource<SqlDatabase> {
-    table: Table = null;
+    table: BkTable = null;
 
     constructor(data, parent) {
         super(data, parent);

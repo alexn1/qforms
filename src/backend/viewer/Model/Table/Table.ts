@@ -1,22 +1,18 @@
 import { Model } from '../Model';
 import { BkColumn } from '../Column/Column';
 import { Application } from '../Application/Application';
+import { Context } from '../../../Context';
 
-export class Table extends Model {
-    columns: BkColumn[];
+export class BkTable extends Model {
+    columns: BkColumn[] = [];
 
     constructor(data, parent) {
         super(data, parent);
         // console.log('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
-        this.columns = [];
     }
 
-    /* static async create(data, parent) {
-        return new Table(data, parent);
-    } */
-
-    async init(context) {
+    async init(context: Context) {
         await this.createColItems('columns', context);
     }
 
@@ -34,7 +30,7 @@ export class Table extends Model {
         return this.parent.parent;
     }
 
-    getColumn(name): BkColumn {
+    getColumn(name: string): BkColumn {
         const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;

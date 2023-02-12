@@ -1,12 +1,13 @@
 import { Model } from '../Model';
 import { BkColumn } from '../Column/Column';
 import { Application } from '../Application/Application';
-export declare class Table extends Model {
+import { Context } from '../../../Context';
+export declare class BkTable extends Model {
     columns: BkColumn[];
     constructor(data: any, parent: any);
-    init(context: any): Promise<void>;
+    init(context: Context): Promise<void>;
     getKeyColumns(): string[];
     getApp(): Application;
-    getColumn(name: any): BkColumn;
+    getColumn(name: string): BkColumn;
     fillAttributes(response: any): void;
 }

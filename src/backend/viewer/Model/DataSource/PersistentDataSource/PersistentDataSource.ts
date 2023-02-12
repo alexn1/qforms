@@ -1,9 +1,9 @@
 import { DataSource } from '../DataSource';
 import { Database } from '../../Database/Database';
-import { Table } from '../../Table/Table';
+import { BkTable } from '../../Table/Table';
 
 export abstract class PersistentDataSource<
-    TDatabase extends Database = Database
+    TDatabase extends Database = Database,
 > extends DataSource {
     decodeChanges(changes) {
         const dChanges = {};
@@ -34,7 +34,7 @@ export abstract class PersistentDataSource<
         return this.getApp().getDatabase(databaseName) as TDatabase;
     }
 
-    getTable(): Table {
+    getTable(): BkTable {
         const tableName = this.getAttr('table');
         if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
         return this.getDatabase().getTable(tableName);

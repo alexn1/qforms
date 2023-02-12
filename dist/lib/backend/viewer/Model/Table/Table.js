@@ -1,17 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Table = void 0;
+exports.BkTable = void 0;
 const Model_1 = require("../Model");
-class Table extends Model_1.Model {
+class BkTable extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
+        this.columns = [];
         // console.log('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
-        this.columns = [];
     }
-    /* static async create(data, parent) {
-        return new Table(data, parent);
-    } */
     async init(context) {
         await this.createColItems('columns', context);
     }
@@ -38,4 +35,4 @@ class Table extends Model_1.Model {
         response.name = this.getAttr('name');
     }
 }
-exports.Table = Table;
+exports.BkTable = BkTable;

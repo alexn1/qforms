@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { BkParam } from '../Param/Param';
 import { Application } from '../Application/Application';
-import { Table } from '../Table/Table';
+import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 interface IConfig {
     host: string;
@@ -11,7 +11,7 @@ interface IConfig {
     port?: number;
 }
 export declare class Database<TConnection = any> extends Model {
-    tables: Table[];
+    tables: BkTable[];
     fillCollections: string[];
     init(context: Context): Promise<void>;
     deinit(): Promise<void>;
@@ -29,8 +29,8 @@ export declare class Database<TConnection = any> extends Model {
     getConfig(): IConfig;
     getDefaultPort(): number;
     getApp(): Application;
-    findTable(name: string): Table;
-    getTable(name: string): Table;
+    findTable(name: string): BkTable | undefined;
+    getTable(name: string): BkTable;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;

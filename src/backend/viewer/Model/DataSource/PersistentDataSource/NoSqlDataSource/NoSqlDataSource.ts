@@ -1,12 +1,13 @@
 import { PersistentDataSource } from '../PersistentDataSource';
 import { Context } from '../../../../../Context';
-import { Table } from '../../../Table/Table';
+import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { DataSource, ReadResult } from '../../DataSource';
 
 export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
-    table: Table;
+    table: BkTable;
+    
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table')
