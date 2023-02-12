@@ -37,7 +37,7 @@ export { BkPage } from './viewer/Model/Page/Page';
 export { PageLink } from './viewer/Model/PageLink/PageLink';
 export { Column } from './viewer/Model/Column/Column';
 export { Table } from './viewer/Model/Table/Table';
-export { Action } from './viewer/Model/Action/Action';
+export { BkAction } from './viewer/Model/Action/Action';
 export { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';
 export { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 export { DataSourceEditor } from './editor/Editor/DataSourceEditor/DataSourceEditor';

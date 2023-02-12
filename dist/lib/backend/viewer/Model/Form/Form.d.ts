@@ -1,12 +1,12 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
-import { Action } from '../Action/Action';
+import { BkAction } from '../Action/Action';
 import { Field } from '../Field/Field';
 import { BkPage } from '../Page/Page';
 import { Application } from '../Application/Application';
 export declare class Form extends Model {
     dataSources: DataSource[];
-    actions: Action[];
+    actions: BkAction[];
     fields: Field[];
     constructor(data: any, parent: any);
     init(context: any): Promise<void>;

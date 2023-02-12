@@ -7,7 +7,7 @@ import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
 import { Model } from '../Model';
-import { Action } from '../Action/Action';
+import { BkAction } from '../Action/Action';
 import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../Helper';
@@ -28,7 +28,7 @@ export class Application extends Model {
     // hostApp: BackHostApp;
     env: string;
     databases: Database[] = [];
-    actions: Action[] = [];
+    actions: BkAction[] = [];
     dataSources: DataSource[] = [];
     pages: any = {};
     links: any[];
@@ -497,10 +497,7 @@ export class Application extends Model {
             context.getRes().sendFile(filePath);
         } else {
             // next();
-            context
-                .getRes()
-                .status(404)
-                .end('Not Found');
+            context.getRes().status(404).end('Not Found');
             await this.getHostApp().logError(
                 new Error(`not found ${context.getUri()}`),
                 context.getReq(),

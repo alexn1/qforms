@@ -1,12 +1,12 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
-import { Action } from '../Action/Action';
+import { BkAction } from '../Action/Action';
 import { Application } from '../Application/Application';
 import { Form } from '../Form/Form';
 import { Context } from '../../../Context';
 export declare class BkPage extends Model {
     dataSources: DataSource[];
-    actions: Action[];
+    actions: BkAction[];
     forms: Form[];
     init(context: Context): Promise<void>;
     getDirPath(): string;

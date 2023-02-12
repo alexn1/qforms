@@ -1,7 +1,7 @@
 import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { Model } from '../Model';
-import { Action } from '../Action/Action';
+import { BkAction } from '../Action/Action';
 import { Database } from '../Database/Database';
 import { DataSource } from '../DataSource/DataSource';
 import { BkPage } from '../Page/Page';
@@ -14,7 +14,7 @@ export declare class Application extends Model {
     hostApp: BackHostApp;
     env: string;
     databases: Database[];
-    actions: Action[];
+    actions: BkAction[];
     dataSources: DataSource[];
     pages: any;
     links: any[];

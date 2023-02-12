@@ -430,10 +430,7 @@ class Application extends Model_1.Model {
         }
         else {
             // next();
-            context
-                .getRes()
-                .status(404)
-                .end('Not Found');
+            context.getRes().status(404).end('Not Found');
             await this.getHostApp().logError(new Error(`not found ${context.getUri()}`), context.getReq());
         }
         /*

@@ -5,15 +5,12 @@ const path = require('path');
 const Model_1 = require("../Model");
 const MyError_1 = require("../../../MyError");
 class Form extends Model_1.Model {
-    /* static async create(data, parent): Promise<any> {
-        throw new Error('Form is abstract');
-    } */
     constructor(data, parent) {
         super(data, parent);
-        this.fillCollections = ['dataSources', 'actions', 'fields'];
         this.dataSources = [];
         this.actions = [];
         this.fields = [];
+        this.fillCollections = ['dataSources', 'actions', 'fields'];
     }
     async init(context) {
         await this.createColItems('dataSources', context);
