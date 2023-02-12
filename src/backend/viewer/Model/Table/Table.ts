@@ -1,9 +1,9 @@
 import { Model } from '../Model';
-import { Column } from '../Column/Column';
+import { BkColumn } from '../Column/Column';
 import { Application } from '../Application/Application';
 
 export class Table extends Model {
-    columns: Column[];
+    columns: BkColumn[];
 
     constructor(data, parent) {
         super(data, parent);
@@ -34,7 +34,7 @@ export class Table extends Model {
         return this.parent.parent;
     }
 
-    getColumn(name): Column {
+    getColumn(name): BkColumn {
         const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`no column ${name}`);
         return column;

@@ -1,15 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Column = void 0;
+exports.BkColumn = void 0;
 const Model_1 = require("../Model");
-class Column extends Model_1.Model {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    //     // console.log('Column.constructor', this.getName());
-    // }
-    /* static async create(data, parent): Promise<Column> {
-        return new Column(data, parent);
-    } */
+class BkColumn extends Model_1.Model {
     fillAttributes(response) {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
@@ -25,4 +18,4 @@ class Column extends Model_1.Model {
         return this.parent.parent.parent;
     }
 }
-exports.Column = Column;
+exports.BkColumn = BkColumn;

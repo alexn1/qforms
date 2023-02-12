@@ -1,16 +1,7 @@
 import { Model } from '../Model';
 import { Application } from '../Application/Application';
 
-export class Column extends Model {
-    // constructor(data, parent) {
-    //     super(data, parent);
-    //     // console.log('Column.constructor', this.getName());
-    // }
-
-    /* static async create(data, parent): Promise<Column> {
-        return new Column(data, parent);
-    } */
-
+export class BkColumn extends Model {
     fillAttributes(response: any): void {
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');
@@ -28,6 +19,7 @@ export class Column extends Model {
     getApp(): Application {
         return this.parent.parent.parent;
     }
+
     /*getDbType() {
         return this.getAttr('dbType');
     }*/

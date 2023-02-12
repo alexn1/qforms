@@ -6,7 +6,7 @@ import { Model } from '../Model';
 import { Application } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
-import { Column } from '../Column/Column';
+import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 
 export class Field extends Model {
@@ -105,7 +105,7 @@ export class Field extends Model {
     isTimezone() {
         return this.getAttr('timezone') === 'true';
     }
-    getDatabaseTableColumn(): Column {
+    getDatabaseTableColumn(): BkColumn {
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: column attr is empty`);
         const defaultDataSource = this.getForm().getDataSource('default') as SqlDataSource;
         if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
