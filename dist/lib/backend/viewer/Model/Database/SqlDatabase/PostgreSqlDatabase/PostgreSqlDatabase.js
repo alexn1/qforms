@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostgreSqlDatabase = void 0;
+exports.BkPostgreSqlDatabase = void 0;
 const pg_1 = require("pg");
 const SqlDatabase_1 = require("../SqlDatabase");
 const colors = require('colors');
-class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
+class BkPostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
     constructor() {
         super(...arguments);
         this.pool = null;
@@ -29,7 +29,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         if (this.pool === null) {
             const config = this.getConfig();
             // console.log('creating connection pool for: ' + this.getName(), config);
-            this.pool = PostgreSqlDatabase.createPool(config);
+            this.pool = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool;
     }
@@ -61,7 +61,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
             } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         }
         SqlDatabase_1.SqlDatabase.checkParams(query, params);
-        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
             console.log('values:', values);
@@ -73,7 +73,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
     static async queryResult(cnn, query, params = null) {
         console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         SqlDatabase_1.SqlDatabase.checkParams(query, params);
-        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
         const result = await cnn.query(sql, values);
@@ -104,7 +104,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         await this.getConnection(context).query('rollback');
     }
     static formatQuery(query, params) {
-        // console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
+        // console.log(`BkPostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
             return { sql: query, values: null };
@@ -133,7 +133,7 @@ class PostgreSqlDatabase extends SqlDatabase_1.SqlDatabase {
         return query;
     }
     getUpdateQuery(tableName, values, where) {
-        return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
+        return BkPostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
     static getUpdateQuery(tableName, values, where) {
         // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
@@ -286,4 +286,4 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         return value;
     }
 }
-exports.PostgreSqlDatabase = PostgreSqlDatabase;
+exports.BkPostgreSqlDatabase = BkPostgreSqlDatabase;

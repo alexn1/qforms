@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 import { Helper } from './Helper';
-import { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
+import { BkPostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
 import { Context } from './Context';
 import { BkApplication } from './viewer/Model/Application/Application';
 import { AppInfo } from './AppInfo';
@@ -101,7 +101,7 @@ export class BackHostApp {
 
         // logPool
         if (log) {
-            this.logPool = PostgreSqlDatabase.createPool(log);
+            this.logPool = BkPostgreSqlDatabase.createPool(log);
         }
 
         // express server
@@ -451,7 +451,7 @@ export class BackHostApp {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await PostgreSqlDatabase.queryResult(
+        await BkPostgreSqlDatabase.queryResult(
             cnn,
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
             values,

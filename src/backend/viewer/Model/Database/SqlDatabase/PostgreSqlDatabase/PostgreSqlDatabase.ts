@@ -4,8 +4,8 @@ import { Context } from '../../../../../Context';
 
 const colors = require('colors');
 
-export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
-    pool: Pool = null;
+export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
+    pool: Pool | null = null;
     /* constructor(data, parent?) {
         console.log('new PostgreSqlDatabase');
         super(data, parent);        
@@ -28,7 +28,7 @@ export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
         if (this.pool === null) {
             const config = this.getConfig();
             // console.log('creating connection pool for: ' + this.getName(), config);
-            this.pool = PostgreSqlDatabase.createPool(config);
+            this.pool = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool;
     }
@@ -65,7 +65,7 @@ export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
             );
         }
         SqlDatabase.checkParams(query, params);
-        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
             console.log('values:', values);
@@ -81,7 +81,7 @@ export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
             query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
         );
         SqlDatabase.checkParams(query, params);
-        const { sql, values } = PostgreSqlDatabase.formatQuery(query, params);
+        const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
         const result = await cnn.query(sql, values);
@@ -114,7 +114,7 @@ export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
     }
 
     static formatQuery(query: string, params: any) {
-        // console.log(`PostgreSqlDatabase.formatQuery: ${query}`);
+        // console.log(`BkPostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
             return { sql: query, values: null };
@@ -145,7 +145,7 @@ export class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
     }
 
     getUpdateQuery(tableName: string, values: any, where: any): string {
-        return PostgreSqlDatabase.getUpdateQuery(tableName, values, where);
+        return BkPostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
 
     static getUpdateQuery(tableName: string, values: any, where: any): string {

@@ -1,8 +1,8 @@
 import { Pool, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
-export declare class PostgreSqlDatabase extends SqlDatabase<PoolClient> {
-    pool: Pool;
+export declare class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
+    pool: Pool | null;
     deinit(): Promise<void>;
     getPool(): Pool;
     static createPool(config: any): Pool;

@@ -70,7 +70,7 @@ class BackHostApp {
         Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
-            this.logPool = PostgreSqlDatabase_1.PostgreSqlDatabase.createPool(log);
+            this.logPool = PostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
         }
         // express server
         this.express = (0, express_1.default)();
@@ -370,7 +370,7 @@ class BackHostApp {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await PostgreSqlDatabase_1.PostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await PostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
     async createLog2(values) {
         if (this.logPool) {
