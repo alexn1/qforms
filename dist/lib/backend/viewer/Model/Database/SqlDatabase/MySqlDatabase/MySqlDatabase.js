@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MySqlDatabase = void 0;
+exports.BkMySqlDatabase = void 0;
 const mysql_1 = require("mysql");
 const SqlDatabase_1 = require("../SqlDatabase");
-class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
+class BkMySqlDatabase extends SqlDatabase_1.SqlDatabase {
     constructor() {
         super(...arguments);
         this.pool = null;
@@ -24,7 +24,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
     }
     getPool() {
         //console.log('MySqlDatabase.getPool');
-        if (this.pool === null) {
+        if (!this.pool) {
             //console.log('creating connection pool for: ' + database);
             this.pool = (0, mysql_1.createPool)(this.getConfig());
         }
@@ -33,7 +33,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
     }
     getConfig() {
         console.log('MySqlDatabase.getConfig');
-        return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: MySqlDatabase.queryFormat });
+        return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: BkMySqlDatabase.queryFormat });
     }
     /*getDefaultPort(): number {
         return 3306;
@@ -56,7 +56,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.query({ sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest }, params, (err, result, fields) => {
+            cnn.query({ sql: query, typeCast: BkMySqlDatabase.typeCast, nestTables: nest }, params, (err, result, fields) => {
                 if (err) {
                     reject(err);
                 }
@@ -78,7 +78,7 @@ class MySqlDatabase extends SqlDatabase_1.SqlDatabase {
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
-            cnn.query({ sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest }, params, (err, result, fields) => {
+            cnn.query({ sql: query, typeCast: BkMySqlDatabase.typeCast, nestTables: nest }, params, (err, result, fields) => {
                 if (err) {
                     reject(err);
                 }
@@ -287,7 +287,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await MySqlDatabase.Pool_getConnection(this.getPool());
+        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
     }
     async release(context) {
         console.log('MySqlDatabase.release', this.getName());
@@ -297,4 +297,4 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[this.getName()] = null;
     }
 }
-exports.MySqlDatabase = MySqlDatabase;
+exports.BkMySqlDatabase = BkMySqlDatabase;

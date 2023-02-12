@@ -2,8 +2,8 @@ import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysq
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
 
-export class MySqlDatabase extends SqlDatabase<PoolConnection> {
-    pool: Pool = null;
+export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
+    pool: Pool | null = null;
 
     /* constructor(data, parent?) {
         super(data, parent);
@@ -23,7 +23,7 @@ export class MySqlDatabase extends SqlDatabase<PoolConnection> {
 
     getPool(): Pool {
         //console.log('MySqlDatabase.getPool');
-        if (this.pool === null) {
+        if (!this.pool) {
             //console.log('creating connection pool for: ' + database);
             this.pool = createPool(this.getConfig());
         }
@@ -35,7 +35,7 @@ export class MySqlDatabase extends SqlDatabase<PoolConnection> {
         console.log('MySqlDatabase.getConfig');
         return {
             ...super.getConfig(),
-            queryFormat: MySqlDatabase.queryFormat,
+            queryFormat: BkMySqlDatabase.queryFormat,
         };
     }
 
@@ -62,7 +62,7 @@ export class MySqlDatabase extends SqlDatabase<PoolConnection> {
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.query(
-                { sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest },
+                { sql: query, typeCast: BkMySqlDatabase.typeCast, nestTables: nest },
                 params,
                 (err, result, fields) => {
                     if (err) {
@@ -87,7 +87,7 @@ export class MySqlDatabase extends SqlDatabase<PoolConnection> {
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.query(
-                { sql: query, typeCast: MySqlDatabase.typeCast, nestTables: nest },
+                { sql: query, typeCast: BkMySqlDatabase.typeCast, nestTables: nest },
                 params,
                 (err, result, fields) => {
                     if (err) {
@@ -310,7 +310,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await MySqlDatabase.Pool_getConnection(this.getPool());
+        context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
     }
 
     async release(context: Context): Promise<void> {
