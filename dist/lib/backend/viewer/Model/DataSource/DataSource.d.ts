@@ -4,8 +4,13 @@ import { Context } from '../../../Context';
 import { Application } from '../Application/Application';
 import { Database } from '../Database/Database';
 import { Form } from '../Form/Form';
-import { IAccessResult } from '../../IAccessResult';
 export type ReadResult = [any[], number | null];
+export interface IAccess {
+    create: boolean;
+    read: boolean;
+    update: boolean;
+    delete: boolean;
+}
 export declare class DataSource extends Model {
     keyColumns: string[];
     rows: any[];
@@ -36,7 +41,7 @@ export declare class DataSource extends Model {
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
     getForm(): Form | null;
-    getAccess(context: Context): IAccessResult;
+    getAccess(context: Context): IAccess;
     getDatabase(): Database;
     getLimit(): number;
 }

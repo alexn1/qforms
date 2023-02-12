@@ -10,9 +10,15 @@ import { BkPage } from '../Page/Page';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { TableForm } from '../Form/TableForm/TableForm';
-import { IAccessResult } from '../../IAccessResult';
 
 export type ReadResult = [any[], number | null];
+
+export interface IAccess {
+    create: boolean;
+    read: boolean;
+    update: boolean;
+    delete: boolean;
+}
 
 export class DataSource extends Model {
     keyColumns: string[] = [];
@@ -281,7 +287,7 @@ export class DataSource extends Model {
         return this.isOnForm() ? this.getParent() : null;
     }
 
-    getAccess(context: Context): IAccessResult {
+    getAccess(context: Context): IAccess {
         return {
             create: true,
             read: true,
