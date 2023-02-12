@@ -13,7 +13,7 @@ export { PostgreSqlDatabase } from './viewer/Model/Database/SqlDatabase/PostgreS
 export { MongoDbDatabase } from './viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
 export { DataSource } from './viewer/Model/DataSource/DataSource';
 export { SqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
-export { NoSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
+export { BkNoSqlDataSource } from './viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
 export { Field } from './viewer/Model/Field/Field';
 export { CheckBoxField } from './viewer/Model/Field/CheckBoxField/CheckBoxField';
 export { CheckBoxListField } from './viewer/Model/Field/CheckBoxListField/CheckBoxListField';

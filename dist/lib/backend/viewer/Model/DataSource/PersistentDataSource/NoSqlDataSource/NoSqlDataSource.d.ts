@@ -4,7 +4,7 @@ import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { ReadResult } from '../../DataSource';
-export declare class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
+export declare class BkNoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;

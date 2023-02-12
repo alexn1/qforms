@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NoSqlDataSource = void 0;
+exports.BkNoSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
 const Result_1 = require("../../../../../Result");
 const DataSource_1 = require("../../DataSource");
-class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
+class BkNoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
         this.table = this.getAttr('table')
@@ -125,4 +125,4 @@ class NoSqlDataSource extends PersistentDataSource_1.PersistentDataSource {
         return context.getParams();
     }
 }
-exports.NoSqlDataSource = NoSqlDataSource;
+exports.BkNoSqlDataSource = BkNoSqlDataSource;

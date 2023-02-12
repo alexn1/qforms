@@ -5,7 +5,7 @@ import { Result } from '../../../../../Result';
 import { NoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { DataSource, ReadResult } from '../../DataSource';
 
-export class NoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
+export class BkNoSqlDataSource extends PersistentDataSource<NoSqlDatabase> {
     table: BkTable | null;
 
     constructor(data, parent) {
