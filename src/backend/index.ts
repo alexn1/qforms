@@ -1,5 +1,4 @@
 // common
-import { AppInfo } from './AppInfo';
 
 export { Helper } from './Helper';
 export { Result } from './Result';
