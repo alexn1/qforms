@@ -9,6 +9,7 @@ export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     getUrl(): string;
     release(context: Context): Promise<void>;
     updateOne(context: Context, colName: string, filter: any, update: any): Promise<any>;
+    insertOne(context: Context, colName: string, document: any): Promise<any>;
     private getDbLink;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
     queryRows(context: Context, query: string, params?: any): Promise<any[]>;

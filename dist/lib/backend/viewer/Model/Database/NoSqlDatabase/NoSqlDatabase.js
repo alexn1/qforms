@@ -6,5 +6,8 @@ class BkNoSqlDatabase extends Database_1.BkDatabase {
     async updateOne(context, colName, filter, update) {
         throw new Error(`${this.constructor.name}.updateOne not implemented`);
     }
+    async insertOne(context, colName, document) {
+        throw new Error(`${this.constructor.name}.insertOne not implemented`);
+    }
 }
 exports.BkNoSqlDatabase = BkNoSqlDatabase;

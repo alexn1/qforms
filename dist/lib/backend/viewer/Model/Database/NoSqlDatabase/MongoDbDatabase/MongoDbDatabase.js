@@ -45,6 +45,9 @@ class BkMongoDbDatabase extends NoSqlDatabase_1.BkNoSqlDatabase {
         console.log('update', update);
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
+    async insertOne(context, colName, document) {
+        return await this.getDbLink(context).collection(colName).insertOne(document);
+    }
     getDbLink(context) {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();

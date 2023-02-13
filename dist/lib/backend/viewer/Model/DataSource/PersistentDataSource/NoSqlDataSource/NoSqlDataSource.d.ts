@@ -9,6 +9,7 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;
     read(context: Context): Promise<ReadResult>;
+    create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;

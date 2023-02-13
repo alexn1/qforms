@@ -50,6 +50,10 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
+    async insertOne(context: Context, colName: string, document: any): Promise<any> {
+        return await this.getDbLink(context).collection(colName).insertOne(document);
+    }
+
     private getDbLink(context: Context): Db {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();

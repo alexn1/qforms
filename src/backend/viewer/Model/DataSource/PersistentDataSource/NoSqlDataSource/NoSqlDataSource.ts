@@ -95,6 +95,46 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         return [rows, count];
     }
 
+    async create(context: Context, _values: any = null): Promise<Result> {
+        console.log('NoSqlDataSource.create');
+        if (this.getAccess(context).create !== true) {
+            throw new Error(`[${this.getFullName()}]: access denied.`);
+        }
+
+        if (!this.table) {
+            throw new Error(
+                `${this.getFullName()}: no link to table object: ${this.getAttr('table')}`,
+            );
+        }
+
+        const databaseName = this.getAttr('database');
+        const tableName = this.getAttr('table');
+        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
+        console.log('values', values);
+
+        const insertResult = await this.getDatabase().insertOne(context, tableName, values);
+        console.log('insertResult:', insertResult);
+
+        const newRow = { _id: insertResult.insertedId };
+        const key = this.getKeyFromValues(newRow);
+        if (!key) throw new Error('create: cannot calc row key');
+        console.log('key:', key);
+
+        const keyParams = BkDataSource.keyToParams(key);
+        // console.log('keyParams:', keyParams);
+
+        // row
+        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
+        if (!row) throw new Error('select query does not return row');
+        this.prepareRows(context, [row]);
+        // console.log('row:', row);
+
+        const result = new Result();
+        Result.addInsertToResult(result, databaseName, tableName, key);
+        Result.addInsertExToResult(result, databaseName, tableName, key, row);
+        return result;
+    }
+
     async update(context: Context): Promise<Result> {
         console.log('NoSqlDataSource.update');
         if (this.getAccess(context).update !== true) {
@@ -122,6 +162,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const newKeyParams = BkDataSource.keyToParams(newKey);
         console.log('newKey:', newKey);
 
+        // row
         const [row] = await this.getDatabase().queryRows(
             context,
             this.getSelectQuery(),
