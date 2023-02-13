@@ -5,6 +5,7 @@ export { BaseModel } from './BaseModel';
 export { BackHostApp } from './BackHostApp';
 export { Converter } from './Converter';
 export { JsonFile } from './JsonFile';
+export { AppInfo } from './AppInfo';
 export { BkModel } from './viewer/Model/Model';
 export { BkApplication } from './viewer/Model/Application/Application';
 export { BkDatabase } from './viewer/Model/Database/Database';
@@ -72,7 +73,6 @@ export { MongoDbDatabaseEditor } from './editor/Editor/DatabaseEditor/MongoDbDat
 export { TableEditor } from './editor/Editor/TableEditor/TableEditor';
 export { ParamEditor } from './editor/Editor/ParamEditor/ParamEditor';
 export { ColumnEditor } from './editor/Editor/ColumnEditor/ColumnEditor';
-export { AppInfo } from './AppInfo';
 export { ActionEditorController } from './editor/EditorController/ActionEditorController/ActionEditorController';
 export { DatabaseEditorController } from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
 export { DataSourceEditorController } from './editor/EditorController/DataSourceEditorController/DataSourceEditorController';
