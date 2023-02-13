@@ -1,6 +1,6 @@
 import { BkDatabase } from '../Database';
 
-export class SqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
+export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
     getUpdateQuery(tableName, values, where): string {
         console.log('SqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
