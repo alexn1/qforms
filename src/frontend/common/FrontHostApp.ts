@@ -1,5 +1,6 @@
 export class FrontHostApp {
     alertCtrl: any;
+
     constructor() {
         // console.log('FrontHostApp.constructor');
 
@@ -13,9 +14,11 @@ export class FrontHostApp {
         // window.onerror              = this.errorHandler.bind(this);
         // window.onbeforeunload       = this.exit.bind(this);
     }
+
     async run() {
         throw new Error('FrontHostApp.run not implemented');
     }
+
     async onWindowUnhandledrejection(e) {
         console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
         try {
@@ -27,6 +30,7 @@ export class FrontHostApp {
             console.error(`onWindowUnhandledrejection error: ${err.message}`);
         }
     }
+
     async onWindowError(e) {
         console.log('FrontHostApp.onWindowError', e);
         try {
@@ -38,6 +42,7 @@ export class FrontHostApp {
             console.error(`onWindowError error: ${err.message}`);
         }
     }
+
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
@@ -93,9 +98,11 @@ export class FrontHostApp {
     static startWait() {
         document.querySelector('html').classList.add('wait');
     }
+
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
+
     static getClassByName(className): any {
         /*// console.log('getClassByName', className);
         if (eval(`typeof ${className}`) === 'function') {
@@ -104,13 +111,16 @@ export class FrontHostApp {
         return null;*/
         return window[className];
     }
+
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
+
     async alert(options): Promise<any> {
         console.log('FrontHostApp.alert', options);
         alert(options.message);
     }
+
     async confirm(options): Promise<any> {
         console.log('FrontHostApp.confirm', options);
         return confirm(options.message);
