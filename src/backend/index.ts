@@ -1,5 +1,3 @@
-// common
-
 export { Helper } from './Helper';
 export { Result } from './Result';
 export { Context } from './Context';
@@ -7,6 +5,7 @@ export { BaseModel } from './BaseModel';
 export { BackHostApp } from './BackHostApp';
 export { Converter } from './Converter';
 export { JsonFile } from './JsonFile';
+export { AppInfo } from './AppInfo';
 
 // viewer
 export { BkModel } from './viewer/Model/Model';
@@ -44,7 +43,6 @@ export { BkTable } from './viewer/Model/Table/Table';
 export { BkAction } from './viewer/Model/Action/Action';
 
 // editor
-
 export { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';
 export { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 export { DataSourceEditor } from './editor/Editor/DataSourceEditor/DataSourceEditor';
@@ -79,8 +77,6 @@ export { MongoDbDatabaseEditor } from './editor/Editor/DatabaseEditor/MongoDbDat
 export { TableEditor } from './editor/Editor/TableEditor/TableEditor';
 export { ParamEditor } from './editor/Editor/ParamEditor/ParamEditor';
 export { ColumnEditor } from './editor/Editor/ColumnEditor/ColumnEditor';
-export { AppInfo } from './AppInfo';
-
 export { ActionEditorController } from './editor/EditorController/ActionEditorController/ActionEditorController';
 export { DatabaseEditorController } from './editor/EditorController/DatabaseEditorController/DatabaseEditorController';
 export { DataSourceEditorController } from './editor/EditorController/DataSourceEditorController/DataSourceEditorController';
