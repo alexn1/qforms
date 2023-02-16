@@ -81,7 +81,8 @@
         "webpack-index": "NODE_ENV=development webpack --config webpack.config.index.js",
         "webpack-monitor": "NODE_ENV=development webpack --config webpack.config.monitor.js",
         "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js",
-        "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js"
+        "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
+        "docker:run": "npx gulp docker-run"
     },
     "repository": {
         "type": "git",
