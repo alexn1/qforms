@@ -47,11 +47,15 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
+        return await this.getDbLink(context)
+            .collection(colName)
+            .updateOne(_filter, update);
     }
 
     async insertOne(context: Context, colName: string, document: any): Promise<any> {
-        return await this.getDbLink(context).collection(colName).insertOne(document);
+        return await this.getDbLink(context)
+            .collection(colName)
+            .insertOne(document);
     }
 
     private getDbLink(context: Context): Db {
@@ -64,7 +68,10 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         const db = this.getDbLink(context);
 
         // eval query as function
-        const fn = eval(`(db, params, ObjectId) => (${query})`);
+        const fn =
+            query.trim().substring(0, 5) === 'async'
+                ? eval(query)
+                : eval(`(db, params, ObjectId) => (${query})`);
 
         // exec query
         const result = await fn(db, params, ObjectId);
