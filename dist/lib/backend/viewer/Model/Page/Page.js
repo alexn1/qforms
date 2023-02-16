@@ -52,16 +52,10 @@ class BkPage extends Model_1.BkModel {
         return this.parent;
     }
     getForm(name) {
-        const f = this.forms.find((form) => form.getName() === name);
-        if (!f)
-            throw new Error(`no form with name: ${name}`);
-        return f;
+        return this.forms.find((form) => form.getName() === name);
     }
     getDataSource(name) {
-        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
-        if (!ds)
-            throw new Error(`no data source with name: ${name}`);
-        return ds;
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
 exports.BkPage = BkPage;

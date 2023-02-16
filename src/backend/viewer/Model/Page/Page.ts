@@ -55,15 +55,11 @@ export class BkPage extends BkModel {
         return this.parent;
     }
 
-    getForm(name: string): BkForm {
-        const f = this.forms.find((form) => form.getName() === name);
-        if (!f) throw new Error(`no form with name: ${name}`);
-        return f;
+    getForm(name: string): BkForm | undefined {
+        return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name: string): BkDataSource {
-        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
-        if (!ds) throw new Error(`no data source with name: ${name}`);
-        return ds;
+    getDataSource(name: string): BkDataSource | undefined {
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

@@ -118,10 +118,7 @@ class BkForm extends Model_1.BkModel {
         return this.fields.find((field) => field.getName() === name);
     }
     getDataSource(name) {
-        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
-        if (!ds)
-            throw new Error(`no data source with name: ${name}`);
-        return ds;
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }
 exports.BkForm = BkForm;

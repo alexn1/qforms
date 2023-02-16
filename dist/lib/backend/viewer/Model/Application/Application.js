@@ -337,10 +337,7 @@ class BkApplication extends Model_1.BkModel {
         return appInfos;
     }
     getDataSource(name) {
-        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
-        if (!ds)
-            throw new Error(`no DataSource with name: ${name}`);
-        return ds;
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
     getViewClassName() {
         return this.getAttr('viewClass') || 'ApplicationView';

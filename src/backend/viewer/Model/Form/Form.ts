@@ -133,9 +133,7 @@ export class BkForm extends BkModel {
     getField(name: string): BkField | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
-    getDataSource(name: string): BkDataSource {
-        const ds = this.dataSources.find((dataSource) => dataSource.getName() === name);
-        if (!ds) throw new Error(`no data source with name: ${name}`);
-        return ds;
+    getDataSource(name: string): BkDataSource | undefined {
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

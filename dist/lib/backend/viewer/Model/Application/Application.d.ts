@@ -56,7 +56,7 @@ export declare class BkApplication extends BkModel {
     static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
     static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]>;
-    getDataSource(name: string): BkDataSource;
+    getDataSource(name: string): BkDataSource | undefined;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: any): Promise<void>;
