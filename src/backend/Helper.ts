@@ -1,3 +1,5 @@
+import { JSONString } from './types';
+
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
@@ -361,15 +363,16 @@ export class Helper {
 
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
-                value,
-            );
+            const a =
+                /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
+                    value,
+                );
             if (a) return new Date(value);
         }
         return value;
     }
 
-    static decodeValue(rawValue) {
+    static decodeValue(rawValue: JSONString): any {
         if (rawValue === undefined) throw new Error('decodeValue undefined');
         if (rawValue === null) throw new Error('decodeValue null');
         try {
@@ -379,8 +382,8 @@ export class Helper {
         }
     }
 
-    static encodeValue(value) {
-        return JSON.stringify(value);
+    static encodeValue(value: any): JSONString {
+        return JSON.stringify(value) as JSONString;
     }
 
     static decodeObject(obj): any {
@@ -393,23 +396,23 @@ export class Helper {
         return dObj;
     }
 
-    static SECOND() {
+    static SECOND(): number {
         return 1000;
     }
 
-    static MINUTE() {
+    static MINUTE(): number {
         return 60 * Helper.SECOND();
     }
 
-    static HOUR() {
+    static HOUR(): number {
         return 60 * Helper.MINUTE();
     }
 
-    static DAY() {
+    static DAY(): number {
         return 24 * Helper.HOUR();
     }
 
-    static WEEK() {
+    static WEEK(): number {
         return 7 * Helper.DAY();
     }
 
@@ -425,20 +428,20 @@ export class Helper {
         });
     }
 
-    static addMinutes(date, minutes): void {
+    static addMinutes(date: Date, minutes: number): void {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
 
-    static removeTimezoneOffset(date): void {
+    static removeTimezoneOffset(date: Date): void {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
 
-    static addTimezoneOffset(date): void {
+    static addTimezoneOffset(date: Date): void {
         Helper.addMinutes(date, date.getTimezoneOffset());
     }
 
-    static cloneDate(date): Date {
+    static cloneDate(date: Date): Date {
         return new Date(date.getTime());
     }
 
@@ -446,7 +449,7 @@ export class Helper {
         return Array.from(Array(n).keys());
     }
 
-    static formatDate(date, format) {
+    static formatDate(date: Date, format: string) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
         const D = date.getDate();
@@ -504,7 +507,7 @@ export class Helper {
 
     static createEmptyPromise() {
         let _resolve, _reject;
-        const promise = new Promise(function(resolve, reject) {
+        const promise = new Promise(function (resolve, reject) {
             _resolve = resolve;
             _reject = reject;
         });

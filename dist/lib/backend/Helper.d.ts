@@ -1,3 +1,4 @@
+import { JSONString } from './types';
 export declare class Helper {
     static getRandomString(length: any): string;
     static getFilePathsSync(publicDirPath: any, subDirPath: any, ext: any): any;
@@ -24,8 +25,8 @@ export declare class Helper {
     static fsUnlink(filePath: any): Promise<void>;
     static today(timeOffset: any): Date;
     static dateTimeReviver(key: any, value: any): any;
-    static decodeValue(rawValue: any): any;
-    static encodeValue(value: any): string;
+    static decodeValue(rawValue: JSONString): any;
+    static encodeValue(value: any): JSONString;
     static decodeObject(obj: any): any;
     static SECOND(): number;
     static MINUTE(): number;
@@ -33,12 +34,12 @@ export declare class Helper {
     static DAY(): number;
     static WEEK(): number;
     static Session_save(session: any): Promise<void>;
-    static addMinutes(date: any, minutes: any): void;
-    static removeTimezoneOffset(date: any): void;
-    static addTimezoneOffset(date: any): void;
-    static cloneDate(date: any): Date;
+    static addMinutes(date: Date, minutes: number): void;
+    static removeTimezoneOffset(date: Date): void;
+    static addTimezoneOffset(date: Date): void;
+    static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
-    static formatDate(date: any, format: any): any;
+    static formatDate(date: Date, format: string): string;
     static getFirstField(object: any): any;
     static getCommandLineParams(): {};
     static getWebSocketIP(webSocket: any): any;
