@@ -7,6 +7,7 @@ export class LinkFieldEditor extends FieldEditor {
             '@attributes': {
                 ...FieldEditor.createAttributes(params),
                 notNull: params.notNull ? params.notNull : 'false',
+                page: params.page ? params.page : '',
             },
         };
     }
