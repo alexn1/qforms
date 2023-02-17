@@ -65,7 +65,7 @@ export declare class DataSource extends Model {
     onTableRefresh: (e: any) => Promise<any>;
     isSurrogate(): any;
     moveRow(row: any, offset: any): void;
-    getLimit(): number;
+    getLimit(): number | null;
     getCount(): number;
     getFrame(): number;
     getLastFrame(): number;

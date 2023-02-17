@@ -43052,7 +43052,7 @@ class WebSocketClient {
                 .getData().versions.app,
         };
         return Object.keys(params)
-            .map(key => `${key}=${encodeURIComponent(params[key])}`)
+            .map((key) => `${key}=${encodeURIComponent(params[key])}`)
             .join('&');
     }
     connect() {
@@ -43063,7 +43063,7 @@ class WebSocketClient {
                 this.webSocket = null;
                 reject(new Error(`Connection failed ${e.code}`));
             };
-            this.webSocket.onopen = e => {
+            this.webSocket.onopen = (e) => {
                 this.webSocket.onclose = this.onClose.bind(this);
                 this.webSocket.onmessage = this.onMessage.bind(this);
                 this.startRefreshTimeout();

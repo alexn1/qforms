@@ -1,0 +1,7 @@
+/* for eslint only */
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "esModuleInterop": true
+    }
+}
