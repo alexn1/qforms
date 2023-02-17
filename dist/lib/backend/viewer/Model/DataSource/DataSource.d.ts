@@ -21,7 +21,7 @@ export declare class BkDataSource extends BkModel {
     getKeyValuesFromKey(key: Key): KeyValues;
     getKeyFromValues(values: any): Key;
     getFullName(): string;
-    static keyToParams(key: string, paramName?: string): {};
+    static keyToParams(key: Key, paramName?: string): {};
     calcNewKeyValues(originalKeyValues: KeyValues, values: any): KeyValues;
     calcNewKey(key: Key, values: any): Key;
     fillAttributes(response: any): void;

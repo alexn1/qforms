@@ -184,7 +184,7 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    static keyToParams(key: string, paramName: string = 'key') {
+    static keyToParams(key: Key, paramName: string = 'key') {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);
