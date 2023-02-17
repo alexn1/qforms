@@ -10,6 +10,7 @@ import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';
+import { Key, KeyValue, KeyValues } from '../../../types';
 
 export type ReadResult = [any[], number | null];
 
@@ -145,12 +146,12 @@ export class BkDataSource extends BkModel {
         return values;
     }*/
 
-    getKeyValuesFromKey(key: string) {
+    getKeyValuesFromKey(key: Key): KeyValues {
         const arr = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
         }
-        const values = {};
+        const values: KeyValues = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
             const keyColumn = this.keyColumns[i];
             values[keyColumn] = arr[i];
@@ -158,8 +159,8 @@ export class BkDataSource extends BkModel {
         return values;
     }
 
-    getKeyFromValues(values): string {
-        const arr: string[] = [];
+    getKeyFromValues(values): Key {
+        const arr = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
             const value = values[column];
@@ -168,7 +169,7 @@ export class BkDataSource extends BkModel {
             }
             arr.push(value);
         }
-        return JSON.stringify(arr);
+        return JSON.stringify(arr) as Key;
     }
 
     getFullName(): string {
@@ -199,7 +200,7 @@ export class BkDataSource extends BkModel {
         return params;
     }
 
-    calcNewKeyValues(originalKeyValues, values) {
+    calcNewKeyValues(originalKeyValues: KeyValues, values): KeyValues {
         const newKeyValues = this.keyColumns.reduce((acc, name) => {
             if (originalKeyValues[name] === undefined)
                 throw new Error(`no key column in values: ${name}`);
@@ -209,7 +210,7 @@ export class BkDataSource extends BkModel {
         return newKeyValues;
     }
 
-    calcNewKey(key: string, values) {
+    calcNewKey(key: Key, values) {
         const keyValues = this.getKeyValuesFromKey(key);
         const newKeyValues = this.calcNewKeyValues(keyValues, values);
         return this.getKeyFromValues(newKeyValues);

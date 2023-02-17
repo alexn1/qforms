@@ -4,6 +4,7 @@ import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { BkNoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
 import { BkDataSource, ReadResult } from '../../DataSource';
+import { Key } from '../../../../../types';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
@@ -147,7 +148,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const changes = this.decodeChanges(context.getBody().changes);
         // console.log('changes:', changes);
 
-        const key = Object.keys(changes)[0];
+        const key = Object.keys(changes)[0] as Key;
         console.log('key:', key);
         const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
