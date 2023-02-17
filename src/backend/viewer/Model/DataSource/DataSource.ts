@@ -10,13 +10,13 @@ import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';
-import { Key, KeyValue, KeyValues } from '../../../types';
+import { Key, KeyValue, KeyValues, Row } from '../../../types';
 
 export type ReadResult = [any[], number | null];
 
 export class BkDataSource extends BkModel {
     keyColumns: string[] = [];
-    rows: any[] = [];
+    rows: Row[] = [];
 
     /* constructor(data, parent) {
         super(data, parent);
@@ -58,7 +58,7 @@ export class BkDataSource extends BkModel {
         return keyColumns;
     }
 
-    prepareRows(context: Context, rows: any[]): void {
+    prepareRows(context: Context, rows: Row[]): void {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         if (rows[0]) {
             for (const keyColumn of this.keyColumns) {
@@ -93,7 +93,7 @@ export class BkDataSource extends BkModel {
         this.encodeRows(rows);
     }
 
-    checkColumns(row: any): void {
+    checkColumns(row: Row): void {
         for (const field of this.parent.fields) {
             const column = field.getAttr('column');
             if (column) {
@@ -113,17 +113,17 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    encodeRows(rows: any[]) {
+    encodeRows(rows: Row[]) {
         for (const row of rows) {
             this.encodeRow(row);
         }
     }
 
-    encodeRow(row: any): void {
+    encodeRow(row: Row): void {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
         if (this.isDefaultOnForm()) {
-            for (const field of this.getParent().fields) {
+            for (const field of this.getForm().fields) {
                 const column = field.getAttr('column');
                 row[column] = field.valueToRaw(row[column]);
             }
@@ -137,14 +137,6 @@ export class BkDataSource extends BkModel {
     getApp(): BkApplication {
         return this.parent.getApp();
     }
-
-    /*getKeyValuesFromRow(row) {
-        const values = {};
-        this.keyColumns.forEach(column => {
-            values[column] = row[column];
-        });
-        return values;
-    }*/
 
     getKeyValuesFromKey(key: Key): KeyValues {
         const arr = JSON.parse(key);
@@ -239,7 +231,7 @@ export class BkDataSource extends BkModel {
         return response;
     }
 
-    private async getRows(): Promise<any[]> {
+    private async getRows(): Promise<Row[]> {
         // console.log('DataSource.getRows');
         /*const jsonFilePath = this.getJsonFilePath();
         const exists = await Helper.exists(jsonFilePath);

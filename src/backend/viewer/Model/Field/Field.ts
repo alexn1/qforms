@@ -7,6 +7,7 @@ import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
+import { JSONString } from '../../../types';
 
 export class BkField extends BkModel {
     /* static async create(data, parent): Promise<Field> {
@@ -97,15 +98,15 @@ export class BkField extends BkModel {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
 
-    valueToRaw(value): any {
+    valueToRaw(value): JSONString {
         return Helper.encodeValue(value);
     }
 
-    rawToValue(raw): any {
+    rawToValue(raw: JSONString): any {
         return Helper.decodeValue(raw);
     }
 
-    isTimezone() {
+    isTimezone(): boolean {
         return this.getAttr('timezone') === 'true';
     }
 

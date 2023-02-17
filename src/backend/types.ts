@@ -16,3 +16,7 @@ export interface KeyValues {
 export interface Row {
     [name: string]: any;
 }
+
+export interface RawRow {
+    [name: string]: JSONString;
+}

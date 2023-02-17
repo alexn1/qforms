@@ -102,7 +102,7 @@ class BkDataSource extends Model_1.BkModel {
         if (!row)
             throw new Error(`encodeRow: need row`);
         if (this.isDefaultOnForm()) {
-            for (const field of this.getParent().fields) {
+            for (const field of this.getForm().fields) {
                 const column = field.getAttr('column');
                 row[column] = field.valueToRaw(row[column]);
             }
@@ -116,13 +116,6 @@ class BkDataSource extends Model_1.BkModel {
     getApp() {
         return this.parent.getApp();
     }
-    /*getKeyValuesFromRow(row) {
-        const values = {};
-        this.keyColumns.forEach(column => {
-            values[column] = row[column];
-        });
-        return values;
-    }*/
     getKeyValuesFromKey(key) {
         const arr = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
