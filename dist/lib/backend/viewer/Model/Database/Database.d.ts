@@ -3,6 +3,7 @@ import { BkParam } from '../Param/Param';
 import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
+import { Row } from '../../../types';
 interface Config {
     host: string;
     database: string;
@@ -20,7 +21,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     getConnection(context: Context): TConnection;
     release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
-    queryRows(context: Context, query: string, params?: any): Promise<any[]>;
+    queryRows(context: Context, query: string, params?: any): Promise<Row[]>;
     queryScalar(context: Context, query: string, params?: any): Promise<any>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;

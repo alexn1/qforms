@@ -1,6 +1,7 @@
 import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysql';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
+import { Row } from '../../../../../types';
 
 export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
     pool: Pool | null = null;
@@ -55,7 +56,7 @@ export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
         });
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         SqlDatabase.checkParams(query, params);
         const nest = true;

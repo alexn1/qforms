@@ -3,6 +3,7 @@ import { BkParam } from '../Param/Param';
 import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
+import { Row } from '../../../types';
 
 interface Config {
     host: string;
@@ -55,7 +56,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.queryResult not implemented`);
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
         throw new Error(`${this.constructor.name}.queryRows not implemented`);
     }
 

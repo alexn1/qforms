@@ -1,6 +1,7 @@
 import { Pool, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
+import { Row } from '../../../../../types';
 export declare class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
     pool: Pool | null;
     deinit(): Promise<void>;
@@ -10,7 +11,7 @@ export declare class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
     release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
     static queryResult(cnn: any, query: string, params?: any): Promise<any>;
-    queryRows(context: Context, query: string, params?: any): Promise<any[]>;
+    queryRows(context: Context, query: string, params?: any): Promise<Row[]>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;

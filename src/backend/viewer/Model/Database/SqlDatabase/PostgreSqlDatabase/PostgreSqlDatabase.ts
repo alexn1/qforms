@@ -1,6 +1,7 @@
 import { Pool, Client, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
+import { Row } from '../../../../../types';
 
 const colors = require('colors');
 
@@ -89,7 +90,7 @@ export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
         return result;
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;

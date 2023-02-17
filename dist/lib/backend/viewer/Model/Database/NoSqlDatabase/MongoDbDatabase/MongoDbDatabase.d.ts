@@ -1,6 +1,7 @@
 import { MongoClient, ClientSession } from 'mongodb';
 import { BkNoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
+import { Row } from '../../../../../types';
 export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     client: MongoClient;
     session: ClientSession;
@@ -12,7 +13,7 @@ export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     insertOne(context: Context, colName: string, document: any): Promise<any>;
     private getDbLink;
     queryResult(context: Context, query: string, params?: any): Promise<any>;
-    queryRows(context: Context, query: string, params?: any): Promise<any[]>;
+    queryRows(context: Context, query: string, params?: any): Promise<Row[]>;
     queryScalar(context: Context, query: string, params?: any): Promise<any>;
     getDefaultPort(): number;
     begin(context: Context): Promise<void>;

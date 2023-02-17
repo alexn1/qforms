@@ -1,6 +1,7 @@
 import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db } from 'mongodb';
 import { BkNoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
+import { Row } from '../../../../../types';
 
 export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     client: MongoClient;
@@ -47,15 +48,11 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .updateOne(_filter, update);
+        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
     async insertOne(context: Context, colName: string, document: any): Promise<any> {
-        return await this.getDbLink(context)
-            .collection(colName)
-            .insertOne(document);
+        return await this.getDbLink(context).collection(colName).insertOne(document);
     }
 
     private getDbLink(context: Context): Db {
@@ -78,7 +75,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return result;
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<any[]> {
+    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
         console.log('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
 

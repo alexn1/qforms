@@ -10,7 +10,7 @@ import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';
-import { Key, KeyValue, KeyValues, Row } from '../../../types';
+import { Key, KeyValues, Row, KeyArray, KeyParams } from '../../../types';
 
 export type ReadResult = [any[], number | null];
 
@@ -139,7 +139,7 @@ export class BkDataSource extends BkModel {
     }
 
     getKeyValuesFromKey(key: Key): KeyValues {
-        const arr = JSON.parse(key);
+        const arr: KeyArray = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
         }
@@ -152,7 +152,7 @@ export class BkDataSource extends BkModel {
     }
 
     getKeyFromValues(values): Key {
-        const arr = [];
+        const arr: KeyArray = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
             const value = values[column];
@@ -176,10 +176,10 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    static keyToParams(key: Key, paramName: string = 'key') {
+    static keyToParams(key: Key, paramName: string = 'key'): KeyParams {
         if (typeof key !== 'string') throw new Error('key not string');
-        const params = {};
-        const arr = JSON.parse(key);
+        const params: KeyParams = {};
+        const arr: KeyArray = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
         } else if (arr.length > 1) {

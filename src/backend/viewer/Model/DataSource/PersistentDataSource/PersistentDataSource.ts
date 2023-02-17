@@ -1,11 +1,12 @@
 import { BkDataSource } from '../DataSource';
 import { BkDatabase } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
+import { RawRow, Changes } from '../../../../types';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,
 > extends BkDataSource {
-    decodeChanges(changes) {
+    decodeChanges(changes: Changes) {
         const dChanges = {};
         for (const key in changes) {
             dChanges[key] = this.getValuesFromRow(changes[key]);
@@ -13,7 +14,7 @@ export abstract class BkPersistentDataSource<
         return dChanges;
     }
 
-    getValuesFromRow(row) {
+    getValuesFromRow(row: RawRow) {
         console.log('PersistentDataSource.getValuesFromRow', row);
         const form = this.getForm();
         if (!form) throw new Error('not form ds');
