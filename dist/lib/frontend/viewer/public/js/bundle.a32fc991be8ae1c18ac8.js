@@ -38003,9 +38003,12 @@ class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORT
             const pageName = this.getModel().getAttr('page');
             if (pageName) {
                 e.preventDefault();
-                this.openPage({ name: pageName, params: {
-                        key: this.getValue()
-                    } });
+                this.openPage({
+                    name: pageName,
+                    params: {
+                        key: this.getValue(),
+                    },
+                });
             }
             // @ts-ignore
             this.emit({ source: this });

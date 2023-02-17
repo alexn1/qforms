@@ -6,11 +6,13 @@ export interface OpenPageOptions {
     name: string;
     key?: any;
     newMode?: boolean;
-    params?: any;
-    modal?: boolean;
-    onClose?: any;
     selectMode?: boolean;
+    params?: {
+        [name: string]: string | number;
+    };
+    modal?: boolean;
     selectedKey?: string;
+    onClose?: any;
     onSelect?: any;
 }
 export declare class ApplicationController extends ModelController<Application> {

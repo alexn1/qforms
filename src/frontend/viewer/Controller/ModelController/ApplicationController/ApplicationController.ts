@@ -10,11 +10,13 @@ export interface OpenPageOptions {
     name: string;
     key?;
     newMode?: boolean;
-    params?: any;
-    modal?: boolean;
-    onClose?;
     selectMode?: boolean;
+    params?: {
+        [name: string]: string | number;
+    };
+    modal?: boolean;
     selectedKey?: string;
+    onClose?;
     onSelect?;
 }
 
