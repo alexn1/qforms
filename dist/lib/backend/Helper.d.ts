@@ -45,7 +45,7 @@ export declare class Helper {
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any): any;
-    static createEmptyPromise(): Promise<unknown>;
+    static createEmptyPromise<T = any>(): Promise<T>;
     static test(): void;
-    static formatNumber(value: any): string;
+    static formatNumber(value: number): string;
 }

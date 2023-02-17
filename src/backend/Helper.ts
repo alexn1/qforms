@@ -505,9 +505,9 @@ export class Helper {
         });
     }
 
-    static createEmptyPromise() {
+    static createEmptyPromise<T = any>(): Promise<T> {
         let _resolve, _reject;
-        const promise = new Promise(function (resolve, reject) {
+        const promise = new Promise<T>(function (resolve, reject) {
             _resolve = resolve;
             _reject = reject;
         });
@@ -522,7 +522,7 @@ export class Helper {
         console.log('Helper.test');
     }
 
-    static formatNumber(value) {
+    static formatNumber(value: number) {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 }
