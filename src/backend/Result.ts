@@ -1,5 +1,5 @@
-export type Key = string;
-export type Row = Object;
+type Key = string;
+type Row = Object;
 export type InsertResult = Key[];
 export type DeleteResult = Key[];
 

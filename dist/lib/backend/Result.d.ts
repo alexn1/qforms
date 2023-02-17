@@ -1,5 +1,5 @@
-export type Key = string;
-export type Row = Object;
+type Key = string;
+type Row = Object;
 export type InsertResult = Key[];
 export type DeleteResult = Key[];
 export declare class InsertExResult {
@@ -31,3 +31,4 @@ export declare class Result {
     static addDeleteToResult(result: Result, dName: string, tName: string, key: Key): void;
     static addTableToResult(result: Result, dName: string, tName: string, tResult: TableResult): void;
 }
+export {};
