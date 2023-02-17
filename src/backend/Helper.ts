@@ -1,12 +1,12 @@
 import { JSONString } from './types';
+import fs from 'fs';
 
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
-const fs = require('fs');
 const colors = require('colors/safe');
 
-function _getFilePathsSync(dirPath, ext) {
+function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
     glob.sync(path.join(dirPath, '*/')).forEach((subDirPath) => {
         _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
@@ -294,7 +294,7 @@ export class Helper {
         });
     }
 
-    static exists(path) {
+    static exists(path): Promise<boolean> {
         // console.log(colors.blue('Helper.exists'), path);
         return new Promise((resolve) => {
             fs.exists(path, (exists) => {
@@ -303,7 +303,7 @@ export class Helper {
         });
     }
 
-    static writeFile(filePath, content): Promise<void> {
+    static writeFile(filePath: string, content): Promise<void> {
         console.log(colors.blue('Helper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', (err) => {

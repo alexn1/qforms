@@ -8,7 +8,7 @@ export declare class Helper {
     static templateToJsString(value: any, params: any): any;
     static readTextFile(path: any): Promise<string>;
     static getFileContent(filePath: any): Promise<string>;
-    static getFileContentSync(filePath: any): any;
+    static getFileContentSync(filePath: any): string;
     static readBinaryFile(filePath: any): Promise<unknown>;
     static createPath(arr: any): any;
     static getDirPath(filePath: any): any;
@@ -17,9 +17,9 @@ export declare class Helper {
     static createDirIfNotExistsSync(dirPath: any): void;
     static moveArrItem(arr: any, item: any, offset: any): void;
     static copyFile3(source: any, target: any): Promise<void>;
-    static exists(path: any): Promise<unknown>;
-    static writeFile(filePath: any, content: any): Promise<void>;
-    static writeFileSync(filePath: any, content: any): any;
+    static exists(path: any): Promise<boolean>;
+    static writeFile(filePath: string, content: any): Promise<void>;
+    static writeFileSync(filePath: any, content: any): void;
     static writeFile2(filePath: any, content: any): Promise<void>;
     static mapObject(object: any, cb: any): {};
     static fsUnlink(filePath: any): Promise<void>;

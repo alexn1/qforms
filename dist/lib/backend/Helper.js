@@ -1,10 +1,13 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Helper = void 0;
+const fs_1 = __importDefault(require("fs"));
 const glob = require('glob');
 const path = require('path');
 const slash = require('slash');
-const fs = require('fs');
 const colors = require('colors/safe');
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -127,7 +130,7 @@ class Helper {
     static readTextFile(path) {
         // console.log(colors.blue('Helper.readTextFile'), path);
         return new Promise((resolve, reject) => {
-            fs.readFile(path, 'utf8', (err, content) => {
+            fs_1.default.readFile(path, 'utf8', (err, content) => {
                 if (err) {
                     reject(err);
                 }
@@ -145,15 +148,15 @@ class Helper {
     }
     static getFileContentSync(filePath) {
         // console.log(colors.blue('Helper.getFileContentSync'), filePath);
-        if (!fs.existsSync(filePath)) {
+        if (!fs_1.default.existsSync(filePath)) {
             return null;
         }
-        return fs.readFileSync(filePath, 'utf8');
+        return fs_1.default.readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
         console.log(colors.blue('Helper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
-            fs.readFile(filePath, (err, data) => {
+            fs_1.default.readFile(filePath, (err, data) => {
                 if (err) {
                     reject(err);
                 }
@@ -189,12 +192,12 @@ class Helper {
     static createDirIfNotExists(dirPath) {
         console.log(colors.blue('Helper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
-            fs.exists(dirPath, (exists) => {
+            fs_1.default.exists(dirPath, (exists) => {
                 if (exists) {
                     resolve();
                 }
                 else {
-                    fs.mkdir(dirPath, (err) => {
+                    fs_1.default.mkdir(dirPath, (err) => {
                         if (err) {
                             reject(err);
                         }
@@ -208,8 +211,8 @@ class Helper {
     }
     static createDirIfNotExistsSync(dirPath) {
         // console.log(colors.blue('Helper.createDirIfNotExistsSync'), dirPath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath);
+        if (!fs_1.default.existsSync(dirPath)) {
+            fs_1.default.mkdirSync(dirPath);
         }
     }
     /*static moveObjProp(obj, prop, offset) {
@@ -264,11 +267,11 @@ class Helper {
     }*/
     static copyFile3(source, target) {
         return new Promise((resolve, reject) => {
-            const rd = fs.createReadStream(source);
+            const rd = fs_1.default.createReadStream(source);
             rd.on('error', (err) => {
                 reject(err);
             });
-            const wr = fs.createWriteStream(target);
+            const wr = fs_1.default.createWriteStream(target);
             wr.on('error', (err) => {
                 reject(err);
             });
@@ -281,7 +284,7 @@ class Helper {
     static exists(path) {
         // console.log(colors.blue('Helper.exists'), path);
         return new Promise((resolve) => {
-            fs.exists(path, (exists) => {
+            fs_1.default.exists(path, (exists) => {
                 resolve(exists);
             });
         });
@@ -289,7 +292,7 @@ class Helper {
     static writeFile(filePath, content) {
         console.log(colors.blue('Helper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
-            fs.writeFile(filePath, content, 'utf8', (err) => {
+            fs_1.default.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
                     reject(err);
                 }
@@ -301,7 +304,7 @@ class Helper {
     }
     static writeFileSync(filePath, content) {
         console.log(colors.blue('Helper.writeFileSync'), filePath /*, content*/);
-        return fs.writeFileSync(filePath, content, 'utf8');
+        return fs_1.default.writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {
         const dirPath = Helper.getDirPath(filePath);
@@ -317,7 +320,7 @@ class Helper {
     }
     static fsUnlink(filePath) {
         return new Promise((resolve, reject) => {
-            fs.unlink(filePath, (err) => {
+            fs_1.default.unlink(filePath, (err) => {
                 if (err) {
                     reject(err);
                 }

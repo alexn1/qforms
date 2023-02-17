@@ -293,7 +293,7 @@ export class BkDataSource extends BkModel {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 
-    getLimit() {
+    getLimit(): number | null {
         if (this.getAttr('limit') !== '') {
             return parseInt(this.getAttr('limit'));
         }
