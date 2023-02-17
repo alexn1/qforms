@@ -78,7 +78,7 @@ class BkDataSource extends Model_1.BkModel {
         this.encodeRows(rows);
     }
     checkColumns(row) {
-        for (const field of this.parent.fields) {
+        for (const field of this.getForm().fields) {
             const column = field.getAttr('column');
             if (column) {
                 if (!row.hasOwnProperty(column)) {

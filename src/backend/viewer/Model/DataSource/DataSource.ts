@@ -94,7 +94,7 @@ export class BkDataSource extends BkModel {
     }
 
     checkColumns(row: Row): void {
-        for (const field of this.parent.fields) {
+        for (const field of this.getForm().fields) {
             const column = field.getAttr('column');
             if (column) {
                 if (!row.hasOwnProperty(column)) {
