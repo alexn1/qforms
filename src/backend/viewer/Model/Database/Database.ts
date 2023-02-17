@@ -4,7 +4,7 @@ import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 
-interface IConfig {
+interface Config {
     host: string;
     database: string;
     user: string;
@@ -79,8 +79,8 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return new BkParam(this.getColItemData('params', name), this);
     }
 
-    getConfig(): IConfig {
-        const config: IConfig = {
+    getConfig(): Config {
+        const config: Config = {
             host: this.createParam('host').getValue(),
             database: this.createParam('database').getValue(),
             user: this.createParam('user').getValue(),

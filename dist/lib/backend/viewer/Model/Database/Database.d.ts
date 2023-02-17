@@ -3,7 +3,7 @@ import { BkParam } from '../Param/Param';
 import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
-interface IConfig {
+interface Config {
     host: string;
     database: string;
     user: string;
@@ -26,7 +26,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
     createParam(name: any): BkParam;
-    getConfig(): IConfig;
+    getConfig(): Config;
     getDefaultPort(): number;
     getApp(): BkApplication;
     findTable(name: string): BkTable | undefined;
