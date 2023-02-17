@@ -8,7 +8,7 @@ export declare class Select extends ReactComponent {
     getInitialValue(): any;
     getValue(): any;
     isNullable(): any;
-    getVisibility(): "visible" | "hidden";
+    getVisibility(): 'visible' | 'hidden';
     getDisplay(): "none" | "block";
     onKeyDown: (e: any) => Promise<void>;
     onInputMouseDown: (e: any) => Promise<void>;

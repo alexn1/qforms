@@ -34867,7 +34867,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
                         console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
                     }
                 }
-                this.setState(prevState => {
+                this.setState((prevState) => {
                     return { visible: !prevState.visible };
                 });
             }
@@ -34911,7 +34911,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.getItems().find(item => item.value === this.props.value);
+            const item = this.getItems().find((item) => item.value === this.props.value);
             if (!item) {
                 if (this.isNullable() && value === '') {
                 }
@@ -34957,7 +34957,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
     getValueTitle(value) {
         if (value === '')
             return '';
-        const item = this.getItems().find(item => item.value === value);
+        const item = this.getItems().find((item) => item.value === value);
         if (!item)
             throw new Error(`cannot find item by value: ${value}`);
         // console.log('item:', item);
@@ -34985,9 +34985,8 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
     }
     renderDropdown() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
-                // visibility: this.getVisibility(),
                 display: this.getDisplay(),
-            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map(item => {
+            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map((item) => {
                     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value));
                 })] })));
     }

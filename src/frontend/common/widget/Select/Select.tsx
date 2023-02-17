@@ -24,7 +24,7 @@ export class Select extends ReactComponent {
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.getItems().find(item => item.value === this.props.value);
+            const item = this.getItems().find((item) => item.value === this.props.value);
             if (!item) {
                 if (this.isNullable() && value === '') {
                 } else {
@@ -53,20 +53,20 @@ export class Select extends ReactComponent {
     isNullable() {
         return this.props.nullable !== undefined ? this.props.nullable : true;
     }
-    getVisibility() {
+    getVisibility(): 'visible' | 'hidden' {
         return this.isVisible() ? 'visible' : 'hidden';
     }
     getDisplay() {
         return this.isVisible() ? 'block' : 'none';
     }
-    onKeyDown = async e => {
+    onKeyDown = async (e) => {
         // console.log('Select.onKeyDown');
         if (this.isVisible()) {
             this.setState({ visible: false });
             e.stopPropagation();
         }
     };
-    onInputMouseDown = async e => {
+    onInputMouseDown = async (e) => {
         console.log('Select.onInputMouseDown');
         if (this.props.readOnly) return;
         if (this.props.onMouseDown) {
@@ -86,19 +86,19 @@ export class Select extends ReactComponent {
                     console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
                 }
             }
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 return { visible: !prevState.visible };
             });
         }
     };
-    onInputBlur = async e => {
+    onInputBlur = async (e) => {
         console.log('Select.onInputBlur', e.target);
         this.setState({ visible: false });
     };
-    onDropdownMouseDown = async e => {
+    onDropdownMouseDown = async (e) => {
         e.preventDefault();
     };
-    onDropdownClick = async e => {
+    onDropdownClick = async (e) => {
         console.log('Select.onDropdownClick', e.target.offsetTop);
         const value = JSON.parse(e.target.dataset.value);
         // console.log('value:', value);
@@ -108,7 +108,7 @@ export class Select extends ReactComponent {
             }
         });
     };
-    onCloseClick = async e => {
+    onCloseClick = async (e) => {
         this.setState({ value: '' });
         if (this.props.onChange) {
             await this.props.onChange('');
@@ -120,7 +120,7 @@ export class Select extends ReactComponent {
     }
     getValueTitle(value) {
         if (value === '') return '';
-        const item = this.getItems().find(item => item.value === value);
+        const item = this.getItems().find((item) => item.value === value);
         if (!item) throw new Error(`cannot find item by value: ${value}`);
         // console.log('item:', item);
         return item.title || item.value;
@@ -174,7 +174,6 @@ export class Select extends ReactComponent {
                 ref={this.dropdown}
                 className={`${this.getCssBlockName()}__dropdown`}
                 style={{
-                    // visibility: this.getVisibility(),
                     display: this.getDisplay(),
                 }}
                 onMouseDown={this.onDropdownMouseDown}
@@ -185,7 +184,7 @@ export class Select extends ReactComponent {
                         &nbsp;
                     </li>
                 )}
-                {this.getItems().map(item => {
+                {this.getItems().map((item) => {
                     return (
                         <li
                             key={item.value}
