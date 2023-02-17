@@ -4,11 +4,13 @@ import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
 import { PageController } from '../PageController/PageController';
+import { ApplicationController } from '../ApplicationController/ApplicationController';
 
-export class FieldController<TModel extends Field> extends ModelController<TModel> {
+export class FieldController<TModel extends Field = Field> extends ModelController<TModel> {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
+
     static create(model: Field, parent: FormController<Form>): FieldController<Field> {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
@@ -35,7 +37,8 @@ export class FieldController<TModel extends Field> extends ModelController<TMode
         const Class = CustomClass || GeneralClass;
         return new Class(model, parent);*/
     }
-    valueToString(value) {
+
+    valueToString(value): string {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
@@ -55,7 +58,8 @@ export class FieldController<TModel extends Field> extends ModelController<TMode
                 );
         }
     }
-    stringToValue(stringValue) {
+
+    stringToValue(stringValue: string) {
         // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
@@ -68,50 +72,50 @@ export class FieldController<TModel extends Field> extends ModelController<TMode
             const date = new Date(stringValue);
             if (date.toString() === 'Invalid Date')
                 throw new Error(
-                    `${
-                        this.getApp()
-                            .getModel()
-                            .getText().error.invalidDate
-                    }: ${stringValue}`,
+                    `${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`,
                 );
             return date;
         } else if (fieldType === 'number') {
             const num = Number(stringValue);
-            if (isNaN(num))
-                throw new Error(
-                    this.getApp()
-                        .getModel()
-                        .getText().error.notNumber,
-                );
+            if (isNaN(num)) throw new Error(this.getApp().getModel().getText().error.notNumber);
             return num;
         }
         return stringValue;
     }
+
     getViewStyle(row) {
         return null;
     }
+
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
-    getForm() {
+
+    getForm(): FormController {
         return this.parent;
     }
+
     getPage(): PageController {
         return this.parent.parent;
     }
-    getApp() {
+
+    getApp(): ApplicationController {
         return this.parent.parent.parent;
     }
-    isVisible() {
+
+    isVisible(): boolean {
         return this.getModel().getAttr('visible') === 'true';
     }
-    isAutoFocus() {
+
+    isAutoFocus(): boolean {
         return this.getModel().getAttr('autoFocus') === 'true';
     }
+
     getAutocomplete() {
         return this.getModel().getAttr('autocomplete') || null;
     }
-    getFormat() {
+
+    getFormat(): string {
         return this.getModel().getAttr('format');
     }
 }

@@ -3,7 +3,7 @@ import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { Field } from '../../../Model/Field/Field';
-export declare class FormController<TForm extends Form> extends ModelController<TForm> {
+export declare class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: {
         [name: string]: FieldController<Field>;
     };

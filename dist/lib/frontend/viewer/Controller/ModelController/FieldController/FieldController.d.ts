@@ -3,17 +3,18 @@ import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
 import { PageController } from '../PageController/PageController';
-export declare class FieldController<TModel extends Field> extends ModelController<TModel> {
+import { ApplicationController } from '../ApplicationController/ApplicationController';
+export declare class FieldController<TModel extends Field = Field> extends ModelController<TModel> {
     static create(model: Field, parent: FormController<Form>): FieldController<Field>;
     valueToString(value: any): string;
-    stringToValue(stringValue: any): any;
+    stringToValue(stringValue: string): any;
     getViewStyle(row: any): any;
     openPage(options: any): Promise<any>;
-    getForm(): any;
+    getForm(): FormController;
     getPage(): PageController;
-    getApp(): any;
+    getApp(): ApplicationController;
     isVisible(): boolean;
     isAutoFocus(): boolean;
     getAutocomplete(): any;
-    getFormat(): any;
+    getFormat(): string;
 }

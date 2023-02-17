@@ -1,6 +1,6 @@
 import { FieldView } from '../FieldView';
 import { RowFormFieldController } from './RowFormFieldController';
-import {Field} from '../../../../Model/Field/Field'
+import { Field } from '../../../../Model/Field/Field';
 
 export class RowFormFieldView<T extends RowFormFieldController<Field>> extends FieldView<T> {
     widget: any;
@@ -8,9 +8,11 @@ export class RowFormFieldView<T extends RowFormFieldController<Field>> extends F
         super(props);
         this.widget = null;
     }
+
     getWidget() {
         return this.widget;
     }
+
     getClassList() {
         const ctrl = this.getCtrl();
         return [
@@ -20,7 +22,8 @@ export class RowFormFieldView<T extends RowFormFieldController<Field>> extends F
             ...(ctrl.getErrorMessage() !== null ? ['error'] : []),
         ];
     }
-    onWidgetCreate = widget => {
+
+    onWidgetCreate = (widget) => {
         this.widget = widget;
     };
 }

@@ -36659,17 +36659,13 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         else if (fieldType === 'date') {
             const date = new Date(stringValue);
             if (date.toString() === 'Invalid Date')
-                throw new Error(`${this.getApp()
-                    .getModel()
-                    .getText().error.invalidDate}: ${stringValue}`);
+                throw new Error(`${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`);
             return date;
         }
         else if (fieldType === 'number') {
             const num = Number(stringValue);
             if (isNaN(num))
-                throw new Error(this.getApp()
-                    .getModel()
-                    .getText().error.notNumber);
+                throw new Error(this.getApp().getModel().getText().error.notNumber);
             return num;
         }
         return stringValue;
@@ -37660,6 +37656,9 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
     getRow() {
         return this.model.getForm().getRow();
     }
+    getForm() {
+        return super.getForm();
+    }
     copyValueToModel() {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
@@ -37740,9 +37739,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         return null;
     }
     getNullErrorText() {
-        return this.getModel()
-            .getApp()
-            .getText().form.required;
+        return this.getModel().getApp().getText().form.required;
     }
     isEditable() {
         return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
@@ -37829,7 +37826,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_0__.FieldView {
     constructor(props) {
         super(props);
-        this.onWidgetCreate = widget => {
+        this.onWidgetCreate = (widget) => {
             this.widget = widget;
         };
         this.widget = null;
@@ -38000,6 +37997,7 @@ class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORT
         super(...arguments);
         this.onClick = (e) => {
             console.log('RowFormLinkFieldController.onClick', e);
+            e.preventDefault();
             // @ts-ignore
             this.emit({ source: this });
         };

@@ -5,7 +5,7 @@ import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { Field } from '../../../Model/Field/Field';
 
-export class FormController<TForm extends Form> extends ModelController<TForm> {
+export class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: { [name: string]: FieldController<Field> } = {};
     state: any;
 
