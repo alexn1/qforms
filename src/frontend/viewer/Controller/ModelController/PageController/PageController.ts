@@ -96,9 +96,9 @@ export class PageController extends ModelController<Page> {
         window.open(link, '_blank');
     };
 
-    createOpenInNewLink(name, key) {
+    createOpenInNewLink(pageName: string, key: string) {
         return PageController.createLink({
-            page: name,
+            page: pageName,
             ...DataSource.keyToParams(key),
         });
     }

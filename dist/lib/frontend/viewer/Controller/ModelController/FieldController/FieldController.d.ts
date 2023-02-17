@@ -2,6 +2,7 @@ import { ModelController } from '../ModelController';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
+import { PageController } from '../PageController/PageController';
 export declare class FieldController<TModel extends Field> extends ModelController<TModel> {
     static create(model: Field, parent: FormController<Form>): FieldController<Field>;
     valueToString(value: any): string;
@@ -9,7 +10,7 @@ export declare class FieldController<TModel extends Field> extends ModelControll
     getViewStyle(row: any): any;
     openPage(options: any): Promise<any>;
     getForm(): any;
-    getPage(): any;
+    getPage(): PageController;
     getApp(): any;
     isVisible(): boolean;
     isAutoFocus(): boolean;

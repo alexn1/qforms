@@ -6,7 +6,8 @@ export class RowFormLinkFieldController extends RowFormFieldController<LinkField
     getViewClass() {
         return super.getViewClass() || RowFormLinkFieldView;
     }
-    onClick = e => {
+
+    onClick = (e) => {
         console.log('RowFormLinkFieldController.onClick', e);
         // @ts-ignore
         this.emit({ source: this });

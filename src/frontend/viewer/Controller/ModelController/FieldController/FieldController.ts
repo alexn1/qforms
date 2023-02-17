@@ -3,6 +3,7 @@ import { FrontHostApp } from '../../../../common';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
+import { PageController } from '../PageController/PageController';
 
 export class FieldController<TModel extends Field> extends ModelController<TModel> {
     /*constructor(model, parent) {
@@ -95,7 +96,7 @@ export class FieldController<TModel extends Field> extends ModelController<TMode
     getForm() {
         return this.parent;
     }
-    getPage() {
+    getPage(): PageController {
         return this.parent.parent;
     }
     getApp() {

@@ -14,7 +14,7 @@ export declare class PageController extends ModelController<Page> {
     onSaveAndCloseClick: () => Promise<void>;
     onClosePageClick: (e: any) => Promise<void>;
     onOpenPageClick: (e: any) => Promise<void>;
-    createOpenInNewLink(name: any, key: any): string;
+    createOpenInNewLink(pageName: string, key: string): string;
     close(): Promise<void>;
     validate(): void;
     isValid(): boolean;

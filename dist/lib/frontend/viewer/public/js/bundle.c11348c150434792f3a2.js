@@ -37998,7 +37998,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
     constructor() {
         super(...arguments);
-        this.onClick = e => {
+        this.onClick = (e) => {
             console.log('RowFormLinkFieldController.onClick', e);
             // @ts-ignore
             this.emit({ source: this });
@@ -38032,8 +38032,15 @@ __webpack_require__.r(__webpack_exports__);
 
 class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
     render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.getValueForWidget(), onClick: ctrl.onClick, target: '_blank' }, { children: ctrl.getValueForWidget() })) })));
+        const ctrl = this.getCtrl();
+        let href = ctrl.getValueForWidget();
+        const pageName = ctrl.getModel().getAttr('page');
+        if (pageName) {
+            const value = ctrl.getValueForWidget();
+            href = ctrl.getPage().createOpenInNewLink(pageName, JSON.stringify([value]));
+            // console.log('href:', link);
+        }
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: ctrl.getValueForWidget() })) })));
     }
 }
 // @ts-ignore
@@ -40071,8 +40078,8 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
         super.deinit();
     }
-    createOpenInNewLink(name, key) {
-        return PageController.createLink(Object.assign({ page: name }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
+    createOpenInNewLink(pageName, key) {
+        return PageController.createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
     }
     async close() {
         // console.log('PageController.close', this.model.getFullName());
