@@ -2,6 +2,17 @@ import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
+export interface OpenPageOptions {
+    name: string;
+    key?: any;
+    newMode?: boolean;
+    params?: any;
+    modal?: boolean;
+    onClose?: any;
+    selectMode?: boolean;
+    selectedKey?: string;
+    onSelect?: any;
+}
 export declare class ApplicationController extends ModelController<Application> {
     frontHostApp: FrontHostApp;
     lastId: number;
@@ -22,16 +33,16 @@ export declare class ApplicationController extends ModelController<Application> 
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};
     createPage(pageData: any, options: any): PageController;
-    openPage(options: any): Promise<PageController>;
+    openPage(options: OpenPageOptions): Promise<PageController>;
     addModal(ctrl: any): void;
     removeModal(ctrl: any): void;
     getNextId(): number;
     getNewId(): string;
-    addPage(pc: any): void;
+    addPage(pc: PageController): void;
     findPageControllerByPageNameAndKey(pageName: any, key: any): PageController | null;
-    onPageSelect(pc: any): void;
+    onPageSelect(pc: PageController): void;
     closePage(pageController: PageController): Promise<void>;
-    onActionClick(name: any): Promise<any>;
+    onActionClick(name: string): Promise<any>;
     getMenuItemsProp(): {
         name: string;
         title: string;

@@ -4,7 +4,10 @@ import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
 import { PageController } from '../PageController/PageController';
-import { ApplicationController } from '../ApplicationController/ApplicationController';
+import {
+    ApplicationController,
+    OpenPageOptions,
+} from '../ApplicationController/ApplicationController';
 
 export class FieldController<TModel extends Field = Field> extends ModelController<TModel> {
     /*constructor(model, parent) {
@@ -87,8 +90,12 @@ export class FieldController<TModel extends Field = Field> extends ModelControll
         return null;
     }
 
-    async openPage(options) {
+    async openPage(options: OpenPageOptions) {
         return await this.getParent().openPage(options);
+    }
+
+    getParent(): FormController {
+        return super.getParent();
     }
 
     getForm(): FormController {

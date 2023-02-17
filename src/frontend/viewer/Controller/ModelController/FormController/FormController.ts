@@ -4,6 +4,10 @@ import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { Field } from '../../../Model/Field/Field';
+import {
+    ApplicationController,
+    OpenPageOptions,
+} from '../ApplicationController/ApplicationController';
 
 export class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: { [name: string]: FieldController<Field> } = {};
@@ -45,15 +49,15 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return true;
     }
 
-    async openPage(options) {
+    async openPage(options: OpenPageOptions) {
         return await this.getPage().openPage(options);
     }
 
-    getPage() {
+    getPage(): PageController {
         return this.parent;
     }
 
-    isChanged() {
+    isChanged(): boolean {
         return false;
     }
 
@@ -66,7 +70,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return this.state.updated;
     }
 
-    invalidate() {
+    invalidate(): void {
         this.state.updated = Date.now();
     }
 
@@ -74,11 +78,11 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         console.log('FormController.onActionClick', name, row);
     }
 
-    getField(name) {
+    getField(name: string) {
         return this.fields[name];
     }
 
-    getApp() {
+    getApp(): ApplicationController {
         return this.parent.parent;
     }
 

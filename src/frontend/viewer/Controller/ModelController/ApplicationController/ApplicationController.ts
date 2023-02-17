@@ -6,6 +6,18 @@ import { FrontHostApp, Search, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 
+export interface OpenPageOptions {
+    name: string;
+    key?;
+    newMode?: boolean;
+    params?: any;
+    modal?: boolean;
+    onClose?;
+    selectMode?: boolean;
+    selectedKey?: string;
+    onSelect?;
+}
+
 export class ApplicationController extends ModelController<Application> {
     frontHostApp: FrontHostApp;
     lastId: number;
@@ -83,7 +95,7 @@ export class ApplicationController extends ModelController<Application> {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
-    onRequest = async e => {
+    onRequest = async (e) => {
         console.log('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
@@ -135,7 +147,7 @@ export class ApplicationController extends ModelController<Application> {
 
         return pc;
     }
-    async openPage(options): Promise<PageController> {
+    async openPage(options: OpenPageOptions): Promise<PageController> {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
         if (options.key) throw new Error('openPage: key param is deprecated');
@@ -175,29 +187,35 @@ export class ApplicationController extends ModelController<Application> {
 
         return pc;
     }
+
     addModal(ctrl): void {
         this.modals.push(ctrl);
     }
+
     removeModal(ctrl): void {
         // console.log('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
         this.modals.splice(i, 1);
     }
+
     getNextId(): number {
         this.lastId++;
         return this.lastId;
     }
+
     getNewId(): string {
         return `c${this.getNextId()}`;
     }
-    addPage(pc): void {
+
+    addPage(pc: PageController): void {
         if (this.activePage) {
             this.closePage(this.activePage);
         }
         this.activePage = pc;
         document.title = this.getTitle();
     }
+
     findPageControllerByPageNameAndKey(pageName, key): PageController | null {
         if (
             this.activePage &&
@@ -208,9 +226,11 @@ export class ApplicationController extends ModelController<Application> {
         }
         return null;
     }
-    onPageSelect(pc) {
+
+    onPageSelect(pc: PageController): void {
         console.log('ApplicationController.onPageSelect', pc.model.getName());
     }
+
     async closePage(pageController: PageController): Promise<void> {
         console.log('ApplicationController.closePage', pageController.model.getFullName());
         if (this.modals.indexOf(pageController) > -1) {
@@ -225,18 +245,20 @@ export class ApplicationController extends ModelController<Application> {
         pageController.deinit();
         pageController.model.deinit();
     }
-    async onActionClick(name): Promise<any> {
+
+    async onActionClick(name: string): Promise<any> {
         console.log('ApplicationController.onActionClick', name);
     }
+
     getMenuItemsProp() {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
             ...(this.model.data.menu
-                ? Object.keys(this.model.data.menu).map(key => ({
+                ? Object.keys(this.model.data.menu).map((key) => ({
                       name: key,
                       title: key,
-                      items: this.model.data.menu[key].map(item => ({
+                      items: this.model.data.menu[key].map((item) => ({
                           type: item.type,
                           name: item.page || item.action,
                           title: item.caption,
@@ -261,14 +283,17 @@ export class ApplicationController extends ModelController<Application> {
                 : []),
         ];
     }
-    onStatusbarCreate = statusbar => {
+
+    onStatusbarCreate = (statusbar) => {
         this.statusbar = statusbar;
     };
+
     onLogout = async () => {
         console.log('ApplicationController.onLogout');
         const result = await this.model.request({ action: 'logout' });
         location.href = this.getRootPath();
     };
+
     onMenuItemClick = async (menu, type, name) => {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
@@ -319,8 +344,8 @@ export class ApplicationController extends ModelController<Application> {
     invalidate() {
         if (this.activePage) this.activePage.invalidate();
         this.modals
-            .filter(ctrl => ctrl instanceof PageController)
-            .forEach(page => page.invalidate());
+            .filter((ctrl) => ctrl instanceof PageController)
+            .forEach((page) => page.invalidate());
     }
     async alert(options) {
         if (!options.title) {

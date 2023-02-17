@@ -1,7 +1,7 @@
 import { ModelController } from '../ModelController';
 import { FormController } from '../FormController/FormController';
 import { PageView } from './PageView';
-import { ApplicationController } from '../ApplicationController/ApplicationController';
+import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
 import { Form } from '../../../Model/Form/Form';
 export declare class PageController extends ModelController<Page> {
@@ -22,7 +22,7 @@ export declare class PageController extends ModelController<Page> {
     onFormDiscard(formController: FormController<Form>): void;
     onFormUpdate(e: any): void;
     onFormInsert(e: any): void;
-    openPage(options: any): Promise<PageController>;
+    openPage(options: OpenPageOptions): Promise<PageController>;
     isChanged(): boolean;
     getApp(): ApplicationController;
     getViewClass(): PageView;

@@ -10,7 +10,16 @@ export class RowFormLinkFieldController extends RowFormFieldController<LinkField
 
     onClick = (e: SyntheticEvent) => {
         console.log('RowFormLinkFieldController.onClick', e);
-        e.preventDefault();
+        const pageName = this.getModel().getAttr('page');
+        if (pageName) {
+            e.preventDefault();
+            this.openPage({
+                name: pageName,
+                params: {
+                    key: this.getValue(),
+                },
+            });
+        }
 
         // @ts-ignore
         this.emit({ source: this });

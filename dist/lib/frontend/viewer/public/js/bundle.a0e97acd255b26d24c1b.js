@@ -36141,7 +36141,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 this.createVersionNotificationIfNotExists();
             }
         };
-        this.onStatusbarCreate = statusbar => {
+        this.onStatusbarCreate = (statusbar) => {
             this.statusbar = statusbar;
         };
         this.onLogout = async () => {
@@ -36374,10 +36374,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return [
             // pages & actions
             ...(this.model.data.menu
-                ? Object.keys(this.model.data.menu).map(key => ({
+                ? Object.keys(this.model.data.menu).map((key) => ({
                     name: key,
                     title: key,
-                    items: this.model.data.menu[key].map(item => ({
+                    items: this.model.data.menu[key].map((item) => ({
                         type: item.type,
                         name: item.page || item.action,
                         title: item.caption,
@@ -36432,8 +36432,8 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         if (this.activePage)
             this.activePage.invalidate();
         this.modals
-            .filter(ctrl => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController)
-            .forEach(page => page.invalidate());
+            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController)
+            .forEach((page) => page.invalidate());
     }
     async alert(options) {
         if (!options.title) {
@@ -36675,6 +36675,9 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     }
     async openPage(options) {
         return await this.getParent().openPage(options);
+    }
+    getParent() {
+        return super.getParent();
     }
     getForm() {
         return this.parent;
@@ -37037,7 +37040,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
     }
     getItems() {
         try {
-            return this.getRows().map(row => ({
+            return this.getRows().map((row) => ({
                 value: this.valueToString(this.getModel().getValueValue(row)),
                 title: this.getModel().getDisplayValue(row),
             }));
@@ -37997,7 +38000,13 @@ class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORT
         super(...arguments);
         this.onClick = (e) => {
             console.log('RowFormLinkFieldController.onClick', e);
-            e.preventDefault();
+            const pageName = this.getModel().getAttr('page');
+            if (pageName) {
+                e.preventDefault();
+                this.openPage({ name: pageName, params: {
+                        key: this.getValue()
+                    } });
+            }
             // @ts-ignore
             this.emit({ source: this });
         };
@@ -39992,22 +40001,16 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             this.validate();
             if (this.isValid()) {
                 try {
-                    this.getApp()
-                        .getView()
-                        .disableRerender();
+                    this.getApp().getView().disableRerender();
                     await this.getModel().update();
                     console.log('page model updated', this.getModel().getFullName());
                 }
                 finally {
-                    this.getApp()
-                        .getView()
-                        .enableRerender();
+                    this.getApp().getView().enableRerender();
                 }
                 await this.getApp().closePage(this);
                 if (this.getModel().getOptions().onClose) {
-                    this.getModel()
-                        .getOptions()
-                        .onClose();
+                    this.getModel().getOptions().onClose();
                 }
             }
             else {
@@ -40094,9 +40097,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
         await this.getApp().closePage(this);
         if (this.getModel().getOptions().onClose) {
-            this.getModel()
-                .getOptions()
-                .onClose();
+            this.getModel().getOptions().onClose();
         }
     }
     validate() {
@@ -40172,14 +40173,14 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
                 [
                     // ...(query ? query.split('&') : []),
                     ...(_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_6__.ApplicationController.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
         }
         return window.location.pathname;
     }
     getForm(name) {
-        return this.forms.find(form => form.model.getName() === name);
+        return this.forms.find((form) => form.model.getName() === name);
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
@@ -40214,12 +40215,10 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel()
-            .getOptions()
-            .onSelect(key);
+        await this.getModel().getOptions().onSelect(key);
     }
     invalidate() {
-        this.forms.forEach(form => form.invalidate());
+        this.forms.forEach((form) => form.invalidate());
     }
     getId() {
         return this.id;

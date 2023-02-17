@@ -4,7 +4,10 @@ import { FormController } from '../FormController/FormController';
 import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
 import { PageView } from './PageView';
-import { ApplicationController } from '../ApplicationController/ApplicationController';
+import {
+    ApplicationController,
+    OpenPageOptions,
+} from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
 import { Form } from '../../../Model/Form/Form';
 
@@ -62,33 +65,27 @@ export class PageController extends ModelController<Page> {
         this.validate();
         if (this.isValid()) {
             try {
-                this.getApp()
-                    .getView()
-                    .disableRerender();
+                this.getApp().getView().disableRerender();
                 await this.getModel().update();
                 console.log('page model updated', this.getModel().getFullName());
             } finally {
-                this.getApp()
-                    .getView()
-                    .enableRerender();
+                this.getApp().getView().enableRerender();
             }
             await this.getApp().closePage(this);
             if (this.getModel().getOptions().onClose) {
-                this.getModel()
-                    .getOptions()
-                    .onClose();
+                this.getModel().getOptions().onClose();
             }
         } else {
             await this.rerender();
         }
     };
 
-    onClosePageClick = async e => {
+    onClosePageClick = async (e) => {
         console.log('PageController.onClosePageClick', this.getModel().getFullName());
         await this.close();
     };
 
-    onOpenPageClick = async e => {
+    onOpenPageClick = async (e) => {
         const name = this.getModel().getName();
         const key = this.getModel().getKey();
         const link = this.createOpenInNewLink(name, key);
@@ -117,9 +114,7 @@ export class PageController extends ModelController<Page> {
         }
         await this.getApp().closePage(this);
         if (this.getModel().getOptions().onClose) {
-            this.getModel()
-                .getOptions()
-                .onClose();
+            this.getModel().getOptions().onClose();
         }
     }
 
@@ -165,7 +160,7 @@ export class PageController extends ModelController<Page> {
         this.rerender();
     }
 
-    async openPage(options) {
+    async openPage(options: OpenPageOptions) {
         if (!options.params) {
             options.params = {};
         }
@@ -203,7 +198,7 @@ export class PageController extends ModelController<Page> {
                 [
                     // ...(query ? query.split('&') : []),
                     ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map(name => `${name}=${encodeURI(params[name])}`),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
         }
@@ -211,14 +206,14 @@ export class PageController extends ModelController<Page> {
     }
 
     getForm(name): FormController<Form> {
-        return this.forms.find(form => form.model.getName() === name);
+        return this.forms.find((form) => form.model.getName() === name);
     }
 
     async onActionClick(name): Promise<any> {
         console.log('PageController.onActionClick', name);
     }
 
-    onKeyDown = async e => {
+    onKeyDown = async (e) => {
         // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
             if (this.isModal()) {
@@ -254,12 +249,12 @@ export class PageController extends ModelController<Page> {
         return null;
     }
 
-    onSelectClick = async e => {
+    onSelectClick = async (e) => {
         console.log('PageController.onSelectClick');
         await this.selectRow(this.getSelectedRowKey());
     };
 
-    onResetClick = async e => {
+    onResetClick = async (e) => {
         console.log('PageController.onResetClick');
         await this.selectRow(null);
     };
@@ -267,13 +262,11 @@ export class PageController extends ModelController<Page> {
     async selectRow(key) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel()
-            .getOptions()
-            .onSelect(key);
+        await this.getModel().getOptions().onSelect(key);
     }
 
     invalidate() {
-        this.forms.forEach(form => form.invalidate());
+        this.forms.forEach((form) => form.invalidate());
     }
 
     getId(): string {
