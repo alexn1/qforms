@@ -185,7 +185,17 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             throw new Error(`${this.getFullName()}: access denied`);
         }
 
+        const { key } = context.params as { key: Key };
+        const filter = this.getKeyValuesFromKey(key);
+        const deleteResult = await this.getDatabase().deleteOne(
+            context,
+            this.getAttr('table'),
+            filter,
+        );
+        console.log('updateResult', deleteResult);
+
         const result = new Result();
+        Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;
     }
 

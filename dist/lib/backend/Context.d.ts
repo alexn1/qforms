@@ -22,8 +22,10 @@ export declare class Context {
     params: {
         [name: string]: any;
     };
+    connections: {
+        [name: string]: any;
+    };
     files: any;
-    connections: any;
     querytime: any;
     constructor(options: {
         domain: string;

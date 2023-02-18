@@ -145,7 +145,12 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (this.getAccess(context).delete !== true) {
             throw new Error(`${this.getFullName()}: access denied`);
         }
+        const { key } = context.params;
+        const filter = this.getKeyValuesFromKey(key);
+        const deleteResult = await this.getDatabase().deleteOne(context, this.getAttr('table'), filter);
+        console.log('updateResult', deleteResult);
         const result = new Result_1.Result();
+        Result_1.Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;
     }
     getSelectQuery() {

@@ -55,6 +55,19 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return await this.getDbLink(context).collection(colName).insertOne(document);
     }
 
+    async deleteOne(context: Context, colName: string, filter): Promise<any> {
+        const _filter = BkMongoDbDatabase.makeObjectIds(filter);
+        // console.log('_filter', _filter);
+        return await this.getDbLink(context).collection(colName).deleteOne(_filter);
+    }
+
+    static makeObjectIds(filter: any, names: string[] = ['_id']): any {
+        return Object.keys(filter).reduce((acc, name) => {
+            acc[name] = names.includes(name) ? new ObjectId(filter[name]) : filter[name];
+            return acc;
+        }, {});
+    }
+
     private getDbLink(context: Context): Db {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();

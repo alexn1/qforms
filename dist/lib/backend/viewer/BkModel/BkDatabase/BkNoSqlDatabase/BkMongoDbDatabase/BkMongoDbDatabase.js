@@ -48,6 +48,17 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     async insertOne(context, colName, document) {
         return await this.getDbLink(context).collection(colName).insertOne(document);
     }
+    async deleteOne(context, colName, filter) {
+        const _filter = BkMongoDbDatabase.makeObjectIds(filter);
+        // console.log('_filter', _filter);
+        return await this.getDbLink(context).collection(colName).deleteOne(_filter);
+    }
+    static makeObjectIds(filter, names = ['_id']) {
+        return Object.keys(filter).reduce((acc, name) => {
+            acc[name] = names.includes(name) ? new mongodb_1.ObjectId(filter[name]) : filter[name];
+            return acc;
+        }, {});
+    }
     getDbLink(context) {
         const client = this.getConnection(context).client;
         const { database } = this.getConfig();

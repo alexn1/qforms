@@ -9,4 +9,8 @@ export abstract class BkNoSqlDatabase<TConnection = any> extends BkDatabase<TCon
     async insertOne(context: Context, colName: string, document: any): Promise<any> {
         throw new Error(`${this.constructor.name}.insertOne not implemented`);
     }
+
+    async deleteOne(context: Context, colName: string, filter): Promise<any> {
+        throw new Error(`${this.constructor.name}.deleteOne not implemented`);
+    }
 }

@@ -9,5 +9,8 @@ class BkNoSqlDatabase extends BkDatabase_1.BkDatabase {
     async insertOne(context, colName, document) {
         throw new Error(`${this.constructor.name}.insertOne not implemented`);
     }
+    async deleteOne(context, colName, filter) {
+        throw new Error(`${this.constructor.name}.deleteOne not implemented`);
+    }
 }
 exports.BkNoSqlDatabase = BkNoSqlDatabase;

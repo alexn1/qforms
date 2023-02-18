@@ -9,15 +9,16 @@ declare module 'express' {
 }
 
 export class Context {
-    // options: any;
     query: {
         [name: string]: any;
     };
     params: {
         [name: string]: any;
     };
+    connections: {
+        [name: string]: any;
+    };
     files: any;
-    connections: any;
     querytime: any;
 
     constructor(
