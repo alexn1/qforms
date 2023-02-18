@@ -1,6 +1,8 @@
 /* for tsc and vscode only */
 {
     "compilerOptions": {
-        "esModuleInterop": true
+        "target": "ES2017",
+        "esModuleInterop": true,
+        "moduleResolution": "node"
     }
 }

@@ -3,7 +3,7 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
-import { Key, Row } from '../../../../types';
+import { Key, KeyArray, KeyParams, KeyValues, Row } from '../../../../types';
 
 export class DataSource extends Model {
     rows: Row[] = null;
@@ -53,14 +53,14 @@ export class DataSource extends Model {
         this.rowsByKey[key] = row;
     }
 
-    addRows(rows) {
+    addRows(rows: Row[]) {
         for (let i = 0; i < rows.length; i++) {
             this.rows.push(rows[i]);
         }
         this.fillRowsByKey();
     }
 
-    getRowsLength() {
+    getRowsLength(): number {
         return this.rows.length;
     }
 
@@ -85,18 +85,18 @@ export class DataSource extends Model {
         throw new Error('DataSource column type not implemented');
     }*/
 
-    discardRowColumn(row, column) {
+    discardRowColumn(row: Row, column: string) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             delete this.changes.get(row)[column];
         }
     }
 
-    changeRowColumn(row, column, newValue) {
+    changeRowColumn(row: Row, column: string, newValue) {
         if (!this.changes.has(row)) this.changes.set(row, {});
         this.changes.get(row)[column] = newValue;
     }
 
-    setValue(row, column, value) {
+    setValue(row: Row, column: string, value) {
         // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
@@ -119,21 +119,21 @@ export class DataSource extends Model {
         // console.log('changes:', this.changes);
     }
 
-    isChanged() {
+    isChanged(): boolean {
         // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
 
-    hasNew() {
+    hasNew(): boolean {
         return !!this.news.length;
     }
 
-    isRowColumnChanged(row, column) {
+    isRowColumnChanged(row: Row, column: string) {
         // console.log('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
 
-    getValue(row, column) {
+    getValue(row: Row, column: string) {
         // console.log('DataSource.getValue', column);
         let value;
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
@@ -150,16 +150,16 @@ export class DataSource extends Model {
         return value;
     }
 
-    getKeyValues(row) {
+    getKeyValues(row: Row): KeyValues {
         return this.data.keyColumns.reduce((key, column) => {
             key[column] = JSON.parse(row[column]);
             return key;
         }, {});
     }
 
-    getRowKey(row): Key {
+    getRowKey(row: Row): Key {
         // console.log('DataSource.getRowKey', row);
-        const arr = [];
+        const arr: KeyArray = [];
         for (const column of this.data.keyColumns) {
             if (row[column] === undefined) return null;
             if (row[column] === null) throw new Error('wrong value null for data source value');
@@ -174,7 +174,7 @@ export class DataSource extends Model {
         return JSON.stringify(arr) as Key;
     }
 
-    removeRow(key) {
+    removeRow(key: Key) {
         const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
         const i = this.rows.indexOf(row);
@@ -183,7 +183,7 @@ export class DataSource extends Model {
         delete this.rowsByKey[key];
     }
 
-    newRow(row) {
+    newRow(row: Row) {
         console.log('DataSource.newRow', this.getFullName(), row);
         if (this.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
@@ -199,17 +199,17 @@ export class DataSource extends Model {
         return row;
     }
 
-    getForm() {
+    getForm(): Form | null {
         return this.parent instanceof Form ? this.parent : null;
     }
 
-    getPage() {
+    getPage(): Page | null {
         if (this.parent instanceof Page) return this.parent;
         if (this.parent instanceof Form) return this.parent.getPage();
         return null;
     }
 
-    getApp() {
+    getApp(): Application | null {
         if (this.parent instanceof Application) return this.parent;
         return this.parent.getApp();
     }
@@ -224,7 +224,7 @@ export class DataSource extends Model {
         return this.getName();
     }*/
 
-    getRow(key) {
+    getRow(key: Key): Row {
         return this.rowsByKey[key] || null;
     }
 
@@ -232,11 +232,11 @@ export class DataSource extends Model {
         return this.rowsByKey[key] || null;
     }*/
 
-    getRows() {
+    getRows(): Row[] {
         return this.rows;
     }
 
-    getRowByIndex(i) {
+    getRowByIndex(i: number): Row {
         return this.rows[i];
     }
 
@@ -246,7 +246,7 @@ export class DataSource extends Model {
         this.changes.clear();
     }
 
-    static keyToParams(key: string, paramName = 'key'): any {
+    static keyToParams(key: string, paramName = 'key'): KeyParams {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);
@@ -263,7 +263,9 @@ export class DataSource extends Model {
     }
 
     getChangesByKey() {
-        const changes = {};
+        const changes: {
+            [key: Key]: any;
+        } = {};
         for (const row of this.changes.keys()) {
             changes[this.getRowKey(row)] = this.changes.get(row);
         }
@@ -402,7 +404,7 @@ export class DataSource extends Model {
         const updates = {};
         for (const key in changes) {
             // console.log('key:', key);
-            const row = this.getRow(key);
+            const row = this.getRow(key as Key);
             // console.log('row:', row);
             const newValues = this.getRowWithChanges(row);
             // console.log('newValues:', newValues);
@@ -475,7 +477,7 @@ export class DataSource extends Model {
         console.log('DataSource.onTableUpdate', this.getFullName(), e);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
-            if (this.getRow(key)) {
+            if (this.getRow(key as Key)) {
                 const newKey = e.updates[key];
                 const sourceRow = e.source.getRow(newKey);
                 this.updateRow(key, sourceRow);
