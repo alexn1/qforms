@@ -1,6 +1,6 @@
 import { Express, Request, Response } from 'express';
 import { Context } from './Context';
-import { BkApplication } from './viewer/Model/Application/Application';
+import { BkApplication } from './viewer/BkModel/Application/Application';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';

@@ -1,6 +1,6 @@
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
-import { BkApplication } from './Model/Application/Application';
+import { BkApplication } from './BkModel/Application/Application';
 export declare class ViewerModule {
     hostApp: BackHostApp;
     css: string[];

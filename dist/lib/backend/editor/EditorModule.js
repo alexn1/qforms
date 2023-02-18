@@ -27,7 +27,7 @@ exports.EditorModule = void 0;
 const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = require("../Helper");
-const Application_1 = require("../viewer/Model/Application/Application");
+const Application_1 = require("../viewer/BkModel/Application/Application");
 const backend = __importStar(require("../index"));
 const EDITOR_CONTROLLERS = [
     'Application',

@@ -3,11 +3,11 @@ import path from 'path';
 import { Context } from '../Context';
 import { Helper } from '../Helper';
 import { BackHostApp } from '../BackHostApp';
-import { BkApplication } from './Model/Application/Application';
+import { BkApplication } from './BkModel/Application/Application';
 import { MyError } from '../MyError';
-import { BkModel } from './Model/Model';
+import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';
-import { BkDataSource } from './Model/BkDataSource/BkDataSource';
+import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
 
 const pkg = require('../../../package.json');
 
