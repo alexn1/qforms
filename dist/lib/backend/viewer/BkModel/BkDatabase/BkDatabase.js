@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDatabase = void 0;
 const BkModel_1 = require("../BkModel");
-const Param_1 = require("../Param/Param");
+const BkParam_1 = require("../BkParam/BkParam");
 class BkDatabase extends BkModel_1.BkModel {
     constructor() {
         super(...arguments);
@@ -57,7 +57,7 @@ class BkDatabase extends BkModel_1.BkModel {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
     createParam(name) {
-        return new Param_1.BkParam(this.getColItemData('params', name), this);
+        return new BkParam_1.BkParam(this.getColItemData('params', name), this);
     }
     getConfig() {
         const config = {

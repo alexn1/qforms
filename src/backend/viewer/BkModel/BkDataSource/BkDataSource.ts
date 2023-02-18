@@ -6,7 +6,7 @@ import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
-import { BkPage } from '../Page/Page';
+import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';

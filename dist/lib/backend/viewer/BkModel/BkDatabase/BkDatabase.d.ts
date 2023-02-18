@@ -1,7 +1,7 @@
 import { BkModel } from '../BkModel';
-import { BkParam } from '../Param/Param';
+import { BkParam } from '../BkParam/BkParam';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { BkTable } from '../Table/Table';
+import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 interface Config {

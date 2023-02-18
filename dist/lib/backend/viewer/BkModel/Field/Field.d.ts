@@ -1,6 +1,6 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { BkPage } from '../Page/Page';
+import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../BkColumn/BkColumn';
 import { JSONString, RawRow } from '../../../../types';

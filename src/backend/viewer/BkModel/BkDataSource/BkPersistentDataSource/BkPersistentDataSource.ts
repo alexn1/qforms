@@ -1,6 +1,6 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
-import { BkTable } from '../../Table/Table';
+import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey } from '../../../../../types';
 
 export abstract class BkPersistentDataSource<

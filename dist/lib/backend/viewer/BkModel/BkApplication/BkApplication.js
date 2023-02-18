@@ -8,7 +8,7 @@ const path_1 = __importDefault(require("path"));
 const BaseModel_1 = require("../../../BaseModel");
 const BkModel_1 = require("../BkModel");
 const Helper_1 = require("../../../Helper");
-const PageLink_1 = require("../PageLink/PageLink");
+const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../../Result");
@@ -182,7 +182,7 @@ class BkApplication extends BkModel_1.BkModel {
     }
     createPageLink(name) {
         const data = this.getColItemData('pageLinks', name);
-        return new PageLink_1.BkPageLink(data, this);
+        return new BkPageLink_1.BkPageLink(data, this);
     }
     async createPage(pageLinkName) {
         // console.log('Application.createPage', pageLinkName);

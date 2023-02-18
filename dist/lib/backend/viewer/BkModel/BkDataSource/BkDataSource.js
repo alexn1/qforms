@@ -7,7 +7,7 @@ exports.BkDataSource = void 0;
 const path_1 = __importDefault(require("path"));
 const BkModel_1 = require("../BkModel");
 const Helper_1 = require("../../../Helper");
-const Page_1 = require("../Page/Page");
+const BkPage_1 = require("../BkPage/BkPage");
 const Form_1 = require("../Form/Form");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 const TableForm_1 = require("../Form/TableForm/TableForm");
@@ -144,7 +144,7 @@ class BkDataSource extends BkModel_1.BkModel {
         if (this.isOnForm()) {
             return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
         }
-        else if (this.parent instanceof Page_1.BkPage) {
+        else if (this.parent instanceof BkPage_1.BkPage) {
             return [this.parent.getName(), this.getName()].join('.');
         }
         else {

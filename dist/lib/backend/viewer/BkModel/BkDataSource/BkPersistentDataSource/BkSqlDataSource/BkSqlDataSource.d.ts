@@ -1,6 +1,6 @@
 import { BkPersistentDataSource } from '../BkPersistentDataSource';
 import { ReadResult } from '../../BkDataSource';
-import { BkTable } from '../../../Table/Table';
+import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { SqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';

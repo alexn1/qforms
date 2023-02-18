@@ -1,6 +1,6 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
-import { BkTable } from '../../Table/Table';
+import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey } from '../../../../../types';
 export declare abstract class BkPersistentDataSource<TDatabase extends BkDatabase = BkDatabase> extends BkDataSource {
     decodeChanges(changes: ChangesByKey): {};
