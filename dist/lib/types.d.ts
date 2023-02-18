@@ -6,18 +6,18 @@ export type Key = JSONString & {
 };
 export type KeyValue = number | string;
 export type KeyArray = KeyValue[];
-export interface KeyValues {
-    [name: string]: KeyValue;
-}
 export interface Row {
-    [name: string]: any;
+    [column: string]: any;
 }
 export interface RawRow {
-    [name: string]: JSONString;
+    [column: string]: JSONString;
 }
-export interface Changes {
+export interface ChangesByKey {
     [key: Key]: RawRow;
 }
 export interface KeyParams {
-    [name: string]: KeyValue;
+    [param: string]: KeyValue;
+}
+export interface KeyValues {
+    [column: string]: KeyValue;
 }

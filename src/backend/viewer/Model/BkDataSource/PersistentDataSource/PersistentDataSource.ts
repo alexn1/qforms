@@ -1,12 +1,12 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
-import { RawRow, Changes } from '../../../../../types';
+import { RawRow, ChangesByKey } from '../../../../../types';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,
 > extends BkDataSource {
-    decodeChanges(changes: Changes) {
+    decodeChanges(changes: ChangesByKey) {
         const dChanges = {};
         for (const key in changes) {
             dChanges[key] = this.getValuesFromRow(changes[key]);

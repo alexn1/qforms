@@ -9,5 +9,5 @@
         "moduleResolution": "node",
         "module": "commonjs"
     },
-    "include": ["src/backend/**/*"]
+    "include": ["src/backend/**/*", "src/Result.ts", "src/types.ts"]
 }
