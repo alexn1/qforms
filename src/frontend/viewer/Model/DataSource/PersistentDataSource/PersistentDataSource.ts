@@ -1,5 +1,5 @@
 import { DataSource } from '../DataSource';
-import { Key } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {
@@ -14,7 +14,7 @@ export class PersistentDataSource extends DataSource {
         super.deinit();
     }*/
 
-    async insert(row) {
+    async insert(row: RawRow) {
         console.log('SqlDataSource.insert', row);
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -94,7 +94,7 @@ export class PersistentDataSource extends DataSource {
         return result;
     }
 
-    async delete(key) {
+    async delete(key: Key) {
         console.log('SqlDataSource.delete:', this.getFullName(), key);
         if (!key) throw new Error('no key');
         const database = this.getAttr('database');
@@ -245,7 +245,7 @@ export class PersistentDataSource extends DataSource {
         return data;
     }
 
-    isPersistent() {
+    isPersistent(): boolean {
         return true;
     }
 }

@@ -1,8 +1,9 @@
 import { DataSource } from '../DataSource';
+import { Key, RawRow } from '../../../../../types';
 export declare class PersistentDataSource extends DataSource {
-    insert(row: any): Promise<any>;
+    insert(row: RawRow): Promise<any>;
     update(): Promise<any>;
-    delete(key: any): Promise<any>;
+    delete(key: Key): Promise<any>;
     onTableUpdate: (e: any) => Promise<void>;
     onTableInsert: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;
