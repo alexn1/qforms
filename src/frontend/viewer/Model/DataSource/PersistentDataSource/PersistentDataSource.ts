@@ -103,7 +103,7 @@ export class PersistentDataSource extends DataSource {
         if (!table) {
             throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
         }
-        const result = await this.getApp().request({
+        const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: '_delete',
             page: this.getForm().getPage().getName(),

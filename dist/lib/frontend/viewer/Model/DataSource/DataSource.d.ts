@@ -55,13 +55,7 @@ export declare class DataSource extends Model {
     getDatabase(): any;
     getType(columnName: string): any;
     insert(row?: RawRow): Promise<any>;
-    delete(key: Key): Promise<{
-        [x: number]: {
-            [x: number]: {
-                delete: Key[];
-            };
-        };
-    }>;
+    delete(key: Key): Promise<Result | null>;
     update(): Promise<Result | null>;
     onTableInsert: (e: any) => Promise<void>;
     onTableUpdate: (e: any) => Promise<void>;

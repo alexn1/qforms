@@ -368,7 +368,7 @@ export class DataSource extends Model {
         return null;
     }
 
-    async delete(key: Key) {
+    async delete(key: Key): Promise<Result | null> {
         console.log('DataSource.delete', key);
         if (!key) throw new Error('no key');
         this.removeRow(key);

@@ -2,6 +2,7 @@ import { Model } from '../Model';
 import { Database } from '../Database/Database';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
+import { Result } from '../../../../Result';
 
 export class Application extends Model {
     databases: any[] = [];
@@ -60,7 +61,7 @@ export class Application extends Model {
 
     getDatabase(name) {
         // console.log('Application.getDatabase', name);
-        const database = this.databases.find(database => database.getName() === name);
+        const database = this.databases.find((database) => database.getName() === name);
         if (!database) throw new Error(`no database: ${name}`);
         return database;
     }
@@ -68,28 +69,33 @@ export class Application extends Model {
     getText() {
         return this.data.text;
     }
+
     getUser() {
         return this.data.user;
     }
+
     getDomain() {
         return this.getAttr('domain');
     }
+
     getVirtualPath() {
         return this.data.virtualPath;
     }
-    async rpc(name, params) {
+
+    async rpc(name: string, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result = await this.request({
+        const response = await this.request({
             uuid: this.getAttr('uuid'),
             action: 'rpc',
             name: name,
             params: params,
         });
-        if (result.errorMessage) throw new Error(result.errorMessage);
-        return result;
+        if (response.errorMessage) throw new Error(response.errorMessage);
+        return response;
     }
-    emitResult(result, source = null) {
+
+    emitResult(result: Result, source = null) {
         console.log('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {
@@ -99,10 +105,12 @@ export class Application extends Model {
         // @ts-ignore
         return Promise.allSettled(promises);
     }
+
     getNodeEnv() {
         return this.data.nodeEnv;
     }
-    isDevelopment() {
+
+    isDevelopment(): boolean {
         return this.getNodeEnv() === 'development';
     }
 }

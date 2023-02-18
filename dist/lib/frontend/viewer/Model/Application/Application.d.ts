@@ -1,5 +1,6 @@
 import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
+import { Result } from '../../../../Result';
 export declare class Application extends Model {
     databases: any[];
     dataSources: DataSource[];
@@ -13,8 +14,8 @@ export declare class Application extends Model {
     getUser(): any;
     getDomain(): any;
     getVirtualPath(): any;
-    rpc(name: any, params: any): Promise<any>;
-    emitResult(result: any, source?: any): any;
+    rpc(name: string, params: any): Promise<any>;
+    emitResult(result: Result, source?: any): any;
     getNodeEnv(): any;
     isDevelopment(): boolean;
 }

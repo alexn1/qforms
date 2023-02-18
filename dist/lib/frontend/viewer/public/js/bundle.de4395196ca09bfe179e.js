@@ -40626,7 +40626,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     getDatabase(name) {
         // console.log('Application.getDatabase', name);
-        const database = this.databases.find(database => database.getName() === name);
+        const database = this.databases.find((database) => database.getName() === name);
         if (!database)
             throw new Error(`no database: ${name}`);
         return database;
@@ -40647,15 +40647,15 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.request({
+        const response = await this.request({
             uuid: this.getAttr('uuid'),
             action: 'rpc',
             name: name,
             params: params,
         });
-        if (result.errorMessage)
-            throw new Error(result.errorMessage);
-        return result;
+        if (response.errorMessage)
+            throw new Error(response.errorMessage);
+        return response;
     }
     emitResult(result, source = null) {
         console.log('Application.emitResult', result, source);

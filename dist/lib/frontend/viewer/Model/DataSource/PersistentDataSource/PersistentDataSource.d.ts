@@ -4,7 +4,7 @@ import { Result } from '../../../../../Result';
 export declare class PersistentDataSource extends DataSource {
     insert(row: RawRow): Promise<Result>;
     update(): Promise<Result | null>;
-    delete(key: Key): Promise<any>;
+    delete(key: Key): Promise<Result>;
     onTableUpdate: (e: any) => Promise<void>;
     onTableInsert: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;
