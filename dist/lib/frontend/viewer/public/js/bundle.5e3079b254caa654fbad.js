@@ -40742,6 +40742,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.news = [];
         this.changes = new Map();
         this.frame = 1;
+        this.count = null;
         this.lastFrame = 1;
         this.onTableInsert = async (e) => {
             if (this.deinited)
@@ -40818,7 +40819,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.onTableRefresh = async (e) => {
             throw new Error('DataSource.onTableRefresh: not implemented');
         };
-        this.count = data.count !== undefined ? data.count : null;
+        if (data.count !== undefined) {
+            this.count = data.count;
+        }
     }
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
@@ -40935,9 +40938,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return value;
     }
     getKeyValues(row) {
-        return this.data.keyColumns.reduce((key, column) => {
-            key[column] = JSON.parse(row[column]);
-            return key;
+        return this.data.keyColumns.reduce((keyValues, column) => {
+            keyValues[column] = JSON.parse(row[column]);
+            return keyValues;
         }, {});
     }
     getRowKey(row) {

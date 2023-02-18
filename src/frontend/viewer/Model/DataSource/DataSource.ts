@@ -3,20 +3,22 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
-import { Key, KeyArray, KeyParams, KeyValues, Row } from '../../../../types';
+import { Key, KeyArray, KeyParams, KeyValues, RawRow } from '../../../../types';
 
 export class DataSource extends Model {
-    rows: Row[] = null;
-    rowsByKey: { [key: Key]: Row } = null;
+    rows: RawRow[] = null;
+    rowsByKey: { [key: Key]: RawRow } = null;
     news: any[] = [];
-    changes = new Map<Row, any>();
+    changes = new Map<RawRow, any>();
     frame: number = 1;
-    count: number;
+    count: number = null;
     lastFrame: number = 1;
 
     constructor(data, parent) {
         super(data, parent);
-        this.count = data.count !== undefined ? data.count : null;
+        if (data.count !== undefined) {
+            this.count = data.count;
+        }
     }
 
     init() {
@@ -42,18 +44,18 @@ export class DataSource extends Model {
         super.deinit();
     }
 
-    setRows(rows: Row[]) {
+    setRows(rows: RawRow[]) {
         this.rows = rows;
         this.fillRowsByKey();
     }
 
-    addRow(row: Row) {
+    addRow(row: RawRow) {
         this.rows.push(row);
         const key = this.getRowKey(row);
         this.rowsByKey[key] = row;
     }
 
-    addRows(rows: Row[]) {
+    addRows(rows: RawRow[]) {
         for (let i = 0; i < rows.length; i++) {
             this.rows.push(rows[i]);
         }
@@ -85,18 +87,18 @@ export class DataSource extends Model {
         throw new Error('DataSource column type not implemented');
     }*/
 
-    discardRowColumn(row: Row, column: string) {
+    discardRowColumn(row: RawRow, column: string) {
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             delete this.changes.get(row)[column];
         }
     }
 
-    changeRowColumn(row: Row, column: string, newValue) {
+    changeRowColumn(row: RawRow, column: string, newValue) {
         if (!this.changes.has(row)) this.changes.set(row, {});
         this.changes.get(row)[column] = newValue;
     }
 
-    setValue(row: Row, column: string, value) {
+    setValue(row: RawRow, column: string, value) {
         // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
@@ -128,12 +130,12 @@ export class DataSource extends Model {
         return !!this.news.length;
     }
 
-    isRowColumnChanged(row: Row, column: string) {
+    isRowColumnChanged(row: RawRow, column: string) {
         // console.log('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
 
-    getValue(row: Row, column: string) {
+    getValue(row: RawRow, column: string) {
         // console.log('DataSource.getValue', column);
         let value;
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
@@ -150,14 +152,14 @@ export class DataSource extends Model {
         return value;
     }
 
-    getKeyValues(row: Row): KeyValues {
-        return this.data.keyColumns.reduce((key, column) => {
-            key[column] = JSON.parse(row[column]);
-            return key;
+    getKeyValues(row: RawRow): KeyValues {
+        return this.data.keyColumns.reduce((keyValues, column) => {
+            keyValues[column] = JSON.parse(row[column]);
+            return keyValues;
         }, {});
     }
 
-    getRowKey(row: Row): Key {
+    getRowKey(row: RawRow): Key {
         // console.log('DataSource.getRowKey', row);
         const arr: KeyArray = [];
         for (const column of this.data.keyColumns) {
@@ -183,7 +185,7 @@ export class DataSource extends Model {
         delete this.rowsByKey[key];
     }
 
-    newRow(row: Row) {
+    newRow(row: RawRow) {
         console.log('DataSource.newRow', this.getFullName(), row);
         if (this.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
@@ -224,7 +226,7 @@ export class DataSource extends Model {
         return this.getName();
     }*/
 
-    getRow(key: Key): Row {
+    getRow(key: Key): RawRow {
         return this.rowsByKey[key] || null;
     }
 
@@ -232,11 +234,11 @@ export class DataSource extends Model {
         return this.rowsByKey[key] || null;
     }*/
 
-    getRows(): Row[] {
+    getRows(): RawRow[] {
         return this.rows;
     }
 
-    getRowByIndex(i: number): Row {
+    getRowByIndex(i: number): RawRow {
         return this.rows[i];
     }
 

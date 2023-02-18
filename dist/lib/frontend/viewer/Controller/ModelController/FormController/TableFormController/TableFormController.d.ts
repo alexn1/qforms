@@ -21,7 +21,7 @@ export declare class TableFormController extends FormController<TableForm> {
     onModelUpdate: (e: any) => Promise<void>;
     onModelDelete: (e: any) => Promise<void>;
     onGridSelectionChange: (key: any) => Promise<void>;
-    getActiveRow(): import("../../../../../../types").Row;
+    getActiveRow(): import("../../../../../../types").RawRow;
     isRowSelected: () => boolean;
     onFrameChanged: (value: any) => Promise<void>;
     onNextClick: () => Promise<void>;
