@@ -4,7 +4,6 @@ import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
 import { Key, KeyArray, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
-import { RowFormPasswordFieldView } from '../../Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView';
 
 export class DataSource extends Model {
     rows: RawRow[] = null;
