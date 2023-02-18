@@ -1,7 +1,7 @@
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../BkPage/BkPage';
-import { BkForm } from '../Form/Form';
+import { BkForm } from '../BkForm/BkForm';
 import { BkColumn } from '../BkColumn/BkColumn';
 import { JSONString, RawRow } from '../../../../types';
 export declare class BkField extends BkModel {

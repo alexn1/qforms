@@ -1,16 +1,16 @@
-import { BkForm } from '../Form';
-
-export class BkTableForm extends BkForm {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BkTableForm = void 0;
+const BkForm_1 = require("../BkForm");
+class BkTableForm extends BkForm_1.BkForm {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/
-
     // async fill(context) {
     //     console.log('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
-
-    fillAttributes(response: any): void {
+    fillAttributes(response) {
         super.fillAttributes(response);
         response.editMethod = this.getAttr('editMethod');
         response.itemEditPage = this.getAttr('itemEditPage');
@@ -20,3 +20,4 @@ export class BkTableForm extends BkForm {
         response.refreshButton = this.getAttr('refreshButton');
     }
 }
+exports.BkTableForm = BkTableForm;

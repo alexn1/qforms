@@ -7,9 +7,9 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkPage } from '../BkPage/BkPage';
-import { BkForm } from '../Form/Form';
-import { BkRowForm } from '../Form/RowForm/RowForm';
-import { BkTableForm } from '../Form/TableForm/TableForm';
+import { BkForm } from '../BkForm/BkForm';
+import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
+import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
 import { Key, KeyValues, Row, KeyArray, KeyParams } from '../../../../types';
 
 export type ReadResult = [any[], number | null];

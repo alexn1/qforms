@@ -3,7 +3,7 @@ import path from 'path';
 import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../BkPage/BkPage';
-import { BkForm } from '../Form/Form';
+import { BkForm } from '../BkForm/BkForm';
 import { BkColumn } from '../BkColumn/BkColumn';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';

@@ -67,12 +67,12 @@ var BkPasswordField_1 = require("./viewer/BkModel/BkField/BkPasswordField/BkPass
 Object.defineProperty(exports, "BkPasswordField", { enumerable: true, get: function () { return BkPasswordField_1.BkPasswordField; } });
 var BkRadioField_1 = require("./viewer/BkModel/BkField/BkRadioField/BkRadioField");
 Object.defineProperty(exports, "BkRadioField", { enumerable: true, get: function () { return BkRadioField_1.BkRadioField; } });
-var Form_1 = require("./viewer/BkModel/Form/Form");
-Object.defineProperty(exports, "BkForm", { enumerable: true, get: function () { return Form_1.BkForm; } });
-var RowForm_1 = require("./viewer/BkModel/Form/RowForm/RowForm");
-Object.defineProperty(exports, "BkRowForm", { enumerable: true, get: function () { return RowForm_1.BkRowForm; } });
-var TableForm_1 = require("./viewer/BkModel/Form/TableForm/TableForm");
-Object.defineProperty(exports, "BkTableForm", { enumerable: true, get: function () { return TableForm_1.BkTableForm; } });
+var BkForm_1 = require("./viewer/BkModel/BkForm/BkForm");
+Object.defineProperty(exports, "BkForm", { enumerable: true, get: function () { return BkForm_1.BkForm; } });
+var BkRowForm_1 = require("./viewer/BkModel/BkForm/BkRowForm/BkRowForm");
+Object.defineProperty(exports, "BkRowForm", { enumerable: true, get: function () { return BkRowForm_1.BkRowForm; } });
+var BkTableForm_1 = require("./viewer/BkModel/BkForm/BkTableForm/BkTableForm");
+Object.defineProperty(exports, "BkTableForm", { enumerable: true, get: function () { return BkTableForm_1.BkTableForm; } });
 var BkPage_1 = require("./viewer/BkModel/BkPage/BkPage");
 Object.defineProperty(exports, "BkPage", { enumerable: true, get: function () { return BkPage_1.BkPage; } });
 var BkPageLink_1 = require("./viewer/BkModel/BkPageLink/BkPageLink");

@@ -8,9 +8,9 @@ const path_1 = __importDefault(require("path"));
 const BkModel_1 = require("../BkModel");
 const Helper_1 = require("../../../Helper");
 const BkPage_1 = require("../BkPage/BkPage");
-const Form_1 = require("../Form/Form");
-const RowForm_1 = require("../Form/RowForm/RowForm");
-const TableForm_1 = require("../Form/TableForm/TableForm");
+const BkForm_1 = require("../BkForm/BkForm");
+const BkRowForm_1 = require("../BkForm/BkRowForm/BkRowForm");
+const BkTableForm_1 = require("../BkForm/BkTableForm/BkTableForm");
 class BkDataSource extends BkModel_1.BkModel {
     constructor() {
         super(...arguments);
@@ -213,16 +213,16 @@ class BkDataSource extends BkModel_1.BkModel {
         return this.rows;
     }
     isOnForm() {
-        return this.parent instanceof Form_1.BkForm;
+        return this.parent instanceof BkForm_1.BkForm;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();
     }
     isDefaultOnRowForm() {
-        return this.getName() === 'default' && this.parent instanceof RowForm_1.BkRowForm;
+        return this.getName() === 'default' && this.parent instanceof BkRowForm_1.BkRowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.parent instanceof TableForm_1.BkTableForm;
+        return this.getName() === 'default' && this.parent instanceof BkTableForm_1.BkTableForm;
     }
     async read(context) {
         throw new Error(`${this.constructor.name}.select not implemented`);

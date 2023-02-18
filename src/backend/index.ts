@@ -33,9 +33,9 @@ export { BkTextBoxField } from './viewer/BkModel/BkField/BkTextBoxField/BkTextBo
 export { BkPhoneField } from './viewer/BkModel/BkField/BkPhoneField/BkPhoneField';
 export { BkPasswordField } from './viewer/BkModel/BkField/BkPasswordField/BkPasswordField';
 export { BkRadioField } from './viewer/BkModel/BkField/BkRadioField/BkRadioField';
-export { BkForm } from './viewer/BkModel/Form/Form';
-export { BkRowForm } from './viewer/BkModel/Form/RowForm/RowForm';
-export { BkTableForm } from './viewer/BkModel/Form/TableForm/TableForm';
+export { BkForm } from './viewer/BkModel/BkForm/BkForm';
+export { BkRowForm } from './viewer/BkModel/BkForm/BkRowForm/BkRowForm';
+export { BkTableForm } from './viewer/BkModel/BkForm/BkTableForm/BkTableForm';
 export { BkPage } from './viewer/BkModel/BkPage/BkPage';
 export { BkPageLink } from './viewer/BkModel/BkPageLink/BkPageLink';
 export { BkColumn } from './viewer/BkModel/BkColumn/BkColumn';

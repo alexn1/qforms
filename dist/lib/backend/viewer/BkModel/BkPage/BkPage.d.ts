@@ -2,7 +2,7 @@ import { BkModel } from '../BkModel';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
 import { BkAction } from '../BkAction/BkAction';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { BkForm } from '../Form/Form';
+import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 export declare class BkPage extends BkModel {
     dataSources: BkDataSource[];

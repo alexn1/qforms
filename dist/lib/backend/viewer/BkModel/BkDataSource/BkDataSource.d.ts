@@ -3,7 +3,7 @@ import { BkModel } from '../BkModel';
 import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
-import { BkForm } from '../Form/Form';
+import { BkForm } from '../BkForm/BkForm';
 import { Key, KeyValues, Row, KeyParams } from '../../../../types';
 export type ReadResult = [any[], number | null];
 export declare class BkDataSource extends BkModel {
