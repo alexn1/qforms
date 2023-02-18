@@ -1,5 +1,6 @@
 import { Model } from '../Model';
 import { Form } from '../Form/Form';
+import { Key } from '../../../../types';
 export declare class DataSource extends Model {
     rows: any;
     rowsByKey: any;
@@ -24,7 +25,7 @@ export declare class DataSource extends Model {
     isRowColumnChanged(row: any, column: any): boolean;
     getValue(row: any, column: any): any;
     getKeyValues(row: any): any;
-    getRowKey(row: any): string;
+    getRowKey(row: any): Key;
     removeRow(key: any): void;
     newRow(row: any): void;
     getSingleRow(withChanges?: boolean): any;

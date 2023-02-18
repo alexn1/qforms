@@ -41097,9 +41097,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable()
-            .getColumn(columnName)
-            .getType();
+        const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
     }

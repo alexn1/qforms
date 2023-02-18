@@ -3,6 +3,7 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
+import { Key } from '../../../../types';
 
 export class DataSource extends Model {
     rows: any = null;
@@ -156,7 +157,7 @@ export class DataSource extends Model {
         }, {});
     }
 
-    getRowKey(row) {
+    getRowKey(row): Key {
         // console.log('DataSource.getRowKey', row);
         const arr = [];
         for (const column of this.data.keyColumns) {
@@ -170,7 +171,7 @@ export class DataSource extends Model {
                 throw err;
             }
         }
-        return JSON.stringify(arr);
+        return JSON.stringify(arr) as Key;
     }
 
     removeRow(key) {
@@ -316,9 +317,7 @@ export class DataSource extends Model {
 
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable()
-            .getColumn(columnName)
-            .getType();
+        const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
     }
