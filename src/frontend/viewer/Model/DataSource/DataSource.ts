@@ -3,14 +3,22 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
-import { Key, KeyArray, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
+import {
+    Key,
+    KeyArray,
+    KeyParams,
+    KeyValues,
+    RawRow,
+    JSONString,
+    ChangesByKey,
+} from '../../../../types';
 import { Result } from '../../../../Result';
 
 export class DataSource extends Model {
     rows: RawRow[] = null;
     rowsByKey: { [key: Key]: RawRow } = null;
     news: RawRow[] = [];
-    changes = new Map<RawRow, { [name: string]: JSONString }>();
+    changes = new Map<RawRow, RawRow>();
     frame: number = 1;
     count: number = null;
     lastFrame: number = 1;
@@ -265,10 +273,8 @@ export class DataSource extends Model {
         return params;
     }
 
-    getChangesByKey() {
-        const changes: {
-            [key: Key]: any;
-        } = {};
+    getChangesByKey(): ChangesByKey {
+        const changes: ChangesByKey = {};
         for (const row of this.changes.keys()) {
             changes[this.getRowKey(row)] = this.changes.get(row);
         }
@@ -277,7 +283,8 @@ export class DataSource extends Model {
 
     getRowWithChanges(row: RawRow): RawRow {
         if (this.changes.has(row)) {
-            return { ...row, ...this.changes.get(row) };
+            return Object.assign(row, this.changes.get(row));
+            // return { ...row, ...this.changes.get(row) };
         }
         return row;
     }

@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-import { Key, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
+import { Key, KeyParams, KeyValues, RawRow, JSONString, ChangesByKey } from '../../../../types';
 import { Result } from '../../../../Result';
 export declare class DataSource extends Model {
     rows: RawRow[];
@@ -10,9 +10,7 @@ export declare class DataSource extends Model {
         [key: Key]: RawRow;
     };
     news: RawRow[];
-    changes: Map<RawRow, {
-        [name: string]: JSONString;
-    }>;
+    changes: Map<RawRow, RawRow>;
     frame: number;
     count: number;
     lastFrame: number;
@@ -44,9 +42,7 @@ export declare class DataSource extends Model {
     getRowByIndex(i: number): RawRow;
     discard(): void;
     static keyToParams(key: string, paramName?: string): KeyParams;
-    getChangesByKey(): {
-        [key: Key]: any;
-    };
+    getChangesByKey(): ChangesByKey;
     getRowWithChanges(row: RawRow): RawRow;
     hasNewRows(): boolean;
     static copyNewValues(row: RawRow, newValues: RawRow): void;
