@@ -12,7 +12,7 @@ const session = require('express-session');
 import { Helper } from './Helper';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
 import { Context } from './Context';
-import { BkApplication } from './viewer/BkModel/Application/Application';
+import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';

@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { BkModel } from '../BkModel';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';

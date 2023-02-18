@@ -1,7 +1,7 @@
 const path = require('path');
 import { Editor } from '../Editor';
 import { Helper } from '../../../Helper';
-import { BkApplication } from '../../../viewer/BkModel/Application/Application';
+import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplication';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';

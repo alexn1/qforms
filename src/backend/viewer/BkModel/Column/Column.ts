@@ -1,5 +1,5 @@
 import { BkModel } from '../BkModel';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 
 export class BkColumn extends BkModel {
     fillAttributes(response: any): void {

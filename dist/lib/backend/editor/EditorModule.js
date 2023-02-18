@@ -27,7 +27,7 @@ exports.EditorModule = void 0;
 const path = require('path');
 const pkg = require('../../../package.json');
 const Helper_1 = require("../Helper");
-const Application_1 = require("../viewer/BkModel/Application/Application");
+const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
 const backend = __importStar(require("../index"));
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -92,7 +92,7 @@ class EditorModule {
     }
     async handleEditorGet(req, res, context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await Application_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
         // data
         const data = {
             app: appInfo.appFile.data,
@@ -122,7 +122,7 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await Application_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;

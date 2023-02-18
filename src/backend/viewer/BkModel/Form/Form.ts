@@ -2,10 +2,10 @@ import path from 'path';
 
 import { BkModel } from '../BkModel';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
-import { BkAction } from '../Action/Action';
+import { BkAction } from '../BkAction/BkAction';
 import { BkField } from '../Field/Field';
 import { BkPage } from '../Page/Page';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { MyError } from '../../../MyError';
 import { Context } from '../../../Context';
 

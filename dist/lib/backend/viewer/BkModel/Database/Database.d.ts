@@ -1,6 +1,6 @@
 import { BkModel } from '../BkModel';
 import { BkParam } from '../Param/Param';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';

@@ -1,7 +1,7 @@
 import { BkModel } from '../BkModel';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
-import { BkAction } from '../Action/Action';
-import { BkApplication } from '../Application/Application';
+import { BkAction } from '../BkAction/BkAction';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../Form/Form';
 import { Context } from '../../../Context';
 export declare class BkPage extends BkModel {

@@ -9,7 +9,7 @@ export { AppInfo } from './AppInfo';
 
 // viewer
 export { BkModel } from './viewer/BkModel/BkModel';
-export { BkApplication } from './viewer/BkModel/Application/Application';
+export { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 export { BkDatabase } from './viewer/BkModel/Database/Database';
 export { BkMySqlDatabase } from './viewer/BkModel/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
 export { BkPostgreSqlDatabase } from './viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
@@ -40,7 +40,7 @@ export { BkPage } from './viewer/BkModel/Page/Page';
 export { BkPageLink } from './viewer/BkModel/PageLink/PageLink';
 export { BkColumn } from './viewer/BkModel/Column/Column';
 export { BkTable } from './viewer/BkModel/Table/Table';
-export { BkAction } from './viewer/BkModel/Action/Action';
+export { BkAction } from './viewer/BkModel/BkAction/BkAction';
 
 // editor
 export { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';

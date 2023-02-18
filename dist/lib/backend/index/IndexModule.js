@@ -7,7 +7,7 @@ exports.IndexModule = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path = require('path');
 const server_1 = __importDefault(require("react-dom/server"));
-const Application_1 = require("../viewer/BkModel/Application/Application");
+const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
 const Helper_1 = require("../Helper");
 const Links_1 = require("./Links");
 const Scripts_1 = require("./Scripts");
@@ -22,7 +22,7 @@ class IndexModule {
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await Application_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
+        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),

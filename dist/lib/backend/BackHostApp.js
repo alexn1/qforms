@@ -15,7 +15,7 @@ const session = require('express-session');
 const Helper_1 = require("./Helper");
 const PostgreSqlDatabase_1 = require("./viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase");
 const Context_1 = require("./Context");
-const Application_1 = require("./viewer/BkModel/Application/Application");
+const BkApplication_1 = require("./viewer/BkModel/BkApplication/BkApplication");
 const MonitorModule_1 = require("./monitor/MonitorModule");
 const IndexModule_1 = require("./index/IndexModule");
 const MyError_1 = require("./MyError");
@@ -221,7 +221,7 @@ class BackHostApp {
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
-        const appInfo = await Application_1.BkApplication.loadAppInfo(this.getAppFilePath(context), this);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.getAppFilePath(context), this);
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
         // application
@@ -238,7 +238,7 @@ class BackHostApp {
                 throw new Error(`no class ${modelClass}`);
             return CustomClass;
         }
-        return Application_1.BkApplication;
+        return BkApplication_1.BkApplication;
     }
     async createApp(req) {
         console.log('createApp');
@@ -252,7 +252,7 @@ class BackHostApp {
         const appFilePath = path.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
-        const appInfos = await Application_1.BkApplication.getAppInfos(this.appsDirPath, this);
+        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, this);
         return appInfos;
     }
     async logError(err, req = null) {

@@ -4,14 +4,14 @@ exports.ApplicationEditor = void 0;
 const path = require('path');
 const Editor_1 = require("../Editor");
 const Helper_1 = require("../../../Helper");
-const Application_1 = require("../../../viewer/BkModel/Application/Application");
+const BkApplication_1 = require("../../../viewer/BkModel/BkApplication/BkApplication");
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor_1 = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = Application_1.BkApplication.makeAppInfoFromAppFile(appFile, null);
+        this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile, null);
     }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);

@@ -3,7 +3,7 @@ import path from 'path';
 import { Context } from '../Context';
 import { Helper } from '../Helper';
 import { BackHostApp } from '../BackHostApp';
-import { BkApplication } from './BkModel/Application/Application';
+import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { MyError } from '../MyError';
 import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';

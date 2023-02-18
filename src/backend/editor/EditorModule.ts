@@ -5,7 +5,7 @@ const pkg = require('../../../package.json');
 
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
-import { BkApplication } from '../viewer/BkModel/Application/Application';
+import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 
 import * as backend from '../index';
 

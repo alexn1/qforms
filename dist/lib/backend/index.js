@@ -19,8 +19,8 @@ Object.defineProperty(exports, "JsonFile", { enumerable: true, get: function () 
 // viewer
 var BkModel_1 = require("./viewer/BkModel/BkModel");
 Object.defineProperty(exports, "BkModel", { enumerable: true, get: function () { return BkModel_1.BkModel; } });
-var Application_1 = require("./viewer/BkModel/Application/Application");
-Object.defineProperty(exports, "BkApplication", { enumerable: true, get: function () { return Application_1.BkApplication; } });
+var BkApplication_1 = require("./viewer/BkModel/BkApplication/BkApplication");
+Object.defineProperty(exports, "BkApplication", { enumerable: true, get: function () { return BkApplication_1.BkApplication; } });
 var Database_1 = require("./viewer/BkModel/Database/Database");
 Object.defineProperty(exports, "BkDatabase", { enumerable: true, get: function () { return Database_1.BkDatabase; } });
 var MySqlDatabase_1 = require("./viewer/BkModel/Database/SqlDatabase/MySqlDatabase/MySqlDatabase");
@@ -81,8 +81,8 @@ var Column_1 = require("./viewer/BkModel/Column/Column");
 Object.defineProperty(exports, "BkColumn", { enumerable: true, get: function () { return Column_1.BkColumn; } });
 var Table_1 = require("./viewer/BkModel/Table/Table");
 Object.defineProperty(exports, "BkTable", { enumerable: true, get: function () { return Table_1.BkTable; } });
-var Action_1 = require("./viewer/BkModel/Action/Action");
-Object.defineProperty(exports, "BkAction", { enumerable: true, get: function () { return Action_1.BkAction; } });
+var BkAction_1 = require("./viewer/BkModel/BkAction/BkAction");
+Object.defineProperty(exports, "BkAction", { enumerable: true, get: function () { return BkAction_1.BkAction; } });
 // editor
 var ActionEditor_1 = require("./editor/Editor/ActionEditor/ActionEditor");
 Object.defineProperty(exports, "ActionEditor", { enumerable: true, get: function () { return ActionEditor_1.ActionEditor; } });

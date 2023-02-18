@@ -4,7 +4,7 @@ import { Result } from '../../../../Result';
 import { BkModel } from '../BkModel';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../Database/Database';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';

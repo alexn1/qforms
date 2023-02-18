@@ -1,6 +1,6 @@
 import { BkModel } from '../BkModel';
 import { BkColumn } from '../Column/Column';
-import { BkApplication } from '../Application/Application';
+import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 
 export class BkTable extends BkModel {
