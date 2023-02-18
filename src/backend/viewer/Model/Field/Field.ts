@@ -6,7 +6,7 @@ import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
-import { BkPersistentDataSource } from '../DataSource/PersistentDataSource/PersistentDataSource';
+import { BkPersistentDataSource } from '../BkDataSource/PersistentDataSource/PersistentDataSource';
 import { JSONString } from '../../../types';
 
 export class BkField extends BkModel {

@@ -29,11 +29,11 @@ var PostgreSqlDatabase_1 = require("./viewer/Model/Database/SqlDatabase/PostgreS
 Object.defineProperty(exports, "BkPostgreSqlDatabase", { enumerable: true, get: function () { return PostgreSqlDatabase_1.BkPostgreSqlDatabase; } });
 var MongoDbDatabase_1 = require("./viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase");
 Object.defineProperty(exports, "BkMongoDbDatabase", { enumerable: true, get: function () { return MongoDbDatabase_1.BkMongoDbDatabase; } });
-var BkDataSource_1 = require("./viewer/Model/DataSource/BkDataSource");
+var BkDataSource_1 = require("./viewer/Model/BkDataSource/BkDataSource");
 Object.defineProperty(exports, "BkDataSource", { enumerable: true, get: function () { return BkDataSource_1.BkDataSource; } });
-var SqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource");
+var SqlDataSource_1 = require("./viewer/Model/BkDataSource/PersistentDataSource/SqlDataSource/SqlDataSource");
 Object.defineProperty(exports, "BkSqlDataSource", { enumerable: true, get: function () { return SqlDataSource_1.BkSqlDataSource; } });
-var NoSqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource");
+var NoSqlDataSource_1 = require("./viewer/Model/BkDataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource");
 Object.defineProperty(exports, "BkNoSqlDataSource", { enumerable: true, get: function () { return NoSqlDataSource_1.BkNoSqlDataSource; } });
 var Field_1 = require("./viewer/Model/Field/Field");
 Object.defineProperty(exports, "BkField", { enumerable: true, get: function () { return Field_1.BkField; } });

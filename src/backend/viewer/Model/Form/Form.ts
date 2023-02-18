@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { BkModel } from '../Model';
-import { BkDataSource } from '../DataSource/BkDataSource';
+import { BkDataSource } from '../BkDataSource/BkDataSource';
 import { BkAction } from '../Action/Action';
 import { BkField } from '../Field/Field';
 import { BkPage } from '../Page/Page';
