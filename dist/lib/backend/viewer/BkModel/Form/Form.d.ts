@@ -1,7 +1,7 @@
 import { BkModel } from '../BkModel';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
 import { BkAction } from '../BkAction/BkAction';
-import { BkField } from '../Field/Field';
+import { BkField } from '../BkField/BkField';
 import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
