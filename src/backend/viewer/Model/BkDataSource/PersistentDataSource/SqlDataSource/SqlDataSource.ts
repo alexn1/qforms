@@ -5,7 +5,7 @@ import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
-import { Key } from '../../../../../types';
+import { Key } from '../../../../../../types';
 
 export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
     table: BkTable | null = null;

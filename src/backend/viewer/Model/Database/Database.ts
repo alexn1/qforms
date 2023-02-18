@@ -3,7 +3,7 @@ import { BkParam } from '../Param/Param';
 import { BkApplication } from '../Application/Application';
 import { BkTable } from '../Table/Table';
 import { Context } from '../../../Context';
-import { Row } from '../../../types';
+import { Row } from '../../../../types';
 
 interface Config {
     host: string;

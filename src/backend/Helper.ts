@@ -1,4 +1,4 @@
-import { JSONString } from './types';
+import { JSONString } from '../types';
 import fs from 'fs';
 
 const glob = require('glob');

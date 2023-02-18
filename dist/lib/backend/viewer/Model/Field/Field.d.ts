@@ -3,7 +3,7 @@ import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
-import { JSONString } from '../../../types';
+import { JSONString } from '../../../../types';
 export declare class BkField extends BkModel {
     fillAttributes(response: any): void;
     getDirPath(): string;

@@ -1,7 +1,7 @@
 import { Pool, Client, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
-import { Row } from '../../../../../types';
+import { Row } from '../../../../../../types';
 
 const colors = require('colors');
 

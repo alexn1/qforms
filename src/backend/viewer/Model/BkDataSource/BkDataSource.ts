@@ -10,7 +10,7 @@ import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';
 import { BkTableForm } from '../Form/TableForm/TableForm';
-import { Key, KeyValues, Row, KeyArray, KeyParams } from '../../../types';
+import { Key, KeyValues, Row, KeyArray, KeyParams } from '../../../../types';
 
 export type ReadResult = [any[], number | null];
 

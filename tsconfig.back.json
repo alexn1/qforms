@@ -4,8 +4,8 @@
         "declaration": true,
         "esModuleInterop": true,
         "module": "commonjs",
-        "rootDir": "src/backend",
-        "outDir": "dist/lib/backend",
+        "rootDir": "src",
+        "outDir": "dist/lib",
         /* Specify an output folder for all emitted files. */
         "jsx": "react-jsx"
         /* Specify what JSX code is generated. */

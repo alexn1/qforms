@@ -1,4 +1,4 @@
-import { JSONString } from './types';
+import { JSONString } from '../types';
 export declare class Helper {
     static getRandomString(length: any): string;
     static getFilePathsSync(publicDirPath: any, subDirPath: any, ext: any): any;

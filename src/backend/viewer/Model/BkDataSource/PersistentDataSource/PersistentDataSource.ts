@@ -1,7 +1,7 @@
 import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
-import { RawRow, Changes } from '../../../../types';
+import { RawRow, Changes } from '../../../../../types';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,

@@ -1,7 +1,7 @@
 import { Pool, PoolClient } from 'pg';
 import { SqlDatabase } from '../SqlDatabase';
 import { Context } from '../../../../../Context';
-import { Row } from '../../../../../types';
+import { Row } from '../../../../../../types';
 export declare class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
     pool: Pool | null;
     deinit(): Promise<void>;

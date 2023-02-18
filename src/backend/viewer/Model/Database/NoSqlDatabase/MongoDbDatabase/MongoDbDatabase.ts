@@ -1,7 +1,7 @@
 import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db } from 'mongodb';
 import { BkNoSqlDatabase } from '../NoSqlDatabase';
 import { Context } from '../../../../../Context';
-import { Row } from '../../../../../types';
+import { Row } from '../../../../../../types';
 
 export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     client: MongoClient;

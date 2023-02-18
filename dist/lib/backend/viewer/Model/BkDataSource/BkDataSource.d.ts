@@ -4,7 +4,7 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../Application/Application';
 import { BkDatabase } from '../Database/Database';
 import { BkForm } from '../Form/Form';
-import { Key, KeyValues, Row, KeyParams } from '../../../types';
+import { Key, KeyValues, Row, KeyParams } from '../../../../types';
 export type ReadResult = [any[], number | null];
 export declare class BkDataSource extends BkModel {
     keyColumns: string[];
