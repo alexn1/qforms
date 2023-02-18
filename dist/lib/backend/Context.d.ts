@@ -43,7 +43,9 @@ export declare class Context {
     getTimeOffset(): number | null;
     getCookies(): any;
     getQuery(): any;
-    getParams(): any;
+    getParams(): {
+        [name: string]: any;
+    };
     getReq(): Request;
     getRes(): Response;
     getBody(): any;

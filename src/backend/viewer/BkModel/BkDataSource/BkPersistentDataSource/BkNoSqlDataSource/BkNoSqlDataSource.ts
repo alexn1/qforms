@@ -78,7 +78,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         this.prepareRows(context, rows);
 
         // count
-        let count = null;
+        let count: number | null = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
                 count = await this.getDatabase().queryScalar(
@@ -213,7 +213,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         return query;
     }
 
-    getSelectParams(context: Context): any {
+    getSelectParams(context: Context) {
         return context.getParams();
     }
 }
