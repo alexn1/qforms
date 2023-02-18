@@ -8,7 +8,7 @@ export declare class DataSource extends Model {
     rowsByKey: {
         [key: Key]: RawRow;
     };
-    news: any[];
+    news: RawRow[];
     changes: Map<RawRow, {
         [name: string]: JSONString;
     }>;
@@ -34,7 +34,7 @@ export declare class DataSource extends Model {
     getRowKey(row: RawRow): Key;
     removeRow(key: Key): void;
     newRow(row: RawRow): void;
-    getSingleRow(withChanges?: boolean): any;
+    getSingleRow(withChanges?: boolean): RawRow;
     getForm(): Form | null;
     getPage(): Page | null;
     getApp(): Application | null;
@@ -46,25 +46,27 @@ export declare class DataSource extends Model {
     getChangesByKey(): {
         [key: Key]: any;
     };
-    getRowWithChanges(row: any): any;
+    getRowWithChanges(row: RawRow): RawRow;
     hasNewRows(): boolean;
-    static copyNewValues(row: any, newValues: any): void;
-    updateRow(key: any, newValues: any): void;
+    static copyNewValues(row: RawRow, newValues: RawRow): void;
+    updateRow(key: Key, newValues: RawRow): void;
     getTable(): any;
     getDatabase(): any;
-    getType(columnName: any): any;
-    insert(row?: any): Promise<any>;
-    delete(key: any): Promise<{
+    getType(columnName: string): any;
+    insert(row?: RawRow): Promise<any>;
+    delete(key: Key): Promise<{
         [x: number]: {
             [x: number]: {
-                delete: any[];
+                delete: Key[];
             };
         };
     }>;
     update(): Promise<{
         [x: number]: {
             [x: number]: {
-                update: {};
+                update: {
+                    [key: Key]: Key;
+                };
             };
         };
     }>;
@@ -73,12 +75,12 @@ export declare class DataSource extends Model {
     onTableDelete: (e: any) => Promise<void>;
     onTableRefresh: (e: any) => Promise<any>;
     isSurrogate(): any;
-    moveRow(row: any, offset: any): void;
+    moveRow(row: RawRow, offset: number): void;
     getLimit(): number | null;
     getCount(): number;
     getFrame(): number;
     getLastFrame(): number;
-    setFrame(frame: any): void;
+    setFrame(frame: number): void;
     getFramesCount(): number;
     hasMore(): boolean;
     isPersistent(): boolean;

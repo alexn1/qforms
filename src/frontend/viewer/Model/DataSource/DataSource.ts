@@ -8,7 +8,7 @@ import { Key, KeyArray, KeyParams, KeyValues, RawRow, JSONString } from '../../.
 export class DataSource extends Model {
     rows: RawRow[] = null;
     rowsByKey: { [key: Key]: RawRow } = null;
-    news: any[] = [];
+    news: RawRow[] = [];
     changes = new Map<RawRow, { [name: string]: JSONString }>();
     frame: number = 1;
     count: number = null;
@@ -193,7 +193,7 @@ export class DataSource extends Model {
         this.news.push(row);
     }
 
-    getSingleRow(withChanges = false) {
+    getSingleRow(withChanges = false): RawRow {
         if (this.news[0]) return this.news[0];
         const row = this.rows[0];
         if (!row) throw new Error('no single row');
@@ -274,24 +274,24 @@ export class DataSource extends Model {
         return changes;
     }
 
-    getRowWithChanges(row) {
+    getRowWithChanges(row: RawRow): RawRow {
         if (this.changes.has(row)) {
             return { ...row, ...this.changes.get(row) };
         }
         return row;
     }
 
-    hasNewRows() {
+    hasNewRows(): boolean {
         return this.news.length > 0;
     }
 
-    static copyNewValues(row, newValues) {
+    static copyNewValues(row: RawRow, newValues: RawRow) {
         for (const name in newValues) {
             row[name] = newValues[name];
         }
     }
 
-    updateRow(key, newValues) {
+    updateRow(key: Key, newValues: RawRow) {
         console.log('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
         const row = this.getRow(key);
@@ -319,17 +319,17 @@ export class DataSource extends Model {
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
-    getType(columnName) {
+    getType(columnName: string) {
         // console.log('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
     }
 
-    async insert(row?: any): Promise<any> {
+    async insert(row?: RawRow): Promise<any> {
         console.log('DataSource.insert', this.news);
         if (!this.news.length) throw new Error('no new rows to insert');
-        const inserts = [];
+        const inserts: Key[] = [];
         for (const row of this.news) {
             const newValues = this.getRowWithChanges(row);
             // console.log('newValues:', newValues);
@@ -367,7 +367,7 @@ export class DataSource extends Model {
         return null;
     }
 
-    async delete(key) {
+    async delete(key: Key) {
         console.log('DataSource.delete', key);
         if (!key) throw new Error('no key');
         this.removeRow(key);
@@ -403,7 +403,7 @@ export class DataSource extends Model {
         // console.log('changes:', changes);
 
         // apply changes to rows
-        const updates = {};
+        const updates: { [key: Key]: Key } = {};
         for (const key in changes) {
             // console.log('key:', key);
             const row = this.getRow(key as Key);
@@ -412,7 +412,7 @@ export class DataSource extends Model {
             // console.log('newValues:', newValues);
             const newKey = this.getRowKey(newValues);
             // console.log('newKey:', newKey);
-            this.updateRow(key, newValues);
+            this.updateRow(key as Key, newValues);
             updates[key] = newKey;
         }
         this.changes.clear();
@@ -482,7 +482,7 @@ export class DataSource extends Model {
             if (this.getRow(key as Key)) {
                 const newKey = e.updates[key];
                 const sourceRow = e.source.getRow(newKey);
-                this.updateRow(key, sourceRow);
+                this.updateRow(key as Key, sourceRow);
             }
         }
 
@@ -523,7 +523,7 @@ export class DataSource extends Model {
         return this.isAttr('database');
     }
 
-    moveRow(row, offset) {
+    moveRow(row: RawRow, offset: number) {
         console.log('DataSource.moveRow');
         Helper.moveArrItem(this.rows, row, offset);
 
@@ -542,35 +542,35 @@ export class DataSource extends Model {
         return null;
     }
 
-    getCount() {
+    getCount(): number {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         return this.count;
     }
 
-    getFrame() {
+    getFrame(): number {
         return this.frame;
     }
 
-    getLastFrame() {
+    getLastFrame(): number {
         return this.lastFrame;
     }
 
-    setFrame(frame) {
+    setFrame(frame: number) {
         this.frame = frame;
     }
 
-    getFramesCount() {
+    getFramesCount(): number {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         if (this.count === 0) return 1;
         if (this.getLimit()) return Math.ceil(this.count / this.getLimit());
         return 1;
     }
 
-    hasMore() {
+    hasMore(): boolean {
         return this.lastFrame < this.getFramesCount();
     }
 
-    isPersistent() {
+    isPersistent(): boolean {
         return false;
     }
 

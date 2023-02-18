@@ -1,4 +1,5 @@
 import { DataSource } from '../DataSource';
+import { Key } from '../../../../../types';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {
@@ -22,9 +23,7 @@ export class PersistentDataSource extends DataSource {
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'insert',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             row: this.getRowWithChanges(row),
         });
@@ -72,9 +71,7 @@ export class PersistentDataSource extends DataSource {
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'update',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         });
@@ -85,7 +82,7 @@ export class PersistentDataSource extends DataSource {
         // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
-        this.updateRow(key, newValues);
+        this.updateRow(key as Key, newValues);
 
         // events
         const event = { source: this, updates: result[database][table].update };
@@ -108,9 +105,7 @@ export class PersistentDataSource extends DataSource {
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: '_delete',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
         });
@@ -127,7 +122,7 @@ export class PersistentDataSource extends DataSource {
         return result;
     }
 
-    onTableUpdate = async e => {
+    onTableUpdate = async (e) => {
         console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
@@ -148,7 +143,7 @@ export class PersistentDataSource extends DataSource {
         this.emit('update', e);
     };
 
-    onTableInsert = async e => {
+    onTableInsert = async (e) => {
         console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
@@ -167,7 +162,7 @@ export class PersistentDataSource extends DataSource {
         this.emit('insert', e);
     };
 
-    onTableDelete = async e => {
+    onTableDelete = async (e) => {
         console.log('SqlDataSource.onTableDelete', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
@@ -182,7 +177,7 @@ export class PersistentDataSource extends DataSource {
         this.emit('delete', e);
     };
 
-    onTableRefresh = async e => {
+    onTableRefresh = async (e) => {
         console.log('SqlDataSource.onTableRefresh', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);

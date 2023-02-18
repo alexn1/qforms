@@ -41386,9 +41386,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'insert',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             row: this.getRowWithChanges(row),
         });
@@ -41432,9 +41430,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'update',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
         });
@@ -41466,9 +41462,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: '_delete',
-            page: this.getForm()
-                .getPage()
-                .getName(),
+            page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
         });
