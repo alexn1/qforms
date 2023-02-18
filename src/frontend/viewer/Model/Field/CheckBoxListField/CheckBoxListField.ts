@@ -1,5 +1,6 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../common';
+import { JSONString, RawRow } from '../../../../../types';
 
 export class CheckBoxListField extends Field {
     getDisplayValue(row) {
@@ -42,10 +43,10 @@ export class CheckBoxListField extends Field {
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
     }
 
-    findRowByRawValue(rawValue) {
+    findRowByRawValue(rawValue: JSONString): RawRow {
         return this.getDataSource()
             .getRows()
-            .find(row => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.data.valueColumn] === rawValue);
     }
 }
 

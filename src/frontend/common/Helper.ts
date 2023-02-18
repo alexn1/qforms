@@ -275,19 +275,19 @@ export class Helper {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
-    static removeTimezoneOffset(date) {
+    static removeTimezoneOffset(date: Date) {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
     static addTimezoneOffset(date) {
         Helper.addMinutes(date, date.getTimezoneOffset());
     }
-    static cloneDate(date) {
+    static cloneDate(date: Date) {
         return new Date(date.getTime());
     }
-    static fillArray(n) {
+    static fillArray(n: number) {
         return Array.from(Array(n).keys());
     }
-    static inIframe() {
+    static inIframe(): boolean {
         try {
             return window.self !== window.top;
         } catch (e) {
@@ -295,7 +295,7 @@ export class Helper {
         }
     }
 
-    static setCookie(name, value, time) {
+    static setCookie(name: string, value: string | number | boolean, time: number) {
         var expires = '';
         if (time) {
             var date = new Date(time);
@@ -304,7 +304,8 @@ export class Helper {
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
-    static getCookie(name) {
+
+    static getCookie(name: string): string | undefined {
         var nameEQ = name + '=';
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {
@@ -315,7 +316,7 @@ export class Helper {
         }
         return undefined;
     }
-    static eraseCookie(name) {
+    static eraseCookie(name: string) {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     static delay(ms = 1000) {

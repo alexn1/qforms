@@ -1,5 +1,6 @@
 import { EventEmitter } from '../EventEmitter';
 import { FrontHostApp } from '../../common';
+import { DataSource } from './DataSource/DataSource';
 
 export class Model extends EventEmitter {
     deinited: boolean = false;
@@ -65,7 +66,7 @@ export class Model extends EventEmitter {
         return this.getAttr('caption');
     }
 
-    getDataSource(name) {
+    getDataSource(name: string): DataSource {
         return this.dataSources.find(dataSource => dataSource.getName() === name);
     }
 

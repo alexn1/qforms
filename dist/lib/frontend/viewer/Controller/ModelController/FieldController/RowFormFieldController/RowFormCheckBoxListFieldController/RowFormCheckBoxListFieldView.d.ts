@@ -3,7 +3,10 @@ import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormCheckBoxListFieldController } from './RowFormCheckBoxListFieldController';
 import './RowFormCheckBoxListFieldView.less';
 export declare class RowFormCheckBoxListFieldView extends RowFormFieldView<RowFormCheckBoxListFieldController> {
-    getItems(): any;
+    getItems(): {
+        value: string;
+        title: any;
+    }[];
     renderCheckBoxList(): JSX.Element;
     render(): JSX.Element;
 }

@@ -24,13 +24,13 @@ export declare class Helper {
     static fallbackCopyTextToClipboard(text: any): void;
     static copyTextToClipboard(text: any): Promise<void>;
     static addMinutes(date: any, minutes: any): void;
-    static removeTimezoneOffset(date: any): void;
+    static removeTimezoneOffset(date: Date): void;
     static addTimezoneOffset(date: any): void;
-    static cloneDate(date: any): Date;
-    static fillArray(n: any): number[];
+    static cloneDate(date: Date): Date;
+    static fillArray(n: number): number[];
     static inIframe(): boolean;
-    static setCookie(name: any, value: any, time: any): void;
-    static getCookie(name: any): string;
-    static eraseCookie(name: any): void;
+    static setCookie(name: string, value: string | number | boolean, time: number): void;
+    static getCookie(name: string): string | undefined;
+    static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;
 }

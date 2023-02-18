@@ -41686,7 +41686,7 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     findRowByRawValue(rawValue) {
         return this.getDataSource()
             .getRows()
-            .find(row => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.data.valueColumn] === rawValue);
     }
 }
 // @ts-ignore
@@ -41753,7 +41753,7 @@ class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     findRowByRawValue(rawValue) {
         return this.getComboBoxDataSource()
             .getRows()
-            .find(row => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.data.valueColumn] === rawValue);
     }
 }
 // @ts-ignore

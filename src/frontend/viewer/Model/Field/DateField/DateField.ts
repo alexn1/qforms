@@ -1,5 +1,6 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../common';
+import { JSONString } from '../../../../../types';
 
 export class DateField extends Field {
     getFormat() {
@@ -16,8 +17,8 @@ export class DateField extends Field {
         return value;
     }
 
-    valueToRaw(value) {
-        let rawValue;
+    valueToRaw(value: Date): JSONString {
+        let rawValue: JSONString;
         if (value && this.getAttr('timezone') === 'false') {
             const v = Helper.cloneDate(value);
             Helper.removeTimezoneOffset(v);

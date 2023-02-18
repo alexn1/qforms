@@ -1,4 +1,5 @@
 import { EventEmitter } from '../EventEmitter';
+import { DataSource } from './DataSource/DataSource';
 export declare class Model extends EventEmitter {
     data: any;
     parent: any;
@@ -18,7 +19,7 @@ export declare class Model extends EventEmitter {
     getName(): any;
     getFullName(): any;
     getCaption(): string;
-    getDataSource(name: any): any;
+    getDataSource(name: string): DataSource;
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;
