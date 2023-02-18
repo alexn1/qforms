@@ -1,5 +1,6 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../common';
+import { JSONString, RawRow } from '../../../../../types';
 
 export class RadioField extends Field {
     getDisplayValue(row) {
@@ -44,7 +45,7 @@ export class RadioField extends Field {
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
     }
 
-    findRowByRawValue(rawValue) {
+    findRowByRawValue(rawValue: JSONString): RawRow {
         const valueColumn = this.getAttr('valueColumn');
         return this.getDataSource()
             .getRows()
