@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkNoSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
-const Result_1 = require("../../../../../Result");
+const Result_1 = require("../../../../../../Result");
 const BkDataSource_1 = require("../../BkDataSource");
 class BkNoSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {

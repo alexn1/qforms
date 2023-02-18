@@ -21,7 +21,7 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 // import { CommonModule } from './common/CommonModule';
 import { FileSessionStore } from './FileSessionStore';
-import { Result } from './Result';
+import { Result } from '../Result';
 
 const pkg = require('../../package.json');
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';

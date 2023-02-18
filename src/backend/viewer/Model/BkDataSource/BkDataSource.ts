@@ -1,6 +1,6 @@
 import path from 'path';
 
-import { Result } from '../../../Result';
+import { Result } from '../../../../Result';
 import { BkModel } from '../Model';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';

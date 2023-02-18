@@ -8,7 +8,7 @@ import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
-import { Result } from '../../../Result';
+import { Result } from '../../../../Result';
 export declare class BkApplication extends BkModel {
     appInfo: AppInfo;
     hostApp: BackHostApp;

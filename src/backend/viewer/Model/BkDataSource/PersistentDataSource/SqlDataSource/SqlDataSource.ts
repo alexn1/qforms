@@ -3,7 +3,7 @@ import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Helper } from '../../../../../Helper';
 import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
-import { Result } from '../../../../../Result';
+import { Result } from '../../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 import { Key } from '../../../../../../types';
 

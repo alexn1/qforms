@@ -1,10 +1,10 @@
-type Key = string;
-type Row = Object;
+import { Key, RawRow } from './types';
+
 export type InsertResult = Key[];
 export type DeleteResult = Key[];
 
 export class InsertExResult {
-    [key: Key]: Row;
+    [key: Key]: RawRow;
 }
 
 export class UpdateResult {
@@ -12,7 +12,7 @@ export class UpdateResult {
 }
 
 export class UpdateEx {
-    [oldKey: Key]: Row;
+    [oldKey: Key]: RawRow;
 }
 
 export class TableResult {
@@ -43,7 +43,7 @@ export class Result {
         dName: string,
         tName: string,
         key: Key,
-        row: Row,
+        row: RawRow,
     ): void {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
@@ -70,7 +70,7 @@ export class Result {
         dName: string,
         tName: string,
         oldKey: Key,
-        row: Row,
+        row: RawRow,
     ): void {
         // console.log('Result.addUpdateExToResult');
         if (!result[dName]) result[dName] = new DatabaseResult();

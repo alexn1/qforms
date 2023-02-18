@@ -16,7 +16,7 @@ import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
-import { Result } from '../../../Result';
+import { Result } from '../../../../Result';
 
 const { v4: uuidv4 } = require('uuid');
 

@@ -4,7 +4,7 @@ exports.BkSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
 const BkDataSource_1 = require("../../BkDataSource");
 const Helper_1 = require("../../../../../Helper");
-const Result_1 = require("../../../../../Result");
+const Result_1 = require("../../../../../../Result");
 class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);

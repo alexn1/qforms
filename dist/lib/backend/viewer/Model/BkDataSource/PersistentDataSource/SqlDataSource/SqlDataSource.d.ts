@@ -2,7 +2,7 @@ import { BkPersistentDataSource } from '../PersistentDataSource';
 import { ReadResult } from '../../BkDataSource';
 import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
-import { Result } from '../../../../../Result';
+import { Result } from '../../../../../../Result';
 import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
 export declare class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
     table: BkTable | null;

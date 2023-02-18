@@ -4,7 +4,7 @@ exports.DateFieldEditor = exports.ComboBoxFieldEditor = exports.CheckBoxListFiel
 exports.PageEditorController = exports.FormEditorController = exports.FieldEditorController = exports.ApplicationEditorController = exports.VisualEditorController = exports.ColumnEditorController = exports.TableEditorController = exports.ParamEditorController = exports.PageLinkEditorController = exports.KeyColumnEditorController = exports.DataSourceEditorController = exports.DatabaseEditorController = exports.ActionEditorController = exports.ColumnEditor = exports.ParamEditor = exports.TableEditor = exports.MongoDbDatabaseEditor = exports.PostgreSqlDatabaseEditor = exports.MySqlDatabaseEditor = exports.DatabaseEditor = exports.KeyColumnEditor = exports.PageLinkEditor = exports.PageEditor = exports.TableFormEditor = exports.RowFormEditor = exports.FormEditor = exports.RadioFieldEditor = exports.PasswordFieldEditor = exports.PhoneFieldEditor = exports.TextBoxFieldEditor = exports.TextAreaFieldEditor = exports.LinkFieldEditor = exports.LabelFieldEditor = exports.ImageFieldEditor = exports.FileFieldEditor = exports.DateTimeFieldEditor = exports.TimeFieldEditor = void 0;
 var Helper_1 = require("./Helper");
 Object.defineProperty(exports, "Helper", { enumerable: true, get: function () { return Helper_1.Helper; } });
-var Result_1 = require("./Result");
+var Result_1 = require("../Result");
 Object.defineProperty(exports, "Result", { enumerable: true, get: function () { return Result_1.Result; } });
 var Context_1 = require("./Context");
 Object.defineProperty(exports, "Context", { enumerable: true, get: function () { return Context_1.Context; } });

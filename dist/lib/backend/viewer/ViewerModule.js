@@ -7,7 +7,7 @@ exports.ViewerModule = void 0;
 const path_1 = __importDefault(require("path"));
 const Helper_1 = require("../Helper");
 const MyError_1 = require("../MyError");
-const Result_1 = require("../Result");
+const Result_1 = require("../../Result");
 const pkg = require('../../../package.json');
 // post actions
 const ACTIONS = [
