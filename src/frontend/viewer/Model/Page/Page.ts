@@ -7,7 +7,7 @@ export class Page extends Model {
     dataSources: any[];
     forms: any[];
     params: any;
-    
+
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
@@ -68,7 +68,7 @@ export class Page extends Model {
         };
     }
 
-    setParam(name, value) {
+    setParam(name: string, value: any) {
         // console.log('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
@@ -178,7 +178,7 @@ export class Page extends Model {
         return result;
     }
     getForm(name) {
-        return this.forms.find(form => form.getName() === name);
+        return this.forms.find((form) => form.getName() === name);
     }
     isSelectMode() {
         return !!this.options.selectMode;

@@ -1,6 +1,7 @@
 import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormComboBoxFieldView } from './TableFormComboBoxFieldView';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
+import { RawRow } from '../../../../../../../types';
 
 export class TableFormComboBoxFieldController extends TableFormFieldController<ComboBoxField> {
     init() {
@@ -23,7 +24,7 @@ export class TableFormComboBoxFieldController extends TableFormFieldController<C
         return super.getViewClass() || TableFormComboBoxFieldView;
     }
 
-    getValueForWidget(row) {
+    getValueForWidget(row: RawRow): string {
         const value = this.model.getValue(row);
         const rawValue = this.model.valueToRaw(value);
         if (rawValue === undefined || rawValue === 'null') return '';
@@ -34,7 +35,7 @@ export class TableFormComboBoxFieldController extends TableFormFieldController<C
         return `[no row for id: ${rawValue}]`;
     }
 
-    onListUpdate = async e => {
+    onListUpdate = async (e) => {
         // console.log('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
         this.getForm().invalidate();
         await this.getForm().rerender();

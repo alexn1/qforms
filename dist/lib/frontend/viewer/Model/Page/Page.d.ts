@@ -11,7 +11,7 @@ export declare class Page extends Model {
     createForms(): void;
     deinitForms(): void;
     getParams(): any;
-    setParam(name: any, value: any): void;
+    setParam(name: string, value: any): void;
     update(): Promise<void>;
     discard(): void;
     getKey(): any;

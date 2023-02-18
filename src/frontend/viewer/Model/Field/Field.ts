@@ -43,7 +43,7 @@ export class Field extends Model {
         }
     }
 
-    valueToPageParams(row) {
+    valueToPageParams(row: RawRow) {
         // console.log('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
             // we need to dump value to param without meta info such as timezone prop
@@ -56,17 +56,17 @@ export class Field extends Model {
         }
     }
 
-    isChanged(row) {
+    isChanged(row: RawRow): boolean {
         // console.log('Field.isChanged', this.getFullName());
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
     }
 
-    hasColumn() {
+    hasColumn(): boolean {
         return !!this.getAttr('column');
     }
 
-    getValue(row) {
+    getValue(row: RawRow): any {
         // console.log('Field.getValue', this.getFullName(), row);
         if (!row && this.parent instanceof RowForm) {
             row = this.parent.getRow();
@@ -74,7 +74,7 @@ export class Field extends Model {
         if (!row) {
             throw new Error(`${this.getFullName()}: need row`);
         }
-        let rawValue;
+        let rawValue: JSONString;
         if (this.getAttr('column')) {
             rawValue = this.getRawValue(row);
         } else if (this.getAttr('value')) {
@@ -100,7 +100,7 @@ export class Field extends Model {
         }
     }
 
-    setValue(row, value) {
+    setValue(row: RawRow, value: any) {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
@@ -108,7 +108,7 @@ export class Field extends Model {
         this.valueToPageParams(row);
     }
 
-    rawToValue(rawValue) {
+    rawToValue(rawValue: JSONString) {
         return Helper.decodeValue(rawValue);
     }
 

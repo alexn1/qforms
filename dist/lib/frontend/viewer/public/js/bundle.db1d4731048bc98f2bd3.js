@@ -42772,7 +42772,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return result;
     }
     getForm(name) {
-        return this.forms.find(form => form.getName() === name);
+        return this.forms.find((form) => form.getName() === name);
     }
     isSelectMode() {
         return !!this.options.selectMode;

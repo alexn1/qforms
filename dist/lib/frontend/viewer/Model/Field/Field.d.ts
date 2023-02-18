@@ -8,12 +8,12 @@ export declare class Field extends Model {
     init(): void;
     replaceThis(value: any): any;
     fillDefaultValue(row: any): void;
-    valueToPageParams(row: any): void;
-    isChanged(row: any): boolean;
+    valueToPageParams(row: RawRow): void;
+    isChanged(row: RawRow): boolean;
     hasColumn(): boolean;
-    getValue(row: any): any;
-    setValue(row: any, value: any): void;
-    rawToValue(rawValue: any): any;
+    getValue(row: RawRow): any;
+    setValue(row: RawRow, value: any): void;
+    rawToValue(rawValue: JSONString): any;
     valueToRaw(value: any): JSONString;
     getRawValue(row: RawRow): JSONString;
     getDefaultDataSource(): DataSource;
