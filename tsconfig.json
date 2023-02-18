@@ -1,1 +1,6 @@
-/* for tsc only */
+/* for tsc and vscode only */
+{
+    "compilerOptions": {
+        "esModuleInterop": true
+    }
+}
