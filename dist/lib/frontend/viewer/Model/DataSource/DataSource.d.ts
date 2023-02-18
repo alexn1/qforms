@@ -28,7 +28,7 @@ export declare class DataSource extends Model {
     isChanged(): boolean;
     hasNew(): boolean;
     isRowColumnChanged(row: RawRow, column: string): boolean;
-    getValue(row: RawRow, column: string): any;
+    getValue(row: RawRow, column: string): JSONString;
     getKeyValues(row: RawRow): KeyValues;
     getRowKey(row: RawRow): Key;
     removeRow(key: Key): void;

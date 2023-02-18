@@ -24,3 +24,4 @@ export interface KeyValues {
 export interface QueryParams {
     [name: string]: string | number | boolean;
 }
+export declare const keyArrayToKey: (keyArray: KeyArray) => Key;

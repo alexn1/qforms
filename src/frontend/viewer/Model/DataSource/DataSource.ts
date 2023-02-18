@@ -144,9 +144,9 @@ export class DataSource extends Model {
         return row[column] !== this.getValue(row, column);
     }
 
-    getValue(row: RawRow, column: string) {
+    getValue(row: RawRow, column: string): JSONString {
         // console.log('DataSource.getValue', column);
-        let value;
+        let value: JSONString;
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             value = this.changes.get(row)[column];
         } else {

@@ -34,3 +34,7 @@ export interface KeyValues {
 export interface QueryParams {
     [name: string]: string | number | boolean;
 }
+
+export const keyArrayToKey = (keyArray: KeyArray): Key => {
+    return JSON.stringify(keyArray) as Key;
+};
