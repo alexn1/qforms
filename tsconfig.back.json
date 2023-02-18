@@ -3,12 +3,10 @@
         "target": "ES2017",
         "declaration": true,
         "esModuleInterop": true,
-        "module": "commonjs",
+        "jsx": "react-jsx",        
         "rootDir": "src",
         "outDir": "dist/lib",
-        /* Specify an output folder for all emitted files. */
-        "jsx": "react-jsx"
-        /* Specify what JSX code is generated. */
+        "module": "commonjs"
     },
     "include": ["src/backend/**/*"]
 }
