@@ -2,14 +2,16 @@ import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-import { Key, KeyParams, KeyValues, RawRow } from '../../../../types';
+import { Key, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
 export declare class DataSource extends Model {
     rows: RawRow[];
     rowsByKey: {
         [key: Key]: RawRow;
     };
     news: any[];
-    changes: Map<RawRow, any>;
+    changes: Map<RawRow, {
+        [name: string]: JSONString;
+    }>;
     frame: number;
     count: number;
     lastFrame: number;
@@ -22,8 +24,8 @@ export declare class DataSource extends Model {
     getRowsLength(): number;
     fillRowsByKey(): void;
     discardRowColumn(row: RawRow, column: string): void;
-    changeRowColumn(row: RawRow, column: string, newValue: any): void;
-    setValue(row: RawRow, column: string, value: any): void;
+    changeRowColumn(row: RawRow, column: string, newValue: JSONString): void;
+    setValue(row: RawRow, column: string, value: JSONString): void;
     isChanged(): boolean;
     hasNew(): boolean;
     isRowColumnChanged(row: RawRow, column: string): boolean;

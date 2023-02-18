@@ -3,13 +3,14 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
-import { Key, KeyArray, KeyParams, KeyValues, RawRow } from '../../../../types';
+import { Key, KeyArray, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
+import { RowFormPasswordFieldView } from '../../Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView';
 
 export class DataSource extends Model {
     rows: RawRow[] = null;
     rowsByKey: { [key: Key]: RawRow } = null;
     news: any[] = [];
-    changes = new Map<RawRow, any>();
+    changes = new Map<RawRow, { [name: string]: JSONString }>();
     frame: number = 1;
     count: number = null;
     lastFrame: number = 1;
@@ -93,12 +94,12 @@ export class DataSource extends Model {
         }
     }
 
-    changeRowColumn(row: RawRow, column: string, newValue) {
+    changeRowColumn(row: RawRow, column: string, newValue: JSONString) {
         if (!this.changes.has(row)) this.changes.set(row, {});
         this.changes.get(row)[column] = newValue;
     }
 
-    setValue(row: RawRow, column: string, value) {
+    setValue(row: RawRow, column: string, value: JSONString) {
         // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
