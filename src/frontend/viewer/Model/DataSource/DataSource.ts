@@ -3,13 +3,13 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
-import { Key } from '../../../../types';
+import { Key, Row } from '../../../../types';
 
 export class DataSource extends Model {
-    rows: any = null;
-    rowsByKey: any = null;
+    rows: Row[] = null;
+    rowsByKey: { [key: Key]: Row } = null;
     news: any[] = [];
-    changes: any = new Map();
+    changes = new Map<Row, any>();
     frame: number = 1;
     count: number;
     lastFrame: number = 1;
@@ -42,12 +42,12 @@ export class DataSource extends Model {
         super.deinit();
     }
 
-    setRows(rows) {
+    setRows(rows: Row[]) {
         this.rows = rows;
         this.fillRowsByKey();
     }
 
-    addRow(row) {
+    addRow(row: Row) {
         this.rows.push(row);
         const key = this.getRowKey(row);
         this.rowsByKey[key] = row;

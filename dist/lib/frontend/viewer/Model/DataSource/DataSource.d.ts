@@ -1,21 +1,23 @@
 import { Model } from '../Model';
 import { Form } from '../Form/Form';
-import { Key } from '../../../../types';
+import { Key, Row } from '../../../../types';
 export declare class DataSource extends Model {
-    rows: any;
-    rowsByKey: any;
+    rows: Row[];
+    rowsByKey: {
+        [key: Key]: Row;
+    };
     news: any[];
-    changes: any;
+    changes: Map<Row, any>;
     frame: number;
     count: number;
     lastFrame: number;
     constructor(data: any, parent: any);
     init(): void;
     deinit(): void;
-    setRows(rows: any): void;
-    addRow(row: any): void;
+    setRows(rows: Row[]): void;
+    addRow(row: Row): void;
     addRows(rows: any): void;
-    getRowsLength(): any;
+    getRowsLength(): number;
     fillRowsByKey(): void;
     discardRowColumn(row: any, column: any): void;
     changeRowColumn(row: any, column: any, newValue: any): void;
@@ -32,9 +34,9 @@ export declare class DataSource extends Model {
     getForm(): Form;
     getPage(): any;
     getApp(): any;
-    getRow(key: any): any;
-    getRows(): any;
-    getRowByIndex(i: any): any;
+    getRow(key: any): Row;
+    getRows(): Row[];
+    getRowByIndex(i: any): Row;
     discard(): void;
     static keyToParams(key: string, paramName?: string): any;
     getChangesByKey(): {};

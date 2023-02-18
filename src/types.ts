@@ -1,11 +1,11 @@
 // JSONString
-export type JSONString = string & { __type: 'JSONString' };
+export type JSONString = string & { type: 'JSONString' };
 
 // Key - array of values as json string
 // '[123]'
 // '["abc"]'
 // '[123, "abc"]'
-export type Key = JSONString & { __type2: 'Key' };
+export type Key = JSONString & { type2: 'Key' };
 
 export type KeyValue = number | string;
 

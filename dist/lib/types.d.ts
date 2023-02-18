@@ -1,8 +1,8 @@
 export type JSONString = string & {
-    __type: 'JSONString';
+    type: 'JSONString';
 };
 export type Key = JSONString & {
-    __type2: 'Key';
+    type2: 'Key';
 };
 export type KeyValue = number | string;
 export type KeyArray = KeyValue[];
