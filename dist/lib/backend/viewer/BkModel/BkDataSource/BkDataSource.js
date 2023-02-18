@@ -117,7 +117,6 @@ class BkDataSource extends BkModel_1.BkModel {
         return this.parent.getApp();
     }
     getKeyValuesFromKey(key) {
-        console.log('getKeyValuesFromKey', key, typeof key);
         const arr = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
