@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkSqlDataSource = void 0;
 const PersistentDataSource_1 = require("../PersistentDataSource");
-const DataSource_1 = require("../../DataSource");
+const BkDataSource_1 = require("../../BkDataSource");
 const Helper_1 = require("../../../../../Helper");
 const Result_1 = require("../../../../../Result");
 class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
@@ -158,7 +158,7 @@ class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
         if (!key)
             throw new Error('insert: cannot calc row key');
         console.log('key:', key);
-        const keyParams = DataSource_1.BkDataSource.keyToParams(key);
+        const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
         const singleQuery = this.getSingleQuery(context);
         // console.log('singleQuery:', singleQuery);
@@ -195,7 +195,7 @@ class BkSqlDataSource extends PersistentDataSource_1.BkPersistentDataSource {
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key
         const newKey = this.calcNewKey(key, values);
-        const newKeyParams = DataSource_1.BkDataSource.keyToParams(newKey);
+        const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
         console.log('key:', key);
         console.log('newKey:', newKey);
         console.log('newKeyParams:', newKeyParams);

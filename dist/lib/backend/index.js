@@ -29,8 +29,8 @@ var PostgreSqlDatabase_1 = require("./viewer/Model/Database/SqlDatabase/PostgreS
 Object.defineProperty(exports, "BkPostgreSqlDatabase", { enumerable: true, get: function () { return PostgreSqlDatabase_1.BkPostgreSqlDatabase; } });
 var MongoDbDatabase_1 = require("./viewer/Model/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase");
 Object.defineProperty(exports, "BkMongoDbDatabase", { enumerable: true, get: function () { return MongoDbDatabase_1.BkMongoDbDatabase; } });
-var DataSource_1 = require("./viewer/Model/DataSource/DataSource");
-Object.defineProperty(exports, "BkDataSource", { enumerable: true, get: function () { return DataSource_1.BkDataSource; } });
+var BkDataSource_1 = require("./viewer/Model/DataSource/BkDataSource");
+Object.defineProperty(exports, "BkDataSource", { enumerable: true, get: function () { return BkDataSource_1.BkDataSource; } });
 var SqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource");
 Object.defineProperty(exports, "BkSqlDataSource", { enumerable: true, get: function () { return SqlDataSource_1.BkSqlDataSource; } });
 var NoSqlDataSource_1 = require("./viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource");

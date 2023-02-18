@@ -3,7 +3,7 @@ import { Context } from '../../../../../Context';
 import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../Result';
 import { BkNoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
-import { BkDataSource, ReadResult } from '../../DataSource';
+import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key } from '../../../../../types';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {

@@ -3,7 +3,7 @@ import { BackHostApp } from '../../../BackHostApp';
 import { BkModel } from '../Model';
 import { BkAction } from '../Action/Action';
 import { BkDatabase } from '../Database/Database';
-import { BkDataSource } from '../DataSource/DataSource';
+import { BkDataSource } from '../DataSource/BkDataSource';
 import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';
 import { Context } from '../../../Context';

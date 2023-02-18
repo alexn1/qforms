@@ -7,7 +7,7 @@ import { BkApplication } from './Model/Application/Application';
 import { MyError } from '../MyError';
 import { BkModel } from './Model/Model';
 import { Result } from '../Result';
-import { BkDataSource } from './Model/DataSource/DataSource';
+import { BkDataSource } from './Model/DataSource/BkDataSource';
 
 const pkg = require('../../../package.json');
 

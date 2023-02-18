@@ -1,4 +1,4 @@
-import { BkDataSource } from '../DataSource';
+import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../Database/Database';
 import { BkTable } from '../../Table/Table';
 import { RawRow, Changes } from '../../../../types';
