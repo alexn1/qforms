@@ -1,5 +1,5 @@
 import { BkModel } from '../BkModel';
-import { BkColumn } from '../Column/Column';
+import { BkColumn } from '../BkColumn/BkColumn';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 export declare class BkTable extends BkModel {

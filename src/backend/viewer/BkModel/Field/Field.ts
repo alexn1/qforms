@@ -4,9 +4,9 @@ import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
-import { BkColumn } from '../Column/Column';
+import { BkColumn } from '../BkColumn/BkColumn';
 import { Helper } from '../../../Helper';
-import { BkPersistentDataSource } from '../BkDataSource/PersistentDataSource/PersistentDataSource';
+import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';
 import { JSONString, RawRow } from '../../../../types';
 
 export class BkField extends BkModel {

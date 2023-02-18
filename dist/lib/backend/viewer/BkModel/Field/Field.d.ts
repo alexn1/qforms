@@ -2,7 +2,7 @@ import { BkModel } from '../BkModel';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
-import { BkColumn } from '../Column/Column';
+import { BkColumn } from '../BkColumn/BkColumn';
 import { JSONString, RawRow } from '../../../../types';
 export declare class BkField extends BkModel {
     fillAttributes(response: any): void;
