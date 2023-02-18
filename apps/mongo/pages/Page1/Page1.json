@@ -26,7 +26,7 @@
                 "itemEditPage": "Page2",
                 "itemCreatePage": "",
                 "newRowMode": "editform",
-                "deleteRowMode": "disabled",
+                "deleteRowMode": "enabled",
                 "refreshButton": "true"
             },
             "dataSources": [

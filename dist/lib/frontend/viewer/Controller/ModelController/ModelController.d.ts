@@ -11,5 +11,5 @@ export declare abstract class ModelController<TModel extends Model> extends Cont
     getParent(): any;
     getTitle(): string;
     getViewClass(): any;
-    isActionEnabled(name: any): boolean;
+    isActionEnabled(name: string): boolean;
 }

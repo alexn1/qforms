@@ -25,7 +25,7 @@ export abstract class ModelController<TModel extends Model> extends Controller {
         return this.parent;
     }
 
-    getTitle() {
+    getTitle(): string {
         return this.getModel().getCaption();
     }
 
@@ -44,7 +44,7 @@ export abstract class ModelController<TModel extends Model> extends Controller {
         return viewClass;
     }
 
-    isActionEnabled(name): boolean {
+    isActionEnabled(name: string): boolean {
         return false;
     }
 }
