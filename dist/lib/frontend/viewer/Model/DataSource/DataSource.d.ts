@@ -3,6 +3,7 @@ import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Key, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
+import { Result } from '../../../../Result';
 export declare class DataSource extends Model {
     rows: RawRow[];
     rowsByKey: {
@@ -61,15 +62,7 @@ export declare class DataSource extends Model {
             };
         };
     }>;
-    update(): Promise<{
-        [x: number]: {
-            [x: number]: {
-                update: {
-                    [key: Key]: Key;
-                };
-            };
-        };
-    }>;
+    update(): Promise<Result | null>;
     onTableInsert: (e: any) => Promise<void>;
     onTableUpdate: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;

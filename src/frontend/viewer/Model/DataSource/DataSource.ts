@@ -4,6 +4,7 @@ import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
 import { Key, KeyArray, KeyParams, KeyValues, RawRow, JSONString } from '../../../../types';
+import { Result } from '../../../../Result';
 
 export class DataSource extends Model {
     rows: RawRow[] = null;
@@ -392,7 +393,7 @@ export class DataSource extends Model {
         return null;
     }
 
-    async update() {
+    async update(): Promise<Result | null> {
         console.log('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();

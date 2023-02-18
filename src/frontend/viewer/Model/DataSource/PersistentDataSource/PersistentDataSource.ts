@@ -58,7 +58,7 @@ export class PersistentDataSource extends DataSource {
         return result;
     }
 
-    async update() {
+    async update(): Promise<Result | null> {
         console.log('SqlDataSource.update', this.getFullName());
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -69,7 +69,7 @@ export class PersistentDataSource extends DataSource {
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         // specific to SqlDataSource
-        const result = await this.getApp().request({
+        const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'update',
             page: this.getForm().getPage().getName(),
