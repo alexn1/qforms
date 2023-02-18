@@ -40729,6 +40729,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Page_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
 /* harmony import */ var _Application_Application__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+
 
 
 
@@ -40960,7 +40962,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 throw err;
             }
         }
-        return JSON.stringify(arr);
+        return (0,_types__WEBPACK_IMPORTED_MODULE_5__.keyArrayToKey)(arr);
     }
     removeRow(key) {
         const row = this.getRow(key);
@@ -43140,6 +43142,23 @@ class WebSocketClient {
         return this.options.applicationController;
     }
 }
+
+
+/***/ }),
+
+/***/ "./src/types.ts":
+/*!**********************!*\
+  !*** ./src/types.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "keyArrayToKey": () => (/* binding */ keyArrayToKey)
+/* harmony export */ });
+const keyArrayToKey = (keyArray) => {
+    return JSON.stringify(keyArray);
+};
 
 
 /***/ })
