@@ -1,5 +1,6 @@
 import { DataSource } from '../DataSource';
 import { Key, RawRow } from '../../../../../types';
+import { Result } from '../../../../../Result';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {
@@ -20,7 +21,7 @@ export class PersistentDataSource extends DataSource {
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to insert');
 
-        const result = await this.getApp().request({
+        const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'insert',
             page: this.getForm().getPage().getName(),
