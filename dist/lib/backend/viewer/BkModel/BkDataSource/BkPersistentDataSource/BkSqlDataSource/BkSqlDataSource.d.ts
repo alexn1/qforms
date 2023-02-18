@@ -3,7 +3,7 @@ import { ReadResult } from '../../BkDataSource';
 import { BkTable } from '../../../Table/Table';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
-import { SqlDatabase } from '../../../Database/SqlDatabase/SqlDatabase';
+import { SqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 export declare class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);

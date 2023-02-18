@@ -2,7 +2,7 @@ import { Result } from '../../../../Result';
 import { BkModel } from '../BkModel';
 import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { BkDatabase } from '../Database/Database';
+import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../Form/Form';
 import { Key, KeyValues, Row, KeyParams } from '../../../../types';
 export type ReadResult = [any[], number | null];

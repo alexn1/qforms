@@ -2,7 +2,7 @@ import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { BkModel } from '../BkModel';
 import { BkAction } from '../BkAction/BkAction';
-import { BkDatabase } from '../Database/Database';
+import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
 import { BkPage } from '../Page/Page';
 import { BkPageLink } from '../PageLink/PageLink';

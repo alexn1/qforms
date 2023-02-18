@@ -1,5 +1,5 @@
 import { MongoClient, FindCursor, AggregationCursor, ObjectId, ClientSession, Db } from 'mongodb';
-import { BkNoSqlDatabase } from '../NoSqlDatabase';
+import { BkNoSqlDatabase } from '../BkNoSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 

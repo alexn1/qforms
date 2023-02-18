@@ -2,7 +2,7 @@ import { BkPersistentDataSource } from '../BkPersistentDataSource';
 import { Context } from '../../../../../Context';
 import { BkTable } from '../../../Table/Table';
 import { Result } from '../../../../../../Result';
-import { BkNoSqlDatabase } from '../../../Database/NoSqlDatabase/NoSqlDatabase';
+import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key } from '../../../../../../types';
 

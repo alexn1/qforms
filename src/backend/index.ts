@@ -10,10 +10,10 @@ export { AppInfo } from './AppInfo';
 // viewer
 export { BkModel } from './viewer/BkModel/BkModel';
 export { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-export { BkDatabase } from './viewer/BkModel/Database/Database';
-export { BkMySqlDatabase } from './viewer/BkModel/Database/SqlDatabase/MySqlDatabase/MySqlDatabase';
-export { BkPostgreSqlDatabase } from './viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
-export { BkMongoDbDatabase } from './viewer/BkModel/Database/NoSqlDatabase/MongoDbDatabase/MongoDbDatabase';
+export { BkDatabase } from './viewer/BkModel/BkDatabase/BkDatabase';
+export { BkMySqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkMySqlDatabase/BkMySqlDatabase';
+export { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
+export { BkMongoDbDatabase } from './viewer/BkModel/BkDatabase/BkNoSqlDatabase/BkMongoDbDatabase/BkMongoDbDatabase';
 export { BkDataSource } from './viewer/BkModel/BkDataSource/BkDataSource';
 export { BkSqlDataSource } from './viewer/BkModel/BkDataSource/BkPersistentDataSource/BkSqlDataSource/BkSqlDataSource';
 export { BkNoSqlDataSource } from './viewer/BkModel/BkDataSource/BkPersistentDataSource/BkNoSqlDataSource/BkNoSqlDataSource';

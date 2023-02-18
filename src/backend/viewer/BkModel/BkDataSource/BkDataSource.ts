@@ -5,7 +5,7 @@ import { BkModel } from '../BkModel';
 import { Helper } from '../../../Helper';
 import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { BkDatabase } from '../Database/Database';
+import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkRowForm } from '../Form/RowForm/RowForm';

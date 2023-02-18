@@ -1,5 +1,5 @@
 import { BkDataSource } from '../BkDataSource';
-import { BkDatabase } from '../../Database/Database';
+import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../Table/Table';
 import { RawRow, ChangesByKey } from '../../../../../types';
 

@@ -1,4 +1,4 @@
-import { BkDatabase } from '../Database';
+import { BkDatabase } from '../BkDatabase';
 import { Context } from '../../../../Context';
 
 export abstract class BkNoSqlDatabase<TConnection = any> extends BkDatabase<TConnection> {

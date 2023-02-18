@@ -10,7 +10,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 
 import { Helper } from './Helper';
-import { BkPostgreSqlDatabase } from './viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase';
+import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';

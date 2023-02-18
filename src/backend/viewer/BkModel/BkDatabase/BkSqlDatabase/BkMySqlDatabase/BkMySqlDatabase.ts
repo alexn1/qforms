@@ -1,5 +1,5 @@
 import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysql';
-import { SqlDatabase } from '../SqlDatabase';
+import { SqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 

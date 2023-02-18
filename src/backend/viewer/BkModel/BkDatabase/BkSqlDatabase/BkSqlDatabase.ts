@@ -1,4 +1,4 @@
-import { BkDatabase } from '../Database';
+import { BkDatabase } from '../BkDatabase';
 
 export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
     getUpdateQuery(tableName, values, where): string {

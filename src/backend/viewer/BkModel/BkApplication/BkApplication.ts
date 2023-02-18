@@ -8,7 +8,7 @@ import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
 import { BkModel } from '../BkModel';
 import { BkAction } from '../BkAction/BkAction';
-import { BkDatabase } from '../Database/Database';
+import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
 import { Helper } from '../../../Helper';
 import { BkPage } from '../Page/Page';

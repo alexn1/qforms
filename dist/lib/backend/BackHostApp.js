@@ -13,7 +13,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const Helper_1 = require("./Helper");
-const PostgreSqlDatabase_1 = require("./viewer/BkModel/Database/SqlDatabase/PostgreSqlDatabase/PostgreSqlDatabase");
+const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 const Context_1 = require("./Context");
 const BkApplication_1 = require("./viewer/BkModel/BkApplication/BkApplication");
 const MonitorModule_1 = require("./monitor/MonitorModule");
@@ -70,7 +70,7 @@ class BackHostApp {
         Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
-            this.logPool = PostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
+            this.logPool = BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
         }
         // express server
         this.express = (0, express_1.default)();
@@ -370,7 +370,7 @@ class BackHostApp {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await PostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
     async createLog2(values) {
         if (this.logPool) {
