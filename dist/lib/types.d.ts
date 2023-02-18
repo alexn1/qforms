@@ -21,3 +21,6 @@ export interface KeyParams {
 export interface KeyValues {
     [column: string]: KeyValue;
 }
+export interface QueryParams {
+    [name: string]: string | number | boolean;
+}

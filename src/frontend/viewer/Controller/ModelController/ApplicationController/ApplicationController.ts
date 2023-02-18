@@ -5,15 +5,14 @@ import { WebSocketClient } from '../../../WebSocketClient';
 import { FrontHostApp, Search, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
+import { QueryParams } from '../../../../../types';
 
 export interface OpenPageOptions {
     name: string;
     key?;
     newMode?: boolean;
     selectMode?: boolean;
-    params?: {
-        [name: string]: string | number;
-    };
+    params?: QueryParams;
     modal?: boolean;
     selectedKey?: string;
     onClose?;

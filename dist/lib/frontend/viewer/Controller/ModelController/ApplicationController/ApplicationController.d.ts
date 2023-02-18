@@ -2,14 +2,13 @@ import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
+import { QueryParams } from '../../../../../types';
 export interface OpenPageOptions {
     name: string;
     key?: any;
     newMode?: boolean;
     selectMode?: boolean;
-    params?: {
-        [name: string]: string | number;
-    };
+    params?: QueryParams;
     modal?: boolean;
     selectedKey?: string;
     onClose?: any;

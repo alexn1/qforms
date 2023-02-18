@@ -1,7 +1,7 @@
 // JSONString
 export type JSONString = string & { type: 'JSONString' };
 
-// Key - array of values as json string
+// Key - json string of key array
 // '[123]'
 // '["abc"]'
 // '[123, "abc"]'
@@ -29,4 +29,8 @@ export interface KeyParams {
 
 export interface KeyValues {
     [column: string]: KeyValue;
+}
+
+export interface QueryParams {
+    [name: string]: string | number | boolean;
 }
