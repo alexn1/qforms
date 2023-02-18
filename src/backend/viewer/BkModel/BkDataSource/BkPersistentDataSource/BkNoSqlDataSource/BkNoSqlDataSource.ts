@@ -180,6 +180,15 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         return result;
     }
 
+    async delete(context: Context): Promise<Result> {
+        if (this.getAccess(context).delete !== true) {
+            throw new Error(`${this.getFullName()}: access denied`);
+        }
+
+        const result = new Result();
+        return result;
+    }
+
     getSelectQuery(): string {
         const selectQuery = this.getAttr('selectQuery');
         if (!selectQuery) {

@@ -7,13 +7,33 @@ declare module 'express' {
     }
 }
 export declare class Context {
-    options: any;
-    query: any;
-    params: any;
+    options: {
+        domain: string;
+        req?: Request;
+        res?: Response;
+        module?: string;
+        appDirName?: string;
+        appFileName?: string;
+        env?: string;
+    };
+    query: {
+        [name: string]: any;
+    };
+    params: {
+        [name: string]: any;
+    };
     files: any;
     connections: any;
     querytime: any;
-    constructor(options: any);
+    constructor(options: {
+        domain: string;
+        req?: Request;
+        res?: Response;
+        module?: string;
+        appDirName?: string;
+        appFileName?: string;
+        env?: string;
+    });
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): any;

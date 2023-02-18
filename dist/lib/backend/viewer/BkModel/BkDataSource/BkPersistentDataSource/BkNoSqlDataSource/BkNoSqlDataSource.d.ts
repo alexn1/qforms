@@ -11,6 +11,7 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     read(context: Context): Promise<ReadResult>;
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
+    delete(context: Context): Promise<Result>;
     getSelectQuery(): string;
     getCountQuery(context: Context): string;
     getSelectParams(context: Context): any;

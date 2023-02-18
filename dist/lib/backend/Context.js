@@ -4,6 +4,7 @@ exports.Context = void 0;
 class Context {
     constructor(options) {
         // console.log('Context', options);
+        // this.options = options;
         this.options = options;
         // query
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));

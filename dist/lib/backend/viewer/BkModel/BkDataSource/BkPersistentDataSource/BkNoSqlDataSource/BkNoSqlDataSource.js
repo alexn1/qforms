@@ -141,6 +141,13 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, row);
         return result;
     }
+    async delete(context) {
+        if (this.getAccess(context).delete !== true) {
+            throw new Error(`${this.getFullName()}: access denied`);
+        }
+        const result = new Result_1.Result();
+        return result;
+    }
     getSelectQuery() {
         const selectQuery = this.getAttr('selectQuery');
         if (!selectQuery) {
