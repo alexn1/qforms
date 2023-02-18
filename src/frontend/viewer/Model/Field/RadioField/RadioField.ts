@@ -48,14 +48,15 @@ export class RadioField extends Field {
         const valueColumn = this.getAttr('valueColumn');
         return this.getDataSource()
             .getRows()
-            .find(row => row[valueColumn] === rawValue);
+            .find((row) => row[valueColumn] === rawValue);
     }
 }
 
-declare global {
+/* declare global {
     interface Window {
-        RadioField: typeof RadioField;
+        RadioField: RadioField;
     }
-}
+} */
 
+// @ts-ignore
 window.RadioField = RadioField;

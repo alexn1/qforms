@@ -3,12 +3,14 @@ import { BkApplication } from '../Application/Application';
 import { BkPage } from '../Page/Page';
 import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
-import { JSONString } from '../../../../types';
+import { JSONString, RawRow } from '../../../../types';
 export declare class BkField extends BkModel {
     fillAttributes(response: any): void;
     getDirPath(): string;
     fillDefaultValue(context: any, row: any): void;
-    dumpRowValueToParams(row: any, params: any): void;
+    dumpRowValueToParams(row: RawRow, params: {
+        [name: string]: any;
+    }): void;
     getFullName(): string;
     getApp(): BkApplication;
     getPage(): BkPage;

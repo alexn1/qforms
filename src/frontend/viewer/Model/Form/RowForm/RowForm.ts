@@ -1,3 +1,4 @@
+import { RawRow } from '../../../../../types';
 import { Form } from '../Form';
 
 export class RowForm extends Form {
@@ -33,7 +34,7 @@ export class RowForm extends Form {
         super.onDataSourceInsert(e);
     }
 
-    getRow(withChanges?) {
+    getRow(withChanges?): RawRow {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 
@@ -57,7 +58,7 @@ export class RowForm extends Form {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
-            fields.forEach(name => {
+            fields.forEach((name) => {
                 this.getField(name).valueToPageParams(this.getRow());
             });
         }

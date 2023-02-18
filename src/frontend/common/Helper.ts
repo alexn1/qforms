@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ReactDOM from 'react-dom';
+import { JSONString } from '../../types';
 
 // @ts-ignore
 window.QForms = {};
@@ -64,8 +65,8 @@ export class Helper {
         return eObj;
     }
 
-    static encodeValue(value) {
-        return JSON.stringify(value);
+    static encodeValue(value): JSONString {
+        return JSON.stringify(value) as JSONString;
     }
 
     static decodeObject(eObj): any {
@@ -77,7 +78,7 @@ export class Helper {
         return obj;
     }
 
-    static decodeValue(raw) {
+    static decodeValue(raw: JSONString) {
         try {
             return JSON.parse(raw, Helper.dateTimeReviver);
         } catch (err) {
@@ -88,9 +89,10 @@ export class Helper {
 
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
-                value,
-            );
+            const a =
+                /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
+                    value,
+                );
             if (a) return new Date(value);
         }
         return value;
@@ -103,7 +105,7 @@ export class Helper {
                 type,
                 {
                     ...props,
-                    onCreate: c => {
+                    onCreate: (c) => {
                         component = c;
                     },
                 } as any,
@@ -118,7 +120,7 @@ export class Helper {
     }
 
     static readFileAsDataURL(file) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsDataURL(file);
@@ -317,7 +319,7 @@ export class Helper {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     static delay(ms = 1000) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }

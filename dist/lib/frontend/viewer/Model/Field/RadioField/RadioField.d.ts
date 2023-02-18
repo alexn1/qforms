@@ -5,8 +5,3 @@ export declare class RadioField extends Field {
     getDataSource(): any;
     findRowByRawValue(rawValue: any): any;
 }
-declare global {
-    interface Window {
-        RadioField: typeof RadioField;
-    }
-}

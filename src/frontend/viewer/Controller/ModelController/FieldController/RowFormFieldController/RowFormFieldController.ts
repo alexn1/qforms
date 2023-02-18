@@ -2,7 +2,9 @@ import React from 'react';
 import { FieldController } from '../FieldController';
 import { ApplicationController } from '../../ApplicationController/ApplicationController';
 import { Field } from '../../../../Model/Field/Field';
-import {RowFormController} from '../../FormController/RowFormController/RowFormController'
+import { RowFormController } from '../../FormController/RowFormController/RowFormController';
+import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
+import { JSONString, RawRow } from '../../../../../../types';
 
 export class RowFormFieldController<TField extends Field> extends FieldController<TField> {
     state: any;
@@ -33,8 +35,9 @@ export class RowFormFieldController<TField extends Field> extends FieldControlle
         this.refreshChangedState();
     }
 
-    getRow() {
-        return this.model.getForm().getRow();
+    getRow(): RawRow {
+        const form = this.getModel().getForm() as RowForm;
+        return form.getRow();
     }
 
     getForm(): RowFormController {
@@ -230,7 +233,7 @@ export class RowFormFieldController<TField extends Field> extends FieldControlle
         return this.state.parseError !== null;
     }
 
-    calcChangedState(row) {
+    calcChangedState(row: RawRow) {
         // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
         if (!row) throw new Error('FieldController: no row');
         if (this.isParseError()) {
@@ -261,8 +264,8 @@ export class RowFormFieldController<TField extends Field> extends FieldControlle
                 let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[
                     this.model.getAttr('column')
                 ];
-                if (original) original = original.substr(0, 100);
-                if (modified) modified = modified.substr(0, 100);
+                if (original) original = original.substr(0, 100) as JSONString;
+                if (modified) modified = modified.substr(0, 100) as JSONString;
                 console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
                 return true;
             }

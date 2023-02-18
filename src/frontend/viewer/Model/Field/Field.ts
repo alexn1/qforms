@@ -1,6 +1,11 @@
 import { Model } from '../Model';
 import { Helper } from '../../../common';
 import { RowForm } from '../Form/RowForm/RowForm';
+import { JSONString, RawRow } from '../../../../types';
+import { DataSource } from '../DataSource/DataSource';
+import { Form } from '../Form/Form';
+import { Page } from '../Page/Page';
+import { Application } from '../Application/Application';
 
 export class Field extends Model {
     // constructor(data, parent) {
@@ -99,9 +104,7 @@ export class Field extends Model {
         // console.log('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column')) throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
-        this.getForm()
-            .getDefaultDataSource()
-            .setValue(row, this.getAttr('column'), rawValue);
+        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
     }
 
@@ -109,22 +112,20 @@ export class Field extends Model {
         return Helper.decodeValue(rawValue);
     }
 
-    valueToRaw(value) {
+    valueToRaw(value): JSONString {
         return Helper.encodeValue(value);
     }
 
-    getRawValue(row) {
+    getRawValue(row: RawRow): JSONString {
         if (!this.hasColumn()) throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm()
-            .getDefaultDataSource()
-            .getValue(row, this.getAttr('column'));
+        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
     }
 
-    getDefaultDataSource() {
+    getDefaultDataSource(): DataSource {
         return this.getForm().getDefaultDataSource();
     }
 
-    getType() {
+    getType(): string {
         if (this.getAttr('type')) {
             return this.getAttr('type');
         }
@@ -138,52 +139,52 @@ export class Field extends Model {
         throw new Error('field type and column empty');
     }
 
-    getForm() {
+    getForm(): Form {
         return this.parent;
     }
 
-    getPage() {
+    getPage(): Page {
         return this.parent.parent;
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent.parent;
     }
 
-    isReadOnly() {
+    isReadOnly(): boolean {
         return this.data.readOnly === 'true';
     }
-    isNotNull() {
+    isNotNull(): boolean {
         return this.data.notNull === 'true';
     }
-    isNullable() {
+    isNullable(): boolean {
         return this.data.notNull === 'false';
     }
-    getWidth() {
+    getWidth(): number | null {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;
         return width;
     }
-    getFullName() {
+    getFullName(): string {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
     }
-    isParam() {
+    isParam(): boolean {
         return this.data.param === 'true';
     }
-    validateOnChange() {
+    validateOnChange(): boolean {
         if (this.data.validateOnChange !== undefined) {
             return this.data.validateOnChange === 'true';
         }
         return true;
     }
-    validateOnBlur() {
+    validateOnBlur(): boolean {
         if (this.data.validateOnBlur !== undefined) {
             return this.data.validateOnBlur === 'true';
         }
         return false;
     }
-    getCaption() {
+    getCaption(): string {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');

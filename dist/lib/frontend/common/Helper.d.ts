@@ -1,12 +1,13 @@
+import { JSONString } from '../../types';
 export declare class Helper {
     static formatDate(date: any, format: any): any;
     static formatNumber(value: any): string;
     static today(): Date;
     static getStartOfDay(date: any): Date;
     static encodeObject(obj: any): {};
-    static encodeValue(value: any): string;
+    static encodeValue(value: any): JSONString;
     static decodeObject(eObj: any): any;
-    static decodeValue(raw: any): any;
+    static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: any, value: any): any;
     static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): any;
     static destroyReactComponent(root: any): void;

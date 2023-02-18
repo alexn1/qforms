@@ -7,7 +7,7 @@ import { BkForm } from '../Form/Form';
 import { BkColumn } from '../Column/Column';
 import { Helper } from '../../../Helper';
 import { BkPersistentDataSource } from '../BkDataSource/PersistentDataSource/PersistentDataSource';
-import { JSONString } from '../../../../types';
+import { JSONString, RawRow } from '../../../../types';
 
 export class BkField extends BkModel {
     /* static async create(data, parent): Promise<Field> {
@@ -58,7 +58,7 @@ export class BkField extends BkModel {
         }
     }
 
-    dumpRowValueToParams(row, params) {
+    dumpRowValueToParams(row: RawRow, params: {[name: string]: any}) {
         // console.log('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {

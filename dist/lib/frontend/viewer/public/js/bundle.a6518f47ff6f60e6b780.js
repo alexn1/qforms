@@ -32062,7 +32062,7 @@ class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: c => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
                     component = c;
                 } }), children),
         ]);
@@ -32073,7 +32073,7 @@ class Helper {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsDataURL(file);
@@ -32279,7 +32279,7 @@ class Helper {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     static delay(ms = 1000) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }
@@ -37657,7 +37657,8 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         this.refreshChangedState();
     }
     getRow() {
-        return this.model.getForm().getRow();
+        const form = this.getModel().getForm();
+        return form.getRow();
     }
     getForm() {
         return super.getForm();
@@ -41971,9 +41972,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!this.getAttr('column'))
             throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
-        this.getForm()
-            .getDefaultDataSource()
-            .setValue(row, this.getAttr('column'), rawValue);
+        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
         this.valueToPageParams(row);
     }
     rawToValue(rawValue) {
@@ -41985,9 +41984,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getRawValue(row) {
         if (!this.hasColumn())
             throw new Error(`${this.getFullName()}: no column`);
-        return this.getForm()
-            .getDefaultDataSource()
-            .getValue(row, this.getAttr('column'));
+        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
     }
     getDefaultDataSource() {
         return this.getForm().getDefaultDataSource();
@@ -42211,9 +42208,15 @@ class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         const valueColumn = this.getAttr('valueColumn');
         return this.getDataSource()
             .getRows()
-            .find(row => row[valueColumn] === rawValue);
+            .find((row) => row[valueColumn] === rawValue);
     }
 }
+/* declare global {
+    interface Window {
+        RadioField: RadioField;
+    }
+} */
+// @ts-ignore
 window.RadioField = RadioField;
 
 
@@ -42463,7 +42466,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
-            fields.forEach(name => {
+            fields.forEach((name) => {
                 this.getField(name).valueToPageParams(this.getRow());
             });
         }
