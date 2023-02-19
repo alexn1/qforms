@@ -19,7 +19,6 @@ import { IndexModule } from './index/IndexModule';
 import { MyError } from './MyError';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
-// import { CommonModule } from './common/CommonModule';
 import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
 
@@ -42,7 +41,6 @@ export class BackHostApp {
     runtimeDirPath: string;
     sessionDirPath: string;
     logPool: any;
-    // commonModule: CommonModule;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -112,10 +110,6 @@ export class BackHostApp {
         this.express.enable('strict routing');
 
         this.initExpressServer();
-
-        // commonModule
-        // this.commonModule = new CommonModule(this);
-        // await this.commonModule.init();
 
         // indexModule
         this.indexModule = new IndexModule(this);

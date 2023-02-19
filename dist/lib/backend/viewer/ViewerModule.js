@@ -31,10 +31,7 @@ class ViewerModule {
         // console.log('viewer.js:' , this.js);
     }
     getLinks() {
-        return [
-            // ...this.hostApp.commonModule.css,
-            ...this.css,
-        ];
+        return [...this.css];
     }
     getScripts() {
         return [
@@ -42,7 +39,6 @@ class ViewerModule {
             // '/lib/react/react-dom.development.js',
             // '/lib/react/react.production.min.js',
             // '/lib/react/react-dom.production.min.js',
-            // ...(this.hostApp.commonModule.js),
             ...this.js,
         ];
     }

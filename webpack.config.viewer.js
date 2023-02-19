@@ -52,7 +52,7 @@ module.exports = {
                             rootDir: 'src',
                             outDir: 'dist/lib',
                             moduleResolution: 'node',
-                            noImplicitAny: false,                            
+                            noImplicitAny: false,
                         },
                     },
                 },

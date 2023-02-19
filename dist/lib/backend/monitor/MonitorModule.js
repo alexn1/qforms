@@ -8,8 +8,8 @@ class MonitorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map(path => `/monitor/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map(path => `/monitor/public/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
@@ -17,17 +17,17 @@ class MonitorModule {
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             uptime: Date.now() - this.hostApp.startTime.getTime(),
-            applications: Object.keys(this.hostApp.applications).map(route => {
+            applications: Object.keys(this.hostApp.applications).map((route) => {
                 const app = this.hostApp.applications[route];
                 return {
                     route: route,
                     version: app.getVersion(),
-                    pages: Object.keys(app.pages).map(name => {
+                    pages: Object.keys(app.pages).map((name) => {
                         return {
                             name: name,
                         };
                     }),
-                    clients: app.clients.map(webSocket => {
+                    clients: app.clients.map((webSocket) => {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
@@ -40,10 +40,7 @@ class MonitorModule {
         };
     }
     getLinks() {
-        return [
-            // ...this.hostApp.commonModule.css,
-            ...this.css,
-        ];
+        return [...this.css];
     }
     getScripts() {
         return [
@@ -51,7 +48,6 @@ class MonitorModule {
             // '/lib/react/react-dom.development.js',
             // '/lib/react/react.production.min.js',
             // '/lib/react/react-dom.production.min.js',
-            // ...(this.hostApp.commonModule.js),
             ...this.js,
         ];
     }

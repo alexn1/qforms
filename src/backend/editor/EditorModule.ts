@@ -69,7 +69,6 @@ export class EditorModule {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
             '/lib/codemirror-4.8/theme/cobalt.css',
-            // ...this.hostApp.commonModule.css,
             ...this.css,
         ];
     }
@@ -81,7 +80,6 @@ export class EditorModule {
             // '/lib/react/react-dom.production.min.js',
             '/lib/codemirror-4.8/lib/codemirror.js',
             '/lib/codemirror-4.8/mode/javascript/javascript.js',
-            // ...(this.hostApp.commonModule.js),
             ...this.js,
         ];
     }
