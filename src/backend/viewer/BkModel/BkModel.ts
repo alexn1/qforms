@@ -64,23 +64,6 @@ export class BkModel extends BaseModel {
         }
     }
 
-    /*async getChildModelCustomClass(model: Model, colName: string, data: any): Promise<any> {
-        // let CustomClass = null;
-        // const dirPath = this.getDirPath();
-        // if (dirPath) {
-        //     const modelName = BaseModel.getName(data);
-        //     const customClassFilePath = path.join(dirPath, colName, modelName, 'Model.back.js');
-        //     const exists = await Helper.exists(customClassFilePath);
-        //     if (exists) {
-        //         CustomClass = require(customClassFilePath);
-        //     }
-        // }
-        // return CustomClass;
-        return this.getParent()
-            ? this.getParent().getChildModelCustomClass(model, colName, data)
-            : null;
-    }*/
-
     async createChildModel(colName: string, itemData: any): Promise<any> {
         const modelClass = BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
