@@ -31283,7 +31283,7 @@ class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: c => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
                     component = c;
                 } }), children),
         ]);
@@ -31294,7 +31294,7 @@ class Helper {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.unmountComponentAtNode(root);
     }
     static readFileAsDataURL(file) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsDataURL(file);
@@ -31500,7 +31500,7 @@ class Helper {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
     static delay(ms = 1000) {
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }
