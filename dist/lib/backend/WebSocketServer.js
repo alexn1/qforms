@@ -1,14 +1,17 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebSocketServer = void 0;
+const ws_1 = __importDefault(require("ws"));
+const url_1 = __importDefault(require("url"));
 const Context_1 = require("./Context");
-const ws = require('ws');
-const url = require('url');
 class WebSocketServer {
     constructor(options) {
         this.options = options;
         // console.log('WebSocketServer.constructor');
-        this.server = new ws.Server({
+        this.server = new ws_1.default.Server({
             server: options.httpServer,
             path: '/',
         });
@@ -20,7 +23,7 @@ class WebSocketServer {
     }
     async onConnection(webSocket) {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
-        const parts = url.parse(webSocket.upgradeReq.url, true);
+        const parts = url_1.default.parse(webSocket.upgradeReq.url, true);
         // console.log('parts.query:', parts.query);
         if (!parts.query.route)
             throw new Error('no route');

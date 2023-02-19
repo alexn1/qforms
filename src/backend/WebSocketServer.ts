@@ -1,8 +1,8 @@
+import ws from 'ws';
+import url from 'url';
+
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
-
-const ws = require('ws');
-const url = require('url');
 
 export class WebSocketServer {
     options: any;
@@ -38,7 +38,7 @@ export class WebSocketServer {
         webSocket.on('close', this.onClose.bind(this, webSocket));
         webSocket.on('message', this.onMessage.bind(this, webSocket));
 
-        const [appDirName, appFileName, env, domain] = parts.query.route.split('/');
+        const [appDirName, appFileName, env, domain] = (parts.query.route as string).split('/');
         const context = new Context({
             module: 'viewer',
             appDirName,
