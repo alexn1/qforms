@@ -57,9 +57,7 @@ export class WebSocketServer {
 
     async onClose(webSocket, code, reason) {
         console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
-        this.getHostApp()
-            .getApplicationByRoute(webSocket.route)
-            .removeClient(webSocket);
+        this.getHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
 
     async onMessage(webSocket, data, flags) {
