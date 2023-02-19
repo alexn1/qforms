@@ -1,3 +1,3 @@
-export const App = pros => {
+export const App = (pros) => {
     return <div></div>;
 };
