@@ -1,9 +1,9 @@
 import path from 'path';
+import { v4 as uuidv4 } from 'uuid';
+// import axios from 'axios';
+// import colors from 'colors/safe';
+
 import { AppInfo } from '../../../AppInfo';
-
-// const axios = require('axios');
-// const colors = require('colors/safe');
-
 import { BackHostApp } from '../../../BackHostApp';
 import { BaseModel } from '../../../BaseModel';
 import { BkModel } from '../BkModel';
@@ -17,8 +17,6 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
 import { Result } from '../../../../Result';
-
-const { v4: uuidv4 } = require('uuid');
 
 const text = require('../../text');
 const pkg = require('../../../../../package.json');

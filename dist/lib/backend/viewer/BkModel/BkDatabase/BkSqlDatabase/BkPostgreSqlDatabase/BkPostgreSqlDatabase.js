@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkPostgreSqlDatabase = void 0;
+const colors_1 = __importDefault(require("colors"));
 const pg_1 = require("pg");
 const BkSqlDatabase_1 = require("../BkSqlDatabase");
-const colors = require('colors');
 class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
     constructor() {
         super(...arguments);
@@ -55,7 +58,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
     }
     async queryResult(context, query, params = null) {
         if (context.query.sql) {
-            console.log(colors.blue('PostgreSqlDatabase.queryResult'), {
+            console.log(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
             } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
@@ -71,7 +74,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
         return result;
     }
     static async queryResult(cnn, query, params = null) {
-        console.log(colors.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        console.log(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         BkSqlDatabase_1.SqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
@@ -98,7 +101,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
         await this.getConnection(context).query('commit');
     }
     async rollback(context, err) {
-        console.log(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
+        console.log(colors_1.default.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('rollback');

@@ -5,6 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkApplication = void 0;
 const path_1 = __importDefault(require("path"));
+const uuid_1 = require("uuid");
 const BaseModel_1 = require("../../../BaseModel");
 const BkModel_1 = require("../BkModel");
 const Helper_1 = require("../../../Helper");
@@ -12,7 +13,6 @@ const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../../Result");
-const { v4: uuidv4 } = require('uuid');
 const text = require('../../text');
 const pkg = require('../../../../../package.json');
 class BkApplication extends BkModel_1.BkModel {
@@ -113,7 +113,7 @@ class BkApplication extends BkModel_1.BkModel {
         // nav
         response.nav = this.nav;
         // uuid
-        response.uuid = uuidv4();
+        response.uuid = (0, uuid_1.v4)();
         // actions
         response.actions = this.getCol('actions').map((data) => ({
             name: BaseModel_1.BaseModel.getName(data),

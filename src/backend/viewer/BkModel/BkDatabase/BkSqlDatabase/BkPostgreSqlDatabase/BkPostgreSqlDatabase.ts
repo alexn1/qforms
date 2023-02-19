@@ -1,9 +1,9 @@
+import colors from 'colors';
+
 import { Pool, Client, PoolClient } from 'pg';
 import { SqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
-
-const colors = require('colors');
 
 export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
     pool: Pool | null = null;
