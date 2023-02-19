@@ -34,13 +34,7 @@ class ViewerModule {
         return [...this.css];
     }
     getScripts() {
-        return [
-            // '/lib/react/react.development.js',
-            // '/lib/react/react-dom.development.js',
-            // '/lib/react/react.production.min.js',
-            // '/lib/react/react-dom.production.min.js',
-            ...this.js,
-        ];
+        return [...this.js];
     }
     async handleViewerGet(context, application) {
         console.log('ViewerModule.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);

@@ -54,13 +54,7 @@ export class ViewerModule {
     }
 
     getScripts() {
-        return [
-            // '/lib/react/react.development.js',
-            // '/lib/react/react-dom.development.js',
-            // '/lib/react/react.production.min.js',
-            // '/lib/react/react-dom.production.min.js',
-            ...this.js,
-        ];
+        return [...this.js];
     }
 
     async handleViewerGet(context: Context, application: BkApplication) {

@@ -45,13 +45,7 @@ export class IndexModule {
         return [...this.css];
     }
     getScripts() {
-        return [
-            // '/lib/react/react.development.js',
-            // '/lib/react/react-dom.development.js',
-            // '/lib/react/react.production.min.js',
-            // '/lib/react/react-dom.production.min.js',
-            ...this.js,
-        ];
+        return [...this.js];
     }
     render({ version, links, scripts, data }: any) {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
