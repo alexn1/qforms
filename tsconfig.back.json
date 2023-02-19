@@ -7,7 +7,8 @@
         "rootDir": "src",
         "outDir": "dist/lib",
         "moduleResolution": "node",
-        "module": "commonjs"
+        "module": "commonjs",
+        "resolveJsonModule": true
     },
     "include": ["src/backend/**/*", "src/Result.ts", "src/types.ts"]
 }

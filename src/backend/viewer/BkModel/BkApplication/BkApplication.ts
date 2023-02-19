@@ -18,7 +18,7 @@ import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
 import { Result } from '../../../../Result';
 
-const text = require('../../text');
+import * as text from '../../text';
 const pkg = require('../../../../../package.json');
 
 export class BkApplication extends BkModel {
