@@ -47,37 +47,45 @@ class BkDataSource extends BkModel_1.BkModel {
         }
         return keyColumns;
     }
+    checkKeyColumns(row) {
+        for (const keyColumn of this.keyColumns) {
+            if (!row.hasOwnProperty(keyColumn)) {
+                throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
+            }
+        }
+    }
+    checkNotUsedColumns(row) {
+        const rowColumns = Object.keys(row);
+        const formColumns = this.getParent()
+            .fields.map((field) => field.getAttr('column'))
+            .filter((column) => !!column);
+        for (const rowColumn of rowColumns) {
+            if (!formColumns.includes(rowColumn)) {
+                console.log('rowColumns:', rowColumns);
+                console.log('formColumns:', formColumns);
+                console.log('row:', row);
+                throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
+            }
+        }
+    }
+    checkRow(row) {
+        this.checkKeyColumns(row);
+        if (this.isDefaultOnForm()) {
+            this.checkNotUsedColumns(row);
+            this.checkFields(row);
+        }
+    }
+    checkRows(rows) {
+        if (rows[0]) {
+            this.checkRow(rows[0]);
+        }
+    }
     prepareRows(context, rows) {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
-        if (rows[0]) {
-            for (const keyColumn of this.keyColumns) {
-                if (!rows[0].hasOwnProperty(keyColumn)) {
-                    throw new Error(`${this.getFullName()}: no key column '${keyColumn}' in result set`);
-                }
-            }
-            if (this.isDefaultOnForm()) {
-                const rowColumns = Object.keys(rows[0]);
-                const formColumns = this.getParent()
-                    .fields.map((field) => field.getAttr('column'))
-                    .filter((column) => !!column);
-                for (const rowColumn of rowColumns) {
-                    if (!formColumns.includes(rowColumn)) {
-                        console.log('rowColumns:', rowColumns);
-                        console.log('formColumns:', formColumns);
-                        console.log('row:', rows[0]);
-                        throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
-                    }
-                }
-            }
-        }
-        if (this.isDefaultOnForm()) {
-            for (const row of rows) {
-                this.checkColumns(row);
-            }
-        }
+        this.checkRows(rows);
         this.encodeRows(rows);
     }
-    checkColumns(row) {
+    checkFields(row) {
         for (const field of this.getForm().fields) {
             const column = field.getAttr('column');
             if (column) {
@@ -97,6 +105,9 @@ class BkDataSource extends BkModel_1.BkModel {
             this.encodeRow(row);
         }
     }
+    encodeRows2(rows) {
+        return rows.map((row) => this.encodeRow2(row));
+    }
     encodeRow(row) {
         // console.log('DataSource.encodeRow');
         if (!row)
@@ -112,6 +123,23 @@ class BkDataSource extends BkModel_1.BkModel {
                 row[name] = Helper_1.Helper.encodeValue(row[name]);
             }
         }
+    }
+    encodeRow2(row) {
+        if (!row)
+            throw new Error(`encodeRow: need row`);
+        const rawRow = {};
+        if (this.isDefaultOnForm()) {
+            for (const field of this.getForm().fields) {
+                const column = field.getAttr('column');
+                rawRow[column] = field.valueToRaw(row[column]);
+            }
+        }
+        else {
+            for (const name in row) {
+                rawRow[name] = Helper_1.Helper.encodeValue(row[name]);
+            }
+        }
+        return rawRow;
     }
     getApp() {
         return this.parent.getApp();

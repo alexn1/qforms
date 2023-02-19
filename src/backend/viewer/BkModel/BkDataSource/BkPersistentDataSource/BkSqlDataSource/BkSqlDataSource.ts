@@ -194,12 +194,14 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         // row
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.prepareRows(context, [row]);
         // console.log('row:', row);
+        // this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
 
         const result = new Result();
         Result.addInsertToResult(result, database, table, key);
-        Result.addInsertExToResult(result, database, table, key, row);
+        Result.addInsertExToResult(result, database, table, key, rawRow);
         return result;
     }
 
@@ -238,13 +240,15 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         // console.log('selectQuery:', selectQuery);
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
-        this.prepareRows(context, [row]);
         // console.log('row:', row);
+        // this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
 
         // result
         const result = new Result();
         Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
-        Result.addUpdateExToResult(result, databaseName, tableName, key, row);
+        Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
 

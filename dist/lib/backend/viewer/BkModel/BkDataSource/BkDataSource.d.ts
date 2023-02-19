@@ -4,7 +4,7 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
-import { Key, KeyValues, Row, KeyParams } from '../../../../types';
+import { Key, KeyValues, Row, KeyParams, RawRow } from '../../../../types';
 export type ReadResult = [any[], number | null];
 export declare class BkDataSource extends BkModel {
     keyColumns: string[];
@@ -13,10 +13,16 @@ export declare class BkDataSource extends BkModel {
     getJsonFilePath(): string;
     init(context: Context): Promise<void>;
     getKeyColumns(): string[];
+    checkKeyColumns(row: Row): void;
+    checkNotUsedColumns(row: Row): void;
+    checkRow(row: Row): void;
+    checkRows(rows: Row[]): void;
     prepareRows(context: Context, rows: Row[]): void;
-    checkColumns(row: Row): void;
+    checkFields(row: Row): void;
     encodeRows(rows: Row[]): void;
+    encodeRows2(rows: Row[]): RawRow[];
     encodeRow(row: Row): void;
+    encodeRow2(row: Row): RawRow;
     getApp(): BkApplication;
     getKeyValuesFromKey(key: Key): KeyValues;
     getKeyFromValues(values: any): Key;

@@ -127,12 +127,15 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
         if (!row) throw new Error('select query does not return row');
-        this.prepareRows(context, [row]);
+        // this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
+
         // console.log('row:', row);
 
         const result = new Result();
         Result.addInsertToResult(result, databaseName, tableName, key);
-        Result.addInsertExToResult(result, databaseName, tableName, key, row);
+        Result.addInsertExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
 
@@ -170,13 +173,15 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             newKeyParams,
         );
         if (!row) throw new Error('select query does not return row');
-        this.prepareRows(context, [row]);
+        //this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
         // console.log('row:', row);
 
         // result
         const result = new Result();
         Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
-        Result.addUpdateExToResult(result, databaseName, tableName, key, row);
+        Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
 

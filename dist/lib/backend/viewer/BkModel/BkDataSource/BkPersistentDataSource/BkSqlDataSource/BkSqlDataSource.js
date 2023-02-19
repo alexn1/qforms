@@ -166,11 +166,13 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        this.prepareRows(context, [row]);
         // console.log('row:', row);
+        // this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
         const result = new Result_1.Result();
         Result_1.Result.addInsertToResult(result, database, table, key);
-        Result_1.Result.addInsertExToResult(result, database, table, key, row);
+        Result_1.Result.addInsertExToResult(result, database, table, key, rawRow);
         return result;
     }
     async update(context) {
@@ -205,12 +207,14 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row)
             throw new Error('singleQuery does not return row');
-        this.prepareRows(context, [row]);
         // console.log('row:', row);
+        // this.prepareRows(context, [row]);
+        this.checkRow(row);
+        const rawRow = this.encodeRow2(row);
         // result
         const result = new Result_1.Result();
         Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
-        Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, row);
+        Result_1.Result.addUpdateExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
     async delete(context) {

@@ -6,12 +6,18 @@ export type Key = JSONString & {
 };
 export type KeyValue = number | string;
 export type KeyArray = KeyValue[];
-export interface Row {
+interface _Row {
     [column: string]: any;
 }
-export interface RawRow {
+export type Row = _Row & {
+    type: 'Row';
+};
+interface _RawRow {
     [column: string]: JSONString;
 }
+export type RawRow = _RawRow & {
+    type: 'RawRow';
+};
 export interface ChangesByKey {
     [key: Key]: RawRow;
 }
@@ -25,3 +31,4 @@ export interface QueryParams {
     [name: string]: string | number | boolean;
 }
 export declare const keyArrayToKey: (keyArray: KeyArray) => Key;
+export {};
