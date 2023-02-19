@@ -80,11 +80,11 @@ class BkDataSource extends BkModel_1.BkModel {
             this.checkRow(rows[0]);
         }
     }
-    prepareRows(context, rows) {
+    /* prepareRows(context: Context, rows: Row[]): void {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         this.checkRows(rows);
         this.encodeRows(rows);
-    }
+    } */
     checkFields(row) {
         for (const field of this.getForm().fields) {
             const column = field.getAttr('column');
@@ -100,30 +100,28 @@ class BkDataSource extends BkModel_1.BkModel {
             throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);
         }
     }
-    encodeRows(rows) {
+    /* encodeRows(rows: Row[]) {
         for (const row of rows) {
             this.encodeRow(row);
         }
-    }
+    } */
     encodeRows2(rows) {
         return rows.map((row) => this.encodeRow2(row));
     }
-    encodeRow(row) {
+    /* encodeRow(row: Row): void {
         // console.log('DataSource.encodeRow');
-        if (!row)
-            throw new Error(`encodeRow: need row`);
+        if (!row) throw new Error(`encodeRow: need row`);
         if (this.isDefaultOnForm()) {
             for (const field of this.getForm().fields) {
                 const column = field.getAttr('column');
                 row[column] = field.valueToRaw(row[column]);
             }
-        }
-        else {
+        } else {
             for (const name in row) {
-                row[name] = Helper_1.Helper.encodeValue(row[name]);
+                row[name] = Helper.encodeValue(row[name]);
             }
         }
-    }
+    } */
     encodeRow2(row) {
         if (!row)
             throw new Error(`encodeRow: need row`);

@@ -139,7 +139,9 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
             : this.getMultipleQuery(context);
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
-        this.prepareRows(context, rows);
+        this.checkRows(rows);
+        // this.encodeRows(rows);
+        const rawRows = this.encodeRows2(rows);
 
         // count
         let count: number | null = null;
@@ -157,7 +159,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
             }
         }
 
-        return [rows, count];
+        return [rawRows, count];
     }
 
     async create(context: Context, _values: any = null): Promise<Result> {
@@ -195,7 +197,6 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         const [row] = await this.getDatabase().queryRows(context, singleQuery, keyParams);
         if (!row) throw new Error('singleQuery does not return row');
         // console.log('row:', row);
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
 
@@ -241,7 +242,6 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         const [row] = await this.getDatabase().queryRows(context, selectQuery, newKeyParams);
         if (!row) throw new Error('singleQuery does not return row');
         // console.log('row:', row);
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
 

@@ -124,7 +124,9 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             : this.getMultipleQuery(context);
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
-        this.prepareRows(context, rows);
+        this.checkRows(rows);
+        // this.encodeRows(rows);
+        const rawRows = this.encodeRows2(rows);
         // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
@@ -137,7 +139,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
                 throw err;
             }
         }
-        return [rows, count];
+        return [rawRows, count];
     }
     async create(context, _values = null) {
         console.log('SqlDataSource.create');
@@ -167,7 +169,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (!row)
             throw new Error('singleQuery does not return row');
         // console.log('row:', row);
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
         const result = new Result_1.Result();
@@ -208,7 +209,6 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (!row)
             throw new Error('singleQuery does not return row');
         // console.log('row:', row);
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
         // result

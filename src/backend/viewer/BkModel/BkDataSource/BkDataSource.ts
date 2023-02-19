@@ -12,7 +12,7 @@ import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
 import { Key, KeyValues, Row, KeyArray, KeyParams, RawRow } from '../../../../types';
 
-export type ReadResult = [any[], number | null];
+export type ReadResult = [RawRow[], number | null];
 
 export class BkDataSource extends BkModel {
     keyColumns: string[] = [];
@@ -99,11 +99,11 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    prepareRows(context: Context, rows: Row[]): void {
+    /* prepareRows(context: Context, rows: Row[]): void {
         // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
         this.checkRows(rows);
         this.encodeRows(rows);
-    }
+    } */
 
     checkFields(row: Row): void {
         for (const field of this.getForm().fields) {
@@ -125,17 +125,17 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    encodeRows(rows: Row[]) {
+    /* encodeRows(rows: Row[]) {
         for (const row of rows) {
             this.encodeRow(row);
         }
-    }
+    } */
 
     encodeRows2(rows: Row[]): RawRow[] {
         return rows.map((row) => this.encodeRow2(row));
     }
 
-    encodeRow(row: Row): void {
+    /* encodeRow(row: Row): void {
         // console.log('DataSource.encodeRow');
         if (!row) throw new Error(`encodeRow: need row`);
         if (this.isDefaultOnForm()) {
@@ -148,7 +148,7 @@ export class BkDataSource extends BkModel {
                 row[name] = Helper.encodeValue(row[name]);
             }
         }
-    }
+    } */
 
     encodeRow2(row: Row): RawRow {
         if (!row) throw new Error(`encodeRow: need row`);

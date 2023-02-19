@@ -59,7 +59,9 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(), this.getSelectParams(context));
         console.log('query time:', Date.now() - start);
-        this.prepareRows(context, rows);
+        this.checkRows(rows);
+        // this.encodeRows(rows);
+        const rawRows = this.encodeRows2(rows);
         // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
@@ -72,7 +74,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
                 throw err;
             }
         }
-        return [rows, count];
+        return [rawRows, count];
     }
     async create(context, _values = null) {
         console.log('NoSqlDataSource.create');
@@ -99,7 +101,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
         if (!row)
             throw new Error('select query does not return row');
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
         // console.log('row:', row);
@@ -135,7 +136,6 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
-        //this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
         // console.log('row:', row);

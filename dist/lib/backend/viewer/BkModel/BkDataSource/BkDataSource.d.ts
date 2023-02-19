@@ -5,7 +5,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
 import { Key, KeyValues, Row, KeyParams, RawRow } from '../../../../types';
-export type ReadResult = [any[], number | null];
+export type ReadResult = [RawRow[], number | null];
 export declare class BkDataSource extends BkModel {
     keyColumns: string[];
     rows: Row[];
@@ -17,11 +17,8 @@ export declare class BkDataSource extends BkModel {
     checkNotUsedColumns(row: Row): void;
     checkRow(row: Row): void;
     checkRows(rows: Row[]): void;
-    prepareRows(context: Context, rows: Row[]): void;
     checkFields(row: Row): void;
-    encodeRows(rows: Row[]): void;
     encodeRows2(rows: Row[]): RawRow[];
-    encodeRow(row: Row): void;
     encodeRow2(row: Row): RawRow;
     getApp(): BkApplication;
     getKeyValuesFromKey(key: Key): KeyValues;

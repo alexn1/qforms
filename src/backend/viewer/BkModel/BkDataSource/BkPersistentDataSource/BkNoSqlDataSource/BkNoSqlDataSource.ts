@@ -75,7 +75,9 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             this.getSelectParams(context),
         );
         console.log('query time:', Date.now() - start);
-        this.prepareRows(context, rows);
+        this.checkRows(rows);
+        // this.encodeRows(rows);
+        const rawRows = this.encodeRows2(rows);
 
         // count
         let count: number | null = null;
@@ -93,7 +95,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             }
         }
 
-        return [rows, count];
+        return [rawRows, count];
     }
 
     async create(context: Context, _values: any = null): Promise<Result> {
@@ -127,7 +129,6 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
         if (!row) throw new Error('select query does not return row');
-        // this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
 
@@ -173,7 +174,6 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             newKeyParams,
         );
         if (!row) throw new Error('select query does not return row');
-        //this.prepareRows(context, [row]);
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
         // console.log('row:', row);
