@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Helper = void 0;
 const fs_1 = __importDefault(require("fs"));
-const glob = require('glob');
-const path = require('path');
-const slash = require('slash');
-const colors = require('colors/safe');
+const glob_1 = __importDefault(require("glob"));
+const path_1 = __importDefault(require("path"));
+const slash_1 = __importDefault(require("slash"));
+const safe_1 = __importDefault(require("colors/safe"));
 function _getFilePathsSync(dirPath, ext) {
-    const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
-    glob.sync(path.join(dirPath, '*/')).forEach((subDirPath) => {
+    const filePaths = glob_1.default.sync(path_1.default.join(dirPath, '*.' + ext));
+    glob_1.default.sync(path_1.default.join(dirPath, '*/')).forEach((subDirPath) => {
         _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
             filePaths.push(fileName);
         });
@@ -21,13 +21,13 @@ function _getFilePathsSync(dirPath, ext) {
 async function _getFilePaths2(dirPath, ext, filePaths) {
     // console.log('_getFilePaths2', dirPath);
     // all files from directory
-    const files = await Helper._glob(path.join(dirPath, '*.' + ext));
+    const files = await Helper._glob(path_1.default.join(dirPath, '*.' + ext));
     // pushing files to output array
     files.forEach((item) => {
         filePaths.push(item);
     });
     // all directories from directory
-    const dirs = await Helper._glob(path.join(dirPath, '*/'));
+    const dirs = await Helper._glob(path_1.default.join(dirPath, '*/'));
     // for each dir push files to output array
     for (let i = 0; i < dirs.length; i++) {
         const subDirPath = dirs[i];
@@ -48,13 +48,13 @@ class Helper {
         return result;
     }
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map((filePath) => {
-            return slash(path.relative(publicDirPath, filePath));
+        return _getFilePathsSync(path_1.default.join(publicDirPath, subDirPath), ext).map((filePath) => {
+            return (0, slash_1.default)(path_1.default.relative(publicDirPath, filePath));
         });
     }
     static _glob(path) {
         return new Promise((resolve, reject) => {
-            glob(path, (err, items) => {
+            (0, glob_1.default)(path, (err, items) => {
                 if (err) {
                     reject(err);
                 }
@@ -69,7 +69,7 @@ class Helper {
         const filePaths = [];
         await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map((filePath) => {
-            return slash(path.relative(dirPath, filePath));
+            return (0, slash_1.default)(path_1.default.relative(dirPath, filePath));
         });
         return relativeFilePaths;
     }
@@ -154,7 +154,7 @@ class Helper {
         return fs_1.default.readFileSync(filePath, 'utf8');
     }
     static readBinaryFile(filePath) {
-        console.log(colors.blue('Helper.readBinaryFile'), filePath);
+        console.log(safe_1.default.blue('Helper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs_1.default.readFile(filePath, (err, data) => {
                 if (err) {
@@ -190,7 +190,7 @@ class Helper {
         }
     }
     static createDirIfNotExists(dirPath) {
-        console.log(colors.blue('Helper.createDirIfNotExists'), dirPath);
+        console.log(safe_1.default.blue('Helper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs_1.default.exists(dirPath, (exists) => {
                 if (exists) {
@@ -290,7 +290,7 @@ class Helper {
         });
     }
     static writeFile(filePath, content) {
-        console.log(colors.blue('Helper.writeFile'), filePath);
+        console.log(safe_1.default.blue('Helper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs_1.default.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
@@ -303,7 +303,7 @@ class Helper {
         });
     }
     static writeFileSync(filePath, content) {
-        console.log(colors.blue('Helper.writeFileSync'), filePath /*, content*/);
+        console.log(safe_1.default.blue('Helper.writeFileSync'), filePath /*, content*/);
         return fs_1.default.writeFileSync(filePath, content, 'utf8');
     }
     static async writeFile2(filePath, content) {

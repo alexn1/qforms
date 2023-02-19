@@ -1,6 +1,6 @@
 import path from 'path';
 import session from 'express-session';
-// const colors = require('colors/safe');
+// import colors from 'colors/safe';
 
 import { Helper } from './Helper';
 

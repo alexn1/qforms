@@ -1,10 +1,10 @@
-import { JSONString } from '../types';
 import fs from 'fs';
+import glob from 'glob';
+import path from 'path';
+import slash from 'slash';
+import colors from 'colors/safe';
 
-const glob = require('glob');
-const path = require('path');
-const slash = require('slash');
-const colors = require('colors/safe');
+import { JSONString } from '../types';
 
 function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
