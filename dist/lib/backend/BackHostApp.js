@@ -6,12 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BackHostApp = void 0;
 const http_1 = __importDefault(require("http"));
 const express_1 = __importDefault(require("express"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
+const safe_1 = __importDefault(require("colors/safe"));
+const fs_1 = __importDefault(require("fs"));
+const path_1 = __importDefault(require("path"));
+const body_parser_1 = __importDefault(require("body-parser"));
+const cookie_parser_1 = __importDefault(require("cookie-parser"));
+const express_session_1 = __importDefault(require("express-session"));
 const WebSocketServer_1 = require("./WebSocketServer");
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
 const Helper_1 = require("./Helper");
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 const Context_1 = require("./Context");
@@ -22,12 +24,10 @@ const MyError_1 = require("./MyError");
 const ViewerModule_1 = require("./viewer/ViewerModule");
 const EditorModule_1 = require("./editor/EditorModule");
 const FileSessionStore_1 = require("./FileSessionStore");
-const pkg = require('../../package.json');
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
-// const Test    = require('./test/Test');
-const fetch = require('node-fetch');
-const colors = require('colors/safe');
+// import Test from './test/Test';
+const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {
         // console.log('BackHostApp.constructor');
@@ -47,23 +47,23 @@ class BackHostApp {
     async run() {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
-        this.appsDirPath = path.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
+        this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
+        this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
         this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
         const port = this.params.port || process.env.LISTEN_PORT || 3000;
         const { log } = this.params;
-        if (!fs.existsSync(this.appsDirPath)) {
-            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
+        if (!fs_1.default.existsSync(this.appsDirPath)) {
+            console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
             process.exit(1);
             return;
         }
         // path
         const backendDirPath = __dirname;
-        this.frontendDirPath = path.resolve(path.join(backendDirPath, '../frontend'));
-        this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
+        this.frontendDirPath = path_1.default.resolve(path_1.default.join(backendDirPath, '../frontend'));
+        this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
         // runtime & temp
         Helper_1.Helper.createDirIfNotExistsSync(this.runtimeDirPath);
         Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
@@ -120,7 +120,7 @@ class BackHostApp {
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
     getSecretSync() {
-        const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
+        const secretFilePath = path_1.default.join(this.runtimeDirPath, 'secret.txt');
         let secret;
         secret = Helper_1.Helper.getFileContentSync(secretFilePath);
         if (secret) {
@@ -132,15 +132,16 @@ class BackHostApp {
     }
     initExpressServer() {
         // middlewares
-        this.express.use(bodyParser.json({
+        this.express.use(body_parser_1.default.json({
             limit: '20mb',
             reviver: Helper_1.Helper.dateTimeReviver,
         }));
-        this.express.use(bodyParser.urlencoded({ extended: false }));
-        this.express.use(cookieParser());
-        this.express.use(session({
+        this.express.use(body_parser_1.default.urlencoded({ extended: false }));
+        this.express.use((0, cookie_parser_1.default)());
+        this.express.use((0, express_session_1.default)({
             store: new FileSessionStore_1.FileSessionStore(this.sessionDirPath),
             secret: this.getSecretSync(),
+            // @ts-ignore
             key: 'sid',
             resave: false,
             saveUninitialized: false,
@@ -213,7 +214,7 @@ class BackHostApp {
         return this.applications[route];
     }
     getAppFilePath(context) {
-        return path.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
+        return path_1.default.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
@@ -244,8 +245,8 @@ class BackHostApp {
             throw new Error('name required: ' + req.body.name);
         const folder = req.body.folder;
         const name = req.body.name;
-        const appDirPath = path.join(this.appsDirPath, folder);
-        const appFilePath = path.join(appDirPath, name + '.json');
+        const appDirPath = path_1.default.join(this.appsDirPath, folder);
+        const appFilePath = path_1.default.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, this);
@@ -253,7 +254,7 @@ class BackHostApp {
     }
     async logError(err, req = null) {
         var _a, _b;
-        console.log('BackHostApp.logError:', colors.red(err.message));
+        console.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
             const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
             const data = req
@@ -283,7 +284,7 @@ class BackHostApp {
             }
             else if (this.logErrorUrl) {
                 console.log(`fetch ${this.logErrorUrl}`);
-                await fetch(this.logErrorUrl, {
+                await (0, node_fetch_1.default)(this.logErrorUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
@@ -300,7 +301,7 @@ class BackHostApp {
             }
         }
         catch (err) {
-            console.error(colors.red(err));
+            console.error(safe_1.default.red(err));
         }
     }
     async logRequest(req, context, time) {
@@ -338,7 +339,7 @@ class BackHostApp {
             });
         }
         catch (err) {
-            console.error(colors.red(err));
+            console.error(safe_1.default.red(err));
         }
     }
     async logEvent(context, message, data = null) {
@@ -353,7 +354,7 @@ class BackHostApp {
             });
         }
         catch (err) {
-            console.error(colors.red(err));
+            console.error(safe_1.default.red(err));
         }
     }
     static async createLog(cnn, values) {
@@ -380,7 +381,7 @@ class BackHostApp {
         }
         else if (this.logErrorUrl) {
             console.log(`fetch ${this.logErrorUrl}`);
-            await fetch(this.logErrorUrl, {
+            await (0, node_fetch_1.default)(this.logErrorUrl, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
@@ -394,7 +395,8 @@ class BackHostApp {
         }
     }
     async moduleGet(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        // @ts-ignore
+        console.log(safe_1.default.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -439,7 +441,7 @@ class BackHostApp {
         }
     }
     async indexGet(req, res, next) {
-        console.log(colors.magenta('indexGet'));
+        console.log(safe_1.default.magenta('indexGet'));
         try {
             const data = await this.indexModule.fill();
             res.end(this.indexModule.render({
@@ -461,7 +463,7 @@ class BackHostApp {
         }
     }
     async indexPost(req, res, next) {
-        console.log(colors.magenta('indexPost'), req.params);
+        console.log(safe_1.default.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
             await res.json({
@@ -476,7 +478,7 @@ class BackHostApp {
         }
     }
     async monitorGet(req, res, next) {
-        console.log(colors.magenta('monitorGet'), req.headers);
+        console.log(safe_1.default.magenta('monitorGet'), req.headers);
         try {
             if (!this.params.monitor) {
                 res.end('Please set monitor username/password in app params');
@@ -502,7 +504,8 @@ class BackHostApp {
         }
     }
     async modulePost(req, res, next) {
-        console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        // @ts-ignore
+        console.log(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
@@ -545,7 +548,8 @@ class BackHostApp {
     }
     async moduleGetFile(req, res, next) {
         if (process.env.NODE_ENV === 'development') {
-            console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+            // @ts-ignore
+            console.log(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         }
         if (req.params.module === 'viewer') {
             let context = null;
@@ -574,15 +578,15 @@ class BackHostApp {
         }
     }
     async _e404(req, res, next) {
-        console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
+        console.error(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
         next(new MyError_1.MyError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404,
         }));
     }
     async _e500(err, req, res, next) {
-        console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
-        console.error(colors.red(err));
+        console.log(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl);
+        console.error(safe_1.default.red(err));
         const error = typeof err === 'string' ? new MyError_1.MyError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&
@@ -653,7 +657,7 @@ class BackHostApp {
         console.log('process.exit:', code);
     }
     async onUnhandledRejection(err) {
-        console.error(colors.red('BackHostApp.onUnhandledRejection'), err);
+        console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), err);
         err.message = `unhandledRejection: ${err.message}`;
         await this.logError(err);
     }
@@ -668,7 +672,7 @@ class BackHostApp {
         }
     }
     onHttpServerError(err) {
-        console.error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
+        console.error(safe_1.default.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /*if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
         } else {
@@ -688,7 +692,7 @@ class BackHostApp {
         return domain;
     }
     async postError(req, res, next) {
-        console.log(colors.blue('BackHostApp.postError'), req.body.message);
+        console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
                 await BackHostApp.createLog(this.logPool, {

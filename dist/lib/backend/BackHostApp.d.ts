@@ -35,7 +35,7 @@ export declare class BackHostApp {
     createApplicationIfNotExists(context: Context): Promise<any>;
     getApplication(context: Context): BkApplication;
     getApplicationByRoute(route: string): BkApplication;
-    getAppFilePath(context: Context): any;
+    getAppFilePath(context: Context): string;
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): any;
     createApp(req: any): Promise<AppInfo[]>;

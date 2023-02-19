@@ -1,14 +1,14 @@
 import http from 'http';
 import express, { Express, Request, Response } from 'express';
+import fetch from 'node-fetch';
+import colors from 'colors/safe';
+import fs from 'fs';
+import path from 'path';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
+import session from 'express-session';
 
 import { WebSocketServer } from './WebSocketServer';
-
-const fs = require('fs');
-const path = require('path');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const session = require('express-session');
-
 import { Helper } from './Helper';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 import { Context } from './Context';
@@ -21,13 +21,11 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
-
-const pkg = require('../../package.json');
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-// const Test    = require('./test/Test');
-const fetch = require('node-fetch');
-const colors = require('colors/safe');
+// import Test from './test/Test';
+
+const pkg = require('../../package.json');
 
 export class BackHostApp {
     params: any;
@@ -190,6 +188,7 @@ export class BackHostApp {
             session({
                 store: new FileSessionStore(this.sessionDirPath),
                 secret: this.getSecretSync(),
+                // @ts-ignore
                 key: 'sid',
                 resave: false,
                 saveUninitialized: false,
@@ -478,6 +477,7 @@ export class BackHostApp {
     }
 
     async moduleGet(req: Request, res: Response, next) {
+        // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context: Context | null = null;
         try {
@@ -582,6 +582,7 @@ export class BackHostApp {
     }
 
     async modulePost(req: Request, res: Response, next) {
+        // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         let context: Context | null = null;
         try {
@@ -621,6 +622,7 @@ export class BackHostApp {
 
     async moduleGetFile(req: Request, res: Response, next) {
         if (process.env.NODE_ENV === 'development') {
+            // @ts-ignore
             console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         }
         if (req.params.module === 'viewer') {
