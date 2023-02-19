@@ -106,7 +106,7 @@ export class Context {
         };
     }
 
-    getParams(): {[name: string]: any} {
+    getParams(): { [name: string]: any } {
         // console.log('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();

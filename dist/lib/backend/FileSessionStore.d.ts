@@ -1,4 +1,4 @@
-declare const session: any;
+import session from 'express-session';
 export declare class FileSessionStore extends session.Store {
     store: any;
     dirPath: string;
@@ -7,4 +7,3 @@ export declare class FileSessionStore extends session.Store {
     get(sid: any, cb: any): void;
     destroy(sid: any, cb: any): void;
 }
-export {};

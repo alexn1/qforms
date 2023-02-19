@@ -3,7 +3,9 @@
     "compilerOptions": {
         "target": "ES2017",
         "esModuleInterop": true,
-        "moduleResolution": "node",
-        "jsx": "react-jsx"
+        "jsx": "react-jsx",
+        "rootDir": "src",
+        "outDir": "dist/lib",
+        "moduleResolution": "node"
     }
 }

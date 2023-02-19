@@ -14,7 +14,7 @@ export class Converter {
         await appEditor.save();
 
         // pages
-        const pageNames = appEditor.data.pageLinks.map(data => BaseModel.getName(data));
+        const pageNames = appEditor.data.pageLinks.map((data) => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {
