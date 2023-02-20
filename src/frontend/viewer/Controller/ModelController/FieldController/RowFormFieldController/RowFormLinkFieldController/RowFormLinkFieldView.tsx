@@ -6,6 +6,15 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
     render() {
         const ctrl = this.getCtrl();
         let href = ctrl.getValueForWidget();
+        let displayValue = ctrl.getValueForWidget();
+
+
+        // valueOfDisplayColumn
+        const valueOfDisplayColumn = ctrl.getDisplayValue();
+        if (valueOfDisplayColumn) {
+            displayValue = valueOfDisplayColumn;
+        }
+
         const pageName = ctrl.getModel().getAttr('page');
         if (pageName) {
             const value = ctrl.getValueForWidget();
@@ -16,7 +25,7 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
         return (
             <div className={this.getCssClassNames()}>
                 <a href={href} onClick={ctrl.onClick} target={'_blank'}>
-                    {ctrl.getValueForWidget()}
+                    {displayValue}
                 </a>
             </div>
         );

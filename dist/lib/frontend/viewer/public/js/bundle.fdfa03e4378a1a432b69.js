@@ -38018,6 +38018,15 @@ class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORT
     getViewClass() {
         return super.getViewClass() || _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormLinkFieldView;
     }
+    getDisplayValue() {
+        const displayColumn = this.getModel().getAttr('displayColumn');
+        if (displayColumn) {
+            const ds = this.getModel().getDefaultDataSource();
+            const rawValue = ds.getValue(ds.getSingleRow(), displayColumn);
+            return JSON.parse(rawValue);
+        }
+        return null;
+    }
 }
 // @ts-ignore
 window.RowFormLinkFieldController = RowFormLinkFieldController;
@@ -38045,13 +38054,19 @@ class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
     render() {
         const ctrl = this.getCtrl();
         let href = ctrl.getValueForWidget();
+        let displayValue = ctrl.getValueForWidget();
+        // valueOfDisplayColumn
+        const valueOfDisplayColumn = ctrl.getDisplayValue();
+        if (valueOfDisplayColumn) {
+            displayValue = valueOfDisplayColumn;
+        }
         const pageName = ctrl.getModel().getAttr('page');
         if (pageName) {
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, JSON.stringify([value]));
             // console.log('href:', link);
         }
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: ctrl.getValueForWidget() })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
     }
 }
 // @ts-ignore
@@ -41104,7 +41119,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     getType(columnName) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable().getColumn(columnName).getType();
+        const type = this.getTable()
+            .getColumn(columnName)
+            .getType();
         // console.log('type:', type);
         return type;
     }
@@ -42382,7 +42399,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         await this.getDefaultDataSource().refresh();
     }
     getField(name) {
-        return this.fields.find(field => field.getName() === name);
+        return this.fields.find((field) => field.getName() === name);
     }
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();

@@ -1,5 +1,6 @@
 import { FormController } from '../FormController';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
+import { RawRow } from '../../../../../../types';
 export declare class TableFormController extends FormController<TableForm> {
     state: any;
     grid: any;
@@ -21,7 +22,7 @@ export declare class TableFormController extends FormController<TableForm> {
     onModelUpdate: (e: any) => Promise<void>;
     onModelDelete: (e: any) => Promise<void>;
     onGridSelectionChange: (key: any) => Promise<void>;
-    getActiveRow(): import("../../../../../../types").RawRow;
+    getActiveRow(): RawRow;
     isRowSelected: () => boolean;
     onFrameChanged: (value: any) => Promise<void>;
     onNextClick: () => Promise<void>;

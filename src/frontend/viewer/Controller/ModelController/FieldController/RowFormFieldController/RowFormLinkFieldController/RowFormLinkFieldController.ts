@@ -24,6 +24,16 @@ export class RowFormLinkFieldController extends RowFormFieldController<LinkField
         // @ts-ignore
         this.emit({ source: this });
     };
+
+    getDisplayValue(): string | null {
+        const displayColumn = this.getModel().getAttr('displayColumn');
+        if (displayColumn) {
+            const ds = this.getModel().getDefaultDataSource();
+            const rawValue = ds.getValue(ds.getSingleRow(), displayColumn);
+            return JSON.parse(rawValue);
+        }
+        return null;
+    }
 }
 
 // @ts-ignore

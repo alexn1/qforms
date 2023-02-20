@@ -2,6 +2,7 @@ import { TableFormView } from './TableFormView';
 import { FormController } from '../FormController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import {TableForm} from '../../../../Model/Form/TableForm/TableForm';
+import { RawRow } from '../../../../../../types';
 
 export class TableFormController extends FormController<TableForm> {
     state: any;
@@ -112,7 +113,7 @@ export class TableFormController extends FormController<TableForm> {
     }*/
     async new() {
         if (this.model.getAttr('newRowMode') === 'oneclick') {
-            const row = {};
+            const row = {} as RawRow;
             this.model.fillDefaultValues(row);
             await this.model.getDefaultDataSource().insert(row);
         } else if (this.model.getAttr('newRowMode') === 'editform') {
@@ -137,7 +138,7 @@ export class TableFormController extends FormController<TableForm> {
             if (!this.model.getAttr('itemEditPage')) {
                 throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
             }
-            const row = {};
+            const row = {} as RawRow;
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
             const database = this.model.getDefaultDataSource().getAttr('database');
@@ -155,7 +156,7 @@ export class TableFormController extends FormController<TableForm> {
             if (!this.model.getAttr('itemCreatePage')) {
                 throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
             }
-            const row = {};
+            const row = {} as RawRow;
             this.model.fillDefaultValues(row);
             const result = await this.model.getDefaultDataSource().insert(row);
             const database = this.model.getDefaultDataSource().getAttr('database');

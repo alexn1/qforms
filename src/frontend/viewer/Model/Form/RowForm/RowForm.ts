@@ -48,8 +48,8 @@ export class RowForm extends Form {
         return null;
     }
 
-    createRow() {
-        const row = {};
+    createRow(): RawRow {
+        const row = {} as RawRow;
         this.fillDefaultValues(row);
         return row;
     }

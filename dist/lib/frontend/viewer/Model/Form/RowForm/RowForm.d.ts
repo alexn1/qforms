@@ -9,6 +9,6 @@ export declare class RowForm extends Form {
     onDataSourceInsert(e: any): void;
     getRow(withChanges?: any): RawRow;
     getKey(): import("../../../../../types").Key;
-    createRow(): {};
+    createRow(): RawRow;
     discard(fields: any): void;
 }

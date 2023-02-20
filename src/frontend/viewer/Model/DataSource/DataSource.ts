@@ -105,7 +105,7 @@ export class DataSource extends Model {
     }
 
     changeRowColumn(row: RawRow, column: string, newValue: JSONString) {
-        if (!this.changes.has(row)) this.changes.set(row, {});
+        if (!this.changes.has(row)) this.changes.set(row, {} as RawRow);
         this.changes.get(row)[column] = newValue;
     }
 
@@ -331,7 +331,9 @@ export class DataSource extends Model {
 
     getType(columnName: string) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable().getColumn(columnName).getType();
+        const type = this.getTable()
+            .getColumn(columnName)
+            .getType();
         // console.log('type:', type);
         return type;
     }
@@ -466,7 +468,7 @@ export class DataSource extends Model {
                 throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
             }
             const newValues = e.source.getRow(key);
-            const newRow = {};
+            const newRow = {} as RawRow;
             DataSource.copyNewValues(newRow, newValues);
             // console.log('newRow:', newRow);
             this.addRow(newRow);

@@ -2,6 +2,7 @@ import { Model } from '../Model';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
+import { RawRow } from '../../../../types';
 
 export class Form extends Model {
     dataSources: DataSource[];
@@ -36,7 +37,7 @@ export class Form extends Model {
         super.deinit();
     }
 
-    fillDefaultValues(row) {
+    fillDefaultValues(row: RawRow) {
         for (const field of this.fields) {
             field.fillDefaultValue(row);
         }
@@ -119,7 +120,7 @@ export class Form extends Model {
         await this.getDefaultDataSource().refresh();
     }
     getField(name) {
-        return this.fields.find(field => field.getName() === name);
+        return this.fields.find((field) => field.getName() === name);
     }
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();

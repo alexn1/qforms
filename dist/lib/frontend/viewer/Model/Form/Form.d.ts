@@ -1,13 +1,14 @@
 import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
+import { RawRow } from '../../../../types';
 export declare class Form extends Model {
     dataSources: DataSource[];
     fields: Field[];
     constructor(data: any, parent: any);
     init(): void;
     deinit(): void;
-    fillDefaultValues(row: any): void;
+    fillDefaultValues(row: RawRow): void;
     onDataSourceRefresh(e: any): void;
     onDataSourceInsert(e: any): void;
     onDataSourceUpdate(e: any): void;

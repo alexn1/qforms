@@ -7,7 +7,7 @@ import { Application } from '../Application/Application';
 export declare class Field extends Model {
     init(): void;
     replaceThis(value: any): any;
-    fillDefaultValue(row: any): void;
+    fillDefaultValue(row: RawRow): void;
     valueToPageParams(row: RawRow): void;
     isChanged(row: RawRow): boolean;
     hasColumn(): boolean;

@@ -23,7 +23,7 @@ export class Field extends Model {
         });
     }
 
-    fillDefaultValue(row) {
+    fillDefaultValue(row: RawRow) {
         // console.log('Field.fillDefaultValue', this.getFullName());
         const column = this.getAttr('column');
         if (!column) return;
