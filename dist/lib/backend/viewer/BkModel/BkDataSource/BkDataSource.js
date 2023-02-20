@@ -130,6 +130,10 @@ class BkDataSource extends BkModel_1.BkModel {
             for (const field of this.getForm().fields) {
                 const column = field.getAttr('column');
                 rawRow[column] = field.valueToRaw(row[column]);
+                if (field.isAttr('displayColumn')) {
+                    const displayColumn = field.getAttr('displayColumn');
+                    rawRow[displayColumn] = field.valueToRaw(row[displayColumn]);
+                }
             }
         }
         else {

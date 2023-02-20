@@ -60,6 +60,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(), this.getSelectParams(context));
         console.log('query time:', Date.now() - start);
+        // console.log('rows:', rows);
         this.checkRows(rows);
         // this.encodeRows(rows);
         const rawRows = this.encodeRows2(rows);
@@ -192,6 +193,10 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
                     row[column] !== undefined
                         ? field.valueToRaw(row[column])
                         : 'null';
+                if (field.isAttr('displayColumn')) {
+                    const displayColumn = field.getAttr('displayColumn');
+                    rawRow[displayColumn] = field.valueToRaw(row[displayColumn]);
+                }
             }
         }
         else {
