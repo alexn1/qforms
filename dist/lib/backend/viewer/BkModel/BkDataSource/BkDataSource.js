@@ -54,24 +54,10 @@ class BkDataSource extends BkModel_1.BkModel {
             }
         }
     }
-    checkNotUsedColumns(row) {
-        const rowColumns = Object.keys(row);
-        const formColumns = this.getParent()
-            .fields.map((field) => field.getAttr('column'))
-            .filter((column) => !!column);
-        for (const rowColumn of rowColumns) {
-            if (!formColumns.includes(rowColumn)) {
-                console.log('rowColumns:', rowColumns);
-                console.log('formColumns:', formColumns);
-                console.log('row:', row);
-                throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
-            }
-        }
-    }
     checkRow(row) {
         this.checkKeyColumns(row);
         if (this.isDefaultOnForm()) {
-            this.checkNotUsedColumns(row);
+            // this.checkNotUsedColumns(row);
             this.checkFields(row);
         }
     }
@@ -85,6 +71,20 @@ class BkDataSource extends BkModel_1.BkModel {
         this.checkRows(rows);
         this.encodeRows(rows);
     } */
+    checkNotUsedColumns(row) {
+        const rowColumns = Object.keys(row);
+        const formColumns = this.getForm()
+            .fields.map((field) => field.getAttr('column'))
+            .filter((column) => !!column);
+        for (const rowColumn of rowColumns) {
+            if (!formColumns.includes(rowColumn)) {
+                console.log('rowColumns:', rowColumns);
+                console.log('formColumns:', formColumns);
+                console.log('row:', row);
+                throw new Error(`${this.getFullName()}: not used column "${rowColumn}" in result set`);
+            }
+        }
+    }
     checkFields(row) {
         for (const field of this.getForm().fields) {
             const column = field.getAttr('column');

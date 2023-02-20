@@ -68,27 +68,10 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    checkNotUsedColumns(row: Row) {
-        const rowColumns = Object.keys(row);
-        const formColumns = this.getParent()
-            .fields.map((field) => field.getAttr('column'))
-            .filter((column) => !!column);
-        for (const rowColumn of rowColumns) {
-            if (!formColumns.includes(rowColumn)) {
-                console.log('rowColumns:', rowColumns);
-                console.log('formColumns:', formColumns);
-                console.log('row:', row);
-                throw new Error(
-                    `${this.getFullName()}: not used column "${rowColumn}" in result set`,
-                );
-            }
-        }
-    }
-
     checkRow(row: Row) {
         this.checkKeyColumns(row);
         if (this.isDefaultOnForm()) {
-            this.checkNotUsedColumns(row);
+            // this.checkNotUsedColumns(row);
             this.checkFields(row);
         }
     }
@@ -104,6 +87,23 @@ export class BkDataSource extends BkModel {
         this.checkRows(rows);
         this.encodeRows(rows);
     } */
+
+    checkNotUsedColumns(row: Row) {
+        const rowColumns = Object.keys(row);
+        const formColumns = this.getForm()
+            .fields.map((field) => field.getAttr('column'))
+            .filter((column) => !!column);
+        for (const rowColumn of rowColumns) {
+            if (!formColumns.includes(rowColumn)) {
+                console.log('rowColumns:', rowColumns);
+                console.log('formColumns:', formColumns);
+                console.log('row:', row);
+                throw new Error(
+                    `${this.getFullName()}: not used column "${rowColumn}" in result set`,
+                );
+            }
+        }
+    }
 
     checkFields(row: Row): void {
         for (const field of this.getForm().fields) {
@@ -307,7 +307,9 @@ export class BkDataSource extends BkModel {
         return this.isOnForm() ? this.getParent() : null;
     }
 
-    getAccess(context: Context): {
+    getAccess(
+        context: Context,
+    ): {
         create: boolean;
         read: boolean;
         update: boolean;

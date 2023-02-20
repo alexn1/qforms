@@ -14,9 +14,9 @@ export declare class BkDataSource extends BkModel {
     init(context: Context): Promise<void>;
     getKeyColumns(): string[];
     checkKeyColumns(row: Row): void;
-    checkNotUsedColumns(row: Row): void;
     checkRow(row: Row): void;
     checkRows(rows: Row[]): void;
+    checkNotUsedColumns(row: Row): void;
     checkFields(row: Row): void;
     encodeRows2(rows: Row[]): RawRow[];
     encodeRow2(row: Row): RawRow;
