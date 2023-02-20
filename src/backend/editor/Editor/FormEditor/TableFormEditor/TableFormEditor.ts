@@ -13,7 +13,7 @@ export class TableFormEditor extends FormEditor {
                 itemCreatePage: params.itemCreatePage || '',
                 newRowMode: params.newRowMode || 'disabled',
                 deleteRowMode: params.deleteRowMode || 'disabled',
-                refreshButton: params.refreshButton || 'false',
+                refreshButton: params.refreshButton || 'true',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor.createItemData) : []),
