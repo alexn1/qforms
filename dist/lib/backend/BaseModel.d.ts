@@ -12,16 +12,16 @@ export declare class BaseModel {
     attributes(): any;
     getAttr(name: any): string;
     setAttr(name: string, value: string): void;
-    isAttr(name: any): boolean;
+    isAttr(name: string): boolean;
     isData(colName: string, name: string): boolean;
     getData(): any;
-    getCol(name: any): any;
-    getItemNames(colName: any): any;
-    getColItemData(colName: any, name: any): any;
-    removeColData(colName: any, name: any): any;
-    static findColDataByName(col: any, name: any): any;
-    addModelData(colName: any, data: any): void;
+    getCol(name: string): any;
+    getItemNames(colName: string): any;
+    getColItemData(colName: string, name: string): any;
+    removeColData(colName: string, name: string): any;
+    static findColDataByName(col: any, name: string): any;
+    addModelData(colName: string, data: any): void;
     getApp(): void;
-    replaceDataColItem(colName: any, oldData: any, newData: any): any;
+    replaceDataColItem(colName: string, oldData: any, newData: any): any;
     getParent(): any;
 }

@@ -8,6 +8,7 @@ export class LinkFieldEditor extends FieldEditor {
                 ...FieldEditor.createAttributes(params),
                 notNull: params.notNull ? params.notNull : 'false',
                 page: params.page ? params.page : '',
+                displayColumn: params.displayColumn ? params.displayColumn : '',
             },
         };
     }

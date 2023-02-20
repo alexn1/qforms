@@ -45,7 +45,7 @@ export class BaseModel {
         this.data['@attributes'][name] = value;
     }
 
-    isAttr(name): boolean {
+    isAttr(name: string): boolean {
         return this.data['@attributes'][name] !== undefined;
     }
 
@@ -59,7 +59,7 @@ export class BaseModel {
         return this.data;
     }
 
-    getCol(name) {
+    getCol(name: string) {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) {
@@ -69,17 +69,17 @@ export class BaseModel {
         return arr;
     }
 
-    getItemNames(colName) {
+    getItemNames(colName: string) {
         return this.getCol(colName).map((data) => BaseModel.getName(data));
     }
 
-    getColItemData(colName, name) {
+    getColItemData(colName: string, name: string) {
         const data = BaseModel.findColDataByName(this.getCol(colName), name);
         if (data) return data;
         return null;
     }
 
-    removeColData(colName, name) {
+    removeColData(colName: string, name: string) {
         const col = this.getCol(colName);
         const data = BaseModel.findColDataByName(col, name);
         if (!data) throw new Error(`removeColData: no ${name} in ${colName}`);
@@ -87,11 +87,11 @@ export class BaseModel {
         return data;
     }
 
-    static findColDataByName(col, name) {
+    static findColDataByName(col, name: string) {
         return col.find((data) => BaseModel.getName(data) === name);
     }
 
-    addModelData(colName, data) {
+    addModelData(colName: string, data) {
         const name = BaseModel.getName(data);
         if (this.getColItemData(colName, name))
             throw new Error(`${name} already exists in ${colName}`);
@@ -102,7 +102,7 @@ export class BaseModel {
         throw new Error('getApp: not implemented');
     }
 
-    replaceDataColItem(colName, oldData, newData) {
+    replaceDataColItem(colName: string, oldData, newData) {
         const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
         if (i === -1)
