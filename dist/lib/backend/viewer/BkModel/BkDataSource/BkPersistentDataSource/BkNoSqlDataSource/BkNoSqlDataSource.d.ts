@@ -4,6 +4,7 @@ import { BkTable } from '../../../BkTable/BkTable';
 import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { ReadResult } from '../../BkDataSource';
+import { Row, RawRow } from '../../../../../../types';
 export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
@@ -17,4 +18,6 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     getSelectParams(context: Context): {
         [name: string]: any;
     };
+    checkRow(row: Row): void;
+    encodeRow2(row: Row): RawRow;
 }

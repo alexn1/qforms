@@ -4,7 +4,8 @@ import { BkTable } from '../../../BkTable/BkTable';
 import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
-import { Key } from '../../../../../../types';
+import { Key, Row, RawRow, JSONString } from '../../../../../../types';
+import { Helper } from '../../../../../Helper';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
@@ -220,5 +221,32 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
     getSelectParams(context: Context) {
         return context.getParams();
+    }
+
+    checkRow(row: Row) {
+        this.checkKeyColumns(row);
+        if (this.isDefaultOnForm()) {
+            // this.checkNotUsedColumns(row);
+            // this.checkFields(row);
+        }
+    }
+
+    encodeRow2(row: Row): RawRow {
+        if (!row) throw new Error(`encodeRow: need row`);
+        const rawRow: RawRow = {} as RawRow;
+        if (this.isDefaultOnForm()) {
+            for (const field of this.getForm().fields) {
+                const column = field.getAttr('column');
+                rawRow[column] =
+                    row[column] !== undefined
+                        ? field.valueToRaw(row[column])
+                        : ('null' as JSONString);
+            }
+        } else {
+            for (const name in row) {
+                rawRow[name] = Helper.encodeValue(row[name]);
+            }
+        }
+        return rawRow;
     }
 }

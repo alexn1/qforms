@@ -4,6 +4,7 @@ exports.BkNoSqlDataSource = void 0;
 const BkPersistentDataSource_1 = require("../BkPersistentDataSource");
 const Result_1 = require("../../../../../../Result");
 const BkDataSource_1 = require("../../BkDataSource");
+const Helper_1 = require("../../../../../Helper");
 class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
@@ -172,6 +173,33 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
     }
     getSelectParams(context) {
         return context.getParams();
+    }
+    checkRow(row) {
+        this.checkKeyColumns(row);
+        if (this.isDefaultOnForm()) {
+            // this.checkNotUsedColumns(row);
+            // this.checkFields(row);
+        }
+    }
+    encodeRow2(row) {
+        if (!row)
+            throw new Error(`encodeRow: need row`);
+        const rawRow = {};
+        if (this.isDefaultOnForm()) {
+            for (const field of this.getForm().fields) {
+                const column = field.getAttr('column');
+                rawRow[column] =
+                    row[column] !== undefined
+                        ? field.valueToRaw(row[column])
+                        : 'null';
+            }
+        }
+        else {
+            for (const name in row) {
+                rawRow[name] = Helper_1.Helper.encodeValue(row[name]);
+            }
+        }
+        return rawRow;
     }
 }
 exports.BkNoSqlDataSource = BkNoSqlDataSource;
