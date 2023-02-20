@@ -7,9 +7,10 @@ module.exports = {
     bracketSameLine: true,
     overrides: [
         {
-            files: ['**/*.css', '**/*.scss'],
+            files: ['**/*.css', '**/*.scss', '**/*.less'],
             options: {
                 singleQuote: false,
+                tabWidth: 2,
             },
         },
         {
