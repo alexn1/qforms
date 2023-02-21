@@ -1428,11 +1428,18 @@ div.CheckBox:not(.disabled):hover {
 }
 .paging__gotoBlock {
   display: flex;
+  align-items: center;
 }
-.paging__gotoBlock select {
+.paging__gotoBlock input {
   height: 26px;
   margin: 0 5px;
   border: none;
+  width: 30px;
+  text-align: right;
+}
+.paging__framesCount {
+  font-size: 14px;
+  padding-right: 30px;
 }
 
 /*!****************************************************************************************************************************************!*\

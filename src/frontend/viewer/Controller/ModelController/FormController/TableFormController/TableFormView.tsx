@@ -6,7 +6,6 @@ import {
     Button,
     DropdownButton,
     MoreVertIcon,
-    // ComboBox,
     TextBox,
     LeftIcon,
     RightIcon,
@@ -85,19 +84,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                             value={ctrl.model.getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                         />
-                        {/* <ComboBox
-                            value={ctrl.model
-                                .getDefaultDataSource()
-                                .getFrame()
-                                .toString()}
-                            onChange={ctrl.onFrameChanged}
-                            items={new Array(dataSource.getFramesCount())
-                                .fill(null)
-                                .map((val, i) => ({
-                                    value: (i + 1).toString(),
-                                    title: (i + 1).toString(),
-                                }))}
-                        /> */}
+                        <div className="paging__framesCount"> / {dataSource.getFramesCount()} </div>
                         <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick}>
                             <RightIcon size={18} />
                         </Button>
