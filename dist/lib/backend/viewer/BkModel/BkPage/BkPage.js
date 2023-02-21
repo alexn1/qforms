@@ -28,6 +28,9 @@ class BkPage extends BkModel_1.BkModel {
         response.cssBlock = this.getAttr('cssBlock');
         response.viewClass = this.getAttr('viewClass');
         response.ctrlClass = this.getAttr('ctrlClass');
+        if (this.isAttr('formInTab')) {
+            response.formInTab = this.getAttr('formInTab');
+        }
     }
     async fill(context) {
         // console.log('Page.fill', this.constructor.name, this.getFullName());

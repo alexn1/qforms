@@ -7,7 +7,8 @@
         "cssBlock": "",
         "viewClass": "",
         "ctrlClass": "",
-        "modelClass": ""
+        "modelClass": "",
+        "formInTab": "true"
     },
     "dataSources": [],
     "actions": [],

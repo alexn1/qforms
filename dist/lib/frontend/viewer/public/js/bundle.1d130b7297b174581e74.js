@@ -40308,7 +40308,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
                 ]] })));
     }
     renderMain() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.renderForms()] })) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.getCtrl().getModel().isFormInTab()
+                        ? this.renderForms2()
+                        : this.renderForms()] })) })));
     }
     renderForms() {
         const model = this.getCtrl().getModel();
@@ -42698,6 +42700,9 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     isSelectMode() {
         return !!this.options.selectMode;
+    }
+    isFormInTab() {
+        return this.isAttr('formInTab') && this.getAttr('formInTab') === 'true';
     }
 }
 // @ts-ignore

@@ -27,4 +27,5 @@ export declare class Page extends Model {
     rpc(name: any, params: any): Promise<any>;
     getForm(name: any): any;
     isSelectMode(): boolean;
+    isFormInTab(): boolean;
 }

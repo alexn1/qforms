@@ -40,6 +40,7 @@ export declare class ApplicationEditor extends Editor {
                 viewClass: any;
                 ctrlClass: any;
                 modelClass: any;
+                formInTab: any;
             };
             dataSources: any[];
             actions: any[];

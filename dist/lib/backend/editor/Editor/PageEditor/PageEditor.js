@@ -20,6 +20,7 @@ class PageEditor extends Editor_1.Editor {
                 viewClass: params.viewClass !== undefined ? params.viewClass : '',
                 ctrlClass: params.ctrlClass !== undefined ? params.ctrlClass : '',
                 modelClass: params.modelClass !== undefined ? params.modelClass : '',
+                formInTab: params.formInTab !== undefined ? params.formInTab : 'false',
             },
             dataSources: [
                 ...(params.dataSources ? params.dataSources.map(Editor_1.Editor.createItemData) : []),

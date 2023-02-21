@@ -223,7 +223,9 @@ export class PageView extends ModelView<PageController> {
             <div className={`${this.getCssBlockName()}__main flex-max frame`}>
                 <div className={'frame__container flex-column grid-gap-10'}>
                     {this.isToolbar() && this.renderToolbar()}
-                    {this.renderForms()}
+                    {this.getCtrl().getModel().isFormInTab()
+                        ? this.renderForms2()
+                        : this.renderForms()}
                 </div>
             </div>
         );
