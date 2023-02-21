@@ -120,6 +120,27 @@
                     }
                 }
             ]
+        },
+        {
+            "@class": "TableForm",
+            "@attributes": {
+                "name": "Form2",
+                "caption": "Form2",
+                "visible": "true",
+                "cssBlock": "",
+                "viewClass": "",
+                "ctrlClass": "",
+                "modelClass": "",
+                "editMethod": "disabled",
+                "itemEditPage": "",
+                "itemCreatePage": "",
+                "newRowMode": "disabled",
+                "deleteRowMode": "disabled",
+                "refreshButton": "true"
+            },
+            "dataSources": [],
+            "actions": [],
+            "fields": []
         }
     ]
 }
