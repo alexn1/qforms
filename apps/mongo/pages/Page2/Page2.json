@@ -67,7 +67,8 @@
                         "ctrlClass": "",
                         "autoFocus": "false",
                         "notNull": "false",
-                        "page": "Page2"
+                        "page": "Page2",
+                        "displayColumn": ""
                     }
                 },
                 {
