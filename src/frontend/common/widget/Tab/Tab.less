@@ -1,7 +1,6 @@
 //@activeColor: rgb(57,139,206);
 @activeColor: var(--accent-color);
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab {
   display: flex;
   flex-direction: column;
@@ -14,18 +13,18 @@
     width: 100%;
     flex-shrink: 0;
     > li {
-      float:left;
+      float: left;
       background-color: #eee;
       margin-right: 1px;
       /*border-radius: 3px 3px 0 0;*/
       cursor: pointer;
       > span {
-        margin          : 5px 10px 0 10px;
-        display         : inline-block;
-        max-width       : 300px;
-        overflow        : hidden;
-        white-space     : nowrap;
-        text-overflow   : ellipsis;
+        margin: 5px 10px 0 10px;
+        display: inline-block;
+        max-width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         -moz-user-select: none;
       }
       > span.close {
@@ -37,14 +36,14 @@
     }
   }
   > div {
-    clear: left;                 // for those who not supports flexbox
+    clear: left; // for those who not supports flexbox
     flex: auto; // 1 1 auto
-    position: relative;         // for chrome
+    position: relative; // for chrome
     > div {
       display: none;
       height: 100%;
-      width: 100%;            // for chrome
-      position: absolute;     // for chrome
+      width: 100%; // for chrome
+      position: absolute; // for chrome
       /*background: lightblue;*/
     }
     > div.active {
@@ -53,7 +52,6 @@
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab.Tab-blue > ul {
   > li {
     border-radius: 3px 3px 0 0;
@@ -61,12 +59,11 @@
   > li.active {
     background-color: @activeColor;
     > span {
-      color:white;
+      color: white;
     }
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab.Tab-blue > div {
   > div {
     box-sizing: border-box;
@@ -74,8 +71,6 @@
   }
 }
 
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab {
   display: flex;
   flex-direction: column;
@@ -88,18 +83,18 @@
     width: 100%;
     flex-shrink: 0;
     > li {
-      float:left;
+      float: left;
       background-color: #eee;
       margin-right: 1px;
       /*border-radius: 3px 3px 0 0;*/
       cursor: pointer;
       > span {
-        margin          : 5px 10px 0 10px;
-        display         : inline-block;
-        max-width       : 300px;
-        overflow        : hidden;
-        white-space     : nowrap;
-        text-overflow   : ellipsis;
+        margin: 5px 10px 0 10px;
+        display: inline-block;
+        max-width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
         -moz-user-select: none;
       }
       > span.close {
@@ -111,14 +106,14 @@
     }
   }
   > div {
-    clear: left;                 // for those who not supports flexbox
+    clear: left; // for those who not supports flexbox
     flex: auto; // 1 1 auto
-    position: relative;         // for chrome
+    position: relative; // for chrome
     > div {
       display: none;
       height: 100%;
-      width: 100%;            // for chrome
-      position: absolute;     // for chrome
+      width: 100%; // for chrome
+      position: absolute; // for chrome
       /*background: lightblue;*/
     }
     > div.active {
@@ -127,7 +122,6 @@
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab.Tab-blue > ul {
   > li {
     border-radius: 3px 3px 0 0;
@@ -135,12 +129,11 @@
   > li.active {
     background-color: @activeColor;
     > span {
-      color:white;
+      color: white;
     }
   }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Tab.Tab-blue > div {
   > div {
     box-sizing: border-box;

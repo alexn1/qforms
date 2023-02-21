@@ -29,8 +29,7 @@ export class GridRow extends ReactComponent {
                 className={`${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`}
                 data-key={key}
                 href={link}
-                onClick={grid.onLinkClick}
-            >
+                onClick={grid.onLinkClick}>
                 {grid.props.columns.map((column, j) => (
                     <div
                         key={column.name}
@@ -41,8 +40,7 @@ export class GridRow extends ReactComponent {
                         data-rc={`[${i},${j}]`}
                         data-row={key}
                         onMouseDown={grid.onCellMouseDown}
-                        onDoubleClick={grid.onCellDoubleClick}
-                    >
+                        onDoubleClick={grid.onCellDoubleClick}>
                         {grid.renderCell(row, column)}
                     </div>
                 ))}

@@ -17,6 +17,7 @@ export class ApplicationController extends VisualController {
     pageLinks: any[];
     opened: boolean;
     items: any[];
+
     constructor(model, editorApp) {
         super(model);
         this.editorApp = editorApp;
@@ -35,10 +36,10 @@ export class ApplicationController extends VisualController {
         ];
     }
     init() {
-        this.model.databases.forEach(database => this.createDatabase(database));
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.actions.forEach(action => this.createAction(action));
-        this.model.pageLinks.forEach(pageLink => this.createPageLink(pageLink));
+        this.model.databases.forEach((database) => this.createDatabase(database));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.actions.forEach((action) => this.createAction(action));
+        this.model.pageLinks.forEach((pageLink) => this.createPageLink(pageLink));
     }
 
     createDatabase(model) {
@@ -98,7 +99,7 @@ export class ApplicationController extends VisualController {
         // @ts-ignore
         await EditorFrontHostApp.editorApp.openModal(
             new NewDatabaseController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     // console.log('values: ', values);
                     const database = await this.model.newDatabase({
                         class: values.class,
@@ -124,7 +125,7 @@ export class ApplicationController extends VisualController {
     async newDataSourceAction() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewDataSourceController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const dataSource = await this.model.newDataSource({
                         name: values.name,
                         class: values.class,
@@ -142,7 +143,7 @@ export class ApplicationController extends VisualController {
     async newPageAction() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewPageController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const page = await this.model.newPage({
                         name: values.name,
                         caption: values.caption || values.name,
@@ -166,7 +167,7 @@ export class ApplicationController extends VisualController {
         return propList;
     }
     findPageLink(name) {
-        return this.pageLinks.find(pageLink => pageLink.model.getName() === name);
+        return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
     }
     getDocumentViewClass() {
         // @ts-ignore

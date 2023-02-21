@@ -6,7 +6,7 @@ export class NewParamView extends ReactComponent {
         super(props);
         this.name = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewParamView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -27,7 +27,7 @@ export class NewParamView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id="name"
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />

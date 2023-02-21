@@ -10,7 +10,7 @@ export class NewFormView extends ReactComponent {
         this.caption = null;
         this.class = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -33,7 +33,7 @@ export class NewFormView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id="name"
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -42,7 +42,7 @@ export class NewFormView extends ReactComponent {
                         <label htmlFor="caption">Caption</label>
                         <TextBox
                             id="caption"
-                            onCreate={c => (this.caption = c)}
+                            onCreate={(c) => (this.caption = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -56,7 +56,7 @@ export class NewFormView extends ReactComponent {
                                 { value: 'TableForm', title: 'TableForm' },
                                 { value: 'Form', title: 'Form' },
                             ]}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                         />
                     </div>
                 </div>

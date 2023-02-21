@@ -21,7 +21,7 @@ export class GridCell extends ReactComponent {
         if (typeof value === 'boolean') return value.toString();
         return value;
     }
-    
+
     render() {
         const row = this.props.row;
         const column = this.props.column;

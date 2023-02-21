@@ -1,58 +1,58 @@
 // grid
-@gridFontFamily     : sans-serif;
-@gridFontSize       : 12px;
-@gridFontWeight     : null;
-@gridBorderColor    : rgb(124,124,139);
-@gridBorderWidth    : 0 1px 1px 1px;
+@gridFontFamily: sans-serif;
+@gridFontSize: 12px;
+@gridFontWeight: null;
+@gridBorderColor: rgb(124, 124, 139);
+@gridBorderWidth: 0 1px 1px 1px;
 @gridBackgroundColor: white;
-@gridMinHeight      : 100px;
+@gridMinHeight: 100px;
 
 // table
 @trBorderBottom: 0 solid white;
-@tdBorderRight : 1px solid white;
+@tdBorderRight: 1px solid white;
 
 // head
-@headTrHeight      : 22px;
+@headTrHeight: 22px;
 @headTrBorderBottom: 0 solid red;
-@thColor           : white;
-@thBackgroundColor : rgb(124,124,139);
+@thColor: white;
+@thBackgroundColor: rgb(124, 124, 139);
 @thPaddingLeftRight: 5px;
-@thTextShadow      : none;
-@thBackground      : none;
-@thTextTransform   : none;
+@thTextShadow: none;
+@thBackground: none;
+@thTextTransform: none;
 
 // gap
 @headBodyGap: 1px;
 
 // body
-@bodyTop                    : @headTrHeight + @headBodyGap;
-@bodyTrBorderBottom         : 0 solid #eee;
-@bodyTrEvenBackgroundColor  : rgba(66,139,202, 0.06);
-@bodyTrBackgroundColorHover : #E1F0FC !important;
-@bodyTrActiveBackgroundColor: rgb(200,226,254);
-@bodyTrActiveColor          : null;
-@tdColor                    : null;
-@tdPaddingTopBottom         : 3px;
-@tdPaddingLeftRight         : 5px;
-@tdTextShadow               : none;
-@tdActiveTextShadow         : none;
-@tdActiveColor              : white;
+@bodyTop: @headTrHeight + @headBodyGap;
+@bodyTrBorderBottom: 0 solid #eee;
+@bodyTrEvenBackgroundColor: rgba(66, 139, 202, 0.06);
+@bodyTrBackgroundColorHover: #e1f0fc !important;
+@bodyTrActiveBackgroundColor: rgb(200, 226, 254);
+@bodyTrActiveColor: null;
+@tdColor: null;
+@tdPaddingTopBottom: 3px;
+@tdPaddingLeftRight: 5px;
+@tdTextShadow: none;
+@tdActiveTextShadow: none;
+@tdActiveColor: white;
 //@tdActiveBackgroundColor    : rgb(66,139,202);
-@tdActiveBackgroundColor    : var(--accent-color);
+@tdActiveBackgroundColor: var(--accent-color);
 //@tdEditBackgroundColor    : lightgreen;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid {
-  font-family        : @gridFontFamily;
-  font-size          : @gridFontSize;
-  font-weight        : @gridFontWeight;
-  min-height         : @gridMinHeight;
-  border-color       : @gridBorderColor;
-  border-width       : @gridBorderWidth;
-  background-color   : @gridBackgroundColor;
-  position           : relative;
-  box-sizing         : border-box;
-  border-style       : solid;
+  font-family: @gridFontFamily;
+  font-size: @gridFontSize;
+  font-weight: @gridFontWeight;
+  min-height: @gridMinHeight;
+  border-color: @gridBorderColor;
+  border-width: @gridBorderWidth;
+  background-color: @gridBackgroundColor;
+  position: relative;
+  box-sizing: border-box;
+  border-style: solid;
   //cursor             : default;
   /*user-select        : none;
   -moz-user-select   : none;
@@ -63,20 +63,20 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__table {
-  display        : table;
-  width          : 100%;
-  border-spacing : 0;
+  display: table;
+  width: 100%;
+  border-spacing: 0;
   border-collapse: collapse;
-  table-layout   : fixed;
+  table-layout: fixed;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__tr {
-  display        : table-row;
-  border-bottom  : @trBorderBottom;
+  display: table-row;
+  border-bottom: @trBorderBottom;
   text-decoration: none;
-  color          : inherit;
-  cursor         : pointer;
+  color: inherit;
+  cursor: pointer;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -85,8 +85,9 @@
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-.Grid__td, .Grid__th {
-  display       : table-cell;
+.Grid__td,
+.Grid__th {
+  display: table-cell;
   vertical-align: middle;
   &:not(:last-child) {
     border-right: @tdBorderRight !important;
@@ -95,27 +96,27 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__th {
-  padding         : 0 @thPaddingLeftRight;
-  background      : @thBackground;
-  text-shadow     : @thTextShadow;
+  padding: 0 @thPaddingLeftRight;
+  background: @thBackground;
+  text-shadow: @thTextShadow;
   background-color: @thBackgroundColor;
-  color           : @thColor;
-  text-transform  : @thTextTransform;
-  position        : relative;
-  background-clip : padding-box; /* prevent hiding border when position: relative */
+  color: @thColor;
+  text-transform: @thTextTransform;
+  position: relative;
+  background-clip: padding-box; /* prevent hiding border when position: relative */
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__td {
-  color      : @tdColor;
+  color: @tdColor;
   text-shadow: @tdTextShadow;
-  padding    : @tdPaddingTopBottom @tdPaddingLeftRight;
-  cursor     : inherit;
+  padding: @tdPaddingTopBottom @tdPaddingLeftRight;
+  cursor: inherit;
   &.active {
-    text-shadow     : @tdActiveTextShadow;
+    text-shadow: @tdActiveTextShadow;
     background-color: @tdActiveBackgroundColor;
     > div {
-      color           : @tdActiveColor           !important;
+      color: @tdActiveColor !important;
       background-color: @tdActiveBackgroundColor !important;
       > a {
         color: white;
@@ -134,22 +135,22 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid::after {
-  content         : "";
-  position        : absolute;
-  top             : 0;
-  right           : 0;
-  width           : 16px;
-  height          : @headTrHeight;
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 16px;
+  height: @headTrHeight;
   background-color: @thBackgroundColor;
-  box-sizing      : border-box;
-  border-bottom   : @headTrBorderBottom;
+  box-sizing: border-box;
+  border-bottom: @headTrBorderBottom;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__head {
-  width     : 100%;
-  position  : absolute;
-  top       : 0;
+  width: 100%;
+  position: absolute;
+  top: 0;
   overflow-y: scroll;
   overflow-x: hidden;
   .Grid__tr {
@@ -160,29 +161,29 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__resize {
-  position        : absolute;
-  top             : 0;
-  right           : -4px;
-  width           : 7px;
-  height          : 100%;
+  position: absolute;
+  top: 0;
+  right: -4px;
+  width: 7px;
+  height: 100%;
   background-color: transparent;
-  cursor          : w-resize;
-  z-index         : 2;
+  cursor: w-resize;
+  z-index: 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .Grid__body {
-  width     : 100%;
-  position  : absolute;
-  top       : @bodyTop;
-  bottom    : 0;
+  width: 100%;
+  position: absolute;
+  top: @bodyTop;
+  bottom: 0;
   overflow-y: scroll;
   overflow-x: auto;
   .Grid__tr {
     border-bottom: @bodyTrBorderBottom;
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
-      color           : @bodyTrActiveColor !important;
+      color: @bodyTrActiveColor !important;
       .Grid__td {
         > div {
           color: @bodyTrActiveColor !important;

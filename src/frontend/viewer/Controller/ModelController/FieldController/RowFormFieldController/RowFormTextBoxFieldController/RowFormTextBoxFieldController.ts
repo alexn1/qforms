@@ -1,6 +1,6 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTextBoxFieldView } from './RowFormTextBoxFieldView';
-import {TextBoxField} from '../../../../../Model/Field/TextBoxField/TextBoxField';
+import { TextBoxField } from '../../../../../Model/Field/TextBoxField/TextBoxField';
 
 export class RowFormTextBoxFieldController extends RowFormFieldController<TextBoxField> {
     getViewClass() {

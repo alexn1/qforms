@@ -12,7 +12,7 @@ export class Search {
     }
     static objToString(obj) {
         const search = Object.keys(obj)
-            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
             .join('&');
         if (!search) return '';
         return `?${search}`;

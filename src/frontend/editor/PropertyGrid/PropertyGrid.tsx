@@ -31,7 +31,7 @@ export class PropertyGrid extends ReactComponent {
                 name={name}
                 value={obj[name]}
                 spellCheck="false"
-                onChange={value => this.onChange(name, value)}
+                onChange={(value) => this.onChange(name, value)}
                 autocomplete={'off'}
             />
         );
@@ -43,18 +43,18 @@ export class PropertyGrid extends ReactComponent {
             <ComboBox
                 name={name}
                 value={obj[name]}
-                items={options[name].map(value => ({
+                items={options[name].map((value) => ({
                     value: value,
                     title: value,
                 }))}
-                onChange={value => this.onChange(name, value)}
+                onChange={(value) => this.onChange(name, value)}
             />
         );
     }
     renderRows() {
         const obj = this.getObj();
         const options = this.getOptions();
-        return Object.keys(obj).map(name => (
+        return Object.keys(obj).map((name) => (
             <tr key={name}>
                 <td>{name}</td>
                 <td>

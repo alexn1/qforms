@@ -6,7 +6,7 @@ export class ChangeClassView extends ReactComponent {
         super(props);
         this.class = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
@@ -45,7 +45,7 @@ export class ChangeClassView extends ReactComponent {
                                 { value: 'RadioField' },
                             ]}
                             value={ctrl.options.fieldCtrl.model.getClassName()}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                         />
                     </div>
                 </div>

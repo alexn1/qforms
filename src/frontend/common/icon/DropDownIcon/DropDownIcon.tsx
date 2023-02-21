@@ -6,8 +6,7 @@ export class DropDownIcon extends ReactComponent {
         return (
             <div
                 className={this.getCssClassNames()}
-                style={{ width: this.props.size, height: this.props.size }}
-            >
+                style={{ width: this.props.size, height: this.props.size }}>
                 <svg viewBox="0 0 10 10">
                     <circle cx="5" cy="5" r="5" style={{ fill: 'gray' }} />
                     <polyline

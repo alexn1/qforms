@@ -8,7 +8,7 @@ export class NewActionView extends ReactComponent {
         this.name = null;
         this.caption = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewActionView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -30,7 +30,7 @@ export class NewActionView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id="name"
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -39,7 +39,7 @@ export class NewActionView extends ReactComponent {
                         <label htmlFor="caption">Caption</label>
                         <TextBox
                             id="caption"
-                            onCreate={c => (this.caption = c)}
+                            onCreate={(c) => (this.caption = c)}
                             autocomplete={'off'}
                         />
                     </div>

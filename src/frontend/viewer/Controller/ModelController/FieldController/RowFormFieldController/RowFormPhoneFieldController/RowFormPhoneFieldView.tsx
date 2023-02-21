@@ -10,12 +10,10 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
             classList: [],
         };
     }
-    onClear = async e => {
+    onClear = async (e) => {
         this.getCtrl().onChange('');
         setTimeout(() => {
-            this.getWidget()
-                .getElement()
-                .focus();
+            this.getWidget().getElement().focus();
         }, 0);
     };
     isCloseVisible() {
@@ -23,11 +21,11 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
     }
-    onFocus = async e => {
+    onFocus = async (e) => {
         this.addCssClass('focus');
         await this.rerender();
     };
-    onBlur = async value => {
+    onBlur = async (value) => {
         // console.log('RowFormPhoneFieldView.onBlur', value);
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);
@@ -56,8 +54,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
                 className={`${this.getCssBlockName()}__close ${
                     this.isCloseVisible() ? 'visible' : ''
                 }`}
-                onMouseDown={this.onClear}
-            >
+                onMouseDown={this.onClear}>
                 <CloseIcon />
             </div>
         );

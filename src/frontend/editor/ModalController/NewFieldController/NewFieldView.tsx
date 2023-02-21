@@ -12,7 +12,7 @@ export class NewFieldView extends ReactComponent {
         this.caption = null;
         this.type = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewFieldView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
@@ -36,7 +36,7 @@ export class NewFieldView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id="name"
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -62,14 +62,14 @@ export class NewFieldView extends ReactComponent {
                                 { value: 'PasswordField' },
                                 { value: 'RadioField' },
                             ]}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                         />
                     </div>
                     <div>
                         <label htmlFor="caption">Caption</label>
                         <TextBox
                             id="caption"
-                            onCreate={c => (this.caption = c)}
+                            onCreate={(c) => (this.caption = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -86,7 +86,7 @@ export class NewFieldView extends ReactComponent {
                                 { value: 'object', title: 'object' },
                                 { value: 'date', title: 'date' },
                             ]}
-                            onCreate={c => (this.type = c)}
+                            onCreate={(c) => (this.type = c)}
                         />
                     </div>
                 </div>

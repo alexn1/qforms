@@ -50,7 +50,7 @@ export class FieldController extends VisualController {
         await EditorFrontHostApp.editorApp.openModal(
             new ChangeClassController({
                 fieldCtrl: this,
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const data = await this.model.changeClass({ class: values.class });
                     console.log(data);
                     EditorFrontHostApp.editorApp.fillPropertyGrid(this);

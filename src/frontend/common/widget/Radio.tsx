@@ -14,7 +14,7 @@ export class Radio extends ReactComponent {
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
                 console.log('items:', this.props.items);
@@ -25,7 +25,7 @@ export class Radio extends ReactComponent {
     getValue() {
         return this.state.value;
     }
-    onChange = async e => {
+    onChange = async (e) => {
         // console.log('Radio.onChange', e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {

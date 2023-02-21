@@ -17,8 +17,7 @@ export class ImageDialogView<T extends ImageDialogController> extends View<T> {
                 className={this.getCssClassNames()}
                 ref={this.el}
                 tabIndex={0}
-                onKeyDown={this.getCtrl().onKeyDown}
-            >
+                onKeyDown={this.getCtrl().onKeyDown}>
                 <img
                     className={`${this.getCssBlockName()}__image`}
                     src={ctrl.getSrc()}

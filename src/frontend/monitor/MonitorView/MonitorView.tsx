@@ -14,7 +14,7 @@ export class MonitorView extends ReactComponent {
                     <li>
                         <div>pages:</div>
                         <ul>
-                            {app.pages.map(page => (
+                            {app.pages.map((page) => (
                                 <li key={page.name}>{page.name}</li>
                             ))}
                         </ul>
@@ -22,7 +22,7 @@ export class MonitorView extends ReactComponent {
                     <li>
                         <div>clients:</div>
                         <ul>
-                            {app.clients.map(client => (
+                            {app.clients.map((client) => (
                                 <li key={client.uuid}>
                                     {client.uuid}
                                     &nbsp;
@@ -30,8 +30,9 @@ export class MonitorView extends ReactComponent {
                                     &nbsp; v{client.version}
                                     &nbsp;
                                     <span
-                                        style={{ color: 'green' }}
-                                    >{`userId: ${client.userId}`}</span>
+                                        style={{
+                                            color: 'green',
+                                        }}>{`userId: ${client.userId}`}</span>
                                 </li>
                             ))}
                         </ul>
@@ -48,7 +49,7 @@ export class MonitorView extends ReactComponent {
                 <div>nodeEnv: {data.nodeEnv}</div>
                 <div>uptime: {Helper.formatNumber(data.uptime)} ms</div>
                 <div>applications:</div>
-                <ul>{data.applications.map(app => this.renderApplication(app))}</ul>
+                <ul>{data.applications.map((app) => this.renderApplication(app))}</ul>
             </div>
         );
     }

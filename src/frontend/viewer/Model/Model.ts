@@ -67,7 +67,7 @@ export class Model extends EventEmitter {
     }
 
     getDataSource(name: string): DataSource {
-        return this.dataSources.find(dataSource => dataSource.getName() === name);
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
     createDataSources() {

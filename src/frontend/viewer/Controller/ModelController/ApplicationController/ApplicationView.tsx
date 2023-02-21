@@ -22,7 +22,7 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
         });
     }
     renderModals() {
-        return this.props.ctrl.modals.map(ctrl => {
+        return this.props.ctrl.modals.map((ctrl) => {
             if (ctrl instanceof PageController) {
                 return <Modal key={ctrl.getId()}>{this.renderView(ctrl)}</Modal>;
             }

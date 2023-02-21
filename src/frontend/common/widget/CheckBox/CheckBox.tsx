@@ -18,10 +18,10 @@ export class CheckBox extends ReactComponent {
     getValue() {
         return this.state.checked;
     }
-    onChange = e => {
+    onChange = (e) => {
         // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
         if (!this.props.readOnly) {
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 if (this.props.onChange) {
                     this.props.onChange(!prevState.checked, e);
                 }
@@ -29,7 +29,7 @@ export class CheckBox extends ReactComponent {
             });
         }
     };
-    onClick = e => {
+    onClick = (e) => {
         if (!this.props.readOnly) {
             if (this.props.onChange) this.props.onChange(true);
             this.setState({ checked: true });
@@ -46,8 +46,7 @@ export class CheckBox extends ReactComponent {
             return (
                 <div
                     className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`}
-                    onClick={this.onClick}
-                >
+                    onClick={this.onClick}>
                     ?
                 </div>
             );

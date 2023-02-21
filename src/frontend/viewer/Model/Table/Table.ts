@@ -20,7 +20,7 @@ export class Table extends Model {
         this.columns.push(column);
     }
     getColumn(name) {
-        const column = this.columns.find(column => column.getName() === name);
+        const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }

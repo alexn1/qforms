@@ -4,52 +4,28 @@ import { RowFormComboBoxFieldController } from './RowFormComboBoxFieldController
 import './RowFormComboBoxFieldView.less';
 
 export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFieldController> {
-    onChange = async widgetValue => {
+    onChange = async (widgetValue) => {
         // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
         this.rerender();
         await this.props.ctrl.onChange(widgetValue);
     };
     isCreateButtonVisible() {
-        if (
-            this.getCtrl()
-                .getForm()
-                .getMode() !== 'edit'
-        ) {
+        if (this.getCtrl().getForm().getMode() !== 'edit') {
             return false;
         }
-        if (
-            this.getCtrl()
-                .getModel()
-                .getAttr('newRowMode') === 'disabled'
-        ) {
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {
             return false;
         }
-        if (
-            this.getCtrl()
-                .getModel()
-                .getAttr('newRowMode') === 'editPage'
-        ) {
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'editPage') {
             return (
-                !!this.getCtrl()
-                    .getModel()
-                    .getAttr('itemEditPage') &&
-                !!this.getCtrl()
-                    .getModel()
-                    .getAttr('itemCreateForm')
+                !!this.getCtrl().getModel().getAttr('itemEditPage') &&
+                !!this.getCtrl().getModel().getAttr('itemCreateForm')
             );
         }
-        if (
-            this.getCtrl()
-                .getModel()
-                .getAttr('newRowMode') === 'createPage'
-        ) {
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'createPage') {
             return (
-                !!this.getCtrl()
-                    .getModel()
-                    .getAttr('itemCreatePage') &&
-                !!this.getCtrl()
-                    .getModel()
-                    .getAttr('itemCreateForm')
+                !!this.getCtrl().getModel().getAttr('itemCreatePage') &&
+                !!this.getCtrl().getModel().getAttr('itemCreateForm')
             );
         }
     }
@@ -75,8 +51,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
             <Button
                 classList={[`${this.getCssBlockName()}__edit-button`]}
                 onClick={ctrl.onEditButtonClick}
-                enabled={!!ctrl.getValue()}
-            >
+                enabled={!!ctrl.getValue()}>
                 ...
             </Button>
         );
@@ -86,8 +61,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
         return (
             <Button
                 classList={[`${this.getCssBlockName()}__create-button`]}
-                onClick={ctrl.onCreateButtonClick}
-            >
+                onClick={ctrl.onCreateButtonClick}>
                 +
             </Button>
         );
@@ -97,9 +71,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
         return (
             <div className={this.getCssClassNames()}>
                 {this.renderSelect()}
-                {this.getCtrl()
-                    .getModel()
-                    .getAttr('itemEditPage') &&
+                {this.getCtrl().getModel().getAttr('itemEditPage') &&
                     !!this.getCtrl().getValue() &&
                     this.renderEditButton()}
                 {this.isCreateButtonVisible() && this.renderCreateButton()}

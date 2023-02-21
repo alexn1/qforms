@@ -7,9 +7,7 @@ export class RowFormPhoneFieldController extends RowFormFieldController<PhoneFie
         return super.getViewClass() || RowFormPhoneFieldView;
     }
     getPhoneFormatErrorText() {
-        return this.getModel()
-            .getApp()
-            .getText().form.phoneNumberFormatError;
+        return this.getModel().getApp().getText().form.phoneNumberFormatError;
     }
 
     getError() {

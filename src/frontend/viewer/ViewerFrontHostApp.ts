@@ -87,7 +87,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
             body: JSON.stringify(values),
-        }).catch(err => {
+        }).catch((err) => {
             console.error(err.message);
         });
     }
@@ -103,7 +103,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new AlertController({
                         ...options,
-                        onClose: result => {
+                        onClose: (result) => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);
@@ -128,7 +128,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new ConfirmController({
                         ...options,
-                        onClose: result => {
+                        onClose: (result) => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);

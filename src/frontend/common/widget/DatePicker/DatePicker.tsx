@@ -118,14 +118,14 @@ export class DatePicker extends ReactComponent {
         return true;
     }
 
-    onClick = e => {
+    onClick = (e) => {
         console.log('DatePicker.onClick', e.target);
         if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
             return this.onDateClick(e.target);
         }
     };
 
-    onMouseDown = e => {
+    onMouseDown = (e) => {
         // console.log('DatePicker.onMouseDown');
         if (this.props.onMouseDown) {
             return this.props.onMouseDown(e);
@@ -139,9 +139,9 @@ export class DatePicker extends ReactComponent {
         }
     }
 
-    onNextClick = e => {
+    onNextClick = (e) => {
         // console.log('DatePicker.next');
-        this.setState(prevState => {
+        this.setState((prevState) => {
             const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             next.setMonth(next.getMonth() + 1);
             return {
@@ -150,9 +150,9 @@ export class DatePicker extends ReactComponent {
         });
     };
 
-    onPrevClick = e => {
+    onPrevClick = (e) => {
         // console.log('DatePicker.prev');
-        this.setState(prevState => {
+        this.setState((prevState) => {
             const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
             prev.setMonth(prev.getMonth() - 1);
             return {
@@ -176,16 +176,14 @@ export class DatePicker extends ReactComponent {
             <table
                 className={`${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`}
                 onClick={this.onClick}
-                onMouseDown={this.onMouseDown}
-            >
+                onMouseDown={this.onMouseDown}>
                 <caption className={`${this.getCssBlockName()}__caption`}>
                     <div className={`${this.getCssBlockName()}__caption-content`}>
                         <div
                             className={`${this.getCssBlockName()}__caption-link ${
                                 this.isPrevAllowed() ? 'enabled' : ''
                             }`}
-                            onClick={this.onPrevClick}
-                        >
+                            onClick={this.onPrevClick}>
                             <LeftIcon size={18} />
                         </div>
                         <span className={`${this.getCssBlockName()}__caption-title`}>{`${
@@ -193,8 +191,7 @@ export class DatePicker extends ReactComponent {
                         }, ${this.state.selectedMonth[0]}`}</span>
                         <div
                             className={`${this.getCssBlockName()}__caption-link enabled`}
-                            onClick={this.onNextClick}
-                        >
+                            onClick={this.onNextClick}>
                             <RightIcon size={18} />
                         </div>
                     </div>
@@ -211,9 +208,9 @@ export class DatePicker extends ReactComponent {
                     </tr>
                 </thead>
                 <tbody>
-                    {Array.from(Array(6).keys()).map(i => (
+                    {Array.from(Array(6).keys()).map((i) => (
                         <tr key={i}>
-                            {Array.from(Array(7).keys()).map(j => {
+                            {Array.from(Array(7).keys()).map((j) => {
                                 const classList = [];
                                 if (j === 5 || j === 6) classList.push('weekend');
                                 if (this.isSelectToday() && date.getTime() === today.getTime())
@@ -240,8 +237,7 @@ export class DatePicker extends ReactComponent {
                                             ' ',
                                         )}`}
                                         style={style}
-                                        data-date={dataDate}
-                                    >
+                                        data-date={dataDate}>
                                         {text}
                                     </td>
                                 );

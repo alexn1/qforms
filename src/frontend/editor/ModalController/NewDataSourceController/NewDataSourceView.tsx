@@ -8,7 +8,7 @@ export class NewDataSourceView extends ReactComponent {
         this.name = null;
         this.class = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -30,7 +30,7 @@ export class NewDataSourceView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id={'name'}
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -44,7 +44,7 @@ export class NewDataSourceView extends ReactComponent {
                                 { value: 'SqlDataSource', title: 'SqlDataSource' },
                                 { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
                             ]}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                             value={'SqlDataSource'}
                         />
                     </div>

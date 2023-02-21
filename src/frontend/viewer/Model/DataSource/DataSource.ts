@@ -331,9 +331,7 @@ export class DataSource extends Model {
 
     getType(columnName: string) {
         // console.log('DataSource.getType', columnName);
-        const type = this.getTable()
-            .getColumn(columnName)
-            .getType();
+        const type = this.getTable().getColumn(columnName).getType();
         // console.log('type:', type);
         return type;
     }

@@ -2,7 +2,7 @@ import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormTimeFieldController } from './TableFormTimeFieldController';
 
 export class TableFormTimeFieldView<
-    T extends TableFormTimeFieldController
+    T extends TableFormTimeFieldController,
 > extends TableFormFieldView<T> {
     span: React.RefObject<any>;
     render() {

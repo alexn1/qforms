@@ -1,13 +1,13 @@
 import { ModelView } from '../ModelView';
 import { FormController } from './FormController';
-import {Form} from '../../../Model/Form/Form'
+import { Form } from '../../../Model/Form/Form';
 
 export class FormView<T extends FormController<Form>> extends ModelView<T> {
     constructor(props) {
         super(props);
         this.checkParent();
     }
-    onActionsClick = async li => {
+    onActionsClick = async (li) => {
         // console.log('FormView.onActionsClick:', li);
         const ctrl = this.props.ctrl;
         const name = li.dataset.action;
@@ -18,17 +18,13 @@ export class FormView<T extends FormController<Form>> extends ModelView<T> {
             }
         } catch (err) {
             console.error(err);
-            await this.getCtrl()
-                .getApp()
-                .alert({ message: err.message });
+            await this.getCtrl().getApp().alert({ message: err.message });
         }
     };
     shouldComponentUpdate(nextProps, nextState) {
         console.log(
             'FormView.shouldComponentUpdate',
-            this.getCtrl()
-                .getModel()
-                .getFullName(),
+            this.getCtrl().getModel().getFullName(),
             nextProps.updated - this.props.updated,
         );
         if (nextProps.updated - this.props.updated) return true;

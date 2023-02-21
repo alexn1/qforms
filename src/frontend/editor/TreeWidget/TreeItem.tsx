@@ -12,25 +12,25 @@ export class TreeItem extends ReactComponent {
         };
         this.li = React.createRef();
     }
-    onDivMouseDown = e => {
+    onDivMouseDown = (e) => {
         // console.log('TreeItem.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         tree.select(item);
     };
-    onDivDoubleClick = e => {
+    onDivDoubleClick = (e) => {
         // console.log('TreeItem.onDivDoubleClick');
         const item = this.props.item;
         const tree = this.props.tree;
         tree.onDoubleClick(item);
     };
-    onNodeMouseDown = e => {
+    onNodeMouseDown = (e) => {
         // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         const opened = this.state.opened;
         e.stopPropagation();
-        this.setState(prevState => {
+        this.setState((prevState) => {
             return { opened: !prevState.opened };
         });
         if (!opened) {
@@ -71,21 +71,20 @@ export class TreeItem extends ReactComponent {
                     className={this.isSelected() ? 'active' : null}
                     style={{ paddingLeft: this.props.paddingLeft }}
                     onMouseDown={this.onDivMouseDown}
-                    onDoubleClick={this.onDivDoubleClick}
-                >
+                    onDoubleClick={this.onDivDoubleClick}>
                     <span className={isNode ? 'node' : 'leaf'} onMouseDown={this.onNodeMouseDown} />
                     &nbsp;
                     <span style={style}>{title}</span>
                 </div>
                 {hasItems && (
                     <ul>
-                        {items.map(item => (
+                        {items.map((item) => (
                             <TreeItem
                                 key={item.getTitle()}
                                 tree={tree}
                                 item={item}
                                 paddingLeft={this.props.paddingLeft + 15}
-                                onCreate={c => {
+                                onCreate={(c) => {
                                     // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
                                     c.parent = this;
                                     item.view = c;

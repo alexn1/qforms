@@ -15,13 +15,13 @@ export class ConfirmController extends Controller {
     close(result) {
         this.options.onClose(result);
     }
-    onYesClick = e => {
+    onYesClick = (e) => {
         this.close(true);
     };
-    onCloseClick = e => {
+    onCloseClick = (e) => {
         this.close(false);
     };
-    onKeyDown = async e => {
+    onKeyDown = async (e) => {
         if (e.key === 'Escape') {
             this.close(false);
         }

@@ -39,8 +39,8 @@ export class DatabaseController extends DocumentController {
         };
     }
     init() {
-        this.model.params.forEach(param => this.createParam(param));
-        this.model.tables.forEach(table => this.createTable2(table));
+        this.model.params.forEach((param) => this.createParam(param));
+        this.model.tables.forEach((table) => this.createTable2(table));
     }
     createParam(model) {
         const param = new ParamController(model, this);
@@ -103,7 +103,7 @@ export class DatabaseController extends DocumentController {
     async actionNewParam() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewParamController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const param = await this.model.newParam(values.name);
                     const paramController = this.createParam(param);
                     await EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
@@ -117,7 +117,7 @@ export class DatabaseController extends DocumentController {
     async actionNewTable() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewTableController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const table = await this.model.newTable({ name: values.name });
                     const tableController = this.createTable2(table);
                     await EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
@@ -135,10 +135,10 @@ export class DatabaseController extends DocumentController {
         // @ts-ignore
         document.treeWidgetItems = result.data.tables
             .sort()
-            .map(tableName => ({ getTitle: () => tableName }));
+            .map((tableName) => ({ getTitle: () => tableName }));
         return document;
     }
-    onTableSelect2 = async item => {
+    onTableSelect2 = async (item) => {
         console.log('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
         this.tableName = tableName;
@@ -147,7 +147,7 @@ export class DatabaseController extends DocumentController {
         this.document.view.rerender();
         // console.log('tableInfo:', this.tableInfo);
     };
-    onCreateTableClick = e => {
+    onCreateTableClick = (e) => {
         console.log('DatabaseController.onCreateTableClick');
         this.newTableAction(this.tableName, this.tableInfo);
     };
@@ -156,7 +156,7 @@ export class DatabaseController extends DocumentController {
         const table = await this.model.newTable({
             class: 'Table',
             name: tableName,
-            columns: tableInfo.map(column => ({
+            columns: tableInfo.map((column) => ({
                 class: 'Column',
                 name: column.name,
                 caption: column.name,

@@ -10,12 +10,12 @@ export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFi
             classList: [],
         };
     }
-    onFocus = async e => {
+    onFocus = async (e) => {
         // console.log('RowFormTextAreaFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
-    onBlur = async e => {
+    onBlur = async (e) => {
         // console.log('RowFormTextAreaFieldView.onBlur');
         this.removeCssClass('focus');
         await this.rerender();

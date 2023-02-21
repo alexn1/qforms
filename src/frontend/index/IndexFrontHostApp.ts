@@ -38,7 +38,7 @@ export class IndexFrontHostApp {
     }
 
     getAppItems() {
-        return this.data.appInfos.map(appInfo => ({
+        return this.data.appInfos.map((appInfo) => ({
             value: appInfo.fullName,
             title: appInfo.fullName,
         }));
@@ -49,7 +49,7 @@ export class IndexFrontHostApp {
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) {
-                return appInfo.envs.map(env => ({ value: env, title: env }));
+                return appInfo.envs.map((env) => ({ value: env, title: env }));
             }
         }
         return [];
@@ -57,25 +57,25 @@ export class IndexFrontHostApp {
 
     getAppInfo(fullName) {
         // console.log('IndexFrontHostApp.getAppInfo', fullName);
-        return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
+        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
     }
 
-    onAppChange = fullName => {
+    onAppChange = (fullName) => {
         console.log('IndexFrontHostApp.onAppChange', fullName);
         this.currentAppFullName = fullName;
-        const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
+        const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
         if (!appInfo) throw new Error(`no appInfo ${fullName}`);
         // console.log('appInfo:', appInfo);
         this.currentAppEnv = appInfo.envs[0];
         this.view.rerender();
     };
 
-    onEnvChange = env => {
+    onEnvChange = (env) => {
         console.log('IndexFrontHostApp.onEnvChange', env);
         this.currentAppEnv = env;
     };
 
-    run = e => {
+    run = (e) => {
         if (this.currentAppFullName) {
             const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
             console.log('href:', href);
@@ -83,7 +83,7 @@ export class IndexFrontHostApp {
         }
     };
 
-    edit = e => {
+    edit = (e) => {
         if (this.currentAppFullName) {
             const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
             console.log('href:', href);
@@ -91,7 +91,7 @@ export class IndexFrontHostApp {
         }
     };
 
-    btnCreate_Click = async e => {
+    btnCreate_Click = async (e) => {
         this.modals.push({ id: 1 });
         await this.view.rerender();
         this.folderNameTextBox.getElement().focus();
@@ -116,18 +116,18 @@ export class IndexFrontHostApp {
         this.modals.pop();
         this.view.rerender();
     };
-    onFolderNameCreate = textBox => {
+    onFolderNameCreate = (textBox) => {
         console.log('IndexFrontHostApp.onFolderNameCreate');
         this.folderNameTextBox = textBox;
     };
-    onFolderNameChange = folderName => {
+    onFolderNameChange = (folderName) => {
         // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
         this.folderName = folderName;
     };
-    onAppNameChange = appName => {
+    onAppNameChange = (appName) => {
         this.appName = appName;
     };
-    onCreateClick = async e => {
+    onCreateClick = async (e) => {
         console.log('IndexFrontHostApp.onCreateClick');
         console.log(this.folderName, this.appName);
         this.closeModal();

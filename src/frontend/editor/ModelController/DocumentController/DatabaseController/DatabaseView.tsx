@@ -19,7 +19,7 @@ export class DatabaseView extends ReactComponent {
                     { name: 'comment', title: 'comment', width: 100 },
                 ]}
                 rows={ctrl.tableInfo}
-                getRowKey={row => row.name}
+                getRowKey={(row) => row.name}
             />
         );
     }

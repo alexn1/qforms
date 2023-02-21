@@ -11,15 +11,13 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
             type: 'password',
         };
     }
-    onCloseClick = async e => {
+    onCloseClick = async (e) => {
         // console.log('RowFormPasswordFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
         this.getWidget().state.value = '';
         this.getWidget().setState({ value: '' });
         ctrl.onChange('');
-        this.getWidget()
-            .getElement()
-            .focus();
+        this.getWidget().getElement().focus();
     };
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
@@ -31,18 +29,18 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
         // console.log('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
-    onFocus = async e => {
+    onFocus = async (e) => {
         // console.log('RowFormPasswordFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
-    onBlur = async e => {
+    onBlur = async (e) => {
         // console.log('RowFormPasswordFieldView.onBlur');
         this.removeCssClass('focus');
         await this.rerender();
     };
-    onIconClick = e => {
-        this.setState(prevState => {
+    onIconClick = (e) => {
+        this.setState((prevState) => {
             return {
                 type: prevState.type === 'password' ? 'text' : 'password',
             };
@@ -70,8 +68,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
                     className={`${this.getCssBlockName()}__close ${
                         this.isCloseVisible() ? 'visible' : ''
                     }`}
-                    onClick={this.onCloseClick}
-                >
+                    onClick={this.onCloseClick}>
                     <CloseIcon />
                 </div>
                 <div className={`${this.getCssBlockName()}__icon`} onClick={this.onIconClick}>

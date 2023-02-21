@@ -31888,7 +31888,7 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         // console.log(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {
@@ -31977,7 +31977,7 @@ class Search {
     }
     static objToString(obj) {
         const search = Object.keys(obj)
-            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
             .join('&');
         if (!search)
             return '';
@@ -32012,7 +32012,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const ArrowIcon = props => {
+const ArrowIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
 };
 // @ts-ignore
@@ -32058,7 +32058,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const CloseIcon = props => {
+const CloseIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
 };
 // @ts-ignore
@@ -32079,7 +32079,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const CloseIcon2 = props => {
+const CloseIcon2 = (props) => {
     const size = props.size || 24;
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
 };
@@ -32791,10 +32791,10 @@ __webpack_require__.r(__webpack_exports__);
 class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
-                this.setState(prevState => {
+                this.setState((prevState) => {
                     if (this.props.onChange) {
                         this.props.onChange(!prevState.checked, e);
                     }
@@ -32802,7 +32802,7 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
                 });
             }
         };
-        this.onClick = e => {
+        this.onClick = (e) => {
             if (!this.props.readOnly) {
                 if (this.props.onChange)
                     this.props.onChange(true);
@@ -32857,12 +32857,12 @@ __webpack_require__.r(__webpack_exports__);
 class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onCheckBoxChange = e => {
+        this.onCheckBoxChange = (e) => {
             // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
             const checked = e.target.checked;
             const itemValue = e.target.dataset.value;
             // console.log('itemValue:', itemValue);
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
                 if (checked) {
@@ -32913,7 +32913,7 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
         return true;
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map(item => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map((item) => {
                 if (item.value === undefined)
                     throw new Error('no item value');
                 return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
@@ -32965,7 +32965,7 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 if (this.props.nullable && value === '') {
                 }
@@ -33000,7 +33000,7 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     render() {
         // console.log('ComboBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
-                    this.props.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
+                    this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
 // @ts-ignore
@@ -33044,21 +33044,21 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
-        this.onClick = e => {
+        this.onClick = (e) => {
             console.log('DatePicker.onClick', e.target);
             if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
                 return this.onDateClick(e.target);
             }
         };
-        this.onMouseDown = e => {
+        this.onMouseDown = (e) => {
             // console.log('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
-        this.onNextClick = e => {
+        this.onNextClick = (e) => {
             // console.log('DatePicker.next');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
                 return {
@@ -33066,9 +33066,9 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
                 };
             });
         };
-        this.onPrevClick = e => {
+        this.onPrevClick = (e) => {
             // console.log('DatePicker.prev');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
                 return {
@@ -33186,7 +33186,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             ? // @ts-ignore
                 new Date(...this.props.highlightedDate)
             : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
                             const classList = [];
                             if (j === 5 || j === 6)
                                 classList.push('weekend');
@@ -33244,24 +33244,24 @@ __webpack_require__.r(__webpack_exports__);
 class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onButtonClick = e => {
+        this.onButtonClick = (e) => {
             // console.log('DropdownButton.onButtonClick');
-            this.setState(state => ({ open: !state.open }));
+            this.setState((state) => ({ open: !state.open }));
         };
-        this.onButtonBlur = e => {
+        this.onButtonBlur = (e) => {
             // console.log('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
-        this.onKeyDown = e => {
+        this.onKeyDown = (e) => {
             // console.log('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
-        this.onUlMouseDown = e => {
+        this.onUlMouseDown = (e) => {
             // console.log('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
@@ -33287,7 +33287,7 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactC
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
-                        this.props.actions.map(action => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
+                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
     }
 }
 // @ts-ignore
@@ -33327,13 +33327,13 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
     constructor(props) {
         // console.log('DropdownDatePicker.constructor', props);
         super(props);
-        this.onInputClick = e => {
+        this.onInputClick = (e) => {
             // console.log('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
-            this.setState(prevState => ({ open: !prevState.open }));
+            this.setState((prevState) => ({ open: !prevState.open }));
         };
-        this.onInputKeyDown = e => {
+        this.onInputKeyDown = (e) => {
             // console.log('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
@@ -33347,19 +33347,19 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
                 this.props.onChange(null);
             }
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
-        this.onDatePickerMouseDown = e => {
+        this.onDatePickerMouseDown = (e) => {
             // console.log('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
-        this.onDatePickerDateSelected = date => {
+        this.onDatePickerDateSelected = (date) => {
             // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
@@ -33479,9 +33479,9 @@ __webpack_require__.r(__webpack_exports__);
 class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onTitleClick = e => {
+        this.onTitleClick = (e) => {
             console.log('Expand.onTitleClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 return { opened: !prevState.opened };
             });
         };
@@ -33624,14 +33624,14 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.state.resized = Date.now();
             await this.rerender();
         };
-        this.onCellViewCreate = c => {
+        this.onCellViewCreate = (c) => {
             // console.log('Grid.onCellViewCreate', c.props.column.name);
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
                 this.columns[columnName] = [];
             this.columns[columnName].push(c);
         };
-        this.onCellViewUnmount = c => {
+        this.onCellViewUnmount = (c) => {
             // console.log('Grid.onCellViewUnmount', c.props.column.name);
             const columnName = c.props.column.name;
             const i = this.columns[columnName].indexOf(c);
@@ -33692,7 +33692,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
     }
     findRow(key) {
-        return this.props.rows.find(row => this.getRowKey(row) === key);
+        return this.props.rows.find((row) => this.getRowKey(row) === key);
     }
     async onLeft() {
         console.log('Grid.onLeft');
@@ -33778,7 +33778,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     getMaxColumnWidth(column) {
-        return (Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2);
+        return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
@@ -33955,7 +33955,7 @@ class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
             if (this.props.onClick) {
                 return await this.props.onClick();
             }
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 if (prevState.classList) {
                     return { classList: null };
                 }
@@ -34008,7 +34008,7 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
-        this.onMouseDown = e => {
+        this.onMouseDown = (e) => {
             // console.log('Menu.onMouseDown');
             e.preventDefault();
             // e.stopPropagation();
@@ -34026,18 +34026,18 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         this.state = {};
     }
     toggleMenu(menu) {
-        return new Promise(resolve => {
-            this.setState(prevState => ({
+        return new Promise((resolve) => {
+            this.setState((prevState) => ({
                 [menu]: !prevState[menu],
             }), resolve);
         });
     }
     closeMenu(menu) {
-        return new Promise(resolve => this.setState({ [menu]: false }, resolve));
+        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map(menu => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
     }
 }
 // @ts-ignore
@@ -34100,15 +34100,15 @@ __webpack_require__.r(__webpack_exports__);
 class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             this._setValue(e.target.value);
         };
-        this.onCloseClick = e => {
+        this.onCloseClick = (e) => {
             this._setValue('');
             this.getInputElement().focus();
         };
-        this.onIconClick = e => {
-            this.setState(prevState => {
+        this.onIconClick = (e) => {
+            this.setState((prevState) => {
                 return {
                     type: prevState.type === 'password' ? 'text' : 'password',
                 };
@@ -34173,7 +34173,7 @@ __webpack_require__.r(__webpack_exports__);
 class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onKeyPress = e => {
+        this.onKeyPress = (e) => {
             // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
             // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
@@ -34185,7 +34185,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
                 e.preventDefault();
             }
         };
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
@@ -34207,7 +34207,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
                 this.props.onChange(value);
             }
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
@@ -34321,7 +34321,7 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
                 console.log('items:', this.props.items);
@@ -34570,9 +34570,9 @@ __webpack_require__.r(__webpack_exports__);
 class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onPrevClick = e => {
+        this.onPrevClick = (e) => {
             // console.log('Slider.onPrevClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
                     image = this.props.images.length - 1;
@@ -34580,9 +34580,9 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 return { image };
             });
         };
-        this.onNextClick = e => {
+        this.onNextClick = (e) => {
             // console.log('Slider.onNextClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
                     image = 0;
@@ -34590,7 +34590,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 return { image };
             });
         };
-        this.onImageClick = e => {
+        this.onImageClick = (e) => {
             console.log('Slider.onImageClick');
             if (this.state.classList) {
                 this.setState({ classList: null });
@@ -34599,7 +34599,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 this.setState({ classList: ['full'] });
             }
         };
-        this.onCloseClick = e => {
+        this.onCloseClick = (e) => {
             this.setState({ classList: null });
         };
         if (!this.props.images)
@@ -34672,7 +34672,7 @@ __webpack_require__.r(__webpack_exports__);
 class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onLiMouseDown = e => {
+        this.onLiMouseDown = (e) => {
             // console.log('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
@@ -34687,7 +34687,7 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                 }
             }
         };
-        this.onLiClick = e => {
+        this.onLiClick = (e) => {
             // console.log('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
@@ -34746,7 +34746,7 @@ __webpack_require__.r(__webpack_exports__);
 class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onLiMouseDown = e => {
+        this.onLiMouseDown = (e) => {
             // console.log('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
@@ -34761,7 +34761,7 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                 }
             }
         };
-        this.onLiClick = e => {
+        this.onLiClick = (e) => {
             // console.log('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
@@ -34819,7 +34819,7 @@ class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     constructor(props) {
         // console.log('TextArea.constructor', props);
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TextArea.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
@@ -34870,7 +34870,7 @@ class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
@@ -34928,14 +34928,14 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         // console.log('TimeBox.constructor', props);
         super(props);
-        this.onKeyPress = event => {
+        this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
                 console.log('cancel', event.key);
                 event.preventDefault();
             }
         };
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
@@ -34967,7 +34967,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                 }
             });
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
@@ -35140,7 +35140,7 @@ __webpack_require__.r(__webpack_exports__);
 class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
-        this.onClear = e => {
+        this.onClear = (e) => {
             // console.log('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
@@ -35217,28 +35217,28 @@ __webpack_require__.r(__webpack_exports__);
 
 class IndexFrontHostApp {
     constructor(data) {
-        this.onAppChange = fullName => {
+        this.onAppChange = (fullName) => {
             console.log('IndexFrontHostApp.onAppChange', fullName);
             this.currentAppFullName = fullName;
-            const appInfo = this.data.appInfos.find(app => app.fullName === fullName);
+            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
             if (!appInfo)
                 throw new Error(`no appInfo ${fullName}`);
             // console.log('appInfo:', appInfo);
             this.currentAppEnv = appInfo.envs[0];
             this.view.rerender();
         };
-        this.onEnvChange = env => {
+        this.onEnvChange = (env) => {
             console.log('IndexFrontHostApp.onEnvChange', env);
             this.currentAppEnv = env;
         };
-        this.run = e => {
+        this.run = (e) => {
             if (this.currentAppFullName) {
                 const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
                 console.log('href:', href);
                 window.location.href = href;
             }
         };
-        this.edit = e => {
+        this.edit = (e) => {
             if (this.currentAppFullName) {
                 const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
                 console.log('href:', href);
@@ -35255,15 +35255,15 @@ class IndexFrontHostApp {
             this.modals.pop();
             this.view.rerender();
         };
-        this.onFolderNameCreate = textBox => {
+        this.onFolderNameCreate = (textBox) => {
             console.log('IndexFrontHostApp.onFolderNameCreate');
             this.folderNameTextBox = textBox;
         };
-        this.onFolderNameChange = folderName => {
+        this.onFolderNameChange = (folderName) => {
             // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
             this.folderName = folderName;
         };
-        this.onAppNameChange = appName => {
+        this.onAppNameChange = (appName) => {
             this.appName = appName;
         };
         this.onCreateClick = async (e) => {
@@ -35295,7 +35295,7 @@ class IndexFrontHostApp {
         });
     }
     getAppItems() {
-        return this.data.appInfos.map(appInfo => ({
+        return this.data.appInfos.map((appInfo) => ({
             value: appInfo.fullName,
             title: appInfo.fullName,
         }));
@@ -35305,14 +35305,14 @@ class IndexFrontHostApp {
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) {
-                return appInfo.envs.map(env => ({ value: env, title: env }));
+                return appInfo.envs.map((env) => ({ value: env, title: env }));
             }
         }
         return [];
     }
     getAppInfo(fullName) {
         // console.log('IndexFrontHostApp.getAppInfo', fullName);
-        return this.data.appInfos.find(appInfo => appInfo.fullName === fullName);
+        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
     }
     async createApp(folderName, appName) {
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
@@ -35351,7 +35351,7 @@ __webpack_require__.r(__webpack_exports__);
 class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderModals() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map(modal => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
     }
     render() {
         console.log('IndexView.render');

@@ -19,6 +19,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     tabWidget: any;
     documents: any[];
     modal: any;
+
     constructor(data, runAppLink) {
         super();
         console.log('EditorFrontHostApp.constructor', data);
@@ -60,7 +61,7 @@ export class EditorFrontHostApp extends FrontHostApp {
 
     deinit() {}
 
-    onItemOpen2 = async item => {
+    onItemOpen2 = async (item) => {
         console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
         // console.log('parent:', item.view.parent);
         if (item instanceof PageLinkController && !item.hasPage()) {
@@ -68,7 +69,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         }
     };
 
-    onItemSelect2 = async item => {
+    onItemSelect2 = async (item) => {
         console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof ModelController) {
             if (item instanceof PageLinkController && !item.hasPage()) {
@@ -122,7 +123,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.actionList.setState({ item: null });
     }
 
-    onItemDoubleClick2 = async item => {
+    onItemDoubleClick2 = async (item) => {
         console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
         if (!controller || !(controller instanceof DocumentController)) return;
@@ -140,9 +141,9 @@ export class EditorFrontHostApp extends FrontHostApp {
         await this.view.rerender();
     }
     findDocument(controller) {
-        return this.documents.find(document => document.controller === controller) || null;
+        return this.documents.find((document) => document.controller === controller) || null;
     }
-    onDocumentClose = i => {
+    onDocumentClose = (i) => {
         console.log('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
         const document = this.documents[i];
         const activeDocument = this.documents[this.tabWidget.state.active];
@@ -171,7 +172,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.modal = null;
         await this.view.rerender();
     }
-    onActionClick = async actionName => {
+    onActionClick = async (actionName) => {
         console.log('EditorFrontHostApp.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();
         // console.log('item', item);

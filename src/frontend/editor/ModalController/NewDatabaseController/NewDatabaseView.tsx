@@ -16,7 +16,7 @@ export class NewDatabaseView extends ReactComponent {
         this.user = null;
         this.password = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewDatabaseView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
@@ -47,7 +47,7 @@ export class NewDatabaseView extends ReactComponent {
                                 { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
                                 { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
                             ]}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                             value={'PostgreSqlDatabase'}
                         />
                     </div>
@@ -56,7 +56,7 @@ export class NewDatabaseView extends ReactComponent {
                         <TextBox
                             id={'name'}
                             value={'default'}
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -65,7 +65,7 @@ export class NewDatabaseView extends ReactComponent {
                         <TextBox
                             id={'host'}
                             value={'localhost'}
-                            onCreate={c => (this.host = c)}
+                            onCreate={(c) => (this.host = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -74,7 +74,7 @@ export class NewDatabaseView extends ReactComponent {
                         <TextBox
                             id={'database'}
                             value={'test'}
-                            onCreate={c => (this.database = c)}
+                            onCreate={(c) => (this.database = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -83,7 +83,7 @@ export class NewDatabaseView extends ReactComponent {
                         <TextBox
                             id={'user'}
                             value={'test'}
-                            onCreate={c => (this.user = c)}
+                            onCreate={(c) => (this.user = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -92,7 +92,7 @@ export class NewDatabaseView extends ReactComponent {
                         <TextBox
                             id={'password'}
                             value={'123qwe'}
-                            onCreate={c => (this.password = c)}
+                            onCreate={(c) => (this.password = c)}
                             autocomplete={'off'}
                         />
                     </div>

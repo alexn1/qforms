@@ -12,7 +12,7 @@ export class Tab extends ReactComponent {
         if (this.props.getActive) return this.props.getActive();
         return this.state.active;
     }
-    onLiMouseDown = e => {
+    onLiMouseDown = (e) => {
         // console.log('Tab.onLiMouseDown', e.target);
         if (e.target.classList.contains('close')) return;
         const i = parseInt(e.currentTarget.dataset.i);
@@ -24,7 +24,7 @@ export class Tab extends ReactComponent {
             }
         }
     };
-    onLiClick = e => {
+    onLiClick = (e) => {
         // console.log('Tab.onLiClick', e.target);
         if (e.target.classList.contains('close')) {
             const i = parseInt(e.currentTarget.dataset.i);
@@ -45,8 +45,7 @@ export class Tab extends ReactComponent {
                 className={i === this.getActive() ? 'active' : null}
                 onMouseDown={this.onLiMouseDown}
                 onClick={this.onLiClick}
-                data-i={i}
-            >
+                data-i={i}>
                 <span>{tab.title}</span>
                 {this.props.canClose && <span className="close">&times;</span>}
             </li>

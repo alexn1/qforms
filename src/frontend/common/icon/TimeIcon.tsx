@@ -9,8 +9,7 @@ export class TimeIcon extends React.Component<any, any> {
                 height="18px"
                 viewBox="0 0 24 24"
                 width="18px"
-                fill="#000000"
-            >
+                fill="#000000">
                 <g>
                     <rect fill="none" height="24" width="24" x="0" />
                 </g>

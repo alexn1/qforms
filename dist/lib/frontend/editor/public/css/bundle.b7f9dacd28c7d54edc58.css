@@ -338,7 +338,7 @@ div.CheckBox:not(.disabled):hover {
   background-color: rgba(66, 139, 202, 0.06);
 }
 .Grid:not(.disabled) .Grid__tr:hover {
-  background-color: #E1F0FC !important;
+  background-color: #e1f0fc !important;
 }
 
 /*!**************************************************************************************************************************************!*\
@@ -494,7 +494,7 @@ div.CheckBox:not(.disabled):hover {
   cursor: pointer;
 }
 .Tooltip.alert::before {
-  content: '!';
+  content: "!";
 }
 .Tooltip > span {
   visibility: hidden;
@@ -1321,7 +1321,7 @@ div.CheckBox:not(.disabled):hover {
   \*******************************************************************************************************************************/
 .error,
 .error:focus {
-  box-shadow: 0 0 2px red  !important;
+  box-shadow: 0 0 2px red !important;
   color: red;
 }
 
@@ -1424,7 +1424,7 @@ nav {
 *:focus {
   outline: 0 !important;
 }
-input[type='text'],
+input[type="text"],
 select,
 img,
 svg {

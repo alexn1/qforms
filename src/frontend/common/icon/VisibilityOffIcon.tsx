@@ -8,8 +8,7 @@ export class VisibilityOffIcon extends React.Component<any, any> {
                 height="24px"
                 viewBox="0 0 24 24"
                 width="24px"
-                fill="#000000"
-            >
+                fill="#000000">
                 <path
                     d="M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z"
                     fill="none"

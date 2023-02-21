@@ -10,28 +10,28 @@ export class DropdownButton extends ReactComponent {
             disabled: false,
         };
     }
-    onButtonClick = e => {
+    onButtonClick = (e) => {
         // console.log('DropdownButton.onButtonClick');
-        this.setState(state => ({ open: !state.open }));
+        this.setState((state) => ({ open: !state.open }));
     };
-    onButtonBlur = e => {
+    onButtonBlur = (e) => {
         // console.log('DropdownButton.onButtonBlur');
         if (this.state.open) {
             this.setState({ open: false });
         }
     };
-    onKeyDown = e => {
+    onKeyDown = (e) => {
         // console.log('DropdownButton.onKeyDown', e.key);
         if (e.key === 'Escape' && this.state.open) {
             this.setState({ open: false });
             e.stopPropagation();
         }
     };
-    onUlMouseDown = e => {
+    onUlMouseDown = (e) => {
         // console.log('DropdownButton.onUlMouseDown');
         e.preventDefault();
     };
-    onLiClick = async e => {
+    onLiClick = async (e) => {
         // console.log('DropdownButton.onLiClick', e.currentTarget);
         const li = e.currentTarget;
         this.setState({ open: false }, () => {
@@ -53,24 +53,21 @@ export class DropdownButton extends ReactComponent {
                     onClick={this.onButtonClick}
                     onBlur={this.onButtonBlur}
                     enabled={this.isEnabled()}
-                    onKeyDown={this.onKeyDown}
-                >
+                    onKeyDown={this.onKeyDown}>
                     {this.props.title || this.props.children}
                 </Button>
                 <ul
                     className={`${this.getCssBlockName()}__dropdown`}
-                    onMouseDown={this.onUlMouseDown}
-                >
+                    onMouseDown={this.onUlMouseDown}>
                     {this.props.actions &&
-                        this.props.actions.map(action => (
+                        this.props.actions.map((action) => (
                             <li
                                 className={`${this.getCssBlockName()}__item ${
                                     action.enabled === false ? 'disabled' : ''
                                 }`}
                                 key={action.name}
                                 data-action={action.name}
-                                onClick={action.enabled !== false ? this.onLiClick : null}
-                            >
+                                onClick={action.enabled !== false ? this.onLiClick : null}>
                                 {action.title}
                             </li>
                         ))}

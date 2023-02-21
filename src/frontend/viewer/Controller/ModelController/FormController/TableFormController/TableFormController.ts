@@ -73,11 +73,7 @@ export class TableFormController extends FormController<TableForm> {
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
             case 'form':
-                if (
-                    this.getPage()
-                        .getModel()
-                        .isSelectMode()
-                ) {
+                if (this.getPage().getModel().isSelectMode()) {
                     await this.getPage().selectRow(key);
                 } else {
                     await this.edit(key);

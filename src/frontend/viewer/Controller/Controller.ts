@@ -7,7 +7,7 @@ export abstract class Controller extends EventEmitter {
         super();
     } */
 
-    onViewCreate = view => {
+    onViewCreate = (view) => {
         // console.log('Controller.onViewCreate');
         this.view = view;
     };

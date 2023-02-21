@@ -11,7 +11,7 @@ export class ComboBox extends ReactComponent {
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 if (this.props.nullable && value === '') {
                 } else {
@@ -33,14 +33,14 @@ export class ComboBox extends ReactComponent {
     getValue() {
         return this.state.value;
     }
-    onChange = async e => {
+    onChange = async (e) => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {
             await this.props.onChange(e.target.value);
         }
     };
-    onMouseDown = async e => {
+    onMouseDown = async (e) => {
         // console.log('ComboBox.onMouseDown', e.button);
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
@@ -64,11 +64,10 @@ export class ComboBox extends ReactComponent {
                 style={this.props.style}
                 id={this.props.id}
                 onDoubleClick={this.props.onDoubleClick}
-                onMouseDown={this.onMouseDown}
-            >
+                onMouseDown={this.onMouseDown}>
                 {this.props.nullable && <option value={''}>{this.props.placeholder}</option>}
                 {this.props.items &&
-                    this.props.items.map(item => (
+                    this.props.items.map((item) => (
                         <option key={item.value} value={item.value}>
                             {item.title || item.value}
                         </option>

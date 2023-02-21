@@ -47,8 +47,7 @@ export class Button extends ReactComponent {
                 onFocus={this.props.onFocus}
                 onBlur={this.props.onBlur}
                 onKeyDown={this.props.onKeyDown}
-                style={this.getStyle()}
-            >
+                style={this.getStyle()}>
                 {this.props.title || this.props.children}
             </button>
         );

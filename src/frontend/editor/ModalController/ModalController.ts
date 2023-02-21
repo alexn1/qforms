@@ -5,11 +5,11 @@ export class ModalController {
     constructor(options) {
         this.options = options;
     }
-    onClose = async e => {
+    onClose = async (e) => {
         console.log('ModalController.onClose');
         await this.close();
     };
-    onCreate = async values => {
+    onCreate = async (values) => {
         console.log('ModalController.onCreate', values);
         await this.close();
         if (this.options.onCreate) {

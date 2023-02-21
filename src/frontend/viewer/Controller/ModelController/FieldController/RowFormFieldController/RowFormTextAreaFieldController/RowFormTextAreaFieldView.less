@@ -1,40 +1,37 @@
 @import "../../../../../style/application";
 @import "../../../../../style/field";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextAreaFieldView {
-    border: 1px solid #bbb;
-    &.editable:hover {
-        border: 1px solid var(--accent-color);
-    }
-    &.focus {
-        border: 1px solid var(--accent-color);
-    }
-    &.error {
-        border: 1px solid red !important;
-    }
-    &.error > .RowFormTextAreaFieldView__textarea {
-        //background-color: #f2dede;
-        color: red;
-    }
+  border: 1px solid #bbb;
+  &.editable:hover {
+    border: 1px solid var(--accent-color);
+  }
+  &.focus {
+    border: 1px solid var(--accent-color);
+  }
+  &.error {
+    border: 1px solid red !important;
+  }
+  &.error > .RowFormTextAreaFieldView__textarea {
+    //background-color: #f2dede;
+    color: red;
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormTextAreaFieldView__textarea {
-    width       : 100%;
-    display     : block;
-    border-width: 0;
-    padding     : 3px 5px;
-    font-family: inherit;
-    font-weight: inherit;
-    font-size  : inherit;
-    &[readonly] {
-        background-color: @fieldDisableBackgroundColor;
-        color           : gray;
-    }
+  width: 100%;
+  display: block;
+  border-width: 0;
+  padding: 3px 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+  &[readonly] {
+    background-color: @fieldDisableBackgroundColor;
+    color: gray;
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .debug .RowFormTextAreaFieldView.changed > .RowFormTextAreaFieldView__textarea {
-    background-color: @fieldDebugChangeBackgroundColor;
+  background-color: @fieldDebugChangeBackgroundColor;
 }

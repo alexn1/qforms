@@ -12,7 +12,7 @@ export class TreeWidget extends ReactComponent {
     async select(item) {
         console.log('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item)) return;
-        return new Promise<void>(resolve => {
+        return new Promise<void>((resolve) => {
             this.setState({ selectedItem: item }, () => {
                 if (this.props.onItemSelect) this.props.onItemSelect(item);
                 resolve();
@@ -34,9 +34,7 @@ export class TreeWidget extends ReactComponent {
     }
     scrollToSelected() {
         console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
-        this.getSelectedItem()
-            .view.getElement()
-            .scrollIntoView();
+        this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
         console.log('TreeWidget.render' /*, this.props.items*/);
@@ -44,13 +42,13 @@ export class TreeWidget extends ReactComponent {
         return (
             <div className={this.getCssClassNames()}>
                 <ul>
-                    {items.map(item => (
+                    {items.map((item) => (
                         <TreeItem
                             key={item.getTitle()}
                             tree={this}
                             item={item}
                             paddingLeft={5}
-                            onCreate={c => (item.view = c)}
+                            onCreate={(c) => (item.view = c)}
                         />
                     ))}
                 </ul>

@@ -155,8 +155,7 @@ export class Select extends ReactComponent {
                 className={`${this.getCssBlockName()}__close ${
                     this.isCloseVisible() ? 'visible' : ''
                 }`}
-                onClick={this.onCloseClick}
-            >
+                onClick={this.onCloseClick}>
                 <CloseIcon />
             </div>
         );
@@ -177,8 +176,7 @@ export class Select extends ReactComponent {
                     display: this.getDisplay(),
                 }}
                 onMouseDown={this.onDropdownMouseDown}
-                onClick={this.onDropdownClick}
-            >
+                onClick={this.onDropdownClick}>
                 {this.isNullable() && (
                     <li className={`${this.getCssBlockName()}__item`} data-value={'""'}>
                         &nbsp;
@@ -191,8 +189,7 @@ export class Select extends ReactComponent {
                             className={`${this.getCssBlockName()}__item ellipsis ${
                                 this.getValue() === item.value ? 'selected' : ''
                             }`}
-                            data-value={JSON.stringify(item.value)}
-                        >
+                            data-value={JSON.stringify(item.value)}>
                             {item.title || item.value}
                         </li>
                     );

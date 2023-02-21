@@ -32164,7 +32164,7 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         // console.log(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {
@@ -32253,7 +32253,7 @@ class Search {
     }
     static objToString(obj) {
         const search = Object.keys(obj)
-            .map(name => `${name}=${encodeURIComponent(obj[name])}`)
+            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
             .join('&');
         if (!search)
             return '';
@@ -32288,7 +32288,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const ArrowIcon = props => {
+const ArrowIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
 };
 // @ts-ignore
@@ -32334,7 +32334,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const CloseIcon = props => {
+const CloseIcon = (props) => {
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
 };
 // @ts-ignore
@@ -32355,7 +32355,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
-const CloseIcon2 = props => {
+const CloseIcon2 = (props) => {
     const size = props.size || 24;
     return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
 };
@@ -33067,10 +33067,10 @@ __webpack_require__.r(__webpack_exports__);
 class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
-                this.setState(prevState => {
+                this.setState((prevState) => {
                     if (this.props.onChange) {
                         this.props.onChange(!prevState.checked, e);
                     }
@@ -33078,7 +33078,7 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
                 });
             }
         };
-        this.onClick = e => {
+        this.onClick = (e) => {
             if (!this.props.readOnly) {
                 if (this.props.onChange)
                     this.props.onChange(true);
@@ -33133,12 +33133,12 @@ __webpack_require__.r(__webpack_exports__);
 class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onCheckBoxChange = e => {
+        this.onCheckBoxChange = (e) => {
             // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
             const checked = e.target.checked;
             const itemValue = e.target.dataset.value;
             // console.log('itemValue:', itemValue);
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
                 if (checked) {
@@ -33189,7 +33189,7 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
         return true;
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map(item => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map((item) => {
                 if (item.value === undefined)
                     throw new Error('no item value');
                 return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
@@ -33241,7 +33241,7 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 if (this.props.nullable && value === '') {
                 }
@@ -33276,7 +33276,7 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     render() {
         // console.log('ComboBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
-                    this.props.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
+                    this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
 }
 // @ts-ignore
@@ -33320,21 +33320,21 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);
-        this.onClick = e => {
+        this.onClick = (e) => {
             console.log('DatePicker.onClick', e.target);
             if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
                 return this.onDateClick(e.target);
             }
         };
-        this.onMouseDown = e => {
+        this.onMouseDown = (e) => {
             // console.log('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
-        this.onNextClick = e => {
+        this.onNextClick = (e) => {
             // console.log('DatePicker.next');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
                 return {
@@ -33342,9 +33342,9 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
                 };
             });
         };
-        this.onPrevClick = e => {
+        this.onPrevClick = (e) => {
             // console.log('DatePicker.prev');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
                 return {
@@ -33462,7 +33462,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             ? // @ts-ignore
                 new Date(...this.props.highlightedDate)
             : null;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map(i => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map(j => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
                             const classList = [];
                             if (j === 5 || j === 6)
                                 classList.push('weekend');
@@ -33520,24 +33520,24 @@ __webpack_require__.r(__webpack_exports__);
 class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onButtonClick = e => {
+        this.onButtonClick = (e) => {
             // console.log('DropdownButton.onButtonClick');
-            this.setState(state => ({ open: !state.open }));
+            this.setState((state) => ({ open: !state.open }));
         };
-        this.onButtonBlur = e => {
+        this.onButtonBlur = (e) => {
             // console.log('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
-        this.onKeyDown = e => {
+        this.onKeyDown = (e) => {
             // console.log('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
-        this.onUlMouseDown = e => {
+        this.onUlMouseDown = (e) => {
             // console.log('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
@@ -33563,7 +33563,7 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactC
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
-                        this.props.actions.map(action => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
+                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
     }
 }
 // @ts-ignore
@@ -33603,13 +33603,13 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
     constructor(props) {
         // console.log('DropdownDatePicker.constructor', props);
         super(props);
-        this.onInputClick = e => {
+        this.onInputClick = (e) => {
             // console.log('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
-            this.setState(prevState => ({ open: !prevState.open }));
+            this.setState((prevState) => ({ open: !prevState.open }));
         };
-        this.onInputKeyDown = e => {
+        this.onInputKeyDown = (e) => {
             // console.log('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
@@ -33623,19 +33623,19 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
                 this.props.onChange(null);
             }
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
-        this.onDatePickerMouseDown = e => {
+        this.onDatePickerMouseDown = (e) => {
             // console.log('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
-        this.onDatePickerDateSelected = date => {
+        this.onDatePickerDateSelected = (date) => {
             // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
@@ -33755,9 +33755,9 @@ __webpack_require__.r(__webpack_exports__);
 class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onTitleClick = e => {
+        this.onTitleClick = (e) => {
             console.log('Expand.onTitleClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 return { opened: !prevState.opened };
             });
         };
@@ -33900,14 +33900,14 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.state.resized = Date.now();
             await this.rerender();
         };
-        this.onCellViewCreate = c => {
+        this.onCellViewCreate = (c) => {
             // console.log('Grid.onCellViewCreate', c.props.column.name);
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
                 this.columns[columnName] = [];
             this.columns[columnName].push(c);
         };
-        this.onCellViewUnmount = c => {
+        this.onCellViewUnmount = (c) => {
             // console.log('Grid.onCellViewUnmount', c.props.column.name);
             const columnName = c.props.column.name;
             const i = this.columns[columnName].indexOf(c);
@@ -33968,7 +33968,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
     }
     findRow(key) {
-        return this.props.rows.find(row => this.getRowKey(row) === key);
+        return this.props.rows.find((row) => this.getRowKey(row) === key);
     }
     async onLeft() {
         console.log('Grid.onLeft');
@@ -34054,7 +34054,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     getMaxColumnWidth(column) {
-        return (Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2);
+        return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
     }
     getColumnWidth(i) {
         const column = this.props.columns[i];
@@ -34231,7 +34231,7 @@ class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
             if (this.props.onClick) {
                 return await this.props.onClick();
             }
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 if (prevState.classList) {
                     return { classList: null };
                 }
@@ -34284,7 +34284,7 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
-        this.onMouseDown = e => {
+        this.onMouseDown = (e) => {
             // console.log('Menu.onMouseDown');
             e.preventDefault();
             // e.stopPropagation();
@@ -34302,18 +34302,18 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         this.state = {};
     }
     toggleMenu(menu) {
-        return new Promise(resolve => {
-            this.setState(prevState => ({
+        return new Promise((resolve) => {
+            this.setState((prevState) => ({
                 [menu]: !prevState[menu],
             }), resolve);
         });
     }
     closeMenu(menu) {
-        return new Promise(resolve => this.setState({ [menu]: false }, resolve));
+        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map(menu => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
     }
 }
 // @ts-ignore
@@ -34376,15 +34376,15 @@ __webpack_require__.r(__webpack_exports__);
 class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             this._setValue(e.target.value);
         };
-        this.onCloseClick = e => {
+        this.onCloseClick = (e) => {
             this._setValue('');
             this.getInputElement().focus();
         };
-        this.onIconClick = e => {
-            this.setState(prevState => {
+        this.onIconClick = (e) => {
+            this.setState((prevState) => {
                 return {
                     type: prevState.type === 'password' ? 'text' : 'password',
                 };
@@ -34449,7 +34449,7 @@ __webpack_require__.r(__webpack_exports__);
 class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onKeyPress = e => {
+        this.onKeyPress = (e) => {
             // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
             // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
@@ -34461,7 +34461,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
                 e.preventDefault();
             }
         };
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
@@ -34483,7 +34483,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
                 this.props.onChange(value);
             }
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
@@ -34597,7 +34597,7 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
-            const item = this.props.items.find(item => item.value === this.props.value);
+            const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
                 console.log('items:', this.props.items);
@@ -34846,9 +34846,9 @@ __webpack_require__.r(__webpack_exports__);
 class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onPrevClick = e => {
+        this.onPrevClick = (e) => {
             // console.log('Slider.onPrevClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
                     image = this.props.images.length - 1;
@@ -34856,9 +34856,9 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 return { image };
             });
         };
-        this.onNextClick = e => {
+        this.onNextClick = (e) => {
             // console.log('Slider.onNextClick');
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
                     image = 0;
@@ -34866,7 +34866,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 return { image };
             });
         };
-        this.onImageClick = e => {
+        this.onImageClick = (e) => {
             console.log('Slider.onImageClick');
             if (this.state.classList) {
                 this.setState({ classList: null });
@@ -34875,7 +34875,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
                 this.setState({ classList: ['full'] });
             }
         };
-        this.onCloseClick = e => {
+        this.onCloseClick = (e) => {
             this.setState({ classList: null });
         };
         if (!this.props.images)
@@ -34948,7 +34948,7 @@ __webpack_require__.r(__webpack_exports__);
 class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onLiMouseDown = e => {
+        this.onLiMouseDown = (e) => {
             // console.log('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
@@ -34963,7 +34963,7 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                 }
             }
         };
-        this.onLiClick = e => {
+        this.onLiClick = (e) => {
             // console.log('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
@@ -35022,7 +35022,7 @@ __webpack_require__.r(__webpack_exports__);
 class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onLiMouseDown = e => {
+        this.onLiMouseDown = (e) => {
             // console.log('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
@@ -35037,7 +35037,7 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                 }
             }
         };
-        this.onLiClick = e => {
+        this.onLiClick = (e) => {
             // console.log('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
@@ -35095,7 +35095,7 @@ class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     constructor(props) {
         // console.log('TextArea.constructor', props);
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TextArea.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
@@ -35146,7 +35146,7 @@ class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         // console.log('TextBox.constructor', props);
         super(props);
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
@@ -35204,14 +35204,14 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         // console.log('TimeBox.constructor', props);
         super(props);
-        this.onKeyPress = event => {
+        this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
                 console.log('cancel', event.key);
                 event.preventDefault();
             }
         };
-        this.onChange = e => {
+        this.onChange = (e) => {
             // console.log('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
@@ -35243,7 +35243,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                 }
             });
         };
-        this.onBlur = e => {
+        this.onBlur = (e) => {
             // console.log('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
@@ -35416,7 +35416,7 @@ __webpack_require__.r(__webpack_exports__);
 class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
-        this.onClear = e => {
+        this.onClear = (e) => {
             // console.log('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
@@ -35505,7 +35505,7 @@ class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     render() {
         // console.log('ActionList.render', this.state.item);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item
-                ? this.state.item.getActions().map(action => {
+                ? this.state.item.getActions().map((action) => {
                     return { name: action.action, title: action.caption };
                 })
                 : [] }));
@@ -37304,7 +37304,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
                 return;
             await this.openDocument(controller);
         };
-        this.onDocumentClose = i => {
+        this.onDocumentClose = (i) => {
             console.log('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
             const document = this.documents[i];
             const activeDocument = this.documents[this.tabWidget.state.active];
@@ -37402,7 +37402,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         await this.view.rerender();
     }
     findDocument(controller) {
-        return this.documents.find(document => document.controller === controller) || null;
+        return this.documents.find((document) => document.controller === controller) || null;
     }
     async openModal(modalController) {
         console.log('EditorFrontHostApp.openModal');
@@ -37452,14 +37452,14 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
         }
         return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
             // @ts-ignore
-            onCreate: c => (document.view = c),
+            onCreate: (c) => (document.view = c),
             document: document,
             ctrl: document.controller,
         });
     }
     getTabs() {
         console.log('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
-        return this.props.ctrl.documents.map(document => ({
+        return this.props.ctrl.documents.map((document) => ({
             name: document.controller.model.getFullName(),
             title: document.controller.model.getFullName(),
             content: this.renderDocumentView(document),
@@ -37467,13 +37467,13 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
     }
     render() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList, { onCreate: c => (ctrl.actionList = c), onClick: ctrl.onActionClick }) })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget, { classList: ['full'], onCreate: c => (ctrl.treeWidget2 = c), items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['Tab-blue', 'full'], tabs: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList, { onCreate: (c) => (ctrl.actionList = c), onClick: ctrl.onActionClick }) })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget, { classList: ['full'], onCreate: (c) => (ctrl.treeWidget2 = c), items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['Tab-blue', 'full'], tabs: [
                                 {
                                     name: 'properties',
                                     title: 'Properties',
-                                    content: ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid, { onCreate: c => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
+                                    content: ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid, { onCreate: (c) => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
                                 },
-                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: c => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__.ModalView, { ctrl: ctrl.modal })] })));
+                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__.ModalView, { ctrl: ctrl.modal })] })));
     }
 }
 
@@ -37528,7 +37528,7 @@ class FormWizard {
         this.model = params.model;
         this.databaseName = params.model.database.getName();
         this.tableName = params.model.getName();
-        this.tableColumns = Object.keys(params.model.data.columns).map(name => params.model.data.columns[name]['@attributes']);
+        this.tableColumns = Object.keys(params.model.data.columns).map((name) => params.model.data.columns[name]['@attributes']);
     }
     getDataSources() {
         return [
@@ -37591,10 +37591,10 @@ class FormWizard {
             fields[column.name] = this.getField(column);
         });
         return fields;*/
-        return this.getColumns().map(column => this.getField(column));
+        return this.getColumns().map((column) => this.getField(column));
     }
     getColumns() {
-        return this.tableColumns.filter(column => {
+        return this.tableColumns.filter((column) => {
             if (this.params.className === 'TableForm') {
                 if (column.dbType === 'text')
                     return false;
@@ -37632,21 +37632,21 @@ __webpack_require__.r(__webpack_exports__);
 
 class MySqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
     getSingleQuery() {
-        const columns = this.tableColumns.map(column => column.name);
+        const columns = this.tableColumns.map((column) => column.name);
         return 'select\n{columns}\nfrom `{table}`\nwhere id = {key}'
             .replace('{table}', this.tableName)
             .replace('{columns}', columns
-            .map(column => {
+            .map((column) => {
             return '    `' + column + '`';
         })
             .join(',\n'));
     }
     getMultipleQuery() {
-        const columns = this.tableColumns.map(column => column.name);
+        const columns = this.tableColumns.map((column) => column.name);
         return 'select\n{columns}\nfrom `{table}`\nlimit {offset}, {limit}'
             .replace('{table}', this.tableName)
             .replace('{columns}', columns
-            .map(column => {
+            .map((column) => {
             return '    `' + column + '`';
         })
             .join(',\n'));
@@ -37675,15 +37675,15 @@ __webpack_require__.r(__webpack_exports__);
 class PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
     getSingleQuery() {
         console.log('PostgreSqlFormWizard.getSingleQuery');
-        const columns = this.getColumns().map(column => column.name);
+        const columns = this.getColumns().map((column) => column.name);
         return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'
             .replace('{table}', this.tableName)
-            .replace('{columns}', columns.map(column => `    "${column}"`).join(',\n'));
+            .replace('{columns}', columns.map((column) => `    "${column}"`).join(',\n'));
     }
     getMultipleQuery() {
         console.log('PostgreSqlFormWizard.getMultipleQuery');
-        const columns = this.getColumns().map(column => column.name);
-        const _columns = columns.map(column => `    "${column}"`).join(',\n');
+        const columns = this.getColumns().map((column) => column.name);
+        const _columns = columns.map((column) => `    "${column}"`).join(',\n');
         return `select\n${_columns}\nfrom "${this.tableName}"\norder by "id"\nlimit {limit}\noffset {offset}`;
     }
     getCountQuery() {
@@ -37761,7 +37761,7 @@ class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
                                     { value: 'PhoneField' },
                                     { value: 'PasswordField' },
                                     { value: 'RadioField' },
-                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: c => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
+                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: (c) => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
     }
 }
 
@@ -37888,7 +37888,7 @@ class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -37945,7 +37945,7 @@ class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "columnName", onCreate: c => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "columnName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38004,11 +38004,11 @@ class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactCompon
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
                                         { value: 'DataSource', title: 'DataSource' },
                                         { value: 'SqlDataSource', title: 'SqlDataSource' },
                                         { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
-                                    ], onCreate: c => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38079,7 +38079,7 @@ class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
                                         { value: 'MySqlDatabase', title: 'MySqlDatabase' },
                                         { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
                                         { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
-                                    ], onCreate: c => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', value: 'default', onCreate: c => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'host', value: 'localhost', onCreate: c => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'database', value: 'test', onCreate: c => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'user', value: 'test', onCreate: c => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'password', value: '123qwe', onCreate: c => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38142,7 +38142,7 @@ class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", items: [
                                         { value: 'TextBoxField' },
                                         { value: 'ComboBoxField' },
                                         { value: 'TextAreaField' },
@@ -38158,14 +38158,14 @@ class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                                         { value: 'PhoneField' },
                                         { value: 'PasswordField' },
                                         { value: 'RadioField' },
-                                    ], onCreate: c => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "type", value: '', items: [
+                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "type", value: '', items: [
                                         { value: '', title: '' },
                                         { value: 'string', title: 'string' },
                                         { value: 'number', title: 'number' },
                                         { value: 'boolean', title: 'boolean' },
                                         { value: 'object', title: 'object' },
                                         { value: 'date', title: 'date' },
-                                    ], onCreate: c => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38226,11 +38226,11 @@ class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "formClass", value: 'TableForm', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "formClass", value: 'TableForm', items: [
                                         { value: 'RowForm', title: 'RowForm' },
                                         { value: 'TableForm', title: 'TableForm' },
                                         { value: 'Form', title: 'Form' },
-                                    ], onCreate: c => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38294,15 +38294,15 @@ class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactCom
     render() {
         const ctrl = this.props.ctrl;
         const tableController = ctrl.options.tableController;
-        const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({
+        const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
             value: pageLink.getName(),
             title: pageLink.getName(),
         }));
         console.log('pages:', pages);
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: c => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", value: 'TableForm', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: (c) => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "class", value: 'TableForm', items: [
                                         { value: 'RowForm', title: 'RowForm' },
                                         { value: 'TableForm', title: 'TableForm' },
-                                    ], onCreate: c => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38359,7 +38359,7 @@ class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38420,10 +38420,10 @@ class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: c => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "startup", items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: "startup", items: [
                                         { value: 'false', title: 'false' },
                                         { value: 'true', title: 'true' },
-                                    ], onCreate: c => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38480,7 +38480,7 @@ class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: c => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38537,7 +38537,7 @@ class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "tableName", onCreate: c => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "tableName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
@@ -38710,7 +38710,7 @@ class DataSourceController extends _DocumentController__WEBPACK_IMPORTED_MODULE_
         };
     }
     init() {
-        this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
+        this.model.keyColumns.forEach((keyColumn) => this.createKeyColumn(keyColumn));
     }
     createKeyColumn(model) {
         const keyColumn = new _KeyColumnController_KeyColumnController__WEBPACK_IMPORTED_MODULE_1__.KeyColumnController(model, this);
@@ -38870,7 +38870,7 @@ class NoSqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Doc
     }
     render() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: { fontWeight: this.isSelected('selectQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: { fontWeight: this.isSelected('selectQuery') ? 'bold' : null }, onClick: (e) => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 
@@ -38952,7 +38952,7 @@ class SqlDataSourceView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.Docum
     }
     render() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'SqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: e => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'SqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : null }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : null }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 
@@ -38995,7 +38995,7 @@ class DatabaseController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0_
             this.document.view.rerender();
             // console.log('tableInfo:', this.tableInfo);
         };
-        this.onCreateTableClick = e => {
+        this.onCreateTableClick = (e) => {
             console.log('DatabaseController.onCreateTableClick');
             this.newTableAction(this.tableName, this.tableInfo);
         };
@@ -39024,8 +39024,8 @@ class DatabaseController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0_
         };
     }
     init() {
-        this.model.params.forEach(param => this.createParam(param));
-        this.model.tables.forEach(table => this.createTable2(table));
+        this.model.params.forEach((param) => this.createParam(param));
+        this.model.tables.forEach((table) => this.createTable2(table));
     }
     createParam(model) {
         const param = new _ParamController_ParamController__WEBPACK_IMPORTED_MODULE_1__.ParamController(model, this);
@@ -39118,7 +39118,7 @@ class DatabaseController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0_
         // @ts-ignore
         document.treeWidgetItems = result.data.tables
             .sort()
-            .map(tableName => ({ getTitle: () => tableName }));
+            .map((tableName) => ({ getTitle: () => tableName }));
         return document;
     }
     async newTableAction(tableName, tableInfo) {
@@ -39126,7 +39126,7 @@ class DatabaseController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0_
         const table = await this.model.newTable({
             class: 'Table',
             name: tableName,
-            columns: tableInfo.map(column => ({
+            columns: tableInfo.map((column) => ({
                 class: 'Column',
                 name: column.name,
                 caption: column.name,
@@ -39188,7 +39188,7 @@ class DatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                 { name: 'nullable', title: 'nullable', width: 60 },
                 { name: 'dbType', title: 'dbType', width: 200 },
                 { name: 'comment', title: 'comment', width: 100 },
-            ], rows: ctrl.tableInfo, getRowKey: row => row.name }));
+            ], rows: ctrl.tableInfo, getRowKey: (row) => row.name }));
     }
     render() {
         // console.log('DatabaseView.render');
@@ -39305,7 +39305,7 @@ class TableController extends _DocumentController__WEBPACK_IMPORTED_MODULE_0__.D
         ];
     }
     init() {
-        this.model.columns.forEach(column => this.createColumn(column));
+        this.model.columns.forEach((column) => this.createColumn(column));
     }
     createColumn(model) {
         const column = new _ColumnController_ColumnController__WEBPACK_IMPORTED_MODULE_1__.ColumnController(model, this);
@@ -39445,7 +39445,7 @@ __webpack_require__.r(__webpack_exports__);
 class TableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
-        return ctrl.columns.map(column => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('name') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('caption') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('type') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('key') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('auto') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName())));
+        return ctrl.columns.map((column) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('name') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('caption') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('type') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('key') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('auto') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName())));
     }
     render() {
         const ctrl = this.props.ctrl;
@@ -39456,7 +39456,7 @@ class TableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
                                 { name: 'key', title: 'key', width: 60 },
                                 { name: 'auto', title: 'auto', width: 60 },
                                 { name: 'nullable', title: 'nullable', width: 60 },
-                            ], rows: ctrl.columns.map(column => column.model.getAttributes()), getRowKey: row => row.name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateFormButtonClick }, { children: "Create Form" }))] })) })) })));
+                            ], rows: ctrl.columns.map((column) => column.model.getAttributes()), getRowKey: (row) => row.name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateFormButtonClick }, { children: "Create Form" }))] })) })) })));
     }
 }
 
@@ -39509,10 +39509,10 @@ class ApplicationController extends _VisualController__WEBPACK_IMPORTED_MODULE_0
         ];
     }
     init() {
-        this.model.databases.forEach(database => this.createDatabase(database));
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.actions.forEach(action => this.createAction(action));
-        this.model.pageLinks.forEach(pageLink => this.createPageLink(pageLink));
+        this.model.databases.forEach((database) => this.createDatabase(database));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.actions.forEach((action) => this.createAction(action));
+        this.model.pageLinks.forEach((pageLink) => this.createPageLink(pageLink));
     }
     createDatabase(model) {
         const database = new _DatabaseController_DatabaseController__WEBPACK_IMPORTED_MODULE_1__.DatabaseController(model, this);
@@ -39629,7 +39629,7 @@ class ApplicationController extends _VisualController__WEBPACK_IMPORTED_MODULE_0
         return propList;
     }
     findPageLink(name) {
-        return this.pageLinks.find(pageLink => pageLink.model.getName() === name);
+        return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
     }
     getDocumentViewClass() {
         // @ts-ignore
@@ -39783,9 +39783,9 @@ class FormController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.Visu
         };
     }
     init() {
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.fields.forEach(field => this.createField(field));
-        this.model.actions.forEach(action => this.createAction(action));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.fields.forEach((field) => this.createField(field));
+        this.model.actions.forEach((action) => this.createAction(action));
     }
     createField(model) {
         const field = new _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_1__.FieldController(model, this);
@@ -39948,9 +39948,9 @@ class PageController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.Visu
     }
     init() {
         // console.log('PageController.init');
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.actions.forEach(action => this.createAction(action));
-        this.model.forms.forEach(form => this.createForm(form));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.actions.forEach((action) => this.createAction(action));
+        this.model.forms.forEach((form) => this.createForm(form));
     }
     createForm(model) {
         const form = new _FormController_FormController__WEBPACK_IMPORTED_MODULE_1__.FormController(model, this);
@@ -40530,20 +40530,20 @@ class PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     renderInput(name) {
         const obj = this.getObj();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: value => this.onChange(name, value), autocomplete: 'off' }));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: (value) => this.onChange(name, value), autocomplete: 'off' }));
     }
     renderSelect(name) {
         const obj = this.getObj();
         const options = this.getOptions();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { name: name, value: obj[name], items: options[name].map(value => ({
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { name: name, value: obj[name], items: options[name].map((value) => ({
                 value: value,
                 title: value,
-            })), onChange: value => this.onChange(name, value) }));
+            })), onChange: (value) => this.onChange(name, value) }));
     }
     renderRows() {
         const obj = this.getObj();
         const options = this.getOptions();
-        return Object.keys(obj).map(name => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name) })] }, name)));
+        return Object.keys(obj).map((name) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name) })] }, name)));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'PropertyGrid full frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: 'PropertyGrid__table', cellPadding: 0, cellSpacing: 0 }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: this.getObj() && this.renderRows() }) })) })) })));
@@ -40572,25 +40572,25 @@ __webpack_require__.r(__webpack_exports__);
 class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
-        this.onDivMouseDown = e => {
+        this.onDivMouseDown = (e) => {
             // console.log('TreeItem.onDivMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             tree.select(item);
         };
-        this.onDivDoubleClick = e => {
+        this.onDivDoubleClick = (e) => {
             // console.log('TreeItem.onDivDoubleClick');
             const item = this.props.item;
             const tree = this.props.tree;
             tree.onDoubleClick(item);
         };
-        this.onNodeMouseDown = e => {
+        this.onNodeMouseDown = (e) => {
             // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             const opened = this.state.opened;
             e.stopPropagation();
-            this.setState(prevState => {
+            this.setState((prevState) => {
                 return { opened: !prevState.opened };
             });
             if (!opened) {
@@ -40631,7 +40631,7 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         const isNode = item.node || hasItems;
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : null, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: c => {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : null, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: (c) => {
                             // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
                             c.parent = this;
                             item.view = c;
@@ -40671,7 +40671,7 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         console.log('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item))
             return;
-        return new Promise(resolve => {
+        return new Promise((resolve) => {
             this.setState({ selectedItem: item }, () => {
                 if (this.props.onItemSelect)
                     this.props.onItemSelect(item);
@@ -40696,14 +40696,12 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     scrollToSelected() {
         console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
-        this.getSelectedItem()
-            .view.getElement()
-            .scrollIntoView();
+        this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
         console.log('TreeWidget.render' /*, this.props.items*/);
         const items = this.props.items;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map(item => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: c => (item.view = c) }, item.getTitle()))) }) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: (c) => (item.view = c) }, item.getTitle()))) }) })));
     }
 }
 

@@ -30,28 +30,28 @@ export class VisualController extends DocumentController {
         this.document.view.rerender();
     }
 
-    onCreateCustomController = async e => {
+    onCreateCustomController = async (e) => {
         console.log('ApplicationController.onCreateCustomController');
         const data = await this.model.createController();
         this.data.js = data.js;
         this.document.view.rerender();
     };
 
-    onCreateCustomView = async e => {
+    onCreateCustomView = async (e) => {
         console.log('VisualController.onCreateCustomView');
         const data = await this.model.createView();
         this.data.jsx = data.jsx;
         this.document.view.rerender();
     };
 
-    onCreateCustomStyle = async e => {
+    onCreateCustomStyle = async (e) => {
         console.log('VisualController.onCreateCustomStyle');
         const data = await this.model.createStyle();
         this.data.less = data.less;
         this.document.view.rerender();
     };
 
-    onCreateModelBack = async e => {
+    onCreateModelBack = async (e) => {
         const data = await this.model.createModelBackJs();
     };
 
@@ -88,7 +88,7 @@ export class VisualController extends DocumentController {
         console.log('VisualController.actionNewAction');
         await EditorFrontHostApp.editorApp.openModal(
             new NewActionController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const action = await this.model.newAction({
                         name: values.name,
                         caption: values.caption,

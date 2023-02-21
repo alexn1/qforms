@@ -22,7 +22,7 @@ export class TableController extends DocumentController {
     }
 
     init() {
-        this.model.columns.forEach(column => this.createColumn(column));
+        this.model.columns.forEach((column) => this.createColumn(column));
     }
     createColumn(model) {
         const column = new ColumnController(model, this);
@@ -72,7 +72,7 @@ export class TableController extends DocumentController {
     async actionNewColumn() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewColumnController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const column = await this.model.newColumn(values.name);
                     const columnController = this.createColumn(column);
                     await EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
@@ -83,7 +83,7 @@ export class TableController extends DocumentController {
             }),
         );
     }
-    onCreateFormButtonClick = async e => {
+    onCreateFormButtonClick = async (e) => {
         console.log('TableController.onCreateFormButtonClick');
         await this.createFormAction();
     };
@@ -111,7 +111,7 @@ export class TableController extends DocumentController {
         await EditorFrontHostApp.editorApp.openModal(
             new NewFormFromTableController({
                 tableController: this,
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const formWizard = EditorHelper.create({
                         model: this.model,
                         pageName: values.page,

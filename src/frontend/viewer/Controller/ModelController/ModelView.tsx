@@ -8,7 +8,7 @@ export class ModelView<T extends ModelController<Model>> extends View<T> {
         return this.props.ctrl
             .getModel()
             .getCol('actions')
-            .map(data => {
+            .map((data) => {
                 const actionName = Model.getName(data);
                 return {
                     name: actionName,

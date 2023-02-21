@@ -4,7 +4,7 @@ import './TableView.less';
 export class TableView extends ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
-        return ctrl.columns.map(column => (
+        return ctrl.columns.map((column) => (
             <tr key={column.model.getName()}>
                 <td>{column.model.getAttr('name')}</td>
                 <td>{column.model.getAttr('caption')}</td>
@@ -31,8 +31,8 @@ export class TableView extends ReactComponent {
                                 { name: 'auto', title: 'auto', width: 60 },
                                 { name: 'nullable', title: 'nullable', width: 60 },
                             ]}
-                            rows={ctrl.columns.map(column => column.model.getAttributes())}
-                            getRowKey={row => row.name}
+                            rows={ctrl.columns.map((column) => column.model.getAttributes())}
+                            getRowKey={(row) => row.name}
                         />
                         <Button onClick={ctrl.onCreateFormButtonClick}>Create Form</Button>
                     </div>

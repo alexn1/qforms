@@ -69,7 +69,7 @@ export class SqlDataSourceView extends DocumentView {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
 
-    onSaveClick = async e => {
+    onSaveClick = async (e) => {
         console.log('SqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
@@ -94,22 +94,19 @@ export class SqlDataSourceView extends DocumentView {
                         <button
                             className={`${this.getButtonClass('singleQuery')}`}
                             style={{ fontWeight: this.isSelected('singleQuery') ? 'bold' : null }}
-                            onClick={e => this.setState({ selected: 'singleQuery' })}
-                        >
+                            onClick={(e) => this.setState({ selected: 'singleQuery' })}>
                             singleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('multipleQuery')}`}
                             style={{ fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }}
-                            onClick={e => this.setState({ selected: 'multipleQuery' })}
-                        >
+                            onClick={(e) => this.setState({ selected: 'multipleQuery' })}>
                             multipleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
                             style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : null }}
-                            onClick={e => this.setState({ selected: 'countQuery' })}
-                        >
+                            onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>
                     </div>
@@ -117,20 +114,17 @@ export class SqlDataSourceView extends DocumentView {
                 <div className="edit flex-max full">
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('singleQuery') }}
-                    >
+                        style={{ visibility: this.getVisibility('singleQuery') }}>
                         <textarea ref={this.singleRef} />
                     </div>
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('multipleQuery') }}
-                    >
+                        style={{ visibility: this.getVisibility('multipleQuery') }}>
                         <textarea ref={this.multipleRef} />
                     </div>
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('countQuery') }}
-                    >
+                        style={{ visibility: this.getVisibility('countQuery') }}>
                         <textarea ref={this.countRef} />
                     </div>
                 </div>

@@ -25,9 +25,7 @@ export class WebSocketClient {
             route: options.route,
             uuid: options.uuid,
             userId: options.userId,
-            version: this.getApp()
-                .getModel()
-                .getData().versions.app,
+            version: this.getApp().getModel().getData().versions.app,
         };
         return Object.keys(params)
             .map((key) => `${key}=${encodeURIComponent(params[key])}`)
@@ -94,9 +92,7 @@ export class WebSocketClient {
             .getHostApp()
             .logError(
                 new Error(
-                    `websocket close ${this.getApp()
-                        .getModel()
-                        .getDomain()}/${this.getApp()
+                    `websocket close ${this.getApp().getModel().getDomain()}/${this.getApp()
                         .getModel()
                         .getName()}`,
                 ),
@@ -112,18 +108,10 @@ export class WebSocketClient {
         console.log('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
-            this.getApp()
-                .getView()
-                .disableRerender();
-            await this.getApp()
-                .getModel()
-                .emitResult(packet.data);
-            this.getApp()
-                .getView()
-                .enableRerender();
-            this.getApp()
-                .getView()
-                .rerender();
+            this.getApp().getView().disableRerender();
+            await this.getApp().getModel().emitResult(packet.data);
+            this.getApp().getView().enableRerender();
+            this.getApp().getView().rerender();
         }
     }
 

@@ -14,7 +14,7 @@ export class EditorFrontHostAppView extends ReactComponent {
 
         return React.createElement(document.controller.getDocumentViewClass(), {
             // @ts-ignore
-            onCreate: c => (document.view = c),
+            onCreate: (c) => (document.view = c),
             document: document,
             ctrl: document.controller,
         });
@@ -22,7 +22,7 @@ export class EditorFrontHostAppView extends ReactComponent {
 
     getTabs() {
         console.log('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
-        return this.props.ctrl.documents.map(document => ({
+        return this.props.ctrl.documents.map((document) => ({
             name: document.controller.model.getFullName(),
             title: document.controller.model.getFullName(),
             content: this.renderDocumentView(document),
@@ -45,7 +45,7 @@ export class EditorFrontHostAppView extends ReactComponent {
                         </a>
                         <div>
                             <ActionList
-                                onCreate={c => (ctrl.actionList = c)}
+                                onCreate={(c) => (ctrl.actionList = c)}
                                 onClick={ctrl.onActionClick}
                             />
                         </div>
@@ -54,7 +54,7 @@ export class EditorFrontHostAppView extends ReactComponent {
                         <div className={'frame__container'}>
                             <TreeWidget
                                 classList={['full']}
-                                onCreate={c => (ctrl.treeWidget2 = c)}
+                                onCreate={(c) => (ctrl.treeWidget2 = c)}
                                 items={ctrl.items}
                                 onItemSelect={ctrl.onItemSelect2}
                                 onItemDoubleClick={ctrl.onItemDoubleClick2}
@@ -70,7 +70,7 @@ export class EditorFrontHostAppView extends ReactComponent {
                                 title: 'Properties',
                                 content: (
                                     <PropertyGrid
-                                        onCreate={c => (ctrl.pg = c)}
+                                        onCreate={(c) => (ctrl.pg = c)}
                                         onChange={ctrl.onPropertyGrid2Change}
                                     />
                                 ),
@@ -83,7 +83,7 @@ export class EditorFrontHostAppView extends ReactComponent {
                         classList={['full']}
                         canClose={true}
                         onTabClose={ctrl.onDocumentClose}
-                        onCreate={c => (ctrl.tabWidget = c)}
+                        onCreate={(c) => (ctrl.tabWidget = c)}
                         tabs={this.getTabs()}
                     />
                 </div>

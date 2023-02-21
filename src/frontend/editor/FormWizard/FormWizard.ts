@@ -12,7 +12,7 @@ export abstract class FormWizard {
         this.databaseName = params.model.database.getName();
         this.tableName = params.model.getName();
         this.tableColumns = Object.keys(params.model.data.columns).map(
-            name => params.model.data.columns[name]['@attributes'],
+            (name) => params.model.data.columns[name]['@attributes'],
         );
     }
 
@@ -81,11 +81,11 @@ export abstract class FormWizard {
             fields[column.name] = this.getField(column);
         });
         return fields;*/
-        return this.getColumns().map(column => this.getField(column));
+        return this.getColumns().map((column) => this.getField(column));
     }
 
     getColumns() {
-        return this.tableColumns.filter(column => {
+        return this.tableColumns.filter((column) => {
             if (this.params.className === 'TableForm') {
                 if (column.dbType === 'text') return false;
                 if (column.dbType === 'bytea') return false;

@@ -12,7 +12,7 @@ export class NewFormFromTableView extends ReactComponent {
         this.name = null;
         this.caption = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             page: this.page.getValue(),
@@ -24,7 +24,7 @@ export class NewFormFromTableView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         const tableController = ctrl.options.tableController;
-        const pages = tableController.model.parent.parent.pageLinks.map(pageLink => ({
+        const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
             value: pageLink.getName(),
             title: pageLink.getName(),
         }));
@@ -52,7 +52,7 @@ export class NewFormFromTableView extends ReactComponent {
                             id="page"
                             items={pages}
                             value={pages[pages.length - 1].value}
-                            onCreate={c => (this.page = c)}
+                            onCreate={(c) => (this.page = c)}
                         />
                     </div>
                     <div>
@@ -64,7 +64,7 @@ export class NewFormFromTableView extends ReactComponent {
                                 { value: 'RowForm', title: 'RowForm' },
                                 { value: 'TableForm', title: 'TableForm' },
                             ]}
-                            onCreate={c => (this.class = c)}
+                            onCreate={(c) => (this.class = c)}
                         />
                     </div>
                     <div>
@@ -72,7 +72,7 @@ export class NewFormFromTableView extends ReactComponent {
                         <TextBox
                             id="name"
                             value={ctrl.options.tableController.model.getName()}
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -81,7 +81,7 @@ export class NewFormFromTableView extends ReactComponent {
                         <label htmlFor="caption">Caption</label>
                         <TextBox
                             id="caption"
-                            onCreate={c => (this.caption = c)}
+                            onCreate={(c) => (this.caption = c)}
                             autocomplete={'off'}
                         />
                     </div>

@@ -7,7 +7,7 @@ export class ActionList extends ReactComponent {
             item: null,
         };
     }
-    onClick = async li => {
+    onClick = async (li) => {
         console.log('ActionList.onClick', li);
         await this.props.onClick(li.dataset.action);
     };
@@ -19,7 +19,7 @@ export class ActionList extends ReactComponent {
                 onClick={this.onClick}
                 actions={
                     this.state.item
-                        ? this.state.item.getActions().map(action => {
+                        ? this.state.item.getActions().map((action) => {
                               return { name: action.action, title: action.caption };
                           })
                         : []

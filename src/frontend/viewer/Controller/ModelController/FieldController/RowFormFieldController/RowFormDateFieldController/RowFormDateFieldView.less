@@ -1,45 +1,42 @@
 @import "../../../../../style/application";
 @import "../../../../../style/field";
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView {
-    height    : @fieldHeight;
-    box-sizing: border-box;
-    border: 1px solid #bbb;
-    &.editable:hover {
-        border: 1px solid var(--accent-color);
-    }
-    &.error {
-        border: 1px solid red !important;
-    }
-    &.error .DropdownDatePicker__input {
-        //background-color: #f2dede;
-        color: red;
-    }
+  height: @fieldHeight;
+  box-sizing: border-box;
+  border: 1px solid #bbb;
+  &.editable:hover {
+    border: 1px solid var(--accent-color);
+  }
+  &.error {
+    border: 1px solid red !important;
+  }
+  &.error .DropdownDatePicker__input {
+    //background-color: #f2dede;
+    color: red;
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormDateFieldView__date-picker {
-    width : 100%;
+  width: 100%;
+  height: 100%;
+  > .DropdownDatePicker__input {
     height: 100%;
-    > .DropdownDatePicker__input {
-        height      : 100%;
-        border-width: 0;
-        padding     : 0 5px 0 5px;
-        font-family: inherit;
-        font-weight: inherit;
-        font-size  : inherit;
-    }
-    &.read-only > .DropdownDatePicker__input {
-        background-color: @fieldDisableBackgroundColor;
-        color: gray;
-    }
-    &:not(.read-only) > .DropdownDatePicker__input {
-        cursor: pointer;
-    }
+    border-width: 0;
+    padding: 0 5px 0 5px;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+  }
+  &.read-only > .DropdownDatePicker__input {
+    background-color: @fieldDisableBackgroundColor;
+    color: gray;
+  }
+  &:not(.read-only) > .DropdownDatePicker__input {
+    cursor: pointer;
+  }
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .debug .RowFormDateFieldView.changed .DropdownDatePicker__input {
-    background-color: @fieldDebugChangeBackgroundColor;
+  background-color: @fieldDebugChangeBackgroundColor;
 }

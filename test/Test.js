@@ -3,9 +3,13 @@ const qforms = require('../qforms');
 class Test {
     static async getUpdateQuery() {
         console.log('Test.getUpdateQuery');
-        const query = qforms.PostgreSqlDatabase.getUpdateQuery('tableName', {field1: 'value1'}, {id: 1});
+        const query = qforms.PostgreSqlDatabase.getUpdateQuery(
+            'tableName',
+            { field1: 'value1' },
+            { id: 1 },
+        );
         console.log('query:', query);
-        return {query};
+        return { query };
     }
 
     static async mapObject() {
@@ -17,7 +21,7 @@ class Test {
         const values2 = qforms.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
         return {
             values,
-            values2
+            values2,
         };
     }
 
@@ -46,10 +50,13 @@ class Test {
     static async blob3(req, res, context, application) {
         console.log('Test.blob3', context.params);
         const db = application.getDatabase('default');
-        await db.queryResult(context, 'insert into file(created, type, size, content) values ({created}, {type}, {size}, {content})', context.params);
-        return {abc: 'xyz'};
+        await db.queryResult(
+            context,
+            'insert into file(created, type, size, content) values ({created}, {type}, {size}, {content})',
+            context.params,
+        );
+        return { abc: 'xyz' };
     }
-
 }
 
 module.exports = Test;

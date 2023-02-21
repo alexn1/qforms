@@ -8,7 +8,6 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
         let href = ctrl.getValueForWidget();
         let displayValue = ctrl.getValueForWidget();
 
-
         // valueOfDisplayColumn
         const valueOfDisplayColumn = ctrl.getDisplayValue();
         if (valueOfDisplayColumn) {

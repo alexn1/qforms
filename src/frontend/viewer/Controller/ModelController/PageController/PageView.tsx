@@ -17,7 +17,7 @@ export class PageView extends ModelView<PageController> {
         this.checkParent();
         this.el = React.createRef();
     }
-    onActionsClick = async li => {
+    onActionsClick = async (li) => {
         // console.log('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
@@ -28,9 +28,7 @@ export class PageView extends ModelView<PageController> {
             }
         } catch (err) {
             console.error(err);
-            await this.getCtrl()
-                .getApp()
-                .alert({ message: err.message });
+            await this.getCtrl().getApp().alert({ message: err.message });
         }
     };
     isToolbar() {
@@ -40,7 +38,7 @@ export class PageView extends ModelView<PageController> {
         //|| model.isSelectMode();
     }
     getFormTabs(forms) {
-        return forms.map(form => {
+        return forms.map((form) => {
             return {
                 name: form.getModel().getName(),
                 title: form.getTitle(),
@@ -50,13 +48,13 @@ export class PageView extends ModelView<PageController> {
     }
     getRowForms() {
         return this.getCtrl()
-            .forms.filter(form => form.getModel().getClassName() === 'RowForm')
-            .filter(form => form.isVisible());
+            .forms.filter((form) => form.getModel().getClassName() === 'RowForm')
+            .filter((form) => form.isVisible());
     }
     getTableForms() {
         return this.getCtrl()
-            .forms.filter(form => form.getModel().getClassName() === 'TableForm')
-            .filter(form => form.isVisible());
+            .forms.filter((form) => form.getModel().getClassName() === 'TableForm')
+            .filter((form) => form.isVisible());
     }
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
@@ -69,7 +67,7 @@ export class PageView extends ModelView<PageController> {
         });
     }
     renderRowForms() {
-        return this.getRowForms().map(form => this.renderForm(form));
+        return this.getRowForms().map((form) => this.renderForm(form));
     }
     renderTitle(): ReactNode {
         const ctrl = this.getCtrl();
@@ -94,8 +92,7 @@ export class PageView extends ModelView<PageController> {
             <Button
                 classList={['toolbar-button', 'default']}
                 onClick={ctrl.onSelectClick}
-                enabled={!!ctrl.getSelectedRowKey()}
-            >
+                enabled={!!ctrl.getSelectedRowKey()}>
                 {/*<DoneIcon/>*/}
                 <div>{model.getApp().getText().page.select}</div>
             </Button>
@@ -108,8 +105,7 @@ export class PageView extends ModelView<PageController> {
             <Button
                 classList={['toolbar-button', 'default']}
                 onClick={ctrl.onSaveAndCloseClick}
-                enabled={ctrl.isValid() && (model.hasNew() || ctrl.isChanged())}
-            >
+                enabled={ctrl.isValid() && (model.hasNew() || ctrl.isChanged())}>
                 {/*<DoneIcon/>*/}
                 <div>{model.getApp().getText().page.saveAndClose}</div>
             </Button>
@@ -129,8 +125,7 @@ export class PageView extends ModelView<PageController> {
             <DropdownButton
                 classList={['toolbar-dropdown-button']}
                 actions={this.getActionsForDropdownButton()}
-                onClick={this.onActionsClick}
-            >
+                onClick={this.onActionsClick}>
                 <MoreVertIcon />
             </DropdownButton>
         );
@@ -176,8 +171,7 @@ export class PageView extends ModelView<PageController> {
             <div
                 key={'open'}
                 className={`${this.getCssBlockName()}__open`}
-                onClick={ctrl.onOpenPageClick}
-            >
+                onClick={ctrl.onOpenPageClick}>
                 <OpenInNewIcon />
             </div>
         );
@@ -188,8 +182,7 @@ export class PageView extends ModelView<PageController> {
             <div
                 key={'close'}
                 className={`${this.getCssBlockName()}__close`}
-                onClick={ctrl.onClosePageClick}
-            >
+                onClick={ctrl.onClosePageClick}>
                 <CloseIcon2 />
             </div>
         );
@@ -226,7 +219,7 @@ export class PageView extends ModelView<PageController> {
     renderForms2() {
         return (
             <Tab2
-                tabs={this.getFormTabs(this.getCtrl().forms.filter(form => form.isVisible()))}
+                tabs={this.getFormTabs(this.getCtrl().forms.filter((form) => form.isVisible()))}
                 classList={['Tab-blue', 'full']}
             />
         );
@@ -244,12 +237,7 @@ export class PageView extends ModelView<PageController> {
         );
     }
     render() {
-        console.log(
-            'PageView.render',
-            this.getCtrl()
-                .getModel()
-                .getFullName(),
-        );
+        console.log('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} ${
@@ -258,8 +246,7 @@ export class PageView extends ModelView<PageController> {
                 style={this.getStyle()}
                 ref={this.el}
                 tabIndex={0}
-                onKeyDown={this.getCtrl().onKeyDown}
-            >
+                onKeyDown={this.getCtrl().onKeyDown}>
                 {this.renderHeader()}
                 {this.renderMain()}
                 {this.getCtrl().isModal() && this.renderFooter()}
@@ -276,12 +263,7 @@ export class PageView extends ModelView<PageController> {
     }
     componentDidMount() {
         // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
-        if (
-            this.getCtrl().isAutoFocus() &&
-            !this.getCtrl()
-                .getModel()
-                .getKey()
-        ) {
+        if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         } else {
             this.focus();
         }
@@ -292,11 +274,7 @@ export class PageView extends ModelView<PageController> {
             // console.log('focus', this.getElement());
             this.getElement().focus();
         } else {
-            console.error(
-                `${this.getCtrl()
-                    .getModel()
-                    .getFullName()}: el is null (ref={this.el})`,
-            );
+            console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);
         }
     }
 }

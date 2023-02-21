@@ -22,7 +22,7 @@ export class TextBox extends ReactComponent {
             this.props.onChange(value);
         }
     }
-    onChange = e => {
+    onChange = (e) => {
         // console.log('TextBox.onChange', e.target.value);
         this._setValue(e.target.value);
     };

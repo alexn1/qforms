@@ -15,9 +15,9 @@ export class Expand extends ReactComponent {
     isHighlighted() {
         return !!this.props.highlighted;
     }
-    onTitleClick = e => {
+    onTitleClick = (e) => {
         console.log('Expand.onTitleClick');
-        this.setState(prevState => {
+        this.setState((prevState) => {
             return { opened: !prevState.opened };
         });
     };
@@ -26,8 +26,7 @@ export class Expand extends ReactComponent {
             <div
                 className={`${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${
                     this.isHighlighted() ? 'highlighted' : ''
-                }`}
-            >
+                }`}>
                 <div className={`${this.getCssBlockName()}__header`} onClick={this.onTitleClick}>
                     <div className={`${this.getCssBlockName()}__icon`}>
                         <DownIcon />

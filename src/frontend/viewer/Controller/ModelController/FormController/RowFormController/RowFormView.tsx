@@ -8,10 +8,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
     renderToolbar(): any {
         // console.log('RowFormView.renderToolbar');
         const { ctrl } = this.props;
-        const text = ctrl
-            .getModel()
-            .getApp()
-            .getText();
+        const text = ctrl.getModel().getApp().getText();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
                 {ctrl.model.hasDefaultPersistentDataSource() && (
@@ -19,8 +16,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         key="edit"
                         classList={['toolbar-button']}
                         onClick={ctrl.onEditClick}
-                        visible={ctrl.getMode() === 'view'}
-                    >
+                        visible={ctrl.getMode() === 'view'}>
                         {/*<EditIcon/>*/}
                         <div>{text.form.edit}</div>
                     </Button>
@@ -31,8 +27,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         classList={['toolbar-button']}
                         enabled={(ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid}
                         onClick={ctrl.onSaveClick}
-                        visible={ctrl.getMode() === 'edit'}
-                    >
+                        visible={ctrl.getMode() === 'edit'}>
                         {/*<SaveIcon/>*/}
                         <div>{text.form.save}</div>
                     </Button>
@@ -44,8 +39,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         visible={
                             ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid
                         }
-                        onClick={ctrl.onCancelClick}
-                    >
+                        onClick={ctrl.onCancelClick}>
                         {/*<CancelIcon/>*/}
                         <div>{text.form.cancel}</div>
                     </Button>
@@ -58,8 +52,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         onClick={ctrl.onDiscardClick}
                         visible={
                             ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid)
-                        }
-                    >
+                        }>
                         {/*<CloseIcon2/>*/}
                         <div>{text.form.discard}</div>
                     </Button>
@@ -71,8 +64,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                             classList={['toolbar-button']}
                             enabled={!ctrl.state.changed && !ctrl.state.hasNew}
                             onClick={ctrl.onRefreshClick}
-                            visible={ctrl.getMode() === 'view'}
-                        >
+                            visible={ctrl.getMode() === 'view'}>
                             {/*<RefreshIcon/>*/}
                             <div>{text.form.refresh}</div>
                         </Button>
@@ -82,8 +74,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
                         onClick={this.onActionsClick}
-                        enabled={this.isActionsEnabled()}
-                    >
+                        enabled={this.isActionsEnabled()}>
                         <MoreVertIcon />
                     </DropdownButton>
                 )}
@@ -95,14 +86,8 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
         return true;
     }
     isActionsVisible() {
-        if (
-            this.getCtrl()
-                .getModel()
-                .hasDefaultPersistentDataSource()
-        ) {
-            return !!this.getCtrl()
-                .getModel()
-                .getKey();
+        if (this.getCtrl().getModel().hasDefaultPersistentDataSource()) {
+            return !!this.getCtrl().getModel().getKey();
         }
         return true;
     }
@@ -173,31 +158,21 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
         return (
             <div className={`${this.getCssBlockName()}__groups`}>
                 {Object.keys(ctrl.fields)
-                    .filter(name => ctrl.getField(name).isVisible())
-                    .map(name => {
+                    .filter((name) => ctrl.getField(name).isVisible())
+                    .map((name) => {
                         return this.renderGroup(ctrl.getField(name));
                     })}
             </div>
         );
     }
     render() {
-        console.log(
-            'RowFormView.render',
-            this.getCtrl()
-                .getModel()
-                .getFullName(),
-        );
+        console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} flex-column grid-gap-5`}
-                style={this.getStyle()}
-            >
-                {(this.getCtrl()
-                    .getModel()
-                    .hasDefaultPersistentDataSource() ||
-                    this.getCtrl()
-                        .getModel()
-                        .hasActions()) &&
+                style={this.getStyle()}>
+                {(this.getCtrl().getModel().hasDefaultPersistentDataSource() ||
+                    this.getCtrl().getModel().hasActions()) &&
                     this.renderToolbar()}
                 {this.renderGroups()}
             </div>

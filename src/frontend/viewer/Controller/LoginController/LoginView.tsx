@@ -10,7 +10,7 @@ export class LoginView<T extends LoginController> extends View<T> {
         super(props);
         this.errMsgRef = React.createRef();
     }
-    onLoginFormSubmit = e => {
+    onLoginFormSubmit = (e) => {
         // console.log('LoginView.onLoginFormSubmit');
         // @ts-ignore
         document.querySelector('.LoginView__button').disabled = true;
@@ -20,11 +20,9 @@ export class LoginView<T extends LoginController> extends View<T> {
         return null;
     }
     renderTitle() {
-        return this.getCtrl()
-            .getFrontHostApp()
-            .getData().title;
+        return this.getCtrl().getFrontHostApp().getData().title;
     }
-    onChange = e => {
+    onChange = (e) => {
         this.errMsgRef.current.innerHTML = '';
     };
     render() {
@@ -34,8 +32,7 @@ export class LoginView<T extends LoginController> extends View<T> {
                 <form
                     className={`${this.getCssBlockName()}__form`}
                     method={'post'}
-                    onSubmit={this.onLoginFormSubmit}
-                >
+                    onSubmit={this.onLoginFormSubmit}>
                     <input
                         type={'hidden'}
                         name={'tzOffset'}
@@ -55,30 +52,18 @@ export class LoginView<T extends LoginController> extends View<T> {
                         required={true}
                         autoFocus={true}
                         spellCheck={false}
-                        value={
-                            this.getCtrl()
-                                .getFrontHostApp()
-                                .getData().username || ''
-                        }
+                        value={this.getCtrl().getFrontHostApp().getData().username || ''}
                         onChange={this.onChange}
                     />
                     <Password
                         classList={[`${this.getCssBlockName()}__field2`]}
                         name={'password'}
                         placeholder={this.getCtrl().getText().login.password}
-                        value={
-                            this.getCtrl()
-                                .getFrontHostApp()
-                                .getData().password || ''
-                        }
+                        value={this.getCtrl().getFrontHostApp().getData().password || ''}
                         onChange={this.onChange}
                     />
                     <p className={`${this.getCssBlockName()}__err-msg`} ref={this.errMsgRef}>
-                        {
-                            this.getCtrl()
-                                .getFrontHostApp()
-                                .getData().errMsg
-                        }
+                        {this.getCtrl().getFrontHostApp().getData().errMsg}
                     </p>
                     <button className={`${this.getCssBlockName()}__button`} type={'submit'}>
                         {this.getCtrl().getText().login.signIn}

@@ -19,38 +19,38 @@ export class DropdownDatePicker extends ReactComponent {
             throw new Error(`need Date type, got ${typeof props.value}`);
         }
     }
-    onInputClick = e => {
+    onInputClick = (e) => {
         // console.log('DropdownDatePicker.onInputClick', e);
         if (this.props.readOnly) return;
-        this.setState(prevState => ({ open: !prevState.open }));
+        this.setState((prevState) => ({ open: !prevState.open }));
     };
-    onInputKeyDown = e => {
+    onInputKeyDown = (e) => {
         // console.log('DropdownDatePicker.onInputKeyDown', e.key);
         if (e.key === 'Escape' && this.state.open) {
             this.setState({ open: false });
             e.stopPropagation();
         }
     };
-    onCloseDown = async e => {
+    onCloseDown = async (e) => {
         // console.log('DropdownDatePicker.onCloseDown', e);
         this.setState({ value: null });
         if (this.props.onChange) {
             this.props.onChange(null);
         }
     };
-    onBlur = e => {
+    onBlur = (e) => {
         // console.log('DropdownDatePicker.onBlur');
         if (this.state.open) {
             this.setState({ open: false });
         }
     };
-    onDatePickerMouseDown = e => {
+    onDatePickerMouseDown = (e) => {
         // console.log('DropdownDatePicker.onDatePickerMouseDown');
         e.preventDefault();
         // e.stopPropagation();
         // return false;
     };
-    onDatePickerDateSelected = date => {
+    onDatePickerDateSelected = (date) => {
         // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setState({ open: false, value });
@@ -134,8 +134,7 @@ export class DropdownDatePicker extends ReactComponent {
                 className={`${this.getCssBlockName()}__close ${
                     this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''
                 }`}
-                onMouseDown={this.onCloseDown}
-            >
+                onMouseDown={this.onCloseDown}>
                 <CloseIcon />
             </div>
         );

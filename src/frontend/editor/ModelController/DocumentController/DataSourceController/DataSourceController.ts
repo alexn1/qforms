@@ -28,7 +28,7 @@ export class DataSourceController extends DocumentController {
         };
     }
     init() {
-        this.model.keyColumns.forEach(keyColumn => this.createKeyColumn(keyColumn));
+        this.model.keyColumns.forEach((keyColumn) => this.createKeyColumn(keyColumn));
     }
     createKeyColumn(model) {
         const keyColumn = new KeyColumnController(model, this);
@@ -75,7 +75,7 @@ export class DataSourceController extends DocumentController {
     async actionNewKeyColumn() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewKeyColumnController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const keyColumn = await this.model.newKeyColumn(values.name);
                     const keyColumnController = this.createKeyColumn(keyColumn);
                     await EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
@@ -117,7 +117,7 @@ export class DataSourceController extends DocumentController {
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
-    onCreateModelBack = async e => {
+    onCreateModelBack = async (e) => {
         const data = await this.model.createModelBackJs();
     };
 }

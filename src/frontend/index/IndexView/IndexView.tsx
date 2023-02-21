@@ -6,7 +6,7 @@ export class IndexView extends ReactComponent {
         const { ctrl } = this.props;
         return (
             <div>
-                {ctrl.modals.map(modal => (
+                {ctrl.modals.map((modal) => (
                     <Modal key={modal.id.toString()}>
                         <div className="modal-dialog modal-sm">
                             <div className="modal-content">
@@ -41,14 +41,12 @@ export class IndexView extends ReactComponent {
                                     <Button
                                         name="create"
                                         classList={['btn', 'btn-primary']}
-                                        onClick={ctrl.onCreateClick}
-                                    >
+                                        onClick={ctrl.onCreateClick}>
                                         Create
                                     </Button>
                                     <Button
                                         classList={['btn', 'btn-default']}
-                                        onClick={ctrl.closeModal}
-                                    >
+                                        onClick={ctrl.closeModal}>
                                         Close
                                     </Button>
                                 </div>
@@ -86,23 +84,20 @@ export class IndexView extends ReactComponent {
                             </div>
                             <Button
                                 classList={['btn', 'btn-primary', 'btn-block']}
-                                onClick={ctrl.run}
-                            >
+                                onClick={ctrl.run}>
                                 Run
                             </Button>
                             {ctrl.data.nodeEnv === 'development' && (
                                 <Button
                                     classList={['btn', 'btn-default', 'btn-block']}
-                                    onClick={ctrl.edit}
-                                >
+                                    onClick={ctrl.edit}>
                                     Edit
                                 </Button>
                             )}
                             {ctrl.data.nodeEnv === 'development' && (
                                 <Button
                                     classList={['btn', 'btn-default', 'btn-block']}
-                                    onClick={ctrl.btnCreate_Click}
-                                >
+                                    onClick={ctrl.btnCreate_Click}>
                                     New...
                                 </Button>
                             )}

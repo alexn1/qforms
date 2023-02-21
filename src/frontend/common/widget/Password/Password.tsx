@@ -30,10 +30,10 @@ export class Password extends ReactComponent {
             this.props.onChange(value);
         }
     }
-    onChange = e => {
+    onChange = (e) => {
         this._setValue(e.target.value);
     };
-    onCloseClick = e => {
+    onCloseClick = (e) => {
         this._setValue('');
         this.getInputElement().focus();
     };
@@ -45,8 +45,8 @@ export class Password extends ReactComponent {
     isCloseVisible() {
         return this.state.value !== '';
     }
-    onIconClick = e => {
-        this.setState(prevState => {
+    onIconClick = (e) => {
+        this.setState((prevState) => {
             return {
                 type: prevState.type === 'password' ? 'text' : 'password',
             };
@@ -77,8 +77,7 @@ export class Password extends ReactComponent {
                     className={`${this.getCssBlockName()}__close ${
                         this.isCloseVisible() ? 'visible' : ''
                     }`}
-                    onClick={this.onCloseClick}
-                >
+                    onClick={this.onCloseClick}>
                     <CloseIcon />
                 </div>
                 <div className={`${this.getCssBlockName()}__icon`} onClick={this.onIconClick}>

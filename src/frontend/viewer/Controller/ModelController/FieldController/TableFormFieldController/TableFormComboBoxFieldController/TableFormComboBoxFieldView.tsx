@@ -3,7 +3,7 @@ import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormComboBoxFieldController } from './TableFormComboBoxFieldController';
 
 export class TableFormComboBoxFieldView<
-    T extends TableFormComboBoxFieldController
+    T extends TableFormComboBoxFieldController,
 > extends TableFormFieldView<T> {
     span: React.RefObject<any>;
     render() {

@@ -42,7 +42,7 @@ export class ReactComponent extends Component<any, any> {
     rerender(logTime = true) {
         // console.log(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender()) return Promise.resolve();
-        return new Promise<void>(resolve => {
+        return new Promise<void>((resolve) => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {

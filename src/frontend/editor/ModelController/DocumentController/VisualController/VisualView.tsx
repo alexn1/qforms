@@ -37,7 +37,7 @@ export class VisualView extends DocumentView {
             this.cm.off('change', this.onChange);
         }
     }
-    onControllerSave = async e => {
+    onControllerSave = async (e) => {
         const ctrl = this.props.ctrl;
         await ctrl.onControllerSave(this.cm.getValue());
     };

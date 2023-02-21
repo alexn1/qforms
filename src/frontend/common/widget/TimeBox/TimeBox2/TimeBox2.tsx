@@ -14,7 +14,7 @@ export class TimeBox2 extends TimeBox {
     isCloseVisible() {
         return !!this.state.value;
     }
-    onClear = e => {
+    onClear = (e) => {
         // console.log('TimeBox2.onClear');
         this.setState({ value: '' }, () => {
             if (this.props.onClear) {
@@ -46,8 +46,7 @@ export class TimeBox2 extends TimeBox {
                     className={`${this.getCssBlockName()}__close-icon ${
                         this.isCloseVisible() ? 'visible' : ''
                     }`}
-                    onMouseDown={this.onClear}
-                >
+                    onMouseDown={this.onClear}>
                     <CloseIcon />
                 </div>
                 <div className={`${this.getCssBlockName()}__time-icon`}>

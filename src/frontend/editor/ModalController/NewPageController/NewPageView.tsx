@@ -10,7 +10,7 @@ export class NewPageView extends ReactComponent {
         this.caption = null;
         this.startup = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewPageView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -33,7 +33,7 @@ export class NewPageView extends ReactComponent {
                         <label htmlFor="name">Name</label>
                         <TextBox
                             id="name"
-                            onCreate={c => (this.name = c)}
+                            onCreate={(c) => (this.name = c)}
                             autocomplete={'off'}
                             autoFocus={true}
                         />
@@ -42,7 +42,7 @@ export class NewPageView extends ReactComponent {
                         <label htmlFor="caption">Caption</label>
                         <TextBox
                             id="caption"
-                            onCreate={c => (this.caption = c)}
+                            onCreate={(c) => (this.caption = c)}
                             autocomplete={'off'}
                         />
                     </div>
@@ -54,7 +54,7 @@ export class NewPageView extends ReactComponent {
                                 { value: 'false', title: 'false' },
                                 { value: 'true', title: 'true' },
                             ]}
-                            onCreate={c => (this.startup = c)}
+                            onCreate={(c) => (this.startup = c)}
                         />
                     </div>
                 </div>

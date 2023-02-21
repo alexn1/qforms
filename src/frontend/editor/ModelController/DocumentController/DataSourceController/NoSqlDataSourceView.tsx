@@ -59,7 +59,7 @@ export class NoSqlDataSourceView extends DocumentView {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
 
-    onSaveClick = async e => {
+    onSaveClick = async (e) => {
         console.log('NoSqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
@@ -84,15 +84,13 @@ export class NoSqlDataSourceView extends DocumentView {
                         <button
                             className={`${this.getButtonClass('selectQuery')}`}
                             style={{ fontWeight: this.isSelected('selectQuery') ? 'bold' : null }}
-                            onClick={e => this.setState({ selected: 'selectQuery' })}
-                        >
+                            onClick={(e) => this.setState({ selected: 'selectQuery' })}>
                             selectQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
                             style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : null }}
-                            onClick={e => this.setState({ selected: 'countQuery' })}
-                        >
+                            onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>
                     </div>
@@ -100,14 +98,12 @@ export class NoSqlDataSourceView extends DocumentView {
                 <div className="edit flex-max full">
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('selectQuery') }}
-                    >
+                        style={{ visibility: this.getVisibility('selectQuery') }}>
                         <textarea ref={this.selectRef} />
                     </div>
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('countQuery') }}
-                    >
+                        style={{ visibility: this.getVisibility('countQuery') }}>
                         <textarea ref={this.countRef} />
                     </div>
                 </div>

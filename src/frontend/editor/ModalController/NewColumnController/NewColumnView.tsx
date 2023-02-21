@@ -6,7 +6,7 @@ export class NewColumnView extends ReactComponent {
         super(props);
         this.name = null;
     }
-    onCreate = async e => {
+    onCreate = async (e) => {
         // console.log('NewParamView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -25,7 +25,7 @@ export class NewColumnView extends ReactComponent {
                 <div className={'NewModelView__body'}>
                     <div>
                         <label htmlFor="columnName">Name</label>
-                        <TextBox id="columnName" onCreate={c => (this.name = c)} />
+                        <TextBox id="columnName" onCreate={(c) => (this.name = c)} />
                     </div>
                 </div>
                 <div className={'NewModelView__footer'}>

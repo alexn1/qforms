@@ -3,7 +3,7 @@ import { TableFormLinkFieldController } from './TableFormLinkFieldController';
 import './TableFormLinkFieldView.less';
 
 export class TableFormLinkFieldView<
-    T extends TableFormLinkFieldController
+    T extends TableFormLinkFieldController,
 > extends TableFormFieldView<T> {
     render() {
         const row = this.props.row;

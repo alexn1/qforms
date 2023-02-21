@@ -24,15 +24,15 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
     getRows() {
         return this.model.getDataSource().getRows();
     }
-    onListInsert = async e => {
+    onListInsert = async (e) => {
         console.log('RowFormCheckBoxListFieldController.onListInsert');
         await this.rerender();
     };
-    onListUpdate = async e => {
+    onListUpdate = async (e) => {
         // console.log('RowFormCheckBoxListFieldController.onListUpdate');
         await this.rerender();
     };
-    onListDelete = async e => {
+    onListDelete = async (e) => {
         await this.rerender();
     };
     getValueForWidget() {

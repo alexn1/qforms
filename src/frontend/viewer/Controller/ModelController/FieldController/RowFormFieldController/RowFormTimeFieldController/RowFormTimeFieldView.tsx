@@ -3,7 +3,7 @@ import { RowFormTimeFieldController } from './RowFormTimeFieldController';
 import './RowFormTimeFieldView.less';
 
 export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldController> {
-    onCloseClick = async e => {
+    onCloseClick = async (e) => {
         console.log('RowFormTimeFieldView.onCloseClick');
         /*const ctrl = this.props.ctrl;
         this.getWidget().state.value = '';
@@ -33,8 +33,7 @@ export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldContr
                 />
                 <div
                     className={`close ${this.isCloseVisible() ? 'visible' : ''}`}
-                    onClick={this.onCloseClick}
-                >
+                    onClick={this.onCloseClick}>
                     <CloseIcon />
                 </div>
             </div>

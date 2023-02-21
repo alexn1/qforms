@@ -5,76 +5,76 @@
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView {
-    height: @fieldHeight;
-    box-sizing: border-box;
-    display: flex;
-    border: 1px solid #bbb;
-    &.editable:hover {
-        border: 1px solid var(--accent-color);
-    }
-    &.error {
-        border: 1px solid red !important;
-    }
-    &.error > .RowFormComboBoxFieldView__select > .Select__input {
-        //background-color: #f2dede;
-        color: red;
-    }
+  height: @fieldHeight;
+  box-sizing: border-box;
+  display: flex;
+  border: 1px solid #bbb;
+  &.editable:hover {
+    border: 1px solid var(--accent-color);
+  }
+  &.error {
+    border: 1px solid red !important;
+  }
+  &.error > .RowFormComboBoxFieldView__select > .Select__input {
+    //background-color: #f2dede;
+    color: red;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__select {
-    width: 100%;
-    .Select__input {
-        background-color: white;
-        border          : none;
-        height          : 100%;
-        padding         : 0 5px;
-        font-family: inherit;
-        font-weight: inherit;
-        font-size  : inherit;
-        &[disabled] {
-            background-color: @fieldDisableBackgroundColor;
-            color           : gray;
-            cursor          : text;
-        }
+  width: 100%;
+  .Select__input {
+    background-color: white;
+    border: none;
+    height: 100%;
+    padding: 0 5px;
+    font-family: inherit;
+    font-weight: inherit;
+    font-size: inherit;
+    &[disabled] {
+      background-color: @fieldDisableBackgroundColor;
+      color: gray;
+      cursor: text;
     }
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__edit-button {
-    border          : none;
-    background-color: #ccc;
-    width           : @buttonWidth;
-    font-size       : @buttonFontSize;
-    &:hover:enabled {
-        background-color: #ddd;
-    }
-    &:active {
-        background-color: #bbb;
-    }
-    &:not(:disabled) {
-        cursor: pointer;
-    }
+  border: none;
+  background-color: #ccc;
+  width: @buttonWidth;
+  font-size: @buttonFontSize;
+  &:hover:enabled {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #bbb;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .RowFormComboBoxFieldView__create-button {
-    border          : none;
-    background-color: #ccc;
-    width           : @buttonWidth;
-    font-size       : @buttonFontSize;
-    &:hover:enabled {
-        background-color: #ddd;
-    }
-    &:active {
-        background-color: #bbb;
-    }
-    &:not(:disabled) {
-        cursor: pointer;
-    }
+  border: none;
+  background-color: #ccc;
+  width: @buttonWidth;
+  font-size: @buttonFontSize;
+  &:hover:enabled {
+    background-color: #ddd;
+  }
+  &:active {
+    background-color: #bbb;
+  }
+  &:not(:disabled) {
+    cursor: pointer;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 .debug .RowFormComboBoxFieldView.changed > .RowFormComboBoxFieldView__select {
-    background-color: @fieldDebugChangeBackgroundColor;
+  background-color: @fieldDebugChangeBackgroundColor;
 }

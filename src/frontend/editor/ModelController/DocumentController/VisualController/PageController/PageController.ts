@@ -28,9 +28,9 @@ export class PageController extends VisualController {
 
     init() {
         // console.log('PageController.init');
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.actions.forEach(action => this.createAction(action));
-        this.model.forms.forEach(form => this.createForm(form));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.actions.forEach((action) => this.createAction(action));
+        this.model.forms.forEach((form) => this.createForm(form));
     }
 
     createForm(model) {
@@ -93,7 +93,7 @@ export class PageController extends VisualController {
     async newDataSourceAction() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewDataSourceController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const dataSourceData = await DataSourceEditor.create(this.model, {
                         name: values.name,
                         class: values.class,
@@ -112,7 +112,7 @@ export class PageController extends VisualController {
     async actionNewForm() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewFormController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const form = await this.model.newForm({
                         name: values.name,
                         caption: values.caption || values.name,

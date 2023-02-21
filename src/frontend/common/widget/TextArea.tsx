@@ -11,7 +11,7 @@ export class TextArea extends ReactComponent {
     getValue() {
         return this.state.value;
     }
-    onChange = e => {
+    onChange = (e) => {
         // console.log('TextArea.onChange', e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {

@@ -13,7 +13,7 @@ export class TimeBox extends ReactComponent {
         };
         this.el = React.createRef();
     }
-    onKeyPress = event => {
+    onKeyPress = (event) => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
         if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             console.log('cancel', event.key);
@@ -44,7 +44,7 @@ export class TimeBox extends ReactComponent {
         }
         return [min, ...(sec ? [sec] : [])].join(':');
     }
-    onChange = e => {
+    onChange = (e) => {
         // console.log('TimeBox.onChange', e.target.value);
         const target = e.target;
         const start = target.selectionStart;
@@ -81,7 +81,7 @@ export class TimeBox extends ReactComponent {
     setValue(value) {
         this.setState({ value: TimeBox.getStringValue(value) });
     }
-    onBlur = e => {
+    onBlur = (e) => {
         // console.log('TimeBox.onBlur');
         if (this.props.onBlur) {
             let nValue;

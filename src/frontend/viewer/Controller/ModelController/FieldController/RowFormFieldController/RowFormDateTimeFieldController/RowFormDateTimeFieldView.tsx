@@ -58,8 +58,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
         return (
             <div
                 className={`${this.getCssClassNames()} ${this.getMode()}`}
-                style={this.getStyle(this.getCtrl().getRow())}
-            >
+                style={this.getStyle(this.getCtrl().getRow())}>
                 {this.renderDatePart()}
                 {this.renderTimePart()}
             </div>

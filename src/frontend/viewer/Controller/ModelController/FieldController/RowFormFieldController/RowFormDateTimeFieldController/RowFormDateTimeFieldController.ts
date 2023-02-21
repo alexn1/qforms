@@ -53,7 +53,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
         this.setValue(widgetValue);
     }
 
-    onView2Create = widget2 => {
+    onView2Create = (widget2) => {
         // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
         this.widget2 = widget2;
     };
@@ -165,9 +165,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
         this.setValue2(widgetValue);
     }
     getTimeErrorText() {
-        return this.getModel()
-            .getApp()
-            .getText().field.timeNotValid;
+        return this.getModel().getApp().getText().field.timeNotValid;
     }
     setValue2(widgetValue) {
         const value = widgetValue !== null ? widgetValue : this.defaultValue;

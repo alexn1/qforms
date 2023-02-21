@@ -10,9 +10,9 @@ export class Slider extends ReactComponent {
         if (!this.props.images) throw new Error('Slider: no images');
         this.state = { image: 0, classList: null };
     }
-    onPrevClick = e => {
+    onPrevClick = (e) => {
         // console.log('Slider.onPrevClick');
-        this.setState(prevState => {
+        this.setState((prevState) => {
             let image = prevState.image - 1;
             if (image < 0) {
                 image = this.props.images.length - 1;
@@ -20,9 +20,9 @@ export class Slider extends ReactComponent {
             return { image };
         });
     };
-    onNextClick = e => {
+    onNextClick = (e) => {
         // console.log('Slider.onNextClick');
-        this.setState(prevState => {
+        this.setState((prevState) => {
             let image = prevState.image + 1;
             if (image > this.props.images.length - 1) {
                 image = 0;
@@ -30,7 +30,7 @@ export class Slider extends ReactComponent {
             return { image };
         });
     };
-    onImageClick = e => {
+    onImageClick = (e) => {
         console.log('Slider.onImageClick');
         if (this.state.classList) {
             this.setState({ classList: null });
@@ -38,7 +38,7 @@ export class Slider extends ReactComponent {
             this.setState({ classList: ['full'] });
         }
     };
-    onCloseClick = e => {
+    onCloseClick = (e) => {
         this.setState({ classList: null });
     };
     render() {

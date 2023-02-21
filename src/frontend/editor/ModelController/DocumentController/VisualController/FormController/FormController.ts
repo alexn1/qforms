@@ -29,9 +29,9 @@ export class FormController extends VisualController {
         };
     }
     init() {
-        this.model.dataSources.forEach(dataSource => this.createDataSource(dataSource));
-        this.model.fields.forEach(field => this.createField(field));
-        this.model.actions.forEach(action => this.createAction(action));
+        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
+        this.model.fields.forEach((field) => this.createField(field));
+        this.model.actions.forEach((action) => this.createAction(action));
     }
     createField(model) {
         const field = new FieldController(model, this);
@@ -88,7 +88,7 @@ export class FormController extends VisualController {
     async actionNewDataSource() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewDataSourceController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const dataSource = await this.model.newDataSource({
                         name: values.name,
                         class: values.class,
@@ -106,7 +106,7 @@ export class FormController extends VisualController {
     async actionNewField() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewFieldController({
-                onCreate: async values => {
+                onCreate: async (values) => {
                     const field = await this.model.newField({
                         class: values.class,
                         name: values.name,

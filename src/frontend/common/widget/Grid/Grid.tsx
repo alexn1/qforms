@@ -42,7 +42,7 @@ export class Grid extends ReactComponent {
     isRowActive(i, key) {
         return this.getActiveRowKey() === key;
     }
-    onCellMouseDown = async e => {
+    onCellMouseDown = async (e) => {
         console.log('Grid.onCellMouseDown', this.isLink());
         e.preventDefault(); // prevent text selection on double click
         if (this.isDisabled()) return;
@@ -57,13 +57,13 @@ export class Grid extends ReactComponent {
             this.props.onClick(row, key);
         }
     };
-    onRowMouseDown = async e => {
+    onRowMouseDown = async (e) => {
         console.log('Grid.onRowMouseDown', this.isLink());
         // if (this.isLink()) return;
         const key = e.currentTarget.dataset.row;
         await this.selectRow(key);
     };
-    onCellDoubleClick = async e => {
+    onCellDoubleClick = async (e) => {
         // console.log('Grid.onCellDoubleClick');
         const button = e.button;
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
@@ -74,7 +74,7 @@ export class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     };
-    onRowDoubleClick = async e => {
+    onRowDoubleClick = async (e) => {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
         const row = this.props.rows[i];
@@ -84,7 +84,7 @@ export class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     };
-    onKeyDown = async e => {
+    onKeyDown = async (e) => {
         // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
         if (this.isDisabled()) return;
         switch (e.keyCode) {
@@ -128,7 +128,7 @@ export class Grid extends ReactComponent {
         await Helper.copyTextToClipboard(text);
     }
     findRow(key) {
-        return this.props.rows.find(row => this.getRowKey(row) === key);
+        return this.props.rows.find((row) => this.getRowKey(row) === key);
     }
     async onLeft() {
         console.log('Grid.onLeft');
@@ -211,10 +211,10 @@ export class Grid extends ReactComponent {
     }
     getMaxColumnWidth(column) {
         return (
-            Math.max(...this.columns[column.name].map(view => view.getSpanOffsetWidth())) + 10 + 2
+            Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2
         );
     }
-    onResizeDoubleClick = async e => {
+    onResizeDoubleClick = async (e) => {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
@@ -236,14 +236,12 @@ export class Grid extends ReactComponent {
             <div
                 className={`${this.getCssBlockName()}__th`}
                 key={column.name}
-                style={{ width: this.getColumnWidth(i) }}
-            >
+                style={{ width: this.getColumnWidth(i) }}>
                 <div className={'ellipsis'}>{column.title || column.name}</div>
                 <span
                     className={'Grid__resize'}
                     data-i={i}
-                    onDoubleClick={this.onResizeDoubleClick}
-                ></span>
+                    onDoubleClick={this.onResizeDoubleClick}></span>
             </div>
         ));
     }
@@ -271,20 +269,20 @@ export class Grid extends ReactComponent {
         }
         return this.props.rows.indexOf(row).toString();
     }
-    onCellViewCreate = c => {
+    onCellViewCreate = (c) => {
         // console.log('Grid.onCellViewCreate', c.props.column.name);
         const columnName = c.props.column.name;
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     };
-    onCellViewUnmount = c => {
+    onCellViewUnmount = (c) => {
         // console.log('Grid.onCellViewUnmount', c.props.column.name);
         const columnName = c.props.column.name;
         const i = this.columns[columnName].indexOf(c);
         if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
         this.columns[columnName].splice(i, 1);
     };
-    onBodyScroll = async e => {
+    onBodyScroll = async (e) => {
         // console.log('Grid.onBodyScroll', e.target.scrollLeft);
         this.head.current.scrollLeft = e.target.scrollLeft;
     };
@@ -324,8 +322,7 @@ export class Grid extends ReactComponent {
                 className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`}
                 ref={this.el}
                 tabIndex={0}
-                onKeyDown={this.onKeyDown}
-            >
+                onKeyDown={this.onKeyDown}>
                 <div className={`${this.getCssBlockName()}__head`} ref={this.head}>
                     <div className={`${this.getCssBlockName()}__table`}>
                         <div className={`${this.getCssBlockName()}__tr`}>
@@ -347,7 +344,7 @@ export class Grid extends ReactComponent {
     isLink() {
         return !!this.props.createLinkCallback;
     }
-    onLinkClick = async e => {
+    onLinkClick = async (e) => {
         console.log('Grid.onLinkClick', e.ctrlKey);
         if (e.ctrlKey) return;
         e.preventDefault();

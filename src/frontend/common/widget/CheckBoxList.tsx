@@ -14,13 +14,13 @@ export class CheckBoxList extends ReactComponent {
     getValue() {
         return this.state.value || [];
     }
-    onCheckBoxChange = e => {
+    onCheckBoxChange = (e) => {
         // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
         const checked = e.target.checked;
         const itemValue = e.target.dataset.value;
         // console.log('itemValue:', itemValue);
         this.setState(
-            prevState => {
+            (prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
                 if (checked) {
@@ -62,7 +62,7 @@ export class CheckBoxList extends ReactComponent {
     render() {
         return (
             <ul className={this.getCssClassNames()}>
-                {this.getItems().map(item => {
+                {this.getItems().map((item) => {
                     if (item.value === undefined) throw new Error('no item value');
                     return (
                         <li key={item.value}>

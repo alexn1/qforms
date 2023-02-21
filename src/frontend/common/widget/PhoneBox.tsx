@@ -12,7 +12,7 @@ export class PhoneBox extends ReactComponent {
     getValue() {
         return PhoneBox.clearValue(this.state.value);
     }
-    onKeyPress = e => {
+    onKeyPress = (e) => {
         // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
         // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
         if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
@@ -26,7 +26,7 @@ export class PhoneBox extends ReactComponent {
             e.preventDefault();
         }
     };
-    onChange = e => {
+    onChange = (e) => {
         // console.log('PhoneBox.onChange', e.target.value);
         const start = e.target.selectionStart;
         const end = e.target.selectionEnd;
@@ -52,7 +52,7 @@ export class PhoneBox extends ReactComponent {
             this.props.onChange(value);
         }
     };
-    onBlur = e => {
+    onBlur = (e) => {
         // console.log('PhoneBox.onBlur');
         let value = PhoneBox.clearValue(e.target.value);
         value = PhoneBox.ifNoCodeAddRussianCode(value);
