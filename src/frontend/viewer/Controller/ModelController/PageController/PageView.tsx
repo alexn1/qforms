@@ -17,6 +17,7 @@ export class PageView extends ModelView<PageController> {
         this.checkParent();
         this.el = React.createRef();
     }
+
     onActionsClick = async (li) => {
         // console.log('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
@@ -31,12 +32,14 @@ export class PageView extends ModelView<PageController> {
             await this.getCtrl().getApp().alert({ message: err.message });
         }
     };
+
     isToolbar() {
         const model = this.getCtrl().getModel();
         return model.hasActions();
         //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
         //|| model.isSelectMode();
     }
+
     getFormTabs(forms) {
         return forms.map((form) => {
             return {
@@ -46,16 +49,19 @@ export class PageView extends ModelView<PageController> {
             };
         });
     }
+
     getRowForms() {
         return this.getCtrl()
             .forms.filter((form) => form.getModel().getClassName() === 'RowForm')
             .filter((form) => form.isVisible());
     }
+
     getTableForms() {
         return this.getCtrl()
             .forms.filter((form) => form.getModel().getClassName() === 'TableForm')
             .filter((form) => form.isVisible());
     }
+
     renderForm(formCtrl, props = {}) {
         return React.createElement(formCtrl.getViewClass(), {
             parent: this,
@@ -66,9 +72,11 @@ export class PageView extends ModelView<PageController> {
             ...props,
         });
     }
+
     renderRowForms() {
         return this.getRowForms().map((form) => this.renderForm(form));
     }
+
     renderTitle(): ReactNode {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -85,6 +93,7 @@ export class PageView extends ModelView<PageController> {
             </h1>
         );
     }
+
     renderSelectButton() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -98,6 +107,7 @@ export class PageView extends ModelView<PageController> {
             </Button>
         );
     }
+
     renderSaveAndCloseButton() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -111,6 +121,7 @@ export class PageView extends ModelView<PageController> {
             </Button>
         );
     }
+
     renderCloseButton() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -120,6 +131,7 @@ export class PageView extends ModelView<PageController> {
             </Button>
         );
     }
+
     renderActionsDropdownButton() {
         return (
             <DropdownButton
@@ -130,6 +142,7 @@ export class PageView extends ModelView<PageController> {
             </DropdownButton>
         );
     }
+
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
@@ -145,9 +158,11 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     /*shouldComponentUpdate(nextProps, nextState) {
         return false;
     }*/
+
     renderTableForms() {
         const tableForms = this.getTableForms();
         if (tableForms.length === 1) {
@@ -165,6 +180,7 @@ export class PageView extends ModelView<PageController> {
             );
         }
     }
+
     renderOpenPageHeaderButton() {
         const ctrl = this.getCtrl();
         return (
@@ -176,6 +192,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     renderClosePageHeaderButton() {
         const ctrl = this.getCtrl();
         return (
@@ -187,6 +204,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     renderHeader() {
         const model = this.getCtrl().getModel();
         return (
@@ -199,6 +217,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     renderMain() {
         return (
             <div className={`${this.getCssBlockName()}__main flex-max frame`}>
@@ -209,6 +228,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     renderForms() {
         const model = this.getCtrl().getModel();
         return [
@@ -216,6 +236,7 @@ export class PageView extends ModelView<PageController> {
             ...(model.hasTableForm() ? [this.renderTableForms()] : []),
         ];
     }
+
     renderForms2() {
         return (
             <Tab2
@@ -224,6 +245,7 @@ export class PageView extends ModelView<PageController> {
             />
         );
     }
+
     renderFooter() {
         const model = this.getCtrl().getModel();
         return (
@@ -236,6 +258,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
         return (
@@ -253,6 +276,7 @@ export class PageView extends ModelView<PageController> {
             </div>
         );
     }
+
     getStyle() {
         if (this.getCtrl().isModal()) {
             return {
@@ -261,6 +285,7 @@ export class PageView extends ModelView<PageController> {
             };
         }
     }
+
     componentDidMount() {
         // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
@@ -268,6 +293,7 @@ export class PageView extends ModelView<PageController> {
             this.focus();
         }
     }
+
     focus() {
         // console.log('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
