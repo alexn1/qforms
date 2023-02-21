@@ -6,7 +6,8 @@ import {
     Button,
     DropdownButton,
     MoreVertIcon,
-    ComboBox,
+    // ComboBox,
+    TextBox,
     LeftIcon,
     RightIcon,
     Grid,
@@ -32,18 +33,17 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
                 )}
-                {model.data.refreshButton === 'true' &&
-                    dataSource.isPersistent() && (
-                        <Button
-                            key="refresh"
-                            classList={['toolbar-button']}
-                            onClick={ctrl.onRefreshClick}
-                            enabled={!ctrl.parent.model.hasNew()}
-                        >
-                            {/*<RefreshIcon/>*/}
-                            <div>{model.getApp().getText().form.refresh}</div>
-                        </Button>
-                    )}
+                {model.data.refreshButton === 'true' && dataSource.isPersistent() && (
+                    <Button
+                        key="refresh"
+                        classList={['toolbar-button']}
+                        onClick={ctrl.onRefreshClick}
+                        enabled={!ctrl.parent.model.hasNew()}
+                    >
+                        {/*<RefreshIcon/>*/}
+                        <div>{model.getApp().getText().form.refresh}</div>
+                    </Button>
+                )}
                 {model.data.deleteRowMode !== 'disabled' && (
                     <Button
                         key="delete"
@@ -68,7 +68,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
         );
     }
     renderPaging() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const model = this.props.ctrl.model;
         const dataSource = model.getDefaultDataSource();
         const text = model.getApp().getText();
@@ -85,7 +85,14 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                         <Button enabled={ctrl.canPrev()} onClick={ctrl.onPreviousClick}>
                             <LeftIcon size={18} />
                         </Button>
-                        <ComboBox
+                        <TextBox
+                            value={ctrl.model
+                                .getDefaultDataSource()
+                                .getFrame()
+                                .toString()}
+                            onChange={ctrl.onFrameChanged}
+                        />
+                        {/* <ComboBox
                             value={ctrl.model
                                 .getDefaultDataSource()
                                 .getFrame()
@@ -97,7 +104,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                                     value: (i + 1).toString(),
                                     title: (i + 1).toString(),
                                 }))}
-                        />
+                        /> */}
                         <Button enabled={ctrl.canNext()} onClick={ctrl.onNextClick}>
                             <RightIcon size={18} />
                         </Button>
@@ -116,8 +123,8 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
     getGridColumns(): any[] {
         const { ctrl } = this.props;
         return Object.keys(ctrl.fields)
-            .filter(name => ctrl.getField(name).isVisible())
-            .map(name => {
+            .filter((name) => ctrl.getField(name).isVisible())
+            .map((name) => {
                 const field = ctrl.getField(name);
                 return {
                     name: field.getModel().getName(),
@@ -144,7 +151,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             name: ctrl.model.getFullName(),
             columns: this.getGridColumns(),
             rows: this.getRows(),
-            getRowKey: row => ctrl.model.getDefaultDataSource().getRowKey(row),
+            getRowKey: (row) => ctrl.model.getDefaultDataSource().getRowKey(row),
             onDoubleClick: ctrl.onGridCellDblClick,
             onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
             onSelectionChange: ctrl.onGridSelectionChange,
@@ -173,7 +180,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             </div>
         );
     }
-    createLinkCallback = key => {
+    createLinkCallback = (key) => {
         return PageController.createLink({
             page: this.getCtrl()
                 .getModel()

@@ -1,7 +1,7 @@
 import { TableFormView } from './TableFormView';
 import { FormController } from '../FormController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
-import {TableForm} from '../../../../Model/Form/TableForm/TableForm';
+import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 
 export class TableFormController extends FormController<TableForm> {
@@ -35,20 +35,20 @@ export class TableFormController extends FormController<TableForm> {
         this.model.off('insert', this.onModelInsert);
         super.deinit();
     }
-    onGridCreate = grid => {
+    onGridCreate = (grid) => {
         this.grid = grid;
     };
-    onNewClick = async e => {
+    onNewClick = async (e) => {
         console.log('TableFormController.onNewClick');
         await this.new();
     };
-    onRefreshClick = async e => {
+    onRefreshClick = async (e) => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
         await this.model.refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     };
-    onDeleteClick = async e => {
+    onDeleteClick = async (e) => {
         console.log(
             'TableFormController.onDeleteClick',
             this.model.getFullName(),
@@ -85,7 +85,7 @@ export class TableFormController extends FormController<TableForm> {
                 break;
         }
     };
-    onGridLinkClick = async key => {
+    onGridLinkClick = async (key) => {
         console.log('TableFormController.onGridLinkClick', key);
         await this.edit(key);
     };
@@ -192,13 +192,13 @@ export class TableFormController extends FormController<TableForm> {
             throw err;
         }
     }
-    onModelRefresh = async e => {
+    onModelRefresh = async (e) => {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
         if (!this.view) return;
         this.invalidate();
         await this.rerender();
     };
-    onModelInsert = async e => {
+    onModelInsert = async (e) => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         if (!this.view) return;
         if (this.grid && e.source) {
@@ -209,7 +209,7 @@ export class TableFormController extends FormController<TableForm> {
         this.invalidate();
         await this.rerender();
     };
-    onModelUpdate = async e => {
+    onModelUpdate = async (e) => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
         if (!this.view) return;
         if (this.grid) {
@@ -225,7 +225,7 @@ export class TableFormController extends FormController<TableForm> {
         this.invalidate();
         await this.rerender();
     };
-    onModelDelete = async e => {
+    onModelDelete = async (e) => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         if (!this.view) return;
         if (this.grid) {
@@ -239,7 +239,7 @@ export class TableFormController extends FormController<TableForm> {
         await this.rerender();
     };
 
-    onGridSelectionChange = async key => {
+    onGridSelectionChange = async (key) => {
         // console.log('TableFormController.onGridSelectionChange', key);
         this.invalidate();
         await this.getPage().rerender();
@@ -253,8 +253,8 @@ export class TableFormController extends FormController<TableForm> {
         // console.log('TableFormController.isRowSelected');
         return !!this.grid && !!this.grid.getActiveRowKey();
     };
-    onFrameChanged = async value => {
-        // console.log('TableFormController.onFrameChanged', parseInt(value));
+    onFrameChanged = async (value) => {
+        console.log('TableFormController.onFrameChanged', value);
         const frame = parseInt(value);
         this.model.getDefaultDataSource().setFrame(frame);
         this.model.getDefaultDataSource().refresh();

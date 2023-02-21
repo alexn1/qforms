@@ -39470,7 +39470,7 @@ __webpack_require__.r(__webpack_exports__);
 class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.FormController {
     constructor(model, parent) {
         super(model, parent);
-        this.onGridCreate = grid => {
+        this.onGridCreate = (grid) => {
             this.grid = grid;
         };
         this.onNewClick = async (e) => {
@@ -39590,7 +39590,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
             return !!this.grid && !!this.grid.getActiveRowKey();
         };
         this.onFrameChanged = async (value) => {
-            // console.log('TableFormController.onFrameChanged', parseInt(value));
+            console.log('TableFormController.onFrameChanged', value);
             const frame = parseInt(value);
             this.model.getDefaultDataSource().setFrame(frame);
             this.model.getDefaultDataSource().refresh();
@@ -39599,6 +39599,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
         this.onNextClick = async () => {
             console.log('TableFormController.onNextClick');
             const frame = this.model.getDefaultDataSource().getFrame() + 1;
+            console.log('frame', frame);
             this.model.getDefaultDataSource().setFrame(frame);
             this.model.getDefaultDataSource().refresh();
             await this.rerender();
@@ -39606,6 +39607,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
         this.onPreviousClick = async () => {
             console.log('TableFormController.onPreviousClick');
             const frame = this.model.getDefaultDataSource().getFrame() - 1;
+            console.log('frame', frame);
             this.model.getDefaultDataSource().setFrame(frame);
             this.model.getDefaultDataSource().refresh();
             this.rerender();
@@ -39788,7 +39790,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
             // console.log(column.name, ctrl.constructor.name);
             return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
-        this.createLinkCallback = key => {
+        this.createLinkCallback = (key) => {
             return _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__.PageController.createLink(Object.assign({ page: this.getCtrl()
                     .getModel()
                     .getAttr('itemEditPage') }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
@@ -39798,29 +39800,23 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' &&
-                    dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon, {}) })))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.MoreVertIcon, {}) })))] })));
     }
     renderPaging() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const model = this.props.ctrl.model;
         const dataSource = model.getDefaultDataSource();
         const text = model.getApp().getText();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() && `of ${dataSource.getCount()}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.ComboBox, { value: ctrl.model
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() && `of ${dataSource.getCount()}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.TextBox, { value: ctrl.model
                                 .getDefaultDataSource()
                                 .getFrame()
-                                .toString(), onChange: ctrl.onFrameChanged, items: new Array(dataSource.getFramesCount())
-                                .fill(null)
-                                .map((val, i) => ({
-                                value: (i + 1).toString(),
-                                title: (i + 1).toString(),
-                            })) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
+                                .toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
         const { ctrl } = this.props;
         return Object.keys(ctrl.fields)
-            .filter(name => ctrl.getField(name).isVisible())
-            .map(name => {
+            .filter((name) => ctrl.getField(name).isVisible())
+            .map((name) => {
             const field = ctrl.getField(name);
             return {
                 name: field.getModel().getName(),
@@ -39847,7 +39843,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
             name: ctrl.model.getFullName(),
             columns: this.getGridColumns(),
             rows: this.getRows(),
-            getRowKey: row => ctrl.model.getDefaultDataSource().getRowKey(row),
+            getRowKey: (row) => ctrl.model.getDefaultDataSource().getRowKey(row),
             onDoubleClick: ctrl.onGridCellDblClick,
             onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
             onSelectionChange: ctrl.onGridSelectionChange,
