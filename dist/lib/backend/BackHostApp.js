@@ -443,13 +443,8 @@ class BackHostApp {
     async indexGet(req, res, next) {
         console.log(safe_1.default.magenta('indexGet'));
         try {
-            const data = await this.indexModule.fill();
-            res.end(this.indexModule.render({
-                version: pkg.version,
-                links: this.indexModule.getLinks(),
-                scripts: this.indexModule.getScripts(),
-                data: data,
-            }));
+            const html = await this.indexModule.render();
+            res.end(html);
         }
         catch (err) {
             next(err);

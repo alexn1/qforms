@@ -3,8 +3,10 @@ import path from 'path';
 import ReactDOMServer from 'react-dom/server';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import { Helper } from '../Helper';
-import { Links } from './Links';
-import { Scripts } from './Scripts';
+import { Links } from '../Links';
+import { Scripts } from '../Scripts';
+
+const pkg = require('../../../package.json');
 
 export class IndexModule {
     hostApp: any;
@@ -46,17 +48,20 @@ export class IndexModule {
     getScripts() {
         return [...this.js];
     }
-    render({ version, links, scripts, data }: any) {
+    async render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
-        const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={links} />);
-        const scripts2 = ReactDOMServer.renderToStaticMarkup(<Scripts scripts={scripts} />);
+        const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
+        const scripts2 = ReactDOMServer.renderToStaticMarkup(
+            <Scripts scripts={this.getScripts()} />,
+        );
+        const data = await this.fill();
         const data2 = JSON.stringify(data /*, null, 4*/);
         return `<!DOCTYPE html>
 <html>
 <head>
-    <!-- ${version}> -->
+    <!-- ${pkg.version}> -->
     <meta charSet="utf-8">
-    <title>QForms v${version}</title>
+    <title>QForms v${pkg.version}</title>
     <!-- links -->
     ${links2}
     <!-- scripts -->

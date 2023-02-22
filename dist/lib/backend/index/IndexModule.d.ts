@@ -13,5 +13,5 @@ export declare class IndexModule {
     }>;
     getLinks(): string[];
     getScripts(): string[];
-    render({ version, links, scripts, data }: any): string;
+    render(): Promise<string>;
 }

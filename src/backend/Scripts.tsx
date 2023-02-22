@@ -5,8 +5,8 @@ interface ScriptsProps {
 export const Scripts = ({ scripts }: ScriptsProps) => {
     return (
         <>
-            {scripts.map((scr, i) => {
-                return <script key={i} type={'text/javascript'} src={scr}></script>;
+            {scripts.map((src, i) => {
+                return <script key={i} type={'text/javascript'} src={src}></script>;
             })}
         </>
     );

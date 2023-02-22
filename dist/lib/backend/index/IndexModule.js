@@ -9,8 +9,9 @@ const path_1 = __importDefault(require("path"));
 const server_1 = __importDefault(require("react-dom/server"));
 const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
 const Helper_1 = require("../Helper");
-const Links_1 = require("./Links");
-const Scripts_1 = require("./Scripts");
+const Links_1 = require("../Links");
+const Scripts_1 = require("../Scripts");
+const pkg = require('../../../package.json');
 class IndexModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -38,17 +39,18 @@ class IndexModule {
     getScripts() {
         return [...this.js];
     }
-    render({ version, links, scripts, data }) {
+    async render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
-        const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: links }));
-        const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: scripts }));
+        const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
+        const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
+        const data = await this.fill();
         const data2 = JSON.stringify(data /*, null, 4*/);
         return `<!DOCTYPE html>
 <html>
 <head>
-    <!-- ${version}> -->
+    <!-- ${pkg.version}> -->
     <meta charSet="utf-8">
-    <title>QForms v${version}</title>
+    <title>QForms v${pkg.version}</title>
     <!-- links -->
     ${links2}
     <!-- scripts -->
