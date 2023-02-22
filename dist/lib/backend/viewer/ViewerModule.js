@@ -70,7 +70,6 @@ class ViewerModule {
         }
     }
     render(version, application, context, response, links, scripts) {
-        console.log('render by template');
         return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
 <head>
@@ -102,20 +101,43 @@ class ViewerModule {
         console.log('ViewerModule.loginGet');
         // const application = this.getApplication(context);
         // const users = await application.getUsers(context);
-        context.getRes().render('viewer/login', {
-            version: pkg.version,
-            context: context,
-            application: application,
-            links: [...this.getLinks(), ...application.links],
-            scripts: [...this.getScripts(), ...application.scripts],
-            data: {
-                name: application.getName(),
-                text: application.getText(),
-                title: application.getTitle(context),
-                errMsg: null,
-                username: context.query.username,
-            },
+        const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
+        const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
+        const html = this.renderLogin(pkg.version, context, application, links, scripts, {
+            name: application.getName(),
+            text: application.getText(),
+            title: application.getTitle(context),
+            errMsg: null,
+            username: context.query.username,
         });
+        context.getRes().end(html);
+    }
+    renderLogin(version, context, application, links, scripts, data) {
+        return `<!DOCTYPE html>
+<html class="${application.getLoginViewClassName()}" lang="${application.getAttr('lang')}">
+<head>
+    <!-- qforms v${version} -->
+    <!-- app v${application.getVersion()}  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${application.getTitle(context)} - ${application.getText().login.login}</title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const frontHostApp = new LoginFrontHostApp(data);
+            await frontHostApp.run();
+        });
+    </script>
+    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+</head>
+<body class="${application.getLoginViewClassName()}__body">
+    <div class="${application.getLoginViewClassName()}__root"></div>
+</body>
+</html>`;
     }
     async handleViewerPost(context, application) {
         // console.log('ViewerModule.handleViewerPost');
