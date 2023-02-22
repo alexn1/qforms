@@ -27,8 +27,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                         key="new"
                         classList={['toolbar-button', 'default']}
                         onClick={ctrl.onNewClick}
-                        enabled={!ctrl.parent.model.hasNew()}
-                    >
+                        enabled={!ctrl.parent.model.hasNew()}>
                         {/*<AddIcon/>*/}
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
@@ -38,8 +37,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                         key="refresh"
                         classList={['toolbar-button']}
                         onClick={ctrl.onRefreshClick}
-                        enabled={!ctrl.parent.model.hasNew()}
-                    >
+                        enabled={!ctrl.parent.model.hasNew()}>
                         {/*<RefreshIcon/>*/}
                         <div>{model.getApp().getText().form.refresh}</div>
                     </Button>
@@ -49,8 +47,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                         key="delete"
                         classList={['toolbar-button']}
                         onClick={ctrl.onDeleteClick}
-                        enabled={ctrl.isRowSelected()}
-                    >
+                        enabled={ctrl.isRowSelected()}>
                         {/*<DeleteIcon/>*/}
                         <div>{model.getApp().getText().form.delete}</div>
                     </Button>
@@ -59,8 +56,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
-                        onClick={this.onActionsClick}
-                    >
+                        onClick={this.onActionsClick}>
                         <MoreVertIcon />
                     </DropdownButton>
                 )}
@@ -87,10 +83,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                             <LeftIcon size={18} />
                         </Button>
                         <TextBox
-                            value={ctrl.model
-                                .getDefaultDataSource()
-                                .getFrame()
-                                .toString()}
+                            value={ctrl.model.getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                         />
                         <div className="paging__framesCount">
@@ -151,10 +144,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             renderGridCellView: this.renderGridCellView,
             updated: ctrl.getUpdated(),
             extraColumn: this.getGridExtraColumn(),
-            selectedKey: ctrl
-                .getPage()
-                .getModel()
-                .getOptions().selectedKey,
+            selectedKey: ctrl.getPage().getModel().getOptions().selectedKey,
             createLinkCallback: this.createLinkCallback,
         });
     }
@@ -164,8 +154,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
         return (
             <div
                 className={`${this.getCssClassNames()} full flex-column grid-gap-5`}
-                style={this.getStyle()}
-            >
+                style={this.getStyle()}>
                 {this.renderToolbar()}
                 {this.renderGrid()}
                 {ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()}
@@ -174,9 +163,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
     }
     createLinkCallback = (key) => {
         return PageController.createLink({
-            page: this.getCtrl()
-                .getModel()
-                .getAttr('itemEditPage'),
+            page: this.getCtrl().getModel().getAttr('itemEditPage'),
             ...DataSource.keyToParams(key),
         });
     };
