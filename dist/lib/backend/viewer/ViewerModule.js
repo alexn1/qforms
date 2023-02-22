@@ -55,14 +55,6 @@ class ViewerModule {
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
                 const html = this.render(pkg.version, application, context, response, links, scripts);
                 context.getRes().end(html);
-                /* context.getRes().render('viewer/index', {
-                    version: pkg.version,
-                    application: application,
-                    context: context,
-                    response: response,
-                    links: [...this.getLinks(), ...application.links],
-                    scripts: [...this.getScripts(), ...application.scripts],
-                }); */
             }
             finally {
                 await application.release(context);

@@ -82,7 +82,6 @@ export class ViewerModule {
                 const scripts = ReactDOMServer.renderToStaticMarkup(
                     <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
                 );
-
                 const html = this.render(
                     pkg.version,
                     application,
@@ -92,15 +91,6 @@ export class ViewerModule {
                     scripts,
                 );
                 context.getRes().end(html);
-
-                /* context.getRes().render('viewer/index', {
-                    version: pkg.version,
-                    application: application,
-                    context: context,
-                    response: response,
-                    links: [...this.getLinks(), ...application.links],
-                    scripts: [...this.getScripts(), ...application.scripts],
-                }); */
             } finally {
                 await application.release(context);
             }
