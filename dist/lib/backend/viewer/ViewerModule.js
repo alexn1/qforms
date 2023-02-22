@@ -99,8 +99,6 @@ class ViewerModule {
     }
     async loginGet(context, application) {
         console.log('ViewerModule.loginGet');
-        // const application = this.getApplication(context);
-        // const users = await application.getUsers(context);
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
         const html = this.renderLogin(pkg.version, context, application, links, scripts, {

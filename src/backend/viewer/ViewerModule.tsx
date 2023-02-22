@@ -140,16 +140,12 @@ export class ViewerModule {
 
     async loginGet(context: Context, application: BkApplication) {
         console.log('ViewerModule.loginGet');
-        // const application = this.getApplication(context);
-        // const users = await application.getUsers(context);
-
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.getLinks(), ...application.links]} />,
         );
         const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
         );
-
         const html = this.renderLogin(pkg.version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
