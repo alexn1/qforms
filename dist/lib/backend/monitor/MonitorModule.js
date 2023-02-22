@@ -71,16 +71,6 @@ class MonitorModule {
             req.headers.authorization.substr(0, 5) === 'Basic' &&
             this.checkCredentials(req));
     }
-    /* render(res) {
-        console.log('MonitorModule.render');
-        const data = this.fill();
-        res.render('monitor/index', {
-            version: pkg.version,
-            response: data,
-            links: this.getLinks(),
-            scripts: this.getScripts(),
-        });
-    } */
     render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));

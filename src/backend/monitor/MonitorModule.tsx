@@ -93,17 +93,6 @@ export class MonitorModule {
         );
     }
 
-    /* render(res) {
-        console.log('MonitorModule.render');
-        const data = this.fill();
-        res.render('monitor/index', {
-            version: pkg.version,
-            response: data,
-            links: this.getLinks(),
-            scripts: this.getScripts(),
-        });
-    } */
-
     render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
