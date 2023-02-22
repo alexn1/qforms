@@ -311,9 +311,7 @@ export class BkDataSource extends BkModel {
         return this.isOnForm() ? this.getParent() : null;
     }
 
-    getAccess(
-        context: Context,
-    ): {
+    getAccess(context: Context): {
         create: boolean;
         read: boolean;
         update: boolean;

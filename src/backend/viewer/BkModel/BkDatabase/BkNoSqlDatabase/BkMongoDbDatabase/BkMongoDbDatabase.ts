@@ -48,23 +48,17 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .updateOne(_filter, update);
+        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
     async insertOne(context: Context, colName: string, document: any): Promise<any> {
-        return await this.getDbLink(context)
-            .collection(colName)
-            .insertOne(document);
+        return await this.getDbLink(context).collection(colName).insertOne(document);
     }
 
     async deleteOne(context: Context, colName: string, filter): Promise<any> {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
         // console.log('_filter', _filter);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .deleteOne(_filter);
+        return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
 
     static makeObjectIds(filter: any, names: string[] = ['_id']): any {
