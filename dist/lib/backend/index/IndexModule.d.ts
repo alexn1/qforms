@@ -1,11 +1,12 @@
+import { BackHostApp } from '../BackHostApp';
 export declare class IndexModule {
-    hostApp: any;
+    hostApp: BackHostApp;
     css: string[];
     js: string[];
-    constructor(hostApp: any);
+    constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     fill(): Promise<{
-        nodeEnv: any;
+        nodeEnv: string;
         appInfos: {
             fullName: string;
             envs: string[];

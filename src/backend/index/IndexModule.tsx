@@ -5,16 +5,16 @@ import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import { Helper } from '../Helper';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
+import { BackHostApp } from '../BackHostApp';
 
 const pkg = require('../../../package.json');
 
 export class IndexModule {
-    hostApp: any;
     css: string[];
     js: string[];
-    constructor(hostApp) {
-        this.hostApp = hostApp;
-    }
+
+    constructor(public hostApp: BackHostApp) {}
+
     async init() {
         this.css = (
             await Helper.getFilePaths(
@@ -31,6 +31,7 @@ export class IndexModule {
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }
+
     async fill() {
         const appInfos = await BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
         // console.log('appInfos:', appInfos);
@@ -42,16 +43,19 @@ export class IndexModule {
             })),
         };
     }
+
     getLinks() {
         return [...this.css];
     }
+
     getScripts() {
         return [...this.js];
     }
+
     async render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
-        const links2 = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
-        const scripts2 = ReactDOMServer.renderToStaticMarkup(
+        const links = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
+        const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={this.getScripts()} />,
         );
         const data = await this.fill();
@@ -63,9 +67,9 @@ export class IndexModule {
     <meta charSet="utf-8">
     <title>QForms v${pkg.version}</title>
     <!-- links -->
-    ${links2}
+    ${links}
     <!-- scripts -->
-    ${scripts2}
+    ${scripts}
     <script type="application/json">${data2}</script>
     <!--<script>
         document.addEventListener('DOMContentLoaded', () => {

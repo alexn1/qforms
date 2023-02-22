@@ -41,8 +41,8 @@ class IndexModule {
     }
     async render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
-        const links2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
-        const scripts2 = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
+        const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
+        const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
         const data = await this.fill();
         const data2 = JSON.stringify(data /*, null, 4*/);
         return `<!DOCTYPE html>
@@ -52,9 +52,9 @@ class IndexModule {
     <meta charSet="utf-8">
     <title>QForms v${pkg.version}</title>
     <!-- links -->
-    ${links2}
+    ${links}
     <!-- scripts -->
-    ${scripts2}
+    ${scripts}
     <script type="application/json">${data2}</script>
     <!--<script>
         document.addEventListener('DOMContentLoaded', () => {
