@@ -3,13 +3,17 @@ const path = require('path');
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
 
+const pkg = require('../../../package.json');
+
 export class MonitorModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
+
     constructor(hostApp: BackHostApp) {
         this.hostApp = hostApp;
     }
+
     async init() {
         this.css = (
             await Helper.getFilePaths(
@@ -26,6 +30,7 @@ export class MonitorModule {
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
+
     fill() {
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
@@ -52,12 +57,15 @@ export class MonitorModule {
             }),
         };
     }
+
     getLinks() {
         return [...this.css];
     }
+
     getScripts() {
         return [...this.js];
     }
+
     checkCredentials(req) {
         const base64string = req.headers.authorization.substr(6);
         const usernamePassword = new Buffer(base64string, 'base64').toString();
@@ -67,6 +75,7 @@ export class MonitorModule {
             password === this.hostApp.getParams().monitor.password
         );
     }
+
     authorize(req): boolean {
         if (this.hostApp.isDevelopment()) {
             return true;
@@ -79,5 +88,15 @@ export class MonitorModule {
             req.headers.authorization.substr(0, 5) === 'Basic' &&
             this.checkCredentials(req)
         );
+    }
+
+    render(res, response) {
+        console.log('MonitorModule.render');
+        res.render('monitor/index', {
+            version: pkg.version,
+            response: response,
+            links: this.getLinks(),
+            scripts: this.getScripts(),
+        });
     }
 }

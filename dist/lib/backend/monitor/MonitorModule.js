@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonitorModule = void 0;
 const path = require('path');
 const Helper_1 = require("../Helper");
+const pkg = require('../../../package.json');
 class MonitorModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
@@ -62,6 +63,15 @@ class MonitorModule {
         return (req.headers.authorization &&
             req.headers.authorization.substr(0, 5) === 'Basic' &&
             this.checkCredentials(req));
+    }
+    render(res, response) {
+        console.log('MonitorModule.render');
+        res.render('monitor/index', {
+            version: pkg.version,
+            response: response,
+            links: this.getLinks(),
+            scripts: this.getScripts(),
+        });
     }
 }
 exports.MonitorModule = MonitorModule;

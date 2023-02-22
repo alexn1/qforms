@@ -450,13 +450,6 @@ class BackHostApp {
                 scripts: this.indexModule.getScripts(),
                 data: data,
             }));
-            /*res.render('index/index', {
-                hostApp: this,
-                version: pkg.version,
-                data   : data,
-                links  : this.indexModule.getLinks(),
-                scripts: this.indexModule.getScripts(),
-            });*/
         }
         catch (err) {
             next(err);
@@ -486,12 +479,7 @@ class BackHostApp {
             }
             if (this.monitorModule.authorize(req)) {
                 const response = this.monitorModule.fill();
-                res.render('monitor/index', {
-                    version: pkg.version,
-                    response: response,
-                    links: this.monitorModule.getLinks(),
-                    scripts: this.monitorModule.getScripts(),
-                });
+                this.monitorModule.render(res, response);
             }
             else {
                 res.statusCode = 401;
