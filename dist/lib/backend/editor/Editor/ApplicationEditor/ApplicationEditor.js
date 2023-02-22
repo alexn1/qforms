@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApplicationEditor = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
 const Helper_1 = require("../../../Helper");
 const BkApplication_1 = require("../../../viewer/BkModel/BkApplication/BkApplication");
@@ -49,9 +52,9 @@ class ApplicationEditor extends Editor_1.Editor {
         return appFile;
     }
     async newPageAndPageLinkData(params) {
-        const pagesDirPath = path.join(this.appInfo.dirPath, 'pages');
-        const pageDirPath = path.join(pagesDirPath, params.name);
-        const pageFilePath = path.join(pageDirPath, params.name + '.json');
+        const pagesDirPath = path_1.default.join(this.appInfo.dirPath, 'pages');
+        const pageDirPath = path_1.default.join(pagesDirPath, params.name);
+        const pageFilePath = path_1.default.join(pageDirPath, params.name + '.json');
         const pageData = PageEditor_1.PageEditor.createData(params);
         const pageFile = new JsonFile_1.JsonFile(pageFilePath, pageData);
         await pageFile.create();
@@ -67,11 +70,11 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async removePageFile(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
-        const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
+        const pageFilePath = path_1.default.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
         await Helper_1.Helper.fsUnlink(pageFilePath);
     }
     async createPageEditor(relFilePath) {
-        const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
+        const pageFilePath = path_1.default.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile_1.JsonFile(pageFilePath);
         await pageFile.read();
         return new PageEditor_1.PageEditor(this, pageFile);
@@ -83,7 +86,7 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
-        const templateFilePath = path.join(__dirname, 'Application.js.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Application.js.ejs');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             application: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
@@ -91,8 +94,8 @@ class ApplicationEditor extends Editor_1.Editor {
         return js;
     }
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });

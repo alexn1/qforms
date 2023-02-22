@@ -1,4 +1,5 @@
-const path = require('path');
+import path from 'path';
+
 import { Editor } from '../Editor';
 import { Helper } from '../../../Helper';
 import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplication';

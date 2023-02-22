@@ -22,9 +22,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FieldEditor = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
 const backend = __importStar(require("../../../../backend"));
 class FieldEditor extends Editor_1.Editor {
@@ -53,7 +56,7 @@ class FieldEditor extends Editor_1.Editor {
         return newData;
     }
     async createJs(params) {
-        const templateFilePath = path.join(__dirname, 'Field.js.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.parent.parent.getName(),
@@ -65,7 +68,7 @@ class FieldEditor extends Editor_1.Editor {
         return js;
     }
     async createJsx(params) {
-        const templateFilePath = path.join(__dirname, 'View.jsx.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'View.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
             page: this.parent.parent.getName(),
@@ -77,7 +80,7 @@ class FieldEditor extends Editor_1.Editor {
         return jsx;
     }
     async createLess(params) {
-        const templateFilePath = path.join(__dirname, 'View.less.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'View.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
             page: this.parent.parent.getName(),
@@ -90,7 +93,7 @@ class FieldEditor extends Editor_1.Editor {
     }
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
-        const dirPath = path.join(customDirPath, 'fields');
+        const dirPath = path_1.default.join(customDirPath, 'fields');
         return dirPath;
     }
     getColName() {

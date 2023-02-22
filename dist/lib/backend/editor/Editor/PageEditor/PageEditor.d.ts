@@ -27,6 +27,6 @@ export declare class PageEditor extends Editor {
     createJsx(params: any): Promise<any>;
     createLess(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
-    getCustomDirPath(): Promise<any>;
+    getCustomDirPath(): Promise<string>;
     reformat(): void;
 }

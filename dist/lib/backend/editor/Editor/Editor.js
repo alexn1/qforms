@@ -22,9 +22,12 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Editor = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const ejs = require('ejs');
 const BaseModel_1 = require("../../BaseModel");
 const Helper_1 = require("../../Helper");
@@ -48,7 +51,7 @@ class Editor extends BaseModel_1.BaseModel {
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await Helper_1.Helper.exists(newFilePath);
         if (exists) {
-            throw new Error(`File ${path.basename(newFilePath)} already exists.`);
+            throw new Error(`File ${path_1.default.basename(newFilePath)} already exists.`);
         }
         const template = await Helper_1.Helper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
@@ -96,15 +99,15 @@ class Editor extends BaseModel_1.BaseModel {
     async getCustomFilePath(ext) {
         const customDirPath = await this.getCustomDirPath();
         if (ext === 'js') {
-            return path.join(customDirPath, 'Controller.front.js');
+            return path_1.default.join(customDirPath, 'Controller.front.js');
         }
         else if (ext === 'jsx') {
-            return path.join(customDirPath, 'View.jsx');
+            return path_1.default.join(customDirPath, 'View.jsx');
         }
         else if (ext === 'less') {
-            return path.join(customDirPath, 'View.less');
+            return path_1.default.join(customDirPath, 'View.less');
         }
-        return path.join(customDirPath, this.getName() + '.' + ext);
+        return path_1.default.join(customDirPath, this.getName() + '.' + ext);
     }
     /*createDataSourceEditor(name) {
         const data = this.getColItemData('dataSources', name);
@@ -140,7 +143,7 @@ class Editor extends BaseModel_1.BaseModel {
     }
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();
-        return path.join(collectionDirPath, this.getName());
+        return path_1.default.join(collectionDirPath, this.getName());
     }
     async getCollectionDirPath() {
         throw new Error('Editor.getCollectionDirPath not implemented');

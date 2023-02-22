@@ -1,4 +1,5 @@
-const path = require('path');
+import path from 'path';
+
 import { Editor } from '../Editor';
 
 export class FormEditor extends Editor {

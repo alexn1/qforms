@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormEditor = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
 class FormEditor extends Editor_1.Editor {
     static createAttributes(params) {
@@ -30,7 +33,7 @@ class FormEditor extends Editor_1.Editor {
         };
     }
     async createJs(params) {
-        const templateFilePath = path.join(__dirname, 'Form.js.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.parent.getName(),
@@ -40,7 +43,7 @@ class FormEditor extends Editor_1.Editor {
         return js;
     }
     async createJsx(params) {
-        const templateFilePath = path.join(__dirname, 'Form.jsx.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Form.jsx.ejs');
         const customFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.parent.getName(),
@@ -50,7 +53,7 @@ class FormEditor extends Editor_1.Editor {
         return jsx;
     }
     async createLess(params) {
-        const templateFilePath = path.join(__dirname, 'Form.less.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Form.less.ejs');
         const customFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.parent.getName(),
@@ -60,8 +63,8 @@ class FormEditor extends Editor_1.Editor {
         return less;
     }
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             page: this.parent.getName(),
             form: this.getName(),
@@ -71,7 +74,7 @@ class FormEditor extends Editor_1.Editor {
     }
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
-        return path.join(customDirPath, 'forms');
+        return path_1.default.join(customDirPath, 'forms');
     }
     getColName() {
         return 'forms';

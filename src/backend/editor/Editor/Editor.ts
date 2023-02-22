@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 const ejs = require('ejs');
 
 import { BaseModel } from '../../BaseModel';

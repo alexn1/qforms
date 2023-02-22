@@ -1,7 +1,7 @@
+import path from 'path';
+
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { PageEditor } from '../PageEditor/PageEditor';
-
-const path = require('path');
 import { Editor } from '../Editor';
 
 export class DataSourceEditor extends Editor {

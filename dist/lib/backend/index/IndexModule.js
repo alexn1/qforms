@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.IndexModule = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const server_1 = __importDefault(require("react-dom/server"));
 const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
 const Helper_1 = require("../Helper");
@@ -16,8 +16,8 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+        this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }

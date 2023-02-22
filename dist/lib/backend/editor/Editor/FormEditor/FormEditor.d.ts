@@ -6,6 +6,6 @@ export declare class FormEditor extends Editor {
     createJsx(params: any): Promise<any>;
     createLess(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
-    getCollectionDirPath(): Promise<any>;
+    getCollectionDirPath(): Promise<string>;
     getColName(): string;
 }

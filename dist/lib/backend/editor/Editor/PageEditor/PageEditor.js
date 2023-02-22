@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageEditor = void 0;
-const path = require('path');
+const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
 class PageEditor extends Editor_1.Editor {
     constructor(appEditor, pageFile) {
@@ -41,7 +44,7 @@ class PageEditor extends Editor_1.Editor {
         await this.pageFile.save();
     }
     async createJs(params) {
-        const templateFilePath = path.join(__dirname, 'Page.js.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getName(),
@@ -50,7 +53,7 @@ class PageEditor extends Editor_1.Editor {
         return js;
     }
     async createJsx(params) {
-        const templateFilePath = path.join(__dirname, 'Page.jsx.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Page.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
             page: this.getName(),
@@ -59,7 +62,7 @@ class PageEditor extends Editor_1.Editor {
         return jsx;
     }
     async createLess(params) {
-        const templateFilePath = path.join(__dirname, 'Page.less.ejs');
+        const templateFilePath = path_1.default.join(__dirname, 'Page.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
             page: this.getName(),
@@ -68,8 +71,8 @@ class PageEditor extends Editor_1.Editor {
         return less;
     }
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });
@@ -78,7 +81,7 @@ class PageEditor extends Editor_1.Editor {
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
-        return path.join(customDirPath, 'pages', this.getName());
+        return path_1.default.join(customDirPath, 'pages', this.getName());
     }
     reformat() {
         this.data = this.pageFile.data = PageEditor.createData(Object.assign(Object.assign({}, this.attributes()), { dataSources: this.data.dataSources, actions: this.data.actions, forms: this.data.forms }));

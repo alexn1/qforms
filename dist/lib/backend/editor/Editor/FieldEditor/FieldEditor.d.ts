@@ -5,6 +5,6 @@ export declare class FieldEditor extends Editor {
     createJs(params: any): Promise<any>;
     createJsx(params: any): Promise<any>;
     createLess(params: any): Promise<any>;
-    getCollectionDirPath(): Promise<any>;
+    getCollectionDirPath(): Promise<string>;
     getColName(): string;
 }

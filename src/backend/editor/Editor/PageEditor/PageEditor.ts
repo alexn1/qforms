@@ -1,4 +1,4 @@
-const path = require('path');
+import path from 'path';
 
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';

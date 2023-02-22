@@ -1,9 +1,12 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DataSourceEditor = void 0;
+const path_1 = __importDefault(require("path"));
 const ApplicationEditor_1 = require("../ApplicationEditor/ApplicationEditor");
 const PageEditor_1 = require("../PageEditor/PageEditor");
-const path = require('path');
 const Editor_1 = require("../Editor");
 class DataSourceEditor extends Editor_1.Editor {
     static createData(params) {
@@ -27,11 +30,11 @@ class DataSourceEditor extends Editor_1.Editor {
     }
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
-        return path.join(customDirPath, 'dataSources');
+        return path_1.default.join(customDirPath, 'dataSources');
     }
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
+        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             _class: this.getClassName(),
             page: params.page ? params.page : '',

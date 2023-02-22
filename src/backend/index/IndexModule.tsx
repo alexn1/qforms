@@ -1,9 +1,8 @@
-const path = require('path');
+import path from 'path';
 
 import ReactDOMServer from 'react-dom/server';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import { Helper } from '../Helper';
-import { App } from './App';
 import { Links } from './Links';
 import { Scripts } from './Scripts';
 

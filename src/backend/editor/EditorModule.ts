@@ -1,13 +1,12 @@
+import path from 'path';
+
 import { Context } from '../Context';
-
-const path = require('path');
-const pkg = require('../../../package.json');
-
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
-
 import * as backend from '../index';
+
+const pkg = require('../../../package.json');
 
 const EDITOR_CONTROLLERS = [
     'Application',

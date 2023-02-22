@@ -1,4 +1,5 @@
-const path = require('path');
+import path from 'path';
+
 import { Editor } from '../Editor';
 import * as backend from '../../../../backend';
 

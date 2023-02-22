@@ -1,4 +1,5 @@
-const path = require('path');
+import path from 'path';
+
 import { VisualEditorController } from '../VisualEditorController';
 import { Helper } from '../../../Helper';
 
