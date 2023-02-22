@@ -63,6 +63,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             </div>
         );
     }
+
     renderPaging() {
         const ctrl = this.getCtrl();
         const model = this.getCtrl().getModel();
@@ -98,6 +99,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             </div>
         );
     }
+
     renderGridCellView = (row, column, onCreate, onUnmount) => {
         // console.log('TableFormView.renderGridCellView');
         const ctrl = this.props.ctrl.getField(column.name);
@@ -105,6 +107,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
         // console.log(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
     };
+
     getGridColumns(): any[] {
         const { ctrl } = this.props;
         return Object.keys(ctrl.fields)
@@ -118,16 +121,20 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
                 };
             });
     }
+
     getRows() {
         const ctrl = this.props.ctrl;
         return ctrl.model.getDefaultDataSource().getRows();
     }
+
     getGridExtraColumn() {
         return true;
     }
+
     getGridClass() {
         return Grid;
     }
+
     renderGrid() {
         const ctrl = this.props.ctrl;
         return React.createElement(this.getGridClass(), {
@@ -148,6 +155,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             createLinkCallback: this.createLinkCallback,
         });
     }
+
     render() {
         console.log('TableFormView.render', this.props.ctrl.model.getFullName());
         const ctrl = this.getCtrl();
@@ -161,6 +169,7 @@ export class TableFormView<T extends TableFormController> extends FormView<T> {
             </div>
         );
     }
+
     createLinkCallback = (key) => {
         return PageController.createLink({
             page: this.getCtrl().getModel().getAttr('itemEditPage'),
