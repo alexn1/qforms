@@ -4,6 +4,9 @@ import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
+import ReactDOMServer from 'react-dom/server';
+import { Links } from '../Links';
+import { Scripts } from '../Scripts';
 import * as backend from '../index';
 
 const pkg = require('../../../package.json');
@@ -45,9 +48,11 @@ export class EditorModule {
     hostApp: BackHostApp;
     css: string[];
     js: string[];
+
     constructor(hostApp: BackHostApp) {
         this.hostApp = hostApp;
     }
+
     async init() {
         this.css = (
             await Helper.getFilePaths(
@@ -64,6 +69,7 @@ export class EditorModule {
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }
+
     getLinks() {
         return [
             '/lib/codemirror-4.8/lib/codemirror.css',
@@ -71,6 +77,7 @@ export class EditorModule {
             ...this.css,
         ];
     }
+
     getScripts() {
         return [
             '/lib/codemirror-4.8/lib/codemirror.js',
@@ -78,6 +85,7 @@ export class EditorModule {
             ...this.js,
         ];
     }
+
     async handleEditorGet(req, res, context: Context) {
         console.log('EditorModule.handleEditorGet');
         const appInfo = await BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
@@ -88,20 +96,55 @@ export class EditorModule {
             nodeEnv: this.hostApp.getNodeEnv(),
             logErrorUrl: '/error',
         };
-        res.render('editor/index', {
-            version: pkg.version,
-            data: {
+        const links = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
+        const scripts = ReactDOMServer.renderToStaticMarkup(
+            <Scripts scripts={this.getScripts()} />,
+        );
+        const html = this.render(
+            pkg.version,
+            {
                 ...data,
                 runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
             },
-            runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
-            appDirName: context.getAppDirName(),
-            appFileName: context.getAppFileName(),
-            env: context.getEnv(),
-            links: this.getLinks(),
-            scripts: this.getScripts(),
-        });
+            `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`,
+            context.getAppDirName(),
+            context.getAppFileName(),
+            context.getEnv(),
+            links,
+            scripts,
+        );
+        res.end(html);
     }
+
+    render(version, data, runAppLink, appDirName, appFileName, env, links, scripts) {
+        return `<!DOCTYPE html>
+<html class="editor" lang="en">
+<head>
+    <!-- ${version} -->
+    <meta charset="utf-8">
+    <title>${appDirName}/${appFileName}[${env}] - QForms Editor</title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <!--<script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', async () => {
+            console.log('editor.ejs DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const runAppLink = "${runAppLink}";
+            const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
+            await editorFrontHostApp.run();
+        });
+    </script>-->
+    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
+</head>
+<body class="editor__body">
+    <div class="editor__root"></div>
+</body>
+</html>
+`;
+    }
+
     async handleEditorPost(req, res, context: Context) {
         console.log('EditorModule.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
