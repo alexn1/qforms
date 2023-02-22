@@ -71,7 +71,7 @@ class MonitorModule {
             req.headers.authorization.substr(0, 5) === 'Basic' &&
             this.checkCredentials(req));
     }
-    render(res) {
+    /* render(res) {
         console.log('MonitorModule.render');
         const data = this.fill();
         res.render('monitor/index', {
@@ -80,34 +80,26 @@ class MonitorModule {
             links: this.getLinks(),
             scripts: this.getScripts(),
         });
-    }
-    async render2() {
+    } */
+    render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
-        const data = await this.fill();
-        const data2 = JSON.stringify(data /*, null, 4*/);
+        const data = JSON.stringify(this.fill() /*, null, 4*/);
         return `<!DOCTYPE html>
-<html>
+<html class="monitor" lang="en">
 <head>
     <!-- ${pkg.version}> -->
     <meta charSet="utf-8">
-    <title>QForms v${pkg.version}</title>
+    <title>QForms monitor v${pkg.version}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->
     ${scripts}
-    <script type="application/json">${data2}</script>
-    <!--<script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // console.log('DOMContentLoaded');
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            new IndexFrontHostApp(data).init();
-        });
-    </script>-->
+    <script type="application/json">${data}</script>
 </head>
-<body>
-<div id="root"></div>
+<body class="monitor__body">
+    <div class="monitor__root"></div>
 </body>
 </html>`;
     }

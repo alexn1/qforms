@@ -550,7 +550,8 @@ export class BackHostApp {
                 return;
             }
             if (this.monitorModule.authorize(req)) {
-                this.monitorModule.render(res);
+                const html = this.monitorModule.render();
+                res.end(html);
             } else {
                 res.statusCode = 401;
                 res.setHeader('WWW-Authenticate', 'Basic realm="My Realm"');

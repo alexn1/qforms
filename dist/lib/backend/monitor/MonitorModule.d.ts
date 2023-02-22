@@ -21,6 +21,5 @@ export declare class MonitorModule {
     getScripts(): string[];
     checkCredentials(req: any): boolean;
     authorize(req: any): boolean;
-    render(res: any): void;
-    render2(): Promise<string>;
+    render(): string;
 }
