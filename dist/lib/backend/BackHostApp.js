@@ -579,13 +579,20 @@ class BackHostApp {
                 : 'Internal Software Error');
         }
         else {
-            res.render('error', {
-                status: error.status,
-                message: this.isDevelopment() || error.status === 404
-                    ? error.message
-                    : 'Internal Software Error',
-                stack: this.isDevelopment() && error.status !== 404 ? error.stack : null,
-            });
+            const status = error.status || 500;
+            const message = this.isDevelopment() || error.status === 404
+                ? error.message
+                : 'Internal Software Error';
+            const stack = this.isDevelopment() && error.status !== 404 ? error.stack : null;
+            res.end(`<!DOCTYPE html>
+<html>
+<title>${status} ${message}</title>
+<body>
+    <h1>${message}</h1>
+    <h2>${status}</h2>
+    <pre>${stack}</pre>
+</body>
+</html>`);
         }
         await this.logError(error, req);
     }
