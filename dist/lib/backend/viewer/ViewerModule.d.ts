@@ -10,6 +10,7 @@ export declare class ViewerModule {
     getLinks(): string[];
     getScripts(): string[];
     handleViewerGet(context: Context, application: BkApplication): Promise<void>;
+    render(version: any, application: any, context: any, response: any, links: any, scripts: any): string;
     loginGet(context: Context, application: BkApplication): Promise<void>;
     handleViewerPost(context: Context, application: BkApplication): Promise<any>;
     loginPost(context: Context, application: BkApplication): Promise<void>;

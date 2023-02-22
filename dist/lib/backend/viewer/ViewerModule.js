@@ -4,10 +4,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ViewerModule = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const Helper_1 = require("../Helper");
 const MyError_1 = require("../MyError");
 const Result_1 = require("../../Result");
+const server_1 = __importDefault(require("react-dom/server"));
+const Links_1 = require("../Links");
+const Scripts_1 = require("../Scripts");
 const pkg = require('../../../package.json');
 // post actions
 const ACTIONS = [
@@ -47,19 +51,52 @@ class ViewerModule {
             try {
                 await application.initContext(context);
                 const response = await application.fill(context);
-                context.getRes().render('viewer/index', {
+                const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
+                const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
+                const html = this.render(pkg.version, application, context, response, links, scripts);
+                context.getRes().end(html);
+                /* context.getRes().render('viewer/index', {
                     version: pkg.version,
                     application: application,
                     context: context,
                     response: response,
                     links: [...this.getLinks(), ...application.links],
                     scripts: [...this.getScripts(), ...application.scripts],
-                });
+                }); */
             }
             finally {
                 await application.release(context);
             }
         }
+    }
+    render(version, application, context, response, links, scripts) {
+        console.log('render by template');
+        return `<!DOCTYPE html>
+<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
+<head>
+    <!-- qforms v${version} -->
+    <!-- app v${application.getVersion()}  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const frontHostApp = new ViewerFrontHostApp({data});
+            await frontHostApp.run();
+        });
+    </script>
+    <script type="application/json">${JSON.stringify(response /*, null, 4*/)}</script>
+</head>
+<body class="${application.getViewClassName()}__body">
+    <div class="${application.getViewClassName()}__root"></div>
+    <div class="alert-root"></div>
+</body>
+</html>`;
     }
     async loginGet(context, application) {
         console.log('ViewerModule.loginGet');

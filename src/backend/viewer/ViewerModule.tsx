@@ -8,6 +8,9 @@ import { MyError } from '../MyError';
 import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';
 import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
+import ReactDOMServer from 'react-dom/server';
+import { Links } from '../Links';
+import { Scripts } from '../Scripts';
 
 const pkg = require('../../../package.json');
 
@@ -72,18 +75,67 @@ export class ViewerModule {
             try {
                 await application.initContext(context);
                 const response = await application.fill(context);
-                context.getRes().render('viewer/index', {
+
+                const links = ReactDOMServer.renderToStaticMarkup(
+                    <Links links={[...this.getLinks(), ...application.links]} />,
+                );
+                const scripts = ReactDOMServer.renderToStaticMarkup(
+                    <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
+                );
+
+                const html = this.render(
+                    pkg.version,
+                    application,
+                    context,
+                    response,
+                    links,
+                    scripts,
+                );
+                context.getRes().end(html);
+
+                /* context.getRes().render('viewer/index', {
                     version: pkg.version,
                     application: application,
                     context: context,
                     response: response,
                     links: [...this.getLinks(), ...application.links],
                     scripts: [...this.getScripts(), ...application.scripts],
-                });
+                }); */
             } finally {
                 await application.release(context);
             }
         }
+    }
+
+    render(version, application, context, response, links, scripts) {
+        return `<!DOCTYPE html>
+<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
+            context.query.debug === '1' ? 'debug' : ''
+        }" lang="${application.getAttr('lang')}">
+<head>
+    <!-- qforms v${version} -->
+    <!-- app v${application.getVersion()}  -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const frontHostApp = new ViewerFrontHostApp({data});
+            await frontHostApp.run();
+        });
+    </script>
+    <script type="application/json">${JSON.stringify(response /*, null, 4*/)}</script>
+</head>
+<body class="${application.getViewClassName()}__body">
+    <div class="${application.getViewClassName()}__root"></div>
+    <div class="alert-root"></div>
+</body>
+</html>`;
     }
 
     async loginGet(context: Context, application: BkApplication) {
