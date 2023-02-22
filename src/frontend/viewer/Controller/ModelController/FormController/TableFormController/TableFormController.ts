@@ -14,9 +14,11 @@ export class TableFormController extends FormController<TableForm> {
         };
         this.grid = null;
     }
+
     getViewClass() {
         return super.getViewClass() || TableFormView;
     }
+
     init() {
         super.init();
         // this.parent.on('hide', this.onHidePage);
@@ -26,6 +28,7 @@ export class TableFormController extends FormController<TableForm> {
         this.model.on('delete', this.onModelDelete);
         this.model.on('insert', this.onModelInsert);
     }
+
     deinit() {
         // this.parent.off('hide', this.onHidePage);
         // this.parent.off('show', this.onShowPage);
@@ -35,19 +38,23 @@ export class TableFormController extends FormController<TableForm> {
         this.model.off('insert', this.onModelInsert);
         super.deinit();
     }
+
     onGridCreate = (grid) => {
         this.grid = grid;
     };
+
     onNewClick = async (e) => {
         console.log('TableFormController.onNewClick');
         await this.new();
     };
+
     onRefreshClick = async (e) => {
         console.log('TableFormController.onRefreshClick', this.model.getFullName());
         await this.model.refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     };
+
     onDeleteClick = async (e) => {
         console.log(
             'TableFormController.onDeleteClick',
@@ -61,6 +68,7 @@ export class TableFormController extends FormController<TableForm> {
             await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
         }
     };
+
     onGridCellDblClick = async (row, key) => {
         // console.log('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
@@ -81,10 +89,12 @@ export class TableFormController extends FormController<TableForm> {
                 break;
         }
     };
+
     onGridLinkClick = async (key) => {
         console.log('TableFormController.onGridLinkClick', key);
         await this.edit(key);
     };
+
     onGridDeleteKeyDown = async (row, key) => {
         console.log('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
