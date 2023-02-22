@@ -43,21 +43,15 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         console.log('colName', colName);
         console.log('_filter:', _filter);
         console.log('update', update);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .updateOne(_filter, update);
+        return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
     async insertOne(context, colName, document) {
-        return await this.getDbLink(context)
-            .collection(colName)
-            .insertOne(document);
+        return await this.getDbLink(context).collection(colName).insertOne(document);
     }
     async deleteOne(context, colName, filter) {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
         // console.log('_filter', _filter);
-        return await this.getDbLink(context)
-            .collection(colName)
-            .deleteOne(_filter);
+        return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
     static makeObjectIds(filter, names = ['_id']) {
         return Object.keys(filter).reduce((acc, name) => {

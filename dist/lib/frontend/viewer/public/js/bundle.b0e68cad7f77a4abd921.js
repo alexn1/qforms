@@ -39436,9 +39436,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
                 //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
                 // break;
                 case 'form':
-                    if (this.getPage()
-                        .getModel()
-                        .isSelectMode()) {
+                    if (this.getPage().getModel().isSelectMode()) {
                         await this.getPage().selectRow(key);
                     }
                     else {
@@ -39525,19 +39523,13 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
             console.log('TableFormController.onFrameChanged', value);
             let frame = parseInt(value);
             console.log('frame:', frame);
-            const frameCount = this.getModel()
-                .getDefaultDataSource()
-                .getFramesCount();
+            const frameCount = this.getModel().getDefaultDataSource().getFramesCount();
             if (frame < 1)
                 frame = 1;
             if (frame > frameCount)
                 frame = frameCount;
-            this.getModel()
-                .getDefaultDataSource()
-                .setFrame(frame);
-            this.getModel()
-                .getDefaultDataSource()
-                .refresh();
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
             await this.rerender();
         };
         this.onNextClick = async () => {
@@ -39735,9 +39727,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
             return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
-            return _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__.PageController.createLink(Object.assign({ page: this.getCtrl()
-                    .getModel()
-                    .getAttr('itemEditPage') }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
+            return _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__.PageController.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
         };
     }
     renderToolbar() {
@@ -39751,10 +39741,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         const model = this.getCtrl().getModel();
         const dataSource = model.getDefaultDataSource();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() &&
-                                `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.TextBox, { value: ctrl.model
-                                .getDefaultDataSource()
-                                .getFrame()
-                                .toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
+                                `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.TextBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
         const { ctrl } = this.props;
@@ -39795,10 +39782,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
             renderGridCellView: this.renderGridCellView,
             updated: ctrl.getUpdated(),
             extraColumn: this.getGridExtraColumn(),
-            selectedKey: ctrl
-                .getPage()
-                .getModel()
-                .getOptions().selectedKey,
+            selectedKey: ctrl.getPage().getModel().getOptions().selectedKey,
             createLinkCallback: this.createLinkCallback,
         });
     }
