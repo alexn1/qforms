@@ -655,14 +655,14 @@ export class BackHostApp {
                     : 'Internal Software Error',
             );
         } else {
-            res.render('error', {
-                status: error.status,
-                message:
-                    this.isDevelopment() || error.status === 404
-                        ? error.message
-                        : 'Internal Software Error',
-                stack: this.isDevelopment() && error.status !== 404 ? error.stack : null,
-            });
+            const status = error.status || 500;
+            const message =
+                this.isDevelopment() || error.status === 404
+                    ? error.message
+                    : 'Internal Software Error';
+            const stack = this.isDevelopment() && error.status !== 404 ? error.stack : null;
+
+            res.render('error', { status, message, stack });
         }
         await this.logError(error, req);
     }
