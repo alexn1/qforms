@@ -4,11 +4,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonitorModule = void 0;
+const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const Helper_1 = require("../Helper");
-// import ReactDOMServer from 'react-dom/server';
-// import { Links } from '../Links';
-// import { Scripts } from '../Scripts';
+const server_1 = __importDefault(require("react-dom/server"));
+const Links_1 = require("../Links");
+const Scripts_1 = require("../Scripts");
 const pkg = require('../../../package.json');
 class MonitorModule {
     constructor(hostApp) {
@@ -70,14 +71,45 @@ class MonitorModule {
             req.headers.authorization.substr(0, 5) === 'Basic' &&
             this.checkCredentials(req));
     }
-    render(res, response) {
+    render(res) {
         console.log('MonitorModule.render');
+        const data = this.fill();
         res.render('monitor/index', {
             version: pkg.version,
-            response: response,
+            response: data,
             links: this.getLinks(),
             scripts: this.getScripts(),
         });
+    }
+    async render2() {
+        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
+        const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
+        const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
+        const data = await this.fill();
+        const data2 = JSON.stringify(data /*, null, 4*/);
+        return `<!DOCTYPE html>
+<html>
+<head>
+    <!-- ${pkg.version}> -->
+    <meta charSet="utf-8">
+    <title>QForms v${pkg.version}</title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <script type="application/json">${data2}</script>
+    <!--<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // console.log('DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            new IndexFrontHostApp(data).init();
+        });
+    </script>-->
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>`;
     }
 }
 exports.MonitorModule = MonitorModule;

@@ -2,9 +2,9 @@ import path from 'path';
 
 import { BackHostApp } from '../BackHostApp';
 import { Helper } from '../Helper';
-// import ReactDOMServer from 'react-dom/server';
-// import { Links } from '../Links';
-// import { Scripts } from '../Scripts';
+import ReactDOMServer from 'react-dom/server';
+import { Links } from '../Links';
+import { Scripts } from '../Scripts';
 
 const pkg = require('../../../package.json');
 
@@ -93,13 +93,47 @@ export class MonitorModule {
         );
     }
 
-    render(res, response) {
+    render(res) {
         console.log('MonitorModule.render');
+        const data = this.fill();
         res.render('monitor/index', {
             version: pkg.version,
-            response: response,
+            response: data,
             links: this.getLinks(),
             scripts: this.getScripts(),
         });
+    }
+
+    async render2() {
+        // const app = ReactDOMServer.renderToStaticMarkup(<App/>);
+        const links = ReactDOMServer.renderToStaticMarkup(<Links links={this.getLinks()} />);
+        const scripts = ReactDOMServer.renderToStaticMarkup(
+            <Scripts scripts={this.getScripts()} />,
+        );
+        const data = await this.fill();
+        const data2 = JSON.stringify(data /*, null, 4*/);
+        return `<!DOCTYPE html>
+<html>
+<head>
+    <!-- ${pkg.version}> -->
+    <meta charSet="utf-8">
+    <title>QForms v${pkg.version}</title>
+    <!-- links -->
+    ${links}
+    <!-- scripts -->
+    ${scripts}
+    <script type="application/json">${data2}</script>
+    <!--<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // console.log('DOMContentLoaded');
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            new IndexFrontHostApp(data).init();
+        });
+    </script>-->
+</head>
+<body>
+<div id="root"></div>
+</body>
+</html>`;
     }
 }
