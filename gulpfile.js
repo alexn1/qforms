@@ -11,3 +11,4 @@ module.exports.release_publish = require('./gulp/release-publish');
 module.exports['build-prod'] = require('./gulp/build-prod');
 module.exports['docker-build'] = require('./gulp/docker-build');
 module.exports['docker-run'] = require('./gulp/docker-run');
+module.exports['backend-ejs'] = require('./gulp/backend-ejs');
