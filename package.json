@@ -85,7 +85,8 @@
         "webpack-editor": "NODE_ENV=development webpack --config webpack.config.editor.js",
         "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
         "docker:build": "npx gulp docker-build",
-        "docker:run": "npx gulp docker-run"
+        "docker:run": "npx gulp docker-run",
+        "prettier:write": "npx prettier --write \"src/**/*.ts\""
     },
     "repository": {
         "type": "git",
