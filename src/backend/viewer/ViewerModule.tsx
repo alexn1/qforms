@@ -236,21 +236,21 @@ export class ViewerModule {
                 );
             } else {
                 // const users = await application.getUsers(context);
-                res.render('viewer/login', {
-                    version: pkg.version,
-                    context: context,
-                    application: application,
-                    links: [...this.getLinks(), ...application.links],
-                    scripts: [...this.getScripts(), ...application.scripts],
-                    data: {
-                        name: application.getName(),
-                        text: application.getText(),
-                        title: application.getTitle(context),
-                        errMsg: application.getText().login.WrongUsernameOrPassword,
-                        username: req.body.username,
-                        password: req.body.password,
-                    },
+                const links = ReactDOMServer.renderToStaticMarkup(
+                    <Links links={[...this.getLinks(), ...application.links]} />,
+                );
+                const scripts = ReactDOMServer.renderToStaticMarkup(
+                    <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
+                );
+                const html = this.renderLogin(pkg.version, context, application, links, scripts, {
+                    name: application.getName(),
+                    text: application.getText(),
+                    title: application.getTitle(context),
+                    errMsg: application.getText().login.WrongUsernameOrPassword,
+                    username: req.body.username,
+                    password: req.body.password,
                 });
+                res.end(html);
             }
         } finally {
             await application.release(context);
