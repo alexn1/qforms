@@ -73,7 +73,11 @@ export class TableFormController extends FormController<TableForm> {
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
             case 'form':
-                if (this.getPage().getModel().isSelectMode()) {
+                if (
+                    this.getPage()
+                        .getModel()
+                        .isSelectMode()
+                ) {
                     await this.getPage().selectRow(key);
                 } else {
                     await this.edit(key);
@@ -251,9 +255,19 @@ export class TableFormController extends FormController<TableForm> {
     };
     onFrameChanged = async (value) => {
         console.log('TableFormController.onFrameChanged', value);
-        const frame = parseInt(value);
-        this.model.getDefaultDataSource().setFrame(frame);
-        this.model.getDefaultDataSource().refresh();
+        let frame = parseInt(value);
+        console.log('frame:', frame);
+        const frameCount = this.getModel()
+            .getDefaultDataSource()
+            .getFramesCount();
+        if (frame < 1) frame = 1;
+        if (frame > frameCount) frame = frameCount;
+        this.getModel()
+            .getDefaultDataSource()
+            .setFrame(frame);
+        this.getModel()
+            .getDefaultDataSource()
+            .refresh();
         await this.rerender();
     };
     onNextClick = async () => {

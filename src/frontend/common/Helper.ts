@@ -43,7 +43,7 @@ export class Helper {
         );
     }
 
-    static formatNumber(value) {
+    static formatNumber(value: number): string {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 

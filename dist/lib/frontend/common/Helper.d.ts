@@ -1,7 +1,7 @@
 import { JSONString } from '../../types';
 export declare class Helper {
     static formatDate(date: any, format: any): any;
-    static formatNumber(value: any): string;
+    static formatNumber(value: number): string;
     static today(): Date;
     static getStartOfDay(date: any): Date;
     static encodeObject(obj: any): {};
