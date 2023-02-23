@@ -43,6 +43,7 @@ class BkApplication extends BkModel_1.BkModel {
         super(appInfo.appFile.data);
         this.appInfo = appInfo;
         this.hostApp = hostApp;
+        this.env = env;
         this.databases = [];
         this.actions = [];
         this.dataSources = [];
@@ -50,7 +51,6 @@ class BkApplication extends BkModel_1.BkModel {
         this.clients = [];
         if (!hostApp)
             throw new Error('BkApplication: no hostApp');
-        this.env = env;
     }
     async init(context) {
         await super.init(context);

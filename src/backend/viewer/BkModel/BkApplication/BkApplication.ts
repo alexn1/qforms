@@ -22,7 +22,6 @@ import * as text from '../../text';
 const pkg = require('../../../../../package.json');
 
 export class BkApplication extends BkModel {
-    env: string;
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
@@ -33,10 +32,13 @@ export class BkApplication extends BkModel {
     nav: any;
     clients: any[] = [];
 
-    constructor(protected appInfo: AppInfo, protected hostApp: BackHostApp, env: string = 'local') {
+    constructor(
+        protected appInfo: AppInfo,
+        protected hostApp: BackHostApp,
+        protected env: string = 'local',
+    ) {
         super(appInfo.appFile.data);
         if (!hostApp) throw new Error('BkApplication: no hostApp');
-        this.env = env;
     }
 
     async init(context: Context): Promise<void> {

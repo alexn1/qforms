@@ -12,7 +12,7 @@ import { Result } from '../../../../Result';
 export declare class BkApplication extends BkModel {
     protected appInfo: AppInfo;
     protected hostApp: BackHostApp;
-    env: string;
+    protected env: string;
     databases: BkDatabase[];
     actions: BkAction[];
     dataSources: BkDataSource[];
