@@ -16,24 +16,30 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
         this.div = React.createRef();
         this.input = React.createRef();
     }
+
     getImage() {
         return this.image.current;
     }
+
     getDiv() {
         return this.div.current;
     }
+
     getInput() {
         return this.input.current;
     }
+
     updateSize() {
         if (this.getImage()) {
             const ns = this.getImage().getNaturalSize();
             this.getDiv().innerText = `${ns[0]}×${ns[1]}`;
         }
     }
+
     onClearClick = (e) => {
         this.props.ctrl.onChange('');
     };
+
     onChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
@@ -42,6 +48,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
             this.props.ctrl.onChange(widgetValue);
         }
     };
+
     onImageClick = async (e) => {
         console.log('RowFormFileFieldView.onImageClick');
         const ctrl = this.props.ctrl;
@@ -58,6 +65,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
         });
         await app.openModal(imageDialogCtrl);
     };
+
     render() {
         const ctrl = this.getCtrl();
         const row = ctrl.getRow();
@@ -107,14 +115,17 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
             </div>
         );
     }
+
     componentDidMount() {
         // console.log('RowFormFileFieldView.componentDidMount', this.props.ctrl.model.getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         // console.log('RowFormFileFieldView.componentDidUpdate', this.props.ctrl.model.getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
+
     onImageIconClick = async (e) => {
         console.log('RowFormFileFieldView.onImageIconClick');
         this.getInput().click();

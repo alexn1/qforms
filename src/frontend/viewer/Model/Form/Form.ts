@@ -116,15 +116,19 @@ export class Form extends Model {
     getApp() {
         return this.parent.parent;
     }
+
     async refresh() {
         await this.getDefaultDataSource().refresh();
     }
+
     getField(name) {
         return this.fields.find((field) => field.getName() === name);
     }
+
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();
     }
+
     decodeRow(row) {
         const values = {};
         for (const field of this.fields) {

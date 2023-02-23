@@ -6,6 +6,7 @@ export class TableFormCheckBoxFieldController extends TableFormFieldController<C
     getViewClass() {
         return super.getViewClass() || TableFormCheckBoxFieldView;
     }
+
     getValueForWidget(row) {
         return this.model.getValue(row);
     }

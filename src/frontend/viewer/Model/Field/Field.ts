@@ -154,36 +154,44 @@ export class Field extends Model {
     isReadOnly(): boolean {
         return this.data.readOnly === 'true';
     }
+
     isNotNull(): boolean {
         return this.data.notNull === 'true';
     }
+
     isNullable(): boolean {
         return this.data.notNull === 'false';
     }
+
     getWidth(): number | null {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;
         return width;
     }
+
     getFullName(): string {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
     }
+
     isParam(): boolean {
         return this.data.param === 'true';
     }
+
     validateOnChange(): boolean {
         if (this.data.validateOnChange !== undefined) {
             return this.data.validateOnChange === 'true';
         }
         return true;
     }
+
     validateOnBlur(): boolean {
         if (this.data.validateOnBlur !== undefined) {
             return this.data.validateOnBlur === 'true';
         }
         return false;
     }
+
     getCaption(): string {
         const caption = this.getAttr('caption');
         if (caption === '') {

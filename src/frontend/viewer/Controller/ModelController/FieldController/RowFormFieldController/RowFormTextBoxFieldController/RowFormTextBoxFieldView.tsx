@@ -10,29 +10,34 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
             classList: [],
         };
     }
+
     onClear = async (e) => {
         this.getCtrl().onChange('');
         setTimeout(() => {
             this.getWidget().getElement().focus();
         }, 0);
     };
+
     isCloseVisible() {
         // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
     }
+
     onFocus = async (e) => {
         // console.log('RowFormTextBoxFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
+
     onBlur = async (e) => {
         // console.log('RowFormTextBoxFieldView.onBlur');
         const value = e.target.value;
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);
     };
+
     renderTextBox() {
         const ctrl = this.props.ctrl;
         return (
@@ -51,6 +56,7 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
             />
         );
     }
+
     renderCloseIcon() {
         return (
             <div
@@ -62,6 +68,7 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
             </div>
         );
     }
+
     render() {
         return (
             <div className={this.getCssClassNames()}>

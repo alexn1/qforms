@@ -30,12 +30,14 @@ import '../common/style/wait.less';
 export class ViewerFrontHostApp extends FrontHostApp {
     options: any;
     applicationController: any;
+
     constructor(options: any = {}) {
         if (!options.data) throw new Error('no data');
         super();
         this.options = options;
         this.applicationController = null;
     }
+
     async run() {
         console.log('ViewerFrontHostApp.run', this.getData());
 
@@ -65,10 +67,12 @@ export class ViewerFrontHostApp extends FrontHostApp {
             this.logError(err);
         }
     }
+
     async onWindowPopState(e) {
         // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
     }
+
     logError(err) {
         console.error('FrontHostApp.logError', err);
         const values = {
@@ -91,10 +95,12 @@ export class ViewerFrontHostApp extends FrontHostApp {
             console.error(err.message);
         });
     }
+
     getData() {
         if (!this.options.data) throw new Error('no data');
         return this.options.data;
     }
+
     alert(options) {
         console.log('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
@@ -120,6 +126,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
             }
         });
     }
+
     confirm(options) {
         console.log('ViewerFrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {

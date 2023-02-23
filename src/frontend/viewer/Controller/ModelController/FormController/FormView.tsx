@@ -7,6 +7,7 @@ export class FormView<T extends FormController<Form>> extends ModelView<T> {
         super(props);
         this.checkParent();
     }
+
     onActionsClick = async (li) => {
         // console.log('FormView.onActionsClick:', li);
         const ctrl = this.props.ctrl;
@@ -21,6 +22,7 @@ export class FormView<T extends FormController<Form>> extends ModelView<T> {
             await this.getCtrl().getApp().alert({ message: err.message });
         }
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         console.log(
             'FormView.shouldComponentUpdate',

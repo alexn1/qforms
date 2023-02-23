@@ -5,10 +5,12 @@ import { Field } from '../../../../Model/Field/Field';
 
 export class TableFormFieldView<T extends TableFormFieldController<Field>> extends FieldView<T> {
     span: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.span = React.createRef();
     }
+
     getSpanOffsetWidth() {
         // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         if (!this.span.current) return 0;

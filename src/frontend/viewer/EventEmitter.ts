@@ -1,8 +1,10 @@
 export class EventEmitter {
     list: any;
+
     constructor() {
         this.list = {};
     }
+
     on(name, cb) {
         // console.log('EventEmitter.on', name);
         if (!this.list[name]) {
@@ -10,6 +12,7 @@ export class EventEmitter {
         }
         this.list[name].push(cb);
     }
+
     off(name, cb) {
         // console.log('EventEmitter.off', name);
         const i = this.list[name].indexOf(cb);
@@ -19,6 +22,7 @@ export class EventEmitter {
         // console.log(i);
         this.list[name].splice(i, 1);
     }
+
     async emit(name, e) {
         // console.log('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {

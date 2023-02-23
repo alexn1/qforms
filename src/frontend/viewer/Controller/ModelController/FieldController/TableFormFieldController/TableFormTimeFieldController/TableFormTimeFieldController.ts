@@ -7,6 +7,7 @@ export class TableFormTimeFieldController extends TableFormFieldController<TimeF
     getViewClass() {
         return super.getViewClass() || TableFormTimeFieldView;
     }
+
     getValueForWidget(row) {
         const value = this.model.getValue(row);
         return TimeBox.getStringValue(value);

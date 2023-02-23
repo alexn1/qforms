@@ -10,6 +10,7 @@ export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldContr
         this.getWidget().setState({value: ''});
         ctrl.onChange(null);*/
     };
+
     isCloseVisible() {
         // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly) return false;
@@ -19,6 +20,7 @@ export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldContr
         // console.log('this.getWidget().state.value:', ctrl.view.state.value);
         return this.getWidget().state.value !== '';
     }
+
     render() {
         const ctrl = this.props.ctrl;
         return (

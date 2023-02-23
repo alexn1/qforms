@@ -6,6 +6,7 @@ import { PageController } from '../../PageController/PageController';
 export class RowFormController extends FormController<RowForm> {
     state: any;
     fields: any;
+
     constructor(model: RowForm, parent: PageController) {
         super(model, parent);
         this.state = {
@@ -87,6 +88,7 @@ export class RowFormController extends FormController<RowForm> {
         }
         return true;
     }
+
     validate() {
         // console.log('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
@@ -94,11 +96,13 @@ export class RowFormController extends FormController<RowForm> {
         }
         this.invalidate();
     }
+
     clearFieldsError() {
         for (const name in this.fields) {
             this.fields[name].setError(null);
         }
     }
+
     onSaveClick = async () => {
         console.log('RowFormController.onSaveClick');
         this.validate();
@@ -176,27 +180,34 @@ export class RowFormController extends FormController<RowForm> {
         this.state.mode = 'edit';
         this.rerender();
     };
+
     onCancelClick = (e) => {
         console.log('RowFormController.onCancelClick');
         this.state.mode = 'view';
         this.rerender();
     };
+
     getViewClass() {
         // console.log('RowFormController.getViewClass', this.model.getFullName());
         return super.getViewClass() || RowFormView;
     }
+
     getActiveRow(withChanges) {
         return this.model.getRow(withChanges);
     }
+
     getMode() {
         return this.state.mode;
     }
+
     isActionEnabled(name) {
         return this.isViewMode();
     }
+
     isEditMode() {
         return this.getMode() === 'edit';
     }
+    
     isViewMode() {
         return this.getMode() === 'view';
     }

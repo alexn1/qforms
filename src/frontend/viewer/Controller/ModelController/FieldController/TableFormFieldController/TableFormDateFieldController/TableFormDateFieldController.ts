@@ -7,6 +7,7 @@ export class TableFormDateFieldController extends TableFormFieldController<DateF
     getViewClass() {
         return super.getViewClass() || TableFormDateFieldView;
     }
+
     getValueForWidget(row) {
         const value = this.model.getValue(row);
         if (value)

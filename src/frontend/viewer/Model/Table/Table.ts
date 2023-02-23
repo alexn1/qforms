@@ -8,6 +8,7 @@ export class Table extends Model {
         super(data, parent);
         this.columns = [];
     }
+
     init() {
         // console.log('Table.init', this.getFullName());
         for (const data of this.data.columns) {
@@ -16,14 +17,17 @@ export class Table extends Model {
             this.addColumn(column);
         }
     }
+
     addColumn(column) {
         this.columns.push(column);
     }
+
     getColumn(name) {
         const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
+
     emitResult(result, source = null) {
         console.log('Table.emitResult');
         return [
@@ -33,15 +37,19 @@ export class Table extends Model {
             ...(result.refresh ? [this.emitRefresh(source)] : []),
         ];
     }
+
     emitInsert(source, inserts) {
         return this.emit('insert', { source, inserts });
     }
+
     emitUpdate(source, updates) {
         return this.emit('update', { source, updates });
     }
+
     emitDelete(source, deletes) {
         return this.emit('delete', { source, deletes });
     }
+
     emitRefresh(source) {
         return this.emit('refresh', { source });
     }

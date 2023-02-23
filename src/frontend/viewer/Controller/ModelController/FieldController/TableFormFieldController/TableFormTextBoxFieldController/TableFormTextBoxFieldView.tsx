@@ -5,6 +5,7 @@ export class TableFormTextBoxFieldView<
     T extends TableFormTextBoxFieldController,
 > extends TableFormFieldView<T> {
     span: React.RefObject<any>;
+
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

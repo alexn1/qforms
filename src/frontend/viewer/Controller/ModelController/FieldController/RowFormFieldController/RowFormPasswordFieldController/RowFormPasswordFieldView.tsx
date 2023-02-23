@@ -11,6 +11,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
             type: 'password',
         };
     }
+
     onCloseClick = async (e) => {
         // console.log('RowFormPasswordFieldView.onCloseClick');
         const ctrl = this.props.ctrl;
@@ -19,6 +20,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
         ctrl.onChange('');
         this.getWidget().getElement().focus();
     };
+
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
         const ctrl = this.props.ctrl;
@@ -29,16 +31,19 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
         // console.log('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
+
     onFocus = async (e) => {
         // console.log('RowFormPasswordFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
+
     onBlur = async (e) => {
         // console.log('RowFormPasswordFieldView.onBlur');
         this.removeCssClass('focus');
         await this.rerender();
     };
+
     onIconClick = (e) => {
         this.setState((prevState) => {
             return {
@@ -46,6 +51,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
             };
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

@@ -6,6 +6,7 @@ export class RowFormRadioFieldController extends RowFormFieldController<RadioFie
     getViewClass() {
         return super.getViewClass() || RowFormRadioFieldView;
     }
+
     getItems() {
         try {
             return this.getRows().map((row) => ({
@@ -18,6 +19,7 @@ export class RowFormRadioFieldController extends RowFormFieldController<RadioFie
             throw err;
         }
     }
+
     getRows() {
         return this.getModel().getDataSource().getRows();
     }

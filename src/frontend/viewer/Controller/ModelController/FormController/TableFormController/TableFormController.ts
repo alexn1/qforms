@@ -7,6 +7,7 @@ import { RawRow } from '../../../../../../types';
 export class TableFormController extends FormController<TableForm> {
     state: any;
     grid: any;
+
     constructor(model: TableForm, parent) {
         super(model, parent);
         this.state = {
@@ -106,9 +107,11 @@ export class TableFormController extends FormController<TableForm> {
             }
         }
     };
+
     /*onHidePage = async () => {
         this.grid.saveScroll();
     }*/
+
     /*onShowPage = async () => {
         console.log('TableFormController.onShowPage', this.model.getFullName());
         if (!this.grid.isHidden()) {
@@ -117,6 +120,7 @@ export class TableFormController extends FormController<TableForm> {
             // console.log('document.activeElement:', document.activeElement);
         }
     }*/
+
     async new() {
         if (this.model.getAttr('newRowMode') === 'oneclick') {
             const row = {} as RawRow;
@@ -178,6 +182,7 @@ export class TableFormController extends FormController<TableForm> {
             });
         }
     }
+
     async edit(key) {
         // console.log('TableForm.edit', this.model.getFullName(), key);
         if (!this.model.getAttr('itemEditPage')) {
@@ -198,12 +203,14 @@ export class TableFormController extends FormController<TableForm> {
             throw err;
         }
     }
+
     onModelRefresh = async (e) => {
         console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
         if (!this.view) return;
         this.invalidate();
         await this.rerender();
     };
+
     onModelInsert = async (e) => {
         console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
         if (!this.view) return;
@@ -215,6 +222,7 @@ export class TableFormController extends FormController<TableForm> {
         this.invalidate();
         await this.rerender();
     };
+
     onModelUpdate = async (e) => {
         console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
         if (!this.view) return;
@@ -231,6 +239,7 @@ export class TableFormController extends FormController<TableForm> {
         this.invalidate();
         await this.rerender();
     };
+
     onModelDelete = async (e) => {
         console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
         if (!this.view) return;
@@ -250,15 +259,18 @@ export class TableFormController extends FormController<TableForm> {
         this.invalidate();
         await this.getPage().rerender();
     };
+
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
         return this.model.getDefaultDataSource().getRow(key);
     }
+
     isRowSelected = () => {
         // console.log('TableFormController.isRowSelected');
         return !!this.grid && !!this.grid.getActiveRowKey();
     };
+
     onFrameChanged = async (value) => {
         console.log('TableFormController.onFrameChanged', value);
         let frame = parseInt(value);
@@ -270,6 +282,7 @@ export class TableFormController extends FormController<TableForm> {
         this.getModel().getDefaultDataSource().refresh();
         await this.rerender();
     };
+
     onNextClick = async () => {
         console.log('TableFormController.onNextClick');
         const frame = this.model.getDefaultDataSource().getFrame() + 1;
@@ -285,16 +298,20 @@ export class TableFormController extends FormController<TableForm> {
         this.model.getDefaultDataSource().refresh();
         this.rerender();
     };
+
     canPrev() {
         return this.model.getDefaultDataSource().getFrame() > 1;
     }
+
     canNext() {
         const ds = this.model.getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
+
     getSelectedRowKey() {
         return this.grid ? this.grid.getActiveRowKey() : null;
     }
+    
     isActionEnabled(name) {
         return this.isRowSelected();
     }

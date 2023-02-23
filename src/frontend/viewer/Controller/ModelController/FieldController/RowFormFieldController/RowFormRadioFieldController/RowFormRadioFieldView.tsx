@@ -8,6 +8,7 @@ export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldCon
         this.rerender();
         await this.getCtrl().onChange(widgetValue);
     }*/
+
     onClick = async (e) => {
         console.log('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
         let value = JSON.parse(e.currentTarget.dataset.value);
@@ -15,6 +16,7 @@ export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldCon
             await this.getCtrl().onChangePure(value);
         }
     };
+
     /*render() {
         return <div className={this.getCssClassNames()}>
             <Radio  classList={[
@@ -29,6 +31,7 @@ export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldCon
             />
         </div>;
     }*/
+
     render() {
         // console.log('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         const value = this.getCtrl().getValue();

@@ -4,6 +4,7 @@ import { ModelController } from './ModelController';
 
 export class ModelView<T extends ModelController<Model>> extends View<T> {
     renderActionIcon: any = undefined;
+
     getActionsForDropdownButton() {
         return this.props.ctrl
             .getModel()
@@ -22,6 +23,7 @@ export class ModelView<T extends ModelController<Model>> extends View<T> {
                 };
             });
     }
+
     getCssBlockName() {
         const model = this.props.ctrl.getModel();
         if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
@@ -29,6 +31,7 @@ export class ModelView<T extends ModelController<Model>> extends View<T> {
         }
         return super.getCssBlockName();
     }
+
     getStyle(row?: any): any {}
 }
 

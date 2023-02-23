@@ -10,26 +10,31 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
             classList: [],
         };
     }
+
     onClear = async (e) => {
         this.getCtrl().onChange('');
         setTimeout(() => {
             this.getWidget().getElement().focus();
         }, 0);
     };
+
     isCloseVisible() {
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
     }
+
     onFocus = async (e) => {
         this.addCssClass('focus');
         await this.rerender();
     };
+
     onBlur = async (value) => {
         // console.log('RowFormPhoneFieldView.onBlur', value);
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);
     };
+
     renderPhoneBox() {
         const ctrl = this.getCtrl();
         return (
@@ -48,6 +53,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
             />
         );
     }
+
     renderClearButton() {
         return (
             <div
@@ -59,6 +65,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
             </div>
         );
     }
+
     renderPhoneIcon() {
         return (
             <div className={`${this.getCssBlockName()}__icon`}>
@@ -66,6 +73,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
             </div>
         );
     }
+
     render() {
         // console.log('RowFormPhoneFieldView.render');
         return (

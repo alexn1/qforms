@@ -7,6 +7,7 @@ export class RowFormImageFieldView extends RowFormFieldView<RowFormImageFieldCon
         const ctrl = this.props.ctrl;
         console.log('RowFormImageFieldView.onImageClick');
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

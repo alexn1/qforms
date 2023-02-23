@@ -3,6 +3,7 @@ import { Table } from '../Table/Table';
 
 export class Database extends Model {
     tables: any[];
+
     constructor(data, parent = null) {
         super(data, parent);
         this.tables = [];

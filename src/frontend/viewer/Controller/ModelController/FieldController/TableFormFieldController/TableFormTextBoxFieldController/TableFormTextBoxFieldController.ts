@@ -6,6 +6,7 @@ export class TableFormTextBoxFieldController extends TableFormFieldController<Te
     getViewClass() {
         return super.getViewClass() || TableFormTextBoxFieldView;
     }
+
     /*beginEdit(view) {
         view.firstElementChild.style.MozUserSelect = 'text';
         view.firstElementChild.contentEditable = true;

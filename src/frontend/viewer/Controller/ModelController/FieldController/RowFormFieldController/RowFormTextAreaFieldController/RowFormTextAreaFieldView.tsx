@@ -10,16 +10,19 @@ export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFi
             classList: [],
         };
     }
+
     onFocus = async (e) => {
         // console.log('RowFormTextAreaFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
+
     onBlur = async (e) => {
         // console.log('RowFormTextAreaFieldView.onBlur');
         this.removeCssClass('focus');
         await this.rerender();
     };
+
     render() {
         // console.log('RowFormTextAreaFieldView.render', this.state);
         const ctrl = this.props.ctrl;

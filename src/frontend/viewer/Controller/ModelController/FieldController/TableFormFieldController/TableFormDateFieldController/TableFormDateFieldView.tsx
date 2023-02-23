@@ -6,6 +6,7 @@ export class TableFormDateFieldView<
     T extends TableFormDateFieldController,
 > extends TableFormFieldView<T> {
     span: React.RefObject<any>;
+
     render() {
         const row = this.props.row;
         const ctrl = this.props.ctrl;

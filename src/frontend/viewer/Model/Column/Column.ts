@@ -8,9 +8,11 @@ export class Column extends Model {
             throw new Error(`${this.getFullName()}: wrong column type: ${this.getAttr('type')}`);
         }
     }
+
     init() {
         // console.log('Column.init', this.getFullName());
     }
+
     getType() {
         return this.getAttr('type');
     }

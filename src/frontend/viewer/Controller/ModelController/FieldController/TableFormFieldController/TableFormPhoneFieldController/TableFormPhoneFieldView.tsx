@@ -4,6 +4,7 @@ import { TableFormPhoneFieldController } from './TableFormPhoneFieldController';
 
 export class TableFormPhoneFieldView extends TableFormFieldView<TableFormPhoneFieldController> {
     span: React.RefObject<any>;
+
     render() {
         const row = this.props.row;
         return (

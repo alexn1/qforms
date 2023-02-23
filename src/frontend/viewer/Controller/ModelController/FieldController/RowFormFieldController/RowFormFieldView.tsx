@@ -4,6 +4,7 @@ import { Field } from '../../../../Model/Field/Field';
 
 export class RowFormFieldView<T extends RowFormFieldController<Field>> extends FieldView<T> {
     widget: any;
+
     constructor(props) {
         super(props);
         this.widget = null;

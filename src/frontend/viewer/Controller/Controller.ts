@@ -3,6 +3,7 @@ import { EventEmitter } from '../EventEmitter';
 
 export abstract class Controller extends EventEmitter {
     view: any = null;
+
     /* constructor() {
         super();
     } */

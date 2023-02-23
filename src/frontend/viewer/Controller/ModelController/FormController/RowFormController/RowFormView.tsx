@@ -81,16 +81,19 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     isActionsEnabled() {
         // return this.getCtrl().state.mode === 'view';
         return true;
     }
+
     isActionsVisible() {
         if (this.getCtrl().getModel().hasDefaultPersistentDataSource()) {
             return !!this.getCtrl().getModel().getKey();
         }
         return true;
     }
+
     renderLabel(fieldCtrl) {
         const model = fieldCtrl.getModel();
         const name = model.getName();
@@ -100,6 +103,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     renderField(fieldCtrl) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         const name = fieldCtrl.getModel().getName();
@@ -109,9 +113,11 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     renderFieldView(fieldCtrl) {
         return RowFormView.renderFieldView(fieldCtrl);
     }
+
     static renderFieldView(fieldCtrl) {
         /*return React.createElement(fieldCtrl.getViewClass(), {
             onCreate: fieldCtrl.onViewCreate,
@@ -119,6 +125,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
         });*/
         return fieldCtrl.renderView();
     }
+
     renderError(fieldCtrl) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
@@ -133,6 +140,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     renderGroup(fieldCtrl): ReactNode {
         /*return (
             <>
@@ -152,6 +160,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             {this.renderError(fieldCtrl)}
         </div>;*/
     }
+
     renderGroups() {
         // console.log('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
@@ -165,6 +174,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     render() {
         console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
         return (
@@ -178,6 +188,7 @@ export class RowFormView<T extends RowFormController> extends FormView<T> {
             </div>
         );
     }
+
     /*renderActionIcon() {
         return <CancelIcon/>;
     }*/
