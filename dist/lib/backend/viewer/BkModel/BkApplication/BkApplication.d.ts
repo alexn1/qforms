@@ -53,9 +53,10 @@ export declare class BkApplication extends BkModel {
     findDatabase(name: string): BkDatabase;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile, hostApp: BackHostApp): AppInfo;
-    static loadAppInfo(appFilePath: string, hostApp: BackHostApp): Promise<AppInfo>;
-    static getAppInfos(appsDirPath: string, hostApp: BackHostApp): Promise<AppInfo[]>;
+    static makeDistDirPath(appFilePath: string, hostApp: BackHostApp): string;
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo;
+    static loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo>;
+    static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
     getDataSource(name: string): BkDataSource | undefined;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;

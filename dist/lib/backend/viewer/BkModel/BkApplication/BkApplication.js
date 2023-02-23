@@ -318,7 +318,12 @@ class BkApplication extends BkModel_1.BkModel {
     }
     // to init custom context params before each request get/post
     async initContext(context) { }
-    static makeAppInfoFromAppFile(appFile, hostApp) {
+    static makeDistDirPath(appFilePath, hostApp) {
+        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
+        const distDirPath = path_1.default.join(hostApp.getDistDirPath(), dirName);
+        return distDirPath;
+    }
+    static makeAppInfoFromAppFile(appFile, distDirPath) {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
@@ -336,23 +341,23 @@ class BkApplication extends BkModel_1.BkModel {
             fileNameExt: path_1.default.basename(appFilePath),
             extName: path_1.default.extname(appFilePath),
             dirPath: path_1.default.resolve(path_1.default.dirname(appFilePath)),
-            distDirPath: hostApp ? path_1.default.join(hostApp.getDistDirPath(), dirName) : null,
+            distDirPath: distDirPath,
         };
     }
-    static async loadAppInfo(appFilePath, hostApp) {
+    static async loadAppInfo(appFilePath, distDirPath) {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
-        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, hostApp);
+        const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
         return appInfo;
     }
-    static async getAppInfos(appsDirPath, hostApp) {
+    static async getAppInfos(appsDirPath, distDirPath) {
         // console.log('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper_1.Helper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
-            const appInfo = await BkApplication.loadAppInfo(appFilePath, hostApp);
+            const appInfo = await BkApplication.loadAppInfo(appFilePath, distDirPath);
             if (appInfo) {
                 appInfos.push(appInfo);
             }

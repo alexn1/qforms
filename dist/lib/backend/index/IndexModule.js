@@ -23,7 +23,8 @@ class IndexModule {
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, this.hostApp);
+        const distDirPath = BkApplication_1.BkApplication.makeDistDirPath(this.hostApp.appsDirPath, this.hostApp);
+        const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
         // console.log('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
