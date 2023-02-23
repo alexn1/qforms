@@ -15,7 +15,7 @@ import { TableFormController } from './TableFormController';
 import './TableFormView.less';
 import { Helper } from '../../../../../common/Helper';
 
-export class TableFormView<T extends TableFormController> extends FormView<T> {
+export class TableFormView extends FormView<TableFormController> {
     renderToolbar() {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();

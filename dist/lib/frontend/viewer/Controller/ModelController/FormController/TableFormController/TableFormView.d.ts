@@ -3,7 +3,7 @@ import { FormView } from '../FormView';
 import { Grid } from '../../../../../common';
 import { TableFormController } from './TableFormController';
 import './TableFormView.less';
-export declare class TableFormView<T extends TableFormController> extends FormView<T> {
+export declare class TableFormView extends FormView<TableFormController> {
     renderToolbar(): JSX.Element;
     renderPaging(): JSX.Element;
     renderGridCellView: (row: any, column: any, onCreate: any, onUnmount: any) => React.CElement<{
