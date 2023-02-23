@@ -22,8 +22,6 @@ import * as text from '../../text';
 const pkg = require('../../../../../package.json');
 
 export class BkApplication extends BkModel {
-    // appInfo: AppInfo;
-    // hostApp: BackHostApp;
     env: string;
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
@@ -35,7 +33,12 @@ export class BkApplication extends BkModel {
     nav: any;
     clients: any[] = [];
 
-    constructor(data: any, public appInfo: AppInfo, public hostApp: BackHostApp, context: Context) {
+    constructor(
+        data: any,
+        public appInfo: AppInfo,
+        protected hostApp: BackHostApp,
+        context: Context,
+    ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context) throw new Error('no route');
@@ -123,7 +126,7 @@ export class BkApplication extends BkModel {
         response.route = context.getRoute();
         response.domain = context.getDomain();
         response.virtualPath = context.getVirtualPath();
-        response.logErrorUrl = this.hostApp.logErrorUrl || '/error';
+        response.logErrorUrl = this.getHostApp().logErrorUrl || '/error';
         response.versions = {
             platform: pkg.version,
             app: this.getVersion(),
@@ -134,7 +137,7 @@ export class BkApplication extends BkModel {
         await this.fillCollection(response, 'dataSources', context);
 
         // nodeEnv
-        response.nodeEnv = this.hostApp.getNodeEnv();
+        response.nodeEnv = this.getHostApp().getNodeEnv();
 
         // text
         response.text = this.getText();

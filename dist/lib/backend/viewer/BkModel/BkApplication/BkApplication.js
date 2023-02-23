@@ -119,7 +119,7 @@ class BkApplication extends BkModel_1.BkModel {
         response.route = context.getRoute();
         response.domain = context.getDomain();
         response.virtualPath = context.getVirtualPath();
-        response.logErrorUrl = this.hostApp.logErrorUrl || '/error';
+        response.logErrorUrl = this.getHostApp().logErrorUrl || '/error';
         response.versions = {
             platform: pkg.version,
             app: this.getVersion(),
@@ -128,7 +128,7 @@ class BkApplication extends BkModel_1.BkModel {
         await this.fillCollection(response, 'actions', context);
         await this.fillCollection(response, 'dataSources', context);
         // nodeEnv
-        response.nodeEnv = this.hostApp.getNodeEnv();
+        response.nodeEnv = this.getHostApp().getNodeEnv();
         // text
         response.text = this.getText();
         // menu

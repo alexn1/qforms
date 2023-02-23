@@ -11,7 +11,7 @@ import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 export declare class BkApplication extends BkModel {
     appInfo: AppInfo;
-    hostApp: BackHostApp;
+    protected hostApp: BackHostApp;
     env: string;
     databases: BkDatabase[];
     actions: BkAction[];
