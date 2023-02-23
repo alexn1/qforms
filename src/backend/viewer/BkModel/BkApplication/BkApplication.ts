@@ -33,9 +33,9 @@ export class BkApplication extends BkModel {
     clients: any[] = [];
 
     constructor(
-        protected appInfo: AppInfo,
-        protected hostApp: BackHostApp,
-        protected env: string = 'local',
+        private appInfo: AppInfo,
+        private hostApp: BackHostApp,
+        private env: string = 'local',
     ) {
         super(appInfo.appFile.data);
         if (!hostApp) throw new Error('BkApplication: no hostApp');

@@ -10,9 +10,9 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 export declare class BkApplication extends BkModel {
-    protected appInfo: AppInfo;
-    protected hostApp: BackHostApp;
-    protected env: string;
+    private appInfo;
+    private hostApp;
+    private env;
     databases: BkDatabase[];
     actions: BkAction[];
     dataSources: BkDataSource[];
