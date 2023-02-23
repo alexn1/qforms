@@ -52,7 +52,7 @@
             "actions": [],
             "fields": [
                 {
-                    "@class": "LinkField",
+                    "@class": "TextBoxField",
                     "@attributes": {
                         "name": "_id",
                         "caption": "_id",
@@ -67,9 +67,12 @@
                         "viewClass": "",
                         "ctrlClass": "",
                         "autoFocus": "false",
+                        "readOnly": "false",
                         "notNull": "false",
-                        "page": "Page2",
-                        "displayColumn": ""
+                        "placeholder": "",
+                        "validateOnChange": "true",
+                        "validateOnBlur": "false",
+                        "autocomplete": ""
                     }
                 },
                 {
