@@ -39,7 +39,7 @@ const Result_1 = require("../../../../Result");
 const text = __importStar(require("../../text"));
 const pkg = require('../../../../../package.json');
 class BkApplication extends BkModel_1.BkModel {
-    constructor(appInfo, hostApp, context) {
+    constructor(appInfo, hostApp, env = 'local') {
         super(appInfo.appFile.data);
         this.appInfo = appInfo;
         this.hostApp = hostApp;
@@ -49,12 +49,7 @@ class BkApplication extends BkModel_1.BkModel {
         this.pages = {};
         this.clients = [];
         if (!hostApp)
-            throw new Error('no hostApp');
-        if (!context)
-            throw new Error('no route');
-        const env = context.getEnv();
-        if (!env)
-            throw new Error('BkApplication: env required');
+            throw new Error('BkApplication: no hostApp');
         this.env = env;
     }
     async init(context) {

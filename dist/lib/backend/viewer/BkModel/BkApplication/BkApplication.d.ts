@@ -24,7 +24,7 @@ export declare class BkApplication extends BkModel {
     menu: any;
     nav: any;
     clients: any[];
-    constructor(appInfo: AppInfo, hostApp: BackHostApp, context: Context);
+    constructor(appInfo: AppInfo, hostApp: BackHostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): BackHostApp;
     getLinks(context: Context): Promise<any[]>;

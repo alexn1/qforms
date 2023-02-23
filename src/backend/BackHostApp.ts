@@ -307,7 +307,7 @@ export class BackHostApp {
         const ApplicationClass = this.getApplicationClass(appInfo);
 
         // application
-        const application = new ApplicationClass(appInfo, this, context);
+        const application = new ApplicationClass(appInfo, this, context.getEnv());
         await application.init(context);
         return application;
     }
