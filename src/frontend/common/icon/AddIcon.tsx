@@ -11,5 +11,6 @@ export const AddIcon = () => {
         </svg>
     );
 };
+
 // @ts-ignore
 window.AddIcon = AddIcon;

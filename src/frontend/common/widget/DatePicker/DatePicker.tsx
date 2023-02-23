@@ -15,6 +15,7 @@ import './DatePicker.less';
 //  highlightedDate array [2021, 0, 1]
 export class DatePicker extends ReactComponent {
     MONTH: string[];
+
     constructor(props) {
         // console.log('DatePicker.constructor', props);
         super(props);

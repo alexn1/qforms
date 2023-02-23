@@ -15,9 +15,11 @@ export class CheckBox extends ReactComponent {
             checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
         };
     }
+
     getValue() {
         return this.state.checked;
     }
+
     onChange = (e) => {
         // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
         if (!this.props.readOnly) {
@@ -29,18 +31,21 @@ export class CheckBox extends ReactComponent {
             });
         }
     };
+
     onClick = (e) => {
         if (!this.props.readOnly) {
             if (this.props.onChange) this.props.onChange(true);
             this.setState({ checked: true });
         }
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
     }
+
     render() {
         if (this.state.checked === null) {
             return (
@@ -65,5 +70,6 @@ export class CheckBox extends ReactComponent {
         );
     }
 }
+
 // @ts-ignore
 window.CheckBox = CheckBox;

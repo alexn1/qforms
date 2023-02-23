@@ -10,6 +10,7 @@
   display: none;
   padding: 10px;
   cursor: default;
+
   &.visible {
     display: block;
   }
@@ -33,9 +34,11 @@
 
 .DatePicker__caption-link {
   visibility: hidden;
+
   &.enabled {
     visibility: visible;
   }
+
   &:hover {
     cursor: pointer;
     background-color: @selectionColor;
@@ -50,6 +53,7 @@
   text-align: center;
   font-weight: bold;
   color: #999;
+  
   &.weekend {
     color: rgba(255, 0, 0, 0.5);
   }

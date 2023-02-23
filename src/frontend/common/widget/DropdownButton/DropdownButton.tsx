@@ -10,16 +10,19 @@ export class DropdownButton extends ReactComponent {
             disabled: false,
         };
     }
+
     onButtonClick = (e) => {
         // console.log('DropdownButton.onButtonClick');
         this.setState((state) => ({ open: !state.open }));
     };
+
     onButtonBlur = (e) => {
         // console.log('DropdownButton.onButtonBlur');
         if (this.state.open) {
             this.setState({ open: false });
         }
     };
+
     onKeyDown = (e) => {
         // console.log('DropdownButton.onKeyDown', e.key);
         if (e.key === 'Escape' && this.state.open) {
@@ -27,10 +30,12 @@ export class DropdownButton extends ReactComponent {
             e.stopPropagation();
         }
     };
+
     onUlMouseDown = (e) => {
         // console.log('DropdownButton.onUlMouseDown');
         e.preventDefault();
     };
+
     onLiClick = async (e) => {
         // console.log('DropdownButton.onLiClick', e.currentTarget);
         const li = e.currentTarget;
@@ -40,11 +45,13 @@ export class DropdownButton extends ReactComponent {
             }
         });
     };
+
     isEnabled() {
         if (this.props.enabled !== undefined) return this.props.enabled;
         // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
         return !this.state.disabled;
     }
+
     render() {
         return (
             <div className={`${this.getCssClassNames()} ${this.state.open && 'show'}`}>
