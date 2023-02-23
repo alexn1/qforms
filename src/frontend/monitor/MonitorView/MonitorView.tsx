@@ -41,6 +41,7 @@ export class MonitorView extends ReactComponent {
             </li>
         );
     }
+
     render() {
         console.log('MonitorView.render', this.props.data);
         const data = this.props.data;

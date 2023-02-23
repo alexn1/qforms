@@ -7,6 +7,7 @@ import { FrontHostApp } from '../../../common';
 export class PageEditor extends Editor {
     pageLink: any;
     forms: any[];
+
     constructor(data, pageLink) {
         super(data);
         this.pageLink = pageLink;
@@ -31,30 +32,35 @@ export class PageEditor extends Editor {
             this.createForm(data);
         }
     }
+
     createDataSource(data) {
         const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
+
     createAction(data) {
         const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
+
     createForm(data) {
         const form = new FormEditor(data, this);
         form.init();
         this.forms.push(form);
         return form;
     }
+
     removeForm(form) {
         console.log('Page.removeForm', form.getName());
         const i = this.forms.indexOf(form);
         if (i === -1) throw new Error('no such form');
         this.forms.splice(i, 1);
     }
+
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
@@ -149,6 +155,7 @@ export class PageEditor extends Editor {
             },
         });
     }
+
     async createStyle() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
@@ -158,6 +165,7 @@ export class PageEditor extends Editor {
             },
         });
     }
+
     async createModelBackJs() {
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',

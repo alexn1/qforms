@@ -3,6 +3,7 @@ import { FrontHostApp } from '../../../common';
 
 export class ColumnEditor extends Editor {
     table: any;
+
     constructor(data, table) {
         super(data, table);
         this.table = table;
@@ -36,6 +37,7 @@ export class ColumnEditor extends Editor {
             },
         });
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeColumn(this);

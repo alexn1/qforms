@@ -118,6 +118,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         // console.log('EditorFrontHostApp.fillActions');
         this.actionList.setState({ item });
     }
+
     clearActions() {
         // console.log('EditorFrontHostApp.clearActions');
         this.actionList.setState({ item: null });
@@ -129,6 +130,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         if (!controller || !(controller instanceof DocumentController)) return;
         await this.openDocument(controller);
     };
+
     async openDocument(controller) {
         console.log('EditorFrontHostApp.openDocument', controller.getTitle());
         let document = this.findDocument(controller);
@@ -140,9 +142,11 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.tabWidget.state.active = this.documents.indexOf(document);
         await this.view.rerender();
     }
+
     findDocument(controller) {
         return this.documents.find((document) => document.controller === controller) || null;
     }
+
     onDocumentClose = (i) => {
         console.log('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
         const document = this.documents[i];
@@ -162,16 +166,19 @@ export class EditorFrontHostApp extends FrontHostApp {
         }
         this.view.rerender();
     };
+
     async openModal(modalController) {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
     }
+
     async onModalClose() {
         console.log('EditorFrontHostApp.onModalClose');
         this.modal = null;
         await this.view.rerender();
     }
+
     onActionClick = async (actionName) => {
         console.log('EditorFrontHostApp.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();

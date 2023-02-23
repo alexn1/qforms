@@ -62,11 +62,13 @@ export class ActionEditor extends Editor {
             },
         });
     }
+
     async delete() {
         console.log('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }
+
     moveUp() {
         return FrontHostApp.doHttpRequest({
             controller: 'Action',
@@ -76,6 +78,7 @@ export class ActionEditor extends Editor {
             },
         });
     }
+
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller: 'Action',

@@ -32,7 +32,9 @@ export abstract class FormWizard {
     }
 
     abstract getCountQuery();
+
     abstract getSingleQuery();
+
     abstract getMultipleQuery();
 
     getFieldClass(column) {

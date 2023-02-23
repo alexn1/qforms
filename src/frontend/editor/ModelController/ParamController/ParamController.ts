@@ -28,6 +28,7 @@ export class ParamController extends ModelController {
             },
         });
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeParam(this);

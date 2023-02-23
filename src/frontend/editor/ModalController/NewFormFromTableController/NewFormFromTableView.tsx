@@ -5,6 +5,7 @@ export class NewFormFromTableView extends ReactComponent {
     class: any;
     name: any;
     caption: any;
+
     constructor(props) {
         super(props);
         this.page = null;
@@ -12,6 +13,7 @@ export class NewFormFromTableView extends ReactComponent {
         this.name = null;
         this.caption = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
@@ -21,6 +23,7 @@ export class NewFormFromTableView extends ReactComponent {
             caption: this.caption.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         const tableController = ctrl.options.tableController;

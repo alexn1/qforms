@@ -10,6 +10,7 @@ import { TableView } from './TableView';
 export class TableController extends DocumentController {
     columns: any[];
     items: any[];
+
     constructor(model, parent) {
         super(model, parent);
         this.columns = [];
@@ -24,12 +25,14 @@ export class TableController extends DocumentController {
     init() {
         this.model.columns.forEach((column) => this.createColumn(column));
     }
+
     createColumn(model) {
         const column = new ColumnController(model, this);
         column.init();
         this.columns.push(column);
         return column;
     }
+
     removeColumn(columnController) {
         console.log('TableController.removeColumn', columnController.getTitle());
         const i = this.columns.indexOf(columnController);
@@ -140,6 +143,7 @@ export class TableController extends DocumentController {
             }),
         );
     }
+
     async delete() {
         console.log('TableController.delete', this.getTitle());
         await this.model.delete();
@@ -147,6 +151,7 @@ export class TableController extends DocumentController {
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+
     getDocumentViewClass() {
         return TableView;
     }

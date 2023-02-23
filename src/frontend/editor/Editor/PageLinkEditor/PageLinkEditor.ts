@@ -46,6 +46,7 @@ export class PageLinkEditor extends Editor {
     getFileName() {
         return this.data['@attributes'].fileName;
     }
+
     remove() {
         console.log('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);

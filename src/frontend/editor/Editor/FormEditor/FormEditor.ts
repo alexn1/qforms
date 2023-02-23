@@ -6,6 +6,7 @@ import { FrontHostApp } from '../../../common';
 
 export class FormEditor extends Editor {
     fields: any[];
+
     constructor(data, page) {
         super(data, page);
         this.page = page;
@@ -30,30 +31,35 @@ export class FormEditor extends Editor {
             this.createField(data);
         }
     }
+
     createDataSource(data) {
         const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
+
     createAction(data) {
         const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
+
     createField(data) {
         const field = new FieldEditor(data, this);
         field.init();
         this.fields.push(field);
         return field;
     }
+
     removeField(field) {
         console.log('FormEditor.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1) throw new Error('no such field');
         this.fields.splice(i, 1);
     }
+
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
@@ -80,10 +86,12 @@ export class FormEditor extends Editor {
             },
         });
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeForm(this);
     }
+
     moveUp() {
         const args = {
             controller: 'Form',

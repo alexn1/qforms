@@ -6,15 +6,18 @@ import './VisualView.less';
 export class VisualView extends DocumentView {
     textarea: React.RefObject<any>;
     cm: any;
+
     constructor(props) {
         super(props);
         this.textarea = React.createRef();
         this.cm = null;
     }
+
     getTextarea() {
         if (this.textarea) return this.textarea.current;
         return null;
     }
+
     componentDidMount() {
         // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
@@ -23,6 +26,7 @@ export class VisualView extends DocumentView {
             this.cm.on('change', this.onChange);
         }
     }
+
     componentDidUpdate() {
         // console.log('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
@@ -31,26 +35,31 @@ export class VisualView extends DocumentView {
             this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
     }
+
     componentWillUnmount() {
         // console.log('VisualView.componentWillUnmount');
         if (this.cm) {
             this.cm.off('change', this.onChange);
         }
     }
+
     onControllerSave = async (e) => {
         const ctrl = this.props.ctrl;
         await ctrl.onControllerSave(this.cm.getValue());
     };
+
     onChange = async (instance, changeObj) => {
         // console.log('VisualView.onChange', this.isChanged());
         await this.rerender();
     };
+
     isChanged() {
         if (!this.cm) {
             return false;
         }
         return this.props.ctrl.data.js !== this.cm.getValue();
     }
+
     render() {
         const ctrl = this.props.ctrl;
         return (

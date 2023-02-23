@@ -13,6 +13,7 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
         }
         return null;
     }
+
     renderView(ctrl, props = {}) {
         return React.createElement(ctrl.getViewClass(), {
             parent: this,
@@ -21,6 +22,7 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
             ...props,
         });
     }
+
     renderModals() {
         return this.props.ctrl.modals.map((ctrl) => {
             if (ctrl instanceof PageController) {
@@ -29,6 +31,7 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
             return this.renderView(ctrl, { key: ctrl.getId() });
         });
     }
+
     renderHeader() {
         return (
             <header className={`${this.getCssBlockName()}__header`}>
@@ -39,9 +42,11 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
             </header>
         );
     }
+
     renderMain() {
         return <main className={`${this.getCssBlockName()}__main`}>{this.renderActivePage()}</main>;
     }
+
     renderFooter() {
         return (
             <footer className={`${this.getCssBlockName()}__footer`}>
@@ -49,6 +54,7 @@ export class ApplicationView<T extends ApplicationController> extends ModelView<
             </footer>
         );
     }
+
     render() {
         console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
         return (

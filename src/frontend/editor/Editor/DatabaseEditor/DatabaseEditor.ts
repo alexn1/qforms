@@ -6,6 +6,7 @@ import { FrontHostApp } from '../../../common';
 export class DatabaseEditor extends Editor {
     params: any[];
     tables: any[];
+
     constructor(data, parent) {
         super(data, parent);
         this.params = [];
@@ -37,12 +38,14 @@ export class DatabaseEditor extends Editor {
         this.tables.push(table);
         return table;
     }
+
     removeParam(param) {
         console.log('DatabaseEditor.removeParam', param.getName());
         const i = this.params.indexOf(param);
         if (i === -1) throw new Error('no such param');
         this.params.splice(i, 1);
     }
+
     removeTable(table) {
         console.log('DatabaseEditor.removeTable', table.getName());
         const i = this.tables.indexOf(table);
@@ -130,6 +133,7 @@ export class DatabaseEditor extends Editor {
             },
         });
     }
+
     moveUp() {
         return FrontHostApp.doHttpRequest({
             controller: 'Database',
@@ -139,6 +143,7 @@ export class DatabaseEditor extends Editor {
             },
         });
     }
+
     moveDown() {
         return FrontHostApp.doHttpRequest({
             controller: 'Database',

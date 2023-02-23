@@ -5,6 +5,7 @@ export class NewFieldView extends ReactComponent {
     name: any;
     caption: any;
     type: any;
+
     constructor(props) {
         super(props);
         this.class = null;
@@ -12,6 +13,7 @@ export class NewFieldView extends ReactComponent {
         this.caption = null;
         this.type = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewFieldView.onCreate');
         await this.props.ctrl.onCreate({
@@ -21,6 +23,7 @@ export class NewFieldView extends ReactComponent {
             type: this.type.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

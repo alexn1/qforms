@@ -35,6 +35,7 @@ export class ApplicationController extends VisualController {
             { getTitle: () => 'Pages', items: this.pageLinks, opened: true },
         ];
     }
+
     init() {
         this.model.databases.forEach((database) => this.createDatabase(database));
         this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
@@ -48,18 +49,21 @@ export class ApplicationController extends VisualController {
         this.databases.push(database);
         return database;
     }
+
     createPageLink(model) {
         const pageLink = new PageLinkController(model, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
     }
+
     removeDatabase(databaseController) {
         console.log('ApplicationController.removeDatabase', databaseController.getTitle());
         const i = this.databases.indexOf(databaseController);
         if (i === -1) throw new Error('no such databaseController');
         this.databases.splice(i, 1);
     }
+
     removePageLink(pageLinkController) {
         const i = this.pageLinks.indexOf(pageLinkController);
         if (i === -1) throw new Error('no such pageLinkController');
@@ -166,9 +170,11 @@ export class ApplicationController extends VisualController {
         propList.options['lang'] = ['en', 'ru'];
         return propList;
     }
+
     findPageLink(name) {
         return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
     }
+
     getDocumentViewClass() {
         // @ts-ignore
         return VisualView;

@@ -12,18 +12,21 @@ export class TreeItem extends ReactComponent {
         };
         this.li = React.createRef();
     }
+
     onDivMouseDown = (e) => {
         // console.log('TreeItem.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         tree.select(item);
     };
+
     onDivDoubleClick = (e) => {
         // console.log('TreeItem.onDivDoubleClick');
         const item = this.props.item;
         const tree = this.props.tree;
         tree.onDoubleClick(item);
     };
+
     onNodeMouseDown = (e) => {
         // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
         const item = this.props.item;
@@ -37,15 +40,19 @@ export class TreeItem extends ReactComponent {
             tree.onOpen(item);
         }
     };
+
     isSelected() {
         return this.props.tree.getSelectedItem() === this.props.item;
     }
+
     isOpened() {
         return this.state.opened;
     }
+
     getElement() {
         return this.li.current;
     }
+
     open() {
         console.log('TreeItem.open', this.props.item.getTitle());
         // @ts-ignore
@@ -56,6 +63,7 @@ export class TreeItem extends ReactComponent {
             console.log('this.parent', this.parent);
         }
     }
+
     render() {
         // console.log('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;

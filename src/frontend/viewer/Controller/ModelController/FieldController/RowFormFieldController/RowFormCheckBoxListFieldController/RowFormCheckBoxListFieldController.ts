@@ -11,6 +11,7 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
         dataSource.on('update', this.onListUpdate);
         dataSource.on('delete', this.onListDelete);
     }
+
     deinit() {
         const dataSource = this.model.getDataSource();
         dataSource.off('insert', this.onListInsert);
@@ -18,32 +19,40 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
         dataSource.off('delete', this.onListDelete);
         super.deinit();
     }
+
     getViewClass() {
         return super.getViewClass() || RowFormCheckBoxListFieldView;
     }
+
     getRows() {
         return this.model.getDataSource().getRows();
     }
+
     onListInsert = async (e) => {
         console.log('RowFormCheckBoxListFieldController.onListInsert');
         await this.rerender();
     };
+
     onListUpdate = async (e) => {
         // console.log('RowFormCheckBoxListFieldController.onListUpdate');
         await this.rerender();
     };
+
     onListDelete = async (e) => {
         await this.rerender();
     };
+
     getValueForWidget() {
         // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
         const value = this.getValue();
         // console.log('value:', value);
         return value;
     }
+
     setValueFromWidget(widgetValue) {
         this.setValue(widgetValue);
     }
+
     getItemFromRow(row) {
         return {
             value: this.valueToString(this.getModel().getValueValue(row)),

@@ -7,6 +7,7 @@ export class RowFormCheckBoxFieldView extends RowFormFieldView<RowFormCheckBoxFi
     onCheckBoxChange = (checked, e) => {
         this.getCtrl().onChange(checked);
     };
+
     render() {
         // console.log('RowFormCheckBoxFieldView.render');
         const ctrl = this.getCtrl();

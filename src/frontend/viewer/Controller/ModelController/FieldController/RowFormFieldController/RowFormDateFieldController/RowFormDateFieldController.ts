@@ -6,9 +6,11 @@ export class RowFormDateFieldController extends RowFormFieldController<DateField
     getViewClass() {
         return super.getViewClass() || RowFormDateFieldView;
     }
+
     getValueForWidget() {
         return this.getValue();
     }
+
     setValueFromWidget(widgetValue) {
         this.setValue(widgetValue);
     }

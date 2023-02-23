@@ -3,11 +3,13 @@ import { ReactComponent, TextBox } from '../../../common';
 export class NewActionView extends ReactComponent {
     name: any;
     caption: any;
+
     constructor(props) {
         super(props);
         this.name = null;
         this.caption = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewActionView.onCreate');
         await this.props.ctrl.onCreate({
@@ -15,6 +17,7 @@ export class NewActionView extends ReactComponent {
             caption: this.caption.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

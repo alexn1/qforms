@@ -9,6 +9,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
         this.rerender();
         await this.props.ctrl.onChange(widgetValue);
     };
+
     isCreateButtonVisible() {
         if (this.getCtrl().getForm().getMode() !== 'edit') {
             return false;
@@ -29,6 +30,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
             );
         }
     }
+
     renderSelect() {
         const ctrl = this.getCtrl();
         return (
@@ -45,6 +47,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
             />
         );
     }
+
     renderEditButton() {
         const ctrl = this.getCtrl();
         return (
@@ -56,6 +59,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
             </Button>
         );
     }
+
     renderCreateButton() {
         const ctrl = this.getCtrl();
         return (
@@ -66,6 +70,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
             </Button>
         );
     }
+
     render() {
         // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
         return (

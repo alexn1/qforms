@@ -8,6 +8,7 @@ import { NoSqlDataSourceView } from './NoSqlDataSourceView';
 export class DataSourceController extends DocumentController {
     keyColumns: any[];
     items: any[];
+
     constructor(model, parent) {
         super(model, parent);
         this.keyColumns = [];
@@ -18,30 +19,36 @@ export class DataSourceController extends DocumentController {
             },
         ];
     }
+
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+
     getStyle() {
         return {
             // fontWeight: 'bold',
             color: 'brown',
         };
     }
+
     init() {
         this.model.keyColumns.forEach((keyColumn) => this.createKeyColumn(keyColumn));
     }
+
     createKeyColumn(model) {
         const keyColumn = new KeyColumnController(model, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;
     }
+
     removeKeyColumn(keyColumnController) {
         console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
         const i = this.keyColumns.indexOf(keyColumnController);
         if (i === -1) throw new Error('no such keyColumnController');
         this.keyColumns.splice(i, 1);
     }
+
     getActions() {
         return [
             { action: 'newItem', caption: 'New Key Column' },
@@ -102,21 +109,25 @@ export class DataSourceController extends DocumentController {
 
         return propList;
     }
+
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
         if (this.model.getClassName() === 'NoSqlDataSource') return NoSqlDataSourceView;
         return super.getDocumentViewClass();
     }
+
     async onSaveClick(name, value) {
         // console.log('DataSourceController.onSaveClick', name, value);
         await this.model.setValue(name, value);
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeDataSource(this);
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+
     onCreateModelBack = async (e) => {
         const data = await this.model.createModelBackJs();
     };

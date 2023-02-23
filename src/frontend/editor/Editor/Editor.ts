@@ -5,6 +5,7 @@ export class Editor {
     page: any;
     dataSources: any[];
     actions: any[];
+
     constructor(data, parent = null) {
         if (!data) throw new Error('no data');
         this.data = data;
@@ -40,6 +41,7 @@ export class Editor {
     getAttr(name) {
         return this.data['@attributes'][name];
     }
+
     getAttributes() {
         return this.data['@attributes'];
     }
@@ -51,24 +53,28 @@ export class Editor {
     /*getObject(col, name) {
         return this[col].find(obj => obj.getName() === name);
     }*/
+
     /*createDataSource(data) {
         const dataSource = new DataSourceEditor(data, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }*/
+
     removeDataSource(dataSource) {
         // console.log('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1) throw new Error('no such dataSource');
         this.dataSources.splice(i, 1);
     }
+
     /*createAction(data) {
         const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }*/
+
     removeAction(action) {
         // console.log('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);

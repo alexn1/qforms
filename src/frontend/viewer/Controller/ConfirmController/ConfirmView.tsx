@@ -9,6 +9,7 @@ export class ConfirmView<T extends ConfirmController> extends View<T> {
         super(props);
         this.el = React.createRef();
     }
+
     render() {
         // console.log('ConfirmView.render', this.getCtrl().options);
         if (!this.getCtrl().options.yesButton) throw new Error('no yesButton option');
@@ -53,6 +54,7 @@ export class ConfirmView<T extends ConfirmController> extends View<T> {
             </div>
         );
     }
+
     componentDidMount() {
         this.getElement().focus();
     }

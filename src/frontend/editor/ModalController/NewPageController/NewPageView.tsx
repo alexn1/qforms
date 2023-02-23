@@ -4,12 +4,14 @@ export class NewPageView extends ReactComponent {
     name: any;
     caption: any;
     startup: any;
+
     constructor(props) {
         super(props);
         this.name = null;
         this.caption = null;
         this.startup = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewPageView.onCreate');
         await this.props.ctrl.onCreate({
@@ -18,6 +20,7 @@ export class NewPageView extends ReactComponent {
             startup: this.startup.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

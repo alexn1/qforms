@@ -3,6 +3,7 @@ import { FrontHostApp } from '../../../common';
 
 export class KeyColumnEditor extends Editor {
     dataSource: any;
+
     constructor(data, dataSource) {
         super(data, dataSource);
         this.dataSource = dataSource;
@@ -40,6 +41,7 @@ export class KeyColumnEditor extends Editor {
             },
         });
     }
+
     getPage() {
         if (this.dataSource.parent.constructor.name === 'FormEditor') {
             return this.dataSource.parent.page;
@@ -49,12 +51,14 @@ export class KeyColumnEditor extends Editor {
         }
         return null;
     }
+
     getForm() {
         if (this.dataSource.parent.constructor.name === 'FormEditor') {
             return this.dataSource.parent;
         }
         return null;
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeKeyColumn(this);

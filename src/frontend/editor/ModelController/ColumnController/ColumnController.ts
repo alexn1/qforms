@@ -6,9 +6,11 @@ export class ColumnController extends ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
+
     getActions() {
         return [{ action: 'delete', caption: 'Delete' }];
     }
+
     async doAction(name) {
         switch (name) {
             case 'delete':
@@ -16,6 +18,7 @@ export class ColumnController extends ModelController {
                 break;
         }
     }
+
     static async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Column',
@@ -25,6 +28,7 @@ export class ColumnController extends ModelController {
             },
         });
     }
+
     getPropList() {
         const propList = super.getPropList();
         propList.options['key'] = ['true', 'false'];
@@ -42,6 +46,7 @@ export class ColumnController extends ModelController {
         ];*/
         return propList;
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeColumn(this);

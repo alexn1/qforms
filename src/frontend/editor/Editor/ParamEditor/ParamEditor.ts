@@ -3,6 +3,7 @@ import { FrontHostApp } from '../../../common';
 
 export class ParamEditor extends Editor {
     database: any;
+
     constructor(data, database) {
         super(data, database);
         this.database = database;
@@ -34,6 +35,7 @@ export class ParamEditor extends Editor {
             },
         });
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeParam(this);

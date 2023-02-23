@@ -9,6 +9,7 @@ export class ImageDialogView<T extends ImageDialogController> extends View<T> {
         super(props);
         this.el = React.createRef();
     }
+
     render() {
         console.log('ImageDialogView.render');
         const { ctrl } = this.props;
@@ -29,6 +30,7 @@ export class ImageDialogView<T extends ImageDialogController> extends View<T> {
             </div>
         );
     }
+
     componentDidMount() {
         this.getElement().focus();
     }

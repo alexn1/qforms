@@ -7,6 +7,7 @@ import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 
 export class DataSourceEditor extends Editor {
     keyColumns: any[];
+
     constructor(data, parent) {
         super(data, parent);
         this.keyColumns = [];
@@ -24,12 +25,14 @@ export class DataSourceEditor extends Editor {
         this.keyColumns.push(keyColumn);
         return keyColumn;
     }
+
     removeKeyColumn(keyColumn) {
         console.log('DatabaseEditor.removeParam', keyColumn.getName());
         const i = this.keyColumns.indexOf(keyColumn);
         if (i === -1) throw new Error('no such keyColumn');
         this.keyColumns.splice(i, 1);
     }
+
     static async create(parent, params) {
         if (parent instanceof FormEditor) {
             const form = parent;
@@ -186,10 +189,12 @@ export class DataSourceEditor extends Editor {
         }
         return await FrontHostApp.doHttpRequest(args);
     }
+
     async newKeyColumn(name) {
         const data = await this.newKeyColumnData(name);
         return this.createKeyColumn(data);
     }
+
     async getView(view) {
         const args = {
             controller: 'DataSource',

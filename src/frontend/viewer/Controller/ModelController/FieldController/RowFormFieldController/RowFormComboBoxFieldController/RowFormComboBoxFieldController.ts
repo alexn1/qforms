@@ -13,6 +13,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         dataSource.on('update', this.onListUpdate);
         dataSource.on('delete', this.onListDelete);
     }
+
     deinit() {
         const dataSource = this.model.getComboBoxDataSource();
         dataSource.off('insert', this.onListInsert);
@@ -20,9 +21,11 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         dataSource.off('delete', this.onListDelete);
         super.deinit();
     }
+
     getViewClass() {
         return super.getViewClass() || RowFormComboBoxFieldView;
     }
+
     getItems() {
         try {
             return this.getRows().map((row) => ({
@@ -34,13 +37,16 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
             throw err;
         }
     }
+
     getRows() {
         return this.model.getComboBoxDataSource().getRows();
     }
+
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return ApplicationController.isDebugMode() ? '[null]' : null;
     }
+
     onEditButtonClick = async (e) => {
         console.log('RowFormComboBoxFieldController.onEditButtonClick');
         const itemEditPage = this.getModel().getAttr('itemEditPage');
@@ -56,6 +62,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
             });
         }
     };
+
     onCreateButtonClick = async (e) => {
         console.log('RowFormComboBoxFieldController.onCreateButtonClick');
         const newRowMode = this.getModel().getAttr('newRowMode');
@@ -88,17 +95,21 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         };
         form.on('insert', onInsert);
     };
+
     onListInsert = async (e) => {
         console.log('RowFormComboBoxFieldController.onListInsert');
         await this.rerender();
     };
+
     onListUpdate = async (e) => {
         // console.log('RowFormComboBoxFieldController.onListUpdate');
         await this.rerender();
     };
+
     onListDelete = async (e) => {
         await this.rerender();
     };
+
     onItemSelect = async (e) => {
         // console.log('RowFormComboBoxFieldController.onItemSelect');
         if (e.button === 0) {

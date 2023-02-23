@@ -2,16 +2,19 @@ import { ReactComponent, TextBox } from '../../../common';
 
 export class NewKeyColumnView extends ReactComponent {
     name: any;
+
     constructor(props) {
         super(props);
         this.name = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewParamView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

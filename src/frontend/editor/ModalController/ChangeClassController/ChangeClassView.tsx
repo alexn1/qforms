@@ -2,16 +2,19 @@ import { ReactComponent, ComboBox } from '../../../common';
 
 export class ChangeClassView extends ReactComponent {
     class: any;
+
     constructor(props) {
         super(props);
         this.class = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

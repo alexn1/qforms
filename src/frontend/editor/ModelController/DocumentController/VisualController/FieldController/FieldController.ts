@@ -7,15 +7,18 @@ export class FieldController extends VisualController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
+
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+
     getStyle() {
         return {
             // fontWeight: 'bold',
             color: 'blue',
         };
     }
+
     getActions() {
         return [
             { action: 'changeClass', caption: 'Change Class' },
@@ -75,12 +78,14 @@ export class FieldController extends VisualController {
         options['type'] = ['', 'string', 'number', 'boolean', 'object', 'date'];
         return { list: list, options: options };
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeField(this);
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+
     getDocumentViewClass() {
         return VisualView;
     }

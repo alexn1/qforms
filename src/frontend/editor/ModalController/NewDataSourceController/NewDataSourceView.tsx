@@ -3,11 +3,13 @@ import { ReactComponent, TextBox, ComboBox, Button } from '../../../common';
 export class NewDataSourceView extends ReactComponent {
     name: any;
     class: any;
+
     constructor(props) {
         super(props);
         this.name = null;
         this.class = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
@@ -15,6 +17,7 @@ export class NewDataSourceView extends ReactComponent {
             class: this.class.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

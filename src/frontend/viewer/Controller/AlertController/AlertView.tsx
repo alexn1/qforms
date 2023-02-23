@@ -9,9 +9,11 @@ export class AlertView<T extends AlertController> extends View<T> {
         super(props);
         this.el = React.createRef();
     }
+
     getHeaderStyle() {
         return this.getCtrl().options.titleStyle /* || {color: 'red'}*/;
     }
+
     render() {
         return (
             <div
@@ -48,6 +50,7 @@ export class AlertView<T extends AlertController> extends View<T> {
             </div>
         );
     }
+
     componentDidMount() {
         this.getElement().focus();
     }

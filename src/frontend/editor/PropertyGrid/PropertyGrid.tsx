@@ -6,24 +6,28 @@ export class PropertyGrid extends ReactComponent {
         super(props);
         this.state = {};
     }
+
     getObj() {
         if (this.state.object) {
             return this.state.object.obj;
         }
         return null;
     }
+
     getOptions() {
         if (this.state.object) {
             return this.state.object.options;
         }
         return null;
     }
+
     onChange = (name, value) => {
         // console.log('PropertyGrid.onChange', name, value);
         if (this.props.onChange) {
             this.props.onChange(name, value);
         }
     };
+
     renderInput(name) {
         const obj = this.getObj();
         return (
@@ -36,6 +40,7 @@ export class PropertyGrid extends ReactComponent {
             />
         );
     }
+
     renderSelect(name) {
         const obj = this.getObj();
         const options = this.getOptions();
@@ -51,6 +56,7 @@ export class PropertyGrid extends ReactComponent {
             />
         );
     }
+
     renderRows() {
         const obj = this.getObj();
         const options = this.getOptions();
@@ -63,6 +69,7 @@ export class PropertyGrid extends ReactComponent {
             </tr>
         ));
     }
+
     render() {
         return (
             <div className={'PropertyGrid full frame'}>

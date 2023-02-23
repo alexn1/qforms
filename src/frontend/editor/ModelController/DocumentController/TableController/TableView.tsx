@@ -15,6 +15,7 @@ export class TableView extends ReactComponent {
             </tr>
         ));
     }
+
     render() {
         const ctrl = this.props.ctrl;
         return (

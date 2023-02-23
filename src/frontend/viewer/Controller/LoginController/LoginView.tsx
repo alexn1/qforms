@@ -6,25 +6,31 @@ import { LoginController } from './LoginController';
 
 export class LoginView<T extends LoginController> extends View<T> {
     errMsgRef: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.errMsgRef = React.createRef();
     }
+
     onLoginFormSubmit = (e) => {
         // console.log('LoginView.onLoginFormSubmit');
         // @ts-ignore
         document.querySelector('.LoginView__button').disabled = true;
         // e.preventDefault();
     };
+
     renderLogo() {
         return null;
     }
+
     renderTitle() {
         return this.getCtrl().getFrontHostApp().getData().title;
     }
+
     onChange = (e) => {
         this.errMsgRef.current.innerHTML = '';
     };
+
     render() {
         // console.log('LoginView.render');
         return (

@@ -142,12 +142,15 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
             this.parent.onFieldChange({ source: this });
         }
     };
+
     getPlaceholder2() {
         return TimeBox.getStringValue(this.defaultValue);
     }
+
     getDefaultValue() {
         return this.defaultValue;
     }
+
     setDefaultValue2(defaultValue) {
         // console.log('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
@@ -160,22 +163,27 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
             this.setValue2(null);
         }
     }
+
     setValueFromView2(widgetValue) {
         if (isNaN(widgetValue)) throw new Error(this.getTimeErrorText());
         this.setValue2(widgetValue);
     }
+
     getTimeErrorText() {
         return this.getModel().getApp().getText().field.timeNotValid;
     }
+
     setValue2(widgetValue) {
         const value = widgetValue !== null ? widgetValue : this.defaultValue;
         const [h, m] = TimeBox.splitTime(value);
         this.state.value.setHours(h, m);
     }
+
     validate2() {
         // console.log('RowFormFieldController.validate', this.model.getFullName());
         this.state.error2 = this.getError2();
     }
+
     getError2() {
         // console.log('RowFormFieldController.getError', this.model.getFullName());
 
@@ -190,25 +198,31 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
 
         return null;
     }
+
     isParseError2() {
         return this.state.parseError2 !== null;
     }
+
     resetErrors2() {
         this.setError2(null);
         this.state.parseError2 = null;
     }
+
     setError2(error2) {
         this.state.error2 = error2;
     }
+
     getErrorMessage2() {
         if (this.state.parseError2) {
             return this.state.parseError2;
         }
         return this.state.error2;
     }
+
     isValid2() {
         return this.state.parseError2 === null && this.state.error2 === null;
     }
+
     refill() {
         // console.log('RowFormDateTimeFieldController.refill');
         if (!this.widget2) return;
@@ -217,12 +231,15 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
         this.resetErrors2();
         this.refreshChangedState();
     }
+
     isParseError() {
         return super.isParseError() || this.isParseError2();
     }
+
     isValid() {
         return super.isValid() && this.isValid2();
     }
+
     getErrorMessage() {
         if (super.getErrorMessage() === null && this.getErrorMessage2() === null) return null;
         return [
@@ -230,9 +247,11 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
             ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : []),
         ].join(', ');
     }
+
     isValidateOnChange2() {
         return true;
     }
+
     isValidateOnBlur2() {
         return false;
     }

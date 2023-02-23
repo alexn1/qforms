@@ -7,6 +7,7 @@ export class NewDatabaseView extends ReactComponent {
     database: any;
     user: any;
     password: any;
+
     constructor(props) {
         super(props);
         this.class = null;
@@ -16,6 +17,7 @@ export class NewDatabaseView extends ReactComponent {
         this.user = null;
         this.password = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewDatabaseView.onCreate');
         await this.props.ctrl.onCreate({
@@ -27,6 +29,7 @@ export class NewDatabaseView extends ReactComponent {
             password: this.password.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

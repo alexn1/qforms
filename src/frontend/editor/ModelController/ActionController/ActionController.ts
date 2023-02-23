@@ -5,6 +5,7 @@ export class ActionController extends ModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
+
     getActions() {
         return [
             { action: 'moveUp', caption: 'Move Up' },
@@ -12,6 +13,7 @@ export class ActionController extends ModelController {
             { action: 'delete', caption: 'Delete' },
         ];
     }
+
     async doAction(name) {
         switch (name) {
             case 'delete':
@@ -29,6 +31,7 @@ export class ActionController extends ModelController {
                 break;
         }
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeAction(this);

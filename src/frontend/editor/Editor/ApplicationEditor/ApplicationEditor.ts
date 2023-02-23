@@ -41,24 +41,28 @@ export class ApplicationEditor extends Editor {
             this.createPageLink(data);
         }
     }
+
     createAction(data) {
         const action = new ActionEditor(data, this);
         action.init();
         this.actions.push(action);
         return action;
     }
+
     createDatabase(data) {
         const database = new DatabaseEditor(data, this);
         database.init();
         this.databases.push(database);
         return database;
     }
+
     createPageLink(data) {
         const pageLink = new PageLinkEditor(data, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
     }
+
     removeDatabase(database) {
         console.log('ApplicationEditor.removeDatabase', database.getName());
         const i = this.databases.indexOf(database);
@@ -72,6 +76,7 @@ export class ApplicationEditor extends Editor {
         if (i === -1) throw new Error('no such pageLink');
         this.pageLinks.splice(i, 1);
     }
+
     async setValue(name, value) {
         //console.log(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({

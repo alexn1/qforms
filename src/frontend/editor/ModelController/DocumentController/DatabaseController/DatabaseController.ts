@@ -12,6 +12,7 @@ export class DatabaseController extends DocumentController {
     params: any[];
     tables: any[];
     items: any[];
+
     constructor(model, parent) {
         super(model, parent);
         this.tableName = null;
@@ -29,43 +30,51 @@ export class DatabaseController extends DocumentController {
             },
         ];
     }
+
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+
     getStyle() {
         return {
             // fontWeight: 'bold',
             color: 'purple',
         };
     }
+
     init() {
         this.model.params.forEach((param) => this.createParam(param));
         this.model.tables.forEach((table) => this.createTable2(table));
     }
+
     createParam(model) {
         const param = new ParamController(model, this);
         param.init();
         this.params.push(param);
         return param;
     }
+
     createTable2(model) {
         const table = new TableController(model, this);
         table.init();
         this.tables.push(table);
         return table;
     }
+
     removeParam(paramController) {
         console.log('DatabaseController.removeParam', paramController.getTitle());
         const i = this.params.indexOf(paramController);
         if (i === -1) throw new Error('no such paramController');
         this.params.splice(i, 1);
     }
+
     removeTable2(tableController) {
         console.log('DatabaseController.removeTable2', tableController.getTitle());
         const i = this.tables.indexOf(tableController);
         if (i === -1) throw new Error('no such tableController');
         this.tables.splice(i, 1);
     }
+
     getActions() {
         return [
             { action: 'newParam', caption: 'New Param' },
@@ -75,6 +84,7 @@ export class DatabaseController extends DocumentController {
             { action: 'delete', caption: 'Delete' },
         ];
     }
+
     async doAction(name) {
         switch (name) {
             case 'newParam':
@@ -100,6 +110,7 @@ export class DatabaseController extends DocumentController {
                 throw new Error(`unknown action: ${name}`);
         }
     }
+
     async actionNewParam() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewParamController({
@@ -114,6 +125,7 @@ export class DatabaseController extends DocumentController {
             }),
         );
     }
+
     async actionNewTable() {
         await EditorFrontHostApp.editorApp.openModal(
             new NewTableController({
@@ -128,6 +140,7 @@ export class DatabaseController extends DocumentController {
             }),
         );
     }
+
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
@@ -138,6 +151,7 @@ export class DatabaseController extends DocumentController {
             .map((tableName) => ({ getTitle: () => tableName }));
         return document;
     }
+
     onTableSelect2 = async (item) => {
         console.log('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
@@ -147,10 +161,12 @@ export class DatabaseController extends DocumentController {
         this.document.view.rerender();
         // console.log('tableInfo:', this.tableInfo);
     };
+
     onCreateTableClick = (e) => {
         console.log('DatabaseController.onCreateTableClick');
         this.newTableAction(this.tableName, this.tableInfo);
     };
+
     async newTableAction(tableName, tableInfo) {
         console.log('DatabaseController.newTableAction', tableName, tableInfo);
         const table = await this.model.newTable({
@@ -173,6 +189,7 @@ export class DatabaseController extends DocumentController {
         this.view.rerender();
         // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
     }
+
     async delete() {
         console.log('DatabaseController.delete', this.getTitle());
         await this.model.delete();
@@ -180,6 +197,7 @@ export class DatabaseController extends DocumentController {
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+
     getDocumentViewClass() {
         return DatabaseView;
     }

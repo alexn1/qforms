@@ -28,6 +28,7 @@ export class KeyColumnController extends ModelController {
             },
         });
     }
+
     async delete() {
         await this.model.delete();
         this.parent.removeKeyColumn(this);

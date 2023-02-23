@@ -23,6 +23,7 @@ export class FieldEditor extends Editor {
         this.setAttr(name, value);
         return data;
     }
+
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Field',
@@ -34,10 +35,12 @@ export class FieldEditor extends Editor {
             },
         });
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeField(this);
     }
+
     async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Field',

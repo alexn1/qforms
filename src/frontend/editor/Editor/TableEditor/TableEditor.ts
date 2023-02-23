@@ -5,6 +5,7 @@ import { FrontHostApp } from '../../../common';
 export class TableEditor extends Editor {
     database: any;
     columns: any[];
+
     constructor(data, database) {
         super(data, database);
         this.database = database;
@@ -23,6 +24,7 @@ export class TableEditor extends Editor {
         this.columns.push(column);
         return column;
     }
+
     removeColumn(column) {
         console.log('TableEditor.removeColumn', column.getName());
         const i = this.columns.indexOf(column);
@@ -43,6 +45,7 @@ export class TableEditor extends Editor {
         });
         return this.createColumn(data);
     }
+
     async deleteData() {
         await FrontHostApp.doHttpRequest({
             controller: 'Table',
@@ -53,6 +56,7 @@ export class TableEditor extends Editor {
             },
         });
     }
+
     async delete() {
         await this.deleteData();
         this.parent.removeTable(this);

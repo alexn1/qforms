@@ -116,17 +116,21 @@ export class IndexFrontHostApp {
         this.modals.pop();
         this.view.rerender();
     };
+
     onFolderNameCreate = (textBox) => {
         console.log('IndexFrontHostApp.onFolderNameCreate');
         this.folderNameTextBox = textBox;
     };
+
     onFolderNameChange = (folderName) => {
         // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
         this.folderName = folderName;
     };
+
     onAppNameChange = (appName) => {
         this.appName = appName;
     };
+
     onCreateClick = async (e) => {
         console.log('IndexFrontHostApp.onCreateClick');
         console.log(this.folderName, this.appName);

@@ -23,6 +23,7 @@ export class DatabaseView extends ReactComponent {
             />
         );
     }
+
     render() {
         // console.log('DatabaseView.render');
         const ctrl = this.props.ctrl;

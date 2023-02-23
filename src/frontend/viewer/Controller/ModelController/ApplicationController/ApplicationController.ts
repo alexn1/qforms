@@ -40,6 +40,7 @@ export class ApplicationController extends ModelController<Application> {
         this.homePageName = null;
         this.webSocketClient = null;
     }
+
     static create(model: Application, frontHostApp: FrontHostApp): ApplicationController {
         // console.log(
         //     'ApplicationController.create',
@@ -58,9 +59,11 @@ export class ApplicationController extends ModelController<Application> {
         // const Class = CustomClass ? CustomClass : ApplicationController;
         // return new Class(model, frontHostApp);
     }
+
     static isDebugMode() {
         return Search.getObj()['debug'] === '1';
     }
+
     init() {
         // console.log('ApplicationController.init');
         super.init();
@@ -78,14 +81,17 @@ export class ApplicationController extends ModelController<Application> {
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : document.title;
     }
+
     deinit() {
         // this.model.off('logout', this.onLogout);
         this.model.off('request', this.onRequest);
         super.deinit();
     }
+
     getViewClass() {
         return super.getViewClass() || ApplicationView;
     }
+
     createView(rootElement) {
         // console.log('ApplicationController.createView');
         this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {
@@ -96,6 +102,7 @@ export class ApplicationController extends ModelController<Application> {
             this.statusbar.setLastQueryTime(this.model.getAttr('time'));
         }
     }
+
     onRequest = async (e) => {
         console.log('onRequest', e);
         if (this.statusbar) {
@@ -110,6 +117,7 @@ export class ApplicationController extends ModelController<Application> {
             this.createVersionNotificationIfNotExists();
         }
     };
+
     createVersionNotificationIfNotExists() {
         // console.log('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
@@ -121,11 +129,13 @@ export class ApplicationController extends ModelController<Application> {
             // console.log(`version notification already exists`);
         }
     }
+
     getGlobalParams() {
         return {
             // foo: 'bar'
         };
     }
+
     // options
     // - modal      : boolean,
     // - newMode    : boolean,
@@ -148,6 +158,7 @@ export class ApplicationController extends ModelController<Application> {
 
         return pc;
     }
+
     async openPage(options: OpenPageOptions): Promise<PageController> {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
@@ -316,18 +327,21 @@ export class ApplicationController extends ModelController<Application> {
             throw new Error(`unknown menu type/name: ${type}/${name}`);
         }
     };
+
     /*getFocusCtrl() {
         if (this.modals.length > 0) {
             return this.modals[this.modals.length - 1];
         }
         return this.activePage;
     }*/
+
     getActivePageName() {
         if (this.activePage) {
             return this.activePage.getModel().getName();
         }
         return null;
     }
+
     async onWindowPopState(e) {
         console.log('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
@@ -335,6 +349,7 @@ export class ApplicationController extends ModelController<Application> {
             modal: false,
         });
     }
+
     getTitle() {
         // console.log('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
@@ -342,12 +357,14 @@ export class ApplicationController extends ModelController<Application> {
         }
         return this.getModel().getCaption();
     }
+
     invalidate() {
         if (this.activePage) this.activePage.invalidate();
         this.modals
             .filter((ctrl) => ctrl instanceof PageController)
             .forEach((page) => page.invalidate());
     }
+
     async alert(options) {
         if (!options.title) {
             options.title = this.getModel().getText().application.alert;
@@ -360,6 +377,7 @@ export class ApplicationController extends ModelController<Application> {
             if (activeElement) activeElement.focus();
         }
     }
+
     async confirm(options) {
         if (!options.title) {
             options.title = this.getModel().getText().application.confirm;
@@ -378,20 +396,25 @@ export class ApplicationController extends ModelController<Application> {
             if (activeElement) activeElement.focus();
         }
     }
+
     getRootPath() {
         return '/';
     }
+
     async openModal(ctrl) {
         this.addModal(ctrl);
         await this.rerender();
     }
+
     async closeModal(ctrl) {
         this.removeModal(ctrl);
         await this.rerender();
     }
+
     getHostApp() {
         return this.frontHostApp;
     }
+
     async connect() {
         const data = this.getModel().getData();
         this.webSocketClient = new WebSocketClient({
@@ -403,6 +426,7 @@ export class ApplicationController extends ModelController<Application> {
         });
         await this.webSocketClient.connect();
     }
+
     async rpc(name, params) {
         const result = await this.getModel().rpc(name, params);
         /*if (result.errorMessage) {
@@ -415,9 +439,11 @@ export class ApplicationController extends ModelController<Application> {
         }*/
         return result;
     }
+
     getDomain() {
         return this.getModel().getDomain();
     }
+    
     getBaseUrl() {
         return `/${this.getDomain()}`;
     }

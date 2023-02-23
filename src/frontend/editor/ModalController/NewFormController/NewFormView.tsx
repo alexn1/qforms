@@ -4,12 +4,14 @@ export class NewFormView extends ReactComponent {
     name: any;
     caption: any;
     class: any;
+
     constructor(props) {
         super(props);
         this.name = null;
         this.caption = null;
         this.class = null;
     }
+
     onCreate = async (e) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
@@ -18,6 +20,7 @@ export class NewFormView extends ReactComponent {
             class: this.class.getValue(),
         });
     };
+
     render() {
         const ctrl = this.props.ctrl;
         return (

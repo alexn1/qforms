@@ -16,6 +16,7 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView<RowFormCheckB
             throw err;
         }
     }
+
     renderCheckBoxList() {
         const ctrl = this.getCtrl();
         return (
@@ -30,6 +31,7 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView<RowFormCheckB
             />
         );
     }
+
     render() {
         return <div className={this.getCssClassNames()}>{this.renderCheckBoxList()}</div>;
     }

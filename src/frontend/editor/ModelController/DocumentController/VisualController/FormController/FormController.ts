@@ -8,6 +8,7 @@ import { VisualView } from '../VisualView';
 export class FormController extends VisualController {
     fields: any[];
     items: any[];
+
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];
@@ -19,20 +20,24 @@ export class FormController extends VisualController {
             { getTitle: () => 'Fields', items: this.fields },
         ];
     }
+
     getTitle() {
         return `${this.model.getClassName()}: ${this.model.getName()}`;
     }
+
     getStyle() {
         return {
             // fontWeight: 'bold',
             color: 'green',
         };
     }
+
     init() {
         this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
         this.model.fields.forEach((field) => this.createField(field));
         this.model.actions.forEach((action) => this.createAction(action));
     }
+
     createField(model) {
         const field = new FieldController(model, this);
         field.init();
@@ -155,6 +160,7 @@ export class FormController extends VisualController {
         EditorFrontHostApp.editorApp.treeWidget2.select(null);
         EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
+
     getDocumentViewClass() {
         return VisualView;
     }
