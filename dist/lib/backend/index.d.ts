@@ -13,7 +13,7 @@ export { BkDatabase } from './viewer/BkModel/BkDatabase/BkDatabase';
 export { BkMySqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkMySqlDatabase/BkMySqlDatabase';
 export { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 export { BkMongoDbDatabase } from './viewer/BkModel/BkDatabase/BkNoSqlDatabase/BkMongoDbDatabase/BkMongoDbDatabase';
-export { BkDataSource } from './viewer/BkModel/BkDataSource/BkDataSource';
+export { BkDataSource, ReadResult } from './viewer/BkModel/BkDataSource/BkDataSource';
 export { BkSqlDataSource } from './viewer/BkModel/BkDataSource/BkPersistentDataSource/BkSqlDataSource/BkSqlDataSource';
 export { BkNoSqlDataSource } from './viewer/BkModel/BkDataSource/BkPersistentDataSource/BkNoSqlDataSource/BkNoSqlDataSource';
 export { BkField } from './viewer/BkModel/BkField/BkField';

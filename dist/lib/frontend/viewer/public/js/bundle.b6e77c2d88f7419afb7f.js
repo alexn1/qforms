@@ -38303,12 +38303,12 @@ __webpack_require__.r(__webpack_exports__);
 
 class RowFormRadioFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
     constructor() {
-        super(...arguments);
         /*onChange = async widgetValue => {
             // console.log('RowFormRadioFieldView.onChange', widgetValue);
             this.rerender();
             await this.getCtrl().onChange(widgetValue);
         }*/
+        super(...arguments);
         this.onClick = async (e) => {
             console.log('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
             let value = JSON.parse(e.currentTarget.dataset.value);
@@ -39273,6 +39273,9 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
     }
     isViewMode() {
         return this.getMode() === 'view';
+    }
+    getField(name) {
+        return super.getField(name);
     }
 }
 // @ts-ignore

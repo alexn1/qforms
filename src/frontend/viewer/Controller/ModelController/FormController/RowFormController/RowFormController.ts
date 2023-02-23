@@ -2,6 +2,7 @@ import { FormController } from '../FormController';
 import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
+import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 
 export class RowFormController extends FormController<RowForm> {
     state: any;
@@ -207,9 +208,13 @@ export class RowFormController extends FormController<RowForm> {
     isEditMode() {
         return this.getMode() === 'edit';
     }
-    
+
     isViewMode() {
         return this.getMode() === 'view';
+    }
+
+    getField(name: string): RowFormFieldController {
+        return super.getField(name) as RowFormFieldController;
     }
 }
 

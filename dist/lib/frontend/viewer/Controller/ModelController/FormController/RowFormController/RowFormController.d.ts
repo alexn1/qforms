@@ -1,6 +1,7 @@
 import { FormController } from '../FormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
+import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 export declare class RowFormController extends FormController<RowForm> {
     state: any;
     fields: any;
@@ -28,4 +29,5 @@ export declare class RowFormController extends FormController<RowForm> {
     isActionEnabled(name: any): boolean;
     isEditMode(): boolean;
     isViewMode(): boolean;
+    getField(name: string): RowFormFieldController;
 }

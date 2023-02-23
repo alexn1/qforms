@@ -19,10 +19,10 @@ export declare class TableResult {
     refresh?: boolean;
 }
 export declare class DatabaseResult {
-    [name: string]: TableResult;
+    [table: string]: TableResult;
 }
 export declare class Result {
-    [name: string]: DatabaseResult;
+    [database: string]: DatabaseResult;
     static addInsertToResult(result: Result, dName: string, tName: string, key: Key): void;
     static addInsertExToResult(result: Result, dName: string, tName: string, key: Key, row: RawRow): void;
     static addUpdateToResult(result: Result, dName: string, tName: string, oldKey: Key, newKey: Key): void;

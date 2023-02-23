@@ -25,11 +25,11 @@ export class TableResult {
 }
 
 export class DatabaseResult {
-    [name: string]: TableResult;
+    [table: string]: TableResult;
 }
 
 export class Result {
-    [name: string]: DatabaseResult;
+    [database: string]: DatabaseResult;
 
     static addInsertToResult(result: Result, dName: string, tName: string, key: Key): void {
         if (!result[dName]) result[dName] = new DatabaseResult();

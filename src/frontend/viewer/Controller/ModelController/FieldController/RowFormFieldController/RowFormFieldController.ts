@@ -6,7 +6,7 @@ import { RowFormController } from '../../FormController/RowFormController/RowFor
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
 
-export class RowFormFieldController<TField extends Field> extends FieldController<TField> {
+export class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     state: any;
 
     constructor(model: TField, parent) {
