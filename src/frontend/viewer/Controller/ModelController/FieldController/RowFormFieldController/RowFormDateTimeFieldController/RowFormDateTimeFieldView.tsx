@@ -8,6 +8,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
         // console.log('RowFormDateTimeFieldView.onClear2');
         this.getCtrl().onChange2(null);
     };
+
     isCloseVisible() {
         if (this.props.readOnly) return false;
         const { ctrl } = this.props;
@@ -16,6 +17,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
         }
         return ctrl.widget2.state.value !== '';
     }
+
     renderDatePart() {
         const ctrl = this.getCtrl();
         return (
@@ -35,6 +37,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
             />
         );
     }
+
     renderTimePart() {
         const ctrl = this.getCtrl();
         return (
@@ -50,9 +53,11 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
             />
         );
     }
+
     getMode() {
         return this.getCtrl().state.value ? 'datetime' : 'date';
     }
+
     render() {
         // console.log('RowFormDateTimeFieldView.render');
         return (
