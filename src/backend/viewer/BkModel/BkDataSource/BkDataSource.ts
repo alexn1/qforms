@@ -301,12 +301,15 @@ export class BkDataSource extends BkModel {
     async create(context: Context, _values: any = null): Promise<Result> {
         throw new Error(`${this.constructor.name}.create not implemented`);
     }
+
     async update(context: Context): Promise<Result> {
         throw new Error(`${this.constructor.name}.update not implemented`);
     }
+
     async delete(context: Context): Promise<Result> {
         throw new Error(`${this.constructor.name}.delete not implemented`);
     }
+
     getForm(): BkForm | null {
         return this.isOnForm() ? this.getParent() : null;
     }

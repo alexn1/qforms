@@ -14,6 +14,7 @@ export class BkDateField extends BkField {
         response.validateOnChange = this.getAttr('validateOnChange');
         response.validateOnBlur = this.getAttr('validateOnBlur');
     }
+
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
@@ -26,6 +27,7 @@ export class BkDateField extends BkField {
         // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
+
     rawToValue(raw) {
         const value = Helper.decodeValue(raw);
         if (value && !this.isTimezone()) {

@@ -7,12 +7,14 @@ import { Helper } from './Helper';
 export class FileSessionStore extends session.Store {
     store: any;
     dirPath: string;
+
     constructor(dirPath: string) {
         // console.log('FileSessionStore.constructor', dirPath);
         super();
         this.dirPath = dirPath;
         this.store = {};
     }
+
     set(sid, session, cb) {
         console.log('FileSessionStore.set', sid, session);
         this.store[sid] = session;
@@ -22,6 +24,7 @@ export class FileSessionStore extends session.Store {
             cb(null);
         });
     }
+
     get(sid, cb) {
         // console.log('FileSessionStore.get', sid);
         const session = this.store[sid];
@@ -43,6 +46,7 @@ export class FileSessionStore extends session.Store {
             });
         }
     }
+
     destroy(sid, cb) {
         console.log('FileSessionStore.destroy', sid);
         delete this.store[sid];

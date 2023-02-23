@@ -802,6 +802,7 @@ export class BackHostApp {
     getFrontendDirPath() {
         return this.frontendDirPath;
     }
+    
     initCustomRoutes() {}
 
     alias(
