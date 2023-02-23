@@ -22,11 +22,13 @@ export class FieldEditor extends Editor {
             autoFocus: params.autoFocus !== undefined ? params.autoFocus : 'false',
         };
     }
+
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
         this.setData(this.getColName(), newData);
         return newData;
     }
+
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -39,6 +41,7 @@ export class FieldEditor extends Editor {
         });
         return js;
     }
+
     async createJsx(params) {
         const templateFilePath = path.join(__dirname, 'View.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
@@ -51,6 +54,7 @@ export class FieldEditor extends Editor {
         });
         return jsx;
     }
+
     async createLess(params) {
         const templateFilePath = path.join(__dirname, 'View.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
@@ -63,11 +67,13 @@ export class FieldEditor extends Editor {
         });
         return less;
     }
+
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
         return dirPath;
     }
+
     getColName() {
         return 'fields';
     }

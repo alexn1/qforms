@@ -5,6 +5,7 @@ export class ParamEditorController extends EditorController {
         console.log('ParamEditorController.constructor');
         super(...args);
     }*/
+
     async _new(params) {
         console.log('ParamEditorController._new');
         const appEditor = this.createApplicationEditor();
@@ -13,6 +14,7 @@ export class ParamEditorController extends EditorController {
         await appEditor.save();
         return data;
     }
+
     async save(params) {
         console.log('ParamEditorController.save');
         const appEditor = this.createApplicationEditor();
@@ -22,6 +24,7 @@ export class ParamEditorController extends EditorController {
         await appEditor.save();
         return null;
     }
+
     async delete(params) {
         console.log('ParamEditorController.delete');
         const appEditor = this.createApplicationEditor();

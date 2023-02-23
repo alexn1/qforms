@@ -20,6 +20,7 @@ export class ActionEditorController extends EditorController {
         }
         return data;
     }
+
     async save(params) {
         const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {
@@ -40,6 +41,7 @@ export class ActionEditorController extends EditorController {
         }
         return null;
     }
+
     async delete(params) {
         const appEditor = this.createApplicationEditor();
         let data;
@@ -58,6 +60,7 @@ export class ActionEditorController extends EditorController {
         }
         return data;
     }
+
     async moveUp(params) {
         const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {
@@ -76,6 +79,7 @@ export class ActionEditorController extends EditorController {
         }
         return null;
     }
+
     async moveDown(params) {
         const appEditor = this.createApplicationEditor();
         if (params.pageFileName) {

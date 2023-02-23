@@ -4,6 +4,7 @@ export class FieldEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
+
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -12,6 +13,7 @@ export class FieldEditorController extends VisualEditorController {
         await pageEditor.save();
         return data;
     }
+
     async save(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -21,6 +23,7 @@ export class FieldEditorController extends VisualEditorController {
         await pageEditor.save();
         return null;
     }
+
     async delete(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -29,6 +32,7 @@ export class FieldEditorController extends VisualEditorController {
         await pageEditor.save();
         return data;
     }
+
     async changeClass(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

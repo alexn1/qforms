@@ -7,11 +7,13 @@ export class PageEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
+
     async get(params) {
         const pageFilePath = path.join(this.appInfo.dirPath, params.fileName);
         const content = await Helper.readTextFile(pageFilePath);
         return JSON.parse(content);
     }
+
     async save(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.fileName);
@@ -19,12 +21,14 @@ export class PageEditorController extends VisualEditorController {
         await pageEditor.save();
         return null;
     }
+
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const data = await appEditor.newPageAndPageLinkData(params);
         await appEditor.save();
         return data;
     }
+
     async delete(params) {
         const appEditor = this.createApplicationEditor();
         await appEditor.removePageFile(params.page);
@@ -32,6 +36,7 @@ export class PageEditorController extends VisualEditorController {
         await appEditor.save();
         return data;
     }
+
     async getView(params) {
         const result = await super.getView(params);
         switch (params.view) {
@@ -49,30 +54,35 @@ export class PageEditorController extends VisualEditorController {
                 return result;
         }
     }
+
     async createController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const js = await pageEditor.createJs(params);
         return { js };
     }
+
     async createView(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const jsx = await pageEditor.createJsx(params);
         return { jsx };
     }
+
     async createStyle(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         const less = await pageEditor.createLess(params);
         return { less };
     }
+
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
         await pageEditor.saveCustomFile('js', params.text);
         return { js: params.text };
     }
+
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

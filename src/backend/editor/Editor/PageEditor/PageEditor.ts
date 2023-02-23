@@ -7,11 +7,13 @@ import { Editor } from '../Editor';
 export class PageEditor extends Editor {
     appEditor: ApplicationEditor;
     pageFile: JsonFile;
+
     constructor(appEditor, pageFile) {
         super(pageFile.data, appEditor);
         this.appEditor = appEditor;
         this.pageFile = pageFile;
     }
+
     static createData(params) {
         return {
             '@class': 'Page',
@@ -32,6 +34,7 @@ export class PageEditor extends Editor {
             forms: [...(params.forms ? params.forms.map(Editor.createItemData) : [])],
         };
     }
+
     setAttr(name, value) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
@@ -40,9 +43,11 @@ export class PageEditor extends Editor {
         }
         super.setAttr(name, value);
     }
+
     async save() {
         await this.pageFile.save();
     }
+
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -52,6 +57,7 @@ export class PageEditor extends Editor {
         });
         return js;
     }
+
     async createJsx(params) {
         const templateFilePath = path.join(__dirname, 'Page.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
@@ -61,6 +67,7 @@ export class PageEditor extends Editor {
         });
         return jsx;
     }
+
     async createLess(params) {
         const templateFilePath = path.join(__dirname, 'Page.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
@@ -70,6 +77,7 @@ export class PageEditor extends Editor {
         });
         return less;
     }
+
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -78,11 +86,13 @@ export class PageEditor extends Editor {
         });
         return js;
     }
+
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }
+
     reformat() {
         this.data = this.pageFile.data = PageEditor.createData({
             ...this.attributes(),

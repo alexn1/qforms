@@ -11,6 +11,7 @@ export class TableEditor extends Editor {
             columns: [...(params.columns ? params.columns.map(Editor.createItemData) : [])],
         };
     }
+
     getColName() {
         return 'tables';
     }

@@ -11,6 +11,7 @@ export class ParamEditor extends Editor {
             },
         };
     }
+
     getColName() {
         return 'params';
     }

@@ -11,6 +11,7 @@ export class ActionEditor extends Editor {
             },
         };
     }
+
     getColName() {
         return 'actions';
     }

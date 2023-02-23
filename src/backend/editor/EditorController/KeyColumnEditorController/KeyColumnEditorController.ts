@@ -5,6 +5,7 @@ export class KeyColumnEditorController extends EditorController {
     /*constructor(...args) {
         super(...args);
     }*/
+
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         if (params.page) {

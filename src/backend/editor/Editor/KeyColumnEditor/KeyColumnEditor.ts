@@ -10,6 +10,7 @@ export class KeyColumnEditor extends Editor {
             },
         };
     }
+
     getColName() {
         return 'keyColumns';
     }

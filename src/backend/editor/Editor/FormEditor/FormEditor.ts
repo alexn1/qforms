@@ -15,6 +15,7 @@ export class FormEditor extends Editor {
             modelClass: params.modelClass !== undefined ? params.modelClass : '',
         };
     }
+
     static createData(params): any {
         console.log('FormEditor.createData', params);
         return {
@@ -29,6 +30,7 @@ export class FormEditor extends Editor {
             fields: [...(params.fields ? params.fields.map(Editor.createItemData) : [])],
         };
     }
+
     async createJs(params) {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
@@ -39,6 +41,7 @@ export class FormEditor extends Editor {
         });
         return js;
     }
+
     async createJsx(params) {
         const templateFilePath = path.join(__dirname, 'Form.jsx.ejs');
         const customFilePath = await this.getCustomFilePath('jsx');
@@ -49,6 +52,7 @@ export class FormEditor extends Editor {
         });
         return jsx;
     }
+
     async createLess(params) {
         const templateFilePath = path.join(__dirname, 'Form.less.ejs');
         const customFilePath = await this.getCustomFilePath('less');
@@ -59,6 +63,7 @@ export class FormEditor extends Editor {
         });
         return less;
     }
+
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -69,10 +74,12 @@ export class FormEditor extends Editor {
         });
         return js;
     }
+
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
+
     getColName() {
         return 'forms';
     }

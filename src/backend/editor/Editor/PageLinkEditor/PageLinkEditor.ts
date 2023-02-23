@@ -12,6 +12,7 @@ export class PageLinkEditor extends Editor {
             },
         };
     }
+
     getColName() {
         return 'pageLinks';
     }

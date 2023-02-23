@@ -13,6 +13,7 @@ export class ApplicationEditorController extends VisualEditorController {
         await appEditor.save();
         return null;
     }
+
     async getView(params) {
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
@@ -22,16 +23,19 @@ export class ApplicationEditorController extends VisualEditorController {
         }
         return result;
     }
+
     async createController(params) {
         const appEditor = this.createApplicationEditor();
         const js = await appEditor.createJs(params);
         return { js };
     }
+
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const js = await appEditor.createModelBackJs(params);
         return { js };
     }
+
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         await appEditor.saveCustomFile('js', params.text);

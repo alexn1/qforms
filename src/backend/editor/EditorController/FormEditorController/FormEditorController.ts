@@ -4,6 +4,7 @@ export class FormEditorController extends VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
+
     async _new(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
@@ -11,6 +12,7 @@ export class FormEditorController extends VisualEditorController {
         await pageEditor.save();
         return data;
     }
+
     async save(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params['pageFileName']);
@@ -19,6 +21,7 @@ export class FormEditorController extends VisualEditorController {
         await pageEditor.save();
         return null;
     }
+
     async delete(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -26,6 +29,7 @@ export class FormEditorController extends VisualEditorController {
         await pageEditor.save();
         return data;
     }
+
     async moveUp(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -33,6 +37,7 @@ export class FormEditorController extends VisualEditorController {
         await pageEditor.save();
         return 'ok';
     }
+
     async moveDown(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.createPageEditor(params.pageFileName);
@@ -40,6 +45,7 @@ export class FormEditorController extends VisualEditorController {
         await pageEditor.save();
         return 'ok';
     }
+
     async getView(params) {
         console.log('FormEditorController.getView');
         const result = await super.getView(params);
@@ -59,6 +65,7 @@ export class FormEditorController extends VisualEditorController {
                 return result;
         }
     }
+
     async createController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
@@ -66,6 +73,7 @@ export class FormEditorController extends VisualEditorController {
         const js = await formEditor.createJs(params);
         return { js };
     }
+
     async createView(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
@@ -73,6 +81,7 @@ export class FormEditorController extends VisualEditorController {
         const jsx = await formEditor.createJsx(params);
         return { jsx };
     }
+
     async createStyle(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
@@ -80,6 +89,7 @@ export class FormEditorController extends VisualEditorController {
         const less = await formEditor.createLess(params);
         return { less };
     }
+
     async saveController(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);
@@ -87,6 +97,7 @@ export class FormEditorController extends VisualEditorController {
         await formEditor.saveCustomFile('js', params.text);
         return { js: params.text };
     }
+
     async createModelBackJs(params) {
         const appEditor = this.createApplicationEditor();
         const pageEditor = await appEditor.getPage(params.page);

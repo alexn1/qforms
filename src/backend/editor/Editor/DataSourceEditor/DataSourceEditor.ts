@@ -16,6 +16,7 @@ export class DataSourceEditor extends Editor {
             ],
         };
     }
+
     static createAttributes(params): any {
         if (!params.name) throw new Error('no name');
         return {
@@ -25,10 +26,12 @@ export class DataSourceEditor extends Editor {
             modelClass: params.modelClass !== undefined ? params.modelClass : '',
         };
     }
+
     async getCollectionDirPath() {
         const customDirPath = await this.parent.getCustomDirPath();
         return path.join(customDirPath, 'dataSources');
     }
+
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
@@ -40,9 +43,11 @@ export class DataSourceEditor extends Editor {
         });
         return js;
     }
+
     getColName() {
         return 'dataSources';
     }
+
     async save() {
         if (this.parent instanceof ApplicationEditor) {
             await this.parent.appFile.save();
