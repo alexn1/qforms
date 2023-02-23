@@ -4,5 +4,13 @@ main();
 async function main() {
     console.log('main');
 
-    const app = new BkApplication();
+    const appFilePath = './apps/mongo/mongo.json';
+
+    const appInfo = await BkApplication.loadAppInfo(appFilePath, null);
+    // console.log('appInfo', appInfo);
+
+    const application = new BkApplication(appInfo.appFile.data, appInfo, {}, {});
+    // await application.init(context);
+
+    // const app = new BkApplication();
 }

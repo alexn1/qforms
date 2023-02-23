@@ -52,7 +52,10 @@ class BkApplication extends BkModel_1.BkModel {
             throw new Error('no hostApp');
         if (!context)
             throw new Error('no route');
-        this.env = context.getEnv();
+        const env = context.getEnv();
+        if (!env)
+            throw new Error('BkApplication: env required');
+        this.env = env;
     }
     async init(context) {
         await super.init(context);

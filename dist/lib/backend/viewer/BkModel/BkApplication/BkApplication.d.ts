@@ -10,13 +10,15 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 export declare class BkApplication extends BkModel {
-    appInfo: AppInfo;
+    protected appInfo: AppInfo;
     protected hostApp: BackHostApp;
     env: string;
     databases: BkDatabase[];
     actions: BkAction[];
     dataSources: BkDataSource[];
-    pages: any;
+    pages: {
+        [pageLinkName: string]: BkPage;
+    };
     links: any[];
     scripts: any[];
     menu: any;

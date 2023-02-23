@@ -26,7 +26,7 @@ export class BkApplication extends BkModel {
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
-    pages: any = {};
+    pages: { [pageLinkName: string]: BkPage } = {};
     links: any[];
     scripts: any[];
     menu: any;
@@ -35,14 +35,16 @@ export class BkApplication extends BkModel {
 
     constructor(
         data: any,
-        public appInfo: AppInfo,
+        protected appInfo: AppInfo,
         protected hostApp: BackHostApp,
         context: Context,
     ) {
         super(data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context) throw new Error('no route');
-        this.env = context.getEnv();
+        const env = context.getEnv();
+        if (!env) throw new Error('BkApplication: env required');
+        this.env = env;
     }
 
     async init(context: Context): Promise<void> {
