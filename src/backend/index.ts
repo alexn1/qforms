@@ -6,6 +6,19 @@ export { BackHostApp } from './BackHostApp';
 export { Converter } from './Converter';
 export { JsonFile } from './JsonFile';
 export { AppInfo } from './AppInfo';
+export {
+    JSONString,
+    Key,
+    KeyValue,
+    KeyArray,
+    Row,
+    RawRow,
+    ChangesByKey,
+    KeyParams,
+    KeyValues,
+    QueryParams,
+    keyArrayToKey,
+} from '../types';
 
 // viewer
 export { BkModel } from './viewer/BkModel/BkModel';
