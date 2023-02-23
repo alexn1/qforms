@@ -318,11 +318,6 @@ class BkApplication extends BkModel_1.BkModel {
     }
     // to init custom context params before each request get/post
     async initContext(context) { }
-    static makeDistDirPath(appFilePath, hostApp) {
-        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
-        const distDirPath = path_1.default.join(hostApp.getDistDirPath(), dirName);
-        return distDirPath;
-    }
     static makeAppInfoFromAppFile(appFile, distDirPath) {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;

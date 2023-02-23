@@ -23,7 +23,7 @@ class IndexModule {
         // console.log('app.js:' , this.js);
     }
     async fill() {
-        const distDirPath = BkApplication_1.BkApplication.makeDistDirPath(this.hostApp.appsDirPath, this.hostApp);
+        const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
         // console.log('appInfos:', appInfos);
         return {

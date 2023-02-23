@@ -33,7 +33,7 @@ export class IndexModule {
     }
 
     async fill() {
-        const distDirPath = BkApplication.makeDistDirPath(this.hostApp.appsDirPath, this.hostApp);
+        const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
         // console.log('appInfos:', appInfos);
         return {

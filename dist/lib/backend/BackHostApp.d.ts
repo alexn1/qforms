@@ -73,4 +73,5 @@ export declare class BackHostApp {
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     static test(): void;
     getDistDirPath(): string;
+    makeDistDirPathForApp(appFilePath: string): string;
 }

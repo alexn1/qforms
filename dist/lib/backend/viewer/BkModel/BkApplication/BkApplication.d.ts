@@ -53,7 +53,6 @@ export declare class BkApplication extends BkModel {
     findDatabase(name: string): BkDatabase;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeDistDirPath(appFilePath: string, hostApp: BackHostApp): string;
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo;
     static loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;

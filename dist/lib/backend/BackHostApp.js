@@ -219,7 +219,7 @@ class BackHostApp {
     async createApplication(context) {
         console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
         const appFilePath = this.getAppFilePath(context);
-        const distDirPath = BkApplication_1.BkApplication.makeDistDirPath(appFilePath, this);
+        const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(appFilePath, distDirPath);
         // ApplicationClass
         const ApplicationClass = this.getApplicationClass(appInfo);
@@ -251,7 +251,7 @@ class BackHostApp {
         const appFilePath = path_1.default.join(appDirPath, name + '.json');
         await Helper_1.Helper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
-        const distDirPath = BkApplication_1.BkApplication.makeDistDirPath(appFilePath, this);
+        const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, distDirPath);
         return appInfos;
     }
@@ -764,6 +764,11 @@ class BackHostApp {
     }
     getDistDirPath() {
         return this.distDirPath;
+    }
+    makeDistDirPathForApp(appFilePath) {
+        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
+        const distDirPath = path_1.default.join(this.getDistDirPath(), dirName);
+        return distDirPath;
     }
 }
 exports.BackHostApp = BackHostApp;

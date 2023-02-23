@@ -354,12 +354,6 @@ export class BkApplication extends BkModel {
     // to init custom context params before each request get/post
     async initContext(context: Context): Promise<void> {}
 
-    static makeDistDirPath(appFilePath: string, hostApp: BackHostApp) {
-        const dirName = path.basename(path.dirname(appFilePath));
-        const distDirPath = path.join(hostApp.getDistDirPath(), dirName);
-        return distDirPath;
-    }
-
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
@@ -390,15 +384,12 @@ export class BkApplication extends BkModel {
         return appInfo;
     }
 
-    static async getAppInfos(
-        appsDirPath: string,
-        distDirPath: string,
-    ): Promise<AppInfo[]> {
+    static async getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]> {
         // console.log('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
-            const appFilePath = appFilesPaths[i];            
+            const appFilePath = appFilesPaths[i];
             const appInfo = await BkApplication.loadAppInfo(appFilePath, distDirPath);
             if (appInfo) {
                 appInfos.push(appInfo);
