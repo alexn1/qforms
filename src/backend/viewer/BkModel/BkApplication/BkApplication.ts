@@ -411,16 +411,19 @@ export class BkApplication extends BkModel {
             await db.connect(context);
         }
     }
+
     async release(context): Promise<void> {
         for (const db of this.databases) {
             await db.release(context);
         }
     }
+
     addClient(webSocket): void {
         // add to clients
         this.clients.push(webSocket);
         // console.log('this.clients', this.clients);
     }
+
     removeClient(webSocket): void {
         const i = this.clients.indexOf(webSocket);
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
@@ -444,6 +447,7 @@ export class BkApplication extends BkModel {
             }
         }
     }
+
     broadcastForeignResultToClients(context: Context, result: Result): void {
         console.log(
             'Application.broadcastForeignResultToClients',
@@ -462,6 +466,7 @@ export class BkApplication extends BkModel {
             }
         }
     }
+
     composeForeignResult(result: Result): Result | null {
         let fResult: Result | null = null;
         for (const databaseName in result) {
@@ -479,6 +484,7 @@ export class BkApplication extends BkModel {
         }
         return fResult;
     }
+
     getTitle(context: Context) {
         return this.getAttr('caption');
     }
