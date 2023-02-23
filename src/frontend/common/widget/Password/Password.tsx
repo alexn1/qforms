@@ -7,6 +7,7 @@ import './Password.less';
 
 export class Password extends ReactComponent {
     inputEl: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.el = React.createRef();
@@ -16,12 +17,15 @@ export class Password extends ReactComponent {
             type: 'password',
         };
     }
+
     getInputElement() {
         return this.inputEl.current;
     }
+
     getValue() {
         return this.state.value;
     }
+
     _setValue(value) {
         // @ts-ignore
         this.state.value = value;
@@ -30,21 +34,26 @@ export class Password extends ReactComponent {
             this.props.onChange(value);
         }
     }
+
     onChange = (e) => {
         this._setValue(e.target.value);
     };
+
     onCloseClick = (e) => {
         this._setValue('');
         this.getInputElement().focus();
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     isCloseVisible() {
         return this.state.value !== '';
     }
+
     onIconClick = (e) => {
         this.setState((prevState) => {
             return {
@@ -53,6 +62,7 @@ export class Password extends ReactComponent {
         });
         this.getInputElement().focus();
     };
+
     render() {
         return (
             <div ref={this.el} className={this.getCssClassNames()}>

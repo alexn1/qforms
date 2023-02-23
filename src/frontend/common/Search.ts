@@ -10,6 +10,7 @@ export class Search {
                 return acc;
             }, {});
     }
+
     static objToString(obj) {
         const search = Object.keys(obj)
             .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
@@ -17,6 +18,7 @@ export class Search {
         if (!search) return '';
         return `?${search}`;
     }
+
     static filter(names) {
         const newObj = {};
         const obj = Search.getObj();

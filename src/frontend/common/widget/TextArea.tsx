@@ -8,9 +8,11 @@ export class TextArea extends ReactComponent {
             value: this.props.value || '',
         };
     }
+
     getValue() {
         return this.state.value;
     }
+
     onChange = (e) => {
         // console.log('TextArea.onChange', e.target.value);
         this.setState({ value: e.target.value });
@@ -18,12 +20,14 @@ export class TextArea extends ReactComponent {
             this.props.onChange(e.target.value);
         }
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     render() {
         // console.log('TextArea.render');
         return (

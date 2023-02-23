@@ -8,10 +8,12 @@ export class Tab2 extends ReactComponent {
             active: 0,
         };
     }
+
     getActive() {
         if (this.props.getActive) return this.props.getActive();
         return this.state.active;
     }
+
     onLiMouseDown = (e) => {
         // console.log('Tab.onLiMouseDown', e.target);
         if (e.target.classList.contains('close')) return;
@@ -24,6 +26,7 @@ export class Tab2 extends ReactComponent {
             }
         }
     };
+
     onLiClick = (e) => {
         // console.log('Tab.onLiClick', e.target);
         if (e.target.classList.contains('close')) {
@@ -32,6 +35,7 @@ export class Tab2 extends ReactComponent {
             if (this.props.onTabClose) this.props.onTabClose(i);
         }
     };
+
     selectTab(i) {
         if (i === this.getActive()) return;
         const start = Date.now();
@@ -53,6 +57,7 @@ export class Tab2 extends ReactComponent {
             </li>
         ));
     }
+
     renderContents() {
         return this.props.tabs.map((tab, i) => (
             <div
@@ -64,6 +69,7 @@ export class Tab2 extends ReactComponent {
             </div>
         ));
     }
+
     render() {
         return (
             <div className={this.getCssClassNames()}>

@@ -4,14 +4,17 @@ import './Image.less';
 
 export class Image extends ReactComponent {
     img: React.RefObject<any>;
+
     constructor(props) {
         super(props);
         this.img = React.createRef();
         this.state = { classList: null };
     }
+
     getNaturalSize() {
         return [this.img.current.naturalWidth, this.img.current.naturalHeight];
     }
+
     onImgClick = async (e) => {
         console.log('Image.onImgClick');
         if (this.props.onClick) {
@@ -25,6 +28,7 @@ export class Image extends ReactComponent {
             }
         });
     };
+
     render() {
         return (
             <img
@@ -35,6 +39,7 @@ export class Image extends ReactComponent {
             />
         );
     }
+
     /*componentDidMount() {
         console.log('Image.componentDidMount', this.getNaturalSize());
     }*/

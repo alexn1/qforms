@@ -7,6 +7,7 @@ export class ComboBox extends ReactComponent {
         if (!props.items) throw new Error('no ComboBox items');
         this.state = { value: this.getInitialValue() };
     }
+
     getInitialValue() {
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
@@ -30,9 +31,11 @@ export class ComboBox extends ReactComponent {
         // console.log('combobox value:', value);
         return value;
     }
+
     getValue() {
         return this.state.value;
     }
+
     onChange = async (e) => {
         // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setState({ value: e.target.value });
@@ -40,18 +43,21 @@ export class ComboBox extends ReactComponent {
             await this.props.onChange(e.target.value);
         }
     };
+
     onMouseDown = async (e) => {
         // console.log('ComboBox.onMouseDown', e.button);
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
         }
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     render() {
         // console.log('ComboBox.render', this.state.value);
         return (

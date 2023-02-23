@@ -9,9 +9,11 @@ export class PhoneBox extends ReactComponent {
             value: PhoneBox.formatPhoneNumber(this.props.value || ''),
         };
     }
+
     getValue() {
         return PhoneBox.clearValue(this.state.value);
     }
+
     onKeyPress = (e) => {
         // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
         // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
@@ -26,6 +28,7 @@ export class PhoneBox extends ReactComponent {
             e.preventDefault();
         }
     };
+
     onChange = (e) => {
         // console.log('PhoneBox.onChange', e.target.value);
         const start = e.target.selectionStart;
@@ -52,6 +55,7 @@ export class PhoneBox extends ReactComponent {
             this.props.onChange(value);
         }
     };
+
     onBlur = (e) => {
         // console.log('PhoneBox.onBlur');
         let value = PhoneBox.clearValue(e.target.value);
@@ -63,6 +67,7 @@ export class PhoneBox extends ReactComponent {
             this.props.onBlur(value);
         }
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
@@ -71,6 +76,7 @@ export class PhoneBox extends ReactComponent {
         }
         return true;
     }
+
     render() {
         // console.log('TextBox.render');
         return (
@@ -94,9 +100,11 @@ export class PhoneBox extends ReactComponent {
             />
         );
     }
+
     static clearValue(value) {
         return value.replace(/[^\+0-9]/g, '');
     }
+
     static ifNoCodeAddRussianCode(value) {
         if (value === '') {
         } else if (value.match(/^8/)) {
@@ -108,6 +116,7 @@ export class PhoneBox extends ReactComponent {
         }
         return value;
     }
+    
     static formatPhoneNumber(_value) {
         const value = PhoneBox.clearValue(_value);
 

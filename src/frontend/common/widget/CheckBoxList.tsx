@@ -8,12 +8,15 @@ export class CheckBoxList extends ReactComponent {
             value: this.props.value || [],
         };
     }
+
     getItems() {
         return this.props.items || [];
     }
+
     getValue() {
         return this.state.value || [];
     }
+
     onCheckBoxChange = (e) => {
         // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
         const checked = e.target.checked;
@@ -46,12 +49,15 @@ export class CheckBoxList extends ReactComponent {
             },
         );
     };
+
     isValueChecked(value) {
         return this.getValue().indexOf(value) > -1;
     }
+
     composeItemId(value) {
         return `${this.props.name}.${value}`;
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // console.log('nextProps.value:', nextProps.value);
@@ -59,6 +65,7 @@ export class CheckBoxList extends ReactComponent {
         this.state.value = nextProps.value;
         return true;
     }
+
     render() {
         return (
             <ul className={this.getCssClassNames()}>

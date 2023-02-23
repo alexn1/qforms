@@ -8,31 +8,38 @@ export class Button extends ReactComponent {
         this.state = { disabled: undefined };
         this.el = createRef();
     }
+
     /*isDisabled() {
         if (this.props.disabled !== undefined) return this.props.disabled;
         if (this.props.enabled !== undefined) return !this.props.enabled;
         return this.state.disabled;
     }*/
+
     /*isEnabled() {
         return !this.isDisabled();
     }*/
+
     /*disable() {
         this.setState({disabled: true});
     }*/
+
     /*enable() {
         this.setState({disabled: false});
     }*/
+
     isVisible() {
         // return this.props.visible === undefined ? true : this.props.visible;
         if (this.props.visible !== undefined) return this.props.visible;
         return true;
     }
+
     getStyle() {
         return {
             display: !this.isVisible() ? 'none' : null,
             width: this.props.width,
         };
     }
+
     render() {
         // console.log('Button.render', this.props.title, this.props);
         return (

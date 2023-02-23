@@ -9,18 +9,22 @@ export class Expand extends ReactComponent {
             opened: this.props.opened !== undefined ? this.props.opened : false,
         };
     }
+
     isOpened() {
         return this.state.opened;
     }
+
     isHighlighted() {
         return !!this.props.highlighted;
     }
+
     onTitleClick = (e) => {
         console.log('Expand.onTitleClick');
         this.setState((prevState) => {
             return { opened: !prevState.opened };
         });
     };
+
     render() {
         return (
             <div

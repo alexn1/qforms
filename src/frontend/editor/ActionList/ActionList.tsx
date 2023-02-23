@@ -7,10 +7,12 @@ export class ActionList extends ReactComponent {
             item: null,
         };
     }
+
     onClick = async (li) => {
         console.log('ActionList.onClick', li);
         await this.props.onClick(li.dataset.action);
     };
+
     render() {
         // console.log('ActionList.render', this.state.item);
         return (

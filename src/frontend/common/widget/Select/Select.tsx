@@ -16,9 +16,11 @@ export class Select extends ReactComponent {
             visible: false,
         };
     }
+
     isVisible() {
         return this.state.visible;
     }
+
     getInitialValue() {
         // console.log('Select.getInitialValue', this.props.value);
         let value = null;
@@ -47,18 +49,23 @@ export class Select extends ReactComponent {
         // console.log('select value:', value);
         return value;
     }
+
     getValue() {
         return this.state.value;
     }
+
     isNullable() {
         return this.props.nullable !== undefined ? this.props.nullable : true;
     }
+
     getVisibility(): 'visible' | 'hidden' {
         return this.isVisible() ? 'visible' : 'hidden';
     }
+
     getDisplay() {
         return this.isVisible() ? 'block' : 'none';
     }
+
     onKeyDown = async (e) => {
         // console.log('Select.onKeyDown');
         if (this.isVisible()) {
@@ -66,6 +73,7 @@ export class Select extends ReactComponent {
             e.stopPropagation();
         }
     };
+
     onInputMouseDown = async (e) => {
         console.log('Select.onInputMouseDown');
         if (this.props.readOnly) return;
@@ -91,13 +99,16 @@ export class Select extends ReactComponent {
             });
         }
     };
+
     onInputBlur = async (e) => {
         console.log('Select.onInputBlur', e.target);
         this.setState({ visible: false });
     };
+
     onDropdownMouseDown = async (e) => {
         e.preventDefault();
     };
+
     onDropdownClick = async (e) => {
         console.log('Select.onDropdownClick', e.target.offsetTop);
         const value = JSON.parse(e.target.dataset.value);
@@ -108,6 +119,7 @@ export class Select extends ReactComponent {
             }
         });
     };
+
     onCloseClick = async (e) => {
         this.setState({ value: '' });
         if (this.props.onChange) {
@@ -115,9 +127,11 @@ export class Select extends ReactComponent {
         }
         this.getElement();
     };
+
     getItems() {
         return this.props.items || [];
     }
+
     getValueTitle(value) {
         if (value === '') return '';
         const item = this.getItems().find((item) => item.value === value);
@@ -125,16 +139,19 @@ export class Select extends ReactComponent {
         // console.log('item:', item);
         return item.title || item.value;
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     isCloseVisible() {
         if (this.props.readOnly) return false;
         return this.state.value !== '';
     }
+
     renderInput() {
         return (
             <input
@@ -149,6 +166,7 @@ export class Select extends ReactComponent {
             />
         );
     }
+
     renderClose() {
         return (
             <div
@@ -160,6 +178,7 @@ export class Select extends ReactComponent {
             </div>
         );
     }
+
     renderIcon() {
         return (
             <div className={`${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}`}>
@@ -167,6 +186,7 @@ export class Select extends ReactComponent {
             </div>
         );
     }
+
     renderDropdown() {
         return (
             <ul
@@ -197,6 +217,7 @@ export class Select extends ReactComponent {
             </ul>
         );
     }
+
     render() {
         // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return (

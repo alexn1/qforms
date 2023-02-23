@@ -8,6 +8,7 @@ import './Grid.less';
 export class Grid extends ReactComponent {
     columns: any;
     head: React.RefObject<any>;
+
     constructor(props) {
         // console.log('Grid.constructor', props);
         super(props);
@@ -24,24 +25,30 @@ export class Grid extends ReactComponent {
         this.el = React.createRef();
         this.head = React.createRef();
     }
+
     getActiveColumn() {
         return this.state.column;
     }
+
     setActiveColumn(column) {
         // @ts-ignore
         this.state.column = column;
     }
+
     getActiveRowKey() {
         return this.state.key;
     }
+
     setActiveRowKey(key) {
         // console.log('Grid.setActiveRowKey', key);
         // @ts-ignore
         this.state.key = key;
     }
+
     isRowActive(i, key) {
         return this.getActiveRowKey() === key;
     }
+
     onCellMouseDown = async (e) => {
         console.log('Grid.onCellMouseDown', this.isLink());
         e.preventDefault(); // prevent text selection on double click
@@ -57,12 +64,14 @@ export class Grid extends ReactComponent {
             this.props.onClick(row, key);
         }
     };
+
     onRowMouseDown = async (e) => {
         console.log('Grid.onRowMouseDown', this.isLink());
         // if (this.isLink()) return;
         const key = e.currentTarget.dataset.row;
         await this.selectRow(key);
     };
+
     onCellDoubleClick = async (e) => {
         // console.log('Grid.onCellDoubleClick');
         const button = e.button;
@@ -74,6 +83,7 @@ export class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     };
+
     onRowDoubleClick = async (e) => {
         // console.log('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
@@ -84,6 +94,7 @@ export class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     };
+
     onKeyDown = async (e) => {
         // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
         if (this.isDisabled()) return;
@@ -120,6 +131,7 @@ export class Grid extends ReactComponent {
                 break;
         }
     };
+
     async onCopy() {
         console.log('Grid.onCopy');
         const row = this.findRow(this.getActiveRowKey());
@@ -127,9 +139,11 @@ export class Grid extends ReactComponent {
         const text = row[column];
         await Helper.copyTextToClipboard(text);
     }
+
     findRow(key) {
         return this.props.rows.find((row) => this.getRowKey(row) === key);
     }
+
     async onLeft() {
         console.log('Grid.onLeft');
         const j = this.getActiveColumn();
@@ -138,6 +152,7 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     async onUp() {
         console.log('Grid.onUp');
         const key = this.getActiveRowKey();
@@ -150,6 +165,7 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     async onRight() {
         console.log('Grid.onRight');
         const j = this.getActiveColumn();
@@ -158,6 +174,7 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     async onDown() {
         console.log('Grid.onDown');
         const key = this.getActiveRowKey();
@@ -170,6 +187,7 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     async onEnter() {
         console.log('Grid.onEnter');
         const key = this.getActiveRowKey();
@@ -179,6 +197,7 @@ export class Grid extends ReactComponent {
             await this.props.onDoubleClick(row, key);
         }
     }
+
     async onDelete() {
         console.log('Grid.onDelete');
         const key = this.getActiveRowKey();
@@ -188,6 +207,7 @@ export class Grid extends ReactComponent {
             await this.props.onDeleteKeyDown(row, key);
         }
     }
+
     async selectCell(key, j) {
         // console.log('Grid.selectCell', key, j);
         if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
@@ -199,6 +219,7 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     async selectRow(key) {
         // console.log('Grid.selectRow', key);
         if (this.getActiveRowKey() === key) return;
@@ -209,11 +230,13 @@ export class Grid extends ReactComponent {
             await this.rerender();
         }
     }
+
     getMaxColumnWidth(column) {
         return (
             Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2
         );
     }
+
     onResizeDoubleClick = async (e) => {
         console.log('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
@@ -224,6 +247,7 @@ export class Grid extends ReactComponent {
         this.state.resized = Date.now();
         await this.rerender();
     };
+
     getColumnWidth(i) {
         const column = this.props.columns[i];
         if (this.state.columnWidth[column.name] !== undefined) {
@@ -231,6 +255,7 @@ export class Grid extends ReactComponent {
         }
         return column.width;
     }
+
     renderColumns() {
         return this.props.columns.map((column, i) => (
             <div
@@ -245,6 +270,7 @@ export class Grid extends ReactComponent {
             </div>
         ));
     }
+
     renderRows() {
         return this.props.rows.map((row, i) => {
             const key = this.getRowKey(row);
@@ -263,18 +289,21 @@ export class Grid extends ReactComponent {
             );
         });
     }
+
     getRowKey(row) {
         if (this.props.getRowKey) {
             return this.props.getRowKey(row);
         }
         return this.props.rows.indexOf(row).toString();
     }
+
     onCellViewCreate = (c) => {
         // console.log('Grid.onCellViewCreate', c.props.column.name);
         const columnName = c.props.column.name;
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     };
+
     onCellViewUnmount = (c) => {
         // console.log('Grid.onCellViewUnmount', c.props.column.name);
         const columnName = c.props.column.name;
@@ -282,10 +311,12 @@ export class Grid extends ReactComponent {
         if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
         this.columns[columnName].splice(i, 1);
     };
+
     onBodyScroll = async (e) => {
         // console.log('Grid.onBodyScroll', e.target.scrollLeft);
         this.head.current.scrollLeft = e.target.scrollLeft;
     };
+
     renderCell(row, column) {
         let view;
         if (this.props.renderGridCellView) {
@@ -307,6 +338,7 @@ export class Grid extends ReactComponent {
             />
         );
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
         if (this.props.updated) {
@@ -315,6 +347,7 @@ export class Grid extends ReactComponent {
         }
         return true;
     }
+
     render() {
         // console.log('Grid.render', this.props.name);
         return (
@@ -341,9 +374,11 @@ export class Grid extends ReactComponent {
             </div>
         );
     }
+
     isLink() {
         return !!this.props.createLinkCallback;
     }
+
     onLinkClick = async (e) => {
         console.log('Grid.onLinkClick', e.ctrlKey);
         if (e.ctrlKey) return;

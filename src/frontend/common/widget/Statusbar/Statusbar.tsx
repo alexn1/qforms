@@ -7,9 +7,11 @@ export class Statusbar extends ReactComponent {
         super(props);
         this.state = {};
     }
+
     setLastQueryTime(lastQueryTime) {
         this.setState({ lastQueryTime });
     }
+
     render() {
         return (
             <div className="Statusbar">

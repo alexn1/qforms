@@ -6,6 +6,7 @@ export class Tooltip extends ReactComponent {
     //     console.log('Tooltip.constructor', props);
     //     super(props);
     // }
+
     render() {
         // console.log('Tooltip.render', this.state, this.props);
         return (

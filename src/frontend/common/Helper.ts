@@ -4,6 +4,7 @@ import { JSONString } from '../../types';
 
 // @ts-ignore
 window.QForms = {};
+
 export class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -140,6 +141,7 @@ export class Helper {
         const binaryString = String.fromCharCode.apply(null, array);
         return window.btoa(binaryString);
     }*/
+
     /*static createObjectUrl(buffer) {
         const blob = new Blob([new Uint8Array(buffer)]);
         return window.URL.createObjectURL(blob);
@@ -178,6 +180,7 @@ export class Helper {
             return 'undefined';
         });
     }
+
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
@@ -186,6 +189,7 @@ export class Helper {
         if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
+
     static formatTime(_sec) {
         // console.log('Helper.formatTime', sec);
         let sec = _sec;
@@ -209,6 +213,7 @@ export class Helper {
             return `${sign}${h}:${m}:${s}`;
         }
     }
+
     static formatTime2(_sec) {
         // console.log('Helper.formatTime', sec);
         let sec = _sec;
@@ -232,21 +237,27 @@ export class Helper {
             return `${sign}${h}h:${m}m:${s}s`;
         }
     }
+
     static SECOND() {
         return 1000;
     }
+
     static MINUTE() {
         return 60 * Helper.SECOND();
     }
+
     static HOUR() {
         return 60 * Helper.MINUTE();
     }
+
     static DAY() {
         return 24 * Helper.HOUR();
     }
+
     static WEEK() {
         return 7 * Helper.DAY();
     }
+
     static fallbackCopyTextToClipboard(text) {
         // console.log('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
@@ -263,6 +274,7 @@ export class Helper {
         // @ts-ignore
         activeElement.focus();
     }
+
     static async copyTextToClipboard(text) {
         console.log('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
@@ -271,22 +283,28 @@ export class Helper {
         }
         await navigator.clipboard.writeText(text);
     }
+
     static addMinutes(date, minutes) {
         // console.log('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
+
     static removeTimezoneOffset(date: Date) {
         Helper.addMinutes(date, -date.getTimezoneOffset());
     }
+
     static addTimezoneOffset(date) {
         Helper.addMinutes(date, date.getTimezoneOffset());
     }
+
     static cloneDate(date: Date) {
         return new Date(date.getTime());
     }
+
     static fillArray(n: number) {
         return Array.from(Array(n).keys());
     }
+
     static inIframe(): boolean {
         try {
             return window.self !== window.top;
@@ -316,14 +334,17 @@ export class Helper {
         }
         return undefined;
     }
+
     static eraseCookie(name: string) {
         document.cookie = name + '=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     }
+
     static delay(ms = 1000) {
         return new Promise((resolve) => {
             setTimeout(resolve, ms);
         });
     }
 }
+
 // @ts-ignore
 window.QForms.Helper = window.Helper = Helper;

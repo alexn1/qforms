@@ -10,6 +10,7 @@ export class Radio extends ReactComponent {
         };
         console.log('value:', JSON.stringify(this.getValue()));
     }
+
     getInitialValue() {
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
@@ -22,9 +23,11 @@ export class Radio extends ReactComponent {
         }
         return value;
     }
+
     getValue() {
         return this.state.value;
     }
+
     onChange = async (e) => {
         // console.log('Radio.onChange', e.target.value);
         this.setState({ value: e.target.value });
@@ -32,6 +35,7 @@ export class Radio extends ReactComponent {
             await this.props.onChange(e.target.value);
         }
     };
+
     renderItem(item, i) {
         return [
             <input
@@ -47,16 +51,19 @@ export class Radio extends ReactComponent {
             <label htmlFor={`${this.props.name}${i}`}>{item.title || item.value}</label>,
         ];
     }
+
     isReadOnly() {
         if (this.props.readOnly !== undefined) return this.props.readOnly;
         return false;
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     render() {
         const items = this.props.items || [];
         return (

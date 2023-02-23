@@ -13,6 +13,7 @@ export class TimeBox extends ReactComponent {
         };
         this.el = React.createRef();
     }
+
     onKeyPress = (event) => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
         if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
@@ -20,6 +21,7 @@ export class TimeBox extends ReactComponent {
             event.preventDefault();
         }
     };
+
     formatValue(value) {
         let min = '';
         let sec = '';
@@ -44,6 +46,7 @@ export class TimeBox extends ReactComponent {
         }
         return [min, ...(sec ? [sec] : [])].join(':');
     }
+
     onChange = (e) => {
         // console.log('TimeBox.onChange', e.target.value);
         const target = e.target;
@@ -75,12 +78,15 @@ export class TimeBox extends ReactComponent {
             }
         });
     };
+
     getValue() {
         return TimeBox.getIntegerValue(this.state.value);
     }
+
     setValue(value) {
         this.setState({ value: TimeBox.getStringValue(value) });
     }
+
     onBlur = (e) => {
         // console.log('TimeBox.onBlur');
         if (this.props.onBlur) {
@@ -95,6 +101,7 @@ export class TimeBox extends ReactComponent {
             this.props.onBlur(nValue);
         }
     };
+
     /*onKeyDown = event => {
         console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
@@ -110,11 +117,13 @@ export class TimeBox extends ReactComponent {
             event.preventDefault();
         }
     }*/
+
     /*onKeyUp = event => {
         console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
+
     static getStringValue(value) {
         // console.log('TimeBox.getStringValue', value);
         if (value === null) return '';
@@ -127,6 +136,7 @@ export class TimeBox extends ReactComponent {
         }
         return '';
     }
+
     static getIntegerValue(stringValue) {
         // console.log('TimeBox.getIntegerValue', stringValue);
         // try {
@@ -146,11 +156,13 @@ export class TimeBox extends ReactComponent {
         //     return NaN;
         // }
     }
+
     static splitTime(value) {
         const hours = Math.floor(value / 60);
         const minutes = value - hours * 60;
         return [hours, minutes];
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
@@ -163,6 +175,7 @@ export class TimeBox extends ReactComponent {
         if (this.state.value !== nextState.value) return true;
         return false;
     }
+
     render() {
         // console.log('TimeBox.render', this.state.value);
         return (

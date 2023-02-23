@@ -10,9 +10,11 @@ export class TextBox extends ReactComponent {
             value: this.props.value || '',
         };
     }
+
     getValue() {
         return this.state.value;
     }
+
     _setValue(value) {
         // @ts-ignore
         this.state.value = value;
@@ -22,16 +24,19 @@ export class TextBox extends ReactComponent {
             this.props.onChange(value);
         }
     }
+
     onChange = (e) => {
         // console.log('TextBox.onChange', e.target.value);
         this._setValue(e.target.value);
     };
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
+
     render() {
         // console.log('TextBox.render');
         return (

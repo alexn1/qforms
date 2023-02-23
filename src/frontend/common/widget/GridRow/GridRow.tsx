@@ -4,6 +4,7 @@ export class GridRow extends ReactComponent {
     isCellActive(j) {
         return this.props.active && this.props.activeColumn === j;
     }
+
     shouldComponentUpdate(nextProps, nextState) {
         // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (this.props.updated) {

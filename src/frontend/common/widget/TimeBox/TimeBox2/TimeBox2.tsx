@@ -11,9 +11,11 @@ export class TimeBox2 extends TimeBox {
         super(props);
         this.inputEl = React.createRef();
     }
+
     isCloseVisible() {
         return !!this.state.value;
     }
+
     onClear = (e) => {
         // console.log('TimeBox2.onClear');
         this.setState({ value: '' }, () => {
@@ -22,9 +24,11 @@ export class TimeBox2 extends TimeBox {
             }
         });
     };
+
     getInputElement() {
         return this.inputEl.current;
     }
+
     render() {
         return (
             <div ref={this.el} className={this.getCssClassNames()}>

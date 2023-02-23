@@ -7,14 +7,17 @@ export class Menu extends ReactComponent {
         super(props);
         this.state = {};
     }
+
     onMenuClick = async (e) => {
         // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
         await this.toggleMenu(e.currentTarget.dataset.menu);
     };
+
     onBlur = async (e) => {
         // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
         await this.closeMenu(e.currentTarget.dataset.menu);
     };
+
     toggleMenu(menu) {
         return new Promise<void>((resolve) => {
             this.setState(
@@ -25,15 +28,18 @@ export class Menu extends ReactComponent {
             );
         });
     }
+
     closeMenu(menu) {
         return new Promise<void>((resolve) => this.setState({ [menu]: false }, resolve));
     }
+
     onMouseDown = (e) => {
         // console.log('Menu.onMouseDown');
         e.preventDefault();
         // e.stopPropagation();
         // return false;
     };
+
     onMenuItemClick = async (e) => {
         // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
         e.persist();
@@ -43,6 +49,7 @@ export class Menu extends ReactComponent {
             this.props.onClick(menu, type, name);
         }
     };
+
     render() {
         return (
             <div className="Menu">
