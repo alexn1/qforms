@@ -39,8 +39,8 @@ const Result_1 = require("../../../../Result");
 const text = __importStar(require("../../text"));
 const pkg = require('../../../../../package.json');
 class BkApplication extends BkModel_1.BkModel {
-    constructor(data, appInfo, hostApp, context) {
-        super(data);
+    constructor(appInfo, hostApp, context) {
+        super(appInfo.appFile.data);
         this.appInfo = appInfo;
         this.hostApp = hostApp;
         this.databases = [];

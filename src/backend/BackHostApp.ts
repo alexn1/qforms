@@ -307,12 +307,12 @@ export class BackHostApp {
         const ApplicationClass = this.getApplicationClass(appInfo);
 
         // application
-        const application = new ApplicationClass(appInfo.appFile.data, appInfo, this, context);
+        const application = new ApplicationClass(appInfo, this, context);
         await application.init(context);
         return application;
     }
 
-    getApplicationClass(appInfo: AppInfo): any {
+    getApplicationClass(appInfo: AppInfo): typeof BkApplication {
         // console.log('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {

@@ -9,7 +9,7 @@ async function main() {
     const appInfo = await BkApplication.loadAppInfo(appFilePath, null);
     // console.log('appInfo', appInfo);
 
-    const application = new BkApplication(appInfo.appFile.data, appInfo, {}, {});
+    const application = new BkApplication(appInfo, {}, {});
     // await application.init(context);
 
     // const app = new BkApplication();

@@ -33,13 +33,8 @@ export class BkApplication extends BkModel {
     nav: any;
     clients: any[] = [];
 
-    constructor(
-        data: any,
-        protected appInfo: AppInfo,
-        protected hostApp: BackHostApp,
-        context: Context,
-    ) {
-        super(data);
+    constructor(protected appInfo: AppInfo, protected hostApp: BackHostApp, context: Context) {
+        super(appInfo.appFile.data);
         if (!hostApp) throw new Error('no hostApp');
         if (!context) throw new Error('no route');
         const env = context.getEnv();
