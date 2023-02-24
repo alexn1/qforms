@@ -4,7 +4,9 @@ A fullstack framework based on Express and React for building Web UI for databas
 
 ## CLI Options
 
+```
 appsDirPath=../name/apps
+```
 
 ## Gulp Tasks
 
