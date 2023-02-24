@@ -1,6 +1,8 @@
 # QForms
 
-A fullstack framework based on Express and React for building Web UI for databases.
+A fullstack framework/platform based on Express and React for building Web UI for databases.
+
+Supported MySql, Postgres, MongoDB.
 
 ## CLI Options
 
