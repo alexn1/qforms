@@ -21,7 +21,7 @@ import { Result } from '../../../../Result';
 import * as text from '../../text';
 const pkg = require('../../../../../package.json');
 
-export class BkApplication extends BkModel {
+export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
@@ -34,7 +34,7 @@ export class BkApplication extends BkModel {
 
     constructor(
         private appInfo: AppInfo,
-        private hostApp: BackHostApp,
+        private hostApp: THostApp,
         private env: string = 'local',
     ) {
         super(appInfo.appFile.data);
@@ -51,7 +51,7 @@ export class BkApplication extends BkModel {
         await this.createMenu(context);
     }
 
-    getHostApp(): BackHostApp {
+    getHostApp(): THostApp {
         return this.hostApp;
     }
 

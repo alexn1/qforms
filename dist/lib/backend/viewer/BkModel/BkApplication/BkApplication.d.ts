@@ -9,7 +9,7 @@ import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
-export declare class BkApplication extends BkModel {
+export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
     private appInfo;
     private hostApp;
     private env;
@@ -24,9 +24,9 @@ export declare class BkApplication extends BkModel {
     menu: any;
     nav: any;
     clients: any[];
-    constructor(appInfo: AppInfo, hostApp: BackHostApp, env?: string);
+    constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
-    getHostApp(): BackHostApp;
+    getHostApp(): THostApp;
     getLinks(context: Context): Promise<any[]>;
     getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
