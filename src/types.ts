@@ -7,9 +7,9 @@ export type JSONString = string & { type: 'JSONString' };
 // '[123, "abc"]'
 export type Key = JSONString & { type2: 'Key' };
 
-export type KeyValue = number | string;
+export type KeyItem = number | string;
 
-export type KeyArray = KeyValue[];
+export type KeyArray = KeyItem[];
 
 interface _Row {
     [column: string]: any;
@@ -28,11 +28,11 @@ export interface ChangesByKey {
 }
 
 export interface KeyParams {
-    [param: string]: KeyValue;
+    [param: string]: KeyItem;
 }
 
 export interface KeyValues {
-    [column: string]: KeyValue;
+    [column: string]: KeyItem;
 }
 
 export interface QueryParams {

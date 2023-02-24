@@ -12,7 +12,7 @@ import {
     JSONString,
     ChangesByKey,
     keyArrayToKey,
-    KeyValue,
+    KeyItem,
 } from '../../../../types';
 import { Result } from '../../../../Result';
 
@@ -177,7 +177,7 @@ export class DataSource extends Model {
             if (row[column] === undefined) return null;
             if (row[column] === null) throw new Error('wrong value null for data source value');
             try {
-                const value = JSON.parse(row[column]) as KeyValue;
+                const value = JSON.parse(row[column]) as KeyItem;
                 arr.push(value);
             } catch (err) {
                 console.log('getRowKey: cannot parse: ', row[column]);

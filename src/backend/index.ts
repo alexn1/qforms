@@ -9,7 +9,7 @@ export { AppInfo } from './AppInfo';
 export {
     JSONString,
     Key,
-    KeyValue,
+    KeyItem,
     KeyArray,
     Row,
     RawRow,

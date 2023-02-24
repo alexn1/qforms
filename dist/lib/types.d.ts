@@ -4,8 +4,8 @@ export type JSONString = string & {
 export type Key = JSONString & {
     type2: 'Key';
 };
-export type KeyValue = number | string;
-export type KeyArray = KeyValue[];
+export type KeyItem = number | string;
+export type KeyArray = KeyItem[];
 interface _Row {
     [column: string]: any;
 }
@@ -22,10 +22,10 @@ export interface ChangesByKey {
     [key: Key]: RawRow;
 }
 export interface KeyParams {
-    [param: string]: KeyValue;
+    [param: string]: KeyItem;
 }
 export interface KeyValues {
-    [column: string]: KeyValue;
+    [column: string]: KeyItem;
 }
 export interface QueryParams {
     [name: string]: string | number | boolean;
