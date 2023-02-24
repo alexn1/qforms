@@ -1,16 +1,17 @@
 const { BkApplication } = require('../dist/lib/backend');
 
-main();
+const APP_FILE_PATH = './apps/mongo/mongo.json';
+
 async function main() {
     console.log('main');
 
-    const appFilePath = './apps/mongo/mongo.json';
-
-    const appInfo = await BkApplication.loadAppInfo(appFilePath, null);
+    const appInfo = await BkApplication.loadAppInfo(APP_FILE_PATH, null);
     // console.log('appInfo', appInfo);
 
-    const application = new BkApplication(appInfo, {}, {});
-    // await application.init(context);
+    const bkHostApp = {};
+    const context = {};
 
-    // const app = new BkApplication();
+    const app = new BkApplication(appInfo, bkHostApp);
+    // await app.init(context);
 }
+main();
