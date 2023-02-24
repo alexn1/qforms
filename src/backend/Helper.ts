@@ -492,6 +492,7 @@ export class Helper {
             ? webSocket.upgradeReq.headers['x-real-port']
             : webSocket.upgradeReq.socket.remotePort;
     }
+
     static templateArray(arr) {
         return arr.map((item) => {
             const type = typeof item;
