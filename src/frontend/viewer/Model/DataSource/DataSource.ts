@@ -6,7 +6,6 @@ import { Helper } from '../../../common';
 import {
     Key,
     KeyArray,
-    KeyParams,
     KeyObject,
     RawRow,
     JSONString,
@@ -259,7 +258,7 @@ export class DataSource extends Model {
         this.changes.clear();
     }
 
-    static keyToParams(key: string, paramName = 'key'): KeyParams {
+    static keyToParams(key: string, paramName: string = 'key'): KeyObject {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);

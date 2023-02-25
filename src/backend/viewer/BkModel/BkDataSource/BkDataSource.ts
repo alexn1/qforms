@@ -10,7 +10,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
-import { Key, KeyObject, Row, KeyArray, KeyParams, RawRow } from '../../../../types';
+import { Key, KeyObject, Row, KeyArray, RawRow } from '../../../../types';
 
 export type ReadResult = [RawRow[], number | null];
 
@@ -212,9 +212,9 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    static keyToParams(key: Key, paramName: string = 'key'): KeyParams {
+    static keyToParams(key: Key, paramName = 'key'): KeyObject {
         if (typeof key !== 'string') throw new Error('key not string');
-        const params: KeyParams = {};
+        const params: KeyObject = {};
         const arr: KeyArray = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];

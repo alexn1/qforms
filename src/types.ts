@@ -27,10 +27,6 @@ export interface ChangesByKey {
     [key: Key]: RawRow;
 }
 
-export interface KeyParams {
-    [param: string]: KeyItem;
-}
-
 export interface KeyObject {
     [column: string]: KeyItem;
 }

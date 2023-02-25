@@ -14,7 +14,6 @@ export {
     Row,
     RawRow,
     ChangesByKey,
-    KeyParams,
     KeyObject,
     QueryParams,
     keyArrayToKey,

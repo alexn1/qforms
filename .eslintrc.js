@@ -46,5 +46,6 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'warn',
         'react/display-name': 'off',
         'react/prop-types': 'off',
+        '@typescript-eslint/no-inferrable-types': 'off',
     },
 };
