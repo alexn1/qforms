@@ -256,7 +256,7 @@ export class BkDataSource extends BkModel {
     }
 
     async fill(context: Context): Promise<any> {
-        //console.log('DataSource.fill', this.getFullName());
+        // console.log('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
         // keyColumns
@@ -269,12 +269,12 @@ export class BkDataSource extends BkModel {
 
     private async getRows(): Promise<Row[]> {
         // console.log('DataSource.getRows');
-        /*const jsonFilePath = this.getJsonFilePath();
+        /* const jsonFilePath = this.getJsonFilePath();
         const exists = await Helper.exists(jsonFilePath);
         if (exists) {
             const content = await Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
-        }*/
+        } */
         return this.rows;
     }
 

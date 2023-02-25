@@ -18,7 +18,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
     }
 
     async fill(context: Context) {
-        //console.log('SqlDataSource.fill', this.getFullName());
+        // console.log('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
         // if form data source named default then check mode
@@ -104,7 +104,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         });
 
         // replace array param to ('itemA', 'itemB')
-        /*for (const name of Object.keys(params)) {
+        /* for (const name of Object.keys(params)) {
             if (Array.isArray(params[name])) {
                 const items = params[name].map(item => {
                     const type = typeof item;
@@ -114,7 +114,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
                 });
                 query = query.replaceAll(`{${name}}`, `(${items})`);
             }
-        }*/
+        } */
         return query;
     }
 
