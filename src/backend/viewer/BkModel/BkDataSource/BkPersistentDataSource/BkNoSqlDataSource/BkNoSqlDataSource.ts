@@ -216,7 +216,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     }
 
     getCountQuery(context: Context): string {
-        let query = this.getAttr('countQuery');
+        const query = this.getAttr('countQuery');
         if (!query) throw new Error(`${this.getFullName()}: no countQuery`);
         return query;
     }

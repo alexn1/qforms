@@ -42,10 +42,11 @@ module.exports = {
         '@typescript-eslint/explicit-module-boundary-types': 'off',
         '@typescript-eslint/ban-ts-comment': 'off',
         '@typescript-eslint/no-non-null-assertion': 'off',
+        '@typescript-eslint/no-inferrable-types': 'off',
+        '@typescript-eslint/no-unused-vars': 'off',
         'prettier/prettier': 'warn',
         'react-hooks/rules-of-hooks': 'warn',
         'react/display-name': 'off',
         'react/prop-types': 'off',
-        '@typescript-eslint/no-inferrable-types': 'off',
     },
 };
