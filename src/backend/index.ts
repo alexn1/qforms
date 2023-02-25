@@ -15,7 +15,7 @@ export {
     RawRow,
     ChangesByKey,
     KeyParams,
-    KeyValues,
+    KeyObject,
     QueryParams,
     keyArrayToKey,
 } from '../types';

@@ -7,7 +7,7 @@ import {
     Key,
     KeyArray,
     KeyParams,
-    KeyValues,
+    KeyObject,
     RawRow,
     JSONString,
     ChangesByKey,
@@ -163,7 +163,7 @@ export class DataSource extends Model {
         return value;
     }
 
-    getKeyValues(row: RawRow): KeyValues {
+    getKeyValues(row: RawRow): KeyObject {
         return this.data.keyColumns.reduce((keyValues, column) => {
             keyValues[column] = JSON.parse(row[column]);
             return keyValues;

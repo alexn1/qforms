@@ -7,7 +7,7 @@ export type JSONString = string & { type: 'JSONString' };
 // '[123, "abc"]'
 export type Key = JSONString & { type2: 'Key' };
 
-export type KeyItem = number | string;
+export type KeyItem = number | string | boolean;
 
 export type KeyArray = KeyItem[];
 
@@ -31,7 +31,7 @@ export interface KeyParams {
     [param: string]: KeyItem;
 }
 
-export interface KeyValues {
+export interface KeyObject {
     [column: string]: KeyItem;
 }
 
