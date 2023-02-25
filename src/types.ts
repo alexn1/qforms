@@ -11,6 +11,14 @@ export type KeyItem = number | string | boolean;
 
 export type KeyArray = KeyItem[];
 
+export interface KeyObject {
+    [column: string]: KeyItem;
+}
+
+export const keyArrayToKey = (keyArray: KeyArray): Key => {
+    return JSON.stringify(keyArray) as Key;
+};
+
 interface _Row {
     [column: string]: any;
 }
@@ -27,14 +35,6 @@ export interface ChangesByKey {
     [key: Key]: RawRow;
 }
 
-export interface KeyObject {
-    [column: string]: KeyItem;
-}
-
 export interface QueryParams {
     [name: string]: string | number | boolean;
 }
-
-export const keyArrayToKey = (keyArray: KeyArray): Key => {
-    return JSON.stringify(keyArray) as Key;
-};

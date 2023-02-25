@@ -4,7 +4,7 @@ import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkForm } from '../BkForm/BkForm';
-import { Key, KeyValues, Row, KeyParams, RawRow } from '../../../../types';
+import { Key, KeyObject, Row, RawRow } from '../../../../types';
 export type ReadResult = [RawRow[], number | null];
 export declare class BkDataSource extends BkModel {
     keyColumns: string[];
@@ -21,11 +21,11 @@ export declare class BkDataSource extends BkModel {
     encodeRows2(rows: Row[]): RawRow[];
     encodeRow2(row: Row): RawRow;
     getApp(): BkApplication;
-    getKeyValuesFromKey(key: Key): KeyValues;
+    getKeyValuesFromKey(key: Key): KeyObject;
     getKeyFromValues(values: any): Key;
     getFullName(): string;
-    static keyToParams(key: Key, paramName?: string): KeyParams;
-    calcNewKeyValues(originalKeyValues: KeyValues, values: any): KeyValues;
+    static keyToParams(key: Key, paramName?: string): KeyObject;
+    calcNewKeyValues(originalKeyValues: KeyObject, values: any): KeyObject;
     calcNewKey(key: Key, values: any): Key;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
