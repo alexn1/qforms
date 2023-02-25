@@ -443,7 +443,7 @@ export class ApplicationController extends ModelController<Application> {
     getDomain() {
         return this.getModel().getDomain();
     }
-    
+
     getBaseUrl() {
         return `/${this.getDomain()}`;
     }

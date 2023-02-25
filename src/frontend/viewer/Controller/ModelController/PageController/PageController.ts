@@ -191,7 +191,7 @@ export class PageController extends ModelController<Page> {
     getViewClass(): PageView {
         return super.getViewClass() || PageView;
     }
-    
+
     static createLink(params = null): string {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);

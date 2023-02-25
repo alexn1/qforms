@@ -116,7 +116,7 @@ export class PhoneBox extends ReactComponent {
         }
         return value;
     }
-    
+
     static formatPhoneNumber(_value) {
         const value = PhoneBox.clearValue(_value);
 

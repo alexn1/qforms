@@ -32,7 +32,7 @@ export class LoginController extends Controller {
     getFrontHostApp() {
         return this.frontHostApp;
     }
-    
+
     getViewClassCssBlockName() {
         return this.getViewClass().name;
     }

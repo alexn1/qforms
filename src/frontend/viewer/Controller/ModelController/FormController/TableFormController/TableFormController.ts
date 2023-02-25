@@ -311,7 +311,7 @@ export class TableFormController extends FormController<TableForm> {
     getSelectedRowKey() {
         return this.grid ? this.grid.getActiveRowKey() : null;
     }
-    
+
     isActionEnabled(name) {
         return this.isRowSelected();
     }
