@@ -275,9 +275,9 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         response.table = this.getAttr('table');
     }
 
-    /*getDbType(column): string {
+    /* getDbType(column): string {
         return this.getTable().getColumn(column).getDbType();
-    }*/
+    } */
 
     getAutoColumns(): string[] {
         if (!this.table) throw new Error('getAutoColumns: no table');
