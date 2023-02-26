@@ -14,7 +14,7 @@ module.exports = {
             },
         },
         {
-            files: ['.github/**/*.yml'],
+            files: ['**/*.yml'],
             options: {
                 singleQuote: false,
                 tabWidth: 2,
