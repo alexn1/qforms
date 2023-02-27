@@ -66,7 +66,7 @@ export class Field extends Model {
         return !!this.getAttr('column');
     }
 
-    getValue(row: RawRow): any {
+    getValue(row?: RawRow): any {
         // console.log('Field.getValue', this.getFullName(), row);
         if (!row && this.parent instanceof RowForm) {
             row = this.parent.getRow();

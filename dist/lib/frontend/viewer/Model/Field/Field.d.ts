@@ -11,7 +11,7 @@ export declare class Field extends Model {
     valueToPageParams(row: RawRow): void;
     isChanged(row: RawRow): boolean;
     hasColumn(): boolean;
-    getValue(row: RawRow): any;
+    getValue(row?: RawRow): any;
     setValue(row: RawRow, value: any): void;
     rawToValue(rawValue: JSONString): any;
     valueToRaw(value: any): JSONString;
