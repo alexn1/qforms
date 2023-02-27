@@ -168,7 +168,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         return selectQuery;
     }
     getCountQuery(context) {
-        let query = this.getAttr('countQuery');
+        const query = this.getAttr('countQuery');
         if (!query)
             throw new Error(`${this.getFullName()}: no countQuery`);
         return query;

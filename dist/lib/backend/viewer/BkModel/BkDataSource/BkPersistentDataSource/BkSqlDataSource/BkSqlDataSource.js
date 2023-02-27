@@ -14,7 +14,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         }
     }
     async fill(context) {
-        //console.log('SqlDataSource.fill', this.getFullName());
+        // console.log('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
@@ -91,7 +91,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             return text;
         });
         // replace array param to ('itemA', 'itemB')
-        /*for (const name of Object.keys(params)) {
+        /* for (const name of Object.keys(params)) {
             if (Array.isArray(params[name])) {
                 const items = params[name].map(item => {
                     const type = typeof item;
@@ -101,7 +101,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
                 });
                 query = query.replaceAll(`{${name}}`, `(${items})`);
             }
-        }*/
+        } */
         return query;
     }
     getSelectParams(context) {
@@ -237,9 +237,9 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         response.database = this.getAttr('database');
         response.table = this.getAttr('table');
     }
-    /*getDbType(column): string {
+    /* getDbType(column): string {
         return this.getTable().getColumn(column).getDbType();
-    }*/
+    } */
     getAutoColumns() {
         if (!this.table)
             throw new Error('getAutoColumns: no table');

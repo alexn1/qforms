@@ -224,7 +224,7 @@ class BkDataSource extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        //console.log('DataSource.fill', this.getFullName());
+        // console.log('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
         // keyColumns
         response.keyColumns = this.keyColumns;
@@ -234,12 +234,12 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     async getRows() {
         // console.log('DataSource.getRows');
-        /*const jsonFilePath = this.getJsonFilePath();
+        /* const jsonFilePath = this.getJsonFilePath();
         const exists = await Helper.exists(jsonFilePath);
         if (exists) {
             const content = await Helper.readTextFile(jsonFilePath);
             return JSON.parse(content);
-        }*/
+        } */
         return this.rows;
     }
     isOnForm() {
