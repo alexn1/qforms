@@ -25,7 +25,7 @@ export declare class PageController extends ModelController<Page> {
     openPage(options: OpenPageOptions): Promise<PageController>;
     isChanged(): boolean;
     getApp(): ApplicationController;
-    getViewClass(): PageView;
+    getViewClass(): typeof PageView;
     static createLink(params?: any): string;
     getForm(name: any): FormController<Form>;
     onActionClick(name: any): Promise<any>;

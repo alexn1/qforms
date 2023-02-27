@@ -188,7 +188,7 @@ export class PageController extends ModelController<Page> {
         return this.parent;
     }
 
-    getViewClass(): PageView {
+    getViewClass(): typeof PageView {
         return super.getViewClass() || PageView;
     }
 
