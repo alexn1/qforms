@@ -29,7 +29,7 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        console.log('ViewerModule.init');
+        console.log('ViewerModule.init', this.hostApp.getFrontendDirPath());
         this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         console.log('viewer.css:', this.css);

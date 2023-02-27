@@ -36,7 +36,7 @@ export class ViewerModule {
     }
 
     async init() {
-        console.log('ViewerModule.init');
+        console.log('ViewerModule.init', this.hostApp.getFrontendDirPath());
         this.css = (
             await Helper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
