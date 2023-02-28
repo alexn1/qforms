@@ -9,7 +9,7 @@ import {
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
 
-export class FieldController<TModel extends Field = Field> extends ModelController<TModel> {
+export class FieldController<TField extends Field = Field> extends ModelController<TField> {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

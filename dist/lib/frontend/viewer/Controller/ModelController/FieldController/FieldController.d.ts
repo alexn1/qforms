@@ -4,7 +4,7 @@ import { FormController } from '../FormController/FormController';
 import { Form } from '../../../Model/Form/Form';
 import { PageController } from '../PageController/PageController';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
-export declare class FieldController<TModel extends Field = Field> extends ModelController<TModel> {
+export declare class FieldController<TField extends Field = Field> extends ModelController<TField> {
     static create(model: Field, parent: FormController<Form>): FieldController<Field>;
     valueToString(value: any): string;
     stringToValue(stringValue: string): any;
