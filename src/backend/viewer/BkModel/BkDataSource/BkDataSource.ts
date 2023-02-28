@@ -68,8 +68,21 @@ export class BkDataSource extends BkModel {
         }
     }
 
+    checkKeyFields(row: Row) {
+        const fieldsClumns = this.getForm().fields.map((field) => field.getAttr('column'));
+        // console.log('fieldsClumns:', fieldsClumns);
+        for (const keyColumn of this.keyColumns) {
+            if (!fieldsClumns.includes(keyColumn)) {
+                throw new Error(`no field with key column: ${keyColumn}`);
+            }
+        }
+    }
+
     checkRow(row: Row) {
         this.checkKeyColumns(row);
+        if (this.isOnForm()) {
+            this.checkKeyFields(row);
+        }
         if (this.isDefaultOnForm()) {
             // this.checkNotUsedColumns(row);
             this.checkFields(row);
