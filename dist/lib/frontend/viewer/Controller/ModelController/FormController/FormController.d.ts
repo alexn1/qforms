@@ -2,14 +2,13 @@ import { ModelController } from '../ModelController';
 import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
-import { Field } from '../../../Model/Field/Field';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
 export declare class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: {
-        [name: string]: FieldController<Field>;
+        [name: string]: FieldController;
     };
     state: any;
-    static create(model: Form, parent: PageController): FormController<Form>;
+    static create(model: Form, parent: PageController): FormController;
     constructor(model: TForm, parent: PageController);
     init(): void;
     deinit(): void;
@@ -21,7 +20,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     getUpdated(): any;
     invalidate(): void;
     onActionClick(name: any, row: any): Promise<any>;
-    getField(name: string): FieldController<Field>;
+    getField(name: string): FieldController;
     getApp(): ApplicationController;
     getSelectedRowKey(): any;
     isAutoFocus(): boolean;

@@ -14,7 +14,7 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         super(model, parent);
     }*/
 
-    static create(model: Field, parent: FormController<Form>): FieldController<Field> {
+    static create(model: Field, parent: FormController): FieldController {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
@@ -94,19 +94,21 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return await this.getParent().openPage(options);
     }
 
-    getParent(): FormController {
+    getParent<TFormController extends FormController = FormController>(): TFormController {
         return super.getParent();
     }
 
-    getForm(): FormController {
+    getForm<TFormController extends FormController = FormController>(): TFormController {
         return this.parent;
     }
 
-    getPage(): PageController {
+    getPage<TPageController extends PageController = PageController>(): TPageController {
         return this.parent.parent;
     }
 
-    getApp(): ApplicationController {
+    getApp<
+        TApplicationController extends ApplicationController = ApplicationController,
+    >(): TApplicationController {
         return this.parent.parent.parent;
     }
 

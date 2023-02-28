@@ -37729,9 +37729,9 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         const form = this.getModel().getForm();
         return form.getRow();
     }
-    getForm() {
-        return super.getForm();
-    }
+    /* getForm(): RowFormController {
+        return super.getForm() as RowFormController;
+    } */
     copyValueToModel() {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());

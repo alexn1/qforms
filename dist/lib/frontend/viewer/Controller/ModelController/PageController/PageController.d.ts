@@ -3,10 +3,9 @@ import { FormController } from '../FormController/FormController';
 import { PageView } from './PageView';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
-import { Form } from '../../../Model/Form/Form';
 export declare class PageController<TApplicationController extends ApplicationController = ApplicationController> extends ModelController<Page> {
     id: string;
-    forms: FormController<Form>[];
+    forms: FormController[];
     constructor(model: Page, parent: ApplicationController, id: string);
     static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
     init(): void;
@@ -19,7 +18,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     validate(): void;
     isValid(): boolean;
     onFormChange(e: any): Promise<void>;
-    onFormDiscard(formController: FormController<Form>): void;
+    onFormDiscard(formController: FormController): void;
     onFormUpdate(e: any): void;
     onFormInsert(e: any): void;
     openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;

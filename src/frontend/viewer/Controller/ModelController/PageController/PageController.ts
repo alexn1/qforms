@@ -9,13 +9,12 @@ import {
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
-import { Form } from '../../../Model/Form/Form';
 
 export class PageController<
     TApplicationController extends ApplicationController = ApplicationController,
 > extends ModelController<Page> {
     id: string;
-    forms: FormController<Form>[] = [];
+    forms: FormController[] = [];
 
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
@@ -143,7 +142,7 @@ export class PageController<
         this.rerender();
     }
 
-    onFormDiscard(formController: FormController<Form>): void {
+    onFormDiscard(formController: FormController): void {
         console.log('PageController.onFormDiscard', this.model.getFullName());
         this.rerender();
     }

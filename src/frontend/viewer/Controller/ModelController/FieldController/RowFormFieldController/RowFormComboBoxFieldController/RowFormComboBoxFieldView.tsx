@@ -1,6 +1,8 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { Select, Button } from '../../../../../../common';
 import { RowFormComboBoxFieldController } from './RowFormComboBoxFieldController';
+import { RowFormController } from '../../../FormController/RowFormController/RowFormController';
+
 import './RowFormComboBoxFieldView.less';
 
 export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFieldController> {
@@ -11,7 +13,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
     };
 
     isCreateButtonVisible() {
-        if (this.getCtrl().getForm().getMode() !== 'edit') {
+        if (this.getCtrl().getForm<RowFormController>().getMode() !== 'edit') {
             return false;
         }
         if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {

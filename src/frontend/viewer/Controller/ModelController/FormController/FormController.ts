@@ -10,10 +10,10 @@ import {
 } from '../ApplicationController/ApplicationController';
 
 export class FormController<TForm extends Form = Form> extends ModelController<TForm> {
-    fields: { [name: string]: FieldController<Field> } = {};
+    fields: { [name: string]: FieldController } = {};
     state: any;
 
-    static create(model: Form, parent: PageController): FormController<Form> {
+    static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
@@ -78,7 +78,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         console.log('FormController.onActionClick', name, row);
     }
 
-    getField(name: string) {
+    getField(name: string): FieldController {
         return this.fields[name];
     }
 
