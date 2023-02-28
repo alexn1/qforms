@@ -48,5 +48,7 @@ module.exports = {
         'react-hooks/rules-of-hooks': 'warn',
         'react/display-name': 'off',
         'react/prop-types': 'off',
+        'react/react-in-jsx-scope': 'off',
+        'no-empty': 'off',
     },
 };
