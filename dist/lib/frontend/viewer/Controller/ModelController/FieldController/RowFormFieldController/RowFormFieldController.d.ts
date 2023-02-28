@@ -1,6 +1,10 @@
 import React from 'react';
 import { FieldController } from '../FieldController';
-export declare class RowFormFieldController extends FieldController {
+import { Field } from '../../../../Model/Field/Field';
+
+export declare class RowFormFieldController<
+    TField extends Field = Field,
+> extends FieldController<TField> {
     state: any;
     constructor(model: any, parent: any);
     init(): void;
@@ -27,7 +31,10 @@ export declare class RowFormFieldController extends FieldController {
     setError(error: any): void;
     resetErrors(): void;
     getErrorMessage(): any;
-    renderView(): React.DetailedReactHTMLElement<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
+    renderView(): React.DetailedReactHTMLElement<
+        React.InputHTMLAttributes<HTMLInputElement>,
+        HTMLInputElement
+    >;
     isValidateOnChange(): any;
     isValidateOnBlur(): any;
     onChangePure: (value: any, fireEvent?: boolean) => Promise<void>;
