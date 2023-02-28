@@ -31855,6 +31855,91 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/Result.ts":
+/*!***********************!*\
+  !*** ./src/Result.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseResult": () => (/* binding */ DatabaseResult),
+/* harmony export */   "InsertExResult": () => (/* binding */ InsertExResult),
+/* harmony export */   "Result": () => (/* binding */ Result),
+/* harmony export */   "TableResult": () => (/* binding */ TableResult),
+/* harmony export */   "UpdateEx": () => (/* binding */ UpdateEx),
+/* harmony export */   "UpdateResult": () => (/* binding */ UpdateResult)
+/* harmony export */ });
+class InsertExResult {
+}
+class UpdateResult {
+}
+class UpdateEx {
+}
+class TableResult {
+}
+class DatabaseResult {
+}
+class Result {
+    static addInsertToResult(result, dName, tName, key) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].insert)
+            result[dName][tName].insert = [];
+        result[dName][tName].insert.push(key);
+    }
+    static addInsertExToResult(result, dName, tName, key, row) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].insertEx)
+            result[dName][tName].insertEx = new InsertExResult();
+        result[dName][tName].insertEx[key] = row;
+    }
+    static addUpdateToResult(result, dName, tName, oldKey, newKey) {
+        // console.log('Result.addUpdateToResult');
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].update)
+            result[dName][tName].update = new UpdateResult();
+        result[dName][tName].update[oldKey] = newKey;
+    }
+    static addUpdateExToResult(result, dName, tName, oldKey, row) {
+        // console.log('Result.addUpdateExToResult');
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].updateEx)
+            result[dName][tName].updateEx = new UpdateEx();
+        result[dName][tName].updateEx[oldKey] = row;
+    }
+    static addDeleteToResult(result, dName, tName, key) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].delete)
+            result[dName][tName].delete = [];
+        result[dName][tName].delete.push(key);
+    }
+    static addTableToResult(result, dName, tName, tResult) {
+        if (!result[dName])
+            result[dName] = {};
+        if (result[dName][tName])
+            throw new Error(`table ${tName} already exists`);
+        result[dName][tName] = tResult;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/FrontHostApp.ts":
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
@@ -43247,6 +43332,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ComboBoxField": () => (/* reexport safe */ _Model_Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_12__.ComboBoxField),
 /* harmony export */   "DataSource": () => (/* reexport safe */ _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource),
 /* harmony export */   "Database": () => (/* reexport safe */ _Model_Database_Database__WEBPACK_IMPORTED_MODULE_47__.Database),
+/* harmony export */   "DatabaseResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.DatabaseResult),
 /* harmony export */   "DateField": () => (/* reexport safe */ _Model_Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_11__.DateField),
 /* harmony export */   "DateIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.DateIcon),
 /* harmony export */   "DatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.DatePicker),
@@ -43265,6 +43351,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "GridRow": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.Helper),
 /* harmony export */   "Image": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.Image),
+/* harmony export */   "InsertExResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.InsertExResult),
 /* harmony export */   "LeftIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.LeftIcon),
 /* harmony export */   "LinkField": () => (/* reexport safe */ _Model_Field_LinkField_LinkField__WEBPACK_IMPORTED_MODULE_56__.LinkField),
 /* harmony export */   "LocationIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.LocationIcon),
@@ -43287,6 +43374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "Radio": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.Radio),
 /* harmony export */   "RadioField": () => (/* reexport safe */ _Model_Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_35__.RadioField),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.ReactComponent),
+/* harmony export */   "Result": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.Result),
 /* harmony export */   "RightIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.RightIcon),
 /* harmony export */   "RowForm": () => (/* reexport safe */ _Model_Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_9__.RowForm),
 /* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_38__.RowFormCheckBoxFieldController),
@@ -43336,6 +43424,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_7__.TableFormTextBoxFieldController),
 /* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _Controller_ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_52__.TableFormTextBoxFieldView),
 /* harmony export */   "TableFormView": () => (/* reexport safe */ _Controller_ModelController_FormController_TableFormController_TableFormView__WEBPACK_IMPORTED_MODULE_50__.TableFormView),
+/* harmony export */   "TableResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.TableResult),
 /* harmony export */   "TextArea": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.TextArea),
 /* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model_Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_21__.TextAreaField),
 /* harmony export */   "TextBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.TextBox),
@@ -43344,9 +43433,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "TimeBox2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.TimeBox2),
 /* harmony export */   "TimeIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.TimeIcon),
 /* harmony export */   "Tooltip": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.Tooltip),
+/* harmony export */   "UpdateEx": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.UpdateEx),
+/* harmony export */   "UpdateResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_67__.UpdateResult),
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.VisibilityOffIcon)
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_65__.VisibilityOffIcon),
+/* harmony export */   "keyArrayToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_66__.keyArrayToKey)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 /* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");
@@ -43414,6 +43506,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Controller_ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_63__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx");
 /* harmony import */ var _Controller_ModelController_FieldController_TableFormFieldController_TableFormLinkFieldController_TableFormLinkFieldController__WEBPACK_IMPORTED_MODULE_64__ = __webpack_require__(/*! ./Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_65__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_66__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_67__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
 
 
 
@@ -43509,6 +43603,8 @@ __webpack_require__.r(__webpack_exports__);
 // export { TimeIcon } from '../common';
 // export { DropdownDatePicker } from '../common';
 // export { DatePicker } from '../common';
+
+
 
 
 })();

@@ -64,3 +64,5 @@ export { RowFormComboBoxFieldView } from './Controller/ModelController/FieldCont
 export { RowFormPhoneFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView';
 export { TableFormLinkFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController';
 export * from '../common';
+export * from '../../types';
+export * from '../../Result';

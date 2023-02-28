@@ -6,5 +6,5 @@ export declare class RowFormRadioFieldController extends RowFormFieldController<
         value: any;
         title: any;
     }[];
-    getRows(): import("../../../../../../../types").RawRow[];
+    getRows(): import("../../../../..").RawRow[];
 }

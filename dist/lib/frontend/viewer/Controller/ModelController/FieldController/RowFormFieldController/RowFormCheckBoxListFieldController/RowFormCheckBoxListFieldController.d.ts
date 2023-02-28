@@ -4,7 +4,7 @@ export declare class RowFormCheckBoxListFieldController extends RowFormFieldCont
     init(): void;
     deinit(): void;
     getViewClass(): any;
-    getRows(): import("../../../../../../../types").RawRow[];
+    getRows(): import("../../../../..").RawRow[];
     onListInsert: (e: any) => Promise<void>;
     onListUpdate: (e: any) => Promise<void>;
     onListDelete: (e: any) => Promise<void>;
