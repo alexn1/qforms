@@ -62,6 +62,7 @@ export { RowFormTextBoxFieldView } from './Controller/ModelController/FieldContr
 export { RowFormDateTimeFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView';
 export { RowFormComboBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView';
 export { RowFormPhoneFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView';
+export { TableFormLinkFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController';
 
 // common
 // export { Helper } from '../common/Helper';
