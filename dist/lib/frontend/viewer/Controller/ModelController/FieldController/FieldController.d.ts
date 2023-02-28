@@ -9,7 +9,7 @@ export declare class FieldController<TModel extends Field = Field> extends Model
     valueToString(value: any): string;
     stringToValue(stringValue: string): any;
     getViewStyle(row: any): any;
-    openPage(options: OpenPageOptions): Promise<PageController>;
+    openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
     getParent(): FormController;
     getForm(): FormController;
     getPage(): PageController;

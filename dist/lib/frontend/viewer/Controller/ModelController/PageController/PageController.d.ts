@@ -4,7 +4,7 @@ import { PageView } from './PageView';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
 import { Page } from '../../../Model/Page/Page';
 import { Form } from '../../../Model/Form/Form';
-export declare class PageController extends ModelController<Page> {
+export declare class PageController<TApplicationController extends ApplicationController = ApplicationController> extends ModelController<Page> {
     id: string;
     forms: FormController<Form>[];
     constructor(model: Page, parent: ApplicationController, id: string);
@@ -22,12 +22,12 @@ export declare class PageController extends ModelController<Page> {
     onFormDiscard(formController: FormController<Form>): void;
     onFormUpdate(e: any): void;
     onFormInsert(e: any): void;
-    openPage(options: OpenPageOptions): Promise<PageController>;
+    openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
     isChanged(): boolean;
-    getApp(): ApplicationController;
+    getApp(): TApplicationController;
     getViewClass(): typeof PageView;
     static createLink(params?: any): string;
-    getForm(name: any): FormController<Form>;
+    getForm<TFormController extends FormController = FormController>(name: string): TFormController;
     onActionClick(name: any): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;

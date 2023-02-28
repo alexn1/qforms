@@ -11,7 +11,9 @@ import {
 import { Page } from '../../../Model/Page/Page';
 import { Form } from '../../../Model/Form/Form';
 
-export class PageController extends ModelController<Page> {
+export class PageController<
+    TApplicationController extends ApplicationController = ApplicationController,
+> extends ModelController<Page> {
     id: string;
     forms: FormController<Form>[] = [];
 
@@ -184,7 +186,7 @@ export class PageController extends ModelController<Page> {
         return false;
     }
 
-    getApp(): ApplicationController {
+    getApp(): TApplicationController {
         return this.parent;
     }
 
@@ -208,8 +210,10 @@ export class PageController extends ModelController<Page> {
         return window.location.pathname;
     }
 
-    getForm(name): FormController<Form> {
-        return this.forms.find((form) => form.model.getName() === name);
+    getForm<TFormController extends FormController = FormController>(
+        name: string,
+    ): TFormController {
+        return this.forms.find((form) => form.model.getName() === name) as TFormController;
     }
 
     async onActionClick(name): Promise<any> {
