@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { RawRow } from '../../../../types';
+import { RawRow, Row } from '../../../../types';
 export declare class Form extends Model {
     dataSources: DataSource[];
     fields: Field[];
@@ -24,5 +24,5 @@ export declare class Form extends Model {
     refresh(): Promise<void>;
     getField(name: any): Field;
     hasDefaultPersistentDataSource(): boolean;
-    decodeRow(row: any): {};
+    decodeRow(row: RawRow): Row;
 }

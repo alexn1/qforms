@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { RawRow } from '../../../../types';
+import { RawRow, Row } from '../../../../types';
 
 export class Form extends Model {
     dataSources: DataSource[];
@@ -129,8 +129,8 @@ export class Form extends Model {
         return this.getDefaultDataSource().isPersistent();
     }
 
-    decodeRow(row) {
-        const values = {};
+    decodeRow(row: RawRow): Row {
+        const values = {} as Row;
         for (const field of this.fields) {
             const column = field.getAttr('column');
             if (column) {
