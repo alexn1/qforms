@@ -35,10 +35,10 @@ class IndexModule {
         };
     }
     getLinks() {
-        return [...this.css];
+        return this.css;
     }
     getScripts() {
-        return [...this.js];
+        return this.js;
     }
     async render() {
         // const app = ReactDOMServer.renderToStaticMarkup(<App/>);

@@ -48,10 +48,10 @@ class MonitorModule {
         };
     }
     getLinks() {
-        return [...this.css];
+        return this.css;
     }
     getScripts() {
-        return [...this.js];
+        return this.js;
     }
     checkCredentials(req) {
         const base64string = req.headers.authorization.substr(6);
