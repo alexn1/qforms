@@ -11,7 +11,9 @@ import {
 import { PageController } from './PageController';
 import './PageView.less';
 
-export class PageView extends ModelView<PageController> {
+export class PageView<
+    TPageController extends PageController = PageController,
+> extends ModelView<TPageController> {
     constructor(props) {
         super(props);
         this.checkParent();

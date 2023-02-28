@@ -1,7 +1,9 @@
 import { ModelView } from '../ModelView';
 import { ReactNode } from 'react';
 import { PageController } from './PageController';
-export declare class PageView extends ModelView<PageController> {
+export declare class PageView<
+    TPageController extends PageController = PageController,
+> extends ModelView<TPageController> {
     constructor(props: any);
     onActionsClick: (li: any) => Promise<void>;
     renderHeader(): any;
