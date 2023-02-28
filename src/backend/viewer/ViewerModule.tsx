@@ -51,6 +51,7 @@ export class ViewerModule {
         ).map((path) => `/viewer/public/${path}`);
         console.log('viewer.css:', this.css);
         console.log('viewer.js:', this.js);
+        if (!this.js.length) throw new Error('no qforms js');
     }
 
     getLinks() {

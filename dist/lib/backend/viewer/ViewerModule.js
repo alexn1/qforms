@@ -34,6 +34,8 @@ class ViewerModule {
         this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         console.log('viewer.css:', this.css);
         console.log('viewer.js:', this.js);
+        if (!this.js.length)
+            throw new Error('no qforms js');
     }
     getLinks() {
         return [...this.css];
