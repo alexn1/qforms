@@ -68,7 +68,7 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    checkKeyFields(row: Row) {
+    checkKeyFields() {
         const fieldsClumns = this.getForm().fields.map((field) => field.getAttr('column'));
         // console.log('fieldsClumns:', fieldsClumns);
         for (const keyColumn of this.keyColumns) {
@@ -81,7 +81,7 @@ export class BkDataSource extends BkModel {
     checkRow(row: Row) {
         this.checkKeyColumns(row);
         if (this.isOnForm()) {
-            this.checkKeyFields(row);
+            this.checkKeyFields();
         }
         if (this.isDefaultOnForm()) {
             // this.checkNotUsedColumns(row);

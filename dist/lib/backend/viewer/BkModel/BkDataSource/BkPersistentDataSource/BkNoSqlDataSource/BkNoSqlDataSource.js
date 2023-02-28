@@ -179,7 +179,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
     checkRow(row) {
         this.checkKeyColumns(row);
         if (this.isOnForm()) {
-            this.checkKeyFields(row);
+            this.checkKeyFields();
         }
         if (this.isDefaultOnForm()) {
             // this.checkNotUsedColumns(row);
