@@ -20,6 +20,10 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     async fill(context: Context): Promise<any> {
         const response = await super.fill(context);
 
+        if (this.isOnForm()) {
+            this.checkKeyFields();
+        }
+
         // if form data source named default then check mode
         if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
             const limit = this.getLimit();
@@ -227,9 +231,6 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
     checkRow(row: Row) {
         this.checkKeyColumns(row);
-        if (this.isOnForm()) {
-            this.checkKeyFields();
-        }
         if (this.isDefaultOnForm()) {
             // this.checkNotUsedColumns(row);
             // this.checkFields(row);

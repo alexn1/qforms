@@ -65,9 +65,6 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     checkRow(row) {
         this.checkKeyColumns(row);
-        if (this.isOnForm()) {
-            this.checkKeyFields();
-        }
         if (this.isDefaultOnForm()) {
             // this.checkNotUsedColumns(row);
             this.checkFields(row);
