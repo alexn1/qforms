@@ -62,7 +62,7 @@ export class Tab2 extends ReactComponent {
         return this.props.tabs.map((tab, i) => (
             <div
                 key={tab.name}
-                className={`${this.getCssBlockName()}__page ${
+                className={`${this.getCssBlockName()}__page full ${
                     i === this.getActive() ? 'active' : ''
                 }`}>
                 {tab.content}

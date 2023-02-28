@@ -871,6 +871,9 @@ div.CheckBox:not(.disabled):hover {
 .Tab2__button > span.close {
   margin: 3px 10px 3px 0;
 }
+.Tab2__pages {
+  flex-grow: 1;
+}
 .Tab2__page {
   display: none;
 }
