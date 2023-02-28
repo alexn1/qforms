@@ -55,11 +55,11 @@ export class ViewerModule {
     }
 
     getLinks() {
-        return [...this.css];
+        return this.css;
     }
 
     getScripts() {
-        return [...this.js];
+        return this.js;
     }
 
     async handleViewerGet(context: Context, application: BkApplication) {

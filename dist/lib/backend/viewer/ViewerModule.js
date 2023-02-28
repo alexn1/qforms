@@ -38,10 +38,10 @@ class ViewerModule {
             throw new Error('no qforms js');
     }
     getLinks() {
-        return [...this.css];
+        return this.css;
     }
     getScripts() {
-        return [...this.js];
+        return this.js;
     }
     async handleViewerGet(context, application) {
         console.log('ViewerModule.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
