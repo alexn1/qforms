@@ -427,7 +427,7 @@ export class ApplicationController extends ModelController<Application> {
         await this.webSocketClient.connect();
     }
 
-    async rpc(name, params) {
+    async rpc(name: string, params: any = {}) {
         const result = await this.getModel().rpc(name, params);
         /*if (result.errorMessage) {
             this.getHostApp().logError(new Error(result.errorMessage));

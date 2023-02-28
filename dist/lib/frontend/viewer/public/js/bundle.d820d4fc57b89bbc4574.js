@@ -36498,7 +36498,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         });
         await this.webSocketClient.connect();
     }
-    async rpc(name, params) {
+    async rpc(name, params = {}) {
         const result = await this.getModel().rpc(name, params);
         /*if (result.errorMessage) {
             this.getHostApp().logError(new Error(result.errorMessage));
