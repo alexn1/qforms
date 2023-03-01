@@ -1,6 +1,7 @@
 import React from 'react';
 import { FieldController } from '../FieldController';
 import { Field } from '../../../../Model/Field/Field';
+import { RowFormController } from '../../FormController/RowFormController/RowFormController';
 
 export declare class RowFormFieldController<
     TField extends Field = Field,
@@ -38,4 +39,5 @@ export declare class RowFormFieldController<
     isValidateOnChange(): any;
     isValidateOnBlur(): any;
     onChangePure: (value: any, fireEvent?: boolean) => Promise<void>;
+    getForm(): RowFormController;
 }
