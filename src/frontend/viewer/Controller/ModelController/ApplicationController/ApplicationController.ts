@@ -17,6 +17,7 @@ export interface OpenPageOptions {
     selectedKey?: string;
     onClose?;
     onSelect?;
+    onCreate?: (page: Page) => void;
 }
 
 export class ApplicationController extends ModelController<Application> {

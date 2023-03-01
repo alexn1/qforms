@@ -1,4 +1,5 @@
 import { ModelController } from '../ModelController';
+import { Page } from '../../../Model/Page/Page';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
@@ -13,6 +14,7 @@ export interface OpenPageOptions {
     selectedKey?: string;
     onClose?: any;
     onSelect?: any;
+    onCreate?: (page: Page) => void;
 }
 export declare class ApplicationController extends ModelController<Application> {
     frontHostApp: FrontHostApp;
