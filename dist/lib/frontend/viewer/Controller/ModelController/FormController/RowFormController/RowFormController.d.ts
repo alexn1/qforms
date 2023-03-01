@@ -29,5 +29,5 @@ export declare class RowFormController extends FormController<RowForm> {
     isActionEnabled(name: any): boolean;
     isEditMode(): boolean;
     isViewMode(): boolean;
-    getField(name: string): RowFormFieldController;
+    getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(name: string): TRowFormFieldController;
 }

@@ -213,8 +213,10 @@ export class RowFormController extends FormController<RowForm> {
         return this.getMode() === 'view';
     }
 
-    getField(name: string): RowFormFieldController {
-        return super.getField(name) as RowFormFieldController;
+    getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(
+        name: string,
+    ): TRowFormFieldController {
+        return super.getField(name) as TRowFormFieldController;
     }
 }
 
