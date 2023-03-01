@@ -13,7 +13,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
     };
 
     isCreateButtonVisible() {
-        if (this.getCtrl().getForm<RowFormController>().getMode() !== 'edit') {
+        if (this.getCtrl().getForm().getMode() !== 'edit') {
             return false;
         }
         if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {

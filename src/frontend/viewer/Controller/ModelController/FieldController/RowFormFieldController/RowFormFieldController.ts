@@ -40,9 +40,9 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return form.getRow();
     }
 
-    /* getForm(): RowFormController {
-        return super.getForm() as RowFormController;
-    } */
+    getForm(): RowFormController {
+        return this.parent;
+    }
 
     copyValueToModel() {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());

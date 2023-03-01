@@ -10,10 +10,6 @@ import {
 } from '../ApplicationController/ApplicationController';
 
 export class FieldController<TField extends Field = Field> extends ModelController<TField> {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-
     static create(model: Field, parent: FormController): FieldController {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
@@ -98,9 +94,9 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return super.getParent();
     }
 
-    getForm<TFormController extends FormController = FormController>(): TFormController {
+    /* getForm<TFormController extends FormController = FormController>(): TFormController {
         return this.parent;
-    }
+    } */
 
     getPage<TPageController extends PageController = PageController>(): TPageController {
         return this.parent.parent;

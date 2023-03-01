@@ -36684,9 +36684,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
@@ -36768,9 +36765,9 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     getParent() {
         return super.getParent();
     }
-    getForm() {
+    /* getForm<TFormController extends FormController = FormController>(): TFormController {
         return this.parent;
-    }
+    } */
     getPage() {
         return this.parent.parent;
     }
@@ -37729,9 +37726,9 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         const form = this.getModel().getForm();
         return form.getRow();
     }
-    /* getForm(): RowFormController {
-        return super.getForm() as RowFormController;
-    } */
+    getForm() {
+        return this.parent;
+    }
     copyValueToModel() {
         // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
@@ -38885,6 +38882,9 @@ class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.model.getValue(row));
+    }
+    getForm() {
+        return this.parent;
     }
 }
 // @ts-ignore
