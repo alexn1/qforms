@@ -4,7 +4,9 @@ import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../co
 import { RowFormController } from './RowFormController';
 import './RowFormView.less';
 
-export class RowFormView extends FormView<RowFormController> {
+export class RowFormView<
+    TRowFormController extends RowFormController = RowFormController,
+> extends FormView<TRowFormController> {
     renderToolbar(): any {
         // console.log('RowFormView.renderToolbar');
         const { ctrl } = this.props;
