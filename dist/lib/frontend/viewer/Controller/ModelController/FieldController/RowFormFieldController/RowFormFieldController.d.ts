@@ -39,5 +39,5 @@ export declare class RowFormFieldController<
     isValidateOnChange(): any;
     isValidateOnBlur(): any;
     onChangePure: (value: any, fireEvent?: boolean) => Promise<void>;
-    getForm(): RowFormController;
+    getForm<TRowFormController extends FormController = RowFormController>(): TRowFormController;
 }
