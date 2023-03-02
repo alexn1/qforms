@@ -2273,3 +2273,47 @@ svg {
   color: blue;
 }
 
+/*!*************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.less ***!
+  \*************************************************************************************************************************************************************************************************************************************/
+.RowFormTimeFieldView {
+  height: 26px;
+  box-sizing: border-box;
+  position: relative;
+}
+.RowFormTimeFieldView > input {
+  width: 100%;
+  height: 100%;
+  border-width: 0;
+  padding: 0 5px 0 5px;
+  font-family: inherit;
+  font-weight: inherit;
+  font-size: inherit;
+}
+.RowFormTimeFieldView > input[readonly] {
+  background-color: #eee;
+  color: gray;
+}
+.RowFormTimeFieldView > .close {
+  display: flex;
+  position: absolute;
+  width: 10px;
+  height: 100%;
+  top: 0;
+  right: 4px;
+  cursor: pointer;
+  visibility: hidden;
+}
+.RowFormTimeFieldView > .close:hover svg line {
+  stroke: black;
+}
+.RowFormTimeFieldView > .close.visible {
+  visibility: visible;
+}
+.RowFormTimeFieldView.error > input {
+  background-color: #f2dede;
+}
+.debug .RowFormTimeFieldView.changed > input {
+  background-color: #eefdea;
+}
+

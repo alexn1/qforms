@@ -63,6 +63,7 @@ export { RowFormDateTimeFieldView } from './Controller/ModelController/FieldCont
 export { RowFormComboBoxFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView';
 export { RowFormPhoneFieldView } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView';
 export { TableFormLinkFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController';
+export { RowFormTimeFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldController';
 export * from '../common';
 export * from '../../types';
 export * from '../../Result';

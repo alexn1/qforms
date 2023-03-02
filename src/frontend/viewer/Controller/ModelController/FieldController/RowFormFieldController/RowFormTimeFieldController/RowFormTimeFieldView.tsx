@@ -1,5 +1,7 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormTimeFieldController } from './RowFormTimeFieldController';
+import { TimeBox, CloseIcon } from '../../../../../../common';
+
 import './RowFormTimeFieldView.less';
 
 export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldController> {
