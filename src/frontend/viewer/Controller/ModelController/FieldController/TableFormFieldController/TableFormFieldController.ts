@@ -13,6 +13,10 @@ export class TableFormFieldController<
     getForm(): TableFormController {
         return this.parent;
     }
+
+    getTextAlign(): null | 'left' | 'center' | 'right' {
+        return null;
+    }
 }
 
 // @ts-ignore

@@ -111,7 +111,7 @@ export class TableFormView<
     };
 
     getGridColumns(): any[] {
-        const { ctrl } = this.props;
+        const ctrl = this.getCtrl();
         return Object.keys(ctrl.fields)
             .filter((name) => ctrl.getField(name).isVisible())
             .map((name) => {
