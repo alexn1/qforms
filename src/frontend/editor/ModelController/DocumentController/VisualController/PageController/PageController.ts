@@ -133,6 +133,7 @@ export class PageController extends VisualController {
         propList.list['menu'] = this.getPageLink().getAttr('menu');
         propList.list['startup'] = this.getPageLink().getAttr('startup');
         propList.options['startup'] = ['true', 'false'];
+        propList.options['formInTab'] = ['true', 'false'];
         return propList;
     }
 
