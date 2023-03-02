@@ -262,7 +262,9 @@ export class Grid extends ReactComponent {
                 className={`${this.getCssBlockName()}__th`}
                 key={column.name}
                 style={{ width: this.getColumnWidth(i) }}>
-                <div className={'ellipsis'}>{column.title || column.name}</div>
+                <div className={'ellipsis'} style={{ textAlign: column.align }}>
+                    {column.title || column.name}
+                </div>
                 <span
                     className={'Grid__resize'}
                     data-i={i}

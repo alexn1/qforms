@@ -9,9 +9,11 @@ export class TableFormCheckBoxFieldView extends TableFormFieldView<TableFormChec
 
     render() {
         const row = this.props.row;
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
-            <div className={this.getCssClassNames()} style={this.getStyle(row)}>
+            <div
+                className={this.getCssClassNames()}
+                style={{ ...this.getStyle(row), textAlign: ctrl.getAlign() }}>
                 <CheckBox
                     ref={this.span}
                     checked={ctrl.getValueForWidget(row)}

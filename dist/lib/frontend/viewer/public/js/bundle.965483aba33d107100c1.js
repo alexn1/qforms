@@ -34341,7 +34341,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return column.width;
     }
     renderColumns() {
-        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis' }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
     }
     renderRows() {
         return this.props.rows.map((row, i) => {
@@ -38654,8 +38654,8 @@ __webpack_require__.r(__webpack_exports__);
 class TableFormCheckBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
     render() {
         const row = this.props.row;
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { ref: this.span, checked: ctrl.getValueForWidget(row), readOnly: true, disabled: true }) })));
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: Object.assign(Object.assign({}, this.getStyle(row)), { textAlign: ctrl.getAlign() }) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { ref: this.span, checked: ctrl.getValueForWidget(row), readOnly: true, disabled: true }) })));
     }
 }
 // @ts-ignore
