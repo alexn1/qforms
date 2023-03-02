@@ -36765,9 +36765,9 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     getParent() {
         return super.getParent();
     }
-    /* getForm<TFormController extends FormController = FormController>(): TFormController {
+    getForm() {
         return this.parent;
-    } */
+    }
     getPage() {
         return this.parent.parent;
     }

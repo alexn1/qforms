@@ -2,6 +2,7 @@ import React from 'react';
 import { FieldController } from '../FieldController';
 import { ApplicationController } from '../../ApplicationController/ApplicationController';
 import { Field } from '../../../../Model/Field/Field';
+import { FormController } from '../../FormController/FormController';
 import { RowFormController } from '../../FormController/RowFormController/RowFormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
@@ -40,8 +41,8 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return form.getRow();
     }
 
-    getForm(): RowFormController {
-        return this.parent;
+    getForm<TRowFormController extends FormController = RowFormController>(): TRowFormController {
+        return this.parent as TRowFormController;
     }
 
     copyValueToModel() {

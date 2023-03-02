@@ -2,6 +2,7 @@ import { FieldController } from '../FieldController';
 import { Field } from '../../../../Model/Field/Field';
 import { TableFormController } from '../../FormController/TableFormController/TableFormController';
 import { Align } from '../../../../../../types';
+import { FormController } from '../../FormController/FormController';
 
 export class TableFormFieldController<
     TField extends Field = Field,
@@ -11,8 +12,10 @@ export class TableFormFieldController<
         return this.valueToString(this.model.getValue(row));
     }
 
-    getForm(): TableFormController {
-        return this.parent;
+    getForm<
+        TTableFormController extends FormController = TableFormController,
+    >(): TTableFormController {
+        return this.parent as TTableFormController;
     }
 
     getAlign(): Align | null {

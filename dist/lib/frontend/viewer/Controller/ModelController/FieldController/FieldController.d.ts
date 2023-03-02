@@ -10,6 +10,7 @@ export declare class FieldController<TField extends Field = Field> extends Model
     getViewStyle(row: any): any;
     openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
     getParent<TFormController extends FormController = FormController>(): TFormController;
+    getForm<TFormController extends FormController = FormController>(): TFormController;
     getPage<TPageController extends PageController = PageController>(): TPageController;
     getApp<TApplicationController extends ApplicationController = ApplicationController>(): TApplicationController;
     isVisible(): boolean;

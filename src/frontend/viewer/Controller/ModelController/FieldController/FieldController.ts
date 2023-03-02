@@ -94,9 +94,9 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return super.getParent();
     }
 
-    /* getForm<TFormController extends FormController = FormController>(): TFormController {
+    getForm<TFormController extends FormController = FormController>(): TFormController {
         return this.parent;
-    } */
+    }
 
     getPage<TPageController extends PageController = PageController>(): TPageController {
         return this.parent.parent;
