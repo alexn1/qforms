@@ -14,6 +14,7 @@ export { ComboBoxField } from './Model/Field/ComboBoxField/ComboBoxField';
 export { TextBoxField } from './Model/Field/TextBoxField/TextBoxField';
 export { SqlDataSource } from './Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource';
 export { NoSqlDataSource } from './Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource';
+export { PersistentDataSource } from './Model/DataSource/PersistentDataSource/PersistentDataSource';
 export { RowFormDateFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController';
 export { RowFormComboBoxFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController';
 export { RowFormTextBoxFieldController } from './Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController';

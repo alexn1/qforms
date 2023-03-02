@@ -103,10 +103,10 @@ export class Form extends Model {
         return null;
     }
 
-    getDefaultDataSource(): DataSource {
+    getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource {
         const dataSource = this.getDataSource('default');
         if (!dataSource) throw new Error(`${this.getFullName()}: no default data source`);
-        return dataSource;
+        return dataSource as TDataSource;
     }
 
     getPage() {
