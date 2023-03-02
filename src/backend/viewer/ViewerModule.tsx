@@ -36,7 +36,7 @@ export class ViewerModule {
     }
 
     async init() {
-        console.log('ViewerModule.init', this.hostApp.getFrontendDirPath());
+        console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (
             await Helper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
@@ -49,8 +49,8 @@ export class ViewerModule {
                 'js',
             )
         ).map((path) => `/viewer/public/${path}`);
-        console.log('viewer.css:', this.css);
-        console.log('viewer.js:', this.js);
+        console.log('ViewerModule.css:', this.css);
+        console.log('ViewerModule.js:', this.js);
         if (!this.js.length) throw new Error('no qforms js');
     }
 
