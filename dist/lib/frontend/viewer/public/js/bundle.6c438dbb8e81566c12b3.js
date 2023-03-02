@@ -39168,9 +39168,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async onActionClick(name, row) {
         console.log('FormController.onActionClick', name, row);
     }
-    /* getField(name: string): FieldController {
+    getField(name) {
         return this.fields[name];
-    } */
+    }
     getApp() {
         return this.parent.parent;
     }
