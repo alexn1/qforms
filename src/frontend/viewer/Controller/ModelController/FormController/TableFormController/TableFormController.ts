@@ -3,6 +3,7 @@ import { FormController } from '../FormController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
+import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 
 export class TableFormController extends FormController<TableForm> {
     state: any;
@@ -314,6 +315,12 @@ export class TableFormController extends FormController<TableForm> {
 
     isActionEnabled(name) {
         return this.isRowSelected();
+    }
+
+    getField<TTableFormFieldController extends TableFormFieldController = TableFormFieldController>(
+        name: string,
+    ): TTableFormFieldController {
+        return this.fields[name] as TTableFormFieldController;
     }
 }
 

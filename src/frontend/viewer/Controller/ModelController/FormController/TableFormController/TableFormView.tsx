@@ -120,6 +120,7 @@ export class TableFormView<
                     name: field.getModel().getName(),
                     title: field.getModel().getCaption(),
                     width: field.getModel().getWidth(),
+                    align: field.getAlign(),
                 };
             });
     }

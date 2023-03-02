@@ -78,9 +78,9 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         console.log('FormController.onActionClick', name, row);
     }
 
-    getField(name: string): FieldController {
+    /* getField(name: string): FieldController {
         return this.fields[name];
-    }
+    } */
 
     getApp(): ApplicationController {
         return this.parent.parent;

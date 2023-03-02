@@ -38,3 +38,5 @@ export interface ChangesByKey {
 export interface QueryParams {
     [name: string]: string | number | boolean;
 }
+
+export type Align = 'left' | 'center' | 'right';

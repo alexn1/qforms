@@ -1,6 +1,7 @@
 import { FieldController } from '../FieldController';
 import { Field } from '../../../../Model/Field/Field';
 import { TableFormController } from '../../FormController/TableFormController/TableFormController';
+import { Align } from '../../../../../../types';
 
 export class TableFormFieldController<
     TField extends Field = Field,
@@ -14,7 +15,7 @@ export class TableFormFieldController<
         return this.parent;
     }
 
-    getTextAlign(): null | 'left' | 'center' | 'right' {
+    getAlign(): Align | null {
         return null;
     }
 }

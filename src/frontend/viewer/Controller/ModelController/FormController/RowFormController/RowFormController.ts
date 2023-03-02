@@ -216,7 +216,7 @@ export class RowFormController extends FormController<RowForm> {
     getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(
         name: string,
     ): TRowFormFieldController {
-        return super.getField(name) as TRowFormFieldController;
+        return this.fields[name] as TRowFormFieldController;
     }
 }
 

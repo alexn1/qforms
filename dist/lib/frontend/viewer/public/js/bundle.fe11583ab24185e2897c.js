@@ -38623,6 +38623,9 @@ class TableFormCheckBoxFieldController extends _TableFormFieldController__WEBPAC
     getValueForWidget(row) {
         return this.model.getValue(row);
     }
+    getAlign() {
+        return 'center';
+    }
 }
 // @ts-ignore
 window.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;
@@ -38885,6 +38888,9 @@ class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE
     }
     getForm() {
         return this.parent;
+    }
+    getAlign() {
+        return null;
     }
 }
 // @ts-ignore
@@ -39162,9 +39168,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async onActionClick(name, row) {
         console.log('FormController.onActionClick', name, row);
     }
-    getField(name) {
+    /* getField(name: string): FieldController {
         return this.fields[name];
-    }
+    } */
     getApp() {
         return this.parent.parent;
     }
@@ -39434,7 +39440,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         return this.getMode() === 'view';
     }
     getField(name) {
-        return super.getField(name);
+        return this.fields[name];
     }
 }
 // @ts-ignore
@@ -39844,6 +39850,9 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
     isActionEnabled(name) {
         return this.isRowSelected();
     }
+    getField(name) {
+        return this.fields[name];
+    }
 }
 // @ts-ignore
 window.TableFormController = TableFormController;
@@ -39906,7 +39915,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
                                 `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.TextBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_7__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_5__.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
-        const { ctrl } = this.props;
+        const ctrl = this.getCtrl();
         return Object.keys(ctrl.fields)
             .filter((name) => ctrl.getField(name).isVisible())
             .map((name) => {
@@ -39915,6 +39924,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
                 name: field.getModel().getName(),
                 title: field.getModel().getCaption(),
                 width: field.getModel().getWidth(),
+                align: field.getAlign(),
             };
         });
     }
