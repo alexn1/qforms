@@ -14,7 +14,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
     }
     async fill(context) {
         const response = await super.fill(context);
-        if (this.isOnForm()) {
+        if (this.isDefaultOnForm()) {
             this.checkKeyFields();
         }
         // if form data source named default then check mode

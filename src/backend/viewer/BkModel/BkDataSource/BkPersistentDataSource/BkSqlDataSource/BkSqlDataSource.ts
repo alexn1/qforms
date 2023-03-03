@@ -21,7 +21,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         // console.log('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
-        if (this.isOnForm()) {
+        if (this.isDefaultOnForm()) {
             this.checkKeyFields();
         }
 

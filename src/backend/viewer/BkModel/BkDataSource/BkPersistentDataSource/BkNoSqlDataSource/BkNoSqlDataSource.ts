@@ -20,7 +20,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     async fill(context: Context): Promise<any> {
         const response = await super.fill(context);
 
-        if (this.isOnForm()) {
+        if (this.isDefaultOnForm()) {
             this.checkKeyFields();
         }
 

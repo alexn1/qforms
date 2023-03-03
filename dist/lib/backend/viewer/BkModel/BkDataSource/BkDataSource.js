@@ -59,7 +59,7 @@ class BkDataSource extends BkModel_1.BkModel {
         // console.log('fieldsClumns:', fieldsClumns);
         for (const keyColumn of this.keyColumns) {
             if (!fieldsClumns.includes(keyColumn)) {
-                throw new Error(`no field with key column: ${keyColumn}`);
+                throw new Error(`[${this.getFullName()}]: no field with key column: ${keyColumn}`);
             }
         }
     }
