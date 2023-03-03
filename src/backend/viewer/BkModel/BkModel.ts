@@ -65,6 +65,7 @@ export class BkModel extends BaseModel {
     }
 
     async createChildModel(colName: string, itemData: any): Promise<any> {
+        // app custom class
         const modelClass = BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -72,9 +73,7 @@ export class BkModel extends BaseModel {
             return new CustomClass(itemData, this);
         }
 
-        // const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
-        // const Class = CustomClass ? CustomClass : backend[className];
-
+        // lib class
         const className = BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
         const Class = backend[`Bk${className}`];

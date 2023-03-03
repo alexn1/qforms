@@ -62,6 +62,7 @@ class BkModel extends BaseModel_1.BaseModel {
         }
     }
     async createChildModel(colName, itemData) {
+        // app custom class
         const modelClass = BaseModel_1.BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -69,8 +70,7 @@ class BkModel extends BaseModel_1.BaseModel {
                 throw new Error(`no class global.${modelClass}`);
             return new CustomClass(itemData, this);
         }
-        // const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
-        // const Class = CustomClass ? CustomClass : backend[className];
+        // lib class
         const className = BaseModel_1.BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
         const Class = backend[`Bk${className}`];
