@@ -68,7 +68,7 @@ export class BkModel extends BaseModel {
         const modelClass = BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
-            if (!CustomClass) throw new Error(`no class ${modelClass}`);
+            if (!CustomClass) throw new Error(`no class global.${modelClass}`);
             return new CustomClass(itemData, this);
         }
 
@@ -77,8 +77,8 @@ export class BkModel extends BaseModel {
 
         const className = BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
-        const Class = /*backend[className] ||*/ backend[`Bk${className}`];
-        if (!Class) throw new Error(`no class ${className}`);
+        const Class = backend[`Bk${className}`];
+        if (!Class) throw new Error(`no class backend.${className}`);
         return new Class(itemData, this);
     }
 

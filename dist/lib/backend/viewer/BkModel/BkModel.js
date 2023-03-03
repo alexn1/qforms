@@ -66,16 +66,16 @@ class BkModel extends BaseModel_1.BaseModel {
         if (modelClass) {
             const CustomClass = global[modelClass];
             if (!CustomClass)
-                throw new Error(`no class ${modelClass}`);
+                throw new Error(`no class global.${modelClass}`);
             return new CustomClass(itemData, this);
         }
         // const CustomClass = await this.getChildModelCustomClass(this, colName, itemData);
         // const Class = CustomClass ? CustomClass : backend[className];
         const className = BaseModel_1.BaseModel.getClassName(itemData);
         const backend = require('../../../backend');
-        const Class = /*backend[className] ||*/ backend[`Bk${className}`];
+        const Class = backend[`Bk${className}`];
         if (!Class)
-            throw new Error(`no class ${className}`);
+            throw new Error(`no class backend.${className}`);
         return new Class(itemData, this);
     }
     getDirPath() {
