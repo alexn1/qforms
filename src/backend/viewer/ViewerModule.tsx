@@ -1,4 +1,5 @@
 import path from 'path';
+import ReactDOMServer from 'react-dom/server';
 
 import { Context } from '../Context';
 import { Helper } from '../Helper';
@@ -8,7 +9,6 @@ import { MyError } from '../MyError';
 import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';
 import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
-import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 
