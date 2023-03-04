@@ -27,8 +27,6 @@ module.exports = {
                 },
             },
             {
-                // Test for a polyfill (or any file) and it won't be included in your
-                // bundle
                 test: /\.less$/i,
                 use: 'null-loader',
             },
