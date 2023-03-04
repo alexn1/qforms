@@ -16389,8 +16389,10 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.isAttr('formInTab') && this.getAttr('formInTab') === 'true';
     }
 }
-// @ts-ignore
-window.Page = Page;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Page = Page;
+}
 
 
 /***/ }),
@@ -16454,8 +16456,10 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.emit('refresh', { source });
     }
 }
-// @ts-ignore
-window.Table = Table;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Table = Table;
+}
 
 
 /***/ }),
