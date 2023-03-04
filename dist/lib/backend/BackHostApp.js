@@ -57,8 +57,7 @@ class BackHostApp {
         const { log } = this.params;
         if (!fs_1.default.existsSync(this.appsDirPath)) {
             console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
-            process.exit(1);
-            return;
+            return 1;
         }
         // path
         const backendDirPath = __dirname;
