@@ -15,28 +15,11 @@ module.exports = {
             type: 'window',
         },
     },
-    /*resolve: {
-        extensions: ['.jsx', '.js'],
-    },*/
     resolve: {
         extensions: ['.tsx', '.ts', '.js'],
     },
     module: {
         rules: [
-            /*{
-                test: /\.(js)x?$/,
-                exclude: /node_modules/,
-                use: [
-                    {
-                        loader: 'babel-loader',
-                        options: {
-                            presets: [
-                                ['@babel/preset-react', {runtime: 'automatic'}],
-                            ]
-                        }
-                    },
-                ],
-            },*/
             {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
@@ -46,7 +29,6 @@ module.exports = {
                         onlyCompileBundledFiles: true,
                         compilerOptions: {
                             target: 'ES2017',
-                            declaration: false,
                             esModuleInterop: true,
                             jsx: 'react-jsx',
                             rootDir: 'src',
