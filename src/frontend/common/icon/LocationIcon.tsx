@@ -13,5 +13,7 @@ export class LocationIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.LocationIcon = LocationIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.LocationIcon = LocationIcon;
+}

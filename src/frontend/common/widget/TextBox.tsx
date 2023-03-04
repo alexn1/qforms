@@ -62,5 +62,7 @@ export class TextBox extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.TextBox = TextBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextBox = TextBox;
+}

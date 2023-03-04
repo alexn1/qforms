@@ -21,5 +21,8 @@ export class DropDownIcon extends ReactComponent {
         );
     }
 }
-// @ts-ignore
-window.DropDownIcon = DropDownIcon;
+
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropDownIcon = DropDownIcon;
+}

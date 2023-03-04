@@ -8,5 +8,7 @@ export const CloseIcon2 = (props) => {
     );
 };
 
-// @ts-ignore
-window.CloseIcon2 = CloseIcon2;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CloseIcon2 = CloseIcon2;
+}

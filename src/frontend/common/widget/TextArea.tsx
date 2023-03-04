@@ -47,5 +47,7 @@ export class TextArea extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.TextArea = TextArea;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextArea = TextArea;
+}

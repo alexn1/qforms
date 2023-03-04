@@ -12,5 +12,7 @@ export const OpenInNewIcon = () => {
     );
 };
 
-// @ts-ignore
-window.OpenInNewIcon = OpenInNewIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.OpenInNewIcon = OpenInNewIcon;
+}

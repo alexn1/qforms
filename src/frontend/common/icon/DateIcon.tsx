@@ -16,5 +16,7 @@ export class DateIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.DateIcon = DateIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DateIcon = DateIcon;
+}

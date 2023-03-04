@@ -12,5 +12,7 @@ export const AddIcon = () => {
     );
 };
 
-// @ts-ignore
-window.AddIcon = AddIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.AddIcon = AddIcon;
+}

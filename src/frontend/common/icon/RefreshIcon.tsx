@@ -16,5 +16,7 @@ export class RefreshIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.RefreshIcon = RefreshIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RefreshIcon = RefreshIcon;
+}

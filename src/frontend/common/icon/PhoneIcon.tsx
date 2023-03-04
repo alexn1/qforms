@@ -12,5 +12,7 @@ export class PhoneIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.PhoneIcon = PhoneIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneIcon = PhoneIcon;
+}

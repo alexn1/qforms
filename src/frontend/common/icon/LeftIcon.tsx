@@ -19,5 +19,7 @@ export const LeftIcon: React.FunctionComponent<LeftIconProps> = (props: LeftIcon
     );
 };
 
-// @ts-ignore
-window.LeftIcon = LeftIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.LeftIcon = LeftIcon;
+}

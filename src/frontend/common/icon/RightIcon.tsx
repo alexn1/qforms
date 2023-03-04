@@ -13,5 +13,7 @@ export const RightIcon = (props: { size?: number }) => {
     );
 };
 
-// @ts-ignore
-window.RightIcon = RightIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RightIcon = RightIcon;
+}

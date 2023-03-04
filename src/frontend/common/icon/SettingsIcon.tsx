@@ -16,5 +16,7 @@ export class SettingsIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.SettingsIcon = SettingsIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.SettingsIcon = SettingsIcon;
+}

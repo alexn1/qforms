@@ -16,5 +16,7 @@ export class MoreVertIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.MoreVertIcon = MoreVertIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.MoreVertIcon = MoreVertIcon;
+}

@@ -83,5 +83,7 @@ export class ComboBox extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.ComboBox = ComboBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ComboBox = ComboBox;
+}

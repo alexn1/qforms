@@ -6,5 +6,7 @@ export const ArrowIcon = (props) => {
     );
 };
 
-// @ts-ignore
-window.ArrowIcon = ArrowIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ArrowIcon = ArrowIcon;
+}

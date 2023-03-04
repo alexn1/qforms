@@ -16,5 +16,7 @@ export class CancelIcon extends React.Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.CancelIcon = CancelIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CancelIcon = CancelIcon;
+}

@@ -111,5 +111,7 @@ export class ReactComponent extends Component<any, any> {
     }
 }
 
-// @ts-ignore
-window.ReactComponent = ReactComponent;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ReactComponent = ReactComponent;
+}

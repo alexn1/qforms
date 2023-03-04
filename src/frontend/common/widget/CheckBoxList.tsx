@@ -92,5 +92,7 @@ export class CheckBoxList extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.CheckBoxList = CheckBoxList;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBoxList = CheckBoxList;
+}

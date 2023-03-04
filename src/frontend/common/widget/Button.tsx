@@ -61,5 +61,7 @@ export class Button extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Button = Button;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Button = Button;
+}

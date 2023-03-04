@@ -144,5 +144,7 @@ export class PhoneBox extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.PhoneBox = PhoneBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneBox = PhoneBox;
+}
