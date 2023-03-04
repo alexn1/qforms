@@ -40,6 +40,7 @@
         "babel-loader": "^9.1.0",
         "babel-preset-react-app": "^3.1.2",
         "chai": "^3.2.0",
+        "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.3",
         "del": "^1.2.1",
         "eslint": "^8.29.0",
@@ -65,6 +66,7 @@
         "less-loader": "^11.1.0",
         "mini-css-extract-plugin": "^2.7.2",
         "nodemon": "^2.0.20",
+        "null-loader": "^4.0.1",
         "prettier": "^2.8.4",
         "should": "^7.0.4",
         "terser-webpack-plugin": "^5.3.6",
@@ -73,7 +75,8 @@
         "ts-loader": "^9.3.1",
         "typescript": "^4.9.3",
         "webpack": "^5.74.0",
-        "webpack-cli": "^4.10.0"
+        "webpack-cli": "^4.10.0",
+        "webpack-node-externals": "^3.0.0"
     },
     "scripts": {
         "start": "NODE_ENV=development node dist/lib/backend/start.js",
@@ -90,7 +93,8 @@
         "docker:build": "npx gulp docker-build",
         "docker:run": "npx gulp docker-run",
         "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\"",
-        "test": "jest test/jest"
+        "test": "jest test/jest",
+        "webpack-back": "NODE_ENV=development webpack --config ./webpack.config.back.js"
     },
     "repository": {
         "type": "git",
