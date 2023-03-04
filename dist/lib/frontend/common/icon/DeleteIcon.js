@@ -32,5 +32,7 @@ class DeleteIcon extends React.Component {
     }
 }
 exports.DeleteIcon = DeleteIcon;
-// @ts-ignore
-window.DeleteIcon = DeleteIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DeleteIcon = DeleteIcon;
+}

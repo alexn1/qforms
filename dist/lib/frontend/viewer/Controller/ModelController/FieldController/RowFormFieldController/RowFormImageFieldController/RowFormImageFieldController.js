@@ -9,5 +9,7 @@ class RowFormImageFieldController extends RowFormFieldController_1.RowFormFieldC
     }
 }
 exports.RowFormImageFieldController = RowFormImageFieldController;
-// @ts-ignore
-window.RowFormImageFieldController = RowFormImageFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormImageFieldController = RowFormImageFieldController;
+}

@@ -11,5 +11,7 @@ class TableFormTextBoxFieldView extends TableFormFieldView_1.TableFormFieldView 
     }
 }
 exports.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
-// @ts-ignore
-window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
+}

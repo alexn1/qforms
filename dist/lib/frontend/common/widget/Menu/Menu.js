@@ -49,5 +49,7 @@ class Menu extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Menu = Menu;
-// @ts-ignore
-window.Menu = Menu;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Menu = Menu;
+}

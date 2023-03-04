@@ -33,5 +33,7 @@ class TextArea extends ReactComponent_1.ReactComponent {
     }
 }
 exports.TextArea = TextArea;
-// @ts-ignore
-window.TextArea = TextArea;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextArea = TextArea;
+}

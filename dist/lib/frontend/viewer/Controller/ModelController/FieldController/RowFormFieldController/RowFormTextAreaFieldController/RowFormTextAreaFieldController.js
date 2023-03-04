@@ -9,5 +9,7 @@ class RowFormTextAreaFieldController extends RowFormFieldController_1.RowFormFie
     }
 }
 exports.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
-// @ts-ignore
-window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+}

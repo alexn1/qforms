@@ -103,5 +103,7 @@ class ReactComponent extends react_1.Component {
     }
 }
 exports.ReactComponent = ReactComponent;
-// @ts-ignore
-window.ReactComponent = ReactComponent;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ReactComponent = ReactComponent;
+}

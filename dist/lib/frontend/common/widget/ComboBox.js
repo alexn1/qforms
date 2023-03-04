@@ -67,5 +67,7 @@ class ComboBox extends ReactComponent_1.ReactComponent {
     }
 }
 exports.ComboBox = ComboBox;
-// @ts-ignore
-window.ComboBox = ComboBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ComboBox = ComboBox;
+}

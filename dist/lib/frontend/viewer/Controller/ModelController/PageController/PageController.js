@@ -252,5 +252,7 @@ class PageController extends ModelController_1.ModelController {
     }
 }
 exports.PageController = PageController;
-// @ts-ignore
-window.PageController = PageController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PageController = PageController;
+}

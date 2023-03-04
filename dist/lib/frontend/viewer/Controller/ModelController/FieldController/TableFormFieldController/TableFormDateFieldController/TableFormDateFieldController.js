@@ -16,5 +16,7 @@ class TableFormDateFieldController extends TableFormFieldController_1.TableFormF
     }
 }
 exports.TableFormDateFieldController = TableFormDateFieldController;
-// @ts-ignore
-window.TableFormDateFieldController = TableFormDateFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormDateFieldController = TableFormDateFieldController;
+}

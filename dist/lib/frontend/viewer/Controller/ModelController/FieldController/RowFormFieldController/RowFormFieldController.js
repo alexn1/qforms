@@ -281,5 +281,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
     }
 }
 exports.RowFormFieldController = RowFormFieldController;
-// @ts-ignore
-window.RowFormFieldController = RowFormFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormFieldController = RowFormFieldController;
+}

@@ -32,5 +32,7 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormTimeFieldView = RowFormTimeFieldView;
-// @ts-ignore
-window.RowFormTimeFieldView = RowFormTimeFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTimeFieldView = RowFormTimeFieldView;
+}

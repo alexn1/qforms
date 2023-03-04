@@ -9,5 +9,7 @@ class RowFormPasswordFieldController extends RowFormFieldController_1.RowFormFie
     }
 }
 exports.RowFormPasswordFieldController = RowFormPasswordFieldController;
-// @ts-ignore
-window.RowFormPasswordFieldController = RowFormPasswordFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormPasswordFieldController = RowFormPasswordFieldController;
+}

@@ -18,5 +18,7 @@ class Statusbar extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Statusbar = Statusbar;
-// @ts-ignore
-window.Statusbar = Statusbar;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Statusbar = Statusbar;
+}

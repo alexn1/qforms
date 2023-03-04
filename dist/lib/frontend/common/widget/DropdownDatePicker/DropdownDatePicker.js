@@ -140,5 +140,7 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
     }
 }
 exports.DropdownDatePicker = DropdownDatePicker;
-// @ts-ignore
-window.DropdownDatePicker = DropdownDatePicker;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropdownDatePicker = DropdownDatePicker;
+}

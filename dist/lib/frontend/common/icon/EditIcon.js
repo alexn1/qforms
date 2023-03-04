@@ -32,5 +32,7 @@ class EditIcon extends React.Component {
     }
 }
 exports.EditIcon = EditIcon;
-// @ts-ignore
-window.EditIcon = EditIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.EditIcon = EditIcon;
+}

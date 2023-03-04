@@ -10,5 +10,7 @@ class Modal extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Modal = Modal;
-// @ts-ignore
-window.Modal = Modal;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Modal = Modal;
+}

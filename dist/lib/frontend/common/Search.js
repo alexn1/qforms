@@ -34,5 +34,7 @@ class Search {
     }
 }
 exports.Search = Search;
-// @ts-ignore
-window.Search = Search;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Search = Search;
+}

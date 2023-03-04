@@ -91,5 +91,7 @@ class TableFormView extends FormView_1.FormView {
     }
 }
 exports.TableFormView = TableFormView;
-// @ts-ignore
-window.TableFormView = TableFormView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormView = TableFormView;
+}

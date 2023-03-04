@@ -32,5 +32,7 @@ class SaveIcon extends React.Component {
     }
 }
 exports.SaveIcon = SaveIcon;
-// @ts-ignore
-window.SaveIcon = SaveIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.SaveIcon = SaveIcon;
+}

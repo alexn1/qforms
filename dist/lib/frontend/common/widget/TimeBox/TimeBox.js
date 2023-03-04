@@ -193,5 +193,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
     }
 }
 exports.TimeBox = TimeBox;
-// @ts-ignore
-window.TimeBox = TimeBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TimeBox = TimeBox;
+}

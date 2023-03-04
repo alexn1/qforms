@@ -84,5 +84,7 @@ class RowFormView extends FormView_1.FormView {
     }
 }
 exports.RowFormView = RowFormView;
-// @ts-ignore
-window.RowFormView = RowFormView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormView = RowFormView;
+}

@@ -134,5 +134,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
     }
 }
 exports.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
-// @ts-ignore
-window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+}

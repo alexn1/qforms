@@ -193,5 +193,7 @@ class RowFormController extends FormController_1.FormController {
     }
 }
 exports.RowFormController = RowFormController;
-// @ts-ignore
-window.RowFormController = RowFormController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormController = RowFormController;
+}

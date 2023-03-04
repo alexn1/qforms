@@ -13,5 +13,7 @@ class TableFormCheckBoxFieldView extends TableFormFieldView_1.TableFormFieldView
     }
 }
 exports.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
-// @ts-ignore
-window.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
+}

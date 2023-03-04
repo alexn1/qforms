@@ -32,5 +32,7 @@ class DoneIcon extends React.Component {
     }
 }
 exports.DoneIcon = DoneIcon;
-// @ts-ignore
-window.DoneIcon = DoneIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DoneIcon = DoneIcon;
+}

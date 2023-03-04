@@ -37,5 +37,7 @@ class ModelView extends View_1.View {
     getStyle(row) { }
 }
 exports.ModelView = ModelView;
-// @ts-ignore
-window.ModelView = ModelView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ModelView = ModelView;
+}

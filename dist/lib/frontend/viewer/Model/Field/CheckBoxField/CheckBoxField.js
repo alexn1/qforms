@@ -5,5 +5,7 @@ const Field_1 = require("../Field");
 class CheckBoxField extends Field_1.Field {
 }
 exports.CheckBoxField = CheckBoxField;
-// @ts-ignore
-window.CheckBoxField = CheckBoxField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBoxField = CheckBoxField;
+}

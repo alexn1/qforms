@@ -44,5 +44,7 @@ class ApplicationView extends ModelView_1.ModelView {
     }
 }
 exports.ApplicationView = ApplicationView;
-// @ts-ignore
-window.ApplicationView = ApplicationView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ApplicationView = ApplicationView;
+}

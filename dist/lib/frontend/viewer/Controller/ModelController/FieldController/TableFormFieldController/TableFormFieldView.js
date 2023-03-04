@@ -19,5 +19,7 @@ class TableFormFieldView extends FieldView_1.FieldView {
     }
 }
 exports.TableFormFieldView = TableFormFieldView;
-// @ts-ignore
-window.TableFormFieldView = TableFormFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormFieldView = TableFormFieldView;
+}

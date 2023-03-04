@@ -540,5 +540,7 @@ class DataSource extends Model_1.Model {
     }
 }
 exports.DataSource = DataSource;
-// @ts-ignore
-window.DataSource = DataSource;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DataSource = DataSource;
+}

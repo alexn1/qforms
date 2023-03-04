@@ -43,5 +43,7 @@ class Button extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Button = Button;
-// @ts-ignore
-window.Button = Button;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Button = Button;
+}

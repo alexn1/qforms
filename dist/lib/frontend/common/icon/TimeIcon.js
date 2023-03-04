@@ -32,5 +32,7 @@ class TimeIcon extends React.Component {
     }
 }
 exports.TimeIcon = TimeIcon;
-// @ts-ignore
-window.TimeIcon = TimeIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TimeIcon = TimeIcon;
+}

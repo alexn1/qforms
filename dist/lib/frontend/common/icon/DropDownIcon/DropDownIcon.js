@@ -10,5 +10,7 @@ class DropDownIcon extends ReactComponent_1.ReactComponent {
     }
 }
 exports.DropDownIcon = DropDownIcon;
-// @ts-ignore
-window.DropDownIcon = DropDownIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropDownIcon = DropDownIcon;
+}

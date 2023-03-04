@@ -53,5 +53,7 @@ class Slider extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Slider = Slider;
-// @ts-ignore
-window.Slider = Slider;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Slider = Slider;
+}

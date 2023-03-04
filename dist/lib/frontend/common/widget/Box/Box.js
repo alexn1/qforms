@@ -41,5 +41,7 @@ class Box extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Box = Box;
-// @ts-ignore
-window.Box = Box;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Box = Box;
+}

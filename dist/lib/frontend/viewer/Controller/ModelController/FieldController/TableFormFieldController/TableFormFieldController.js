@@ -15,5 +15,7 @@ class TableFormFieldController extends FieldController_1.FieldController {
     }
 }
 exports.TableFormFieldController = TableFormFieldController;
-// @ts-ignore
-window.TableFormFieldController = TableFormFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormFieldController = TableFormFieldController;
+}

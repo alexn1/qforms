@@ -108,5 +108,7 @@ class FieldController extends ModelController_1.ModelController {
     }
 }
 exports.FieldController = FieldController;
-// @ts-ignore
-window.FieldController = FieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.FieldController = FieldController;
+}

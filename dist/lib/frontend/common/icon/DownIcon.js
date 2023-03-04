@@ -33,5 +33,7 @@ class DownIcon extends React.Component {
     }
 }
 exports.DownIcon = DownIcon;
-// @ts-ignore
-window.DoneIcon = DoneIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DoneIcon = DoneIcon;
+}

@@ -194,5 +194,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
     }
 }
 exports.DatePicker = DatePicker;
-// @ts-ignore
-window.DatePicker = DatePicker;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DatePicker = DatePicker;
+}

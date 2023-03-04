@@ -36,5 +36,7 @@ class RowFormLinkFieldController extends RowFormFieldController_1.RowFormFieldCo
     }
 }
 exports.RowFormLinkFieldController = RowFormLinkFieldController;
-// @ts-ignore
-window.RowFormLinkFieldController = RowFormLinkFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormLinkFieldController = RowFormLinkFieldController;
+}

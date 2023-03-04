@@ -32,5 +32,7 @@ class VisibilityOffIcon extends React.Component {
     }
 }
 exports.VisibilityOffIcon = VisibilityOffIcon;
-// @ts-ignore
-window.VisibilityOffIcon = VisibilityOffIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.VisibilityOffIcon = VisibilityOffIcon;
+}

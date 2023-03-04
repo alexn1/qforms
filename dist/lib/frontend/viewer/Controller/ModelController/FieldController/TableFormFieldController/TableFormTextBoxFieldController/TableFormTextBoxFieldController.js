@@ -9,5 +9,7 @@ class TableFormTextBoxFieldController extends TableFormFieldController_1.TableFo
     }
 }
 exports.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
-// @ts-ignore
-window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+}

@@ -35,4 +35,6 @@ class LoginView extends View_1.View {
     }
 }
 exports.LoginView = LoginView;
-window.LoginView = LoginView;
+if (typeof window === 'object') {
+    window.LoginView = LoginView;
+}

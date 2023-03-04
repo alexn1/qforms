@@ -33,5 +33,7 @@ class GridRow extends ReactComponent_1.ReactComponent {
     }
 }
 exports.GridRow = GridRow;
-// @ts-ignore
-window.GridRow = GridRow;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.GridRow = GridRow;
+}

@@ -292,5 +292,7 @@ class TableFormController extends FormController_1.FormController {
     }
 }
 exports.TableFormController = TableFormController;
-// @ts-ignore
-window.TableFormController = TableFormController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormController = TableFormController;
+}

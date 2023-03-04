@@ -5,5 +5,7 @@ const PersistentDataSource_1 = require("../PersistentDataSource");
 class SqlDataSource extends PersistentDataSource_1.PersistentDataSource {
 }
 exports.SqlDataSource = SqlDataSource;
-// @ts-ignore
-window.SqlDataSource = SqlDataSource;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.SqlDataSource = SqlDataSource;
+}

@@ -29,5 +29,7 @@ class Expand extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Expand = Expand;
-// @ts-ignore
-window.Expand = Expand;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Expand = Expand;
+}

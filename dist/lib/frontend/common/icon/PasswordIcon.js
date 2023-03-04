@@ -32,5 +32,7 @@ class PasswordIcon extends React.Component {
     }
 }
 exports.PasswordIcon = PasswordIcon;
-// @ts-ignore
-window.PasswordIcon = PasswordIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PasswordIcon = PasswordIcon;
+}

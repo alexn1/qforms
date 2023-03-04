@@ -32,4 +32,6 @@ class LoginController extends Controller_1.Controller {
     }
 }
 exports.LoginController = LoginController;
-window.LoginController = LoginController;
+if (typeof window === 'object') {
+    window.LoginController = LoginController;
+}

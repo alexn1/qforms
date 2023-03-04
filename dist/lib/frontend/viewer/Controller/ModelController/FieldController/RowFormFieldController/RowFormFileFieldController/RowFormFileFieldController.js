@@ -9,5 +9,7 @@ class RowFormFileFieldController extends RowFormFieldController_1.RowFormFieldCo
     }
 }
 exports.RowFormFileFieldController = RowFormFileFieldController;
-// @ts-ignore
-window.RowFormFileFieldController = RowFormFileFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormFileFieldController = RowFormFileFieldController;
+}

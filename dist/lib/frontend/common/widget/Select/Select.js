@@ -170,5 +170,7 @@ class Select extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Select = Select;
-// @ts-ignore
-window.Select = Select;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Select = Select;
+}

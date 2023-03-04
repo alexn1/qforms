@@ -11,5 +11,7 @@ class TableFormComboBoxFieldView extends TableFormFieldView_1.TableFormFieldView
     }
 }
 exports.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
-// @ts-ignore
-window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+}

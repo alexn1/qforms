@@ -25,5 +25,7 @@ class RowFormRadioFieldController extends RowFormFieldController_1.RowFormFieldC
     }
 }
 exports.RowFormRadioFieldController = RowFormRadioFieldController;
-// @ts-ignore
-window.RowFormRadioFieldController = RowFormRadioFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormRadioFieldController = RowFormRadioFieldController;
+}

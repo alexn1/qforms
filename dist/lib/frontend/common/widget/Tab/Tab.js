@@ -57,5 +57,7 @@ class Tab extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Tab = Tab;
-// @ts-ignore
-window.Tab = Tab;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Tab = Tab;
+}

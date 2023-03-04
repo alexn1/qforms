@@ -32,5 +32,7 @@ class SettingsIcon extends React.Component {
     }
 }
 exports.SettingsIcon = SettingsIcon;
-// @ts-ignore
-window.SettingsIcon = SettingsIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.SettingsIcon = SettingsIcon;
+}

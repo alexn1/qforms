@@ -106,5 +106,7 @@ class Application extends Model_1.Model {
     }
 }
 exports.Application = Application;
-// @ts-ignore
-window.Application = Application;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Application = Application;
+}

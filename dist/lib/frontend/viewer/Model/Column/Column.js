@@ -19,5 +19,7 @@ class Column extends Model_1.Model {
     }
 }
 exports.Column = Column;
-// @ts-ignore
-window.Column = Column;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Column = Column;
+}

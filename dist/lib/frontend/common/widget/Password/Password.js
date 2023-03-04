@@ -83,5 +83,7 @@ class Password extends ReactComponent_1.ReactComponent {
     }
 }
 exports.Password = Password;
-// @ts-ignore
-window.Password = Password;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Password = Password;
+}

@@ -24,5 +24,7 @@ class RowFormFieldView extends FieldView_1.FieldView {
     }
 }
 exports.RowFormFieldView = RowFormFieldView;
-// @ts-ignore
-window.RowFormFieldView = RowFormFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormFieldView = RowFormFieldView;
+}

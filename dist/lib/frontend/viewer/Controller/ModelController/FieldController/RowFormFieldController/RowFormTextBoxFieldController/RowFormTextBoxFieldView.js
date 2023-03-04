@@ -48,5 +48,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
-// @ts-ignore
-window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
+}

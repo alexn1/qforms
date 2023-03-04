@@ -42,5 +42,7 @@ class TableFormComboBoxFieldController extends TableFormFieldController_1.TableF
     }
 }
 exports.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
-// @ts-ignore
-window.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
+}

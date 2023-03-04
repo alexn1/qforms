@@ -32,5 +32,7 @@ class VisibilityIcon extends React.Component {
     }
 }
 exports.VisibilityIcon = VisibilityIcon;
-// @ts-ignore
-window.VisibilityIcon = VisibilityIcon;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.VisibilityIcon = VisibilityIcon;
+}

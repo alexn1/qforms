@@ -55,5 +55,7 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
     }
 }
 exports.DropdownButton = DropdownButton;
-// @ts-ignore
-window.DropdownButton = DropdownButton;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropdownButton = DropdownButton;
+}
