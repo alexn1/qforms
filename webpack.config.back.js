@@ -10,7 +10,7 @@ module.exports = {
     output: {
         // clean: true,
         path: path.resolve(__dirname, './dist/lib'),
-        filename: 'bundle.js',
+        filename: 'start.js',
     },
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
