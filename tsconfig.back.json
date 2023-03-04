@@ -10,5 +10,5 @@
         "module": "commonjs",
         "resolveJsonModule": true
     },
-    "include": ["src/backend/**/*", "src/Result.ts", "src/types.ts"]
+    "include": ["src/**/*"]
 }

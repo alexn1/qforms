@@ -141,7 +141,7 @@ export class DatabaseController extends DocumentController {
         );
     }
 
-    async createDocument() {
+    async createDocument(): Promise<any> {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
         // console.log('data:', result.data);

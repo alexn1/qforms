@@ -2,9 +2,6 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { JSONString } from '../../types';
 
-// @ts-ignore
-window.QForms = {};
-
 export class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -346,5 +343,7 @@ export class Helper {
     }
 }
 
-// @ts-ignore
-window.QForms.Helper = window.Helper = Helper;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Helper = Helper;
+}

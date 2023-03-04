@@ -8,7 +8,7 @@ export class DocumentController extends ModelController {
         this.document = null;
     }
 
-    async createDocument() {
+    async createDocument(): Promise<any> {
         const document = {
             controller: this,
             view: null,

@@ -105,5 +105,7 @@ class FrontHostApp {
     }
 }
 exports.FrontHostApp = FrontHostApp;
-// @ts-ignore
-window.FrontHostApp = FrontHostApp;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.FrontHostApp = FrontHostApp;
+}

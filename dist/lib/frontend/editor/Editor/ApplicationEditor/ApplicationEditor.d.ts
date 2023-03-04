@@ -1,0 +1,31 @@
+import { Editor } from '../Editor';
+import { DatabaseEditor } from '../DatabaseEditor/DatabaseEditor';
+import { DataSourceEditor } from '../DataSourceEditor/DataSourceEditor';
+import { PageLinkEditor } from '../PageLinkEditor/PageLinkEditor';
+import { PageEditor } from '../PageEditor/PageEditor';
+import { ActionEditor } from '../ActionEditor/ActionEditor';
+export declare class ApplicationEditor extends Editor {
+    databases: any[];
+    actions: any[];
+    pageLinks: any[];
+    constructor(data: any);
+    init(): void;
+    createAction(data: any): ActionEditor;
+    createDatabase(data: any): DatabaseEditor;
+    createPageLink(data: any): PageLinkEditor;
+    removeDatabase(database: any): void;
+    removePageLink(pageLink: any): void;
+    setValue(name: any, value: any): Promise<any>;
+    newPageAndPageLinkData(params: any): Promise<any>;
+    newPage(params: any): Promise<PageEditor>;
+    newDatabase(params: any): Promise<DatabaseEditor>;
+    getView(view: any): Promise<any>;
+    saveView(text: any, view: any): Promise<any>;
+    saveController(text: any): Promise<any>;
+    createView(): Promise<any>;
+    createController(): Promise<any>;
+    createModelBackJs(): Promise<any>;
+    newDataSource(params: any): Promise<DataSourceEditor>;
+    newAction(params: any): Promise<ActionEditor>;
+    createDataSource(data: any): DataSourceEditor;
+}

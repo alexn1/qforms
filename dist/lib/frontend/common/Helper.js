@@ -29,8 +29,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Helper = void 0;
 const React = __importStar(require("react"));
 const react_dom_1 = __importDefault(require("react-dom"));
-// @ts-ignore
-window.QForms = {};
 class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -338,5 +336,7 @@ class Helper {
     }
 }
 exports.Helper = Helper;
-// @ts-ignore
-window.QForms.Helper = window.Helper = Helper;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Helper = Helper;
+}
