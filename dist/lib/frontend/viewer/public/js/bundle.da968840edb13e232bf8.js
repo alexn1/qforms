@@ -42143,8 +42143,10 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
             .find((row) => row[this.data.valueColumn] === rawValue);
     }
 }
-// @ts-ignore
-window.CheckBoxListField = CheckBoxListField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBoxListField = CheckBoxListField;
+}
 
 
 /***/ }),
@@ -42210,8 +42212,10 @@ class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
             .find((row) => row[this.data.valueColumn] === rawValue);
     }
 }
-// @ts-ignore
-window.ComboBoxField = ComboBoxField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ComboBoxField = ComboBoxField;
+}
 
 
 /***/ }),
@@ -42257,8 +42261,10 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return rawValue;
     }
 }
-// @ts-ignore
-window.DateField = DateField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DateField = DateField;
+}
 
 
 /***/ }),
@@ -42304,8 +42310,10 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return rawValue;
     }
 }
-// @ts-ignore
-window.DateTimeField = DateTimeField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DateTimeField = DateTimeField;
+}
 
 
 /***/ }),
@@ -42537,8 +42545,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class FileField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
 }
-// @ts-ignore
-window.FileField = FileField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.FileField = FileField;
+}
 
 
 /***/ }),
@@ -42557,8 +42567,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class LinkField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
 }
-// @ts-ignore
-window.LinkField = LinkField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.LinkField = LinkField;
+}
 
 
 /***/ }),
@@ -42577,8 +42589,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class PasswordField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
 }
-// @ts-ignore
-window.PasswordField = PasswordField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PasswordField = PasswordField;
+}
 
 
 /***/ }),
@@ -42597,8 +42611,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class PhoneField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
 }
-// @ts-ignore
-window.PhoneField = PhoneField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneField = PhoneField;
+}
 
 
 /***/ }),
@@ -42672,8 +42688,10 @@ class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         RadioField: RadioField;
     }
 } */
-// @ts-ignore
-window.RadioField = RadioField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RadioField = RadioField;
+}
 
 
 /***/ }),
@@ -42698,8 +42716,10 @@ class TextAreaField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return this.data.cols;
     }
 }
-// @ts-ignore
-window.TextAreaField = TextAreaField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextAreaField = TextAreaField;
+}
 
 
 /***/ }),
@@ -42718,8 +42738,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
 }
-// @ts-ignore
-window.TextBoxField = TextBoxField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextBoxField = TextBoxField;
+}
 
 
 /***/ }),
@@ -42854,8 +42876,10 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return values;
     }
 }
-// @ts-ignore
-window.Form = Form;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Form = Form;
+}
 
 
 /***/ }),
@@ -42928,8 +42952,10 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         }
     }
 }
-// @ts-ignore
-window.RowForm = RowForm;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowForm = RowForm;
+}
 
 
 /***/ }),
@@ -42948,8 +42974,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TableForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
 }
-// @ts-ignore
-window.TableForm = TableForm;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableForm = TableForm;
+}
 
 
 /***/ }),
@@ -43239,8 +43267,10 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.isAttr('formInTab') && this.getAttr('formInTab') === 'true';
     }
 }
-// @ts-ignore
-window.Page = Page;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Page = Page;
+}
 
 
 /***/ }),
@@ -43303,8 +43333,10 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.emit('refresh', { source });
     }
 }
-// @ts-ignore
-window.Table = Table;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Table = Table;
+}
 
 
 /***/ }),
