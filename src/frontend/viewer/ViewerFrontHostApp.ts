@@ -154,5 +154,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
     }
 }
 
-// @ts-ignore
-window.ViewerFrontHostApp = ViewerFrontHostApp;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ViewerFrontHostApp = ViewerFrontHostApp;
+}

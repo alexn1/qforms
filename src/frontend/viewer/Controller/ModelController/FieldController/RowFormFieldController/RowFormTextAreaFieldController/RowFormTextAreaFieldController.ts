@@ -8,5 +8,7 @@ export class RowFormTextAreaFieldController extends RowFormFieldController<TextA
     }
 }
 
-// @ts-ignore
-window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
+}

@@ -588,5 +588,7 @@ export class DataSource extends Model {
     }
 }
 
-// @ts-ignore
-window.DataSource = DataSource;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DataSource = DataSource;
+}

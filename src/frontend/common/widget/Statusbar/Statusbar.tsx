@@ -24,5 +24,7 @@ export class Statusbar extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Statusbar = Statusbar;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Statusbar = Statusbar;
+}

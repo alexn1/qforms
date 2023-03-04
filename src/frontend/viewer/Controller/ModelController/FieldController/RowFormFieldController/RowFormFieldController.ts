@@ -336,5 +336,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
     };
 }
 
-// @ts-ignore
-window.RowFormFieldController = RowFormFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormFieldController = RowFormFieldController;
+}

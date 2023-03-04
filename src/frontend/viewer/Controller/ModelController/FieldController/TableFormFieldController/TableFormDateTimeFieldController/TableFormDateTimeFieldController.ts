@@ -16,5 +16,7 @@ export class TableFormDateTimeFieldController extends TableFormFieldController<D
     }
 }
 
-// @ts-ignore
-window.TableFormDateTimeFieldController = TableFormDateTimeFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormDateTimeFieldController = TableFormDateTimeFieldController;
+}

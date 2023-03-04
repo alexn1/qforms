@@ -44,5 +44,7 @@ export class RowFormTimeFieldController extends RowFormFieldController<TimeField
     }
 }
 
-// @ts-ignore
-window.RowFormTimeFieldController = RowFormTimeFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTimeFieldController = RowFormTimeFieldController;
+}

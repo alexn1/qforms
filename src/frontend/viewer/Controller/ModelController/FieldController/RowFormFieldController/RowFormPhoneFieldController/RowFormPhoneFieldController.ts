@@ -25,5 +25,7 @@ export class RowFormPhoneFieldController extends RowFormFieldController<PhoneFie
     }
 }
 
-// @ts-ignore
-window.RowFormPhoneFieldController = RowFormPhoneFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormPhoneFieldController = RowFormPhoneFieldController;
+}

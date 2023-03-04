@@ -132,5 +132,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     };
 }
 
-// @ts-ignore
-window.RowFormFileFieldView = RowFormFileFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormFileFieldView = RowFormFileFieldView;
+}

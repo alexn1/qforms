@@ -25,5 +25,7 @@ export class RowFormDateFieldView extends RowFormFieldView<RowFormDateFieldContr
     }
 }
 
-// @ts-ignore
-window.RowFormDateFieldView = RowFormDateFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormDateFieldView = RowFormDateFieldView;
+}

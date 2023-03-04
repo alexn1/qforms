@@ -18,5 +18,7 @@ export class Tooltip extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Tooltip = Tooltip;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Tooltip = Tooltip;
+}

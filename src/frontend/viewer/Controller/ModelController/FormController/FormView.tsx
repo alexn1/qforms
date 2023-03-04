@@ -33,5 +33,7 @@ export class FormView<T extends FormController> extends ModelView<T> {
     }
 }
 
-// @ts-ignore
-window.FormView = FormView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.FormView = FormView;
+}

@@ -43,5 +43,7 @@ export class Expand extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Expand = Expand;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Expand = Expand;
+}

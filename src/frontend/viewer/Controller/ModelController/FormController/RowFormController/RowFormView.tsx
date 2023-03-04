@@ -196,5 +196,7 @@ export class RowFormView<
     }*/
 }
 
-// @ts-ignore
-window.RowFormView = RowFormView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormView = RowFormView;
+}

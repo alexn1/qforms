@@ -208,5 +208,7 @@ export class Field extends Model {
     }
 }
 
-// @ts-ignore
-window.Field = Field;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Field = Field;
+}

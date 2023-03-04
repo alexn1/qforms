@@ -104,5 +104,7 @@ export class Model extends EventEmitter {
     }
 }
 
-// @ts-ignore
-window.Model = Model;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Model = Model;
+}

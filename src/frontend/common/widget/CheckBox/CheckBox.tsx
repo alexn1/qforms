@@ -71,5 +71,7 @@ export class CheckBox extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.CheckBox = CheckBox;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBox = CheckBox;
+}

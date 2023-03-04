@@ -8,5 +8,7 @@ export class RowFormImageFieldController extends RowFormFieldController<ImageFie
     }
 }
 
-// @ts-ignore
-window.RowFormImageFieldController = RowFormImageFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormImageFieldController = RowFormImageFieldController;
+}

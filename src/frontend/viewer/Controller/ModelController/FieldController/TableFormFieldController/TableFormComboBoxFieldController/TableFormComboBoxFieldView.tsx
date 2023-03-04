@@ -16,5 +16,7 @@ export class TableFormComboBoxFieldView extends TableFormFieldView<TableFormComb
     }
 }
 
-// @ts-ignore
-window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
+}

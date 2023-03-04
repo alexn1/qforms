@@ -115,5 +115,7 @@ export class Application extends Model {
     }
 }
 
-// @ts-ignore
-window.Application = Application;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Application = Application;
+}

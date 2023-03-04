@@ -19,5 +19,7 @@ export class TableFormFieldView<
     }
 }
 
-// @ts-ignore
-window.TableFormFieldView = TableFormFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormFieldView = TableFormFieldView;
+}

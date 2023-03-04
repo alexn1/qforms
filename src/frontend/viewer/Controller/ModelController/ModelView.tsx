@@ -35,5 +35,7 @@ export class ModelView<T extends ModelController<Model>> extends View<T> {
     getStyle(row?: any): any {}
 }
 
-// @ts-ignore
-window.ModelView = ModelView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ModelView = ModelView;
+}

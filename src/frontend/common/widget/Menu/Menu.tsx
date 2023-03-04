@@ -80,5 +80,7 @@ export class Menu extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Menu = Menu;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Menu = Menu;
+}

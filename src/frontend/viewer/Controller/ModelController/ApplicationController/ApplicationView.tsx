@@ -68,5 +68,7 @@ export class ApplicationView extends ModelView<ApplicationController> {
     }
 }
 
-// @ts-ignore
-window.ApplicationView = ApplicationView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ApplicationView = ApplicationView;
+}

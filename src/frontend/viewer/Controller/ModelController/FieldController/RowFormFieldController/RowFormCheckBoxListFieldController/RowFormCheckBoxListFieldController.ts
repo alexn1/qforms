@@ -61,5 +61,7 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
     }
 }
 
-// @ts-ignore
-window.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;
+}

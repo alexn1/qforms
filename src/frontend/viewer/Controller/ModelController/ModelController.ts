@@ -49,5 +49,7 @@ export abstract class ModelController<TModel extends Model> extends Controller {
     }
 }
 
-// @ts-ignore
-window.ModelController = ModelController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ModelController = ModelController;
+}

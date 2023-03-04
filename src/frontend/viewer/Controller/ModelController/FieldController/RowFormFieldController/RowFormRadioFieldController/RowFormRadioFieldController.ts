@@ -25,5 +25,7 @@ export class RowFormRadioFieldController extends RowFormFieldController<RadioFie
     }
 }
 
-// @ts-ignore
-window.RowFormRadioFieldController = RowFormRadioFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormRadioFieldController = RowFormRadioFieldController;
+}

@@ -33,5 +33,7 @@ export class GridCell extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.GridCell = GridCell;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.GridCell = GridCell;
+}

@@ -393,5 +393,7 @@ export class Grid extends ReactComponent {
     };
 }
 
-// @ts-ignore
-window.Grid = Grid;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Grid = Grid;
+}

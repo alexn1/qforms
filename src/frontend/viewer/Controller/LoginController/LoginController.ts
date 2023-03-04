@@ -44,4 +44,6 @@ declare global {
     }
 }
 
-window.LoginController = LoginController;
+if (typeof window === 'object') {
+    window.LoginController = LoginController;
+}

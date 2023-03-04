@@ -8,5 +8,7 @@ export class RowFormTextBoxFieldController extends RowFormFieldController<TextBo
     }
 }
 
-// @ts-ignore
-window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
+}

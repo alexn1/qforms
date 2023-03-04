@@ -11,5 +11,7 @@ export class Modal extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Modal = Modal;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Modal = Modal;
+}

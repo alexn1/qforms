@@ -325,5 +325,7 @@ export class TableFormController extends FormController<TableForm> {
     }
 }
 
-// @ts-ignore
-window.TableFormController = TableFormController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormController = TableFormController;
+}

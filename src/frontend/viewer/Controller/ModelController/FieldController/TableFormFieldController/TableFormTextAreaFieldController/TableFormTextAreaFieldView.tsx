@@ -15,5 +15,7 @@ export class TableFormTextAreaFieldView extends TableFormFieldView<TableFormText
     }
 }
 
-// @ts-ignore
-window.TableFormTextAreaFieldView = TableFormTextAreaFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormTextAreaFieldView = TableFormTextAreaFieldView;
+}

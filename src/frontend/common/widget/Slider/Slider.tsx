@@ -79,5 +79,7 @@ export class Slider extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Slider = Slider;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Slider = Slider;
+}

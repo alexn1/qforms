@@ -17,5 +17,7 @@ export class TableFormCheckBoxFieldController extends TableFormFieldController<C
     }
 }
 
-// @ts-ignore
-window.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;
+}

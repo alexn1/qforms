@@ -86,5 +86,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
     }
 }
 
-// @ts-ignore
-window.RowFormPhoneFieldView = RowFormPhoneFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormPhoneFieldView = RowFormPhoneFieldView;
+}

@@ -51,5 +51,7 @@ export class Box extends ReactComponent {
     }
 }
 
-// @ts-ignore
-window.Box = Box;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Box = Box;
+}

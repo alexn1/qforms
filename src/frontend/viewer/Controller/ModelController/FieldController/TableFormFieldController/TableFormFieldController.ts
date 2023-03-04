@@ -23,5 +23,7 @@ export class TableFormFieldController<
     }
 }
 
-// @ts-ignore
-window.TableFormFieldController = TableFormFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormFieldController = TableFormFieldController;
+}

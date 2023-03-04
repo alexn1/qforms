@@ -24,5 +24,7 @@ export class TableFormTextBoxFieldController extends TableFormFieldController<Te
     }*/
 }
 
-// @ts-ignore
-window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormTextBoxFieldController = TableFormTextBoxFieldController;
+}

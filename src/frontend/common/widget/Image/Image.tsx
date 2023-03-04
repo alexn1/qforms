@@ -45,5 +45,7 @@ export class Image extends ReactComponent {
     }*/
 }
 
-// @ts-ignore
-window.Image = Image;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Image = Image;
+}

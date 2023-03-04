@@ -309,5 +309,7 @@ export class PageView<
     }
 }
 
-// @ts-ignore
-window.PageView = PageView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PageView = PageView;
+}

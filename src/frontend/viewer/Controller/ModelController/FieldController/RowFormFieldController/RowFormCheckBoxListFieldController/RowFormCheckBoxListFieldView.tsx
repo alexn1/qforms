@@ -37,5 +37,7 @@ export class RowFormCheckBoxListFieldView extends RowFormFieldView<RowFormCheckB
     }
 }
 
-// @ts-ignore
-window.RowFormCheckBoxListFieldView = RowFormCheckBoxListFieldView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormCheckBoxListFieldView = RowFormCheckBoxListFieldView;
+}

@@ -8,5 +8,7 @@ export class TableFormTextAreaFieldController extends TableFormFieldController<T
     }
 }
 
-// @ts-ignore
-window.TableFormTextAreaFieldController = TableFormTextAreaFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormTextAreaFieldController = TableFormTextAreaFieldController;
+}

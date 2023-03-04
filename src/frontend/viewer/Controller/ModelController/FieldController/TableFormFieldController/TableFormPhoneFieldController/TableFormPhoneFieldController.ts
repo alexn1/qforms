@@ -8,5 +8,7 @@ export class TableFormPhoneFieldController extends TableFormFieldController<Phon
     }
 }
 
-// @ts-ignore
-window.TableFormPhoneFieldController = TableFormPhoneFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormPhoneFieldController = TableFormPhoneFieldController;
+}

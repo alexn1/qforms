@@ -14,5 +14,7 @@ export class TableFormLinkFieldController extends TableFormFieldController<LinkF
     };
 }
 
-// @ts-ignore
-window.TableFormLinkFieldController = TableFormLinkFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormLinkFieldController = TableFormLinkFieldController;
+}

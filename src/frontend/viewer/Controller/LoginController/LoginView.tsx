@@ -86,4 +86,6 @@ declare global {
     }
 }
 
-window.LoginView = LoginView;
+if (typeof window === 'object') {
+    window.LoginView = LoginView;
+}

@@ -38,5 +38,7 @@ export class Database extends Model {
     }
 }
 
-// @ts-ignore
-window.Database = Database;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Database = Database;
+}

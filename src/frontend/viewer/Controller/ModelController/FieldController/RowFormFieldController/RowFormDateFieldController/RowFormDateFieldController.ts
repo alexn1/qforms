@@ -16,5 +16,7 @@ export class RowFormDateFieldController extends RowFormFieldController<DateField
     }
 }
 
-// @ts-ignore
-window.RowFormDateFieldController = RowFormDateFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormDateFieldController = RowFormDateFieldController;
+}

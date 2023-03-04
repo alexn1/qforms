@@ -450,5 +450,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 }
 
-// @ts-ignore
-window.ApplicationController = ApplicationController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ApplicationController = ApplicationController;
+}

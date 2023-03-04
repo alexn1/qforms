@@ -138,5 +138,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     };
 }
 
-// @ts-ignore
-window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
+}

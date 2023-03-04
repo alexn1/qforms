@@ -181,5 +181,7 @@ export class TableFormView<
     };
 }
 
-// @ts-ignore
-window.TableFormView = TableFormView;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TableFormView = TableFormView;
+}
