@@ -22,9 +22,11 @@ module.exports = {
                 use: {
                     loader: 'ts-loader',
                     options: {
-                        onlyCompileBundledFiles: true,
+                        onlyCompileBundledFiles: false,
                         compilerOptions: {
                             declaration: true,
+                            rootDir: 'src',
+                            outDir: 'dist/lib',
                         },
                     },
                 },
