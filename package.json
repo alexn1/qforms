@@ -81,7 +81,7 @@
     "scripts": {
         "start": "NODE_ENV=development node dist/lib/backend/start.js",
         "start2": "NODE_ENV=development APPS_DIR_PATH=~/projects/qforms-apps node dist/lib/backend/start.js",
-        "start3": "NODE_ENV=development node dist/lib/bundle.js",
+        "start3": "NODE_ENV=development node dist/lib/start.js",
         "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/lib/backend/start.js",
         "tsc-build-watch": "tsc --build tsconfig.back.json --watch",
         "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch",
