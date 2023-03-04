@@ -25,7 +25,7 @@ export declare class RowFormController extends FormController<RowForm> {
     onEditClick: (e: any) => void;
     onCancelClick: (e: any) => void;
     getViewClass(): any;
-    getActiveRow(withChanges: any): import("../../../..").RawRow;
+    getActiveRow(withChanges: any): import("../../../../../../types").RawRow;
     getMode(): any;
     isActionEnabled(name: any): boolean;
     isEditMode(): boolean;
