@@ -10,7 +10,10 @@ async function main() {
         },
     });
     try {
-        await backHostApp.run();
+        const result = await backHostApp.run();
+        if (result) {
+            process.exit(result);
+        }
     } catch (err) {
         await backHostApp.logError(err);
     }

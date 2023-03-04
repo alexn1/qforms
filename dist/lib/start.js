@@ -392,8 +392,7 @@ class BackHostApp {
         const { log } = this.params;
         if (!fs__WEBPACK_IMPORTED_MODULE_4___default().existsSync(this.appsDirPath)) {
             console.error(colors_safe__WEBPACK_IMPORTED_MODULE_3___default().red(`Application folder '${this.appsDirPath}' doesn't exist`));
-            process.exit(1);
-            return;
+            return 1;
         }
         // path
         const backendDirPath = __dirname;
@@ -16966,7 +16965,10 @@ async function main() {
             password: '123qwe',
         } }));
     try {
-        await backHostApp.run();
+        const result = await backHostApp.run();
+        if (result) {
+            process.exit(result);
+        }
     }
     catch (err) {
         await backHostApp.logError(err);

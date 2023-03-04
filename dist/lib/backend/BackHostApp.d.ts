@@ -28,7 +28,7 @@ export declare class BackHostApp {
     appQueue: any;
     constructor(params?: any);
     checkVersion(): void;
-    run(): Promise<void>;
+    run(): Promise<number>;
     initProcess(): void;
     getSecretSync(): any;
     initExpressServer(): void;

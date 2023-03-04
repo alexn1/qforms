@@ -66,7 +66,7 @@ export class BackHostApp {
         }
     }
 
-    async run() {
+    async run(): Promise<number> {
         // console.log(`${this.constructor.name}.run`);
         this.startTime = new Date();
         this.appsDirPath = path.resolve(
@@ -81,9 +81,8 @@ export class BackHostApp {
         const { log } = this.params;
 
         if (!fs.existsSync(this.appsDirPath)) {
-            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
-            process.exit(1);
-            return;
+            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));            
+            return 1;
         }
 
         // path
