@@ -1,3 +1,13 @@
+var Module = require('module');
+var originalRequire = Module.prototype.require;
+Module.prototype.require = function () {
+    if (/\.less$/.test(arguments[0])) {
+        // console.log(arguments[0]);
+    } else {
+        return originalRequire.apply(this, arguments);
+    }
+};
+
 import { BackHostApp, Helper } from './index';
 
 async function main() {

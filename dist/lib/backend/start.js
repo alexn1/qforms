@@ -1,5 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var Module = require('module');
+var originalRequire = Module.prototype.require;
+Module.prototype.require = function () {
+    if (/\.less$/.test(arguments[0])) {
+        // console.log(arguments[0]);
+    }
+    else {
+        return originalRequire.apply(this, arguments);
+    }
+};
 const index_1 = require("./index");
 async function main() {
     // console.log('main');
