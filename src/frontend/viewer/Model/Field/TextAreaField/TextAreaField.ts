@@ -10,5 +10,7 @@ export class TextAreaField extends Field {
     }
 }
 
-// @ts-ignore
-window.TextAreaField = TextAreaField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextAreaField = TextAreaField;
+}

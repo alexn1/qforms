@@ -59,5 +59,7 @@ export class RadioField extends Field {
     }
 } */
 
-// @ts-ignore
-window.RadioField = RadioField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RadioField = RadioField;
+}

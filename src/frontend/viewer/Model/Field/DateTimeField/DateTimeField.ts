@@ -31,5 +31,7 @@ export class DateTimeField extends Field {
     }
 }
 
-// @ts-ignore
-window.DateTimeField = DateTimeField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DateTimeField = DateTimeField;
+}

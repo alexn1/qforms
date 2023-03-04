@@ -2,5 +2,7 @@ import { Field } from '../Field';
 
 export class PhoneField extends Field {}
 
-// @ts-ignore
-window.PhoneField = PhoneField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneField = PhoneField;
+}

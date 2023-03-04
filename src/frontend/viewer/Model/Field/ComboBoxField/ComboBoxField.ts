@@ -50,5 +50,7 @@ export class ComboBoxField extends Field {
     }
 }
 
-// @ts-ignore
-window.ComboBoxField = ComboBoxField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ComboBoxField = ComboBoxField;
+}

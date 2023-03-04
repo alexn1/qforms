@@ -141,5 +141,7 @@ export class Form extends Model {
     }
 }
 
-// @ts-ignore
-window.Form = Form;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Form = Form;
+}

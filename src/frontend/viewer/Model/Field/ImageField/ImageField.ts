@@ -2,5 +2,7 @@ import { Field } from '../Field';
 
 export class ImageField extends Field {}
 
-// @ts-ignore
-window.ImageField = ImageField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ImageField = ImageField;
+}

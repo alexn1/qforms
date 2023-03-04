@@ -55,5 +55,7 @@ export class Table extends Model {
     }
 }
 
-// @ts-ignore
-window.Table = Table;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Table = Table;
+}

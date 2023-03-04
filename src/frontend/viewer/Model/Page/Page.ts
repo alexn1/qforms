@@ -192,5 +192,7 @@ export class Page extends Model {
     }
 }
 
-// @ts-ignore
-window.Page = Page;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Page = Page;
+}

@@ -66,5 +66,7 @@ export class RowForm extends Form {
     }
 }
 
-// @ts-ignore
-window.RowForm = RowForm;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RowForm = RowForm;
+}

@@ -50,5 +50,7 @@ export class CheckBoxListField extends Field {
     }
 }
 
-// @ts-ignore
-window.CheckBoxListField = CheckBoxListField;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBoxListField = CheckBoxListField;
+}
