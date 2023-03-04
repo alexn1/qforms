@@ -1,0 +1,39 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Database = void 0;
+const Model_1 = require("../Model");
+const Table_1 = require("../Table/Table");
+class Database extends Model_1.Model {
+    constructor(data, parent = null) {
+        super(data, parent);
+        this.tables = [];
+    }
+    init() {
+        // console.log('Database.init', this.getName());
+        for (const data of this.data.tables) {
+            const table = new Table_1.Table(data, this);
+            table.init();
+            this.addTable(table);
+        }
+    }
+    addTable(table) {
+        this.tables.push(table);
+    }
+    getTable(name) {
+        const table = this.tables.find((table) => table.getName() === name);
+        if (!table)
+            throw new Error(`${this.getFullName()}: no table with name: ${name}`);
+        return table;
+    }
+    emitResult(result, source = null) {
+        console.log('Database.emitResult');
+        const promises = [];
+        for (const table in result) {
+            promises.push(...this.getTable(table).emitResult(result[table], source));
+        }
+        return promises;
+    }
+}
+exports.Database = Database;
+// @ts-ignore
+window.Database = Database;

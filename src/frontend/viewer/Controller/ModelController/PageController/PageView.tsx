@@ -64,7 +64,7 @@ export class PageView<
             .filter((form) => form.isVisible());
     }
 
-    renderForm(formCtrl, props = {}) {
+    renderForm(formCtrl, props = {}): any {
         return React.createElement(formCtrl.getViewClass(), {
             parent: this,
             key: formCtrl.getModel().getName(),
@@ -75,7 +75,7 @@ export class PageView<
         });
     }
 
-    renderRowForms() {
+    renderRowForms(): any {
         return this.getRowForms().map((form) => this.renderForm(form));
     }
 
@@ -233,7 +233,7 @@ export class PageView<
         );
     }
 
-    renderForms() {
+    renderForms(): any {
         const model = this.getCtrl().getModel();
         return [
             ...(model.hasRowForm() ? [this.renderRowForms()] : []),

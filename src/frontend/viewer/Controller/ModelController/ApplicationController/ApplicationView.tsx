@@ -6,7 +6,7 @@ import './ApplicationView.less';
 import { ApplicationController } from './ApplicationController';
 
 export class ApplicationView extends ModelView<ApplicationController> {
-    renderActivePage() {
+    renderActivePage(): any {
         const { ctrl } = this.props;
         if (ctrl.activePage) {
             return this.renderView(ctrl.activePage);
@@ -14,7 +14,7 @@ export class ApplicationView extends ModelView<ApplicationController> {
         return null;
     }
 
-    renderView(ctrl, props = {}) {
+    renderView(ctrl, props = {}): any {
         return React.createElement(ctrl.getViewClass(), {
             parent: this,
             ctrl: ctrl,

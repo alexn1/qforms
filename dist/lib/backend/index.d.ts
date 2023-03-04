@@ -87,3 +87,4 @@ export { ApplicationEditorController } from './editor/EditorController/Applicati
 export { FieldEditorController } from './editor/EditorController/FieldEditorController/FieldEditorController';
 export { FormEditorController } from './editor/EditorController/FormEditorController/FormEditorController';
 export { PageEditorController } from './editor/EditorController/PageEditorController/PageEditorController';
+export * from '../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';

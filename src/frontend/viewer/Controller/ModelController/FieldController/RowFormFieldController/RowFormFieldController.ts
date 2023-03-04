@@ -290,7 +290,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return this.state.error;
     }
 
-    renderView() {
+    renderView(): any {
         return React.createElement(this.getViewClass(), {
             onCreate: this.onViewCreate,
             ctrl: this,

@@ -1,16 +1,15 @@
-import React from 'react';
 import { FieldController } from '../FieldController';
 import { Field } from '../../../../Model/Field/Field';
+import { FormController } from '../../FormController/FormController';
 import { RowFormController } from '../../FormController/RowFormController/RowFormController';
-
-export declare class RowFormFieldController<
-    TField extends Field = Field,
-> extends FieldController<TField> {
+import { RawRow } from '../../../../../../types';
+export declare class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     state: any;
-    constructor(model: any, parent: any);
+    constructor(model: TField, parent: any);
     init(): void;
     refill(): void;
-    getRow(): any;
+    getRow(): RawRow;
+    getForm<TRowFormController extends FormController = RowFormController>(): TRowFormController;
     copyValueToModel(): void;
     putValue(widgetValue: any): void;
     onChange: (widgetValue: any, fireEvent?: boolean) => Promise<void>;
@@ -28,16 +27,12 @@ export declare class RowFormFieldController<
     getNullErrorText(): any;
     isEditable(): boolean;
     isParseError(): boolean;
-    calcChangedState(row: any): boolean;
+    calcChangedState(row: RawRow): boolean;
     setError(error: any): void;
     resetErrors(): void;
     getErrorMessage(): any;
-    renderView(): React.DetailedReactHTMLElement<
-        React.InputHTMLAttributes<HTMLInputElement>,
-        HTMLInputElement
-    >;
-    isValidateOnChange(): any;
-    isValidateOnBlur(): any;
+    renderView(): any;
+    isValidateOnChange(): boolean;
+    isValidateOnBlur(): boolean;
     onChangePure: (value: any, fireEvent?: boolean) => Promise<void>;
-    getForm<TRowFormController extends FormController = RowFormController>(): TRowFormController;
 }
