@@ -53,9 +53,9 @@ module.exports = {
             }),
         ],
     },
-    // plugins: [
-    //     new CopyPlugin({
-    //         patterns: [{ from: '**/*.json', context: 'src/second' }],
-    //     }),
-    // ],
+    plugins: [
+        new CopyPlugin({
+            patterns: [{ from: '**/*.ejs', context: 'src' }],
+        }),
+    ],
 };

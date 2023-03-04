@@ -18,7 +18,7 @@ export declare abstract class FormWizard {
     abstract getCountQuery(): any;
     abstract getSingleQuery(): any;
     abstract getMultipleQuery(): any;
-    getFieldClass(column: any): "CheckBoxField" | "DateField" | "TextAreaField" | "TextBoxField";
+    getFieldClass(column: any): "DateField" | "CheckBoxField" | "TextAreaField" | "TextBoxField";
     getField(column: any): any;
     getFields(): any;
     getColumns(): any;
