@@ -17,6 +17,7 @@ const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelC
 const viewer_1 = require("../../frontend/viewer");
 console.log('TableForm.name', viewer_1.TableForm.name);
 const index_1 = require("./index");
+const login_1 = require("./login");
 const pkg = require('../../../package.json');
 // post actions
 const ACTIONS = [
@@ -87,7 +88,7 @@ class ViewerModule {
         console.log('ViewerModule.loginGet');
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-        const html = this.renderLogin(pkg.version, context, application, links, scripts, {
+        const html = (0, login_1.login)(pkg.version, context, application, links, scripts, {
             name: application.getName(),
             text: application.getText(),
             title: application.getTitle(context),
@@ -95,33 +96,6 @@ class ViewerModule {
             username: context.query.username,
         });
         context.getRes().end(html);
-    }
-    renderLogin(version, context, application, links, scripts, data) {
-        return `<!DOCTYPE html>
-<html class="${application.getLoginViewClassName()}" lang="${application.getAttr('lang')}">
-<head>
-    <!-- qforms v${version} -->
-    <!-- app v${application.getVersion()}  -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>${application.getTitle(context)} - ${application.getText().login.login}</title>
-    <!-- links -->
-    ${links}
-    <!-- scripts -->
-    ${scripts}
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            const frontHostApp = new LoginFrontHostApp(data);
-            await frontHostApp.run();
-        });
-    </script>
-    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
-</head>
-<body class="${application.getLoginViewClassName()}__body">
-    <div class="${application.getLoginViewClassName()}__root"></div>
-</body>
-</html>`;
     }
     async handleViewerPost(context, application) {
         // console.log('ViewerModule.handleViewerPost');
@@ -172,7 +146,7 @@ class ViewerModule {
                 // const users = await application.getUsers(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                const html = this.renderLogin(pkg.version, context, application, links, scripts, {
+                const html = (0, login_1.login)(pkg.version, context, application, links, scripts, {
                     name: application.getName(),
                     text: application.getText(),
                     title: application.getTitle(context),
