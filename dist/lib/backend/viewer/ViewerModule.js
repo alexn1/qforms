@@ -14,11 +14,11 @@ const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
 const Application_1 = require("../../frontend/viewer/Model/Application/Application");
 const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
-const viewer_1 = require("../../frontend/viewer");
-console.log('TableForm.name', viewer_1.TableForm.name);
 const index_1 = require("./index");
 const login_1 = require("./login");
 const pkg = require('../../../package.json');
+const viewer_1 = require("../../frontend/viewer");
+console.log('TableForm.name', viewer_1.TableForm.name);
 // post actions
 const ACTIONS = [
     'page',

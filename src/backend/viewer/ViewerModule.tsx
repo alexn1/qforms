@@ -13,12 +13,13 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { Application } from '../../frontend/viewer/Model/Application/Application';
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { TableForm } from '../../frontend/viewer';
-console.log('TableForm.name', TableForm.name);
 import { index } from './index';
 import { login } from './login';
 
 const pkg = require('../../../package.json');
+
+import { TableForm } from '../../frontend/viewer';
+console.log('TableForm.name', TableForm.name);
 
 // post actions
 const ACTIONS = [
