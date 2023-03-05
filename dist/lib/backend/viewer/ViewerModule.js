@@ -12,6 +12,8 @@ const MyError_1 = require("../MyError");
 const Result_1 = require("../../Result");
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
+const Application_1 = require("../../frontend/viewer/Model/Application/Application");
+const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
 const pkg = require('../../../package.json');
 // post actions
 const ACTIONS = [
@@ -53,10 +55,12 @@ class ViewerModule {
             await application.connect(context);
             try {
                 await application.initContext(context);
-                const response = await application.fill(context);
+                const data = await application.fill(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                const html = this.render(pkg.version, application, context, response, links, scripts);
+                const appViewHtml = this.renderApplicationView(data);
+                console.log('appViewHtml:', appViewHtml);
+                const html = this.render(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             }
             finally {
@@ -64,7 +68,19 @@ class ViewerModule {
             }
         }
     }
-    render(version, application, context, response, links, scripts) {
+    renderApplicationView(data) {
+        console.log('renderApplicationView', data);
+        // application
+        const application = new Application_1.Application(data);
+        application.init();
+        // applicationController
+        const applicationController = ApplicationController_1.ApplicationController.create(application, null);
+        applicationController.init();
+        // const html = ReactDOMServer.renderToStaticMarkup(<ApplicationView />);
+        // return html;
+        return 'test';
+    }
+    render(version, application, context, data, links, scripts) {
         return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
 <head>
@@ -79,12 +95,12 @@ class ViewerModule {
     ${scripts}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            /*const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
-            await frontHostApp.run();
+            await frontHostApp.run();*/
         });
     </script>
-    <script type="application/json">${JSON.stringify(response /*, null, 4*/)}</script>
+    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
     <div class="${application.getViewClassName()}__root"></div>
