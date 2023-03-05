@@ -12,6 +12,12 @@ import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 
+import { Application } from '../../frontend/viewer/Model/Application/Application';
+import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
+
+import { TableForm } from '../../frontend/viewer';
+console.log('TableForm.name', TableForm.name);
+
 const pkg = require('../../../package.json');
 
 // post actions
@@ -76,7 +82,7 @@ export class ViewerModule {
             await application.connect(context);
             try {
                 await application.initContext(context);
-                const response = await application.fill(context);
+                const data = await application.fill(context);
 
                 const links = ReactDOMServer.renderToStaticMarkup(
                     <Links links={[...this.getLinks(), ...application.links]} />,
@@ -84,14 +90,11 @@ export class ViewerModule {
                 const scripts = ReactDOMServer.renderToStaticMarkup(
                     <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
                 );
-                const html = this.render(
-                    pkg.version,
-                    application,
-                    context,
-                    response,
-                    links,
-                    scripts,
-                );
+
+                // const appViewHtml = this.renderApplicationView(data);
+                // console.log('appViewHtml:', appViewHtml);
+
+                const html = this.render(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             } finally {
                 await application.release(context);
@@ -99,7 +102,23 @@ export class ViewerModule {
         }
     }
 
-    render(version, application, context, response, links, scripts) {
+    renderApplicationView(data): string {
+        console.log('renderApplicationView', data);
+
+        // application
+        const application = new Application(data);
+        application.init();
+
+        // applicationController
+        const applicationController = ApplicationController.create(application, null);
+        applicationController.init();
+
+        // const html = ReactDOMServer.renderToStaticMarkup(<ApplicationView />);
+        // return html;
+        return 'test';
+    }
+
+    render(version, application, context, data, links, scripts) {
         return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
             context.query.debug === '1' ? 'debug' : ''
@@ -121,7 +140,7 @@ export class ViewerModule {
             await frontHostApp.run();
         });
     </script>
-    <script type="application/json">${JSON.stringify(response /*, null, 4*/)}</script>
+    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
     <div class="${application.getViewClassName()}__root"></div>

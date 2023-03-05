@@ -30,5 +30,4 @@ export class LoginFrontHostApp extends FrontHostApp {
     }
 }
 
-// @ts-ignore
-window.LoginFrontHostApp = LoginFrontHostApp;
+Helper.registerGlobalClass(LoginFrontHostApp);

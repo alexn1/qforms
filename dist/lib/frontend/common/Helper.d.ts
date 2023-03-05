@@ -33,4 +33,6 @@ export declare class Helper {
     static getCookie(name: string): string | undefined;
     static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;
+    static registerGlobalClass(Class: any): void;
+    static getGlobalClass(className: string): any;
 }
