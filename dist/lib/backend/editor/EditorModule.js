@@ -35,6 +35,7 @@ const server_1 = __importDefault(require("react-dom/server"));
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
 const backend = __importStar(require("../index"));
+const index_1 = require("./index");
 const pkg = require('../../../package.json');
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -102,36 +103,8 @@ class EditorModule {
         };
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
-        const html = this.render(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const html = (0, index_1.index)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.end(html);
-    }
-    render(version, data, runAppLink, appDirName, appFileName, env, links, scripts) {
-        return `<!DOCTYPE html>
-<html class="editor" lang="en">
-<head>
-    <!-- ${version} -->
-    <meta charset="utf-8">
-    <title>${appDirName}/${appFileName}[${env}] - QForms Editor</title>
-    <!-- links -->
-    ${links}
-    <!-- scripts -->
-    ${scripts}
-    <!--<script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log('editor.ejs DOMContentLoaded');
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            const runAppLink = "${runAppLink}";
-            const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
-            await editorFrontHostApp.run();
-        });
-    </script>-->
-    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
-</head>
-<body class="editor__body">
-    <div class="editor__root"></div>
-</body>
-</html>
-`;
     }
     async handleEditorPost(req, res, context) {
         console.log('EditorModule.handleEditorPost', req.body);

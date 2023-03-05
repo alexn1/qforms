@@ -8,6 +8,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import * as backend from '../index';
+import { index } from './index';
 
 const pkg = require('../../../package.json');
 
@@ -100,7 +101,7 @@ export class EditorModule {
         const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={this.getScripts()} />,
         );
-        const html = this.render(
+        const html = index(
             pkg.version,
             {
                 ...data,
@@ -114,35 +115,6 @@ export class EditorModule {
             scripts,
         );
         res.end(html);
-    }
-
-    render(version, data, runAppLink, appDirName, appFileName, env, links, scripts) {
-        return `<!DOCTYPE html>
-<html class="editor" lang="en">
-<head>
-    <!-- ${version} -->
-    <meta charset="utf-8">
-    <title>${appDirName}/${appFileName}[${env}] - QForms Editor</title>
-    <!-- links -->
-    ${links}
-    <!-- scripts -->
-    ${scripts}
-    <!--<script type="text/javascript">
-        document.addEventListener('DOMContentLoaded', async () => {
-            console.log('editor.ejs DOMContentLoaded');
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-            const runAppLink = "${runAppLink}";
-            const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
-            await editorFrontHostApp.run();
-        });
-    </script>-->
-    <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
-</head>
-<body class="editor__body">
-    <div class="editor__root"></div>
-</body>
-</html>
-`;
     }
 
     async handleEditorPost(req, res, context: Context) {
