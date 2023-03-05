@@ -2,8 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Page = void 0;
 const Model_1 = require("../Model");
-const common_1 = require("../../../common");
 const DataSource_1 = require("../DataSource/DataSource");
+const Helper_1 = require("../../../common/Helper");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
@@ -37,7 +37,7 @@ class Page extends Model_1.Model {
     createForms() {
         // forms
         for (const data of this.data.forms) {
-            const FormClass = common_1.FrontHostApp.getClassByName(Model_1.Model.getClassName(data));
+            const FormClass = Helper_1.Helper.getGlobalClass(Model_1.Model.getClassName(data));
             if (!FormClass)
                 throw new Error(`no ${Model_1.Model.getClassName(data)} class`);
             const form = new FormClass(data, this);

@@ -1,6 +1,7 @@
 import { Model } from '../Model';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../DataSource/DataSource';
+import { Helper } from '../../../common/Helper';
 
 export class Page extends Model {
     options: any;
@@ -43,7 +44,7 @@ export class Page extends Model {
     createForms() {
         // forms
         for (const data of this.data.forms) {
-            const FormClass = FrontHostApp.getClassByName(Model.getClassName(data));
+            const FormClass = Helper.getGlobalClass(Model.getClassName(data));
             if (!FormClass) throw new Error(`no ${Model.getClassName(data)} class`);
             const form = new FormClass(data, this);
             form.init();

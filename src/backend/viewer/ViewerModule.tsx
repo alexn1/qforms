@@ -14,7 +14,9 @@ import { Scripts } from '../Scripts';
 
 import { Application } from '../../frontend/viewer/Model/Application/Application';
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { ApplicationView } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView';
+
+import { TableForm } from '../../frontend/viewer';
+console.log('TableForm.name', TableForm.name);
 
 const pkg = require('../../../package.json');
 

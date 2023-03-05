@@ -25,5 +25,4 @@ class LoginFrontHostApp extends common_1.FrontHostApp {
     }
 }
 exports.LoginFrontHostApp = LoginFrontHostApp;
-// @ts-ignore
-window.LoginFrontHostApp = LoginFrontHostApp;
+common_1.Helper.registerGlobalClass(LoginFrontHostApp);

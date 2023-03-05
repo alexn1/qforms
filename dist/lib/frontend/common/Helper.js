@@ -334,6 +334,23 @@ class Helper {
             setTimeout(resolve, ms);
         });
     }
+    static registerGlobalClass(Class) {
+        console.log('Helper.registerGlobalClass', Class.name);
+        if (typeof window === 'object') {
+            if (window[Class.name])
+                throw new Error(`window.${Class.name} already used`);
+            window[Class.name] = Class;
+        }
+        else {
+            if (global[Class.name])
+                throw new Error(`global.${Class.name} already used`);
+            global[Class.name] = Class;
+        }
+    }
+    static getGlobalClass(className) {
+        console.log('Helper.getGlobalClass', className);
+        return typeof window === 'object' ? window[className] : global[className];
+    }
 }
 exports.Helper = Helper;
 if (typeof window === 'object') {
