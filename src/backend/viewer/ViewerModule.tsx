@@ -91,8 +91,8 @@ export class ViewerModule {
                     <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
                 );
 
-                const appViewHtml = this.renderApplicationView(data);
-                console.log('appViewHtml:', appViewHtml);
+                // const appViewHtml = this.renderApplicationView(data);
+                // console.log('appViewHtml:', appViewHtml);
 
                 const html = this.render(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
@@ -135,9 +135,9 @@ export class ViewerModule {
     ${scripts}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            /*const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
-            await frontHostApp.run();*/
+            await frontHostApp.run();
         });
     </script>
     <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>

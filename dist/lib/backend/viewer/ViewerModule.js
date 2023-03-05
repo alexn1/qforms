@@ -60,8 +60,8 @@ class ViewerModule {
                 const data = await application.fill(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                const appViewHtml = this.renderApplicationView(data);
-                console.log('appViewHtml:', appViewHtml);
+                // const appViewHtml = this.renderApplicationView(data);
+                // console.log('appViewHtml:', appViewHtml);
                 const html = this.render(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             }
@@ -97,9 +97,9 @@ class ViewerModule {
     ${scripts}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            /*const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
-            await frontHostApp.run();*/
+            await frontHostApp.run();
         });
     </script>
     <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
