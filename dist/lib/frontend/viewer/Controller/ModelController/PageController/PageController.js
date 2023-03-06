@@ -70,16 +70,13 @@ class PageController extends ModelController_1.ModelController {
         // console.log('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = common_1.FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent, id, options);
         }
         // @ts-ignore
         return new PageController(model, parent, id, options);
-        /*const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
-        const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id, options);*/
     }
     init() {
         for (const form of this.model.forms) {

@@ -35,4 +35,7 @@ export declare class Helper {
     static delay(ms?: number): Promise<unknown>;
     static registerGlobalClass(Class: any): void;
     static getGlobalClass(className: string): any;
+    static setDocumentTitle(title: any): void;
+    static getDocumentTitle(): string;
+    static addClassToDocumentElement(className: any): void;
 }

@@ -1,9 +1,8 @@
 import { ModelController } from '../ModelController';
-import { FrontHostApp } from '../../../../common';
+import { Helper } from '../../../../common';
 import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
-import { Field } from '../../../Model/Field/Field';
 import {
     ApplicationController,
     OpenPageOptions,
@@ -17,11 +16,11 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         // console.log('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = Helper.getGlobalClass(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
-        const GeneralClass = FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+        const GeneralClass = Helper.getGlobalClass(`${model.getClassName()}Controller`);
         return new GeneralClass(model, parent);
     }
 

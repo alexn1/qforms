@@ -4,6 +4,7 @@ exports.TableFormController = void 0;
 const TableFormView_1 = require("./TableFormView");
 const FormController_1 = require("../FormController");
 const DataSource_1 = require("../../../../Model/DataSource/DataSource");
+const common_1 = require("../../../../../common");
 class TableFormController extends FormController_1.FormController {
     constructor(model, parent) {
         super(model, parent);
@@ -292,7 +293,4 @@ class TableFormController extends FormController_1.FormController {
     }
 }
 exports.TableFormController = TableFormController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormController = TableFormController;
-}
+common_1.Helper.registerGlobalClass(TableFormController);

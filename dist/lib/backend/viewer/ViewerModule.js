@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewerModule = void 0;
+exports.ViewerModule = exports.TableFormTextBoxFieldController = exports.TextBoxField = exports.NoSqlDataSource = exports.TableForm = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const server_1 = __importDefault(require("react-dom/server"));
@@ -17,8 +17,12 @@ const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelC
 const index_1 = require("./index");
 const login_1 = require("./login");
 const pkg = require('../../../package.json');
-const viewer_1 = require("../../frontend/viewer");
-console.log('TableForm.name', viewer_1.TableForm.name);
+// to compile without using
+var viewer_1 = require("../../frontend/viewer");
+Object.defineProperty(exports, "TableForm", { enumerable: true, get: function () { return viewer_1.TableForm; } });
+Object.defineProperty(exports, "NoSqlDataSource", { enumerable: true, get: function () { return viewer_1.NoSqlDataSource; } });
+Object.defineProperty(exports, "TextBoxField", { enumerable: true, get: function () { return viewer_1.TextBoxField; } });
+Object.defineProperty(exports, "TableFormTextBoxFieldController", { enumerable: true, get: function () { return viewer_1.TableFormTextBoxFieldController; } });
 // post actions
 const ACTIONS = [
     'page',
@@ -62,8 +66,8 @@ class ViewerModule {
                 const data = await application.fill(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                // const appViewHtml = this.renderApplicationView(data);
-                // console.log('appViewHtml:', appViewHtml);
+                /* const appViewHtml = this.renderApplicationView(data);
+                console.log('appViewHtml:', appViewHtml); */
                 const html = (0, index_1.index)(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             }

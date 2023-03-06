@@ -9,12 +9,12 @@ class FormController extends ModelController_1.ModelController {
         // console.log('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = common_1.FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
-        const GeneralClass = common_1.FrontHostApp.getClassByName(`${model.getClassName()}Controller`);
+        const GeneralClass = common_1.Helper.getGlobalClass(`${model.getClassName()}Controller`);
         return new GeneralClass(model, parent);
     }
     constructor(model, parent) {

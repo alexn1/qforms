@@ -2,13 +2,13 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FieldController = void 0;
 const ModelController_1 = require("../ModelController");
-const common_1 = require("../../../../common");
+const Helper_1 = require("../../../../common/Helper");
 class FieldController extends ModelController_1.ModelController {
     static create(model, parent) {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = common_1.FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
@@ -16,20 +16,10 @@ class FieldController extends ModelController_1.ModelController {
         const generalClassName = `${parent
             .getModel()
             .getClassName()}${model.getClassName()}Controller`;
-        const GeneralClass = common_1.FrontHostApp.getClassByName(generalClassName);
+        const GeneralClass = Helper_1.Helper.getGlobalClass(generalClassName);
         if (!GeneralClass)
             throw new Error(`no class ${generalClassName}`);
         return new GeneralClass(model, parent);
-        /*const page = model.getPage();
-        const form = model.getForm();
-        const CustomClass = FrontHostApp.getClassByName(
-            `${page.getName()}${form.getName()}${model.getName()}FieldController`,
-        );
-        const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
-        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
-        if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
-        const Class = CustomClass || GeneralClass;
-        return new Class(model, parent);*/
     }
     valueToString(value) {
         // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);

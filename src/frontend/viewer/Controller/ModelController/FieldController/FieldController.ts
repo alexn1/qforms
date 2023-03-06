@@ -2,39 +2,28 @@ import { ModelController } from '../ModelController';
 import { FrontHostApp } from '../../../../common';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
-import { Form } from '../../../Model/Form/Form';
 import { PageController } from '../PageController/PageController';
 import {
     ApplicationController,
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
+import { Helper } from '../../../../common/Helper';
 
 export class FieldController<TField extends Field = Field> extends ModelController<TField> {
     static create(model: Field, parent: FormController): FieldController {
         // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = Helper.getGlobalClass(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const generalClassName = `${parent
             .getModel()
             .getClassName()}${model.getClassName()}Controller`;
-        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
+        const GeneralClass = Helper.getGlobalClass(generalClassName);
         if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
         return new GeneralClass(model, parent);
-
-        /*const page = model.getPage();
-        const form = model.getForm();
-        const CustomClass = FrontHostApp.getClassByName(
-            `${page.getName()}${form.getName()}${model.getName()}FieldController`,
-        );
-        const generalClassName = `${parent.model.getClassName()}${model.getClassName()}Controller`;
-        const GeneralClass = FrontHostApp.getClassByName(generalClassName);
-        if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
-        const Class = CustomClass || GeneralClass;
-        return new Class(model, parent);*/
     }
 
     valueToString(value): string {

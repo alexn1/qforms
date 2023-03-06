@@ -1,5 +1,5 @@
 import { ModelController } from '../ModelController';
-import { FrontHostApp } from '../../../../common';
+import { Helper } from '../../../../common';
 import { FormController } from '../FormController/FormController';
 import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
@@ -34,15 +34,12 @@ export class PageController<
         // console.log('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = Helper.getGlobalClass(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent, id, options);
         }
         // @ts-ignore
         return new PageController(model, parent, id, options);
-        /*const CustomClass = FrontHostApp.getClassByName(`${model.getName()}PageController`);
-        const Class = CustomClass ? CustomClass : PageController;
-        return new Class(model, parent, id, options);*/
     }
 
     init() {

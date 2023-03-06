@@ -14,7 +14,7 @@ class Form extends Model_1.Model {
         this.createDataSources();
         // fields
         for (const data of this.data.fields) {
-            const Class = common_1.FrontHostApp.getClassByName(data.class);
+            const Class = common_1.Helper.getGlobalClass(data.class);
             if (!Class)
                 throw new Error(`no ${data.class} class`);
             const field = new Class(data, this);

@@ -61,7 +61,7 @@ class Model extends EventEmitter_1.EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const Class = common_1.FrontHostApp.getClassByName(data.class);
+                const Class = common_1.Helper.getGlobalClass(data.class);
                 if (!Class)
                     throw new Error(`no ${data.class} class`);
                 const dataSource = new Class(data, this);

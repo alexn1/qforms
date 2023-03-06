@@ -18,8 +18,13 @@ import { login } from './login';
 
 const pkg = require('../../../package.json');
 
-import { TableForm } from '../../frontend/viewer';
-console.log('TableForm.name', TableForm.name);
+// to compile without using
+export {
+    TableForm,
+    NoSqlDataSource,
+    TextBoxField,
+    TableFormTextBoxFieldController,
+} from '../../frontend/viewer';
 
 // post actions
 const ACTIONS = [
@@ -92,8 +97,8 @@ export class ViewerModule {
                     <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
                 );
 
-                // const appViewHtml = this.renderApplicationView(data);
-                // console.log('appViewHtml:', appViewHtml);
+                /* const appViewHtml = this.renderApplicationView(data);
+                console.log('appViewHtml:', appViewHtml); */
 
                 const html = index(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);

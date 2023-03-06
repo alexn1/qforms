@@ -5,6 +5,7 @@ import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
+import { Helper } from '../../../../../common';
 
 export class TableFormController extends FormController<TableForm> {
     state: any;
@@ -325,7 +326,4 @@ export class TableFormController extends FormController<TableForm> {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormController = TableFormController;
-}
+Helper.registerGlobalClass(TableFormController);
