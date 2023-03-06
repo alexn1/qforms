@@ -84,10 +84,6 @@ class FrontHostApp {
     static stopWait() {
         document.querySelector('html').classList.remove('wait');
     }
-    /* static getClassByName(className: string): any {
-        // console.log('getClassByName', className);
-        return typeof window === 'object' ? window[className] : null;
-    } */
     async onWindowPopState(e) {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
