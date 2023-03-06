@@ -357,6 +357,18 @@ export class Helper {
         console.log('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
+
+    static setDocumentTitle(title) {
+        document.title = title;
+    }
+
+    static getDocumentTitle() {
+        return document.title;
+    }
+
+    static addClassToDocumentElement(className) {
+        document.documentElement.classList.add(className);
+    }
 }
 
 if (typeof window === 'object') {
