@@ -51,14 +51,11 @@ export class ApplicationController extends ModelController<Application> {
         // );
         const { ctrlClass } = model.data;
         if (ctrlClass) {
-            const CustomClass = FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = Helper.getGlobalClass(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, frontHostApp);
         }
         return new ApplicationController(model, frontHostApp);
-        // const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
-        // const Class = CustomClass ? CustomClass : ApplicationController;
-        // return new Class(model, frontHostApp);
     }
 
     static isDebugMode() {

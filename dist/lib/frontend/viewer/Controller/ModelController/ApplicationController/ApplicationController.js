@@ -73,15 +73,12 @@ class ApplicationController extends ModelController_1.ModelController {
         // );
         const { ctrlClass } = model.data;
         if (ctrlClass) {
-            const CustomClass = common_1.FrontHostApp.getClassByName(ctrlClass);
+            const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, frontHostApp);
         }
         return new ApplicationController(model, frontHostApp);
-        // const CustomClass = FrontHostApp.getClassByName(`${model.getName()}ApplicationController`);
-        // const Class = CustomClass ? CustomClass : ApplicationController;
-        // return new Class(model, frontHostApp);
     }
     static isDebugMode() {
         return common_1.Search.getObj()['debug'] === '1';

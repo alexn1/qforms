@@ -11,7 +11,6 @@ export declare class FrontHostApp {
     static post(url: any, body: any, contentType: any): Promise<any[]>;
     static startWait(): void;
     static stopWait(): void;
-    static getClassByName(className: string): any;
     onWindowPopState(e: any): Promise<void>;
     alert(options: any): Promise<any>;
     confirm(options: any): Promise<any>;

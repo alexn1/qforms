@@ -1,5 +1,5 @@
 import { EventEmitter } from '../EventEmitter';
-import { FrontHostApp } from '../../common';
+import { FrontHostApp, Helper } from '../../common';
 import { DataSource } from './DataSource/DataSource';
 
 export class Model extends EventEmitter {
@@ -73,7 +73,7 @@ export class Model extends EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const Class = FrontHostApp.getClassByName(data.class);
+                const Class = Helper.getGlobalClass(data.class);
                 if (!Class) throw new Error(`no ${data.class} class`);
                 const dataSource = new Class(data, this);
                 dataSource.init();

@@ -14,7 +14,7 @@ class LoginController extends Controller_1.Controller {
         const data = frontHostApp.getData();
         if (!data.name)
             throw new Error('no app name');
-        const CustomClass = common_1.FrontHostApp.getClassByName(`${data.name}LoginController`);
+        const CustomClass = common_1.Helper.getGlobalClass(`${data.name}LoginController`);
         const Class = CustomClass || LoginController;
         return new Class(frontHostApp);
     }

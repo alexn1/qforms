@@ -1,5 +1,5 @@
 import { Model } from '../Model';
-import { FrontHostApp } from '../../../common';
+import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
 import { RawRow, Row } from '../../../../types';
@@ -20,7 +20,7 @@ export class Form extends Model {
 
         // fields
         for (const data of this.data.fields) {
-            const Class = FrontHostApp.getClassByName(data.class);
+            const Class = Helper.getGlobalClass(data.class);
             if (!Class) throw new Error(`no ${data.class} class`);
             const field = new Class(data, this);
             field.init();

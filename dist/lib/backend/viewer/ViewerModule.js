@@ -16,9 +16,11 @@ const Application_1 = require("../../frontend/viewer/Model/Application/Applicati
 const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
 const index_1 = require("./index");
 const login_1 = require("./login");
-const pkg = require('../../../package.json');
 const viewer_1 = require("../../frontend/viewer");
-console.log('TableForm.name', viewer_1.TableForm.name);
+const dummy = [viewer_1.TableForm, viewer_1.NoSqlDataSource];
+// @ts-ignore
+console.log(global.NoSqlDataSource.name);
+const pkg = require('../../../package.json');
 // post actions
 const ACTIONS = [
     'page',
@@ -62,8 +64,8 @@ class ViewerModule {
                 const data = await application.fill(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                // const appViewHtml = this.renderApplicationView(data);
-                // console.log('appViewHtml:', appViewHtml);
+                const appViewHtml = this.renderApplicationView(data);
+                console.log('appViewHtml:', appViewHtml);
                 const html = (0, index_1.index)(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             }
