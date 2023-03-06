@@ -19,7 +19,12 @@ import { login } from './login';
 const pkg = require('../../../package.json');
 
 // to compile without using
-export { TableForm, NoSqlDataSource, TextBoxField } from '../../frontend/viewer';
+export {
+    TableForm,
+    NoSqlDataSource,
+    TextBoxField,
+    TableFormTextBoxFieldController,
+} from '../../frontend/viewer';
 
 // post actions
 const ACTIONS = [
