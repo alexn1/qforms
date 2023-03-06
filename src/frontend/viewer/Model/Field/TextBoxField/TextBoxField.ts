@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common/Helper';
 
 export class TextBoxField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TextBoxField = TextBoxField;
-}
+Helper.registerGlobalClass(TextBoxField);

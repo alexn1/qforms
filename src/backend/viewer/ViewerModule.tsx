@@ -16,14 +16,10 @@ import { ApplicationController } from '../../frontend/viewer/Controller/ModelCon
 import { index } from './index';
 import { login } from './login';
 
-import { TableForm, NoSqlDataSource } from '../../frontend/viewer';
-
-const dummy = [TableForm, NoSqlDataSource];
-
-// @ts-ignore
-console.log(global.NoSqlDataSource.name);
-
 const pkg = require('../../../package.json');
+
+// to compile without using
+export { TableForm, NoSqlDataSource, TextBoxField } from '../../frontend/viewer';
 
 // post actions
 const ACTIONS = [

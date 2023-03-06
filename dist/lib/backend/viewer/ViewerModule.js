@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewerModule = void 0;
+exports.ViewerModule = exports.TextBoxField = exports.NoSqlDataSource = exports.TableForm = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const server_1 = __importDefault(require("react-dom/server"));
@@ -16,11 +16,12 @@ const Application_1 = require("../../frontend/viewer/Model/Application/Applicati
 const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
 const index_1 = require("./index");
 const login_1 = require("./login");
-const viewer_1 = require("../../frontend/viewer");
-const dummy = [viewer_1.TableForm, viewer_1.NoSqlDataSource];
-// @ts-ignore
-console.log(global.NoSqlDataSource.name);
 const pkg = require('../../../package.json');
+// to compile without using
+var viewer_1 = require("../../frontend/viewer");
+Object.defineProperty(exports, "TableForm", { enumerable: true, get: function () { return viewer_1.TableForm; } });
+Object.defineProperty(exports, "NoSqlDataSource", { enumerable: true, get: function () { return viewer_1.NoSqlDataSource; } });
+Object.defineProperty(exports, "TextBoxField", { enumerable: true, get: function () { return viewer_1.TextBoxField; } });
 // post actions
 const ACTIONS = [
     'page',
