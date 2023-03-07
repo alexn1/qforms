@@ -29,4 +29,5 @@ export interface QueryParams {
     [name: string]: string | number | boolean;
 }
 export type Align = 'left' | 'center' | 'right';
+export type Visibility = 'visible' | 'hidden';
 export {};

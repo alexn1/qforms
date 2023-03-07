@@ -1,5 +1,6 @@
 import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
+import { Visibility } from '../../../../types';
 import './Select.less';
 export declare class Select extends ReactComponent {
     dropdown: React.RefObject<any>;
@@ -8,7 +9,7 @@ export declare class Select extends ReactComponent {
     getInitialValue(): any;
     getValue(): any;
     isNullable(): any;
-    getVisibility(): 'visible' | 'hidden';
+    getVisibility(): Visibility;
     getDisplay(): "none" | "block";
     onKeyDown: (e: any) => Promise<void>;
     onInputMouseDown: (e: any) => Promise<void>;

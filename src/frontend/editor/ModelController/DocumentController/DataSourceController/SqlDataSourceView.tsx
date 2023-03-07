@@ -2,6 +2,7 @@ import * as React from 'react';
 import { DocumentView } from '../DocumentView';
 import { Button } from '../../../../common';
 import './SqlDataSourceView.less';
+import { Visibility } from '../../../../viewer';
 
 export class SqlDataSourceView extends DocumentView {
     singleRef: React.RefObject<any>;
@@ -61,11 +62,11 @@ export class SqlDataSourceView extends DocumentView {
         await this.rerender();
     };
 
-    getButtonClass(name) {
+    getButtonClass(name: string): string {
         return this.state.selected === name ? 'btn-primary' : 'btn-default';
     }
 
-    getVisibility(name) {
+    getVisibility(name: string): Visibility {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
 

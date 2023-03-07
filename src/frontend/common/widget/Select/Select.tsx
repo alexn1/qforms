@@ -2,6 +2,8 @@ import React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 import { CloseIcon } from '../../icon/CloseIcon';
 import { ArrowIcon } from '../../icon/ArrowIcon';
+import { Visibility } from '../../../../types';
+
 import './Select.less';
 
 export class Select extends ReactComponent {
@@ -58,7 +60,7 @@ export class Select extends ReactComponent {
         return this.props.nullable !== undefined ? this.props.nullable : true;
     }
 
-    getVisibility(): 'visible' | 'hidden' {
+    getVisibility(): Visibility {
         return this.isVisible() ? 'visible' : 'hidden';
     }
 
