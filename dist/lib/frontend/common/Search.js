@@ -3,6 +3,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Search = void 0;
 class Search {
     static getObj() {
+        if (typeof window !== 'object')
+            return {};
         if (!window.location.search.split('?')[1])
             return {};
         return window.location.search

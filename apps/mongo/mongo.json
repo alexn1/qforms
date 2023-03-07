@@ -4,7 +4,7 @@
         "formatVersion": "0.1",
         "name": "mongo",
         "caption": "mongo",
-        "authentication": "true",
+        "authentication": "false",
         "user": "admin",
         "password": "admin",
         "lang": "en",
