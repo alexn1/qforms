@@ -16,6 +16,7 @@ import { Application } from '../../frontend/viewer/Model/Application/Application
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { index } from './index';
 import { login } from './login';
+import { FrontHostApp } from '../../frontend/common';
 
 const pkg = require('../../../package.json');
 
@@ -115,6 +116,8 @@ export class ViewerModule {
         // application
         const application = new Application(data);
         application.init();
+
+        const frontHostApp = new FrontHostApp();
 
         // applicationController
         const applicationController = ApplicationController.create(application, null);

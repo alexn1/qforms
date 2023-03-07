@@ -17,6 +17,7 @@ export const index = (version, application, context, data, links, scripts) => {
         document.addEventListener('DOMContentLoaded', async () => {
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
+            frontHostApp.init();
             await frontHostApp.run();
         });
     </script>

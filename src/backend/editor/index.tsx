@@ -15,6 +15,7 @@ ${scripts}
         const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
         const runAppLink = "${runAppLink}";
         const editorFrontHostApp = new EditorFrontHostApp(data, runAppLink);
+        editorFrontHostApp.init();
         await editorFrontHostApp.run();
     });
 </script>-->

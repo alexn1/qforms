@@ -3,15 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontHostApp = void 0;
 class FrontHostApp {
     constructor() {
-        // console.log('FrontHostApp.constructor');
         this.alertCtrl = null;
-        // window
+        // console.log('FrontHostApp.constructor');
+    }
+    init() {
         window.addEventListener('error', this.onWindowError.bind(this));
         window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
         window.addEventListener('popstate', this.onWindowPopState.bind(this));
-        // window.onunhandledrejection = this.onunhandledrejection.bind(this);
-        // window.onerror              = this.errorHandler.bind(this);
-        // window.onbeforeunload       = this.exit.bind(this);
     }
     async run() {
         throw new Error('FrontHostApp.run not implemented');

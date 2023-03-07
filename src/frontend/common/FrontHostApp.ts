@@ -1,18 +1,16 @@
+import { inherits } from 'util';
+
 export class FrontHostApp {
-    alertCtrl: any;
+    alertCtrl: any = null;
 
     constructor() {
         // console.log('FrontHostApp.constructor');
+    }
 
-        this.alertCtrl = null;
-
-        // window
+    init() {
         window.addEventListener('error', this.onWindowError.bind(this));
         window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
         window.addEventListener('popstate', this.onWindowPopState.bind(this));
-        // window.onunhandledrejection = this.onunhandledrejection.bind(this);
-        // window.onerror              = this.errorHandler.bind(this);
-        // window.onbeforeunload       = this.exit.bind(this);
     }
 
     async run() {

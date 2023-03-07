@@ -1,6 +1,7 @@
 export declare class FrontHostApp {
     alertCtrl: any;
     constructor();
+    init(): void;
     run(): Promise<void>;
     onWindowUnhandledrejection(e: any): Promise<void>;
     onWindowError(e: any): Promise<void>;

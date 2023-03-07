@@ -17,6 +17,7 @@ const Application_1 = require("../../frontend/viewer/Model/Application/Applicati
 const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
 const index_1 = require("./index");
 const login_1 = require("./login");
+const common_1 = require("../../frontend/common");
 const pkg = require('../../../package.json');
 // to compile without using
 var viewer_1 = require("../../frontend/viewer");
@@ -82,6 +83,7 @@ class ViewerModule {
         // application
         const application = new Application_1.Application(data);
         application.init();
+        const frontHostApp = new common_1.FrontHostApp();
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, null);
         applicationController.init();

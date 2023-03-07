@@ -12,7 +12,7 @@ export declare class NoSqlDataSourceView extends DocumentView {
     isChanged(): boolean;
     onChange: (i: any, o: any) => Promise<void>;
     getButtonClass(name: any): "btn-primary" | "btn-default";
-    getVisibility(name: any): "visible" | "hidden";
+    getVisibility(name: any): "hidden" | "visible";
     onSaveClick: (e: any) => Promise<void>;
     isSelected(name: any): boolean;
     render(): JSX.Element;
