@@ -2,6 +2,8 @@ import * as React from 'react';
 import ReactDOM from 'react-dom';
 import { JSONString } from '../../types';
 
+let document_title = '';
+
 export class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -359,15 +361,24 @@ export class Helper {
     }
 
     static setDocumentTitle(title) {
-        document.title = title;
+        if (typeof document === 'object') {
+            document.title = title;
+        } else {
+            document_title = title;
+        }
     }
 
     static getDocumentTitle() {
-        return document.title;
+        if (typeof document === 'object') {
+            return document.title;
+        }
+        return document_title;
     }
 
     static addClassToDocumentElement(className) {
-        document.documentElement.classList.add(className);
+        if (typeof document === 'object') {
+            document.documentElement.classList.add(className);
+        }
     }
 }
 

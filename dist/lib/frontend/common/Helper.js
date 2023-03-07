@@ -29,6 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Helper = void 0;
 const React = __importStar(require("react"));
 const react_dom_1 = __importDefault(require("react-dom"));
+let document_title = '';
 class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -352,13 +353,23 @@ class Helper {
         return typeof window === 'object' ? window[className] : global[className];
     }
     static setDocumentTitle(title) {
-        document.title = title;
+        if (typeof document === 'object') {
+            document.title = title;
+        }
+        else {
+            document_title = title;
+        }
     }
     static getDocumentTitle() {
-        return document.title;
+        if (typeof document === 'object') {
+            return document.title;
+        }
+        return document_title;
     }
     static addClassToDocumentElement(className) {
-        document.documentElement.classList.add(className);
+        if (typeof document === 'object') {
+            document.documentElement.classList.add(className);
+        }
     }
 }
 exports.Helper = Helper;
