@@ -17,6 +17,6 @@ export declare class SqlDataSourceView extends DocumentView {
     getButtonClass(name: string): string;
     getVisibility(name: string): Visibility;
     onSaveClick: (e: any) => Promise<void>;
-    isSelected(name: any): boolean;
+    isSelected(name: string): boolean;
     render(): JSX.Element;
 }

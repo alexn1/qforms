@@ -77,7 +77,7 @@ export class SqlDataSourceView extends DocumentView {
         await this.rerender();
     };
 
-    isSelected(name) {
+    isSelected(name: string): boolean {
         return this.state.selected === name;
     }
 
