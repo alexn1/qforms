@@ -97,6 +97,7 @@ export class Helper {
         }
         return value;
     }
+
     static createReactComponent(rootElement, type, props = {}, children = null) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
@@ -115,6 +116,7 @@ export class Helper {
         ReactDOM.render(reactRootElement, rootElement);
         return component;
     }
+
     static destroyReactComponent(root) {
         ReactDOM.unmountComponentAtNode(root);
     }
