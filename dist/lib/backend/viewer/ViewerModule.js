@@ -85,7 +85,7 @@ class ViewerModule {
         application.init();
         const frontHostApp = new common_1.FrontHostApp();
         // applicationController
-        const applicationController = ApplicationController_1.ApplicationController.create(application, null);
+        const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();
         const ApplicationView = applicationController.getViewClass();
         return server_1.default.renderToStaticMarkup(react_1.default.createElement(ApplicationView, {

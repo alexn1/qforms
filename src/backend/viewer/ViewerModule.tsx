@@ -120,7 +120,7 @@ export class ViewerModule {
         const frontHostApp = new FrontHostApp();
 
         // applicationController
-        const applicationController = ApplicationController.create(application, null);
+        const applicationController = ApplicationController.create(application, frontHostApp);
         applicationController.init();
 
         const ApplicationView = applicationController.getViewClass();

@@ -21,25 +21,18 @@ export interface OpenPageOptions {
 }
 
 export class ApplicationController extends ModelController<Application> {
-    frontHostApp: FrontHostApp;
-    lastId: number;
-    activePage: PageController;
-    modals: any[];
-    statusbar: any;
-    homePageName: string | null;
-    webSocketClient: any;
+    // frontHostApp: FrontHostApp;
+    lastId: number = 0;
+    activePage: PageController = null; // active non modal page
+    modals: any[] = [];
+    statusbar: any = null;
+    homePageName: string | null = null;
+    webSocketClient: any = null;
     view: any;
 
-    constructor(model: Application, frontHostApp: FrontHostApp) {
+    constructor(model: Application, private frontHostApp: FrontHostApp) {
         super(model, null);
         console.log(`${this.constructor.name}.constructor`, model);
-        this.frontHostApp = frontHostApp;
-        this.lastId = 0;
-        this.activePage = null; // active non modal page
-        this.modals = [];
-        this.statusbar = null;
-        this.homePageName = null;
-        this.webSocketClient = null;
     }
 
     static create(model: Application, frontHostApp: FrontHostApp): ApplicationController {

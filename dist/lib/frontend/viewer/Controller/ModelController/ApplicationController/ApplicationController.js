@@ -10,6 +10,14 @@ const PageController_1 = require("../PageController/PageController");
 class ApplicationController extends ModelController_1.ModelController {
     constructor(model, frontHostApp) {
         super(model, null);
+        this.frontHostApp = frontHostApp;
+        // frontHostApp: FrontHostApp;
+        this.lastId = 0;
+        this.activePage = null; // active non modal page
+        this.modals = [];
+        this.statusbar = null;
+        this.homePageName = null;
+        this.webSocketClient = null;
         this.onRequest = async (e) => {
             console.log('onRequest', e);
             if (this.statusbar) {
@@ -56,13 +64,6 @@ class ApplicationController extends ModelController_1.ModelController {
             }
         };
         console.log(`${this.constructor.name}.constructor`, model);
-        this.frontHostApp = frontHostApp;
-        this.lastId = 0;
-        this.activePage = null; // active non modal page
-        this.modals = [];
-        this.statusbar = null;
-        this.homePageName = null;
-        this.webSocketClient = null;
     }
     static create(model, frontHostApp) {
         // console.log(

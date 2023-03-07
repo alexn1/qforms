@@ -17,7 +17,7 @@ export interface OpenPageOptions {
     onCreate?: (page: Page) => void;
 }
 export declare class ApplicationController extends ModelController<Application> {
-    frontHostApp: FrontHostApp;
+    private frontHostApp;
     lastId: number;
     activePage: PageController;
     modals: any[];
