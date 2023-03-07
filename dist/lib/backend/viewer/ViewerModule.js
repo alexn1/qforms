@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ViewerModule = exports.TableFormTextBoxFieldController = exports.TextBoxField = exports.NoSqlDataSource = exports.TableForm = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
+const react_1 = __importDefault(require("react"));
 const server_1 = __importDefault(require("react-dom/server"));
 const Helper_1 = require("../Helper");
 const MyError_1 = require("../MyError");
@@ -84,9 +85,12 @@ class ViewerModule {
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, null);
         applicationController.init();
-        // const html = ReactDOMServer.renderToStaticMarkup(<ApplicationView />);
-        // return html;
-        return 'test';
+        const ApplicationView = applicationController.getViewClass();
+        return server_1.default.renderToStaticMarkup(react_1.default.createElement(ApplicationView, {
+            ctrl: applicationController,
+            onCreate: (c) => { },
+        }));
+        // return 'test';
     }
     async loginGet(context, application) {
         console.log('ViewerModule.loginGet');

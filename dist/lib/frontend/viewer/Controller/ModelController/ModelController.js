@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ModelController = void 0;
 const Controller_1 = require("../Controller");
 const ModelView_1 = require("./ModelView");
+const common_1 = require("../../../common");
 class ModelController extends Controller_1.Controller {
     constructor(model, parent) {
         super();
@@ -32,7 +33,7 @@ class ModelController extends Controller_1.Controller {
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        const viewClass = window[viewClassName];
+        const viewClass = common_1.Helper.getGlobalClass(viewClassName);
         if (viewClass && !(viewClass.prototype instanceof ModelView_1.ModelView)) {
             throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
         }

@@ -1,6 +1,7 @@
 import { Controller } from '../Controller';
 import { ModelView } from './ModelView';
 import { Model } from '../../Model/Model';
+import { Helper } from '../../../common';
 
 export abstract class ModelController<TModel extends Model> extends Controller {
     deinited: boolean = false;
@@ -36,8 +37,7 @@ export abstract class ModelController<TModel extends Model> extends Controller {
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-
-        const viewClass: any = window[viewClassName];
+        const viewClass: any = Helper.getGlobalClass(viewClassName);
         if (viewClass && !(viewClass.prototype instanceof ModelView)) {
             throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
         }

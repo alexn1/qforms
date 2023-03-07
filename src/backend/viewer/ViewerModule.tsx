@@ -1,4 +1,5 @@
 import path from 'path';
+import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { Context } from '../Context';
@@ -108,7 +109,7 @@ export class ViewerModule {
         }
     }
 
-    renderApplicationView(data): string {
+    renderApplicationView(data: any): string {
         console.log('renderApplicationView', data);
 
         // application
@@ -119,9 +120,15 @@ export class ViewerModule {
         const applicationController = ApplicationController.create(application, null);
         applicationController.init();
 
-        // const html = ReactDOMServer.renderToStaticMarkup(<ApplicationView />);
-        // return html;
-        return 'test';
+        const ApplicationView = applicationController.getViewClass();
+        return ReactDOMServer.renderToStaticMarkup(
+            React.createElement(ApplicationView, {
+                ctrl: applicationController,
+                onCreate: (c) => {},
+            } as any),
+        );
+
+        // return 'test';
     }
 
     async loginGet(context: Context, application: BkApplication) {
