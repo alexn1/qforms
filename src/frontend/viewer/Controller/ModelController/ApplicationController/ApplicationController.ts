@@ -21,7 +21,6 @@ export interface OpenPageOptions {
 }
 
 export class ApplicationController extends ModelController<Application> {
-    // frontHostApp: FrontHostApp;
     lastId: number = 0;
     activePage: PageController = null; // active non modal page
     modals: any[] = [];

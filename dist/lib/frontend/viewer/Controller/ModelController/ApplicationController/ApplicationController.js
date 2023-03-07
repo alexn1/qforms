@@ -11,7 +11,6 @@ class ApplicationController extends ModelController_1.ModelController {
     constructor(model, frontHostApp) {
         super(model, null);
         this.frontHostApp = frontHostApp;
-        // frontHostApp: FrontHostApp;
         this.lastId = 0;
         this.activePage = null; // active non modal page
         this.modals = [];
