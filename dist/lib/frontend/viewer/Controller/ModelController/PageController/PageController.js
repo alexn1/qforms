@@ -95,7 +95,7 @@ class PageController extends ModelController_1.ModelController {
         super.deinit();
     }
     createOpenInNewLink(pageName, key) {
-        return PageController.createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
+        return FrontHostApp_1.FrontHostApp.createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
         // console.log('PageController.close', this.model.getFullName());
@@ -178,21 +178,6 @@ class PageController extends ModelController_1.ModelController {
     }
     getViewClass() {
         return super.getViewClass() || PageView_1.PageView;
-    }
-    static createLink(params = null) {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
-        if (params) {
-            return [
-                window.location.pathname,
-                [
-                    // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp_1.FrontHostApp.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
-        }
-        return window.location.pathname;
     }
     getForm(name) {
         return this.forms.find((form) => form.model.getName() === name);

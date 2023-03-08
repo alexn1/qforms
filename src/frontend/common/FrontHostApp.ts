@@ -135,6 +135,22 @@ export class FrontHostApp {
     static isDebugMode() {
         return Search.getObj()['debug'] === '1';
     }
+
+    static createLink(params = null): string {
+        // const query = window.location.search.split('?')[1];
+        // console.log('query:', query);
+        if (params) {
+            return [
+                window.location.pathname,
+                [
+                    // ...(query ? query.split('&') : []),
+                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                ].join('&'),
+            ].join('?');
+        }
+        return window.location.pathname;
+    }
 }
 
 Helper.registerGlobalClass(FrontHostApp);

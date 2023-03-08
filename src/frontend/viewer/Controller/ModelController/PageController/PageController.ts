@@ -96,7 +96,7 @@ export class PageController<
     };
 
     createOpenInNewLink(pageName: string, key: string) {
-        return PageController.createLink({
+        return FrontHostApp.createLink({
             page: pageName,
             ...DataSource.keyToParams(key),
         });
@@ -192,22 +192,6 @@ export class PageController<
 
     getViewClass(): typeof PageView {
         return super.getViewClass() || PageView;
-    }
-
-    static createLink(params = null): string {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
-        if (params) {
-            return [
-                window.location.pathname,
-                [
-                    // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
-        }
-        return window.location.pathname;
     }
 
     getForm<TFormController extends FormController = FormController>(

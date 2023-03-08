@@ -25,7 +25,6 @@ export declare class PageController<TApplicationController extends ApplicationCo
     isChanged(): boolean;
     getApp(): TApplicationController;
     getViewClass(): typeof PageView;
-    static createLink(params?: any): string;
     getForm<TFormController extends FormController = FormController>(name: string): TFormController;
     onActionClick(name: any): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;

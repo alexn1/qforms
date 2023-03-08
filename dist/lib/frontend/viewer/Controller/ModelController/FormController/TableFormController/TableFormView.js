@@ -7,7 +7,6 @@ exports.TableFormView = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const react_1 = __importDefault(require("react"));
 const FormView_1 = require("../FormView");
-const PageController_1 = require("../../PageController/PageController");
 const DataSource_1 = require("../../../../Model/DataSource/DataSource");
 const common_1 = require("../../../../../common");
 require("./TableFormView.less");
@@ -24,7 +23,7 @@ class TableFormView extends FormView_1.FormView {
             return react_1.default.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
-            return PageController_1.PageController.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource_1.DataSource.keyToParams(key)));
+            return common_1.FrontHostApp.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource_1.DataSource.keyToParams(key)));
         };
     }
     renderToolbar() {

@@ -2,7 +2,7 @@ import { ModelController } from '../ModelController';
 import { Page } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
 import { WebSocketClient } from '../../../WebSocketClient';
-import { FrontHostApp, Search, Helper } from '../../../../common';
+import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { QueryParams } from '../../../../../types';
@@ -302,7 +302,7 @@ export class ApplicationController extends ModelController<Application> {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
             await this.openPage({ name: name, modal: false });
-            history.pushState({ pageName: name }, '', PageController.createLink({ page: name }));
+            history.pushState({ pageName: name }, '', FrontHostApp.createLink({ page: name }));
         } else if (type === 'action') {
             try {
                 const result = await this.onActionClick(name);

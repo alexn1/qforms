@@ -1,6 +1,5 @@
 import React from 'react';
 import { FormView } from '../FormView';
-import { PageController } from '../../PageController/PageController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import {
     Button,
@@ -10,6 +9,7 @@ import {
     LeftIcon,
     RightIcon,
     Grid,
+    FrontHostApp,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
 import './TableFormView.less';
@@ -174,7 +174,7 @@ export class TableFormView<
     }
 
     createLinkCallback = (key) => {
-        return PageController.createLink({
+        return FrontHostApp.createLink({
             page: this.getCtrl().getModel().getAttr('itemEditPage'),
             ...DataSource.keyToParams(key),
         });
