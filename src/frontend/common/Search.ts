@@ -1,3 +1,5 @@
+import { Helper } from '../common/Helper';
+
 export class Search {
     static getObj(): any {
         if (typeof window !== 'object') return {};
@@ -33,7 +35,4 @@ export class Search {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Search = Search;
-}
+Helper.registerGlobalClass(Search);
