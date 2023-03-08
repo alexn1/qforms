@@ -31962,6 +31962,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
 /* harmony export */ });
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+
 class FrontHostApp {
     constructor() {
         this.alertCtrl = null;
@@ -32070,10 +32072,7 @@ class FrontHostApp {
         return this.documentTitle;
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FrontHostApp = FrontHostApp;
-}
+_common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(FrontHostApp);
 
 
 /***/ }),
@@ -32412,7 +32411,7 @@ class Helper {
         }
     }
     static getGlobalClass(className) {
-        console.log('Helper.getGlobalClass', className);
+        // console.log('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : __webpack_require__.g[className];
     }
     static addClassToDocumentElement(className) {
@@ -36414,7 +36413,9 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 throw new Error(`unknown menu type/name: ${type}/${name}`);
             }
         };
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
     static create(model, frontHostApp) {
         // console.log(
@@ -39460,7 +39461,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     constructor(model, parent) {
         super(model, parent);
         this.fields = {};
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
     init() {
         for (const field of this.model.fields) {
@@ -40508,7 +40511,9 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             console.log('PageController.onResetClick');
             await this.selectRow(null);
         };
-        console.log(`${this.constructor.name}.constructor`, model, id);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model, id);
+        }
         if (!id) {
             throw new Error('no id');
         }

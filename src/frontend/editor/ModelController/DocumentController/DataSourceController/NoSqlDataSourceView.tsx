@@ -1,6 +1,8 @@
 import * as React from 'react';
 import { DocumentView } from '../DocumentView';
 import { Button } from '../../../../common';
+import { Visibility } from '../../../../../types';
+
 import './NoSqlDataSourceView.less';
 
 export class NoSqlDataSourceView extends DocumentView {
@@ -51,11 +53,11 @@ export class NoSqlDataSourceView extends DocumentView {
         await this.rerender();
     };
 
-    getButtonClass(name) {
+    getButtonClass(name: string): string {
         return this.state.selected === name ? 'btn-primary' : 'btn-default';
     }
 
-    getVisibility(name) {
+    getVisibility(name: string): Visibility {
         return this.state.selected === name ? 'visible' : 'hidden';
     }
 

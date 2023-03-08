@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { DocumentView } from '../DocumentView';
+import { Visibility } from '../../../../../types';
 import './NoSqlDataSourceView.less';
 export declare class NoSqlDataSourceView extends DocumentView {
     selectRef: React.RefObject<any>;
@@ -11,8 +12,8 @@ export declare class NoSqlDataSourceView extends DocumentView {
     componentWillUnmount(): void;
     isChanged(): boolean;
     onChange: (i: any, o: any) => Promise<void>;
-    getButtonClass(name: any): "btn-primary" | "btn-default";
-    getVisibility(name: any): "hidden" | "visible";
+    getButtonClass(name: string): string;
+    getVisibility(name: string): Visibility;
     onSaveClick: (e: any) => Promise<void>;
     isSelected(name: any): boolean;
     render(): JSX.Element;
