@@ -122,6 +122,9 @@ class Context {
     isDebugMode() {
         return this.query['debug'] === '1';
     }
+    getPath() {
+        return this.getReq().path;
+    }
     destroy() { }
 }
 exports.Context = Context;

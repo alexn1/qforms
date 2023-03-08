@@ -61,5 +61,6 @@ export declare class Context {
     setVersionHeaders(platformVersion: string, appVersion: string): void;
     setParam(name: string, value: any): void;
     isDebugMode(): boolean;
+    getPath(): string;
     destroy(): void;
 }

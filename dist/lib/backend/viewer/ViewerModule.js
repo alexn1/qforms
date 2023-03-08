@@ -80,7 +80,7 @@ class ViewerModule {
     }
     renderApplicationView(context, data) {
         console.log('renderApplicationView');
-        console.log('path:', context.getReq().path);
+        console.log('path:', context.getPath());
         // application
         const application = new Application_1.Application(data);
         application.init();

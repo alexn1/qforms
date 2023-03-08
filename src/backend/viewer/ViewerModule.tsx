@@ -113,7 +113,7 @@ export class ViewerModule {
     renderApplicationView(context: Context, data: any): string {
         console.log('renderApplicationView');
 
-        console.log('path:', context.getReq().path);
+        console.log('path:', context.getPath());
 
         // application
         const application = new Application(data);

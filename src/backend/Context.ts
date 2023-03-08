@@ -196,5 +196,9 @@ export class Context {
         return this.query['debug'] === '1';
     }
 
+    getPath(): string {
+        return this.getReq().path;
+    }
+
     destroy(): void {}
 }
