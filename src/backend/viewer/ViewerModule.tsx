@@ -99,8 +99,8 @@ export class ViewerModule {
                     <Scripts scripts={[...this.getScripts(), ...application.scripts]} />,
                 );
 
-                /* const appViewHtml = this.renderApplicationView(data);
-                console.log('appViewHtml:', appViewHtml); */
+                const appViewHtml = this.renderApplicationView(context, data);
+                console.log('appViewHtml:', appViewHtml);
 
                 const html = index(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
@@ -110,7 +110,7 @@ export class ViewerModule {
         }
     }
 
-    renderApplicationView(data: any): string {
+    renderApplicationView(context: Context, data: any): string {
         console.log('renderApplicationView', data);
 
         // application

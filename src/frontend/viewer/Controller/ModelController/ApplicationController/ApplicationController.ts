@@ -31,7 +31,9 @@ export class ApplicationController extends ModelController<Application> {
 
     constructor(model: Application, private frontHostApp: FrontHostApp) {
         super(model, null);
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
 
     static create(model: Application, frontHostApp: FrontHostApp): ApplicationController {

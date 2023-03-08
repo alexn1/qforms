@@ -119,6 +119,9 @@ class Context {
     setParam(name, value) {
         this.params[name] = value;
     }
+    isDebugMode() {
+        return this.query['debug'] === '1';
+    }
     destroy() { }
 }
 exports.Context = Context;

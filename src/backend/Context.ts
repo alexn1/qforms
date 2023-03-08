@@ -192,5 +192,9 @@ export class Context {
         this.params[name] = value;
     }
 
+    isDebugMode(): boolean {
+        return this.query['debug'] === '1';
+    }
+
     destroy(): void {}
 }

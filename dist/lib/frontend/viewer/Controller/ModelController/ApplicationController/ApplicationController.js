@@ -62,7 +62,9 @@ class ApplicationController extends ModelController_1.ModelController {
                 throw new Error(`unknown menu type/name: ${type}/${name}`);
             }
         };
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
     static create(model, frontHostApp) {
         // console.log(

@@ -11,7 +11,7 @@ export declare class ViewerModule {
     getLinks(): string[];
     getScripts(): string[];
     handleViewerGet(context: Context, application: BkApplication): Promise<void>;
-    renderApplicationView(data: any): string;
+    renderApplicationView(context: Context, data: any): string;
     loginGet(context: Context, application: BkApplication): Promise<void>;
     handleViewerPost(context: Context, application: BkApplication): Promise<any>;
     loginPost(context: Context, application: BkApplication): Promise<void>;
