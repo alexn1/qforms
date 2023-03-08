@@ -2,12 +2,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageController = void 0;
 const ModelController_1 = require("../ModelController");
-const common_1 = require("../../../../common");
+const Helper_1 = require("../../../../common/Helper");
+const FrontHostApp_1 = require("../../../../common/FrontHostApp");
 const FormController_1 = require("../FormController/FormController");
 const DataSource_1 = require("../../../Model/DataSource/DataSource");
 const RowFormController_1 = require("../FormController/RowFormController/RowFormController");
 const PageView_1 = require("./PageView");
-const ApplicationController_1 = require("../ApplicationController/ApplicationController");
 class PageController extends ModelController_1.ModelController {
     constructor(model, parent, id) {
         super(model, parent);
@@ -72,7 +72,7 @@ class PageController extends ModelController_1.ModelController {
         // console.log('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
-            const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
+            const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
                 throw new Error(`no class ${ctrlClass}`);
             return new CustomClass(model, parent, id, options);
@@ -187,7 +187,7 @@ class PageController extends ModelController_1.ModelController {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(ApplicationController_1.ApplicationController.isDebugMode() ? ['debug=1'] : []),
+                    ...(FrontHostApp_1.FrontHostApp.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
@@ -215,7 +215,7 @@ class PageController extends ModelController_1.ModelController {
         }
         return [
             model.getCaption(),
-            ...(ApplicationController_1.ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(FrontHostApp_1.FrontHostApp.isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

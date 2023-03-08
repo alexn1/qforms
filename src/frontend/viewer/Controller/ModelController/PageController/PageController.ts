@@ -1,5 +1,6 @@
 import { ModelController } from '../ModelController';
-import { Helper } from '../../../../common';
+import { Helper } from '../../../../common/Helper';
+import { FrontHostApp } from '../../../../common/FrontHostApp';
 import { FormController } from '../FormController/FormController';
 import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
@@ -201,7 +202,7 @@ export class PageController<
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(ApplicationController.isDebugMode() ? ['debug=1'] : []),
+                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
@@ -242,7 +243,7 @@ export class PageController<
         }
         return [
             model.getCaption(),
-            ...(ApplicationController.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(FrontHostApp.isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

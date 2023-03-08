@@ -27,7 +27,6 @@ export declare class ApplicationController extends ModelController<Application> 
     view: any;
     constructor(model: Application, frontHostApp: FrontHostApp);
     static create(model: Application, frontHostApp: FrontHostApp): ApplicationController;
-    static isDebugMode(): boolean;
     init(): void;
     deinit(): void;
     getViewClass(): any;

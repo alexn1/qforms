@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontHostApp = void 0;
 const Helper_1 = require("../common/Helper");
+const Search_1 = require("../common/Search");
 class FrontHostApp {
     constructor() {
         this.alertCtrl = null;
@@ -108,6 +109,9 @@ class FrontHostApp {
             return document.title;
         }
         return this.documentTitle;
+    }
+    static isDebugMode() {
+        return Search_1.Search.getObj()['debug'] === '1';
     }
 }
 exports.FrontHostApp = FrontHostApp;

@@ -18,4 +18,5 @@ export declare class FrontHostApp {
     confirm(options: any): Promise<any>;
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
+    static isDebugMode(): boolean;
 }

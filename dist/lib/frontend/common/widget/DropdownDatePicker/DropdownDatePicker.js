@@ -8,6 +8,7 @@ const CloseIcon_1 = require("../../icon/CloseIcon");
 const DateIcon_1 = require("../../icon/DateIcon");
 const CloseIcon2_1 = require("../../icon/CloseIcon2");
 const DatePicker_1 = require("../DatePicker/DatePicker");
+const FrontHostApp_1 = require("../../FrontHostApp");
 require("./DropdownDatePicker.less");
 // oldDates boolean true
 class DropdownDatePicker extends ReactComponent_1.ReactComponent {
@@ -71,8 +72,7 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         const value = this.getValue();
         if (value) {
             let format = this.getFormat();
-            // @ts-ignore
-            if (ApplicationController.isDebugMode()) {
+            if (FrontHostApp_1.FrontHostApp.isDebugMode()) {
                 const time = Helper_1.Helper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';

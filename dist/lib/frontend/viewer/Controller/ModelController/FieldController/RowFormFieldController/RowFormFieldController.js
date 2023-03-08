@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormFieldController = void 0;
 const react_1 = __importDefault(require("react"));
 const FieldController_1 = require("../FieldController");
-const ApplicationController_1 = require("../../ApplicationController/ApplicationController");
+const FrontHostApp_1 = require("../../../../../common/FrontHostApp");
 class RowFormFieldController extends FieldController_1.FieldController {
     constructor(model, parent) {
         super(model, parent);
@@ -185,7 +185,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        if (ApplicationController_1.ApplicationController.isDebugMode()) {
+        if (FrontHostApp_1.FrontHostApp.isDebugMode()) {
             const value = this.getValue();
             if (value === undefined)
                 return 'undefined';

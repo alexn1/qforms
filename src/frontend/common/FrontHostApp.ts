@@ -1,4 +1,5 @@
 import { Helper } from '../common/Helper';
+import { Search } from '../common/Search';
 
 export class FrontHostApp {
     alertCtrl: any = null;
@@ -129,6 +130,10 @@ export class FrontHostApp {
             return document.title;
         }
         return this.documentTitle;
+    }
+
+    static isDebugMode() {
+        return Search.getObj()['debug'] === '1';
     }
 }
 

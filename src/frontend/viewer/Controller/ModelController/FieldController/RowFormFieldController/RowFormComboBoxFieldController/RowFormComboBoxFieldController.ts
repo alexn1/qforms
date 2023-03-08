@@ -1,7 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
-import { ApplicationController } from '../../../ApplicationController/ApplicationController';
-import { Helper } from '../../../../../../common';
+import { FrontHostApp } from '../../../../../../common/FrontHostApp';
+import { Helper } from '../../../../../../common/Helper';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 
 export class RowFormComboBoxFieldController extends RowFormFieldController<ComboBoxField> {
@@ -44,7 +44,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
 
     getPlaceholder() {
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        return ApplicationController.isDebugMode() ? '[null]' : null;
+        return FrontHostApp.isDebugMode() ? '[null]' : null;
     }
 
     onEditButtonClick = async (e) => {

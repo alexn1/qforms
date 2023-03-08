@@ -40,7 +40,7 @@ export class ApplicationController extends ModelController<Application> {
         // console.log(
         //     'ApplicationController.create',
         //     'debug:',
-        //     ApplicationController.isDebugMode(),
+        //     FrontHostApp.isDebugMode(),
         //     model,
         // );
         const { ctrlClass } = model.data;
@@ -52,9 +52,9 @@ export class ApplicationController extends ModelController<Application> {
         return new ApplicationController(model, frontHostApp);
     }
 
-    static isDebugMode() {
+    /* static isDebugMode() {
         return Search.getObj()['debug'] === '1';
-    }
+    } */
 
     init() {
         // console.log('ApplicationController.init');

@@ -1,11 +1,11 @@
 import React from 'react';
 import { FieldController } from '../FieldController';
-import { ApplicationController } from '../../ApplicationController/ApplicationController';
 import { Field } from '../../../../Model/Field/Field';
 import { FormController } from '../../FormController/FormController';
 import { RowFormController } from '../../FormController/RowFormController/RowFormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
+import { FrontHostApp } from '../../../../../common/FrontHostApp';
 
 export class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     state: any;
@@ -193,7 +193,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
     getPlaceholder() {
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
-        if (ApplicationController.isDebugMode()) {
+        if (FrontHostApp.isDebugMode()) {
             const value = this.getValue();
             if (value === undefined) return 'undefined';
             if (value === null) return 'null';
