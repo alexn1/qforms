@@ -4,6 +4,7 @@ exports.FrontHostApp = void 0;
 class FrontHostApp {
     constructor() {
         this.alertCtrl = null;
+        this.documentTitle = ''; // for run on back
         // console.log('FrontHostApp.constructor');
     }
     init() {
@@ -92,6 +93,20 @@ class FrontHostApp {
     async confirm(options) {
         console.log('FrontHostApp.confirm', options);
         return confirm(options.message);
+    }
+    setDocumentTitle(title) {
+        if (typeof document === 'object') {
+            document.title = title;
+        }
+        else {
+            this.documentTitle = title;
+        }
+    }
+    getDocumentTitle() {
+        if (typeof document === 'object') {
+            return document.title;
+        }
+        return this.documentTitle;
     }
 }
 exports.FrontHostApp = FrontHostApp;

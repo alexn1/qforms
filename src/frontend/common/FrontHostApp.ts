@@ -2,6 +2,7 @@ import { inherits } from 'util';
 
 export class FrontHostApp {
     alertCtrl: any = null;
+    documentTitle = ''; // for run on back
 
     constructor() {
         // console.log('FrontHostApp.constructor');
@@ -113,6 +114,21 @@ export class FrontHostApp {
     async confirm(options): Promise<any> {
         console.log('FrontHostApp.confirm', options);
         return confirm(options.message);
+    }
+
+    setDocumentTitle(title: string) {
+        if (typeof document === 'object') {
+            document.title = title;
+        } else {
+            this.documentTitle = title;
+        }
+    }
+
+    getDocumentTitle(): string {
+        if (typeof document === 'object') {
+            return document.title;
+        }
+        return this.documentTitle;
     }
 }
 

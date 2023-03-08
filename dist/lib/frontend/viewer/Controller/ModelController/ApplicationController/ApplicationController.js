@@ -95,10 +95,10 @@ class ApplicationController extends ModelController_1.ModelController {
                 params: this.getGlobalParams(),
             })
             : null;
-        common_1.Helper.setDocumentTitle(this.getTitle());
+        this.frontHostApp.setDocumentTitle(this.getTitle());
         common_1.Helper.addClassToDocumentElement(common_1.Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
-        this.homePageName = activePageName ? activePageName : common_1.Helper.getDocumentTitle();
+        this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }
     deinit() {
         // this.model.off('logout', this.onLogout);
@@ -215,7 +215,7 @@ class ApplicationController extends ModelController_1.ModelController {
             this.closePage(this.activePage);
         }
         this.activePage = pc;
-        common_1.Helper.setDocumentTitle(this.getTitle());
+        this.frontHostApp.setDocumentTitle(this.getTitle());
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage &&

@@ -1,5 +1,6 @@
 export declare class FrontHostApp {
     alertCtrl: any;
+    documentTitle: string;
     constructor();
     init(): void;
     run(): Promise<void>;
@@ -15,4 +16,6 @@ export declare class FrontHostApp {
     onWindowPopState(e: any): Promise<void>;
     alert(options: any): Promise<any>;
     confirm(options: any): Promise<any>;
+    setDocumentTitle(title: string): void;
+    getDocumentTitle(): string;
 }

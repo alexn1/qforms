@@ -352,20 +352,19 @@ class Helper {
         console.log('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
-    static setDocumentTitle(title) {
+    /* static setDocumentTitle(title) {
         if (typeof document === 'object') {
             document.title = title;
-        }
-        else {
+        } else {
             document_title = title;
         }
-    }
-    static getDocumentTitle() {
+    } */
+    /* static getDocumentTitle() {
         if (typeof document === 'object') {
             return document.title;
         }
         return document_title;
-    }
+    } */
     static addClassToDocumentElement(className) {
         if (typeof document === 'object') {
             document.documentElement.classList.add(className);
