@@ -1,4 +1,4 @@
-import { inherits } from 'util';
+import { Helper } from '../common/Helper';
 
 export class FrontHostApp {
     alertCtrl: any = null;
@@ -132,7 +132,4 @@ export class FrontHostApp {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FrontHostApp = FrontHostApp;
-}
+Helper.registerGlobalClass(FrontHostApp);

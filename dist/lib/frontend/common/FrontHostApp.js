@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontHostApp = void 0;
+const Helper_1 = require("../common/Helper");
 class FrontHostApp {
     constructor() {
         this.alertCtrl = null;
@@ -110,7 +111,4 @@ class FrontHostApp {
     }
 }
 exports.FrontHostApp = FrontHostApp;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FrontHostApp = FrontHostApp;
-}
+Helper_1.Helper.registerGlobalClass(FrontHostApp);
