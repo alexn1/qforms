@@ -20,7 +20,9 @@ class FormController extends ModelController_1.ModelController {
     constructor(model, parent) {
         super(model, parent);
         this.fields = {};
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
     init() {
         for (const field of this.model.fields) {

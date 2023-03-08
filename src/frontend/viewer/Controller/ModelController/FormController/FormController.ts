@@ -26,7 +26,9 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
 
     constructor(model: TForm, parent: PageController) {
         super(model, parent);
-        console.log(`${this.constructor.name}.constructor`, model);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model);
+        }
     }
 
     init() {

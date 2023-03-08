@@ -111,7 +111,9 @@ export class ViewerModule {
     }
 
     renderApplicationView(context: Context, data: any): string {
-        console.log('renderApplicationView', data);
+        console.log('renderApplicationView');
+
+        console.log('path:', context.getReq().path);
 
         // application
         const application = new Application(data);

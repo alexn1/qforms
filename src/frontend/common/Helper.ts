@@ -358,7 +358,7 @@ export class Helper {
     }
 
     static getGlobalClass(className: string): any {
-        console.log('Helper.getGlobalClass', className);
+        // console.log('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
 

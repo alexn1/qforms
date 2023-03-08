@@ -349,7 +349,7 @@ class Helper {
         }
     }
     static getGlobalClass(className) {
-        console.log('Helper.getGlobalClass', className);
+        // console.log('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {

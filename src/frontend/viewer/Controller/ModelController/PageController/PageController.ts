@@ -18,7 +18,10 @@ export class PageController<
 
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
-        console.log(`${this.constructor.name}.constructor`, model, id);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model, id);
+        }
+
         if (!id) {
             throw new Error('no id');
         }

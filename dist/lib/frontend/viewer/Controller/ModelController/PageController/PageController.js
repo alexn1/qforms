@@ -60,7 +60,9 @@ class PageController extends ModelController_1.ModelController {
             console.log('PageController.onResetClick');
             await this.selectRow(null);
         };
-        console.log(`${this.constructor.name}.constructor`, model, id);
+        if (typeof window === 'object') {
+            console.log(`${this.constructor.name}.constructor`, model, id);
+        }
         if (!id) {
             throw new Error('no id');
         }
