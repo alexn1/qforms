@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormComboBoxFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormComboBoxFieldView_1 = require("./RowFormComboBoxFieldView");
-const FrontHostApp_1 = require("../../../../../../common/FrontHostApp");
 const Helper_1 = require("../../../../../../common/Helper");
 class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor() {
@@ -130,7 +129,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
     getPlaceholder() {
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        return FrontHostApp_1.FrontHostApp.isDebugMode() ? '[null]' : null;
+        return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
     }
 }
 exports.RowFormComboBoxFieldController = RowFormComboBoxFieldController;

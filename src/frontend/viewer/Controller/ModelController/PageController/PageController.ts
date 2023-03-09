@@ -229,7 +229,7 @@ export class PageController<
         }
         return [
             model.getCaption(),
-            ...(FrontHostApp.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

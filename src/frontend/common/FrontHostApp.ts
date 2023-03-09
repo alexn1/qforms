@@ -136,6 +136,10 @@ export class FrontHostApp {
         return Search.getObj()['debug'] === '1';
     }
 
+    isDebugMode() {
+        return Search.getObj()['debug'] === '1';
+    }
+
     createLink(params = null): string {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
@@ -144,7 +148,7 @@ export class FrontHostApp {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');

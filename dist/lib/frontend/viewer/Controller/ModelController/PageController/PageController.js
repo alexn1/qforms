@@ -3,7 +3,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageController = void 0;
 const ModelController_1 = require("../ModelController");
 const Helper_1 = require("../../../../common/Helper");
-const FrontHostApp_1 = require("../../../../common/FrontHostApp");
 const FormController_1 = require("../FormController/FormController");
 const DataSource_1 = require("../../../Model/DataSource/DataSource");
 const RowFormController_1 = require("../FormController/RowFormController/RowFormController");
@@ -202,7 +201,7 @@ class PageController extends ModelController_1.ModelController {
         }
         return [
             model.getCaption(),
-            ...(FrontHostApp_1.FrontHostApp.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }

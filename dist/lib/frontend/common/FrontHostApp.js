@@ -113,6 +113,9 @@ class FrontHostApp {
     static isDebugMode() {
         return Search_1.Search.getObj()['debug'] === '1';
     }
+    isDebugMode() {
+        return Search_1.Search.getObj()['debug'] === '1';
+    }
     createLink(params = null) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
@@ -121,7 +124,7 @@ class FrontHostApp {
                 window.location.pathname,
                 [
                     // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');

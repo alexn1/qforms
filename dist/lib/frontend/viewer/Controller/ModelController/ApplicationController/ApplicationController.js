@@ -70,7 +70,7 @@ class ApplicationController extends ModelController_1.ModelController {
         // console.log(
         //     'ApplicationController.create',
         //     'debug:',
-        //     FrontHostApp.isDebugMode(),
+        //     this.getHostApp().isDebugMode(),
         //     model,
         // );
         const { ctrlClass } = model.data;
