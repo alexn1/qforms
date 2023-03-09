@@ -33,8 +33,8 @@ require("../common/style/wait.less");
 class ViewerFrontHostApp extends common_1.FrontHostApp {
     constructor(options = {}) {
         if (!options.data)
-            throw new Error('no data');
-        super();
+            throw new Error('ViewerFrontHostApp: no data');
+        super(options);
         this.options = options;
         this.applicationController = null;
     }

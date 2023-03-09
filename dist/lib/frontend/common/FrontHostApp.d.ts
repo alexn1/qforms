@@ -1,7 +1,12 @@
+interface FrontHostAppOptions {
+    path: string;
+    debug: boolean;
+}
 export declare class FrontHostApp {
+    protected options?: FrontHostAppOptions;
     alertCtrl: any;
     documentTitle: string;
-    constructor();
+    constructor(options?: FrontHostAppOptions);
     init(): void;
     run(): Promise<void>;
     onWindowUnhandledrejection(e: any): Promise<void>;
@@ -21,4 +26,6 @@ export declare class FrontHostApp {
     static isDebugMode(): boolean;
     isDebugMode(): boolean;
     createLink(params?: any): string;
+    getOptions(): FrontHostAppOptions;
 }
+export {};

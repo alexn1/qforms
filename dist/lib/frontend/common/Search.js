@@ -4,8 +4,6 @@ exports.Search = void 0;
 const Helper_1 = require("../common/Helper");
 class Search {
     static getObj() {
-        if (typeof window !== 'object')
-            return {};
         if (!window.location.search.split('?')[1])
             return {};
         return window.location.search

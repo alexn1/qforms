@@ -1,11 +1,16 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 
+interface FrontHostAppOptions {
+    path: string;
+    debug: boolean;
+}
+
 export class FrontHostApp {
     alertCtrl: any = null;
     documentTitle = ''; // for run on back
 
-    constructor() {
+    constructor(protected options?: FrontHostAppOptions) {
         // console.log('FrontHostApp.constructor');
     }
 
@@ -137,23 +142,38 @@ export class FrontHostApp {
     }
 
     isDebugMode() {
-        return Search.getObj()['debug'] === '1';
+        if (typeof window === 'object') {
+            return Search.getObj()['debug'] === '1';
+        } else {
+            return this.getOptions().debug;
+        }
     }
 
     createLink(params = null): string {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
-        if (params) {
-            return [
-                window.location.pathname,
-                [
-                    // ...(query ? query.split('&') : []),
-                    ...(this.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+        if (typeof window === 'object') {
+            if (params) {
+                return [
+                    window.location.pathname,
+                    [
+                        // ...(query ? query.split('&') : []),
+                        ...(this.isDebugMode() ? ['debug=1'] : []),
+                        ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                    ].join('&'),
+                ].join('?');
+            }
+            return window.location.pathname;
+        } else {
+            throw new Error('createLink not implemented');
         }
-        return window.location.pathname;
+    }
+
+    getOptions() {
+        if (!this.options) {
+            throw new Error('no options');
+        }
+        return this.options;
     }
 }
 

@@ -28,14 +28,11 @@ import '../common/style/grid-gap-10.less';
 import '../common/style/wait.less';
 
 export class ViewerFrontHostApp extends FrontHostApp {
-    options: any;
-    applicationController: any;
+    applicationController: any = null;
 
-    constructor(options: any = {}) {
-        if (!options.data) throw new Error('no data');
-        super();
-        this.options = options;
-        this.applicationController = null;
+    constructor(protected options: any = {}) {
+        if (!options.data) throw new Error('ViewerFrontHostApp: no data');
+        super(options);
     }
 
     async run() {

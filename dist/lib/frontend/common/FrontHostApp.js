@@ -4,7 +4,8 @@ exports.FrontHostApp = void 0;
 const Helper_1 = require("../common/Helper");
 const Search_1 = require("../common/Search");
 class FrontHostApp {
-    constructor() {
+    constructor(options) {
+        this.options = options;
         this.alertCtrl = null;
         this.documentTitle = ''; // for run on back
         // console.log('FrontHostApp.constructor');
@@ -114,22 +115,38 @@ class FrontHostApp {
         return Search_1.Search.getObj()['debug'] === '1';
     }
     isDebugMode() {
-        return Search_1.Search.getObj()['debug'] === '1';
+        if (typeof window === 'object') {
+            return Search_1.Search.getObj()['debug'] === '1';
+        }
+        else {
+            return this.getOptions().debug;
+        }
     }
     createLink(params = null) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
-        if (params) {
-            return [
-                window.location.pathname,
-                [
-                    // ...(query ? query.split('&') : []),
-                    ...(this.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+        if (typeof window === 'object') {
+            if (params) {
+                return [
+                    window.location.pathname,
+                    [
+                        // ...(query ? query.split('&') : []),
+                        ...(this.isDebugMode() ? ['debug=1'] : []),
+                        ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                    ].join('&'),
+                ].join('?');
+            }
+            return window.location.pathname;
         }
-        return window.location.pathname;
+        else {
+            throw new Error('createLink not implemented');
+        }
+    }
+    getOptions() {
+        if (!this.options) {
+            throw new Error('no options');
+        }
+        return this.options;
     }
 }
 exports.FrontHostApp = FrontHostApp;

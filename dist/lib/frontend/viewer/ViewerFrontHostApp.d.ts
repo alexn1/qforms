@@ -18,7 +18,7 @@ import '../common/style/grid-gap-5.less';
 import '../common/style/grid-gap-10.less';
 import '../common/style/wait.less';
 export declare class ViewerFrontHostApp extends FrontHostApp {
-    options: any;
+    protected options: any;
     applicationController: any;
     constructor(options?: any);
     run(): Promise<void>;

@@ -68,8 +68,8 @@ class ViewerModule {
                 const data = await application.fill(context);
                 const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
                 const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                /* const appViewHtml = this.renderApplicationView(context, data);
-                console.log('appViewHtml:', appViewHtml); */
+                const appViewHtml = this.renderApplicationView(context, data);
+                console.log('appViewHtml:', appViewHtml);
                 const html = (0, index_1.index)(pkg.version, application, context, data, links, scripts);
                 context.getRes().end(html);
             }
@@ -84,7 +84,10 @@ class ViewerModule {
         // application
         const application = new Application_1.Application(data);
         application.init();
-        const frontHostApp = new common_1.FrontHostApp();
+        const frontHostApp = new common_1.FrontHostApp({
+            path: context.getPath(),
+            debug: context.isDebugMode(),
+        });
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();

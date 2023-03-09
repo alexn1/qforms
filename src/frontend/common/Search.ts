@@ -2,8 +2,6 @@ import { Helper } from '../common/Helper';
 
 export class Search {
     static getObj(): any {
-        if (typeof window !== 'object') return {};
-
         if (!window.location.search.split('?')[1]) return {};
         return window.location.search
             .split('?')[1]
