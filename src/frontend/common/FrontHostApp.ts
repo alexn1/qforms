@@ -136,7 +136,7 @@ export class FrontHostApp {
         return Search.getObj()['debug'] === '1';
     }
 
-    static createLink(params = null): string {
+    createLink(params = null): string {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
         if (params) {

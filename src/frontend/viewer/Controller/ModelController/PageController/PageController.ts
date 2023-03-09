@@ -96,10 +96,12 @@ export class PageController<
     };
 
     createOpenInNewLink(pageName: string, key: string) {
-        return FrontHostApp.createLink({
-            page: pageName,
-            ...DataSource.keyToParams(key),
-        });
+        return this.getApp()
+            .getHostApp()
+            .createLink({
+                page: pageName,
+                ...DataSource.keyToParams(key),
+            });
     }
 
     async close(): Promise<void> {

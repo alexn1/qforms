@@ -113,7 +113,7 @@ class FrontHostApp {
     static isDebugMode() {
         return Search_1.Search.getObj()['debug'] === '1';
     }
-    static createLink(params = null) {
+    createLink(params = null) {
         // const query = window.location.search.split('?')[1];
         // console.log('query:', query);
         if (params) {

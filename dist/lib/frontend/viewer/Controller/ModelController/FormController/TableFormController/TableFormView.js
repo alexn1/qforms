@@ -23,7 +23,10 @@ class TableFormView extends FormView_1.FormView {
             return react_1.default.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
-            return common_1.FrontHostApp.createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource_1.DataSource.keyToParams(key)));
+            return this.getCtrl()
+                .getApp()
+                .getHostApp()
+                .createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, DataSource_1.DataSource.keyToParams(key)));
         };
     }
     renderToolbar() {

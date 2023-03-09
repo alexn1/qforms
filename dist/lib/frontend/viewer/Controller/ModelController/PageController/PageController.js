@@ -95,7 +95,9 @@ class PageController extends ModelController_1.ModelController {
         super.deinit();
     }
     createOpenInNewLink(pageName, key) {
-        return FrontHostApp_1.FrontHostApp.createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
+        return this.getApp()
+            .getHostApp()
+            .createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
         // console.log('PageController.close', this.model.getFullName());

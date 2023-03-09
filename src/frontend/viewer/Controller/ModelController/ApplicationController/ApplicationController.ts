@@ -302,7 +302,7 @@ export class ApplicationController extends ModelController<Application> {
         console.log('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
             await this.openPage({ name: name, modal: false });
-            history.pushState({ pageName: name }, '', FrontHostApp.createLink({ page: name }));
+            history.pushState({ pageName: name }, '', this.getHostApp().createLink({ page: name }));
         } else if (type === 'action') {
             try {
                 const result = await this.onActionClick(name);

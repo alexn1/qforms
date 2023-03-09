@@ -19,5 +19,5 @@ export declare class FrontHostApp {
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
     static isDebugMode(): boolean;
-    static createLink(params?: any): string;
+    createLink(params?: any): string;
 }

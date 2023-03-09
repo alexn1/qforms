@@ -174,10 +174,13 @@ export class TableFormView<
     }
 
     createLinkCallback = (key) => {
-        return FrontHostApp.createLink({
-            page: this.getCtrl().getModel().getAttr('itemEditPage'),
-            ...DataSource.keyToParams(key),
-        });
+        return this.getCtrl()
+            .getApp()
+            .getHostApp()
+            .createLink({
+                page: this.getCtrl().getModel().getAttr('itemEditPage'),
+                ...DataSource.keyToParams(key),
+            });
     };
 }
 
