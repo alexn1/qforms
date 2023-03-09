@@ -100,7 +100,7 @@ export class ViewerModule {
                 );
 
                 const appViewHtml = this.renderApplicationView(context, data);
-                console.log('appViewHtml:', appViewHtml);
+                // console.log('appViewHtml:', appViewHtml);
 
                 const html = index(
                     pkg.version,
@@ -121,12 +121,11 @@ export class ViewerModule {
     renderApplicationView(context: Context, data: any): string {
         console.log('renderApplicationView');
 
-        console.log('path:', context.getPath());
-
         // application
         const application = new Application(data);
         application.init();
 
+        // frontHostApp
         const frontHostApp = new FrontHostApp({
             path: context.getPath(),
             debug: context.isDebugMode(),
