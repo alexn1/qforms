@@ -1,3 +1,4 @@
+import React from 'react';
 import { JSONString } from '../../types';
 export declare class Helper {
     static formatDate(date: any, format: any): any;
@@ -9,7 +10,7 @@ export declare class Helper {
     static decodeObject(eObj: any): any;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: any, value: any): any;
-    static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): any;
+    static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): React.Component;
     static destroyReactComponent(root: any): void;
     static readFileAsDataURL(file: any): Promise<unknown>;
     static templateToJsString(value: any, params: any): any;

@@ -1,8 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import { JSONString } from '../../types';
-
-let document_title = '';
 
 export class Helper {
     /*static currentDate() {
@@ -98,7 +96,7 @@ export class Helper {
         return value;
     }
 
-    static createReactComponent(rootElement, type, props = {}, children = null) {
+    static createReactComponent(rootElement, type, props = {}, children = null): React.Component {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
