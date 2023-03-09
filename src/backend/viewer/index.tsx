@@ -8,6 +8,7 @@ export const index = (
     data: any,
     links: string,
     scripts: string,
+    appViewHtml: string,
 ) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
@@ -34,7 +35,7 @@ export const index = (
     <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
-    <div class="${application.getViewClassName()}__root"></div>
+    <div class="${application.getViewClassName()}__root">${appViewHtml}</div>
     <div class="alert-root"></div>
 </body>
 </html>`;

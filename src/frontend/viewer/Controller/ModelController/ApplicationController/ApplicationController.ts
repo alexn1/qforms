@@ -86,7 +86,7 @@ export class ApplicationController extends ModelController<Application> {
 
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = Helper.createReactComponent(rootElement, this.getViewClass(), {
+        this.view = Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });

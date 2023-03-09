@@ -97,6 +97,18 @@ class Helper {
         react_dom_1.default.render(reactRootElement, rootElement);
         return component;
     }
+    static createReactComponent2(rootElement, type, props = {}, children = null) {
+        // console.log('Helper.createReactComponent2', rootElement, type);
+        let component;
+        const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
+            react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+                    component = c;
+                } }), children),
+        ]);
+        // ReactDOM.render(reactRootElement, rootElement);
+        react_dom_1.default.hydrate(reactRootElement, rootElement);
+        return component;
+    }
     static destroyReactComponent(root) {
         react_dom_1.default.unmountComponentAtNode(root);
     }

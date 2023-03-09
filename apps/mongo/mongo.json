@@ -120,6 +120,15 @@
                 "menu": "",
                 "startup": "false"
             }
+        },
+        {
+            "@class": "PageLink",
+            "@attributes": {
+                "name": "Page3",
+                "fileName": "pages/Page3/Page3.json",
+                "menu": "",
+                "startup": "false"
+            }
         }
     ]
 }

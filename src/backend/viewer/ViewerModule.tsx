@@ -102,7 +102,15 @@ export class ViewerModule {
                 const appViewHtml = this.renderApplicationView(context, data);
                 console.log('appViewHtml:', appViewHtml);
 
-                const html = index(pkg.version, application, context, data, links, scripts);
+                const html = index(
+                    pkg.version,
+                    application,
+                    context,
+                    data,
+                    links,
+                    scripts,
+                    appViewHtml,
+                );
                 context.getRes().end(html);
             } finally {
                 await application.release(context);

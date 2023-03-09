@@ -31967,7 +31967,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class FrontHostApp {
-    constructor() {
+    constructor(options) {
+        this.options = options;
         this.alertCtrl = null;
         this.documentTitle = ''; // for run on back
         // console.log('FrontHostApp.constructor');
@@ -32076,35 +32077,32 @@ class FrontHostApp {
     static isDebugMode() {
         return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
     }
-    createLink(params = null) {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
-        if (params) {
-            return [
-                window.location.pathname,
-                [
-                    // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
-                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                ].join('&'),
-            ].join('?');
+    isDebugMode() {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
         }
-        return window.location.pathname;
+        else {
+            return this.getOptions().debug;
+        }
     }
-    static createLink(params = null) {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
+    createLink(params = null) {
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
         if (params) {
             return [
-                window.location.pathname,
+                path,
                 [
-                    // ...(query ? query.split('&') : []),
-                    ...(FrontHostApp.isDebugMode() ? ['debug=1'] : []),
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
                     ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
                 ].join('&'),
             ].join('?');
         }
-        return window.location.pathname;
+        return path;
+    }
+    getOptions() {
+        if (!this.options) {
+            throw new Error('no options');
+        }
+        return this.options;
     }
 }
 _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.registerGlobalClass(FrontHostApp);
@@ -32126,7 +32124,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
-let document_title = '';
 class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -32216,6 +32213,18 @@ class Helper {
                 } }), children),
         ]);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
+        return component;
+    }
+    static createReactComponent2(rootElement, type, props = {}, children = null) {
+        // console.log('Helper.createReactComponent2', rootElement, type);
+        let component;
+        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+                    component = c;
+                } }), children),
+        ]);
+        // ReactDOM.render(reactRootElement, rootElement);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
@@ -32597,8 +32606,6 @@ __webpack_require__.r(__webpack_exports__);
 
 class Search {
     static getObj() {
-        if (typeof window !== 'object')
-            return {};
         if (!window.location.search.split('?')[1])
             return {};
         return window.location.search
@@ -36456,7 +36463,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         // console.log(
         //     'ApplicationController.create',
         //     'debug:',
-        //     FrontHostApp.isDebugMode(),
+        //     this.getHostApp().isDebugMode(),
         //     model,
         // );
         const { ctrlClass } = model.data;
@@ -36498,7 +36505,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent(rootElement, this.getViewClass(), {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });
@@ -37192,9 +37199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
-/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
-
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
@@ -37242,7 +37247,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
             const onInsert = async (e) => {
                 form.off('insert', onInsert);
                 const [key] = e.inserts;
-                const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(key);
+                const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(key);
                 // console.log('id:', id);
                 await this.onChange(id.toString());
             };
@@ -37271,7 +37276,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
                     selectedKey: selectedKey,
                     onSelect: async (key) => {
                         if (key) {
-                            const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(key);
+                            const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(key);
                             // console.log('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
@@ -37323,7 +37328,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
     getPlaceholder() {
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        return _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.isDebugMode() ? '[null]' : null;
+        return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
     }
 }
 if (typeof window === 'object') {
@@ -37791,8 +37796,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _FieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
-/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-
 
 
 class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1__.FieldController {
@@ -37973,7 +37976,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
         if (this.model.getAttr('placeholder'))
             return this.model.getAttr('placeholder');
-        if (_common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.isDebugMode()) {
+        if (this.getApp().getHostApp().isDebugMode()) {
             const value = this.getValue();
             if (value === undefined)
                 return 'undefined';
@@ -40483,12 +40486,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
-/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
-/* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
-/* harmony import */ var _PageView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
-
+/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
+/* harmony import */ var _PageView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
 
 
 
@@ -40569,7 +40570,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     init() {
         for (const form of this.model.forms) {
-            const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_3__.FormController.create(form, this);
+            const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__.FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
         }
@@ -40584,7 +40585,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     createOpenInNewLink(pageName, key) {
         return this.getApp()
             .getHostApp()
-            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_4__.DataSource.keyToParams(key)));
+            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
     }
     async close() {
         // console.log('PageController.close', this.model.getFullName());
@@ -40606,7 +40607,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     }
     validate() {
         for (const form of this.forms) {
-            if (form instanceof _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_5__.RowFormController) {
+            if (form instanceof _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__.RowFormController) {
                 form.validate();
             }
         }
@@ -40666,7 +40667,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return this.parent;
     }
     getViewClass() {
-        return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_6__.PageView;
+        return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_5__.PageView;
     }
     getForm(name) {
         return this.forms.find((form) => form.model.getName() === name);
@@ -40689,7 +40690,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
         return [
             model.getCaption(),
-            ...(_common_FrontHostApp__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
             ...(keyPart ? [keyPart] : []),
         ].join(' ');
     }
@@ -43447,8 +43448,8 @@ __webpack_require__.r(__webpack_exports__);
 class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp {
     constructor(options = {}) {
         if (!options.data)
-            throw new Error('no data');
-        super();
+            throw new Error('ViewerFrontHostApp: no data');
+        super(options);
         this.options = options;
         this.applicationController = null;
     }

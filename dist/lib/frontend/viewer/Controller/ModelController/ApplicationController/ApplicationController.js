@@ -112,7 +112,7 @@ class ApplicationController extends ModelController_1.ModelController {
     }
     createView(rootElement) {
         // console.log('ApplicationController.createView');
-        this.view = common_1.Helper.createReactComponent(rootElement, this.getViewClass(), {
+        this.view = common_1.Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
         });

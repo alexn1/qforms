@@ -11,6 +11,7 @@ export declare class Helper {
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: any, value: any): any;
     static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): React.Component;
+    static createReactComponent2(rootElement: any, type: any, props?: {}, children?: any): React.Component;
     static destroyReactComponent(root: any): void;
     static readFileAsDataURL(file: any): Promise<unknown>;
     static templateToJsString(value: any, params: any): any;

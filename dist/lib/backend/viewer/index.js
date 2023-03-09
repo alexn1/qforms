@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.index = void 0;
-const index = (version, application, context, data, links, scripts) => {
+const index = (version, application, context, data, links, scripts, appViewHtml) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
 <head>
@@ -25,7 +25,7 @@ const index = (version, application, context, data, links, scripts) => {
     <script type="application/json">${JSON.stringify(data /*, null, 4*/)}</script>
 </head>
 <body class="${application.getViewClassName()}__body">
-    <div class="${application.getViewClassName()}__root"></div>
+    <div class="${application.getViewClassName()}__root">${appViewHtml}</div>
     <div class="alert-root"></div>
 </body>
 </html>`;

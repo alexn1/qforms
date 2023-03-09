@@ -115,6 +115,26 @@ export class Helper {
         return component;
     }
 
+    static createReactComponent2(rootElement, type, props = {}, children = null): React.Component {
+        // console.log('Helper.createReactComponent2', rootElement, type);
+        let component;
+        const reactRootElement = React.createElement(React.StrictMode, {}, [
+            React.createElement(
+                type,
+                {
+                    ...props,
+                    onCreate: (c) => {
+                        component = c;
+                    },
+                } as any,
+                children,
+            ),
+        ]);
+        // ReactDOM.render(reactRootElement, rootElement);
+        ReactDOM.hydrate(reactRootElement, rootElement);
+        return component;
+    }
+
     static destroyReactComponent(root) {
         ReactDOM.unmountComponentAtNode(root);
     }
