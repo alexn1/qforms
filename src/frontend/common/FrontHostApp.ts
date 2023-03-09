@@ -1,7 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 
-interface FrontHostAppOptions {
+export interface FrontHostAppOptions {
     path: string;
     debug: boolean;
 }
@@ -150,23 +150,17 @@ export class FrontHostApp {
     }
 
     createLink(params = null): string {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
-        if (typeof window === 'object') {
-            if (params) {
-                return [
-                    window.location.pathname,
-                    [
-                        // ...(query ? query.split('&') : []),
-                        ...(this.isDebugMode() ? ['debug=1'] : []),
-                        ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                    ].join('&'),
-                ].join('?');
-            }
-            return window.location.pathname;
-        } else {
-            throw new Error('createLink not implemented');
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        if (params) {
+            return [
+                path,
+                [
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                ].join('&'),
+            ].join('?');
         }
+        return path;
     }
 
     getOptions() {

@@ -1,4 +1,4 @@
-interface FrontHostAppOptions {
+export interface FrontHostAppOptions {
     path: string;
     debug: boolean;
 }
@@ -28,4 +28,3 @@ export declare class FrontHostApp {
     createLink(params?: any): string;
     getOptions(): FrontHostAppOptions;
 }
-export {};

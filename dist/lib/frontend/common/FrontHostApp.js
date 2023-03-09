@@ -123,24 +123,17 @@ class FrontHostApp {
         }
     }
     createLink(params = null) {
-        // const query = window.location.search.split('?')[1];
-        // console.log('query:', query);
-        if (typeof window === 'object') {
-            if (params) {
-                return [
-                    window.location.pathname,
-                    [
-                        // ...(query ? query.split('&') : []),
-                        ...(this.isDebugMode() ? ['debug=1'] : []),
-                        ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
-                    ].join('&'),
-                ].join('?');
-            }
-            return window.location.pathname;
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        if (params) {
+            return [
+                path,
+                [
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                ].join('&'),
+            ].join('?');
         }
-        else {
-            throw new Error('createLink not implemented');
-        }
+        return path;
     }
     getOptions() {
         if (!this.options) {
