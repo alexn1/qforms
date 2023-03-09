@@ -128,15 +128,12 @@ export class ViewerModule {
         const applicationController = ApplicationController.create(application, frontHostApp);
         applicationController.init();
 
-        const ApplicationView = applicationController.getViewClass();
-        return ReactDOMServer.renderToStaticMarkup(
-            React.createElement(ApplicationView, {
+        return ReactDOMServer.renderToString(
+            React.createElement(applicationController.getViewClass(), {
                 ctrl: applicationController,
                 onCreate: (c) => {},
             } as any),
         );
-
-        // return 'test';
     }
 
     async loginGet(context: Context, application: BkApplication) {

@@ -91,12 +91,10 @@ class ViewerModule {
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();
-        const ApplicationView = applicationController.getViewClass();
-        return server_1.default.renderToStaticMarkup(react_1.default.createElement(ApplicationView, {
+        return server_1.default.renderToString(react_1.default.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
             onCreate: (c) => { },
         }));
-        // return 'test';
     }
     async loginGet(context, application) {
         console.log('ViewerModule.loginGet');

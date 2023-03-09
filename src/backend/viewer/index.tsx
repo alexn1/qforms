@@ -1,4 +1,14 @@
-export const index = (version, application, context, data, links, scripts) => {
+import { Context } from '../Context';
+import { BkApplication } from './BkModel/BkApplication/BkApplication';
+
+export const index = (
+    version: string,
+    application: BkApplication,
+    context: Context,
+    data: any,
+    links: string,
+    scripts: string,
+) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
         context.query.debug === '1' ? 'debug' : ''
