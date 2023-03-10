@@ -50,4 +50,4 @@ export class ComboBoxField extends Field {
     }
 }
 
-Helper.readFileAsDataURL(ComboBoxField);
+Helper.registerGlobalClass(ComboBoxField);

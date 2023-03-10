@@ -51,4 +51,4 @@ class ComboBoxField extends Field_1.Field {
     }
 }
 exports.ComboBoxField = ComboBoxField;
-common_1.Helper.readFileAsDataURL(ComboBoxField);
+common_1.Helper.registerGlobalClass(ComboBoxField);
