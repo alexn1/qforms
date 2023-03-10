@@ -2,6 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTimeFieldView } from './RowFormTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { TimeField } from '../../../../../Model/Field/TimeField/TimeField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormTimeFieldController extends RowFormFieldController<TimeField> {
     defaultValue: any = null;
@@ -44,7 +45,4 @@ export class RowFormTimeFieldController extends RowFormFieldController<TimeField
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTimeFieldController = RowFormTimeFieldController;
-}
+Helper.registerGlobalClass(RowFormTimeFieldController);

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormRadioFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormRadioFieldView_1 = require("./RowFormRadioFieldView");
+const Helper_1 = require("../../../../../../common/Helper");
 class RowFormRadioFieldController extends RowFormFieldController_1.RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormRadioFieldView_1.RowFormRadioFieldView;
@@ -25,7 +26,4 @@ class RowFormRadioFieldController extends RowFormFieldController_1.RowFormFieldC
     }
 }
 exports.RowFormRadioFieldController = RowFormRadioFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormRadioFieldController = RowFormRadioFieldController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormRadioFieldController);

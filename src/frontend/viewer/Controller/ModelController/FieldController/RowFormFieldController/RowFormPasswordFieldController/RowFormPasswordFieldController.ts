@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormPasswordFieldView } from './RowFormPasswordFieldView';
 import { PasswordField } from '../../../../../Model/Field/PasswordField/PasswordField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormPasswordFieldController extends RowFormFieldController<PasswordField> {
     getViewClass() {
@@ -8,7 +9,4 @@ export class RowFormPasswordFieldController extends RowFormFieldController<Passw
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormPasswordFieldController = RowFormPasswordFieldController;
-}
+Helper.registerGlobalClass(RowFormPasswordFieldController);

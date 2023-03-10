@@ -4,6 +4,7 @@ exports.RowFormTimeFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormTimeFieldView_1 = require("./RowFormTimeFieldView");
 const common_1 = require("../../../../../../common");
+const Helper_1 = require("../../../../../../common/Helper");
 class RowFormTimeFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor() {
         super(...arguments);
@@ -45,7 +46,4 @@ class RowFormTimeFieldController extends RowFormFieldController_1.RowFormFieldCo
     }
 }
 exports.RowFormTimeFieldController = RowFormTimeFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTimeFieldController = RowFormTimeFieldController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormTimeFieldController);

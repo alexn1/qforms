@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormCheckBoxFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormCheckBoxFieldView_1 = require("./RowFormCheckBoxFieldView");
+const Helper_1 = require("../../../../../../common/Helper");
 class RowFormCheckBoxFieldController extends RowFormFieldController_1.RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormCheckBoxFieldView_1.RowFormCheckBoxFieldView;
@@ -15,7 +16,4 @@ class RowFormCheckBoxFieldController extends RowFormFieldController_1.RowFormFie
     }
 }
 exports.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormCheckBoxFieldController = RowFormCheckBoxFieldController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormCheckBoxFieldController);

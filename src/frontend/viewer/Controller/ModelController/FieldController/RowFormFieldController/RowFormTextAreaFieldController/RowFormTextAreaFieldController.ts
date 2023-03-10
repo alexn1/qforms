@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTextAreaFieldView } from './RowFormTextAreaFieldView';
 import { TextAreaField } from '../../../../../Model/Field/TextAreaField/TextAreaField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormTextAreaFieldController extends RowFormFieldController<TextAreaField> {
     getViewClass() {
@@ -8,7 +9,4 @@ export class RowFormTextAreaFieldController extends RowFormFieldController<TextA
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextAreaFieldController = RowFormTextAreaFieldController;
-}
+Helper.registerGlobalClass(RowFormTextAreaFieldController);

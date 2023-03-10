@@ -1,6 +1,5 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
-import { FrontHostApp } from '../../../../../../common/FrontHostApp';
 import { Helper } from '../../../../../../common/Helper';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
 
@@ -43,7 +42,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     }
 
     getPlaceholder() {
-        if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');        
+        if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
         return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
     }
 
@@ -138,7 +137,4 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     };
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormComboBoxFieldController = RowFormComboBoxFieldController;
-}
+Helper.registerGlobalClass(RowFormComboBoxFieldController);

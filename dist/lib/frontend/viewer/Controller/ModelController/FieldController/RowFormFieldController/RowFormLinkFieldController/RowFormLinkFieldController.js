@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormLinkFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormLinkFieldView_1 = require("./RowFormLinkFieldView");
+const Helper_1 = require("../../../../../../common/Helper");
 class RowFormLinkFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor() {
         super(...arguments);
@@ -36,7 +37,4 @@ class RowFormLinkFieldController extends RowFormFieldController_1.RowFormFieldCo
     }
 }
 exports.RowFormLinkFieldController = RowFormLinkFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormLinkFieldController = RowFormLinkFieldController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormLinkFieldController);

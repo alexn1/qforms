@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormTextBoxFieldView } from './RowFormTextBoxFieldView';
 import { TextBoxField } from '../../../../../Model/Field/TextBoxField/TextBoxField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormTextBoxFieldController extends RowFormFieldController<TextBoxField> {
     getViewClass() {
@@ -8,7 +9,4 @@ export class RowFormTextBoxFieldController extends RowFormFieldController<TextBo
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextBoxFieldController = RowFormTextBoxFieldController;
-}
+Helper.registerGlobalClass(RowFormTextBoxFieldController);

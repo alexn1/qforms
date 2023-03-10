@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormImageFieldView } from './RowFormImageFieldView';
 import { ImageField } from '../../../../../Model/Field/ImageField/ImageField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormImageFieldController extends RowFormFieldController<ImageField> {
     getViewClass() {
@@ -8,7 +9,4 @@ export class RowFormImageFieldController extends RowFormFieldController<ImageFie
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormImageFieldController = RowFormImageFieldController;
-}
+Helper.registerGlobalClass(RowFormImageFieldController);

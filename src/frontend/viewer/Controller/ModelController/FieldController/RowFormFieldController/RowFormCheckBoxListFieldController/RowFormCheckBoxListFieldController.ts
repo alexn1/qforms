@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormCheckBoxListFieldView } from './RowFormCheckBoxListFieldView';
 import { CheckBoxListField } from '../../../../../Model/Field/CheckBoxListField/CheckBoxListField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormCheckBoxListFieldController extends RowFormFieldController<CheckBoxListField> {
     init() {
@@ -61,7 +62,4 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormCheckBoxListFieldController = RowFormCheckBoxListFieldController;
-}
+Helper.registerGlobalClass(RowFormCheckBoxListFieldController);

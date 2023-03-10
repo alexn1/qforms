@@ -1,6 +1,7 @@
 import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormRadioFieldView } from './RowFormRadioFieldView';
 import { RadioField } from '../../../../../Model/Field/RadioField/RadioField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormRadioFieldController extends RowFormFieldController<RadioField> {
     getViewClass() {
@@ -25,7 +26,4 @@ export class RowFormRadioFieldController extends RowFormFieldController<RadioFie
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormRadioFieldController = RowFormRadioFieldController;
-}
+Helper.registerGlobalClass(RowFormRadioFieldController);

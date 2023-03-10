@@ -5,7 +5,7 @@ import { FormController } from '../../FormController/FormController';
 import { RowFormController } from '../../FormController/RowFormController/RowFormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
-import { FrontHostApp } from '../../../../../common/FrontHostApp';
+import { Helper } from '../../../../../common/Helper';
 
 export class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     state: any;
@@ -334,9 +334,4 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
             this.parent.onFieldChange({ source: this });
         }
     };
-}
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormFieldController = RowFormFieldController;
 }

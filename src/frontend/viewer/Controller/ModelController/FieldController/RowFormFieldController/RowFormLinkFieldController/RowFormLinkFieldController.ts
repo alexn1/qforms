@@ -2,6 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormLinkFieldView } from './RowFormLinkFieldView';
 import { LinkField } from '../../../../../Model/Field/LinkField/LinkField';
 import { SyntheticEvent } from 'react';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormLinkFieldController extends RowFormFieldController<LinkField> {
     getViewClass() {
@@ -36,7 +37,4 @@ export class RowFormLinkFieldController extends RowFormFieldController<LinkField
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormLinkFieldController = RowFormLinkFieldController;
-}
+Helper.registerGlobalClass(RowFormLinkFieldController);

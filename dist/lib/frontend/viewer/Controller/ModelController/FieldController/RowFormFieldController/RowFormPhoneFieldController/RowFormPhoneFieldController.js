@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormPhoneFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormPhoneFieldView_1 = require("./RowFormPhoneFieldView");
+const Helper_1 = require("../../../../../../common/Helper");
 class RowFormPhoneFieldController extends RowFormFieldController_1.RowFormFieldController {
     getViewClass() {
         return super.getViewClass() || RowFormPhoneFieldView_1.RowFormPhoneFieldView;
@@ -23,7 +24,4 @@ class RowFormPhoneFieldController extends RowFormFieldController_1.RowFormFieldC
     }
 }
 exports.RowFormPhoneFieldController = RowFormPhoneFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormPhoneFieldController = RowFormPhoneFieldController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormPhoneFieldController);

@@ -2,6 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormDateTimeFieldView } from './RowFormDateTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController<DateTimeField> {
     widget2: any;
@@ -257,7 +258,4 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormDateTimeFieldController = RowFormDateTimeFieldController;
-}
+Helper.registerGlobalClass(RowFormDateTimeFieldController);
