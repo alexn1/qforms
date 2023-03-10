@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class PhoneField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PhoneField = PhoneField;
-}
+Helper.registerGlobalClass(PhoneField);

@@ -4,6 +4,7 @@ exports.Application = void 0;
 const Model_1 = require("../Model");
 const Database_1 = require("../Database/Database");
 const common_1 = require("../../../common");
+const Helper_1 = require("../../../common/Helper");
 class Application extends Model_1.Model {
     constructor() {
         super(...arguments);
@@ -106,7 +107,4 @@ class Application extends Model_1.Model {
     }
 }
 exports.Application = Application;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Application = Application;
-}
+Helper_1.Helper.registerGlobalClass(Application);

@@ -3,6 +3,7 @@ import { Database } from '../Database/Database';
 import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
+import { Helper } from '../../../common/Helper';
 
 export class Application extends Model {
     databases: any[] = [];
@@ -115,7 +116,4 @@ export class Application extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Application = Application;
-}
+Helper.registerGlobalClass(Application);

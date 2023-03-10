@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class ImageField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ImageField = ImageField;
-}
+Helper.registerGlobalClass(ImageField);

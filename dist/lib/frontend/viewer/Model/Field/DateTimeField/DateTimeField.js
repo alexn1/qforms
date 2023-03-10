@@ -31,7 +31,4 @@ class DateTimeField extends Field_1.Field {
     }
 }
 exports.DateTimeField = DateTimeField;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DateTimeField = DateTimeField;
-}
+common_1.Helper.registerGlobalClass(DateTimeField);

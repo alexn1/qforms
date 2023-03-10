@@ -1,4 +1,5 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class TextAreaField extends Field {
     getRows() {
@@ -10,7 +11,4 @@ export class TextAreaField extends Field {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TextAreaField = TextAreaField;
-}
+Helper.registerGlobalClass(TextAreaField);

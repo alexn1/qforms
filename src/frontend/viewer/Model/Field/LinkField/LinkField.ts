@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class LinkField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.LinkField = LinkField;
-}
+Helper.registerGlobalClass(LinkField);

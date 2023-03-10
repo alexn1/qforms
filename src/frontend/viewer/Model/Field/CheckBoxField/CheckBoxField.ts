@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common/Helper';
 
 export class CheckBoxField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.CheckBoxField = CheckBoxField;
-}
+Helper.registerGlobalClass(CheckBoxField);

@@ -208,7 +208,4 @@ export class Field extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Field = Field;
-}
+Helper.registerGlobalClass(Field);

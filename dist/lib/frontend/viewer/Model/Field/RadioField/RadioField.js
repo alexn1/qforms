@@ -54,12 +54,4 @@ class RadioField extends Field_1.Field {
     }
 }
 exports.RadioField = RadioField;
-/* declare global {
-    interface Window {
-        RadioField: RadioField;
-    }
-} */
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RadioField = RadioField;
-}
+common_1.Helper.registerGlobalClass(RadioField);

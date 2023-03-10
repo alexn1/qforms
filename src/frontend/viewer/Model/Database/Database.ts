@@ -1,5 +1,6 @@
 import { Model } from '../Model';
 import { Table } from '../Table/Table';
+import { Helper } from '../../../common/Helper';
 
 export class Database extends Model {
     tables: any[];
@@ -38,7 +39,4 @@ export class Database extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Database = Database;
-}
+Helper.registerGlobalClass(Database);

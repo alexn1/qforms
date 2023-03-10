@@ -51,7 +51,4 @@ class CheckBoxListField extends Field_1.Field {
     }
 }
 exports.CheckBoxListField = CheckBoxListField;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.CheckBoxListField = CheckBoxListField;
-}
+common_1.Helper.registerGlobalClass(CheckBoxListField);

@@ -1,4 +1,5 @@
 import { Model } from '../Model';
+import { Helper } from '../../../common/Helper';
 
 export class Column extends Model {
     constructor(data, parent) {
@@ -18,7 +19,4 @@ export class Column extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Column = Column;
-}
+Helper.registerGlobalClass(Column);

@@ -1,8 +1,6 @@
 import { PersistentDataSource } from '../PersistentDataSource';
+import { Helper } from '../../../../../common/Helper';
 
 export class SqlDataSource extends PersistentDataSource {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.SqlDataSource = SqlDataSource;
-}
+Helper.registerGlobalClass(SqlDataSource);

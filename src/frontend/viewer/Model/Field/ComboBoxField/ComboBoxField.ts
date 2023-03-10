@@ -50,7 +50,4 @@ export class ComboBoxField extends Field {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ComboBoxField = ComboBoxField;
-}
+Helper.readFileAsDataURL(ComboBoxField);

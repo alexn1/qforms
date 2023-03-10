@@ -194,7 +194,4 @@ class Field extends Model_1.Model {
     }
 }
 exports.Field = Field;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Field = Field;
-}
+common_1.Helper.registerGlobalClass(Field);

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Column = void 0;
 const Model_1 = require("../Model");
+const Helper_1 = require("../../../common/Helper");
 class Column extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -19,7 +20,4 @@ class Column extends Model_1.Model {
     }
 }
 exports.Column = Column;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Column = Column;
-}
+Helper_1.Helper.registerGlobalClass(Column);

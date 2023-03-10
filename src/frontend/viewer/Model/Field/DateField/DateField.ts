@@ -31,7 +31,4 @@ export class DateField extends Field {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DateField = DateField;
-}
+Helper.registerGlobalClass(DateField);

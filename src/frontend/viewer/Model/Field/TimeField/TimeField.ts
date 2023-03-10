@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class TimeField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TimeField = TimeField;
-}
+Helper.registerGlobalClass(TimeField);

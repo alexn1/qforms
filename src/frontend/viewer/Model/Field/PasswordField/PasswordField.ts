@@ -1,8 +1,6 @@
 import { Field } from '../Field';
+import { Helper } from '../../../../common';
 
 export class PasswordField extends Field {}
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PasswordField = PasswordField;
-}
+Helper.registerGlobalClass(PasswordField);
