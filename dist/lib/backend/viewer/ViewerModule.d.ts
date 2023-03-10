@@ -1,7 +1,7 @@
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
-export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, } from '../../frontend/viewer';
+export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, RowForm, } from '../../frontend/viewer';
 export declare class ViewerModule {
     hostApp: BackHostApp;
     css: string[];

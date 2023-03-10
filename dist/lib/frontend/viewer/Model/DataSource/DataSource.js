@@ -540,7 +540,4 @@ class DataSource extends Model_1.Model {
     }
 }
 exports.DataSource = DataSource;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DataSource = DataSource;
-}
+common_1.Helper.registerGlobalClass(DataSource);

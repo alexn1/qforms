@@ -26,6 +26,7 @@ export {
     NoSqlDataSource,
     TextBoxField,
     TableFormTextBoxFieldController,
+    RowForm,
 } from '../../frontend/viewer';
 
 // post actions

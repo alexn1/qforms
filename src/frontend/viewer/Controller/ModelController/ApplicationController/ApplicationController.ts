@@ -441,7 +441,4 @@ export class ApplicationController extends ModelController<Application> {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ApplicationController = ApplicationController;
-}
+Helper.registerGlobalClass(ApplicationController);

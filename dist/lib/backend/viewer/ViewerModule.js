@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewerModule = exports.TableFormTextBoxFieldController = exports.TextBoxField = exports.NoSqlDataSource = exports.TableForm = void 0;
+exports.ViewerModule = exports.RowForm = exports.TableFormTextBoxFieldController = exports.TextBoxField = exports.NoSqlDataSource = exports.TableForm = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const react_1 = __importDefault(require("react"));
@@ -25,6 +25,7 @@ Object.defineProperty(exports, "TableForm", { enumerable: true, get: function ()
 Object.defineProperty(exports, "NoSqlDataSource", { enumerable: true, get: function () { return viewer_1.NoSqlDataSource; } });
 Object.defineProperty(exports, "TextBoxField", { enumerable: true, get: function () { return viewer_1.TextBoxField; } });
 Object.defineProperty(exports, "TableFormTextBoxFieldController", { enumerable: true, get: function () { return viewer_1.TableFormTextBoxFieldController; } });
+Object.defineProperty(exports, "RowForm", { enumerable: true, get: function () { return viewer_1.RowForm; } });
 // post actions
 const ACTIONS = [
     'page',

@@ -4,6 +4,7 @@ import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
+import { Helper } from '../../../../../common/Helper';
 
 export class RowFormController extends FormController<RowForm> {
     state: any;
@@ -221,7 +222,4 @@ export class RowFormController extends FormController<RowForm> {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormController = RowFormController;
-}
+Helper.registerGlobalClass(RowFormController);

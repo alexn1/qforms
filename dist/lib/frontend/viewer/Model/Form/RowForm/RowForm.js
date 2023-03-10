@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowForm = void 0;
 const Form_1 = require("../Form");
+const Helper_1 = require("../../../../common/Helper");
 class RowForm extends Form_1.Form {
     init() {
         super.init();
@@ -59,7 +60,4 @@ class RowForm extends Form_1.Form {
     }
 }
 exports.RowForm = RowForm;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowForm = RowForm;
-}
+Helper_1.Helper.registerGlobalClass(RowForm);

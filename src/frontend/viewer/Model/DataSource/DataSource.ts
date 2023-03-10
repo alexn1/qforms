@@ -588,7 +588,4 @@ export class DataSource extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DataSource = DataSource;
-}
+Helper.registerGlobalClass(DataSource);

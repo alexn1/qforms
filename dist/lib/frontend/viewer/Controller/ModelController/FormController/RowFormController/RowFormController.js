@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.RowFormController = void 0;
 const FormController_1 = require("../FormController");
 const RowFormView_1 = require("./RowFormView");
+const Helper_1 = require("../../../../../common/Helper");
 class RowFormController extends FormController_1.FormController {
     constructor(model, parent) {
         super(model, parent);
@@ -193,7 +194,4 @@ class RowFormController extends FormController_1.FormController {
     }
 }
 exports.RowFormController = RowFormController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormController = RowFormController;
-}
+Helper_1.Helper.registerGlobalClass(RowFormController);

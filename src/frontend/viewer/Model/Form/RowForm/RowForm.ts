@@ -1,5 +1,6 @@
 import { RawRow } from '../../../../../types';
 import { Form } from '../Form';
+import { Helper } from '../../../../common/Helper';
 
 export class RowForm extends Form {
     fields: any;
@@ -66,7 +67,4 @@ export class RowForm extends Form {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowForm = RowForm;
-}
+Helper.registerGlobalClass(RowForm);
