@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Search = void 0;
-const Helper_1 = require("../common/Helper");
 class Search {
     static getObj() {
         if (!window.location.search.split('?')[1])
@@ -35,4 +34,4 @@ class Search {
     }
 }
 exports.Search = Search;
-Helper_1.Helper.registerGlobalClass(Search);
+// Helper.registerGlobalClass(Search);

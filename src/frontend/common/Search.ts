@@ -33,4 +33,4 @@ export class Search {
     }
 }
 
-Helper.registerGlobalClass(Search);
+// Helper.registerGlobalClass(Search);
