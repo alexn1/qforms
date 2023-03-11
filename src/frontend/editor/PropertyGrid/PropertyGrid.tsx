@@ -34,8 +34,12 @@ export class PropertyGrid extends ReactComponent {
             <TextBox
                 name={name}
                 value={obj[name]}
-                spellCheck="false"
-                onChange={(value) => this.onChange(name, value)}
+                spellCheck={'false'}
+                onBlur={(event) => {
+                    if (obj[name] !== event.currentTarget.value) {
+                        this.onChange(name, event.currentTarget.value);
+                    }
+                }}
                 autocomplete={'off'}
             />
         );
