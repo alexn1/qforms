@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontHostApp = void 0;
-const Helper_1 = require("../common/Helper");
 const Search_1 = require("../common/Search");
 class FrontHostApp {
     constructor(options) {
@@ -143,4 +142,4 @@ class FrontHostApp {
     }
 }
 exports.FrontHostApp = FrontHostApp;
-Helper_1.Helper.registerGlobalClass(FrontHostApp);
+// Helper.registerGlobalClass(FrontHostApp);

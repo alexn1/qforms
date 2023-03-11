@@ -171,4 +171,4 @@ export class FrontHostApp {
     }
 }
 
-Helper.registerGlobalClass(FrontHostApp);
+// Helper.registerGlobalClass(FrontHostApp);

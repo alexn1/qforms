@@ -30,4 +30,4 @@ export class LoginFrontHostApp extends FrontHostApp {
     }
 }
 
-Helper.registerGlobalClass(LoginFrontHostApp);
+// Helper.registerGlobalClass(LoginFrontHostApp);
