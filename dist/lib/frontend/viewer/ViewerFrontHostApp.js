@@ -142,7 +142,4 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
     }
 }
 exports.ViewerFrontHostApp = ViewerFrontHostApp;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ViewerFrontHostApp = ViewerFrontHostApp;
-}
+common_1.Helper.registerGlobalClass(ViewerFrontHostApp);

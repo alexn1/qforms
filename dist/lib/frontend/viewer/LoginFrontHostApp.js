@@ -25,4 +25,4 @@ class LoginFrontHostApp extends common_1.FrontHostApp {
     }
 }
 exports.LoginFrontHostApp = LoginFrontHostApp;
-// Helper.registerGlobalClass(LoginFrontHostApp);
+common_1.Helper.registerGlobalClass(LoginFrontHostApp);
