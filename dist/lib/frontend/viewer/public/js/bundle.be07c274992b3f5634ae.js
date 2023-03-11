@@ -40995,7 +40995,7 @@ class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostAp
         return this.data;
     }
 }
-// Helper.registerGlobalClass(LoginFrontHostApp);
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(LoginFrontHostApp);
 
 
 /***/ }),
@@ -43462,10 +43462,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         });
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ViewerFrontHostApp = ViewerFrontHostApp;
-}
+_common__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(ViewerFrontHostApp);
 
 
 /***/ }),
