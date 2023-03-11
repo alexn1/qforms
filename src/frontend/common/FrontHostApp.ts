@@ -137,10 +137,6 @@ export class FrontHostApp {
         return this.documentTitle;
     }
 
-    static isDebugMode() {
-        return Search.getObj()['debug'] === '1';
-    }
-
     isDebugMode() {
         if (typeof window === 'object') {
             return Search.getObj()['debug'] === '1';

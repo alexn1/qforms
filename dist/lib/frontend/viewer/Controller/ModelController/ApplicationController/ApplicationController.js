@@ -82,9 +82,6 @@ class ApplicationController extends ModelController_1.ModelController {
         }
         return new ApplicationController(model, frontHostApp);
     }
-    /* static isDebugMode() {
-        return Search.getObj()['debug'] === '1';
-    } */
     init() {
         // console.log('ApplicationController.init');
         super.init();

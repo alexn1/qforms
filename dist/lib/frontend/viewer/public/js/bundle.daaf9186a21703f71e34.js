@@ -32072,9 +32072,6 @@ class FrontHostApp {
         }
         return this.documentTitle;
     }
-    static isDebugMode() {
-        return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj()['debug'] === '1';
-    }
     isDebugMode() {
         if (typeof window === 'object') {
             return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj()['debug'] === '1';
@@ -36472,9 +36469,6 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         }
         return new ApplicationController(model, frontHostApp);
     }
-    /* static isDebugMode() {
-        return Search.getObj()['debug'] === '1';
-    } */
     init() {
         // console.log('ApplicationController.init');
         super.init();
