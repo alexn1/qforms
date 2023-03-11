@@ -21,4 +21,5 @@ export declare class DropdownDatePicker extends ReactComponent {
     renderDateIcon(): JSX.Element;
     renderDatePicker(): JSX.Element;
     render(): JSX.Element;
+    isDebugMode(): boolean;
 }

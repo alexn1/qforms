@@ -77,7 +77,7 @@ export class DropdownDatePicker extends ReactComponent {
         const value = this.getValue();
         if (value) {
             let format = this.getFormat();
-            if (FrontHostApp.isDebugMode()) {
+            if (this.isDebugMode()) {
                 const time = Helper.formatDate(value, '{hh}:{mm}:{ss}');
                 if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
                     format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
@@ -195,6 +195,10 @@ export class DropdownDatePicker extends ReactComponent {
                 {this.state.open && this.renderDatePicker()}
             </div>
         );
+    }
+
+    isDebugMode() {
+        return this.props.debug === true;
     }
 }
 

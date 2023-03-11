@@ -1,11 +1,12 @@
 import { RowFormFieldView } from '../RowFormFieldView';
 import { DropdownDatePicker } from '../../../../../../common';
 import { RowFormDateFieldController } from './RowFormDateFieldController';
+
 import './RowFormDateFieldView.less';
 
 export class RowFormDateFieldView extends RowFormFieldView<RowFormDateFieldController> {
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <div className={this.getCssClassNames()}>
                 <DropdownDatePicker
@@ -19,6 +20,7 @@ export class RowFormDateFieldView extends RowFormFieldView<RowFormDateFieldContr
                     oldDates={this.props.oldDates}
                     // getMinDate={this.props.getMinDate}
                     minDate={this.props.minDate}
+                    debug={ctrl.getApp().getHostApp().isDebugMode()}
                 />
             </div>
         );

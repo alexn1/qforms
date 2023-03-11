@@ -26,7 +26,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)(common_1.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
             // getMinDate={this.props.getMinDate}
-            highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null }));
+            highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().getHostApp().isDebugMode() }));
     }
     renderTimePart() {
         const ctrl = this.getCtrl();
