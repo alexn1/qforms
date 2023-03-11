@@ -2,6 +2,7 @@ import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormTimeFieldView } from './TableFormTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { TimeField } from '../../../../../Model/Field/TimeField/TimeField';
+import { Helper } from '../../../../../../common/Helper';
 
 export class TableFormTimeFieldController extends TableFormFieldController<TimeField> {
     getViewClass() {
@@ -14,7 +15,4 @@ export class TableFormTimeFieldController extends TableFormFieldController<TimeF
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormTimeFieldController = TableFormTimeFieldController;
-}
+Helper.registerGlobalClass(TableFormTimeFieldController);

@@ -4,6 +4,7 @@ exports.TableFormTimeFieldController = void 0;
 const TableFormFieldController_1 = require("../TableFormFieldController");
 const TableFormTimeFieldView_1 = require("./TableFormTimeFieldView");
 const common_1 = require("../../../../../../common");
+const Helper_1 = require("../../../../../../common/Helper");
 class TableFormTimeFieldController extends TableFormFieldController_1.TableFormFieldController {
     getViewClass() {
         return super.getViewClass() || TableFormTimeFieldView_1.TableFormTimeFieldView;
@@ -14,7 +15,4 @@ class TableFormTimeFieldController extends TableFormFieldController_1.TableFormF
     }
 }
 exports.TableFormTimeFieldController = TableFormTimeFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormTimeFieldController = TableFormTimeFieldController;
-}
+Helper_1.Helper.registerGlobalClass(TableFormTimeFieldController);

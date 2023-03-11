@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TableFormComboBoxFieldController = void 0;
 const TableFormFieldController_1 = require("../TableFormFieldController");
 const TableFormComboBoxFieldView_1 = require("./TableFormComboBoxFieldView");
+const Helper_1 = require("../../../../../../common/Helper");
 class TableFormComboBoxFieldController extends TableFormFieldController_1.TableFormFieldController {
     constructor() {
         super(...arguments);
@@ -42,7 +43,4 @@ class TableFormComboBoxFieldController extends TableFormFieldController_1.TableF
     }
 }
 exports.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormComboBoxFieldController = TableFormComboBoxFieldController;
-}
+Helper_1.Helper.registerGlobalClass(TableFormComboBoxFieldController);

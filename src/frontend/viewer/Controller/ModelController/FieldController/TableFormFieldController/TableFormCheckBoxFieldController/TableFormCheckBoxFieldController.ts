@@ -2,6 +2,7 @@ import { TableFormFieldController } from '../TableFormFieldController';
 import { TableFormCheckBoxFieldView } from './TableFormCheckBoxFieldView';
 import { CheckBoxField } from '../../../../../Model/Field/CheckBoxField/CheckBoxField';
 import { Align } from '../../../../../../../types';
+import { Helper } from '../../../../../../common/Helper';
 
 export class TableFormCheckBoxFieldController extends TableFormFieldController<CheckBoxField> {
     getViewClass() {
@@ -17,7 +18,4 @@ export class TableFormCheckBoxFieldController extends TableFormFieldController<C
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormCheckBoxFieldController = TableFormCheckBoxFieldController;
-}
+Helper.registerGlobalClass(TableFormCheckBoxFieldController);

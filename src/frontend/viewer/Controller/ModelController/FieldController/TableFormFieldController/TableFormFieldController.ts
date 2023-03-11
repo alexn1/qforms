@@ -22,8 +22,3 @@ export class TableFormFieldController<
         return null;
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormFieldController = TableFormFieldController;
-}
