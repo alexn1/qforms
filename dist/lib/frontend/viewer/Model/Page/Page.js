@@ -166,7 +166,4 @@ class Page extends Model_1.Model {
     }
 }
 exports.Page = Page;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Page = Page;
-}
+Helper_1.Helper.registerGlobalClass(Page);

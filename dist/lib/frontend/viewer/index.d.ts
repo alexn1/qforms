@@ -3,6 +3,7 @@ export { ViewerFrontHostApp } from './ViewerFrontHostApp';
 export { DataSource } from './Model/DataSource/DataSource';
 export { ApplicationView } from './Controller/ModelController/ApplicationController/ApplicationView';
 export { PageView } from './Controller/ModelController/PageController/PageView';
+export { Page } from './Model/Page/Page';
 export { RowFormController } from './Controller/ModelController/FormController/RowFormController/RowFormController';
 export { RowFormView } from './Controller/ModelController/FormController/RowFormController/RowFormView';
 export { TableFormTextBoxFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController';
@@ -68,4 +69,3 @@ export { RowFormTimeFieldController } from './Controller/ModelController/FieldCo
 export * from '../common';
 export * from '../../types';
 export * from '../../Result';
-export * from './Model/Page/Page';

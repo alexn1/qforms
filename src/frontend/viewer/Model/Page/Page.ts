@@ -1,5 +1,4 @@
 import { Model } from '../Model';
-import { FrontHostApp } from '../../../common';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 
@@ -193,7 +192,4 @@ export class Page extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Page = Page;
-}
+Helper.registerGlobalClass(Page);

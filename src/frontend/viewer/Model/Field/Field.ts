@@ -208,4 +208,4 @@ export class Field extends Model {
     }
 }
 
-Helper.registerGlobalClass(Field);
+// Helper.registerGlobalClass(Field);

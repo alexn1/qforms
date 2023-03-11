@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Model = void 0;
 const EventEmitter_1 = require("../EventEmitter");
-const common_1 = require("../../common");
+const Helper_1 = require("../../common/Helper");
 class Model extends EventEmitter_1.EventEmitter {
     constructor(data, parent = null) {
         if (!data.name)
@@ -61,7 +61,7 @@ class Model extends EventEmitter_1.EventEmitter {
     createDataSources() {
         for (const data of this.data.dataSources) {
             try {
-                const Class = common_1.Helper.getGlobalClass(data.class);
+                const Class = Helper_1.Helper.getGlobalClass(data.class);
                 if (!Class)
                     throw new Error(`no ${data.class} class`);
                 const dataSource = new Class(data, this);
@@ -90,7 +90,3 @@ class Model extends EventEmitter_1.EventEmitter {
     }
 }
 exports.Model = Model;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Model = Model;
-}

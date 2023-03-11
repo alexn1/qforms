@@ -120,7 +120,3 @@ class Form extends Model_1.Model {
     }
 }
 exports.Form = Form;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Form = Form;
-}

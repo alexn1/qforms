@@ -194,4 +194,4 @@ class Field extends Model_1.Model {
     }
 }
 exports.Field = Field;
-common_1.Helper.registerGlobalClass(Field);
+// Helper.registerGlobalClass(Field);

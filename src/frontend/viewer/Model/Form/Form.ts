@@ -140,8 +140,3 @@ export class Form extends Model {
         return values;
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Form = Form;
-}

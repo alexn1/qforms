@@ -1,5 +1,6 @@
 import { Model } from '../Model';
 import { Column } from '../Column/Column';
+import { Helper } from '../../../common/Helper';
 
 export class Table extends Model {
     columns: any[];
@@ -55,7 +56,4 @@ export class Table extends Model {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Table = Table;
-}
+Helper.registerGlobalClass(Table);

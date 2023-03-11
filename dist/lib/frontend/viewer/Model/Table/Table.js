@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Table = void 0;
 const Model_1 = require("../Model");
 const Column_1 = require("../Column/Column");
+const Helper_1 = require("../../../common/Helper");
 class Table extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -48,7 +49,4 @@ class Table extends Model_1.Model {
     }
 }
 exports.Table = Table;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Table = Table;
-}
+Helper_1.Helper.registerGlobalClass(Table);

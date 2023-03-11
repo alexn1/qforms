@@ -1,6 +1,6 @@
 import { EventEmitter } from '../EventEmitter';
-import { FrontHostApp, Helper } from '../../common';
 import { DataSource } from './DataSource/DataSource';
+import { Helper } from '../../common/Helper';
 
 export class Model extends EventEmitter {
     deinited: boolean = false;
@@ -102,9 +102,4 @@ export class Model extends EventEmitter {
     getData() {
         return this.data;
     }
-}
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Model = Model;
 }

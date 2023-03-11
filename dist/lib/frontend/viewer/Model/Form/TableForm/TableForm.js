@@ -7,8 +7,3 @@ class TableForm extends Form_1.Form {
 }
 exports.TableForm = TableForm;
 Helper_1.Helper.registerGlobalClass(TableForm);
-/* if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableForm = TableForm;
-}
- */
