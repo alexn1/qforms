@@ -29,7 +29,11 @@ class PropertyGrid extends common_1.ReactComponent {
     }
     renderInput(name) {
         const obj = this.getObj();
-        return ((0, jsx_runtime_1.jsx)(common_1.TextBox, { name: name, value: obj[name], spellCheck: "false", onChange: (value) => this.onChange(name, value), autocomplete: 'off' }));
+        return ((0, jsx_runtime_1.jsx)(common_1.TextBox, { name: name, value: obj[name], spellCheck: 'false', onBlur: (event) => {
+                if (obj[name] !== event.currentTarget.value) {
+                    this.onChange(name, event.currentTarget.value);
+                }
+            }, autocomplete: 'off' }));
     }
     renderSelect(name) {
         const obj = this.getObj();

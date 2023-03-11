@@ -33,11 +33,16 @@ class ModelController extends Controller_1.Controller {
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        const viewClass = common_1.Helper.getGlobalClass(viewClassName);
-        if (viewClass && !(viewClass.prototype instanceof ModelView_1.ModelView)) {
-            throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+        if (viewClassName) {
+            const viewClass = common_1.Helper.getGlobalClass(viewClassName);
+            if (!viewClass)
+                throw new Error(`no class ${viewClassName}`);
+            if (viewClass && !(viewClass.prototype instanceof ModelView_1.ModelView)) {
+                throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+            }
+            return viewClass;
         }
-        return viewClass;
+        return null;
     }
     isActionEnabled(name) {
         return false;
