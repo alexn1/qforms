@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ReactComponent, ComboBox, TextBox, Button } from '../../../common';
 
 export class NewDatabaseView extends ReactComponent {
@@ -16,9 +17,10 @@ export class NewDatabaseView extends ReactComponent {
         this.database = null;
         this.user = null;
         this.password = null;
+        this.el = createRef();
     }
 
-    onCreate = async (e) => {
+    onCreate = async (e?) => {
         // console.log('NewDatabaseView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
@@ -30,10 +32,23 @@ export class NewDatabaseView extends ReactComponent {
         });
     };
 
+    onKeyDown = (e) => {
+        console.log('NewDatabaseView.onKeyDown', e);
+        if (e.key === 'Escape') {
+            this.props.ctrl.onClose();
+        } else if (e.key === 'Enter') {
+            this.onCreate();
+        }
+    };
+
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div
+                className={`${this.getCssClassNames()} NewModelView`}
+                ref={this.el}
+                tabIndex={0}
+                onKeyDown={this.onKeyDown}>
                 <div className={`NewModelView__header`}>
                     <div className={`NewModelView__title`}>New Database</div>
                     <button type="button" className="close" onClick={ctrl.onClose}>

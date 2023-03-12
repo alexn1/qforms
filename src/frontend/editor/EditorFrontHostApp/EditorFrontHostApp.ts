@@ -171,7 +171,11 @@ export class EditorFrontHostApp extends FrontHostApp {
     async openModal(modalController: ModalController) {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
-        await this.view.rerender();
+        await this.view.rerender();        
+        if (modalController.view.el) {
+            // console.log('element', modalController.view.getElement());
+            modalController.view.getElement().focus();
+        }
     }
 
     async onModalClose() {

@@ -32340,7 +32340,6 @@ class Search {
         return Search.objToString(newObj);
     }
 }
-// Helper.registerGlobalClass(Search);
 
 
 /***/ }),
@@ -37571,6 +37570,10 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
+        if (modalController.view.el) {
+            // console.log('element', modalController.view.getElement());
+            modalController.view.getElement().focus();
+        }
     }
     async onModalClose() {
         console.log('EditorFrontHostApp.onModalClose');
@@ -37992,7 +37995,10 @@ __webpack_require__.r(__webpack_exports__);
 class ModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
-        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { ctrl }) });
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), {
+                ctrl,
+                onCreate: (c) => (ctrl.view = c),
+            }) }));
     }
 }
 
@@ -38212,10 +38218,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 
 
-class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+
+class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
@@ -38229,20 +38237,30 @@ class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
                 password: this.password.getValue(),
             });
         };
+        this.onKeyDown = (e) => {
+            console.log('NewDatabaseView.onKeyDown', e);
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
         this.class = null;
         this.name = null;
         this.host = null;
         this.database = null;
         this.user = null;
         this.password = null;
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { id: 'class', items: [
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: 'class', items: [
                                         { value: 'MySqlDatabase', title: 'MySqlDatabase' },
                                         { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
                                         { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
-                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 
