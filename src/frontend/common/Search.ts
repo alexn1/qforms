@@ -1,5 +1,3 @@
-import { Helper } from '../common/Helper';
-
 export class Search {
     static getObj(): any {
         if (!window.location.search.split('?')[1]) return {};
@@ -32,5 +30,3 @@ export class Search {
         return Search.objToString(newObj);
     }
 }
-
-// Helper.registerGlobalClass(Search);

@@ -34,4 +34,3 @@ class Search {
     }
 }
 exports.Search = Search;
-// Helper.registerGlobalClass(Search);

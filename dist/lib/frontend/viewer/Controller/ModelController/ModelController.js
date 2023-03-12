@@ -37,7 +37,7 @@ class ModelController extends Controller_1.Controller {
             const viewClass = common_1.Helper.getGlobalClass(viewClassName);
             if (!viewClass)
                 throw new Error(`no class ${viewClassName}`);
-            if (viewClass && !(viewClass.prototype instanceof ModelView_1.ModelView)) {
+            if (!(viewClass.prototype instanceof ModelView_1.ModelView)) {
                 throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
             }
             return viewClass;
