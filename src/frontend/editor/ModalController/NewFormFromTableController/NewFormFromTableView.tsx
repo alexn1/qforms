@@ -9,13 +9,14 @@ export class NewFormFromTableView extends ReactComponent {
 
     constructor(props) {
         super(props);
+        this.el = createRef();
         this.page = null;
         this.class = null;
         this.name = null;
         this.caption = null;
     }
 
-    onCreate = async (e) => {
+    onCreate = async (e?) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             page: this.page.getValue(),
@@ -23,6 +24,14 @@ export class NewFormFromTableView extends ReactComponent {
             name: this.name.getValue(),
             caption: this.caption.getValue(),
         });
+    };
+
+    onKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            this.props.ctrl.onClose();
+        } else if (e.key === 'Enter') {
+            this.onCreate();
+        }
     };
 
     render() {
@@ -34,7 +43,11 @@ export class NewFormFromTableView extends ReactComponent {
         }));
         console.log('pages:', pages);
         return (
-            <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div
+                className={`${this.getCssClassNames()} NewModelView`}
+                ref={this.el}
+                tabIndex={0}
+                onKeyDown={this.onKeyDown}>
                 <div className={'NewModelView__header'}>
                     <div className={'NewModelView__title'}>New Form</div>
                     <button type="button" className="close" onClick={ctrl.onClose}>

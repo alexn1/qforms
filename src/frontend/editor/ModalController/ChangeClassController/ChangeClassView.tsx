@@ -6,20 +6,33 @@ export class ChangeClassView extends ReactComponent {
 
     constructor(props) {
         super(props);
+        this.el = createRef();
         this.class = null;
     }
 
-    onCreate = async (e) => {
+    onCreate = async (e?) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
         });
     };
 
+    onKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            this.props.ctrl.onClose();
+        } else if (e.key === 'Enter') {
+            this.onCreate();
+        }
+    };
+
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div
+                className={`${this.getCssClassNames()} NewModelView`}
+                ref={this.el}
+                tabIndex={0}
+                onKeyDown={this.onKeyDown}>
                 <div className={'NewModelView__header'}>
                     <div className={'NewModelView__title'}>Change Field Class</div>
                     <button type="button" className="close" onClick={ctrl.onClose}>

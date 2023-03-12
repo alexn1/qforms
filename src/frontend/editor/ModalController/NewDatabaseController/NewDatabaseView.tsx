@@ -33,7 +33,6 @@ export class NewDatabaseView extends ReactComponent {
     };
 
     onKeyDown = (e) => {
-        console.log('NewDatabaseView.onKeyDown', e);
         if (e.key === 'Escape') {
             this.props.ctrl.onClose();
         } else if (e.key === 'Enter') {

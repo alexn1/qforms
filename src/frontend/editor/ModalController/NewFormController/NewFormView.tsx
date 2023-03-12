@@ -8,12 +8,13 @@ export class NewFormView extends ReactComponent {
 
     constructor(props) {
         super(props);
+        this.el = createRef();
         this.name = null;
         this.caption = null;
         this.class = null;
     }
 
-    onCreate = async (e) => {
+    onCreate = async (e?) => {
         // console.log('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
@@ -22,10 +23,22 @@ export class NewFormView extends ReactComponent {
         });
     };
 
+    onKeyDown = (e) => {
+        if (e.key === 'Escape') {
+            this.props.ctrl.onClose();
+        } else if (e.key === 'Enter') {
+            this.onCreate();
+        }
+    };
+
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <div className={`${this.getCssClassNames()} NewModelView`}>
+            <div
+                className={`${this.getCssClassNames()} NewModelView`}
+                ref={this.el}
+                tabIndex={0}
+                onKeyDown={this.onKeyDown}>
                 <div className={'NewModelView__header'}>
                     <div className={'NewModelView__title'}>New Form</div>
                     <button type="button" className="close" onClick={ctrl.onClose}>
