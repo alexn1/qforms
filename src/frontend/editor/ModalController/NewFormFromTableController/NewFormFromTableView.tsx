@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ReactComponent, TextBox, ComboBox } from '../../../common';
 
 export class NewFormFromTableView extends ReactComponent {

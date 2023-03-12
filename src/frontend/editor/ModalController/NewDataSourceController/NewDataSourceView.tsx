@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ReactComponent, TextBox, ComboBox, Button } from '../../../common';
 
 export class NewDataSourceView extends ReactComponent {

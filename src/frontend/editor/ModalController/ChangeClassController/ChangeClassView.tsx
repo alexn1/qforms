@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ReactComponent, ComboBox } from '../../../common';
 
 export class ChangeClassView extends ReactComponent {

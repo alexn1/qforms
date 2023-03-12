@@ -11,13 +11,13 @@ export class NewDatabaseView extends ReactComponent {
 
     constructor(props) {
         super(props);
+        this.el = createRef();
         this.class = null;
         this.name = null;
         this.host = null;
         this.database = null;
         this.user = null;
         this.password = null;
-        this.el = createRef();
     }
 
     onCreate = async (e?) => {

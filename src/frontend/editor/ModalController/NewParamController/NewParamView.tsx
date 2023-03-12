@@ -1,3 +1,4 @@
+import { createRef } from 'react';
 import { ReactComponent, TextBox } from '../../../common';
 
 export class NewParamView extends ReactComponent {
