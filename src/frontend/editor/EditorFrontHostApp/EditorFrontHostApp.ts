@@ -6,6 +6,7 @@ import { PageLinkController } from '../ModelController/PageLinkController/PageLi
 import { ModelController } from '../ModelController/ModelController';
 import { DocumentController } from '../ModelController/DocumentController/DocumentController';
 import { Helper } from '../../common';
+import { ModalController } from '../ModalController/ModalController';
 
 export class EditorFrontHostApp extends FrontHostApp {
     public static editorApp: any;
@@ -18,9 +19,9 @@ export class EditorFrontHostApp extends FrontHostApp {
     items: any;
     tabWidget: any;
     documents: any[];
-    modal: any;
+    modal: ModalController;
 
-    constructor(data, runAppLink) {
+    constructor(data, runAppLink: string) {
         super();
         console.log('EditorFrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
@@ -167,7 +168,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.view.rerender();
     };
 
-    async openModal(modalController) {
+    async openModal(modalController: ModalController) {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
