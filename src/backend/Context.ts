@@ -197,7 +197,10 @@ export class Context {
     }
 
     getUrl(): URL {
-        return new URL(this.getReq().url);
+        const req = this.getReq();
+        var fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+        // console.log('Context.getUrl', fullUrl);
+        return new URL(fullUrl);
     }
 
     destroy(): void {}
