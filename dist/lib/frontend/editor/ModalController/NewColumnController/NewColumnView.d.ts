@@ -3,6 +3,7 @@ import { ReactComponent } from '../../../common';
 export declare class NewColumnView extends ReactComponent {
     name: any;
     constructor(props: any);
-    onCreate: (e: any) => Promise<void>;
+    onCreate: (e?: any) => Promise<void>;
+    onKeyDown: (e: any) => void;
     render(): JSX.Element;
 }

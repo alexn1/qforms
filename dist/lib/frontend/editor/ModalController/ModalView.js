@@ -32,7 +32,10 @@ require("./NewModelView.less");
 class ModalView extends common_1.ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
-        return (0, jsx_runtime_1.jsx)(common_1.Modal, { children: React.createElement(ctrl.getViewClass(), { ctrl }) });
+        return ((0, jsx_runtime_1.jsx)(common_1.Modal, { children: React.createElement(ctrl.getViewClass(), {
+                ctrl,
+                onCreate: (c) => (ctrl.view = c),
+            }) }));
     }
 }
 exports.ModalView = ModalView;

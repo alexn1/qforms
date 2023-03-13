@@ -19,7 +19,7 @@ export class Search {
         return `?${search}`;
     }
 
-    static filter(names) {
+    static filter(names: string[]) {
         const newObj = {};
         const obj = Search.getObj();
         for (const name of names) {

@@ -5,6 +5,7 @@ export declare class NewPageView extends ReactComponent {
     caption: any;
     startup: any;
     constructor(props: any);
-    onCreate: (e: any) => Promise<void>;
+    onCreate: (e?: any) => Promise<void>;
+    onKeyDown: (e: any) => void;
     render(): JSX.Element;
 }

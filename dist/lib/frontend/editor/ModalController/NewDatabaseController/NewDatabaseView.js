@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.NewDatabaseView = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
+const react_1 = require("react");
 const common_1 = require("../../../common");
 class NewDatabaseView extends common_1.ReactComponent {
     constructor(props) {
@@ -17,6 +18,15 @@ class NewDatabaseView extends common_1.ReactComponent {
                 password: this.password.getValue(),
             });
         };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0, react_1.createRef)();
         this.class = null;
         this.name = null;
         this.host = null;
@@ -26,7 +36,7 @@ class NewDatabaseView extends common_1.ReactComponent {
     }
     render() {
         const ctrl = this.props.ctrl;
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView` }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: 'class', items: [
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0, jsx_runtime_1.jsx)("span", { children: "\u00D7" }) }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: [(0, jsx_runtime_1.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0, jsx_runtime_1.jsx)(common_1.ComboBox, { id: 'class', items: [
                                         { value: 'MySqlDatabase', title: 'MySqlDatabase' },
                                         { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
                                         { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },

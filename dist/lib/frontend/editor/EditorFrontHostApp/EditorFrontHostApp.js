@@ -150,6 +150,10 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
+        if (modalController.view.el) {
+            // console.log('element', modalController.view.getElement());
+            modalController.view.getElement().focus();
+        }
     }
     async onModalClose() {
         console.log('EditorFrontHostApp.onModalClose');
