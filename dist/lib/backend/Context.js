@@ -122,8 +122,8 @@ class Context {
     isDebugMode() {
         return this.query['debug'] === '1';
     }
-    getPath() {
-        return this.getReq().path;
+    getUrl() {
+        return new URL(this.getReq().url);
     }
     destroy() { }
 }

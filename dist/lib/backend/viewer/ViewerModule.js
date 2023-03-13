@@ -57,7 +57,7 @@ class ViewerModule {
         return this.js;
     }
     async handleViewerGet(context, application) {
-        console.log('ViewerModule.handleViewerGet', context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/);
+        console.log('ViewerModule.handleViewerGet', context.query, context.getReq().url);
         if (application.isAuthentication() &&
             !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
             await this.loginGet(context, application);
@@ -86,8 +86,8 @@ class ViewerModule {
         application.init();
         // frontHostApp
         const frontHostApp = new common_1.FrontHostApp({
-            path: context.getPath(),
             debug: context.isDebugMode(),
+            url: context.getUrl(),
         });
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);

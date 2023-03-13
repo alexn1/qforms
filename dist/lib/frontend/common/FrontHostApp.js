@@ -119,7 +119,7 @@ class FrontHostApp {
         }
     }
     createLink(params = null) {
-        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
             return [
                 path,
@@ -137,6 +137,18 @@ class FrontHostApp {
         }
         return this.options;
     }
+    filterSearch(names) {
+        if (typeof window === 'object') {
+            return Search_1.Search.filter(names);
+        }
+        const newObj = {};
+        const obj = this.getOptions().url.searchParams;
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return Search_1.Search.objToString(newObj);
+    }
 }
 exports.FrontHostApp = FrontHostApp;
-// Helper.registerGlobalClass(FrontHostApp);

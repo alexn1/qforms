@@ -1,9 +1,8 @@
-import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 
 export interface FrontHostAppOptions {
-    path: string;
     debug: boolean;
+    url: URL;
 }
 
 export class FrontHostApp {
@@ -146,7 +145,8 @@ export class FrontHostApp {
     }
 
     createLink(params = null): string {
-        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        const path =
+            typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
             return [
                 path,
@@ -165,6 +165,18 @@ export class FrontHostApp {
         }
         return this.options;
     }
-}
 
-// Helper.registerGlobalClass(FrontHostApp);
+    filterSearch(names: string[]): string {
+        if (typeof window === 'object') {
+            return Search.filter(names);
+        }
+        const newObj = {};
+        const obj = this.getOptions().url.searchParams;
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return Search.objToString(newObj);
+    }
+}

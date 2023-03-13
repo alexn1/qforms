@@ -1,6 +1,6 @@
 export interface FrontHostAppOptions {
-    path: string;
     debug: boolean;
+    url: URL;
 }
 export declare class FrontHostApp {
     protected options?: FrontHostAppOptions;
@@ -26,4 +26,5 @@ export declare class FrontHostApp {
     isDebugMode(): boolean;
     createLink(params?: any): string;
     getOptions(): FrontHostAppOptions;
+    filterSearch(names: string[]): string;
 }

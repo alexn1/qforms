@@ -80,8 +80,11 @@ export class ViewerModule {
     async handleViewerGet(context: Context, application: BkApplication) {
         console.log(
             'ViewerModule.handleViewerGet',
-            context.query /*, Object.keys(context.query).map(name => typeof context.query[name])*/,
+            context.query,
+            context.getReq().url,
+            // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
+
         if (
             application.isAuthentication() &&
             !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])
@@ -128,8 +131,8 @@ export class ViewerModule {
 
         // frontHostApp
         const frontHostApp = new FrontHostApp({
-            path: context.getPath(),
             debug: context.isDebugMode(),
+            url: context.getUrl(),
         });
 
         // applicationController
