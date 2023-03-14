@@ -287,12 +287,12 @@ class Helper {
         return Array.from(Array(n).keys());
     }
     static inIframe() {
-        try {
+        return false;
+        /* try {
             return window.self !== window.top;
-        }
-        catch (e) {
-            return true;
-        }
+        } catch (e) {
+            return false;
+        } */
     }
     static setCookie(name, value, time) {
         var expires = '';

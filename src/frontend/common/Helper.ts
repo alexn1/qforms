@@ -325,11 +325,12 @@ export class Helper {
     }
 
     static inIframe(): boolean {
-        try {
+        return false;
+        /* try {
             return window.self !== window.top;
         } catch (e) {
-            return true;
-        }
+            return false;
+        } */
     }
 
     static setCookie(name: string, value: string | number | boolean, time: number) {
