@@ -154,7 +154,8 @@ class FrontHostApp {
         if (typeof window === 'object') {
             return Search_1.Search.getObj();
         }
-        return this.getOptions().url.searchParams;
+        // @ts-ignore
+        return Object.fromEntries(this.getOptions().url.searchParams);
     }
 }
 exports.FrontHostApp = FrontHostApp;
