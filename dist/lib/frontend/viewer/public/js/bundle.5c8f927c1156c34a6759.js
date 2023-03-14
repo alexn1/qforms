@@ -32081,7 +32081,7 @@ class FrontHostApp {
         }
     }
     createLink(params = null) {
-        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
             return [
                 path,
@@ -32099,8 +32099,20 @@ class FrontHostApp {
         }
         return this.options;
     }
+    filterSearch(names) {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.filter(names);
+        }
+        const newObj = {};
+        const obj = this.getOptions().url.searchParams;
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.objToString(newObj);
+    }
 }
-// Helper.registerGlobalClass(FrontHostApp);
 
 
 /***/ }),
@@ -32400,12 +32412,12 @@ class Helper {
         return Array.from(Array(n).keys());
     }
     static inIframe() {
-        try {
+        return false;
+        /* try {
             return window.self !== window.top;
-        }
-        catch (e) {
-            return true;
-        }
+        } catch (e) {
+            return false;
+        } */
     }
     static setCookie(name, value, time) {
         var expires = '';
@@ -32629,7 +32641,6 @@ class Search {
         return Search.objToString(newObj);
     }
 }
-// Helper.registerGlobalClass(Search);
 
 
 /***/ }),
@@ -40354,11 +40365,16 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
             throw new Error(`${this.constructor.name} not supports view`);
         }
         const viewClassName = model.getAttr('viewClass');
-        const viewClass = _common__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(viewClassName);
-        if (viewClass && !(viewClass.prototype instanceof _ModelView__WEBPACK_IMPORTED_MODULE_1__.ModelView)) {
-            throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+        if (viewClassName) {
+            const viewClass = _common__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(viewClassName);
+            if (!viewClass)
+                throw new Error(`no class ${viewClassName}`);
+            if (!(viewClass.prototype instanceof _ModelView__WEBPACK_IMPORTED_MODULE_1__.ModelView)) {
+                throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+            }
+            return viewClass;
         }
-        return viewClass;
+        return null;
     }
     isActionEnabled(name) {
         return false;
