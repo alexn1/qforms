@@ -32112,6 +32112,12 @@ class FrontHostApp {
         }
         return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.objToString(newObj);
     }
+    getSearchParams() {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj();
+        }
+        return this.getOptions().url.searchParams;
+    }
 }
 
 

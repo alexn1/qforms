@@ -150,5 +150,11 @@ class FrontHostApp {
         }
         return Search_1.Search.objToString(newObj);
     }
+    getSearchParams() {
+        if (typeof window === 'object') {
+            return Search_1.Search.getObj();
+        }
+        return this.getOptions().url.searchParams;
+    }
 }
 exports.FrontHostApp = FrontHostApp;

@@ -179,4 +179,11 @@ export class FrontHostApp {
         }
         return Search.objToString(newObj);
     }
+
+    getSearchParams() {
+        if (typeof window === 'object') {
+            return Search.getObj();
+        }
+        return this.getOptions().url.searchParams;
+    }
 }

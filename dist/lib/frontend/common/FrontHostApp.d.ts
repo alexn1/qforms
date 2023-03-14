@@ -27,4 +27,5 @@ export declare class FrontHostApp {
     createLink(params?: any): string;
     getOptions(): FrontHostAppOptions;
     filterSearch(names: string[]): string;
+    getSearchParams(): any;
 }
