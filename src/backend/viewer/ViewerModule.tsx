@@ -133,6 +133,7 @@ export class ViewerModule {
         const frontHostApp = new FrontHostApp({
             debug: context.isDebugMode(),
             url: context.getUrl(),
+            cookies: context.getCookies(),
         });
 
         // applicationController

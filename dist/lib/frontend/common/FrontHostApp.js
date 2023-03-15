@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrontHostApp = void 0;
+const Helper_1 = require("../common/Helper");
 const Search_1 = require("../common/Search");
 class FrontHostApp {
     constructor(options) {
@@ -156,6 +157,12 @@ class FrontHostApp {
         }
         // @ts-ignore
         return Object.fromEntries(this.getOptions().url.searchParams);
+    }
+    getCookie(name) {
+        if (typeof window === 'object') {
+            return Helper_1.Helper.getCookie(name);
+        }
+        return this.getOptions().cookies[name];
     }
 }
 exports.FrontHostApp = FrontHostApp;

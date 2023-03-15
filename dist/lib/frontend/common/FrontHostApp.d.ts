@@ -1,6 +1,9 @@
 export interface FrontHostAppOptions {
     debug: boolean;
     url: URL;
+    cookies: {
+        [name: string]: string;
+    };
 }
 export declare class FrontHostApp {
     protected options?: FrontHostAppOptions;
@@ -28,4 +31,5 @@ export declare class FrontHostApp {
     getOptions(): FrontHostAppOptions;
     filterSearch(names: string[]): string;
     getSearchParams(): any;
+    getCookie(name: string): string;
 }

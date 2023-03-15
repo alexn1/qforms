@@ -41,7 +41,9 @@ export declare class Context {
     getUser(): any;
     getClientTimezoneOffset(): number | null;
     getTimeOffset(): number | null;
-    getCookies(): any;
+    getCookies(): {
+        [name: string]: string;
+    };
     getQuery(): any;
     getParams(): {
         [name: string]: any;

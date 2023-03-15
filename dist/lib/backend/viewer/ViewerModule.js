@@ -88,6 +88,7 @@ class ViewerModule {
         const frontHostApp = new common_1.FrontHostApp({
             debug: context.isDebugMode(),
             url: context.getUrl(),
+            cookies: context.getCookies(),
         });
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);

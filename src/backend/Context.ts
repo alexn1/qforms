@@ -94,7 +94,7 @@ export class Context {
         return null;
     }
 
-    getCookies(): any {
+    getCookies(): {[name: string]: string} {
         return {
             ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}),
         };

@@ -1,8 +1,10 @@
+import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 
 export interface FrontHostAppOptions {
     debug: boolean;
     url: URL;
+    cookies: { [name: string]: string };
 }
 
 export class FrontHostApp {
@@ -186,5 +188,12 @@ export class FrontHostApp {
         }
         // @ts-ignore
         return Object.fromEntries(this.getOptions().url.searchParams);
+    }
+
+    getCookie(name: string): string | undefined {
+        if (typeof window === 'object') {
+            return Helper.getCookie(name);
+        }
+        return this.getOptions().cookies[name];
     }
 }
