@@ -31673,7 +31673,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
 /* harmony export */ });
-/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+
 
 class FrontHostApp {
     constructor(options) {
@@ -31785,14 +31787,14 @@ class FrontHostApp {
     }
     isDebugMode() {
         if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj()['debug'] === '1';
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
         }
         else {
             return this.getOptions().debug;
         }
     }
     createLink(params = null) {
-        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().path;
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
             return [
                 path,
@@ -31810,8 +31812,33 @@ class FrontHostApp {
         }
         return this.options;
     }
+    filterSearch(names) {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.filter(names);
+        }
+        const newObj = {};
+        const obj = this.getOptions().url.searchParams;
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.objToString(newObj);
+    }
+    getSearchParams() {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
+        }
+        // @ts-ignore
+        return Object.fromEntries(this.getOptions().url.searchParams);
+    }
+    getCookie(name) {
+        if (typeof window === 'object') {
+            return _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.getCookie(name);
+        }
+        return this.getOptions().cookies[name];
+    }
 }
-// Helper.registerGlobalClass(FrontHostApp);
 
 
 /***/ }),
@@ -32111,12 +32138,12 @@ class Helper {
         return Array.from(Array(n).keys());
     }
     static inIframe() {
-        try {
+        return false;
+        /* try {
             return window.self !== window.top;
-        }
-        catch (e) {
-            return true;
-        }
+        } catch (e) {
+            return false;
+        } */
     }
     static setCookie(name, value, time) {
         var expires = '';
@@ -37572,7 +37599,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         await this.view.rerender();
         if (modalController.view.el) {
             // console.log('element', modalController.view.getElement());
-            modalController.view.getElement().focus();
+            // modalController.view.getElement().focus();
         }
     }
     async onModalClose() {
