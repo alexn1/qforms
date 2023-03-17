@@ -366,7 +366,7 @@ export class Helper {
     }
 
     static registerGlobalClass(Class) {
-        console.log('Helper.registerGlobalClass', Class.name);
+        // console.log('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name]) throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
