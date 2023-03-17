@@ -37597,10 +37597,10 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
-        if (modalController.view.el) {
-            // console.log('element', modalController.view.getElement());
-            // modalController.view.getElement().focus();
-        }
+        /* if (modalController.view.el) {
+            console.log('element', modalController.view.getElement());
+            modalController.view.getElement().focus();
+        } */
     }
     async onModalClose() {
         console.log('EditorFrontHostApp.onModalClose');

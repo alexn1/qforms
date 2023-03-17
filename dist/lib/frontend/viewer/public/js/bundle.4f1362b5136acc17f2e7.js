@@ -31962,7 +31962,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
 /* harmony export */ });
-/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+
 
 class FrontHostApp {
     constructor(options) {
@@ -32074,7 +32076,7 @@ class FrontHostApp {
     }
     isDebugMode() {
         if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj()['debug'] === '1';
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
         }
         else {
             return this.getOptions().debug;
@@ -32101,7 +32103,7 @@ class FrontHostApp {
     }
     filterSearch(names) {
         if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.filter(names);
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.filter(names);
         }
         const newObj = {};
         const obj = this.getOptions().url.searchParams;
@@ -32110,14 +32112,20 @@ class FrontHostApp {
                 newObj[name] = obj[name];
             }
         }
-        return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.objToString(newObj);
+        return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.objToString(newObj);
     }
     getSearchParams() {
         if (typeof window === 'object') {
-            return _common_Search__WEBPACK_IMPORTED_MODULE_0__.Search.getObj();
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
         }
         // @ts-ignore
         return Object.fromEntries(this.getOptions().url.searchParams);
+    }
+    getCookie(name) {
+        if (typeof window === 'object') {
+            return _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.getCookie(name);
+        }
+        return this.getOptions().cookies[name];
     }
 }
 
