@@ -31,5 +31,5 @@ export declare class FrontHostApp {
     getOptions(): FrontHostAppOptions;
     filterSearch(names: string[]): string;
     getSearchParams(): any;
-    getCookie(name: string): string;
+    getCookie(name: string): string | undefined;
 }
