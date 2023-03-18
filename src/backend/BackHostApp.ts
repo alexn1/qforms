@@ -77,11 +77,11 @@ export class BackHostApp {
         this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
-        const port = this.params.port || process.env.LISTEN_PORT || 3000;
+        const port = this.params.port || process.env.LISTEN_PORT || 7000;
         const { log } = this.params;
 
         if (!fs.existsSync(this.appsDirPath)) {
-            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));            
+            console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
             return 1;
         }
 

@@ -10,7 +10,7 @@ RUN npm ci --omit=dev
 COPY dist dist
 COPY apps apps
 
-EXPOSE 3000
+EXPOSE 7000
 
 VOLUME ["/app/apps", "/app/runtime"]
 
