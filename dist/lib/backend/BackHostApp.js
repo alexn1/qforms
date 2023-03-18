@@ -53,7 +53,7 @@ class BackHostApp {
         this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
-        const port = this.params.port || process.env.LISTEN_PORT || 3000;
+        const port = this.params.port || process.env.LISTEN_PORT || 7000;
         const { log } = this.params;
         if (!fs_1.default.existsSync(this.appsDirPath)) {
             console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
