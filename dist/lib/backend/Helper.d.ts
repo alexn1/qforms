@@ -48,4 +48,5 @@ export declare class Helper {
     static createEmptyPromise<T = any>(): Promise<T>;
     static test(): void;
     static formatNumber(value: number): string;
+    static formatTime2(_sec: any): string;
 }

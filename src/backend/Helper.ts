@@ -526,6 +526,30 @@ export class Helper {
     static formatNumber(value: number) {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
+
+    static formatTime2(_sec) {
+        // console.log('Helper.formatTime', sec);
+        let sec = _sec;
+        let sign = '';
+        if (_sec < 0) {
+            sec = -sec;
+            sign = '-';
+        }
+        let h = Math.floor(sec / 3600);
+        let m = Math.floor((sec - h * 3600) / 60);
+        let s = Math.floor(sec - h * 3600 - m * 60);
+        // @ts-ignore
+        if (h < 10) h = '0' + h;
+        // @ts-ignore
+        if (m < 10) m = '0' + m;
+        // @ts-ignore
+        if (s < 10) s = '0' + s;
+        if (Math.floor(sec / 3600) === 0) {
+            return `${sign}${m}m:${s}s`;
+        } else {
+            return `${sign}${h}h:${m}m:${s}s`;
+        }
+    }
 }
 
 // @ts-ignore
