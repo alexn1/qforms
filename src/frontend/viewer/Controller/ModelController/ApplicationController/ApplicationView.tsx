@@ -2,10 +2,13 @@ import React from 'react';
 import { ModelView } from '../ModelView';
 import { PageController } from '../PageController/PageController';
 import { Modal, Menu, Statusbar } from '../../../../common';
-import './ApplicationView.less';
 import { ApplicationController } from './ApplicationController';
 
-export class ApplicationView extends ModelView<ApplicationController> {
+import './ApplicationView.less';
+
+export class ApplicationView<
+    TApplicationController extends ApplicationController = ApplicationController,
+> extends ModelView<TApplicationController> {
     renderActivePage(): any {
         const { ctrl } = this.props;
         if (ctrl.activePage) {

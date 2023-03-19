@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import { ModelView } from '../ModelView';
-import './ApplicationView.less';
 import { ApplicationController } from './ApplicationController';
-export declare class ApplicationView extends ModelView<ApplicationController> {
+import './ApplicationView.less';
+export declare class ApplicationView<TApplicationController extends ApplicationController = ApplicationController> extends ModelView<TApplicationController> {
     renderActivePage(): any;
     renderView(ctrl: any, props?: {}): any;
     renderModals(): any;
