@@ -56,47 +56,48 @@ class ViewerModule {
     getScripts() {
         return this.js;
     }
-    async handleViewerGet(context, application) {
+    async handleViewerGet(context, bkApplication) {
         console.log('ViewerModule.handleViewerGet', context.query, context.getReq().url);
-        if (application.isAuthentication() &&
+        if (bkApplication.isAuthentication() &&
             !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-            await this.loginGet(context, application);
+            await this.loginGet(context, bkApplication);
         }
         else {
-            await application.connect(context);
+            await bkApplication.connect(context);
             try {
-                await application.initContext(context);
-                const data = await application.fill(context);
-                const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
-                const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
-                const appViewHtml = this.renderApplicationView(context, data);
-                // console.log('appViewHtml:', appViewHtml);
-                const html = (0, index_1.index)(pkg.version, application, context, data, links, scripts, appViewHtml);
+                await bkApplication.initContext(context);
+                const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
+                const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
+                const data = await bkApplication.fill(context);
+                const html = this.renderHtml(bkApplication, context, links, scripts, data);
                 context.getRes().end(html);
             }
             finally {
-                await application.release(context);
+                await bkApplication.release(context);
             }
         }
     }
-    renderApplicationView(context, data) {
-        console.log('renderApplicationView');
-        // application
-        const application = new Application_1.Application(data);
-        application.init();
+    renderHtml(bkApplication, context, links, scripts, data) {
+        console.log('ViewerModule.renderHtml');
         // frontHostApp
         const frontHostApp = new common_1.FrontHostApp({
             debug: context.isDebugMode(),
             url: context.getUrl(),
             cookies: context.getCookies(),
         });
+        // application
+        const application = new Application_1.Application(data);
+        application.init();
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();
-        return server_1.default.renderToString(react_1.default.createElement(applicationController.getViewClass(), {
+        const appViewHtml = server_1.default.renderToString(react_1.default.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
             onCreate: (c) => { },
         }));
+        // console.log('appViewHtml:', appViewHtml);
+        const html = (0, index_1.index)(pkg.version, bkApplication, context, data, links, scripts, appViewHtml, applicationController);
+        return html;
     }
     async loginGet(context, application) {
         console.log('ViewerModule.loginGet');

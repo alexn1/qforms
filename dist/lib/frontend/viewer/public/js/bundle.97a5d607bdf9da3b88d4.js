@@ -36507,7 +36507,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 params: this.getGlobalParams(),
             })
             : null;
-        this.frontHostApp.setDocumentTitle(this.getTitle());
+        // this.frontHostApp.setDocumentTitle(this.getTitle());
         _common__WEBPACK_IMPORTED_MODULE_4__.Helper.addClassToDocumentElement(_common__WEBPACK_IMPORTED_MODULE_4__.Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();

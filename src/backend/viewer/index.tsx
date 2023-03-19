@@ -1,25 +1,27 @@
+import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 
 export const index = (
-    version: string,
+    qformsVersion: string,
     application: BkApplication,
     context: Context,
     data: any,
     links: string,
     scripts: string,
     appViewHtml: string,
+    applicationController: ApplicationController,
 ) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
         context.query.debug === '1' ? 'debug' : ''
     }" lang="${application.getAttr('lang')}">
 <head>
-    <!-- qforms v${version} -->
+    <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>${applicationController.getTitle()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->

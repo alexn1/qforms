@@ -1,15 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.index = void 0;
-const index = (version, application, context, data, links, scripts, appViewHtml) => {
+const index = (qformsVersion, application, context, data, links, scripts, appViewHtml, applicationController) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
 <head>
-    <!-- qforms v${version} -->
+    <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>${applicationController.getTitle()}</title>
     <!-- links -->
     ${links}
     <!-- scripts -->

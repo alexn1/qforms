@@ -64,7 +64,7 @@ export class ApplicationController extends ModelController<Application> {
                   params: this.getGlobalParams(),
               })
             : null;
-        this.frontHostApp.setDocumentTitle(this.getTitle());
+        // this.frontHostApp.setDocumentTitle(this.getTitle());
         Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
