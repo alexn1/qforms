@@ -36,6 +36,7 @@ const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
 const Result_1 = require("../../../../Result");
+const index_1 = require("../../index");
 const text = __importStar(require("../../text"));
 const pkg = require('../../../../../package.json');
 class BkApplication extends BkModel_1.BkModel {
@@ -459,6 +460,9 @@ class BkApplication extends BkModel_1.BkModel {
             throw new MyError({message: 'not authenticated', context});
         }
         */
+    }
+    renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
+        return (0, index_1.index)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
 }
 exports.BkApplication = BkApplication;

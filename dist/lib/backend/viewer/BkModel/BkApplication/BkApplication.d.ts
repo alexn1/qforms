@@ -9,6 +9,7 @@ import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
+import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
     private appInfo;
     private hostApp;
@@ -71,4 +72,5 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getLoginViewClassName(): string;
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;
+    renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: string, appViewHtml: string): string;
 }

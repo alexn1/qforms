@@ -15,7 +15,6 @@ const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
 const Application_1 = require("../../frontend/viewer/Model/Application/Application");
 const ApplicationController_1 = require("../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController");
-const index_1 = require("./index");
 const login_1 = require("./login");
 const common_1 = require("../../frontend/common");
 const pkg = require('../../../package.json');
@@ -96,7 +95,7 @@ class ViewerModule {
             onCreate: (c) => { },
         }));
         // console.log('appViewHtml:', appViewHtml);
-        const html = (0, index_1.index)(bkApplication, context, applicationController, pkg.version, links, scripts, data, appViewHtml);
+        const html = bkApplication.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
     async loginGet(context, application) {

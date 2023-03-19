@@ -17,8 +17,11 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { MyError } from '../../../MyError';
 import { Result } from '../../../../Result';
+import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
+import { index } from '../../index';
 
 import * as text from '../../text';
+
 const pkg = require('../../../../../package.json');
 
 export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
@@ -511,5 +514,26 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
             throw new MyError({message: 'not authenticated', context});
         }
         */
+    }
+
+    renderIndexHtml(
+        context: Context,
+        applicationController: ApplicationController,
+        qformsVersion: string,
+        links: string,
+        scripts: string,
+        data: string,
+        appViewHtml: string,
+    ): string {
+        return index(
+            this,
+            context,
+            applicationController,
+            qformsVersion,
+            links,
+            scripts,
+            data,
+            appViewHtml,
+        );
     }
 }

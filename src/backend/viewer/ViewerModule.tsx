@@ -14,7 +14,6 @@ import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { Application } from '../../frontend/viewer/Model/Application/Application';
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { index } from './index';
 import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
 
@@ -136,8 +135,7 @@ export class ViewerModule {
         );
         // console.log('appViewHtml:', appViewHtml);
 
-        const html = index(
-            bkApplication,
+        const html = bkApplication.renderIndexHtml(
             context,
             applicationController,
             pkg.version,
@@ -146,6 +144,7 @@ export class ViewerModule {
             data,
             appViewHtml,
         );
+
         return html;
     }
 
