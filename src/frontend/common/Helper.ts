@@ -388,7 +388,4 @@ export class Helper {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Helper = Helper;
-}
+Helper.registerGlobalClass(Helper);
