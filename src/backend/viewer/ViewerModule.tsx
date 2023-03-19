@@ -144,14 +144,14 @@ export class ViewerModule {
         // console.log('appViewHtml:', appViewHtml);
 
         const html = index(
-            pkg.version,
             bkApplication,
             context,
-            data,
+            applicationController,
+            pkg.version,
             links,
             scripts,
+            data,
             appViewHtml,
-            applicationController,
         );
         return html;
     }

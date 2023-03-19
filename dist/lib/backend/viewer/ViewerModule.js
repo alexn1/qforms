@@ -96,7 +96,7 @@ class ViewerModule {
             onCreate: (c) => { },
         }));
         // console.log('appViewHtml:', appViewHtml);
-        const html = (0, index_1.index)(pkg.version, bkApplication, context, data, links, scripts, appViewHtml, applicationController);
+        const html = (0, index_1.index)(bkApplication, context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
     async loginGet(context, application) {

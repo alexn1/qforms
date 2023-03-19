@@ -3,14 +3,14 @@ import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 
 export const index = (
-    qformsVersion: string,
     application: BkApplication,
     context: Context,
-    data: any,
+    applicationController: ApplicationController,
+    qformsVersion: string,
     links: string,
     scripts: string,
+    data: any,
     appViewHtml: string,
-    applicationController: ApplicationController,
 ) => {
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
