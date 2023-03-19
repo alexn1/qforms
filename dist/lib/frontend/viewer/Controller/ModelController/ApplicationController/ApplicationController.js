@@ -95,7 +95,7 @@ class ApplicationController extends ModelController_1.ModelController {
             })
             : null;
         // this.frontHostApp.setDocumentTitle(this.getTitle());
-        common_1.Helper.addClassToDocumentElement(common_1.Helper.inIframe() ? 'iframe' : 'not-iframe');
+        // Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }

@@ -65,7 +65,7 @@ export class ApplicationController extends ModelController<Application> {
               })
             : null;
         // this.frontHostApp.setDocumentTitle(this.getTitle());
-        Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
+        // Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }

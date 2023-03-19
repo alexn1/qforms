@@ -30,7 +30,6 @@ export declare class Helper {
     static addTimezoneOffset(date: any): void;
     static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
-    static inIframe(): boolean;
     static setCookie(name: string, value: string | number | boolean, time: number): void;
     static getCookie(name: string): string | undefined;
     static eraseCookie(name: string): void;

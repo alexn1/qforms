@@ -324,14 +324,14 @@ export class Helper {
         return Array.from(Array(n).keys());
     }
 
-    static inIframe(): boolean {
-        return false;
-        /* try {
-            return window.self !== window.top;
-        } catch (e) {
-            return false;
-        } */
-    }
+    // static inIframe(): boolean {
+    //     return false;
+    //     /* try {
+    //         return window.self !== window.top;
+    //     } catch (e) {
+    //         return false;
+    //     } */
+    // }
 
     static setCookie(name: string, value: string | number | boolean, time: number) {
         var expires = '';

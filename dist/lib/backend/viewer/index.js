@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.index = void 0;
 const index = (qformsVersion, application, context, data, links, scripts, appViewHtml, applicationController) => {
     return `<!DOCTYPE html>
-<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''}" lang="${application.getAttr('lang')}">
+<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''} ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr('lang')}">
 <head>
     <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->

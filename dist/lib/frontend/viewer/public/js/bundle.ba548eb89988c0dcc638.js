@@ -32426,14 +32426,14 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static inIframe() {
-        return false;
-        /* try {
-            return window.self !== window.top;
-        } catch (e) {
-            return false;
-        } */
-    }
+    // static inIframe(): boolean {
+    //     return false;
+    //     /* try {
+    //         return window.self !== window.top;
+    //     } catch (e) {
+    //         return false;
+    //     } */
+    // }
     static setCookie(name, value, time) {
         var expires = '';
         if (time) {
@@ -36508,7 +36508,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             })
             : null;
         // this.frontHostApp.setDocumentTitle(this.getTitle());
-        _common__WEBPACK_IMPORTED_MODULE_4__.Helper.addClassToDocumentElement(_common__WEBPACK_IMPORTED_MODULE_4__.Helper.inIframe() ? 'iframe' : 'not-iframe');
+        // Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
         const activePageName = this.getActivePageName();
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }

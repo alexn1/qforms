@@ -286,14 +286,14 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static inIframe() {
-        return false;
-        /* try {
-            return window.self !== window.top;
-        } catch (e) {
-            return false;
-        } */
-    }
+    // static inIframe(): boolean {
+    //     return false;
+    //     /* try {
+    //         return window.self !== window.top;
+    //     } catch (e) {
+    //         return false;
+    //     } */
+    // }
     static setCookie(name, value, time) {
         var expires = '';
         if (time) {

@@ -15,7 +15,9 @@ export const index = (
     return `<!DOCTYPE html>
 <html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
         context.query.debug === '1' ? 'debug' : ''
-    }" lang="${application.getAttr('lang')}">
+    } ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr(
+        'lang',
+    )}">
 <head>
     <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->
