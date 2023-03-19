@@ -1,4 +1,14 @@
-export const login = (version, context, application, links, scripts, data) => {
+import { Context } from '../Context';
+import { BkApplication } from './BkModel/BkApplication/BkApplication';
+
+export const login = (
+    version: string,
+    context: Context,
+    application: BkApplication,
+    links: string,
+    scripts: string,
+    data: any,
+) => {
     return `<!DOCTYPE html>
 <html class="${application.getLoginViewClassName()}" lang="${application.getAttr('lang')}">
 <head>
