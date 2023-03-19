@@ -16,7 +16,8 @@ const index = (application, context, applicationController, qformsVersion, links
     ${scripts}
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
+            const dataScriptElement = document.querySelector('script[type="application/json"]');
+            const data = JSON.parse(dataScriptElement.textContent);
             const frontHostApp = new ViewerFrontHostApp({data});
             frontHostApp.init();
             await frontHostApp.run();
