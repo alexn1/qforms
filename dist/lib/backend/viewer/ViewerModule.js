@@ -66,10 +66,7 @@ class ViewerModule {
             await bkApplication.connect(context);
             try {
                 await bkApplication.initContext(context);
-                const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
-                const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
-                const data = await bkApplication.fill(context);
-                const html = this.renderHtml(bkApplication, context, links, scripts, data);
+                const html = await this.renderHtml(bkApplication, context);
                 context.getRes().end(html);
             }
             finally {
@@ -77,8 +74,11 @@ class ViewerModule {
             }
         }
     }
-    renderHtml(bkApplication, context, links, scripts, data) {
+    async renderHtml(bkApplication, context) {
         console.log('ViewerModule.renderHtml');
+        const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
+        const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
+        const data = await bkApplication.fill(context);
         // frontHostApp
         const frontHostApp = new common_1.FrontHostApp({
             debug: context.isDebugMode(),

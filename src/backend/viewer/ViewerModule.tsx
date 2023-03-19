@@ -94,16 +94,7 @@ export class ViewerModule {
             await bkApplication.connect(context);
             try {
                 await bkApplication.initContext(context);
-
-                const links = ReactDOMServer.renderToStaticMarkup(
-                    <Links links={[...this.getLinks(), ...bkApplication.links]} />,
-                );
-                const scripts = ReactDOMServer.renderToStaticMarkup(
-                    <Scripts scripts={[...this.getScripts(), ...bkApplication.scripts]} />,
-                );
-                const data = await bkApplication.fill(context);
-
-                const html = this.renderHtml(bkApplication, context, links, scripts, data);
+                const html = await this.renderHtml(bkApplication, context);
                 context.getRes().end(html);
             } finally {
                 await bkApplication.release(context);
@@ -111,14 +102,16 @@ export class ViewerModule {
         }
     }
 
-    renderHtml(
-        bkApplication: BkApplication,
-        context: Context,
-        links: string,
-        scripts: string,
-        data: any,
-    ): string {
+    async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
         console.log('ViewerModule.renderHtml');
+
+        const links = ReactDOMServer.renderToStaticMarkup(
+            <Links links={[...this.getLinks(), ...bkApplication.links]} />,
+        );
+        const scripts = ReactDOMServer.renderToStaticMarkup(
+            <Scripts scripts={[...this.getScripts(), ...bkApplication.scripts]} />,
+        );
+        const data = await bkApplication.fill(context);
 
         // frontHostApp
         const frontHostApp = new FrontHostApp({
