@@ -4,7 +4,7 @@ import { TextBox, Password } from '../../../common';
 import './LoginView.less';
 import { LoginController } from './LoginController';
 
-export class LoginView<T extends LoginController> extends View<T> {
+export class LoginView<T extends LoginController = LoginController> extends View<T> {
     errMsgRef: React.RefObject<any>;
 
     constructor(props) {
