@@ -26,7 +26,7 @@ export interface ChangesByKey {
     [key: Key]: RawRow;
 }
 export interface QueryParams {
-    [name: string]: string | number | boolean;
+    [name: string]: string | number | boolean | null;
 }
 export type Align = 'left' | 'center' | 'right';
 export type Visibility = 'visible' | 'hidden';

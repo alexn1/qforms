@@ -26,7 +26,6 @@ const EditorModule_1 = require("./editor/EditorModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
-// import Test from './test/Test';
 const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {

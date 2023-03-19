@@ -24,6 +24,7 @@ import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
+import { QueryParams } from '../types';
 
 const pkg = require('../../package.json');
 
@@ -811,9 +812,15 @@ export class BackHostApp {
     alias(
         method: string,
         path: string,
-        [module, appDirName, appFileName, env, domain],
+        [module, appDirName, appFileName, env, domain]: [
+            module: string,
+            appDirName: string,
+            appFileName: string,
+            env: string,
+            domain?: string,
+        ],
         cb: string,
-        query?: any,
+        query?: QueryParams,
     ) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
@@ -834,7 +841,17 @@ export class BackHostApp {
         });
     }
 
-    getPostAlias(path, arr, query?) {
+    getPostAlias(
+        path: string,
+        arr: [
+            module: string,
+            appDirName: string,
+            appFileName: string,
+            env: string,
+            domain?: string,
+        ],
+        query?: QueryParams,
+    ) {
         this.alias('get', path, arr, 'moduleGet', query);
         this.alias('post', path, arr, 'modulePost', query);
     }

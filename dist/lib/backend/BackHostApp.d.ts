@@ -7,6 +7,7 @@ import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
+import { QueryParams } from '../types';
 export declare class BackHostApp {
     params: any;
     applications: any;
@@ -64,8 +65,20 @@ export declare class BackHostApp {
     postError(req: any, res: any, next: any): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
-    alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [any, any, any, any, any], cb: string, query?: any): void;
-    getPostAlias(path: any, arr: any, query?: any): void;
+    alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [
+        module: string,
+        appDirName: string,
+        appFileName: string,
+        env: string,
+        domain?: string
+    ], cb: string, query?: QueryParams): void;
+    getPostAlias(path: string, arr: [
+        module: string,
+        appDirName: string,
+        appFileName: string,
+        env: string,
+        domain?: string
+    ], query?: QueryParams): void;
     getNodeEnv(): string | null;
     isDevelopment(): boolean;
     isProduction(): boolean;
