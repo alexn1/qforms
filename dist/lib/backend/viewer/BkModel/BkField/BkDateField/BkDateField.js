@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDateField = void 0;
 const BkField_1 = require("../BkField");
-const Helper_1 = require("../../../../Helper");
+const BkHelper_1 = require("../../../../BkHelper");
 class BkDateField extends BkField_1.BkField {
     fillAttributes(response) {
         super.fillAttributes(response);
@@ -19,20 +19,20 @@ class BkDateField extends BkField_1.BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = Helper_1.Helper.cloneDate(value);
-            Helper_1.Helper.removeTimezoneOffset(v);
-            raw = Helper_1.Helper.encodeValue(v);
+            const v = BkHelper_1.BkHelper.cloneDate(value);
+            BkHelper_1.BkHelper.removeTimezoneOffset(v);
+            raw = BkHelper_1.BkHelper.encodeValue(v);
         }
         else {
-            raw = Helper_1.Helper.encodeValue(value);
+            raw = BkHelper_1.BkHelper.encodeValue(value);
         }
         // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
-        const value = Helper_1.Helper.decodeValue(raw);
+        const value = BkHelper_1.BkHelper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            Helper_1.Helper.addTimezoneOffset(value);
+            BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
         // console.log('DateField.rawToValue', this.getFullName(), raw, value);
         return value;

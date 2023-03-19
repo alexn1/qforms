@@ -1,41 +1,40 @@
-import fs from 'fs';
-import glob from 'glob';
-import path from 'path';
-import slash from 'slash';
-import colors from 'colors/safe';
-
-import { JSONString } from '../types';
-
-function _getFilePathsSync(dirPath: string, ext: string) {
-    const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
-    glob.sync(path.join(dirPath, '*/')).forEach((subDirPath) => {
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.BkHelper = void 0;
+const fs_1 = __importDefault(require("fs"));
+const glob_1 = __importDefault(require("glob"));
+const path_1 = __importDefault(require("path"));
+const slash_1 = __importDefault(require("slash"));
+const safe_1 = __importDefault(require("colors/safe"));
+function _getFilePathsSync(dirPath, ext) {
+    const filePaths = glob_1.default.sync(path_1.default.join(dirPath, '*.' + ext));
+    glob_1.default.sync(path_1.default.join(dirPath, '*/')).forEach((subDirPath) => {
         _getFilePathsSync(subDirPath, ext).forEach((fileName) => {
             filePaths.push(fileName);
         });
     });
     return filePaths;
 }
-
 async function _getFilePaths2(dirPath, ext, filePaths) {
     // console.log('_getFilePaths2', dirPath);
     // all files from directory
-    const files = await Helper._glob(path.join(dirPath, '*.' + ext));
-
+    const files = await BkHelper._glob(path_1.default.join(dirPath, '*.' + ext));
     // pushing files to output array
     files.forEach((item) => {
         filePaths.push(item);
     });
     // all directories from directory
-    const dirs = await Helper._glob(path.join(dirPath, '*/'));
-
+    const dirs = await BkHelper._glob(path_1.default.join(dirPath, '*/'));
     // for each dir push files to output array
     for (let i = 0; i < dirs.length; i++) {
         const subDirPath = dirs[i];
         await _getFilePaths2(subDirPath, ext, filePaths);
     }
 }
-
-export class Helper {
+class BkHelper {
     static getRandomString(length) {
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -48,35 +47,32 @@ export class Helper {
         }
         return result;
     }
-
     static getFilePathsSync(publicDirPath, subDirPath, ext) {
-        return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map((filePath) => {
-            return slash(path.relative(publicDirPath, filePath));
+        return _getFilePathsSync(path_1.default.join(publicDirPath, subDirPath), ext).map((filePath) => {
+            return (0, slash_1.default)(path_1.default.relative(publicDirPath, filePath));
         });
     }
-
-    static _glob(path): Promise<any[]> {
+    static _glob(path) {
         return new Promise((resolve, reject) => {
-            glob(path, (err, items) => {
+            (0, glob_1.default)(path, (err, items) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve(items);
                 }
             });
         });
     }
-
-    static async getFilePaths(dirPath, ext): Promise<string[]> {
-        // console.log('Helper.getFilePaths');
+    static async getFilePaths(dirPath, ext) {
+        // console.log('BkHelper.getFilePaths');
         const filePaths = [];
         await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map((filePath) => {
-            return slash(path.relative(dirPath, filePath));
+            return (0, slash_1.default)(path_1.default.relative(dirPath, filePath));
         });
         return relativeFilePaths;
     }
-
     static currentTime() {
         const now = new Date();
         const arrN = [now.getHours(), now.getMinutes(), now.getSeconds()];
@@ -86,7 +82,6 @@ export class Helper {
                 arrS[i] = '0' + arrS[i];
             }
         }
-
         /*
         let hh = now.getHours();
         let mm = now.getMinutes();
@@ -104,7 +99,6 @@ export class Helper {
         return [_hh, _mm, _ss].join(':');*/
         return arrS.join(':');
     }
-
     /*static currentDate() {
         const now = new Date();
         let dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
@@ -112,20 +106,17 @@ export class Helper {
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
     }*/
-
     /*static currentDateTime() {
-        return Helper.currentDate() + ' ' + Helper.currentTime();
+        return BkHelper.currentDate() + ' ' + BkHelper.currentTime();
     }*/
-
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
-                return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
+                return `BkHelper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
             }
             return 'undefined';
         });
     }
-
     /*static replaceKey(obj, key1, key2) {
         const keys   = Object.keys(obj);
         const values = _.filter(obj, () => {return true;});
@@ -136,82 +127,81 @@ export class Helper {
         }
         return obj;
     }*/
-
-    static readTextFile(path): Promise<string> {
-        // console.log(colors.blue('Helper.readTextFile'), path);
+    static readTextFile(path) {
+        // console.log(colors.blue('BkHelper.readTextFile'), path);
         return new Promise((resolve, reject) => {
-            fs.readFile(path, 'utf8', (err, content) => {
+            fs_1.default.readFile(path, 'utf8', (err, content) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve(content);
                 }
             });
         });
     }
-
     static async getFileContent(filePath) {
-        if (await Helper.exists(filePath)) {
-            return Helper.readTextFile(filePath);
+        if (await BkHelper.exists(filePath)) {
+            return BkHelper.readTextFile(filePath);
         }
         return null;
     }
     static getFileContentSync(filePath) {
-        // console.log(colors.blue('Helper.getFileContentSync'), filePath);
-        if (!fs.existsSync(filePath)) {
+        // console.log(colors.blue('BkHelper.getFileContentSync'), filePath);
+        if (!fs_1.default.existsSync(filePath)) {
             return null;
         }
-        return fs.readFileSync(filePath, 'utf8');
+        return fs_1.default.readFileSync(filePath, 'utf8');
     }
-
     static readBinaryFile(filePath) {
-        console.log(colors.blue('Helper.readBinaryFile'), filePath);
+        console.log(safe_1.default.blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
-            fs.readFile(filePath, (err, data) => {
+            fs_1.default.readFile(filePath, (err, data) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve(data);
                 }
             });
         });
     }
-
     static createPath(arr) {
-        if (arr.length === 0) throw new Error('no path elements');
-        if (arr.length === 1) return '/';
+        if (arr.length === 0)
+            throw new Error('no path elements');
+        if (arr.length === 1)
+            return '/';
         return arr.join('/');
     }
-
     static getDirPath(filePath) {
         const arr = filePath.split('/');
-        return Helper.createPath(arr.slice(0, arr.length - 1));
+        return BkHelper.createPath(arr.slice(0, arr.length - 1));
     }
-
     static async createDirIfNotExists2(originalDirPath) {
-        // console.log('Helper.createDirIfNotExists2', originalDirPath);
+        // console.log('BkHelper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
-            const dirPath = Helper.createPath(arr.slice(0, i));
-            const exists = await Helper.exists(dirPath);
+            const dirPath = BkHelper.createPath(arr.slice(0, i));
+            const exists = await BkHelper.exists(dirPath);
             // console.log('dirPath', i, dirPath, exists);
             if (!exists) {
-                await Helper.createDirIfNotExists(dirPath);
+                await BkHelper.createDirIfNotExists(dirPath);
             }
         }
     }
-
-    static createDirIfNotExists(dirPath): Promise<void> {
-        console.log(colors.blue('Helper.createDirIfNotExists'), dirPath);
+    static createDirIfNotExists(dirPath) {
+        console.log(safe_1.default.blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
-            fs.exists(dirPath, (exists) => {
+            fs_1.default.exists(dirPath, (exists) => {
                 if (exists) {
                     resolve();
-                } else {
-                    fs.mkdir(dirPath, (err) => {
+                }
+                else {
+                    fs_1.default.mkdir(dirPath, (err) => {
                         if (err) {
                             reject(err);
-                        } else {
+                        }
+                        else {
                             resolve();
                         }
                     });
@@ -219,14 +209,12 @@ export class Helper {
             });
         });
     }
-
     static createDirIfNotExistsSync(dirPath) {
-        // console.log(colors.blue('Helper.createDirIfNotExistsSync'), dirPath);
-        if (!fs.existsSync(dirPath)) {
-            fs.mkdirSync(dirPath);
+        // console.log(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
+        if (!fs_1.default.existsSync(dirPath)) {
+            fs_1.default.mkdirSync(dirPath);
         }
     }
-
     /*static moveObjProp(obj, prop, offset) {
         const keys     = _.keys(obj);
         const values   = _.values(obj);
@@ -245,19 +233,20 @@ export class Helper {
         values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
         return _.object(keys, values);
     }*/
-
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
-        if (oldIndex === -1) throw new Error('cannot find element');
+        if (oldIndex === -1)
+            throw new Error('cannot find element');
         const newIndex = oldIndex + offset;
-        if (newIndex < 0) throw new Error('cannot up top element');
-        if (newIndex > arr.length - 1) throw new Error('cannot down bottom element');
+        if (newIndex < 0)
+            throw new Error('cannot up top element');
+        if (newIndex > arr.length - 1)
+            throw new Error('cannot down bottom element');
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
-
     /*static getTempSubDirPath3(tempDirPath) {
         return new Promise((resolve, reject) => {
-            const subDirName = Helper.getRandomString(8);
+            const subDirName = BkHelper.getRandomString(8);
             const tempSubSirPath = path.join(tempDirPath, subDirName);
             fs.exists(tempSubSirPath, exists => {
                 if (!exists) {
@@ -269,21 +258,20 @@ export class Helper {
                         }
                     });
                 } else {
-                    Helper.getTempSubDirPath(tempDirPath, () => {
+                    BkHelper.getTempSubDirPath(tempDirPath, () => {
                         resolve();
                     });
                 }
             });
         });
     }*/
-
-    static copyFile3(source, target): Promise<void> {
+    static copyFile3(source, target) {
         return new Promise((resolve, reject) => {
-            const rd = fs.createReadStream(source);
+            const rd = fs_1.default.createReadStream(source);
             rd.on('error', (err) => {
                 reject(err);
             });
-            const wr = fs.createWriteStream(target);
+            const wr = fs_1.default.createWriteStream(target);
             wr.on('error', (err) => {
                 reject(err);
             });
@@ -293,39 +281,36 @@ export class Helper {
             rd.pipe(wr);
         });
     }
-
-    static exists(path): Promise<boolean> {
-        // console.log(colors.blue('Helper.exists'), path);
+    static exists(path) {
+        // console.log(colors.blue('BkHelper.exists'), path);
         return new Promise((resolve) => {
-            fs.exists(path, (exists) => {
+            fs_1.default.exists(path, (exists) => {
                 resolve(exists);
             });
         });
     }
-
-    static writeFile(filePath: string, content): Promise<void> {
-        console.log(colors.blue('Helper.writeFile'), filePath);
+    static writeFile(filePath, content) {
+        console.log(safe_1.default.blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
-            fs.writeFile(filePath, content, 'utf8', (err) => {
+            fs_1.default.writeFile(filePath, content, 'utf8', (err) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve();
                 }
             });
         });
     }
     static writeFileSync(filePath, content) {
-        console.log(colors.blue('Helper.writeFileSync'), filePath /*, content*/);
-        return fs.writeFileSync(filePath, content, 'utf8');
+        console.log(safe_1.default.blue('BkHelper.writeFileSync'), filePath /*, content*/);
+        return fs_1.default.writeFileSync(filePath, content, 'utf8');
     }
-
     static async writeFile2(filePath, content) {
-        const dirPath = Helper.getDirPath(filePath);
-        await Helper.createDirIfNotExists2(dirPath);
-        return await Helper.writeFile(filePath, content);
+        const dirPath = BkHelper.getDirPath(filePath);
+        await BkHelper.createDirIfNotExists2(dirPath);
+        return await BkHelper.writeFile(filePath, content);
     }
-
     static mapObject(object, cb) {
         return Object.keys(object).reduce((obj, key) => {
             const [newKey, newVal] = cb(key, object[key]);
@@ -333,123 +318,108 @@ export class Helper {
             return obj;
         }, {});
     }
-
-    static fsUnlink(filePath): Promise<void> {
+    static fsUnlink(filePath) {
         return new Promise((resolve, reject) => {
-            fs.unlink(filePath, (err) => {
+            fs_1.default.unlink(filePath, (err) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve();
                 }
             });
         });
     }
-
     // timeOffset number in minutes
     static today(timeOffset) {
-        // console.log('Helper.today', timeOffset);
+        // console.log('BkHelper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
-            ts += Helper.MINUTE() * timeOffset;
+            ts += BkHelper.MINUTE() * timeOffset;
         }
         const date = new Date(ts);
         ts = new Date(date.getFullYear(), date.getMonth(), date.getDate()).getTime();
         if (timeOffset !== undefined && timeOffset !== null) {
-            ts -= Helper.MINUTE() * timeOffset;
+            ts -= BkHelper.MINUTE() * timeOffset;
         }
         return new Date(ts);
     }
-
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
-            const a =
-                /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
-                    value,
-                );
-            if (a) return new Date(value);
+            const a = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(value);
+            if (a)
+                return new Date(value);
         }
         return value;
     }
-
-    static decodeValue(rawValue: JSONString): any {
-        if (rawValue === undefined) throw new Error('decodeValue undefined');
-        if (rawValue === null) throw new Error('decodeValue null');
+    static decodeValue(rawValue) {
+        if (rawValue === undefined)
+            throw new Error('decodeValue undefined');
+        if (rawValue === null)
+            throw new Error('decodeValue null');
         try {
-            return JSON.parse(rawValue, Helper.dateTimeReviver);
-        } catch (err) {
+            return JSON.parse(rawValue, BkHelper.dateTimeReviver);
+        }
+        catch (err) {
             throw new Error(`decodeValue failed: ${rawValue}`);
         }
     }
-
-    static encodeValue(value: any): JSONString {
-        return JSON.stringify(value) as JSONString;
+    static encodeValue(value) {
+        return JSON.stringify(value);
     }
-
-    static decodeObject(obj): any {
+    static decodeObject(obj) {
         const dObj = {};
         for (const name in obj) {
             if (typeof obj[name] !== 'string')
                 throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
-            dObj[name] = Helper.decodeValue(obj[name]);
+            dObj[name] = BkHelper.decodeValue(obj[name]);
         }
         return dObj;
     }
-
-    static SECOND(): number {
+    static SECOND() {
         return 1000;
     }
-
-    static MINUTE(): number {
-        return 60 * Helper.SECOND();
+    static MINUTE() {
+        return 60 * BkHelper.SECOND();
     }
-
-    static HOUR(): number {
-        return 60 * Helper.MINUTE();
+    static HOUR() {
+        return 60 * BkHelper.MINUTE();
     }
-
-    static DAY(): number {
-        return 24 * Helper.HOUR();
+    static DAY() {
+        return 24 * BkHelper.HOUR();
     }
-
-    static WEEK(): number {
-        return 7 * Helper.DAY();
+    static WEEK() {
+        return 7 * BkHelper.DAY();
     }
-
-    static Session_save(session): Promise<void> {
+    static Session_save(session) {
         return new Promise((resolve, reject) => {
             session.save((err) => {
                 if (err) {
                     reject(err);
-                } else {
+                }
+                else {
                     resolve();
                 }
             });
         });
     }
-
-    static addMinutes(date: Date, minutes: number): void {
-        // console.log('Helper.addMinutes', date, minutes);
+    static addMinutes(date, minutes) {
+        // console.log('BkHelper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
-
-    static removeTimezoneOffset(date: Date): void {
-        Helper.addMinutes(date, -date.getTimezoneOffset());
+    static removeTimezoneOffset(date) {
+        BkHelper.addMinutes(date, -date.getTimezoneOffset());
     }
-
-    static addTimezoneOffset(date: Date): void {
-        Helper.addMinutes(date, date.getTimezoneOffset());
+    static addTimezoneOffset(date) {
+        BkHelper.addMinutes(date, date.getTimezoneOffset());
     }
-
-    static cloneDate(date: Date): Date {
+    static cloneDate(date) {
         return new Date(date.getTime());
     }
-
-    static fillArray(n: number): number[] {
+    static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-
-    static formatDate(date: Date, format: string) {
+    static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
         const D = date.getDate();
@@ -462,37 +432,30 @@ export class Helper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) =>
-            values[name] ? values[name] : text,
-        );
+        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
-
     static getFirstField(object) {
         const [key] = Object.keys(object);
         return object[key];
     }
-
     static getCommandLineParams() {
         return process.argv
             .map((arg) => arg.split('='))
             .reduce((acc, [name, value]) => {
-                acc[name] = value;
-                return acc;
-            }, {});
+            acc[name] = value;
+            return acc;
+        }, {});
     }
-
     static getWebSocketIP(webSocket) {
         return webSocket.upgradeReq.headers['x-real-ip']
             ? webSocket.upgradeReq.headers['x-real-ip']
             : webSocket.upgradeReq.socket.remoteAddress;
     }
-
     static getWebSocketPort(webSocket) {
         return webSocket.upgradeReq.headers['x-real-port']
             ? webSocket.upgradeReq.headers['x-real-port']
             : webSocket.upgradeReq.socket.remotePort;
     }
-
     static templateArray(arr) {
         return arr.map((item) => {
             const type = typeof item;
@@ -505,10 +468,9 @@ export class Helper {
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
-
-    static createEmptyPromise<T = any>(): Promise<T> {
+    static createEmptyPromise() {
         let _resolve, _reject;
-        const promise = new Promise<T>(function (resolve, reject) {
+        const promise = new Promise(function (resolve, reject) {
             _resolve = resolve;
             _reject = reject;
         });
@@ -518,17 +480,14 @@ export class Helper {
         promise.reject = _reject;
         return promise;
     }
-
     static test() {
-        console.log('Helper.test');
+        console.log('BkHelper.test');
     }
-
-    static formatNumber(value: number) {
+    static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
-
     static formatTime2(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.log('BkHelper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -539,18 +498,22 @@ export class Helper {
         let m = Math.floor((sec - h * 3600) / 60);
         let s = Math.floor(sec - h * 3600 - m * 60);
         // @ts-ignore
-        if (h < 10) h = '0' + h;
+        if (h < 10)
+            h = '0' + h;
         // @ts-ignore
-        if (m < 10) m = '0' + m;
+        if (m < 10)
+            m = '0' + m;
         // @ts-ignore
-        if (s < 10) s = '0' + s;
+        if (s < 10)
+            s = '0' + s;
         if (Math.floor(sec / 3600) === 0) {
             return `${sign}${m}m:${s}s`;
-        } else {
+        }
+        else {
             return `${sign}${h}h:${m}m:${s}s`;
         }
     }
 }
-
+exports.BkHelper = BkHelper;
 // @ts-ignore
-global.Helper = Helper;
+global.BkHelper = BkHelper;

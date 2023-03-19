@@ -2,34 +2,34 @@ import path from 'path';
 const ejs = require('ejs');
 
 import { BaseModel } from '../../BaseModel';
-import { Helper } from '../../Helper';
+import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 
 export class Editor extends BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
-        const exists = await Helper.exists(newFilePath);
+        const exists = await BkHelper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
-        const template = await Helper.readTextFile(templateFilePath);
+        const template = await BkHelper.readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
         if (text === '') {
             text = emptyTemplate;
         }
-        await Helper.writeFile2(newFilePath, text);
+        await BkHelper.writeFile2(newFilePath, text);
         return text;
     }*/
 
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await Helper.exists(newFilePath);
+        const exists = await BkHelper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
         }
-        const template = await Helper.readTextFile(templateFilePath);
+        const template = await BkHelper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await Helper.writeFile2(newFilePath, content);
+        await BkHelper.writeFile2(newFilePath, content);
         return content;
     }
 
@@ -39,18 +39,18 @@ export class Editor extends BaseModel {
 
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
-        const exists = await Helper.exists(filePath);
+        const exists = await BkHelper.exists(filePath);
         if (exists) {
-            return await Helper.readTextFile(filePath);
+            return await BkHelper.readTextFile(filePath);
         }
     }
 
     async saveFile(filePath, content): Promise<void> {
-        const exists = await Helper.exists(filePath);
+        const exists = await BkHelper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        await Helper.writeFile2(filePath, content);
+        await BkHelper.writeFile2(filePath, content);
     }
 
     async getCustomFile(ext) {
@@ -100,7 +100,7 @@ export class Editor extends BaseModel {
     }*/
 
     moveDataColItem(colName, name, offset) {
-        Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+        BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
 
     /*async newActionData(params) {

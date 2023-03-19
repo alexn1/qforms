@@ -5,7 +5,7 @@ import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key, Row, RawRow, JSONString } from '../../../../../../types';
-import { Helper } from '../../../../../Helper';
+import { BkHelper } from '../../../../../BkHelper';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
@@ -254,7 +254,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             }
         } else {
             for (const name in row) {
-                rawRow[name] = Helper.encodeValue(row[name]);
+                rawRow[name] = BkHelper.encodeValue(row[name]);
             }
         }
         return rawRow;

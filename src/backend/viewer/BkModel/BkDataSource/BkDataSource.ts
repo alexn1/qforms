@@ -2,7 +2,7 @@ import path from 'path';
 
 import { Result } from '../../../../Result';
 import { BkModel } from '../BkModel';
-import { Helper } from '../../../Helper';
+import { BkHelper } from '../../../BkHelper';
 import { Context } from '../../../Context';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
@@ -39,9 +39,9 @@ export class BkDataSource extends BkModel {
 
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper.exists(jsonFilePath);
+        const exists = await BkHelper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper.readTextFile(jsonFilePath);
+            const content = await BkHelper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }
@@ -155,7 +155,7 @@ export class BkDataSource extends BkModel {
             }
         } else {
             for (const name in row) {
-                row[name] = Helper.encodeValue(row[name]);
+                row[name] = BkHelper.encodeValue(row[name]);
             }
         }
     } */
@@ -174,7 +174,7 @@ export class BkDataSource extends BkModel {
             }
         } else {
             for (const name in row) {
-                rawRow[name] = Helper.encodeValue(row[name]);
+                rawRow[name] = BkHelper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -280,9 +280,9 @@ export class BkDataSource extends BkModel {
     private async getRows(): Promise<Row[]> {
         // console.log('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper.exists(jsonFilePath);
+        const exists = await BkHelper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper.readTextFile(jsonFilePath);
+            const content = await BkHelper.readTextFile(jsonFilePath);
             return JSON.parse(content);
         } */
         return this.rows;

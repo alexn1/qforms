@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOMServer from 'react-dom/server';
 
 import { Context } from '../Context';
-import { Helper } from '../Helper';
+import { BkHelper } from '../BkHelper';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
 import { MyError } from '../MyError';
@@ -52,13 +52,13 @@ export class ViewerModule {
     async init() {
         console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'css',
             )
         ).map((path) => `/viewer/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'viewer/public'),
                 'js',
             )
@@ -425,7 +425,7 @@ export class ViewerModule {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
         delete req.session.user[context.getRoute()];
-        await Helper.Session_save(req.session);
+        await BkHelper.Session_save(req.session);
         await res.json(null);
     }
 

@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { Editor } from '../Editor';
-import { Helper } from '../../../Helper';
+import { BkHelper } from '../../../BkHelper';
 import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplication';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
@@ -75,7 +75,7 @@ export class ApplicationEditor extends Editor {
     async removePageFile(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
-        await Helper.fsUnlink(pageFilePath);
+        await BkHelper.fsUnlink(pageFilePath);
     }
 
     async createPageEditor(relFilePath): Promise<PageEditor> {

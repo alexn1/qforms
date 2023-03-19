@@ -9,7 +9,7 @@ import cookieParser from 'cookie-parser';
 import session from 'express-session';
 
 import { WebSocketServer } from './WebSocketServer';
-import { Helper } from './Helper';
+import { BkHelper } from './BkHelper';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
@@ -92,8 +92,8 @@ export class BackHostApp {
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
 
         // runtime & temp
-        Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        Helper.createDirIfNotExistsSync(this.sessionDirPath);
+        BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
+        BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
         // logPool
         if (log) {
@@ -165,12 +165,12 @@ export class BackHostApp {
     getSecretSync() {
         const secretFilePath = path.join(this.runtimeDirPath, 'secret.txt');
         let secret;
-        secret = Helper.getFileContentSync(secretFilePath);
+        secret = BkHelper.getFileContentSync(secretFilePath);
         if (secret) {
             return secret;
         }
-        secret = Helper.getRandomString(20);
-        Helper.writeFileSync(secretFilePath, secret);
+        secret = BkHelper.getRandomString(20);
+        BkHelper.writeFileSync(secretFilePath, secret);
         return secret;
     }
 
@@ -179,7 +179,7 @@ export class BackHostApp {
         this.express.use(
             bodyParser.json({
                 limit: '20mb',
-                reviver: Helper.dateTimeReviver,
+                reviver: BkHelper.dateTimeReviver,
             }),
         );
         this.express.use(bodyParser.urlencoded({ extended: false }));
@@ -257,7 +257,7 @@ export class BackHostApp {
         // if creating application
         if (Array.isArray(this.appQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = Helper.createEmptyPromise();
+            const promise = BkHelper.createEmptyPromise();
             this.appQueue[context.getRoute()].push(promise);
             return promise;
         }
@@ -331,7 +331,7 @@ export class BackHostApp {
         const name = req.body.name;
         const appDirPath = path.join(this.appsDirPath, folder);
         const appFilePath = path.join(appDirPath, name + '.json');
-        await Helper.createDirIfNotExists(appDirPath);
+        await BkHelper.createDirIfNotExists(appDirPath);
         await ApplicationEditor.createAppFile(appFilePath, { name });
         const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfos = await BkApplication.getAppInfos(this.appsDirPath, distDirPath);

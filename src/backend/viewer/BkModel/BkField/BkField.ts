@@ -5,7 +5,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkColumn } from '../BkColumn/BkColumn';
-import { Helper } from '../../../Helper';
+import { BkHelper } from '../../../BkHelper';
 import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';
 import { JSONString, RawRow } from '../../../../types';
 
@@ -44,11 +44,9 @@ export class BkField extends BkModel {
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getParams();
-        const js = Helper.templateToJsString(defaultValue, params);
+        const js = BkHelper.templateToJsString(defaultValue, params);
         let value;
         try {
-            // @ts-ignore
-            // global.Helper = Helper;
             value = eval(js);
             if (value !== undefined) {
                 row[column] = this.valueToRaw(value);
@@ -99,11 +97,11 @@ export class BkField extends BkModel {
     }
 
     valueToRaw(value): JSONString {
-        return Helper.encodeValue(value);
+        return BkHelper.encodeValue(value);
     }
 
     rawToValue(raw: JSONString): any {
-        return Helper.decodeValue(raw);
+        return BkHelper.decodeValue(raw);
     }
 
     isTimezone(): boolean {

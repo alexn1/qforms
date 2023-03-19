@@ -6,14 +6,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.PageEditorController = void 0;
 const path_1 = __importDefault(require("path"));
 const VisualEditorController_1 = require("../VisualEditorController");
-const Helper_1 = require("../../../Helper");
+const BkHelper_1 = require("../../../BkHelper");
 class PageEditorController extends VisualEditorController_1.VisualEditorController {
     /*constructor(...args) {
         super(...args);
     }*/
     async get(params) {
         const pageFilePath = path_1.default.join(this.appInfo.dirPath, params.fileName);
-        const content = await Helper_1.Helper.readTextFile(pageFilePath);
+        const content = await BkHelper_1.BkHelper.readTextFile(pageFilePath);
         return JSON.parse(content);
     }
     async save(params) {

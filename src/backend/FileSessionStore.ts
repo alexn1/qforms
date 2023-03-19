@@ -2,7 +2,7 @@ import path from 'path';
 import session from 'express-session';
 // import colors from 'colors/safe';
 
-import { Helper } from './Helper';
+import { BkHelper } from './BkHelper';
 
 export class FileSessionStore extends session.Store {
     store: any;
@@ -20,7 +20,7 @@ export class FileSessionStore extends session.Store {
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        Helper.writeFile(sessionFilePath, content).then(() => {
+        BkHelper.writeFile(sessionFilePath, content).then(() => {
             cb(null);
         });
     }
@@ -32,7 +32,7 @@ export class FileSessionStore extends session.Store {
             cb(null, session);
         } else {
             const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
-            Helper.getFileContent(sessionFilePath).then((content) => {
+            BkHelper.getFileContent(sessionFilePath).then((content) => {
                 if (content) {
                     try {
                         const session = (this.store[sid] = JSON.parse(content));

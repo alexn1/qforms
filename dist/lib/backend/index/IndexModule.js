@@ -8,7 +8,7 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const server_1 = __importDefault(require("react-dom/server"));
 const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
-const Helper_1 = require("../Helper");
+const BkHelper_1 = require("../BkHelper");
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
 const pkg = require('../../../package.json');
@@ -17,8 +17,8 @@ class IndexModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
+        this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
+        this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
         // console.log('app.css:', this.css);
         // console.log('app.js:' , this.js);
     }

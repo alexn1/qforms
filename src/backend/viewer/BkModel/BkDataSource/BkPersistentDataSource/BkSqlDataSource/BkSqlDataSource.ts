@@ -1,6 +1,6 @@
 import { BkPersistentDataSource } from '../BkPersistentDataSource';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
-import { Helper } from '../../../../../Helper';
+import { BkHelper } from '../../../../../BkHelper';
 import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
@@ -228,8 +228,8 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
 
         // update row
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = BkHelper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = BkHelper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = { ..._values, ..._where };
         await this.getDatabase().queryResult(context, updateQuery, params);
 

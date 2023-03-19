@@ -2,7 +2,7 @@ import path from 'path';
 
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
-import { Helper } from '../Helper';
+import { BkHelper } from '../BkHelper';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
 import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
@@ -56,13 +56,13 @@ export class EditorModule {
 
     async init() {
         this.css = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'css',
             )
         ).map((path) => `/editor/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'editor/public'),
                 'js',
             )

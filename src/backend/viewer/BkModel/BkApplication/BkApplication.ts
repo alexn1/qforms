@@ -10,7 +10,7 @@ import { BkModel } from '../BkModel';
 import { BkAction } from '../BkAction/BkAction';
 import { BkDatabase } from '../BkDatabase/BkDatabase';
 import { BkDataSource } from '../BkDataSource/BkDataSource';
-import { Helper } from '../../../Helper';
+import { BkHelper } from '../../../BkHelper';
 import { BkPage } from '../BkPage/BkPage';
 import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
@@ -60,7 +60,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
 
     async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
-        return (await Helper.getFilePaths(this.getPublicDirPath(), 'css')).map(
+        return (await BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
@@ -69,7 +69,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         // console.log('publicDirPath:', publicDirPath);
-        return (await Helper.getFilePaths(publicDirPath, 'js')).map(
+        return (await BkHelper.getFilePaths(publicDirPath, 'js')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
@@ -241,7 +241,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path.join(this.getDirPath(), relFilePath);
-        const content = await Helper.readTextFile(pageFilePath);
+        const content = await BkHelper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
         await page.init();
@@ -385,7 +385,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
 
     static async getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]> {
         // console.log('BkApplication.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper._glob(path.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -499,7 +499,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     async handleGetFile(context: Context, next) {
         // console.log('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
-        if (await Helper.exists(filePath)) {
+        if (await BkHelper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         } else {
             // next();

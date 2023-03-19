@@ -31,7 +31,7 @@ const path_1 = __importDefault(require("path"));
 const uuid_1 = require("uuid");
 const BaseModel_1 = require("../../../BaseModel");
 const BkModel_1 = require("../BkModel");
-const Helper_1 = require("../../../Helper");
+const BkHelper_1 = require("../../../BkHelper");
 const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const MyError_1 = require("../../../MyError");
@@ -67,13 +67,13 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async getLinks(context) {
         const virtualPath = context.getVirtualPath();
-        return (await Helper_1.Helper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
+        return (await BkHelper_1.BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map((src) => `${virtualPath}/${src}`);
     }
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         // console.log('publicDirPath:', publicDirPath);
-        return (await Helper_1.Helper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
+        return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
         console.log('Application.deinit: ' + this.getName());
@@ -214,7 +214,7 @@ class BkApplication extends BkModel_1.BkModel {
         const pageLink = this.createPageLink(pageLinkName);
         const relFilePath = pageLink.getAttr('fileName');
         const pageFilePath = path_1.default.join(this.getDirPath(), relFilePath);
-        const content = await Helper_1.Helper.readTextFile(pageFilePath);
+        const content = await BkHelper_1.BkHelper.readTextFile(pageFilePath);
         const data = JSON.parse(content);
         const page = await this.createChildModel('pages', data);
         await page.init();
@@ -347,7 +347,7 @@ class BkApplication extends BkModel_1.BkModel {
     }
     static async getAppInfos(appsDirPath, distDirPath) {
         // console.log('BkApplication.getAppInfos', appsDirPath);
-        const appFilesPaths = await Helper_1.Helper._glob(path_1.default.join(appsDirPath, '*/*.json'));
+        const appFilesPaths = await BkHelper_1.BkHelper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
             const appFilePath = appFilesPaths[i];
@@ -447,7 +447,7 @@ class BkApplication extends BkModel_1.BkModel {
     async handleGetFile(context, next) {
         // console.log('Application.handleGetFile', context.getUri());
         const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
-        if (await Helper_1.Helper.exists(filePath)) {
+        if (await BkHelper_1.BkHelper.exists(filePath)) {
             context.getRes().sendFile(filePath);
         }
         else {

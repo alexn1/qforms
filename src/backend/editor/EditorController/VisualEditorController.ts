@@ -9,7 +9,7 @@ export class VisualEditorController extends EditorController {
                 this.hostApp.getFrontendDirPath(),
                 'editor/class/Controller/ModelController/DocumentController/VisualController/view/VisualView.html'
             );
-            result.view = await Helper.readTextFile(viewFilePath);
+            result.view = await BkHelper.readTextFile(viewFilePath);
         }
         return result;
     }*/

@@ -29,7 +29,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditorModule = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
-const Helper_1 = require("../Helper");
+const BkHelper_1 = require("../BkHelper");
 const BkApplication_1 = require("../viewer/BkModel/BkApplication/BkApplication");
 const server_1 = __importDefault(require("react-dom/server"));
 const Links_1 = require("../Links");
@@ -73,8 +73,8 @@ class EditorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
+        this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
+        this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
         // console.log('editor.css:', this.css);
         // console.log('editor.js:' , this.js);
     }

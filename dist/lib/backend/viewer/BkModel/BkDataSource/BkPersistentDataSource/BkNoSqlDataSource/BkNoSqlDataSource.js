@@ -4,7 +4,7 @@ exports.BkNoSqlDataSource = void 0;
 const BkPersistentDataSource_1 = require("../BkPersistentDataSource");
 const Result_1 = require("../../../../../../Result");
 const BkDataSource_1 = require("../../BkDataSource");
-const Helper_1 = require("../../../../../Helper");
+const BkHelper_1 = require("../../../../../BkHelper");
 class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
@@ -205,7 +205,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         }
         else {
             for (const name in row) {
-                rawRow[name] = Helper_1.Helper.encodeValue(row[name]);
+                rawRow[name] = BkHelper_1.BkHelper.encodeValue(row[name]);
             }
         }
         return rawRow;

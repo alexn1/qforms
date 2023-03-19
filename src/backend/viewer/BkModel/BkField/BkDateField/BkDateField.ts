@@ -1,5 +1,5 @@
 import { BkField } from '../BkField';
-import { Helper } from '../../../../Helper';
+import { BkHelper } from '../../../../BkHelper';
 
 export class BkDateField extends BkField {
     fillAttributes(response: any): void {
@@ -18,20 +18,20 @@ export class BkDateField extends BkField {
     valueToRaw(value) {
         let raw;
         if (value && !this.isTimezone()) {
-            const v = Helper.cloneDate(value);
-            Helper.removeTimezoneOffset(v);
-            raw = Helper.encodeValue(v);
+            const v = BkHelper.cloneDate(value);
+            BkHelper.removeTimezoneOffset(v);
+            raw = BkHelper.encodeValue(v);
         } else {
-            raw = Helper.encodeValue(value);
+            raw = BkHelper.encodeValue(value);
         }
         // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
 
     rawToValue(raw) {
-        const value = Helper.decodeValue(raw);
+        const value = BkHelper.decodeValue(raw);
         if (value && !this.isTimezone()) {
-            Helper.addTimezoneOffset(value);
+            BkHelper.addTimezoneOffset(value);
         }
         // console.log('DateField.rawToValue', this.getFullName(), raw, value);
         return value;

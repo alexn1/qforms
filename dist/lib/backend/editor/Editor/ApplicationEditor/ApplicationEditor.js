@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ApplicationEditor = void 0;
 const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
-const Helper_1 = require("../../../Helper");
+const BkHelper_1 = require("../../../BkHelper");
 const BkApplication_1 = require("../../../viewer/BkModel/BkApplication/BkApplication");
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor_1 = require("../PageEditor/PageEditor");
@@ -71,7 +71,7 @@ class ApplicationEditor extends Editor_1.Editor {
     async removePageFile(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path_1.default.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
-        await Helper_1.Helper.fsUnlink(pageFilePath);
+        await BkHelper_1.BkHelper.fsUnlink(pageFilePath);
     }
     async createPageEditor(relFilePath) {
         const pageFilePath = path_1.default.join(this.appInfo.dirPath, relFilePath);

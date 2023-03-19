@@ -1,4 +1,4 @@
-export { Helper } from './Helper';
+export { BkHelper as BkHelper } from './BkHelper';
 export { Result } from '../Result';
 export { Context } from './Context';
 export { BaseModel } from './BaseModel';

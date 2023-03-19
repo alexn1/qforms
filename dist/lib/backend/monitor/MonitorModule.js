@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.MonitorModule = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
-const Helper_1 = require("../Helper");
+const BkHelper_1 = require("../BkHelper");
 const server_1 = __importDefault(require("react-dom/server"));
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
@@ -16,8 +16,8 @@ class MonitorModule {
         this.hostApp = hostApp;
     }
     async init() {
-        this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
+        this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
+        this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
         // console.log('monitor.css:', this.css);
         // console.log('monitor.js:' , this.js);
     }
@@ -39,7 +39,7 @@ class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: Helper_1.Helper.getWebSocketIP(webSocket),
+                            ip: BkHelper_1.BkHelper.getWebSocketIP(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),

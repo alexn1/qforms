@@ -14,7 +14,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_session_1 = __importDefault(require("express-session"));
 const WebSocketServer_1 = require("./WebSocketServer");
-const Helper_1 = require("./Helper");
+const BkHelper_1 = require("./BkHelper");
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 const Context_1 = require("./Context");
 const BkApplication_1 = require("./viewer/BkModel/BkApplication/BkApplication");
@@ -63,8 +63,8 @@ class BackHostApp {
         this.frontendDirPath = path_1.default.resolve(path_1.default.join(backendDirPath, '../frontend'));
         this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
         // runtime & temp
-        Helper_1.Helper.createDirIfNotExistsSync(this.runtimeDirPath);
-        Helper_1.Helper.createDirIfNotExistsSync(this.sessionDirPath);
+        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
+        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
         // logPool
         if (log) {
             this.logPool = BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
@@ -120,19 +120,19 @@ class BackHostApp {
     getSecretSync() {
         const secretFilePath = path_1.default.join(this.runtimeDirPath, 'secret.txt');
         let secret;
-        secret = Helper_1.Helper.getFileContentSync(secretFilePath);
+        secret = BkHelper_1.BkHelper.getFileContentSync(secretFilePath);
         if (secret) {
             return secret;
         }
-        secret = Helper_1.Helper.getRandomString(20);
-        Helper_1.Helper.writeFileSync(secretFilePath, secret);
+        secret = BkHelper_1.BkHelper.getRandomString(20);
+        BkHelper_1.BkHelper.writeFileSync(secretFilePath, secret);
         return secret;
     }
     initExpressServer() {
         // middlewares
         this.express.use(body_parser_1.default.json({
             limit: '20mb',
-            reviver: Helper_1.Helper.dateTimeReviver,
+            reviver: BkHelper_1.BkHelper.dateTimeReviver,
         }));
         this.express.use(body_parser_1.default.urlencoded({ extended: false }));
         this.express.use((0, cookie_parser_1.default)());
@@ -188,7 +188,7 @@ class BackHostApp {
         // if creating application
         if (Array.isArray(this.appQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = Helper_1.Helper.createEmptyPromise();
+            const promise = BkHelper_1.BkHelper.createEmptyPromise();
             this.appQueue[context.getRoute()].push(promise);
             return promise;
         }
@@ -247,7 +247,7 @@ class BackHostApp {
         const name = req.body.name;
         const appDirPath = path_1.default.join(this.appsDirPath, folder);
         const appFilePath = path_1.default.join(appDirPath, name + '.json');
-        await Helper_1.Helper.createDirIfNotExists(appDirPath);
+        await BkHelper_1.BkHelper.createDirIfNotExists(appDirPath);
         await ApplicationEditor_1.ApplicationEditor.createAppFile(appFilePath, { name });
         const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, distDirPath);

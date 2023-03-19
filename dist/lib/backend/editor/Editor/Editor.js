@@ -30,32 +30,32 @@ exports.Editor = void 0;
 const path_1 = __importDefault(require("path"));
 const ejs = require('ejs');
 const BaseModel_1 = require("../../BaseModel");
-const Helper_1 = require("../../Helper");
+const BkHelper_1 = require("../../BkHelper");
 const backend = __importStar(require("../../../backend"));
 class Editor extends BaseModel_1.BaseModel {
     /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
-        const exists = await Helper.exists(newFilePath);
+        const exists = await BkHelper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exist.`);
         }
-        const template = await Helper.readTextFile(templateFilePath);
+        const template = await BkHelper.readTextFile(templateFilePath);
         let text = template.replace(new RegExp(replaceFrom, 'g'), replaceTo);
         if (text === '') {
             text = emptyTemplate;
         }
-        await Helper.writeFile2(newFilePath, text);
+        await BkHelper.writeFile2(newFilePath, text);
         return text;
     }*/
     async createFileByParams(newFilePath, templateFilePath, params) {
-        const exists = await Helper_1.Helper.exists(newFilePath);
+        const exists = await BkHelper_1.BkHelper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path_1.default.basename(newFilePath)} already exists.`);
         }
-        const template = await Helper_1.Helper.readTextFile(templateFilePath);
+        const template = await BkHelper_1.BkHelper.readTextFile(templateFilePath);
         const content = ejs.render(template, params);
-        await Helper_1.Helper.writeFile2(newFilePath, content);
+        await BkHelper_1.BkHelper.writeFile2(newFilePath, content);
         return content;
     }
     /*getViewName() {
@@ -63,17 +63,17 @@ class Editor extends BaseModel_1.BaseModel {
     }*/
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
-        const exists = await Helper_1.Helper.exists(filePath);
+        const exists = await BkHelper_1.BkHelper.exists(filePath);
         if (exists) {
-            return await Helper_1.Helper.readTextFile(filePath);
+            return await BkHelper_1.BkHelper.readTextFile(filePath);
         }
     }
     async saveFile(filePath, content) {
-        const exists = await Helper_1.Helper.exists(filePath);
+        const exists = await BkHelper_1.BkHelper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
         }
-        await Helper_1.Helper.writeFile2(filePath, content);
+        await BkHelper_1.BkHelper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
         console.log('Editor.getCustomFile', ext);
@@ -116,7 +116,7 @@ class Editor extends BaseModel_1.BaseModel {
         return new DataSourceClass(data, this);
     }*/
     moveDataColItem(colName, name, offset) {
-        Helper_1.Helper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
+        BkHelper_1.BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
     /*async newActionData(params) {
         if (!params.name) throw new Error('no name');

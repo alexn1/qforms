@@ -7,7 +7,7 @@ exports.FileSessionStore = void 0;
 const path_1 = __importDefault(require("path"));
 const express_session_1 = __importDefault(require("express-session"));
 // import colors from 'colors/safe';
-const Helper_1 = require("./Helper");
+const BkHelper_1 = require("./BkHelper");
 class FileSessionStore extends express_session_1.default.Store {
     constructor(dirPath) {
         // console.log('FileSessionStore.constructor', dirPath);
@@ -20,7 +20,7 @@ class FileSessionStore extends express_session_1.default.Store {
         this.store[sid] = session;
         const sessionFilePath = path_1.default.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
-        Helper_1.Helper.writeFile(sessionFilePath, content).then(() => {
+        BkHelper_1.BkHelper.writeFile(sessionFilePath, content).then(() => {
             cb(null);
         });
     }
@@ -32,7 +32,7 @@ class FileSessionStore extends express_session_1.default.Store {
         }
         else {
             const sessionFilePath = path_1.default.join(this.dirPath, `${sid}.json`);
-            Helper_1.Helper.getFileContent(sessionFilePath).then((content) => {
+            BkHelper_1.BkHelper.getFileContent(sessionFilePath).then((content) => {
                 if (content) {
                     try {
                         const session = (this.store[sid] = JSON.parse(content));

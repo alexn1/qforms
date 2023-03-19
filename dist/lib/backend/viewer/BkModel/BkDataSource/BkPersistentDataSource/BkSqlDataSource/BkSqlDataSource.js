@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkSqlDataSource = void 0;
 const BkPersistentDataSource_1 = require("../BkPersistentDataSource");
 const BkDataSource_1 = require("../../BkDataSource");
-const Helper_1 = require("../../../../../Helper");
+const BkHelper_1 = require("../../../../../BkHelper");
 const Result_1 = require("../../../../../../Result");
 class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
@@ -195,8 +195,8 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         const values = changes[key];
         // update row
         const updateQuery = this.getDatabase().getUpdateQuery(tableName, values, where);
-        const _values = Helper_1.Helper.mapObject(values, (name, value) => [`val_${name}`, value]);
-        const _where = Helper_1.Helper.mapObject(where, (name, value) => [`key_${name}`, value]);
+        const _values = BkHelper_1.BkHelper.mapObject(values, (name, value) => [`val_${name}`, value]);
+        const _where = BkHelper_1.BkHelper.mapObject(where, (name, value) => [`key_${name}`, value]);
         const params = Object.assign(Object.assign({}, _values), _where);
         await this.getDatabase().queryResult(context, updateQuery, params);
         // new key

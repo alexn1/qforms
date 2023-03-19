@@ -13,7 +13,7 @@ Module.prototype.require = function () {
 const index_1 = require("./index");
 async function main() {
     // console.log('main');
-    const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.Helper.getCommandLineParams()), { monitor: {
+    const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
             username: 'admin',
             password: '123qwe',
         } }));

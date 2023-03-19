@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDataSource = void 0;
 const path_1 = __importDefault(require("path"));
 const BkModel_1 = require("../BkModel");
-const Helper_1 = require("../../../Helper");
+const BkHelper_1 = require("../../../BkHelper");
 const BkPage_1 = require("../BkPage/BkPage");
 const BkForm_1 = require("../BkForm/BkForm");
 const BkRowForm_1 = require("../BkForm/BkRowForm/BkRowForm");
@@ -33,9 +33,9 @@ class BkDataSource extends BkModel_1.BkModel {
         this.keyColumns = this.getKeyColumns();
         // rows
         const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper_1.Helper.exists(jsonFilePath);
+        const exists = await BkHelper_1.BkHelper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper_1.Helper.readTextFile(jsonFilePath);
+            const content = await BkHelper_1.BkHelper.readTextFile(jsonFilePath);
             this.rows = JSON.parse(content);
         }
     }
@@ -127,7 +127,7 @@ class BkDataSource extends BkModel_1.BkModel {
             }
         } else {
             for (const name in row) {
-                row[name] = Helper.encodeValue(row[name]);
+                row[name] = BkHelper.encodeValue(row[name]);
             }
         }
     } */
@@ -147,7 +147,7 @@ class BkDataSource extends BkModel_1.BkModel {
         }
         else {
             for (const name in row) {
-                rawRow[name] = Helper_1.Helper.encodeValue(row[name]);
+                rawRow[name] = BkHelper_1.BkHelper.encodeValue(row[name]);
             }
         }
         return rawRow;
@@ -244,9 +244,9 @@ class BkDataSource extends BkModel_1.BkModel {
     async getRows() {
         // console.log('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
-        const exists = await Helper.exists(jsonFilePath);
+        const exists = await BkHelper.exists(jsonFilePath);
         if (exists) {
-            const content = await Helper.readTextFile(jsonFilePath);
+            const content = await BkHelper.readTextFile(jsonFilePath);
             return JSON.parse(content);
         } */
         return this.rows;

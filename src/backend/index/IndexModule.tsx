@@ -2,7 +2,7 @@ import path from 'path';
 
 import ReactDOMServer from 'react-dom/server';
 import { BkApplication } from '../viewer/BkModel/BkApplication/BkApplication';
-import { Helper } from '../Helper';
+import { BkHelper } from '../BkHelper';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import { BackHostApp } from '../BackHostApp';
@@ -17,13 +17,13 @@ export class IndexModule {
 
     async init() {
         this.css = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
                 'css',
             )
         ).map((path) => `/index/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'index/public'),
                 'js',
             )

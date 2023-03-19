@@ -8,7 +8,7 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const path_1 = __importDefault(require("path"));
 const react_1 = __importDefault(require("react"));
 const server_1 = __importDefault(require("react-dom/server"));
-const Helper_1 = require("../Helper");
+const BkHelper_1 = require("../BkHelper");
 const MyError_1 = require("../MyError");
 const Result_1 = require("../../Result");
 const Links_1 = require("../Links");
@@ -42,8 +42,8 @@ class ViewerModule {
     }
     async init() {
         console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
-        this.css = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
-        this.js = (await Helper_1.Helper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
+        this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
+        this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
         console.log('ViewerModule.css:', this.css);
         console.log('ViewerModule.js:', this.js);
         if (!this.js.length)
@@ -374,7 +374,7 @@ class ViewerModule {
             throw new Error(`no user for route ${context.getRoute()}`);
         }
         delete req.session.user[context.getRoute()];
-        await Helper_1.Helper.Session_save(req.session);
+        await BkHelper_1.BkHelper.Session_save(req.session);
         await res.json(null);
     }
     // action

@@ -8,12 +8,12 @@ Module.prototype.require = function () {
     }
 };
 
-import { BackHostApp, Helper } from './index';
+import { BackHostApp, BkHelper } from './index';
 
 async function main() {
     // console.log('main');
     const backHostApp = new BackHostApp({
-        ...Helper.getCommandLineParams(),
+        ...BkHelper.getCommandLineParams(),
         monitor: {
             username: 'admin',
             password: '123qwe',

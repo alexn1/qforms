@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkField = void 0;
 const path_1 = __importDefault(require("path"));
 const BkModel_1 = require("../BkModel");
-const Helper_1 = require("../../../Helper");
+const BkHelper_1 = require("../../../BkHelper");
 class BkField extends BkModel_1.BkModel {
     /* static async create(data, parent): Promise<Field> {
         return new Field(data, parent);
@@ -39,11 +39,9 @@ class BkField extends BkModel_1.BkModel {
             return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
         const params = context.getParams();
-        const js = Helper_1.Helper.templateToJsString(defaultValue, params);
+        const js = BkHelper_1.BkHelper.templateToJsString(defaultValue, params);
         let value;
         try {
-            // @ts-ignore
-            // global.Helper = Helper;
             value = eval(js);
             if (value !== undefined) {
                 row[column] = this.valueToRaw(value);
@@ -88,10 +86,10 @@ class BkField extends BkModel_1.BkModel {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
     valueToRaw(value) {
-        return Helper_1.Helper.encodeValue(value);
+        return BkHelper_1.BkHelper.encodeValue(value);
     }
     rawToValue(raw) {
-        return Helper_1.Helper.decodeValue(raw);
+        return BkHelper_1.BkHelper.decodeValue(raw);
     }
     isTimezone() {
         return this.getAttr('timezone') === 'true';

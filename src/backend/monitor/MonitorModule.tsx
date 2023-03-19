@@ -1,7 +1,7 @@
 import path from 'path';
 
 import { BackHostApp } from '../BackHostApp';
-import { Helper } from '../Helper';
+import { BkHelper } from '../BkHelper';
 import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
@@ -19,13 +19,13 @@ export class MonitorModule {
 
     async init() {
         this.css = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
                 'css',
             )
         ).map((path) => `/monitor/public/${path}`);
         this.js = (
-            await Helper.getFilePaths(
+            await BkHelper.getFilePaths(
                 path.join(this.hostApp.getFrontendDirPath(), 'monitor/public'),
                 'js',
             )
@@ -52,7 +52,7 @@ export class MonitorModule {
                         return {
                             uuid: webSocket.uuid,
                             userId: webSocket.userId,
-                            ip: Helper.getWebSocketIP(webSocket),
+                            ip: BkHelper.getWebSocketIP(webSocket),
                             version: webSocket.customFields.version,
                         };
                     }),
