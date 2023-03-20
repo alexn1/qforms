@@ -13,7 +13,7 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
-    getSelectQuery(): string;
+    getSelectQuery(context: Context): string;
     getCountQuery(context: Context): string;
     getSelectParams(context: Context): {
         [name: string]: any;

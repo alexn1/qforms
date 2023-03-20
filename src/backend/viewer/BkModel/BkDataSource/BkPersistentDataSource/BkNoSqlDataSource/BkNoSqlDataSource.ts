@@ -76,7 +76,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(
             context,
-            this.getSelectQuery(),
+            this.getSelectQuery(context),
             this.getSelectParams(context),
         );
         console.log('rows query time:', Date.now() - start);
@@ -134,7 +134,11 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         // console.log('keyParams:', keyParams);
 
         // row
-        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
+        const [row] = await this.getDatabase().queryRows(
+            context,
+            this.getSelectQuery(context),
+            keyParams,
+        );
         if (!row) throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow2(row);
@@ -177,7 +181,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         // row
         const [row] = await this.getDatabase().queryRows(
             context,
-            this.getSelectQuery(),
+            this.getSelectQuery(context),
             newKeyParams,
         );
         if (!row) throw new Error('select query does not return row');
@@ -211,12 +215,10 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         return result;
     }
 
-    getSelectQuery(): string {
-        const selectQuery = this.getAttr('selectQuery');
-        if (!selectQuery) {
-            throw new Error('no selectQuery');
-        }
-        return selectQuery;
+    getSelectQuery(context: Context): string {
+        const query = this.getAttr('selectQuery');
+        if (!query) throw new Error(`${this.getFullName()}: no selectQuery`);
+        return query;
     }
 
     getCountQuery(context: Context): string {

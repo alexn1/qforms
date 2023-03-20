@@ -61,7 +61,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         }
         // exec selectQuery
         const start = Date.now();
-        const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(), this.getSelectParams(context));
+        const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(context), this.getSelectParams(context));
         console.log('rows query time:', Date.now() - start);
         // console.log('rows:', rows);
         this.checkRows(rows);
@@ -104,7 +104,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
         // console.log('keyParams:', keyParams);
         // row
-        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), keyParams);
+        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), keyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
@@ -139,7 +139,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
         console.log('newKey:', newKey);
         // row
-        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(), newKeyParams);
+        const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
@@ -163,12 +163,11 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         Result_1.Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;
     }
-    getSelectQuery() {
-        const selectQuery = this.getAttr('selectQuery');
-        if (!selectQuery) {
-            throw new Error('no selectQuery');
-        }
-        return selectQuery;
+    getSelectQuery(context) {
+        const query = this.getAttr('selectQuery');
+        if (!query)
+            throw new Error(`${this.getFullName()}: no selectQuery`);
+        return query;
     }
     getCountQuery(context) {
         const query = this.getAttr('countQuery');

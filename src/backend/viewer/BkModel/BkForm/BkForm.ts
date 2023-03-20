@@ -82,7 +82,7 @@ export class BkForm extends BkModel {
         // console.log(params);
     }
 
-    replaceThis(context: Context, query) {
+    replaceThis(context: Context, query: string): string {
         return query
             .replace(/\{([@\w.]+)\}/g, (text, name) => {
                 if (name.indexOf('.') !== -1) {

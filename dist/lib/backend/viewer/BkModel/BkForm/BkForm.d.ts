@@ -23,7 +23,7 @@ export declare class BkForm extends BkModel {
         }[];
     };
     dumpRowToParams(row: any, params: any): void;
-    replaceThis(context: Context, query: any): any;
+    replaceThis(context: Context, query: string): string;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): BkApplication;
     getPage(): BkPage;
