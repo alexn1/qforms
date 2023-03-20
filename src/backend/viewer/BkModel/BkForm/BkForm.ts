@@ -54,9 +54,9 @@ export class BkForm extends BkModel {
         return response;
     }
 
-    /*getDefaultDataSource() {
+    /* getDefaultDataSource() {
         return this.getDataSource('default');
-    }*/
+    } */
 
     _getSurrogateDataSourceResponse(context: Context) {
         const row = {
@@ -79,12 +79,12 @@ export class BkForm extends BkModel {
                 field.dumpRowValueToParams(row, params);
             }
         }
-        //console.log(params);
+        // console.log(params);
     }
 
     replaceThis(context: Context, query) {
         return query
-            .replace(/\{([@\w\.]+)\}/g, (text, name) => {
+            .replace(/\{([@\w.]+)\}/g, (text, name) => {
                 if (name.indexOf('.') !== -1) {
                     const arr = name.split('.');
                     if (arr[0] === 'this') {
@@ -94,7 +94,7 @@ export class BkForm extends BkModel {
                 }
                 return text;
             })
-            .replace(/\[([@\w\.]+)\]/g, (text, name) => {
+            .replace(/\[([@\w.]+)\]/g, (text, name) => {
                 if (name.indexOf('.') !== -1) {
                     const arr = name.split('.');
                     if (arr[0] === 'this') {

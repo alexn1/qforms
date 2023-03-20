@@ -44,9 +44,9 @@ class BkForm extends BkModel_1.BkModel {
         response.dataSources.push(dataSourceResponse);
         return response;
     }
-    /*getDefaultDataSource() {
+    /* getDefaultDataSource() {
         return this.getDataSource('default');
-    }*/
+    } */
     _getSurrogateDataSourceResponse(context) {
         const row = {
             id: 1,
@@ -67,11 +67,11 @@ class BkForm extends BkModel_1.BkModel {
                 field.dumpRowValueToParams(row, params);
             }
         }
-        //console.log(params);
+        // console.log(params);
     }
     replaceThis(context, query) {
         return query
-            .replace(/\{([@\w\.]+)\}/g, (text, name) => {
+            .replace(/\{([@\w.]+)\}/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {
@@ -81,7 +81,7 @@ class BkForm extends BkModel_1.BkModel {
             }
             return text;
         })
-            .replace(/\[([@\w\.]+)\]/g, (text, name) => {
+            .replace(/\[([@\w.]+)\]/g, (text, name) => {
             if (name.indexOf('.') !== -1) {
                 const arr = name.split('.');
                 if (arr[0] === 'this') {

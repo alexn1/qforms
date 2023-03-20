@@ -100,7 +100,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
         let query = _query;
 
         // replace [param] to value
-        query = _query.replace(/\[([\w\.@]+)\]/g, (text, name) => {
+        query = _query.replace(/\[([\w.@]+)\]/g, (text, name) => {
             if (params[name]) {
                 return params[name];
             }

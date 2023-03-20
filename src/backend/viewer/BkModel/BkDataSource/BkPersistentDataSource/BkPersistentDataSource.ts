@@ -21,7 +21,7 @@ export abstract class BkPersistentDataSource<
         const values = {};
         for (const field of form.fields) {
             const column = field.getAttr('column');
-            if (row.hasOwnProperty(column)) {
+            if (Object.prototype.hasOwnProperty.call(row, column)) {
                 const value = field.rawToValue(row[column]);
                 values[column] = field.valueToDbValue(value);
             }
