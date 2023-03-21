@@ -30,8 +30,3 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormLinkFieldView = RowFormLinkFieldView;
-}

@@ -45,8 +45,3 @@ export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFi
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
-}

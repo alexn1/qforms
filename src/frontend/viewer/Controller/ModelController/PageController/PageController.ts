@@ -279,8 +279,3 @@ export class PageController<
         return false;
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PageController = PageController;
-}

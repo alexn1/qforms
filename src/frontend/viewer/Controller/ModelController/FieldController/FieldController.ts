@@ -114,7 +114,3 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FieldController = FieldController;
-}

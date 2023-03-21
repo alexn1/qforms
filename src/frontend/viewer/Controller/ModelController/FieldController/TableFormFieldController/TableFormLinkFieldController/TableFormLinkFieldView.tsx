@@ -15,8 +15,3 @@ export class TableFormLinkFieldView extends TableFormFieldView<TableFormLinkFiel
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormLinkFieldView = TableFormLinkFieldView;
-}

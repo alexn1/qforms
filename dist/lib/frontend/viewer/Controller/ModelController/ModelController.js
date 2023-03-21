@@ -49,7 +49,3 @@ class ModelController extends Controller_1.Controller {
     }
 }
 exports.ModelController = ModelController;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ModelController = ModelController;
-}

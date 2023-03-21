@@ -24,8 +24,3 @@ export class TableFormCheckBoxFieldView extends TableFormFieldView<TableFormChec
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
-}

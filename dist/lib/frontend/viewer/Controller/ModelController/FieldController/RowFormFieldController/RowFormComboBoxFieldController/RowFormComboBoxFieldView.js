@@ -52,7 +52,3 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
-}

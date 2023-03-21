@@ -173,7 +173,3 @@ class PageView extends ModelView_1.ModelView {
     }
 }
 exports.PageView = PageView;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PageView = PageView;
-}

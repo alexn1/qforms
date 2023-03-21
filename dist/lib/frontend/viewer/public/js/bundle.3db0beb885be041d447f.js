@@ -36215,9 +36215,6 @@ class LoginController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         return this.getViewClass().name;
     }
 }
-if (typeof window === 'object') {
-    window.LoginController = LoginController;
-}
 
 
 /***/ }),
@@ -36266,9 +36263,6 @@ class LoginView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
         // console.log('LoginView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) })));
     }
-}
-if (typeof window === 'object') {
-    window.LoginView = LoginView;
 }
 
 
@@ -36860,10 +36854,6 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ApplicationView = ApplicationView;
-}
 
 
 /***/ }),
@@ -36976,10 +36966,6 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         return this.getModel().getAttr('format');
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FieldController = FieldController;
-}
 
 
 /***/ }),
@@ -37067,10 +37053,6 @@ class RowFormCheckBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { onCreate: this.onWidgetCreate, checked: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: this.onCheckBoxChange }) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
 }
 
 
@@ -37187,10 +37169,6 @@ class RowFormCheckBoxListFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_M
     render() {
         return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.renderCheckBoxList() }));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormCheckBoxListFieldView = RowFormCheckBoxListFieldView;
 }
 
 
@@ -37409,10 +37387,6 @@ class RowFormComboBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
                     this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()] })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormComboBoxFieldView = RowFormComboBoxFieldView;
-}
 
 
 /***/ }),
@@ -37474,10 +37448,6 @@ class RowFormDateFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
                 // getMinDate={this.props.getMinDate}
                 minDate: this.props.minDate, debug: ctrl.getApp().getHostApp().isDebugMode() }) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormDateFieldView = RowFormDateFieldView;
 }
 
 
@@ -37779,10 +37749,6 @@ class RowFormDateTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         // console.log('RowFormDateTimeFieldView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getMode()}`, style: this.getStyle(this.getCtrl().getRow()) }, { children: [this.renderDatePart(), this.renderTimePart()] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormDateTimeFieldView = RowFormDateTimeFieldView;
 }
 
 
@@ -38112,10 +38078,6 @@ class RowFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_0__.FieldView
         ];
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormFieldView = RowFormFieldView;
-}
 
 
 /***/ }),
@@ -38236,10 +38198,6 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         setTimeout(() => this.updateSize(), 0);
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormFileFieldView = RowFormFileFieldView;
-}
 
 
 /***/ }),
@@ -38331,10 +38289,6 @@ class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
         }
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormLinkFieldView = RowFormLinkFieldView;
 }
 
 
@@ -38432,10 +38386,6 @@ class RowFormPasswordFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { classList: [`${this.getCssBlockName()}__input`], type: this.state.type, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.VisibilityOffIcon, {}) }))] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormPasswordFieldView = RowFormPasswordFieldView;
 }
 
 
@@ -38541,10 +38491,6 @@ class RowFormPhoneFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1
         // console.log('RowFormPhoneFieldView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormPhoneFieldView = RowFormPhoneFieldView;
 }
 
 
@@ -38719,10 +38665,6 @@ class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.model.getRows(), cols: ctrl.model.getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextAreaFieldView = RowFormTextAreaFieldView;
-}
 
 
 /***/ }),
@@ -38812,10 +38754,6 @@ class RowFormTextBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderTextBox(), this.renderCloseIcon()] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
 }
 
 
@@ -38928,10 +38866,6 @@ class RowFormTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TimeBox, { onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, onBlur: ctrl.onBlur, placeholder: ctrl.getPlaceholder() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) }))] })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTimeFieldView = RowFormTimeFieldView;
-}
 
 
 /***/ }),
@@ -38992,10 +38926,6 @@ class TableFormCheckBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_M
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: Object.assign(Object.assign({}, this.getStyle(row)), { textAlign: ctrl.getAlign() }) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { ref: this.span, checked: ctrl.getValueForWidget(row), readOnly: true, disabled: true }) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormCheckBoxFieldView = TableFormCheckBoxFieldView;
 }
 
 
@@ -39081,10 +39011,6 @@ class TableFormComboBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_M
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormComboBoxFieldView = TableFormComboBoxFieldView;
-}
 
 
 /***/ }),
@@ -39141,10 +39067,6 @@ class TableFormDateFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODUL
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormDateFieldView = TableFormDateFieldView;
 }
 
 
@@ -39203,10 +39125,6 @@ class TableFormDateTimeFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_M
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormDateTimeFieldView = TableFormDateTimeFieldView;
-}
 
 
 /***/ }),
@@ -39264,10 +39182,6 @@ class TableFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_1__.FieldVi
             return 0;
         return this.span.current.offsetWidth;
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormFieldView = TableFormFieldView;
 }
 
 
@@ -39329,10 +39243,6 @@ class TableFormLinkFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODUL
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: "#", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormLinkFieldView = TableFormLinkFieldView;
 }
 
 
@@ -39437,10 +39347,6 @@ class TableFormTextBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MO
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
-}
 
 
 /***/ }),
@@ -39543,11 +39449,6 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         throw new Error('FormController.getActiveRow not implemented');
     }
 }
-/* if (typeof window === 'object') {
-    // @ts-ignore
-    window.FormController = FormController;
-}
- */
 
 
 /***/ }),
@@ -39590,10 +39491,6 @@ class FormView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
             return true;
         return false;
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.FormView = FormView;
 }
 
 
@@ -39904,10 +39801,6 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
                     this.getCtrl().getModel().hasActions()) &&
                     this.renderToolbar(), this.renderGroups()] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormView = RowFormView;
 }
 
 
@@ -40323,14 +40216,10 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         });
     }
     render() {
-        console.log('TableFormView.render', this.getCtrl().model.getFullName());
+        console.log('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormView = TableFormView;
 }
 
 
@@ -40396,10 +40285,6 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         return false;
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ModelController = ModelController;
-}
 
 
 /***/ }),
@@ -40451,10 +40336,6 @@ class ModelView extends _View__WEBPACK_IMPORTED_MODULE_1__.View {
         return super.getCssBlockName();
     }
     getStyle(row) { }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ModelView = ModelView;
 }
 
 
@@ -40711,10 +40592,6 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return false;
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PageController = PageController;
-}
 
 
 /***/ }),
@@ -40901,10 +40778,6 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
             console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);
         }
     }
-}
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.PageView = PageView;
 }
 
 

@@ -14,8 +14,3 @@ export class TableFormTextBoxFieldView extends TableFormFieldView<TableFormTextB
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormTextBoxFieldView = TableFormTextBoxFieldView;
-}

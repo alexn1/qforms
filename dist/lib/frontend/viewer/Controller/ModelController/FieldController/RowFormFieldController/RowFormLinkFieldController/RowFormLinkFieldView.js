@@ -24,7 +24,3 @@ class RowFormLinkFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormLinkFieldView = RowFormLinkFieldView;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormLinkFieldView = RowFormLinkFieldView;
-}

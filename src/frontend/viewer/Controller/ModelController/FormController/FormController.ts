@@ -111,9 +111,3 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         throw new Error('FormController.getActiveRow not implemented');
     }
 }
-
-/* if (typeof window === 'object') {
-    // @ts-ignore
-    window.FormController = FormController;
-}
- */

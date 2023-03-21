@@ -30,8 +30,3 @@ export class RowFormFieldView<
         this.widget = widget;
     };
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormFieldView = RowFormFieldView;
-}

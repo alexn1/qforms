@@ -87,8 +87,3 @@ class FormController extends ModelController_1.ModelController {
     }
 }
 exports.FormController = FormController;
-/* if (typeof window === 'object') {
-    // @ts-ignore
-    window.FormController = FormController;
-}
- */

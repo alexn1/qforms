@@ -18,8 +18,3 @@ export class RowFormImageFieldView extends RowFormFieldView<RowFormImageFieldCon
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormImageFieldView = RowFormImageFieldView;
-}

@@ -18,8 +18,3 @@ export class TableFormFieldView<
         return this.span.current.offsetWidth;
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormFieldView = TableFormFieldView;
-}

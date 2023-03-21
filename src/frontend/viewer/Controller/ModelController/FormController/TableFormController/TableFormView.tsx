@@ -9,7 +9,6 @@ import {
     LeftIcon,
     RightIcon,
     Grid,
-    FrontHostApp,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
 import './TableFormView.less';
@@ -160,7 +159,7 @@ export class TableFormView<
     }
 
     render() {
-        console.log('TableFormView.render', this.getCtrl().model.getFullName());
+        console.log('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return (
             <div
@@ -182,9 +181,4 @@ export class TableFormView<
                 ...DataSource.keyToParams(key),
             });
     };
-}
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormView = TableFormView;
 }

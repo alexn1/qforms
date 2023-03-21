@@ -71,7 +71,3 @@ export class ApplicationView<
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.ApplicationView = ApplicationView;
-}

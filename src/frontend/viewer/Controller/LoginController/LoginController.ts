@@ -1,6 +1,6 @@
 import { Controller } from '../Controller';
 import { LoginView } from './LoginView';
-import { FrontHostApp, Helper } from '../../../common';
+import { Helper } from '../../../common';
 
 export class LoginController extends Controller {
     frontHostApp: any;
@@ -42,8 +42,4 @@ declare global {
     interface Window {
         LoginController: typeof LoginController;
     }
-}
-
-if (typeof window === 'object') {
-    window.LoginController = LoginController;
 }

@@ -15,8 +15,3 @@ export class TableFormDateTimeFieldView extends TableFormFieldView<TableFormDate
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormDateTimeFieldView = TableFormDateTimeFieldView;
-}

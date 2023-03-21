@@ -19,7 +19,3 @@ class RowFormCheckBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
 }
 exports.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormCheckBoxFieldView = RowFormCheckBoxFieldView;
-}

@@ -78,8 +78,3 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormTextBoxFieldView = RowFormTextBoxFieldView;
-}

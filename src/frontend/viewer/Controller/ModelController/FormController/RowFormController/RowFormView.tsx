@@ -195,8 +195,3 @@ export class RowFormView<
         return <CancelIcon/>;
     }*/
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.RowFormView = RowFormView;
-}

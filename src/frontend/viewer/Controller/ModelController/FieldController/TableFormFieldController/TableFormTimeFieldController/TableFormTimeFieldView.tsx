@@ -14,8 +14,3 @@ export class TableFormTimeFieldView extends TableFormFieldView<TableFormTimeFiel
         );
     }
 }
-
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.TableFormTimeFieldView = TableFormTimeFieldView;
-}
