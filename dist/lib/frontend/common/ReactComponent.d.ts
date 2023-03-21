@@ -6,7 +6,7 @@ export declare class ReactComponent extends Component<any, any> {
     getElement(): any;
     getParent(): any;
     checkParent(): void;
-    getClassList(): any[];
+    getClassList(): string[];
     addCssClass(className: any): void;
     removeCssClass(className: any): void;
     getCssBlockName(): string;

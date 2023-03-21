@@ -22,7 +22,7 @@ export class ReactComponent extends Component<any, any> {
         if (!this.props.parent) throw new Error(`${this.constructor.name}: no parent`);
     }
 
-    getClassList() {
+    getClassList(): string[] {
         return [
             this.getCssBlockName(),
             ...(this.props.classList || []),

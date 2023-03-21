@@ -4,6 +4,6 @@ export declare class RowFormFieldView<T extends RowFormFieldController = RowForm
     widget: any;
     constructor(props: any);
     getWidget(): any;
-    getClassList(): any[];
+    getClassList(): string[];
     onWidgetCreate: (widget: any) => void;
 }
