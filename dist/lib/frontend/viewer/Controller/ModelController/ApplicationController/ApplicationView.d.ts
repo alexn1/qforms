@@ -5,7 +5,7 @@ import './ApplicationView.less';
 export declare class ApplicationView<TApplicationController extends ApplicationController = ApplicationController> extends ModelView<TApplicationController> {
     renderActivePage(): any;
     renderView(ctrl: any, props?: {}): any;
-    renderModals(): any;
+    renderModals(): any[];
     renderHeader(): JSX.Element;
     renderMain(): JSX.Element;
     renderFooter(): JSX.Element;

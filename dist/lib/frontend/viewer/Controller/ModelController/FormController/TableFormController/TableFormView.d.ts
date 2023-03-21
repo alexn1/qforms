@@ -11,16 +11,16 @@ export declare class TableFormView<TTableFormController extends TableFormControl
         column: any;
         onCreate: any;
         onUnmount: any;
-        ctrl: any;
+        ctrl: import("../../FieldController/TableFormFieldController/TableFormFieldController").TableFormFieldController<import("../../../../Model/Field/Field").Field>;
     }, React.Component<{
         row: any;
         column: any;
         onCreate: any;
         onUnmount: any;
-        ctrl: any;
+        ctrl: import("../../FieldController/TableFormFieldController/TableFormFieldController").TableFormFieldController<import("../../../../Model/Field/Field").Field>;
     }, any, any>>;
     getGridColumns(): any[];
-    getRows(): any;
+    getRows(): import("../../../..").RawRow[];
     getGridExtraColumn(): boolean;
     getGridClass(): typeof Grid;
     renderGrid(): React.CElement<any, Grid>;

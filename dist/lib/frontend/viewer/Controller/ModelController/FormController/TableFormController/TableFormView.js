@@ -16,7 +16,7 @@ class TableFormView extends FormView_1.FormView {
         super(...arguments);
         this.renderGridCellView = (row, column, onCreate, onUnmount) => {
             // console.log('TableFormView.renderGridCellView');
-            const ctrl = this.props.ctrl.getField(column.name);
+            const ctrl = this.getCtrl().getField(column.name);
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
             // console.log(column.name, ctrl.constructor.name);
@@ -57,7 +57,7 @@ class TableFormView extends FormView_1.FormView {
         });
     }
     getRows() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ctrl.model.getDefaultDataSource().getRows();
     }
     getGridExtraColumn() {
@@ -67,7 +67,7 @@ class TableFormView extends FormView_1.FormView {
         return common_1.Grid;
     }
     renderGrid() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return react_1.default.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
@@ -87,7 +87,7 @@ class TableFormView extends FormView_1.FormView {
         });
     }
     render() {
-        console.log('TableFormView.render', this.props.ctrl.model.getFullName());
+        console.log('TableFormView.render', this.getCtrl().model.getFullName());
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }

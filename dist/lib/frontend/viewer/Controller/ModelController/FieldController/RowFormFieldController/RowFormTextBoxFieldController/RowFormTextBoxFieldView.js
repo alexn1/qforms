@@ -37,7 +37,7 @@ class RowFormTextBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ctrl.getValueForWidget() !== '';
     }
     renderTextBox() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), enabled: ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }));
     }
     renderCloseIcon() {

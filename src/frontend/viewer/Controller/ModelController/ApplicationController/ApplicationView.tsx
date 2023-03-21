@@ -27,7 +27,7 @@ export class ApplicationView<
     }
 
     renderModals() {
-        return this.props.ctrl.modals.map((ctrl) => {
+        return this.getCtrl().modals.map((ctrl) => {
             if (ctrl instanceof PageController) {
                 return <Modal key={ctrl.getId()}>{this.renderView(ctrl)}</Modal>;
             }
@@ -59,7 +59,7 @@ export class ApplicationView<
     }
 
     render() {
-        console.log(`${this.constructor.name}.render`, this.props.ctrl.model.getFullName());
+        console.log(`${this.constructor.name}.render`, this.getCtrl().model.getFullName());
         return (
             <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
                 {this.renderHeader()}

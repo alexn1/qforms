@@ -9,12 +9,12 @@ class RowFormImageFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onImageClick = async (e) => {
-            const ctrl = this.props.ctrl;
+            const ctrl = this.getCtrl();
             console.log('RowFormImageFieldView.onImageClick');
         };
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(ctrl.getRow()) }, { children: (0, jsx_runtime_1.jsx)(Image_1.Image, { src: ctrl.getValueForWidget(), onClick: this.onImageClick }) })));
     }
 }

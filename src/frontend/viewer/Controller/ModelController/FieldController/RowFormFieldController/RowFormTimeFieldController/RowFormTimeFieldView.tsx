@@ -7,7 +7,7 @@ import './RowFormTimeFieldView.less';
 export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldController> {
     onCloseClick = async (e) => {
         console.log('RowFormTimeFieldView.onCloseClick');
-        /*const ctrl = this.props.ctrl;
+        /*const ctrl = this.getCtrl();
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
         ctrl.onChange(null);*/
@@ -24,7 +24,7 @@ export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldContr
     }
 
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <div className={this.getCssClassNames()}>
                 <TimeBox

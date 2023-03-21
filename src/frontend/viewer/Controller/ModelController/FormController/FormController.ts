@@ -7,6 +7,7 @@ import {
     ApplicationController,
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
+import { RawRow } from '../../../../../types';
 
 export class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: { [name: string]: FieldController } = {};
@@ -105,9 +106,14 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';
     }
+
+    getActiveRow(): RawRow {
+        throw new Error('FormController.getActiveRow not implemented');
+    }
 }
 
-if (typeof window === 'object') {
+/* if (typeof window === 'object') {
     // @ts-ignore
     window.FormController = FormController;
 }
+ */

@@ -3,6 +3,7 @@ import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
+import { RawRow } from '../../../../../types';
 export declare class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: {
         [name: string]: FieldController;
@@ -25,4 +26,5 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     getSelectedRowKey(): any;
     isAutoFocus(): boolean;
     isVisible(): boolean;
+    getActiveRow(): RawRow;
 }

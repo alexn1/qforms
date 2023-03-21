@@ -263,7 +263,7 @@ export class TableFormController extends FormController<TableForm> {
         await this.getPage().rerender();
     };
 
-    getActiveRow() {
+    getActiveRow(): RawRow {
         const key = this.grid.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
         return this.model.getDefaultDataSource().getRow(key);

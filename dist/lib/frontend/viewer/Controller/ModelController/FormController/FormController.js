@@ -82,9 +82,13 @@ class FormController extends ModelController_1.ModelController {
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';
     }
+    getActiveRow() {
+        throw new Error('FormController.getActiveRow not implemented');
+    }
 }
 exports.FormController = FormController;
-if (typeof window === 'object') {
+/* if (typeof window === 'object') {
     // @ts-ignore
     window.FormController = FormController;
 }
+ */

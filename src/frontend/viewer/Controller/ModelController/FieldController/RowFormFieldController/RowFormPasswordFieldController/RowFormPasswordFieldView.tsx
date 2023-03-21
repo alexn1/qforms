@@ -14,7 +14,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
 
     onCloseClick = async (e) => {
         // console.log('RowFormPasswordFieldView.onCloseClick');
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         this.getWidget().state.value = '';
         this.getWidget().setState({ value: '' });
         ctrl.onChange('');
@@ -23,7 +23,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
 
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
@@ -53,7 +53,7 @@ export class RowFormPasswordFieldView extends RowFormFieldView<RowFormPasswordFi
     };
 
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <div className={this.getCssClassNames()}>
                 <TextBox

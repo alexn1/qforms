@@ -37,7 +37,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     }
 
     onClearClick = (e) => {
-        this.props.ctrl.onChange('');
+        this.getCtrl().onChange('');
     };
 
     onChange = async (e) => {
@@ -45,13 +45,13 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
         if (file) {
             const widgetValue = await Helper.readFileAsDataURL(file);
             // console.log('widgetValue:', widgetValue);
-            this.props.ctrl.onChange(widgetValue);
+            this.getCtrl().onChange(widgetValue);
         }
     };
 
     onImageClick = async (e) => {
         console.log('RowFormFileFieldView.onImageClick');
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const app = ctrl.getApp();
         const src = ctrl.getValueForWidget();
         const imageDialogCtrl = new ImageDialogController({
@@ -117,12 +117,12 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     }
 
     componentDidMount() {
-        // console.log('RowFormFileFieldView.componentDidMount', this.props.ctrl.model.getFullName());
+        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().model.getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('RowFormFileFieldView.componentDidUpdate', this.props.ctrl.model.getFullName(), snapshot);
+        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().model.getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 

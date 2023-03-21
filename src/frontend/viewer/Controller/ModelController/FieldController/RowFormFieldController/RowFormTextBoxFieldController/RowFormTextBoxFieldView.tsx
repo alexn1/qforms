@@ -39,7 +39,7 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
     };
 
     renderTextBox() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <TextBox
                 classList={[`${this.getCssBlockName()}__input`]}

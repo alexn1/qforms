@@ -25,7 +25,7 @@ export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFi
 
     render() {
         // console.log('RowFormTextAreaFieldView.render', this.state);
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return (
             <div className={this.getCssClassNames()}>
                 <TextArea

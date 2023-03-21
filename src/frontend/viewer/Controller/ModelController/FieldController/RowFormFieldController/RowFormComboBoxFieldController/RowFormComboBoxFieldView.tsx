@@ -9,7 +9,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
     onChange = async (widgetValue) => {
         // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
         this.rerender();
-        await this.props.ctrl.onChange(widgetValue);
+        await this.getCtrl().onChange(widgetValue);
     };
 
     isCreateButtonVisible() {
@@ -74,7 +74,7 @@ export class RowFormComboBoxFieldView extends RowFormFieldView<RowFormComboBoxFi
     }
 
     render() {
-        // console.log('RowFormComboBoxFieldView.render', this.props.ctrl.getItems(), this.props.ctrl.getValue());
+        // console.log('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         return (
             <div className={this.getCssClassNames()}>
                 {this.renderSelect()}

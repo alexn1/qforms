@@ -3,6 +3,7 @@ import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
+import { RawRow } from '../../../../../../types';
 export declare class RowFormController extends FormController<RowForm> {
     state: any;
     fields: any;
@@ -25,7 +26,7 @@ export declare class RowFormController extends FormController<RowForm> {
     onEditClick: (e: any) => void;
     onCancelClick: (e: any) => void;
     getViewClass(): any;
-    getActiveRow(withChanges: any): import("../../../..").RawRow;
+    getActiveRow(): RawRow;
     getMode(): any;
     isActionEnabled(name: any): boolean;
     isEditMode(): boolean;

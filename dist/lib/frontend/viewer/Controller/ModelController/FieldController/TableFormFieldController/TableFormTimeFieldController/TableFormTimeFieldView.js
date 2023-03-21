@@ -6,7 +6,7 @@ const TableFormFieldView_1 = require("../TableFormFieldView");
 class TableFormTimeFieldView extends TableFormFieldView_1.TableFormFieldView {
     render() {
         const row = this.props.row;
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0, jsx_runtime_1.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }

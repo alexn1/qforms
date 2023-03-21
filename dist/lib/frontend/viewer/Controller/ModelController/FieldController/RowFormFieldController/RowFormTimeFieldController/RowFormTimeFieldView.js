@@ -10,7 +10,7 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         super(...arguments);
         this.onCloseClick = async (e) => {
             console.log('RowFormTimeFieldView.onCloseClick');
-            /*const ctrl = this.props.ctrl;
+            /*const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({value: ''});
             ctrl.onChange(null);*/
@@ -27,7 +27,7 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         return this.getWidget().state.value !== '';
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)(common_1.TimeBox, { onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, onBlur: ctrl.onBlur, placeholder: ctrl.getPlaceholder() }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon, {}) }))] })));
     }
 }

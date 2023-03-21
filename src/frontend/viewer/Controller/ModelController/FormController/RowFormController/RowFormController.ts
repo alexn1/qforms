@@ -5,6 +5,7 @@ import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
+import { RawRow } from '../../../../../../types';
 
 export class RowFormController extends FormController<RowForm> {
     state: any;
@@ -195,8 +196,8 @@ export class RowFormController extends FormController<RowForm> {
         return super.getViewClass() || RowFormView;
     }
 
-    getActiveRow(withChanges) {
-        return this.model.getRow(withChanges);
+    getActiveRow(): RawRow {
+        return this.model.getRow(true);
     }
 
     getMode() {

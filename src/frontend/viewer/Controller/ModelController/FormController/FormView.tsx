@@ -1,7 +1,7 @@
 import { ModelView } from '../ModelView';
 import { FormController } from './FormController';
 
-export class FormView<T extends FormController> extends ModelView<T> {
+export class FormView<TFormController extends FormController> extends ModelView<TFormController> {
     constructor(props) {
         super(props);
         this.checkParent();
@@ -9,10 +9,10 @@ export class FormView<T extends FormController> extends ModelView<T> {
 
     onActionsClick = async (li) => {
         // console.log('FormView.onActionsClick:', li);
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
-            const result = await ctrl.onActionClick(name, ctrl.getActiveRow(true));
+            const result = await ctrl.onActionClick(name, ctrl.getActiveRow());
             if (!result) {
                 throw new Error(`no handler for action '${name}'`);
             }

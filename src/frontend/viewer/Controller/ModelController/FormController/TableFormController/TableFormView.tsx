@@ -104,7 +104,7 @@ export class TableFormView<
 
     renderGridCellView = (row, column, onCreate, onUnmount) => {
         // console.log('TableFormView.renderGridCellView');
-        const ctrl = this.props.ctrl.getField(column.name);
+        const ctrl = this.getCtrl().getField(column.name);
         if (!ctrl) throw new Error(`no field: ${column.name}`);
         // console.log(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
@@ -126,7 +126,7 @@ export class TableFormView<
     }
 
     getRows() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ctrl.model.getDefaultDataSource().getRows();
     }
 
@@ -139,7 +139,7 @@ export class TableFormView<
     }
 
     renderGrid() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return React.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
@@ -160,7 +160,7 @@ export class TableFormView<
     }
 
     render() {
-        console.log('TableFormView.render', this.props.ctrl.model.getFullName());
+        console.log('TableFormView.render', this.getCtrl().model.getFullName());
         const ctrl = this.getCtrl();
         return (
             <div

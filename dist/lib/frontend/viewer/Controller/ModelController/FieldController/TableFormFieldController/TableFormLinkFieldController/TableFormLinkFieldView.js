@@ -7,7 +7,7 @@ require("./TableFormLinkFieldView.less");
 class TableFormLinkFieldView extends TableFormFieldView_1.TableFormFieldView {
     render() {
         const row = this.props.row;
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0, jsx_runtime_1.jsx)("a", Object.assign({ href: "#", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
     }
 }

@@ -10,7 +10,7 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
         super(props);
         this.onCloseClick = async (e) => {
             // console.log('RowFormPasswordFieldView.onCloseClick');
-            const ctrl = this.props.ctrl;
+            const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({ value: '' });
             ctrl.onChange('');
@@ -40,7 +40,7 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
     }
     isCloseVisible() {
         // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
         if (!this.getWidget()) {
@@ -50,7 +50,7 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
         return this.getWidget().state.value !== '';
     }
     render() {
-        const ctrl = this.props.ctrl;
+        const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)(common_1.TextBox, { classList: [`${this.getCssBlockName()}__input`], type: this.state.type, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon, {}) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0, jsx_runtime_1.jsx)(common_1.VisibilityIcon, {}) : (0, jsx_runtime_1.jsx)(common_1.VisibilityOffIcon, {}) }))] })));
     }
 }

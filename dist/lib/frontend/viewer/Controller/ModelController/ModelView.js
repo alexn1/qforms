@@ -10,7 +10,7 @@ class ModelView extends View_1.View {
         this.renderActionIcon = undefined;
     }
     getActionsForDropdownButton() {
-        return this.props.ctrl
+        return this.getCtrl()
             .getModel()
             .getCol('actions')
             .map((data) => {
@@ -28,7 +28,7 @@ class ModelView extends View_1.View {
         });
     }
     getCssBlockName() {
-        const model = this.props.ctrl.getModel();
+        const model = this.getCtrl().getModel();
         if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
             return model.getAttr('cssBlock');
         }
