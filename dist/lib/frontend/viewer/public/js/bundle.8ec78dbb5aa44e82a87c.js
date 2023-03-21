@@ -40867,16 +40867,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
                     model.hasRowFormWithDefaultSqlDataSource() &&
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
     }
-    getClassList() {
-        const list = super.getClassList();
-        if (!this.getCtrl().isModal()) {
-            list.push('full');
-        }
-        return list;
-    }
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {
         if (this.getCtrl().isModal()) {

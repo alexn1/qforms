@@ -263,19 +263,13 @@ export class PageView<
         );
     }
 
-    getClassList() {
-        const list = super.getClassList();
-        if (!this.getCtrl().isModal()) {
-            list.push('full');
-        }
-        return list;
-    }
-
     render() {
         console.log('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
-                className={`${this.getCssClassNames()} flex-column`}
+                className={`${this.getCssClassNames()} ${
+                    this.getCtrl().isModal() ? '' : 'full'
+                } flex-column`}
                 style={this.getStyle()}
                 ref={this.el}
                 tabIndex={0}

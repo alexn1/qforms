@@ -25,7 +25,6 @@ export declare class PageView<TPageController extends PageController = PageContr
     renderForms(): any;
     renderForms2(): JSX.Element;
     renderFooter(): JSX.Element;
-    getClassList(): string[];
     render(): JSX.Element;
     getStyle(): {
         width: number;
