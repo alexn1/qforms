@@ -7,6 +7,6 @@ export declare class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDa
     isCloseVisible(): boolean;
     renderDatePart(): JSX.Element;
     renderTimePart(): JSX.Element;
-    getMode(): "datetime" | "date";
+    getMode(): "date" | "datetime";
     render(): JSX.Element;
 }

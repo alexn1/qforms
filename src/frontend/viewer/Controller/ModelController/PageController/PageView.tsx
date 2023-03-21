@@ -10,6 +10,7 @@ import {
 } from '../../../../common';
 import { PageController } from './PageController';
 import './PageView.less';
+import { FormController } from '../FormController/FormController';
 
 export class PageView<
     TPageController extends PageController = PageController,
@@ -64,7 +65,7 @@ export class PageView<
             .filter((form) => form.isVisible());
     }
 
-    renderForm(formCtrl, props = {}): any {
+    renderForm(formCtrl: FormController, props = {}): any {
         return React.createElement(formCtrl.getViewClass(), {
             parent: this,
             key: formCtrl.getModel().getName(),

@@ -2,14 +2,15 @@ import { ReactNode } from 'react';
 import { ModelView } from '../ModelView';
 import { PageController } from './PageController';
 import './PageView.less';
+import { FormController } from '../FormController/FormController';
 export declare class PageView<TPageController extends PageController = PageController> extends ModelView<TPageController> {
     constructor(props: any);
     onActionsClick: (li: any) => Promise<void>;
     isToolbar(): boolean;
     getFormTabs(forms: any): any;
-    getRowForms(): import("../FormController/FormController").FormController<import("../../../Model/Form/Form").Form>[];
-    getTableForms(): import("../FormController/FormController").FormController<import("../../../Model/Form/Form").Form>[];
-    renderForm(formCtrl: any, props?: {}): any;
+    getRowForms(): FormController<import("../../../Model/Form/Form").Form>[];
+    getTableForms(): FormController<import("../../../Model/Form/Form").Form>[];
+    renderForm(formCtrl: FormController, props?: {}): any;
     renderRowForms(): any;
     renderTitle(): ReactNode;
     renderSelectButton(): JSX.Element;
