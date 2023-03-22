@@ -79,6 +79,7 @@ export class ViewerModule {
     async handleViewerGet(context: Context, bkApplication: BkApplication) {
         console.log(
             'ViewerModule.handleViewerGet',
+            context.getDomain(),
             context.query,
             context.getReq().url,
             // Object.keys(context.query).map((name) => typeof context.query[name]),

@@ -56,7 +56,7 @@ class ViewerModule {
         return this.js;
     }
     async handleViewerGet(context, bkApplication) {
-        console.log('ViewerModule.handleViewerGet', context.query, context.getReq().url);
+        console.log('ViewerModule.handleViewerGet', context.getDomain(), context.query, context.getReq().url);
         if (bkApplication.isAuthentication() &&
             !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
             await this.loginGet(context, bkApplication);
