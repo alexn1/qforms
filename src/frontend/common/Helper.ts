@@ -63,7 +63,7 @@ export class Helper {
         return eObj;
     }
 
-    static encodeValue(value): JSONString {
+    static encodeValue(value: any): JSONString {
         return JSON.stringify(value) as JSONString;
     }
 

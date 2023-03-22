@@ -112,7 +112,7 @@ export class Field extends Model {
         return Helper.decodeValue(rawValue);
     }
 
-    valueToRaw(value): JSONString {
+    valueToRaw(value: any): JSONString {
         return Helper.encodeValue(value);
     }
 
