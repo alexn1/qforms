@@ -2066,6 +2066,9 @@ svg {
 .RowFormCheckBoxFieldView > input.CheckBox:not(:disabled) {
   cursor: pointer;
 }
+.RowFormCheckBoxFieldView > div.CheckBox {
+  margin-top: 5px;
+}
 
 /*!************************************************************************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less ***!
