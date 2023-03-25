@@ -5,8 +5,9 @@ const react_1 = require("react");
 class ReactComponent extends react_1.Component {
     constructor(props) {
         super(props);
-        if (props.onCreate)
+        if (props.onCreate) {
             props.onCreate(this, this.props.name);
+        }
         this.allowRerender = true;
     }
     getElement() {

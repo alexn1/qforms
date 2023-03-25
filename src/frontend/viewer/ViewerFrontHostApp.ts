@@ -113,7 +113,10 @@ export class ViewerFrontHostApp extends FrontHostApp {
                         },
                     }));
                     // console.log('ctrl:', ctrl);
-                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = Helper.createReactComponent(root, ctrl.getViewClass(), {
+                        ctrl,
+                        key: 0,
+                    });
                     // console.log('view', view);
                 } else {
                     reject(new Error('alert already exists'));

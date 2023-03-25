@@ -1,8 +1,8 @@
 /// <reference types="react" />
 import { View } from '../View';
-import './AlertView.less';
 import { AlertController } from './AlertController';
-export declare class AlertView<T extends AlertController> extends View<T> {
+import './AlertView.less';
+export declare class AlertView<TController extends AlertController = AlertController> extends View<TController> {
     constructor(props: any);
     getHeaderStyle(): any;
     render(): JSX.Element;

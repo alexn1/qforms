@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { JSONString } from '../../types';
+import { ReactComponent } from './ReactComponent';
 
 export class Helper {
     /*static currentDate() {
@@ -96,15 +97,15 @@ export class Helper {
         return value;
     }
 
-    static createReactComponent(rootElement, type, props = {}, children = null): React.Component {
+    static createReactComponent(rootElement, type, props = {}, children = null): ReactComponent {
         // console.log('Helper.createReactComponent', rootElement, type);
-        let component;
+        let component: ReactComponent;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
                 type,
                 {
                     ...props,
-                    onCreate: (c) => {
+                    onCreate: (c: ReactComponent, name: string) => {
                         component = c;
                     },
                 } as any,
@@ -115,15 +116,15 @@ export class Helper {
         return component;
     }
 
-    static createReactComponent2(rootElement, type, props = {}, children = null): React.Component {
+    static createReactComponent2(rootElement, type, props = {}, children = null): ReactComponent {
         // console.log('Helper.createReactComponent2', rootElement, type);
-        let component;
+        let component: ReactComponent;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
                 type,
                 {
                     ...props,
-                    onCreate: (c) => {
+                    onCreate: (c: ReactComponent, name: string) => {
                         component = c;
                     },
                 } as any,

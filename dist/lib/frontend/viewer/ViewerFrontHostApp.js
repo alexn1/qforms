@@ -104,7 +104,10 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                             resolve(result);
                         } })));
                     // console.log('ctrl:', ctrl);
-                    const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), {
+                        ctrl,
+                        key: 0,
+                    });
                     // console.log('view', view);
                 }
                 else {

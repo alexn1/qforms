@@ -90,7 +90,7 @@ class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
-            react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -101,7 +101,7 @@ class Helper {
         // console.log('Helper.createReactComponent2', rootElement, type);
         let component;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
-            react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);

@@ -32230,7 +32230,7 @@ class Helper {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -32241,7 +32241,7 @@ class Helper {
         // console.log('Helper.createReactComponent2', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -32506,8 +32506,9 @@ __webpack_require__.r(__webpack_exports__);
 class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
-        if (props.onCreate)
+        if (props.onCreate) {
             props.onCreate(this, this.props.name);
+        }
         this.allowRerender = true;
     }
     getElement() {
@@ -43324,7 +43325,10 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
                             resolve(result);
                         } })));
                     // console.log('ctrl:', ctrl);
-                    const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), {
+                        ctrl,
+                        key: 0,
+                    });
                     // console.log('view', view);
                 }
                 else {

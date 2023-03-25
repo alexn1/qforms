@@ -6,7 +6,9 @@ export class ReactComponent extends Component<any, any> {
 
     constructor(props) {
         super(props);
-        if (props.onCreate) props.onCreate(this, this.props.name);
+        if (props.onCreate) {
+            props.onCreate(this, this.props.name);
+        }
         this.allowRerender = true;
     }
 

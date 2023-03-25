@@ -1,10 +1,13 @@
 import React from 'react';
 import { View } from '../View';
 import { CloseIcon2, Button } from '../../../common';
-import './AlertView.less';
 import { AlertController } from './AlertController';
 
-export class AlertView<T extends AlertController> extends View<T> {
+import './AlertView.less';
+
+export class AlertView<
+    TController extends AlertController = AlertController,
+> extends View<TController> {
     constructor(props) {
         super(props);
         this.el = React.createRef();
