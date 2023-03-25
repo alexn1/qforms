@@ -30,7 +30,7 @@ export declare class ApplicationController extends ModelController<Application> 
     init(): void;
     deinit(): void;
     getViewClass(): any;
-    createView(rootElement: any): void;
+    createView(rootElement: Element): void;
     onRequest: (e: any) => Promise<void>;
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};

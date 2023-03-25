@@ -32226,7 +32226,7 @@ class Helper {
         }
         return value;
     }
-    static createReactComponent(rootElement, type, props = {}, children = null) {
+    static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
@@ -32237,7 +32237,7 @@ class Helper {
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;
     }
-    static createReactComponent2(rootElement, type, props = {}, children = null) {
+    static createReactComponent2(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent2', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [

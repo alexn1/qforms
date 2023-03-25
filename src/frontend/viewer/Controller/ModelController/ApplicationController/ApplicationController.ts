@@ -80,7 +80,7 @@ export class ApplicationController extends ModelController<Application> {
         return super.getViewClass() || ApplicationView;
     }
 
-    createView(rootElement) {
+    createView(rootElement: Element) {
         // console.log('ApplicationController.createView');
         this.view = Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,

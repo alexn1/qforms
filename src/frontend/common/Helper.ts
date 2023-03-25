@@ -97,7 +97,7 @@ export class Helper {
         return value;
     }
 
-    static createReactComponent(rootElement, type, props = {}, children = null): ReactComponent {
+    static createReactComponent(rootElement: Element, type, props = {}, children?): ReactComponent {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component: ReactComponent;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
@@ -116,7 +116,12 @@ export class Helper {
         return component;
     }
 
-    static createReactComponent2(rootElement, type, props = {}, children = null): ReactComponent {
+    static createReactComponent2(
+        rootElement: Element,
+        type,
+        props = {},
+        children?,
+    ): ReactComponent {
         // console.log('Helper.createReactComponent2', rootElement, type);
         let component: ReactComponent;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
