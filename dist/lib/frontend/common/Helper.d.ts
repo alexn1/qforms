@@ -10,8 +10,8 @@ export declare class Helper {
     static decodeObject(eObj: any): any;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: any, value: any): any;
-    static createReactComponent(rootElement: any, type: any, props?: {}, children?: any): ReactComponent;
-    static createReactComponent2(rootElement: any, type: any, props?: {}, children?: any): ReactComponent;
+    static createReactComponent(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent;
+    static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent;
     static destroyReactComponent(root: any): void;
     static readFileAsDataURL(file: any): Promise<unknown>;
     static templateToJsString(value: any, params: any): any;
