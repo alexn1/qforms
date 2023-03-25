@@ -49,4 +49,5 @@ export declare class BkHelper {
     static test(): void;
     static formatNumber(value: number): string;
     static formatTime2(_sec: any): string;
+    static registerGlobalClass(Class: any): void;
 }

@@ -513,6 +513,12 @@ class BkHelper {
             return `${sign}${h}h:${m}m:${s}s`;
         }
     }
+    static registerGlobalClass(Class) {
+        // console.log('BkHelper.registerGlobalClass', Class.name);
+        if (global[Class.name])
+            throw new Error(`global.${Class.name} already used`);
+        global[Class.name] = Class;
+    }
 }
 exports.BkHelper = BkHelper;
 // @ts-ignore
