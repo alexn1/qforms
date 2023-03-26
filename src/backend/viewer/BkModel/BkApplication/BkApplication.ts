@@ -307,7 +307,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     }
 
     async rpc(name: string, context: Context) {
-        console.log('Application.rpc', name, context.getReq().body);
+        // console.log('Application.rpc', name, context.getReq().body);
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no remote proc ${this.constructor.name}.${name}`,

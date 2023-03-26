@@ -273,7 +273,7 @@ class BkApplication extends BkModel_1.BkModel {
         return null;
     }
     async rpc(name, context) {
-        console.log('Application.rpc', name, context.getReq().body);
+        // console.log('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
         throw new MyError_1.MyError({
