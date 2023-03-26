@@ -117,9 +117,11 @@ export class BkDatabase<TConnection = any> extends BkModel {
     async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
         throw new Error(`${this.constructor.name}.insertRow not implemented`);
     }
+
     async getTableList(): Promise<string[]> {
         throw new Error(`${this.constructor.name}.getTableList not implemented`);
     }
+
     async getTableInfo(table): Promise<any[]> {
         throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
