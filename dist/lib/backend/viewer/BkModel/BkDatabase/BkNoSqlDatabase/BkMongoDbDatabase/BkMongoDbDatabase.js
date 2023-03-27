@@ -85,7 +85,6 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         return [result];
     }
     async queryScalar(context, query, params = null) {
-        // const rows = await this.queryRows(context, query, params);
         const result = await this.queryResult(context, query, params);
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {

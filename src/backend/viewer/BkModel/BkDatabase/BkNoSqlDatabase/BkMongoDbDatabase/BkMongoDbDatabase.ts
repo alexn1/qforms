@@ -102,7 +102,6 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     async queryScalar(context: Context, query: string, params: any = null): Promise<any> {
-        // const rows = await this.queryRows(context, query, params);
         const result = await this.queryResult(context, query, params);
 
         // for find() and aggregate()
