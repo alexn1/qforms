@@ -85,16 +85,22 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         return [result];
     }
     async queryScalar(context, query, params = null) {
-        const rows = await this.queryRows(context, query, params);
-        // console.log('rows:', rows);
-        const [firstRow] = rows;
-        if (!firstRow)
-            throw new Error('queryScalar: no first row');
-        // console.log('firstRow:', firstRow);
-        const firstField = Object.keys(firstRow)[0];
-        if (!firstField)
-            throw new Error('queryScalar: no first field');
-        return firstRow[firstField];
+        // const rows = await this.queryRows(context, query, params);
+        const result = await this.queryResult(context, query, params);
+        // for find() and aggregate()
+        if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
+            const rows = await result.toArray();
+            // console.log('rows:', rows);
+            const [firstRow] = rows;
+            if (!firstRow)
+                throw new Error('queryScalar: no first row');
+            // console.log('firstRow:', firstRow);
+            const firstField = Object.keys(firstRow)[0];
+            if (!firstField)
+                throw new Error('queryScalar: no first field');
+            return firstRow[firstField];
+        }
+        return result;
     }
     getDefaultPort() {
         return 27017;
