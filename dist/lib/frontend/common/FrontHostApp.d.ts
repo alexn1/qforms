@@ -32,4 +32,15 @@ export declare class FrontHostApp {
     filterSearch(names: string[]): string;
     getSearchParams(): any;
     getCookie(name: string): string | undefined;
+    getLocation(): {
+        href: string;
+        origin: string;
+        protocol: string;
+        host: string;
+        hostname: string;
+        port: string;
+        pathname: string;
+        search: string;
+        hash: string;
+    };
 }

@@ -32127,6 +32127,12 @@ class FrontHostApp {
         }
         return this.getOptions().cookies[name];
     }
+    getLocation() {
+        if (typeof window === 'object') {
+            return window.location;
+        }
+        return this.getOptions().url;
+    }
 }
 
 

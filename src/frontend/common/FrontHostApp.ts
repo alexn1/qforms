@@ -196,4 +196,21 @@ export class FrontHostApp {
         }
         return this.getOptions().cookies[name];
     }
+
+    getLocation(): {
+        href: string;
+        origin: string;
+        protocol: string;
+        host: string;
+        hostname: string;
+        port: string;
+        pathname: string;
+        search: string;
+        hash: string;
+    } {
+        if (typeof window === 'object') {
+            return window.location;
+        }
+        return this.getOptions().url;
+    }
 }
