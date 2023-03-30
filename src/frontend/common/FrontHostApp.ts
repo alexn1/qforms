@@ -7,6 +7,18 @@ export interface FrontHostAppOptions {
     cookies: { [name: string]: string };
 }
 
+export interface Location {
+    href: string;
+    origin: string;
+    protocol: string;
+    host: string;
+    hostname: string;
+    port: string;
+    pathname: string;
+    search: string;
+    hash: string;
+}
+
 export class FrontHostApp {
     alertCtrl: any = null;
     documentTitle = ''; // for run on back
@@ -197,17 +209,7 @@ export class FrontHostApp {
         return this.getOptions().cookies[name];
     }
 
-    getLocation(): {
-        href: string;
-        origin: string;
-        protocol: string;
-        host: string;
-        hostname: string;
-        port: string;
-        pathname: string;
-        search: string;
-        hash: string;
-    } {
+    getLocation(): Location {
         if (typeof window === 'object') {
             return window.location;
         }
