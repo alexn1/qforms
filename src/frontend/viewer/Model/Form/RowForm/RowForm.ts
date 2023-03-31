@@ -3,8 +3,6 @@ import { Form } from '../Form';
 import { Helper } from '../../../../common/Helper';
 
 export class RowForm extends Form {
-    fields: any;
-
     init() {
         super.init();
         if (this.isNewMode()) {
@@ -20,7 +18,7 @@ export class RowForm extends Form {
         return this.getPage().isNewMode();
     }
 
-    fillParams(row) {
+    fillParams(row: RawRow) {
         for (const field of this.fields) {
             field.valueToPageParams(row);
         }
@@ -36,7 +34,7 @@ export class RowForm extends Form {
         super.onDataSourceInsert(e);
     }
 
-    getRow(withChanges?): RawRow {
+    getRow(withChanges?: boolean): RawRow {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 
@@ -56,7 +54,7 @@ export class RowForm extends Form {
         return row;
     }
 
-    discard(fields) {
+    discard(fields: string[]) {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
