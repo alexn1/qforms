@@ -105,17 +105,17 @@ export class BkHelper {
         return arrS.join(':');
     }
 
-    /*static currentDate() {
+    /* static currentDate() {
         const now = new Date();
         let dd   = now.getDate();      if (dd < 10) dd = '0' + dd;
         let mm   = now.getMonth() + 1; if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
-    }*/
+    } */
 
-    /*static currentDateTime() {
+    /* static currentDateTime() {
         return BkHelper.currentDate() + ' ' + BkHelper.currentTime();
-    }*/
+    } */
 
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
@@ -126,7 +126,7 @@ export class BkHelper {
         });
     }
 
-    /*static replaceKey(obj, key1, key2) {
+    /* static replaceKey(obj, key1, key2) {
         const keys   = Object.keys(obj);
         const values = _.filter(obj, () => {return true;});
         const index  = keys.indexOf(key1);
@@ -135,7 +135,7 @@ export class BkHelper {
             obj = _.object(keys, values);
         }
         return obj;
-    }*/
+    } */
 
     static readTextFile(path): Promise<string> {
         // console.log(colors.blue('BkHelper.readTextFile'), path);
@@ -227,7 +227,7 @@ export class BkHelper {
         }
     }
 
-    /*static moveObjProp(obj, prop, offset) {
+    /* static moveObjProp(obj, prop, offset) {
         const keys     = _.keys(obj);
         const values   = _.values(obj);
         const oldIndex = keys.indexOf(prop);
@@ -244,7 +244,7 @@ export class BkHelper {
         keys.splice(newIndex, 0,   keys.splice(oldIndex, 1)[0]);
         values.splice(newIndex, 0, values.splice(oldIndex, 1)[0]);
         return _.object(keys, values);
-    }*/
+    } */
 
     static moveArrItem(arr, item, offset) {
         const oldIndex = arr.indexOf(item);
@@ -255,7 +255,7 @@ export class BkHelper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
 
-    /*static getTempSubDirPath3(tempDirPath) {
+    /* static getTempSubDirPath3(tempDirPath) {
         return new Promise((resolve, reject) => {
             const subDirName = BkHelper.getRandomString(8);
             const tempSubSirPath = path.join(tempDirPath, subDirName);
@@ -275,7 +275,7 @@ export class BkHelper {
                 }
             });
         });
-    }*/
+    } */
 
     static copyFile3(source, target): Promise<void> {
         return new Promise((resolve, reject) => {
@@ -316,7 +316,7 @@ export class BkHelper {
         });
     }
     static writeFileSync(filePath, content) {
-        console.log(colors.blue('BkHelper.writeFileSync'), filePath /*, content*/);
+        console.log(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
         return fs.writeFileSync(filePath, content, 'utf8');
     }
 
@@ -462,7 +462,7 @@ export class BkHelper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) =>
+        return format.replace(/\{([\w.]+)\}/g, (text, name) =>
             values[name] ? values[name] : text,
         );
     }
