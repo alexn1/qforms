@@ -16,7 +16,9 @@ export declare class Form extends Model {
     update(): Promise<void>;
     isChanged(): boolean;
     hasNew(): boolean;
-    rpc(name: any, params: any): Promise<any>;
+    rpc(name: string, params: {
+        [name: string]: any;
+    }): Promise<any>;
     getKey(): any;
     getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource;
     getPage(): any;

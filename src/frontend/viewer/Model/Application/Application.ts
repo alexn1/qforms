@@ -83,7 +83,7 @@ export class Application extends Model {
         return this.data.virtualPath;
     }
 
-    async rpc(name: string, params) {
+    async rpc(name: string, params: { [name: string]: any }) {
         console.log('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const response = await this.request({

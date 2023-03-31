@@ -84,7 +84,7 @@ export class Form extends Model {
         return this.getDefaultDataSource().hasNew();
     }
 
-    async rpc(name, params) {
+    async rpc(name: string, params: { [name: string]: any }) {
         console.log('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({

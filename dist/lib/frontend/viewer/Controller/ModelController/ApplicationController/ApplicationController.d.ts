@@ -64,7 +64,9 @@ export declare class ApplicationController extends ModelController<Application> 
     closeModal(ctrl: any): Promise<void>;
     getHostApp(): FrontHostApp;
     connect(): Promise<void>;
-    rpc(name: string, params?: any): Promise<any>;
+    rpc(name: string, params?: {
+        [name: string]: any;
+    }): Promise<any>;
     getDomain(): any;
     getBaseUrl(): string;
 }

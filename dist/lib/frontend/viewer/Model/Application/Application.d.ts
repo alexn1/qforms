@@ -14,7 +14,9 @@ export declare class Application extends Model {
     getUser(): any;
     getDomain(): any;
     getVirtualPath(): any;
-    rpc(name: string, params: any): Promise<any>;
+    rpc(name: string, params: {
+        [name: string]: any;
+    }): Promise<any>;
     emitResult(result: Result, source?: any): any;
     getNodeEnv(): any;
     isDevelopment(): boolean;
