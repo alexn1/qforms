@@ -4,11 +4,14 @@ exports.Form = void 0;
 const Model_1 = require("../Model");
 const common_1 = require("../../../common");
 class Form extends Model_1.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.dataSources = [];
         this.fields = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
     init() {
         // data sources
         this.createDataSources();

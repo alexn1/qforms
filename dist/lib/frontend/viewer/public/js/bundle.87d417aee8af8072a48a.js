@@ -42631,11 +42631,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.dataSources = [];
         this.fields = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
     init() {
         // data sources
         this.createDataSources();

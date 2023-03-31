@@ -5,14 +5,12 @@ import { Field } from '../../Model/Field/Field';
 import { RawRow, Row } from '../../../../types';
 
 export class Form extends Model {
-    dataSources: DataSource[];
-    fields: Field[];
+    dataSources: DataSource[] = [];
+    fields: Field[] = [];
 
-    constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
-        this.dataSources = [];
-        this.fields = [];
-    }
+    } */
 
     init() {
         // data sources
@@ -121,7 +119,7 @@ export class Form extends Model {
         await this.getDefaultDataSource().refresh();
     }
 
-    getField(name) {
+    getField(name: string) {
         return this.fields.find((field) => field.getName() === name);
     }
 

@@ -5,7 +5,6 @@ import { RawRow, Row } from '../../../../types';
 export declare class Form extends Model {
     dataSources: DataSource[];
     fields: Field[];
-    constructor(data: any, parent: any);
     init(): void;
     deinit(): void;
     fillDefaultValues(row: RawRow): void;
@@ -24,7 +23,7 @@ export declare class Form extends Model {
     getPage(): any;
     getApp(): any;
     refresh(): Promise<void>;
-    getField(name: any): Field;
+    getField(name: string): Field;
     hasDefaultPersistentDataSource(): boolean;
     decodeRow(row: RawRow): Row;
 }
