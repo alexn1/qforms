@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkMySqlDatabase = void 0;
 const mysql_1 = require("mysql");
 const BkSqlDatabase_1 = require("../BkSqlDatabase");
-class BkMySqlDatabase extends BkSqlDatabase_1.SqlDatabase {
+class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     constructor() {
         super(...arguments);
         this.pool = null;
@@ -52,7 +52,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.SqlDatabase {
     }
     async queryRows(context, query, params = null) {
         console.log('MySqlDatabase.queryRows', query, params);
-        BkSqlDatabase_1.SqlDatabase.checkParams(query, params);
+        BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -74,7 +74,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.SqlDatabase {
     }
     async queryResult(context, query, params = null) {
         console.log('MySqlDatabase.queryResult', query, params);
-        BkSqlDatabase_1.SqlDatabase.checkParams(query, params);
+        BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {

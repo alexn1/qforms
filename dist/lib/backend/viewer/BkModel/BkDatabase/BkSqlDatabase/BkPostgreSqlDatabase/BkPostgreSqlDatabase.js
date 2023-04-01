@@ -7,7 +7,7 @@ exports.BkPostgreSqlDatabase = void 0;
 const colors_1 = __importDefault(require("colors"));
 const pg_1 = require("pg");
 const BkSqlDatabase_1 = require("../BkSqlDatabase");
-class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
+class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     constructor() {
         super(...arguments);
         this.pool = null;
@@ -63,7 +63,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
                 params,
             } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         }
-        BkSqlDatabase_1.SqlDatabase.checkParams(query, params);
+        BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
@@ -75,7 +75,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
     }
     static async queryResult(cnn, query, params = null) {
         console.log(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
-        BkSqlDatabase_1.SqlDatabase.checkParams(query, params);
+        BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -112,7 +112,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.SqlDatabase {
         if (!params) {
             return { sql: query, values: null };
         }
-        const usedValues = BkSqlDatabase_1.SqlDatabase.getUsedParams(query);
+        const usedValues = BkSqlDatabase_1.BkSqlDatabase.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);

@@ -4,10 +4,10 @@ import { BkHelper } from '../../../../../BkHelper';
 import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
-import { SqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
+import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { Key } from '../../../../../../types';
 
-export class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
+export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     table: BkTable | null = null;
 
     constructor(data, parent) {

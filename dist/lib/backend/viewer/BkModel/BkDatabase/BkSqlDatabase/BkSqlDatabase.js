@@ -1,10 +1,10 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.SqlDatabase = void 0;
+exports.BkSqlDatabase = void 0;
 const BkDatabase_1 = require("../BkDatabase");
-class SqlDatabase extends BkDatabase_1.BkDatabase {
+class BkSqlDatabase extends BkDatabase_1.BkDatabase {
     getUpdateQuery(tableName, values, where) {
-        console.log('SqlDatabase.getUpdateQuery', tableName);
+        console.log('BkSqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0)
@@ -16,7 +16,7 @@ class SqlDatabase extends BkDatabase_1.BkDatabase {
         return `update ${tableName} set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
-        console.log('SqlDatabase.getInsertQuery');
+        console.log('BkSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         const columnsString = columns.join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
@@ -25,7 +25,7 @@ class SqlDatabase extends BkDatabase_1.BkDatabase {
         return query;
     }
     getDeleteQuery(tableName, rowKeyValues) {
-        console.log('SqlDatabase.getDeleteQuery');
+        console.log('BkSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `${keyColumn} = {${keyColumn}}`)
@@ -41,7 +41,7 @@ class SqlDatabase extends BkDatabase_1.BkDatabase {
         return items.map((str) => str.substr(1, str.length - 2));
     }
     static checkParams(query, params) {
-        const usedParams = SqlDatabase.getUsedParams(query);
+        const usedParams = BkSqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter((name) => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);
@@ -50,4 +50,4 @@ class SqlDatabase extends BkDatabase_1.BkDatabase {
         }
     }
 }
-exports.SqlDatabase = SqlDatabase;
+exports.BkSqlDatabase = BkSqlDatabase;

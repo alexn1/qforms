@@ -4,7 +4,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
-interface Config {
+export interface Config {
     host: string;
     database: string;
     user: string;
@@ -36,4 +36,3 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
 }
-export {};

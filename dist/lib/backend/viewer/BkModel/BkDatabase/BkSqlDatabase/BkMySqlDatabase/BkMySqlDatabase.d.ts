@@ -1,8 +1,8 @@
 import { Pool, PoolConnection } from 'mysql';
-import { SqlDatabase } from '../BkSqlDatabase';
+import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
-export declare class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
+export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     pool: Pool | null;
     deinit(): Promise<void>;
     getPool(): Pool;

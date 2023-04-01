@@ -3,8 +3,8 @@ import { ReadResult } from '../../BkDataSource';
 import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
-import { SqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
-export declare class BkSqlDataSource extends BkPersistentDataSource<SqlDatabase> {
+import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
+export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
     fill(context: Context): Promise<any>;

@@ -1,8 +1,8 @@
 import { BkDatabase } from '../BkDatabase';
 
-export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
+export abstract class BkSqlDatabase<TConnection = any> extends BkDatabase<TConnection> {
     getUpdateQuery(tableName, values, where): string {
-        console.log('SqlDatabase.getUpdateQuery', tableName);
+        console.log('BkSqlDatabase.getUpdateQuery', tableName);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0) throw new Error('getUpdateQuery: no values');
@@ -13,7 +13,7 @@ export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnect
     }
 
     getInsertQuery(tableName, values): string {
-        console.log('SqlDatabase.getInsertQuery');
+        console.log('BkSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         const columnsString = columns.join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
@@ -23,7 +23,7 @@ export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnect
     }
 
     getDeleteQuery(tableName, rowKeyValues): string {
-        console.log('SqlDatabase.getDeleteQuery');
+        console.log('BkSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `${keyColumn} = {${keyColumn}}`)
@@ -40,7 +40,7 @@ export abstract class SqlDatabase<TConnection = any> extends BkDatabase<TConnect
     }
 
     static checkParams(query, params) {
-        const usedParams = SqlDatabase.getUsedParams(query);
+        const usedParams = BkSqlDatabase.getUsedParams(query);
         const paramNames = params ? Object.keys(params) : [];
         const notPassedParams = usedParams.filter((name) => paramNames.indexOf(name) === -1);
         // console.log('notPassedParams:', notPassedParams);

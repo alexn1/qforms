@@ -5,7 +5,7 @@ import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 
-interface Config {
+export interface Config {
     host: string;
     database: string;
     user: string;

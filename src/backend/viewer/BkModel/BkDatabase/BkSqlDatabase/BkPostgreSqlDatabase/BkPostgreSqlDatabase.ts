@@ -1,11 +1,11 @@
 import colors from 'colors';
 
 import { Pool, Client, PoolClient } from 'pg';
-import { SqlDatabase } from '../BkSqlDatabase';
+import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 
-export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
+export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     pool: Pool | null = null;
     /* constructor(data, parent?) {
         console.log('new PostgreSqlDatabase');
@@ -65,7 +65,7 @@ export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
                 } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
             );
         }
-        SqlDatabase.checkParams(query, params);
+        BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
             console.log('sql:', sql);
@@ -81,7 +81,7 @@ export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
             colors.blue('static PostgreSqlDatabase.queryResult'),
             query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
         );
-        SqlDatabase.checkParams(query, params);
+        BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
@@ -120,7 +120,7 @@ export class BkPostgreSqlDatabase extends SqlDatabase<PoolClient> {
         if (!params) {
             return { sql: query, values: null };
         }
-        const usedValues = SqlDatabase.getUsedParams(query);
+        const usedValues = BkSqlDatabase.getUsedParams(query);
         // console.log('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
         // console.log('keys:', keys);

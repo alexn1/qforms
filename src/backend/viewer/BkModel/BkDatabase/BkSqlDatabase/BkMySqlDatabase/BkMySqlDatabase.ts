@@ -1,9 +1,9 @@
 import { createPool, createConnection, escape, Pool, PoolConnection } from 'mysql';
-import { SqlDatabase } from '../BkSqlDatabase';
+import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 
-export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
+export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     pool: Pool | null = null;
 
     /* constructor(data, parent?) {
@@ -58,7 +58,7 @@ export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
 
     async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
         console.log('MySqlDatabase.queryRows', query, params);
-        SqlDatabase.checkParams(query, params);
+        BkSqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
@@ -83,7 +83,7 @@ export class BkMySqlDatabase extends SqlDatabase<PoolConnection> {
 
     async queryResult(context, query, params = null): Promise<any> {
         console.log('MySqlDatabase.queryResult', query, params);
-        SqlDatabase.checkParams(query, params);
+        BkSqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
         return new Promise((resolve, reject) => {
