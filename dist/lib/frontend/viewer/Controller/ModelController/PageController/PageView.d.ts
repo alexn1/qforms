@@ -8,8 +8,8 @@ export declare class PageView<TPageController extends PageController = PageContr
     onActionsClick: (li: any) => Promise<void>;
     isToolbar(): boolean;
     getFormTabs(forms: any): any;
-    getRowForms(): FormController<import("../../../Model/Form/Form").Form>[];
-    getTableForms(): FormController<import("../../../Model/Form/Form").Form>[];
+    getRowForms(): FormController<import("../../..").Form>[];
+    getTableForms(): FormController<import("../../..").Form>[];
     renderForm(formCtrl: FormController, props?: {}): any;
     renderRowForms(): any;
     renderTitle(): ReactNode;

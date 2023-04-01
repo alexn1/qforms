@@ -13,6 +13,7 @@ export interface Config {
 }
 export declare class BkDatabase<TConnection = any> extends BkModel {
     tables: BkTable[];
+    params: BkParam[];
     fillCollections: string[];
     init(context: Context): Promise<void>;
     deinit(): Promise<void>;
@@ -26,12 +27,13 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
-    createParam(name: string): BkParam;
     getConfig(): Config;
     getDefaultPort(): number;
     getApp(): BkApplication;
     findTable(name: string): BkTable | undefined;
+    findParam(name: string): BkParam;
     getTable(name: string): BkTable;
+    getParam(name: string): BkParam;
     insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;

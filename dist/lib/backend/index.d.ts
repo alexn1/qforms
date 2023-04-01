@@ -39,6 +39,7 @@ export { BkPage } from './viewer/BkModel/BkPage/BkPage';
 export { BkPageLink } from './viewer/BkModel/BkPageLink/BkPageLink';
 export { BkColumn } from './viewer/BkModel/BkColumn/BkColumn';
 export { BkTable } from './viewer/BkModel/BkTable/BkTable';
+export { BkParam } from './viewer/BkModel/BkParam/BkParam';
 export { BkAction } from './viewer/BkModel/BkAction/BkAction';
 export { ActionEditor } from './editor/Editor/ActionEditor/ActionEditor';
 export { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';

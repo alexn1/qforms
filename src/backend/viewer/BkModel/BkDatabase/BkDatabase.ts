@@ -2,6 +2,7 @@ import { BkModel } from '../BkModel';
 import { BkParam } from '../BkParam/BkParam';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../BkTable/BkTable';
+
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 
@@ -15,6 +16,7 @@ export interface Config {
 
 export class BkDatabase<TConnection = any> extends BkModel {
     tables: BkTable[] = [];
+    params: BkParam[] = [];
     fillCollections = ['tables'];
 
     /* constructor(data, parent?) {
@@ -24,6 +26,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
 
     async init(context: Context): Promise<void> {
         await this.createColItems('tables', context);
+        await this.createColItems('params', context);
     }
 
     async deinit(): Promise<void> {
@@ -76,19 +79,15 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
 
-    createParam(name: string): BkParam {
-        return new BkParam(this.getColItemData('params', name), this);
-    }
-
     getConfig(): Config {
         const config: Config = {
-            host: this.createParam('host').getValue(),
-            database: this.createParam('database').getValue(),
-            user: this.createParam('user').getValue(),
-            password: this.createParam('password').getValue(),
+            host: this.getParam('host').getValue(),
+            database: this.getParam('database').getValue(),
+            user: this.getParam('user').getValue(),
+            password: this.getParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
-            config.port = parseInt(this.createParam('port').getValue());
+            config.port = parseInt(this.getParam('port').getValue());
         }
         return config;
     }
@@ -105,11 +104,22 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return this.tables.find((table) => table.getName() === name);
     }
 
+    findParam(name: string): BkParam {
+        return this.params.find((param) => param.getName() === name);
+    }
+
     getTable(name: string): BkTable {
         if (!name) throw new Error('getTable: no name');
         const table = this.findTable(name);
         if (!table) throw new Error(`no table with name: ${name}`);
         return table;
+    }
+
+    getParam(name: string): BkParam {
+        if (!name) throw new Error('getParam: no name');
+        const param = this.findParam(name);
+        if (!param) throw new Error(`no param with name: ${name}`);
+        return param;
     }
 
     async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {

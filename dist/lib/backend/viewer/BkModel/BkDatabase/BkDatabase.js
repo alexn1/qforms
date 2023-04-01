@@ -2,11 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkDatabase = void 0;
 const BkModel_1 = require("../BkModel");
-const BkParam_1 = require("../BkParam/BkParam");
 class BkDatabase extends BkModel_1.BkModel {
     constructor() {
         super(...arguments);
         this.tables = [];
+        this.params = [];
         this.fillCollections = ['tables'];
     }
     /* constructor(data, parent?) {
@@ -15,6 +15,7 @@ class BkDatabase extends BkModel_1.BkModel {
     } */
     async init(context) {
         await this.createColItems('tables', context);
+        await this.createColItems('params', context);
     }
     async deinit() {
         throw new Error(`${this.constructor.name}.deinit not implemented`);
@@ -56,18 +57,15 @@ class BkDatabase extends BkModel_1.BkModel {
     async rollback(context, err) {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
-    createParam(name) {
-        return new BkParam_1.BkParam(this.getColItemData('params', name), this);
-    }
     getConfig() {
         const config = {
-            host: this.createParam('host').getValue(),
-            database: this.createParam('database').getValue(),
-            user: this.createParam('user').getValue(),
-            password: this.createParam('password').getValue(),
+            host: this.getParam('host').getValue(),
+            database: this.getParam('database').getValue(),
+            user: this.getParam('user').getValue(),
+            password: this.getParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
-            config.port = parseInt(this.createParam('port').getValue());
+            config.port = parseInt(this.getParam('port').getValue());
         }
         return config;
     }
@@ -80,6 +78,9 @@ class BkDatabase extends BkModel_1.BkModel {
     findTable(name) {
         return this.tables.find((table) => table.getName() === name);
     }
+    findParam(name) {
+        return this.params.find((param) => param.getName() === name);
+    }
     getTable(name) {
         if (!name)
             throw new Error('getTable: no name');
@@ -87,6 +88,14 @@ class BkDatabase extends BkModel_1.BkModel {
         if (!table)
             throw new Error(`no table with name: ${name}`);
         return table;
+    }
+    getParam(name) {
+        if (!name)
+            throw new Error('getParam: no name');
+        const param = this.findParam(name);
+        if (!param)
+            throw new Error(`no param with name: ${name}`);
+        return param;
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
         throw new Error(`${this.constructor.name}.insertRow not implemented`);
