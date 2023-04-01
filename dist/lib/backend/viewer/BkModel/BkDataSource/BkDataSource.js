@@ -75,11 +75,6 @@ class BkDataSource extends BkModel_1.BkModel {
             this.checkRow(rows[0]);
         }
     }
-    /* prepareRows(context: Context, rows: Row[]): void {
-        // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
-        this.checkRows(rows);
-        this.encodeRows(rows);
-    } */
     checkNotUsedColumns(row) {
         const rowColumns = Object.keys(row);
         const formColumns = this.getForm()

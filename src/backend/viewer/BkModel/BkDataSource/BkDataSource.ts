@@ -92,12 +92,6 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    /* prepareRows(context: Context, rows: Row[]): void {
-        // console.log('DataSource.prepareRows:', this.getFullName(), this.keyColumns);
-        this.checkRows(rows);
-        this.encodeRows(rows);
-    } */
-
     checkNotUsedColumns(row: Row) {
         const rowColumns = Object.keys(row);
         const formColumns = this.getForm()
