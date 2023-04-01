@@ -7,10 +7,10 @@ import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 
 export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
-    pool: Pool | null = null;
+    pool: { [configString: string]: Pool } = {};
     /* constructor(data, parent?) {
         console.log('new PostgreSqlDatabase');
-        super(data, parent);        
+        super(data, parent);
     } */
 
     /*static async create(data, parent) {
@@ -20,19 +20,22 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
 
     async deinit(): Promise<void> {
         console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
-        if (!this.pool) return;
-        console.log('ending pool:', this.pool.totalCount);
-        await this.pool.end();
+        for (const configString in this.pool) {
+            const pool = this.pool[configString];
+            console.log('ending pool:', pool.totalCount);
+            await pool.end();
+        }
     }
 
     getPool(): Pool {
         // console.log('PostgreSqlDatabase.getPool');
-        if (this.pool === null) {
-            const config = this.getConfig();
-            console.log(`creating connection pool for: ${this.getName()}`, config);
-            this.pool = BkPostgreSqlDatabase.createPool(config);
+        const config = this.getConfig();
+        const configString = JSON.stringify(config);
+        if (!this.pool[configString]) {
+            console.log(`creating connection pool for ${this.getName()}(${configString})`);
+            this.pool[configString] = BkPostgreSqlDatabase.createPool(config);
         }
-        return this.pool;
+        return this.pool[configString];
     }
 
     static createPool(config: Config): Pool {

@@ -4,7 +4,9 @@ import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
 export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
-    pool: Pool | null;
+    pool: {
+        [configString: string]: Pool;
+    };
     deinit(): Promise<void>;
     getPool(): Pool;
     static createPool(config: Config): Pool;
