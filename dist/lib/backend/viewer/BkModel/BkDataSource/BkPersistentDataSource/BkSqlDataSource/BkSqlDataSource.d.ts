@@ -7,7 +7,11 @@ import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     table: BkTable | null;
     constructor(data: any, parent: any);
-    fill(context: Context): Promise<any>;
+    fill(context: Context): Promise<{
+        rows: import("../../../../../../types").RawRow[];
+        count: number;
+        limit?: number;
+    }>;
     getKeyColumns(): string[];
     getCountQuery(context: Context): string;
     getSingleQuery(context: Context): string;

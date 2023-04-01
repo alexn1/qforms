@@ -29,7 +29,11 @@ export declare class BkDataSource extends BkModel {
     calcNewKeyValues(originalKeyValues: KeyObject, values: any): KeyObject;
     calcNewKey(key: Key, values: any): Key;
     fillAttributes(response: any): void;
-    fill(context: Context): Promise<any>;
+    fill(context: Context): Promise<{
+        rows: RawRow[];
+        count: number;
+        limit?: number;
+    }>;
     private getRows;
     isOnForm(): boolean;
     isDefaultOnForm(): boolean;

@@ -265,7 +265,7 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    async fill(context: Context): Promise<any> {
+    async fill(context: Context): Promise<{ rows: RawRow[]; count: number; limit?: number }> {
         // console.log('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
