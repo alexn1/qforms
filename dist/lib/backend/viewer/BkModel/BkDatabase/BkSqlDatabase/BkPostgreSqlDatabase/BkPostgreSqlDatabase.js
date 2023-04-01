@@ -31,7 +31,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         // console.log('PostgreSqlDatabase.getPool');
         if (this.pool === null) {
             const config = this.getConfig();
-            // console.log('creating connection pool for: ' + this.getName(), config);
+            console.log(`creating connection pool for: ${this.getName()}`, config);
             this.pool = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool;
