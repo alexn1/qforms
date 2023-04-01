@@ -87,8 +87,6 @@ class BkDatabase extends BkModel_1.BkModel {
         if (!table)
             throw new Error(`no table with name: ${name}`);
         return table;
-        // if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
-        // return this.tables[name];
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
         throw new Error(`${this.constructor.name}.insertRow not implemented`);

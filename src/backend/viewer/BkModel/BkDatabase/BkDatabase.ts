@@ -76,7 +76,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
 
-    createParam(name): BkParam {
+    createParam(name: string): BkParam {
         return new BkParam(this.getColItemData('params', name), this);
     }
 
@@ -110,8 +110,6 @@ export class BkDatabase<TConnection = any> extends BkModel {
         const table = this.findTable(name);
         if (!table) throw new Error(`no table with name: ${name}`);
         return table;
-        // if (!this.tables[name]) throw new Error(`no table with name: ${name}`);
-        // return this.tables[name];
     }
 
     async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
