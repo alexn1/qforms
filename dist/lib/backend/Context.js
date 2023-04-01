@@ -119,6 +119,10 @@ class Context {
     setParam(name, value) {
         this.params[name] = value;
     }
+    getParam(name) {
+        const params = this.getParams();
+        return params[name];
+    }
     isDebugMode() {
         return this.query['debug'] === '1';
     }

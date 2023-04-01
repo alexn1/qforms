@@ -94,7 +94,7 @@ export class Context {
         return null;
     }
 
-    getCookies(): {[name: string]: string} {
+    getCookies(): { [name: string]: string } {
         return {
             ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}),
         };
@@ -190,6 +190,11 @@ export class Context {
 
     setParam(name: string, value): void {
         this.params[name] = value;
+    }
+
+    getParam(name: string): any {
+        const params = this.getParams();
+        return params[name];
     }
 
     isDebugMode(): boolean {

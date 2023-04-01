@@ -62,6 +62,7 @@ export declare class Context {
     getProtocol(): string;
     setVersionHeaders(platformVersion: string, appVersion: string): void;
     setParam(name: string, value: any): void;
+    getParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;
     destroy(): void;
