@@ -8,6 +8,7 @@ export { RowFormController } from './Controller/ModelController/FormController/R
 export { RowFormView } from './Controller/ModelController/FormController/RowFormController/RowFormView';
 export { TableFormTextBoxFieldController } from './Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController';
 export { PageController } from './Controller/ModelController/PageController/PageController';
+export { Form } from './Model/Form/Form';
 export { RowForm } from './Model/Form/RowForm/RowForm';
 export { TableForm } from './Model/Form/TableForm/TableForm';
 export { DateField } from './Model/Field/DateField/DateField';
