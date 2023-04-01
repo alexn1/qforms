@@ -27,8 +27,8 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
-    getDatabaseName(): string;
-    getConfig(): Config;
+    getDatabaseName(context?: Context): string;
+    getConfig(context?: Context): Config;
     getDefaultPort(): number;
     getApp(): BkApplication;
     findTable(name: string): BkTable | undefined;

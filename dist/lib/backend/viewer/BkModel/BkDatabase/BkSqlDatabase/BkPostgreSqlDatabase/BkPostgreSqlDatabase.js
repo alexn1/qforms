@@ -28,9 +28,9 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             await pool.end();
         }
     }
-    getPool() {
+    getPool(context) {
         // console.log('PostgreSqlDatabase.getPool');
-        const config = this.getConfig();
+        const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
             console.log(`creating connection pool for ${this.getName()}(${configString})`);
@@ -49,7 +49,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await this.getPool().connect();
+        context.connections[name] = await this.getPool(context).connect();
     }
     async release(context) {
         console.log('PostgreSqlDatabase.release', this.getName());

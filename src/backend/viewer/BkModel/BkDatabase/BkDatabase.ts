@@ -79,14 +79,14 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
 
-    getDatabaseName(): string {
+    getDatabaseName(context?: Context): string {
         return this.getParam('database').getValue();
     }
 
-    getConfig(): Config {
+    getConfig(context?: Context): Config {
         const config: Config = {
             host: this.getParam('host').getValue(),
-            database: this.getDatabaseName(),
+            database: this.getDatabaseName(context),
             user: this.getParam('user').getValue(),
             password: this.getParam('password').getValue(),
         };

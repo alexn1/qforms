@@ -57,13 +57,13 @@ class BkDatabase extends BkModel_1.BkModel {
     async rollback(context, err) {
         throw new Error(`${this.constructor.name}.rollback not implemented`);
     }
-    getDatabaseName() {
+    getDatabaseName(context) {
         return this.getParam('database').getValue();
     }
-    getConfig() {
+    getConfig(context) {
         const config = {
             host: this.getParam('host').getValue(),
-            database: this.getDatabaseName(),
+            database: this.getDatabaseName(context),
             user: this.getParam('user').getValue(),
             password: this.getParam('password').getValue(),
         };

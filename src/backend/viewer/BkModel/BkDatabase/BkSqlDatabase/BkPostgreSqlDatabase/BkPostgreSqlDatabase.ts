@@ -27,9 +27,9 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         }
     }
 
-    getPool(): Pool {
+    getPool(context: Context): Pool {
         // console.log('PostgreSqlDatabase.getPool');
-        const config = this.getConfig();
+        const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
             console.log(`creating connection pool for ${this.getName()}(${configString})`);
@@ -49,7 +49,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await this.getPool().connect();
+        context.connections[name] = await this.getPool(context).connect();
     }
 
     async release(context: Context): Promise<void> {

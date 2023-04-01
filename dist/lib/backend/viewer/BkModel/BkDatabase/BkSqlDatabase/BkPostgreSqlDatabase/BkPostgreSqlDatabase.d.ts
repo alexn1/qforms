@@ -8,7 +8,7 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         [configString: string]: Pool;
     };
     deinit(): Promise<void>;
-    getPool(): Pool;
+    getPool(context: Context): Pool;
     static createPool(config: Config): Pool;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
