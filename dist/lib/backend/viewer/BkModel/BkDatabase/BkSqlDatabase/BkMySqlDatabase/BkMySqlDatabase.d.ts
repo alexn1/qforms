@@ -8,7 +8,9 @@ export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     getPool(): Pool;
     getConfig(): any;
     static Pool_getConnection(pool: Pool): Promise<PoolConnection>;
-    queryRows(context: Context, query: string, params?: any): Promise<Row[]>;
+    queryRows(context: Context, query: string, params?: {
+        [name: string]: any;
+    }): Promise<Row[]>;
     queryResult(context: any, query: any, params?: any): Promise<any>;
     _getRows(result: any, fields: any): any[];
     begin(context: Context): Promise<void>;

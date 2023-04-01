@@ -56,7 +56,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         });
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
+    async queryRows(context: Context, query: string, params: { [name: string]: any } = null): Promise<Row[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase.checkParams(query, params);
         const nest = true;

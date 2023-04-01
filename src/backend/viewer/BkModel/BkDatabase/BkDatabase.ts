@@ -55,15 +55,27 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.release not implemented`);
     }
 
-    async queryResult(context: Context, query: string, params: any = null): Promise<any> {
+    async queryResult(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<any> {
         throw new Error(`${this.constructor.name}.queryResult not implemented`);
     }
 
-    async queryRows(context: Context, query: string, params: any = null): Promise<Row[]> {
+    async queryRows(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<Row[]> {
         throw new Error(`${this.constructor.name}.queryRows not implemented`);
     }
 
-    async queryScalar(context: Context, query: string, params: any = null): Promise<any> {
+    async queryScalar(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<any> {
         throw new Error(`${this.constructor.name}.queryScalar not implemented`);
     }
 

@@ -21,9 +21,15 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     connect(context: Context): Promise<void>;
     getConnection(context: Context): TConnection;
     release(context: Context): Promise<void>;
-    queryResult(context: Context, query: string, params?: any): Promise<any>;
-    queryRows(context: Context, query: string, params?: any): Promise<Row[]>;
-    queryScalar(context: Context, query: string, params?: any): Promise<any>;
+    queryResult(context: Context, query: string, params?: {
+        [name: string]: any;
+    }): Promise<any>;
+    queryRows(context: Context, query: string, params?: {
+        [name: string]: any;
+    }): Promise<Row[]>;
+    queryScalar(context: Context, query: string, params?: {
+        [name: string]: any;
+    }): Promise<any>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
