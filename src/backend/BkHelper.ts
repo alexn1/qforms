@@ -118,8 +118,8 @@ export class BkHelper {
     } */
 
     static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
-            if (params.hasOwnProperty(name)) {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
+            if (Object.prototype.hasOwnProperty.call(params, name)) {
                 return `BkHelper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
             }
             return 'undefined';
