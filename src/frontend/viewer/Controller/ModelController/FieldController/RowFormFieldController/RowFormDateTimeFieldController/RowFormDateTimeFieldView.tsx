@@ -55,7 +55,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
         );
     }
 
-    getMode() {
+    getMode(): 'datetime' | 'date' {
         return this.getCtrl().state.value ? 'datetime' : 'date';
     }
 
@@ -71,4 +71,3 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
         );
     }
 }
-

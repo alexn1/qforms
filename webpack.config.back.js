@@ -24,9 +24,15 @@ module.exports = {
                     options: {
                         onlyCompileBundledFiles: false,
                         compilerOptions: {
+                            target: 'ES2017',
                             declaration: true,
+                            esModuleInterop: true,
+                            jsx: 'react-jsx',
                             rootDir: 'src',
                             outDir: 'dist/lib',
+                            moduleResolution: 'node',
+                            module: 'commonjs',
+                            resolveJsonModule: true,
                         },
                     },
                 },
