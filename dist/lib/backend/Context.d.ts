@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { Params } from '../types';
 declare module 'express' {
     interface Request {
         session: any;
@@ -19,9 +20,7 @@ export declare class Context {
     query: {
         [name: string]: any;
     };
-    params: {
-        [name: string]: any;
-    };
+    params: Params;
     connections: {
         [name: string]: any;
     };
@@ -45,9 +44,7 @@ export declare class Context {
         [name: string]: string;
     };
     getQuery(): any;
-    getParams(): {
-        [name: string]: any;
-    };
+    getParams(): Params;
     getReq(): Request;
     getRes(): Response;
     getBody(): any;

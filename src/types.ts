@@ -42,3 +42,7 @@ export interface QueryParams {
 export type Align = 'left' | 'center' | 'right';
 
 export type Visibility = 'visible' | 'hidden';
+
+export interface Params {
+    [name: string]: any;
+}

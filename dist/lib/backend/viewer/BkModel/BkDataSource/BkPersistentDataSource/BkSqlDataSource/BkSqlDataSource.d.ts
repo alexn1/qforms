@@ -17,9 +17,7 @@ export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabas
     getSingleQuery(context: Context): string;
     getMultipleQuery(context: Context): string;
     templateQuery(context: Context, _query: string): string;
-    getSelectParams(context: Context): {
-        [name: string]: any;
-    };
+    getSelectParams(context: Context): import("../../../../../../types").Params;
     read(context: Context): Promise<ReadResult>;
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;

@@ -15,9 +15,7 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     delete(context: Context): Promise<Result>;
     getSelectQuery(context: Context): string;
     getCountQuery(context: Context): string;
-    getSelectParams(context: Context): {
-        [name: string]: any;
-    };
+    getSelectParams(context: Context): import("../../../../../../types").Params;
     checkRow(row: Row): void;
     encodeRow2(row: Row): RawRow;
 }
