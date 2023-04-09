@@ -31838,6 +31838,12 @@ class FrontHostApp {
         }
         return this.getOptions().cookies[name];
     }
+    getLocation() {
+        if (typeof window === 'object') {
+            return window.location;
+        }
+        return this.getOptions().url;
+    }
 }
 
 
@@ -31937,22 +31943,22 @@ class Helper {
         }
         return value;
     }
-    static createReactComponent(rootElement, type, props = {}, children = null) {
+    static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
         return component;
     }
-    static createReactComponent2(rootElement, type, props = {}, children = null) {
+    static createReactComponent2(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent2', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
@@ -31970,24 +31976,24 @@ class Helper {
             reader.readAsDataURL(file);
         });
     }
-    /*static readFileAsArrayBuffer(file) {
+    /* static readFileAsArrayBuffer(file) {
         return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsArrayBuffer(file);
         });
-    }*/
-    /*static convertBufferToBase64string(buffer) {
+    } */
+    /* static convertBufferToBase64string(buffer) {
         const array = new Uint8Array(buffer);
         const binaryString = String.fromCharCode.apply(null, array);
         return window.btoa(binaryString);
-    }*/
-    /*static createObjectUrl(buffer) {
+    } */
+    /* static createObjectUrl(buffer) {
         const blob = new Blob([new Uint8Array(buffer)]);
         return window.URL.createObjectURL(blob);
-    }*/
+    } */
     // append file as filed and all not file as json string
-    /*static createFormData(body) {
+    /* static createFormData(body) {
         const formData = new FormData();
         const fields = {};
         for (const name in body) {
@@ -31999,8 +32005,8 @@ class Helper {
         }
         formData.append('__json', JSON.stringify(fields));
         return formData;
-    }*/
-    /*static base64ToArrayBuffer(base64) {
+    } */
+    /* static base64ToArrayBuffer(base64) {
         const binaryString = window.atob(base64);
         const len = binaryString.length;
         const bytes = new Uint8Array(len);
@@ -32008,7 +32014,7 @@ class Helper {
             bytes[i] = binaryString.charCodeAt(i);
         }
         return bytes.buffer;
-    }*/
+    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -32137,14 +32143,14 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static inIframe() {
-        return false;
-        /* try {
-            return window.self !== window.top;
-        } catch (e) {
-            return false;
-        } */
-    }
+    // static inIframe(): boolean {
+    //     return false;
+    //     /* try {
+    //         return window.self !== window.top;
+    //     } catch (e) {
+    //         return false;
+    //     } */
+    // }
     static setCookie(name, value, time) {
         var expires = '';
         if (time) {
@@ -32175,7 +32181,7 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        console.log('Helper.registerGlobalClass', Class.name);
+        // console.log('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
@@ -32197,10 +32203,7 @@ class Helper {
         }
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.Helper = Helper;
-}
+Helper.registerGlobalClass(Helper);
 
 
 /***/ }),
@@ -32220,8 +32223,9 @@ __webpack_require__.r(__webpack_exports__);
 class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
-        if (props.onCreate)
+        if (props.onCreate) {
             props.onCreate(this, this.props.name);
+        }
         this.allowRerender = true;
     }
     getElement() {
