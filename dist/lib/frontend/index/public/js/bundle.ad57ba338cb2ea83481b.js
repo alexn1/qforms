@@ -2,9 +2,21 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./src/frontend/monitor/MonitorView/MonitorView.less":
+/***/ "./src/frontend/common/widget/Box/Box.less":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.less ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.less":
 /*!***********************************************************!*\
-  !*** ./src/frontend/monitor/MonitorView/MonitorView.less ***!
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.less ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -14,10 +26,202 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/monitor/style/monitor.less":
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.less":
+/*!***************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.less ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.less":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.less ***!
+  \***********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Image/Image.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.less ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.less":
+/*!***********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.less ***!
+  \***********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.less":
+/*!*************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.less ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.less":
 /*!*************************************************!*\
-  !*** ./src/frontend/monitor/style/monitor.less ***!
+  !*** ./src/frontend/common/widget/Tab/Tab.less ***!
   \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.less":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.less ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less":
+/*!*******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.less":
+/*!*********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.less ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexView/IndexView.less":
+/*!*****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.less ***!
+  \*****************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -31183,6 +31387,192 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/frontend/common/FrontHostApp.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/common/FrontHostApp.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FrontHostApp": () => (/* binding */ FrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_Search__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Search */ "./src/frontend/common/Search.ts");
+
+
+class FrontHostApp {
+    constructor(options) {
+        this.options = options;
+        this.alertCtrl = null;
+        this.documentTitle = ''; // for run on back
+        // console.log('FrontHostApp.constructor');
+    }
+    init() {
+        window.addEventListener('error', this.onWindowError.bind(this));
+        window.addEventListener('unhandledrejection', this.onWindowUnhandledrejection.bind(this));
+        window.addEventListener('popstate', this.onWindowPopState.bind(this));
+    }
+    async run() {
+        throw new Error('FrontHostApp.run not implemented');
+    }
+    async onWindowUnhandledrejection(e) {
+        console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        try {
+            e.preventDefault();
+            const err = e instanceof Error ? e : e.reason || e.detail.reason;
+            this.logError(err);
+            await this.alert({ title: 'Unhandled Rejection', message: err.message });
+        }
+        catch (err) {
+            console.error(`onWindowUnhandledrejection error: ${err.message}`);
+        }
+    }
+    async onWindowError(e) {
+        console.log('FrontHostApp.onWindowError', e);
+        try {
+            e.preventDefault();
+            const err = e.error;
+            this.logError(err);
+            // await this.alert({message: err.message});
+        }
+        catch (err) {
+            console.error(`onWindowError error: ${err.message}`);
+        }
+    }
+    static async doHttpRequest(data) {
+        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
+        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        return body;
+    }
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+    }
+    static async doHttpRequest2(data) {
+        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
+        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
+        return [headers, body];
+    }
+    static async postJson(url, data) {
+        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    }
+    static async post(url, body, contentType) {
+        try {
+            FrontHostApp.startWait();
+            const response = await fetch(url, Object.assign({ method: 'POST', body: body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
+            if (response.ok) {
+                const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
+                    const [name, value] = header;
+                    acc[name] = value;
+                    return acc;
+                }, {});
+                // console.log('headers:', headers);
+                const body = await response.json();
+                return [headers, body];
+            }
+            throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
+        }
+        finally {
+            FrontHostApp.stopWait();
+        }
+    }
+    static startWait() {
+        document.querySelector('html').classList.add('wait');
+    }
+    static stopWait() {
+        document.querySelector('html').classList.remove('wait');
+    }
+    async onWindowPopState(e) {
+        console.log('FrontHostApp.onWindowPopState', e.state);
+    }
+    async alert(options) {
+        console.log('FrontHostApp.alert', options);
+        alert(options.message);
+    }
+    async confirm(options) {
+        console.log('FrontHostApp.confirm', options);
+        return confirm(options.message);
+    }
+    setDocumentTitle(title) {
+        if (typeof document === 'object') {
+            document.title = title;
+        }
+        else {
+            this.documentTitle = title;
+        }
+    }
+    getDocumentTitle() {
+        if (typeof document === 'object') {
+            return document.title;
+        }
+        return this.documentTitle;
+    }
+    isDebugMode() {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj()['debug'] === '1';
+        }
+        else {
+            return this.getOptions().debug;
+        }
+    }
+    createLink(params = null) {
+        const path = typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
+        if (params) {
+            return [
+                path,
+                [
+                    ...(this.isDebugMode() ? ['debug=1'] : []),
+                    ...Object.keys(params).map((name) => `${name}=${encodeURI(params[name])}`),
+                ].join('&'),
+            ].join('?');
+        }
+        return path;
+    }
+    getOptions() {
+        if (!this.options) {
+            throw new Error('no options');
+        }
+        return this.options;
+    }
+    filterSearch(names) {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.filter(names);
+        }
+        const newObj = {};
+        const obj = this.getOptions().url.searchParams;
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.objToString(newObj);
+    }
+    getSearchParams() {
+        if (typeof window === 'object') {
+            return _common_Search__WEBPACK_IMPORTED_MODULE_1__.Search.getObj();
+        }
+        // @ts-ignore
+        return Object.fromEntries(this.getOptions().url.searchParams);
+    }
+    getCookie(name) {
+        if (typeof window === 'object') {
+            return _common_Helper__WEBPACK_IMPORTED_MODULE_0__.Helper.getCookie(name);
+        }
+        return this.getOptions().cookies[name];
+    }
+    getLocation() {
+        if (typeof window === 'object') {
+            return window.location;
+        }
+        return this.getOptions().url;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/Helper.ts":
 /*!***************************************!*\
   !*** ./src/frontend/common/Helper.ts ***!
@@ -31197,8 +31587,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 
 
-// @ts-ignore
-window.QForms = {};
 class Helper {
     /*static currentDate() {
         const now = new Date();
@@ -31279,15 +31667,27 @@ class Helper {
         }
         return value;
     }
-    static createReactComponent(rootElement, type, props = {}, children = null) {
+    static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
-            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c) => {
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
                 } }), children),
         ]);
         react_dom__WEBPACK_IMPORTED_MODULE_1__.render(reactRootElement, rootElement);
+        return component;
+    }
+    static createReactComponent2(rootElement, type, props = {}, children) {
+        // console.log('Helper.createReactComponent2', rootElement, type);
+        let component;
+        const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
+            react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
+                    component = c;
+                } }), children),
+        ]);
+        // ReactDOM.render(reactRootElement, rootElement);
+        react_dom__WEBPACK_IMPORTED_MODULE_1__.hydrate(reactRootElement, rootElement);
         return component;
     }
     static destroyReactComponent(root) {
@@ -31300,24 +31700,24 @@ class Helper {
             reader.readAsDataURL(file);
         });
     }
-    /*static readFileAsArrayBuffer(file) {
+    /* static readFileAsArrayBuffer(file) {
         return new Promise(resolve => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsArrayBuffer(file);
         });
-    }*/
-    /*static convertBufferToBase64string(buffer) {
+    } */
+    /* static convertBufferToBase64string(buffer) {
         const array = new Uint8Array(buffer);
         const binaryString = String.fromCharCode.apply(null, array);
         return window.btoa(binaryString);
-    }*/
-    /*static createObjectUrl(buffer) {
+    } */
+    /* static createObjectUrl(buffer) {
         const blob = new Blob([new Uint8Array(buffer)]);
         return window.URL.createObjectURL(blob);
-    }*/
+    } */
     // append file as filed and all not file as json string
-    /*static createFormData(body) {
+    /* static createFormData(body) {
         const formData = new FormData();
         const fields = {};
         for (const name in body) {
@@ -31329,8 +31729,8 @@ class Helper {
         }
         formData.append('__json', JSON.stringify(fields));
         return formData;
-    }*/
-    /*static base64ToArrayBuffer(base64) {
+    } */
+    /* static base64ToArrayBuffer(base64) {
         const binaryString = window.atob(base64);
         const len = binaryString.length;
         const bytes = new Uint8Array(len);
@@ -31338,7 +31738,7 @@ class Helper {
             bytes[i] = binaryString.charCodeAt(i);
         }
         return bytes.buffer;
-    }*/
+    } */
     static templateToJsString(value, params) {
         return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
@@ -31467,14 +31867,14 @@ class Helper {
     static fillArray(n) {
         return Array.from(Array(n).keys());
     }
-    static inIframe() {
-        try {
-            return window.self !== window.top;
-        }
-        catch (e) {
-            return true;
-        }
-    }
+    // static inIframe(): boolean {
+    //     return false;
+    //     /* try {
+    //         return window.self !== window.top;
+    //     } catch (e) {
+    //         return false;
+    //     } */
+    // }
     static setCookie(name, value, time) {
         var expires = '';
         if (time) {
@@ -31504,9 +31904,30 @@ class Helper {
             setTimeout(resolve, ms);
         });
     }
+    static registerGlobalClass(Class) {
+        // console.log('Helper.registerGlobalClass', Class.name);
+        if (typeof window === 'object') {
+            if (window[Class.name])
+                throw new Error(`window.${Class.name} already used`);
+            window[Class.name] = Class;
+        }
+        else {
+            if (__webpack_require__.g[Class.name])
+                throw new Error(`global.${Class.name} already used`);
+            __webpack_require__.g[Class.name] = Class;
+        }
+    }
+    static getGlobalClass(className) {
+        // console.log('Helper.getGlobalClass', className);
+        return typeof window === 'object' ? window[className] : __webpack_require__.g[className];
+    }
+    static addClassToDocumentElement(className) {
+        if (typeof document === 'object') {
+            document.documentElement.classList.add(className);
+        }
+    }
 }
-// @ts-ignore
-window.QForms.Helper = window.Helper = Helper;
+Helper.registerGlobalClass(Helper);
 
 
 /***/ }),
@@ -31526,8 +31947,9 @@ __webpack_require__.r(__webpack_exports__);
 class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
     constructor(props) {
         super(props);
-        if (props.onCreate)
+        if (props.onCreate) {
             props.onCreate(this, this.props.name);
+        }
         this.allowRerender = true;
     }
     getElement() {
@@ -31623,40 +32045,3511 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         this.setState({ disabled: undefined });
     }
 }
-// @ts-ignore
-window.ReactComponent = ReactComponent;
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ReactComponent = ReactComponent;
+}
 
 
 /***/ }),
 
-/***/ "./src/frontend/monitor/MonitorView/MonitorView.tsx":
+/***/ "./src/frontend/common/Search.ts":
+/*!***************************************!*\
+  !*** ./src/frontend/common/Search.ts ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Search": () => (/* binding */ Search)
+/* harmony export */ });
+class Search {
+    static getObj() {
+        if (!window.location.search.split('?')[1])
+            return {};
+        return window.location.search
+            .split('?')[1]
+            .split('&')
+            .reduce((acc, item) => {
+            const kv = item.split('=');
+            acc[kv[0]] = decodeURIComponent(kv[1]);
+            return acc;
+        }, {});
+    }
+    static objToString(obj) {
+        const search = Object.keys(obj)
+            .map((name) => `${name}=${encodeURIComponent(obj[name])}`)
+            .join('&');
+        if (!search)
+            return '';
+        return `?${search}`;
+    }
+    static filter(names) {
+        const newObj = {};
+        const obj = Search.getObj();
+        for (const name of names) {
+            if (obj.hasOwnProperty(name)) {
+                newObj[name] = obj[name];
+            }
+        }
+        return Search.objToString(newObj);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/ArrowIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/ArrowIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* binding */ ArrowIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const ArrowIcon = (props) => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ width: "10px", height: "6px", viewBox: "0 0 10 6" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M1.429.253a.819.819 0 0 0-1.184 0 .883.883 0 0 0 0 1.22l4.142 4.274A.821.821 0 0 0 5 6a.821.821 0 0 0 .612-.253l4.143-4.273a.883.883 0 0 0 0-1.221.819.819 0 0 0-1.184 0L5 3.937 1.429.253z" }) })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ArrowIcon = ArrowIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CancelIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CancelIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CancelIcon": () => (/* binding */ CancelIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class CancelIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none", opacity: ".87" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C6.47 2 2 6.47 2 12s4.47 10 10 10 10-4.47 10-10S17.53 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm3.59-13L12 10.59 8.41 7 7 8.41 10.59 12 7 15.59 8.41 17 12 13.41 15.59 17 17 15.59 13.41 12 17 8.41z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CancelIcon = CancelIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon": () => (/* binding */ CloseIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon = (props) => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ width: "10px", height: "10px", viewBox: "0 0 10 10" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "2", y1: "2", x2: "8", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("line", { x1: "8", y1: "2", x2: "2", y2: "8", stroke: "#aaa", strokeWidth: 1, strokeMiterlimit: "10" })] })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CloseIcon = CloseIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/CloseIcon2.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/CloseIcon2.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CloseIcon2": () => (/* binding */ CloseIcon2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const CloseIcon2 = (props) => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z" })] })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CloseIcon2 = CloseIcon2;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DateIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DateIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateIcon": () => (/* binding */ DateIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DateIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V10h16v11zm0-13H4V5h16v3z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DateIcon = DateIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DeleteIcon.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/icon/DeleteIcon.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DeleteIcon": () => (/* binding */ DeleteIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DeleteIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM8 9h8v10H8V9zm7.5-5l-1-1h-5l-1 1H5v2h14V4h-3.5z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DeleteIcon = DeleteIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DoneIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DoneIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DoneIcon": () => (/* binding */ DoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DoneIcon = DoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/DownIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/DownIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DownIcon": () => (/* binding */ DownIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class DownIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DoneIcon = DoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/EditIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/EditIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EditIcon": () => (/* binding */ EditIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class EditIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83 3.75 3.75 1.83-1.83c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.EditIcon = EditIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LeftIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/LeftIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LeftIcon": () => (/* binding */ LeftIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const LeftIcon = (props) => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M15.61 7.41L14.2 6l-6 6 6 6 1.41-1.41L11.03 12l4.58-4.59z" })] })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.LeftIcon = LeftIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/LocationIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/LocationIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LocationIcon": () => (/* binding */ LocationIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class LocationIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: size, height: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zM7 9c0-2.76 2.24-5 5-5s5 2.24 5 5c0 2.88-2.88 7.19-5 9.88C9.92 16.21 7 11.85 7 9z" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("circle", { cx: "12", cy: "9", r: "2.5" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.LocationIcon = LocationIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/MoreVertIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/MoreVertIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "MoreVertIcon": () => (/* binding */ MoreVertIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class MoreVertIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.MoreVertIcon = MoreVertIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/OpenInNewIcon.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/icon/OpenInNewIcon.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "OpenInNewIcon": () => (/* binding */ OpenInNewIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const OpenInNewIcon = () => {
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19 19H5V5h7V3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z" })] })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.OpenInNewIcon = OpenInNewIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PasswordIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/PasswordIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordIcon": () => (/* binding */ PasswordIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PasswordIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0,0h24v24H0V0z", fill: "none" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M2,17h20v2H2V17z M3.15,12.95L4,11.47l0.85,1.48l1.3-0.75L5.3,10.72H7v-1.5H5.3l0.85-1.47L4.85,7L4,8.47L3.15,7l-1.3,0.75 L2.7,9.22H1v1.5h1.7L1.85,12.2L3.15,12.95z M9.85,12.2l1.3,0.75L12,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H15v-1.5h-1.7l0.85-1.47 L12.85,7L12,8.47L11.15,7l-1.3,0.75l0.85,1.47H9v1.5h1.7L9.85,12.2z M23,9.22h-1.7l0.85-1.47L20.85,7L20,8.47L19.15,7l-1.3,0.75 l0.85,1.47H17v1.5h1.7l-0.85,1.48l1.3,0.75L20,11.47l0.85,1.48l1.3-0.75l-0.85-1.48H23V9.22z" }) }) })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PasswordIcon = PasswordIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/PhoneIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/PhoneIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneIcon": () => (/* binding */ PhoneIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class PhoneIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        const size = this.props.size || 24;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M6.54 5c.06.89.21 1.76.45 2.59l-1.2 1.2c-.41-1.2-.67-2.47-.76-3.79h1.51m9.86 12.02c.85.24 1.72.39 2.6.45v1.49c-1.32-.09-2.59-.35-3.8-.75l1.2-1.19M7.5 3H4c-.55 0-1 .45-1 1 0 9.39 7.61 17 17 17 .55 0 1-.45 1-1v-3.49c0-.55-.45-1-1-1-1.24 0-2.45-.2-3.57-.57-.1-.04-.21-.05-.31-.05-.26 0-.51.1-.71.29l-2.2 2.2c-2.83-1.45-5.15-3.76-6.59-6.59l2.2-2.2c.28-.28.36-.67.25-1.02C8.7 6.45 8.5 5.25 8.5 4c0-.55-.45-1-1-1z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneIcon = PhoneIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/RightIcon.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/icon/RightIcon.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RightIcon": () => (/* binding */ RightIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+const RightIcon = (props) => {
+    const size = props.size || 24;
+    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: size, width: size, viewBox: "0 0 24 24", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z" })] })));
+};
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.RightIcon = RightIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/SettingsIcon.tsx":
+/*!***************************************************!*\
+  !*** ./src/frontend/common/icon/SettingsIcon.tsx ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SettingsIcon": () => (/* binding */ SettingsIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class SettingsIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M19.43 12.98c.04-.32.07-.64.07-.98 0-.34-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.09-.16-.26-.25-.44-.25-.06 0-.12.01-.17.03l-2.49 1c-.52-.4-1.08-.73-1.69-.98l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.49.42l-.38 2.65c-.61.25-1.17.59-1.69.98l-2.49-1c-.06-.02-.12-.03-.18-.03-.17 0-.34.09-.43.25l-2 3.46c-.13.22-.07.49.12.64l2.11 1.65c-.04.32-.07.65-.07.98 0 .33.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.09.16.26.25.44.25.06 0 .12-.01.17-.03l2.49-1c.52.4 1.08.73 1.69.98l.38 2.65c.03.24.24.42.49.42h4c.25 0 .46-.18.49-.42l.38-2.65c.61-.25 1.17-.59 1.69-.98l2.49 1c.06.02.12.03.18.03.17 0 .34-.09.43-.25l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zm-1.98-1.71c.04.31.05.52.05.73 0 .21-.02.43-.05.73l-.14 1.13.89.7 1.08.84-.7 1.21-1.27-.51-1.04-.42-.9.68c-.43.32-.84.56-1.25.73l-1.06.43-.16 1.13-.2 1.35h-1.4l-.19-1.35-.16-1.13-1.06-.43c-.43-.18-.83-.41-1.23-.71l-.91-.7-1.06.43-1.27.51-.7-1.21 1.08-.84.89-.7-.14-1.13c-.03-.31-.05-.54-.05-.74s.02-.43.05-.73l.14-1.13-.89-.7-1.08-.84.7-1.21 1.27.51 1.04.42.9-.68c.43-.32.84-.56 1.25-.73l1.06-.43.16-1.13.2-1.35h1.39l.19 1.35.16 1.13 1.06.43c.43.18.83.41 1.23.71l.91.7 1.06-.43 1.27-.51.7 1.21-1.07.85-.89.7.14 1.13zM12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm0 6c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.SettingsIcon = SettingsIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/TimeIcon.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/icon/TimeIcon.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeIcon": () => (/* binding */ TimeIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class TimeIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", enableBackground: "new 0 0 24 24", height: "18px", viewBox: "0 0 24 24", width: "18px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("rect", { fill: "none", height: "24", width: "24", x: "0" }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("g", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12,2C6.5,2,2,6.5,2,12s4.5,10,10,10s10-4.5,10-10S17.5,2,12,2z M12,20c-4.41,0-8-3.59-8-8s3.59-8,8-8s8,3.59,8,8 S16.41,20,12,20z M12.5,7H11v6l5.2,3.2l0.8-1.3l-4.5-2.7V7z" }) }) })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TimeIcon = TimeIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityIcon.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityIcon.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityIcon": () => (/* binding */ VisibilityIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.VisibilityIcon = VisibilityIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/icon/VisibilityOffIcon.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/icon/VisibilityOffIcon.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "VisibilityOffIcon": () => (/* binding */ VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+
+
+class VisibilityOffIcon extends react__WEBPACK_IMPORTED_MODULE_1__.Component {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", height: "24px", viewBox: "0 0 24 24", width: "24px", fill: "#000000" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0zm0 0h24v24H0V0z", fill: "none" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M12 6c3.79 0 7.17 2.13 8.82 5.5-.59 1.22-1.42 2.27-2.41 3.12l1.41 1.41c1.39-1.23 2.49-2.77 3.18-4.53C21.27 7.11 17 4 12 4c-1.27 0-2.49.2-3.64.57l1.65 1.65C10.66 6.09 11.32 6 12 6zm-1.07 1.14L13 9.21c.57.25 1.03.71 1.28 1.28l2.07 2.07c.08-.34.14-.7.14-1.07C16.5 9.01 14.48 7 12 7c-.37 0-.72.05-1.07.14zM2.01 3.87l2.68 2.68C3.06 7.83 1.77 9.53 1 11.5 2.73 15.89 7 19 12 19c1.52 0 2.98-.29 4.32-.82l3.42 3.42 1.41-1.41L3.42 2.45 2.01 3.87zm7.5 7.5l2.61 2.61c-.04.01-.08.02-.12.02-1.38 0-2.5-1.12-2.5-2.5 0-.05.01-.08.01-.13zm-3.4-3.4l1.75 1.75c-.23.55-.36 1.15-.36 1.78 0 2.48 2.02 4.5 4.5 4.5.63 0 1.23-.13 1.77-.36l.98.98c-.88.24-1.8.38-2.75.38-3.79 0-7.17-2.13-8.82-5.5.7-1.43 1.72-2.61 2.93-3.53z" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.VisibilityOffIcon = VisibilityOffIcon;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/index.ts":
+/*!**************************************!*\
+  !*** ./src/frontend/common/index.ts ***!
+  \**************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_27__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__.CheckBoxList),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__.ComboBox),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__.Expand),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget_Radio__WEBPACK_IMPORTED_MODULE_51__.Radio),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
+/* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./icon/SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon/DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon/EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _widget_Radio__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./widget/Radio */ "./src/frontend/common/widget/Radio.tsx");
+
+
+
+
+// icon
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// widget
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Box/Box.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Box/Box.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _Box_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Box.less */ "./src/frontend/common/widget/Box/Box.less");
+
+
+
+
+class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Box.constructor', props);
+        super(props);
+        this.update = () => {
+            console.log('Box.update');
+            this.setState({
+                backgroundColor: 'green',
+            });
+        };
+        this.state = {
+            backgroundColor: 'purple',
+        };
+    }
+    // componentWillMount() {
+    //     console.log('Box.componentWillMount');
+    // }
+    componentDidMount() {
+        console.log('Box.componentDidMount');
+    }
+    componentWillUnmount() {
+        console.log('Box.componentWillUnmount');
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        return true;
+    }
+    componentDidUpdate() {
+        console.log('Box.componentDidUpdate');
+    }
+    render() {
+        console.log('Box.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Box = Box;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Button.tsx":
+/*!***********************************************!*\
+  !*** ./src/frontend/common/widget/Button.tsx ***!
+  \***********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Button": () => (/* binding */ Button)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('Button.constructor', props);
+        super(props);
+        this.state = { disabled: undefined };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+    }
+    /*isDisabled() {
+        if (this.props.disabled !== undefined) return this.props.disabled;
+        if (this.props.enabled !== undefined) return !this.props.enabled;
+        return this.state.disabled;
+    }*/
+    /*isEnabled() {
+        return !this.isDisabled();
+    }*/
+    /*disable() {
+        this.setState({disabled: true});
+    }*/
+    /*enable() {
+        this.setState({disabled: false});
+    }*/
+    isVisible() {
+        // return this.props.visible === undefined ? true : this.props.visible;
+        if (this.props.visible !== undefined)
+            return this.props.visible;
+        return true;
+    }
+    getStyle() {
+        return {
+            display: !this.isVisible() ? 'none' : null,
+            width: this.props.width,
+        };
+    }
+    render() {
+        // console.log('Button.render', this.props.title, this.props);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Button = Button;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBox/CheckBox.tsx":
 /*!**********************************************************!*\
-  !*** ./src/frontend/monitor/MonitorView/MonitorView.tsx ***!
+  !*** ./src/frontend/common/widget/CheckBox/CheckBox.tsx ***!
   \**********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MonitorView": () => (/* binding */ MonitorView)
+/* harmony export */   "CheckBox": () => (/* binding */ CheckBox)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common/ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _MonitorView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./MonitorView.less */ "./src/frontend/monitor/MonitorView/MonitorView.less");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _CheckBox_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckBox.less */ "./src/frontend/common/widget/CheckBox/CheckBox.less");
 
 
 
-
-class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    renderApplication(app) {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [app.route, " ", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ style: { color: 'gray' } }, { children: ["version: ", app.version] }))] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "pages:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.pages.map((page) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", { children: page.name }, page.name))) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "clients:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: app.clients.map((client) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [client.uuid, "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'blue' } }, { children: client.ip })), "\u00A0 v", client.version, "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: {
-                                                    color: 'green',
-                                                } }, { children: `userId: ${client.userId}` }))] }, client.uuid))) })] })] })] }, app.route));
+class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = (e) => {
+            // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+            if (!this.props.readOnly) {
+                this.setState((prevState) => {
+                    if (this.props.onChange) {
+                        this.props.onChange(!prevState.checked, e);
+                    }
+                    return { checked: !prevState.checked };
+                });
+            }
+        };
+        this.onClick = (e) => {
+            if (!this.props.readOnly) {
+                if (this.props.onChange)
+                    this.props.onChange(true);
+                this.setState({ checked: true });
+            }
+        };
+        if (this.props.checked !== undefined &&
+            this.props.checked !== null &&
+            typeof this.props.checked !== 'boolean') {
+            throw new Error(`wrong checked prop: ${this.props.checked}`);
+        }
+        this.state = {
+            checked: typeof this.props.checked === 'boolean' ? this.props.checked : null,
+        };
+    }
+    getValue() {
+        return this.state.checked;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
+        return true;
     }
     render() {
-        console.log('MonitorView.render', this.props.data);
-        const data = this.props.data;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "MonitorView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["nodeEnv: ", data.nodeEnv] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["uptime: ", _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.formatNumber(data.uptime), " ms"] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "applications:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })] })));
+        if (this.state.checked === null) {
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, onClick: this.onClick }, { children: "?" })));
+        }
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: this.getCssClassNames(), type: "checkbox", id: this.props.id, checked: this.state.checked, readOnly: this.props.readOnly, disabled: this.props.disabled, "data-tag": this.props.tag, onChange: this.onChange }));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBox = CheckBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/CheckBoxList.tsx":
+/*!*****************************************************!*\
+  !*** ./src/frontend/common/widget/CheckBoxList.tsx ***!
+  \*****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxList": () => (/* binding */ CheckBoxList)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCheckBoxChange = (e) => {
+            // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+            const checked = e.target.checked;
+            const itemValue = e.target.dataset.value;
+            // console.log('itemValue:', itemValue);
+            this.setState((prevState) => {
+                const prevValue = prevState.value || [];
+                const value = [...prevValue];
+                if (checked) {
+                    if (value.indexOf(itemValue) > -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.push(itemValue);
+                }
+                else {
+                    if (value.indexOf(itemValue) === -1) {
+                        console.log('value:', itemValue, checked, value);
+                        throw new Error('CheckBoxList value error');
+                    }
+                    value.splice(value.indexOf(itemValue), 1);
+                }
+                // console.log('value:', value);
+                return { value };
+            }, () => {
+                if (this.props.onChange) {
+                    this.props.onChange(this.getValue());
+                }
+            });
+        };
+        if (!this.props.name)
+            throw new Error('no CheckBoxList name');
+        this.state = {
+            value: this.props.value || [],
+        };
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValue() {
+        return this.state.value || [];
+    }
+    isValueChecked(value) {
+        return this.getValue().indexOf(value) > -1;
+    }
+    composeItemId(value) {
+        return `${this.props.name}.${value}`;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.log('nextProps.value:', nextProps.value);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: this.getCssClassNames() }, { children: this.getItems().map((item) => {
+                if (item.value === undefined)
+                    throw new Error('no item value');
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'checkbox', id: this.composeItemId(item.value), checked: this.isValueChecked(item.value), onChange: this.onCheckBoxChange, "data-value": item.value, readOnly: this.props.readOnly }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: this.composeItemId(item.value) }, { children: item.title || item.value }))] }, item.value));
+            }) })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.CheckBoxList = CheckBoxList;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/ComboBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/ComboBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBox": () => (/* binding */ ComboBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        this.onMouseDown = async (e) => {
+            // console.log('ComboBox.onMouseDown', e.button);
+            if (this.props.onMouseDown) {
+                await this.props.onMouseDown(e);
+            }
+        };
+        if (!props.items)
+            throw new Error('no ComboBox items');
+        this.state = { value: this.getInitialValue() };
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find((item) => item.value === this.props.value);
+            if (!item) {
+                if (this.props.nullable && value === '') {
+                }
+                else {
+                    console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
+                    console.log('items:', this.props.items);
+                }
+            }
+        }
+        else {
+            if (this.props.items.length) {
+                value = this.props.items[0].value;
+            }
+            else {
+                value = '';
+            }
+        }
+        if (value === null)
+            throw new Error('null is wrong value for ComboBox');
+        // console.log('combobox value:', value);
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('ComboBox.render', this.state.value);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
+                    this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.ComboBox = ComboBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DatePicker/DatePicker.tsx":
+/*!**************************************************************!*\
+  !*** ./src/frontend/common/widget/DatePicker/DatePicker.tsx ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatePicker": () => (/* binding */ DatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _DatePicker_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DatePicker.less */ "./src/frontend/common/widget/DatePicker/DatePicker.less");
+
+
+
+
+
+
+// props
+//  visible boolean true
+//  selectedDate array [2021, 0, 1]
+//  minDate array [2021, 0, 1]
+//  onMouseDown function
+//  onDateSelected function
+//  getDateStyle function
+//  selectToday boolean false
+//  highlightedDate array [2021, 0, 1]
+class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DatePicker.constructor', props);
+        super(props);
+        this.onClick = (e) => {
+            console.log('DatePicker.onClick', e.target);
+            if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
+                return this.onDateClick(e.target);
+            }
+        };
+        this.onMouseDown = (e) => {
+            // console.log('DatePicker.onMouseDown');
+            if (this.props.onMouseDown) {
+                return this.props.onMouseDown(e);
+            }
+        };
+        this.onNextClick = (e) => {
+            // console.log('DatePicker.next');
+            this.setState((prevState) => {
+                const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                next.setMonth(next.getMonth() + 1);
+                return {
+                    selectedMonth: [next.getFullYear(), next.getMonth()],
+                };
+            });
+        };
+        this.onPrevClick = (e) => {
+            // console.log('DatePicker.prev');
+            this.setState((prevState) => {
+                const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
+                prev.setMonth(prev.getMonth() - 1);
+                return {
+                    selectedMonth: [prev.getFullYear(), prev.getMonth()],
+                };
+            });
+        };
+        if (this.props.minDate && !(this.props.minDate instanceof Array))
+            throw new Error('minDate must be array');
+        this.state = { selectedMonth: this.calcSelectedMonth() };
+        this.MONTH = [
+            'Январь',
+            'Февраль',
+            'Март',
+            'Апрель',
+            'Май',
+            'Июнь',
+            'Июль',
+            'Август',
+            'Сентябрь',
+            'Октябрь',
+            'Ноябрь',
+            'Декабрь',
+        ];
+    }
+    static createDateFromArr(arr) {
+        return new Date(arr[0], arr[1], arr[2]);
+    }
+    isVisible() {
+        if (this.props.visible === false)
+            return false;
+        return true;
+    }
+    calcSelectedMonth() {
+        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        if (this.props.selectedDate) {
+            return [this.props.selectedDate[0], this.props.selectedDate[1]];
+        }
+        else if (this.props.highlightedDate) {
+            return [this.props.highlightedDate[0], this.props.highlightedDate[1]];
+        }
+        else {
+            const dates = [_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today().getTime()];
+            if (this.props.minDate)
+                dates.push(DatePicker.createDateFromArr(this.props.minDate).getTime());
+            // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
+            // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
+            const date = new Date(Math.min(...dates));
+            // console.log('date:', date);
+            return [date.getFullYear(), date.getMonth()];
+        }
+    }
+    static getTodayArr() {
+        return DatePicker.dateToArray(new Date());
+    }
+    static dateToArray(date) {
+        return [date.getFullYear(), date.getMonth(), date.getDate()];
+    }
+    static getDay(date) {
+        let day = date.getDay() - 1;
+        if (day === -1)
+            day = 6;
+        if (day === 0)
+            day = 7;
+        return day;
+    }
+    createSelectedDate() {
+        if (!this.isDateSelected())
+            throw new Error('date not selected');
+        // @ts-ignore
+        return new Date(...this.props.selectedDate);
+    }
+    isDateSelected() {
+        return !!this.props.selectedDate;
+    }
+    getFirstDateOfTable() {
+        const date = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1], 1); // first day of month
+        date.setDate(date.getDate() - DatePicker.getDay(date)); // first day of table
+        return date;
+    }
+    createMinDate() {
+        if (!this.props.minDate)
+            throw new Error('no min date');
+        return new Date(this.props.minDate[0], this.props.minDate[1], this.props.minDate[2]);
+    }
+    isMinDate() {
+        return !!this.props.minDate;
+    }
+    isPrevAllowed() {
+        const prev = new Date(this.state.selectedMonth[0], this.state.selectedMonth[1]);
+        prev.setMonth(prev.getMonth() - 1);
+        return this.isMonthAllowed(prev);
+    }
+    isMonthAllowed(month) {
+        if (this.isMinDate()) {
+            const minMonth = new Date(this.props.minDate[0], this.props.minDate[1]);
+            return month.getTime() >= minMonth.getTime();
+        }
+        return true;
+    }
+    onDateClick(target) {
+        // console.log('DatePicker.onDateClick', target.dataset.date);
+        if (this.props.onDateSelected) {
+            this.props.onDateSelected(JSON.parse(target.dataset.date));
+        }
+    }
+    render() {
+        // console.log('DatePicker.render', this.props, this.state);
+        const date = this.getFirstDateOfTable();
+        const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
+        const minDate = this.isMinDate() ? this.createMinDate() : null;
+        const selectedDate = this.isDateSelected() ? this.createSelectedDate() : null;
+        // @ts-ignore
+        const highlightedDate = this.props.highlightedDate
+            ? // @ts-ignore
+                new Date(...this.props.highlightedDate)
+            : null;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("table", Object.assign({ className: `${this.getCssClassNames()} ${this.isVisible() ? 'visible' : ''}`, onClick: this.onClick, onMouseDown: this.onMouseDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("caption", Object.assign({ className: `${this.getCssBlockName()}__caption` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-content` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link ${this.isPrevAllowed() ? 'enabled' : ''}`, onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_3__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__caption-title` }, { children: `${this.MONTH[this.state.selectedMonth[1]]}, ${this.state.selectedMonth[0]}` })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__caption-link enabled`, onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("thead", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u043D" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0412\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0421\u0440" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u0427\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th` }, { children: "\u041F\u0442" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0421\u0431" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("th", Object.assign({ className: `${this.getCssBlockName()}__th weekend` }, { children: "\u0412\u0441" }))] }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: Array.from(Array(6).keys()).map((i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tr", { children: Array.from(Array(7).keys()).map((j) => {
+                            const classList = [];
+                            if (j === 5 || j === 6)
+                                classList.push('weekend');
+                            if (this.isSelectToday() && date.getTime() === today.getTime())
+                                classList.push('today');
+                            if (date.getMonth() !== this.state.selectedMonth[1])
+                                classList.push('out');
+                            if (!minDate)
+                                classList.push('selectable');
+                            else if (date.getTime() >= minDate.getTime())
+                                classList.push('selectable');
+                            if (selectedDate && date.getTime() === selectedDate.getTime())
+                                classList.push('selected');
+                            if (highlightedDate && highlightedDate.getTime() === date.getTime())
+                                classList.push('highlight');
+                            const text = date.getDate().toString();
+                            const dataDate = JSON.stringify(DatePicker.dateToArray(date));
+                            const style = this.props.getDateStyle
+                                ? this.props.getDateStyle(date)
+                                : null;
+                            date.setDate(date.getDate() + 1);
+                            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", Object.assign({ className: `${this.getCssBlockName()}__td  ${classList.join(' ')}`, style: style, "data-date": dataDate }, { children: text }), text));
+                        }) }, i))) })] })));
+    }
+    isSelectToday() {
+        if (this.props.selectToday === false)
+            return false;
+        return true;
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DatePicker = DatePicker;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownButton/DropdownButton.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
+
+
+
+
+class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onButtonClick = (e) => {
+            // console.log('DropdownButton.onButtonClick');
+            this.setState((state) => ({ open: !state.open }));
+        };
+        this.onButtonBlur = (e) => {
+            // console.log('DropdownButton.onButtonBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onKeyDown = (e) => {
+            // console.log('DropdownButton.onKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onUlMouseDown = (e) => {
+            // console.log('DropdownButton.onUlMouseDown');
+            e.preventDefault();
+        };
+        this.onLiClick = async (e) => {
+            // console.log('DropdownButton.onLiClick', e.currentTarget);
+            const li = e.currentTarget;
+            this.setState({ open: false }, () => {
+                if (this.props.onClick) {
+                    this.props.onClick(li);
+                }
+            });
+        };
+        this.state = {
+            open: false,
+            disabled: false,
+        };
+    }
+    isEnabled() {
+        if (this.props.enabled !== undefined)
+            return this.props.enabled;
+        // if (this.props.isDisabled) return this.props.isDisabled(this.props.name);
+        return !this.state.disabled;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
+                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropdownButton = DropdownButton;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx":
+/*!******************************************************************************!*\
+  !*** ./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx ***!
+  \******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DropdownDatePicker": () => (/* binding */ DropdownDatePicker)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _DropdownDatePicker_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DropdownDatePicker.less */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.less");
+
+
+
+
+
+
+
+
+// oldDates boolean true
+class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('DropdownDatePicker.constructor', props);
+        super(props);
+        this.onInputClick = (e) => {
+            // console.log('DropdownDatePicker.onInputClick', e);
+            if (this.props.readOnly)
+                return;
+            this.setState((prevState) => ({ open: !prevState.open }));
+        };
+        this.onInputKeyDown = (e) => {
+            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            if (e.key === 'Escape' && this.state.open) {
+                this.setState({ open: false });
+                e.stopPropagation();
+            }
+        };
+        this.onCloseDown = async (e) => {
+            // console.log('DropdownDatePicker.onCloseDown', e);
+            this.setState({ value: null });
+            if (this.props.onChange) {
+                this.props.onChange(null);
+            }
+        };
+        this.onBlur = (e) => {
+            // console.log('DropdownDatePicker.onBlur');
+            if (this.state.open) {
+                this.setState({ open: false });
+            }
+        };
+        this.onDatePickerMouseDown = (e) => {
+            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onDatePickerDateSelected = (date) => {
+            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            const value = new Date(date[0], date[1], date[2]);
+            this.setState({ open: false, value });
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.state = {
+            open: false,
+            value: props.value || null,
+        };
+        if (props.value && !(props.value instanceof Date)) {
+            throw new Error(`need Date type, got ${typeof props.value}`);
+        }
+    }
+    getFormat() {
+        // if (this.props.format) return this.props.format;
+        // return '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+        return this.props.format || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+    }
+    getStringValue() {
+        const value = this.getValue();
+        if (value) {
+            let format = this.getFormat();
+            if (this.isDebugMode()) {
+                const time = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, '{hh}:{mm}:{ss}');
+                if (format === '{DD}.{MM}.{YYYY}' && time !== '00:00:00') {
+                    format = '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}';
+                }
+            }
+            return _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, format);
+        }
+        return '';
+    }
+    /*getMinDate() {
+        if (this.props.getMinDate) {
+            return this.props.getMinDate();
+        } else if (this.props.oldDates === false) {
+            return DatePicker.getTodayArr();
+        }
+        return null;
+    }*/
+    getSelectedMonth() {
+        if (this.getValue()) {
+            return [this.getValue().getFullYear(), this.getValue().getMonth()];
+        }
+        return null;
+    }
+    getSelectedDate() {
+        if (this.getValue()) {
+            return [
+                this.getValue().getFullYear(),
+                this.getValue().getMonth(),
+                this.getValue().getDate(),
+            ];
+        }
+        return null;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    getClassList() {
+        return [...super.getClassList(), ...(this.props.readOnly ? ['read-only'] : [])];
+    }
+    renderInput() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, type: 'text', readOnly: true, onClick: this.onInputClick, onBlur: this.onBlur, value: this.getStringValue(), placeholder: this.props.placeholder, onKeyDown: this.onInputKeyDown }));
+    }
+    renderCloseIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.getStringValue() !== '' && !this.props.readOnly ? 'visible' : ''}`, onMouseDown: this.onCloseDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+    }
+    renderDateIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DateIcon__WEBPACK_IMPORTED_MODULE_4__.DateIcon, {}) })));
+    }
+    renderDatePicker() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-container` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__date-picker-close` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_6__.DatePicker
+                // minDate={this.getMinDate()}
+                , { 
+                    // minDate={this.getMinDate()}
+                    minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
+    }
+    render() {
+        // console.log('DropdownDatePicker.render', this.props, this.state);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
+    }
+    isDebugMode() {
+        return this.props.debug === true;
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.DropdownDatePicker = DropdownDatePicker;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Expand/Expand.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Expand/Expand.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Expand": () => (/* binding */ Expand)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _Expand_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Expand.less */ "./src/frontend/common/widget/Expand/Expand.less");
+
+
+
+
+class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onTitleClick = (e) => {
+            console.log('Expand.onTitleClick');
+            this.setState((prevState) => {
+                return { opened: !prevState.opened };
+            });
+        };
+        this.state = {
+            opened: this.props.opened !== undefined ? this.props.opened : false,
+        };
+    }
+    isOpened() {
+        return this.state.opened;
+    }
+    isHighlighted() {
+        return !!this.props.highlighted;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isOpened() ? 'opened' : ''} ${this.isHighlighted() ? 'highlighted' : ''}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header`, onClick: this.onTitleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_DownIcon__WEBPACK_IMPORTED_MODULE_2__.DownIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.props.title }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__content` }, { children: this.props.children }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Expand = Expand;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Grid/Grid.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Grid/Grid.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Grid": () => (/* binding */ Grid)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _Grid_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Grid.less */ "./src/frontend/common/widget/Grid/Grid.less");
+
+
+
+
+
+
+
+class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('Grid.constructor', props);
+        super(props);
+        this.onCellMouseDown = async (e) => {
+            console.log('Grid.onCellMouseDown', this.isLink());
+            e.preventDefault(); // prevent text selection on double click
+            if (this.isDisabled())
+                return;
+            this.getElement().focus();
+            // if (this.isLink()) return;
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            await this.selectCell(key, j);
+            if (button === 0 && this.props.onClick) {
+                this.props.onClick(row, key);
+            }
+        };
+        this.onRowMouseDown = async (e) => {
+            console.log('Grid.onRowMouseDown', this.isLink());
+            // if (this.isLink()) return;
+            const key = e.currentTarget.dataset.row;
+            await this.selectRow(key);
+        };
+        this.onCellDoubleClick = async (e) => {
+            // console.log('Grid.onCellDoubleClick');
+            const button = e.button;
+            const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (button === 0 && this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onRowDoubleClick = async (e) => {
+            // console.log('Grid.onRowDoubleClick');
+            const i = parseInt(e.currentTarget.dataset.r);
+            const row = this.props.rows[i];
+            const key = e.currentTarget.dataset.row;
+            // console.log('row:', row);
+            if (this.props.onDoubleClick) {
+                await this.props.onDoubleClick(row, key);
+            }
+        };
+        this.onKeyDown = async (e) => {
+            // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+            if (this.isDisabled())
+                return;
+            switch (e.keyCode) {
+                case 37:
+                    e.preventDefault();
+                    await this.onLeft();
+                    break;
+                case 38:
+                    e.preventDefault();
+                    await this.onUp();
+                    break;
+                case 39:
+                    e.preventDefault();
+                    await this.onRight();
+                    break;
+                case 40:
+                    e.preventDefault();
+                    await this.onDown();
+                    break;
+                case 13:
+                    e.preventDefault();
+                    await this.onEnter();
+                    break;
+                case 46:
+                    e.preventDefault();
+                    await this.onDelete();
+                    break;
+                case 67:
+                    if (e.ctrlKey) {
+                        e.preventDefault();
+                        await this.onCopy();
+                    }
+                    break;
+            }
+        };
+        this.onResizeDoubleClick = async (e) => {
+            console.log('Grid.onResizeDoubleClick', e.target);
+            const i = parseInt(e.target.dataset.i);
+            const column = this.props.columns[i];
+            if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
+                return;
+            this.state.columnWidth[column.name] = this.getMaxColumnWidth(column);
+            // @ts-ignore
+            this.state.resized = Date.now();
+            await this.rerender();
+        };
+        this.onCellViewCreate = (c) => {
+            // console.log('Grid.onCellViewCreate', c.props.column.name);
+            const columnName = c.props.column.name;
+            if (this.columns[columnName] === undefined)
+                this.columns[columnName] = [];
+            this.columns[columnName].push(c);
+        };
+        this.onCellViewUnmount = (c) => {
+            // console.log('Grid.onCellViewUnmount', c.props.column.name);
+            const columnName = c.props.column.name;
+            const i = this.columns[columnName].indexOf(c);
+            if (i === -1)
+                throw new Error('cannot find FieldView in Grid.columns');
+            this.columns[columnName].splice(i, 1);
+        };
+        this.onBodyScroll = async (e) => {
+            // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+            this.head.current.scrollLeft = e.target.scrollLeft;
+        };
+        this.onLinkClick = async (e) => {
+            console.log('Grid.onLinkClick', e.ctrlKey);
+            if (e.ctrlKey)
+                return;
+            e.preventDefault();
+            /*if (!this.isLink()) return;
+            const key = e.currentTarget.dataset.key;
+            if (this.props.onLinkClick) {
+                await this.props.onLinkClick(key);
+            }*/
+        };
+        this.state = {
+            key: this.props.selectedKey || null,
+            column: this.props.selectedKey && this.props.columns && this.props.columns.length
+                ? 0
+                : null,
+            columnWidth: {},
+            resized: Date.now(),
+        };
+        this.columns = {}; // each column is the array of each cell view
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.head = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    getActiveColumn() {
+        return this.state.column;
+    }
+    setActiveColumn(column) {
+        // @ts-ignore
+        this.state.column = column;
+    }
+    getActiveRowKey() {
+        return this.state.key;
+    }
+    setActiveRowKey(key) {
+        // console.log('Grid.setActiveRowKey', key);
+        // @ts-ignore
+        this.state.key = key;
+    }
+    isRowActive(i, key) {
+        return this.getActiveRowKey() === key;
+    }
+    async onCopy() {
+        console.log('Grid.onCopy');
+        const row = this.findRow(this.getActiveRowKey());
+        const column = this.props.columns[this.getActiveColumn()].name;
+        const text = row[column];
+        await _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.copyTextToClipboard(text);
+    }
+    findRow(key) {
+        return this.props.rows.find((row) => this.getRowKey(row) === key);
+    }
+    async onLeft() {
+        console.log('Grid.onLeft');
+        const j = this.getActiveColumn();
+        if (j - 1 >= 0) {
+            this.setActiveColumn(j - 1);
+            await this.rerender();
+        }
+    }
+    async onUp() {
+        console.log('Grid.onUp');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i - 1 >= 0) {
+            const pRow = this.props.rows[i - 1];
+            const pKey = this.getRowKey(pRow);
+            this.setActiveRowKey(pKey);
+            await this.rerender();
+        }
+    }
+    async onRight() {
+        console.log('Grid.onRight');
+        const j = this.getActiveColumn();
+        if (j + 1 <= this.props.columns.length - 1) {
+            this.setActiveColumn(j + 1);
+            await this.rerender();
+        }
+    }
+    async onDown() {
+        console.log('Grid.onDown');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        const i = this.props.rows.indexOf(row);
+        if (i + 1 <= this.props.rows.length - 1) {
+            const nRow = this.props.rows[i + 1];
+            const nKey = this.getRowKey(nRow);
+            this.setActiveRowKey(nKey);
+            await this.rerender();
+        }
+    }
+    async onEnter() {
+        console.log('Grid.onEnter');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDoubleClick) {
+            await this.props.onDoubleClick(row, key);
+        }
+    }
+    async onDelete() {
+        console.log('Grid.onDelete');
+        const key = this.getActiveRowKey();
+        const row = this.findRow(key);
+        // console.log(row, key);
+        if (this.props.onDeleteKeyDown) {
+            await this.props.onDeleteKeyDown(row, key);
+        }
+    }
+    async selectCell(key, j) {
+        // console.log('Grid.selectCell', key, j);
+        if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
+            return;
+        this.setActiveRowKey(key);
+        this.setActiveColumn(j);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    async selectRow(key) {
+        // console.log('Grid.selectRow', key);
+        if (this.getActiveRowKey() === key)
+            return;
+        this.setActiveRowKey(key);
+        if (this.props.onSelectionChange) {
+            await this.props.onSelectionChange(key);
+        }
+        else {
+            await this.rerender();
+        }
+    }
+    getMaxColumnWidth(column) {
+        return (Math.max(...this.columns[column.name].map((view) => view.getSpanOffsetWidth())) + 10 + 2);
+    }
+    getColumnWidth(i) {
+        const column = this.props.columns[i];
+        if (this.state.columnWidth[column.name] !== undefined) {
+            return this.state.columnWidth[column.name];
+        }
+        return column.width;
+    }
+    renderColumns() {
+        return this.props.columns.map((column, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__th`, style: { width: this.getColumnWidth(i) } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'ellipsis', style: { textAlign: column.align } }, { children: column.title || column.name })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: 'Grid__resize', "data-i": i, onDoubleClick: this.onResizeDoubleClick })] }), column.name)));
+    }
+    renderRows() {
+        return this.props.rows.map((row, i) => {
+            const key = this.getRowKey(row);
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_4__.GridRow, { rowKey: key, grid: this, row: row, i: i, active: this.isRowActive(i, key), activeColumn: this.getActiveColumn(), updated: this.props.updated, resized: this.state.resized }, key));
+        });
+    }
+    getRowKey(row) {
+        if (this.props.getRowKey) {
+            return this.props.getRowKey(row);
+        }
+        return this.props.rows.indexOf(row).toString();
+    }
+    renderCell(row, column) {
+        let view;
+        if (this.props.renderGridCellView) {
+            view = this.props.renderGridCellView(row, column, this.onCellViewCreate, this.onCellViewUnmount);
+        }
+        if (view)
+            return view;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('Grid.render', this.props.name);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
+    }
+    isLink() {
+        return !!this.props.createLinkCallback;
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Grid = Grid;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridCell/GridCell.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/GridCell/GridCell.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridCell": () => (/* binding */ GridCell)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+
+class GridCell extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.span = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    getSpanOffsetWidth() {
+        if (!this.span.current)
+            return 0;
+        return this.span.current.offsetWidth;
+    }
+    renderCellValue(rawValue) {
+        const value = this.props.grid.props.decodeValue ? _Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.decodeValue(rawValue) : rawValue;
+        if (typeof value === 'boolean')
+            return value.toString();
+        return value;
+    }
+    render() {
+        const row = this.props.row;
+        const column = this.props.column;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: this.renderCellValue(row[column.name]) })) })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.GridCell = GridCell;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/GridRow/GridRow.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/GridRow/GridRow.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "GridRow": () => (/* binding */ GridRow)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    isCellActive(j) {
+        return this.props.active && this.props.activeColumn === j;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+        if (this.props.updated) {
+            if (nextProps.updated - this.props.updated)
+                return true;
+            if (nextProps.resized - this.props.resized)
+                return true;
+            if (this.props.active !== nextProps.active)
+                return true;
+            if (this.props.active && this.props.activeColumn !== nextProps.activeColumn)
+                return true;
+            return false;
+        }
+        return true;
+    }
+    render() {
+        // console.log('GridRow.render', this.props.i);
+        const grid = this.props.grid;
+        const row = this.props.row;
+        const i = this.props.i;
+        const key = this.props.rowKey;
+        const link = grid.props.createLinkCallback ? grid.props.createLinkCallback(key) : null;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("a", Object.assign({ className: `${grid.getCssBlockName()}__tr ${this.props.active ? 'active' : ''}`, "data-key": key, href: link, onClick: grid.onLinkClick }, { children: [grid.props.columns.map((column, j) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${grid.getCssBlockName()}__td ${this.isCellActive(j) ? 'active' : ''}`, style: { width: grid.getColumnWidth(j) }, "data-rc": `[${i},${j}]`, "data-row": key, onMouseDown: grid.onCellMouseDown, onDoubleClick: grid.onCellDoubleClick }, { children: grid.renderCell(row, column) }), column.name))), !!grid.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${grid.getCssBlockName()}__td`, "data-r": i, "data-row": key, onMouseDown: grid.onRowMouseDown, onDoubleClick: grid.onRowDoubleClick }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.GridRow = GridRow;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Image/Image.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Image/Image.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Image": () => (/* binding */ Image)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Image_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Image.less */ "./src/frontend/common/widget/Image/Image.less");
+
+
+
+
+class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onImgClick = async (e) => {
+            console.log('Image.onImgClick');
+            if (this.props.onClick) {
+                return await this.props.onClick();
+            }
+            this.setState((prevState) => {
+                if (prevState.classList) {
+                    return { classList: null };
+                }
+                else {
+                    return { classList: ['Image_full'] };
+                }
+            });
+        };
+        this.img = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = { classList: null };
+    }
+    getNaturalSize() {
+        return [this.img.current.naturalWidth, this.img.current.naturalHeight];
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: this.getCssClassNames(), ref: this.img, src: this.props.src, onClick: this.onImgClick }));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Image = Image;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Menu/Menu.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Menu/Menu.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Menu": () => (/* binding */ Menu)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Menu_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Menu.less */ "./src/frontend/common/widget/Menu/Menu.less");
+
+
+
+class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Menu.constructor', props);
+        super(props);
+        this.onMenuClick = async (e) => {
+            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            await this.toggleMenu(e.currentTarget.dataset.menu);
+        };
+        this.onBlur = async (e) => {
+            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            await this.closeMenu(e.currentTarget.dataset.menu);
+        };
+        this.onMouseDown = (e) => {
+            // console.log('Menu.onMouseDown');
+            e.preventDefault();
+            // e.stopPropagation();
+            // return false;
+        };
+        this.onMenuItemClick = async (e) => {
+            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            e.persist();
+            const { menu, type, name } = e.target.dataset;
+            await this.closeMenu(menu);
+            if (this.props.onClick) {
+                this.props.onClick(menu, type, name);
+            }
+        };
+        this.state = {};
+    }
+    toggleMenu(menu) {
+        return new Promise((resolve) => {
+            this.setState((prevState) => ({
+                [menu]: !prevState[menu],
+            }), resolve);
+        });
+    }
+    closeMenu(menu) {
+        return new Promise((resolve) => this.setState({ [menu]: false }, resolve));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
+                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Menu = Menu;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Modal/Modal.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/common/widget/Modal/Modal.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Modal": () => (/* binding */ Modal)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Modal_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Modal.less */ "./src/frontend/common/widget/Modal/Modal.less");
+
+
+
+class Modal extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: this.props.children })) })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Modal = Modal;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Password/Password.tsx":
+/*!**********************************************************!*\
+  !*** ./src/frontend/common/widget/Password/Password.tsx ***!
+  \**********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Password": () => (/* binding */ Password)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _Password_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Password.less */ "./src/frontend/common/widget/Password/Password.less");
+
+
+
+
+
+
+
+class Password extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onChange = (e) => {
+            this._setValue(e.target.value);
+        };
+        this.onCloseClick = (e) => {
+            this._setValue('');
+            this.getInputElement().focus();
+        };
+        this.onIconClick = (e) => {
+            this.setState((prevState) => {
+                return {
+                    type: prevState.type === 'password' ? 'text' : 'password',
+                };
+            });
+            this.getInputElement().focus();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.props.value || '',
+            type: 'password',
+        };
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        return this.state.value !== '';
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: this.state.type, id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_5__.VisibilityOffIcon, {}) }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Password = Password;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/PhoneBox.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/PhoneBox.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneBox": () => (/* binding */ PhoneBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyPress = (e) => {
+            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
+                e.preventDefault();
+            }
+            if (e.key === '+' &&
+                e.target.value.length &&
+                Math.abs(e.target.selectionEnd - e.target.selectionStart) !== e.target.value.length) {
+                e.preventDefault();
+            }
+        };
+        this.onChange = (e) => {
+            // console.log('PhoneBox.onChange', e.target.value);
+            const start = e.target.selectionStart;
+            const end = e.target.selectionEnd;
+            const len = e.target.value.length;
+            // console.log('start/end/len:', start, end, len);
+            // disable edition in middle
+            if (start !== end || start !== len) {
+                return;
+            }
+            // value pipeline
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // state
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(value);
+            this.setState({ value: this.state.value }); // for render only
+            // event
+            if (this.props.onChange) {
+                this.props.onChange(value);
+            }
+        };
+        this.onBlur = (e) => {
+            // console.log('PhoneBox.onBlur');
+            let value = PhoneBox.clearValue(e.target.value);
+            value = PhoneBox.ifNoCodeAddRussianCode(value);
+            // console.log('value:', value);
+            // event
+            if (this.props.onBlur) {
+                this.props.onBlur(value);
+            }
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: PhoneBox.formatPhoneNumber(this.props.value || ''),
+        };
+    }
+    getValue() {
+        return PhoneBox.clearValue(this.state.value);
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        if (nextProps.value !== undefined) {
+            // @ts-ignore
+            this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
+        }
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
+    }
+    static clearValue(value) {
+        return value.replace(/[^\+0-9]/g, '');
+    }
+    static ifNoCodeAddRussianCode(value) {
+        if (value === '') {
+        }
+        else if (value.match(/^8/)) {
+            return value.replace(/^8/, '+7');
+        }
+        else if (value.match(/^7/)) {
+            return `+${value}`;
+        }
+        else if (value[0] !== '+') {
+            return `+7${value}`;
+        }
+        return value;
+    }
+    static formatPhoneNumber(_value) {
+        const value = PhoneBox.clearValue(_value);
+        // russian country code
+        const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
+        // console.log('arr:', arr);
+        if (arr) {
+            if (arr[5]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
+            }
+            if (arr[4]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}`;
+            }
+            if (arr[3]) {
+                return `${arr[1]} ${arr[2]} ${arr[3]}`;
+            }
+            if (arr[2]) {
+                return `${arr[1]} ${arr[2]}`;
+            }
+            if (arr[1]) {
+                return `${arr[1]}`;
+            }
+        }
+        return value;
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.PhoneBox = PhoneBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Radio.tsx":
+/*!**********************************************!*\
+  !*** ./src/frontend/common/widget/Radio.tsx ***!
+  \**********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Radio": () => (/* binding */ Radio)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Radio.constructor', props.value);
+        super(props);
+        this.onChange = async (e) => {
+            // console.log('Radio.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                await this.props.onChange(e.target.value);
+            }
+        };
+        if (!props.name)
+            throw new Error('no name');
+        this.state = {
+            value: this.getInitialValue(),
+        };
+        console.log('value:', JSON.stringify(this.getValue()));
+    }
+    getInitialValue() {
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.props.items.find((item) => item.value === this.props.value);
+            if (!item) {
+                console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
+                console.log('items:', this.props.items);
+            }
+        }
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    renderItem(item, i) {
+        return [
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'radio', name: this.props.name, id: `${this.props.name}${i}`, value: item.value, onChange: this.onChange, checked: item.value === this.getValue(), readOnly: this.isReadOnly(), disabled: this.isReadOnly() }),
+            (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: `${this.props.name}${i}` }, { children: item.title || item.value })),
+        ];
+    }
+    isReadOnly() {
+        if (this.props.readOnly !== undefined)
+            return this.props.readOnly;
+        return false;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        const items = this.props.items || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: items.map((item, i) => this.renderItem(item, i)) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Select/Select.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Select/Select.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _Select_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Select.less */ "./src/frontend/common/widget/Select/Select.less");
+
+
+
+
+
+
+class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onKeyDown = async (e) => {
+            // console.log('Select.onKeyDown');
+            if (this.isVisible()) {
+                this.setState({ visible: false });
+                e.stopPropagation();
+            }
+        };
+        this.onInputMouseDown = async (e) => {
+            console.log('Select.onInputMouseDown');
+            if (this.props.readOnly)
+                return;
+            if (this.props.onMouseDown) {
+                await this.props.onMouseDown(e);
+            }
+            else {
+                if (!this.isVisible()) {
+                    const [selected] = this.el.current.querySelectorAll('li.selected');
+                    // console.log('selected:', selected);
+                    if (selected) {
+                        // console.log('selected.offsetTop:', selected.offsetTop);
+                        const scrollTop = selected.offsetTop -
+                            this.dropdown.current.getBoundingClientRect().height / 2 +
+                            selected.getBoundingClientRect().height / 2;
+                        console.log('scrollTop:', scrollTop);
+                        this.dropdown.current.scrollTop = scrollTop;
+                        console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+                    }
+                }
+                this.setState((prevState) => {
+                    return { visible: !prevState.visible };
+                });
+            }
+        };
+        this.onInputBlur = async (e) => {
+            console.log('Select.onInputBlur', e.target);
+            this.setState({ visible: false });
+        };
+        this.onDropdownMouseDown = async (e) => {
+            e.preventDefault();
+        };
+        this.onDropdownClick = async (e) => {
+            console.log('Select.onDropdownClick', e.target.offsetTop);
+            const value = JSON.parse(e.target.dataset.value);
+            // console.log('value:', value);
+            this.setState({ value: value, visible: false }, async () => {
+                if (this.props.onChange) {
+                    await this.props.onChange(value.toString());
+                }
+            });
+        };
+        this.onCloseClick = async (e) => {
+            this.setState({ value: '' });
+            if (this.props.onChange) {
+                await this.props.onChange('');
+            }
+            this.getElement();
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.dropdown = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.state = {
+            value: this.getInitialValue(),
+            visible: false,
+        };
+    }
+    isVisible() {
+        return this.state.visible;
+    }
+    getInitialValue() {
+        // console.log('Select.getInitialValue', this.props.value);
+        let value = null;
+        if (this.props.value !== undefined && this.props.value !== null) {
+            value = this.props.value;
+            const item = this.getItems().find((item) => item.value === this.props.value);
+            if (!item) {
+                if (this.isNullable() && value === '') {
+                }
+                else {
+                    console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
+                    console.log('items:', this.getItems());
+                }
+            }
+        }
+        else {
+            if (this.isNullable()) {
+                value = '';
+            }
+            else {
+                if (this.props.items.length) {
+                    value = this.props.items[0].value;
+                }
+                else {
+                    value = '';
+                }
+            }
+        }
+        if (value === null)
+            throw new Error('null is wrong value for Select');
+        // console.log('select value:', value);
+        return value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    isNullable() {
+        return this.props.nullable !== undefined ? this.props.nullable : true;
+    }
+    getVisibility() {
+        return this.isVisible() ? 'visible' : 'hidden';
+    }
+    getDisplay() {
+        return this.isVisible() ? 'block' : 'none';
+    }
+    getItems() {
+        return this.props.items || [];
+    }
+    getValueTitle(value) {
+        if (value === '')
+            return '';
+        const item = this.getItems().find((item) => item.value === value);
+        if (!item)
+            throw new Error(`cannot find item by value: ${value}`);
+        // console.log('item:', item);
+        return item.title || item.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    isCloseVisible() {
+        if (this.props.readOnly)
+            return false;
+        return this.state.value !== '';
+    }
+    renderInput() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__input`, readOnly: true, disabled: this.props.readOnly, placeholder: this.props.placeholder, onBlur: this.onInputBlur, value: this.getValueTitle(this.getValue()), onMouseDown: this.onInputMouseDown, onKeyDown: this.onKeyDown }));
+    }
+    renderClose() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })));
+    }
+    renderIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon ${this.isVisible() ? 'up' : ''}` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon, {}) })));
+    }
+    renderDropdown() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("ul", Object.assign({ ref: this.dropdown, className: `${this.getCssBlockName()}__dropdown`, style: {
+                display: this.getDisplay(),
+            }, onMouseDown: this.onDropdownMouseDown, onClick: this.onDropdownClick }, { children: [this.isNullable() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item`, "data-value": '""' }, { children: "\u00A0" }))), this.getItems().map((item) => {
+                    return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ellipsis ${this.getValue() === item.value ? 'selected' : ''}`, "data-value": JSON.stringify(item.value) }, { children: item.title || item.value }), item.value));
+                })] })));
+    }
+    render() {
+        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Select = Select;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Slider/Slider.tsx":
+/*!******************************************************!*\
+  !*** ./src/frontend/common/widget/Slider/Slider.tsx ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Slider": () => (/* binding */ Slider)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _Slider_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Slider.less */ "./src/frontend/common/widget/Slider/Slider.less");
+
+
+
+
+
+
+class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onPrevClick = (e) => {
+            // console.log('Slider.onPrevClick');
+            this.setState((prevState) => {
+                let image = prevState.image - 1;
+                if (image < 0) {
+                    image = this.props.images.length - 1;
+                }
+                return { image };
+            });
+        };
+        this.onNextClick = (e) => {
+            // console.log('Slider.onNextClick');
+            this.setState((prevState) => {
+                let image = prevState.image + 1;
+                if (image > this.props.images.length - 1) {
+                    image = 0;
+                }
+                return { image };
+            });
+        };
+        this.onImageClick = (e) => {
+            console.log('Slider.onImageClick');
+            if (this.state.classList) {
+                this.setState({ classList: null });
+            }
+            else {
+                this.setState({ classList: ['full'] });
+            }
+        };
+        this.onCloseClick = (e) => {
+            this.setState({ classList: null });
+        };
+        if (!this.props.images)
+            throw new Error('Slider: no images');
+        this.state = { image: 0, classList: null };
+    }
+    render() {
+        // console.log('Slider.render', this.props.images);
+        const images = this.props.images || [];
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Slider = Slider;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Statusbar/Statusbar.tsx":
+/*!************************************************************!*\
+  !*** ./src/frontend/common/widget/Statusbar/Statusbar.tsx ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Statusbar": () => (/* binding */ Statusbar)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Statusbar_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Statusbar.less */ "./src/frontend/common/widget/Statusbar/Statusbar.less");
+
+
+
+class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('Statusbar.constructor', props);
+        super(props);
+        this.state = {};
+    }
+    setLastQueryTime(lastQueryTime) {
+        this.setState({ lastQueryTime });
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Statusbar" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["Last query time:", ' ', this.state.lastQueryTime ? `${this.state.lastQueryTime} ms` : '-'] }) })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Statusbar = Statusbar;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab/Tab.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/Tab/Tab.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab": () => (/* binding */ Tab)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tab_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab.less */ "./src/frontend/common/widget/Tab/Tab.less");
+
+
+
+class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = (e) => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = (e) => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0,
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name)));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Tab = Tab;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tab2/Tab2.tsx":
+/*!**************************************************!*\
+  !*** ./src/frontend/common/widget/Tab2/Tab2.tsx ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tab2": () => (/* binding */ Tab2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tab2_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tab2.less */ "./src/frontend/common/widget/Tab2/Tab2.less");
+
+
+
+class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onLiMouseDown = (e) => {
+            // console.log('Tab.onLiMouseDown', e.target);
+            if (e.target.classList.contains('close'))
+                return;
+            const i = parseInt(e.currentTarget.dataset.i);
+            if (this.props.getActive) {
+                if (this.props.onTabMouseDown)
+                    this.props.onTabMouseDown(i);
+            }
+            else {
+                if (i !== this.getActive()) {
+                    this.selectTab(i);
+                }
+            }
+        };
+        this.onLiClick = (e) => {
+            // console.log('Tab.onLiClick', e.target);
+            if (e.target.classList.contains('close')) {
+                const i = parseInt(e.currentTarget.dataset.i);
+                // console.log('close tab:', i);
+                if (this.props.onTabClose)
+                    this.props.onTabClose(i);
+            }
+        };
+        this.state = {
+            active: 0,
+        };
+    }
+    getActive() {
+        if (this.props.getActive)
+            return this.props.getActive();
+        return this.state.active;
+    }
+    selectTab(i) {
+        if (i === this.getActive())
+            return;
+        const start = Date.now();
+        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+    }
+    renderTitles() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
+    }
+    renderContents() {
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__page full ${i === this.getActive() ? 'active' : ''}` }, { children: tab.content }), tab.name)));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__buttons` }, { children: this.props.tabs && this.renderTitles() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__pages` }, { children: this.props.tabs && this.renderContents() }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Tab2 = Tab2;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextArea.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/common/widget/TextArea.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextArea": () => (/* binding */ TextArea)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    constructor(props) {
+        // console.log('TextArea.constructor', props);
+        super(props);
+        this.onChange = (e) => {
+            // console.log('TextArea.onChange', e.target.value);
+            this.setState({ value: e.target.value });
+            if (this.props.onChange) {
+                this.props.onChange(e.target.value);
+            }
+        };
+        this.state = {
+            value: this.props.value || '',
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextArea.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextArea = TextArea;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TextBox.tsx":
+/*!************************************************!*\
+  !*** ./src/frontend/common/widget/TextBox.tsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBox": () => (/* binding */ TextBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('TextBox.constructor', props);
+        super(props);
+        this.onChange = (e) => {
+            // console.log('TextBox.onChange', e.target.value);
+            this._setValue(e.target.value);
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.state = {
+            value: this.props.value || '',
+        };
+    }
+    getValue() {
+        return this.state.value;
+    }
+    _setValue(value) {
+        // @ts-ignore
+        this.state.value = value;
+        // this.setState({value: this.state.value});   // rerender
+        this.forceUpdate();
+        if (this.props.onChange) {
+            this.props.onChange(value);
+        }
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // @ts-ignore
+        this.state.value = nextProps.value;
+        return true;
+    }
+    render() {
+        // console.log('TextBox.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TextBox = TextBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox": () => (/* binding */ TimeBox)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+
+
+
+class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        // console.log('TimeBox.constructor', props);
+        super(props);
+        this.onKeyPress = (event) => {
+            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
+                console.log('cancel', event.key);
+                event.preventDefault();
+            }
+        };
+        this.onChange = (e) => {
+            // console.log('TimeBox.onChange', e.target.value);
+            const target = e.target;
+            const start = target.selectionStart;
+            const end = target.selectionEnd;
+            if (target.value.length > 5) {
+                return;
+            }
+            const inEnd = start === end && start === target.value.length;
+            const stringValue = this.formatValue(target.value);
+            // console.log('before:', target.selectionStart, target.selectionEnd);
+            this.setState({ value: stringValue }, () => {
+                // console.log('after:', target.selectionStart, target.selectionEnd);
+                // console.log('inEnd:', inEnd);
+                if (!inEnd) {
+                    target.selectionStart = start;
+                    target.selectionEnd = end;
+                }
+                if (this.props.onChange) {
+                    let nValue;
+                    try {
+                        nValue = this.getValue();
+                    }
+                    catch (err) {
+                        console.log(err.message);
+                        nValue = NaN;
+                    }
+                    // console.log('nValue:', nValue);
+                    this.props.onChange(nValue);
+                }
+            });
+        };
+        this.onBlur = (e) => {
+            // console.log('TimeBox.onBlur');
+            if (this.props.onBlur) {
+                let nValue;
+                try {
+                    nValue = this.getValue();
+                }
+                catch (err) {
+                    console.log(err.message);
+                    nValue = NaN;
+                }
+                // console.log('nValue:', nValue);
+                this.props.onBlur(nValue);
+            }
+        };
+        if (props.value && typeof props.value !== 'number') {
+            throw new Error(`need number type, got ${typeof props.value}`);
+        }
+        this.state = {
+            value: TimeBox.getStringValue(props.value),
+        };
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    formatValue(value) {
+        let min = '';
+        let sec = '';
+        const pure = value.replace(':', '');
+        switch (pure.length) {
+            case 0:
+                break;
+            case 1:
+                min = pure;
+                break;
+            case 2:
+                min = pure;
+                break;
+            case 3:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 1);
+                break;
+            case 4:
+                min = pure.substr(0, 2);
+                sec = pure.substr(2, 2);
+                break;
+        }
+        return [min, ...(sec ? [sec] : [])].join(':');
+    }
+    getValue() {
+        return TimeBox.getIntegerValue(this.state.value);
+    }
+    setValue(value) {
+        this.setState({ value: TimeBox.getStringValue(value) });
+    }
+    /*onKeyDown = event => {
+        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        const mask = '00:00';
+        if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
+        if (event.which < 96 || event.which > 105) {
+            console.log('cancel');
+            event.stopPropagation();
+            event.preventDefault();
+        }
+
+        if (event.target.value.length + 1 > mask.length) {
+            event.stopPropagation();
+            event.preventDefault();
+        }
+    }*/
+    /*onKeyUp = event => {
+        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        event.stopPropagation();
+        event.preventDefault();
+    }*/
+    static getStringValue(value) {
+        // console.log('TimeBox.getStringValue', value);
+        if (value === null)
+            return '';
+        if (value !== undefined) {
+            let h = Math.floor(value / 60);
+            let m = Math.floor(value - h * 60);
+            if (h < 10)
+                h = '0' + h;
+            if (m < 10)
+                m = '0' + m;
+            return `${h}:${m}`;
+        }
+        return '';
+    }
+    static getIntegerValue(stringValue) {
+        // console.log('TimeBox.getIntegerValue', stringValue);
+        // try {
+        if (stringValue === '')
+            return null;
+        const arr = stringValue.split(':');
+        if (!arr[0])
+            throw new Error(`no hours: ${stringValue}`);
+        if (!arr[1])
+            throw new Error(`no minutes: ${stringValue}`);
+        if (arr[0].length !== 2)
+            throw new Error(`hours incomplete: ${stringValue}`);
+        if (arr[1].length !== 2)
+            throw new Error(`minutes incomplete: ${stringValue}`);
+        const hh = parseInt(arr[0]);
+        const mm = parseInt(arr[1]);
+        if (hh > 23)
+            throw new Error(`hours out of range: ${mm}, ${stringValue}`);
+        if (mm > 59)
+            throw new Error(`minutes out of range: ${mm}, ${stringValue}`);
+        return hh * 60 + mm;
+        // } catch (err) {
+        //     console.error(err.message);
+        //     return NaN;
+        // }
+    }
+    static splitTime(value) {
+        const hours = Math.floor(value / 60);
+        const minutes = value - hours * 60;
+        return [hours, minutes];
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        if (this.props.value !== nextProps.value) {
+            // @ts-ignore
+            this.state.value = TimeBox.getStringValue(nextProps.value);
+            return true;
+        }
+        if (this.props.readOnly !== nextProps.readOnly)
+            return true;
+        if (this.props.placeholder !== nextProps.placeholder)
+            return true;
+        if (this.state.value !== nextState.value)
+            return true;
+        return false;
+    }
+    render() {
+        // console.log('TimeBox.render', this.state.value);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+            // onKeyDown={this.onKeyDown}
+            // onKeyUp={this.onKeyUp}
+            onKeyPress: this.onKeyPress, onBlur: this.onBlur }));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.TimeBox = TimeBox;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx":
+/*!******************************************************************!*\
+  !*** ./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TimeBox2": () => (/* binding */ TimeBox2)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _TimeBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+/* harmony import */ var _TimeBox2_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TimeBox2.less */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.less");
+
+
+
+
+
+
+class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
+    constructor(props) {
+        super(props);
+        this.onClear = (e) => {
+            // console.log('TimeBox2.onClear');
+            this.setState({ value: '' }, () => {
+                if (this.props.onClear) {
+                    this.props.onClear();
+                }
+            });
+        };
+        this.inputEl = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    isCloseVisible() {
+        return !!this.state.value;
+    }
+    getInputElement() {
+        return this.inputEl.current;
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.inputEl, className: `${this.getCssBlockName()}__input`, type: 'text', 
+                    // id={this.props.id}
+                    readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
+                    // onKeyDown={this.onKeyDown}
+                    // onKeyUp={this.onKeyUp}
+                    onKeyPress: this.onKeyPress, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close-icon ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon__WEBPACK_IMPORTED_MODULE_3__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__time-icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_TimeIcon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon, {}) }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/common/widget/Tooltip/Tooltip.tsx":
+/*!********************************************************!*\
+  !*** ./src/frontend/common/widget/Tooltip/Tooltip.tsx ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Tooltip": () => (/* binding */ Tooltip)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Tooltip_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Tooltip.less */ "./src/frontend/common/widget/Tooltip/Tooltip.less");
+
+
+
+class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    // constructor(props) {
+    //     console.log('Tooltip.constructor', props);
+    //     super(props);
+    // }
+    render() {
+        // console.log('Tooltip.render', this.state, this.props);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
+    }
+}
+if (typeof window === 'object') {
+    // @ts-ignore
+    window.Tooltip = Tooltip;
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexFrontHostApp.ts":
+/*!*************************************************!*\
+  !*** ./src/frontend/index/IndexFrontHostApp.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexFrontHostApp": () => (/* binding */ IndexFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexView/IndexView */ "./src/frontend/index/IndexView/IndexView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+
+
+class IndexFrontHostApp {
+    constructor(data) {
+        this.onAppChange = (fullName) => {
+            console.log('IndexFrontHostApp.onAppChange', fullName);
+            this.currentAppFullName = fullName;
+            const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
+            if (!appInfo)
+                throw new Error(`no appInfo ${fullName}`);
+            // console.log('appInfo:', appInfo);
+            this.currentAppEnv = appInfo.envs[0];
+            this.view.rerender();
+        };
+        this.onEnvChange = (env) => {
+            console.log('IndexFrontHostApp.onEnvChange', env);
+            this.currentAppEnv = env;
+        };
+        this.run = (e) => {
+            if (this.currentAppFullName) {
+                const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.log('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.edit = (e) => {
+            if (this.currentAppFullName) {
+                const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
+                console.log('href:', href);
+                window.location.href = href;
+            }
+        };
+        this.btnCreate_Click = async (e) => {
+            this.modals.push({ id: 1 });
+            await this.view.rerender();
+            this.folderNameTextBox.getElement().focus();
+        };
+        this.closeModal = () => {
+            console.log('IndexFrontHostApp.closeModal');
+            this.modals.pop();
+            this.view.rerender();
+        };
+        this.onFolderNameCreate = (textBox) => {
+            console.log('IndexFrontHostApp.onFolderNameCreate');
+            this.folderNameTextBox = textBox;
+        };
+        this.onFolderNameChange = (folderName) => {
+            // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
+            this.folderName = folderName;
+        };
+        this.onAppNameChange = (appName) => {
+            this.appName = appName;
+        };
+        this.onCreateClick = async (e) => {
+            console.log('IndexFrontHostApp.onCreateClick');
+            console.log(this.folderName, this.appName);
+            this.closeModal();
+            await this.createApp(this.folderName, this.appName);
+        };
+        console.log('IndexFrontHostApp.constructor', data);
+        this.data = data;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
+    }
+    init() {
+        // console.log('IndexFrontHostApp.init');
+        const appInfo = this.data.appInfos[0];
+        this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
+        this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
+        this.createView(document.querySelector('#root'));
+    }
+    createView(root) {
+        this.view = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(root, _IndexView_IndexView__WEBPACK_IMPORTED_MODULE_0__.IndexView, {
+            ctrl: this,
+        });
+    }
+    getAppItems() {
+        return this.data.appInfos.map((appInfo) => ({
+            value: appInfo.fullName,
+            title: appInfo.fullName,
+        }));
+    }
+    getEnvItems() {
+        // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
+        if (this.currentAppFullName) {
+            const appInfo = this.getAppInfo(this.currentAppFullName);
+            if (appInfo) {
+                return appInfo.envs.map((env) => ({ value: env, title: env }));
+            }
+        }
+        return [];
+    }
+    getAppInfo(fullName) {
+        // console.log('IndexFrontHostApp.getAppInfo', fullName);
+        return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
+    }
+    async createApp(folderName, appName) {
+        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+            action: 'new',
+            folder: folderName,
+            name: appName,
+        });
+        console.log('data:', data);
+        if (data.appInfos) {
+            this.data.appInfos = data.appInfos;
+            this.currentAppFullName = `${folderName}/${appName}`;
+            this.view.rerender();
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/index/IndexView/IndexView.tsx":
+/*!****************************************************!*\
+  !*** ./src/frontend/index/IndexView/IndexView.tsx ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "IndexView": () => (/* binding */ IndexView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _IndexView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./IndexView.less */ "./src/frontend/index/IndexView/IndexView.less");
+
+
+
+class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+    renderModals() {
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
+    }
+    render() {
+        console.log('IndexView.render');
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
     }
 }
 
@@ -31702,6 +35595,18 @@ class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.Re
 /******/ 		};
 /******/ 	})();
 /******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
 /******/ 	(() => {
 /******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
@@ -31722,20 +35627,16 @@ class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.Re
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!**************************************!*\
-  !*** ./src/frontend/monitor/main.ts ***!
-  \**************************************/
+/*!************************************!*\
+  !*** ./src/frontend/index/main.ts ***!
+  \************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./MonitorView/MonitorView */ "./src/frontend/monitor/MonitorView/MonitorView.tsx");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common/Helper */ "./src/frontend/common/Helper.ts");
-/* harmony import */ var _style_monitor_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/monitor.less */ "./src/frontend/monitor/style/monitor.less");
-
-
+/* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
 
 document.addEventListener('DOMContentLoaded', () => {
+    console.log('DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    console.log('data:', data);
-    _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(document.querySelector('.monitor__root'), _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__.MonitorView, { data });
+    new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
 });
 
 })();
