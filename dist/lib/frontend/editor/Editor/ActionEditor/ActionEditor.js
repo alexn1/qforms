@@ -6,10 +6,10 @@ const FormEditor_1 = require("../FormEditor/FormEditor");
 const PageEditor_1 = require("../PageEditor/PageEditor");
 const common_1 = require("../../../common");
 class ActionEditor extends Editor_1.Editor {
-    /*constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
-    }*/
-    /*async getView(view) {
+    } */
+    /* async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
@@ -19,7 +19,7 @@ class ActionEditor extends Editor_1.Editor {
                 form : this.data !== undefined ? this.form.getName()      : null,
             }
         });
-    }*/
+    } */
     getParams() {
         if (this.parent instanceof FormEditor_1.FormEditor) {
             return {

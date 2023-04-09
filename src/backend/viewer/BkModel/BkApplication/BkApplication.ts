@@ -316,10 +316,10 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         });
     }
 
-    /*async request(options) {
+    /* async request(options) {
         console.log(colors.magenta('Application.request'), options);
         return await axios(options);
-    }*/
+    } */
 
     getEnv(): string {
         return this.env;

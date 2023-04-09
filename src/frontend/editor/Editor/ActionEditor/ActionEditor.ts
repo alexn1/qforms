@@ -4,11 +4,11 @@ import { PageEditor } from '../PageEditor/PageEditor';
 import { FrontHostApp } from '../../../common';
 
 export class ActionEditor extends Editor {
-    /*constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
-    }*/
+    } */
 
-    /*async getView(view) {
+    /* async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
@@ -18,7 +18,7 @@ export class ActionEditor extends Editor {
                 form : this.data !== undefined ? this.form.getName()      : null,
             }
         });
-    }*/
+    } */
 
     getParams() {
         if (this.parent instanceof FormEditor) {

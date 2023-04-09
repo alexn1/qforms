@@ -282,10 +282,10 @@ class BkApplication extends BkModel_1.BkModel {
             context,
         });
     }
-    /*async request(options) {
+    /* async request(options) {
         console.log(colors.magenta('Application.request'), options);
         return await axios(options);
-    }*/
+    } */
     getEnv() {
         return this.env;
     }

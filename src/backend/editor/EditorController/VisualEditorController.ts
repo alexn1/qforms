@@ -1,7 +1,7 @@
 import { EditorController } from './EditorController';
 
 export class VisualEditorController extends EditorController {
-    /*async getView(params) {
+    /* async getView(params) {
         console.log('VisualEditorController.getView');
         const result = await super.getView(params);
         if (params.view === 'VisualView.html') {
@@ -12,5 +12,5 @@ export class VisualEditorController extends EditorController {
             result.view = await BkHelper.readTextFile(viewFilePath);
         }
         return result;
-    }*/
+    } */
 }

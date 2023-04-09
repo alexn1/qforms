@@ -35727,10 +35727,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    /*constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
-    }*/
-    /*async getView(view) {
+    } */
+    /* async getView(view) {
         return await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action    : 'getView',
@@ -35740,7 +35740,7 @@ class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
                 form : this.data !== undefined ? this.form.getName()      : null,
             }
         });
-    }*/
+    } */
     getParams() {
         if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__.FormEditor) {
             return {

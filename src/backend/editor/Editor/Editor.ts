@@ -6,7 +6,7 @@ import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 
 export class Editor extends BaseModel {
-    /*async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
+    /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await BkHelper.exists(newFilePath);
@@ -20,7 +20,7 @@ export class Editor extends BaseModel {
         }
         await BkHelper.writeFile2(newFilePath, text);
         return text;
-    }*/
+    } */
 
     async createFileByParams(newFilePath, templateFilePath, params) {
         const exists = await BkHelper.exists(newFilePath);
@@ -92,18 +92,18 @@ export class Editor extends BaseModel {
         return path.join(customDirPath, this.getName() + '.' + ext);
     }
 
-    /*createDataSourceEditor(name) {
+    /* createDataSourceEditor(name) {
         const data = this.getColItemData('dataSources', name);
         const className = BaseModel.getClassName(data);
         const DataSourceClass = backend[`${className}Editor`];
         return new DataSourceClass(data, this);
-    }*/
+    } */
 
     moveDataColItem(colName, name, offset) {
         BkHelper.moveArrItem(this.getCol(colName), this.getColItemData(colName, name), offset);
     }
 
-    /*async newActionData(params) {
+    /* async newActionData(params) {
         if (!params.name) throw new Error('no name');
         const name = params.name;
         if (this.getColItemData('actions', name)) {
@@ -112,7 +112,7 @@ export class Editor extends BaseModel {
         const data = backend.ActionEditor.createData(params);
         this.addModelData('actions', data);
         return data;
-    }*/
+    } */
 
     /*createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
