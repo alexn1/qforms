@@ -143,7 +143,10 @@ export class Context {
         if (this.options.domain) {
             return this.options.domain;
         }
-        return this.getReq().params.domain;
+        if (this.getReq().params.domain) {
+            return this.getReq().params.domain;
+        }
+        throw new Error('domain not defined');
     }
 
     getAppDirName(): string {
