@@ -3,6 +3,8 @@ import { FormView } from '../FormView';
 import { Button, DropdownButton, MoreVertIcon, Tooltip } from '../../../../../common';
 import { RowFormController } from './RowFormController';
 import './RowFormView.less';
+import { FieldController } from '../../FieldController/FieldController';
+import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 
 export class RowFormView<
     TRowFormController extends RowFormController = RowFormController,
@@ -96,7 +98,7 @@ export class RowFormView<
         return true;
     }
 
-    renderLabel(fieldCtrl) {
+    renderLabel(fieldCtrl: RowFormFieldController) {
         const model = fieldCtrl.getModel();
         const name = model.getName();
         return (
@@ -106,7 +108,7 @@ export class RowFormView<
         );
     }
 
-    renderField(fieldCtrl) {
+    renderField(fieldCtrl: RowFormFieldController) {
         // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
         const name = fieldCtrl.getModel().getName();
         return (
@@ -116,11 +118,11 @@ export class RowFormView<
         );
     }
 
-    renderFieldView(fieldCtrl) {
+    renderFieldView(fieldCtrl: RowFormFieldController) {
         return RowFormView.renderFieldView(fieldCtrl);
     }
 
-    static renderFieldView(fieldCtrl) {
+    static renderFieldView(fieldCtrl: RowFormFieldController) {
         /*return React.createElement(fieldCtrl.getViewClass(), {
             onCreate: fieldCtrl.onViewCreate,
             ctrl: fieldCtrl,
@@ -128,7 +130,7 @@ export class RowFormView<
         return fieldCtrl.renderView();
     }
 
-    renderError(fieldCtrl) {
+    renderError(fieldCtrl: RowFormFieldController) {
         // console.log('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return (
@@ -143,7 +145,7 @@ export class RowFormView<
         );
     }
 
-    renderGroup(fieldCtrl): ReactNode {
+    renderGroup(fieldCtrl: RowFormFieldController): ReactNode {
         /*return (
             <>
                 {this.renderLabel(fieldCtrl)}
