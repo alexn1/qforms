@@ -7,9 +7,9 @@ import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
 import { RawRow } from '../../../../../../types';
 
-export class RowFormController extends FormController<RowForm> {
-    state: any;
-    fields: any;
+export class RowFormController extends FormController<RowForm> {    
+    fields: { [name: string]: RowFormFieldController } = {};
+    // state: any;
 
     constructor(model: RowForm, parent: PageController) {
         super(model, parent);
@@ -130,10 +130,10 @@ export class RowFormController extends FormController<RowForm> {
     onDiscardClick = () => {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
         const changedFields = [];
-        const row = this.model.getRow();
+        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(row) || !field.isValid()) {
+            if (field.isChanged(/* row */) || !field.isValid()) {
                 changedFields.push(name);
             }
         }
@@ -164,10 +164,10 @@ export class RowFormController extends FormController<RowForm> {
     isChanged() {
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged()) return true;
-        const row = this.model.getRow();
+        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(row)) return true;
+            if (field.isChanged(/* row */)) return true;
         }
         return false;
     }
@@ -216,7 +216,7 @@ export class RowFormController extends FormController<RowForm> {
         return this.getMode() === 'view';
     }
 
-    getField<TRowFormFieldController extends FieldController = RowFormFieldController>(
+    getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(
         name: string,
     ): TRowFormFieldController {
         return this.fields[name] as TRowFormFieldController;

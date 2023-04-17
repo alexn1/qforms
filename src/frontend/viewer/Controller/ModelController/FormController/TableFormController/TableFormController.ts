@@ -4,11 +4,12 @@ import { DataSource } from '../../../../Model/DataSource/DataSource';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
-import { FieldController } from '../../FieldController/FieldController';
+// import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common';
 
 export class TableFormController extends FormController<TableForm> {
-    state: any;
+    fields: { [name: string]: TableFormFieldController } = {};
+    // state: any;
     grid: any;
 
     constructor(model: TableForm, parent) {
@@ -319,7 +320,7 @@ export class TableFormController extends FormController<TableForm> {
         return this.isRowSelected();
     }
 
-    getField<TTableFormFieldController extends FieldController = TableFormFieldController>(
+    getField<TTableFormFieldController extends TableFormFieldController = TableFormFieldController>(
         name: string,
     ): TTableFormFieldController {
         return this.fields[name] as TTableFormFieldController;

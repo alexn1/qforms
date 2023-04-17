@@ -39432,9 +39432,11 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async onActionClick(name, row) {
         console.log('FormController.onActionClick', name, row);
     }
-    getField(name) {
-        return this.fields[name];
-    }
+    /* getField<TFieldController extends FieldController = FieldController>(
+        name: string,
+    ): TFieldController {
+        return this.fields[name] as TFieldController;
+    } */
     getApp() {
         return this.parent.parent;
     }
@@ -39520,8 +39522,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
+    // state: any;
     constructor(model, parent) {
         super(model, parent);
+        this.fields = {};
         this.onModelRefresh = async (e) => {
             console.log('RowFormController.onModelRefresh', this.model.getFullName());
             if (!this.view)
@@ -39568,10 +39572,10 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         this.onDiscardClick = () => {
             console.log('RowFormController.onDiscardClick', this.model.getFullName());
             const changedFields = [];
-            const row = this.model.getRow();
+            // const row = this.model.getRow();
             for (const name in this.fields) {
                 const field = this.fields[name];
-                if (field.isChanged(row) || !field.isValid()) {
+                if (field.isChanged( /* row */) || !field.isValid()) {
                     changedFields.push(name);
                 }
             }
@@ -39671,10 +39675,10 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged())
             return true;
-        const row = this.model.getRow();
+        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(row))
+            if (field.isChanged( /* row */))
                 return true;
         }
         return false;
@@ -39830,10 +39834,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import { FieldController } from '../../FieldController/FieldController';
 
 class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.FormController {
     constructor(model, parent) {
         super(model, parent);
+        this.fields = {};
         this.onGridCreate = (grid) => {
             this.grid = grid;
         };
