@@ -2,9 +2,10 @@ import { FormController } from '../FormController';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
-import { FieldController } from '../../FieldController/FieldController';
 export declare class TableFormController extends FormController<TableForm> {
-    state: any;
+    fields: {
+        [name: string]: TableFormFieldController;
+    };
     grid: any;
     constructor(model: TableForm, parent: any);
     getViewClass(): any;
@@ -33,5 +34,5 @@ export declare class TableFormController extends FormController<TableForm> {
     canNext(): boolean;
     getSelectedRowKey(): any;
     isActionEnabled(name: any): boolean;
-    getField<TTableFormFieldController extends FieldController = TableFormFieldController>(name: string): TTableFormFieldController;
+    getField<TTableFormFieldController extends TableFormFieldController = TableFormFieldController>(name: string): TTableFormFieldController;
 }

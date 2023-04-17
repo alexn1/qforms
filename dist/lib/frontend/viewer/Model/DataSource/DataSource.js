@@ -331,8 +331,7 @@ class DataSource extends Model_1.Model {
     }
     getRowWithChanges(row) {
         if (this.changes.has(row)) {
-            return Object.assign(row, this.changes.get(row));
-            // return { ...row, ...this.changes.get(row) };
+            return Object.assign(Object.assign({}, row), this.changes.get(row));
         }
         return row;
     }

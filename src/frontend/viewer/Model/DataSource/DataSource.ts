@@ -284,8 +284,7 @@ export class DataSource extends Model {
 
     getRowWithChanges(row: RawRow): RawRow {
         if (this.changes.has(row)) {
-            return Object.assign(row, this.changes.get(row));
-            // return { ...row, ...this.changes.get(row) };
+            return { ...row, ...this.changes.get(row) };
         }
         return row;
     }

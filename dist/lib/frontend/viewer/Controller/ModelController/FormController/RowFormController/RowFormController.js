@@ -5,8 +5,10 @@ const FormController_1 = require("../FormController");
 const RowFormView_1 = require("./RowFormView");
 const Helper_1 = require("../../../../../common/Helper");
 class RowFormController extends FormController_1.FormController {
+    // state: any;
     constructor(model, parent) {
         super(model, parent);
+        this.fields = {};
         this.onModelRefresh = async (e) => {
             console.log('RowFormController.onModelRefresh', this.model.getFullName());
             if (!this.view)
@@ -53,10 +55,10 @@ class RowFormController extends FormController_1.FormController {
         this.onDiscardClick = () => {
             console.log('RowFormController.onDiscardClick', this.model.getFullName());
             const changedFields = [];
-            const row = this.model.getRow();
+            // const row = this.model.getRow();
             for (const name in this.fields) {
                 const field = this.fields[name];
-                if (field.isChanged(row) || !field.isValid()) {
+                if (field.isChanged( /* row */) || !field.isValid()) {
                     changedFields.push(name);
                 }
             }
@@ -156,10 +158,10 @@ class RowFormController extends FormController_1.FormController {
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged())
             return true;
-        const row = this.model.getRow();
+        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(row))
+            if (field.isChanged( /* row */))
                 return true;
         }
         return false;

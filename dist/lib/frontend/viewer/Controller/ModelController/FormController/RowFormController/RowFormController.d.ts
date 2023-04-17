@@ -2,11 +2,11 @@ import { FormController } from '../FormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
-import { FieldController } from '../../FieldController/FieldController';
 import { RawRow } from '../../../../../../types';
 export declare class RowFormController extends FormController<RowForm> {
-    state: any;
-    fields: any;
+    fields: {
+        [name: string]: RowFormFieldController;
+    };
     constructor(model: RowForm, parent: PageController);
     init(): void;
     deinit(): void;
@@ -31,5 +31,5 @@ export declare class RowFormController extends FormController<RowForm> {
     isActionEnabled(name: any): boolean;
     isEditMode(): boolean;
     isViewMode(): boolean;
-    getField<TRowFormFieldController extends FieldController = RowFormFieldController>(name: string): TRowFormFieldController;
+    getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(name: string): TRowFormFieldController;
 }
