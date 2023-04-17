@@ -7,7 +7,7 @@ import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
 import { RawRow } from '../../../../../../types';
 
-export class RowFormController extends FormController<RowForm> {    
+export class RowFormController extends FormController<RowForm> {
     fields: { [name: string]: RowFormFieldController } = {};
     // state: any;
 
@@ -216,10 +216,10 @@ export class RowFormController extends FormController<RowForm> {
         return this.getMode() === 'view';
     }
 
-    getField<TRowFormFieldController extends RowFormFieldController = RowFormFieldController>(
+    getField<TRowFormFieldController extends FieldController = RowFormFieldController>(
         name: string,
     ): TRowFormFieldController {
-        return this.fields[name] as TRowFormFieldController;
+        return this.fields[name] as unknown as TRowFormFieldController;
     }
 }
 

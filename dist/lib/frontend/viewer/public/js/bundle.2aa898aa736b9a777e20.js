@@ -39432,11 +39432,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     async onActionClick(name, row) {
         console.log('FormController.onActionClick', name, row);
     }
-    /* getField<TFieldController extends FieldController = FieldController>(
-        name: string,
-    ): TFieldController {
-        return this.fields[name] as TFieldController;
-    } */
+    getField(name) {
+        return this.fields[name];
+    }
     getApp() {
         return this.parent.parent;
     }
@@ -39834,7 +39832,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-// import { FieldController } from '../../FieldController/FieldController';
 
 class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.FormController {
     constructor(model, parent) {

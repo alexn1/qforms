@@ -62,11 +62,9 @@ class FormController extends ModelController_1.ModelController {
     async onActionClick(name, row) {
         console.log('FormController.onActionClick', name, row);
     }
-    /* getField<TFieldController extends FieldController = FieldController>(
-        name: string,
-    ): TFieldController {
-        return this.fields[name] as TFieldController;
-    } */
+    getField(name) {
+        return this.fields[name];
+    }
     getApp() {
         return this.parent.parent;
     }
