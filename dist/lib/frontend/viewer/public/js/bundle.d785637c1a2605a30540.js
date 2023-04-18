@@ -41666,7 +41666,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         } */
         super(...arguments);
         this.onTableUpdate = async (e) => {
-            console.log('SqlDataSource.onTableUpdate', this.getFullName(), e);
+            console.log('PersistentDataSource.onTableUpdate', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
             if (e.source === this) {
@@ -41685,7 +41685,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('update', e);
         };
         this.onTableInsert = async (e) => {
-            console.log('SqlDataSource.onTableInsert', this.getFullName(), e);
+            console.log('PersistentDataSource.onTableInsert', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
             if (e.source === this) {
@@ -41701,7 +41701,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('insert', e);
         };
         this.onTableDelete = async (e) => {
-            console.log('SqlDataSource.onTableDelete', this.getFullName(), e);
+            console.log('PersistentDataSource.onTableDelete', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source === this) {
@@ -41715,7 +41715,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('delete', e);
         };
         this.onTableRefresh = async (e) => {
-            console.log('SqlDataSource.onTableRefresh', this.getFullName(), e);
+            console.log('PersistentDataSource.onTableRefresh', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source)
@@ -41734,7 +41734,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         super.deinit();
     }*/
     async insert(row) {
-        console.log('SqlDataSource.insert', row);
+        console.log('PersistentDataSource.insert', row);
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '')
@@ -41772,7 +41772,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return result;
     }
     async update() {
-        console.log('SqlDataSource.update', this.getFullName());
+        console.log('PersistentDataSource.update', this.getFullName());
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '')
@@ -41782,7 +41782,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         }
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
-        // specific to SqlDataSource
+        // specific to PersistentDataSource
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'update',
@@ -41807,13 +41807,13 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return result;
     }
     async delete(key) {
-        console.log('SqlDataSource.delete:', this.getFullName(), key);
+        console.log('PersistentDataSource.delete:', this.getFullName(), key);
         if (!key)
             throw new Error('no key');
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (!table) {
-            throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
+            throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
@@ -41837,14 +41837,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return page ? page.getParams() : {};
     }
     async refresh() {
-        console.log('SqlDataSource.refresh', this.getFullName());
+        console.log('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
         if (this.parent.onDataSourceRefresh) {
             this.parent.onDataSourceRefresh({ source: this });
         }
     }
     async refill() {
-        console.log('SqlDataSource.refill', this.getFullName());
+        console.log('PersistentDataSource.refill', this.getFullName());
         if (this.isChanged())
             throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
         const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
@@ -41866,7 +41866,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         await this.fill(this.lastFrame);
     }
     async select(params = {}) {
-        console.log('SqlDataSource.select', this.getFullName(), params);
+        console.log('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
