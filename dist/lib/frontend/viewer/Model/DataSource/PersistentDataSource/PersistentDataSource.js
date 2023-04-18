@@ -156,7 +156,7 @@ class PersistentDataSource extends DataSource_1.DataSource {
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (!table) {
-            throw new Error(`no table in SqlDataSource: ${this.getFullName()}`);
+            throw new Error(`no table in data source: ${this.getFullName()}`);
         }
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
