@@ -281,6 +281,7 @@ export class BackHostApp {
             for (const p of this.createAppQueue[context.getRoute()]) {
                 p.reject(err);
             }
+            throw err;
         } finally {
             this.createAppQueue[context.getRoute()] = null;
         }
