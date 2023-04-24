@@ -45,7 +45,7 @@ export class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     logErrorUrl: string;
-    appQueue: any = {};
+    createAppQueue: any = {};
 
     constructor(private params: any = {}) {
         // console.log('BackHostApp.constructor');
@@ -251,27 +251,39 @@ export class BackHostApp {
         }
 
         // if creating application
-        if (Array.isArray(this.appQueue[context.getRoute()])) {
+        if (Array.isArray(this.createAppQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
             const promise = BkHelper.createEmptyPromise();
-            this.appQueue[context.getRoute()].push(promise);
+            this.createAppQueue[context.getRoute()].push(promise);
             return promise;
         }
 
-        this.appQueue[context.getRoute()] = [];
-        const app = (this.applications[context.getRoute()] = await this.createApplication(context));
-        console.log(
-            'application created, start resolve loop',
-            context.getRoute(),
-            this.appQueue[context.getRoute()].length,
-        );
-        for (const p of this.appQueue[context.getRoute()]) {
-            // @ts-ignore
-            p.resolve(app);
+        this.createAppQueue[context.getRoute()] = [];
+        try {
+            const app = (this.applications[context.getRoute()] = await this.createApplication(
+                context,
+            ));
+            console.log(
+                'application created, start resolve loop',
+                context.getRoute(),
+                this.createAppQueue[context.getRoute()].length,
+            );
+            for (const p of this.createAppQueue[context.getRoute()]) {
+                p.resolve(app);
+            }
+            return app;
+        } catch (err) {
+            console.error(
+                'application not created, start reject loop',
+                context.getRoute(),
+                this.createAppQueue[context.getRoute()].length,
+            );
+            for (const p of this.createAppQueue[context.getRoute()]) {
+                p.reject(err);
+            }
+        } finally {
+            this.createAppQueue[context.getRoute()] = null;
         }
-        this.appQueue[context.getRoute()] = null;
-
-        return app;
     }
 
     getApplication(context: Context): BkApplication {
