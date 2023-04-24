@@ -29,8 +29,7 @@ import { QueryParams } from '../types';
 const pkg = require('../../package.json');
 
 export class BackHostApp {
-    params: any;
-    applications: any; // application by route
+    applications: any = {}; // application by route
     express: Express;
     httpServer: any;
     wsServer: any;
@@ -46,14 +45,11 @@ export class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     logErrorUrl: string;
-    appQueue: any;
+    appQueue: any = {};
 
-    constructor(params: any = {}) {
+    constructor(private params: any = {}) {
         // console.log('BackHostApp.constructor');
         this.checkVersion();
-        this.params = params;
-        this.applications = {};
-        this.appQueue = {};
     }
 
     checkVersion() {

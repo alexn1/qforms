@@ -29,11 +29,11 @@ const BaseModel_1 = require("./BaseModel");
 const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {
+        this.params = params;
+        this.applications = {}; // application by route
+        this.appQueue = {};
         // console.log('BackHostApp.constructor');
         this.checkVersion();
-        this.params = params;
-        this.applications = {};
-        this.appQueue = {};
     }
     checkVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');

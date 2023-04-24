@@ -9,7 +9,7 @@ import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
 export declare class BackHostApp {
-    params: any;
+    private params;
     applications: any;
     express: Express;
     httpServer: any;
