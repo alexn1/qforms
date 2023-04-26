@@ -4,7 +4,7 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
-export declare class BkPage extends BkModel {
+export declare class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel {
     dataSources: BkDataSource[];
     actions: BkAction[];
     forms: BkForm[];
@@ -13,7 +13,7 @@ export declare class BkPage extends BkModel {
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
-    getApp(): BkApplication;
+    getApp(): TBkApplication;
     getForm(name: string): BkForm | undefined;
     getDataSource(name: string): BkDataSource | undefined;
 }

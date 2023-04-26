@@ -8,7 +8,7 @@ import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
 
-export class BkPage extends BkModel {
+export class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     forms: BkForm[] = [];
@@ -54,7 +54,7 @@ export class BkPage extends BkModel {
         });
     }
 
-    getApp(): BkApplication {
+    getApp(): TBkApplication {
         return this.parent;
     }
 
