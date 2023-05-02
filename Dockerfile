@@ -16,4 +16,4 @@ VOLUME ["/app/apps", "/app/runtime"]
 
 ENV NODE_ENV development
 
-CMD ["node", "dist/lib/backend/start.js"]
+CMD ["node", "dist/backend/start.js"]

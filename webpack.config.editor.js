@@ -8,7 +8,7 @@ module.exports = {
     entry: './src/frontend/editor/main.ts',
     output: {
         clean: true,
-        path: path.resolve(__dirname, './dist/lib/frontend/editor/public'),
+        path: path.resolve(__dirname, './dist/frontend/editor/public'),
         filename: 'js/bundle.[contenthash].js',
     },
     /* resolve: {
@@ -46,7 +46,7 @@ module.exports = {
                             esModuleInterop: true,
                             jsx: 'react-jsx',
                             rootDir: 'src',
-                            outDir: 'dist/lib',
+                            outDir: 'dist',
                             moduleResolution: 'node',
                             noImplicitAny: false,
                         },

@@ -1,4 +1,4 @@
-const Helper = require('../dist/lib/backend/Helper');
+const Helper = require('../dist/backend/Helper');
 function dateTimeReviver(key, value) {
     if (typeof value === 'string') {
         // x* опоставляется с предшествующим элементом x ноль или более раз.

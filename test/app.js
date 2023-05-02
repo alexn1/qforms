@@ -1,4 +1,4 @@
-const { BkApplication } = require('../dist/lib/backend');
+const { BkApplication } = require('../dist/backend');
 
 const APP_FILE_PATH = './apps/mongo/mongo.json';
 

@@ -8,7 +8,7 @@ module.exports = {
     entry: './src/frontend/viewer/index.ts',
     output: {
         clean: true,
-        path: path.resolve(__dirname, './dist/lib/frontend/viewer/public'),
+        path: path.resolve(__dirname, './dist/frontend/viewer/public'),
         filename: 'js/bundle.[contenthash].js',
         library: {
             name: 'qforms',
@@ -32,7 +32,7 @@ module.exports = {
                             esModuleInterop: true,
                             jsx: 'react-jsx',
                             rootDir: 'src',
-                            outDir: 'dist/lib',
+                            outDir: 'dist',
                             moduleResolution: 'node',
                             noImplicitAny: false,
                         },

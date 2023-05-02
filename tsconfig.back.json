@@ -5,7 +5,7 @@
         "esModuleInterop": true,
         "jsx": "react-jsx",
         "rootDir": "src",
-        "outDir": "dist/lib",
+        "outDir": "dist",
         "moduleResolution": "node",
         "module": "commonjs",
         "resolveJsonModule": true

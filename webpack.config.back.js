@@ -9,7 +9,7 @@ module.exports = {
     entry: './src/backend/start.ts',
     output: {
         // clean: true,
-        path: path.resolve(__dirname, './dist/lib'),
+        path: path.resolve(__dirname, './dist'),
         filename: 'backend/bundle.js',
     },
     mode: process.env.NODE_ENV || 'production',
@@ -29,7 +29,7 @@ module.exports = {
                             esModuleInterop: true,
                             jsx: 'react-jsx',
                             rootDir: 'src',
-                            outDir: 'dist/lib',
+                            outDir: 'dist',
                             moduleResolution: 'node',
                             module: 'commonjs',
                             resolveJsonModule: true,
