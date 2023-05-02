@@ -3,6 +3,9 @@
     "version": "0.2.1",
     "description": "A platform for building Web UI for databases.",
     "main": "lib/backend/index.js",
+    "files": [
+        "/dist"
+    ],
     "dependencies": {
         "body-parser": "^1.19.1",
         "colors": "^1.4.0",
