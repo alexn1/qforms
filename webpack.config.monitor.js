@@ -19,7 +19,7 @@ module.exports = {
     },
     module: {
         rules: [
-            /*{
+            /* {
                 test: /\.(js)x?$/,
                 exclude: /node_modules/,
                 use: [

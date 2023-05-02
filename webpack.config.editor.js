@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, './dist/lib/frontend/editor/public'),
         filename: 'js/bundle.[contenthash].js',
     },
-    /*resolve: {
+    /* resolve: {
         extensions: ['.jsx', '.js'],
     },*/
     resolve: {
@@ -19,7 +19,7 @@ module.exports = {
     },
     module: {
         rules: [
-            /*{
+            /* {
                 test: /\.(js)x?$/,
                 exclude: /node_modules/,
                 use: [

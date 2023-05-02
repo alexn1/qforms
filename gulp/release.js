@@ -15,11 +15,11 @@ async function release() {
     console.log('releaseVersion:', releaseVersion);
 
     // build
-    /*let stderr = await Lib.exec('gulp build --backend');
+    /* let stderr = await Lib.exec('gulp build --backend');
     if (stderr) throw new Error(stderr);*/
 
     // commit
-    /*try {
+    /* try {
         await Lib.exec(`git commit -am "release v${releaseVersion}"`);
         await Lib.exec('git push origin master');
     } catch (err) {
@@ -38,16 +38,16 @@ async function release() {
     await Lib.exec('git checkout master');
 
     // edit package.json
-    /*const packageJson2 = await Lib.getJsonFileData('package.json');
+    /* const packageJson2 = await Lib.getJsonFileData('package.json');
     const nextVersion = packageJson2.version = Lib.versionWithDev(Lib.incPatch(packageJson2.version));
     await Lib.putJsonFileData('package.json', packageJson2);*/
 
     // build
-    /*stderr = await Lib.exec('gulp build --backend');
+    /* stderr = await Lib.exec('gulp build --backend');
     if (stderr) throw new Error(stderr);*/
 
     // commit
-    /*await Lib.exec(`git commit -am "begin v${Lib.versionWithoutDev(nextVersion)}"`);
+    /* await Lib.exec(`git commit -am "begin v${Lib.versionWithoutDev(nextVersion)}"`);
     await Lib.exec('git push origin master');*/
 }
 
