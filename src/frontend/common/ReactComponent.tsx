@@ -1,10 +1,29 @@
 import { Component, RefObject } from 'react';
 
-export class ReactComponent extends Component<any, any> {
+export interface ReactComponentProps {
+    name: string;
+    parent: any;
+    classList: string[];
+    enabled: boolean;
+    disabled: boolean;
+    onCreate: any;
+    onUnmount: any;
+}
+
+export interface ReactComponentState {
+    classList: string[];
+    enabled: boolean;
+    disabled: boolean;
+}
+
+export class ReactComponent<
+    P extends ReactComponentProps = any,
+    S extends ReactComponentState = any,
+> extends Component<P, S> {
     allowRerender: boolean;
     el: RefObject<any>;
 
-    constructor(props) {
+    constructor(props: P) {
         super(props);
         if (props.onCreate) {
             props.onCreate(this, this.props.name);
@@ -32,13 +51,13 @@ export class ReactComponent extends Component<any, any> {
         ];
     }
 
-    addCssClass(className) {
+    addCssClass(className: string) {
         if (this.state.classList.indexOf(className) === -1) {
             this.state.classList.push(className);
         }
     }
 
-    removeCssClass(className) {
+    removeCssClass(className: string) {
         this.state.classList.splice(this.state.classList.indexOf(className), 1);
     }
 
@@ -85,9 +104,9 @@ export class ReactComponent extends Component<any, any> {
         if (this.props.onUnmount) this.props.onUnmount(this, this.props.name);
     }
 
-    /*componentDidMount() {
+    /* componentDidMount() {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
-    }*/
+    } */
 
     isEnabled() {
         // console.log('ReactComponent.isEnabled', this.state);

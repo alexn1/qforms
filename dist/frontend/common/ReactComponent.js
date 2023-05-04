@@ -75,9 +75,9 @@ class ReactComponent extends react_1.Component {
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /*componentDidMount() {
+    /* componentDidMount() {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
-    }*/
+    } */
     isEnabled() {
         // console.log('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
