@@ -2,7 +2,7 @@ import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 
 export class BkModel extends BaseModel {
-    fillCollections: any[] = [];
+    fillCollections: string[] = [];
 
     /* constructor(data: any, parent?: any) {
         super(data, parent);
@@ -13,10 +13,15 @@ export class BkModel extends BaseModel {
     async fill(context: Context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const response = {};
+
+        // attributes
         this.fillAttributes(response);
+
+        // collections
         for (const colName of this.fillCollections) {
             await this.fillCollection(response, colName, context);
         }
+
         return response;
     }
 

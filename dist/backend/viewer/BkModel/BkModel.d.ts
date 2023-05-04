@@ -1,7 +1,7 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 export declare class BkModel extends BaseModel {
-    fillCollections: any[];
+    fillCollections: string[];
     init(context: Context): Promise<void>;
     fill(context: Context): Promise<any>;
     fillAttributes(response: any): void;
