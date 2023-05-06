@@ -39837,6 +39837,8 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
     constructor(model, parent) {
         super(model, parent);
         this.fields = {};
+        // state: any;
+        this.grid = null;
         this.onGridCreate = (grid) => {
             this.grid = grid;
         };
@@ -39984,7 +39986,6 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
         this.state = {
             updated: Date.now(),
         };
-        this.grid = null;
     }
     getViewClass() {
         return super.getViewClass() || _TableFormView__WEBPACK_IMPORTED_MODULE_0__.TableFormView;

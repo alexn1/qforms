@@ -5,19 +5,18 @@ import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
-import { Helper } from '../../../../../common';
+import { Grid, Helper } from '../../../../../common';
 
 export class TableFormController extends FormController<TableForm> {
     fields: { [name: string]: TableFormFieldController } = {};
     // state: any;
-    grid: any;
+    grid: Grid = null;
 
     constructor(model: TableForm, parent) {
         super(model, parent);
         this.state = {
             updated: Date.now(),
         };
-        this.grid = null;
     }
 
     getViewClass() {
@@ -44,7 +43,7 @@ export class TableFormController extends FormController<TableForm> {
         super.deinit();
     }
 
-    onGridCreate = (grid) => {
+    onGridCreate = (grid: Grid) => {
         this.grid = grid;
     };
 
@@ -316,14 +315,14 @@ export class TableFormController extends FormController<TableForm> {
         return this.grid ? this.grid.getActiveRowKey() : null;
     }
 
-    isActionEnabled(name) {
+    isActionEnabled(name: string) {
         return this.isRowSelected();
     }
 
     getField<TTableFormFieldController extends FieldController = TableFormFieldController>(
         name: string,
     ): TTableFormFieldController {
-        return (this.fields[name] as unknown) as TTableFormFieldController;
+        return this.fields[name] as unknown as TTableFormFieldController;
     }
 }
 
