@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { RawRow, Row } from '../../../../types';
+import { Key, RawRow, Row } from '../../../../types';
 export declare class Form extends Model {
     dataSources: DataSource[];
     fields: Field[];
@@ -18,7 +18,7 @@ export declare class Form extends Model {
     rpc(name: string, params: {
         [name: string]: any;
     }): Promise<any>;
-    getKey(): any;
+    getKey(): Key;
     getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource;
     getPage(): any;
     getApp(): any;

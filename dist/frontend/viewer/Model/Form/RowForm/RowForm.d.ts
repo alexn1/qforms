@@ -1,4 +1,4 @@
-import { RawRow } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 import { Form } from '../Form';
 export declare class RowForm extends Form {
     init(): void;
@@ -7,7 +7,7 @@ export declare class RowForm extends Form {
     onDataSourceUpdate(e: any): void;
     onDataSourceInsert(e: any): void;
     getRow(withChanges?: boolean): RawRow;
-    getKey(): import("../../../../../types").Key;
+    getKey(): Key;
     createRow(): RawRow;
-    discard(fields: string[]): void;
+    discard(fields?: string[]): void;
 }

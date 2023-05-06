@@ -1,8 +1,10 @@
 import { Model } from '../Model';
+import { Form } from '../Form/Form';
+import { Key } from '../../../../types';
 export declare class Page extends Model {
     options: any;
     dataSources: any[];
-    forms: any[];
+    forms: Form[];
     params: any;
     constructor(data: any, parent: any, options: any);
     init(): void;
@@ -14,7 +16,7 @@ export declare class Page extends Model {
     setParam(name: string, value: any): void;
     update(): Promise<void>;
     discard(): void;
-    getKey(): any;
+    getKey(): Key;
     hasRowFormWithDefaultDs(): boolean;
     hasRowFormWithDefaultSqlDataSource(): boolean;
     hasRowForm(): boolean;
@@ -25,7 +27,7 @@ export declare class Page extends Model {
     isModal(): boolean;
     onFormInsert(e: any): void;
     rpc(name: any, params: any): Promise<any>;
-    getForm(name: any): any;
+    getForm(name: any): Form;
     isSelectMode(): boolean;
     isFormInTab(): boolean;
 }

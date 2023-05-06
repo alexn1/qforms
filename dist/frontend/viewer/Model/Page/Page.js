@@ -4,6 +4,7 @@ exports.Page = void 0;
 const Model_1 = require("../Model");
 const DataSource_1 = require("../DataSource/DataSource");
 const Helper_1 = require("../../../common/Helper");
+const RowForm_1 = require("../Form/RowForm/RowForm");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
         // console.log('Page.constructor', options);
@@ -71,7 +72,9 @@ class Page extends Model_1.Model {
     discard() {
         console.log('Page.discard', this.getFullName());
         for (const form of this.forms) {
-            form.discard();
+            if (form instanceof RowForm_1.RowForm) {
+                form.discard();
+            }
         }
     }
     getKey() {

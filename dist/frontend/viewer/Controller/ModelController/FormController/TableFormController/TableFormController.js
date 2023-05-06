@@ -9,6 +9,8 @@ class TableFormController extends FormController_1.FormController {
     constructor(model, parent) {
         super(model, parent);
         this.fields = {};
+        // state: any;
+        this.grid = null;
         this.onGridCreate = (grid) => {
             this.grid = grid;
         };
@@ -156,7 +158,6 @@ class TableFormController extends FormController_1.FormController {
         this.state = {
             updated: Date.now(),
         };
-        this.grid = null;
     }
     getViewClass() {
         return super.getViewClass() || TableFormView_1.TableFormView;

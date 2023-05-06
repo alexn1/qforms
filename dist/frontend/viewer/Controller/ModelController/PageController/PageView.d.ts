@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import { ModelView } from '../ModelView';
 import { PageController } from './PageController';
-import './PageView.less';
 import { FormController } from '../FormController/FormController';
+import './PageView.less';
 export declare class PageView<TPageController extends PageController = PageController> extends ModelView<TPageController> {
     constructor(props: any);
     onActionsClick: (li: any) => Promise<void>;

@@ -93,9 +93,9 @@ class PageView extends ModelView_1.ModelView {
         const model = ctrl.getModel();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: model.hasActions() && this.renderActionsDropdownButton() })));
     }
-    /*shouldComponentUpdate(nextProps, nextState) {
+    /* shouldComponentUpdate(nextProps, nextState) {
         return false;
-    }*/
+    } */
     renderTableForms() {
         const tableForms = this.getTableForms();
         if (tableForms.length === 1) {

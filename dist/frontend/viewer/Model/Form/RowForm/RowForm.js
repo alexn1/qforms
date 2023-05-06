@@ -49,7 +49,7 @@ class RowForm extends Form_1.Form {
         this.fillDefaultValues(row);
         return row;
     }
-    discard(fields) {
+    discard(fields = []) {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();

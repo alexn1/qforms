@@ -3,16 +3,17 @@ import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
+import { Grid } from '../../../../../common';
 export declare class TableFormController extends FormController<TableForm> {
     fields: {
         [name: string]: TableFormFieldController;
     };
-    grid: any;
+    grid: Grid;
     constructor(model: TableForm, parent: any);
     getViewClass(): any;
     init(): void;
     deinit(): void;
-    onGridCreate: (grid: any) => void;
+    onGridCreate: (grid: Grid) => void;
     onNewClick: (e: any) => Promise<void>;
     onRefreshClick: (e: any) => Promise<void>;
     onDeleteClick: (e: any) => Promise<void>;
@@ -34,6 +35,6 @@ export declare class TableFormController extends FormController<TableForm> {
     canPrev(): boolean;
     canNext(): boolean;
     getSelectedRowKey(): any;
-    isActionEnabled(name: any): boolean;
+    isActionEnabled(name: string): boolean;
     getField<TTableFormFieldController extends FieldController = TableFormFieldController>(name: string): TTableFormFieldController;
 }
