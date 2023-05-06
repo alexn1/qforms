@@ -124,15 +124,6 @@ export class ApplicationController extends ModelController<Application> {
         };
     }
 
-    // options
-    // - modal      : boolean,
-    // - newMode    : boolean,
-    // - selectMode : boolean,
-    // - selectedKey: string,
-    // - onCreate   : function,
-    // - onSelect   : function,
-    // - onClose    : function,
-    // - params     : object,
     createPage(pageData, options: PageOptions): PageController {
         if (options.modal === undefined) throw new Error('no options.modal');
 
