@@ -3,6 +3,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
+import { Key } from '../../../../types';
 
 export class Page extends Model {
     options: any;
@@ -93,7 +94,7 @@ export class Page extends Model {
         }
     }
 
-    getKey() {
+    getKey(): Key {
         for (const form of this.forms) {
             if (form.getClassName() === 'RowForm') {
                 return form.getKey();

@@ -218,7 +218,7 @@ export class PageController<
     getTitle(): string {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart;
+        let keyPart: string;
         if (key) {
             const arr = JSON.parse(key);
             if (arr.length === 1 && typeof arr[0] === 'number') {

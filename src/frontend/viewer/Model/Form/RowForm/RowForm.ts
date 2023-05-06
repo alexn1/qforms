@@ -1,4 +1,4 @@
-import { RawRow } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 import { Form } from '../Form';
 import { Helper } from '../../../../common/Helper';
 
@@ -38,7 +38,7 @@ export class RowForm extends Form {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 
-    getKey() {
+    getKey(): Key {
         // console.log('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
         if (dataSource.isPersistent()) {

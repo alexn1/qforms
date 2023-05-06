@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { RawRow, Row } from '../../../../types';
+import { Key, RawRow, Row } from '../../../../types';
 
 export class Form extends Model {
     dataSources: DataSource[] = [];
@@ -97,7 +97,7 @@ export class Form extends Model {
         return result;
     }
 
-    getKey() {
+    getKey(): Key {
         return null;
     }
 
