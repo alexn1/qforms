@@ -54,7 +54,7 @@ export class RowForm extends Form {
         return row;
     }
 
-    discard(fields: string[]) {
+    discard(fields: string[] = []) {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();

@@ -40710,9 +40710,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         const model = ctrl.getModel();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: model.hasActions() && this.renderActionsDropdownButton() })));
     }
-    /*shouldComponentUpdate(nextProps, nextState) {
+    /* shouldComponentUpdate(nextProps, nextState) {
         return false;
-    }*/
+    } */
     renderTableForms() {
         const tableForms = this.getTableForms();
         if (tableForms.length === 1) {
@@ -42815,7 +42815,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         this.fillDefaultValues(row);
         return row;
     }
-    discard(fields) {
+    discard(fields = []) {
         console.log('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
@@ -42968,6 +42968,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
 /* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+
 
 
 
@@ -43038,7 +43040,9 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     discard() {
         console.log('Page.discard', this.getFullName());
         for (const form of this.forms) {
-            form.discard();
+            if (form instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm) {
+                form.discard();
+            }
         }
     }
     getKey() {

@@ -1,11 +1,13 @@
 import { Model } from '../Model';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
+import { Form } from '../Form/Form';
+import { RowForm } from '../Form/RowForm/RowForm';
 
 export class Page extends Model {
     options: any;
     dataSources: any[];
-    forms: any[];
+    forms: Form[];
     params: any;
 
     constructor(data, parent, options) {
@@ -85,7 +87,9 @@ export class Page extends Model {
     discard() {
         console.log('Page.discard', this.getFullName());
         for (const form of this.forms) {
-            form.discard();
+            if (form instanceof RowForm) {
+                form.discard();
+            }
         }
     }
 

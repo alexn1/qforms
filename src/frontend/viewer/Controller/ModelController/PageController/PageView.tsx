@@ -9,8 +9,9 @@ import {
     CloseIcon2,
 } from '../../../../common';
 import { PageController } from './PageController';
-import './PageView.less';
 import { FormController } from '../FormController/FormController';
+
+import './PageView.less';
 
 export class PageView<
     TPageController extends PageController = PageController,
@@ -162,9 +163,9 @@ export class PageView<
         );
     }
 
-    /*shouldComponentUpdate(nextProps, nextState) {
+    /* shouldComponentUpdate(nextProps, nextState) {
         return false;
-    }*/
+    } */
 
     renderTableForms() {
         const tableForms = this.getTableForms();
