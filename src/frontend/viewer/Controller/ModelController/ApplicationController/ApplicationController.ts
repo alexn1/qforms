@@ -1,5 +1,5 @@
 import { ModelController } from '../ModelController';
-import { Page } from '../../../Model/Page/Page';
+import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
 import { WebSocketClient } from '../../../WebSocketClient';
 import { FrontHostApp, Helper } from '../../../../common';
@@ -133,7 +133,7 @@ export class ApplicationController extends ModelController<Application> {
     // - onSelect   : function,
     // - onClose    : function,
     // - params     : object,
-    createPage(pageData, options): PageController {
+    createPage(pageData, options: PageOptions): PageController {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         // model

@@ -42979,7 +42979,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options = options; // {id, modal, newMode, selectMode, params}
+        this.options = options;
         this.dataSources = [];
         this.forms = [];
         this.params = {};

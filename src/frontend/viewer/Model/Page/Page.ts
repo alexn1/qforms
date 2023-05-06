@@ -5,20 +5,27 @@ import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { Key } from '../../../../types';
 
-export class Page extends Model {
-    options: any;
-    dataSources: any[];
-    forms: Form[];
-    params: any;
+export interface PageOptions {
+    id?: string;
+    modal?: boolean;
+    newMode?: boolean;
+    selectMode?: boolean;
+    selectedKey?: string;
+    params?: any;
+    onCreate?: (page: Page) => void;
+    onSelect?: any;
+    onClose?: any;
+}
 
-    constructor(data, parent, options) {
+export class Page extends Model {
+    dataSources: any[] = [];
+    forms: Form[] = [];
+    params: any = {};
+
+    constructor(data, parent, private options: PageOptions) {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options = options; // {id, modal, newMode, selectMode, params}
-        this.dataSources = [];
-        this.forms = [];
-        this.params = {};
         if (options.onCreate) {
             options.onCreate(this);
         }

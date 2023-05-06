@@ -9,7 +9,7 @@ import {
     ApplicationController,
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
-import { Page } from '../../../Model/Page/Page';
+import { Page, PageOptions } from '../../../Model/Page/Page';
 
 export class PageController<
     TApplicationController extends ApplicationController = ApplicationController,
@@ -33,7 +33,7 @@ export class PageController<
         model: Page,
         parent: ApplicationController,
         id: string,
-        options = null,
+        options: PageOptions = null,
     ): PageController {
         // console.log('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
