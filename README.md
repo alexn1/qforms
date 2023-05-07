@@ -14,3 +14,9 @@ appsDirPath=../name/apps
 
 -   gulp release
 -   gulp publish
+
+## Make npm module ready for linking
+
+```bash
+$ npm link
+```
