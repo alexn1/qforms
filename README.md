@@ -6,7 +6,7 @@ Supported MySql, Postgres, MongoDB.
 
 ## CLI Options
 
-```
+```bash
 appsDirPath=../name/apps
 ```
 
