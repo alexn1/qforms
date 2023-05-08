@@ -177,7 +177,7 @@ export class Page extends Model {
         }
     }
 
-    async rpc(name, params) {
+    async rpc(name: string, params) {
         // console.log('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({
@@ -191,8 +191,8 @@ export class Page extends Model {
         return result;
     }
 
-    getForm(name) {
-        return this.forms.find((form) => form.getName() === name);
+    getForm<TForm extends Form = Form>(name: string): TForm {
+        return this.forms.find((form) => form.getName() === name) as TForm;
     }
 
     isSelectMode() {
