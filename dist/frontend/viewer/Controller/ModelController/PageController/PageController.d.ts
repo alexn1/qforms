@@ -2,12 +2,12 @@ import { ModelController } from '../ModelController';
 import { FormController } from '../FormController/FormController';
 import { PageView } from './PageView';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
-import { Page } from '../../../Model/Page/Page';
+import { Page, PageOptions } from '../../../Model/Page/Page';
 export declare class PageController<TApplicationController extends ApplicationController = ApplicationController> extends ModelController<Page> {
     id: string;
     forms: FormController[];
     constructor(model: Page, parent: ApplicationController, id: string);
-    static create(model: Page, parent: ApplicationController, id: string, options?: any): PageController;
+    static create(model: Page, parent: ApplicationController, id: string, options?: PageOptions): PageController;
     init(): void;
     deinit(): void;
     onSaveAndCloseClick: () => Promise<void>;

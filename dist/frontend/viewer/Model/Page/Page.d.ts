@@ -1,15 +1,26 @@
 import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Key } from '../../../../types';
+export interface PageOptions {
+    id?: string;
+    modal?: boolean;
+    newMode?: boolean;
+    selectMode?: boolean;
+    selectedKey?: string;
+    params?: any;
+    onCreate?: (page: Page) => void;
+    onSelect?: any;
+    onClose?: any;
+}
 export declare class Page extends Model {
-    options: any;
+    private options;
     dataSources: any[];
     forms: Form[];
     params: any;
-    constructor(data: any, parent: any, options: any);
+    constructor(data: any, parent: any, options: PageOptions);
     init(): void;
     deinit(): void;
-    getOptions(): any;
+    getOptions(): PageOptions;
     createForms(): void;
     deinitForms(): void;
     getParams(): any;
@@ -26,8 +37,8 @@ export declare class Page extends Model {
     getApp(): any;
     isModal(): boolean;
     onFormInsert(e: any): void;
-    rpc(name: any, params: any): Promise<any>;
-    getForm(name: any): Form;
+    rpc(name: string, params: any): Promise<any>;
+    getForm<TForm extends Form = Form>(name: string): TForm;
     isSelectMode(): boolean;
     isFormInTab(): boolean;
 }

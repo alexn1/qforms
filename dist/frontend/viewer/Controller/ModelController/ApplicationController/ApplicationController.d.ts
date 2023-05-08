@@ -1,5 +1,5 @@
 import { ModelController } from '../ModelController';
-import { Page } from '../../../Model/Page/Page';
+import { Page, PageOptions } from '../../../Model/Page/Page';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
@@ -34,7 +34,7 @@ export declare class ApplicationController extends ModelController<Application> 
     onRequest: (e: any) => Promise<void>;
     createVersionNotificationIfNotExists(): void;
     getGlobalParams(): {};
-    createPage(pageData: any, options: any): PageController;
+    createPage(pageData: any, options: PageOptions): PageController;
     openPage(options: OpenPageOptions): Promise<PageController>;
     addModal(ctrl: any): void;
     removeModal(ctrl: any): void;
