@@ -1,6 +1,8 @@
 import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormTextBoxFieldController } from './TableFormTextBoxFieldController';
 
+import './TableFormTextBoxFieldView.less';
+
 export class TableFormTextBoxFieldView extends TableFormFieldView<TableFormTextBoxFieldController> {
     span: React.RefObject<any>;
 

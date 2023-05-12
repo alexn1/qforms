@@ -30,8 +30,8 @@
 @bodyTrEvenBackgroundColor: rgba(66, 139, 202, 0.06);
 @bodyTrBackgroundColorHover: #e1f0fc !important;
 @bodyTrActiveBackgroundColor: rgb(200, 226, 254);
-@bodyTrActiveColor: unset;
-@tdColor: unset;
+// @bodyTrActiveColor: unset;
+// @tdColor: unset;
 @tdPaddingTopBottom: 3px;
 @tdPaddingLeftRight: 5px;
 @tdTextShadow: none;
@@ -101,14 +101,14 @@
 }
 
 .Grid__td {
-  color: @tdColor;
+  // color: @tdColor;
   text-shadow: @tdTextShadow;
   padding: @tdPaddingTopBottom @tdPaddingLeftRight;
   cursor: inherit;
   &.active {
     text-shadow: @tdActiveTextShadow;
     background-color: @tdActiveBackgroundColor;
-    > div {
+    /* > div {
       color: @tdActiveColor !important;
       background-color: @tdActiveBackgroundColor !important;
       > a {
@@ -117,7 +117,7 @@
       > select {
         color: black;
       }
-    }
+    } */
   }
   /*&.edit {
     color           : inherit;
@@ -172,11 +172,11 @@
     border-bottom: @bodyTrBorderBottom;
     &.active {
       background-color: @bodyTrActiveBackgroundColor !important;
-      color: @bodyTrActiveColor !important;
+      // color: @bodyTrActiveColor !important;
       .Grid__td {
-        > div {
+        /* > div {
           color: @bodyTrActiveColor !important;
-        }
+        } */
       }
     }
     &:nth-child(even) {
