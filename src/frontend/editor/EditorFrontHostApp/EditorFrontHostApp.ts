@@ -2,7 +2,7 @@ import { FrontHostApp } from '../../common/FrontHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
 import { ApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
-import { PageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
+import { EdPageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';
 import { EdDocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { Helper } from '../../common';
@@ -65,7 +65,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     onItemOpen2 = async (item) => {
         console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
         // console.log('parent:', item.view.parent);
-        if (item instanceof PageLinkController && !item.hasPage()) {
+        if (item instanceof EdPageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
     };
@@ -73,7 +73,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     onItemSelect2 = async (item) => {
         console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof EdModelController) {
-            if (item instanceof PageLinkController && !item.hasPage()) {
+            if (item instanceof EdPageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
             this.fillActions(item);
@@ -127,7 +127,7 @@ export class EditorFrontHostApp extends FrontHostApp {
 
     onItemDoubleClick2 = async (item) => {
         console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
-        const controller = item instanceof PageLinkController ? item.pageController : item;
+        const controller = item instanceof EdPageLinkController ? item.pageController : item;
         if (!controller || !(controller instanceof EdDocumentController)) return;
         await this.openDocument(controller);
     };
@@ -188,7 +188,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         console.log('EditorFrontHostApp.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();
         // console.log('item', item);
-        const controller = item instanceof PageLinkController ? item.pageController : item;
+        const controller = item instanceof EdPageLinkController ? item.pageController : item;
         await controller.doAction(actionName);
     };
 }

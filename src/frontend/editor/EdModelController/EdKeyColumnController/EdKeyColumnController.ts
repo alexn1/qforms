@@ -2,7 +2,7 @@ import { EdModelController } from '../EdModelController';
 import { FrontHostApp } from '../../../common';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
-export class KeyColumnController extends EdModelController {
+export class EdKeyColumnController extends EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

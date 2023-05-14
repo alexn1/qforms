@@ -1,5 +1,5 @@
 import { EdDocumentController } from '../EdDocumentController';
-import { ParamController } from '../../EdParamController/EdParamController';
+import { EdParamController } from '../../EdParamController/EdParamController';
 import { TableController } from '../EdTableController/EdTableController';
 import { DatabaseView } from './EdDatabaseView';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
@@ -48,7 +48,7 @@ export class DatabaseController extends EdDocumentController {
     }
 
     createParam(model) {
-        const param = new ParamController(model, this);
+        const param = new EdParamController(model, this);
         param.init();
         this.params.push(param);
         return param;

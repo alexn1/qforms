@@ -2,7 +2,7 @@ import { EdModelController } from '../EdModelController';
 import { FrontHostApp } from '../../../common';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
-export class ParamController extends EdModelController {
+export class EdParamController extends EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

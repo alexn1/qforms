@@ -3,7 +3,7 @@ import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp'
 import { PageEditor } from '../../Editor/PageEditor/PageEditor';
 import { PageController } from '../EdDocumentController/EdVisualController/EdPageController/EdPageController';
 
-export class PageLinkController extends EdModelController {
+export class EdPageLinkController extends EdModelController {
     node: boolean;
     pageController: any;
     items: any;

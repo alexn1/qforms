@@ -1,5 +1,5 @@
 import { EdDocumentController } from '../EdDocumentController';
-import { KeyColumnController } from '../../EdKeyColumnController/EdKeyColumnController';
+import { EdKeyColumnController } from '../../EdKeyColumnController/EdKeyColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewKeyColumnController } from '../../../EdModalController/NewKeyColumnController/NewKeyColumnController';
 import { SqlDataSourceView } from './EdSqlDataSourceView';
@@ -36,7 +36,7 @@ export class DataSourceController extends EdDocumentController {
     }
 
     createKeyColumn(model) {
-        const keyColumn = new KeyColumnController(model, this);
+        const keyColumn = new EdKeyColumnController(model, this);
         keyColumn.init();
         this.keyColumns.push(keyColumn);
         return keyColumn;

@@ -1,6 +1,6 @@
 import { VisualController } from '../EdVisualController';
 import { DatabaseController } from '../../EdDatabaseController/EdDatabaseController';
-import { PageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
+import { EdPageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDatabaseController } from '../../../../EdModalController/NewDatabaseController/NewDatabaseController';
 import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
@@ -51,7 +51,7 @@ export class ApplicationController extends VisualController {
     }
 
     createPageLink(model) {
-        const pageLink = new PageLinkController(model, this);
+        const pageLink = new EdPageLinkController(model, this);
         pageLink.init();
         this.pageLinks.push(pageLink);
         return pageLink;
