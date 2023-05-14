@@ -2,8 +2,8 @@ import { DocumentController } from '../EdDocumentController';
 import { KeyColumnController } from '../../EdKeyColumnController/EdKeyColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewKeyColumnController } from '../../../ModalController/NewKeyColumnController/NewKeyColumnController';
-import { SqlDataSourceView } from './SqlDataSourceView';
-import { NoSqlDataSourceView } from './NoSqlDataSourceView';
+import { SqlDataSourceView } from './EdSqlDataSourceView';
+import { NoSqlDataSourceView } from './EdNoSqlDataSourceView';
 
 export class DataSourceController extends DocumentController {
     keyColumns: any[];

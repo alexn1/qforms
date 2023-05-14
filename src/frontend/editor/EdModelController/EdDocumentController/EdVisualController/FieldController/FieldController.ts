@@ -1,7 +1,7 @@
-import { VisualController } from '../VisualController';
+import { VisualController } from '../EdVisualController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { ChangeClassController } from '../../../../ModalController/ChangeClassController/ChangeClassController';
-import { VisualView } from '../VisualView';
+import { VisualView } from '../EdVisualView';
 
 export class FieldController extends VisualController {
     /*constructor(model, parent) {

@@ -1,52 +1,43 @@
 import * as React from 'react';
 import { DocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
-import './SqlDataSourceView.less';
-import { Visibility } from '../../../../viewer';
+import { Visibility } from '../../../../../types';
 
-export class SqlDataSourceView extends DocumentView {
-    singleRef: React.RefObject<any>;
-    multipleRef: React.RefObject<any>;
+import './EdNoSqlDataSourceView.less';
+
+export class NoSqlDataSourceView extends DocumentView {
+    selectRef: React.RefObject<any>;
     countRef: React.RefObject<any>;
-    singleQuery: any;
-    multipleQuery: any;
+    selectQuery: any;
     countQuery: any;
 
     constructor(props) {
         super(props);
-        this.singleRef = React.createRef();
-        this.multipleRef = React.createRef();
+        this.selectRef = React.createRef();
         this.countRef = React.createRef();
         this.state = {
-            selected: 'singleQuery',
+            selected: 'selectQuery',
         };
-        this.singleQuery = null;
-        this.multipleQuery = null;
+        this.selectQuery = null;
         this.countQuery = null;
     }
 
     componentDidMount() {
         const { ctrl } = this.props;
-        this.singleQuery = DocumentView.createCM(
-            this.singleRef.current,
-            ctrl.model.getAttr('singleQuery'),
-        );
-        this.multipleQuery = DocumentView.createCM(
-            this.multipleRef.current,
-            ctrl.model.getAttr('multipleQuery'),
+        this.selectQuery = DocumentView.createCM(
+            this.selectRef.current,
+            ctrl.model.getAttr('selectQuery'),
         );
         this.countQuery = DocumentView.createCM(
             this.countRef.current,
             ctrl.model.getAttr('countQuery'),
         );
-        this.singleQuery.on('change', this.onChange);
-        this.multipleQuery.on('change', this.onChange);
+        this.selectQuery.on('change', this.onChange);
         this.countQuery.on('change', this.onChange);
     }
 
     componentWillUnmount() {
-        this.singleQuery.off('change', this.onChange);
-        this.multipleQuery.off('change', this.onChange);
+        this.selectQuery.off('change', this.onChange);
         this.countQuery.off('change', this.onChange);
     }
 
@@ -58,7 +49,7 @@ export class SqlDataSourceView extends DocumentView {
     }
 
     onChange = async (i, o) => {
-        // console.log('SqlDataSourceView.onChange');
+        // console.log('NoSqlDataSourceView.onChange');
         await this.rerender();
     };
 
@@ -71,20 +62,20 @@ export class SqlDataSourceView extends DocumentView {
     }
 
     onSaveClick = async (e) => {
-        console.log('SqlDataSourceView.onSaveClick');
+        console.log('NoSqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
         await this.rerender();
     };
 
-    isSelected(name: string): boolean {
+    isSelected(name) {
         return this.state.selected === name;
     }
 
     render() {
         const { ctrl } = this.props;
         return (
-            <div className={'SqlDataSourceView full flex-column'}>
+            <div className={'NoSqlDataSourceView full flex-column'}>
                 <div className="toolbar">
                     <Button onClick={this.onSaveClick} enabled={this.isChanged()}>
                         Save
@@ -93,16 +84,10 @@ export class SqlDataSourceView extends DocumentView {
                     &nbsp;
                     <div className="btn-group" role="group">
                         <button
-                            className={`${this.getButtonClass('singleQuery')}`}
-                            style={{ fontWeight: this.isSelected('singleQuery') ? 'bold' : null }}
-                            onClick={(e) => this.setState({ selected: 'singleQuery' })}>
-                            singleQuery
-                        </button>
-                        <button
-                            className={`${this.getButtonClass('multipleQuery')}`}
-                            style={{ fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }}
-                            onClick={(e) => this.setState({ selected: 'multipleQuery' })}>
-                            multipleQuery
+                            className={`${this.getButtonClass('selectQuery')}`}
+                            style={{ fontWeight: this.isSelected('selectQuery') ? 'bold' : null }}
+                            onClick={(e) => this.setState({ selected: 'selectQuery' })}>
+                            selectQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
@@ -115,13 +100,8 @@ export class SqlDataSourceView extends DocumentView {
                 <div className="edit flex-max full">
                     <div
                         className="cm-container full"
-                        style={{ visibility: this.getVisibility('singleQuery') }}>
-                        <textarea ref={this.singleRef} />
-                    </div>
-                    <div
-                        className="cm-container full"
-                        style={{ visibility: this.getVisibility('multipleQuery') }}>
-                        <textarea ref={this.multipleRef} />
+                        style={{ visibility: this.getVisibility('selectQuery') }}>
+                        <textarea ref={this.selectRef} />
                     </div>
                     <div
                         className="cm-container full"

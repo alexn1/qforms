@@ -1,4 +1,4 @@
-import { VisualController } from '../VisualController';
+import { VisualController } from '../EdVisualController';
 import { DatabaseController } from '../../EdDatabaseController/EdDatabaseController';
 import { PageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
@@ -6,7 +6,7 @@ import { NewDatabaseController } from '../../../../ModalController/NewDatabaseCo
 import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
 import { NewPageController } from '../../../../ModalController/NewPageController/NewPageController';
 import { PageController } from '../PageController/PageController';
-import { VisualView } from '../VisualView';
+import { VisualView } from '../EdVisualView';
 import { DocumentView } from '../../EdDocumentView';
 
 export class ApplicationController extends VisualController {

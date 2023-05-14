@@ -1,10 +1,10 @@
-import { VisualController } from '../VisualController';
+import { VisualController } from '../EdVisualController';
 import { FormController } from '../FormController/FormController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
 import { NewFormController } from '../../../../ModalController/NewFormController/NewFormController';
-import { VisualView } from '../VisualView';
+import { VisualView } from '../EdVisualView';
 import { EdModelController } from '../../../EdModelController';
 
 export class PageController extends VisualController {

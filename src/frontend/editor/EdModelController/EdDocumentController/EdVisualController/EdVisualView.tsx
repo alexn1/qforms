@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { DocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
-import './VisualView.less';
+import './EdVisualView.less';
 
 export class VisualView extends DocumentView {
     textarea: React.RefObject<any>;
