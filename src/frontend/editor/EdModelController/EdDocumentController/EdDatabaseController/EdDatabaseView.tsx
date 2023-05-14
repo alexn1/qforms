@@ -29,7 +29,7 @@ export class EdDatabaseView extends ReactComponent {
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return (
-            <div className={'DatabaseView frame'}>
+            <div className={'EdDatabaseView frame'}>
                 <div className={'client frame'}>
                     <div className={'frame__container'}>
                         <div className={'divTableInfo full flex-column'}>
