@@ -1,6 +1,6 @@
 import { FrontHostApp } from '../../common/FrontHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
-import { ApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/ApplicationController/ApplicationController';
+import { ApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { PageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';

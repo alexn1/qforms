@@ -5,7 +5,7 @@ import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHo
 import { NewDatabaseController } from '../../../../ModalController/NewDatabaseController/NewDatabaseController';
 import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
 import { NewPageController } from '../../../../ModalController/NewPageController/NewPageController';
-import { PageController } from '../PageController/PageController';
+import { PageController } from '../EdPageController/EdPageController';
 import { VisualView } from '../EdVisualView';
 import { DocumentView } from '../../EdDocumentView';
 

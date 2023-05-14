@@ -1,5 +1,5 @@
 import { VisualController } from '../EdVisualController';
-import { FormController } from '../FormController/FormController';
+import { FormController } from '../EdFormController/EdFormController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
