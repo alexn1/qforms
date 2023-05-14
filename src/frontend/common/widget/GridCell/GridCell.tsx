@@ -3,6 +3,8 @@ import { ReactComponent } from '../../ReactComponent';
 import { Helper } from '../../Helper';
 import { JSONString } from '../../../../types';
 
+import './GridCell.less';
+
 export class GridCell extends ReactComponent {
     span: React.RefObject<any>;
 
