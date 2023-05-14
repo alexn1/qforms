@@ -11,9 +11,9 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/common/widget/CheckBox/CheckBox.less ***!
   \********************************************************************************************************************************************/
 div.CheckBox {
+  display: inline-block;
   width: 16px;
   height: 16px;
-  text-align: center;
   cursor: pointer;
   background-color: white;
 }
@@ -260,7 +260,6 @@ div.CheckBox:not(.disabled):hover {
   /* prevent hiding border when position: relative */
 }
 .Grid__td {
-  color: null;
   text-shadow: none;
   padding: 3px 5px;
   cursor: inherit;
@@ -273,16 +272,16 @@ div.CheckBox:not(.disabled):hover {
 .Grid__td.active {
   text-shadow: none;
   background-color: var(--accent-color);
-}
-.Grid__td.active > div {
-  color: white !important;
-  background-color: var(--accent-color) !important;
-}
-.Grid__td.active > div > a {
-  color: white;
-}
-.Grid__td.active > div > select {
-  color: black;
+  /* > div {
+      color: @tdActiveColor !important;
+      background-color: @tdActiveBackgroundColor !important;
+      > a {
+        color: white;
+      }
+      > select {
+        color: black;
+      }
+    } */
 }
 .Grid::after {
   content: "";
@@ -329,10 +328,11 @@ div.CheckBox:not(.disabled):hover {
 }
 .Grid__body .Grid__tr.active {
   background-color: #c8e2fe !important;
-  color: null !important;
 }
-.Grid__body .Grid__tr.active .Grid__td > div {
-  color: null !important;
+.Grid__body .Grid__tr.active .Grid__td {
+  /* > div {
+          color: @bodyTrActiveColor !important;
+        } */
 }
 .Grid__body .Grid__tr:nth-child(even) {
   background-color: rgba(66, 139, 202, 0.06);

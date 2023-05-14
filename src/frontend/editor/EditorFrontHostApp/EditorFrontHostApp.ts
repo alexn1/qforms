@@ -3,7 +3,7 @@ import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor
 import { ApplicationController } from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { PageLinkController } from '../ModelController/PageLinkController/PageLinkController';
-import { ModelController } from '../ModelController/ModelController';
+import { EdModelController } from '../ModelController/ModelController';
 import { DocumentController } from '../ModelController/DocumentController/DocumentController';
 import { Helper } from '../../common';
 import { ModalController } from '../ModalController/ModalController';
@@ -72,7 +72,7 @@ export class EditorFrontHostApp extends FrontHostApp {
 
     onItemSelect2 = async (item) => {
         console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-        if (item instanceof ModelController) {
+        if (item instanceof EdModelController) {
             if (item instanceof PageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }

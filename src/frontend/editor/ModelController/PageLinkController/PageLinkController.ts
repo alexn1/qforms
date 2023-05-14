@@ -1,9 +1,9 @@
-import { ModelController } from '../ModelController';
+import { EdModelController } from '../ModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 import { PageEditor } from '../../Editor/PageEditor/PageEditor';
 import { PageController } from '../DocumentController/VisualController/PageController/PageController';
 
-export class PageLinkController extends ModelController {
+export class PageLinkController extends EdModelController {
     node: boolean;
     pageController: any;
     items: any;

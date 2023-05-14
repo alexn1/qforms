@@ -32293,9 +32293,9 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /*componentDidMount() {
+    /* componentDidMount() {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
-    }*/
+    } */
     isEnabled() {
         // console.log('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
@@ -37472,7 +37472,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         };
         this.onItemSelect2 = async (item) => {
             console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-            if (item instanceof _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__.ModelController) {
+            if (item instanceof _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
                 if (item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController && !item.hasPage()) {
                     await item.loadPage();
                 }
@@ -38890,7 +38890,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-class ActionController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class ActionController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -38945,7 +38945,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class ColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class ColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -39545,7 +39545,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
 
-class DocumentController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class DocumentController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     constructor(model, parent) {
         super(model, parent);
         this.document = null;
@@ -40380,7 +40380,7 @@ class PageController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.Visu
             this.getPageLink().setValue(name, value);
         }
         else {
-            _ModelController__WEBPACK_IMPORTED_MODULE_7__.ModelController.prototype.setProperty.call(this, name, value);
+            _ModelController__WEBPACK_IMPORTED_MODULE_7__.EdModelController.prototype.setProperty.call(this, name, value);
         }
     }
     getPageLink() {
@@ -40604,7 +40604,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class KeyColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class KeyColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -40646,11 +40646,11 @@ class KeyColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ModelController": () => (/* binding */ ModelController)
+/* harmony export */   "EdModelController": () => (/* binding */ EdModelController)
 /* harmony export */ });
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
-class ModelController {
+class EdModelController {
     constructor(model, parent = null) {
         // super();
         this.model = model;
@@ -40711,7 +40711,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class PageLinkController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class PageLinkController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     constructor(model, parent) {
         super(model, parent);
         this.node = true;
@@ -40788,7 +40788,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class ParamController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+class ParamController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

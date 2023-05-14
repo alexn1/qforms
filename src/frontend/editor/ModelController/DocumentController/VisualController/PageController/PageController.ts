@@ -5,7 +5,7 @@ import { NewDataSourceController } from '../../../../ModalController/NewDataSour
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
 import { NewFormController } from '../../../../ModalController/NewFormController/NewFormController';
 import { VisualView } from '../VisualView';
-import { ModelController } from '../../../ModelController';
+import { EdModelController } from '../../../ModelController';
 
 export class PageController extends VisualController {
     options: any;
@@ -141,7 +141,7 @@ export class PageController extends VisualController {
         if (name === 'startup' || name === 'menu') {
             this.getPageLink().setValue(name, value);
         } else {
-            ModelController.prototype.setProperty.call(this, name, value);
+            EdModelController.prototype.setProperty.call(this, name, value);
         }
     }
 

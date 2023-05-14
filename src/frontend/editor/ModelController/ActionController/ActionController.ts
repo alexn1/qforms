@@ -1,7 +1,7 @@
-import { ModelController } from '../ModelController';
+import { EdModelController } from '../ModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
-export class ActionController extends ModelController {
+export class ActionController extends EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

@@ -1,6 +1,6 @@
 import { Helper } from '../../common';
 
-export class ModelController {
+export class EdModelController {
     model: any;
     parent: any;
     view: any;
