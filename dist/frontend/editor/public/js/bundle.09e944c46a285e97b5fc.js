@@ -350,10 +350,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModalController/EdNewModelView.less":
-/*!*******************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/EdNewModelView.less ***!
-  \*******************************************************************/
+/***/ "./src/frontend/editor/EdModalController/NewModelView.less":
+/*!*****************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewModelView.less ***!
+  \*****************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -35844,7 +35844,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _EdModalView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdModalView.less */ "./src/frontend/editor/EdModalController/EdModalView.less");
-/* harmony import */ var _EdNewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdNewModelView.less */ "./src/frontend/editor/EdModalController/EdNewModelView.less");
+/* harmony import */ var _NewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NewModelView.less */ "./src/frontend/editor/EdModalController/NewModelView.less");
 
 
 

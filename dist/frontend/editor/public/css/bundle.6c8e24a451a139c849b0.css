@@ -1250,10 +1250,10 @@ div.CheckBox:not(.disabled):hover {
   margin: auto;
 }
 
-/*!****************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/EdNewModelView.less ***!
-  \****************************************************************************************************************************************************/
-.EdNewModelView {
+/*!**************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/NewModelView.less ***!
+  \**************************************************************************************************************************************************/
+.NewModelView {
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
@@ -1262,24 +1262,24 @@ div.CheckBox:not(.disabled):hover {
   margin: auto;
   padding: 20px;
 }
-.EdNewModelView input,
-.EdNewModelView select {
+.NewModelView input,
+.NewModelView select {
   width: 100%;
 }
-.EdNewModelView__header {
+.NewModelView__header {
   display: flex;
   grid-gap: 10px;
   align-items: center;
 }
-.EdNewModelView__title {
+.NewModelView__title {
   flex-grow: 1;
 }
-.EdNewModelView__body {
+.NewModelView__body {
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
 }
-.EdNewModelView__footer {
+.NewModelView__footer {
   display: flex;
   flex-direction: row-reverse;
   grid-gap: 10px;
