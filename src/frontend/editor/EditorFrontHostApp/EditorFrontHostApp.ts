@@ -3,7 +3,7 @@ import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor
 import { ApplicationController } from '../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { PageLinkController } from '../ModelController/PageLinkController/PageLinkController';
-import { EdModelController } from '../ModelController/ModelController';
+import { EdModelController } from '../ModelController/EdModelController';
 import { DocumentController } from '../ModelController/DocumentController/DocumentController';
 import { Helper } from '../../common';
 import { ModalController } from '../ModalController/ModalController';

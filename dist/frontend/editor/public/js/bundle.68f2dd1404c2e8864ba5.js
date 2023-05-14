@@ -37449,7 +37449,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModelController_DocumentController_VisualController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/ApplicationController/ApplicationController.ts");
 /* harmony import */ var _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
 /* harmony import */ var _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ModelController/PageLinkController/PageLinkController */ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts");
-/* harmony import */ var _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ModelController/ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _ModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ModelController/EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 /* harmony import */ var _ModelController_DocumentController_DocumentController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ModelController/DocumentController/DocumentController */ "./src/frontend/editor/ModelController/DocumentController/DocumentController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
 
@@ -37472,7 +37472,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         };
         this.onItemSelect2 = async (item) => {
             console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-            if (item instanceof _ModelController_ModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
+            if (item instanceof _ModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
                 if (item instanceof _ModelController_PageLinkController_PageLinkController__WEBPACK_IMPORTED_MODULE_4__.PageLinkController && !item.hasPage()) {
                     await item.loadPage();
                 }
@@ -38886,11 +38886,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ActionController": () => (/* binding */ ActionController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
-class ActionController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+class ActionController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -38939,13 +38939,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ColumnController": () => (/* binding */ ColumnController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
 
-class ColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+class ColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -39543,9 +39543,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "DocumentController": () => (/* binding */ DocumentController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 
-class DocumentController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+class DocumentController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     constructor(model, parent) {
         super(model, parent);
         this.document = null;
@@ -40255,7 +40255,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
 /* harmony import */ var _ModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts");
 /* harmony import */ var _VisualView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../VisualView */ "./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.tsx");
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 
 
 
@@ -40380,7 +40380,7 @@ class PageController extends _VisualController__WEBPACK_IMPORTED_MODULE_0__.Visu
             this.getPageLink().setValue(name, value);
         }
         else {
-            _ModelController__WEBPACK_IMPORTED_MODULE_7__.EdModelController.prototype.setProperty.call(this, name, value);
+            _EdModelController__WEBPACK_IMPORTED_MODULE_7__.EdModelController.prototype.setProperty.call(this, name, value);
         }
     }
     getPageLink() {
@@ -40588,60 +40588,10 @@ class VisualView extends _DocumentView__WEBPACK_IMPORTED_MODULE_2__.DocumentView
 
 /***/ }),
 
-/***/ "./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "KeyColumnController": () => (/* binding */ KeyColumnController)
-/* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-
-
-class KeyColumnController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getActions() {
-        return [{ action: 'delete', caption: 'Delete' }];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-        }
-    }
-    static async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action: 'getView',
-            params: {
-                view: view,
-            },
-        });
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeKeyColumn(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModelController/ModelController.ts":
-/*!****************************************************************!*\
-  !*** ./src/frontend/editor/ModelController/ModelController.ts ***!
-  \****************************************************************/
+/***/ "./src/frontend/editor/ModelController/EdModelController.ts":
+/*!******************************************************************!*\
+  !*** ./src/frontend/editor/ModelController/EdModelController.ts ***!
+  \******************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -40693,6 +40643,56 @@ class EdModelController {
 
 /***/ }),
 
+/***/ "./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/ModelController/KeyColumnController/KeyColumnController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "KeyColumnController": () => (/* binding */ KeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+
+
+
+class KeyColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+    /*constructor(model, parent) {
+        super(model, parent);
+    }*/
+    getActions() {
+        return [{ action: 'delete', caption: 'Delete' }];
+    }
+    async doAction(name) {
+        switch (name) {
+            case 'delete':
+                await this.delete();
+                break;
+        }
+    }
+    static async getView(view) {
+        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
+            controller: 'KeyColumn',
+            action: 'getView',
+            params: {
+                view: view,
+            },
+        });
+    }
+    async delete() {
+        await this.model.delete();
+        this.parent.removeKeyColumn(this);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
+        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts":
 /*!**************************************************************************************!*\
   !*** ./src/frontend/editor/ModelController/PageLinkController/PageLinkController.ts ***!
@@ -40703,7 +40703,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "PageLinkController": () => (/* binding */ PageLinkController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 /* harmony import */ var _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Editor/PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
 /* harmony import */ var _DocumentController_VisualController_PageController_PageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DocumentController/VisualController/PageController/PageController */ "./src/frontend/editor/ModelController/DocumentController/VisualController/PageController/PageController.ts");
@@ -40711,7 +40711,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class PageLinkController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+class PageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     constructor(model, parent) {
         super(model, parent);
         this.node = true;
@@ -40782,13 +40782,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "ParamController": () => (/* binding */ ParamController)
 /* harmony export */ });
-/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/editor/ModelController/ModelController.ts");
+/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/ModelController/EdModelController.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 
 
 
-class ParamController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
+class ParamController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/

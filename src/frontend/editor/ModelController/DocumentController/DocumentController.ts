@@ -1,4 +1,4 @@
-import { EdModelController } from '../ModelController';
+import { EdModelController } from '../EdModelController';
 
 export class DocumentController extends EdModelController {
     document: any;

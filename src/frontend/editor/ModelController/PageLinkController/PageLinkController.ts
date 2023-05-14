@@ -1,4 +1,4 @@
-import { EdModelController } from '../ModelController';
+import { EdModelController } from '../EdModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 import { PageEditor } from '../../Editor/PageEditor/PageEditor';
 import { PageController } from '../DocumentController/VisualController/PageController/PageController';

@@ -1,4 +1,4 @@
-import { EdModelController } from '../ModelController';
+import { EdModelController } from '../EdModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 
 export class ActionController extends EdModelController {

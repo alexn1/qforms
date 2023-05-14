@@ -5,7 +5,7 @@ import { NewDataSourceController } from '../../../../ModalController/NewDataSour
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
 import { NewFormController } from '../../../../ModalController/NewFormController/NewFormController';
 import { VisualView } from '../VisualView';
-import { EdModelController } from '../../../ModelController';
+import { EdModelController } from '../../../EdModelController';
 
 export class PageController extends VisualController {
     options: any;
