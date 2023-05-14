@@ -75,7 +75,7 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
     render() {
         const { ctrl } = this.props;
         return (
-            <div className={'NoSqlDataSourceView full flex-column'}>
+            <div className={'EdNoSqlDataSourceView full flex-column'}>
                 <div className="toolbar">
                     <Button onClick={this.onSaveClick} enabled={this.isChanged()}>
                         Save
