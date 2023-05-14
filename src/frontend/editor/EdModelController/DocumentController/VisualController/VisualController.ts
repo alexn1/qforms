@@ -1,6 +1,6 @@
 import { DocumentController } from '../DocumentController';
 import { DataSourceController } from '../DataSourceController/DataSourceController';
-import { ActionController } from '../../ActionController/ActionController';
+import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewActionController } from '../../../ModalController/NewActionController/NewActionController';
 
@@ -71,7 +71,7 @@ export class VisualController extends DocumentController {
     }
 
     createAction(model) {
-        const action = new ActionController(model, this);
+        const action = new EdActionController(model, this);
         action.init();
         this.actions.push(action);
         return action;
