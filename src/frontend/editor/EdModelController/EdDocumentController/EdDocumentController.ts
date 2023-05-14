@@ -1,6 +1,6 @@
 import { EdModelController } from '../EdModelController';
 
-export class DocumentController extends EdModelController {
+export class EdDocumentController extends EdModelController {
     document: any;
 
     constructor(model, parent) {

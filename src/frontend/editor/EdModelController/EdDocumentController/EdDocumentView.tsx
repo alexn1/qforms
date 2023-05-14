@@ -1,6 +1,6 @@
 import { ReactComponent } from '../../../common';
 
-export class DocumentView extends ReactComponent {
+export class EdDocumentView extends ReactComponent {
     static createCM(textarea, value) {
         // @ts-ignore
         const cm = CodeMirror.fromTextArea(textarea, {

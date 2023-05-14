@@ -1,10 +1,10 @@
 import * as React from 'react';
-import { DocumentView } from '../EdDocumentView';
+import { EdDocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
 import './EdSqlDataSourceView.less';
 import { Visibility } from '../../../../viewer';
 
-export class SqlDataSourceView extends DocumentView {
+export class SqlDataSourceView extends EdDocumentView {
     singleRef: React.RefObject<any>;
     multipleRef: React.RefObject<any>;
     countRef: React.RefObject<any>;
@@ -27,15 +27,15 @@ export class SqlDataSourceView extends DocumentView {
 
     componentDidMount() {
         const { ctrl } = this.props;
-        this.singleQuery = DocumentView.createCM(
+        this.singleQuery = EdDocumentView.createCM(
             this.singleRef.current,
             ctrl.model.getAttr('singleQuery'),
         );
-        this.multipleQuery = DocumentView.createCM(
+        this.multipleQuery = EdDocumentView.createCM(
             this.multipleRef.current,
             ctrl.model.getAttr('multipleQuery'),
         );
-        this.countQuery = DocumentView.createCM(
+        this.countQuery = EdDocumentView.createCM(
             this.countRef.current,
             ctrl.model.getAttr('countQuery'),
         );

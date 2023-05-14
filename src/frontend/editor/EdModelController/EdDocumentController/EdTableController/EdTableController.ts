@@ -1,4 +1,4 @@
-import { DocumentController } from '../EdDocumentController';
+import { EdDocumentController } from '../EdDocumentController';
 import { EdColumnController } from '../../EdColumnController/EdColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { FrontHostApp } from '../../../../common';
@@ -7,7 +7,7 @@ import { NewFormFromTableController } from '../../../EdModalController/NewFormFr
 import { EditorHelper } from '../../../EditorHelper';
 import { TableView } from './EdTableView';
 
-export class TableController extends DocumentController {
+export class TableController extends EdDocumentController {
     columns: any[];
     items: any[];
 

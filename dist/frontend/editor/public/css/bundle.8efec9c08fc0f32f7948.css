@@ -1074,9 +1074,9 @@ div.CheckBox:not(.disabled):hover {
   padding-top: 10px;
 }
 
-/*!*********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DataSourceController/SqlDataSourceView.less ***!
-  \*********************************************************************************************************************************************************************************************/
+/*!*****************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less ***!
+  \*****************************************************************************************************************************************************************************************************/
 .SqlDataSourceView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1092,9 +1092,9 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DataSourceController/NoSqlDataSourceView.less ***!
-  \***********************************************************************************************************************************************************************************************/
+/*!*******************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
+  \*******************************************************************************************************************************************************************************************************/
 .NoSqlDataSourceView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1110,9 +1110,9 @@ div.CheckBox:not(.disabled):hover {
   height: 100%;
 }
 
-/*!********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/TableController/TableView.less ***!
-  \********************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less ***!
+  \****************************************************************************************************************************************************************************************/
 .TableView {
   height: 100%;
   background-color: white;
@@ -1170,9 +1170,9 @@ div.CheckBox:not(.disabled):hover {
   background-position: 0 -11px;
 }
 
-/*!**************************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/DatabaseController/DatabaseView.less ***!
-  \**************************************************************************************************************************************************************************************/
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less ***!
+  \**********************************************************************************************************************************************************************************************/
 .DatabaseView {
   height: 100%;
   background-color: white;
@@ -1193,9 +1193,9 @@ div.CheckBox:not(.disabled):hover {
   right: 0;
 }
 
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModelController/DocumentController/VisualController/VisualView.less ***!
-  \**********************************************************************************************************************************************************************************/
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less ***!
+  \******************************************************************************************************************************************************************************************/
 .VisualView .toolbar {
   background-color: white;
   padding: 5px;
@@ -1241,19 +1241,19 @@ div.CheckBox:not(.disabled):hover {
   width: 100%;
 }
 
-/*!*********************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModalController/ModalView.less ***!
-  \*********************************************************************************************************************************************/
-.ModalView {
+/*!*************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/EdModalView.less ***!
+  \*************************************************************************************************************************************************/
+.EdModalView {
   background-color: white;
   width: 300px;
   margin: auto;
 }
 
-/*!************************************************************************************************************************************************!*\
-  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/ModalController/NewModelView.less ***!
-  \************************************************************************************************************************************************/
-.NewModelView {
+/*!****************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/less-loader/dist/cjs.js!./src/frontend/editor/EdModalController/EdNewModelView.less ***!
+  \****************************************************************************************************************************************************/
+.EdNewModelView {
   display: flex;
   flex-direction: column;
   grid-gap: 20px;
@@ -1262,24 +1262,24 @@ div.CheckBox:not(.disabled):hover {
   margin: auto;
   padding: 20px;
 }
-.NewModelView input,
-.NewModelView select {
+.EdNewModelView input,
+.EdNewModelView select {
   width: 100%;
 }
-.NewModelView__header {
+.EdNewModelView__header {
   display: flex;
   grid-gap: 10px;
   align-items: center;
 }
-.NewModelView__title {
+.EdNewModelView__title {
   flex-grow: 1;
 }
-.NewModelView__body {
+.EdNewModelView__body {
   display: flex;
   flex-direction: column;
   grid-gap: 5px;
 }
-.NewModelView__footer {
+.EdNewModelView__footer {
   display: flex;
   flex-direction: row-reverse;
   grid-gap: 10px;

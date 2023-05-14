@@ -4,7 +4,7 @@ import { ApplicationController } from '../EdModelController/EdDocumentController
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { PageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';
-import { DocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
+import { EdDocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { Helper } from '../../common';
 import { EdModalController } from '../EdModalController/EdModalController';
 
@@ -128,7 +128,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     onItemDoubleClick2 = async (item) => {
         console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof PageLinkController ? item.pageController : item;
-        if (!controller || !(controller instanceof DocumentController)) return;
+        if (!controller || !(controller instanceof EdDocumentController)) return;
         await this.openDocument(controller);
     };
 

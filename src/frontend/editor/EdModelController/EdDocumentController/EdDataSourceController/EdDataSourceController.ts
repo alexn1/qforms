@@ -1,11 +1,11 @@
-import { DocumentController } from '../EdDocumentController';
+import { EdDocumentController } from '../EdDocumentController';
 import { KeyColumnController } from '../../EdKeyColumnController/EdKeyColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewKeyColumnController } from '../../../EdModalController/NewKeyColumnController/NewKeyColumnController';
 import { SqlDataSourceView } from './EdSqlDataSourceView';
 import { NoSqlDataSourceView } from './EdNoSqlDataSourceView';
 
-export class DataSourceController extends DocumentController {
+export class DataSourceController extends EdDocumentController {
     keyColumns: any[];
     items: any[];
 

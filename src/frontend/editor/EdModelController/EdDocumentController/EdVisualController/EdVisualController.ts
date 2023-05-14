@@ -1,10 +1,10 @@
-import { DocumentController } from '../EdDocumentController';
+import { EdDocumentController } from '../EdDocumentController';
 import { DataSourceController } from '../EdDataSourceController/EdDataSourceController';
 import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewActionController } from '../../../EdModalController/NewActionController/NewActionController';
 
-export class VisualController extends DocumentController {
+export class VisualController extends EdDocumentController {
     data: any;
     dataSources: any[];
     actions: any[];

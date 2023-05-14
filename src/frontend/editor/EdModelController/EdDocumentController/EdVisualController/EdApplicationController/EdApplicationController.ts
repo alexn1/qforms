@@ -7,7 +7,7 @@ import { NewDataSourceController } from '../../../../EdModalController/NewDataSo
 import { NewPageController } from '../../../../EdModalController/NewPageController/NewPageController';
 import { PageController } from '../EdPageController/EdPageController';
 import { VisualView } from '../EdVisualView';
-import { DocumentView } from '../../EdDocumentView';
+import { EdDocumentView } from '../../EdDocumentView';
 
 export class ApplicationController extends VisualController {
     editorApp: any;

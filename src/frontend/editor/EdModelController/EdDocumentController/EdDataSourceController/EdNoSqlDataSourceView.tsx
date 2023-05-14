@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { DocumentView } from '../EdDocumentView';
+import { EdDocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
 import { Visibility } from '../../../../../types';
 
 import './EdNoSqlDataSourceView.less';
 
-export class NoSqlDataSourceView extends DocumentView {
+export class NoSqlDataSourceView extends EdDocumentView {
     selectRef: React.RefObject<any>;
     countRef: React.RefObject<any>;
     selectQuery: any;
@@ -24,11 +24,11 @@ export class NoSqlDataSourceView extends DocumentView {
 
     componentDidMount() {
         const { ctrl } = this.props;
-        this.selectQuery = DocumentView.createCM(
+        this.selectQuery = EdDocumentView.createCM(
             this.selectRef.current,
             ctrl.model.getAttr('selectQuery'),
         );
-        this.countQuery = DocumentView.createCM(
+        this.countQuery = EdDocumentView.createCM(
             this.countRef.current,
             ctrl.model.getAttr('countQuery'),
         );

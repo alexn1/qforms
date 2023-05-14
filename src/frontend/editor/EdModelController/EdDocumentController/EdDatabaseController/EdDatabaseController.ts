@@ -1,4 +1,4 @@
-import { DocumentController } from '../EdDocumentController';
+import { EdDocumentController } from '../EdDocumentController';
 import { ParamController } from '../../EdParamController/EdParamController';
 import { TableController } from '../EdTableController/EdTableController';
 import { DatabaseView } from './EdDatabaseView';
@@ -6,7 +6,7 @@ import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostA
 import { NewParamController } from '../../../EdModalController/NewParamController/NewParamController';
 import { NewTableController } from '../../../EdModalController/NewTableController/NewTableController';
 
-export class DatabaseController extends DocumentController {
+export class DatabaseController extends EdDocumentController {
     tableName: any;
     tableInfo: any;
     params: any[];

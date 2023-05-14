@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { DocumentView } from '../EdDocumentView';
+import { EdDocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
 import './EdVisualView.less';
 
-export class VisualView extends DocumentView {
+export class VisualView extends EdDocumentView {
     textarea: React.RefObject<any>;
     cm: any;
 
@@ -22,7 +22,7 @@ export class VisualView extends DocumentView {
         // console.log('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
-            this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            this.cm = EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
             this.cm.on('change', this.onChange);
         }
     }
@@ -32,7 +32,7 @@ export class VisualView extends DocumentView {
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !this.cm) {
-            this.cm = DocumentView.createCM(this.getTextarea(), ctrl.data.js);
+            this.cm = EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
         }
     }
 
