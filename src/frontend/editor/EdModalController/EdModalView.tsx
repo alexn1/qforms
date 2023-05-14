@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { ReactComponent, Modal } from '../../common';
-import './ModalView.less';
-import './NewModelView.less';
+import './EdModalView.less';
+import './EdNewModelView.less';
 
 export class ModalView extends ReactComponent {
     render() {

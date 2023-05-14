@@ -338,6 +338,30 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/frontend/editor/EdModalController/EdModalView.less":
+/*!****************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalView.less ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdNewModelView.less":
+/*!*******************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdNewModelView.less ***!
+  \*******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less":
 /*!**********************************************************************************************************************!*\
   !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
@@ -402,30 +426,6 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************************!*\
   !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
   \****************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/ModalView.less":
-/*!************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/ModalView.less ***!
-  \************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-// extracted by mini-css-extract-plugin
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewModelView.less":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewModelView.less ***!
-  \***************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -35708,6 +35708,990 @@ class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
 
 /***/ }),
 
+/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassController": () => (/* binding */ ChangeClassController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx");
+
+
+class ChangeClassController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__.ChangeClassView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ChangeClassView": () => (/* binding */ ChangeClassView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
+                                    { value: 'TextBoxField' },
+                                    { value: 'ComboBoxField' },
+                                    { value: 'TextAreaField' },
+                                    { value: 'LinkField' },
+                                    { value: 'ImageField' },
+                                    { value: 'LabelField' },
+                                    { value: 'DateField' },
+                                    { value: 'TimeField' },
+                                    { value: 'DateTimeField' },
+                                    { value: 'CheckBoxField' },
+                                    { value: 'CheckBoxListField' },
+                                    { value: 'FileField' },
+                                    { value: 'PhoneField' },
+                                    { value: 'PasswordField' },
+                                    { value: 'RadioField' },
+                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: (c) => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdModalController.ts":
+/*!********************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalController.ts ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalController": () => (/* binding */ ModalController)
+/* harmony export */ });
+/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
+
+class ModalController {
+    constructor(options) {
+        this.onClose = async (e) => {
+            console.log('ModalController.onClose');
+            await this.close();
+        };
+        this.onCreate = async (values) => {
+            console.log('ModalController.onCreate', values);
+            await this.close();
+            if (this.options.onCreate) {
+                await this.options.onCreate(values);
+            }
+        };
+        this.options = options;
+    }
+    async close() {
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp.editorApp.onModalClose();
+    }
+    getViewClass() {
+        throw new Error('ModalController.getViewClass not implemented');
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/EdModalView.tsx":
+/*!***************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/EdModalView.tsx ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalView": () => (/* binding */ ModalView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _EdModalView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdModalView.less */ "./src/frontend/editor/EdModalController/EdModalView.less");
+/* harmony import */ var _EdNewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdNewModelView.less */ "./src/frontend/editor/EdModalController/EdNewModelView.less");
+
+
+
+
+
+class ModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), {
+                ctrl,
+                onCreate: (c) => (ctrl.view = c),
+            }) }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionController": () => (/* binding */ NewActionController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewActionView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx");
+
+
+class NewActionController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewActionView__WEBPACK_IMPORTED_MODULE_1__.NewActionView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewActionView": () => (/* binding */ NewActionView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewActionView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+        this.caption = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts":
+/*!******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts ***!
+  \******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnController": () => (/* binding */ NewColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx");
+
+
+class NewColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewColumnView__WEBPACK_IMPORTED_MODULE_1__.NewColumnView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewColumnView": () => (/* binding */ NewColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewParamView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "columnName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceController": () => (/* binding */ NewDataSourceController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx");
+
+
+class NewDataSourceController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__.NewDataSourceView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx":
+/*!*********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx ***!
+  \*********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDataSourceView": () => (/* binding */ NewDataSourceView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                class: this.class.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
+                                        { value: 'DataSource', title: 'DataSource' },
+                                        { value: 'SqlDataSource', title: 'SqlDataSource' },
+                                        { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
+                                    ], onCreate: (c) => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts ***!
+  \**********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseController": () => (/* binding */ NewDatabaseController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx");
+
+
+class NewDatabaseController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__.NewDatabaseView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDatabaseView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+                name: this.name.getValue(),
+                host: this.host.getValue(),
+                database: this.database.getValue(),
+                user: this.user.getValue(),
+                password: this.password.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.class = null;
+        this.name = null;
+        this.host = null;
+        this.database = null;
+        this.user = null;
+        this.password = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: 'class', items: [
+                                        { value: 'MySqlDatabase', title: 'MySqlDatabase' },
+                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
+                                        { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
+                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldController": () => (/* binding */ NewFieldController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx");
+
+
+class NewFieldController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewFieldView__WEBPACK_IMPORTED_MODULE_1__.NewFieldView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFieldView": () => (/* binding */ NewFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewFieldView.onCreate');
+            await this.props.ctrl.onCreate({
+                class: this.class.getValue(),
+                name: this.name.getValue(),
+                caption: this.caption.getValue() || this.name.getValue(),
+                type: this.type.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.class = null;
+        this.name = null;
+        this.caption = null;
+        this.type = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
+                                        { value: 'TextBoxField' },
+                                        { value: 'ComboBoxField' },
+                                        { value: 'TextAreaField' },
+                                        { value: 'LinkField' },
+                                        { value: 'ImageField' },
+                                        { value: 'LabelField' },
+                                        { value: 'DateField' },
+                                        { value: 'TimeField' },
+                                        { value: 'DateTimeField' },
+                                        { value: 'CheckBoxField' },
+                                        { value: 'CheckBoxListField' },
+                                        { value: 'FileField' },
+                                        { value: 'PhoneField' },
+                                        { value: 'PasswordField' },
+                                        { value: 'RadioField' },
+                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "type", value: '', items: [
+                                        { value: '', title: '' },
+                                        { value: 'string', title: 'string' },
+                                        { value: 'number', title: 'number' },
+                                        { value: 'boolean', title: 'boolean' },
+                                        { value: 'object', title: 'object' },
+                                        { value: 'date', title: 'date' },
+                                    ], onCreate: (c) => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx");
+
+
+class NewFormController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewFormView__WEBPACK_IMPORTED_MODULE_1__.NewFormView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx":
+/*!*********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormView": () => (/* binding */ NewFormView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+                class: this.class.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+        this.caption = null;
+        this.class = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "formClass", value: 'TableForm', items: [
+                                        { value: 'RowForm', title: 'RowForm' },
+                                        { value: 'TableForm', title: 'TableForm' },
+                                        { value: 'Form', title: 'Form' },
+                                    ], onCreate: (c) => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts":
+/*!********************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
+  \********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableController": () => (/* binding */ NewFormFromTableController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx");
+
+
+class NewFormFromTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__.NewFormFromTableView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx":
+/*!***************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx ***!
+  \***************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewFormFromTableView": () => (/* binding */ NewFormFromTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewDataSourceView.onCreate');
+            await this.props.ctrl.onCreate({
+                page: this.page.getValue(),
+                class: this.class.getValue(),
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.page = null;
+        this.class = null;
+        this.name = null;
+        this.caption = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        const tableController = ctrl.options.tableController;
+        const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
+            value: pageLink.getName(),
+            title: pageLink.getName(),
+        }));
+        console.log('pages:', pages);
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: (c) => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", value: 'TableForm', items: [
+                                        { value: 'RowForm', title: 'RowForm' },
+                                        { value: 'TableForm', title: 'TableForm' },
+                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts":
+/*!************************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts ***!
+  \************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnController": () => (/* binding */ NewKeyColumnController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx");
+
+
+class NewKeyColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__.NewKeyColumnView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewKeyColumnView": () => (/* binding */ NewKeyColumnView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewParamView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageController": () => (/* binding */ NewPageController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewPageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx");
+
+
+class NewPageController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewPageView__WEBPACK_IMPORTED_MODULE_1__.NewPageView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx":
+/*!*********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewPageView": () => (/* binding */ NewPageView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewPageView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+                caption: this.caption.getValue(),
+                startup: this.startup.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+        this.caption = null;
+        this.startup = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "startup", items: [
+                                        { value: 'false', title: 'false' },
+                                        { value: 'true', title: 'true' },
+                                    ], onCreate: (c) => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamController": () => (/* binding */ NewParamController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewParamView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx");
+
+
+class NewParamController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewParamView__WEBPACK_IMPORTED_MODULE_1__.NewParamView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewParamView": () => (/* binding */ NewParamView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewParamView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts":
+/*!****************************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableController": () => (/* binding */ NewTableController)
+/* harmony export */ });
+/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
+/* harmony import */ var _NewTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx");
+
+
+class NewTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    getViewClass() {
+        return _NewTableView__WEBPACK_IMPORTED_MODULE_1__.NewTableView;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx":
+/*!***********************************************************************************!*\
+  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NewTableView": () => (/* binding */ NewTableView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
+    constructor(props) {
+        super(props);
+        this.onCreate = async (e) => {
+            // console.log('NewParamView.onCreate');
+            await this.props.ctrl.onCreate({
+                name: this.name.getValue(),
+            });
+        };
+        this.onKeyDown = (e) => {
+            if (e.key === 'Escape') {
+                this.props.ctrl.onClose();
+            }
+            else if (e.key === 'Enter') {
+                this.onCreate();
+            }
+        };
+        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
+        this.name = null;
+    }
+    render() {
+        const ctrl = this.props.ctrl;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "tableName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts":
 /*!****************************************************************************************!*\
   !*** ./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts ***!
@@ -35841,7 +36825,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
 /* harmony import */ var _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdKeyColumnController/EdKeyColumnController */ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../ModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts");
+/* harmony import */ var _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EdModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts");
 /* harmony import */ var _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx");
 /* harmony import */ var _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EdNoSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx");
 
@@ -35918,7 +36902,7 @@ class DataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
         }
     }
     async actionNewKeyColumn() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__.NewKeyColumnController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__.NewKeyColumnController({
             onCreate: async (values) => {
                 const keyColumn = await this.model.newKeyColumn(values.name);
                 const keyColumnController = this.createKeyColumn(keyColumn);
@@ -36138,8 +37122,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdTableController/EdTableController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts");
 /* harmony import */ var _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdDatabaseView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../ModalController/NewParamController/NewParamController */ "./src/frontend/editor/ModalController/NewParamController/NewParamController.ts");
-/* harmony import */ var _ModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../ModalController/NewTableController/NewTableController */ "./src/frontend/editor/ModalController/NewTableController/NewTableController.ts");
+/* harmony import */ var _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewParamController/NewParamController */ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts");
+/* harmony import */ var _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EdModalController/NewTableController/NewTableController */ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts");
 
 
 
@@ -36252,7 +37236,7 @@ class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         }
     }
     async actionNewParam() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__.NewParamController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__.NewParamController({
             onCreate: async (values) => {
                 const param = await this.model.newParam(values.name);
                 const paramController = this.createParam(param);
@@ -36264,7 +37248,7 @@ class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         }));
     }
     async actionNewTable() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__.NewTableController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__.NewTableController({
             onCreate: async (values) => {
                 const table = await this.model.newTable({ name: values.name });
                 const tableController = this.createTable2(table);
@@ -36441,8 +37425,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdColumnController/EdColumnController */ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../ModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts");
-/* harmony import */ var _ModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../ModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts");
+/* harmony import */ var _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts");
+/* harmony import */ var _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts");
 /* harmony import */ var _EditorHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EditorHelper */ "./src/frontend/editor/EditorHelper.ts");
 /* harmony import */ var _EdTableView__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EdTableView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx");
 
@@ -36515,7 +37499,7 @@ class TableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__
         }
     }
     async actionNewColumn() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__.NewColumnController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__.NewColumnController({
             onCreate: async (values) => {
                 const column = await this.model.newColumn(values.name);
                 const columnController = this.createColumn(column);
@@ -36545,7 +37529,7 @@ class TableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__
     }
     async createFormAction() {
         console.log('TableController.createFormAction');
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
             tableController: this,
             onCreate: async (values) => {
                 const formWizard = _EditorHelper__WEBPACK_IMPORTED_MODULE_6__.EditorHelper.create({
@@ -36641,9 +37625,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdDatabaseController/EdDatabaseController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts");
 /* harmony import */ var _EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EdPageLinkController/EdPageLinkController */ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts");
-/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
-/* harmony import */ var _ModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../ModalController/NewPageController/NewPageController */ "./src/frontend/editor/ModalController/NewPageController/NewPageController.ts");
+/* harmony import */ var _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../EdModalController/NewPageController/NewPageController */ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts");
 /* harmony import */ var _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../EdPageController/EdPageController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts");
 /* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
 
@@ -36732,7 +37716,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
     async newDatabaseAction() {
         console.log('ApplicationController.newDatabaseAction');
         // @ts-ignore
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
             onCreate: async (values) => {
                 // console.log('values: ', values);
                 const database = await this.model.newDatabase({
@@ -36755,7 +37739,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
         }));
     }
     async newDataSourceAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__.NewDataSourceController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__.NewDataSourceController({
             onCreate: async (values) => {
                 const dataSource = await this.model.newDataSource({
                     name: values.name,
@@ -36770,7 +37754,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
         }));
     }
     async newPageAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__.NewPageController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__.NewPageController({
             onCreate: async (values) => {
                 const page = await this.model.newPage({
                     name: values.name,
@@ -36816,7 +37800,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../ModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts");
+/* harmony import */ var _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EdModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts");
 /* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
 
 
@@ -36864,7 +37848,7 @@ class FieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.V
         }
     }
     async actionChangeClass() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.openModal(new _ModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__.ChangeClassController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__.ChangeClassController({
             fieldCtrl: this,
             onCreate: async (values) => {
                 const data = await this.model.changeClass({ class: values.class });
@@ -36916,8 +37900,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFieldController/EdFieldController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
-/* harmony import */ var _ModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts");
 /* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
 
 
@@ -37001,7 +37985,7 @@ class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         }
     }
     async actionNewDataSource() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
             onCreate: async (values) => {
                 const dataSource = await this.model.newDataSource({
                     name: values.name,
@@ -37016,7 +38000,7 @@ class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         }));
     }
     async actionNewField() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__.NewFieldController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__.NewFieldController({
             onCreate: async (values) => {
                 const field = await this.model.newField({
                     class: values.class,
@@ -37083,9 +38067,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFormController/EdFormController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../ModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts");
+/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
 /* harmony import */ var _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-/* harmony import */ var _ModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../ModalController/NewFormController/NewFormController */ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts");
+/* harmony import */ var _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewFormController/NewFormController */ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts");
 /* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
 /* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
 
@@ -37168,7 +38152,7 @@ class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         }
     }
     async newDataSourceAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
             onCreate: async (values) => {
                 const dataSourceData = await _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__.DataSourceEditor.create(this.model, {
                     name: values.name,
@@ -37184,7 +38168,7 @@ class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         }));
     }
     async actionNewForm() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__.NewFormController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__.NewFormController({
             onCreate: async (values) => {
                 const form = await this.model.newForm({
                     name: values.name,
@@ -37246,7 +38230,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdDataSourceController/EdDataSourceController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts");
 /* harmony import */ var _EdActionController_EdActionController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EdActionController/EdActionController */ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _ModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../ModalController/NewActionController/NewActionController */ "./src/frontend/editor/ModalController/NewActionController/NewActionController.ts");
+/* harmony import */ var _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewActionController/NewActionController */ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts");
 
 
 
@@ -37320,7 +38304,7 @@ class VisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0_
     }
     async actionNewAction() {
         console.log('VisualController.actionNewAction');
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _ModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
+        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
             onCreate: async (values) => {
                 const action = await this.model.newAction({
                     name: values.name,
@@ -39578,7 +40562,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.tsx");
 /* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
 /* harmony import */ var _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx");
-/* harmony import */ var _ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ModalController/ModalView */ "./src/frontend/editor/ModalController/ModalView.tsx");
+/* harmony import */ var _EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdModalController/EdModalView */ "./src/frontend/editor/EdModalController/EdModalView.tsx");
 /* harmony import */ var _EditorFrontHostAppView_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditorFrontHostAppView.less */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less");
 
 
@@ -39616,7 +40600,7 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
                                     title: 'Properties',
                                     content: ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid, { onCreate: (c) => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
                                 },
-                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_ModalController_ModalView__WEBPACK_IMPORTED_MODULE_6__.ModalView, { ctrl: ctrl.modal })] })));
+                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__.ModalView, { ctrl: ctrl.modal })] })));
     }
 }
 
@@ -39832,990 +40816,6 @@ class PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.Form
     getCountQuery() {
         console.log('PostgreSqlFormWizard.getCountQuery');
         return `select count(*) from "${this.tableName}"`;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts":
-/*!********************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassController.ts ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChangeClassController": () => (/* binding */ ChangeClassController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx");
-
-
-class ChangeClassController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__.ChangeClassView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx":
-/*!***************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/ChangeClassController/ChangeClassView.tsx ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChangeClassView": () => (/* binding */ ChangeClassView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                    { value: 'TextBoxField' },
-                                    { value: 'ComboBoxField' },
-                                    { value: 'TextAreaField' },
-                                    { value: 'LinkField' },
-                                    { value: 'ImageField' },
-                                    { value: 'LabelField' },
-                                    { value: 'DateField' },
-                                    { value: 'TimeField' },
-                                    { value: 'DateTimeField' },
-                                    { value: 'CheckBoxField' },
-                                    { value: 'CheckBoxListField' },
-                                    { value: 'FileField' },
-                                    { value: 'PhoneField' },
-                                    { value: 'PasswordField' },
-                                    { value: 'RadioField' },
-                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: (c) => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/ModalController.ts":
-/*!****************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/ModalController.ts ***!
-  \****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ModalController": () => (/* binding */ ModalController)
-/* harmony export */ });
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-class ModalController {
-    constructor(options) {
-        this.onClose = async (e) => {
-            console.log('ModalController.onClose');
-            await this.close();
-        };
-        this.onCreate = async (values) => {
-            console.log('ModalController.onCreate', values);
-            await this.close();
-            if (this.options.onCreate) {
-                await this.options.onCreate(values);
-            }
-        };
-        this.options = options;
-    }
-    async close() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp.editorApp.onModalClose();
-    }
-    getViewClass() {
-        throw new Error('ModalController.getViewClass not implemented');
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/ModalView.tsx":
-/*!***********************************************************!*\
-  !*** ./src/frontend/editor/ModalController/ModalView.tsx ***!
-  \***********************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ModalView": () => (/* binding */ ModalView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ModalView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ModalView.less */ "./src/frontend/editor/ModalController/ModalView.less");
-/* harmony import */ var _NewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NewModelView.less */ "./src/frontend/editor/ModalController/NewModelView.less");
-
-
-
-
-
-class ModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), {
-                ctrl,
-                onCreate: (c) => (ctrl.view = c),
-            }) }));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewActionController/NewActionController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewActionController/NewActionController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewActionController": () => (/* binding */ NewActionController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewActionView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx");
-
-
-class NewActionController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewActionView__WEBPACK_IMPORTED_MODULE_1__.NewActionView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx":
-/*!***********************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewActionController/NewActionView.tsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewActionView": () => (/* binding */ NewActionView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewActionView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewColumnController/NewColumnController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewColumnController": () => (/* binding */ NewColumnController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx");
-
-
-class NewColumnController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewColumnView__WEBPACK_IMPORTED_MODULE_1__.NewColumnView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx":
-/*!***********************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewColumnController/NewColumnView.tsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewColumnView": () => (/* binding */ NewColumnView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "columnName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts":
-/*!************************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceController.ts ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDataSourceController": () => (/* binding */ NewDataSourceController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx");
-
-
-class NewDataSourceController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__.NewDataSourceView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx":
-/*!*******************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewDataSourceController/NewDataSourceView.tsx ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDataSourceView": () => (/* binding */ NewDataSourceView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                        { value: 'DataSource', title: 'DataSource' },
-                                        { value: 'SqlDataSource', title: 'SqlDataSource' },
-                                        { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
-                                    ], onCreate: (c) => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts":
-/*!********************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseController.ts ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDatabaseController": () => (/* binding */ NewDatabaseController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx");
-
-
-class NewDatabaseController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__.NewDatabaseView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx":
-/*!***************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewDatabaseController/NewDatabaseView.tsx ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewDatabaseView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                host: this.host.getValue(),
-                database: this.database.getValue(),
-                user: this.user.getValue(),
-                password: this.password.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-        this.name = null;
-        this.host = null;
-        this.database = null;
-        this.user = null;
-        this.password = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: 'class', items: [
-                                        { value: 'MySqlDatabase', title: 'MySqlDatabase' },
-                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
-                                        { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
-                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFieldController": () => (/* binding */ NewFieldController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx");
-
-
-class NewFieldController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewFieldView__WEBPACK_IMPORTED_MODULE_1__.NewFieldView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFieldController/NewFieldView.tsx ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFieldView": () => (/* binding */ NewFieldView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewFieldView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                caption: this.caption.getValue() || this.name.getValue(),
-                type: this.type.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-        this.name = null;
-        this.caption = null;
-        this.type = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                        { value: 'TextBoxField' },
-                                        { value: 'ComboBoxField' },
-                                        { value: 'TextAreaField' },
-                                        { value: 'LinkField' },
-                                        { value: 'ImageField' },
-                                        { value: 'LabelField' },
-                                        { value: 'DateField' },
-                                        { value: 'TimeField' },
-                                        { value: 'DateTimeField' },
-                                        { value: 'CheckBoxField' },
-                                        { value: 'CheckBoxListField' },
-                                        { value: 'FileField' },
-                                        { value: 'PhoneField' },
-                                        { value: 'PasswordField' },
-                                        { value: 'RadioField' },
-                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "type", value: '', items: [
-                                        { value: '', title: '' },
-                                        { value: 'string', title: 'string' },
-                                        { value: 'number', title: 'number' },
-                                        { value: 'boolean', title: 'boolean' },
-                                        { value: 'object', title: 'object' },
-                                        { value: 'date', title: 'date' },
-                                    ], onCreate: (c) => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFormController/NewFormController.ts":
-/*!************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFormController/NewFormController.ts ***!
-  \************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx");
-
-
-class NewFormController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewFormView__WEBPACK_IMPORTED_MODULE_1__.NewFormView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx":
-/*!*******************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFormController/NewFormView.tsx ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormView": () => (/* binding */ NewFormView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "formClass", value: 'TableForm', items: [
-                                        { value: 'RowForm', title: 'RowForm' },
-                                        { value: 'TableForm', title: 'TableForm' },
-                                        { value: 'Form', title: 'Form' },
-                                    ], onCreate: (c) => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts":
-/*!******************************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
-  \******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormFromTableController": () => (/* binding */ NewFormFromTableController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx");
-
-
-class NewFormFromTableController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__.NewFormFromTableView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx":
-/*!*************************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewFormFromTableController/NewFormFromTableView.tsx ***!
-  \*************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormFromTableView": () => (/* binding */ NewFormFromTableView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                page: this.page.getValue(),
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.page = null;
-        this.class = null;
-        this.name = null;
-        this.caption = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        const tableController = ctrl.options.tableController;
-        const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
-            value: pageLink.getName(),
-            title: pageLink.getName(),
-        }));
-        console.log('pages:', pages);
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: (c) => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", value: 'TableForm', items: [
-                                        { value: 'RowForm', title: 'RowForm' },
-                                        { value: 'TableForm', title: 'TableForm' },
-                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts":
-/*!**********************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnController.ts ***!
-  \**********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewKeyColumnController": () => (/* binding */ NewKeyColumnController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx");
-
-
-class NewKeyColumnController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__.NewKeyColumnView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx":
-/*!*****************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewKeyColumnController/NewKeyColumnView.tsx ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewKeyColumnView": () => (/* binding */ NewKeyColumnView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewPageController/NewPageController.ts":
-/*!************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewPageController/NewPageController.ts ***!
-  \************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewPageController": () => (/* binding */ NewPageController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewPageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx");
-
-
-class NewPageController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewPageView__WEBPACK_IMPORTED_MODULE_1__.NewPageView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx":
-/*!*******************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewPageController/NewPageView.tsx ***!
-  \*******************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewPageView": () => (/* binding */ NewPageView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewPageView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-                startup: this.startup.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-        this.startup = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "startup", items: [
-                                        { value: 'false', title: 'false' },
-                                        { value: 'true', title: 'true' },
-                                    ], onCreate: (c) => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewParamController/NewParamController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewParamController/NewParamController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewParamController": () => (/* binding */ NewParamController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewParamView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx");
-
-
-class NewParamController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewParamView__WEBPACK_IMPORTED_MODULE_1__.NewParamView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewParamController/NewParamView.tsx ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewParamView": () => (/* binding */ NewParamView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewTableController/NewTableController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewTableController/NewTableController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewTableController": () => (/* binding */ NewTableController)
-/* harmony export */ });
-/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/editor/ModalController/ModalController.ts");
-/* harmony import */ var _NewTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx");
-
-
-class NewTableController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
-    getViewClass() {
-        return _NewTableView__WEBPACK_IMPORTED_MODULE_1__.NewTableView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/editor/ModalController/NewTableController/NewTableView.tsx ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewTableView": () => (/* binding */ NewTableView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "tableName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
     }
 }
 

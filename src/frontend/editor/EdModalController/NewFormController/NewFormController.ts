@@ -1,4 +1,4 @@
-import { ModalController } from '../ModalController';
+import { ModalController } from '../EdModalController';
 import { NewFormView } from './NewFormView';
 
 export class NewFormController extends ModalController {

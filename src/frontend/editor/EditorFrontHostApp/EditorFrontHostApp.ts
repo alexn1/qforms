@@ -6,7 +6,7 @@ import { PageLinkController } from '../EdModelController/EdPageLinkController/Ed
 import { EdModelController } from '../EdModelController/EdModelController';
 import { DocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { Helper } from '../../common';
-import { ModalController } from '../ModalController/ModalController';
+import { ModalController } from '../EdModalController/EdModalController';
 
 export class EditorFrontHostApp extends FrontHostApp {
     public static editorApp: any;

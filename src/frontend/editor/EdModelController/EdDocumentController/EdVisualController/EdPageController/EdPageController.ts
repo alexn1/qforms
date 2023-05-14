@@ -1,9 +1,9 @@
 import { VisualController } from '../EdVisualController';
 import { FormController } from '../EdFormController/EdFormController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
+import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
-import { NewFormController } from '../../../../ModalController/NewFormController/NewFormController';
+import { NewFormController } from '../../../../EdModalController/NewFormController/NewFormController';
 import { VisualView } from '../EdVisualView';
 import { EdModelController } from '../../../EdModelController';
 

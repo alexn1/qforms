@@ -2,8 +2,8 @@ import { DocumentController } from '../EdDocumentController';
 import { EdColumnController } from '../../EdColumnController/EdColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { FrontHostApp } from '../../../../common';
-import { NewColumnController } from '../../../ModalController/NewColumnController/NewColumnController';
-import { NewFormFromTableController } from '../../../ModalController/NewFormFromTableController/NewFormFromTableController';
+import { NewColumnController } from '../../../EdModalController/NewColumnController/NewColumnController';
+import { NewFormFromTableController } from '../../../EdModalController/NewFormFromTableController/NewFormFromTableController';
 import { EditorHelper } from '../../../EditorHelper';
 import { TableView } from './EdTableView';
 

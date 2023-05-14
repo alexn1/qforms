@@ -1,6 +1,6 @@
 import { VisualController } from '../EdVisualController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import { ChangeClassController } from '../../../../ModalController/ChangeClassController/ChangeClassController';
+import { ChangeClassController } from '../../../../EdModalController/ChangeClassController/ChangeClassController';
 import { VisualView } from '../EdVisualView';
 
 export class FieldController extends VisualController {

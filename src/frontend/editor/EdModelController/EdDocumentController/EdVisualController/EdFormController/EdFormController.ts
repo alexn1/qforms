@@ -1,8 +1,8 @@
 import { VisualController } from '../EdVisualController';
 import { FieldController } from '../EdFieldController/EdFieldController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
-import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
-import { NewFieldController } from '../../../../ModalController/NewFieldController/NewFieldController';
+import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
+import { NewFieldController } from '../../../../EdModalController/NewFieldController/NewFieldController';
 import { VisualView } from '../EdVisualView';
 
 export class FormController extends VisualController {

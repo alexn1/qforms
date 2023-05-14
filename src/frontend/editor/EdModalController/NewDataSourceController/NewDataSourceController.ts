@@ -1,4 +1,4 @@
-import { ModalController } from '../ModalController';
+import { ModalController } from '../EdModalController';
 import { NewDataSourceView } from './NewDataSourceView';
 
 export class NewDataSourceController extends ModalController {

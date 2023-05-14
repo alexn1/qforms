@@ -1,4 +1,4 @@
-import { ModalController } from '../ModalController';
+import { ModalController } from '../EdModalController';
 import { NewFormFromTableView } from './NewFormFromTableView';
 
 export class NewFormFromTableController extends ModalController {

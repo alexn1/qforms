@@ -3,8 +3,8 @@ import { ParamController } from '../../EdParamController/EdParamController';
 import { TableController } from '../EdTableController/EdTableController';
 import { DatabaseView } from './EdDatabaseView';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import { NewParamController } from '../../../ModalController/NewParamController/NewParamController';
-import { NewTableController } from '../../../ModalController/NewTableController/NewTableController';
+import { NewParamController } from '../../../EdModalController/NewParamController/NewParamController';
+import { NewTableController } from '../../../EdModalController/NewTableController/NewTableController';
 
 export class DatabaseController extends DocumentController {
     tableName: any;

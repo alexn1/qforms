@@ -1,4 +1,4 @@
-import { ModalController } from '../ModalController';
+import { ModalController } from '../EdModalController';
 import { NewTableView } from './NewTableView';
 
 export class NewTableController extends ModalController {

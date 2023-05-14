@@ -2,7 +2,7 @@ import { DocumentController } from '../EdDocumentController';
 import { DataSourceController } from '../EdDataSourceController/EdDataSourceController';
 import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
-import { NewActionController } from '../../../ModalController/NewActionController/NewActionController';
+import { NewActionController } from '../../../EdModalController/NewActionController/NewActionController';
 
 export class VisualController extends DocumentController {
     data: any;

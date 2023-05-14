@@ -3,7 +3,7 @@ import { ReactComponent, Tab } from '../../common';
 import { ActionList } from '../ActionList/ActionList';
 import { TreeWidget } from '../TreeWidget/TreeWidget';
 import { PropertyGrid } from '../PropertyGrid/PropertyGrid';
-import { ModalView } from '../ModalController/ModalView';
+import { ModalView } from '../EdModalController/EdModalView';
 import './EditorFrontHostAppView.less';
 
 export class EditorFrontHostAppView extends ReactComponent {
