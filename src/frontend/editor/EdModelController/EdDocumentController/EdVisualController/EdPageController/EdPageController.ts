@@ -1,13 +1,13 @@
-import { VisualController } from '../EdVisualController';
-import { FormController } from '../EdFormController/EdFormController';
+import { EdVisualController } from '../EdVisualController';
+import { EdFormController } from '../EdFormController/EdFormController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
 import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSourceEditor';
 import { NewFormController } from '../../../../EdModalController/NewFormController/NewFormController';
-import { VisualView } from '../EdVisualView';
+import { EdVisualView } from '../EdVisualView';
 import { EdModelController } from '../../../EdModelController';
 
-export class PageController extends VisualController {
+export class EdPageController extends EdVisualController {
     options: any;
     forms: any[];
     items: any[];
@@ -34,7 +34,7 @@ export class PageController extends VisualController {
     }
 
     createForm(model) {
-        const form = new FormController(model, this);
+        const form = new EdFormController(model, this);
         form.init();
         this.forms.push(form);
         return form;
@@ -157,6 +157,6 @@ export class PageController extends VisualController {
     }
 
     getDocumentViewClass() {
-        return VisualView;
+        return EdVisualView;
     }
 }

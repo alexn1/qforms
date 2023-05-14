@@ -2,10 +2,10 @@ import { EdDocumentController } from '../EdDocumentController';
 import { EdKeyColumnController } from '../../EdKeyColumnController/EdKeyColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewKeyColumnController } from '../../../EdModalController/NewKeyColumnController/NewKeyColumnController';
-import { SqlDataSourceView } from './EdSqlDataSourceView';
-import { NoSqlDataSourceView } from './EdNoSqlDataSourceView';
+import { EdSqlDataSourceView } from './EdSqlDataSourceView';
+import { EdNoSqlDataSourceView } from './EdNoSqlDataSourceView';
 
-export class DataSourceController extends EdDocumentController {
+export class EdDataSourceController extends EdDocumentController {
     keyColumns: any[];
     items: any[];
 
@@ -111,8 +111,8 @@ export class DataSourceController extends EdDocumentController {
     }
 
     getDocumentViewClass() {
-        if (this.model.getClassName() === 'SqlDataSource') return SqlDataSourceView;
-        if (this.model.getClassName() === 'NoSqlDataSource') return NoSqlDataSourceView;
+        if (this.model.getClassName() === 'SqlDataSource') return EdSqlDataSourceView;
+        if (this.model.getClassName() === 'NoSqlDataSource') return EdNoSqlDataSourceView;
         return super.getDocumentViewClass();
     }
 

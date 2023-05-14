@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { EdDocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
-import './EdSqlDataSourceView.less';
 import { Visibility } from '../../../../viewer';
 
-export class SqlDataSourceView extends EdDocumentView {
+import './EdSqlDataSourceView.less';
+
+export class EdSqlDataSourceView extends EdDocumentView {
     singleRef: React.RefObject<any>;
     multipleRef: React.RefObject<any>;
     countRef: React.RefObject<any>;

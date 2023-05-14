@@ -1,10 +1,10 @@
 import { EdDocumentController } from '../EdDocumentController';
-import { DataSourceController } from '../EdDataSourceController/EdDataSourceController';
+import { EdDataSourceController } from '../EdDataSourceController/EdDataSourceController';
 import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewActionController } from '../../../EdModalController/NewActionController/NewActionController';
 
-export class VisualController extends EdDocumentController {
+export class EdVisualController extends EdDocumentController {
     data: any;
     dataSources: any[];
     actions: any[];
@@ -57,7 +57,7 @@ export class VisualController extends EdDocumentController {
 
     createDataSource(model) {
         console.log('VisualController.createDataSource', model);
-        const dataSource = new DataSourceController(model, this);
+        const dataSource = new EdDataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;

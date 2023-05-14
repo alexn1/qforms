@@ -1,7 +1,7 @@
 import { EdModelController } from '../EdModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 import { PageEditor } from '../../Editor/PageEditor/PageEditor';
-import { PageController } from '../EdDocumentController/EdVisualController/EdPageController/EdPageController';
+import { EdPageController } from '../EdDocumentController/EdVisualController/EdPageController/EdPageController';
 
 export class EdPageLinkController extends EdModelController {
     node: boolean;
@@ -42,7 +42,7 @@ export class EdPageLinkController extends EdModelController {
         page.init();
 
         // pageController
-        const pageController = new PageController(page, this);
+        const pageController = new EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
         // console.log('pageController:', pageController);

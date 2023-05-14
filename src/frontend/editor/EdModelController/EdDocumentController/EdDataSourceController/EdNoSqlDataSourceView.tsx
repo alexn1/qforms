@@ -5,7 +5,7 @@ import { Visibility } from '../../../../../types';
 
 import './EdNoSqlDataSourceView.less';
 
-export class NoSqlDataSourceView extends EdDocumentView {
+export class EdNoSqlDataSourceView extends EdDocumentView {
     selectRef: React.RefObject<any>;
     countRef: React.RefObject<any>;
     selectQuery: any;

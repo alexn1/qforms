@@ -1,9 +1,9 @@
-import { VisualController } from '../EdVisualController';
+import { EdVisualController } from '../EdVisualController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { ChangeClassController } from '../../../../EdModalController/ChangeClassController/ChangeClassController';
-import { VisualView } from '../EdVisualView';
+import { EdVisualView } from '../EdVisualView';
 
-export class FieldController extends VisualController {
+export class EdFieldController extends EdVisualController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -87,6 +87,6 @@ export class FieldController extends VisualController {
     }
 
     getDocumentViewClass() {
-        return VisualView;
+        return EdVisualView;
     }
 }

@@ -36820,7 +36820,7 @@ class EdColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DataSourceController": () => (/* binding */ DataSourceController)
+/* harmony export */   "EdDataSourceController": () => (/* binding */ EdDataSourceController)
 /* harmony export */ });
 /* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
 /* harmony import */ var _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdKeyColumnController/EdKeyColumnController */ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts");
@@ -36834,7 +36834,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class DataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onCreateModelBack = async (e) => {
@@ -36928,9 +36928,9 @@ class DataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
     }
     getDocumentViewClass() {
         if (this.model.getClassName() === 'SqlDataSource')
-            return _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.SqlDataSourceView;
+            return _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.EdSqlDataSourceView;
         if (this.model.getClassName() === 'NoSqlDataSource')
-            return _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__.NoSqlDataSourceView;
+            return _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__.EdNoSqlDataSourceView;
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
@@ -36956,7 +36956,7 @@ class DataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NoSqlDataSourceView": () => (/* binding */ NoSqlDataSourceView)
+/* harmony export */   "EdNoSqlDataSourceView": () => (/* binding */ EdNoSqlDataSourceView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -36968,7 +36968,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class NoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+class EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
@@ -37033,7 +37033,7 @@ class NoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.E
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "SqlDataSourceView": () => (/* binding */ SqlDataSourceView)
+/* harmony export */   "EdSqlDataSourceView": () => (/* binding */ EdSqlDataSourceView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -37045,7 +37045,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class SqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+class EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
@@ -37115,7 +37115,7 @@ class SqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdD
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatabaseController": () => (/* binding */ DatabaseController)
+/* harmony export */   "EdDatabaseController": () => (/* binding */ EdDatabaseController)
 /* harmony export */ });
 /* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
 /* harmony import */ var _EdParamController_EdParamController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdParamController/EdParamController */ "./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts");
@@ -37131,7 +37131,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onTableSelect2 = async (item) => {
@@ -37182,7 +37182,7 @@ class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         return param;
     }
     createTable2(model) {
-        const table = new _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__.TableController(model, this);
+        const table = new _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__.EdTableController(model, this);
         table.init();
         this.tables.push(table);
         return table;
@@ -37299,7 +37299,7 @@ class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__.DatabaseView;
+        return _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__.EdDatabaseView;
     }
 }
 
@@ -37314,7 +37314,7 @@ class DatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatabaseView": () => (/* binding */ DatabaseView)
+/* harmony export */   "EdDatabaseView": () => (/* binding */ EdDatabaseView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
@@ -37324,7 +37324,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class DatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
@@ -37419,7 +37419,7 @@ class EdDocumentView extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TableController": () => (/* binding */ TableController)
+/* harmony export */   "EdTableController": () => (/* binding */ EdTableController)
 /* harmony export */ });
 /* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
 /* harmony import */ var _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdColumnController/EdColumnController */ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts");
@@ -37437,7 +37437,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class TableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
     constructor(model, parent) {
         super(model, parent);
         this.onCreateFormButtonClick = async (e) => {
@@ -37567,7 +37567,7 @@ class TableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return _EdTableView__WEBPACK_IMPORTED_MODULE_7__.TableView;
+        return _EdTableView__WEBPACK_IMPORTED_MODULE_7__.EdTableView;
     }
 }
 
@@ -37582,7 +37582,7 @@ class TableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TableView": () => (/* binding */ TableView)
+/* harmony export */   "EdTableView": () => (/* binding */ EdTableView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
@@ -37590,7 +37590,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class TableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+class EdTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
         return ctrl.columns.map((column) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('name') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('caption') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('type') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('key') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('auto') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName())));
@@ -37619,7 +37619,7 @@ class TableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplicationController": () => (/* binding */ ApplicationController)
+/* harmony export */   "EdApplicationController": () => (/* binding */ EdApplicationController)
 /* harmony export */ });
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdDatabaseController/EdDatabaseController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts");
@@ -37639,7 +37639,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
+class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
     constructor(model, editorApp) {
         super(model);
         this.editorApp = editorApp;
@@ -37663,7 +37663,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
         this.model.pageLinks.forEach((pageLink) => this.createPageLink(pageLink));
     }
     createDatabase(model) {
-        const database = new _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__.DatabaseController(model, this);
+        const database = new _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__.EdDatabaseController(model, this);
         database.init();
         this.databases.push(database);
         return database;
@@ -37762,7 +37762,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
                     startup: values.startup,
                 });
                 const pageLinkController = this.createPageLink(page.pageLink);
-                const pageController = new _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__.PageController(page, pageLinkController);
+                const pageController = new _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__.EdPageController(page, pageLinkController);
                 pageController.init();
                 pageLinkController.setPageController(pageController);
                 _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
@@ -37781,7 +37781,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
     }
     getDocumentViewClass() {
         // @ts-ignore
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_8__.VisualView;
+        return _EdVisualView__WEBPACK_IMPORTED_MODULE_8__.EdVisualView;
     }
 }
 
@@ -37796,7 +37796,7 @@ class ApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FieldController": () => (/* binding */ FieldController)
+/* harmony export */   "EdFieldController": () => (/* binding */ EdFieldController)
 /* harmony export */ });
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
@@ -37806,7 +37806,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class FieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
+class EdFieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
     /*constructor(model, parent) {
         super(model, parent);
     }*/
@@ -37880,7 +37880,7 @@ class FieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.V
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_3__.VisualView;
+        return _EdVisualView__WEBPACK_IMPORTED_MODULE_3__.EdVisualView;
     }
 }
 
@@ -37895,7 +37895,7 @@ class FieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.V
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormController": () => (/* binding */ FormController)
+/* harmony export */   "EdFormController": () => (/* binding */ EdFormController)
 /* harmony export */ });
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFieldController/EdFieldController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts");
@@ -37909,7 +37909,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
+class EdFormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
     constructor(model, parent) {
         super(model, parent);
         this.dataSources = [];
@@ -37936,7 +37936,7 @@ class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         this.model.actions.forEach((action) => this.createAction(action));
     }
     createField(model) {
-        const field = new _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__.FieldController(model, this);
+        const field = new _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__.EdFieldController(model, this);
         field.init();
         this.fields.push(field);
         return field;
@@ -38047,7 +38047,7 @@ class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_5__.VisualView;
+        return _EdVisualView__WEBPACK_IMPORTED_MODULE_5__.EdVisualView;
     }
 }
 
@@ -38062,7 +38062,7 @@ class FormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PageController": () => (/* binding */ PageController)
+/* harmony export */   "EdPageController": () => (/* binding */ EdPageController)
 /* harmony export */ });
 /* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
 /* harmony import */ var _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFormController/EdFormController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts");
@@ -38080,7 +38080,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.VisualController {
+class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
     constructor(model, pageLinkController = null, options = {}) {
         super(model);
         this.options = options;
@@ -38101,7 +38101,7 @@ class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         this.model.forms.forEach((form) => this.createForm(form));
     }
     createForm(model) {
-        const form = new _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__.FormController(model, this);
+        const form = new _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__.EdFormController(model, this);
         form.init();
         this.forms.push(form);
         return form;
@@ -38209,7 +38209,7 @@ class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
     }
     getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_6__.VisualView;
+        return _EdVisualView__WEBPACK_IMPORTED_MODULE_6__.EdVisualView;
     }
 }
 
@@ -38224,7 +38224,7 @@ class PageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.Vi
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VisualController": () => (/* binding */ VisualController)
+/* harmony export */   "EdVisualController": () => (/* binding */ EdVisualController)
 /* harmony export */ });
 /* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
 /* harmony import */ var _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdDataSourceController/EdDataSourceController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts");
@@ -38236,7 +38236,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class VisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
+class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
     constructor(model, parent = null) {
         super(model, parent);
         this.onCreateCustomController = async (e) => {
@@ -38277,7 +38277,7 @@ class VisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0_
     }
     createDataSource(model) {
         console.log('VisualController.createDataSource', model);
-        const dataSource = new _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__.DataSourceController(model, this);
+        const dataSource = new _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__.EdDataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
@@ -38336,7 +38336,7 @@ class VisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0_
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "VisualView": () => (/* binding */ VisualView)
+/* harmony export */   "EdVisualView": () => (/* binding */ EdVisualView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
@@ -38348,7 +38348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-class VisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
+class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
     constructor(props) {
         super(props);
         this.onControllerSave = async (e) => {
@@ -38558,7 +38558,7 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
         const page = new _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor(pageData, pageLink);
         page.init();
         // pageController
-        const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.PageController(page, this);
+        const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
         // console.log('pageController:', pageController);
@@ -40478,7 +40478,7 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         app.init();
         // console.log('app:', app);
         // application controller
-        const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.ApplicationController(app, this);
+        const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.EdApplicationController(app, this);
         applicationController.init();
         this.items = [applicationController];
         // view

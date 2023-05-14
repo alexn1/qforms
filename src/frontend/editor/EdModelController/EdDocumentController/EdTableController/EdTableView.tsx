@@ -1,7 +1,7 @@
 import { ReactComponent, Grid, Button } from '../../../../common';
 import './EdTableView.less';
 
-export class TableView extends ReactComponent {
+export class EdTableView extends ReactComponent {
     renderRows() {
         const ctrl = this.props.ctrl;
         return ctrl.columns.map((column) => (

@@ -1,11 +1,11 @@
-import { VisualController } from '../EdVisualController';
-import { FieldController } from '../EdFieldController/EdFieldController';
+import { EdVisualController } from '../EdVisualController';
+import { EdFieldController } from '../EdFieldController/EdFieldController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
 import { NewFieldController } from '../../../../EdModalController/NewFieldController/NewFieldController';
-import { VisualView } from '../EdVisualView';
+import { EdVisualView } from '../EdVisualView';
 
-export class FormController extends VisualController {
+export class EdFormController extends EdVisualController {
     fields: any[];
     items: any[];
 
@@ -39,7 +39,7 @@ export class FormController extends VisualController {
     }
 
     createField(model) {
-        const field = new FieldController(model, this);
+        const field = new EdFieldController(model, this);
         field.init();
         this.fields.push(field);
         return field;
@@ -162,6 +162,6 @@ export class FormController extends VisualController {
     }
 
     getDocumentViewClass() {
-        return VisualView;
+        return EdVisualView;
     }
 }

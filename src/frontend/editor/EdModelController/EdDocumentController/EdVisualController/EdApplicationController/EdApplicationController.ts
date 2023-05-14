@@ -1,15 +1,15 @@
-import { VisualController } from '../EdVisualController';
-import { DatabaseController } from '../../EdDatabaseController/EdDatabaseController';
+import { EdVisualController } from '../EdVisualController';
+import { EdDatabaseController } from '../../EdDatabaseController/EdDatabaseController';
 import { EdPageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDatabaseController } from '../../../../EdModalController/NewDatabaseController/NewDatabaseController';
 import { NewDataSourceController } from '../../../../EdModalController/NewDataSourceController/NewDataSourceController';
 import { NewPageController } from '../../../../EdModalController/NewPageController/NewPageController';
-import { PageController } from '../EdPageController/EdPageController';
-import { VisualView } from '../EdVisualView';
+import { EdPageController } from '../EdPageController/EdPageController';
+import { EdVisualView } from '../EdVisualView';
 import { EdDocumentView } from '../../EdDocumentView';
 
-export class ApplicationController extends VisualController {
+export class EdApplicationController extends EdVisualController {
     editorApp: any;
     databases: any[];
     dataSources: any[];
@@ -44,7 +44,7 @@ export class ApplicationController extends VisualController {
     }
 
     createDatabase(model) {
-        const database = new DatabaseController(model, this);
+        const database = new EdDatabaseController(model, this);
         database.init();
         this.databases.push(database);
         return database;
@@ -154,7 +154,7 @@ export class ApplicationController extends VisualController {
                         startup: values.startup,
                     });
                     const pageLinkController = this.createPageLink(page.pageLink);
-                    const pageController = new PageController(page, pageLinkController);
+                    const pageController = new EdPageController(page, pageLinkController);
                     pageController.init();
                     pageLinkController.setPageController(pageController);
                     EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
@@ -177,6 +177,6 @@ export class ApplicationController extends VisualController {
 
     getDocumentViewClass() {
         // @ts-ignore
-        return VisualView;
+        return EdVisualView;
     }
 }

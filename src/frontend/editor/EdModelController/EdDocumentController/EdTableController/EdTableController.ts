@@ -5,9 +5,9 @@ import { FrontHostApp } from '../../../../common';
 import { NewColumnController } from '../../../EdModalController/NewColumnController/NewColumnController';
 import { NewFormFromTableController } from '../../../EdModalController/NewFormFromTableController/NewFormFromTableController';
 import { EditorHelper } from '../../../EditorHelper';
-import { TableView } from './EdTableView';
+import { EdTableView } from './EdTableView';
 
-export class TableController extends EdDocumentController {
+export class EdTableController extends EdDocumentController {
     columns: any[];
     items: any[];
 
@@ -153,6 +153,6 @@ export class TableController extends EdDocumentController {
     }
 
     getDocumentViewClass() {
-        return TableView;
+        return EdTableView;
     }
 }

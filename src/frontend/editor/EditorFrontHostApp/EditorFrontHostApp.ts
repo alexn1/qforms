@@ -1,6 +1,6 @@
 import { FrontHostApp } from '../../common/FrontHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
-import { ApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController';
+import { EdApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
 import { EdPageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';
@@ -48,7 +48,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         // console.log('app:', app);
 
         // application controller
-        const applicationController = new ApplicationController(app, this);
+        const applicationController = new EdApplicationController(app, this);
         applicationController.init();
         this.items = [applicationController];
 

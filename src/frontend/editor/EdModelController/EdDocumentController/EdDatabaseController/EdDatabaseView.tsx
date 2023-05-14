@@ -2,7 +2,7 @@ import { ReactComponent, Grid, Button } from '../../../../common';
 import { TreeWidget } from '../../../TreeWidget/TreeWidget';
 import './EdDatabaseView.less';
 
-export class DatabaseView extends ReactComponent {
+export class EdDatabaseView extends ReactComponent {
     renderGrid() {
         // console.log('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;

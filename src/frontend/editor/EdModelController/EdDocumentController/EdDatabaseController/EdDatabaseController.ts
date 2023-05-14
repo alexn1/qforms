@@ -1,12 +1,12 @@
 import { EdDocumentController } from '../EdDocumentController';
 import { EdParamController } from '../../EdParamController/EdParamController';
-import { TableController } from '../EdTableController/EdTableController';
-import { DatabaseView } from './EdDatabaseView';
+import { EdTableController } from '../EdTableController/EdTableController';
+import { EdDatabaseView } from './EdDatabaseView';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewParamController } from '../../../EdModalController/NewParamController/NewParamController';
 import { NewTableController } from '../../../EdModalController/NewTableController/NewTableController';
 
-export class DatabaseController extends EdDocumentController {
+export class EdDatabaseController extends EdDocumentController {
     tableName: any;
     tableInfo: any;
     params: any[];
@@ -55,7 +55,7 @@ export class DatabaseController extends EdDocumentController {
     }
 
     createTable2(model) {
-        const table = new TableController(model, this);
+        const table = new EdTableController(model, this);
         table.init();
         this.tables.push(table);
         return table;
@@ -199,6 +199,6 @@ export class DatabaseController extends EdDocumentController {
     }
 
     getDocumentViewClass() {
-        return DatabaseView;
+        return EdDatabaseView;
     }
 }
