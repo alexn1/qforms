@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { DocumentView } from '../DocumentView';
+import { DocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
 import './VisualView.less';
 

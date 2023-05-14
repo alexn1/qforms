@@ -1,7 +1,7 @@
 import { EdModelController } from '../EdModelController';
 import { EditorFrontHostApp } from '../../EditorFrontHostApp/EditorFrontHostApp';
 import { PageEditor } from '../../Editor/PageEditor/PageEditor';
-import { PageController } from '../DocumentController/VisualController/PageController/PageController';
+import { PageController } from '../EdDocumentController/EdVisualController/PageController/PageController';
 
 export class PageLinkController extends EdModelController {
     node: boolean;

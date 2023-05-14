@@ -1,7 +1,7 @@
-import { DocumentController } from '../DocumentController';
-import { ParamController } from '../../ParamController/ParamController';
-import { TableController } from '../TableController/TableController';
-import { DatabaseView } from './DatabaseView';
+import { DocumentController } from '../EdDocumentController';
+import { ParamController } from '../../EdParamController/EdParamController';
+import { TableController } from '../EdTableController/EdTableController';
+import { DatabaseView } from './EdDatabaseView';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewParamController } from '../../../ModalController/NewParamController/NewParamController';
 import { NewTableController } from '../../../ModalController/NewTableController/NewTableController';

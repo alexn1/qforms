@@ -1,11 +1,11 @@
-import { DocumentController } from '../DocumentController';
-import { ColumnController } from '../../ColumnController/ColumnController';
+import { DocumentController } from '../EdDocumentController';
+import { EdColumnController } from '../../EdColumnController/EdColumnController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { FrontHostApp } from '../../../../common';
 import { NewColumnController } from '../../../ModalController/NewColumnController/NewColumnController';
 import { NewFormFromTableController } from '../../../ModalController/NewFormFromTableController/NewFormFromTableController';
 import { EditorHelper } from '../../../EditorHelper';
-import { TableView } from './TableView';
+import { TableView } from './EdTableView';
 
 export class TableController extends DocumentController {
     columns: any[];
@@ -27,7 +27,7 @@ export class TableController extends DocumentController {
     }
 
     createColumn(model) {
-        const column = new ColumnController(model, this);
+        const column = new EdColumnController(model, this);
         column.init();
         this.columns.push(column);
         return column;

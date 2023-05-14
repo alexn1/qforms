@@ -1,5 +1,5 @@
 import { ReactComponent, Grid, Button } from '../../../../common';
-import './TableView.less';
+import './EdTableView.less';
 
 export class TableView extends ReactComponent {
     renderRows() {

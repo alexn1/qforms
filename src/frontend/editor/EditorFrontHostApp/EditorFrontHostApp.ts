@@ -1,10 +1,10 @@
 import { FrontHostApp } from '../../common/FrontHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
-import { ApplicationController } from '../EdModelController/DocumentController/VisualController/ApplicationController/ApplicationController';
+import { ApplicationController } from '../EdModelController/EdDocumentController/EdVisualController/ApplicationController/ApplicationController';
 import { EditorFrontHostAppView } from './EditorFrontHostAppView';
-import { PageLinkController } from '../EdModelController/PageLinkController/PageLinkController';
+import { PageLinkController } from '../EdModelController/EdPageLinkController/EdPageLinkController';
 import { EdModelController } from '../EdModelController/EdModelController';
-import { DocumentController } from '../EdModelController/DocumentController/DocumentController';
+import { DocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { Helper } from '../../common';
 import { ModalController } from '../ModalController/ModalController';
 

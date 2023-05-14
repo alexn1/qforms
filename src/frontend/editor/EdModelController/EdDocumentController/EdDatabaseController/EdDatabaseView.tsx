@@ -1,6 +1,6 @@
 import { ReactComponent, Grid, Button } from '../../../../common';
 import { TreeWidget } from '../../../TreeWidget/TreeWidget';
-import './DatabaseView.less';
+import './EdDatabaseView.less';
 
 export class DatabaseView extends ReactComponent {
     renderGrid() {

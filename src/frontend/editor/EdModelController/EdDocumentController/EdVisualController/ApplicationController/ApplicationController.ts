@@ -1,13 +1,13 @@
 import { VisualController } from '../VisualController';
-import { DatabaseController } from '../../DatabaseController/DatabaseController';
-import { PageLinkController } from '../../../PageLinkController/PageLinkController';
+import { DatabaseController } from '../../EdDatabaseController/EdDatabaseController';
+import { PageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 import { EditorFrontHostApp } from '../../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewDatabaseController } from '../../../../ModalController/NewDatabaseController/NewDatabaseController';
 import { NewDataSourceController } from '../../../../ModalController/NewDataSourceController/NewDataSourceController';
 import { NewPageController } from '../../../../ModalController/NewPageController/NewPageController';
 import { PageController } from '../PageController/PageController';
 import { VisualView } from '../VisualView';
-import { DocumentView } from '../../DocumentView';
+import { DocumentView } from '../../EdDocumentView';
 
 export class ApplicationController extends VisualController {
     editorApp: any;

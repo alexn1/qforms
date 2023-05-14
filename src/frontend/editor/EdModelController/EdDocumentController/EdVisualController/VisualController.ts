@@ -1,4 +1,4 @@
-import { DocumentController } from '../DocumentController';
+import { DocumentController } from '../EdDocumentController';
 import { DataSourceController } from '../DataSourceController/DataSourceController';
 import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
