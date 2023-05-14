@@ -6,7 +6,7 @@ import { PageLinkController } from '../EdModelController/EdPageLinkController/Ed
 import { EdModelController } from '../EdModelController/EdModelController';
 import { DocumentController } from '../EdModelController/EdDocumentController/EdDocumentController';
 import { Helper } from '../../common';
-import { ModalController } from '../EdModalController/EdModalController';
+import { EdModalController } from '../EdModalController/EdModalController';
 
 export class EditorFrontHostApp extends FrontHostApp {
     public static editorApp: any;
@@ -19,7 +19,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     items: any;
     tabWidget: any;
     documents: any[];
-    modal: ModalController;
+    modal: EdModalController;
 
     constructor(data, runAppLink: string) {
         super();
@@ -168,7 +168,7 @@ export class EditorFrontHostApp extends FrontHostApp {
         this.view.rerender();
     };
 
-    async openModal(modalController: ModalController) {
+    async openModal(modalController: EdModalController) {
         console.log('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();

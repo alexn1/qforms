@@ -1,7 +1,7 @@
 import { ReactComponent } from '../../common/ReactComponent';
 import { EditorFrontHostApp } from '../EditorFrontHostApp/EditorFrontHostApp';
 
-export class ModalController {
+export class EdModalController {
     options: any;
     view: ReactComponent;
 

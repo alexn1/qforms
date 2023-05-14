@@ -3,7 +3,7 @@ import { ReactComponent, Modal } from '../../common';
 import './EdModalView.less';
 import './EdNewModelView.less';
 
-export class ModalView extends ReactComponent {
+export class EdModalView extends ReactComponent {
     render() {
         const ctrl = this.props.ctrl;
         return (
