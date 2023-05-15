@@ -2,6 +2,8 @@ import React from 'react';
 import { TableFormFieldView } from '../TableFormFieldView';
 import { TableFormDateFieldController } from './TableFormDateFieldController';
 
+import './TableFormDateFieldView.less';
+
 export class TableFormDateFieldView extends TableFormFieldView<TableFormDateFieldController> {
     span: React.RefObject<any>;
 
