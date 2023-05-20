@@ -130,7 +130,7 @@ export class BkForm extends BkModel {
     isNewMode(context: Context): boolean {
         return !!context.getBody().newMode;
     }
-    getField(name: string): BkField | undefined {
+    getField(name: string): BkField {
         return this.fields.find((field) => field.getName() === name);
     }
     getDataSource(name: string): BkDataSource {
