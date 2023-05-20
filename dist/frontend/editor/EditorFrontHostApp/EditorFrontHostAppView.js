@@ -30,7 +30,7 @@ const common_1 = require("../../common");
 const ActionList_1 = require("../ActionList/ActionList");
 const TreeWidget_1 = require("../TreeWidget/TreeWidget");
 const PropertyGrid_1 = require("../PropertyGrid/PropertyGrid");
-const ModalView_1 = require("../ModalController/ModalView");
+const EdModalView_1 = require("../EdModalController/EdModalView");
 require("./EditorFrontHostAppView.less");
 class EditorFrontHostAppView extends common_1.ReactComponent {
     renderDocumentView(document) {
@@ -60,7 +60,7 @@ class EditorFrontHostAppView extends common_1.ReactComponent {
                                     title: 'Properties',
                                     content: ((0, jsx_runtime_1.jsx)(PropertyGrid_1.PropertyGrid, { onCreate: (c) => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
                                 },
-                            ] })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0, jsx_runtime_1.jsx)(common_1.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && React.createElement(ModalView_1.ModalView, { ctrl: ctrl.modal })] })));
+                            ] })] })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0, jsx_runtime_1.jsx)(common_1.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && React.createElement(EdModalView_1.EdModalView, { ctrl: ctrl.modal })] })));
     }
 }
 exports.EditorFrontHostAppView = EditorFrontHostAppView;

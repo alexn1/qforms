@@ -3,11 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EditorFrontHostApp = void 0;
 const FrontHostApp_1 = require("../../common/FrontHostApp");
 const ApplicationEditor_1 = require("../Editor/ApplicationEditor/ApplicationEditor");
-const ApplicationController_1 = require("../ModelController/DocumentController/VisualController/ApplicationController/ApplicationController");
+const EdApplicationController_1 = require("../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController");
 const EditorFrontHostAppView_1 = require("./EditorFrontHostAppView");
-const PageLinkController_1 = require("../ModelController/PageLinkController/PageLinkController");
-const ModelController_1 = require("../ModelController/ModelController");
-const DocumentController_1 = require("../ModelController/DocumentController/DocumentController");
+const EdPageLinkController_1 = require("../EdModelController/EdPageLinkController/EdPageLinkController");
+const EdModelController_1 = require("../EdModelController/EdModelController");
+const EdDocumentController_1 = require("../EdModelController/EdDocumentController/EdDocumentController");
 const common_1 = require("../../common");
 class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
     constructor(data, runAppLink) {
@@ -15,14 +15,14 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         this.onItemOpen2 = async (item) => {
             console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
             // console.log('parent:', item.view.parent);
-            if (item instanceof PageLinkController_1.PageLinkController && !item.hasPage()) {
+            if (item instanceof EdPageLinkController_1.EdPageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
         };
         this.onItemSelect2 = async (item) => {
             console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-            if (item instanceof ModelController_1.ModelController) {
-                if (item instanceof PageLinkController_1.PageLinkController && !item.hasPage()) {
+            if (item instanceof EdModelController_1.EdModelController) {
+                if (item instanceof EdPageLinkController_1.EdPageLinkController && !item.hasPage()) {
                     await item.loadPage();
                 }
                 this.fillActions(item);
@@ -41,8 +41,8 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         };
         this.onItemDoubleClick2 = async (item) => {
             console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
-            const controller = item instanceof PageLinkController_1.PageLinkController ? item.pageController : item;
-            if (!controller || !(controller instanceof DocumentController_1.DocumentController))
+            const controller = item instanceof EdPageLinkController_1.EdPageLinkController ? item.pageController : item;
+            if (!controller || !(controller instanceof EdDocumentController_1.EdDocumentController))
                 return;
             await this.openDocument(controller);
         };
@@ -71,7 +71,7 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
             console.log('EditorFrontHostApp.onActionClick', actionName);
             const item = this.treeWidget2.getSelectedItem();
             // console.log('item', item);
-            const controller = item instanceof PageLinkController_1.PageLinkController ? item.pageController : item;
+            const controller = item instanceof EdPageLinkController_1.EdPageLinkController ? item.pageController : item;
             await controller.doAction(actionName);
         };
         console.log('EditorFrontHostApp.constructor', data);
@@ -97,7 +97,7 @@ class EditorFrontHostApp extends FrontHostApp_1.FrontHostApp {
         app.init();
         // console.log('app:', app);
         // application controller
-        const applicationController = new ApplicationController_1.ApplicationController(app, this);
+        const applicationController = new EdApplicationController_1.EdApplicationController(app, this);
         applicationController.init();
         this.items = [applicationController];
         // view

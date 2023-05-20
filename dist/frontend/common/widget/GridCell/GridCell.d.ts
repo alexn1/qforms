@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { ReactComponent } from '../../ReactComponent';
 import { JSONString } from '../../../../types';
+import './GridCell.less';
 export declare class GridCell extends ReactComponent {
     span: React.RefObject<any>;
     constructor(props: any);

@@ -3,6 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.TableFormDateFieldView = void 0;
 const jsx_runtime_1 = require("react/jsx-runtime");
 const TableFormFieldView_1 = require("../TableFormFieldView");
+require("./TableFormDateFieldView.less");
 class TableFormDateFieldView extends TableFormFieldView_1.TableFormFieldView {
     render() {
         const row = this.props.row;

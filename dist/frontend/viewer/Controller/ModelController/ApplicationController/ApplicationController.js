@@ -134,15 +134,6 @@ class ApplicationController extends ModelController_1.ModelController {
         // foo: 'bar'
         };
     }
-    // options
-    // - modal      : boolean,
-    // - newMode    : boolean,
-    // - selectMode : boolean,
-    // - selectedKey: string,
-    // - onCreate   : function,
-    // - onSelect   : function,
-    // - onClose    : function,
-    // - params     : object,
     createPage(pageData, options) {
         if (options.modal === undefined)
             throw new Error('no options.modal');

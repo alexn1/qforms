@@ -10,7 +10,7 @@ class Page extends Model_1.Model {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
-        this.options = options; // {id, modal, newMode, selectMode, params}
+        this.options = options;
         this.dataSources = [];
         this.forms = [];
         this.params = {};

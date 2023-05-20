@@ -28,6 +28,7 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const React = __importStar(require("react"));
 const ReactComponent_1 = require("../../ReactComponent");
 const Helper_1 = require("../../Helper");
+require("./GridCell.less");
 class GridCell extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);

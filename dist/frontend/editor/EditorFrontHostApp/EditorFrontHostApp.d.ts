@@ -1,5 +1,5 @@
 import { FrontHostApp } from '../../common/FrontHostApp';
-import { ModalController } from '../ModalController/ModalController';
+import { EdModalController } from '../EdModalController/EdModalController';
 export declare class EditorFrontHostApp extends FrontHostApp {
     static editorApp: any;
     data: any;
@@ -11,7 +11,7 @@ export declare class EditorFrontHostApp extends FrontHostApp {
     items: any;
     tabWidget: any;
     documents: any[];
-    modal: ModalController;
+    modal: EdModalController;
     constructor(data: any, runAppLink: string);
     run(): Promise<void>;
     deinit(): void;
@@ -28,7 +28,7 @@ export declare class EditorFrontHostApp extends FrontHostApp {
     openDocument(controller: any): Promise<void>;
     findDocument(controller: any): any;
     onDocumentClose: (i: any) => void;
-    openModal(modalController: ModalController): Promise<void>;
+    openModal(modalController: EdModalController): Promise<void>;
     onModalClose(): Promise<void>;
     onActionClick: (actionName: any) => Promise<void>;
 }
