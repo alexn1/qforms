@@ -116,7 +116,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return this.parent;
     }
 
-    findTable(name: string): BkTable | undefined {
+    findTable(name: string): BkTable {
         return this.tables.find((table) => table.getName() === name);
     }
 

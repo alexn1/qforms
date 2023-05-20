@@ -163,7 +163,7 @@ export class Field extends Model {
         return this.data.notNull === 'false';
     }
 
-    getWidth(): number | null {
+    getWidth(): number {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;

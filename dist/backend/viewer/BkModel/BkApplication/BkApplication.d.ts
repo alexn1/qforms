@@ -32,10 +32,10 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
-    getDistDirPath(): string | null;
+    getDistDirPath(): string;
     getPublicDirPath(): string;
     getText(): any;
-    getVersion(): string | null;
+    getVersion(): string;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<any>;
     getClientUserFromServerUser(context: Context): Promise<any>;
@@ -59,7 +59,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo;
     static loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
-    getDataSource(name: string): BkDataSource | undefined;
+    getDataSource(name: string): BkDataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: any): Promise<void>;
@@ -67,7 +67,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     removeClient(webSocket: any): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
-    composeForeignResult(result: Result): Result | null;
+    composeForeignResult(result: Result): Result;
     getTitle(context: Context): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;

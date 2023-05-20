@@ -38,8 +38,8 @@ export declare class Context {
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): any;
-    getClientTimezoneOffset(): number | null;
-    getTimeOffset(): number | null;
+    getClientTimezoneOffset(): number;
+    getTimeOffset(): number;
     getCookies(): {
         [name: string]: string;
     };

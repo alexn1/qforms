@@ -207,7 +207,7 @@ export class ApplicationController extends ModelController<Application> {
         this.frontHostApp.setDocumentTitle(this.getTitle());
     }
 
-    findPageControllerByPageNameAndKey(pageName, key): PageController | null {
+    findPageControllerByPageNameAndKey(pageName, key): PageController {
         if (
             this.activePage &&
             this.activePage.model.getName() === pageName &&

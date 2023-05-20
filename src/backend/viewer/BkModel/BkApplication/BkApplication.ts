@@ -87,7 +87,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return this.appInfo.dirPath;
     }
 
-    getDistDirPath(): string | null {
+    getDistDirPath(): string {
         return this.appInfo.distDirPath;
     }
 
@@ -102,7 +102,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return text[lang];
     }
 
-    getVersion(): string | null {
+    getVersion(): string {
         return null;
     }
 
@@ -397,7 +397,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return appInfos;
     }
 
-    getDataSource(name: string): BkDataSource | undefined {
+    getDataSource(name: string): BkDataSource {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
@@ -466,7 +466,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         }
     }
 
-    composeForeignResult(result: Result): Result | null {
+    composeForeignResult(result: Result): Result {
         let fResult: Result | null = null;
         for (const databaseName in result) {
             const database = this.findDatabase(databaseName);

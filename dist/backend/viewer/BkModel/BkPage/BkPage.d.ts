@@ -14,6 +14,6 @@ export declare class BkPage<TBkApplication extends BkApplication = BkApplication
     fill(context: Context): Promise<any>;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): TBkApplication;
-    getForm(name: string): BkForm | undefined;
-    getDataSource(name: string): BkDataSource | undefined;
+    getForm(name: string): BkForm;
+    getDataSource(name: string): BkDataSource;
 }

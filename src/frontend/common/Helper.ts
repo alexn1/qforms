@@ -349,7 +349,7 @@ export class Helper {
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
 
-    static getCookie(name: string): string | undefined {
+    static getCookie(name: string): string {
         var nameEQ = name + '=';
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {

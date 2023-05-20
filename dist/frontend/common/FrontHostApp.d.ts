@@ -42,6 +42,6 @@ export declare class FrontHostApp {
     getOptions(): FrontHostAppOptions;
     filterSearch(names: string[]): string;
     getSearchParams(): any;
-    getCookie(name: string): string | undefined;
+    getCookie(name: string): string;
     getLocation(): Location;
 }

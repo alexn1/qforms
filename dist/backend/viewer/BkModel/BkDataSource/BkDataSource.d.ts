@@ -51,5 +51,5 @@ export declare class BkDataSource extends BkModel {
         delete: boolean;
     };
     getDatabase(): BkDatabase;
-    getLimit(): number | null;
+    getLimit(): number;
 }

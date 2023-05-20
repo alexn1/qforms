@@ -18,7 +18,7 @@ export class TableFormFieldController<
         return this.parent as TTableFormController;
     }
 
-    getAlign(): Align | null {
+    getAlign(): Align {
         return null;
     }
 }

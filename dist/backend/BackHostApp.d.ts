@@ -61,7 +61,7 @@ export declare class BackHostApp {
     onUnhandledRejection(err: any): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
-    getDomainFromRequest(req: any): string | null;
+    getDomainFromRequest(req: any): string;
     postError(req: any, res: any, next: any): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
@@ -79,7 +79,7 @@ export declare class BackHostApp {
         env: string,
         domain?: string
     ], query?: QueryParams): void;
-    getNodeEnv(): string | null;
+    getNodeEnv(): string;
     isDevelopment(): boolean;
     isProduction(): boolean;
     getParams(): any;

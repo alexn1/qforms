@@ -4,5 +4,5 @@ import { Align } from '../../../../../../../types';
 export declare class TableFormCheckBoxFieldController extends TableFormFieldController<CheckBoxField> {
     getViewClass(): any;
     getValueForWidget(row: any): any;
-    getAlign(): Align | null;
+    getAlign(): Align;
 }

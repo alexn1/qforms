@@ -13,7 +13,7 @@ export class TableFormCheckBoxFieldController extends TableFormFieldController<C
         return this.model.getValue(row);
     }
 
-    getAlign(): Align | null {
+    getAlign(): Align {
         return 'center';
     }
 }

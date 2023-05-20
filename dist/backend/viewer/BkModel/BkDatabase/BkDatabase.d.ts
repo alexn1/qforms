@@ -37,7 +37,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     getConfig(context?: Context): Config;
     getDefaultPort(): number;
     getApp(): BkApplication;
-    findTable(name: string): BkTable | undefined;
+    findTable(name: string): BkTable;
     findParam(name: string): BkParam;
     getTable(name: string): BkTable;
     getParam(name: string): BkParam;

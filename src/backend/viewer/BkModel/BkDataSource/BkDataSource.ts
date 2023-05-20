@@ -336,7 +336,7 @@ export class BkDataSource extends BkModel {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 
-    getLimit(): number | null {
+    getLimit(): number {
         if (this.getAttr('limit') !== '') {
             return parseInt(this.getAttr('limit'));
         }

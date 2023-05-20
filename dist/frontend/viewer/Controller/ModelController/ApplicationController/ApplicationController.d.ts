@@ -41,7 +41,7 @@ export declare class ApplicationController extends ModelController<Application> 
     getNextId(): number;
     getNewId(): string;
     addPage(pc: PageController): void;
-    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController | null;
+    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController;
     onPageSelect(pc: PageController): void;
     closePage(pageController: PageController): Promise<void>;
     onActionClick(name: string): Promise<any>;

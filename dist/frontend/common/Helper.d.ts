@@ -31,7 +31,7 @@ export declare class Helper {
     static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
     static setCookie(name: string, value: string | number | boolean, time: number): void;
-    static getCookie(name: string): string | undefined;
+    static getCookie(name: string): string;
     static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;
     static registerGlobalClass(Class: any): void;

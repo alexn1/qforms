@@ -6,5 +6,5 @@ import { FormController } from '../../FormController/FormController';
 export declare class TableFormFieldController<TField extends Field = Field> extends FieldController<TField> {
     getValueForWidget(row: any): string;
     getForm<TTableFormController extends FormController = TableFormController>(): TTableFormController;
-    getAlign(): Align | null;
+    getAlign(): Align;
 }

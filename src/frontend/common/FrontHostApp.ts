@@ -202,7 +202,7 @@ export class FrontHostApp {
         return Object.fromEntries(this.getOptions().url.searchParams);
     }
 
-    getCookie(name: string): string | undefined {
+    getCookie(name: string): string {
         if (typeof window === 'object') {
             return Helper.getCookie(name);
         }

@@ -769,7 +769,7 @@ export class BackHostApp {
         }*/
     }
 
-    getDomainFromRequest(req: any): string | null {
+    getDomainFromRequest(req: any): string {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
@@ -865,7 +865,7 @@ export class BackHostApp {
         this.alias('post', path, arr, 'modulePost', query);
     }
 
-    getNodeEnv(): string | null {
+    getNodeEnv(): string {
         return process.env.NODE_ENV || null;
     }
 

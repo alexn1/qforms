@@ -211,17 +211,17 @@ export class DataSource extends Model {
         return row;
     }
 
-    getForm(): Form | null {
+    getForm(): Form {
         return this.parent instanceof Form ? this.parent : null;
     }
 
-    getPage(): Page | null {
+    getPage(): Page {
         if (this.parent instanceof Page) return this.parent;
         if (this.parent instanceof Form) return this.parent.getPage();
         return null;
     }
 
-    getApp(): Application | null {
+    getApp(): Application {
         if (this.parent instanceof Application) return this.parent;
         return this.parent.getApp();
     }
@@ -543,7 +543,7 @@ export class DataSource extends Model {
         this.emit('refresh', event);
     }
 
-    getLimit(): number | null {
+    getLimit(): number {
         if (this.getAttr('limit')) {
             return parseInt(this.getAttr('limit'));
         }

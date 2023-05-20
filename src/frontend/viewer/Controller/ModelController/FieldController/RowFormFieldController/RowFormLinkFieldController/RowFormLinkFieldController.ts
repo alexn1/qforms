@@ -26,7 +26,7 @@ export class RowFormLinkFieldController extends RowFormFieldController<LinkField
         this.emit({ source: this });
     };
 
-    getDisplayValue(): string | null {
+    getDisplayValue(): string {
         const displayColumn = this.getModel().getAttr('displayColumn');
         if (displayColumn) {
             const ds = this.getModel().getDefaultDataSource();
