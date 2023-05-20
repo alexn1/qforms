@@ -769,7 +769,7 @@ export class BackHostApp {
         }*/
     }
 
-    getDomainFromRequest(req: any): string {
+    getDomainFromRequest(req: any): string | null {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
