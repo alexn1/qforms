@@ -127,12 +127,15 @@ export class BkForm extends BkModel {
     getFullName(): string {
         return `${this.getPage().getName()}.${this.getName()}`;
     }
+
     isNewMode(context: Context): boolean {
         return !!context.getBody().newMode;
     }
+
     getField(name: string): BkField {
         return this.fields.find((field) => field.getName() === name);
     }
+
     getDataSource(name: string): BkDataSource {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
