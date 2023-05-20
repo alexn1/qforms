@@ -64,7 +64,7 @@ export class EdVisualView extends EdDocumentView {
     render() {
         const ctrl = this.props.ctrl;
         return (
-            <div className={'VisualView full'}>
+            <div className={'EdVisualView full'}>
                 <div className="full flex-column">
                     <div className="toolbar">
                         <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
