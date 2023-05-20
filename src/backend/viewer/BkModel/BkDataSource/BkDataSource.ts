@@ -314,7 +314,7 @@ export class BkDataSource extends BkModel {
         throw new Error(`${this.constructor.name}.delete not implemented`);
     }
 
-    getForm(): BkForm | null {
+    getForm(): BkForm {
         return this.isOnForm() ? this.getParent() : null;
     }
 

@@ -133,7 +133,7 @@ export class BkForm extends BkModel {
     getField(name: string): BkField | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
-    getDataSource(name: string): BkDataSource | undefined {
+    getDataSource(name: string): BkDataSource {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

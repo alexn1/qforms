@@ -30,5 +30,5 @@ export declare class BkForm extends BkModel {
     getFullName(): string;
     isNewMode(context: Context): boolean;
     getField(name: string): BkField | undefined;
-    getDataSource(name: string): BkDataSource | undefined;
+    getDataSource(name: string): BkDataSource;
 }

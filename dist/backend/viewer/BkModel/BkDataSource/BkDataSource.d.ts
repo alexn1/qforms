@@ -43,7 +43,7 @@ export declare class BkDataSource extends BkModel {
     create(context: Context, _values?: any): Promise<Result>;
     update(context: Context): Promise<Result>;
     delete(context: Context): Promise<Result>;
-    getForm(): BkForm | null;
+    getForm(): BkForm;
     getAccess(context: Context): {
         create: boolean;
         read: boolean;
