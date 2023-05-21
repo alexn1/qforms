@@ -1,14 +1,19 @@
-import { FormController } from '../FormController';
+import { FormController, FormControllerState } from '../FormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
-import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { RawRow } from '../../../../../../types';
+export interface RowFormControllerState extends FormControllerState {
+    mode: 'view' | 'edit';
+    hasNew: boolean;
+    changed: boolean;
+    valid: boolean;
+}
 export declare class RowFormController extends FormController<RowForm> {
     fields: {
         [name: string]: RowFormFieldController;
     };
-    constructor(model: RowForm, parent: PageController);
+    state: RowFormControllerState;
     init(): void;
     deinit(): void;
     calcState(): void;
@@ -29,7 +34,7 @@ export declare class RowFormController extends FormController<RowForm> {
     getViewClass(): any;
     getActiveRow(): RawRow;
     getRow(): RawRow;
-    getMode(): any;
+    getMode(): "view" | "edit";
     isActionEnabled(name: string): boolean;
     isEditMode(): boolean;
     isViewMode(): boolean;

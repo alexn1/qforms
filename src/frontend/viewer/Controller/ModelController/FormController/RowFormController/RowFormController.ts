@@ -1,4 +1,4 @@
-import { FormController } from '../FormController';
+import { FormController, FormControllerState } from '../FormController';
 import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { PageController } from '../../PageController/PageController';
@@ -7,20 +7,26 @@ import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
 import { RawRow } from '../../../../../../types';
 
+export interface RowFormControllerState extends FormControllerState {
+    mode: 'view' | 'edit';
+    hasNew: boolean;
+    changed: boolean;
+    valid: boolean;
+}
+
 export class RowFormController extends FormController<RowForm> {
     fields: { [name: string]: RowFormFieldController } = {};
-    // state: any;
+    state: RowFormControllerState = {
+        updated: Date.now(),
+        mode: 'edit',
+        hasNew: false,
+        changed: false,
+        valid: true,
+    };
 
-    constructor(model: RowForm, parent: PageController) {
+    /* constructor(model: RowForm, parent: PageController) {
         super(model, parent);
-        this.state = {
-            updated: Date.now(),
-            mode: 'edit',
-            hasNew: false,
-            changed: false,
-            valid: true,
-        };
-    }
+    } */
 
     init() {
         super.init();

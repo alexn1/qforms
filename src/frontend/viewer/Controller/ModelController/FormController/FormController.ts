@@ -9,9 +9,13 @@ import {
 } from '../ApplicationController/ApplicationController';
 import { RawRow } from '../../../../../types';
 
+export interface FormControllerState {
+    updated: number;
+}
+
 export class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: { [name: string]: FieldController } = {};
-    state: any;
+    state: FormControllerState;
 
     static create(model: Form, parent: PageController): FormController {
         // console.log('FormController.create', model.getFullName());

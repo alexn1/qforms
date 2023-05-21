@@ -4,11 +4,14 @@ import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
 import { RawRow } from '../../../../../types';
+export interface FormControllerState {
+    updated: number;
+}
 export declare class FormController<TForm extends Form = Form> extends ModelController<TForm> {
     fields: {
         [name: string]: FieldController;
     };
-    state: any;
+    state: FormControllerState;
     static create(model: Form, parent: PageController): FormController;
     constructor(model: TForm, parent: PageController);
     init(): void;
@@ -18,7 +21,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     getPage(): PageController;
     isChanged(): boolean;
     onFieldChange(e: any): Promise<void>;
-    getUpdated(): any;
+    getUpdated(): number;
     invalidate(): void;
     onActionClick(name: any, row: any): Promise<any>;
     getField<TFieldController extends FieldController = FieldController>(name: string): TFieldController;

@@ -5,10 +5,16 @@ const FormController_1 = require("../FormController");
 const RowFormView_1 = require("./RowFormView");
 const Helper_1 = require("../../../../../common/Helper");
 class RowFormController extends FormController_1.FormController {
-    // state: any;
-    constructor(model, parent) {
-        super(model, parent);
+    constructor() {
+        super(...arguments);
         this.fields = {};
+        this.state = {
+            updated: Date.now(),
+            mode: 'edit',
+            hasNew: false,
+            changed: false,
+            valid: true,
+        };
         this.onModelRefresh = async (e) => {
             console.log('RowFormController.onModelRefresh', this.model.getFullName());
             if (!this.view)
@@ -90,14 +96,10 @@ class RowFormController extends FormController_1.FormController {
             this.state.mode = 'view';
             this.rerender();
         };
-        this.state = {
-            updated: Date.now(),
-            mode: 'edit',
-            hasNew: false,
-            changed: false,
-            valid: true,
-        };
     }
+    /* constructor(model: RowForm, parent: PageController) {
+        super(model, parent);
+    } */
     init() {
         super.init();
         this.model.on('refresh', this.onModelRefresh);
