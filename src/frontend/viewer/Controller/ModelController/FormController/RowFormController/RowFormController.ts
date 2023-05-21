@@ -130,10 +130,9 @@ export class RowFormController extends FormController<RowForm> {
     onDiscardClick = () => {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
         const changedFields = [];
-        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(/* row */) || !field.isValid()) {
+            if (field.isChanged() || !field.isValid()) {
                 changedFields.push(name);
             }
         }
