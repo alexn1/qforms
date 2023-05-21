@@ -19,6 +19,10 @@ export const keyArrayToKey = (keyArray: KeyArray): Key => {
     return JSON.stringify(keyArray) as Key;
 };
 
+export const keyToKeyArray = (key: Key): KeyArray => {
+    return JSON.parse(key);
+};
+
 interface _Row {
     [column: string]: any;
 }

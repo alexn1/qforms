@@ -10,6 +10,7 @@ export interface KeyObject {
     [column: string]: KeyItem;
 }
 export declare const keyArrayToKey: (keyArray: KeyArray) => Key;
+export declare const keyToKeyArray: (key: Key) => KeyArray;
 interface _Row {
     [column: string]: any;
 }
