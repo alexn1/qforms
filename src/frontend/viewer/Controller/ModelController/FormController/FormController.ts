@@ -110,4 +110,8 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     getActiveRow(): RawRow {
         throw new Error('FormController.getActiveRow not implemented');
     }
+
+    getRow(): RawRow {
+        throw new Error('FormController.getRow not implemented');
+    }
 }

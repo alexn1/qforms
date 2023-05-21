@@ -197,14 +197,18 @@ export class RowFormController extends FormController<RowForm> {
     }
 
     getActiveRow(): RawRow {
-        return this.model.getRow(true);
+        return this.getModel().getRow(true);
+    }
+
+    getRow(): RawRow {
+        return this.getModel().getRow(true);
     }
 
     getMode() {
         return this.state.mode;
     }
 
-    isActionEnabled(name) {
+    isActionEnabled(name: string) {
         return this.isViewMode();
     }
 

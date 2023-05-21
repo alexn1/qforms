@@ -39488,6 +39488,9 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     getActiveRow() {
         throw new Error('FormController.getActiveRow not implemented');
     }
+    getRow() {
+        throw new Error('FormController.getRow not implemented');
+    }
 }
 
 
@@ -39725,7 +39728,10 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         return super.getViewClass() || _RowFormView__WEBPACK_IMPORTED_MODULE_1__.RowFormView;
     }
     getActiveRow() {
-        return this.model.getRow(true);
+        return this.getModel().getRow(true);
+    }
+    getRow() {
+        return this.getModel().getRow(true);
     }
     getMode() {
         return this.state.mode;
