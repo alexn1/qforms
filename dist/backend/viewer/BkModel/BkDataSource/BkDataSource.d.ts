@@ -34,7 +34,7 @@ export declare class BkDataSource extends BkModel {
         count: number;
         limit?: number;
     }>;
-    private getRows;
+    getRows(): Promise<Row[]>;
     isOnForm(): boolean;
     isDefaultOnForm(): boolean;
     isDefaultOnRowForm(): boolean;

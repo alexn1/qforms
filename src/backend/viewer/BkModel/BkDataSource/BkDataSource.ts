@@ -271,7 +271,7 @@ export class BkDataSource extends BkModel {
         return response;
     }
 
-    private async getRows(): Promise<Row[]> {
+    async getRows(): Promise<Row[]> {
         // console.log('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
         const exists = await BkHelper.exists(jsonFilePath);
