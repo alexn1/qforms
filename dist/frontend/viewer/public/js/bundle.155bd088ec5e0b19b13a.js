@@ -39708,10 +39708,9 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged())
             return true;
-        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged( /* row */))
+            if (field.isChanged())
                 return true;
         }
         return false;

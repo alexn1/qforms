@@ -163,10 +163,9 @@ export class RowFormController extends FormController<RowForm> {
     isChanged() {
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged()) return true;
-        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged(/* row */)) return true;
+            if (field.isChanged()) return true;
         }
         return false;
     }
