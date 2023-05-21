@@ -85,5 +85,8 @@ class FormController extends ModelController_1.ModelController {
     getActiveRow() {
         throw new Error('FormController.getActiveRow not implemented');
     }
+    getRow() {
+        throw new Error('FormController.getRow not implemented');
+    }
 }
 exports.FormController = FormController;

@@ -28,8 +28,9 @@ export declare class RowFormController extends FormController<RowForm> {
     onCancelClick: (e: any) => void;
     getViewClass(): any;
     getActiveRow(): RawRow;
+    getRow(): RawRow;
     getMode(): any;
-    isActionEnabled(name: any): boolean;
+    isActionEnabled(name: string): boolean;
     isEditMode(): boolean;
     isViewMode(): boolean;
     getField<TRowFormFieldController extends FieldController = RowFormFieldController>(name: string): TRowFormFieldController;

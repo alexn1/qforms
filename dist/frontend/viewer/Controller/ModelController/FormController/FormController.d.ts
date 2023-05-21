@@ -27,4 +27,5 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     isAutoFocus(): boolean;
     isVisible(): boolean;
     getActiveRow(): RawRow;
+    getRow(): RawRow;
 }

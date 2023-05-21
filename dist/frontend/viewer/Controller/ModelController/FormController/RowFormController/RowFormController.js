@@ -55,10 +55,9 @@ class RowFormController extends FormController_1.FormController {
         this.onDiscardClick = () => {
             console.log('RowFormController.onDiscardClick', this.model.getFullName());
             const changedFields = [];
-            // const row = this.model.getRow();
             for (const name in this.fields) {
                 const field = this.fields[name];
-                if (field.isChanged( /* row */) || !field.isValid()) {
+                if (field.isChanged() || !field.isValid()) {
                     changedFields.push(name);
                 }
             }
@@ -158,10 +157,9 @@ class RowFormController extends FormController_1.FormController {
         // console.log('RowFormController.isChanged', this.model.getFullName());
         if (this.model.isChanged())
             return true;
-        // const row = this.model.getRow();
         for (const name in this.fields) {
             const field = this.fields[name];
-            if (field.isChanged( /* row */))
+            if (field.isChanged())
                 return true;
         }
         return false;
@@ -177,7 +175,10 @@ class RowFormController extends FormController_1.FormController {
         return super.getViewClass() || RowFormView_1.RowFormView;
     }
     getActiveRow() {
-        return this.model.getRow(true);
+        return this.getModel().getRow(true);
+    }
+    getRow() {
+        return this.getModel().getRow(true);
     }
     getMode() {
         return this.state.mode;
