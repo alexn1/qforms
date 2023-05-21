@@ -34,7 +34,7 @@ export class RowForm extends Form {
         super.onDataSourceInsert(e);
     }
 
-    getRow(withChanges?: boolean): RawRow {
+    getRow(withChanges = false): RawRow {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 

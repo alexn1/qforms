@@ -207,7 +207,9 @@ export class DataSource extends Model {
         if (this.news[0]) return this.news[0];
         const row = this.rows[0];
         if (!row) throw new Error('no single row');
-        if (withChanges) return this.getRowWithChanges(row);
+        if (withChanges) {
+            return this.getRowWithChanges(row);
+        }
         return row;
     }
 

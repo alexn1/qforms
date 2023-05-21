@@ -258,8 +258,9 @@ class DataSource extends Model_1.Model {
         const row = this.rows[0];
         if (!row)
             throw new Error('no single row');
-        if (withChanges)
+        if (withChanges) {
             return this.getRowWithChanges(row);
+        }
         return row;
     }
     getForm() {

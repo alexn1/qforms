@@ -32,7 +32,7 @@ class RowForm extends Form_1.Form {
         this.fillParams(this.getRow());
         super.onDataSourceInsert(e);
     }
-    getRow(withChanges) {
+    getRow(withChanges = false) {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
     getKey() {
