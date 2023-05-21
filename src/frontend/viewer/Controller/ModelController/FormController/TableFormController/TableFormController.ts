@@ -1,4 +1,4 @@
-import { FormController, FormControllerState } from '../FormController';
+import { FormController, FormControllerFields, FormControllerState } from '../FormController';
 import { TableFormView } from './TableFormView';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
@@ -7,8 +7,12 @@ import { TableFormFieldController } from '../../FieldController/TableFormFieldCo
 import { FieldController } from '../../FieldController/FieldController';
 import { Grid, Helper } from '../../../../../common';
 
+export interface TableFormControllerFields extends FormControllerFields {
+    [name: string]: TableFormFieldController;
+}
+
 export class TableFormController extends FormController<TableForm> {
-    fields: { [name: string]: TableFormFieldController } = {};
+    fields: TableFormControllerFields = {};
     state: FormControllerState = {
         updated: Date.now(),
     };

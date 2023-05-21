@@ -1,4 +1,4 @@
-import { FormController, FormControllerState, FormControllerFields } from '../FormController';
+import { FormController, FormControllerFields, FormControllerState } from '../FormController';
 import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';

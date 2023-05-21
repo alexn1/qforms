@@ -1,13 +1,14 @@
-import { FormController, FormControllerState } from '../FormController';
+import { FormController, FormControllerFields, FormControllerState } from '../FormController';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Grid } from '../../../../../common';
+export interface TableFormControllerFields extends FormControllerFields {
+    [name: string]: TableFormFieldController;
+}
 export declare class TableFormController extends FormController<TableForm> {
-    fields: {
-        [name: string]: TableFormFieldController;
-    };
+    fields: TableFormControllerFields;
     state: FormControllerState;
     grid: Grid;
     getViewClass(): any;
