@@ -1,8 +1,11 @@
-import { FormController, FormControllerState } from '../FormController';
+import { FormController, FormControllerState, FormControllerFields } from '../FormController';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { RawRow } from '../../../../../../types';
+export interface RowFormControllerFields extends FormControllerFields {
+    [name: string]: RowFormFieldController;
+}
 export interface RowFormControllerState extends FormControllerState {
     mode: 'view' | 'edit';
     hasNew: boolean;
@@ -10,9 +13,7 @@ export interface RowFormControllerState extends FormControllerState {
     valid: boolean;
 }
 export declare class RowFormController extends FormController<RowForm> {
-    fields: {
-        [name: string]: RowFormFieldController;
-    };
+    fields: RowFormControllerFields;
     state: RowFormControllerState;
     init(): void;
     deinit(): void;

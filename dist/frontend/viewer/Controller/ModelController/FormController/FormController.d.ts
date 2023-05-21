@@ -7,10 +7,11 @@ import { RawRow } from '../../../../../types';
 export interface FormControllerState {
     updated: number;
 }
+export interface FormControllerFields {
+    [name: string]: FieldController;
+}
 export declare class FormController<TForm extends Form = Form> extends ModelController<TForm> {
-    fields: {
-        [name: string]: FieldController;
-    };
+    fields: FormControllerFields;
     state: FormControllerState;
     static create(model: Form, parent: PageController): FormController;
     constructor(model: TForm, parent: PageController);

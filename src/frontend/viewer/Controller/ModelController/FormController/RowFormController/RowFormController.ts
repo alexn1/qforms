@@ -1,10 +1,14 @@
-import { FormController, FormControllerState } from '../FormController';
+import { FormController, FormControllerState, FormControllerFields } from '../FormController';
 import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
 import { RawRow } from '../../../../../../types';
+
+export interface RowFormControllerFields extends FormControllerFields {
+    [name: string]: RowFormFieldController;
+}
 
 export interface RowFormControllerState extends FormControllerState {
     mode: 'view' | 'edit';
@@ -14,7 +18,7 @@ export interface RowFormControllerState extends FormControllerState {
 }
 
 export class RowFormController extends FormController<RowForm> {
-    fields: { [name: string]: RowFormFieldController } = {};
+    fields: RowFormControllerFields = {};
     state: RowFormControllerState = {
         updated: Date.now(),
         mode: 'edit',
