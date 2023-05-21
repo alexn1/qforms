@@ -202,7 +202,7 @@ export class PageController<
         return this.forms.find((form) => form.model.getName() === name) as TFormController;
     }
 
-    async onActionClick(name): Promise<any> {
+    async onActionClick(name: string): Promise<any> {
         console.log('PageController.onActionClick', name);
     }
 

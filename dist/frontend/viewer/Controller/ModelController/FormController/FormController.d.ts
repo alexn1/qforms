@@ -24,7 +24,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     onFieldChange(e: any): Promise<void>;
     getUpdated(): number;
     invalidate(): void;
-    onActionClick(name: any, row: any): Promise<any>;
+    onActionClick(name: string, row: RawRow): Promise<any>;
     getField<TFieldController extends FieldController = FieldController>(name: string): TFieldController;
     getApp(): ApplicationController;
     getSelectedRowKey(): any;

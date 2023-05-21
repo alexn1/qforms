@@ -84,7 +84,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         this.state.updated = Date.now();
     }
 
-    async onActionClick(name, row): Promise<any> {
+    async onActionClick(name: string, row: RawRow): Promise<any> {
         console.log('FormController.onActionClick', name, row);
     }
 

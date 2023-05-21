@@ -26,7 +26,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     getApp(): TApplicationController;
     getViewClass(): typeof PageView;
     getForm<TFormController extends FormController = FormController>(name: string): TFormController;
-    onActionClick(name: any): Promise<any>;
+    onActionClick(name: string): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;
     getSelectedRowKey(): any;
