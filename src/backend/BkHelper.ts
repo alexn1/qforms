@@ -467,8 +467,9 @@ export class BkHelper {
         );
     }
 
-    static getFirstField(object) {
+    static getFirstField(object: Object) {
         const [key] = Object.keys(object);
+        if (!key) throw new Error('getFirstField: no fields');
         return object[key];
     }
 

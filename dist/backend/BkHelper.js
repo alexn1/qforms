@@ -436,6 +436,8 @@ class BkHelper {
     }
     static getFirstField(object) {
         const [key] = Object.keys(object);
+        if (!key)
+            throw new Error('getFirstField: no fields');
         return object[key];
     }
     static getCommandLineParams() {

@@ -40,7 +40,7 @@ export declare class BkHelper {
     static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
     static formatDate(date: Date, format: string): string;
-    static getFirstField(object: any): any;
+    static getFirstField(object: Object): any;
     static getCommandLineParams(): {};
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
