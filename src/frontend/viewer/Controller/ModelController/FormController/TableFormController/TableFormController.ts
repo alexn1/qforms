@@ -1,5 +1,5 @@
+import { FormController, FormControllerState } from '../FormController';
 import { TableFormView } from './TableFormView';
-import { FormController } from '../FormController';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
@@ -9,15 +9,10 @@ import { Grid, Helper } from '../../../../../common';
 
 export class TableFormController extends FormController<TableForm> {
     fields: { [name: string]: TableFormFieldController } = {};
-    // state: any;
+    state: FormControllerState = {
+        updated: Date.now(),
+    };
     grid: Grid = null;
-
-    constructor(model: TableForm, parent) {
-        super(model, parent);
-        this.state = {
-            updated: Date.now(),
-        };
-    }
 
     getViewClass() {
         return super.getViewClass() || TableFormView;

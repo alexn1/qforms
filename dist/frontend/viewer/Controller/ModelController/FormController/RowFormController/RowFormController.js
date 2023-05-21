@@ -97,9 +97,6 @@ class RowFormController extends FormController_1.FormController {
             this.rerender();
         };
     }
-    /* constructor(model: RowForm, parent: PageController) {
-        super(model, parent);
-    } */
     init() {
         super.init();
         this.model.on('refresh', this.onModelRefresh);

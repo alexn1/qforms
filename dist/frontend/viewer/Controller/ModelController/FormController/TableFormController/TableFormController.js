@@ -1,15 +1,17 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TableFormController = void 0;
-const TableFormView_1 = require("./TableFormView");
 const FormController_1 = require("../FormController");
+const TableFormView_1 = require("./TableFormView");
 const DataSource_1 = require("../../../../Model/DataSource/DataSource");
 const common_1 = require("../../../../../common");
 class TableFormController extends FormController_1.FormController {
-    constructor(model, parent) {
-        super(model, parent);
+    constructor() {
+        super(...arguments);
         this.fields = {};
-        // state: any;
+        this.state = {
+            updated: Date.now(),
+        };
         this.grid = null;
         this.onGridCreate = (grid) => {
             this.grid = grid;
@@ -154,9 +156,6 @@ class TableFormController extends FormController_1.FormController {
             this.model.getDefaultDataSource().setFrame(frame);
             this.model.getDefaultDataSource().refresh();
             this.rerender();
-        };
-        this.state = {
-            updated: Date.now(),
         };
     }
     getViewClass() {

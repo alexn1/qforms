@@ -1,4 +1,4 @@
-import { FormController } from '../FormController';
+import { FormController, FormControllerState } from '../FormController';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
 import { RawRow } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
@@ -8,8 +8,8 @@ export declare class TableFormController extends FormController<TableForm> {
     fields: {
         [name: string]: TableFormFieldController;
     };
+    state: FormControllerState;
     grid: Grid;
-    constructor(model: TableForm, parent: any);
     getViewClass(): any;
     init(): void;
     deinit(): void;

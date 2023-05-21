@@ -1,7 +1,6 @@
 import { FormController, FormControllerState } from '../FormController';
 import { RowFormView } from './RowFormView';
 import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
-import { PageController } from '../../PageController/PageController';
 import { RowFormFieldController } from '../../FieldController/RowFormFieldController/RowFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Helper } from '../../../../../common/Helper';
@@ -23,10 +22,6 @@ export class RowFormController extends FormController<RowForm> {
         changed: false,
         valid: true,
     };
-
-    /* constructor(model: RowForm, parent: PageController) {
-        super(model, parent);
-    } */
 
     init() {
         super.init();
