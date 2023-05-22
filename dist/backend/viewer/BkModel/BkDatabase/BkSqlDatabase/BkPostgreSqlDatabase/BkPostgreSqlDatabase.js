@@ -27,6 +27,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             console.log('ending pool:', pool.totalCount);
             await pool.end();
         }
+        this.pool = {};
     }
     getPool(context) {
         // console.log('PostgreSqlDatabase.getPool');

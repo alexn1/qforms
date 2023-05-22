@@ -17,6 +17,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         if (this.pool !== null) {
             await new Promise((resolve) => {
                 this.pool.end(() => {
+                    this.pool = null;
                     resolve();
                 });
             });

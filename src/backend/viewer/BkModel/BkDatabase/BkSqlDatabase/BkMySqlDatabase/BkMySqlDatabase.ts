@@ -16,6 +16,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         if (this.pool !== null) {
             await new Promise<void>((resolve) => {
                 this.pool.end(() => {
+                    this.pool = null;
                     resolve();
                 });
             });
