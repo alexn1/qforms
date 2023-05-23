@@ -1,5 +1,4 @@
 import { ModelController } from '../ModelController';
-import { FrontHostApp } from '../../../../common';
 import { Field } from '../../../Model/Field/Field';
 import { FormController } from '../FormController/FormController';
 import { PageController } from '../PageController/PageController';

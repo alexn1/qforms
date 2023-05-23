@@ -36915,7 +36915,7 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         if (ctrlClass) {
             const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
-                throw new Error(`no class ${ctrlClass}`);
+                throw new Error(`no global class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const generalClassName = `${parent
@@ -36923,7 +36923,7 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
             .getClassName()}${model.getClassName()}Controller`;
         const GeneralClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(generalClassName);
         if (!GeneralClass)
-            throw new Error(`no class ${generalClassName}`);
+            throw new Error(`no global class ${generalClassName}`);
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
@@ -39556,10 +39556,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
-    // state: any;
-    constructor(model, parent) {
-        super(model, parent);
+    constructor() {
+        super(...arguments);
         this.fields = {};
+        this.state = {
+            updated: Date.now(),
+            mode: 'edit',
+            hasNew: false,
+            changed: false,
+            valid: true,
+        };
         this.onModelRefresh = async (e) => {
             console.log('RowFormController.onModelRefresh', this.model.getFullName());
             if (!this.view)
@@ -39640,13 +39646,6 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             console.log('RowFormController.onCancelClick');
             this.state.mode = 'view';
             this.rerender();
-        };
-        this.state = {
-            updated: Date.now(),
-            mode: 'edit',
-            hasNew: false,
-            changed: false,
-            valid: true,
         };
     }
     init() {
@@ -39862,19 +39861,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "TableFormController": () => (/* binding */ TableFormController)
 /* harmony export */ });
-/* harmony import */ var _TableFormView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
-/* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _TableFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
 
 
 
 
-class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.FormController {
-    constructor(model, parent) {
-        super(model, parent);
+class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
+    constructor() {
+        super(...arguments);
         this.fields = {};
-        // state: any;
+        this.state = {
+            updated: Date.now(),
+        };
         this.grid = null;
         this.onGridCreate = (grid) => {
             this.grid = grid;
@@ -40020,12 +40021,9 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_1__.F
             this.model.getDefaultDataSource().refresh();
             this.rerender();
         };
-        this.state = {
-            updated: Date.now(),
-        };
     }
     getViewClass() {
-        return super.getViewClass() || _TableFormView__WEBPACK_IMPORTED_MODULE_0__.TableFormView;
+        return super.getViewClass() || _TableFormView__WEBPACK_IMPORTED_MODULE_1__.TableFormView;
     }
     init() {
         super.init();
@@ -41379,8 +41377,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         const row = this.rows[0];
         if (!row)
             throw new Error('no single row');
-        if (withChanges)
+        if (withChanges) {
             return this.getRowWithChanges(row);
+        }
         return row;
     }
     getForm() {
@@ -42836,7 +42835,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         this.fillParams(this.getRow());
         super.onDataSourceInsert(e);
     }
-    getRow(withChanges) {
+    getRow(withChanges = false) {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
     getKey() {
@@ -43543,10 +43542,14 @@ class WebSocketClient {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "keyArrayToKey": () => (/* binding */ keyArrayToKey)
+/* harmony export */   "keyArrayToKey": () => (/* binding */ keyArrayToKey),
+/* harmony export */   "keyToKeyArray": () => (/* binding */ keyToKeyArray)
 /* harmony export */ });
 const keyArrayToKey = (keyArray) => {
     return JSON.stringify(keyArray);
+};
+const keyToKeyArray = (key) => {
+    return JSON.parse(key);
 };
 
 
@@ -43755,7 +43758,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_69__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_69__.VisibilityOffIcon),
-/* harmony export */   "keyArrayToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyArrayToKey)
+/* harmony export */   "keyArrayToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyArrayToKey),
+/* harmony export */   "keyToKeyArray": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyToKeyArray)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 /* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");

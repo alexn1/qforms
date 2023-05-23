@@ -10,7 +10,7 @@ class FieldController extends ModelController_1.ModelController {
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
-                throw new Error(`no class ${ctrlClass}`);
+                throw new Error(`no global class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const generalClassName = `${parent
@@ -18,7 +18,7 @@ class FieldController extends ModelController_1.ModelController {
             .getClassName()}${model.getClassName()}Controller`;
         const GeneralClass = Helper_1.Helper.getGlobalClass(generalClassName);
         if (!GeneralClass)
-            throw new Error(`no class ${generalClassName}`);
+            throw new Error(`no global class ${generalClassName}`);
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
