@@ -28,6 +28,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             await pool.end();
         }
         this.pool = {};
+        await super.deinit();
     }
     getPool(context) {
         // console.log('PostgreSqlDatabase.getPool');
@@ -46,6 +47,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         console.log('PostgreSqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);

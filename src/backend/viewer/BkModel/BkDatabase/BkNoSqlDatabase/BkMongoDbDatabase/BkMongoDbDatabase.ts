@@ -10,6 +10,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     async connect(context: Context): Promise<void> {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
@@ -74,7 +75,11 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return client.db(database);
     }
 
-    async queryResult(context: Context, query: string, params: { [name: string]: any } = null): Promise<any> {
+    async queryResult(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<any> {
         const db = this.getDbLink(context);
 
         // eval query as function
@@ -88,7 +93,11 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return result;
     }
 
-    async queryRows(context: Context, query: string, params: { [name: string]: any } = null): Promise<Row[]> {
+    async queryRows(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<Row[]> {
         console.log('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
 
@@ -101,7 +110,11 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         return [result];
     }
 
-    async queryScalar(context: Context, query: string, params: { [name: string]: any } = null): Promise<any> {
+    async queryScalar(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<any> {
         const result = await this.queryResult(context, query, params);
 
         // for find() and aggregate()
@@ -136,9 +149,5 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     async rollback(context: Context, err): Promise<void> {
         console.log('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
-    }
-
-    async deinit(): Promise<void> {
-        console.log(`MongoDbDatabase.deinit: ${this.getName()}`);
     }
 }

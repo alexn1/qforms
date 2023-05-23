@@ -8,6 +8,7 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         console.log('MongoDbDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
@@ -115,9 +116,6 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     async rollback(context, err) {
         console.log('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
-    }
-    async deinit() {
-        console.log(`MongoDbDatabase.deinit: ${this.getName()}`);
     }
 }
 exports.BkMongoDbDatabase = BkMongoDbDatabase;

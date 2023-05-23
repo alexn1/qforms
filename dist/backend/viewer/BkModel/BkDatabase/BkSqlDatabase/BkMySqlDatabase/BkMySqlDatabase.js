@@ -17,11 +17,12 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         if (this.pool !== null) {
             await new Promise((resolve) => {
                 this.pool.end(() => {
-                    this.pool = null;
                     resolve();
                 });
             });
+            this.pool = null;
         }
+        await super.deinit();
     }
     getPool() {
         //console.log('MySqlDatabase.getPool');
@@ -284,6 +285,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         console.log('MySqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);

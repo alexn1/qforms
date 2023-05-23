@@ -5,12 +5,21 @@ const BaseModel_1 = require("../../BaseModel");
 class BkModel extends BaseModel_1.BaseModel {
     constructor() {
         super(...arguments);
+        this.deinited = false;
         this.fillCollections = [];
     }
     /* constructor(data: any, parent?: any) {
         super(data, parent);
     } */
     async init(context) { }
+    async deinit() {
+        this.deinited = true;
+    }
+    checkDeinited() {
+        if (this.deinited) {
+            throw new Error(`${this.getName()} is already deinited and cannot be used`);
+        }
+    }
     async fill(context) {
         // console.log('Model.fill', this.constructor.name, this.getName());
         const response = {};

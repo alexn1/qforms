@@ -75,12 +75,14 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     }
 
     async deinit(): Promise<void> {
-        console.log('Application.deinit: ' + this.getName());
+        console.log(`Application.deinit: ${this.getName()}`);
 
         // databases
         for (const database of this.databases) {
             await database.deinit();
         }
+
+        await super.deinit();
     }
 
     getDirPath(): string {

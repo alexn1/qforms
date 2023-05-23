@@ -26,6 +26,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
             await pool.end();
         }
         this.pool = {};
+        await super.deinit();
     }
 
     getPool(context: Context): Pool {
@@ -46,6 +47,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     async connect(context: Context): Promise<void> {
         console.log('PostgreSqlDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);

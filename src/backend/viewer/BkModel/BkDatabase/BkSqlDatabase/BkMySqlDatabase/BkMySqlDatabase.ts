@@ -16,11 +16,12 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         if (this.pool !== null) {
             await new Promise<void>((resolve) => {
                 this.pool.end(() => {
-                    this.pool = null;
                     resolve();
                 });
             });
+            this.pool = null;
         }
+        await super.deinit();
     }
 
     getPool(): Pool {
@@ -57,7 +58,11 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         });
     }
 
-    async queryRows(context: Context, query: string, params: { [name: string]: any } = null): Promise<Row[]> {
+    async queryRows(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } = null,
+    ): Promise<Row[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase.checkParams(query, params);
         const nest = true;
@@ -308,6 +313,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
     async connect(context: Context): Promise<void> {
         console.log('MySqlDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
+        this.checkDeinited();
         const name = this.getName();
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);

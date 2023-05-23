@@ -76,11 +76,12 @@ class BkApplication extends BkModel_1.BkModel {
         return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        console.log('Application.deinit: ' + this.getName());
+        console.log(`Application.deinit: ${this.getName()}`);
         // databases
         for (const database of this.databases) {
             await database.deinit();
         }
+        await super.deinit();
     }
     getDirPath() {
         return this.appInfo.dirPath;

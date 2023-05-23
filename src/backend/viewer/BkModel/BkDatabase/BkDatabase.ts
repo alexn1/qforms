@@ -29,10 +29,6 @@ export class BkDatabase<TConnection = any> extends BkModel {
         await this.createColItems('params', context);
     }
 
-    async deinit(): Promise<void> {
-        throw new Error(`${this.constructor.name}.deinit not implemented`);
-    }
-
     fillAttributes(response: any): void {
         response.name = this.getAttr('name');
     }

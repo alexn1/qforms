@@ -1,8 +1,11 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 export declare class BkModel extends BaseModel {
+    deinited: boolean;
     fillCollections: string[];
     init(context: Context): Promise<void>;
+    deinit(): Promise<void>;
+    checkDeinited(): void;
     fill(context: Context): Promise<any>;
     fillAttributes(response: any): void;
     isBackOnly(): boolean;

@@ -27,5 +27,4 @@ export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
-    deinit(): Promise<void>;
 }

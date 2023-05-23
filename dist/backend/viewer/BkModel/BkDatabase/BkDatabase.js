@@ -17,9 +17,6 @@ class BkDatabase extends BkModel_1.BkModel {
         await this.createColItems('tables', context);
         await this.createColItems('params', context);
     }
-    async deinit() {
-        throw new Error(`${this.constructor.name}.deinit not implemented`);
-    }
     fillAttributes(response) {
         response.name = this.getAttr('name');
     }

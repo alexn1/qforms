@@ -2,6 +2,7 @@ import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
 
 export class BkModel extends BaseModel {
+    deinited = false;
     fillCollections: string[] = [];
 
     /* constructor(data: any, parent?: any) {
@@ -9,6 +10,16 @@ export class BkModel extends BaseModel {
     } */
 
     async init(context: Context): Promise<void> {}
+
+    async deinit(): Promise<void> {
+        this.deinited = true;
+    }
+
+    checkDeinited() {
+        if (this.deinited) {
+            throw new Error(`${this.getName()} is already deinited and cannot be used`);
+        }
+    }
 
     async fill(context: Context): Promise<any> {
         // console.log('Model.fill', this.constructor.name, this.getName());
