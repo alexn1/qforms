@@ -15,14 +15,14 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
-            if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
+            if (!CustomClass) throw new Error(`no global class ${ctrlClass}`);
             return new CustomClass(model, parent);
         }
         const generalClassName = `${parent
             .getModel()
             .getClassName()}${model.getClassName()}Controller`;
         const GeneralClass = Helper.getGlobalClass(generalClassName);
-        if (!GeneralClass) throw new Error(`no class ${generalClassName}`);
+        if (!GeneralClass) throw new Error(`no global class ${generalClassName}`);
         return new GeneralClass(model, parent);
     }
 
@@ -113,4 +113,3 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return this.getModel().getAttr('format');
     }
 }
-
