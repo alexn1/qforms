@@ -85,7 +85,7 @@ export class BkModel extends BaseModel {
         const modelClass = BaseModel.getAttr(itemData, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
-            if (!CustomClass) throw new Error(`no class global.${modelClass}`);
+            if (!CustomClass) throw new Error(`no global class ${modelClass}`);
             return new CustomClass(itemData, this);
         }
 

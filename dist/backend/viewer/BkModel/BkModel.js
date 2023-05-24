@@ -78,7 +78,7 @@ class BkModel extends BaseModel_1.BaseModel {
         if (modelClass) {
             const CustomClass = global[modelClass];
             if (!CustomClass)
-                throw new Error(`no class global.${modelClass}`);
+                throw new Error(`no global class ${modelClass}`);
             return new CustomClass(itemData, this);
         }
         // lib class
