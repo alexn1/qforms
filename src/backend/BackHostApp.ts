@@ -379,10 +379,10 @@ export class BackHostApp {
             await this.logger.log({
                 type: 'error',
                 source: 'server',
-                ip: req ? Context.getIpFromReq(req) : null,
                 message: err.message,
                 stack: err.stack?.toString(),
                 data: data,
+                ip: req ? Context.getIpFromReq(req) : null,
             });
         } catch (err) {
             console.error(colors.red(err));
@@ -431,9 +431,9 @@ export class BackHostApp {
             await this.logger.log({
                 type: 'log',
                 source: 'server',
-                ip: context.getIp(),
                 message: message,
                 data: data,
+                ip: context.getIp(),
             });
         } catch (err) {
             console.error(colors.red(err));

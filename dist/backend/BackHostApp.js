@@ -280,10 +280,10 @@ class BackHostApp {
             await this.logger.log({
                 type: 'error',
                 source: 'server',
-                ip: req ? Context_1.Context.getIpFromReq(req) : null,
                 message: err.message,
                 stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
                 data: data,
+                ip: req ? Context_1.Context.getIpFromReq(req) : null,
             });
         }
         catch (err) {
@@ -331,9 +331,9 @@ class BackHostApp {
             await this.logger.log({
                 type: 'log',
                 source: 'server',
-                ip: context.getIp(),
                 message: message,
                 data: data,
+                ip: context.getIp(),
             });
         }
         catch (err) {
