@@ -289,7 +289,7 @@ class BackHostApp {
                 await this.logger.createLog({
                     type: 'error',
                     source: 'server',
-                    ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    ip: req ? Context_1.Context.getIpFromReq(req) : null,
                     message: err.message,
                     stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
                     data: data ? JSON.stringify(data, null, 4) : null,
@@ -303,9 +303,7 @@ class BackHostApp {
                     body: JSON.stringify({
                         type: 'error',
                         source: 'server',
-                        ip: req
-                            ? req.headers['x-forwarded-for'] || req.connection.remoteAddress
-                            : null,
+                        ip: req ? Context_1.Context.getIpFromReq(req) : null,
                         message: err.message,
                         stack: (_b = err.stack) === null || _b === void 0 ? void 0 : _b.toString(),
                         data: data,
@@ -346,7 +344,7 @@ class BackHostApp {
             await this.logger.createLog({
                 type: 'log',
                 source: 'server',
-                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                ip: Context_1.Context.getIpFromReq(req),
                 message: message,
                 data: JSON.stringify(req.body, null, 4),
             });
@@ -689,9 +687,7 @@ class BackHostApp {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
-                    ip: req.body.ip ||
-                        req.headers['x-forwarded-for'] ||
-                        req.connection.remoteAddress,
+                    ip: req.body.ip || Context_1.Context.getIpFromReq(req),
                     message: req.body.message,
                     stack: req.body.stack,
                     data: req

@@ -11,4 +11,5 @@ export declare class Logger {
         stack?: string;
         data: string;
     }): Promise<void>;
+    logError(values: object): Promise<void>;
 }

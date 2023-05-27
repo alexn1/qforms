@@ -62,5 +62,6 @@ export declare class Context {
     getParam(name: string): any;
     isDebugMode(): boolean;
     getUrl(): URL;
+    static getIpFromReq(req: Request): any;
     destroy(): void;
 }

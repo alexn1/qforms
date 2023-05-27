@@ -18,5 +18,7 @@ class Logger {
         }
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
+    async logError(values) {
+    }
 }
 exports.Logger = Logger;

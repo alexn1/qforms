@@ -26,4 +26,8 @@ export class Logger {
             values,
         );
     }
+
+    async logError(values: object) {
+        
+    }
 }

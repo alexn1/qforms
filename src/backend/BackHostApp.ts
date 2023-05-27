@@ -402,7 +402,7 @@ export class BackHostApp {
                 await this.logger.createLog({
                     type: 'error',
                     source: 'server',
-                    ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
+                    ip: req ? Context.getIpFromReq(req) : null,
                     message: err.message,
                     stack: err.stack?.toString(),
                     data: data ? JSON.stringify(data, null, 4) : null,
@@ -415,9 +415,7 @@ export class BackHostApp {
                     body: JSON.stringify({
                         type: 'error',
                         source: 'server',
-                        ip: req
-                            ? req.headers['x-forwarded-for'] || req.connection.remoteAddress
-                            : null,
+                        ip: req ? Context.getIpFromReq(req) : null,
                         message: err.message,
                         stack: err.stack?.toString(),
                         data: data,
@@ -456,7 +454,7 @@ export class BackHostApp {
             await this.logger.createLog({
                 type: 'log',
                 source: 'server',
-                ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+                ip: Context.getIpFromReq(req),
                 message: message,
                 data: JSON.stringify(req.body, null, 4),
             });
@@ -795,17 +793,14 @@ export class BackHostApp {
         return domain;
     }
 
-    async postError(req, res, next) {
+    async postError(req: Request, res: Response, next) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
-                    ip:
-                        req.body.ip ||
-                        req.headers['x-forwarded-for'] ||
-                        req.connection.remoteAddress,
+                    ip: req.body.ip || Context.getIpFromReq(req),
                     message: req.body.message,
                     stack: req.body.stack,
                     data: req

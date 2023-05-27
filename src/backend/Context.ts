@@ -175,7 +175,7 @@ export class Context {
     }
 
     getIp(): string {
-        return this.getReq().headers['x-forwarded-for'] || this.getReq().connection.remoteAddress;
+        return Context.getIpFromReq(this.getReq());
     }
 
     getHost(): string {
@@ -209,6 +209,10 @@ export class Context {
         var fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         // console.log('Context.getUrl', fullUrl);
         return new URL(fullUrl);
+    }
+
+    static getIpFromReq(req: Request) {
+        return req.headers['x-forwarded-for'] || req.connection.remoteAddress;
     }
 
     destroy(): void {}
