@@ -55,7 +55,7 @@ export interface LogRecord {
     id: number;
     created: Date;
     source: 'client' | 'server';
-    level: 'info' | 'warn' | 'error';
+    level: 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
     type: string;
     message: string;
     stack: string;
