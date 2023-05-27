@@ -284,7 +284,7 @@ class BackHostApp {
                     data: err instanceof MyError_1.MyError ? err.data || null : null,
                 }
                 : null;
-            await this.logger.logError({
+            await this.logger.log({
                 type: 'error',
                 source: 'server',
                 ip: req ? Context_1.Context.getIpFromReq(req) : null,

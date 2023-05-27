@@ -398,7 +398,7 @@ export class BackHostApp {
                   }
                 : null;
 
-            await this.logger.logError({
+            await this.logger.log({
                 type: 'error',
                 source: 'server',
                 ip: req ? Context.getIpFromReq(req) : null,

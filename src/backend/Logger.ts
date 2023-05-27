@@ -27,7 +27,7 @@ export class Logger {
         );
     }
 
-    async logError(values: {
+    async log(values: {
         type: string;
         source: string;
         ip: string;
@@ -61,14 +61,20 @@ export class Logger {
         }
     }
 
-    async createLog2(values) {
+    async createLog2(values: {
+        type: string;
+        source: string;
+        ip: string;
+        message: string;
+        data: object;
+    }) {
         if (this.logPool) {
             await this.createLog({
                 type: values.type,
                 source: values.source,
                 ip: values.ip,
                 message: values.message,
-                data: values.data ? JSON.stringify(values.data) : null,
+                data: values.data ? JSON.stringify(values.data, null, 4) : null,
             });
         } else if (this.logErrorUrl) {
             console.log(`fetch ${this.logErrorUrl}`);

@@ -12,7 +12,7 @@ export declare class Logger {
         stack?: string;
         data: string;
     }): Promise<void>;
-    logError(values: {
+    log(values: {
         type: string;
         source: string;
         ip: string;
@@ -20,5 +20,11 @@ export declare class Logger {
         stack: string;
         data: object;
     }): Promise<void>;
-    createLog2(values: any): Promise<void>;
+    createLog2(values: {
+        type: string;
+        source: string;
+        ip: string;
+        message: string;
+        data: object;
+    }): Promise<void>;
 }

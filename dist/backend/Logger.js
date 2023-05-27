@@ -19,7 +19,7 @@ class Logger {
         }
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
-    async logError(values) {
+    async log(values) {
         if (this.logPool) {
             await this.createLog({
                 type: values.type,
@@ -53,7 +53,7 @@ class Logger {
                 source: values.source,
                 ip: values.ip,
                 message: values.message,
-                data: values.data ? JSON.stringify(values.data) : null,
+                data: values.data ? JSON.stringify(values.data, null, 4) : null,
             });
         }
         else if (this.logErrorUrl) {
