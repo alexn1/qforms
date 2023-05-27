@@ -47,12 +47,12 @@ export class Logger {
     }
 
     async log(values: {
-        type: string;
-        source: string;
+        type: 'log' | 'warn' | 'error';
+        source: 'client' | 'server';
         ip: string;
         message: string;
         stack?: string;
-        data: object;
+        data?: object;
     }) {
         if (this.logPool) {
             await this.createLog({
@@ -74,7 +74,7 @@ export class Logger {
                     ip: values.ip,
                     message: values.message,
                     stack: values.stack || null,
-                    data: values.data,
+                    data: values.data || null,
                 }),
             });
         }

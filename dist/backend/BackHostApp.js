@@ -285,30 +285,6 @@ class BackHostApp {
                 stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
                 data: data,
             });
-            /* if (this.logPool) {
-                await this.logger.createLog({
-                    type: 'error',
-                    source: 'server',
-                    ip: req ? Context.getIpFromReq(req) : null,
-                    message: err.message,
-                    stack: err.stack?.toString(),
-                    data: data ? JSON.stringify(data, null, 4) : null,
-                });
-            } else if (this.logErrorUrl) {
-                console.log(`fetch ${this.logErrorUrl}`);
-                await fetch(this.logErrorUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        type: 'error',
-                        source: 'server',
-                        ip: req ? Context.getIpFromReq(req) : null,
-                        message: err.message,
-                        stack: err.stack?.toString(),
-                        data: data,
-                    }),
-                });
-            } */
         }
         catch (err) {
             console.error(safe_1.default.red(err));

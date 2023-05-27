@@ -390,31 +390,6 @@ export class BackHostApp {
                 stack: err.stack?.toString(),
                 data: data,
             });
-
-            /* if (this.logPool) {
-                await this.logger.createLog({
-                    type: 'error',
-                    source: 'server',
-                    ip: req ? Context.getIpFromReq(req) : null,
-                    message: err.message,
-                    stack: err.stack?.toString(),
-                    data: data ? JSON.stringify(data, null, 4) : null,
-                });
-            } else if (this.logErrorUrl) {
-                console.log(`fetch ${this.logErrorUrl}`);
-                await fetch(this.logErrorUrl, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        type: 'error',
-                        source: 'server',
-                        ip: req ? Context.getIpFromReq(req) : null,
-                        message: err.message,
-                        stack: err.stack?.toString(),
-                        data: data,
-                    }),
-                });
-            } */
         } catch (err) {
             console.error(colors.red(err));
         }

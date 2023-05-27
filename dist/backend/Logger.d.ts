@@ -19,11 +19,11 @@ export declare class Logger {
         data: string;
     }): Promise<void>;
     log(values: {
-        type: string;
-        source: string;
+        type: 'log' | 'warn' | 'error';
+        source: 'client' | 'server';
         ip: string;
         message: string;
         stack?: string;
-        data: object;
+        data?: object;
     }): Promise<void>;
 }

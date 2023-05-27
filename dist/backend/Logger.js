@@ -47,7 +47,7 @@ class Logger {
                     ip: values.ip,
                     message: values.message,
                     stack: values.stack || null,
-                    data: values.data,
+                    data: values.data || null,
                 }),
             });
         }
