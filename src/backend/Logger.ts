@@ -4,7 +4,15 @@ import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/
 export class Logger {
     constructor(logErrorUrl: string, private logPool: Pool) {}
 
-    static async createLog(cnn, values) {
+    async createLog(values: {
+        created?: Date;
+        type: string;
+        source: string;
+        ip: string;
+        message: string;
+        stack?: string;
+        data: string;
+    }) {
         // console.log('BackHostApp.createLog', values);
         if (values.stack === undefined) values.stack = null;
         if (values.created === undefined) values.created = new Date();
@@ -13,7 +21,7 @@ export class Logger {
             values.message = values.message.substr(0, 255);
         }
         await BkPostgreSqlDatabase.queryResult(
-            cnn,
+            this.logPool,
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
             values,
         );

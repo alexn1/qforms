@@ -6,7 +6,7 @@ class Logger {
     constructor(logErrorUrl, logPool) {
         this.logPool = logPool;
     }
-    static async createLog(cnn, values) {
+    async createLog(values) {
         // console.log('BackHostApp.createLog', values);
         if (values.stack === undefined)
             values.stack = null;
@@ -16,7 +16,7 @@ class Logger {
             // throw new Error(`message to long: ${values.message.length}`);
             values.message = values.message.substr(0, 255);
         }
-        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
 }
 exports.Logger = Logger;

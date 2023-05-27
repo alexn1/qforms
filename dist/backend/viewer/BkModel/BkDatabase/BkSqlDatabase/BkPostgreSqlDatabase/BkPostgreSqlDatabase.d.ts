@@ -15,7 +15,7 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     queryResult(context: Context, query: string, params?: {
         [name: string]: any;
     }): Promise<any>;
-    static queryResult(cnn: any, query: string, params?: {
+    static queryResult(pool: Pool, query: string, params?: {
         [name: string]: any;
     }): Promise<any>;
     queryRows(context: Context, query: string, params?: {

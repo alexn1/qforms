@@ -88,7 +88,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     static async queryResult(
-        cnn,
+        pool: Pool,
         query: string,
         params: { [name: string]: any } = null,
     ): Promise<any> {
@@ -100,7 +100,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
-        const result = await cnn.query(sql, values);
+        const result = await pool.query(sql, values);
         // console.log('cnn.query result:', result);
         return result;
     }

@@ -63,8 +63,8 @@ export declare class BackHostApp {
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
     createApp(req: any): Promise<AppInfo[]>;
-    logError(err: Error, req?: Request | null): Promise<void>;
-    logRequest(req: any, context: Context, time: any): Promise<void>;
+    logError(err: Error, req?: Request): Promise<void>;
+    logRequest(req: Request, context: Context, time: any): Promise<void>;
     logEvent(context: Context, message: string, data?: any): Promise<void>;
     createLog2(values: any): Promise<void>;
     moduleGet(req: Request, res: Response, next: any): Promise<void>;

@@ -265,7 +265,7 @@ class BackHostApp {
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, distDirPath);
         return appInfos;
     }
-    async logError(err, req = null) {
+    async logError(err, req) {
         var _a, _b;
         console.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
@@ -286,7 +286,7 @@ class BackHostApp {
                 }
                 : null;
             if (this.logPool) {
-                await Logger_1.Logger.createLog(this.logPool, {
+                await this.logger.createLog({
                     type: 'error',
                     source: 'server',
                     ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -343,7 +343,7 @@ class BackHostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await Logger_1.Logger.createLog(this.logPool, {
+            await this.logger.createLog({
                 type: 'log',
                 source: 'server',
                 ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -372,7 +372,7 @@ class BackHostApp {
     }
     async createLog2(values) {
         if (this.logPool) {
-            await Logger_1.Logger.createLog(this.logPool, {
+            await this.logger.createLog({
                 type: values.type,
                 source: values.source,
                 ip: values.ip,
@@ -686,7 +686,7 @@ class BackHostApp {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
-                await Logger_1.Logger.createLog(this.logPool, {
+                await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
                     ip: req.body.ip ||

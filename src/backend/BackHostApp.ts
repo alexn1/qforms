@@ -378,7 +378,7 @@ export class BackHostApp {
         return appInfos;
     }
 
-    async logError(err: Error, req: Request | null = null) {
+    async logError(err: Error, req?: Request) {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
             const route = err instanceof MyError && err.context ? err.context.getRoute() : null;
@@ -399,7 +399,7 @@ export class BackHostApp {
                 : null;
 
             if (this.logPool) {
-                await Logger.createLog(this.logPool, {
+                await this.logger.createLog({
                     type: 'error',
                     source: 'server',
                     ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -429,7 +429,7 @@ export class BackHostApp {
         }
     }
 
-    async logRequest(req, context: Context, time) {
+    async logRequest(req: Request, context: Context, time) {
         if (!this.logPool) return;
         try {
             const application = this.getApplication(context);
@@ -453,7 +453,7 @@ export class BackHostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await Logger.createLog(this.logPool, {
+            await this.logger.createLog({
                 type: 'log',
                 source: 'server',
                 ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -482,7 +482,7 @@ export class BackHostApp {
 
     async createLog2(values) {
         if (this.logPool) {
-            await Logger.createLog(this.logPool, {
+            await this.logger.createLog({
                 type: values.type,
                 source: values.source,
                 ip: values.ip,
@@ -799,7 +799,7 @@ export class BackHostApp {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
-                await Logger.createLog(this.logPool, {
+                await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
                     ip:

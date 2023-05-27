@@ -78,13 +78,13 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         // console.log('cnn.query result:', result);
         return result;
     }
-    static async queryResult(cnn, query, params = null) {
+    static async queryResult(pool, query, params = null) {
         console.log(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
         // console.log('values:', values);
-        const result = await cnn.query(sql, values);
+        const result = await pool.query(sql, values);
         // console.log('cnn.query result:', result);
         return result;
     }
