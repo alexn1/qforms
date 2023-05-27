@@ -629,17 +629,17 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        if (this.params.log) {
+        if (this.params.logger) {
             try {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
-                    ip: req.body.ip || Context_1.Context.getIpFromReq(req),
                     message: req.body.message,
                     stack: req.body.stack,
                     data: req
                         ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4)
                         : null,
+                    ip: req.body.ip || Context_1.Context.getIpFromReq(req),
                 });
             }
             catch (err) {

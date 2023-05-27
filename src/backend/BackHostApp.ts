@@ -730,14 +730,13 @@ export class BackHostApp {
         return domain;
     }
 
-    async postError(req: Request, res: Response, next) {
+    async postError(req: Request, res: Response, next: (err?) => void) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
-        if (this.params.log) {
+        if (this.params.logger) {
             try {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
-                    ip: req.body.ip || Context.getIpFromReq(req),
                     message: req.body.message,
                     stack: req.body.stack,
                     data: req
@@ -751,6 +750,7 @@ export class BackHostApp {
                               4,
                           )
                         : null,
+                    ip: req.body.ip || Context.getIpFromReq(req),
                 });
             } catch (err) {
                 next(err);

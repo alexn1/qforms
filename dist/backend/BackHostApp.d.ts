@@ -73,7 +73,7 @@ export declare class BackHostApp {
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
     getDomainFromRequest(req: any): string | null;
-    postError(req: Request, res: Response, next: any): Promise<void>;
+    postError(req: Request, res: Response, next: (err?: any) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
     alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [
