@@ -6,24 +6,22 @@ const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabas
 class Logger {
     constructor(logErrorUrl, log) {
         this.logErrorUrl = logErrorUrl;
-        if (log) {
-            this.logPool = BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
-        }
+        this.logPool = log && BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
     }
     getLogErrorUrl() {
         return this.logErrorUrl;
     }
     async createLog(values) {
         // console.log('BackHostApp.createLog', values);
-        if (values.stack === undefined)
-            values.stack = null;
-        if (values.created === undefined)
-            values.created = new Date();
-        if (values.message && values.message.length > 255) {
-            // throw new Error(`message to long: ${values.message.length}`);
-            values.message = values.message.substr(0, 255);
-        }
-        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
+        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', {
+            created: new Date(),
+            type: values.type,
+            source: values.source,
+            ip: values.ip,
+            message: values.message && values.message.substring(0, 255),
+            stack: values.stack || null,
+            data: values.data || null,
+        });
     }
     async log(values) {
         if (this.logPool) {

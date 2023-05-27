@@ -2,8 +2,27 @@ import { Pool } from 'pg';
 // import fetch from 'node-fetch';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 
+export interface LogRecord {
+    type: 'log' | 'warn' | 'error';
+    source: 'client' | 'server';
+    ip: string;
+    message: string;
+    stack?: string;
+    data?: object;
+}
+
+export interface LogRow {
+    type: 'log' | 'warn' | 'error';
+    source: 'client' | 'server';
+    ip: string;
+    message: string;
+    stack?: string;
+    data?: string;
+}
+
 export class Logger {
     private logPool: Pool;
+
     constructor(
         private logErrorUrl: string,
         log?: {
@@ -14,46 +33,31 @@ export class Logger {
             password: string;
         },
     ) {
-        if (log) {
-            this.logPool = BkPostgreSqlDatabase.createPool(log);
-        }
+        this.logPool = log && BkPostgreSqlDatabase.createPool(log);
     }
 
     getLogErrorUrl() {
         return this.logErrorUrl;
     }
 
-    async createLog(values: {
-        created?: Date;
-        type: string;
-        source: string;
-        ip: string;
-        message: string;
-        stack?: string;
-        data: string;
-    }) {
+    async createLog(values: LogRow) {
         // console.log('BackHostApp.createLog', values);
-        if (values.stack === undefined) values.stack = null;
-        if (values.created === undefined) values.created = new Date();
-        if (values.message && values.message.length > 255) {
-            // throw new Error(`message to long: ${values.message.length}`);
-            values.message = values.message.substr(0, 255);
-        }
         await BkPostgreSqlDatabase.queryResult(
             this.logPool,
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
-            values,
+            {
+                created: new Date(),
+                type: values.type,
+                source: values.source,
+                ip: values.ip,
+                message: values.message && values.message.substring(0, 255),
+                stack: values.stack || null,
+                data: values.data || null,
+            },
         );
     }
 
-    async log(values: {
-        type: 'log' | 'warn' | 'error';
-        source: 'client' | 'server';
-        ip: string;
-        message: string;
-        stack?: string;
-        data?: object;
-    }) {
+    async log(values: LogRecord) {
         if (this.logPool) {
             await this.createLog({
                 type: values.type,
