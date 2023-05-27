@@ -286,7 +286,7 @@ class BackHostApp {
                 }
                 : null;
             if (this.logPool) {
-                await BackHostApp.createLog(this.logPool, {
+                await Logger_1.Logger.createLog(this.logPool, {
                     type: 'error',
                     source: 'server',
                     ip: req ? req.headers['x-forwarded-for'] || req.connection.remoteAddress : null,
@@ -343,7 +343,7 @@ class BackHostApp {
             if (time) {
                 message += `, time: ${time}`;
             }
-            await BackHostApp.createLog(this.logPool, {
+            await Logger_1.Logger.createLog(this.logPool, {
                 type: 'log',
                 source: 'server',
                 ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
@@ -370,21 +370,9 @@ class BackHostApp {
             console.error(safe_1.default.red(err));
         }
     }
-    static async createLog(cnn, values) {
-        // console.log('BackHostApp.createLog', values);
-        if (values.stack === undefined)
-            values.stack = null;
-        if (values.created === undefined)
-            values.created = new Date();
-        if (values.message && values.message.length > 255) {
-            // throw new Error(`message to long: ${values.message.length}`);
-            values.message = values.message.substr(0, 255);
-        }
-        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(cnn, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
-    }
     async createLog2(values) {
         if (this.logPool) {
-            await BackHostApp.createLog(this.logPool, {
+            await Logger_1.Logger.createLog(this.logPool, {
                 type: values.type,
                 source: values.source,
                 ip: values.ip,
@@ -698,7 +686,7 @@ class BackHostApp {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
         if (this.logPool) {
             try {
-                await BackHostApp.createLog(this.logPool, {
+                await Logger_1.Logger.createLog(this.logPool, {
                     type: req.body.type,
                     source: req.body.source,
                     ip: req.body.ip ||
