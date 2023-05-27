@@ -25,8 +25,30 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
+import { Pool } from 'pg';
 
 const pkg = require('../../package.json');
+
+export interface BackHostAppParams {
+    appsDirPath?: string;
+    distDirPath?: string;
+    runtimeDirPath?: string;
+    logErrorUrl?: string;
+    handleException?: boolean;
+    host?: string;
+    port?: number;
+    log?: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    };
+    monitor?: {
+        username: string;
+        password: string;
+    };
+}
 
 export class BackHostApp {
     applications: any = {}; // application by route
@@ -38,16 +60,18 @@ export class BackHostApp {
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
-    logPool: any;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    logErrorUrl: string;
     createAppQueue: any = {};
 
-    constructor(private params: any = {}) {
+    // logger
+    logPool: Pool;
+    logErrorUrl: string;
+
+    constructor(private params: BackHostAppParams = {}) {
         // console.log('BackHostApp.constructor');
         this.checkVersion();
     }

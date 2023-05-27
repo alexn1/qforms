@@ -8,6 +8,27 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
+import { Pool } from 'pg';
+export interface BackHostAppParams {
+    appsDirPath?: string;
+    distDirPath?: string;
+    runtimeDirPath?: string;
+    logErrorUrl?: string;
+    handleException?: boolean;
+    host?: string;
+    port?: number;
+    log?: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    };
+    monitor?: {
+        username: string;
+        password: string;
+    };
+}
 export declare class BackHostApp {
     private params;
     applications: any;
@@ -19,15 +40,15 @@ export declare class BackHostApp {
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
-    logPool: any;
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    logErrorUrl: string;
     createAppQueue: any;
-    constructor(params?: any);
+    logPool: Pool;
+    logErrorUrl: string;
+    constructor(params?: BackHostAppParams);
     checkVersion(): void;
     run(): Promise<number>;
     initProcess(): void;
@@ -82,7 +103,7 @@ export declare class BackHostApp {
     getNodeEnv(): string;
     isDevelopment(): boolean;
     isProduction(): boolean;
-    getParams(): any;
+    getParams(): BackHostAppParams;
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result): void;
     static test(): void;
     getDistDirPath(): string;
