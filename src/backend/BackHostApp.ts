@@ -1,6 +1,5 @@
 import http from 'http';
 import express, { Express, Request, Response } from 'express';
-import fetch from 'node-fetch';
 import colors from 'colors/safe';
 import fs from 'fs';
 import path from 'path';
@@ -10,7 +9,6 @@ import session from 'express-session';
 
 import { WebSocketServer } from './WebSocketServer';
 import { BkHelper } from './BkHelper';
-import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
@@ -25,7 +23,6 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
-import { Pool } from 'pg';
 import { Logger } from './Logger';
 
 const pkg = require('../../package.json');
@@ -67,11 +64,6 @@ export class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     createAppQueue: any = {};
-
-    // logger
-    // logPool: Pool;
-    // logErrorUrl: string;
-
     logger: Logger;
 
     constructor(private params: BackHostAppParams = {}) {
@@ -117,15 +109,7 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
-        // this.logErrorUrl = this.params.logErrorUrl || null;
-
-        // logPool
-        const { log } = this.params;
-        /* if (log) {
-            this.logPool = BkPostgreSqlDatabase.createPool(log);
-        } */
-
-        this.logger = new Logger(this.params.logErrorUrl, log);
+        this.logger = new Logger(this.params.logErrorUrl, this.params.log);
 
         // express server
         this.express = express();

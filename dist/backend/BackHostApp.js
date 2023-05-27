@@ -62,13 +62,7 @@ class BackHostApp {
         // runtime & temp
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
-        // this.logErrorUrl = this.params.logErrorUrl || null;
-        // logPool
-        const { log } = this.params;
-        /* if (log) {
-            this.logPool = BkPostgreSqlDatabase.createPool(log);
-        } */
-        this.logger = new Logger_1.Logger(this.params.logErrorUrl, log);
+        this.logger = new Logger_1.Logger(this.params.logErrorUrl, this.params.log);
         // express server
         this.express = (0, express_1.default)();
         this.express.set('handleException', handleException);
