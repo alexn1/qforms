@@ -10,13 +10,14 @@ import { Result } from '../Result';
 import { QueryParams } from '../types';
 import { Logger } from './Logger';
 export interface BackHostAppParams {
+    [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
     logErrorUrl?: string;
     handleException?: boolean;
     host?: string;
-    port?: number;
+    port?: number | string;
     log?: {
         host: string;
         port: number;

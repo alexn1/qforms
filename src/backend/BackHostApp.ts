@@ -28,13 +28,14 @@ import { Logger } from './Logger';
 const pkg = require('../../package.json');
 
 export interface BackHostAppParams {
+    [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
     logErrorUrl?: string;
     handleException?: boolean;
     host?: string;
-    port?: number;
+    port?: number | string;
     log?: {
         host: string;
         port: number;
