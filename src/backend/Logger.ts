@@ -5,10 +5,10 @@ import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/
 export interface LogRecord {
     type: 'log' | 'warn' | 'error';
     source: 'client' | 'server';
-    ip: string;
     message: string;
     stack?: string;
     data?: object;
+    ip?: string;
 }
 
 export interface LogRow {
@@ -49,23 +49,23 @@ export class Logger {
                 created: new Date(),
                 type: values.type,
                 source: values.source,
-                ip: values.ip,
                 message: values.message && values.message.substring(0, 255),
                 stack: values.stack || null,
                 data: values.data || null,
+                ip: values.ip || null,
             },
         );
     }
 
-    async log(values: LogRecord) {
+    async log(record: LogRecord) {
         if (this.logPool) {
             await this.createLog({
-                type: values.type,
-                source: values.source,
-                ip: values.ip,
-                message: values.message,
-                stack: values.stack || null,
-                data: values.data ? JSON.stringify(values.data, null, 4) : null,
+                type: record.type,
+                source: record.source,
+                message: record.message,
+                stack: record.stack || null,
+                data: record.data ? JSON.stringify(record.data, null, 4) : null,
+                ip: record.ip || null,
             });
         } else if (this.logErrorUrl) {
             console.log(`fetch ${this.logErrorUrl}`);
@@ -73,45 +73,14 @@ export class Logger {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    type: values.type,
-                    source: values.source,
-                    ip: values.ip,
-                    message: values.message,
-                    stack: values.stack || null,
-                    data: values.data || null,
+                    type: record.type,
+                    source: record.source,
+                    message: record.message,
+                    stack: record.stack || null,
+                    data: record.data || null,
+                    ip: record.ip || null,
                 }),
             });
         }
     }
-
-    /* async createLog2(values: {
-        type: string;
-        source: string;
-        ip: string;
-        message: string;
-        data: object;
-    }) {
-        if (this.logPool) {
-            await this.createLog({
-                type: values.type,
-                source: values.source,
-                ip: values.ip,
-                message: values.message,
-                data: values.data ? JSON.stringify(values.data, null, 4) : null,
-            });
-        } else if (this.logErrorUrl) {
-            console.log(`fetch ${this.logErrorUrl}`);
-            await fetch(this.logErrorUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    type: values.type,
-                    source: values.source,
-                    ip: values.ip,
-                    message: values.message,
-                    data: values.data,
-                }),
-            });
-        }
-    } */
 }

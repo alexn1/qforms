@@ -17,21 +17,21 @@ class Logger {
             created: new Date(),
             type: values.type,
             source: values.source,
-            ip: values.ip,
             message: values.message && values.message.substring(0, 255),
             stack: values.stack || null,
             data: values.data || null,
+            ip: values.ip || null,
         });
     }
-    async log(values) {
+    async log(record) {
         if (this.logPool) {
             await this.createLog({
-                type: values.type,
-                source: values.source,
-                ip: values.ip,
-                message: values.message,
-                stack: values.stack || null,
-                data: values.data ? JSON.stringify(values.data, null, 4) : null,
+                type: record.type,
+                source: record.source,
+                message: record.message,
+                stack: record.stack || null,
+                data: record.data ? JSON.stringify(record.data, null, 4) : null,
+                ip: record.ip || null,
             });
         }
         else if (this.logErrorUrl) {
@@ -40,12 +40,12 @@ class Logger {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    type: values.type,
-                    source: values.source,
-                    ip: values.ip,
-                    message: values.message,
-                    stack: values.stack || null,
-                    data: values.data || null,
+                    type: record.type,
+                    source: record.source,
+                    message: record.message,
+                    stack: record.stack || null,
+                    data: record.data || null,
+                    ip: record.ip || null,
                 }),
             });
         }
