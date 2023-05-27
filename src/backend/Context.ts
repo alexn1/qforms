@@ -14,12 +14,14 @@ export class Context {
     query: {
         [name: string]: any;
     };
-    params: Params;
     connections: {
         [name: string]: any;
+    } = {};
+    files: {
+        [name: string]: any;
     };
-    files: any;
-    querytime: any;
+    querytime: any = { params: {} };
+    params: Params;
 
     constructor(
         public options: {
@@ -54,10 +56,10 @@ export class Context {
         }
 
         // connections
-        this.connections = {};
+        // this.connections = {};
 
         // querytime
-        this.querytime = { params: {} };
+        // this.querytime = { params: {} };
     }
 
     getRoute(): string {

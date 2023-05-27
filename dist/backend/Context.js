@@ -6,6 +6,8 @@ class Context {
         // console.log('Context', options);
         // this.options = options;
         this.options = options;
+        this.connections = {};
+        this.querytime = { params: {} };
         // query
         this.query = Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
         // params
@@ -18,9 +20,9 @@ class Context {
             }
         }
         // connections
-        this.connections = {};
+        // this.connections = {};
         // querytime
-        this.querytime = { params: {} };
+        // this.querytime = { params: {} };
     }
     getRoute() {
         return `${this.getAppDirName()}/${this.getAppFileName()}/${this.getEnv()}/${this.getDomain()}`;

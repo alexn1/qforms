@@ -20,12 +20,14 @@ export declare class Context {
     query: {
         [name: string]: any;
     };
-    params: Params;
     connections: {
         [name: string]: any;
     };
-    files: any;
+    files: {
+        [name: string]: any;
+    };
     querytime: any;
+    params: Params;
     constructor(options: {
         domain: string;
         req?: Request;
