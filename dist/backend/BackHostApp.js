@@ -62,7 +62,7 @@ class BackHostApp {
         // runtime & temp
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
-        this.logger = new Logger_1.Logger(this.params.logErrorUrl, this.params.log);
+        this.logger = new Logger_1.Logger(this.params.logger);
         // express server
         this.express = (0, express_1.default)();
         this.express.set('handleException', handleException);

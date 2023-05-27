@@ -23,7 +23,7 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
-import { Logger } from './Logger';
+import { Logger, LoggerOptions } from './Logger';
 
 const pkg = require('../../package.json');
 
@@ -32,17 +32,10 @@ export interface BackHostAppParams {
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
-    logErrorUrl?: string;
     handleException?: boolean;
     host?: string;
     port?: number | string;
-    log?: {
-        host: string;
-        port: number;
-        database: string;
-        user: string;
-        password: string;
-    };
+    logger?: LoggerOptions;
     monitor?: {
         username: string;
         password: string;
@@ -110,7 +103,7 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
-        this.logger = new Logger(this.params.logErrorUrl, this.params.log);
+        this.logger = new Logger(this.params.logger);
 
         // express server
         this.express = express();

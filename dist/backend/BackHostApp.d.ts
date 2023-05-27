@@ -8,23 +8,16 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
-import { Logger } from './Logger';
+import { Logger, LoggerOptions } from './Logger';
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
     distDirPath?: string;
     runtimeDirPath?: string;
-    logErrorUrl?: string;
     handleException?: boolean;
     host?: string;
     port?: number | string;
-    log?: {
-        host: string;
-        port: number;
-        database: string;
-        user: string;
-        password: string;
-    };
+    logger?: LoggerOptions;
     monitor?: {
         username: string;
         password: string;

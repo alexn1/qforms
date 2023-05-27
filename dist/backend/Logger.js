@@ -4,16 +4,16 @@ exports.Logger = void 0;
 // import fetch from 'node-fetch';
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 class Logger {
-    constructor(logErrorUrl, log) {
-        this.logErrorUrl = logErrorUrl;
-        this.logPool = log && BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
+    constructor(options) {
+        this.pool = (options === null || options === void 0 ? void 0 : options.db) && BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(options.db);
+        this.url = options === null || options === void 0 ? void 0 : options.url;
     }
     getLogErrorUrl() {
-        return this.logErrorUrl;
+        return this.url;
     }
     async createLog(values) {
         // console.log('BackHostApp.createLog', values);
-        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', {
+        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', {
             created: new Date(),
             type: values.type,
             source: values.source,
@@ -24,7 +24,7 @@ class Logger {
         });
     }
     async log(record) {
-        if (this.logPool) {
+        if (this.pool) {
             await this.createLog({
                 type: record.type,
                 source: record.source,
@@ -34,9 +34,9 @@ class Logger {
                 ip: record.ip || null,
             });
         }
-        else if (this.logErrorUrl) {
-            console.log(`fetch ${this.logErrorUrl}`);
-            await fetch(this.logErrorUrl, {
+        else if (this.url) {
+            console.log(`fetch ${this.url}`);
+            await fetch(this.url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

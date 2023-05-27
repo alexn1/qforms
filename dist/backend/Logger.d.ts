@@ -1,3 +1,13 @@
+export interface LoggerOptions {
+    db?: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    };
+    url?: string;
+}
 export interface LogRecord {
     type: 'log' | 'warn' | 'error';
     source: 'client' | 'server';
@@ -15,15 +25,9 @@ export interface LogRow {
     data?: string;
 }
 export declare class Logger {
-    private logErrorUrl;
-    private logPool;
-    constructor(logErrorUrl: string, log?: {
-        host: string;
-        port: number;
-        database: string;
-        user: string;
-        password: string;
-    });
+    private pool;
+    private url;
+    constructor(options?: LoggerOptions);
     getLogErrorUrl(): string;
     createLog(values: LogRow): Promise<void>;
     log(record: LogRecord): Promise<void>;

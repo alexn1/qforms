@@ -2,6 +2,17 @@ import { Pool } from 'pg';
 // import fetch from 'node-fetch';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 
+export interface LoggerOptions {
+    db?: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    };
+    url?: string;
+}
+
 export interface LogRecord {
     type: 'log' | 'warn' | 'error';
     source: 'client' | 'server';
@@ -21,29 +32,22 @@ export interface LogRow {
 }
 
 export class Logger {
-    private logPool: Pool;
+    private pool: Pool;
+    private url: string;
 
-    constructor(
-        private logErrorUrl: string,
-        log?: {
-            host: string;
-            port: number;
-            database: string;
-            user: string;
-            password: string;
-        },
-    ) {
-        this.logPool = log && BkPostgreSqlDatabase.createPool(log);
+    constructor(options?: LoggerOptions) {
+        this.pool = options?.db && BkPostgreSqlDatabase.createPool(options.db);
+        this.url = options?.url;
     }
 
     getLogErrorUrl() {
-        return this.logErrorUrl;
+        return this.url;
     }
 
     async createLog(values: LogRow) {
         // console.log('BackHostApp.createLog', values);
         await BkPostgreSqlDatabase.queryResult(
-            this.logPool,
+            this.pool,
             'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
             {
                 created: new Date(),
@@ -58,7 +62,7 @@ export class Logger {
     }
 
     async log(record: LogRecord) {
-        if (this.logPool) {
+        if (this.pool) {
             await this.createLog({
                 type: record.type,
                 source: record.source,
@@ -67,9 +71,9 @@ export class Logger {
                 data: record.data ? JSON.stringify(record.data, null, 4) : null,
                 ip: record.ip || null,
             });
-        } else if (this.logErrorUrl) {
-            console.log(`fetch ${this.logErrorUrl}`);
-            await fetch(this.logErrorUrl, {
+        } else if (this.url) {
+            console.log(`fetch ${this.url}`);
+            await fetch(this.url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
