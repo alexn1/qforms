@@ -26,6 +26,7 @@ const EditorModule_1 = require("./editor/EditorModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
+const Logger_1 = require("./Logger");
 const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {
@@ -49,11 +50,9 @@ class BackHostApp {
         this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
-        this.logErrorUrl = this.params.logErrorUrl || null;
         const handleException = this.params.handleException || true;
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
         const port = this.params.port || process.env.LISTEN_PORT || 7000;
-        const { log } = this.params;
         if (!fs_1.default.existsSync(this.appsDirPath)) {
             console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
             return 1;
@@ -65,10 +64,13 @@ class BackHostApp {
         // runtime & temp
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+        this.logErrorUrl = this.params.logErrorUrl || null;
         // logPool
+        const { log } = this.params;
         if (log) {
             this.logPool = BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
         }
+        this.logger = new Logger_1.Logger(this.logErrorUrl, this.logPool);
         // express server
         this.express = (0, express_1.default)();
         this.express.set('handleException', handleException);

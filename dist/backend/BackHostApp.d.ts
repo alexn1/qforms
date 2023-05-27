@@ -9,6 +9,7 @@ import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
 import { Pool } from 'pg';
+import { Logger } from './Logger';
 export interface BackHostAppParams {
     appsDirPath?: string;
     distDirPath?: string;
@@ -48,6 +49,7 @@ export declare class BackHostApp {
     createAppQueue: any;
     logPool: Pool;
     logErrorUrl: string;
+    logger: Logger;
     constructor(params?: BackHostAppParams);
     checkVersion(): void;
     run(): Promise<number>;

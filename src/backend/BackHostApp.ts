@@ -26,6 +26,7 @@ import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
 import { Pool } from 'pg';
+import { Logger } from './Logger';
 
 const pkg = require('../../package.json');
 
@@ -71,6 +72,8 @@ export class BackHostApp {
     logPool: Pool;
     logErrorUrl: string;
 
+    logger: Logger;
+
     constructor(private params: BackHostAppParams = {}) {
         // console.log('BackHostApp.constructor');
         this.checkVersion();
@@ -95,11 +98,10 @@ export class BackHostApp {
         );
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
-        this.logErrorUrl = this.params.logErrorUrl || null;
+
         const handleException = this.params.handleException || true;
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
         const port = this.params.port || process.env.LISTEN_PORT || 7000;
-        const { log } = this.params;
 
         if (!fs.existsSync(this.appsDirPath)) {
             console.error(colors.red(`Application folder '${this.appsDirPath}' doesn't exist`));
@@ -115,10 +117,15 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
+        this.logErrorUrl = this.params.logErrorUrl || null;
+
         // logPool
+        const { log } = this.params;
         if (log) {
             this.logPool = BkPostgreSqlDatabase.createPool(log);
         }
+
+        this.logger = new Logger(this.logErrorUrl, this.logPool);
 
         // express server
         this.express = express();

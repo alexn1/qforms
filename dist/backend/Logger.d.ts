@@ -1,5 +1,5 @@
+import { Pool } from 'pg';
 export declare class Logger {
     private logPool;
-    private logErrorUrl;
-    constructor(logPool: any, logErrorUrl: string);
+    constructor(logErrorUrl: string, logPool: Pool);
 }
