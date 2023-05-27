@@ -2,7 +2,25 @@ import { Pool } from 'pg';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 
 export class Logger {
-    constructor(private logErrorUrl: string, private logPool: Pool) {}
+    private logPool: Pool;
+    constructor(
+        private logErrorUrl: string,
+        log?: {
+            host: string;
+            port: number;
+            database: string;
+            user: string;
+            password: string;
+        },
+    ) {
+        if (log) {
+            this.logPool = BkPostgreSqlDatabase.createPool(log);
+        }
+    }
+
+    getLogErrorUrl() {
+        return this.logErrorUrl;
+    }
 
     async createLog(values: {
         created?: Date;
@@ -32,7 +50,7 @@ export class Logger {
         source: string;
         ip: string;
         message: string;
-        stack: string;
+        stack?: string;
         data: object;
     }) {
         if (this.logPool) {
@@ -41,7 +59,7 @@ export class Logger {
                 source: values.source,
                 ip: values.ip,
                 message: values.message,
-                stack: values.stack,
+                stack: values.stack || null,
                 data: values.data ? JSON.stringify(values.data, null, 4) : null,
             });
         } else if (this.logErrorUrl) {
@@ -54,14 +72,14 @@ export class Logger {
                     source: values.source,
                     ip: values.ip,
                     message: values.message,
-                    stack: values.stack,
+                    stack: values.stack || null,
                     data: values.data,
                 }),
             });
         }
     }
 
-    async createLog2(values: {
+    /* async createLog2(values: {
         type: string;
         source: string;
         ip: string;
@@ -90,5 +108,5 @@ export class Logger {
                 }),
             });
         }
-    }
+    } */
 }

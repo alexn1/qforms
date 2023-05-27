@@ -1,8 +1,14 @@
-import { Pool } from 'pg';
 export declare class Logger {
     private logErrorUrl;
     private logPool;
-    constructor(logErrorUrl: string, logPool: Pool);
+    constructor(logErrorUrl: string, log?: {
+        host: string;
+        port: number;
+        database: string;
+        user: string;
+        password: string;
+    });
+    getLogErrorUrl(): string;
     createLog(values: {
         created?: Date;
         type: string;
@@ -17,14 +23,7 @@ export declare class Logger {
         source: string;
         ip: string;
         message: string;
-        stack: string;
-        data: object;
-    }): Promise<void>;
-    createLog2(values: {
-        type: string;
-        source: string;
-        ip: string;
-        message: string;
+        stack?: string;
         data: object;
     }): Promise<void>;
 }

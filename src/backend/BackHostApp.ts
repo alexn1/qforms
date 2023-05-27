@@ -69,8 +69,8 @@ export class BackHostApp {
     createAppQueue: any = {};
 
     // logger
-    logPool: Pool;
-    logErrorUrl: string;
+    // logPool: Pool;
+    // logErrorUrl: string;
 
     logger: Logger;
 
@@ -117,15 +117,15 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
-        this.logErrorUrl = this.params.logErrorUrl || null;
+        // this.logErrorUrl = this.params.logErrorUrl || null;
 
         // logPool
         const { log } = this.params;
-        if (log) {
+        /* if (log) {
             this.logPool = BkPostgreSqlDatabase.createPool(log);
-        }
+        } */
 
-        this.logger = new Logger(this.logErrorUrl, this.logPool);
+        this.logger = new Logger(this.params.logErrorUrl, log);
 
         // express server
         this.express = express();
@@ -475,7 +475,7 @@ export class BackHostApp {
     async logEvent(context: Context, message: string, data = null): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
-            await this.logger.createLog2({
+            await this.logger.log({
                 type: 'log',
                 source: 'server',
                 ip: context.getIp(),
@@ -779,7 +779,7 @@ export class BackHostApp {
 
     async postError(req: Request, res: Response, next) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
-        if (this.logPool) {
+        if (this.params.log) {
             try {
                 await this.logger.createLog({
                     type: req.body.type,
@@ -799,12 +799,12 @@ export class BackHostApp {
                           )
                         : null,
                 });
-                res.header('Access-Control-Allow-Origin', '*');
-                res.end('ok');
             } catch (err) {
                 next(err);
             }
         }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.end('ok');
     }
 
     getFrontendDirPath() {
@@ -900,5 +900,9 @@ export class BackHostApp {
         const dirName = path.basename(path.dirname(appFilePath));
         const distDirPath = path.join(this.getDistDirPath(), dirName);
         return distDirPath;
+    }
+
+    getLogger() {
+        return this.logger;
     }
 }

@@ -8,7 +8,6 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
-import { Pool } from 'pg';
 import { Logger } from './Logger';
 export interface BackHostAppParams {
     appsDirPath?: string;
@@ -47,8 +46,6 @@ export declare class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     createAppQueue: any;
-    logPool: Pool;
-    logErrorUrl: string;
     logger: Logger;
     constructor(params?: BackHostAppParams);
     checkVersion(): void;
@@ -107,4 +104,5 @@ export declare class BackHostApp {
     static test(): void;
     getDistDirPath(): string;
     makeDistDirPathForApp(appFilePath: string): string;
+    getLogger(): Logger;
 }

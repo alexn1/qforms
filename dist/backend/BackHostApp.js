@@ -14,7 +14,6 @@ const cookie_parser_1 = __importDefault(require("cookie-parser"));
 const express_session_1 = __importDefault(require("express-session"));
 const WebSocketServer_1 = require("./WebSocketServer");
 const BkHelper_1 = require("./BkHelper");
-const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 const Context_1 = require("./Context");
 const BkApplication_1 = require("./viewer/BkModel/BkApplication/BkApplication");
 const MonitorModule_1 = require("./monitor/MonitorModule");
@@ -63,13 +62,13 @@ class BackHostApp {
         // runtime & temp
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
-        this.logErrorUrl = this.params.logErrorUrl || null;
+        // this.logErrorUrl = this.params.logErrorUrl || null;
         // logPool
         const { log } = this.params;
-        if (log) {
-            this.logPool = BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(log);
-        }
-        this.logger = new Logger_1.Logger(this.logErrorUrl, this.logPool);
+        /* if (log) {
+            this.logPool = BkPostgreSqlDatabase.createPool(log);
+        } */
+        this.logger = new Logger_1.Logger(this.params.logErrorUrl, log);
         // express server
         this.express = (0, express_1.default)();
         this.express.set('handleException', handleException);
@@ -359,7 +358,7 @@ class BackHostApp {
     async logEvent(context, message, data = null) {
         console.log('BackHostApp.logEvent', message);
         try {
-            await this.logger.createLog2({
+            await this.logger.log({
                 type: 'log',
                 source: 'server',
                 ip: context.getIp(),
@@ -660,7 +659,7 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        if (this.logPool) {
+        if (this.params.log) {
             try {
                 await this.logger.createLog({
                     type: req.body.type,
@@ -672,13 +671,13 @@ class BackHostApp {
                         ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4)
                         : null,
                 });
-                res.header('Access-Control-Allow-Origin', '*');
-                res.end('ok');
             }
             catch (err) {
                 next(err);
             }
         }
+        res.header('Access-Control-Allow-Origin', '*');
+        res.end('ok');
     }
     getFrontendDirPath() {
         return this.frontendDirPath;
@@ -741,6 +740,9 @@ class BackHostApp {
         const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
         const distDirPath = path_1.default.join(this.getDistDirPath(), dirName);
         return distDirPath;
+    }
+    getLogger() {
+        return this.logger;
     }
 }
 exports.BackHostApp = BackHostApp;
