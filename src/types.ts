@@ -54,7 +54,7 @@ export interface Params {
 export interface LogRecord {
     id: number;
     created: Date;
-    location: 'client' | 'server';
+    source: 'client' | 'server';
     level: 'info' | 'warn' | 'error';
     type: string;
     message: string;
