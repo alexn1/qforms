@@ -20,4 +20,5 @@ export declare class Logger {
         stack: string;
         data: object;
     }): Promise<void>;
+    createLog2(values: any): Promise<void>;
 }

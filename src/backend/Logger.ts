@@ -60,4 +60,29 @@ export class Logger {
             });
         }
     }
+
+    async createLog2(values) {
+        if (this.logPool) {
+            await this.createLog({
+                type: values.type,
+                source: values.source,
+                ip: values.ip,
+                message: values.message,
+                data: values.data ? JSON.stringify(values.data) : null,
+            });
+        } else if (this.logErrorUrl) {
+            console.log(`fetch ${this.logErrorUrl}`);
+            await fetch(this.logErrorUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: values.type,
+                    source: values.source,
+                    ip: values.ip,
+                    message: values.message,
+                    data: values.data,
+                }),
+            });
+        }
+    }
 }

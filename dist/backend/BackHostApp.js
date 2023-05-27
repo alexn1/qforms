@@ -6,7 +6,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BackHostApp = void 0;
 const http_1 = __importDefault(require("http"));
 const express_1 = __importDefault(require("express"));
-const node_fetch_1 = __importDefault(require("node-fetch"));
 const safe_1 = __importDefault(require("colors/safe"));
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));
@@ -322,9 +321,8 @@ class BackHostApp {
             console.error(safe_1.default.red(err));
         }
     }
-    async logRequest(req, context, time) {
-        if (!this.logPool)
-            return;
+    /* async logRequest(req: Request, context: Context, time) {
+        if (!this.logPool) return;
         try {
             const application = this.getApplication(context);
             let args = '';
@@ -332,8 +330,7 @@ class BackHostApp {
                 args = Object.keys(req.body.params)
                     .map((name) => `${name}: ${req.body.params[name]}`)
                     .join(', ');
-            }
-            else if (req.body.row) {
+            } else if (req.body.row) {
                 args = Object.keys(req.body.row)
                     .map((name) => `${name}: ${req.body.row[name]}`)
                     .join(', ');
@@ -351,19 +348,18 @@ class BackHostApp {
             await this.logger.createLog({
                 type: 'log',
                 source: 'server',
-                ip: Context_1.Context.getIpFromReq(req),
+                ip: Context.getIpFromReq(req),
                 message: message,
                 data: JSON.stringify(req.body, null, 4),
             });
+        } catch (err) {
+            console.error(colors.red(err));
         }
-        catch (err) {
-            console.error(safe_1.default.red(err));
-        }
-    }
+    } */
     async logEvent(context, message, data = null) {
         console.log('BackHostApp.logEvent', message);
         try {
-            await this.createLog2({
+            await this.logger.createLog2({
                 type: 'log',
                 source: 'server',
                 ip: context.getIp(),
@@ -373,31 +369,6 @@ class BackHostApp {
         }
         catch (err) {
             console.error(safe_1.default.red(err));
-        }
-    }
-    async createLog2(values) {
-        if (this.logPool) {
-            await this.logger.createLog({
-                type: values.type,
-                source: values.source,
-                ip: values.ip,
-                message: values.message,
-                data: values.data ? JSON.stringify(values.data) : null,
-            });
-        }
-        else if (this.logErrorUrl) {
-            console.log(`fetch ${this.logErrorUrl}`);
-            await (0, node_fetch_1.default)(this.logErrorUrl, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    type: values.type,
-                    source: values.source,
-                    ip: values.ip,
-                    message: values.message,
-                    data: values.data,
-                }),
-            });
         }
     }
     async moduleGet(req, res, next) {
