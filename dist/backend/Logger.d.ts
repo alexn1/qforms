@@ -28,7 +28,7 @@ export declare class Logger {
     private pool;
     private url;
     constructor(options?: LoggerOptions);
-    getLogErrorUrl(): string;
+    getUrl(): string;
     createLog(values: LogRow): Promise<void>;
     log(record: LogRecord): Promise<void>;
 }

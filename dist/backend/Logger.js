@@ -8,7 +8,7 @@ class Logger {
         this.pool = (options === null || options === void 0 ? void 0 : options.db) && BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(options.db);
         this.url = options === null || options === void 0 ? void 0 : options.url;
     }
-    getLogErrorUrl() {
+    getUrl() {
         return this.url;
     }
     async createLog(values) {

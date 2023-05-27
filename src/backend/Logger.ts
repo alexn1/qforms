@@ -40,7 +40,7 @@ export class Logger {
         this.url = options?.url;
     }
 
-    getLogErrorUrl() {
+    getUrl() {
         return this.url;
     }
 

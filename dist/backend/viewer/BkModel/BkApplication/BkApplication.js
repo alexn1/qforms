@@ -119,7 +119,7 @@ class BkApplication extends BkModel_1.BkModel {
         response.route = context.getRoute();
         response.domain = context.getDomain();
         response.virtualPath = context.getVirtualPath();
-        response.logErrorUrl = this.getHostApp().getLogger().getLogErrorUrl() || '/error';
+        response.logErrorUrl = this.getHostApp().getLogger().getUrl() || '/error';
         response.versions = {
             platform: pkg.version,
             app: this.getVersion(),
