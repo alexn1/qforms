@@ -2,7 +2,7 @@ import { Pool } from 'pg';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 
 export class Logger {
-    constructor(logErrorUrl: string, private logPool: Pool) {}
+    constructor(private logErrorUrl: string, private logPool: Pool) {}
 
     async createLog(values: {
         created?: Date;
@@ -27,7 +27,37 @@ export class Logger {
         );
     }
 
-    async logError(values: object) {
-        
+    async logError(values: {
+        type: string;
+        source: string;
+        ip: string;
+        message: string;
+        stack: string;
+        data: object;
+    }) {
+        if (this.logPool) {
+            await this.createLog({
+                type: values.type,
+                source: values.source,
+                ip: values.ip,
+                message: values.message,
+                stack: values.stack,
+                data: values.data ? JSON.stringify(values.data, null, 4) : null,
+            });
+        } else if (this.logErrorUrl) {
+            console.log(`fetch ${this.logErrorUrl}`);
+            await fetch(this.logErrorUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: values.type,
+                    source: values.source,
+                    ip: values.ip,
+                    message: values.message,
+                    stack: values.stack,
+                    data: values.data,
+                }),
+            });
+        }
     }
 }

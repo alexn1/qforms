@@ -398,7 +398,16 @@ export class BackHostApp {
                   }
                 : null;
 
-            if (this.logPool) {
+            await this.logger.logError({
+                type: 'error',
+                source: 'server',
+                ip: req ? Context.getIpFromReq(req) : null,
+                message: err.message,
+                stack: err.stack?.toString(),
+                data: data,
+            });
+
+            /* if (this.logPool) {
                 await this.logger.createLog({
                     type: 'error',
                     source: 'server',
@@ -421,7 +430,7 @@ export class BackHostApp {
                         data: data,
                     }),
                 });
-            }
+            } */
         } catch (err) {
             console.error(colors.red(err));
         }

@@ -266,7 +266,7 @@ class BackHostApp {
         return appInfos;
     }
     async logError(err, req) {
-        var _a, _b;
+        var _a;
         console.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
             const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
@@ -285,31 +285,38 @@ class BackHostApp {
                     data: err instanceof MyError_1.MyError ? err.data || null : null,
                 }
                 : null;
-            if (this.logPool) {
+            await this.logger.logError({
+                type: 'error',
+                source: 'server',
+                ip: req ? Context_1.Context.getIpFromReq(req) : null,
+                message: err.message,
+                stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
+                data: data,
+            });
+            /* if (this.logPool) {
                 await this.logger.createLog({
                     type: 'error',
                     source: 'server',
-                    ip: req ? Context_1.Context.getIpFromReq(req) : null,
+                    ip: req ? Context.getIpFromReq(req) : null,
                     message: err.message,
-                    stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
+                    stack: err.stack?.toString(),
                     data: data ? JSON.stringify(data, null, 4) : null,
                 });
-            }
-            else if (this.logErrorUrl) {
+            } else if (this.logErrorUrl) {
                 console.log(`fetch ${this.logErrorUrl}`);
-                await (0, node_fetch_1.default)(this.logErrorUrl, {
+                await fetch(this.logErrorUrl, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
                         type: 'error',
                         source: 'server',
-                        ip: req ? Context_1.Context.getIpFromReq(req) : null,
+                        ip: req ? Context.getIpFromReq(req) : null,
                         message: err.message,
-                        stack: (_b = err.stack) === null || _b === void 0 ? void 0 : _b.toString(),
+                        stack: err.stack?.toString(),
                         data: data,
                     }),
                 });
-            }
+            } */
         }
         catch (err) {
             console.error(safe_1.default.red(err));

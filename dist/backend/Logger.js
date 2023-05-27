@@ -4,6 +4,7 @@ exports.Logger = void 0;
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 class Logger {
     constructor(logErrorUrl, logPool) {
+        this.logErrorUrl = logErrorUrl;
         this.logPool = logPool;
     }
     async createLog(values) {
@@ -19,6 +20,31 @@ class Logger {
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.logPool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', values);
     }
     async logError(values) {
+        if (this.logPool) {
+            await this.createLog({
+                type: values.type,
+                source: values.source,
+                ip: values.ip,
+                message: values.message,
+                stack: values.stack,
+                data: values.data ? JSON.stringify(values.data, null, 4) : null,
+            });
+        }
+        else if (this.logErrorUrl) {
+            console.log(`fetch ${this.logErrorUrl}`);
+            await fetch(this.logErrorUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    type: values.type,
+                    source: values.source,
+                    ip: values.ip,
+                    message: values.message,
+                    stack: values.stack,
+                    data: values.data,
+                }),
+            });
+        }
     }
 }
 exports.Logger = Logger;
