@@ -1,4 +1,7 @@
+/// <reference types="node" />
+import http from 'http';
 import { Express, Request, Response } from 'express';
+import { WebSocketServer } from './WebSocketServer';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
@@ -9,6 +12,7 @@ import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
 import { Logger, LoggerOptions } from './Logger';
+import { EmptyPromise } from './EmptyPromise';
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
@@ -25,10 +29,12 @@ export interface BackHostAppParams {
 }
 export declare class BackHostApp {
     private params;
-    applications: any;
+    applications: {
+        [route: string]: BkApplication;
+    };
     express: Express;
-    httpServer: any;
-    wsServer: any;
+    httpServer: http.Server;
+    wsServer: WebSocketServer;
     appsDirPath: string;
     distDirPath: string;
     frontendDirPath: string;
@@ -39,7 +45,9 @@ export declare class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    createAppQueue: any;
+    createAppQueue: {
+        [route: string]: Array<EmptyPromise<any>>;
+    };
     logger: Logger;
     constructor(params?: BackHostAppParams);
     checkVersion(): void;
@@ -61,7 +69,7 @@ export declare class BackHostApp {
         originalUrl: string;
         uri: string;
         platformVersion: any;
-        appVersion: any;
+        appVersion: string;
         route: string;
         body: any;
         status: number;

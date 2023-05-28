@@ -29,7 +29,7 @@ const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {
         this.params = params;
-        this.applications = {}; // application by route
+        this.applications = {};
         this.createAppQueue = {};
         // console.log('BackHostApp.constructor');
         this.checkVersion();

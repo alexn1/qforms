@@ -10,11 +10,16 @@ export declare class MonitorModule {
         uptime: number;
         applications: {
             route: string;
-            version: any;
+            version: string;
             pages: {
                 name: string;
             }[];
-            clients: any;
+            clients: {
+                uuid: any;
+                userId: any;
+                ip: any;
+                version: any;
+            }[];
         }[];
     };
     getLinks(): string[];

@@ -5,6 +5,7 @@ import slash from 'slash';
 import colors from 'colors/safe';
 
 import { JSONString } from '../types';
+import { EmptyPromise } from './EmptyPromise';
 
 function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
@@ -507,15 +508,13 @@ export class BkHelper {
         });
     }
 
-    static createEmptyPromise<T = any>(): Promise<T> {
+    static createEmptyPromise<T = any>(): EmptyPromise<T> {
         let _resolve, _reject;
-        const promise = new Promise<T>(function (resolve, reject) {
+        const promise = new EmptyPromise<T>(function (resolve, reject) {
             _resolve = resolve;
             _reject = reject;
         });
-        // @ts-ignore
         promise.resolve = _resolve;
-        // @ts-ignore
         promise.reject = _reject;
         return promise;
     }

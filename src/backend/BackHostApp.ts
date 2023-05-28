@@ -24,6 +24,7 @@ import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
 import { Logger, LoggerOptions } from './Logger';
+import { EmptyPromise } from './EmptyPromise';
 
 const pkg = require('../../package.json');
 
@@ -43,10 +44,10 @@ export interface BackHostAppParams {
 }
 
 export class BackHostApp {
-    applications: any = {}; // application by route
+    applications: { [route: string]: BkApplication } = {};
     express: Express;
-    httpServer: any;
-    wsServer: any;
+    httpServer: http.Server;
+    wsServer: WebSocketServer;
     appsDirPath: string;
     distDirPath: string;
     frontendDirPath: string;
@@ -57,7 +58,7 @@ export class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    createAppQueue: any = {};
+    createAppQueue: { [route: string]: Array<EmptyPromise<any>> } = {};
     logger: Logger;
 
     constructor(private params: BackHostAppParams = {}) {
