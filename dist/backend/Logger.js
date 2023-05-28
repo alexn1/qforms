@@ -11,9 +11,9 @@ class Logger {
     getUrl() {
         return this.url;
     }
-    async createLog(record) {
-        // console.log('BackHostApp.createLog', values);
-        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})', {
+    async insertLog(record) {
+        // console.log('BackHostApp.insertLog', values);
+        await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {
             created: new Date(),
             type: record.type,
             source: record.source,
@@ -25,28 +25,14 @@ class Logger {
     }
     async log(record) {
         if (this.pool) {
-            await this.createLog({
-                type: record.type,
-                source: record.source,
-                message: record.message,
-                stack: record.stack || null,
-                data: record.data || null,
-                ip: record.ip || null,
-            });
+            await this.insertLog(record);
         }
         else if (this.url) {
             console.log(`fetch ${this.url}`);
             await fetch(this.url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    type: record.type,
-                    source: record.source,
-                    message: record.message,
-                    stack: record.stack || null,
-                    data: record.data || null,
-                    ip: record.ip || null,
-                }),
+                body: JSON.stringify(record),
             });
         }
     }

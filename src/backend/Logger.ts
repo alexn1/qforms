@@ -35,11 +35,11 @@ export class Logger {
         return this.url;
     }
 
-    async createLog(record: LogRecord) {
-        // console.log('BackHostApp.createLog', values);
+    async insertLog(record: LogRecord) {
+        // console.log('BackHostApp.insertLog', values);
         await BkPostgreSqlDatabase.queryResult(
             this.pool,
-            'insert into log(created, type, source, ip, message, stack, data) values ({created}, {type}, {source}, {ip}, {message}, {stack}, {data})',
+            'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})',
             {
                 created: new Date(),
                 type: record.type,
@@ -54,27 +54,13 @@ export class Logger {
 
     async log(record: LogRecord) {
         if (this.pool) {
-            await this.createLog({
-                type: record.type,
-                source: record.source,
-                message: record.message,
-                stack: record.stack || null,
-                data: record.data || null,
-                ip: record.ip || null,
-            });
+            await this.insertLog(record);
         } else if (this.url) {
             console.log(`fetch ${this.url}`);
             await fetch(this.url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    type: record.type,
-                    source: record.source,
-                    message: record.message,
-                    stack: record.stack || null,
-                    data: record.data || null,
-                    ip: record.ip || null,
-                }),
+                body: JSON.stringify(record),
             });
         }
     }

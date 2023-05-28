@@ -630,16 +630,14 @@ class BackHostApp {
     async postError(req, res, next) {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
         try {
-            if (this.params.logger) {
-                await this.logger.createLog({
-                    type: req.body.type,
-                    source: req.body.source,
-                    message: req.body.message,
-                    stack: req.body.stack,
-                    data: JSON.stringify(Object.assign(Object.assign({}, req.body.data), { headers: req.headers, domain: this.getDomainFromRequest(req) }), null, 4),
-                    ip: req.body.ip || Context_1.Context.getIpFromReq(req),
-                });
-            }
+            await this.logger.log({
+                type: req.body.type,
+                source: req.body.source,
+                message: req.body.message,
+                stack: req.body.stack,
+                data: JSON.stringify(Object.assign(Object.assign({}, req.body.data), { headers: req.headers, domain: this.getDomainFromRequest(req) }), null, 4),
+                ip: req.body.ip || Context_1.Context.getIpFromReq(req),
+            });
             res.header('Access-Control-Allow-Origin', '*');
             res.end('ok');
         }

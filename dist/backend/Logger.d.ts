@@ -21,6 +21,6 @@ export declare class Logger {
     private url;
     constructor(options?: LoggerOptions);
     getUrl(): string;
-    createLog(record: LogRecord): Promise<void>;
+    insertLog(record: LogRecord): Promise<void>;
     log(record: LogRecord): Promise<void>;
 }
