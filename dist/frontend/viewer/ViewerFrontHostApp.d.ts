@@ -23,7 +23,7 @@ export declare class ViewerFrontHostApp extends FrontHostApp {
     constructor(options?: any);
     run(): Promise<void>;
     onWindowPopState(e: any): Promise<void>;
-    logError(err: any): void;
+    logError(err: Error): void;
     getData(): any;
     alert(options: any): Promise<unknown>;
     confirm(options: any): Promise<unknown>;

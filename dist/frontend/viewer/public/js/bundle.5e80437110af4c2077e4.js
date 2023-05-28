@@ -43345,11 +43345,11 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
             source: 'client',
             message: err.message,
             stack: err.stack,
-            data: {
+            data: JSON.stringify({
                 href: window.location.href,
                 platformVersion: this.getData().versions.platform,
                 appVersion: this.getData().versions.app,
-            },
+            }, null, 4),
         };
         console.log(`POST ${this.getData().logErrorUrl}`, values);
         fetch(this.getData().logErrorUrl, {

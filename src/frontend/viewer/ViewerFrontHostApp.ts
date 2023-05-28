@@ -70,24 +70,28 @@ export class ViewerFrontHostApp extends FrontHostApp {
         await this.applicationController.onWindowPopState(e);
     }
 
-    logError(err) {
+    logError(err: Error) {
         console.error('FrontHostApp.logError', err);
-        const values = {
+        const body = {
             type: 'error',
             source: 'client',
             message: err.message,
             stack: err.stack,
-            data: {
-                href: window.location.href,
-                platformVersion: this.getData().versions.platform,
-                appVersion: this.getData().versions.app,
-            },
+            data: JSON.stringify(
+                {
+                    href: window.location.href,
+                    platformVersion: this.getData().versions.platform,
+                    appVersion: this.getData().versions.app,
+                },
+                null,
+                4,
+            ),
         };
-        console.log(`POST ${this.getData().logErrorUrl}`, values);
+        console.log(`POST ${this.getData().logErrorUrl}`, body);
         fetch(this.getData().logErrorUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify(values),
+            body: JSON.stringify(body),
         }).catch((err) => {
             console.error(err.message);
         });

@@ -325,7 +325,7 @@ class BackHostApp {
             console.error(colors.red(err));
         }
     } */
-    async logEvent(context, message, data = null) {
+    async logEvent(context, message, data) {
         console.log('BackHostApp.logEvent', message);
         try {
             await this.logger.log({
