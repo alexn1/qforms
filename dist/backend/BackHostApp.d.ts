@@ -76,7 +76,7 @@ export declare class BackHostApp {
         data: object;
     };
     logError(err: Error, req?: Request): Promise<void>;
-    logEvent(context: Context, message: string, data?: any): Promise<void>;
+    logEvent(context: Context, message: string, data?: object): Promise<void>;
     moduleGet(req: Request, res: Response, next: any): Promise<void>;
     indexGet(req: Request, res: Response, next: any): Promise<void>;
     indexPost(req: any, res: any, next: any): Promise<void>;

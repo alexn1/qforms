@@ -382,7 +382,7 @@ export class BackHostApp {
                 source: 'server',
                 message: err.message,
                 stack: err.stack,
-                data: req ? this.composeContextData(err, req) : null,
+                data: req ? JSON.stringify(this.composeContextData(err, req), null, 4) : null,
                 ip: req ? Context.getIpFromReq(req) : null,
             });
         } catch (err) {
@@ -426,14 +426,14 @@ export class BackHostApp {
         }
     } */
 
-    async logEvent(context: Context, message: string, data = null): Promise<void> {
+    async logEvent(context: Context, message: string, data: object = null): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
             await this.logger.log({
                 type: 'log',
                 source: 'server',
                 message: message,
-                data: data,
+                data: data ? JSON.stringify(data, null, 4) : null,
                 ip: context.getIp(),
             });
         } catch (err) {
