@@ -734,20 +734,20 @@ export class BackHostApp {
     async postError(req: Request, res: Response, next: (err?: Error) => void) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
         try {
+            const data = JSON.stringify(
+                {
+                    headers: req.headers,
+                    domain: this.getDomainFromRequest(req),
+                },
+                null,
+                4,
+            );
             await this.logger.log({
                 type: req.body.type,
                 source: req.body.source,
                 message: req.body.message,
                 stack: req.body.stack,
-                data: JSON.stringify(
-                    {
-                        ...req.body.data,
-                        headers: req.headers,
-                        domain: this.getDomainFromRequest(req),
-                    },
-                    null,
-                    4,
-                ),
+                data: `${req.body.data}\n${data}`,
                 ip: req.body.ip || Context.getIpFromReq(req),
             });
             res.header('Access-Control-Allow-Origin', '*');
