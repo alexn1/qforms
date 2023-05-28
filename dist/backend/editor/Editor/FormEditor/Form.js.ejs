@@ -1,4 +1,6 @@
-class <%=page%><%=form%>FormController extends <%=_class%>Controller {
+import {<%=_class%>Controller, Helper} from 'qforms/dist/frontend/viewer'
+
+class <%=page%><%=form%><%=_class%>Controller extends <%=_class%>Controller {
 
     /*
     constructor(...args) {
@@ -21,13 +23,7 @@ class <%=page%><%=form%>FormController extends <%=_class%>Controller {
     */
 
     /*
-    getViewClass() {
-        return <%=page%><%=form%>FormView;
-    }
-    */
-
-    /*
-    async onActionClick(name, row) {
+    async onActionClick(name: string, row) {
         switch (name) {
             case 'action1': await this.onAction1(row); return true;
         }
@@ -39,7 +35,7 @@ class <%=page%><%=form%>FormController extends <%=_class%>Controller {
     */
 
     /*
-    isActionEnabled(name) {
+    isActionEnabled(name: string) {
         // for table form
         // return this.isRowSelected();
         // return this.isViewMode();
@@ -57,3 +53,5 @@ class <%=page%><%=form%>FormController extends <%=_class%>Controller {
     */
 
 }
+
+Helper.registerGlobalClass(<%=page%><%=form%><%=_class%>Controller);
