@@ -107,7 +107,7 @@ export class Application extends Model {
         return Promise.allSettled(promises);
     }
 
-    getNodeEnv() {
+    getNodeEnv(): string {
         return this.data.nodeEnv;
     }
 
