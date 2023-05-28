@@ -636,9 +636,7 @@ class BackHostApp {
                     source: req.body.source,
                     message: req.body.message,
                     stack: req.body.stack,
-                    data: req
-                        ? JSON.stringify(Object.assign({ headers: req.headers, domain: this.getDomainFromRequest(req) }, req.body.data), null, 4)
-                        : null,
+                    data: JSON.stringify(Object.assign(Object.assign({}, req.body.data), { headers: req.headers, domain: this.getDomainFromRequest(req) }), null, 4),
                     ip: req.body.ip || Context_1.Context.getIpFromReq(req),
                 });
             }
