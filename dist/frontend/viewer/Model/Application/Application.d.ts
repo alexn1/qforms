@@ -18,6 +18,6 @@ export declare class Application extends Model {
         [name: string]: any;
     }): Promise<any>;
     emitResult(result: Result, source?: any): any;
-    getNodeEnv(): any;
+    getNodeEnv(): string;
     isDevelopment(): boolean;
 }
