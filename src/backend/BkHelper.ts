@@ -508,7 +508,7 @@ export class BkHelper {
         });
     }
 
-    static createEmptyPromise<T = any>(): EmptyPromise<T> {
+    /* static createEmptyPromise<T = any>(): EmptyPromise<T> {
         let _resolve, _reject;
         const promise = new EmptyPromise<T>(function (resolve, reject) {
             _resolve = resolve;
@@ -517,7 +517,7 @@ export class BkHelper {
         promise.resolve = _resolve;
         promise.reject = _reject;
         return promise;
-    }
+    } */
 
     static test() {
         console.log('BkHelper.test');

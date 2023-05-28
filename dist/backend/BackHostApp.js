@@ -25,6 +25,7 @@ const FileSessionStore_1 = require("./FileSessionStore");
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
 const Logger_1 = require("./Logger");
+const EmptyPromise_1 = require("./EmptyPromise");
 const pkg = require('../../package.json');
 class BackHostApp {
     constructor(params = {}) {
@@ -182,7 +183,7 @@ class BackHostApp {
         // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = BkHelper_1.BkHelper.createEmptyPromise();
+            const promise = EmptyPromise_1.EmptyPromise.create();
             this.createAppQueue[context.getRoute()].push(promise);
             return promise;
         }

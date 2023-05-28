@@ -263,7 +263,7 @@ export class BackHostApp {
         // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
-            const promise = BkHelper.createEmptyPromise();
+            const promise = EmptyPromise.create();
             this.createAppQueue[context.getRoute()].push(promise);
             return promise;
         }

@@ -1,5 +1,4 @@
 import { JSONString } from '../types';
-import { EmptyPromise } from './EmptyPromise';
 export declare class BkHelper {
     static getRandomString(length: any): string;
     static getFilePathsSync(publicDirPath: any, subDirPath: any, ext: any): any;
@@ -46,7 +45,6 @@ export declare class BkHelper {
     static getWebSocketIP(webSocket: any): any;
     static getWebSocketPort(webSocket: any): any;
     static templateArray(arr: any): any;
-    static createEmptyPromise<T = any>(): EmptyPromise<T>;
     static test(): void;
     static formatNumber(value: number): string;
     static formatTime2(_sec: any): string;

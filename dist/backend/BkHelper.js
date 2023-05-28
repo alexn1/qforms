@@ -9,7 +9,6 @@ const glob_1 = __importDefault(require("glob"));
 const path_1 = __importDefault(require("path"));
 const slash_1 = __importDefault(require("slash"));
 const safe_1 = __importDefault(require("colors/safe"));
-const EmptyPromise_1 = require("./EmptyPromise");
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob_1.default.sync(path_1.default.join(dirPath, '*.' + ext));
     glob_1.default.sync(path_1.default.join(dirPath, '*/')).forEach((subDirPath) => {
@@ -471,16 +470,16 @@ class BkHelper {
             throw new Error(`wrong type for array item: ${type}`);
         });
     }
-    static createEmptyPromise() {
+    /* static createEmptyPromise<T = any>(): EmptyPromise<T> {
         let _resolve, _reject;
-        const promise = new EmptyPromise_1.EmptyPromise(function (resolve, reject) {
+        const promise = new EmptyPromise<T>(function (resolve, reject) {
             _resolve = resolve;
             _reject = reject;
         });
         promise.resolve = _resolve;
         promise.reject = _reject;
         return promise;
-    }
+    } */
     static test() {
         console.log('BkHelper.test');
     }
