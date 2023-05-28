@@ -443,7 +443,7 @@ export class BackHostApp {
     async moduleGet(req: Request, res: Response, next) {
         // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context: Context | null = null;
+        let context: Context;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
@@ -732,8 +732,8 @@ export class BackHostApp {
 
     async postError(req: Request, res: Response, next: (err?) => void) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
-        if (this.params.logger) {
-            try {
+        try {
+            if (this.params.logger) {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
@@ -752,12 +752,12 @@ export class BackHostApp {
                         : null,
                     ip: req.body.ip || Context.getIpFromReq(req),
                 });
-            } catch (err) {
-                next(err);
             }
+            res.header('Access-Control-Allow-Origin', '*');
+            res.end('ok');
+        } catch (err) {
+            next(err);
         }
-        res.header('Access-Control-Allow-Origin', '*');
-        res.end('ok');
     }
 
     getFrontendDirPath() {

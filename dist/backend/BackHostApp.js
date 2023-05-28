@@ -342,7 +342,7 @@ class BackHostApp {
     async moduleGet(req, res, next) {
         // @ts-ignore
         console.log(safe_1.default.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context = null;
+        let context;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context_1.Context({
@@ -628,8 +628,8 @@ class BackHostApp {
     }
     async postError(req, res, next) {
         console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
-        if (this.params.logger) {
-            try {
+        try {
+            if (this.params.logger) {
                 await this.logger.createLog({
                     type: req.body.type,
                     source: req.body.source,
@@ -641,12 +641,12 @@ class BackHostApp {
                     ip: req.body.ip || Context_1.Context.getIpFromReq(req),
                 });
             }
-            catch (err) {
-                next(err);
-            }
+            res.header('Access-Control-Allow-Origin', '*');
+            res.end('ok');
         }
-        res.header('Access-Control-Allow-Origin', '*');
-        res.end('ok');
+        catch (err) {
+            next(err);
+        }
     }
     getFrontendDirPath() {
         return this.frontendDirPath;
