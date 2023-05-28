@@ -731,7 +731,7 @@ export class BackHostApp {
         return domain;
     }
 
-    async postError(req: Request, res: Response, next: (err?) => void) {
+    async postError(req: Request, res: Response, next: (err?: Error) => void) {
         console.log(colors.blue('BackHostApp.postError'), req.body.message);
         try {
             if (this.params.logger) {
