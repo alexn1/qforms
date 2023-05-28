@@ -282,8 +282,8 @@ class BackHostApp {
                 source: 'server',
                 message: err.message,
                 stack: err.stack,
-                data: req ? JSON.stringify(this.composeContextData(err, req), null, 4) : null,
-                ip: req ? Context_1.Context.getIpFromReq(req) : null,
+                data: req && JSON.stringify(this.composeContextData(err, req), null, 4),
+                ip: req && Context_1.Context.getIpFromReq(req),
             });
         }
         catch (err) {
@@ -332,7 +332,7 @@ class BackHostApp {
                 type: 'log',
                 source: 'server',
                 message: message,
-                data: data ? JSON.stringify(data, null, 4) : null,
+                data: data && JSON.stringify(data, null, 4),
                 ip: context.getIp(),
             });
         }
