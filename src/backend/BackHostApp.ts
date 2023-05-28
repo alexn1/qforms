@@ -356,32 +356,32 @@ export class BackHostApp {
         return appInfos;
     }
 
+    composeContextData(err: Error, req: Request) {
+        const route = err instanceof MyError && err.context ? err.context.getRoute() : null;
+        return {
+            headers: req.headers,
+            method: req.method,
+            host: req.headers.host,
+            originalUrl: req.originalUrl,
+            uri: req.params['0'],
+            platformVersion: pkg.version,
+            appVersion: route ? this.applications[route].getVersion() : null,
+            route: route,
+            body: req.body,
+            status: err instanceof MyError ? err.status || null : null,
+            data: err instanceof MyError ? err.data || null : null,
+        };
+    }
+
     async logError(err: Error, req?: Request) {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
-            const route = err instanceof MyError && err.context ? err.context.getRoute() : null;
-            const data = req
-                ? {
-                      headers: req.headers,
-                      method: req.method,
-                      host: req.headers.host,
-                      originalUrl: req.originalUrl,
-                      uri: req.params['0'],
-                      platformVersion: pkg.version,
-                      appVersion: route ? this.applications[route].getVersion() : null,
-                      route: route,
-                      body: req.body,
-                      status: err instanceof MyError ? err.status || null : null,
-                      data: err instanceof MyError ? err.data || null : null,
-                  }
-                : null;
-
             await this.logger.log({
                 type: 'error',
                 source: 'server',
                 message: err.message,
-                stack: err.stack?.toString(),
-                data: data,
+                stack: err.stack,
+                data: req ? this.composeContextData(err, req) : null,
                 ip: req ? Context.getIpFromReq(req) : null,
             });
         } catch (err) {

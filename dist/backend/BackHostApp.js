@@ -257,32 +257,31 @@ class BackHostApp {
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.appsDirPath, distDirPath);
         return appInfos;
     }
+    composeContextData(err, req) {
+        const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
+        return {
+            headers: req.headers,
+            method: req.method,
+            host: req.headers.host,
+            originalUrl: req.originalUrl,
+            uri: req.params['0'],
+            platformVersion: pkg.version,
+            appVersion: route ? this.applications[route].getVersion() : null,
+            route: route,
+            body: req.body,
+            status: err instanceof MyError_1.MyError ? err.status || null : null,
+            data: err instanceof MyError_1.MyError ? err.data || null : null,
+        };
+    }
     async logError(err, req) {
-        var _a;
         console.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
-            const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
-            const data = req
-                ? {
-                    headers: req.headers,
-                    method: req.method,
-                    host: req.headers.host,
-                    originalUrl: req.originalUrl,
-                    uri: req.params['0'],
-                    platformVersion: pkg.version,
-                    appVersion: route ? this.applications[route].getVersion() : null,
-                    route: route,
-                    body: req.body,
-                    status: err instanceof MyError_1.MyError ? err.status || null : null,
-                    data: err instanceof MyError_1.MyError ? err.data || null : null,
-                }
-                : null;
             await this.logger.log({
                 type: 'error',
                 source: 'server',
                 message: err.message,
-                stack: (_a = err.stack) === null || _a === void 0 ? void 0 : _a.toString(),
-                data: data,
+                stack: err.stack,
+                data: req ? this.composeContextData(err, req) : null,
                 ip: req ? Context_1.Context.getIpFromReq(req) : null,
             });
         }

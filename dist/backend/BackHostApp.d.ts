@@ -54,6 +54,19 @@ export declare class BackHostApp {
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
     createApp(req: any): Promise<AppInfo[]>;
+    composeContextData(err: Error, req: Request): {
+        headers: any;
+        method: string;
+        host: any;
+        originalUrl: string;
+        uri: string;
+        platformVersion: any;
+        appVersion: any;
+        route: string;
+        body: any;
+        status: number;
+        data: object;
+    };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: any): Promise<void>;
     moduleGet(req: Request, res: Response, next: any): Promise<void>;
