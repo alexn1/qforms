@@ -426,7 +426,7 @@ export class BackHostApp {
         }
     } */
 
-    async logEvent(context: Context, message: string, data: object = null): Promise<void> {
+    async logEvent(context: Context, message: string, data?: object): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
             await this.logger.log({
