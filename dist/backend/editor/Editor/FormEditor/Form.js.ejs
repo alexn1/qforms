@@ -1,4 +1,4 @@
-import {<%=_class%>Controller, Helper} from 'qforms/dist/frontend/viewer';
+import {<%=_class%>Controller, Helper, RawRow} from 'qforms/dist/frontend/viewer';
 
 export class <%=page%><%=form%><%=_class%>Controller extends <%=_class%>Controller {
 
@@ -23,14 +23,14 @@ export class <%=page%><%=form%><%=_class%>Controller extends <%=_class%>Controll
     */
 
     /*
-    async onActionClick(name: string, row) {
+    async onActionClick(name: string, row: RawRow) {
         switch (name) {
             case 'action1': await this.onAction1(row); return true;
         }
         return false;
     }
     
-    async onAction1(row) {
+    async onAction1(row: RawRow) {
     }
     */
 
