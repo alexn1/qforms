@@ -3,13 +3,13 @@ import { Context } from './Context';
 export class MyError extends Error {
     context: Context;
     status: number;
-    data: any;
+    data: object;
 
-    constructor(options) {
+    constructor(options: { message: string; context?: Context; status?: number; data?: object }) {
         if (!options.message) throw new Error('MyError: no message');
         super(options.message);
+        this.context = options.context;
         this.status = options.status;
         this.data = options.data;
-        this.context = options.context;
     }
 }

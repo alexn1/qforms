@@ -6,9 +6,9 @@ class MyError extends Error {
         if (!options.message)
             throw new Error('MyError: no message');
         super(options.message);
+        this.context = options.context;
         this.status = options.status;
         this.data = options.data;
-        this.context = options.context;
     }
 }
 exports.MyError = MyError;
