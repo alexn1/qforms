@@ -15,7 +15,7 @@ export class ConfirmController extends Controller {
         return ConfirmView;
     }
 
-    close(result) {
+    close(result: boolean) {
         this.options.onClose(result);
     }
 

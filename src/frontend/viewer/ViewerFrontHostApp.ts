@@ -131,7 +131,12 @@ export class ViewerFrontHostApp extends FrontHostApp {
         });
     }
 
-    confirm(options) {
+    confirm(options: {
+        message: string;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }): Promise<boolean> {
         console.log('ViewerFrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {
             try {
@@ -139,7 +144,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new ConfirmController({
                         ...options,
-                        onClose: (result) => {
+                        onClose: (result: boolean) => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
                             resolve(result);

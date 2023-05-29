@@ -66,7 +66,7 @@ export declare class ApplicationController extends ModelController<Application> 
         title?: string;
         yesButton?: string;
         noButton?: string;
-    }): Promise<any>;
+    }): Promise<boolean>;
     getRootPath(): string;
     openModal(ctrl: any): Promise<void>;
     closeModal(ctrl: any): Promise<void>;

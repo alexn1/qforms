@@ -39,7 +39,10 @@ export declare class FrontHostApp {
     }): Promise<void>;
     confirm(options: {
         message: string;
-    }): Promise<any>;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }): Promise<boolean>;
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
     isDebugMode(): boolean;

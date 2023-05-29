@@ -374,7 +374,7 @@ export class ApplicationController extends ModelController<Application> {
         }
         const activeElement = document.activeElement;
         try {
-            return await this.frontHostApp.confirm({ message: options.message });
+            return await this.frontHostApp.confirm(options);
         } finally {
             // @ts-ignore
             if (activeElement) activeElement.focus();

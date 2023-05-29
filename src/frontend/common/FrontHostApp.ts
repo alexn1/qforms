@@ -130,7 +130,12 @@ export class FrontHostApp {
         alert(options.message);
     }
 
-    async confirm(options: { message: string }): Promise<any> {
+    async confirm(options: {
+        message: string;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }): Promise<boolean> {
         console.log('FrontHostApp.confirm', options);
         return confirm(options.message);
     }

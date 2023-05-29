@@ -29,5 +29,10 @@ export declare class ViewerFrontHostApp extends FrontHostApp {
         message: string;
         title?: string;
     }): Promise<void>;
-    confirm(options: any): Promise<unknown>;
+    confirm(options: {
+        message: string;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }): Promise<boolean>;
 }
