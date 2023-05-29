@@ -329,7 +329,7 @@ class ApplicationController extends ModelController_1.ModelController {
         }
         const activeElement = document.activeElement;
         try {
-            return await this.frontHostApp.confirm(options);
+            return await this.frontHostApp.confirm({ message: options.message });
         }
         finally {
             // @ts-ignore

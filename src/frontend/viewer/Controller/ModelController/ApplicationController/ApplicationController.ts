@@ -344,7 +344,7 @@ export class ApplicationController extends ModelController<Application> {
             .forEach((page) => page.invalidate());
     }
 
-    async alert(options) {
+    async alert(options: { title?: string; message: string }) {
         if (!options.title) {
             options.title = this.getModel().getText().application.alert;
         }
@@ -357,7 +357,12 @@ export class ApplicationController extends ModelController<Application> {
         }
     }
 
-    async confirm(options) {
+    async confirm(options: {
+        message: string;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }) {
         if (!options.title) {
             options.title = this.getModel().getText().application.confirm;
         }
@@ -369,7 +374,7 @@ export class ApplicationController extends ModelController<Application> {
         }
         const activeElement = document.activeElement;
         try {
-            return await this.frontHostApp.confirm(options);
+            return await this.frontHostApp.confirm({ message: options.message });
         } finally {
             // @ts-ignore
             if (activeElement) activeElement.focus();

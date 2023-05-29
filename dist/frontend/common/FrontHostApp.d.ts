@@ -33,8 +33,13 @@ export declare class FrontHostApp {
     static startWait(): void;
     static stopWait(): void;
     onWindowPopState(e: any): Promise<void>;
-    alert(options: any): Promise<any>;
-    confirm(options: any): Promise<any>;
+    alert(options: {
+        message: string;
+        title?: string;
+    }): Promise<any>;
+    confirm(options: {
+        message: string;
+    }): Promise<any>;
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
     isDebugMode(): boolean;

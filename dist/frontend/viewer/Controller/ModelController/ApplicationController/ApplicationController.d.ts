@@ -57,8 +57,16 @@ export declare class ApplicationController extends ModelController<Application> 
     onWindowPopState(e: any): Promise<void>;
     getTitle(): string;
     invalidate(): void;
-    alert(options: any): Promise<any>;
-    confirm(options: any): Promise<any>;
+    alert(options: {
+        title?: string;
+        message: string;
+    }): Promise<any>;
+    confirm(options: {
+        message: string;
+        title?: string;
+        yesButton?: string;
+        noButton?: string;
+    }): Promise<any>;
     getRootPath(): string;
     openModal(ctrl: any): Promise<void>;
     closeModal(ctrl: any): Promise<void>;
