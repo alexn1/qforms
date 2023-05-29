@@ -102,7 +102,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         return this.options.data;
     }
 
-    alert(options): Promise<void> {
+    alert(options: { message: string; title?: string }): Promise<void> {
         console.log('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
             try {
