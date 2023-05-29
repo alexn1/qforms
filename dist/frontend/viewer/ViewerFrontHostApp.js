@@ -98,10 +98,10 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = (this.alertCtrl = new AlertController_1.AlertController(Object.assign(Object.assign({}, options), { onClose: (result) => {
+                    const ctrl = (this.alertCtrl = new AlertController_1.AlertController(Object.assign(Object.assign({}, options), { onClose: () => {
                             this.alertCtrl = null;
                             react_dom_1.default.unmountComponentAtNode(root);
-                            resolve(result);
+                            resolve();
                         } })));
                     // console.log('ctrl:', ctrl);
                     const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), {

@@ -15,21 +15,21 @@ export class AlertController extends Controller {
         return AlertView;
     }
 
-    close(result) {
-        this.options.onClose(result);
+    close() {
+        this.options.onClose();
     }
 
     onOkButtonClick = async (e) => {
-        this.close(true);
+        this.close();
     };
 
     onCloseClick = async (e) => {
-        this.close(false);
+        this.close();
     };
 
     onKeyDown = async (e) => {
         if (e.key === 'Escape') {
-            this.close(false);
+            this.close();
         }
     };
 }

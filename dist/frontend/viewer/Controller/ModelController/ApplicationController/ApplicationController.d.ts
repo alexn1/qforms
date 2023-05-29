@@ -60,7 +60,7 @@ export declare class ApplicationController extends ModelController<Application> 
     alert(options: {
         title?: string;
         message: string;
-    }): Promise<any>;
+    }): Promise<void>;
     confirm(options: {
         message: string;
         title?: string;

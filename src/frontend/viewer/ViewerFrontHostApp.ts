@@ -102,7 +102,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         return this.options.data;
     }
 
-    alert(options) {
+    alert(options): Promise<void> {
         console.log('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
             try {
@@ -110,10 +110,10 @@ export class ViewerFrontHostApp extends FrontHostApp {
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new AlertController({
                         ...options,
-                        onClose: (result) => {
+                        onClose: () => {
                             this.alertCtrl = null;
                             ReactDOM.unmountComponentAtNode(root);
-                            resolve(result);
+                            resolve();
                         },
                     }));
                     // console.log('ctrl:', ctrl);

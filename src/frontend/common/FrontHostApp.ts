@@ -125,7 +125,7 @@ export class FrontHostApp {
         console.log('FrontHostApp.onWindowPopState', e.state);
     }
 
-    async alert(options: { message: string; title?: string }): Promise<any> {
+    async alert(options: { message: string; title?: string }): Promise<void> {
         console.log('FrontHostApp.alert', options);
         alert(options.message);
     }

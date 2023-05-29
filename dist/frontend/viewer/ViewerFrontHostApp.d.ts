@@ -25,6 +25,6 @@ export declare class ViewerFrontHostApp extends FrontHostApp {
     onWindowPopState(e: any): Promise<void>;
     logError(err: Error): void;
     getData(): any;
-    alert(options: any): Promise<unknown>;
+    alert(options: any): Promise<void>;
     confirm(options: any): Promise<unknown>;
 }

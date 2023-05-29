@@ -36,7 +36,7 @@ export declare class FrontHostApp {
     alert(options: {
         message: string;
         title?: string;
-    }): Promise<any>;
+    }): Promise<void>;
     confirm(options: {
         message: string;
     }): Promise<any>;

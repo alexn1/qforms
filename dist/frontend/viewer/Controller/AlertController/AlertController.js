@@ -7,14 +7,14 @@ class AlertController extends Controller_1.Controller {
     constructor(options) {
         super();
         this.onOkButtonClick = async (e) => {
-            this.close(true);
+            this.close();
         };
         this.onCloseClick = async (e) => {
-            this.close(false);
+            this.close();
         };
         this.onKeyDown = async (e) => {
             if (e.key === 'Escape') {
-                this.close(false);
+                this.close();
             }
         };
         this.options = options;
@@ -26,8 +26,8 @@ class AlertController extends Controller_1.Controller {
     getViewClass() {
         return AlertView_1.AlertView;
     }
-    close(result) {
-        this.options.onClose(result);
+    close() {
+        this.options.onClose();
     }
 }
 exports.AlertController = AlertController;
