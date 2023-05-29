@@ -344,7 +344,7 @@ export class ApplicationController extends ModelController<Application> {
             .forEach((page) => page.invalidate());
     }
 
-    async alert(options: { title?: string; message: string }) {
+    async alert(options: { message: string; title?: string }) {
         if (!options.title) {
             options.title = this.getModel().getText().application.alert;
         }

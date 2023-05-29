@@ -58,8 +58,8 @@ export declare class ApplicationController extends ModelController<Application> 
     getTitle(): string;
     invalidate(): void;
     alert(options: {
-        title?: string;
         message: string;
+        title?: string;
     }): Promise<void>;
     confirm(options: {
         message: string;
