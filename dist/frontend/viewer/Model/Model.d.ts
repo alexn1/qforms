@@ -8,13 +8,13 @@ export declare class Model extends EventEmitter {
     constructor(data: any, parent?: any);
     init(): void;
     deinit(): void;
-    static getAttr(data: any, name: any): any;
-    static getCol(data: any, name: any): any;
+    static getAttr(data: any, name: string): any;
+    static getCol(data: any, name: string): any;
     static getName(data: any): any;
     static getClassName(data: any): any;
-    isAttr(name: any): any;
-    getAttr(name: any): any;
-    getCol(name: any): any;
+    isAttr(name: string): any;
+    getAttr(name: string): any;
+    getCol(name: string): any;
     getClassName(): any;
     getName(): any;
     getFullName(): any;

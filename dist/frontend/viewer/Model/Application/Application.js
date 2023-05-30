@@ -105,6 +105,9 @@ class Application extends Model_1.Model {
     isDevelopment() {
         return this.getNodeEnv() === 'development';
     }
+    getRoute() {
+        return this.getAttr('route');
+    }
 }
 exports.Application = Application;
 Helper_1.Helper.registerGlobalClass(Application);

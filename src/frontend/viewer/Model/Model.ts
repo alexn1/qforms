@@ -18,11 +18,11 @@ export class Model extends EventEmitter {
         this.deinited = true;
     }
 
-    static getAttr(data, name) {
+    static getAttr(data, name: string) {
         return data[name];
     }
 
-    static getCol(data, name) {
+    static getCol(data, name: string) {
         return data[name];
     }
 
@@ -34,16 +34,16 @@ export class Model extends EventEmitter {
         return Model.getAttr(data, 'class');
     }
 
-    isAttr(name) {
+    isAttr(name: string) {
         // return this.data[name] !== undefined;
         return this.data.hasOwnProperty(name);
     }
 
-    getAttr(name) {
+    getAttr(name: string) {
         return this.data[name];
     }
 
-    getCol(name) {
+    getCol(name: string) {
         return this.data[name];
     }
 

@@ -20,4 +20,5 @@ export declare class Application extends Model {
     emitResult(result: Result, source?: any): any;
     getNodeEnv(): string;
     isDevelopment(): boolean;
+    getRoute(): string;
 }
