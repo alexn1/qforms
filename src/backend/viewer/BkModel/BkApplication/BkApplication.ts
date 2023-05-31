@@ -362,18 +362,18 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
         return {
-            appFile: appFile,
+            appFile,
             name: BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption'),
             fullName: [dirName, fileName].join('/'),
             envs: BaseModel.getEnvList(data),
-            fileName: fileName,
-            dirName: dirName,
+            fileName,
+            dirName,
             filePath: path.resolve(appFilePath),
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),
             dirPath: path.resolve(path.dirname(appFilePath)),
-            distDirPath: distDirPath,
+            distDirPath,
         };
     }
 
