@@ -53,7 +53,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getEnv(): string;
     getEnvVarValue(name: string): any;
     getApp(): BkApplication;
-    findDatabase(name: string): BkDatabase;
+    findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo;

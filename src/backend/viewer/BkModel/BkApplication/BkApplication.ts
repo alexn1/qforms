@@ -341,15 +341,15 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return this;
     }
 
-    findDatabase(name: string): BkDatabase {
-        const db = this.databases.find((database) => database.getName() === name);
-        if (!db) throw new Error(`no database with name: ${name}`);
-        return db;
+    findDatabase(name: string): BkDatabase | undefined {
+        return this.databases.find((database) => database.getName() === name);
     }
 
     getDatabase(name: string): BkDatabase {
         if (!name) throw new Error('getDatabase: no name');
-        return this.findDatabase(name);
+        const db = this.findDatabase(name);
+        if (!db) throw new Error(`no database with name: ${name}`);
+        return db;
     }
 
     // to init custom context params before each request get/post
