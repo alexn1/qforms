@@ -556,6 +556,15 @@ export class BkHelper {
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
         global[Class.name] = Class;
     }
+
+    static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer] {
+        const [type, data] = value.split(';');
+        const contentType = type.split(':')[1];
+        const base64string = data.split(',')[1];
+        // console.log('base64string:', base64string);
+        const buffer = Buffer.from(base64string, 'base64');
+        return [contentType, buffer];
+    }
 }
 
 // @ts-ignore

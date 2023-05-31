@@ -1,3 +1,4 @@
+/// <reference types="node" />
 import { JSONString } from '../types';
 export declare class BkHelper {
     static getRandomString(length: any): string;
@@ -49,4 +50,5 @@ export declare class BkHelper {
     static formatNumber(value: number): string;
     static formatTime2(_sec: any): string;
     static registerGlobalClass(Class: any): void;
+    static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer];
 }
