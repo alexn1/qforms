@@ -357,10 +357,9 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
 
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
-        const appFilePath = appFile.filePath;
-        const data = appFile.data;
-        const dirName = path.basename(path.dirname(appFilePath));
-        const fileName = path.basename(appFilePath, path.extname(appFilePath));
+        const { data, filePath } = appFile;
+        const dirName = path.basename(path.dirname(filePath));
+        const fileName = path.basename(filePath, path.extname(filePath));
         return {
             appFile,
             name: BaseModel.getName(data),
@@ -369,10 +368,10 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
             envs: BaseModel.getEnvList(data),
             dirName,
             fileName,
-            filePath: path.resolve(appFilePath),
-            fileNameExt: path.basename(appFilePath),
-            extName: path.extname(appFilePath),
-            dirPath: path.resolve(path.dirname(appFilePath)),
+            filePath: path.resolve(filePath),
+            fileNameExt: path.basename(filePath),
+            extName: path.extname(filePath),
+            dirPath: path.resolve(path.dirname(filePath)),
             distDirPath,
         };
     }

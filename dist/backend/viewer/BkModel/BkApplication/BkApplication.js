@@ -317,10 +317,9 @@ class BkApplication extends BkModel_1.BkModel {
     async initContext(context) { }
     static makeAppInfoFromAppFile(appFile, distDirPath) {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
-        const appFilePath = appFile.filePath;
-        const data = appFile.data;
-        const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
-        const fileName = path_1.default.basename(appFilePath, path_1.default.extname(appFilePath));
+        const { data, filePath } = appFile;
+        const dirName = path_1.default.basename(path_1.default.dirname(filePath));
+        const fileName = path_1.default.basename(filePath, path_1.default.extname(filePath));
         return {
             appFile,
             name: BaseModel_1.BaseModel.getName(data),
@@ -329,10 +328,10 @@ class BkApplication extends BkModel_1.BkModel {
             envs: BaseModel_1.BaseModel.getEnvList(data),
             dirName,
             fileName,
-            filePath: path_1.default.resolve(appFilePath),
-            fileNameExt: path_1.default.basename(appFilePath),
-            extName: path_1.default.extname(appFilePath),
-            dirPath: path_1.default.resolve(path_1.default.dirname(appFilePath)),
+            filePath: path_1.default.resolve(filePath),
+            fileNameExt: path_1.default.basename(filePath),
+            extName: path_1.default.extname(filePath),
+            dirPath: path_1.default.resolve(path_1.default.dirname(filePath)),
             distDirPath,
         };
     }
