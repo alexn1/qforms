@@ -5,8 +5,8 @@ export interface AppInfo {
     caption: string;
     fullName: string;
     envs: string[];
-    fileName: string;
     dirName: string;
+    fileName: string;
     filePath: string;
     fileNameExt: string;
     extName: string;

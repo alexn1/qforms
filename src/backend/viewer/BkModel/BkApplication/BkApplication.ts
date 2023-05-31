@@ -1,4 +1,4 @@
-import path from 'path';
+import path, { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
 // import axios from 'axios';
 // import colors from 'colors/safe';
@@ -359,16 +359,16 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
-        const fileName = path.basename(appFilePath, path.extname(appFilePath));
         const dirName = path.basename(path.dirname(appFilePath));
+        const fileName = path.basename(appFilePath, path.extname(appFilePath));
         return {
             appFile,
             name: BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption'),
-            fullName: [dirName, fileName].join('/'),
+            fullName: join(dirName, fileName),
             envs: BaseModel.getEnvList(data),
-            fileName,
             dirName,
+            fileName,
             filePath: path.resolve(appFilePath),
             fileNameExt: path.basename(appFilePath),
             extName: path.extname(appFilePath),

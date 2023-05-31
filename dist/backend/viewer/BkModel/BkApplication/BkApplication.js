@@ -22,12 +22,9 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkApplication = void 0;
-const path_1 = __importDefault(require("path"));
+const path_1 = __importStar(require("path"));
 const uuid_1 = require("uuid");
 const BaseModel_1 = require("../../../BaseModel");
 const BkModel_1 = require("../BkModel");
@@ -322,16 +319,16 @@ class BkApplication extends BkModel_1.BkModel {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;
-        const fileName = path_1.default.basename(appFilePath, path_1.default.extname(appFilePath));
         const dirName = path_1.default.basename(path_1.default.dirname(appFilePath));
+        const fileName = path_1.default.basename(appFilePath, path_1.default.extname(appFilePath));
         return {
             appFile,
             name: BaseModel_1.BaseModel.getName(data),
             caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
-            fullName: [dirName, fileName].join('/'),
+            fullName: (0, path_1.join)(dirName, fileName),
             envs: BaseModel_1.BaseModel.getEnvList(data),
-            fileName,
             dirName,
+            fileName,
             filePath: path_1.default.resolve(appFilePath),
             fileNameExt: path_1.default.basename(appFilePath),
             extName: path_1.default.extname(appFilePath),
