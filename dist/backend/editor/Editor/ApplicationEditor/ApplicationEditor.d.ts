@@ -3,9 +3,10 @@ import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
 export declare class ApplicationEditor extends Editor {
-    appFile: JsonFile;
+    private appFile;
     appInfo: AppInfo;
-    constructor(appFile: any);
+    constructor(appFile: JsonFile);
+    getAppFile(): JsonFile;
     static createData(params: any): {
         '@class': string;
         '@attributes': {

@@ -16,6 +16,9 @@ class ApplicationEditor extends Editor_1.Editor {
         this.appFile = appFile;
         this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile, null);
     }
+    getAppFile() {
+        return this.appFile;
+    }
     static createData(params) {
         // console.log('ApplicationEditor.createData', params);
         if (!params.name)

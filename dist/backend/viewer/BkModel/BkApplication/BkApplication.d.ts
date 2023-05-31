@@ -56,7 +56,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo;
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo;
     static loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
     getDataSource(name: string): BkDataSource;

@@ -355,7 +355,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     // to init custom context params before each request get/post
     async initContext(context: Context): Promise<void> {}
 
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | null): AppInfo {
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const appFilePath = appFile.filePath;
         const data = appFile.data;

@@ -8,13 +8,15 @@ import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
 
 export class ApplicationEditor extends Editor {
-    appFile: JsonFile;
     appInfo: AppInfo;
 
-    constructor(appFile) {
+    constructor(private appFile: JsonFile) {
         super(appFile.data);
-        this.appFile = appFile;
         this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile, null);
+    }
+
+    getAppFile(): JsonFile {
+        return this.appFile;
     }
 
     static createData(params) {

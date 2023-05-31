@@ -48,7 +48,7 @@ class DataSourceEditor extends Editor_1.Editor {
     }
     async save() {
         if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
-            await this.parent.appFile.save();
+            await this.parent.getAppFile().save();
         }
         else if (this.parent instanceof PageEditor_1.PageEditor) {
             await this.parent.pageFile.save();
