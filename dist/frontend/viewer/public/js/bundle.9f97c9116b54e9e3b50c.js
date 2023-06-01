@@ -36015,14 +36015,14 @@ class AlertController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
     constructor(options) {
         super();
         this.onOkButtonClick = async (e) => {
-            this.close(true);
+            this.close();
         };
         this.onCloseClick = async (e) => {
-            this.close(false);
+            this.close();
         };
         this.onKeyDown = async (e) => {
             if (e.key === 'Escape') {
-                this.close(false);
+                this.close();
             }
         };
         this.options = options;
@@ -36034,8 +36034,8 @@ class AlertController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
     getViewClass() {
         return _AlertView__WEBPACK_IMPORTED_MODULE_1__.AlertView;
     }
-    close(result) {
-        this.options.onClose(result);
+    close() {
+        this.options.onClose();
     }
 }
 
@@ -41063,6 +41063,9 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     isDevelopment() {
         return this.getNodeEnv() === 'development';
     }
+    getRoute() {
+        return this.getAttr('route');
+    }
 }
 _common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(Application);
 
@@ -43340,7 +43343,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
     }
     logError(err) {
         console.error('FrontHostApp.logError', err);
-        const values = {
+        const body = {
             type: 'error',
             source: 'client',
             message: err.message,
@@ -43351,11 +43354,11 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
                 appVersion: this.getData().versions.app,
             }, null, 4),
         };
-        console.log(`POST ${this.getData().logErrorUrl}`, values);
+        console.log(`POST ${this.getData().logErrorUrl}`, body);
         fetch(this.getData().logErrorUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
-            body: JSON.stringify(values),
+            body: JSON.stringify(body),
         }).catch((err) => {
             console.error(err.message);
         });
@@ -43371,10 +43374,10 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
             try {
                 const root = document.querySelector('.alert-root');
                 if (root.childElementCount === 0) {
-                    const ctrl = (this.alertCtrl = new _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__.AlertController(Object.assign(Object.assign({}, options), { onClose: (result) => {
+                    const ctrl = (this.alertCtrl = new _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__.AlertController(Object.assign(Object.assign({}, options), { onClose: () => {
                             this.alertCtrl = null;
                             react_dom__WEBPACK_IMPORTED_MODULE_0__.unmountComponentAtNode(root);
-                            resolve(result);
+                            resolve();
                         } })));
                     // console.log('ctrl:', ctrl);
                     const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), {
