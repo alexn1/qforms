@@ -461,7 +461,7 @@ class BkApplication extends BkModel_1.BkModel {
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
         return (0, index_1.index)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
-    async queryDatabase(context, appDbName, cb) {
+    async useDatabase(context, appDbName, cb) {
         const db = this.getDatabase(appDbName);
         await db.connect(context);
         try {

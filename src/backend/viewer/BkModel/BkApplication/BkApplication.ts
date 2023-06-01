@@ -538,7 +538,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         );
     }
 
-    async queryDatabase<T>(
+    async useDatabase<T>(
         context: Context,
         appDbName: string,
         cb: (db: BkDatabase) => Promise<T>,
