@@ -537,4 +537,18 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
             appViewHtml,
         );
     }
+
+    async queryDatabase<T>(
+        context: Context,
+        appDbName: string,
+        cb: (db: BkDatabase) => Promise<T>,
+    ): Promise<T> {
+        const db = this.getDatabase(appDbName);
+        await db.connect(context);
+        try {
+            return await cb(db);
+        } finally {
+            await db.release(context);
+        }
+    }
 }
