@@ -73,5 +73,5 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: string, appViewHtml: string): string;
-    useDatabase<T>(context: Context, appDbName: string, cb: (db: BkDatabase) => Promise<T>): Promise<T>;
+    useDatabase<T = any>(context: Context, appDbName: string, cb: (db: BkDatabase) => Promise<T>): Promise<T>;
 }
