@@ -1,7 +1,10 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Logger = void 0;
-// import fetch from 'node-fetch';
+const node_fetch_1 = __importDefault(require("node-fetch"));
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
 class Logger {
     constructor(options) {
@@ -29,7 +32,7 @@ class Logger {
         }
         else if (this.url) {
             console.log(`fetch ${this.url}`);
-            await fetch(this.url, {
+            await (0, node_fetch_1.default)(this.url, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(record),
