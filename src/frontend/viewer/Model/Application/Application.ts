@@ -7,7 +7,7 @@ import { Helper } from '../../../common/Helper';
 import { ApplicationData } from '../../../../data';
 
 export class Application extends Model<ApplicationData> {
-    databases: any[] = [];
+    databases: Database[] = [];
     dataSources: DataSource[] = [];
 
     /* constructor(data) {
@@ -35,7 +35,7 @@ export class Application extends Model<ApplicationData> {
         super.deinit();
     }
 
-    addDatabase(database) {
+    addDatabase(database: Database) {
         this.databases.push(database);
     }
 

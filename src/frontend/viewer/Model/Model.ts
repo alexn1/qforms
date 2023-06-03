@@ -5,7 +5,7 @@ import { ModelData } from '../../../data';
 
 export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;
-    dataSources: any[];
+    dataSources: DataSource[];
 
     constructor(public data: T, public parent = null) {
         if (!data.name) throw new Error(`${data.class} no name`);
@@ -100,7 +100,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         return this.parent;
     }
 
-    getData() {
+    getData(): T {
         return this.data;
     }
 }
