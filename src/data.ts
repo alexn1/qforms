@@ -1,7 +1,10 @@
-export interface ApplicationData {
+export interface ModelData {
     class: string;
     name: string;
     caption: string;
+}
+
+export interface ApplicationData extends ModelData {
     lang: string;
     theme: string;
     cssBlock: string;
@@ -28,8 +31,6 @@ export interface ApplicationData {
     menu: any;
     nav: any;
 
-
     actions: any[];
     pages: any[];
-
 }
