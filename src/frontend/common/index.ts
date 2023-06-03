@@ -1,4 +1,4 @@
-export { FrontHostApp } from './FrontHostApp';
+export * from './FrontHostApp';
 export { Helper } from './Helper';
 export { ReactComponent } from './ReactComponent';
 export { Search } from './Search';

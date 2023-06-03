@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
 import { Application } from './Model/Application/Application';
 import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
-import { FrontHostApp, Helper } from '../common';
+import { FrontHostApp, Helper, FrontHostAppOptions } from '../common';
 import { AlertController } from './Controller/AlertController/AlertController';
 import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
 
@@ -26,11 +26,16 @@ import '../common/style/global.less';
 import '../common/style/grid-gap-5.less';
 import '../common/style/grid-gap-10.less';
 import '../common/style/wait.less';
+import { ApplicationData } from '../../data';
+
+export interface ViewerFrontHostAppOptions extends FrontHostAppOptions {
+    data: ApplicationData;
+}
 
 export class ViewerFrontHostApp extends FrontHostApp {
     applicationController: any = null;
 
-    constructor(protected options: any = {}) {
+    constructor(protected options: ViewerFrontHostAppOptions) {
         if (!options.data) throw new Error('ViewerFrontHostApp: no data');
         super(options);
     }
@@ -97,7 +102,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         });
     }
 
-    getData() {
+    getData(): ApplicationData {
         if (!this.options.data) throw new Error('no data');
         return this.options.data;
     }

@@ -19,14 +19,18 @@ export class Application extends Model<ApplicationData> {
         if (!this.data.theme) throw new Error('no theme attr');
 
         // databases
+        this.createDatabases();
+
+        // data sources
+        this.createDataSources();
+    }
+
+    createDatabases() {
         for (const data of this.data.databases) {
             const database = new Database(data, this);
             database.init();
             this.addDatabase(database);
         }
-
-        // data sources
-        this.createDataSources();
     }
 
     deinit() {
@@ -61,7 +65,7 @@ export class Application extends Model<ApplicationData> {
         return body;
     }
 
-    getDatabase(name) {
+    getDatabase(name: string) {
         // console.log('Application.getDatabase', name);
         const database = this.databases.find((database) => database.getName() === name);
         if (!database) throw new Error(`no database: ${name}`);

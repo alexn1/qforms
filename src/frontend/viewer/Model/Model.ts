@@ -48,15 +48,15 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         return this.data[name];
     }
 
-    getClassName() {
+    getClassName(): string {
         return this.getAttr('class');
     }
 
-    getName() {
+    getName(): string {
         return this.getAttr('name');
     }
 
-    getFullName() {
+    getFullName(): string {
         if (this.parent) {
             return `${this.parent.getFullName()}.${this.getName()}`;
         }

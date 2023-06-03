@@ -40977,13 +40977,16 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!this.data.theme)
             throw new Error('no theme attr');
         // databases
+        this.createDatabases();
+        // data sources
+        this.createDataSources();
+    }
+    createDatabases() {
         for (const data of this.data.databases) {
             const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_1__.Database(data, this);
             database.init();
             this.addDatabase(database);
         }
-        // data sources
-        this.createDataSources();
     }
     deinit() {
         this.deinitDataSources();
@@ -43307,7 +43310,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp {
-    constructor(options = {}) {
+    constructor(options) {
         if (!options.data)
             throw new Error('ViewerFrontHostApp: no data');
         super(options);
