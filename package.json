@@ -97,11 +97,11 @@
         "webpack-editor-watch": "NODE_ENV=development webpack --config webpack.config.editor.js --watch",
         "webpack-viewer": "NODE_ENV=development webpack --config webpack.config.viewer.js",
         "webpack-viewer-watch": "NODE_ENV=development webpack --config webpack.config.viewer.js --watch",
+        "webpack-back": "NODE_ENV=development webpack --config ./webpack.config.back.js",
         "docker:build": "npx gulp docker-build",
         "docker:run": "npx gulp docker-run",
         "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\"",
         "test": "jest test/jest",
-        "webpack-back": "NODE_ENV=development webpack --config ./webpack.config.back.js",
         "publish": "npm publish"
     },
     "repository": {
