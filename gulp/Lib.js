@@ -3,8 +3,8 @@ const child_process = require('child_process');
 
 class Lib {
     static getJsonFileData(filePath) {
-        return new Promise(function(resolve, reject) {
-            fs.readFile(filePath, 'utf8', function(err, text) {
+        return new Promise(function (resolve, reject) {
+            fs.readFile(filePath, 'utf8', function (err, text) {
                 if (err) {
                     reject(err);
                 } else {
@@ -38,10 +38,10 @@ class Lib {
 
     static putJsonFileData(filePath, data) {
         // console.log('putJsonFileData version:', data.version);
-        return new Promise(function(resolve, reject) {
+        return new Promise(function (resolve, reject) {
             try {
                 const text = JSON.stringify(data, null, 4) + '\n';
-                fs.writeFile(filePath, text, function(err) {
+                fs.writeFile(filePath, text, function (err) {
                     if (err) {
                         reject(err);
                     } else {
@@ -53,18 +53,19 @@ class Lib {
             }
         });
     }
+
     static async exec(cmd) {
         console.log(cmd);
-        return new Promise(function(resolve, reject) {
-            const childProcess = child_process.exec(cmd, function(err, stdout, stderr) {
+        return new Promise(function (resolve, reject) {
+            const childProcess = child_process.exec(cmd, function (err, stdout, stderr) {
                 if (err) {
                     reject(err);
                 } else {
                     resolve(stderr);
                 }
             });
-            childProcess.stdout.on('data', data => process.stdout.write(data));
-            childProcess.stderr.on('data', data => process.stderr.write(data));
+            childProcess.stdout.on('data', (data) => process.stdout.write(data));
+            childProcess.stderr.on('data', (data) => process.stderr.write(data));
             // childProcess.on('exit', code => console.log(`${cmd} process exited with code: ${code}`));
         });
     }

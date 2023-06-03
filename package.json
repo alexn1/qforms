@@ -101,7 +101,8 @@
         "docker:run": "npx gulp docker-run",
         "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\"",
         "test": "jest test/jest",
-        "webpack-back": "NODE_ENV=development webpack --config ./webpack.config.back.js"
+        "webpack-back": "NODE_ENV=development webpack --config ./webpack.config.back.js",
+        "publish": "npm publish"
     },
     "repository": {
         "type": "git",
