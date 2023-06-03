@@ -19,24 +19,23 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         this.deinited = true;
     }
 
-    static getAttr(data, name: string) {
+    static getAttr(data: ModelData, name: string) {
         return data[name];
     }
 
-    static getCol(data, name: string) {
+    static getCol(data: ModelData, name: string) {
         return data[name];
     }
 
-    static getName(data) {
+    static getName(data: ModelData) {
         return Model.getAttr(data, 'name');
     }
 
-    static getClassName(data) {
+    static getClassName(data: ModelData) {
         return Model.getAttr(data, 'class');
     }
 
     isAttr(name: string) {
-        // return this.data[name] !== undefined;
         return this.data.hasOwnProperty(name);
     }
 

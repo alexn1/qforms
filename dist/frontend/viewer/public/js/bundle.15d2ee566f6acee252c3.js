@@ -42936,7 +42936,6 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
         return Model.getAttr(data, 'class');
     }
     isAttr(name) {
-        // return this.data[name] !== undefined;
         return this.data.hasOwnProperty(name);
     }
     getAttr(name) {
