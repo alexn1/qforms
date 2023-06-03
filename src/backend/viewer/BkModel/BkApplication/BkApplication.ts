@@ -21,6 +21,7 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { index } from '../../index';
 
 import * as text from '../../text';
+import { ApplicationData } from '../../../../data';
 
 const pkg = require('../../../../../package.json');
 
@@ -119,10 +120,10 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         response.ctrlClass = this.getAttr('ctrlClass');
     }
 
-    async fill(context: Context): Promise<any> {
+    async fill(context: Context): Promise<ApplicationData> {
         // console.log('Application.fill');
         const start = Date.now();
-        const response = await super.fill(context);
+        const response = (await super.fill(context)) as ApplicationData;
 
         response.route = context.getRoute();
         response.domain = context.getDomain();
@@ -523,7 +524,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         qformsVersion: string,
         links: string,
         scripts: string,
-        data: string,
+        data: ApplicationData,
         appViewHtml: string,
     ): string {
         return index(

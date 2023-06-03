@@ -112,7 +112,7 @@ class BkApplication extends BkModel_1.BkModel {
     async fill(context) {
         // console.log('Application.fill');
         const start = Date.now();
-        const response = await super.fill(context);
+        const response = (await super.fill(context));
         response.route = context.getRoute();
         response.domain = context.getDomain();
         response.virtualPath = context.getVirtualPath();

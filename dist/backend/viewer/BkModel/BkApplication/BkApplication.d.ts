@@ -10,6 +10,7 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
+import { ApplicationData } from '../../../../data';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
     private appInfo;
     private hostApp;
@@ -37,7 +38,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getText(): any;
     getVersion(): string;
     fillAttributes(response: any): void;
-    fill(context: Context): Promise<any>;
+    fill(context: Context): Promise<ApplicationData>;
     getClientUserFromServerUser(context: Context): Promise<any>;
     createMenu(context: Context): Promise<void>;
     createPageLink(name: string): BkPageLink;
@@ -72,6 +73,6 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getLoginViewClassName(): string;
     isAvailable(): boolean;
     handleGetFile(context: Context, next: any): Promise<void>;
-    renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: string, appViewHtml: string): string;
+    renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
     useDatabase<T = any>(context: Context, appDbName: string, cb: (db: BkDatabase) => Promise<T>): Promise<T>;
 }

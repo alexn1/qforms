@@ -22,4 +22,14 @@ export interface ApplicationData {
         id: number;
         login: string;
     };
+
+    // any
+    text: any;
+    menu: any;
+    nav: any;
+
+
+    actions: any[];
+    pages: any[];
+
 }

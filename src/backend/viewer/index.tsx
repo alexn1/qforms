@@ -1,6 +1,7 @@
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { Context } from '../Context';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
+import { ApplicationData } from '../../data';
 
 export const index = (
     application: BkApplication,
@@ -9,7 +10,7 @@ export const index = (
     qformsVersion: string,
     links: string,
     scripts: string,
-    data: any,
+    data: ApplicationData,
     appViewHtml: string,
 ) => {
     return `<!DOCTYPE html>
