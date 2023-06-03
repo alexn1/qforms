@@ -1,9 +1,11 @@
 import ReactDOM from 'react-dom';
+
 import { Application } from './Model/Application/Application';
 import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
 import { FrontHostApp, Helper, FrontHostAppOptions } from '../common';
 import { AlertController } from './Controller/AlertController/AlertController';
 import { ConfirmController } from './Controller/ConfirmController/ConfirmController';
+import { ApplicationData } from '../../data';
 
 // style
 import './style/application.less';
@@ -26,14 +28,13 @@ import '../common/style/global.less';
 import '../common/style/grid-gap-5.less';
 import '../common/style/grid-gap-10.less';
 import '../common/style/wait.less';
-import { ApplicationData } from '../../data';
 
 export interface ViewerFrontHostAppOptions extends FrontHostAppOptions {
     data: ApplicationData;
 }
 
 export class ViewerFrontHostApp extends FrontHostApp {
-    applicationController: any = null;
+    applicationController: ApplicationController = null;
 
     constructor(protected options: ViewerFrontHostAppOptions) {
         if (!options.data) throw new Error('ViewerFrontHostApp: no data');
