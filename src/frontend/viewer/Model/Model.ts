@@ -1,12 +1,13 @@
 import { EventEmitter } from '../EventEmitter';
 import { DataSource } from './DataSource/DataSource';
 import { Helper } from '../../common/Helper';
+import { ModelData } from '../../../data';
 
-export class Model extends EventEmitter {
+export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;
     dataSources: any[];
 
-    constructor(public data, public parent = null) {
+    constructor(public data: T, public parent = null) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
     }

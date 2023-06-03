@@ -2,6 +2,9 @@ export interface ModelData {
     class: string;
     name: string;
     caption: string;
+
+    dataSources: any[];
+    actions: any[];
 }
 
 export interface ApplicationData extends ModelData {
@@ -31,6 +34,5 @@ export interface ApplicationData extends ModelData {
     menu: any;
     nav: any;
 
-    actions: any[];
     pages: any[];
 }
