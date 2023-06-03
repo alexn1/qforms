@@ -102,6 +102,7 @@
         "docker:run": "npx gulp docker-run",
         "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\"",
         "test": "jest test/jest",
+        "build-prod": "npx gulp build-prod",
         "publish": "npm publish"
     },
     "repository": {
