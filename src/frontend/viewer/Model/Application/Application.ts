@@ -4,8 +4,9 @@ import { FrontHostApp } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
+import { ApplicationData } from '../../../../data';
 
-export class Application extends Model {
+export class Application extends Model<ApplicationData> {
     databases: any[] = [];
     dataSources: DataSource[] = [];
 

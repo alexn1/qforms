@@ -34,5 +34,7 @@ export interface ApplicationData extends ModelData {
     menu: any;
     nav: any;
 
+    databases: any[];
+
     pages: any[];
 }
