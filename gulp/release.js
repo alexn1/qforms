@@ -21,7 +21,10 @@ async function gitCheckoutMaster() {
     try {
         await Lib.exec('git checkout master');
     } catch (err) {
-        if (err.message !== `Already on 'master'\n`) throw err;
+        if (err.message !== `Already on 'master'\n`) {
+            console.error('gitCheckoutMaster error:', msg.error);
+            throw err;
+        }
     }
 }
 
@@ -29,7 +32,10 @@ async function gitPullOriginMaster() {
     try {
         await Lib.exec('git pull origin master');
     } catch (err) {
-        if (err.message !== `Already up to date.\n`) throw err;
+        if (err.message !== `Already up to date.\n`) {
+            console.error('gitPullOriginMaster error:', msg.error);
+            throw err;
+        }
     }
 }
 
