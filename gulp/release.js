@@ -28,9 +28,7 @@ async function release() {
     await Lib.exec('git push -q origin master');
     const releaseVersion = await getVersion();
     // await Lib.exec('npx gulp build-dev');
-    const diff = await isDiff();
-    console.log('diff:', diff);
-    if (diff) {
+    if (await isDiff()) {
         await Lib.exec(`git commit -q -am "release v${releaseVersion}"`);
         await Lib.exec('git push -q origin master');
     }
