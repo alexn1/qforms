@@ -13,7 +13,7 @@ async function setVersion(version) {
     // package-lock.json
     const packageLock = await Lib.getJsonFileData('package-lock.json');
     packageLock.version = packageLock.packages[''].version = version;
-    await putJsonFileData('package-lock.json', packageLock);
+    await Lib.putJsonFileData('package-lock.json', packageLock);
 }
 
 async function isDiff() {
@@ -31,7 +31,7 @@ async function release() {
     await Lib.exec('git pull -q origin master');
     await Lib.exec('git push -q origin master');
     const releaseVersion = await getVersion();
-    await Lib.exec('npx gulp build-dev');
+    // await Lib.exec('npx gulp build-dev');
     if (await isDiff()) {
         await Lib.exec(`git commit -q -am "release v${releaseVersion}"`);
         await Lib.exec('git push -q origin master');
