@@ -29,10 +29,21 @@ async function gitCheckoutMaster() {
     }
 }
 
+async function gitPushOriginMaster() {
+    try {
+        await Lib.exec('git push origin master');
+    } catch (err) {
+        if (err.message !== `Everything up-to-date\n`) {
+            console.error('gitPushOriginMaster error:', colors.red(`"${err.message}"`));
+            throw err;
+        }
+    }
+}
+
 async function release() {
     await gitCheckoutMaster();
     await Lib.exec('git pull origin master', false);
-    await Lib.exec('git push origin master');
+    await gitPushOriginMaster();
 
     const releaseVersion = await getVersion();
     console.log('releaseVersion:', releaseVersion);
