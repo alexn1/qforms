@@ -103,14 +103,14 @@ class Lib {
 
     static async setVersion(version) {
         // package.json
-        const package = await Lib.getJsonFileData('package.json');
-        package.version = version;
-        await Lib.putJsonFileData('package.json', package);
+        const packageJson = await Lib.getJsonFileData('package.json');
+        packageJson.version = version;
+        await Lib.putJsonFileData('package.json', packageJson);
 
         // package-lock.json
-        const packageLock = await Lib.getJsonFileData('package-lock.json');
-        packageLock.version = packageLock.packages[''].version = version;
-        await Lib.putJsonFileData('package-lock.json', packageLock);
+        const packageLockJson = await Lib.getJsonFileData('package-lock.json');
+        packageLockJson.version = packageLockJson.packages[''].version = version;
+        await Lib.putJsonFileData('package-lock.json', packageLockJson);
     }
 }
 
