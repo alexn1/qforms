@@ -54,14 +54,14 @@ class Lib {
         });
     }
 
-    static async exec(cmd) {
+    static async exec(cmd, throwStdErr = true) {
         console.log(cmd);
         return new Promise(function (resolve, reject) {
             const childProcess = child_process.exec(cmd, function (err, stdout, stderr) {
                 if (err) {
                     reject(err);
                 } else {
-                    if (stderr) {
+                    if (stderr && throwStdErr) {
                         reject(new Error(stderr));
                     } else {
                         resolve(stderr);

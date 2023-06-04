@@ -29,23 +29,9 @@ async function gitCheckoutMaster() {
     }
 }
 
-async function gitPullOriginMaster() {
-    try {
-        await Lib.exec('git pull origin master');
-    } catch (err) {
-        if (
-            err.message !==
-            `From https://github.com/alexn1/qforms\n        * branch                master     -> FETCH_HEAD\n`
-        ) {
-            console.error('gitPullOriginMaster error:', colors.red(`"${err.message}"`));
-            throw err;
-        }
-    }
-}
-
 async function release() {
     await gitCheckoutMaster();
-    await gitPullOriginMaster();
+    await Lib.exec('git pull origin master', false);
     await Lib.exec('git push origin master');
 
     const releaseVersion = await getVersion();
