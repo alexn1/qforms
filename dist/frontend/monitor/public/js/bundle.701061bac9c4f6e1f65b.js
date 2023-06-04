@@ -31627,9 +31627,9 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
-    /*componentDidMount() {
+    /* componentDidMount() {
         console.log('ReactComponent.componentDidMount', this.constructor.name);
-    }*/
+    } */
     isEnabled() {
         // console.log('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
