@@ -14,13 +14,11 @@ async function bumpVersion() {
 }
 
 async function release() {
+    // master branch
     await Lib.exec('git checkout -q master');
     await Lib.exec('git pull -q origin master');
     await Lib.exec('git push -q origin master');
-
     const releaseVersion = await getVersion();
-    // console.log('releaseVersion:', releaseVersion);
-
     // await Lib.exec('npx gulp build-dev');
     // await Lib.exec(`git commit -q -am "release v${releaseVersion}"`);
     // await Lib.exec('git push -q origin master');
@@ -36,7 +34,6 @@ async function release() {
     // master branch
     await Lib.exec('git checkout -q master');
     const nextVersion = await bumpVersion();
-    // await buildBackend();
     await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
