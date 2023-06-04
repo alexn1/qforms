@@ -41,7 +41,7 @@ async function release() {
     await Lib.exec('git checkout -q master');
     const nextVersion = await bumpVersion();
     // await buildBackend();
-    await Lib.exec(`git commit -amq "bump version to ${nextVersion}"`);
+    await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
 
