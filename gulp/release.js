@@ -25,9 +25,17 @@ async function gitCheckoutMaster() {
     }
 }
 
+async function gitPullOriginMaster() {
+    try {
+        await Lib.exec('git pull origin master');
+    } catch (err) {
+        if (err.message !== `Your branch is up to date with 'origin/master'.\n`) throw err;
+    }
+}
+
 async function release() {
     await gitCheckoutMaster();
-    await Lib.exec('git pull origin master');
+    await gitPullOriginMaster();
     await Lib.exec('git push origin master');
 
     const releaseVersion = await getVersion();
