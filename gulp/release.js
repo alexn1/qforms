@@ -29,7 +29,7 @@ async function gitPullOriginMaster() {
     try {
         await Lib.exec('git pull origin master');
     } catch (err) {
-        if (err.message !== `Your branch is up to date with 'origin/master'.\n`) throw err;
+        if (err.message !== `Already up to date.\n`) throw err;
     }
 }
 
