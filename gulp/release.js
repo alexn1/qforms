@@ -13,6 +13,8 @@ async function bumpVersion() {
 }
 
 async function release() {
+    await Lib.exec('git diff --exit-code');
+
     // master branch
     await Lib.exec('git checkout -q master');
     await Lib.exec('git pull -q origin master');
