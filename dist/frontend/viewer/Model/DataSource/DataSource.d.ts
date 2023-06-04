@@ -48,7 +48,7 @@ export declare class DataSource extends Model {
     static copyNewValues(row: RawRow, newValues: RawRow): void;
     updateRow(key: Key, newValues: RawRow): void;
     getTable(): any;
-    getDatabase(): any;
+    getDatabase(): import("../..").Database;
     getType(columnName: string): any;
     insert(row?: RawRow): Promise<any>;
     delete(key: Key): Promise<Result | null>;
@@ -57,7 +57,7 @@ export declare class DataSource extends Model {
     onTableUpdate: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;
     onTableRefresh: (e: any) => Promise<any>;
-    isSurrogate(): any;
+    isSurrogate(): boolean;
     moveRow(row: RawRow, offset: number): void;
     getLimit(): number;
     getCount(): number;

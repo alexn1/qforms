@@ -31,7 +31,7 @@ require("../common/style/grid-gap-5.less");
 require("../common/style/grid-gap-10.less");
 require("../common/style/wait.less");
 class ViewerFrontHostApp extends common_1.FrontHostApp {
-    constructor(options = {}) {
+    constructor(options) {
         if (!options.data)
             throw new Error('ViewerFrontHostApp: no data');
         super(options);

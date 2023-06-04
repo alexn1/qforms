@@ -1,4 +1,6 @@
-import { FrontHostApp } from '../common';
+import { ApplicationController } from './Controller/ModelController/ApplicationController/ApplicationController';
+import { FrontHostApp, FrontHostAppOptions } from '../common';
+import { ApplicationData } from '../../data';
 import './style/application.less';
 import './style/field.less';
 import './style/form.less';
@@ -17,14 +19,17 @@ import '../common/style/global.less';
 import '../common/style/grid-gap-5.less';
 import '../common/style/grid-gap-10.less';
 import '../common/style/wait.less';
+export interface ViewerFrontHostAppOptions extends FrontHostAppOptions {
+    data: ApplicationData;
+}
 export declare class ViewerFrontHostApp extends FrontHostApp {
-    protected options: any;
-    applicationController: any;
-    constructor(options?: any);
+    protected options: ViewerFrontHostAppOptions;
+    applicationController: ApplicationController;
+    constructor(options: ViewerFrontHostAppOptions);
     run(): Promise<void>;
     onWindowPopState(e: any): Promise<void>;
     logError(err: Error): void;
-    getData(): any;
+    getData(): ApplicationData;
     alert(options: {
         message: string;
         title?: string;

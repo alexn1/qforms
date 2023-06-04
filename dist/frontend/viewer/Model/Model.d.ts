@@ -1,28 +1,29 @@
 import { EventEmitter } from '../EventEmitter';
 import { DataSource } from './DataSource/DataSource';
-export declare class Model extends EventEmitter {
-    data: any;
+import { ModelData } from '../../../data';
+export declare class Model<T extends ModelData = any> extends EventEmitter {
+    data: T;
     parent: any;
     deinited: boolean;
-    dataSources: any[];
-    constructor(data: any, parent?: any);
+    dataSources: DataSource[];
+    constructor(data: T, parent?: any);
     init(): void;
     deinit(): void;
-    static getAttr(data: any, name: string): any;
-    static getCol(data: any, name: string): any;
-    static getName(data: any): any;
-    static getClassName(data: any): any;
-    isAttr(name: string): any;
+    static getAttr(data: ModelData, name: string): any;
+    static getCol(data: ModelData, name: string): any;
+    static getName(data: ModelData): any;
+    static getClassName(data: ModelData): any;
+    isAttr(name: string): boolean;
     getAttr(name: string): any;
     getCol(name: string): any;
-    getClassName(): any;
-    getName(): any;
-    getFullName(): any;
+    getClassName(): string;
+    getName(): string;
+    getFullName(): string;
     getCaption(): string;
     getDataSource(name: string): DataSource;
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;
     getParent(): Model;
-    getData(): any;
+    getData(): T;
 }

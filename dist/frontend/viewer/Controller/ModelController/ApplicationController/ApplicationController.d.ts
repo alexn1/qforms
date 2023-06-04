@@ -53,7 +53,7 @@ export declare class ApplicationController extends ModelController<Application> 
     onStatusbarCreate: (statusbar: any) => void;
     onLogout: () => Promise<void>;
     onMenuItemClick: (menu: any, type: any, name: any) => Promise<void>;
-    getActivePageName(): any;
+    getActivePageName(): string;
     onWindowPopState(e: any): Promise<void>;
     getTitle(): string;
     invalidate(): void;

@@ -1,19 +1,25 @@
 import { Model } from '../Model';
+import { Database } from '../Database/Database';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
-export declare class Application extends Model {
-    databases: any[];
+import { ApplicationData } from '../../../../data';
+export declare class Application extends Model<ApplicationData> {
+    databases: Database[];
     dataSources: DataSource[];
     init(): void;
+    createDatabases(): void;
     deinit(): void;
-    addDatabase(database: any): void;
+    addDatabase(database: Database): void;
     logout(): Promise<void>;
     request(options: any): Promise<any>;
-    getDatabase(name: any): any;
+    getDatabase(name: string): Database;
     getText(): any;
-    getUser(): any;
+    getUser(): {
+        id: number;
+        login: string;
+    };
     getDomain(): any;
-    getVirtualPath(): any;
+    getVirtualPath(): string;
     rpc(name: string, params: {
         [name: string]: any;
     }): Promise<any>;

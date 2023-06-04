@@ -1,7 +1,11 @@
-export interface ApplicationData {
+export interface ModelData {
     class: string;
     name: string;
     caption: string;
+    dataSources: any[];
+    actions: any[];
+}
+export interface ApplicationData extends ModelData {
     lang: string;
     theme: string;
     cssBlock: string;
@@ -25,6 +29,7 @@ export interface ApplicationData {
     text: any;
     menu: any;
     nav: any;
-    actions: any[];
+    databases: any[];
     pages: any[];
+    params: any[];
 }

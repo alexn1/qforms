@@ -19,13 +19,16 @@ class Application extends Model_1.Model {
         if (!this.data.theme)
             throw new Error('no theme attr');
         // databases
+        this.createDatabases();
+        // data sources
+        this.createDataSources();
+    }
+    createDatabases() {
         for (const data of this.data.databases) {
             const database = new Database_1.Database(data, this);
             database.init();
             this.addDatabase(database);
         }
-        // data sources
-        this.createDataSources();
     }
     deinit() {
         this.deinitDataSources();
