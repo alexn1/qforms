@@ -96,6 +96,22 @@ class Lib {
         minor = parseInt(minor) + 1;
         return [major, minor, patch].join('.');
     }
+
+    static async getVersion() {
+        return (await Lib.getJsonFileData('package.json')).version;
+    }
+
+    static async setVersion(version) {
+        // package.json
+        const package = await Lib.getJsonFileData('package.json');
+        package.version = version;
+        await Lib.putJsonFileData('package.json', package);
+
+        // package-lock.json
+        const packageLock = await Lib.getJsonFileData('package-lock.json');
+        packageLock.version = packageLock.packages[''].version = version;
+        await Lib.putJsonFileData('package-lock.json', packageLock);
+    }
 }
 
 module.exports = Lib;
