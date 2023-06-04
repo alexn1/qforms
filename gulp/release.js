@@ -17,8 +17,16 @@ async function bumpVersion() {
     return nextVersion;
 }
 
+async function gitCheckoutMaster() {
+    try {
+        await Lib.exec('git checkout master');
+    } catch (err) {
+        if (err.message !== `Already on 'master'\n`) throw err;
+    }
+}
+
 async function release() {
-    await Lib.exec('git checkout master');
+    await gitCheckoutMaster();
     await Lib.exec('git pull origin master');
     await Lib.exec('git push origin master');
 
