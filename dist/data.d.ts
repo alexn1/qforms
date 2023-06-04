@@ -23,6 +23,7 @@ export interface ApplicationData extends ModelData {
     time: number;
     uuid: string;
     user: {
+        [name: string]: any;
         id: number;
         login: string;
     };

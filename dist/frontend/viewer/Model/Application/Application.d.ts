@@ -15,6 +15,7 @@ export declare class Application extends Model<ApplicationData> {
     getDatabase(name: string): Database;
     getText(): any;
     getUser(): {
+        [name: string]: any;
         id: number;
         login: string;
     };

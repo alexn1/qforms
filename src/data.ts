@@ -25,6 +25,7 @@ export interface ApplicationData extends ModelData {
     time: number;
     uuid: string;
     user: {
+        [name: string]: any; // user fields allowed
         id: number;
         login: string;
     };
