@@ -112,6 +112,15 @@ class Lib {
         packageLockJson.version = packageLockJson.packages[''].version = version;
         await Lib.putJsonFileData('package-lock.json', packageLockJson);
     }
+
+    static async isDiff() {
+        try {
+            await Lib.exec('git diff --exit-code');
+        } catch (err) {
+            if (err.code) return true;
+        }
+        return false;
+    }
 }
 
 module.exports = Lib;

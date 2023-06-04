@@ -1,14 +1,5 @@
 const Lib = require('./Lib');
 
-/* async function isDiff() {
-    try {
-        await Lib.exec('git diff --exit-code');
-    } catch (err) {
-        if (err.code) return true;
-    }
-    return false;
-} */
-
 async function release() {
     // master branch
     await Lib.exec('git checkout -q master');
