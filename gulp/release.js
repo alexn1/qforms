@@ -1,5 +1,4 @@
 const Lib = require('./Lib');
-const colors = require('colors/safe');
 
 async function getVersion() {
     return (await Lib.getJsonFileData('package.json')).version;
