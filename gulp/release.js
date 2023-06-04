@@ -11,7 +11,7 @@ async function setVersion(version) {
     await Lib.putJsonFileData('package.json', package);
 
     // package-lock.json
-    const packageLock = await getJsonFileData('package-lock.json');
+    const packageLock = await Lib.getJsonFileData('package-lock.json');
     packageLock.version = packageLock.packages[''].version = version;
     await putJsonFileData('package-lock.json', packageLock);
 }
