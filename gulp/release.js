@@ -23,8 +23,6 @@ async function release() {
     await Lib.exec('git pull -q origin master');
     await Lib.exec('git push -q origin master');
 
-    // test 2
-
     const releaseVersion = await getVersion();
     // console.log('releaseVersion:', releaseVersion);
 
@@ -43,7 +41,7 @@ async function release() {
     await Lib.exec('git checkout -q master');
     const nextVersion = await bumpVersion();
     // await buildBackend();
-    await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
+    await Lib.exec(`git commit -q -a -m "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
 
