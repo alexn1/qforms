@@ -10,8 +10,35 @@ Supports MySql, Postgres, MongoDB.
 appsDirPath=../name/apps
 ```
 
-## Make an npm module ready for linking
+## Make npm module ready for linking
 
 ```bash
 $ npm link
+```
+
+## Build
+
+```bash
+$ npx gulp build-dev
+```
+
+## Release
+
+```bash
+$ npx gulp release
+```
+
+## Publish
+
+```bash
+$ git checkout release
+$ npx gulp build-prod
+$ npm publish
+```
+
+## Docker
+
+```
+$ npx gulp docker-build
+$ npx gulp docker-run
 ```
