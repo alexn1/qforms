@@ -37,5 +37,7 @@ export interface ApplicationData extends ModelData {
 
     databases: any[];
     pages: any[];
-    params: any[];
+    params: {
+        [name: string]: any;
+    };
 }
