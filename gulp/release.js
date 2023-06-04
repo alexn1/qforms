@@ -4,12 +4,16 @@ async function getVersion() {
     return (await Lib.getJsonFileData('package.json')).version;
 }
 
-async function bumpVersion() {
+async function setVersion(version) {
+    // package.json
     const package = await Lib.getJsonFileData('package.json');
-    const nextVersion = Lib.incMinor(package.version);
-    package.version = nextVersion;
+    package.version = version;
     await Lib.putJsonFileData('package.json', package);
-    return nextVersion;
+
+    // package-lock.json
+    const packageLock = await getJsonFileData('package-lock.json');
+    packageLock.version = packageLock.packages[''].version = version;
+    await putJsonFileData('package-lock.json', packageLock);
 }
 
 async function isDiff() {
@@ -43,7 +47,8 @@ async function release() {
 
     // master branch
     await Lib.exec('git checkout -q master');
-    const nextVersion = await bumpVersion();
+    const nextVersion = Lib.incMinor(releaseVersion);
+    await setVersion(nextVersion);
     await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
