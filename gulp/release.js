@@ -5,11 +5,6 @@ async function getVersion() {
     return (await Lib.getJsonFileData('package.json')).version;
 }
 
-async function makeReleaseCommit(releaseVersion) {
-    await Lib.exec(`git commit -am "release v${releaseVersion}"`);
-    await Lib.exec('git push origin master');
-}
-
 async function bumpVersion() {
     const package = await Lib.getJsonFileData('package.json');
     const nextVersion = Lib.incMinor(package.version);
@@ -27,7 +22,8 @@ async function release() {
     // console.log('releaseVersion:', releaseVersion);
 
     // await Lib.exec('npx gulp build-dev');
-    // await makeReleaseCommit(releaseVersion);
+    // await Lib.exec(`git commit -q -am "release v${releaseVersion}"`);
+    // await Lib.exec('git push -q origin master');
 
     // release branch
     await Lib.exec('git checkout -q release');
@@ -41,7 +37,7 @@ async function release() {
     await Lib.exec('git checkout -q master');
     const nextVersion = await bumpVersion();
     // await buildBackend();
-    await Lib.exec(`git commit -q -a -m "bump version to ${nextVersion}"`);
+    await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
 }
 
