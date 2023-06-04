@@ -4,7 +4,7 @@ const child_process = require('child_process');
 class Lib {
     static getJsonFileData(filePath) {
         return new Promise((resolve, reject) => {
-            fs.readFile(filePath, 'utf8', function (err, text) {
+            fs.readFile(filePath, 'utf8', (err, text) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -56,8 +56,8 @@ class Lib {
 
     static async exec(cmd) {
         console.log(cmd);
-        return new Promise(function (resolve, reject) {
-            const childProcess = child_process.exec(cmd, function (err, stdout, stderr) {
+        return new Promise((resolve, reject) => {
+            const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
                 if (err) reject(err);
             });
             childProcess.stdout.on('data', (data) => process.stdout.write(data));
