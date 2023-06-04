@@ -33,7 +33,7 @@ async function release() {
     await Lib.exec('git checkout -q release');
     await Lib.exec('git pull -q origin release');
     await Lib.exec('git merge -q master');
-    await Lib.exec(`git tag -amq v${releaseVersion} "v${releaseVersion}"`);
+    await Lib.exec(`git tag -a v${releaseVersion} -m "v${releaseVersion}"`);
     await Lib.exec('git push -q origin release');
     await Lib.exec('git push -q origin --tags');
 
