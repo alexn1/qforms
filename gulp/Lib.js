@@ -68,6 +68,7 @@ class Lib {
                     typeof stderr,
                 ); */
                 if (err) {
+                    console.error('exec error:', err);
                     reject(err);
                 } else {
                     resolve();
