@@ -58,15 +58,7 @@ class Lib {
         console.log(cmd);
         return new Promise((resolve, reject) => {
             const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
-                console.debug(
-                    'callback:',
-                    JSON.stringify(err),
-                    typeof err,
-                    JSON.stringify(stdout),
-                    typeof stdout,
-                    JSON.stringify(stderr),
-                    typeof stderr,
-                );
+                console.debug('callback:', JSON.stringify({ err, stdout, stderr }));
                 if (err) {
                     console.error('exec error:', err);
                     reject(err);
