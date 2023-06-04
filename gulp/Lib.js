@@ -58,11 +58,25 @@ class Lib {
         console.log(cmd);
         return new Promise((resolve, reject) => {
             const childProcess = child_process.exec(cmd, (err, stdout, stderr) => {
-                if (err) reject(err);
+                /* console.debug(
+                    'callback:',
+                    JSON.stringify(err),
+                    typeof err,
+                    JSON.stringify(stdout),
+                    typeof stdout,
+                    JSON.stringify(stderr),
+                    typeof stderr,
+                ); */
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
             });
             childProcess.stdout.on('data', (data) => process.stdout.write(data));
             childProcess.stderr.on('data', (data) => process.stderr.write(data));
-            childProcess.on('exit', (code) => {
+            childProcess.on('exit:', (code) => {
+                // console.debug('exit:', code, typeof code);
                 if (code) {
                     const err = new Error(`"${cmd}" process exited with code: ${code}`);
                     err.code = code;
