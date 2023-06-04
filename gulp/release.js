@@ -30,7 +30,7 @@ async function release() {
     await Lib.exec('git checkout -q master');
     await Lib.exec('git pull -q origin master');
     await Lib.exec('git push -q origin master');
-    const releaseVersion = await getVersion();
+    const releaseVersion = Lib.versionWithoutDev(await getVersion());
     // await Lib.exec('npx gulp build-dev');
     if (await isDiff()) {
         await Lib.exec(`git commit -q -am "release v${releaseVersion}"`);
@@ -47,7 +47,7 @@ async function release() {
 
     // master branch
     await Lib.exec('git checkout -q master');
-    const nextVersion = Lib.incMinor(releaseVersion);
+    const nextVersion = Lib.versionWithDev(Lib.incMinor(releaseVersion));
     await setVersion(nextVersion);
     await Lib.exec(`git commit -q -am "bump version to ${nextVersion}"`);
     await Lib.exec('git push -q origin master');
