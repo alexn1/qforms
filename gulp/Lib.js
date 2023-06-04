@@ -3,7 +3,7 @@ const child_process = require('child_process');
 
 class Lib {
     static getJsonFileData(filePath) {
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             fs.readFile(filePath, 'utf8', function (err, text) {
                 if (err) {
                     reject(err);
@@ -38,10 +38,10 @@ class Lib {
 
     static putJsonFileData(filePath, data) {
         // console.log('putJsonFileData version:', data.version);
-        return new Promise(function (resolve, reject) {
+        return new Promise((resolve, reject) => {
             try {
                 const text = JSON.stringify(data, null, 4) + '\n';
-                fs.writeFile(filePath, text, function (err) {
+                fs.writeFile(filePath, text, (err) => {
                     if (err) {
                         reject(err);
                     } else {
