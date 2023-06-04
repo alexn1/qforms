@@ -18,32 +18,10 @@ async function bumpVersion() {
     return nextVersion;
 }
 
-async function gitCheckoutMaster() {
-    try {
-        await Lib.exec('git checkout master');
-    } catch (err) {
-        if (err.message !== `Already on 'master'\n`) {
-            console.error('gitCheckoutMaster error:', colors.red(`"${err.message}"`));
-            throw err;
-        }
-    }
-}
-
-async function gitPushOriginMaster() {
-    try {
-        await Lib.exec('git push origin master');
-    } catch (err) {
-        if (err.message !== `Everything up-to-date\n`) {
-            console.error('gitPushOriginMaster error:', colors.red(`"${err.message}"`));
-            throw err;
-        }
-    }
-}
-
 async function release() {
-    await gitCheckoutMaster();
-    await Lib.exec('git pull origin master', false);
-    await gitPushOriginMaster();
+    await Lib.exec('git checkout -q master');
+    await Lib.exec('git pull -q origin master');
+    await Lib.exec('git push -q origin master');
 
     const releaseVersion = await getVersion();
     console.log('releaseVersion:', releaseVersion);
@@ -52,19 +30,19 @@ async function release() {
     // await makeReleaseCommit(releaseVersion);
 
     // release branch
-    await Lib.exec('git checkout release');
-    await Lib.exec('git pull origin release');
-    await Lib.exec('git merge master');
-    await Lib.exec(`git tag -am v${releaseVersion} "v${releaseVersion}"`);
-    await Lib.exec('git push origin release');
-    await Lib.exec('git push origin --tags');
+    await Lib.exec('git checkout -q release');
+    await Lib.exec('git pull -q origin release');
+    await Lib.exec('git merge -q master');
+    await Lib.exec(`git tag -amq v${releaseVersion} "v${releaseVersion}"`);
+    await Lib.exec('git push -q origin release');
+    await Lib.exec('git push -q origin --tags');
 
     // master branch
-    await Lib.exec('git checkout master');
+    await Lib.exec('git checkout -q master');
     const nextVersion = await bumpVersion();
     // await buildBackend();
-    await Lib.exec(`git commit -am "bump version to ${nextVersion}"`);
-    await Lib.exec('git push origin master');
+    await Lib.exec(`git commit -amq "bump version to ${nextVersion}"`);
+    await Lib.exec('git push -q origin master');
 }
 
 module.exports = release;
