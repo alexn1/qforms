@@ -61,7 +61,11 @@ class Lib {
                 if (err) {
                     reject(err);
                 } else {
-                    resolve(stderr);
+                    if (stderr) {
+                        reject(new Error(stderr));
+                    } else {
+                        resolve(stderr);
+                    }
                 }
             });
             childProcess.stdout.on('data', (data) => process.stdout.write(data));

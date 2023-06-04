@@ -4,11 +4,6 @@ async function getVersion() {
     return (await Lib.getJsonFileData('package.json')).version;
 }
 
-async function buildBackend() {
-    const stderr = await Lib.exec('gulp build --backend');
-    if (stderr) throw new Error(stderr);
-}
-
 async function makeReleaseCommit(releaseVersion) {
     await Lib.exec(`git commit -am "release v${releaseVersion}"`);
     await Lib.exec('git push origin master');
@@ -30,7 +25,7 @@ async function release() {
     const releaseVersion = await getVersion();
     console.log('releaseVersion:', releaseVersion);
 
-    // await buildBackend();
+    // await Lib.exec('npx gulp build-dev');
     // await makeReleaseCommit(releaseVersion);
 
     // release branch
