@@ -23,7 +23,7 @@ async function release() {
     await Lib.exec('git pull -q origin master');
     await Lib.exec('git push -q origin master');
 
-    // test
+    // test 2
 
     const releaseVersion = await getVersion();
     // console.log('releaseVersion:', releaseVersion);
