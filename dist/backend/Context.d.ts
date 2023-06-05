@@ -9,7 +9,7 @@ declare module 'express' {
 }
 export declare class Context {
     options: {
-        domain: string;
+        domain?: string;
         req?: Request;
         res?: Response;
         module?: string;
@@ -29,7 +29,7 @@ export declare class Context {
     querytime: any;
     params: Params;
     constructor(options: {
-        domain: string;
+        domain?: string;
         req?: Request;
         res?: Response;
         module?: string;

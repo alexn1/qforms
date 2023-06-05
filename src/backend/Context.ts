@@ -25,7 +25,7 @@ export class Context {
 
     constructor(
         public options: {
-            domain: string;
+            domain?: string;
             req?: Request;
             res?: Response;
             module?: string;
