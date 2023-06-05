@@ -24,7 +24,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         for (const configString in this.pool) {
             const pool = this.pool[configString];
-            console.log('ending pool:', pool.totalCount);
+            console.debug('ending pool:', pool.totalCount);
             await pool.end();
         }
         this.pool = {};
@@ -35,7 +35,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
-            console.log(`creating connection pool for ${this.getName()}(${configString})`);
+            console.debug(`creating connection pool for ${this.getName()}(${configString})`);
             this.pool[configString] = BkPostgreSqlDatabase.createPool(config);
         }
         return this.pool[configString];
@@ -94,13 +94,13 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return result.rows;
     }
     async begin(context) {
-        console.log('PostgreSqlDatabase.begin', this.getName());
+        console.debug('PostgreSqlDatabase.begin', this.getName());
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('begin');
     }
     async commit(context) {
-        console.log('PostgreSqlDatabase.commit', this.getName());
+        console.debug('PostgreSqlDatabase.commit', this.getName());
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('commit');
