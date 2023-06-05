@@ -53,13 +53,13 @@ export declare class BackHostApp {
     run(): Promise<void>;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
-    createAndInitModules(): Promise<void>;
-    createWebSocketServer(): void;
+    initModules(): Promise<void>;
+    initWebSocketServer(): void;
     initDirPaths(): void;
     composeStartMessage(host: string, port: string | number): string;
     listenProcessEvents(): void;
     getSecretSync(): any;
-    createExpressServer(): void;
+    initExpressServer(): void;
     createApplicationIfNotExists(context: Context): Promise<any>;
     getApplication(context: Context): BkApplication;
     getApplicationByRoute(route: string): BkApplication;

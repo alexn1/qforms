@@ -22,7 +22,7 @@ async function main() {
         });
         await backHostApp.run();
     } catch (err) {
-        console.error(err.message);
+        console.error(err);
         process.exit(1);
     }
 }

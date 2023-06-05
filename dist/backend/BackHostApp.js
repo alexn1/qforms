@@ -45,15 +45,15 @@ class BackHostApp {
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
         // logger
         this.logger = new Logger_1.Logger(this.params.logger);
-        this.createExpressServer();
-        await this.createAndInitModules();
+        this.initExpressServer();
+        await this.initModules();
         // host/port
         const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
         const port = this.params.port || process.env.LISTEN_PORT || 7000;
         // http server
         this.httpServer = await this.createAndRunHttpServer(host, port);
         this.httpServer.on('error', this.onHttpServerError.bind(this));
-        this.createWebSocketServer();
+        this.initWebSocketServer();
         this.listenProcessEvents();
         console.log(this.composeStartMessage(host, port));
     }
@@ -70,7 +70,7 @@ class BackHostApp {
             throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
         }
     }
-    async createAndInitModules() {
+    async initModules() {
         // indexModule
         this.indexModule = new IndexModule_1.IndexModule(this);
         await this.indexModule.init();
@@ -84,7 +84,7 @@ class BackHostApp {
         this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
     }
-    createWebSocketServer() {
+    initWebSocketServer() {
         this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
@@ -127,7 +127,7 @@ class BackHostApp {
         BkHelper_1.BkHelper.writeFileSync(secretFilePath, secret);
         return secret;
     }
-    createExpressServer() {
+    initExpressServer() {
         // create
         this.express = (0, express_1.default)();
         // init
