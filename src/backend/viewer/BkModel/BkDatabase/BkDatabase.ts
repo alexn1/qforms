@@ -145,4 +145,15 @@ export class BkDatabase<TConnection = any> extends BkModel {
     async getTableInfo(table): Promise<any[]> {
         throw new Error(`${this.constructor.name}.getTableInfo not implemented`);
     }
+
+    async useTransaction(context: Context, cb: () => Promise<void>) {
+        await this.begin(context);
+        try {
+            await cb();
+            await this.commit(context);
+        } catch (err) {
+            await this.rollback(context, err);
+            throw err;
+        }
+    }
 }
