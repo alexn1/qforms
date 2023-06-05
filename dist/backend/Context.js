@@ -2,9 +2,8 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Context = void 0;
 class Context {
-    constructor(options) {
+    constructor(options = {}) {
         // console.log('Context', options);
-        // this.options = options;
         this.options = options;
         this.connections = {};
         this.querytime = { params: {} };

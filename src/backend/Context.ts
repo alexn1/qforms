@@ -10,6 +10,16 @@ declare module 'express' {
     }
 }
 
+export interface ContextOptions {
+    domain?: string;
+    req?: Request;
+    res?: Response;
+    module?: string;
+    appDirName?: string;
+    appFileName?: string;
+    env?: string;
+}
+
 export class Context {
     query: {
         [name: string]: any;
@@ -23,19 +33,8 @@ export class Context {
     querytime: any = { params: {} };
     params: Params;
 
-    constructor(
-        public options: {
-            domain?: string;
-            req?: Request;
-            res?: Response;
-            module?: string;
-            appDirName?: string;
-            appFileName?: string;
-            env?: string;
-        },
-    ) {
+    constructor(public options: ContextOptions = {}) {
         // console.log('Context', options);
-        // this.options = options;
 
         // query
         this.query = {

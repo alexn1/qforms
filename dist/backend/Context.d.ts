@@ -7,16 +7,17 @@ declare module 'express' {
         files: any;
     }
 }
+export interface ContextOptions {
+    domain?: string;
+    req?: Request;
+    res?: Response;
+    module?: string;
+    appDirName?: string;
+    appFileName?: string;
+    env?: string;
+}
 export declare class Context {
-    options: {
-        domain?: string;
-        req?: Request;
-        res?: Response;
-        module?: string;
-        appDirName?: string;
-        appFileName?: string;
-        env?: string;
-    };
+    options: ContextOptions;
     query: {
         [name: string]: any;
     };
@@ -28,15 +29,7 @@ export declare class Context {
     };
     querytime: any;
     params: Params;
-    constructor(options: {
-        domain?: string;
-        req?: Request;
-        res?: Response;
-        module?: string;
-        appDirName?: string;
-        appFileName?: string;
-        env?: string;
-    });
+    constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): any;
