@@ -18,9 +18,11 @@ async function main() {
             password: '123qwe',
         } }));
     try {
-        const result = await backHostApp.run();
-        if (result) {
-            process.exit(result);
+        await backHostApp.init();
+        const code = await backHostApp.run();
+        console.log('code:', code);
+        if (code) {
+            process.exit(code);
         }
     }
     catch (err) {

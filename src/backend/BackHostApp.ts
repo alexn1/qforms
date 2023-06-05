@@ -66,6 +66,8 @@ export class BackHostApp {
         this.checkVersion();
     }
 
+    async init() {}
+
     checkVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
         // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
@@ -104,6 +106,7 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
 
+        // logger
         this.logger = new Logger(this.params.logger);
 
         // express server
@@ -158,6 +161,8 @@ export class BackHostApp {
             httpServer: this.httpServer,
         });
         this.initProcess();
+
+        return 0;
     }
 
     initProcess() {

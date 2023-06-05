@@ -35,6 +35,7 @@ class BackHostApp {
         // console.log('BackHostApp.constructor');
         this.checkVersion();
     }
+    async init() { }
     checkVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
         // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
@@ -63,6 +64,7 @@ class BackHostApp {
         // runtime & temp
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+        // logger
         this.logger = new Logger_1.Logger(this.params.logger);
         // express server
         this.express = (0, express_1.default)();
@@ -104,6 +106,7 @@ class BackHostApp {
             httpServer: this.httpServer,
         });
         this.initProcess();
+        return 0;
     }
     initProcess() {
         process.on('message', this.onProcessMessage.bind(this));

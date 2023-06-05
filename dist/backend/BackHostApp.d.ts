@@ -50,6 +50,7 @@ export declare class BackHostApp {
     };
     logger: Logger;
     constructor(params?: BackHostAppParams);
+    init(): Promise<void>;
     checkVersion(): void;
     run(): Promise<number>;
     initProcess(): void;

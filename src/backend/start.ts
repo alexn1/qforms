@@ -20,9 +20,11 @@ async function main() {
         },
     });
     try {
-        const result = await backHostApp.run();
-        if (result) {
-            process.exit(result);
+        await backHostApp.init();
+        const code = await backHostApp.run();
+        // console.debug('code:', code);
+        if (code) {
+            process.exit(code);
         }
     } catch (err) {
         await backHostApp.logError(err);
