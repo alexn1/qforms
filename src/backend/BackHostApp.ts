@@ -63,37 +63,35 @@ export class BackHostApp {
 
     constructor(private params: BackHostAppParams = {}) {
         // console.log('BackHostApp.constructor');
+        this.startTime = new Date();
     }
 
     async run(): Promise<void> {
         // console.log(`${this.constructor.name}.run`);
-        this.startTime = new Date();
         this.initDirPaths();
         this.checkNodeVersion();
         this.checkApplicationFolder();
-
-        // runtime & temp
-        BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
-        BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
-
-        // logger
-        this.logger = new Logger(this.params.logger);
-
+        this.createDirsIfNotExistsSync();
+        this.createLogger();
         this.initExpressServer();
         await this.initModules();
-
-        // host/port
-        const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
-        const port = this.params.port || process.env.LISTEN_PORT || 7000;
-
-        // http server
-        this.httpServer = await this.createAndRunHttpServer(host, port);
-        this.httpServer.on('error', this.onHttpServerError.bind(this));
-
+        await this.initHttpServer();
         this.initWebSocketServer();
         this.listenProcessEvents();
+        console.log(this.composeStartMessage(this.getHost(), this.getPort()));
+    }
 
-        console.log(this.composeStartMessage(host, port));
+    getHost() {
+        return this.params.host || process.env.LISTEN_HOST || 'localhost';
+    }
+
+    getPort() {
+        return this.params.port || process.env.LISTEN_PORT || 7000;
+    }
+
+    async initHttpServer() {
+        this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
+        this.httpServer.on('error', this.onHttpServerError.bind(this));
     }
 
     checkNodeVersion() {
@@ -111,6 +109,15 @@ export class BackHostApp {
         if (!fs.existsSync(this.appsDirPath)) {
             throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
         }
+    }
+
+    createDirsIfNotExistsSync() {
+        BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
+        BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+    }
+
+    createLogger() {
+        this.logger = new Logger(this.params.logger);
     }
 
     async initModules() {

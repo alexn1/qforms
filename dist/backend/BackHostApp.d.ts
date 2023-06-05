@@ -51,8 +51,13 @@ export declare class BackHostApp {
     logger: Logger;
     constructor(params?: BackHostAppParams);
     run(): Promise<void>;
+    getHost(): string;
+    getPort(): string | number;
+    initHttpServer(): Promise<void>;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
+    createDirsIfNotExistsSync(): void;
+    createLogger(): void;
     initModules(): Promise<void>;
     initWebSocketServer(): void;
     initDirPaths(): void;
