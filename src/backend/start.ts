@@ -12,22 +12,18 @@ import { BackHostApp, BkHelper } from './index';
 
 async function main() {
     // console.log('main');
-    const backHostApp = new BackHostApp({
-        ...BkHelper.getCommandLineParams(),
-        monitor: {
-            username: 'admin',
-            password: '123qwe',
-        },
-    });
     try {
-        await backHostApp.init();
-        const code = await backHostApp.run();
-        // console.debug('code:', code);
-        if (code) {
-            process.exit(code);
-        }
+        const backHostApp = new BackHostApp({
+            ...BkHelper.getCommandLineParams(),
+            monitor: {
+                username: 'admin',
+                password: '123qwe',
+            },
+        });
+        await backHostApp.run();
     } catch (err) {
-        await backHostApp.logError(err);
+        console.error(err.message);
+        process.exit(1);
     }
 }
 main();

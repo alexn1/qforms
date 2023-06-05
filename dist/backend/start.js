@@ -13,20 +13,16 @@ Module.prototype.require = function () {
 const index_1 = require("./index");
 async function main() {
     // console.log('main');
-    const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
-            username: 'admin',
-            password: '123qwe',
-        } }));
     try {
-        await backHostApp.init();
-        const code = await backHostApp.run();
-        // console.debug('code:', code);
-        if (code) {
-            process.exit(code);
-        }
+        const backHostApp = new index_1.BackHostApp(Object.assign(Object.assign({}, index_1.BkHelper.getCommandLineParams()), { monitor: {
+                username: 'admin',
+                password: '123qwe',
+            } }));
+        await backHostApp.run();
     }
     catch (err) {
-        await backHostApp.logError(err);
+        console.error(err.message);
+        process.exit(1);
     }
 }
 main();

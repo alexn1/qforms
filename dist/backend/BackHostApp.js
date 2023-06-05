@@ -33,10 +33,31 @@ class BackHostApp {
         this.applications = {};
         this.createAppQueue = {};
         // console.log('BackHostApp.constructor');
-        this.checkVersion();
     }
-    async init() { }
-    checkVersion() {
+    async run() {
+        // console.log(`${this.constructor.name}.run`);
+        this.startTime = new Date();
+        this.initDirPaths();
+        this.checkNodeVersion();
+        this.checkApplicationFolder();
+        // runtime & temp
+        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
+        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
+        // logger
+        this.logger = new Logger_1.Logger(this.params.logger);
+        this.createExpressServer();
+        await this.createAndInitModules();
+        // host/port
+        const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
+        const port = this.params.port || process.env.LISTEN_PORT || 7000;
+        // http server
+        this.httpServer = await this.createAndRunHttpServer(host, port);
+        this.httpServer.on('error', this.onHttpServerError.bind(this));
+        this.createWebSocketServer();
+        this.listenProcessEvents();
+        console.log(this.composeStartMessage(host, port));
+    }
+    checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
         // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
@@ -44,32 +65,12 @@ class BackHostApp {
             throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
         }
     }
-    async run() {
-        // console.log(`${this.constructor.name}.run`);
-        this.startTime = new Date();
-        this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
-        this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
+    checkApplicationFolder() {
         if (!fs_1.default.existsSync(this.appsDirPath)) {
-            console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
-            return 1;
+            throw new Error(`Application folder '${this.appsDirPath}' doesn't exist`);
         }
-        // path
-        const backendDirPath = __dirname;
-        this.frontendDirPath = path_1.default.resolve(path_1.default.join(backendDirPath, '../frontend'));
-        this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
-        // runtime & temp
-        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
-        BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
-        // logger
-        this.logger = new Logger_1.Logger(this.params.logger);
-        // express server
-        this.express = (0, express_1.default)();
-        this.express.set('handleException', this.params.handleException || true);
-        this.express.set('view engine', 'ejs');
-        this.express.set('views', backendDirPath);
-        this.express.enable('strict routing');
-        this.initExpressServer();
+    }
+    async createAndInitModules() {
         // indexModule
         this.indexModule = new IndexModule_1.IndexModule(this);
         await this.indexModule.init();
@@ -82,34 +83,20 @@ class BackHostApp {
         // editorModule
         this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
-        // host/port
-        const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
-        const port = this.params.port || process.env.LISTEN_PORT || 7000;
-        // http
-        this.httpServer = await this.createAndRunHttpServer(host, port);
-        this.httpServer.on('error', this.onHttpServerError.bind(this));
-        if (process.send) {
-            process.send('online');
-        }
-        /* let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${
-            this.isDevelopment() ? '/index2' : ''
-        }\n`;
-        msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
-        msg += `\tappsDirPath: ${this.appsDirPath}\n`;
-        msg += `\tdistDirPath: ${this.distDirPath}\n`;
-
-        if (this.isDevelopment()) {
-            msg += `\tmonitor: http://${host}:${port}/monitor\n`;
-        }
-        msg += `\tstarted at: ${new Date().toISOString()}\n`; */
-        console.log(this.composeStartMessage(host, port));
-        // ws
+    }
+    createWebSocketServer() {
         this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
             httpServer: this.httpServer,
         });
-        this.initProcess();
-        return 0;
+    }
+    initDirPaths() {
+        this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
+        this.distDirPath = this.params.distDirPath || this.appsDirPath;
+        this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
+        const backendDirPath = __dirname;
+        this.frontendDirPath = path_1.default.resolve(path_1.default.join(backendDirPath, '../frontend'));
+        this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
     }
     composeStartMessage(host, port) {
         let message = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
@@ -122,7 +109,7 @@ class BackHostApp {
         message += `\tstarted at: ${new Date().toISOString()}\n`;
         return message;
     }
-    initProcess() {
+    listenProcessEvents() {
         process.on('message', this.onProcessMessage.bind(this));
         process.on('SIGINT', this.onProcessSIGINT.bind(this));
         process.on('SIGTERM', this.onProcessSIGTERM.bind(this));
@@ -140,7 +127,14 @@ class BackHostApp {
         BkHelper_1.BkHelper.writeFileSync(secretFilePath, secret);
         return secret;
     }
-    initExpressServer() {
+    createExpressServer() {
+        // create
+        this.express = (0, express_1.default)();
+        // init
+        this.express.set('handleException', this.params.handleException || true);
+        // this.express.set('view engine', 'ejs');
+        // this.express.set('views', backendDirPath);
+        this.express.enable('strict routing');
         // middlewares
         this.express.use(body_parser_1.default.json({
             limit: '20mb',
@@ -191,10 +185,10 @@ class BackHostApp {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
-            /*if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
+            /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
                 await application.deinit();
                 return this.applications[route] = await this.createApplication(context);
-            }*/
+            } */
             return application;
         }
         // if creating application
@@ -559,15 +553,15 @@ class BackHostApp {
         }
         await this.logError(error, req);
     }
-    /*_getTest(req, res, next) {
+    /* _getTest(req, res, next) {
         console.log('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
-    }*/
-    /*_postTest(req, res, next) {
+    } */
+    /* _postTest(req, res, next) {
         console.log('postTest', req.body);
         res.json({foo: 'bar'});
-    }*/
+    } */
     createAndRunHttpServer(host, port) {
         return new Promise((resolve, reject) => {
             try {
@@ -626,11 +620,11 @@ class BackHostApp {
     }
     onHttpServerError(err) {
         console.error(safe_1.default.red('BackHostApp.onHttpServerError'), err.code, err.message);
-        /*if (err.code === 'EADDRINUSE') {
+        /* if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
         } else {
             console.error(err);
-        }*/
+        } */
     }
     getDomainFromRequest(req) {
         if (!req)
