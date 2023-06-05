@@ -53,6 +53,7 @@ export declare class BackHostApp {
     init(): Promise<void>;
     checkVersion(): void;
     run(): Promise<number>;
+    composeStartMessage(host: string, port: string | number): string;
     initProcess(): void;
     getSecretSync(): any;
     initExpressServer(): void;

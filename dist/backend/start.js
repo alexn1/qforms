@@ -20,7 +20,7 @@ async function main() {
     try {
         await backHostApp.init();
         const code = await backHostApp.run();
-        console.log('code:', code);
+        // console.debug('code:', code);
         if (code) {
             process.exit(code);
         }

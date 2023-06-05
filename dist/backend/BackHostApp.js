@@ -50,9 +50,6 @@ class BackHostApp {
         this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
-        const handleException = this.params.handleException || true;
-        const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
-        const port = this.params.port || process.env.LISTEN_PORT || 7000;
         if (!fs_1.default.existsSync(this.appsDirPath)) {
             console.error(safe_1.default.red(`Application folder '${this.appsDirPath}' doesn't exist`));
             return 1;
@@ -68,7 +65,7 @@ class BackHostApp {
         this.logger = new Logger_1.Logger(this.params.logger);
         // express server
         this.express = (0, express_1.default)();
-        this.express.set('handleException', handleException);
+        this.express.set('handleException', this.params.handleException || true);
         this.express.set('view engine', 'ejs');
         this.express.set('views', backendDirPath);
         this.express.enable('strict routing');
@@ -85,21 +82,27 @@ class BackHostApp {
         // editorModule
         this.editorModule = new EditorModule_1.EditorModule(this);
         await this.editorModule.init();
+        // host/port
+        const host = this.params.host || process.env.LISTEN_HOST || 'localhost';
+        const port = this.params.port || process.env.LISTEN_PORT || 7000;
         // http
         this.httpServer = await this.createAndRunHttpServer(host, port);
         this.httpServer.on('error', this.onHttpServerError.bind(this));
         if (process.send) {
             process.send('online');
         }
-        let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+        /* let msg = `QForms server v${pkg.version} listening on http://${host}:${port}${
+            this.isDevelopment() ? '/index2' : ''
+        }\n`;
         msg += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
         msg += `\tappsDirPath: ${this.appsDirPath}\n`;
         msg += `\tdistDirPath: ${this.distDirPath}\n`;
+
         if (this.isDevelopment()) {
             msg += `\tmonitor: http://${host}:${port}/monitor\n`;
         }
-        msg += `\tstarted at: ${new Date().toISOString()}\n`;
-        console.log(msg);
+        msg += `\tstarted at: ${new Date().toISOString()}\n`; */
+        console.log(this.composeStartMessage(host, port));
         // ws
         this.wsServer = new WebSocketServer_1.WebSocketServer({
             hostApp: this,
@@ -107,6 +110,17 @@ class BackHostApp {
         });
         this.initProcess();
         return 0;
+    }
+    composeStartMessage(host, port) {
+        let message = `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
+        message += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
+        message += `\tappsDirPath: ${this.appsDirPath}\n`;
+        message += `\tdistDirPath: ${this.distDirPath}\n`;
+        if (this.isDevelopment()) {
+            message += `\tmonitor: http://${host}:${port}/monitor\n`;
+        }
+        message += `\tstarted at: ${new Date().toISOString()}\n`;
+        return message;
     }
     initProcess() {
         process.on('message', this.onProcessMessage.bind(this));
