@@ -6,7 +6,7 @@ import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
 
-export interface Config {
+export interface DbConfig {
     host: string;
     database: string;
     user: string;
@@ -91,8 +91,8 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return this.getParam('database').getValue();
     }
 
-    getConfig(context?: Context): Config {
-        const config: Config = {
+    getConfig(context?: Context): DbConfig {
+        const config: DbConfig = {
             host: this.getParam('host').getValue(),
             database: this.getDatabaseName(context),
             user: this.getParam('user').getValue(),

@@ -1,7 +1,7 @@
 import colors from 'colors';
 import { Pool, Client, PoolClient } from 'pg';
 
-import { Config } from '../../BkDatabase';
+import { DbConfig } from '../../BkDatabase';
 import { BkSqlDatabase } from '../BkSqlDatabase';
 import { Context } from '../../../../../Context';
 import { Row } from '../../../../../../types';
@@ -40,7 +40,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         return this.pool[configString];
     }
 
-    static createPool(config: Config): Pool {
+    static createPool(config: DbConfig): Pool {
         return new Pool(config);
     }
 

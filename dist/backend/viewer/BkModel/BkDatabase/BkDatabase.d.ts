@@ -4,7 +4,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../BkTable/BkTable';
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
-export interface Config {
+export interface DbConfig {
     host: string;
     database: string;
     user: string;
@@ -33,7 +33,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
     getDatabaseName(context?: Context): string;
-    getConfig(context?: Context): Config;
+    getConfig(context?: Context): DbConfig;
     getDefaultPort(): number;
     getApp(): BkApplication;
     findTable(name: string): BkTable;

@@ -9,7 +9,7 @@ export { AppInfo } from './AppInfo';
 export * from '../types';
 export { BkModel } from './viewer/BkModel/BkModel';
 export { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-export { BkDatabase } from './viewer/BkModel/BkDatabase/BkDatabase';
+export { BkDatabase, DbConfig } from './viewer/BkModel/BkDatabase/BkDatabase';
 export { BkMySqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkMySqlDatabase/BkMySqlDatabase';
 export { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 export { BkMongoDbDatabase } from './viewer/BkModel/BkDatabase/BkNoSqlDatabase/BkMongoDbDatabase/BkMongoDbDatabase';
