@@ -20,7 +20,7 @@ export interface BackHostAppParams {
     runtimeDirPath?: string;
     handleException?: boolean;
     host?: string;
-    port?: number | string;
+    port?: number;
     logger?: LoggerOptions;
     monitor?: {
         username: string;
@@ -52,7 +52,7 @@ export declare class BackHostApp {
     constructor(params?: BackHostAppParams);
     run(): Promise<void>;
     getHost(): string;
-    getPort(): string | number;
+    getPort(): number;
     initHttpServer(): Promise<void>;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
@@ -95,7 +95,7 @@ export declare class BackHostApp {
     moduleGetFile(req: Request, res: Response, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
-    createAndRunHttpServer(host: any, port: any): Promise<any>;
+    createAndRunHttpServer(host: string, port: number): Promise<http.Server>;
     onProcessMessage(message: any): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): void;

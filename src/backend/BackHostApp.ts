@@ -28,6 +28,11 @@ import { EmptyPromise } from './EmptyPromise';
 
 const pkg = require('../../package.json');
 
+const BACKEND_DIR_PATH = __dirname;
+const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
+const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
+const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
+
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
@@ -35,7 +40,7 @@ export interface BackHostAppParams {
     runtimeDirPath?: string;
     handleException?: boolean;
     host?: string;
-    port?: number | string;
+    port?: number;
     logger?: LoggerOptions;
     monitor?: {
         username: string;
@@ -81,12 +86,12 @@ export class BackHostApp {
         console.log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
 
-    getHost() {
-        return this.params.host || process.env.LISTEN_HOST || 'localhost';
+    getHost(): string {
+        return this.params.host || LISTEN_HOST;
     }
 
-    getPort() {
-        return this.params.port || process.env.LISTEN_PORT || 7000;
+    getPort(): number {
+        return this.params.port || LISTEN_PORT;
     }
 
     async initHttpServer() {
@@ -146,13 +151,10 @@ export class BackHostApp {
     }
 
     initDirPaths() {
-        this.appsDirPath = path.resolve(
-            this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps',
-        );
+        this.appsDirPath = path.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
-        const backendDirPath = __dirname;
-        this.frontendDirPath = path.resolve(path.join(backendDirPath, '../frontend'));
+        this.frontendDirPath = path.resolve(path.join(BACKEND_DIR_PATH, '../frontend'));
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
     }
 
@@ -587,7 +589,7 @@ export class BackHostApp {
     }
 
     async moduleGetFile(req: Request, res: Response, next) {
-        if (process.env.NODE_ENV === 'development') {
+        if (this.getNodeEnv() === 'development') {
             // @ts-ignore
             console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         }
@@ -670,7 +672,7 @@ export class BackHostApp {
         res.json({foo: 'bar'});
     } */
 
-    createAndRunHttpServer(host, port): Promise<any> {
+    createAndRunHttpServer(host: string, port: number): Promise<http.Server> {
         return new Promise((resolve, reject) => {
             try {
                 const httpServer = http.createServer(this.express);

@@ -27,6 +27,10 @@ const BaseModel_1 = require("./BaseModel");
 const Logger_1 = require("./Logger");
 const EmptyPromise_1 = require("./EmptyPromise");
 const pkg = require('../../package.json');
+const BACKEND_DIR_PATH = __dirname;
+const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
+const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
+const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 class BackHostApp {
     constructor(params = {}) {
         this.params = params;
@@ -50,10 +54,10 @@ class BackHostApp {
         console.log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
     getHost() {
-        return this.params.host || process.env.LISTEN_HOST || 'localhost';
+        return this.params.host || LISTEN_HOST;
     }
     getPort() {
-        return this.params.port || process.env.LISTEN_PORT || 7000;
+        return this.params.port || LISTEN_PORT;
     }
     async initHttpServer() {
         this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
@@ -100,11 +104,10 @@ class BackHostApp {
         });
     }
     initDirPaths() {
-        this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || process.env.APPS_DIR_PATH || './apps');
+        this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
         this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
-        const backendDirPath = __dirname;
-        this.frontendDirPath = path_1.default.resolve(path_1.default.join(backendDirPath, '../frontend'));
+        this.frontendDirPath = path_1.default.resolve(path_1.default.join(BACKEND_DIR_PATH, '../frontend'));
         this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
     }
     composeStartMessage(host, port) {
@@ -496,7 +499,7 @@ class BackHostApp {
         }
     }
     async moduleGetFile(req, res, next) {
-        if (process.env.NODE_ENV === 'development') {
+        if (this.getNodeEnv() === 'development') {
             // @ts-ignore
             console.log(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         }
