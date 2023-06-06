@@ -22,10 +22,10 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     }
     getUrl() {
         // console.log('config', this.getConfig());
-        const { host, user, password } = this.getConfig();
+        const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
-        return `mongodb://${userPassword}${host2}:${this.getDefaultPort()}`;
+        return `mongodb://${userPassword}${host2}:${port || this.getDefaultPort()}`;
     }
     async release(context) {
         console.log('MongoDbDatabase.release', this.getName());

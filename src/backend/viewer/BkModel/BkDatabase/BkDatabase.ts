@@ -99,7 +99,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
             password: this.getParam('password').getValue(),
         };
         if (this.isData('params', 'port')) {
-            config.port = parseInt(this.getParam('port').getValue());
+            config.port = this.getParam('port').getValue();
         }
         return config;
     }
