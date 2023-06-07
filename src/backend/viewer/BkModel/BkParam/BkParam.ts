@@ -11,9 +11,9 @@ export class BkParam extends BkModel {
         }); */
 
         try {
-            return JSON.parse(value);
+            return eval(value);
         } catch (err) {
-            err.message = `param parse error: ${err.message}, ${this.getName()} = ${value}`;
+            err.message = `eval error: ${err.message}, ${this.getName()} = ${value}`;
             throw err;
         }
     }

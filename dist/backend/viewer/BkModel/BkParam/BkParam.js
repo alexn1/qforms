@@ -11,10 +11,10 @@ class BkParam extends BkModel_1.BkModel {
             return app.getEnvVarValue(name);
         }); */
         try {
-            return JSON.parse(value);
+            return eval(value);
         }
         catch (err) {
-            err.message = `param parse error: ${err.message}, ${this.getName()} = ${value}`;
+            err.message = `eval error: ${err.message}, ${this.getName()} = ${value}`;
             throw err;
         }
     }
