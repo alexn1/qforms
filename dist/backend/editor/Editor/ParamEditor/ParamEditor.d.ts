@@ -4,7 +4,7 @@ export declare class ParamEditor extends Editor {
         '@class': string;
         '@attributes': {
             name: any;
-            value: any;
+            value: string;
         };
     };
     getColName(): string;
