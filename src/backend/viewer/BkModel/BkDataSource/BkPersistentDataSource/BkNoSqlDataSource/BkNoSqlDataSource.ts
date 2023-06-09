@@ -82,7 +82,6 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         console.log('rows query time:', Date.now() - start);
         // console.log('rows:', rows);
         this.checkRows(rows);
-        // this.encodeRows(rows);
         const rawRows = this.encodeRows2(rows);
 
         // count

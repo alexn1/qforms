@@ -144,7 +144,6 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.checkRows(rows);
-        // this.encodeRows(rows);
         const rawRows = this.encodeRows2(rows);
 
         // count
