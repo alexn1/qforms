@@ -82,7 +82,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         console.log('rows query time:', Date.now() - start);
         // console.log('rows:', rows);
         this.checkRows(rows);
-        const rawRows = this.encodeRows2(rows);
+        const rawRows = this.encodeRows(rows);
 
         // count
         let count: number | null = null;
@@ -140,7 +140,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         );
         if (!row) throw new Error('select query does not return row');
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
 
         // console.log('row:', row);
 
@@ -185,7 +185,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         );
         if (!row) throw new Error('select query does not return row');
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
         // console.log('row:', row);
 
         // result
@@ -238,7 +238,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         }
     }
 
-    encodeRow2(row: Row): RawRow {
+    encodeRow(row: Row): RawRow {
         if (!row) throw new Error(`encodeRow: need row`);
         const rawRow: RawRow = {} as RawRow;
         if (this.isDefaultOnForm()) {

@@ -144,7 +144,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         const params = this.getSelectParams(context);
         const rows = await this.getDatabase().queryRows(context, query, params);
         this.checkRows(rows);
-        const rawRows = this.encodeRows2(rows);
+        const rawRows = this.encodeRows(rows);
 
         // count
         let count: number | null = null;
@@ -201,7 +201,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         if (!row) throw new Error('singleQuery does not return row');
         // console.log('row:', row);
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
 
         const result = new Result();
         Result.addInsertToResult(result, database, table, key);
@@ -246,7 +246,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         if (!row) throw new Error('singleQuery does not return row');
         // console.log('row:', row);
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
 
         // result
         const result = new Result();

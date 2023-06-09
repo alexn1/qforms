@@ -17,5 +17,5 @@ export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDat
     getCountQuery(context: Context): string;
     getSelectParams(context: Context): import("../../../../../../types").Params;
     checkRow(row: Row): void;
-    encodeRow2(row: Row): RawRow;
+    encodeRow(row: Row): RawRow;
 }

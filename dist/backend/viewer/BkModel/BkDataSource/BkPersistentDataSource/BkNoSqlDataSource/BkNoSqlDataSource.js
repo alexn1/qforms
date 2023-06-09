@@ -65,8 +65,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         console.log('rows query time:', Date.now() - start);
         // console.log('rows:', rows);
         this.checkRows(rows);
-        // this.encodeRows(rows);
-        const rawRows = this.encodeRows2(rows);
+        const rawRows = this.encodeRows(rows);
         // count
         let count = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
@@ -108,7 +107,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
         // console.log('row:', row);
         const result = new Result_1.Result();
         Result_1.Result.addInsertToResult(result, databaseName, tableName, key);
@@ -143,7 +142,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
-        const rawRow = this.encodeRow2(row);
+        const rawRow = this.encodeRow(row);
         // console.log('row:', row);
         // result
         const result = new Result_1.Result();
@@ -185,7 +184,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             // this.checkFields(row);
         }
     }
-    encodeRow2(row) {
+    encodeRow(row) {
         if (!row)
             throw new Error(`encodeRow: need row`);
         const rawRow = {};

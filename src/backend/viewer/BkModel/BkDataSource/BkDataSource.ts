@@ -129,11 +129,11 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    encodeRows2(rows: Row[]): RawRow[] {
-        return rows.map((row) => this.encodeRow2(row));
+    encodeRows(rows: Row[]): RawRow[] {
+        return rows.map((row) => this.encodeRow(row));
     }
 
-    encodeRow2(row: Row): RawRow {
+    encodeRow(row: Row): RawRow {
         if (!row) throw new Error(`encodeRow: need row`);
         const rawRow: RawRow = {} as RawRow;
         if (this.isDefaultOnForm()) {

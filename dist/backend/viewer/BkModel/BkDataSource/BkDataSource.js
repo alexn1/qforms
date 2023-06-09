@@ -104,29 +104,10 @@ class BkDataSource extends BkModel_1.BkModel {
             throw new Error(`[${field.getFullName()}]: no column and no value attr for calculation`);
         }
     }
-    /* encodeRows(rows: Row[]) {
-        for (const row of rows) {
-            this.encodeRow(row);
-        }
-    } */
-    encodeRows2(rows) {
-        return rows.map((row) => this.encodeRow2(row));
+    encodeRows(rows) {
+        return rows.map((row) => this.encodeRow(row));
     }
-    /* encodeRow(row: Row): void {
-        // console.log('DataSource.encodeRow');
-        if (!row) throw new Error(`encodeRow: need row`);
-        if (this.isDefaultOnForm()) {
-            for (const field of this.getForm().fields) {
-                const column = field.getAttr('column');
-                row[column] = field.valueToRaw(row[column]);
-            }
-        } else {
-            for (const name in row) {
-                row[name] = BkHelper.encodeValue(row[name]);
-            }
-        }
-    } */
-    encodeRow2(row) {
+    encodeRow(row) {
         if (!row)
             throw new Error(`encodeRow: need row`);
         const rawRow = {};

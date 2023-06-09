@@ -19,8 +19,8 @@ export declare class BkDataSource extends BkModel {
     checkRows(rows: Row[]): void;
     checkNotUsedColumns(row: Row): void;
     checkFields(row: Row): void;
-    encodeRows2(rows: Row[]): RawRow[];
-    encodeRow2(row: Row): RawRow;
+    encodeRows(rows: Row[]): RawRow[];
+    encodeRow(row: Row): RawRow;
     getApp(): BkApplication;
     getKeyValuesFromKey(key: Key): KeyObject;
     getKeyFromValues(values: any): Key;
