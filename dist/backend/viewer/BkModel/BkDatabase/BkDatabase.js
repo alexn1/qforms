@@ -23,6 +23,9 @@ class BkDatabase extends BkModel_1.BkModel {
     async connect(context) {
         throw new Error(`${this.constructor.name}.connect not implemented`);
     }
+    isConnected(context) {
+        return !!context.connections[this.getName()];
+    }
     getConnection(context) {
         // console.log('Database.getConnection');
         if (!context)

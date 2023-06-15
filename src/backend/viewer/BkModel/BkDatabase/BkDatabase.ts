@@ -37,6 +37,10 @@ export class BkDatabase<TConnection = any> extends BkModel {
         throw new Error(`${this.constructor.name}.connect not implemented`);
     }
 
+    isConnected(context: Context) {
+        return !!context.connections[this.getName()];
+    }
+
     getConnection(context: Context): TConnection {
         // console.log('Database.getConnection');
         if (!context) throw new Error('no context');

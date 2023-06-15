@@ -18,6 +18,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     init(context: Context): Promise<void>;
     fillAttributes(response: any): void;
     connect(context: Context): Promise<void>;
+    isConnected(context: Context): boolean;
     getConnection(context: Context): TConnection;
     release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: {

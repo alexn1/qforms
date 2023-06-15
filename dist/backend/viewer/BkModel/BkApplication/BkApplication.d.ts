@@ -63,7 +63,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getDataSource(name: string): BkDataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
-    release(context: any): Promise<void>;
+    release(context: Context): Promise<void>;
     addClient(webSocket: any): void;
     removeClient(webSocket: any): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;

@@ -412,9 +412,11 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         }
     }
 
-    async release(context): Promise<void> {
+    async release(context: Context): Promise<void> {
         for (const db of this.databases) {
-            await db.release(context);
+            if (db.isConnected(context)) {
+                await db.release(context);
+            }
         }
     }
 

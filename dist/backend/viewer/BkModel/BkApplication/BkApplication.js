@@ -368,7 +368,9 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async release(context) {
         for (const db of this.databases) {
-            await db.release(context);
+            if (db.isConnected(context)) {
+                await db.release(context);
+            }
         }
     }
     addClient(webSocket) {

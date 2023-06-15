@@ -54,7 +54,8 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         if (context.connections[name]) {
             throw new Error(`already connected: ${name}`);
         }
-        context.connections[name] = await this.getPool(context).connect();
+        const pool = this.getPool(context);
+        context.connections[name] = await pool.connect();
     }
 
     async release(context: Context): Promise<void> {
