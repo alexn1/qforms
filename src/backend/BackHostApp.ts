@@ -647,7 +647,7 @@ export class BackHostApp {
                 this.isDevelopment() || error.status === 404
                     ? error.message
                     : 'Internal Software Error';
-            const stack = this.isDevelopment() && error.status !== 404 ? error.stack : null;
+            const stack = this.isDevelopment() && error.status !== 404 ? error.stack : '';
             res.end(`<!DOCTYPE html>
 <html>
 <title>${status} ${message}</title>
