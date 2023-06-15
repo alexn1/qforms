@@ -14,6 +14,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     } */
     async deinit() {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
+        await super.deinit();
         if (this.pool !== null) {
             await new Promise((resolve) => {
                 this.pool.end(() => {
@@ -22,7 +23,6 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             });
             this.pool = null;
         }
-        await super.deinit();
     }
     getPool() {
         //console.log('MySqlDatabase.getPool');

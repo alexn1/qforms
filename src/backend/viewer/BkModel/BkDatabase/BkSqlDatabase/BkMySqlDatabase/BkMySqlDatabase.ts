@@ -13,6 +13,8 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
 
     async deinit(): Promise<void> {
         console.log(`MySqlDatabase.deinit: ${this.getName()}`);
+        await super.deinit();
+
         if (this.pool !== null) {
             await new Promise<void>((resolve) => {
                 this.pool.end(() => {
@@ -21,7 +23,6 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
             });
             this.pool = null;
         }
-        await super.deinit();
     }
 
     getPool(): Pool {

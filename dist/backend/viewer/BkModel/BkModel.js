@@ -13,6 +13,7 @@ class BkModel extends BaseModel_1.BaseModel {
     } */
     async init(context) { }
     async deinit() {
+        this.checkDeinited();
         this.deinited = true;
     }
     checkDeinited() {

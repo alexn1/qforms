@@ -74,11 +74,11 @@ class BkApplication extends BkModel_1.BkModel {
     }
     async deinit() {
         console.log(`Application.deinit: ${this.getName()}`);
+        await super.deinit();
         // databases
         for (const database of this.databases) {
             await database.deinit();
         }
-        await super.deinit();
     }
     getDirPath() {
         return this.appInfo.dirPath;

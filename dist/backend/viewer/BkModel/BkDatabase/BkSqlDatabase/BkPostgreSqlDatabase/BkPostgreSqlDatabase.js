@@ -22,13 +22,13 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     }*/
     async deinit() {
         console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
+        await super.deinit();
         for (const configString in this.pool) {
             const pool = this.pool[configString];
-            console.debug('ending pool:', pool.totalCount);
+            console.debug('ending pool:', configString, pool.totalCount);
             await pool.end();
         }
         this.pool = {};
-        await super.deinit();
     }
     getPool(context) {
         // console.log('PostgreSqlDatabase.getPool');

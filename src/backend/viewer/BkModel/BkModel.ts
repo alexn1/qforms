@@ -12,6 +12,7 @@ export class BkModel extends BaseModel {
     async init(context: Context): Promise<void> {}
 
     async deinit(): Promise<void> {
+        this.checkDeinited();
         this.deinited = true;
     }
 
