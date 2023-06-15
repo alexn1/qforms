@@ -691,10 +691,14 @@ export class BackHostApp {
         });
     }
 
-    async onProcessMessage(message) {
+    async onProcessMessage(message: string) {
         console.log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
-            await this.shutdown();
+            try {
+                await this.shutdown();
+            } catch (err) {
+                console.error('shutdown error:', err.message);
+            }
             process.exit(0);
         }
     }
@@ -702,7 +706,11 @@ export class BackHostApp {
     async onProcessSIGINT() {
         console.log('BackHostApp.onProcessSIGINT');
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
-        await this.shutdown();
+        try {
+            await this.shutdown();
+        } catch (err) {
+            console.error('shutdown error:', err.message);
+        }
         process.exit(0);
     }
 
@@ -712,7 +720,7 @@ export class BackHostApp {
         process.exit(1);
     }
 
-    onProcessExit(code) {
+    onProcessExit(code: number) {
         console.log('BackHostApp.onProcessExit', code);
         console.log('process.exit:', code);
     }

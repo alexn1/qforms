@@ -596,14 +596,24 @@ class BackHostApp {
     async onProcessMessage(message) {
         console.log('BackHostApp.onProcessMessage');
         if (message === 'shutdown') {
-            await this.shutdown();
+            try {
+                await this.shutdown();
+            }
+            catch (err) {
+                console.error('shutdown error:', err.message);
+            }
             process.exit(0);
         }
     }
     async onProcessSIGINT() {
         console.log('BackHostApp.onProcessSIGINT');
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
-        await this.shutdown();
+        try {
+            await this.shutdown();
+        }
+        catch (err) {
+            console.error('shutdown error:', err.message);
+        }
         process.exit(0);
     }
     onProcessSIGTERM() {

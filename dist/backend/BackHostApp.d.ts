@@ -96,10 +96,10 @@ export declare class BackHostApp {
     _e404(req: any, res: any, next: any): Promise<void>;
     _e500(err: any, req: any, res: any, next: any): Promise<void>;
     createAndRunHttpServer(host: string, port: number): Promise<http.Server>;
-    onProcessMessage(message: any): Promise<void>;
+    onProcessMessage(message: string): Promise<void>;
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): void;
-    onProcessExit(code: any): void;
+    onProcessExit(code: number): void;
     onUnhandledRejection(err: any): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
