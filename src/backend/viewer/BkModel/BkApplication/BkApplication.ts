@@ -407,8 +407,13 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     }
 
     async connect(context: Context): Promise<void> {
-        for (const db of this.databases) {
-            await db.connect(context);
+        try {
+            for (const db of this.databases) {
+                await db.connect(context);
+            }
+        } catch (err) {
+            await this.release(context); // if some databases already connected successfully
+            throw err;
         }
     }
 

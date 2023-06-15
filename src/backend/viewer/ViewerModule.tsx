@@ -91,12 +91,7 @@ export class ViewerModule {
         ) {
             await this.loginGet(context, bkApplication);
         } else {
-            try {
-                await bkApplication.connect(context);
-            } catch (err) {
-                await bkApplication.release(context); // if some databases already connected successfully
-                throw err;
-            }
+            await bkApplication.connect(context);
             try {
                 await bkApplication.initContext(context);
                 const html = await this.renderHtml(bkApplication, context);

@@ -362,8 +362,14 @@ class BkApplication extends BkModel_1.BkModel {
         return this.getAttr('viewClass') || 'ApplicationView';
     }
     async connect(context) {
-        for (const db of this.databases) {
-            await db.connect(context);
+        try {
+            for (const db of this.databases) {
+                await db.connect(context);
+            }
+        }
+        catch (err) {
+            await this.release(context); // if some databases already connected successfully
+            throw err;
         }
     }
     async release(context) {
