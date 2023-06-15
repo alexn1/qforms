@@ -26,6 +26,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
             const pool = this.pool[configString];
             console.debug('ending pool:', configString, pool.totalCount);
             await pool.end();
+            console.debug('pool ended');
         }
         this.pool = {};
     }

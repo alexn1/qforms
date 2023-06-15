@@ -711,7 +711,8 @@ export class BackHostApp {
         } catch (err) {
             console.error('shutdown error:', err.message);
         }
-        process.exit(0);
+        console.log('process.exit(1);');
+        process.exit(1);
     }
 
     onProcessSIGTERM() {
