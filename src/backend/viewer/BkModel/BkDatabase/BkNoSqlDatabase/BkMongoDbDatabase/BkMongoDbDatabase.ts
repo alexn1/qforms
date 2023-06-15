@@ -29,7 +29,9 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
-        return `mongodb://${userPassword}${host2}:${port || this.getDefaultPort()}`;
+        return `mongodb://${userPassword}${host2}:${
+            port || this.getDefaultPort()
+        }/?directConnection=true`;
     }
 
     async release(context: Context): Promise<void> {
