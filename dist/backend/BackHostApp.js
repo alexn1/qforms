@@ -610,12 +610,12 @@ class BackHostApp {
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
+            process.exit(0);
         }
         catch (err) {
             console.error('shutdown error:', err.message);
+            process.exit(1);
         }
-        console.log('process.exit(1);');
-        process.exit(1);
     }
     onProcessSIGTERM() {
         console.log('BackHostApp.onProcessSIGTERM');
@@ -624,7 +624,6 @@ class BackHostApp {
     }
     onProcessExit(code) {
         console.log('BackHostApp.onProcessExit', code);
-        console.log('process.exit:', code);
     }
     async onUnhandledRejection(err) {
         console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), err);
