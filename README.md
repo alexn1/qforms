@@ -31,12 +31,7 @@ $ npx gulp release
 ## Publish
 
 ```bash
-$ git checkout release
-$ npx gulp build-prod
-$ npm publish
-$ git add .
-$ git reset --hard
-$ git checkout master
+$ npx gulp publish-npm-package
 ```
 
 ## Docker
