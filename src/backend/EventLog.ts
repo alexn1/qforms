@@ -31,12 +31,12 @@ export class EventLog {
         this.url = options?.url;
     }
 
-    getUrl() {
+    public getUrl() {
         return this.url;
     }
 
-    async insertLog(event: Event) {
-        // console.log('BackHostApp.insertLog', event);
+    private async create(event: Event) {
+        // console.log('EventLog.create', event);
         await BkPostgreSqlDatabase.queryResult(
             this.pool,
             'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})',
@@ -52,9 +52,9 @@ export class EventLog {
         );
     }
 
-    async log(event: Event) {
+    public async log(event: Event) {
         if (this.pool) {
-            await this.insertLog(event);
+            await this.create(event);
         } else if (this.url) {
             console.log(`fetch ${this.url}`);
             await fetch(this.url, {

@@ -21,6 +21,6 @@ export declare class EventLog {
     private url;
     constructor(options?: EventLogOptions);
     getUrl(): string;
-    insertLog(event: Event): Promise<void>;
+    private insert;
     log(event: Event): Promise<void>;
 }

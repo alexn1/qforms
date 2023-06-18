@@ -14,7 +14,7 @@ class EventLog {
     getUrl() {
         return this.url;
     }
-    async insertLog(event) {
+    async insert(event) {
         // console.log('BackHostApp.insertLog', event);
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {
             created: new Date(),
@@ -28,7 +28,7 @@ class EventLog {
     }
     async log(event) {
         if (this.pool) {
-            await this.insertLog(event);
+            await this.insert(event);
         }
         else if (this.url) {
             console.log(`fetch ${this.url}`);
