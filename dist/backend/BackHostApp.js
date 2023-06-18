@@ -24,7 +24,7 @@ const EditorModule_1 = require("./editor/EditorModule");
 const FileSessionStore_1 = require("./FileSessionStore");
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
-const Logger_1 = require("./Logger");
+const EventLog_1 = require("./EventLog");
 const EmptyPromise_1 = require("./EmptyPromise");
 const pkg = require('../../package.json');
 const BACKEND_DIR_PATH = __dirname;
@@ -45,7 +45,7 @@ class BackHostApp {
         this.checkNodeVersion();
         this.checkApplicationFolder();
         this.createDirsIfNotExistsSync();
-        this.createLogger();
+        this.createEventLog();
         this.initExpressServer();
         await this.initModules();
         await this.initHttpServer();
@@ -80,8 +80,8 @@ class BackHostApp {
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.runtimeDirPath);
         BkHelper_1.BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
     }
-    createLogger() {
-        this.logger = new Logger_1.Logger(this.params.logger);
+    createEventLog() {
+        this.eventLog = new EventLog_1.EventLog(this.params.logger);
     }
     async initModules() {
         // indexModule
@@ -300,7 +300,7 @@ class BackHostApp {
     async logError(err, req) {
         console.log('BackHostApp.logError:', safe_1.default.red(err.message));
         try {
-            await this.logger.log({
+            await this.eventLog.log({
                 type: 'error',
                 source: 'server',
                 message: err.message,
@@ -351,7 +351,7 @@ class BackHostApp {
     async logEvent(context, message, data) {
         console.log('BackHostApp.logEvent', message);
         try {
-            await this.logger.log({
+            await this.eventLog.log({
                 type: 'log',
                 source: 'server',
                 message: message,
@@ -667,7 +667,7 @@ class BackHostApp {
                 headers: req.headers,
                 domain: this.getDomainFromRequest(req),
             }, null, 4);
-            await this.logger.log({
+            await this.eventLog.log({
                 type: req.body.type,
                 source: req.body.source,
                 message: req.body.message,
@@ -745,7 +745,7 @@ class BackHostApp {
         return distDirPath;
     }
     getLogger() {
-        return this.logger;
+        return this.eventLog;
     }
 }
 exports.BackHostApp = BackHostApp;

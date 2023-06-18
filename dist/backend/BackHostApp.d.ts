@@ -11,7 +11,7 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
-import { Logger, LoggerOptions } from './Logger';
+import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 export interface BackHostAppParams {
     [name: string]: any;
@@ -21,7 +21,7 @@ export interface BackHostAppParams {
     handleException?: boolean;
     host?: string;
     port?: number;
-    logger?: LoggerOptions;
+    logger?: EventLogOptions;
     monitor?: {
         username: string;
         password: string;
@@ -48,7 +48,7 @@ export declare class BackHostApp {
     createAppQueue: {
         [route: string]: Array<EmptyPromise<any>>;
     };
-    logger: Logger;
+    private eventLog;
     constructor(params?: BackHostAppParams);
     run(): Promise<void>;
     getHost(): string;
@@ -57,7 +57,7 @@ export declare class BackHostApp {
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
     createDirsIfNotExistsSync(): void;
-    createLogger(): void;
+    private createEventLog;
     initModules(): Promise<void>;
     initWebSocketServer(): void;
     initDirPaths(): void;
@@ -129,5 +129,5 @@ export declare class BackHostApp {
     static test(): void;
     getDistDirPath(): string;
     makeDistDirPathForApp(appFilePath: string): string;
-    getLogger(): Logger;
+    getLogger(): EventLog;
 }

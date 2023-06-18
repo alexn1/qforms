@@ -23,7 +23,7 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 // import Test from './test/Test';
 import { QueryParams } from '../types';
-import { Logger, LoggerOptions } from './Logger';
+import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 
 const pkg = require('../../package.json');
@@ -41,7 +41,7 @@ export interface BackHostAppParams {
     handleException?: boolean;
     host?: string;
     port?: number;
-    logger?: LoggerOptions;
+    logger?: EventLogOptions;
     monitor?: {
         username: string;
         password: string;
@@ -64,7 +64,7 @@ export class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     createAppQueue: { [route: string]: Array<EmptyPromise<any>> } = {};
-    logger: Logger;
+    private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
         // console.log('BackHostApp.constructor');
@@ -77,7 +77,7 @@ export class BackHostApp {
         this.checkNodeVersion();
         this.checkApplicationFolder();
         this.createDirsIfNotExistsSync();
-        this.createLogger();
+        this.createEventLog();
         this.initExpressServer();
         await this.initModules();
         await this.initHttpServer();
@@ -121,8 +121,8 @@ export class BackHostApp {
         BkHelper.createDirIfNotExistsSync(this.sessionDirPath);
     }
 
-    createLogger() {
-        this.logger = new Logger(this.params.logger);
+    private createEventLog() {
+        this.eventLog = new EventLog(this.params.logger);
     }
 
     async initModules() {
@@ -399,7 +399,7 @@ export class BackHostApp {
     async logError(err: Error, req?: Request) {
         console.log('BackHostApp.logError:', colors.red(err.message));
         try {
-            await this.logger.log({
+            await this.eventLog.log({
                 type: 'error',
                 source: 'server',
                 message: err.message,
@@ -451,7 +451,7 @@ export class BackHostApp {
     async logEvent(context: Context, message: string, data?: object): Promise<void> {
         console.log('BackHostApp.logEvent', message);
         try {
-            await this.logger.log({
+            await this.eventLog.log({
                 type: 'log',
                 source: 'server',
                 message: message,
@@ -772,7 +772,7 @@ export class BackHostApp {
                 null,
                 4,
             );
-            await this.logger.log({
+            await this.eventLog.log({
                 type: req.body.type,
                 source: req.body.source,
                 message: req.body.message,
@@ -883,6 +883,6 @@ export class BackHostApp {
     }
 
     getLogger() {
-        return this.logger;
+        return this.eventLog;
     }
 }
