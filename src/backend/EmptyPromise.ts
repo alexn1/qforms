@@ -1,4 +1,4 @@
-export class EmptyPromise<T> extends Promise<T> {
+export class EmptyPromise<T = any> extends Promise<T> {
     resolve: any;
     reject: any;
 

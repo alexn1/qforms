@@ -46,7 +46,7 @@ export declare class BackHostApp {
     editorModule: EditorModule;
     startTime: Date;
     createAppQueue: {
-        [route: string]: Array<EmptyPromise<any>>;
+        [route: string]: EmptyPromise[];
     };
     private eventLog;
     constructor(params?: BackHostAppParams);

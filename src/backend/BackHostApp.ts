@@ -63,7 +63,7 @@ export class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    createAppQueue: { [route: string]: Array<EmptyPromise<any>> } = {};
+    createAppQueue: { [route: string]: EmptyPromise[] } = {};
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
