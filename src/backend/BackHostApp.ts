@@ -271,7 +271,7 @@ export class BackHostApp {
         this.express.use(this._e500.bind(this));
     }
 
-    async createApplicationIfNotExists(context: Context) {
+    async createApplicationIfNotExists(context: Context): Promise<BkApplication> {
         // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {

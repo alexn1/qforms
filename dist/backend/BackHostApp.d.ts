@@ -65,7 +65,7 @@ export declare class BackHostApp {
     listenProcessEvents(): void;
     getSecretSync(): any;
     initExpressServer(): void;
-    createApplicationIfNotExists(context: Context): Promise<any>;
+    createApplicationIfNotExists(context: Context): Promise<BkApplication>;
     getApplication(context: Context): BkApplication;
     getApplicationByRoute(route: string): BkApplication;
     getAppFilePath(context: Context): string;
