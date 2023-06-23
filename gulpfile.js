@@ -1,8 +1,8 @@
 // release
 module.exports['release'] = require('./gulp/release');
 
-// publish-npm-package
-module.exports['publish-npm-package'] = require('./gulp/publish-npm-package');
+// deploy
+module.exports['deploy'] = require('./gulp/deploy');
 
 // ejs
 module.exports['ejs'] = require('./gulp/ejs');

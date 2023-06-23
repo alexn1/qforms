@@ -28,10 +28,10 @@ $ npx gulp build-dev
 $ npx gulp release
 ```
 
-## Publish
+## Deploy
 
 ```bash
-$ npx gulp publish-npm-package
+$ npx gulp deploy
 ```
 
 ## Docker
