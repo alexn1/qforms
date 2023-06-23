@@ -1,6 +1,6 @@
 {
     "name": "qforms",
-    "version": "0.28.0",
+    "version": "0.29.0-dev",
     "description": "A fullstack framework/platform based on Express and React for building Web UI for databases.",
     "main": "dist/backend/index.js",
     "files": [
