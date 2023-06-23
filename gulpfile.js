@@ -4,8 +4,8 @@ module.exports['release'] = require('./gulp/release');
 // publish-npm-package
 module.exports['publish-npm-package'] = require('./gulp/publish-npm-package');
 
-// backend-ejs
-module.exports['backend-ejs'] = require('./gulp/backend-ejs');
+// ejs
+module.exports['ejs'] = require('./gulp/ejs');
 
 // build
 module.exports['build-dev'] = require('./gulp/build-dev');
