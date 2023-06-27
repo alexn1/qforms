@@ -715,10 +715,16 @@ export class BackHostApp {
         }
     }
 
-    onProcessSIGTERM() {
+    async onProcessSIGTERM() {
         console.log('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
-        process.exit(1);
+        try {
+            await this.shutdown();
+            process.exit(0);
+        } catch (err) {
+            console.error('shutdown error:', err.message);
+            process.exit(1);
+        }
     }
 
     onProcessExit(code: number) {

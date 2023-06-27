@@ -98,7 +98,7 @@ export declare class BackHostApp {
     createAndRunHttpServer(host: string, port: number): Promise<http.Server>;
     onProcessMessage(message: string): Promise<void>;
     onProcessSIGINT(): Promise<void>;
-    onProcessSIGTERM(): void;
+    onProcessSIGTERM(): Promise<void>;
     onProcessExit(code: number): void;
     onUnhandledRejection(err: any): Promise<void>;
     shutdown(): Promise<void>;
