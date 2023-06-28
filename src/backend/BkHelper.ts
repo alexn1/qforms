@@ -3,6 +3,7 @@ import glob from 'glob';
 import path from 'path';
 import slash from 'slash';
 import colors from 'colors/safe';
+import fetch from 'node-fetch';
 
 import { JSONString } from '../types';
 import { EmptyPromise } from './EmptyPromise';
@@ -564,6 +565,16 @@ export class BkHelper {
         // console.log('base64string:', base64string);
         const buffer = Buffer.from(base64string, 'base64');
         return [contentType, buffer];
+    }
+
+    static async post(url: string, data: any) {
+        const response = await fetch(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        if (response.ok) return await response.json();
+        throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
     }
 }
 

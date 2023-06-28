@@ -51,4 +51,5 @@ export declare class BkHelper {
     static formatTime2(_sec: any): string;
     static registerGlobalClass(Class: any): void;
     static getContentFromDataUrl(value: string): [contentType: string, buffer: Buffer];
+    static post(url: string, data: any): Promise<any>;
 }

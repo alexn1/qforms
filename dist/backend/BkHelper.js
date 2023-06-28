@@ -9,6 +9,7 @@ const glob_1 = __importDefault(require("glob"));
 const path_1 = __importDefault(require("path"));
 const slash_1 = __importDefault(require("slash"));
 const safe_1 = __importDefault(require("colors/safe"));
+const node_fetch_1 = __importDefault(require("node-fetch"));
 function _getFilePathsSync(dirPath, ext) {
     const filePaths = glob_1.default.sync(path_1.default.join(dirPath, '*.' + ext));
     glob_1.default.sync(path_1.default.join(dirPath, '*/')).forEach((subDirPath) => {
@@ -526,6 +527,16 @@ class BkHelper {
         // console.log('base64string:', base64string);
         const buffer = Buffer.from(base64string, 'base64');
         return [contentType, buffer];
+    }
+    static async post(url, data) {
+        const response = await (0, node_fetch_1.default)(url, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+        });
+        if (response.ok)
+            return await response.json();
+        throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
     }
 }
 exports.BkHelper = BkHelper;
