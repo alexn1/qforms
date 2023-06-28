@@ -1,6 +1,7 @@
 import { Pool } from 'pg';
 import fetch from 'node-fetch';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
+import { BkHelper } from './BkHelper';
 
 export interface EventLogOptions {
     db?: {
@@ -11,6 +12,7 @@ export interface EventLogOptions {
         password: string;
     };
     url?: string;
+    url2?: string;
 }
 
 export interface Event {
@@ -25,10 +27,12 @@ export interface Event {
 export class EventLog {
     private pool: Pool;
     private url: string;
+    private url2: string;
 
     constructor(options?: EventLogOptions) {
         this.pool = options?.db && BkPostgreSqlDatabase.createPool(options.db);
         this.url = options?.url;
+        this.url2 = options?.url2;
     }
 
     public getUrl() {
@@ -62,6 +66,19 @@ export class EventLog {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(event),
             });
+        }
+        if (this.url2) {
+            const eventId = await this.logToEventLog(event);
+            return eventId;
+        }
+    }
+
+    private async logToEventLog(event: any): Promise<string | null> {
+        try {
+            const { _id } = await BkHelper.post(this.url2, event);
+            return _id;
+        } catch (err) {
+            return null;
         }
     }
 }

@@ -6,10 +6,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.EventLog = void 0;
 const node_fetch_1 = __importDefault(require("node-fetch"));
 const BkPostgreSqlDatabase_1 = require("./viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase");
+const BkHelper_1 = require("./BkHelper");
 class EventLog {
     constructor(options) {
         this.pool = (options === null || options === void 0 ? void 0 : options.db) && BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.createPool(options.db);
         this.url = options === null || options === void 0 ? void 0 : options.url;
+        this.url2 = options === null || options === void 0 ? void 0 : options.url2;
     }
     getUrl() {
         return this.url;
@@ -37,6 +39,18 @@ class EventLog {
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(event),
             });
+        }
+        if (this.url2) {
+            return await this.logToEventLog(event);
+        }
+    }
+    async logToEventLog(event) {
+        try {
+            const { _id } = await BkHelper_1.BkHelper.post(this.url2, event);
+            return _id;
+        }
+        catch (err) {
+            return null;
         }
     }
 }
