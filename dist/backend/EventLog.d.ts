@@ -22,7 +22,6 @@ export declare class EventLog {
     private url;
     private url2;
     constructor(options?: EventLogOptions);
-    getUrl(): string;
     private create;
     log(event: Event): Promise<string>;
     private logToEventLog;
