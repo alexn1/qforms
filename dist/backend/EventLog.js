@@ -41,7 +41,8 @@ class EventLog {
             });
         }
         if (this.url2) {
-            return await this.logToEventLog(event);
+            const eventId = await this.logToEventLog(event);
+            return eventId;
         }
     }
     async logToEventLog(event) {

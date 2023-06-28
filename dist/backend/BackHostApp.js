@@ -751,8 +751,8 @@ class BackHostApp {
         const distDirPath = path_1.default.join(this.getDistDirPath(), dirName);
         return distDirPath;
     }
-    getLogger() {
-        return this.eventLog;
+    getFrontLogUrl() {
+        return this.params.frontLogUrl;
     }
 }
 exports.BackHostApp = BackHostApp;
