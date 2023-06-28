@@ -1,5 +1,5 @@
 import { Pool } from 'pg';
-import fetch from 'node-fetch';
+// import fetch from 'node-fetch';
 import { BkPostgreSqlDatabase } from './viewer/BkModel/BkDatabase/BkSqlDatabase/BkPostgreSqlDatabase/BkPostgreSqlDatabase';
 import { BkHelper } from './BkHelper';
 
@@ -12,7 +12,6 @@ export interface EventLogOptions {
         password: string;
     };
     url?: string;
-    url2?: string;
 }
 
 export interface Event {
@@ -27,17 +26,11 @@ export interface Event {
 export class EventLog {
     private pool: Pool;
     private url: string;
-    private url2: string;
 
     constructor(options?: EventLogOptions) {
         this.pool = options?.db && BkPostgreSqlDatabase.createPool(options.db);
         this.url = options?.url;
-        this.url2 = options?.url2;
     }
-
-    /* public getUrl() {
-        return this.url;
-    } */
 
     private async create(event: Event) {
         // console.log('EventLog.create', event);
@@ -59,15 +52,8 @@ export class EventLog {
     public async log(event: Event) {
         if (this.pool) {
             await this.create(event);
-        } else if (this.url) {
-            console.log(`fetch ${this.url}`);
-            await fetch(this.url, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(event),
-            });
         }
-        if (this.url2) {
+        if (this.url) {
             const eventId = await this.logToEventLog(event);
             return eventId;
         }
@@ -75,7 +61,7 @@ export class EventLog {
 
     private async logToEventLog(event: any): Promise<string | null> {
         try {
-            const { _id } = await BkHelper.post(this.url2, event);
+            const { _id } = await BkHelper.post(this.url, event);
             return _id;
         } catch (err) {
             return null;

@@ -7,7 +7,6 @@ export interface EventLogOptions {
         password: string;
     };
     url?: string;
-    url2?: string;
 }
 export interface Event {
     type: 'log' | 'warn' | 'error';
@@ -20,7 +19,6 @@ export interface Event {
 export declare class EventLog {
     private pool;
     private url;
-    private url2;
     constructor(options?: EventLogOptions);
     private create;
     log(event: Event): Promise<string>;
