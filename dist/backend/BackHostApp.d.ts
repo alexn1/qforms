@@ -11,7 +11,7 @@ import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
 import { QueryParams } from '../types';
-import { EventLogOptions } from './EventLog';
+import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 export interface BackHostAppParams {
     [name: string]: any;
@@ -130,5 +130,6 @@ export declare class BackHostApp {
     static test(): void;
     getDistDirPath(): string;
     makeDistDirPathForApp(appFilePath: string): string;
+    getLogger(): EventLog;
     getFrontLogUrl(): string;
 }

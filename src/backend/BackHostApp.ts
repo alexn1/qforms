@@ -889,6 +889,10 @@ export class BackHostApp {
         return distDirPath;
     }
 
+    getLogger() {
+        return this.eventLog;
+    }
+
     getFrontLogUrl() {
         return this.params.frontLogUrl;
     }
