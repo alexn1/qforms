@@ -35,9 +35,9 @@ export class EventLog {
         this.url2 = options?.url2;
     }
 
-    public getUrl() {
+    /* public getUrl() {
         return this.url;
-    }
+    } */
 
     private async create(event: Event) {
         // console.log('EventLog.create', event);
