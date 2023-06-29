@@ -40,7 +40,7 @@ export declare class Context {
     };
     getQuery(): any;
     getParams(): Params;
-    getReq(): Request;
+    getReq(): Request | undefined;
     getRes(): Response;
     getBody(): any;
     getModule(): string;

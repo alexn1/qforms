@@ -38,19 +38,19 @@ export class Context {
 
         // query
         this.query = {
-            ...(this.getReq() && this.getReq().query ? this.getReq().query : {}),
+            ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
         };
 
         // params
         this.params = {
-            ...(this.getReq() && this.getReq().body.params ? this.getReq().body.params : {}),
+            ...(this.getReq() && this.getReq()!.body.params ? this.getReq()!.body.params : {}),
         };
 
         // files
         this.files = {};
-        if (this.getReq() && this.getReq().files) {
-            for (const name in this.getReq().files) {
-                this.files[name] = this.getReq().files[name].buffer;
+        if (this.getReq() && this.getReq()!.files) {
+            for (const name in this.getReq()!.files) {
+                this.files[name] = this.getReq()!.files[name].buffer;
             }
         }
 
@@ -71,18 +71,18 @@ export class Context {
 
     getUser(): any {
         const route = this.getRoute();
-        if (this.getReq().session.user && this.getReq().session.user[route]) {
-            return this.getReq().session.user[route];
+        if (this.getReq()!.session.user && this.getReq()!.session.user[route]) {
+            return this.getReq()!.session.user[route];
         }
         return null;
     }
 
     getClientTimezoneOffset(): number | null {
         if (
-            this.getReq().session.tzOffset !== undefined &&
-            this.getReq().session.tzOffset !== null
+            this.getReq()!.session.tzOffset !== undefined &&
+            this.getReq()!.session.tzOffset !== null
         ) {
-            return this.getReq().session.tzOffset;
+            return this.getReq()!.session.tzOffset;
         }
         return null;
     }
@@ -97,13 +97,13 @@ export class Context {
 
     getCookies(): { [name: string]: string } {
         return {
-            ...(this.getReq() && this.getReq().cookies ? this.getReq().cookies : {}),
+            ...(this.getReq() && this.getReq()!.cookies ? this.getReq()!.cookies : {}),
         };
     }
 
     getQuery(): any {
         return {
-            ...(this.getReq() && this.getReq().query ? this.getReq().query : {}),
+            ...(this.getReq() && this.getReq()!.query ? this.getReq()!.query : {}),
         };
     }
 
@@ -121,8 +121,8 @@ export class Context {
         };
     }
 
-    getReq(): Request {
-        if (!this.options.req) throw new Error('getRes: no req');
+    getReq(): Request | undefined {
+        // if (!this.options.req) throw new Error('getRes: no req');
         return this.options.req;
     }
 
@@ -132,22 +132,22 @@ export class Context {
     }
 
     getBody(): any {
-        return this.getReq().body;
+        return this.getReq()!.body;
     }
 
     getModule(): string {
         if (this.options.module) {
             return this.options.module;
         }
-        return this.getReq().params.module;
+        return this.getReq()!.params.module;
     }
 
     getDomain(): string {
         if (this.options.domain) {
             return this.options.domain;
         }
-        if (this.getReq().params.domain) {
-            return this.getReq().params.domain;
+        if (this.getReq()!.params.domain) {
+            return this.getReq()!.params.domain;
         }
         throw new Error('domain not defined');
     }
@@ -156,37 +156,37 @@ export class Context {
         if (this.options.appDirName) {
             return this.options.appDirName;
         }
-        return this.getReq().params.appDirName;
+        return this.getReq()!.params.appDirName;
     }
 
     getAppFileName(): string {
         if (this.options.appFileName) {
             return this.options.appFileName;
         }
-        return this.getReq().params.appFileName;
+        return this.getReq()!.params.appFileName;
     }
 
     getEnv(): string {
         if (this.options.env) {
             return this.options.env;
         }
-        return this.getReq().params.env;
+        return this.getReq()!.params.env;
     }
 
     getUri(): string {
-        return this.getReq().params['0'];
+        return this.getReq()!.params['0'];
     }
 
     getIp(): string {
-        return Context.getIpFromReq(this.getReq());
+        return Context.getIpFromReq(this.getReq()!);
     }
 
     getHost(): string {
-        return this.getReq().headers.host;
+        return this.getReq()!.headers.host;
     }
 
     getProtocol(): string {
-        return this.getReq().headers['x-forwarded-proto'] || 'http';
+        return this.getReq()!.headers['x-forwarded-proto'] || 'http';
     }
 
     setVersionHeaders(platformVersion: string, appVersion: string | null): void {
@@ -210,7 +210,7 @@ export class Context {
     }
 
     getUrl(): URL {
-        const req = this.getReq();
+        const req = this.getReq()!;
         var fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         // console.log('Context.getUrl', fullUrl);
         return new URL(fullUrl);

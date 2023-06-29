@@ -63,8 +63,7 @@ class Context {
         return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
-        if (!this.options.req)
-            throw new Error('getRes: no req');
+        // if (!this.options.req) throw new Error('getRes: no req');
         return this.options.req;
     }
     getRes() {

@@ -113,19 +113,20 @@ class ViewerModule {
     }
     async handleViewerPost(context, application) {
         // console.log('ViewerModule.handleViewerPost');
-        if (context.getReq().body.action === 'login') {
+        const req = context.getReq();
+        if (req.body.action === 'login') {
             await this.loginPost(context, application);
         }
         else {
             if (application.isAuthentication() &&
-                !(context.getReq().session.user &&
-                    context.getReq().session.user[context.getRoute()])) {
+                !(req.session.user &&
+                    req.session.user[context.getRoute()])) {
                 throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
             }
-            if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
-                throw new Error(`unknown action: ${context.getReq().body.action}`);
+            if (ACTIONS.indexOf(req.body.action) === -1) {
+                throw new Error(`unknown action: ${req.body.action}`);
             }
-            return await this[context.getReq().body.action](context, application);
+            return await this[req.body.action](context, application);
         }
     }
     async loginPost(context, application) {

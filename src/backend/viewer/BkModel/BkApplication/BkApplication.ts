@@ -448,12 +448,12 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     broadcastDomesticResultToClients(context: Context, result: Result): void {
         console.log(
             'Application.broadcastDomesticResultToClients',
-            context.getReq().body.uuid,
+            context.getReq()!.body.uuid,
             result,
         );
-        if (!context.getReq().body.uuid) throw new Error('no uuid');
+        if (!context.getReq()!.body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
-        const uuid = context.getReq().body.uuid;
+        const uuid = context.getReq()!.body.uuid;
         for (const webSocket of this.clients) {
             if (webSocket.uuid !== uuid) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
@@ -464,14 +464,14 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     broadcastForeignResultToClients(context: Context, result: Result): void {
         console.log(
             'Application.broadcastForeignResultToClients',
-            context.getReq().body.uuid,
+            context.getReq()!.body.uuid,
             result,
         );
-        if (!context.getReq().body.uuid) throw new Error('no uuid');
+        if (!context.getReq()!.body.uuid) throw new Error('no uuid');
         if (!result) throw new Error('no result');
         const fResult = this.composeForeignResult(result);
         if (fResult) {
-            const uuid = context.getReq().body.uuid;
+            const uuid = context.getReq()!.body.uuid;
             for (const webSocket of this.clients) {
                 if (webSocket.uuid !== uuid) {
                     webSocket.send(JSON.stringify({ type: 'result', data: fResult }));

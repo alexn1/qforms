@@ -81,13 +81,13 @@ export class ViewerModule {
             'ViewerModule.handleViewerGet',
             context.getDomain(),
             context.query,
-            context.getReq().url,
+            context.getReq()!.url,
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
 
         if (
             bkApplication.isAuthentication() &&
-            !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])
+            !(context.getReq()!.session.user && context.getReq()!.session.user[context.getRoute()])
         ) {
             await this.loginGet(context, bkApplication);
         } else {
@@ -169,28 +169,29 @@ export class ViewerModule {
 
     async handleViewerPost(context: Context, application: BkApplication) {
         // console.log('ViewerModule.handleViewerPost');
-        if (context.getReq().body.action === 'login') {
+        const req = context.getReq()!;
+        if (req.body.action === 'login') {
             await this.loginPost(context, application);
         } else {
             if (
                 application.isAuthentication() &&
                 !(
-                    context.getReq().session.user &&
-                    context.getReq().session.user[context.getRoute()]
+                    req.session.user &&
+                    req.session.user[context.getRoute()]
                 )
             ) {
                 throw new MyError({ message: 'Unauthorized', status: 401, context });
             }
-            if (ACTIONS.indexOf(context.getReq().body.action) === -1) {
-                throw new Error(`unknown action: ${context.getReq().body.action}`);
+            if (ACTIONS.indexOf(req.body.action) === -1) {
+                throw new Error(`unknown action: ${req.body.action}`);
             }
-            return await this[context.getReq().body.action](context, application);
+            return await this[req.body.action](context, application);
         }
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
         console.log('ViewerModule.loginPost');
-        const req = context.getReq();
+        const req = context.getReq()!;
         const res = context.getRes();
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
         if (req.body.username === undefined) throw new Error('no username');
@@ -242,8 +243,8 @@ export class ViewerModule {
 
     // action (fill page)
     async page(context: Context, application: BkApplication) {
-        console.log('ViewerModule.page', context.getReq().body.page);
-        const req = context.getReq();
+        console.log('ViewerModule.page', context.getReq()!.body.page);
+        const req = context.getReq()!;
         const res = context.getRes();
         await application.connect(context);
         try {
@@ -259,8 +260,8 @@ export class ViewerModule {
 
     // action
     async select(context: Context, application: BkApplication) {
-        console.log('ViewerModule.select', context.getReq().body.page);
-        const req = context.getReq();
+        console.log('ViewerModule.select', context.getReq()!.body.page);
+        const req = context.getReq()!;
         const res = context.getRes();
         const start = Date.now();
         let dataSource: BkDataSource;
@@ -289,8 +290,8 @@ export class ViewerModule {
 
     // action
     async insert(context: Context, application: BkApplication) {
-        console.log('ViewerModule.insert', context.getReq().body.page);
-        const req = context.getReq();
+        console.log('ViewerModule.insert', context.getReq()!.body.page);
+        const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -318,8 +319,8 @@ export class ViewerModule {
 
     // action
     async update(context: Context, application: BkApplication) {
-        console.log('ViewerModule.update', context.getReq().body.page);
-        const req = context.getReq();
+        console.log('ViewerModule.update', context.getReq()!.body.page);
+        const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -347,8 +348,8 @@ export class ViewerModule {
 
     // action
     async _delete(context: Context, application: BkApplication) {
-        console.log('ViewerModule._delete', context.getReq().body.page);
-        const req = context.getReq();
+        console.log('ViewerModule._delete', context.getReq()!.body.page);
+        const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
@@ -376,8 +377,8 @@ export class ViewerModule {
 
     // action
     async rpc(context: Context, application: BkApplication) {
-        console.log('ViewerModule.rpc', context.getReq().body);
-        const req = context.getReq();
+        console.log('ViewerModule.rpc', context.getReq()!.body);
+        const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
         // await application.initContext(context);
@@ -420,7 +421,7 @@ export class ViewerModule {
     // action
     async logout(context: Context, application: BkApplication) {
         console.log('ViewerModule.logout');
-        const req = context.getReq();
+        const req = context.getReq()!;
         const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
             throw new Error(`no user for route ${context.getRoute()}`);
@@ -432,7 +433,7 @@ export class ViewerModule {
 
     // action
     async test(context: Context, application: BkApplication) {
-        console.log('ViewerModule.test', context.getReq().body);
+        console.log('ViewerModule.test', context.getReq()!.body);
         const req = context.getReq();
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);
