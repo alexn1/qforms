@@ -6,14 +6,11 @@ const Database_1 = require("../Database/Database");
 const common_1 = require("../../../common");
 const Helper_1 = require("../../../common/Helper");
 class Application extends Model_1.Model {
-    constructor() {
-        super(...arguments);
+    constructor(data) {
+        super(data, null);
         this.databases = [];
         this.dataSources = [];
     }
-    /* constructor(data) {
-        super(data);
-    } */
     init() {
         // console.log('Application.init');
         if (!this.data.theme)

@@ -10,9 +10,9 @@ export class Application extends Model<ApplicationData> {
     databases: Database[] = [];
     dataSources: DataSource[] = [];
 
-    /* constructor(data) {
-        super(data);
-    } */
+    constructor(data: ApplicationData) {
+        super(data, null);
+    }
 
     init() {
         // console.log('Application.init');

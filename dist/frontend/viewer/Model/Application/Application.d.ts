@@ -6,6 +6,7 @@ import { ApplicationData } from '../../../../data';
 export declare class Application extends Model<ApplicationData> {
     databases: Database[];
     dataSources: DataSource[];
+    constructor(data: ApplicationData);
     init(): void;
     createDatabases(): void;
     deinit(): void;

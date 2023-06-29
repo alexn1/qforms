@@ -7,7 +7,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;
     dataSources: DataSource[];
 
-    constructor(public data: T, public parent = null) {
+    constructor(public data: T, public parent) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
     }
