@@ -89,7 +89,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return this.appInfo.dirPath;
     }
 
-    getDistDirPath(): string {
+    getDistDirPath(): string | undefined {
         return this.appInfo.distDirPath;
     }
 
@@ -104,7 +104,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return text[lang];
     }
 
-    getVersion(): string {
+    getVersion(): string | null {
         return null;
     }
 
@@ -355,7 +355,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
     // to init custom context params before each request get/post
     async initContext(context: Context): Promise<void> {}
 
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | undefined): AppInfo {
         // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path.basename(path.dirname(filePath));
@@ -376,7 +376,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         };
     }
 
-    static async loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo> {
+    static async loadAppInfo(appFilePath: string, distDirPath: string | undefined): Promise<AppInfo> {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
@@ -398,7 +398,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return appInfos;
     }
 
-    getDataSource(name: string): BkDataSource {
+    getDataSource(name: string): BkDataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 
@@ -477,7 +477,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         }
     }
 
-    composeForeignResult(result: Result): Result {
+    composeForeignResult(result: Result): Result | null {
         let fResult: Result | null = null;
         for (const databaseName in result) {
             const database = this.findDatabase(databaseName);

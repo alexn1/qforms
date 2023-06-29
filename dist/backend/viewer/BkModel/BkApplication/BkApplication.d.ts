@@ -33,10 +33,10 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getScripts(context: Context): Promise<any[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
-    getDistDirPath(): string;
+    getDistDirPath(): string | undefined;
     getPublicDirPath(): string;
     getText(): any;
-    getVersion(): string;
+    getVersion(): string | null;
     fillAttributes(response: any): void;
     fill(context: Context): Promise<ApplicationData>;
     getClientUserFromServerUser(context: Context): Promise<any>;
@@ -57,10 +57,10 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo;
-    static loadAppInfo(appFilePath: string, distDirPath: string | null): Promise<AppInfo>;
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | undefined): AppInfo;
+    static loadAppInfo(appFilePath: string, distDirPath: string | undefined): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
-    getDataSource(name: string): BkDataSource;
+    getDataSource(name: string): BkDataSource | undefined;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
@@ -68,7 +68,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     removeClient(webSocket: any): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
-    composeForeignResult(result: Result): Result;
+    composeForeignResult(result: Result): Result | null;
     getTitle(context: Context): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;

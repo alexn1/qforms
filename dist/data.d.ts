@@ -17,7 +17,7 @@ export interface ApplicationData extends ModelData {
     logErrorUrl: string;
     versions: {
         platform: string;
-        app: string;
+        app: string | null;
     };
     nodeEnv: string;
     time: number;

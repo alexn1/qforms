@@ -98,7 +98,7 @@ export class BkModel extends BaseModel {
         return new Class(itemData, this);
     }
 
-    getDirPath(): string {
+    getDirPath(): string | null {
         return null;
     }
 

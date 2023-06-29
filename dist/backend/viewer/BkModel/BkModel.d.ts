@@ -13,6 +13,6 @@ export declare class BkModel extends BaseModel {
     createColItems(colName: string, context: Context): Promise<void>;
     createColItem(colName: string, itemData: any, context: Context): Promise<void>;
     createChildModel(colName: string, itemData: any): Promise<any>;
-    getDirPath(): string;
+    getDirPath(): string | null;
     rpc(name: string, context: Context): Promise<any>;
 }
