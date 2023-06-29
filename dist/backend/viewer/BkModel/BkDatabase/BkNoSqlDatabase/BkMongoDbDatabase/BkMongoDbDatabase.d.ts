@@ -16,13 +16,13 @@ export declare class BkMongoDbDatabase extends BkNoSqlDatabase<{
     private getDbLink;
     queryResult(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<any>;
+    } | null): Promise<any>;
     queryRows(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<Row[]>;
+    } | null): Promise<Row[]>;
     queryScalar(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<any>;
+    } | null): Promise<any>;
     getDefaultPort(): number;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;

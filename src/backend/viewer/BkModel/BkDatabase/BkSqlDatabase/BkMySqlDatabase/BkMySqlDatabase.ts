@@ -17,7 +17,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
 
         if (this.pool !== null) {
             await new Promise<void>((resolve) => {
-                this.pool.end(() => {
+                this.pool!.end(() => {
                     resolve();
                 });
             });
@@ -62,7 +62,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     async queryRows(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
         console.log('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase.checkParams(query, params);
@@ -88,7 +88,11 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
         });
     }
 
-    async queryResult(context, query, params = null): Promise<any> {
+    async queryResult(
+        context: Context,
+        query: string,
+        params: { [name: string]: any } | null = null,
+    ): Promise<any> {
         console.log('MySqlDatabase.queryResult', query, params);
         BkSqlDatabase.checkParams(query, params);
         const nest = false;
@@ -119,7 +123,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
             fieldCount[f.name]++;
             f.numb = fieldCount[f.name] - 1;
         }
-        const rows = [];
+        const rows: any[] = [];
         for (let i = 0; i < result.length; i++) {
             const r = result[i];
             const row = {};
@@ -202,7 +206,7 @@ export class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
                     reject(err);
                 } else {
                     //console.log('rows:', rows);
-                    const tables = rows.map((row) => row[fields[0].name]);
+                    const tables = rows.map((row) => row[fields![0].name]);
                     console.log('tables:', tables);
                     resolve(tables);
                 }
@@ -246,7 +250,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         });
     }
 
-    getColumnTypeByDataType(dataType): string {
+    getColumnTypeByDataType(dataType): string | null {
         switch (dataType) {
             case 'int(10) unsigned':
             case 'int unsigned':

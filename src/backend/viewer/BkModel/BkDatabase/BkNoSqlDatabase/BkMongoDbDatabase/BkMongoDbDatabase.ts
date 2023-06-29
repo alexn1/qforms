@@ -80,7 +80,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     async queryResult(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         const db = this.getDbLink(context);
 
@@ -98,7 +98,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     async queryRows(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
         console.log('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
@@ -115,7 +115,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     async queryScalar(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         const result = await this.queryResult(context, query, params);
 

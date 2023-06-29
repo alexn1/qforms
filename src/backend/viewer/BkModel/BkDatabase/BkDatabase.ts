@@ -58,7 +58,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
     async queryResult(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         throw new Error(`${this.constructor.name}.queryResult not implemented`);
     }
@@ -66,7 +66,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
     async queryRows(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
         throw new Error(`${this.constructor.name}.queryRows not implemented`);
     }
@@ -74,7 +74,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
     async queryScalar(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         throw new Error(`${this.constructor.name}.queryScalar not implemented`);
     }
@@ -116,11 +116,11 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return this.parent;
     }
 
-    findTable(name: string): BkTable {
+    findTable(name: string): BkTable | undefined {
         return this.tables.find((table) => table.getName() === name);
     }
 
-    findParam(name: string): BkParam {
+    findParam(name: string): BkParam | undefined {
         return this.params.find((param) => param.getName() === name);
     }
 

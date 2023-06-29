@@ -10,8 +10,10 @@ export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     static Pool_getConnection(pool: Pool): Promise<PoolConnection>;
     queryRows(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<Row[]>;
-    queryResult(context: any, query: any, params?: any): Promise<any>;
+    } | null): Promise<Row[]>;
+    queryResult(context: Context, query: string, params?: {
+        [name: string]: any;
+    } | null): Promise<any>;
     _getRows(result: any, fields: any): any[];
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
@@ -20,7 +22,7 @@ export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     static typeCast(field: any, next: any): any;
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
-    getColumnTypeByDataType(dataType: any): string;
+    getColumnTypeByDataType(dataType: any): string | null;
     insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<any>;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
