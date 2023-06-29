@@ -33,7 +33,7 @@ export class PageController<
         model: Page,
         parent: ApplicationController,
         id: string,
-        options: PageOptions = null,
+        options: PageOptions | null = null,
     ): PageController {
         // console.log('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
@@ -90,7 +90,7 @@ export class PageController<
     onOpenPageClick = async (e) => {
         const name = this.getModel().getName();
         const key = this.getModel().getKey();
-        const link = this.createOpenInNewLink(name, key);
+        const link = this.createOpenInNewLink(name, key!);
         // console.log('link', link);
         window.open(link, '_blank');
     };
@@ -218,7 +218,7 @@ export class PageController<
     getTitle(): string {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart: string = null;
+        let keyPart: string | null = null;
         if (key) {
             const arr = JSON.parse(key);
             if (arr.length === 1 && typeof arr[0] === 'number') {

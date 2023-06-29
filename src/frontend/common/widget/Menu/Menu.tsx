@@ -55,7 +55,7 @@ export class Menu extends ReactComponent {
             <div className="Menu">
                 {this.props.items &&
                     this.props.items.map((menu) => (
-                        <div key={menu.name} className={this.state[menu.name] ? 'active' : null}>
+                        <div key={menu.name} className={this.state[menu.name] ? 'active' : undefined}>
                             <button
                                 data-menu={menu.name}
                                 onClick={this.onMenuClick}

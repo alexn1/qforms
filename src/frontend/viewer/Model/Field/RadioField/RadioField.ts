@@ -47,7 +47,7 @@ export class RadioField extends Field {
 
     findRowByRawValue(rawValue: JSONString): RawRow | undefined {
         const valueColumn = this.getAttr('valueColumn');
-        return this.getDataSource()
+        return this.getDataSource()!
             .getRows()
             .find((row) => row[valueColumn] === rawValue);
     }

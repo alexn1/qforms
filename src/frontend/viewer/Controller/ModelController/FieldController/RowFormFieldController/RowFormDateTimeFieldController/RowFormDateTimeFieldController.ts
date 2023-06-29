@@ -6,7 +6,7 @@ import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController<DateTimeField> {
     widget2: any;
-    defaultValue: number;
+    defaultValue: number = 0;
     state: any;
     getHighlightedDate: any;
     getSelectToday: any;
@@ -15,7 +15,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
     constructor(model, parent) {
         super(model, parent);
         this.widget2 = null;
-        this.defaultValue = 0;
+        // this.defaultValue = 0;
         this.state.parseError2 = null;
         this.state.error2 = null;
     }
@@ -155,7 +155,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
     setDefaultValue2(defaultValue) {
         // console.log('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
-            this.defaultValue = TimeBox.getIntegerValue(defaultValue);
+            this.defaultValue = TimeBox.getIntegerValue(defaultValue)!;
         } else {
             if (defaultValue >= 24 * 60) throw new Error(`wrong default value: ${defaultValue}`);
             this.defaultValue = defaultValue;

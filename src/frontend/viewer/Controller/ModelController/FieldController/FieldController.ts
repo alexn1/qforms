@@ -71,7 +71,7 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 
     getViewStyle(row) {
-        return null;
+        return undefined;
     }
 
     async openPage(options: OpenPageOptions) {

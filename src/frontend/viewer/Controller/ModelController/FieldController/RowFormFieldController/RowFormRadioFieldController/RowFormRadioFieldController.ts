@@ -22,7 +22,7 @@ export class RowFormRadioFieldController extends RowFormFieldController<RadioFie
     }
 
     getRows() {
-        return this.getModel().getDataSource().getRows();
+        return this.getModel().getDataSource()!.getRows();
     }
 }
 

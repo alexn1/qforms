@@ -1,5 +1,7 @@
+import { Helper } from '../../Helper';
 import { ReactComponent } from '../../ReactComponent';
 import { Button } from '../Button';
+
 import './DropdownButton.less';
 
 export class DropdownButton extends ReactComponent {
@@ -74,7 +76,7 @@ export class DropdownButton extends ReactComponent {
                                 }`}
                                 key={action.name}
                                 data-action={action.name}
-                                onClick={action.enabled !== false ? this.onLiClick : null}>
+                                onClick={action.enabled !== false ? this.onLiClick : undefined}>
                                 {action.title}
                             </li>
                         ))}
@@ -84,7 +86,4 @@ export class DropdownButton extends ReactComponent {
     }
 }
 
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DropdownButton = DropdownButton;
-}
+Helper.registerGlobalClass(DropdownButton);

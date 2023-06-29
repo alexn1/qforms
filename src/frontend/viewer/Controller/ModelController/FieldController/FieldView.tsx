@@ -1,9 +1,9 @@
+import { CSSProperties } from 'react';
 import { ModelView } from '../ModelView';
 import { FieldController } from './FieldController';
-import { Field } from '../../../Model/Field/Field';
 
 export class FieldView<T extends FieldController> extends ModelView<T> {
-    getStyle(row) {
+    getStyle(row): CSSProperties | undefined {
         return this.getCtrl().getViewStyle(row);
     }
 }

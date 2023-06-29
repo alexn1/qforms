@@ -212,7 +212,7 @@ export class DatePicker extends ReactComponent {
                     {Array.from(Array(6).keys()).map((i) => (
                         <tr key={i}>
                             {Array.from(Array(7).keys()).map((j) => {
-                                const classList = [];
+                                const classList: string[] = [];
                                 if (j === 5 || j === 6) classList.push('weekend');
                                 if (this.isSelectToday() && date.getTime() === today.getTime())
                                     classList.push('today');

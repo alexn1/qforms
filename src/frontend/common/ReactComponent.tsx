@@ -128,7 +128,7 @@ export class ReactComponent<
 
     enable() {
         if (!this.state) throw new Error('no state');
-        this.setState({ disabled: undefined });
+        this.setState({ disabled: undefined } as any);
     }
 }
 

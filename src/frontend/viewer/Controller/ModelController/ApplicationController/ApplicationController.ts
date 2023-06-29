@@ -6,6 +6,7 @@ import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { QueryParams } from '../../../../../types';
+import { Key } from 'react';
 
 export interface OpenPageOptions {
     name: string;
@@ -22,7 +23,7 @@ export interface OpenPageOptions {
 
 export class ApplicationController extends ModelController<Application> {
     lastId: number = 0;
-    activePage: PageController = null; // active non modal page
+    activePage: PageController | null = null; // active non modal page
     modals: any[] = [];
     statusbar: any = null;
     homePageName: string | null = null;
@@ -112,7 +113,7 @@ export class ApplicationController extends ModelController<Application> {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
             div.className = 'version-notification';
-            document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
+            document.querySelector(`.${this.getView().getCssBlockName()}__body`)!.append(div);
         } else {
             // console.log(`version notification already exists`);
         }
@@ -207,7 +208,7 @@ export class ApplicationController extends ModelController<Application> {
         this.frontHostApp.setDocumentTitle(this.getTitle());
     }
 
-    findPageControllerByPageNameAndKey(pageName, key): PageController {
+    findPageControllerByPageNameAndKey(pageName: string, key: Key | null): PageController | null {
         if (
             this.activePage &&
             this.activePage.model.getName() === pageName &&

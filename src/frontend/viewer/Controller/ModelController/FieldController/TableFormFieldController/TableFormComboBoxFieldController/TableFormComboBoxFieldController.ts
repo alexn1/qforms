@@ -8,16 +8,16 @@ export class TableFormComboBoxFieldController extends TableFormFieldController<C
     init() {
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();
-        dataSource.on('insert', this.onListUpdate);
-        dataSource.on('update', this.onListUpdate);
-        dataSource.on('delete', this.onListUpdate);
+        dataSource!.on('insert', this.onListUpdate);
+        dataSource!.on('update', this.onListUpdate);
+        dataSource!.on('delete', this.onListUpdate);
     }
 
     deinit() {
         const dataSource = this.getModel().getComboBoxDataSource();
-        dataSource.off('insert', this.onListUpdate);
-        dataSource.off('update', this.onListUpdate);
-        dataSource.off('delete', this.onListUpdate);
+        dataSource!.off('insert', this.onListUpdate);
+        dataSource!.off('update', this.onListUpdate);
+        dataSource!.off('delete', this.onListUpdate);
         super.deinit();
     }
 

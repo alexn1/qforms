@@ -35,7 +35,7 @@ export class Button extends ReactComponent {
 
     getStyle() {
         return {
-            display: !this.isVisible() ? 'none' : null,
+            display: !this.isVisible() ? 'none' : undefined,
             width: this.props.width,
         };
     }

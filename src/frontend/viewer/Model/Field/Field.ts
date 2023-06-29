@@ -198,8 +198,8 @@ export class Field extends Model {
             const columnName = this.getAttr('column');
             if (columnName && this.getForm().hasDefaultPersistentDataSource()) {
                 const ds = this.getForm().getDataSource('default');
-                if (ds.getAttr('table')) {
-                    const column = ds.getTable().getColumn(columnName);
+                if (ds!.getAttr('table')) {
+                    const column = ds!.getTable().getColumn(columnName);
                     return column.getCaption();
                 }
             }

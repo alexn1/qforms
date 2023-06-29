@@ -137,7 +137,7 @@ export class TimeBox extends ReactComponent {
         return '';
     }
 
-    static getIntegerValue(stringValue) {
+    static getIntegerValue(stringValue: string) {
         // console.log('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '') return null;

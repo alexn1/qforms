@@ -12,7 +12,7 @@ export class FormView<TFormController extends FormController> extends ModelView<
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
-            const result = await ctrl.onActionClick(name, ctrl.getActiveRow());
+            const result = await ctrl.onActionClick(name, ctrl.getActiveRow()!);
             if (!result) {
                 throw new Error(`no handler for action '${name}'`);
             }

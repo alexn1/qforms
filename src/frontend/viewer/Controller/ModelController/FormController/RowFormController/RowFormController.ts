@@ -134,7 +134,7 @@ export class RowFormController extends FormController<RowForm> {
 
     onDiscardClick = () => {
         console.log('RowFormController.onDiscardClick', this.model.getFullName());
-        const changedFields = [];
+        const changedFields: string[] = [];
         for (const name in this.fields) {
             const field = this.fields[name];
             if (field.isChanged() || !field.isValid()) {

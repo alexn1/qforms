@@ -44,7 +44,7 @@ export class CheckBoxListField extends Field {
     }
 
     findRowByRawValue(rawValue: JSONString): RawRow | undefined {
-        return this.getDataSource()
+        return this.getDataSource()!
             .getRows()
             .find((row) => row[this.data.valueColumn] === rawValue);
     }

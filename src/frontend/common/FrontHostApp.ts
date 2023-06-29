@@ -114,11 +114,11 @@ export class FrontHostApp {
     }
 
     static startWait() {
-        document.querySelector('html').classList.add('wait');
+        document.querySelector('html')!.classList.add('wait');
     }
 
     static stopWait() {
-        document.querySelector('html').classList.remove('wait');
+        document.querySelector('html')!.classList.remove('wait');
     }
 
     async onWindowPopState(e) {
@@ -163,7 +163,7 @@ export class FrontHostApp {
         }
     }
 
-    createLink(params = null): string {
+    createLink(params: {[name: string]: any} | null = null): string {
         const path =
             typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {
@@ -207,7 +207,7 @@ export class FrontHostApp {
         return Object.fromEntries(this.getOptions().url.searchParams);
     }
 
-    getCookie(name: string): string {
+    getCookie(name: string): string | undefined {
         if (typeof window === 'object') {
             return Helper.getCookie(name);
         }

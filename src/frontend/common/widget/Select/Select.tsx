@@ -25,7 +25,7 @@ export class Select extends ReactComponent {
 
     getInitialValue() {
         // console.log('Select.getInitialValue', this.props.value);
-        let value = null;
+        let value: any = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
             const item = this.getItems().find((item) => item.value === this.props.value);

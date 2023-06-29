@@ -44,7 +44,7 @@ export class ComboBoxField extends Field {
     }
 
     findRowByRawValue(rawValue: JSONString): RawRow | undefined {
-        return this.getComboBoxDataSource()
+        return this.getComboBoxDataSource()!
             .getRows()
             .find((row) => row[this.data.valueColumn] === rawValue);
     }

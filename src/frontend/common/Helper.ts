@@ -97,9 +97,9 @@ export class Helper {
         return value;
     }
 
-    static createReactComponent(rootElement: Element, type, props = {}, children?): ReactComponent {
+    static createReactComponent(rootElement: Element, type, props = {}, children?): ReactComponent | undefined {
         // console.log('Helper.createReactComponent', rootElement, type);
-        let component: ReactComponent;
+        let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
                 type,
@@ -121,9 +121,9 @@ export class Helper {
         type,
         props = {},
         children?,
-    ): ReactComponent {
+    ): ReactComponent | undefined {
         // console.log('Helper.createReactComponent2', rootElement, type);
-        let component: ReactComponent;
+        let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
                 type,
@@ -349,7 +349,7 @@ export class Helper {
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
 
-    static getCookie(name: string): string {
+    static getCookie(name: string): string | undefined {
         var nameEQ = name + '=';
         var ca = document.cookie.split(';');
         for (var i = 0; i < ca.length; i++) {

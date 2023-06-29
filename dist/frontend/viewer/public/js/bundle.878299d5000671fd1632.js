@@ -32270,7 +32270,7 @@ class Helper {
     }
     static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
-        let component;
+        let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
@@ -32281,7 +32281,7 @@ class Helper {
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent2', rootElement, type);
-        let component;
+        let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
@@ -33499,7 +33499,7 @@ class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
     }
     getStyle() {
         return {
-            display: !this.isVisible() ? 'none' : null,
+            display: !this.isVisible() ? 'none' : undefined,
             width: this.props.width,
         };
     }
@@ -33986,14 +33986,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "DropdownButton": () => (/* binding */ DropdownButton)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
-/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
+/* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _DropdownButton_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DropdownButton.less */ "./src/frontend/common/widget/DropdownButton/DropdownButton.less");
 
 
 
 
-class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
+
+class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onButtonClick = (e) => {
@@ -34038,14 +34040,11 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactC
         return !this.state.disabled;
     }
     render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
-                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : null }, { children: action.title }), action.name))) }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.state.open && 'show'}` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__button`], onClick: this.onButtonClick, onBlur: this.onButtonBlur, enabled: this.isEnabled(), onKeyDown: this.onKeyDown }, { children: this.props.title || this.props.children })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", Object.assign({ className: `${this.getCssBlockName()}__dropdown`, onMouseDown: this.onUlMouseDown }, { children: this.props.actions &&
+                        this.props.actions.map((action) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("li", Object.assign({ className: `${this.getCssBlockName()}__item ${action.enabled === false ? 'disabled' : ''}`, "data-action": action.name, onClick: action.enabled !== false ? this.onLiClick : undefined }, { children: action.title }), action.name))) }))] })));
     }
 }
-if (typeof window === 'object') {
-    // @ts-ignore
-    window.DropdownButton = DropdownButton;
-}
+_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DropdownButton);
 
 
 /***/ }),
@@ -34807,7 +34806,7 @@ class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+                this.props.items.map((menu) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
     }
 }
 if (typeof window === 'object') {
@@ -35496,10 +35495,10 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
     renderTitles() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : undefined, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name)));
+        return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : undefined }, { children: tab.content }), tab.name)));
     }
     render() {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));
@@ -36972,7 +36971,7 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         return stringValue;
     }
     getViewStyle(row) {
-        return null;
+        return undefined;
     }
     async openPage(options) {
         return await this.getParent().openPage(options);
@@ -37134,7 +37133,7 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
         dataSource.on('delete', this.onListDelete);
     }
     deinit() {
-        const dataSource = this.model.getDataSource();
+        const dataSource = this.getModel().getDataSource();
         dataSource.off('insert', this.onListInsert);
         dataSource.off('update', this.onListUpdate);
         dataSource.off('delete', this.onListDelete);
@@ -37144,7 +37143,7 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
         return super.getViewClass() || _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldView;
     }
     getRows() {
-        return this.model.getDataSource().getRows();
+        return this.getModel().getDataSource().getRows();
     }
     getValueForWidget() {
         // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
@@ -37292,7 +37291,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
-                const selectedKey = id ? JSON.stringify([id]) : null;
+                const selectedKey = id ? JSON.stringify([id]) : undefined;
                 await this.openPage({
                     name: this.getModel().getAttr('itemSelectPage'),
                     selectMode: true,
@@ -37510,6 +37509,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.defaultValue = 0;
         this.onView2Create = (widget2) => {
             // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
             this.widget2 = widget2;
@@ -37593,7 +37593,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
             }
         };
         this.widget2 = null;
-        this.defaultValue = 0;
+        // this.defaultValue = 0;
         this.state.parseError2 = null;
         this.state.error2 = null;
     }
@@ -38223,7 +38223,7 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         const ctrl = this.getCtrl();
         const row = ctrl.getRow();
         const value = ctrl.getValueForWidget();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : null } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
     }
     componentDidMount() {
         // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().model.getFullName());

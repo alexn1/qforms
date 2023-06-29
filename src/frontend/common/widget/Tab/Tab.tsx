@@ -46,7 +46,7 @@ export class Tab extends ReactComponent {
         return this.props.tabs.map((tab, i) => (
             <li
                 key={tab.name}
-                className={i === this.getActive() ? 'active' : null}
+                className={i === this.getActive() ? 'active' : undefined}
                 onMouseDown={this.onLiMouseDown}
                 onClick={this.onLiClick}
                 data-i={i}>
@@ -58,7 +58,7 @@ export class Tab extends ReactComponent {
 
     renderContents() {
         return this.props.tabs.map((tab, i) => (
-            <div key={tab.name} className={i === this.getActive() ? 'active' : null}>
+            <div key={tab.name} className={i === this.getActive() ? 'active' : undefined}>
                 {tab.content}
             </div>
         ));

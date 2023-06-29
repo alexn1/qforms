@@ -115,7 +115,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return this.getModel().getAttr('visible') === 'true';
     }
 
-    getActiveRow(): RawRow {
+    getActiveRow(): RawRow | null {
         throw new Error('FormController.getActiveRow not implemented');
     }
 

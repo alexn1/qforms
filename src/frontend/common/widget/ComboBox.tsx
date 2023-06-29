@@ -9,7 +9,7 @@ export class ComboBox extends ReactComponent {
     }
 
     getInitialValue() {
-        let value = null;
+        let value: any = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
             const item = this.props.items.find((item) => item.value === this.props.value);

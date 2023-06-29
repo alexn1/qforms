@@ -8,16 +8,16 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.model.getComboBoxDataSource();
-        dataSource.on('insert', this.onListInsert);
-        dataSource.on('update', this.onListUpdate);
-        dataSource.on('delete', this.onListDelete);
+        dataSource!.on('insert', this.onListInsert);
+        dataSource!.on('update', this.onListUpdate);
+        dataSource!.on('delete', this.onListDelete);
     }
 
     deinit() {
         const dataSource = this.model.getComboBoxDataSource();
-        dataSource.off('insert', this.onListInsert);
-        dataSource.off('update', this.onListUpdate);
-        dataSource.off('delete', this.onListDelete);
+        dataSource!.off('insert', this.onListInsert);
+        dataSource!.off('update', this.onListUpdate);
+        dataSource!.off('delete', this.onListDelete);
         super.deinit();
     }
 
@@ -38,7 +38,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     }
 
     getRows() {
-        return this.model.getComboBoxDataSource().getRows();
+        return this.model.getComboBoxDataSource()!.getRows();
     }
 
     getPlaceholder() {
@@ -114,7 +114,7 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         if (e.button === 0) {
             e.preventDefault();
             const id = this.getValue();
-            const selectedKey = id ? JSON.stringify([id]) : null;
+            const selectedKey = id ? JSON.stringify([id]) : undefined;
             await this.openPage({
                 name: this.getModel().getAttr('itemSelectPage'),
                 selectMode: true,

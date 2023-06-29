@@ -104,7 +104,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
                         type="file"
                         onChange={this.onChange}
                         disabled={!ctrl.isEditable()}
-                        style={{ display: !value ? 'none' : null }}
+                        style={{ display: !value ? 'none' : undefined }}
                     />
                     {!!value && (
                         <Button onClick={this.onClearClick} enabled={ctrl.isEditable()}>
@@ -131,4 +131,3 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
         this.getInput().click();
     };
 }
-

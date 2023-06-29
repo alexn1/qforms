@@ -16,7 +16,7 @@ export class TableFormController extends FormController<TableForm> {
     state: FormControllerState = {
         updated: Date.now(),
     };
-    grid: Grid = null;
+    grid: Grid | null = null;
 
     getViewClass() {
         return super.getViewClass() || TableFormView;
@@ -62,13 +62,13 @@ export class TableFormController extends FormController<TableForm> {
         console.log(
             'TableFormController.onDeleteClick',
             this.model.getFullName(),
-            this.grid.getActiveRowKey(),
+            this.grid!.getActiveRowKey(),
         );
         const result = await this.getApp().confirm({
             message: this.model.getApp().getText().form.areYouSure,
         });
         if (result) {
-            await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
+            await this.model.getDefaultDataSource().delete(this.grid!.getActiveRowKey());
         }
     };
 
@@ -262,8 +262,8 @@ export class TableFormController extends FormController<TableForm> {
         await this.getPage().rerender();
     };
 
-    getActiveRow(): RawRow {
-        const key = this.grid.getActiveRowKey();
+    getActiveRow(): RawRow | null {
+        const key = this.grid!.getActiveRowKey();
         if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
         return this.model.getDefaultDataSource().getRow(key);
     }
