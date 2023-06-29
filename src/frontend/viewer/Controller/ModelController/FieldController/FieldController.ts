@@ -7,6 +7,8 @@ import {
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
 import { Helper } from '../../../../common/Helper';
+import { CSSProperties } from 'react';
+import { RawRow } from '../../../../../types';
 
 export class FieldController<TField extends Field = Field> extends ModelController<TField> {
     static create(model: Field, parent: FormController): FieldController {
@@ -70,7 +72,7 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return stringValue;
     }
 
-    getViewStyle(row) {
+    getViewStyle(row: RawRow): CSSProperties | undefined {
         return undefined;
     }
 

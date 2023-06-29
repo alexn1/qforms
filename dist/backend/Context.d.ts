@@ -8,7 +8,7 @@ declare module 'express' {
     }
 }
 export interface ContextOptions {
-    domain?: string;
+    domain?: string | null;
     req?: Request;
     res?: Response;
     module?: string;
