@@ -21,7 +21,7 @@ export interface ApplicationData extends ModelData {
         platform: string;
         app: string | null;
     };
-    nodeEnv: string;
+    nodeEnv: string | null;
     time: number;
     uuid: string;
     user: {
