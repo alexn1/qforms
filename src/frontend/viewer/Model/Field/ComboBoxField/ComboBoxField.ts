@@ -4,7 +4,7 @@ import { JSONString, RawRow } from '../../../../../types';
 
 export class ComboBoxField extends Field {
     getDisplayValue(row) {
-        let value = null;
+        let value: any = null;
         if (row[this.data.displayColumn]) {
             try {
                 value = Helper.decodeValue(row[this.data.displayColumn]);
@@ -43,7 +43,7 @@ export class ComboBoxField extends Field {
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
     }
 
-    findRowByRawValue(rawValue: JSONString): RawRow {
+    findRowByRawValue(rawValue: JSONString): RawRow | undefined {
         return this.getComboBoxDataSource()
             .getRows()
             .find((row) => row[this.data.valueColumn] === rawValue);

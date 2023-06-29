@@ -3,8 +3,8 @@ import { Helper } from '../../../../common';
 import { JSONString, RawRow } from '../../../../../types';
 
 export class CheckBoxListField extends Field {
-    getDisplayValue(row) {
-        let value = null;
+    getDisplayValue(row: RawRow) {
+        let value: any = null;
         if (row[this.data.displayColumn]) {
             try {
                 value = Helper.decodeValue(row[this.data.displayColumn]);
@@ -43,7 +43,7 @@ export class CheckBoxListField extends Field {
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
     }
 
-    findRowByRawValue(rawValue: JSONString): RawRow {
+    findRowByRawValue(rawValue: JSONString): RawRow | undefined {
         return this.getDataSource()
             .getRows()
             .find((row) => row[this.data.valueColumn] === rawValue);

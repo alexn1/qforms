@@ -34,7 +34,7 @@ export interface ViewerFrontHostAppOptions extends FrontHostAppOptions {
 }
 
 export class ViewerFrontHostApp extends FrontHostApp {
-    applicationController: ApplicationController = null;
+    applicationController: ApplicationController | null = null;
 
     constructor(protected options: ViewerFrontHostAppOptions) {
         if (!options.data) throw new Error('ViewerFrontHostApp: no data');
@@ -73,7 +73,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
 
     async onWindowPopState(e) {
         // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
-        await this.applicationController.onWindowPopState(e);
+        await this.applicationController!.onWindowPopState(e);
     }
 
     logError(err: Error) {
@@ -113,6 +113,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root) throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new AlertController({
                         ...options,
@@ -147,6 +148,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root) throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new ConfirmController({
                         ...options,

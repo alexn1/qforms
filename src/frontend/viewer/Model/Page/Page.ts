@@ -102,7 +102,7 @@ export class Page extends Model {
         }
     }
 
-    getKey(): Key {
+    getKey(): Key | null {
         for (const form of this.forms) {
             if (form.getClassName() === 'RowForm') {
                 return form.getKey();

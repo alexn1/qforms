@@ -16,15 +16,15 @@ import {
 import { Result } from '../../../../Result';
 
 export class DataSource extends Model {
-    rows: RawRow[] = null;
-    rowsByKey: { [key: Key]: RawRow } = null;
+    rows: RawRow[] | null = null;
+    rowsByKey: { [key: Key]: RawRow } | null = null;
     news: RawRow[] = [];
     changes = new Map<RawRow, RawRow>();
     frame: number = 1;
-    count: number = null;
+    count: number | null = null;
     lastFrame: number = 1;
 
-    constructor(data, parent) {
+    constructor(data, parent: Model) {
         super(data, parent);
         if (data.count !== undefined) {
             this.count = data.count;
@@ -60,29 +60,29 @@ export class DataSource extends Model {
     }
 
     addRow(row: RawRow) {
-        this.rows.push(row);
+        this.rows!.push(row);
         const key = this.getRowKey(row);
-        this.rowsByKey[key] = row;
+        this.rowsByKey![key!] = row;
     }
 
     addRows(rows: RawRow[]) {
         for (let i = 0; i < rows.length; i++) {
-            this.rows.push(rows[i]);
+            this.rows!.push(rows[i]);
         }
         this.fillRowsByKey();
     }
 
     getRowsLength(): number {
-        return this.rows.length;
+        return this.rows!.length;
     }
 
     fillRowsByKey() {
         // console.log('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
-        for (let i = 0; i < this.rows.length; i++) {
-            const row = this.rows[i];
+        for (let i = 0; i < this.rows!.length; i++) {
+            const row = this.rows![i];
             const key = this.getRowKey(row);
-            this.rowsByKey[key] = row;
+            this.rowsByKey[key!] = row;
         }
         // console.log('this.rowsByKey:', this.getFullName(), this.rowsByKey);
     }
@@ -98,14 +98,14 @@ export class DataSource extends Model {
     }*/
 
     discardRowColumn(row: RawRow, column: string) {
-        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
-            delete this.changes.get(row)[column];
+        if (this.changes.has(row) && this.changes.get(row)![column] !== undefined) {
+            delete this.changes.get(row)![column];
         }
     }
 
     changeRowColumn(row: RawRow, column: string, newValue: JSONString) {
         if (!this.changes.has(row)) this.changes.set(row, {} as RawRow);
-        this.changes.get(row)[column] = newValue;
+        this.changes.get(row)![column] = newValue;
     }
 
     setValue(row: RawRow, column: string, value: JSONString) {
@@ -126,7 +126,7 @@ export class DataSource extends Model {
         } else {
             this.discardRowColumn(row, column);
         }
-        if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length)
+        if (this.changes.has(row) && !Object.keys(this.changes.get(row)!).length)
             this.changes.delete(row);
         // console.log('changes:', this.changes);
     }
@@ -148,8 +148,8 @@ export class DataSource extends Model {
     getValue(row: RawRow, column: string): JSONString {
         // console.log('DataSource.getValue', column);
         let value: JSONString;
-        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
-            value = this.changes.get(row)[column];
+        if (this.changes.has(row) && this.changes.get(row)![column] !== undefined) {
+            value = this.changes.get(row)![column];
         } else {
             value = row[column];
         }
@@ -169,7 +169,7 @@ export class DataSource extends Model {
         }, {});
     }
 
-    getRowKey(row: RawRow): Key {
+    getRowKey(row: RawRow): Key | null {
         // console.log('DataSource.getRowKey', row);
         const arr: KeyArray = [];
         for (const column of this.data.keyColumns) {
@@ -189,15 +189,15 @@ export class DataSource extends Model {
     removeRow(key: Key) {
         const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
-        const i = this.rows.indexOf(row);
+        const i = this.rows!.indexOf(row);
         if (i === -1) throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
-        this.rows.splice(i, 1);
-        delete this.rowsByKey[key];
+        this.rows!.splice(i, 1);
+        delete this.rowsByKey![key];
     }
 
     newRow(row: RawRow) {
         console.log('DataSource.newRow', this.getFullName(), row);
-        if (this.rows.length > 0) {
+        if (this.rows!.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
         this.news.push(row);
@@ -205,7 +205,7 @@ export class DataSource extends Model {
 
     getSingleRow(withChanges = false): RawRow {
         if (this.news[0]) return this.news[0];
-        const row = this.rows[0];
+        const row = this.rows![0];
         if (!row) throw new Error('no single row');
         if (withChanges) {
             return this.getRowWithChanges(row);
@@ -214,7 +214,7 @@ export class DataSource extends Model {
     }
 
     getForm(): Form | null {
-        return this.getParent() instanceof Form ? this.getParent() as Form : null;
+        return this.getParent() instanceof Form ? (this.getParent() as Form) : null;
     }
 
     getPage(): Page | null {
@@ -241,8 +241,8 @@ export class DataSource extends Model {
         return this.getName();
     }*/
 
-    getRow(key: Key): RawRow {
-        return this.rowsByKey[key] || null;
+    getRow(key: Key): RawRow | null {
+        return this.rowsByKey![key] || null;
     }
 
     /*getRowByKey(key) {
@@ -250,11 +250,12 @@ export class DataSource extends Model {
     }*/
 
     getRows(): RawRow[] {
+        if (!this.rows) throw new Error('no rows');
         return this.rows;
     }
 
     getRowByIndex(i: number): RawRow {
-        return this.rows[i];
+        return this.rows![i];
     }
 
     discard() {
@@ -282,7 +283,7 @@ export class DataSource extends Model {
     getChangesByKey(): ChangesByKey {
         const changes: ChangesByKey = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)] = this.changes.get(row);
+            changes[this.getRowKey(row)!] != this.changes.get(row);
         }
         return changes;
     }
@@ -312,8 +313,8 @@ export class DataSource extends Model {
         const newKey = this.getRowKey(newValues);
         DataSource.copyNewValues(row, newValues); // copy new values to original row object
         if (key !== newKey) {
-            delete this.rowsByKey[key];
-            this.rowsByKey[newKey] = row;
+            delete this.rowsByKey![key];
+            this.rowsByKey![newKey!] = row;
         }
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
@@ -421,7 +422,7 @@ export class DataSource extends Model {
             // console.log('key:', key);
             const row = this.getRow(key as Key);
             // console.log('row:', row);
-            const newValues = this.getRowWithChanges(row);
+            const newValues = this.getRowWithChanges(row!);
             // console.log('newValues:', newValues);
             const newKey = this.getRowKey(newValues);
             // console.log('newKey:', newKey);
@@ -575,7 +576,7 @@ export class DataSource extends Model {
     getFramesCount(): number {
         if (this.count === null) throw new Error(`${this.getFullName()}: no count info`);
         if (this.count === 0) return 1;
-        if (this.getLimit()) return Math.ceil(this.count / this.getLimit());
+        if (this.getLimit()) return Math.ceil(this.count / this.getLimit()!);
         return 1;
     }
 

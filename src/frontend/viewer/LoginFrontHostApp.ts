@@ -16,6 +16,7 @@ export class LoginFrontHostApp extends FrontHostApp {
         const rootElement = document.querySelector(
             `.${loginController.getViewClassCssBlockName()}__root`,
         );
+        if (!rootElement) throw new Error('no root element');
         const loginView = Helper.createReactComponent(rootElement, loginController.getViewClass(), {
             ctrl: loginController,
         });

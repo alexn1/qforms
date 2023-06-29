@@ -35,7 +35,7 @@ export class Result {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
         if (!result[dName][tName].insert) result[dName][tName].insert = [];
-        result[dName][tName].insert.push(key);
+        result[dName][tName].insert!.push(key);
     }
 
     static addInsertExToResult(
@@ -48,7 +48,7 @@ export class Result {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
         if (!result[dName][tName].insertEx) result[dName][tName].insertEx = new InsertExResult();
-        result[dName][tName].insertEx[key] = row;
+        result[dName][tName].insertEx![key] = row;
     }
 
     static addUpdateToResult(
@@ -62,7 +62,7 @@ export class Result {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
         if (!result[dName][tName].update) result[dName][tName].update = new UpdateResult();
-        result[dName][tName].update[oldKey] = newKey;
+        result[dName][tName].update![oldKey] = newKey;
     }
 
     static addUpdateExToResult(
@@ -76,14 +76,14 @@ export class Result {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
         if (!result[dName][tName].updateEx) result[dName][tName].updateEx = new UpdateEx();
-        result[dName][tName].updateEx[oldKey] = row;
+        result[dName][tName].updateEx![oldKey] = row;
     }
 
     static addDeleteToResult(result: Result, dName: string, tName: string, key: Key): void {
         if (!result[dName]) result[dName] = new DatabaseResult();
         if (!result[dName][tName]) result[dName][tName] = new TableResult();
         if (!result[dName][tName].delete) result[dName][tName].delete = [];
-        result[dName][tName].delete.push(key);
+        result[dName][tName].delete!.push(key);
     }
 
     static addTableToResult(

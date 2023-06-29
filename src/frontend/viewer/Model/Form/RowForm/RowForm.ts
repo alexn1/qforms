@@ -59,7 +59,7 @@ export class RowForm extends Form {
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
             fields.forEach((name) => {
-                this.getField(name).valueToPageParams(this.getRow());
+                this.getField(name)!.valueToPageParams(this.getRow());
             });
         }
     }

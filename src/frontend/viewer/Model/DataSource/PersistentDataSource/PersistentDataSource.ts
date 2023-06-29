@@ -18,22 +18,22 @@ export class PersistentDataSource extends DataSource {
 
     async insert(row: RawRow) {
         console.log('PersistentDataSource.insert', row);
-        const database = this.getAttr('database');
-        const table = this.getAttr('table');
+        const database = this.getAttr('database') as string;
+        const table = this.getAttr('table') as string;
         if (table === '') throw new Error('no data source table to insert');
 
         const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'insert',
-            page: this.getForm().getPage().getName(),
-            form: this.getForm().getName(),
+            page: this.getForm()!.getPage().getName(),
+            form: this.getForm()!.getName(),
             row: this.getRowWithChanges(row),
         });
 
         // key & values
-        const [key] = Object.keys(result[database][table].insertEx);
+        const [key] = Object.keys(result[database][table].insertEx!);
         if (!key) throw new Error('no inserted row key');
-        const values = result[database][table].insertEx[key];
+        const values = result[database][table].insertEx![key];
         for (const column in values) {
             row[column] = values[column];
         }
@@ -73,14 +73,14 @@ export class PersistentDataSource extends DataSource {
         const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: 'update',
-            page: this.getForm().getPage().getName(),
-            form: this.getForm().getName(),
+            page: this.getForm()!.getPage().getName(),
+            form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
         });
 
-        const [key] = Object.keys(result[database][table].updateEx);
+        const [key] = Object.keys(result[database][table].updateEx!);
         if (!key) throw new Error('no updated row');
-        const newValues = result[database][table].updateEx[key];
+        const newValues = result[database][table].updateEx![key];
         // const newKey = this.getRowKey(newValues);
 
         this.changes.clear();
@@ -107,8 +107,8 @@ export class PersistentDataSource extends DataSource {
         const result: Result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),
             action: '_delete',
-            page: this.getForm().getPage().getName(),
-            form: this.getForm().getName(),
+            page: this.getForm()!.getPage().getName(),
+            form: this.getForm()!.getName(),
             params: { key },
         });
         await this.refill();
@@ -200,7 +200,7 @@ export class PersistentDataSource extends DataSource {
         console.log('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
         if (this.getParent() instanceof Form) {
-            this.getForm().onDataSourceRefresh({ source: this });
+            this.getForm()!.onDataSourceRefresh({ source: this });
         }
     }
 

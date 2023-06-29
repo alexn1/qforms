@@ -66,7 +66,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
         return this.getAttr('caption');
     }
 
-    getDataSource(name: string): DataSource {
+    getDataSource(name: string): DataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 

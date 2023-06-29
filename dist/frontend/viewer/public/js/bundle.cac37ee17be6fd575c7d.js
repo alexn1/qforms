@@ -40929,6 +40929,8 @@ class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostAp
         console.log('LoginFrontHostApp.run');
         const loginController = _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_0__.LoginController.create(this);
         const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
+        if (!rootElement)
+            throw new Error('no root element');
         const loginView = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(rootElement, loginController.getViewClass(), {
             ctrl: loginController,
         });
@@ -41420,6 +41422,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.rowsByKey[key] || null;
     }*/
     getRows() {
+        if (!this.rows)
+            throw new Error('no rows');
         return this.rows;
     }
     getRowByIndex(i) {
@@ -41452,7 +41456,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getChangesByKey() {
         const changes = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)] = this.changes.get(row);
+            changes[this.getRowKey(row)] != this.changes.get(row);
         }
         return changes;
     }
@@ -43384,6 +43388,8 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__.AlertController(Object.assign(Object.assign({}, options), { onClose: () => {
                             this.alertCtrl = null;
@@ -43411,6 +43417,8 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new _Controller_ConfirmController_ConfirmController__WEBPACK_IMPORTED_MODULE_5__.ConfirmController(Object.assign(Object.assign({}, options), { onClose: (result) => {
                             this.alertCtrl = null;
