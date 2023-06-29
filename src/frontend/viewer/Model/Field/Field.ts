@@ -68,8 +68,8 @@ export class Field extends Model {
 
     getValue(row?: RawRow): any {
         // console.log('Field.getValue', this.getFullName(), row);
-        if (!row && this.parent instanceof RowForm) {
-            row = this.parent.getRow();
+        if (!row && this.getParent() instanceof RowForm) {
+            row = (this.getForm() as RowForm).getRow();
         }
         if (!row) {
             throw new Error(`${this.getFullName()}: need row`);

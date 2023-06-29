@@ -42332,8 +42332,8 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     getValue(row) {
         // console.log('Field.getValue', this.getFullName(), row);
-        if (!row && this.parent instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__.RowForm) {
-            row = this.parent.getRow();
+        if (!row && this.getParent() instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__.RowForm) {
+            row = this.getForm().getRow();
         }
         if (!row) {
             throw new Error(`${this.getFullName()}: need row`);

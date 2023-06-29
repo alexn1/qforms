@@ -7,7 +7,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;
     dataSources: DataSource[];
 
-    constructor(public data: T, public parent: Model | null) {
+    constructor(public data: T, private parent: Model | null) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
     }
@@ -103,5 +103,4 @@ export class Model<T extends ModelData = any> extends EventEmitter {
     getData(): T {
         return this.data;
     }
-    
 }
