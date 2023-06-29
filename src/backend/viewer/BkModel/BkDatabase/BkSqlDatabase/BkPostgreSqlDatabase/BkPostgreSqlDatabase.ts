@@ -68,7 +68,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     async queryResult(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         if (context.query.sql) {
             console.log(
@@ -93,7 +93,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     static async queryResult(
         pool: Pool,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<any> {
         console.log(
             colors.blue('static PostgreSqlDatabase.queryResult'),
@@ -111,7 +111,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     async queryRows(
         context: Context,
         query: string,
-        params: { [name: string]: any } = null,
+        params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
         // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
@@ -136,7 +136,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         await this.getConnection(context).query('rollback');
     }
 
-    static formatQuery(query: string, params: { [name: string]: any }) {
+    static formatQuery(query: string, params: { [name: string]: any } | null): {sql: string, values: any} {
         // console.log(`BkPostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
@@ -225,7 +225,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         return tableInfo;
     }
 
-    getColumnTypeByDataType(dataType: string): string {
+    getColumnTypeByDataType(dataType: string): string | null {
         switch (dataType) {
             case 'integer':
             case 'numeric':

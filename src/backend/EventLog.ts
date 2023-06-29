@@ -23,8 +23,8 @@ export interface Event {
 }
 
 export class EventLog {
-    private pool: Pool;
-    private url: string;
+    private pool?: Pool;
+    private url?: string;
 
     constructor(options?: EventLogOptions) {
         this.pool = options?.db && BkPostgreSqlDatabase.createPool(options.db);
@@ -33,6 +33,7 @@ export class EventLog {
 
     private async create(event: Event) {
         // console.log('EventLog.create', event);
+        if (!this.pool) throw new Error('no pool');
         await BkPostgreSqlDatabase.queryResult(
             this.pool,
             'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})',
@@ -59,6 +60,7 @@ export class EventLog {
     }
 
     private async logToEventLog(event: any): Promise<string | null> {
+        if (!this.url) throw new Error('no url');
         try {
             const { _id } = await BkHelper.post(this.url, event);
             return _id;

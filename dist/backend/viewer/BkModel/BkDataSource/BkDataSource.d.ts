@@ -31,7 +31,7 @@ export declare class BkDataSource extends BkModel {
     fillAttributes(response: any): void;
     fill(context: Context): Promise<{
         rows: RawRow[];
-        count: number;
+        count: number | null;
         limit?: number;
     }>;
     getRows(): Promise<Row[]>;
@@ -51,5 +51,5 @@ export declare class BkDataSource extends BkModel {
         delete: boolean;
     };
     getDatabase(): BkDatabase;
-    getLimit(): number;
+    getLimit(): number | null;
 }

@@ -64,7 +64,7 @@ export class BackHostApp {
     viewerModule: ViewerModule;
     editorModule: EditorModule;
     startTime: Date;
-    createAppQueue: { [route: string]: EmptyPromise[] } = {};
+    createAppQueue: { [route: string]: EmptyPromise[] | null } = {};
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
@@ -287,7 +287,7 @@ export class BackHostApp {
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
             console.log('application is creating:', context.getRoute());
             const promise = EmptyPromise.create();
-            this.createAppQueue[context.getRoute()].push(promise);
+            this.createAppQueue[context.getRoute()]!.push(promise);
             return promise;
         }
 
@@ -299,9 +299,9 @@ export class BackHostApp {
             console.log(
                 'application created, start resolve loop',
                 context.getRoute(),
-                this.createAppQueue[context.getRoute()].length,
+                this.createAppQueue[context.getRoute()]!.length,
             );
-            for (const p of this.createAppQueue[context.getRoute()]) {
+            for (const p of this.createAppQueue[context.getRoute()]!) {
                 p.resolve(app);
             }
             return app;
@@ -309,9 +309,9 @@ export class BackHostApp {
             console.error(
                 'application not created, start reject loop',
                 context.getRoute(),
-                this.createAppQueue[context.getRoute()].length,
+                this.createAppQueue[context.getRoute()]!.length,
             );
-            for (const p of this.createAppQueue[context.getRoute()]) {
+            for (const p of this.createAppQueue[context.getRoute()]!) {
                 p.reject(err);
             }
             throw err;
@@ -467,7 +467,7 @@ export class BackHostApp {
     async moduleGet(req: Request, res: Response, next) {
         // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context: Context;
+        let context: Context | null = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context({
@@ -758,7 +758,7 @@ export class BackHostApp {
         } */
     }
 
-    getDomainFromRequest(req: any): string | null {
+    getDomainFromRequest(req: any): string {
         if (!req) throw new Error('need req param');
         const hostPort = req.headers.host;
         if (!hostPort) throw new Error('no host');
@@ -847,7 +847,7 @@ export class BackHostApp {
         this.alias('post', path, arr, 'modulePost', query);
     }
 
-    getNodeEnv(): string {
+    getNodeEnv(): string | null {
         return process.env.NODE_ENV || null;
     }
 

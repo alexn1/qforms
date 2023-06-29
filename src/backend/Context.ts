@@ -77,7 +77,7 @@ export class Context {
         return null;
     }
 
-    getClientTimezoneOffset(): number {
+    getClientTimezoneOffset(): number | null {
         if (
             this.getReq().session.tzOffset !== undefined &&
             this.getReq().session.tzOffset !== null
@@ -87,7 +87,7 @@ export class Context {
         return null;
     }
 
-    getTimeOffset(): number {
+    getTimeOffset(): number | null {
         const clientTimezoneOffset = this.getClientTimezoneOffset();
         if (clientTimezoneOffset !== null) {
             return new Date().getTimezoneOffset() - clientTimezoneOffset;
@@ -122,10 +122,12 @@ export class Context {
     }
 
     getReq(): Request {
+        if (!this.options.req) throw new Error('getRes: no req');
         return this.options.req;
     }
 
     getRes(): Response {
+        if (!this.options.res) throw new Error('getRes: no res');
         return this.options.res;
     }
 
@@ -187,9 +189,11 @@ export class Context {
         return this.getReq().headers['x-forwarded-proto'] || 'http';
     }
 
-    setVersionHeaders(platformVersion: string, appVersion: string): void {
+    setVersionHeaders(platformVersion: string, appVersion: string | null): void {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
-        this.getRes().setHeader('qforms-app-version', appVersion);
+        if (appVersion) {
+            this.getRes().setHeader('qforms-app-version', appVersion);
+        }
     }
 
     setParam(name: string, value): void {

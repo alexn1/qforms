@@ -63,9 +63,13 @@ class Context {
         return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
     }
     getReq() {
+        if (!this.options.req)
+            throw new Error('getRes: no req');
         return this.options.req;
     }
     getRes() {
+        if (!this.options.res)
+            throw new Error('getRes: no res');
         return this.options.res;
     }
     getBody() {
@@ -118,7 +122,9 @@ class Context {
     }
     setVersionHeaders(platformVersion, appVersion) {
         this.getRes().setHeader('qforms-platform-version', platformVersion);
-        this.getRes().setHeader('qforms-app-version', appVersion);
+        if (appVersion) {
+            this.getRes().setHeader('qforms-app-version', appVersion);
+        }
     }
     setParam(name, value) {
         this.params[name] = value;

@@ -238,7 +238,9 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    async fill(context: Context): Promise<{ rows: RawRow[]; count: number; limit?: number }> {
+    async fill(
+        context: Context,
+    ): Promise<{ rows: RawRow[]; count: number | null; limit?: number }> {
         // console.log('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
@@ -315,7 +317,7 @@ export class BkDataSource extends BkModel {
         throw new Error(`${this.constructor.name}.getDatabase not implemented`);
     }
 
-    getLimit(): number {
+    getLimit(): number | null {
         if (this.getAttr('limit') !== '') {
             return parseInt(this.getAttr('limit'));
         }

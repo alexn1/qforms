@@ -85,7 +85,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const rawRows = this.encodeRows(rows);
 
         // count
-        let count: number = null;
+        let count: number | null = null;
         if (this.isDefaultOnTableForm() && this.getLimit()) {
             try {
                 const start = Date.now();

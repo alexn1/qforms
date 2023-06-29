@@ -17,8 +17,8 @@ export interface Event {
     ip?: string;
 }
 export declare class EventLog {
-    private pool;
-    private url;
+    private pool?;
+    private url?;
     constructor(options?: EventLogOptions);
     private create;
     log(event: Event): Promise<string>;

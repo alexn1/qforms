@@ -366,7 +366,7 @@ class BackHostApp {
     async moduleGet(req, res, next) {
         // @ts-ignore
         console.log(safe_1.default.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context;
+        let context = null;
         try {
             if (req.params.module === 'viewer') {
                 context = new Context_1.Context({

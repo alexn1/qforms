@@ -33,8 +33,8 @@ export declare class Context {
     getRoute(): string;
     getVirtualPath(): string;
     getUser(): any;
-    getClientTimezoneOffset(): number;
-    getTimeOffset(): number;
+    getClientTimezoneOffset(): number | null;
+    getTimeOffset(): number | null;
     getCookies(): {
         [name: string]: string;
     };
@@ -52,7 +52,7 @@ export declare class Context {
     getIp(): string;
     getHost(): string;
     getProtocol(): string;
-    setVersionHeaders(platformVersion: string, appVersion: string): void;
+    setVersionHeaders(platformVersion: string, appVersion: string | null): void;
     setParam(name: string, value: any): void;
     getParam(name: string): any;
     isDebugMode(): boolean;

@@ -10,6 +10,8 @@ class EventLog {
     }
     async create(event) {
         // console.log('EventLog.create', event);
+        if (!this.pool)
+            throw new Error('no pool');
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {
             created: new Date(),
             type: event.type,
@@ -30,6 +32,8 @@ class EventLog {
         }
     }
     async logToEventLog(event) {
+        if (!this.url)
+            throw new Error('no url');
         try {
             const { _id } = await BkHelper_1.BkHelper.post(this.url, event);
             return _id;

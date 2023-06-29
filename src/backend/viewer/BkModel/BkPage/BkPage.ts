@@ -58,11 +58,11 @@ export class BkPage<TBkApplication extends BkApplication = BkApplication> extend
         return this.parent;
     }
 
-    getForm(name: string): BkForm {
+    getForm(name: string): BkForm | undefined {
         return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name: string): BkDataSource {
+    getDataSource(name: string): BkDataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
     }
 }

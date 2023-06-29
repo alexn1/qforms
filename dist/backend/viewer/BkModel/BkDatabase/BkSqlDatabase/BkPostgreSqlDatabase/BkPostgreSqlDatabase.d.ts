@@ -14,21 +14,21 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     release(context: Context): Promise<void>;
     queryResult(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<any>;
+    } | null): Promise<any>;
     static queryResult(pool: Pool, query: string, params?: {
         [name: string]: any;
-    }): Promise<any>;
+    } | null): Promise<any>;
     queryRows(context: Context, query: string, params?: {
         [name: string]: any;
-    }): Promise<Row[]>;
+    } | null): Promise<Row[]>;
     begin(context: Context): Promise<void>;
     commit(context: Context): Promise<void>;
     rollback(context: Context, err: any): Promise<void>;
     static formatQuery(query: string, params: {
         [name: string]: any;
-    }): {
+    } | null): {
         sql: string;
-        values: any[];
+        values: any;
     };
     getDeleteQuery(tableName: string, rowKeyValues: any): string;
     getUpdateQuery(tableName: string, values: any, where: any): string;
@@ -44,7 +44,7 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         comment: any;
         dbType: any;
     }[]>;
-    getColumnTypeByDataType(dataType: string): string;
+    getColumnTypeByDataType(dataType: string): string | null;
     getTableKeyColumns(table: string): Promise<any[]>;
     query(query: string): Promise<any[]>;
     queryAutoValues(context: Context, table: string, autoColumnTypes: any): Promise<{}>;
