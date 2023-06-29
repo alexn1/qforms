@@ -112,7 +112,7 @@ export class Application extends Model<ApplicationData> {
         return Promise.allSettled(promises);
     }
 
-    getNodeEnv(): string {
+    getNodeEnv(): string | null {
         return this.data.nodeEnv;
     }
 

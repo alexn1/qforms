@@ -189,7 +189,7 @@ class PageController extends ModelController_1.ModelController {
     getTitle() {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart;
+        let keyPart = null;
         if (key) {
             const arr = JSON.parse(key);
             if (arr.length === 1 && typeof arr[0] === 'number') {

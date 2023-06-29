@@ -40591,7 +40591,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     getTitle() {
         const model = this.getModel();
         const key = model.getKey();
-        let keyPart;
+        let keyPart = null;
         if (key) {
             const arr = JSON.parse(key);
             if (arr.length === 1 && typeof arr[0] === 'number') {
@@ -40964,14 +40964,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    constructor() {
-        super(...arguments);
+    constructor(data) {
+        super(data, null);
         this.databases = [];
         this.dataSources = [];
     }
-    /* constructor(data) {
-        super(data);
-    } */
     init() {
         // console.log('Application.init');
         if (!this.data.theme)
@@ -41970,10 +41967,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    constructor(data, parent = null) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.tables = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+        this.tables = [];
+    } */
     init() {
         // console.log('Database.init', this.getName());
         for (const data of this.data.tables) {
@@ -42909,7 +42910,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
-    constructor(data, parent = null) {
+    constructor(data, parent) {
         if (!data.name)
             throw new Error(`${data.class} no name`);
         super();

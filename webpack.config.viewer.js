@@ -35,6 +35,7 @@ module.exports = {
                             outDir: 'dist',
                             moduleResolution: 'node',
                             noImplicitAny: false,
+                            strictNullChecks: false
                         },
                     },
                 },

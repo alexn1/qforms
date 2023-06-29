@@ -3,6 +3,8 @@ import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
 import { Key, RawRow, Row } from '../../../../types';
+import { Page } from '../Page/Page';
+import { Application } from '../Application/Application';
 
 export class Form extends Model {
     dataSources: DataSource[] = [];
@@ -107,11 +109,11 @@ export class Form extends Model {
         return dataSource as TDataSource;
     }
 
-    getPage() {
+    getPage(): Page {
         return this.parent;
     }
 
-    getApp() {
+    getApp(): Application {
         return this.parent.parent;
     }
 

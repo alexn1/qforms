@@ -3,12 +3,12 @@ import { Table } from '../Table/Table';
 import { Helper } from '../../../common/Helper';
 
 export class Database extends Model {
-    tables: any[];
+    tables: any[] = [];
 
-    constructor(data, parent = null) {
+    /* constructor(data, parent) {
         super(data, parent);
         this.tables = [];
-    }
+    } */
 
     init() {
         // console.log('Database.init', this.getName());

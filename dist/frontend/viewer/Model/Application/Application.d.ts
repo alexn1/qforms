@@ -26,7 +26,7 @@ export declare class Application extends Model<ApplicationData> {
         [name: string]: any;
     }): Promise<any>;
     emitResult(result: Result, source?: any): any;
-    getNodeEnv(): string;
+    getNodeEnv(): string | null;
     isDevelopment(): boolean;
     getRoute(): string;
 }

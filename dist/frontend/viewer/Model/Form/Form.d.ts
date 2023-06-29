@@ -2,6 +2,8 @@ import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
 import { Key, RawRow, Row } from '../../../../types';
+import { Page } from '../Page/Page';
+import { Application } from '../Application/Application';
 export declare class Form extends Model {
     dataSources: DataSource[];
     fields: Field[];
@@ -20,8 +22,8 @@ export declare class Form extends Model {
     }): Promise<any>;
     getKey(): Key;
     getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource;
-    getPage(): any;
-    getApp(): any;
+    getPage(): Page;
+    getApp(): Application;
     refresh(): Promise<void>;
     getField(name: string): Field;
     hasDefaultPersistentDataSource(): boolean;
