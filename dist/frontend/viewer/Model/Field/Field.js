@@ -135,13 +135,13 @@ class Field extends Model_1.Model {
         throw new Error('field type and column empty');
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getPage() {
-        return this.parent.parent;
+        return this.getForm().getPage();
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getForm().getApp();
     }
     isReadOnly() {
         return this.data.readOnly === 'true';
@@ -182,8 +182,8 @@ class Field extends Model_1.Model {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');
-            if (columnName && this.parent.hasDefaultPersistentDataSource()) {
-                const ds = this.parent.getDataSource('default');
+            if (columnName && this.getForm().hasDefaultPersistentDataSource()) {
+                const ds = this.getForm().getDataSource('default');
                 if (ds.getAttr('table')) {
                     const column = ds.getTable().getColumn(columnName);
                     return column.getCaption();

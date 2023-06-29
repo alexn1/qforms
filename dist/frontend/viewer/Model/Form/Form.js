@@ -44,7 +44,7 @@ class Form extends Model_1.Model {
     }
     onDataSourceInsert(e) {
         // console.log('Form.onDataSourceInsert', this.getFullName());
-        this.parent.onFormInsert(e);
+        this.getPage().onFormInsert(e);
         this.emit('insert', e);
     }
     onDataSourceUpdate(e) {
@@ -97,10 +97,10 @@ class Form extends Model_1.Model {
         return dataSource;
     }
     getPage() {
-        return this.parent;
+        return this.getParent();
     }
     getApp() {
-        return this.parent.parent;
+        return this.getPage().getApp();
     }
     async refresh() {
         await this.getDefaultDataSource().refresh();

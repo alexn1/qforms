@@ -1,6 +1,7 @@
 import { DataSource } from '../DataSource';
 import { Key, RawRow } from '../../../../../types';
 import { Result } from '../../../../../Result';
+import { Form } from '../../Form/Form';
 
 export class PersistentDataSource extends DataSource {
     /* constructor(data, parent) {
@@ -49,8 +50,8 @@ export class PersistentDataSource extends DataSource {
 
         // events
         const event = { source: this, inserts: result[database][table].insert };
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(event);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceInsert(event);
         }
         this.emit('insert', event);
         await this.getApp().emitResult(result, this);
@@ -87,8 +88,8 @@ export class PersistentDataSource extends DataSource {
 
         // events
         const event = { source: this, updates: result[database][table].update };
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate(event);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceUpdate(event);
         }
         this.emit('update', event);
         await this.getApp().emitResult(result, this);
@@ -114,8 +115,8 @@ export class PersistentDataSource extends DataSource {
 
         // events
         const event = { source: this, deletes: result[database][table].delete };
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(event);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceDelete(event);
         }
         this.emit('delete', event);
         await this.getApp().emitResult(result, this);
@@ -138,8 +139,8 @@ export class PersistentDataSource extends DataSource {
         await this.refill();
 
         // events
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceUpdate(e);
         }
         this.emit('update', e);
     };
@@ -157,8 +158,8 @@ export class PersistentDataSource extends DataSource {
         await this.refill();
 
         // events
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceInsert(e);
         }
         this.emit('insert', e);
     };
@@ -172,8 +173,8 @@ export class PersistentDataSource extends DataSource {
             return;
         }
         await this.refill();
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceDelete(e);
         }
         this.emit('delete', e);
     };
@@ -184,8 +185,8 @@ export class PersistentDataSource extends DataSource {
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source) throw new Error('refresh is foreign result so source must be null');
         await this.refill();
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceRefresh(e);
         }
         this.emit('refresh', e);
     };
@@ -198,8 +199,8 @@ export class PersistentDataSource extends DataSource {
     async refresh() {
         console.log('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh({ source: this });
+        if (this.getParent() instanceof Form) {
+            this.getForm().onDataSourceRefresh({ source: this });
         }
     }
 

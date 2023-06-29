@@ -20,7 +20,7 @@ export declare class Form extends Model {
     rpc(name: string, params: {
         [name: string]: any;
     }): Promise<any>;
-    getKey(): Key;
+    getKey(): Key | null;
     getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource;
     getPage(): Page;
     getApp(): Application;

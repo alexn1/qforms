@@ -140,15 +140,15 @@ export class Field extends Model {
     }
 
     getForm(): Form {
-        return this.parent;
+        return this.getParent() as Form;
     }
 
     getPage(): Page {
-        return this.parent.parent;
+        return this.getForm().getPage();
     }
 
     getApp(): Application {
-        return this.parent.parent.parent;
+        return this.getForm().getApp();
     }
 
     isReadOnly(): boolean {
@@ -163,7 +163,7 @@ export class Field extends Model {
         return this.data.notNull === 'false';
     }
 
-    getWidth(): number {
+    getWidth(): number | null {
         const width = parseInt(this.data.width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;
@@ -196,8 +196,8 @@ export class Field extends Model {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');
-            if (columnName && this.parent.hasDefaultPersistentDataSource()) {
-                const ds = this.parent.getDataSource('default');
+            if (columnName && this.getForm().hasDefaultPersistentDataSource()) {
+                const ds = this.getForm().getDataSource('default');
                 if (ds.getAttr('table')) {
                     const column = ds.getTable().getColumn(columnName);
                     return column.getCaption();

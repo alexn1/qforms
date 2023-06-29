@@ -34,8 +34,8 @@ export declare class DataSource extends Model {
     removeRow(key: Key): void;
     newRow(row: RawRow): void;
     getSingleRow(withChanges?: boolean): RawRow;
-    getForm(): Form;
-    getPage(): Page;
+    getForm(): Form | null;
+    getPage(): Page | null;
     getApp(): Application;
     getRow(key: Key): RawRow;
     getRows(): RawRow[];
@@ -59,7 +59,7 @@ export declare class DataSource extends Model {
     onTableRefresh: (e: any) => Promise<any>;
     isSurrogate(): boolean;
     moveRow(row: RawRow, offset: number): void;
-    getLimit(): number;
+    getLimit(): number | null;
     getCount(): number;
     getFrame(): number;
     getLastFrame(): number;

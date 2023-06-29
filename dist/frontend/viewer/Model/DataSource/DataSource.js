@@ -40,8 +40,8 @@ class DataSource extends Model_1.Model {
                 this.addRow(newRow);
             }
             // events
-            if (this.parent.onDataSourceInsert) {
-                this.parent.onDataSourceInsert(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceInsert(e);
             }
             this.emit('insert', e);
         };
@@ -63,8 +63,8 @@ class DataSource extends Model_1.Model {
                 }
             }
             // events
-            if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceUpdate(e);
             }
             this.emit('update', e);
         };
@@ -84,8 +84,8 @@ class DataSource extends Model_1.Model {
                 }
             }
             // events
-            if (this.parent.onDataSourceDelete) {
-                this.parent.onDataSourceDelete(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceDelete(e);
             }
             this.emit('delete', e);
         };
@@ -264,19 +264,23 @@ class DataSource extends Model_1.Model {
         return row;
     }
     getForm() {
-        return this.parent instanceof Form_1.Form ? this.parent : null;
+        return this.getParent() instanceof Form_1.Form ? this.getParent() : null;
     }
     getPage() {
-        if (this.parent instanceof Page_1.Page)
-            return this.parent;
-        if (this.parent instanceof Form_1.Form)
-            return this.parent.getPage();
+        if (this.getParent() instanceof Form_1.Form)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof Page_1.Page)
+            return this.getParent();
         return null;
     }
     getApp() {
-        if (this.parent instanceof Application_1.Application)
-            return this.parent;
-        return this.parent.getApp();
+        if (this.getParent() instanceof Application_1.Application)
+            return this.getParent();
+        if (this.getParent() instanceof Page_1.Page)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof Form_1.Form)
+            return this.getParent().getParent().getParent();
+        throw new Error('unknown parent');
     }
     /*getNamespace() {
         if (this.parent instanceof Form) {
@@ -402,8 +406,8 @@ class DataSource extends Model_1.Model {
         console.log('rows:', this.getRows());
         console.log('inserts:', inserts);
         // events
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({ source: this, inserts });
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceInsert({ source: this, inserts });
         }
         this.emit('insert', { source: this, inserts });
         const database = this.getAttr('database');
@@ -426,8 +430,8 @@ class DataSource extends Model_1.Model {
         this.removeRow(key);
         // events
         const deletes = [key];
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({ source: this, deletes });
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceDelete({ source: this, deletes });
         }
         this.emit('delete', { source: this, deletes });
         const database = this.getAttr('database');
@@ -447,7 +451,7 @@ class DataSource extends Model_1.Model {
         console.log('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();
-            return;
+            return null;
         }
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
@@ -468,8 +472,8 @@ class DataSource extends Model_1.Model {
         }
         this.changes.clear();
         // events
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({ source: this, updates });
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceUpdate({ source: this, updates });
         }
         this.emit('update', { source: this, updates });
         const database = this.getAttr('database');
@@ -495,8 +499,8 @@ class DataSource extends Model_1.Model {
         common_1.Helper.moveArrItem(this.rows, row, offset);
         // refresh event
         const event = { source: this };
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh(event);
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceRefresh(event);
         }
         this.emit('refresh', event);
     }

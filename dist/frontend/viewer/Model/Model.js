@@ -82,6 +82,8 @@ class Model extends EventEmitter_1.EventEmitter {
         return this.data.actions.length > 0;
     }
     getParent() {
+        if (!this.parent)
+            throw new Error('np parent');
         return this.parent;
     }
     getData() {

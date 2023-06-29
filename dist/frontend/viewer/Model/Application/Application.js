@@ -89,7 +89,7 @@ class Application extends Model_1.Model {
             throw new Error(response.errorMessage);
         return response;
     }
-    emitResult(result, source = null) {
+    emitResult(result, source) {
         console.log('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {

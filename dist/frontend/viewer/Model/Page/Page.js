@@ -129,7 +129,7 @@ class Page extends Model_1.Model {
         return false;
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     isModal() {
         return !!this.options.modal;

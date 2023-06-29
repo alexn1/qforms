@@ -24,7 +24,7 @@ export declare class Field extends Model {
     isReadOnly(): boolean;
     isNotNull(): boolean;
     isNullable(): boolean;
-    getWidth(): number;
+    getWidth(): number | null;
     getFullName(): string;
     isParam(): boolean;
     validateOnChange(): boolean;

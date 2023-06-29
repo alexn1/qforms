@@ -3,10 +3,10 @@ import { DataSource } from './DataSource/DataSource';
 import { ModelData } from '../../../data';
 export declare class Model<T extends ModelData = any> extends EventEmitter {
     data: T;
-    parent: any;
+    parent: Model | null;
     deinited: boolean;
     dataSources: DataSource[];
-    constructor(data: T, parent: any);
+    constructor(data: T, parent: Model | null);
     init(): void;
     deinit(): void;
     static getAttr(data: ModelData, name: string): any;

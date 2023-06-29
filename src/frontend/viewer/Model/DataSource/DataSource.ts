@@ -213,19 +213,22 @@ export class DataSource extends Model {
         return row;
     }
 
-    getForm(): Form {
-        return this.parent instanceof Form ? this.parent : null;
+    getForm(): Form | null {
+        return this.getParent() instanceof Form ? this.getParent() as Form : null;
     }
 
-    getPage(): Page {
-        if (this.parent instanceof Page) return this.parent;
-        if (this.parent instanceof Form) return this.parent.getPage();
+    getPage(): Page | null {
+        if (this.getParent() instanceof Form) return this.getParent().getParent() as Page;
+        if (this.getParent() instanceof Page) return this.getParent() as Page;
         return null;
     }
 
     getApp(): Application {
-        if (this.parent instanceof Application) return this.parent;
-        return this.parent.getApp();
+        if (this.getParent() instanceof Application) return this.getParent() as Application;
+        if (this.getParent() instanceof Page) return this.getParent().getParent() as Application;
+        if (this.getParent() instanceof Form)
+            return this.getParent().getParent().getParent() as Application;
+        throw new Error('unknown parent');
     }
 
     /*getNamespace() {
@@ -359,8 +362,8 @@ export class DataSource extends Model {
         console.log('inserts:', inserts);
 
         // events
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({ source: this, inserts });
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceInsert({ source: this, inserts });
         }
         this.emit('insert', { source: this, inserts });
         const database = this.getAttr('database');
@@ -384,8 +387,8 @@ export class DataSource extends Model {
 
         // events
         const deletes = [key];
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({ source: this, deletes });
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceDelete({ source: this, deletes });
         }
         this.emit('delete', { source: this, deletes });
         const database = this.getAttr('database');
@@ -406,7 +409,7 @@ export class DataSource extends Model {
         console.log('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();
-            return;
+            return null;
         }
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const changes = this.getChangesByKey();
@@ -428,8 +431,8 @@ export class DataSource extends Model {
         this.changes.clear();
 
         // events
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({ source: this, updates });
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceUpdate({ source: this, updates });
         }
         this.emit('update', { source: this, updates });
 
@@ -473,8 +476,8 @@ export class DataSource extends Model {
         }
 
         // events
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceInsert(e);
         }
         this.emit('insert', e);
     };
@@ -497,8 +500,8 @@ export class DataSource extends Model {
         }
 
         // events
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceUpdate(e);
         }
         this.emit('update', e);
     };
@@ -519,8 +522,8 @@ export class DataSource extends Model {
         }
 
         // events
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(e);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceDelete(e);
         }
         this.emit('delete', e);
     };
@@ -539,13 +542,13 @@ export class DataSource extends Model {
 
         // refresh event
         const event = { source: this };
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh(event);
+        if (this.getParent() instanceof Form) {
+            this.getForm()!.onDataSourceRefresh(event);
         }
         this.emit('refresh', event);
     }
 
-    getLimit(): number {
+    getLimit(): number | null {
         if (this.getAttr('limit')) {
             return parseInt(this.getAttr('limit'));
         }

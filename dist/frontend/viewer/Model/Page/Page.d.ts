@@ -1,6 +1,7 @@
 import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Key } from '../../../../types';
+import { Application } from '../Application/Application';
 export interface PageOptions {
     id?: string;
     modal?: boolean;
@@ -34,7 +35,7 @@ export declare class Page extends Model {
     hasTableForm(): boolean;
     isNewMode(): boolean;
     hasNew(): boolean;
-    getApp(): any;
+    getApp(): Application;
     isModal(): boolean;
     onFormInsert(e: any): void;
     rpc(name: string, params: any): Promise<any>;

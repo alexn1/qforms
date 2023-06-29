@@ -38,7 +38,7 @@ export class RowForm extends Form {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
 
-    getKey(): Key {
+    getKey(): Key | null {
         // console.log('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
         if (dataSource.isPersistent()) {

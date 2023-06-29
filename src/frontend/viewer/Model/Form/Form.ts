@@ -50,7 +50,7 @@ export class Form extends Model {
 
     onDataSourceInsert(e) {
         // console.log('Form.onDataSourceInsert', this.getFullName());
-        this.parent.onFormInsert(e);
+        this.getPage().onFormInsert(e);
         this.emit('insert', e);
     }
 
@@ -99,7 +99,7 @@ export class Form extends Model {
         return result;
     }
 
-    getKey(): Key {
+    getKey(): Key | null {
         return null;
     }
 
@@ -110,11 +110,11 @@ export class Form extends Model {
     }
 
     getPage(): Page {
-        return this.parent;
+        return this.getParent() as Page;
     }
 
     getApp(): Application {
-        return this.parent.parent;
+        return this.getPage().getApp();
     }
 
     async refresh() {

@@ -7,7 +7,7 @@ export class Model<T extends ModelData = any> extends EventEmitter {
     deinited: boolean = false;
     dataSources: DataSource[];
 
-    constructor(public data: T, public parent) {
+    constructor(public data: T, public parent: Model | null) {
         if (!data.name) throw new Error(`${data.class} no name`);
         super();
     }
@@ -96,10 +96,12 @@ export class Model<T extends ModelData = any> extends EventEmitter {
     }
 
     getParent(): Model {
+        if (!this.parent) throw new Error('np parent');
         return this.parent;
     }
 
     getData(): T {
         return this.data;
     }
+    
 }

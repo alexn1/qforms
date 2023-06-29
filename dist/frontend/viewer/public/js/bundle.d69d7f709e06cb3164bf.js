@@ -41047,7 +41047,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             throw new Error(response.errorMessage);
         return response;
     }
-    emitResult(result, source = null) {
+    emitResult(result, source) {
         console.log('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {
@@ -41162,8 +41162,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 this.addRow(newRow);
             }
             // events
-            if (this.parent.onDataSourceInsert) {
-                this.parent.onDataSourceInsert(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceInsert(e);
             }
             this.emit('insert', e);
         };
@@ -41185,8 +41185,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 }
             }
             // events
-            if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceUpdate(e);
             }
             this.emit('update', e);
         };
@@ -41206,8 +41206,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 }
             }
             // events
-            if (this.parent.onDataSourceDelete) {
-                this.parent.onDataSourceDelete(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceDelete(e);
             }
             this.emit('delete', e);
         };
@@ -41386,19 +41386,23 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return row;
     }
     getForm() {
-        return this.parent instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form ? this.parent : null;
+        return this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form ? this.getParent() : null;
     }
     getPage() {
-        if (this.parent instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
-            return this.parent;
-        if (this.parent instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
-            return this.parent.getPage();
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
+            return this.getParent();
         return null;
     }
     getApp() {
-        if (this.parent instanceof _Application_Application__WEBPACK_IMPORTED_MODULE_3__.Application)
-            return this.parent;
-        return this.parent.getApp();
+        if (this.getParent() instanceof _Application_Application__WEBPACK_IMPORTED_MODULE_3__.Application)
+            return this.getParent();
+        if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
+            return this.getParent().getParent().getParent();
+        throw new Error('unknown parent');
     }
     /*getNamespace() {
         if (this.parent instanceof Form) {
@@ -41524,8 +41528,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.log('rows:', this.getRows());
         console.log('inserts:', inserts);
         // events
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert({ source: this, inserts });
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceInsert({ source: this, inserts });
         }
         this.emit('insert', { source: this, inserts });
         const database = this.getAttr('database');
@@ -41548,8 +41552,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.removeRow(key);
         // events
         const deletes = [key];
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete({ source: this, deletes });
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceDelete({ source: this, deletes });
         }
         this.emit('delete', { source: this, deletes });
         const database = this.getAttr('database');
@@ -41569,7 +41573,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.log('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();
-            return;
+            return null;
         }
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
@@ -41590,8 +41594,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
         this.changes.clear();
         // events
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate({ source: this, updates });
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceUpdate({ source: this, updates });
         }
         this.emit('update', { source: this, updates });
         const database = this.getAttr('database');
@@ -41617,8 +41621,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         _common__WEBPACK_IMPORTED_MODULE_4__.Helper.moveArrItem(this.rows, row, offset);
         // refresh event
         const event = { source: this };
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh(event);
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceRefresh(event);
         }
         this.emit('refresh', event);
     }
@@ -41698,6 +41702,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "PersistentDataSource": () => (/* binding */ PersistentDataSource)
 /* harmony export */ });
 /* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+
 
 class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
     constructor() {
@@ -41719,8 +41725,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             // update rows
             await this.refill();
             // events
-            if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceUpdate(e);
             }
             this.emit('update', e);
         };
@@ -41735,8 +41741,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             // update rows
             await this.refill();
             // events
-            if (this.parent.onDataSourceInsert) {
-                this.parent.onDataSourceInsert(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceInsert(e);
             }
             this.emit('insert', e);
         };
@@ -41749,8 +41755,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
                 return;
             }
             await this.refill();
-            if (this.parent.onDataSourceDelete) {
-                this.parent.onDataSourceDelete(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceDelete(e);
             }
             this.emit('delete', e);
         };
@@ -41761,8 +41767,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             if (e.source)
                 throw new Error('refresh is foreign result so source must be null');
             await this.refill();
-            if (this.parent.onDataSourceRefresh) {
-                this.parent.onDataSourceRefresh(e);
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceRefresh(e);
             }
             this.emit('refresh', e);
         };
@@ -41804,8 +41810,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         this.addRow(row);
         // events
         const event = { source: this, inserts: result[database][table].insert };
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(event);
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceInsert(event);
         }
         this.emit('insert', event);
         await this.getApp().emitResult(result, this);
@@ -41839,8 +41845,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         this.updateRow(key, newValues);
         // events
         const event = { source: this, updates: result[database][table].update };
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate(event);
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceUpdate(event);
         }
         this.emit('update', event);
         await this.getApp().emitResult(result, this);
@@ -41865,8 +41871,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         await this.refill();
         // events
         const event = { source: this, deletes: result[database][table].delete };
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(event);
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceDelete(event);
         }
         this.emit('delete', event);
         await this.getApp().emitResult(result, this);
@@ -41879,8 +41885,8 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
     async refresh() {
         console.log('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh({ source: this });
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceRefresh({ source: this });
         }
     }
     async refill() {
@@ -42398,13 +42404,13 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         throw new Error('field type and column empty');
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getPage() {
-        return this.parent.parent;
+        return this.getForm().getPage();
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getForm().getApp();
     }
     isReadOnly() {
         return this.data.readOnly === 'true';
@@ -42445,8 +42451,8 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         const caption = this.getAttr('caption');
         if (caption === '') {
             const columnName = this.getAttr('column');
-            if (columnName && this.parent.hasDefaultPersistentDataSource()) {
-                const ds = this.parent.getDataSource('default');
+            if (columnName && this.getForm().hasDefaultPersistentDataSource()) {
+                const ds = this.getForm().getDataSource('default');
                 if (ds.getAttr('table')) {
                     const column = ds.getTable().getColumn(columnName);
                     return column.getCaption();
@@ -42717,7 +42723,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     onDataSourceInsert(e) {
         // console.log('Form.onDataSourceInsert', this.getFullName());
-        this.parent.onFormInsert(e);
+        this.getPage().onFormInsert(e);
         this.emit('insert', e);
     }
     onDataSourceUpdate(e) {
@@ -42770,10 +42776,10 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return dataSource;
     }
     getPage() {
-        return this.parent;
+        return this.getParent();
     }
     getApp() {
-        return this.parent.parent;
+        return this.getPage().getApp();
     }
     async refresh() {
         await this.getDefaultDataSource().refresh();
@@ -42988,6 +42994,8 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
         return this.data.actions.length > 0;
     }
     getParent() {
+        if (!this.parent)
+            throw new Error('np parent');
         return this.parent;
     }
     getData() {
@@ -43140,7 +43148,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return false;
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     isModal() {
         return !!this.options.modal;

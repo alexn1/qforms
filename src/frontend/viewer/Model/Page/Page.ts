@@ -4,6 +4,7 @@ import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
 import { Key } from '../../../../types';
+import { Application } from '../Application/Application';
 
 export interface PageOptions {
     id?: string;
@@ -159,8 +160,8 @@ export class Page extends Model {
         return false;
     }
 
-    getApp() {
-        return this.parent;
+    getApp(): Application {
+        return this.getParent() as Application;
     }
 
     isModal() {

@@ -101,7 +101,7 @@ export class Application extends Model<ApplicationData> {
         return response;
     }
 
-    emitResult(result: Result, source = null) {
+    emitResult(result: Result, source?: any) {
         console.log('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {

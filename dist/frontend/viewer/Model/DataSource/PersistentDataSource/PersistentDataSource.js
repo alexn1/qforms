@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.PersistentDataSource = void 0;
 const DataSource_1 = require("../DataSource");
+const Form_1 = require("../../Form/Form");
 class PersistentDataSource extends DataSource_1.DataSource {
     constructor() {
         /* constructor(data, parent) {
@@ -22,8 +23,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
             // update rows
             await this.refill();
             // events
-            if (this.parent.onDataSourceUpdate) {
-                this.parent.onDataSourceUpdate(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceUpdate(e);
             }
             this.emit('update', e);
         };
@@ -38,8 +39,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
             // update rows
             await this.refill();
             // events
-            if (this.parent.onDataSourceInsert) {
-                this.parent.onDataSourceInsert(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceInsert(e);
             }
             this.emit('insert', e);
         };
@@ -52,8 +53,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
                 return;
             }
             await this.refill();
-            if (this.parent.onDataSourceDelete) {
-                this.parent.onDataSourceDelete(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceDelete(e);
             }
             this.emit('delete', e);
         };
@@ -64,8 +65,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
             if (e.source)
                 throw new Error('refresh is foreign result so source must be null');
             await this.refill();
-            if (this.parent.onDataSourceRefresh) {
-                this.parent.onDataSourceRefresh(e);
+            if (this.getParent() instanceof Form_1.Form) {
+                this.getForm().onDataSourceRefresh(e);
             }
             this.emit('refresh', e);
         };
@@ -107,8 +108,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
         this.addRow(row);
         // events
         const event = { source: this, inserts: result[database][table].insert };
-        if (this.parent.onDataSourceInsert) {
-            this.parent.onDataSourceInsert(event);
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceInsert(event);
         }
         this.emit('insert', event);
         await this.getApp().emitResult(result, this);
@@ -142,8 +143,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
         this.updateRow(key, newValues);
         // events
         const event = { source: this, updates: result[database][table].update };
-        if (this.parent.onDataSourceUpdate) {
-            this.parent.onDataSourceUpdate(event);
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceUpdate(event);
         }
         this.emit('update', event);
         await this.getApp().emitResult(result, this);
@@ -168,8 +169,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
         await this.refill();
         // events
         const event = { source: this, deletes: result[database][table].delete };
-        if (this.parent.onDataSourceDelete) {
-            this.parent.onDataSourceDelete(event);
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceDelete(event);
         }
         this.emit('delete', event);
         await this.getApp().emitResult(result, this);
@@ -182,8 +183,8 @@ class PersistentDataSource extends DataSource_1.DataSource {
     async refresh() {
         console.log('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
-        if (this.parent.onDataSourceRefresh) {
-            this.parent.onDataSourceRefresh({ source: this });
+        if (this.getParent() instanceof Form_1.Form) {
+            this.getForm().onDataSourceRefresh({ source: this });
         }
     }
     async refill() {
