@@ -6,7 +6,7 @@ export declare class Model<T extends ModelData = any> extends EventEmitter {
     private parent;
     deinited: boolean;
     dataSources: DataSource[];
-    constructor(data: T, parent: Model | null);
+    constructor(data: T, parent?: Model | null);
     init(): void;
     deinit(): void;
     static getAttr(data: ModelData, name: string): any;

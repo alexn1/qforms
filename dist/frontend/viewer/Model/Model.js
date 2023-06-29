@@ -4,7 +4,7 @@ exports.Model = void 0;
 const EventEmitter_1 = require("../EventEmitter");
 const Helper_1 = require("../../common/Helper");
 class Model extends EventEmitter_1.EventEmitter {
-    constructor(data, parent) {
+    constructor(data, parent = null) {
         if (!data.name)
             throw new Error(`${data.class} no name`);
         super();
