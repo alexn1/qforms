@@ -3,12 +3,7 @@ import { Table } from '../Table/Table';
 import { Helper } from '../../../common/Helper';
 
 export class Database extends Model {
-    tables: any[] = [];
-
-    /* constructor(data, parent) {
-        super(data, parent);
-        this.tables = [];
-    } */
+    tables: Table[] = [];
 
     init() {
         // console.log('Database.init', this.getName());
@@ -19,11 +14,11 @@ export class Database extends Model {
         }
     }
 
-    addTable(table) {
+    addTable(table: Table) {
         this.tables.push(table);
     }
 
-    getTable(name) {
+    getTable(name: string): Table {
         const table = this.tables.find((table) => table.getName() === name);
         if (!table) throw new Error(`${this.getFullName()}: no table with name: ${name}`);
         return table;
@@ -31,7 +26,7 @@ export class Database extends Model {
 
     emitResult(result, source = null) {
         console.log('Database.emitResult');
-        const promises = [];
+        const promises: any[] = [];
         for (const table in result) {
             promises.push(...this.getTable(table).emitResult(result[table], source));
         }

@@ -23,7 +23,7 @@ export class EventEmitter {
         this.list[name].splice(i, 1);
     }
 
-    async emit(name, e) {
+    async emit(name: string, e) {
         // console.log('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
             // @ts-ignore

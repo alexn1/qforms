@@ -103,7 +103,7 @@ export class Application extends Model<ApplicationData> {
 
     emitResult(result: Result, source?: any) {
         console.log('Application.emitResult', result, source);
-        const promises = [];
+        const promises: any[] = [];
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }

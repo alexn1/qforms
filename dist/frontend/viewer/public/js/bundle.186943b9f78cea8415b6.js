@@ -41977,10 +41977,6 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         super(...arguments);
         this.tables = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-        this.tables = [];
-    } */
     init() {
         // console.log('Database.init', this.getName());
         for (const data of this.data.tables) {
@@ -43209,10 +43205,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.columns = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+        this.columns = [];
+    } */
     init() {
         // console.log('Table.init', this.getFullName());
         for (const data of this.data.columns) {

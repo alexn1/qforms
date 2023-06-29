@@ -1,14 +1,15 @@
 import { Model } from '../Model';
 import { Column } from '../Column/Column';
 import { Helper } from '../../../common/Helper';
+import { Result } from '../../../../Result';
 
 export class Table extends Model {
-    columns: any[];
+    columns: Column[] = [];
 
-    constructor(data, parent) {
+    /* constructor(data, parent) {
         super(data, parent);
         this.columns = [];
-    }
+    } */
 
     init() {
         // console.log('Table.init', this.getFullName());
@@ -19,17 +20,17 @@ export class Table extends Model {
         }
     }
 
-    addColumn(column) {
+    addColumn(column: Column) {
         this.columns.push(column);
     }
 
-    getColumn(name) {
+    getColumn(name: string) {
         const column = this.columns.find((column) => column.getName() === name);
         if (!column) throw new Error(`table ${this.getFullName()}: no column ${name}`);
         return column;
     }
 
-    emitResult(result, source = null) {
+    emitResult(result: Result, source = null): Array<Promise<void>> {
         console.log('Table.emitResult');
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
