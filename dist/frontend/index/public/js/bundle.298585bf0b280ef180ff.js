@@ -35422,7 +35422,17 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class IndexFrontHostApp {
+    ;
     constructor(data) {
+        this.data = data;
+        // data: any;
+        this.view = null;
+        this.currentAppFullName = undefined;
+        this.currentAppEnv = undefined;
+        this.modals = [];
+        this.folderNameTextBox = null;
+        this.folderName = null;
+        this.appName = null;
         this.onAppChange = (fullName) => {
             console.log('IndexFrontHostApp.onAppChange', fullName);
             this.currentAppFullName = fullName;
@@ -35479,14 +35489,14 @@ class IndexFrontHostApp {
             await this.createApp(this.folderName, this.appName);
         };
         console.log('IndexFrontHostApp.constructor', data);
-        this.data = data;
-        this.view = null;
-        this.currentAppFullName = undefined;
-        this.currentAppEnv = undefined;
-        this.modals = [];
-        this.folderNameTextBox = null;
-        this.folderName = null;
-        this.appName = null;
+        // this.data = data;
+        // this.view = null;
+        // this.currentAppFullName = undefined;
+        // this.currentAppEnv = undefined;
+        // this.modals = [];
+        // this.folderNameTextBox = null;
+        // this.folderName = null;
+        // this.appName = null;
     }
     init() {
         // console.log('IndexFrontHostApp.init');

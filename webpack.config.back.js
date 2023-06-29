@@ -33,7 +33,7 @@ module.exports = {
                             moduleResolution: 'node',
                             module: 'commonjs',
                             resolveJsonModule: true,
-                            strictNullChecks: false,
+                            strictNullChecks: true,
                         },
                     },
                 },
