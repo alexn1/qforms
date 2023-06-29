@@ -3,5 +3,5 @@ export declare class EventEmitter {
     constructor();
     on(name: any, cb: any): void;
     off(name: any, cb: any): void;
-    emit(name: any, e: any): Promise<void>;
+    emit(name: string, e: any): Promise<void>;
 }

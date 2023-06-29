@@ -1,7 +1,7 @@
 import { VisualEditorController } from '../VisualEditorController';
 export declare class FieldEditorController extends VisualEditorController {
     _new(params: any): Promise<any>;
-    save(params: any): Promise<any>;
+    save(params: any): Promise<null>;
     delete(params: any): Promise<any>;
     changeClass(params: any): Promise<any>;
     getView(params: any): Promise<{

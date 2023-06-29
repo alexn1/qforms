@@ -5,10 +5,14 @@ const Model_1 = require("../Model");
 const Column_1 = require("../Column/Column");
 const Helper_1 = require("../../../common/Helper");
 class Table extends Model_1.Model {
-    constructor(data, parent) {
-        super(data, parent);
+    constructor() {
+        super(...arguments);
         this.columns = [];
     }
+    /* constructor(data, parent) {
+        super(data, parent);
+        this.columns = [];
+    } */
     init() {
         // console.log('Table.init', this.getFullName());
         for (const data of this.data.columns) {

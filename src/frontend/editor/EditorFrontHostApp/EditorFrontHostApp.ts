@@ -19,7 +19,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     items: any;
     tabWidget: any;
     documents: any[];
-    modal: EdModalController;
+    modal: EdModalController | null;
 
     constructor(data, runAppLink: string) {
         super();
@@ -54,7 +54,7 @@ export class EditorFrontHostApp extends FrontHostApp {
 
         // view
         this.view = Helper.createReactComponent(
-            document.querySelector('.editor__root'),
+            document.querySelector('.editor__root')!,
             EditorFrontHostAppView,
             { ctrl: this, key: 'editor' },
         );

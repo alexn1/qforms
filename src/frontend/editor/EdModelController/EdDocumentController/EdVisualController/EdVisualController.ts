@@ -3,6 +3,7 @@ import { EdDataSourceController } from '../EdDataSourceController/EdDataSourceCo
 import { EdActionController } from '../../EdActionController/EdActionController';
 import { EditorFrontHostApp } from '../../../EditorFrontHostApp/EditorFrontHostApp';
 import { NewActionController } from '../../../EdModalController/NewActionController/NewActionController';
+import { EdModelController } from '../../EdModelController';
 
 export class EdVisualController extends EdDocumentController {
     data: any;
@@ -10,7 +11,7 @@ export class EdVisualController extends EdDocumentController {
     actions: any[];
     pageLinkController: any;
 
-    constructor(model, parent = null) {
+    constructor(model, parent: EdModelController | null = null) {
         super(model, parent);
         this.data = null;
     }

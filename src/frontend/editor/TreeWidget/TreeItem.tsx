@@ -74,9 +74,9 @@ export class TreeItem extends ReactComponent {
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
         return (
-            <li key={title} ref={this.li} className={this.isOpened() ? 'opened' : null}>
+            <li key={title} ref={this.li} className={this.isOpened() ? 'opened' : undefined}>
                 <div
-                    className={this.isSelected() ? 'active' : null}
+                    className={this.isSelected() ? 'active' : undefined}
                     style={{ paddingLeft: this.props.paddingLeft }}
                     onMouseDown={this.onDivMouseDown}
                     onDoubleClick={this.onDivDoubleClick}>

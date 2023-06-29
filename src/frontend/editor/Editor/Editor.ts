@@ -6,7 +6,7 @@ export class Editor {
     dataSources: any[];
     actions: any[];
 
-    constructor(data, parent = null) {
+    constructor(data, parent: Editor | null = null) {
         if (!data) throw new Error('no data');
         this.data = data;
         this.parent = parent;

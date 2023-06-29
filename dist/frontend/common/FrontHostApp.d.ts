@@ -17,10 +17,10 @@ export interface Location {
     hash: string;
 }
 export declare class FrontHostApp {
-    protected options?: FrontHostAppOptions;
+    protected options?: FrontHostAppOptions | undefined;
     alertCtrl: any;
     documentTitle: string;
-    constructor(options?: FrontHostAppOptions);
+    constructor(options?: FrontHostAppOptions | undefined);
     init(): void;
     run(): Promise<void>;
     onWindowUnhandledrejection(e: any): Promise<void>;
@@ -46,10 +46,12 @@ export declare class FrontHostApp {
     setDocumentTitle(title: string): void;
     getDocumentTitle(): string;
     isDebugMode(): boolean;
-    createLink(params?: any): string;
+    createLink(params?: {
+        [name: string]: any;
+    } | null): string;
     getOptions(): FrontHostAppOptions;
     filterSearch(names: string[]): string;
     getSearchParams(): any;
-    getCookie(name: string): string;
+    getCookie(name: string): string | undefined;
     getLocation(): Location;
 }

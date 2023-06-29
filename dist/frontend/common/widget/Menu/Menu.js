@@ -45,7 +45,7 @@ class Menu extends ReactComponent_1.ReactComponent {
     }
     render() {
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: "Menu" }, { children: this.props.items &&
-                this.props.items.map((menu) => ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : null }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0, jsx_runtime_1.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0, jsx_runtime_1.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
+                this.props.items.map((menu) => ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.state[menu.name] ? 'active' : undefined }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ "data-menu": menu.name, onClick: this.onMenuClick, onBlur: this.onBlur }, { children: menu.title })), (0, jsx_runtime_1.jsx)("div", Object.assign({ onMouseDown: this.onMouseDown, onClick: this.onMenuItemClick }, { children: menu.items.map((item) => ((0, jsx_runtime_1.jsx)("a", Object.assign({ "data-menu": menu.name, "data-type": item.type, "data-name": item.name }, { children: item.title }), item.name))) }))] }), menu.name))) })));
     }
 }
 exports.Menu = Menu;

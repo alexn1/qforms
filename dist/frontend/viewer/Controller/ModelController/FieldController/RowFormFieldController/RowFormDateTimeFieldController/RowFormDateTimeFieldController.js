@@ -8,6 +8,7 @@ const Helper_1 = require("../../../../../../common/Helper");
 class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.defaultValue = 0;
         this.onView2Create = (widget2) => {
             // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
             this.widget2 = widget2;
@@ -91,7 +92,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
             }
         };
         this.widget2 = null;
-        this.defaultValue = 0;
+        // this.defaultValue = 0;
         this.state.parseError2 = null;
         this.state.error2 = null;
     }

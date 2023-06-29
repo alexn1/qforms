@@ -88,7 +88,7 @@ class Helper {
     }
     static createReactComponent(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent', rootElement, type);
-        let component;
+        let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;
@@ -99,7 +99,7 @@ class Helper {
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
         // console.log('Helper.createReactComponent2', rootElement, type);
-        let component;
+        let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
                     component = c;

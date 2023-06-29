@@ -37,11 +37,11 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     getTableList(): Promise<string[]>;
     getTableInfo(table: string): Promise<{
         name: any;
-        type: string;
+        type: string | null;
         key: boolean;
         auto: boolean;
         nullable: boolean;
-        comment: any;
+        comment: null;
         dbType: any;
     }[]>;
     getColumnTypeByDataType(dataType: string): string | null;

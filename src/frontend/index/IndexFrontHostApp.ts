@@ -2,25 +2,25 @@ import { IndexView } from './IndexView/IndexView';
 import { Helper, FrontHostApp } from '../common';
 
 export class IndexFrontHostApp {
-    data: any;
-    view: any;
-    currentAppFullName: string;
-    currentAppEnv: any;
-    modals: any[];
-    folderNameTextBox: any;
-    folderName: string;
-    appName: string;
+    // data: any;
+    view: any = null;;
+    currentAppFullName: string | undefined = undefined;
+    currentAppEnv: any = undefined;
+    modals: any[] = [];
+    folderNameTextBox: any = null;
+    folderName: string | null = null;
+    appName: string | null = null;
 
-    constructor(data) {
+    constructor(public data: any) {
         console.log('IndexFrontHostApp.constructor', data);
-        this.data = data;
-        this.view = null;
-        this.currentAppFullName = undefined;
-        this.currentAppEnv = undefined;
-        this.modals = [];
-        this.folderNameTextBox = null;
-        this.folderName = null;
-        this.appName = null;
+        // this.data = data;
+        // this.view = null;
+        // this.currentAppFullName = undefined;
+        // this.currentAppEnv = undefined;
+        // this.modals = [];
+        // this.folderNameTextBox = null;
+        // this.folderName = null;
+        // this.appName = null;
     }
 
     init() {

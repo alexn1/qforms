@@ -47,10 +47,10 @@ class Tab extends ReactComponent_1.ReactComponent {
         this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
     }
     renderTitles() {
-        return this.props.tabs.map((tab, i) => ((0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : null, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose && (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
+        return this.props.tabs.map((tab, i) => ((0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : undefined, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose && (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
     }
     renderContents() {
-        return this.props.tabs.map((tab, i) => ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : null }, { children: tab.content }), tab.name)));
+        return this.props.tabs.map((tab, i) => ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: i === this.getActive() ? 'active' : undefined }, { children: tab.content }), tab.name)));
     }
     render() {
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("ul", { children: this.props.tabs && this.renderTitles() }), (0, jsx_runtime_1.jsx)("div", { children: this.props.tabs && this.renderContents() })] })));

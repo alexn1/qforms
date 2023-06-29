@@ -6,13 +6,14 @@ import { DataSourceEditor } from '../../../../Editor/DataSourceEditor/DataSource
 import { NewFormController } from '../../../../EdModalController/NewFormController/NewFormController';
 import { EdVisualView } from '../EdVisualView';
 import { EdModelController } from '../../../EdModelController';
+import { EdPageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 
 export class EdPageController extends EdVisualController {
     options: any;
     forms: any[];
     items: any[];
 
-    constructor(model, pageLinkController = null, options = {}) {
+    constructor(model, pageLinkController: EdPageLinkController | null = null, options = {}) {
         super(model);
         this.options = options;
         this.pageLinkController = pageLinkController;

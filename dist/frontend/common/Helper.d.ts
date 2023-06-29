@@ -10,8 +10,8 @@ export declare class Helper {
     static decodeObject(eObj: any): any;
     static decodeValue(raw: JSONString): any;
     static dateTimeReviver(key: any, value: any): any;
-    static createReactComponent(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent;
-    static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent;
+    static createReactComponent(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent | undefined;
+    static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent | undefined;
     static destroyReactComponent(root: any): void;
     static readFileAsDataURL(file: any): Promise<unknown>;
     static templateToJsString(value: any, params: any): any;
@@ -31,7 +31,7 @@ export declare class Helper {
     static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
     static setCookie(name: string, value: string | number | boolean, time: number): void;
-    static getCookie(name: string): string;
+    static getCookie(name: string): string | undefined;
     static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;
     static registerGlobalClass(Class: any): void;

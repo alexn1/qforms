@@ -5,16 +5,16 @@ import { Application } from '../Application/Application';
 import { Key, KeyObject, RawRow, JSONString, ChangesByKey } from '../../../../types';
 import { Result } from '../../../../Result';
 export declare class DataSource extends Model {
-    rows: RawRow[];
+    rows: RawRow[] | null;
     rowsByKey: {
         [key: Key]: RawRow;
-    };
+    } | null;
     news: RawRow[];
     changes: Map<RawRow, RawRow>;
     frame: number;
-    count: number;
+    count: number | null;
     lastFrame: number;
-    constructor(data: any, parent: any);
+    constructor(data: any, parent: Model);
     init(): void;
     deinit(): void;
     setRows(rows: RawRow[]): void;
@@ -30,14 +30,14 @@ export declare class DataSource extends Model {
     isRowColumnChanged(row: RawRow, column: string): boolean;
     getValue(row: RawRow, column: string): JSONString;
     getKeyValues(row: RawRow): KeyObject;
-    getRowKey(row: RawRow): Key;
+    getRowKey(row: RawRow): Key | null;
     removeRow(key: Key): void;
     newRow(row: RawRow): void;
     getSingleRow(withChanges?: boolean): RawRow;
     getForm(): Form | null;
     getPage(): Page | null;
     getApp(): Application;
-    getRow(key: Key): RawRow;
+    getRow(key: Key): RawRow | null;
     getRows(): RawRow[];
     getRowByIndex(i: number): RawRow;
     discard(): void;
@@ -47,7 +47,7 @@ export declare class DataSource extends Model {
     hasNewRows(): boolean;
     static copyNewValues(row: RawRow, newValues: RawRow): void;
     updateRow(key: Key, newValues: RawRow): void;
-    getTable(): any;
+    getTable(): import("../..").Table;
     getDatabase(): import("../..").Database;
     getType(columnName: string): any;
     insert(row?: RawRow): Promise<any>;

@@ -5,8 +5,7 @@ export class EdModelController {
     parent: any;
     view: any;
 
-    constructor(model, parent = null) {
-        // super();
+    constructor(model, parent: EdModelController | null = null) {
         this.model = model;
         this.parent = parent;
         this.view = null;

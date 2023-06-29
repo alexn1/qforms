@@ -6,11 +6,11 @@ export declare class MonitorModule {
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     fill(): {
-        nodeEnv: string;
+        nodeEnv: string | null;
         uptime: number;
         applications: {
             route: string;
-            version: string;
+            version: string | null;
             pages: {
                 name: string;
             }[];

@@ -7,7 +7,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     id: string;
     forms: FormController[];
     constructor(model: Page, parent: ApplicationController, id: string);
-    static create(model: Page, parent: ApplicationController, id: string, options?: PageOptions): PageController;
+    static create(model: Page, parent: ApplicationController, id: string, options?: PageOptions | null): PageController;
     init(): void;
     deinit(): void;
     onSaveAndCloseClick: () => Promise<void>;
@@ -29,7 +29,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     onActionClick(name: string): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;
-    getSelectedRowKey(): any;
+    getSelectedRowKey(): null;
     onSelectClick: (e: any) => Promise<void>;
     onResetClick: (e: any) => Promise<void>;
     selectRow(key: any): Promise<void>;

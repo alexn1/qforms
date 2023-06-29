@@ -6,7 +6,7 @@ export declare class LoginView<T extends LoginController = LoginController> exte
     errMsgRef: React.RefObject<any>;
     constructor(props: any);
     onLoginFormSubmit: (e: any) => void;
-    renderLogo(): any;
+    renderLogo(): null;
     renderTitle(): any;
     onChange: (e: any) => void;
     render(): JSX.Element;

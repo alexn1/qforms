@@ -94,7 +94,7 @@ class EditorModule {
     }
     async handleEditorGet(req, res, context) {
         console.log('EditorModule.handleEditorGet');
-        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
         // data
         const data = {
             app: appInfo.appFile.data,
@@ -118,7 +118,7 @@ class EditorModule {
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass)
             throw new Error(`no class with name ${editorControllerClassName}`);
-        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context), null);
+        const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
         const method = req.body.action;

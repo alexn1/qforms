@@ -2,7 +2,7 @@ export declare class EdModelController {
     model: any;
     parent: any;
     view: any;
-    constructor(model: any, parent?: any);
+    constructor(model: any, parent?: EdModelController | null);
     init(): void;
     getTitle(): any;
     getStyle(): {};

@@ -9,10 +9,6 @@ class Database extends Model_1.Model {
         super(...arguments);
         this.tables = [];
     }
-    /* constructor(data, parent) {
-        super(data, parent);
-        this.tables = [];
-    } */
     init() {
         // console.log('Database.init', this.getName());
         for (const data of this.data.tables) {

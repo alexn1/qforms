@@ -27,9 +27,9 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     onActionClick(name: string, row: RawRow): Promise<any>;
     getField<TFieldController extends FieldController = FieldController>(name: string): TFieldController;
     getApp(): ApplicationController;
-    getSelectedRowKey(): any;
+    getSelectedRowKey(): null;
     isAutoFocus(): boolean;
     isVisible(): boolean;
-    getActiveRow(): RawRow;
+    getActiveRow(): RawRow | null;
     getRow(): RawRow;
 }

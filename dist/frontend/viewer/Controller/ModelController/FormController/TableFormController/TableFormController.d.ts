@@ -10,7 +10,7 @@ export interface TableFormControllerFields extends FormControllerFields {
 export declare class TableFormController extends FormController<TableForm> {
     fields: TableFormControllerFields;
     state: FormControllerState;
-    grid: Grid;
+    grid: Grid | null;
     getViewClass(): any;
     init(): void;
     deinit(): void;
@@ -28,7 +28,7 @@ export declare class TableFormController extends FormController<TableForm> {
     onModelUpdate: (e: any) => Promise<void>;
     onModelDelete: (e: any) => Promise<void>;
     onGridSelectionChange: (key: any) => Promise<void>;
-    getActiveRow(): RawRow;
+    getActiveRow(): RawRow | null;
     isRowSelected: () => boolean;
     onFrameChanged: (value: any) => Promise<void>;
     onNextClick: () => Promise<void>;

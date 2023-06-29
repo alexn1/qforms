@@ -74,8 +74,8 @@ export class MonitorModule {
         const usernamePassword = new Buffer(base64string, 'base64').toString();
         const [username, password] = usernamePassword.split(':');
         return (
-            username === this.hostApp.getParams().monitor.username &&
-            password === this.hostApp.getParams().monitor.password
+            username === this.hostApp.getParams().monitor!.username &&
+            password === this.hostApp.getParams().monitor!.password
         );
     }
 

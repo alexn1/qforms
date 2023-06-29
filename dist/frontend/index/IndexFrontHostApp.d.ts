@@ -1,12 +1,12 @@
 export declare class IndexFrontHostApp {
     data: any;
     view: any;
-    currentAppFullName: string;
+    currentAppFullName: string | undefined;
     currentAppEnv: any;
     modals: any[];
     folderNameTextBox: any;
-    folderName: string;
-    appName: string;
+    folderName: string | null;
+    appName: string | null;
     constructor(data: any);
     init(): void;
     createView(root: any): void;

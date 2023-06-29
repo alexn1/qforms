@@ -22,7 +22,7 @@ export declare class RowFormDateTimeFieldController extends RowFormFieldControll
     getTimeErrorText(): any;
     setValue2(widgetValue: any): void;
     validate2(): void;
-    getError2(): string;
+    getError2(): string | null;
     isParseError2(): boolean;
     resetErrors2(): void;
     setError2(error2: any): void;
@@ -31,7 +31,7 @@ export declare class RowFormDateTimeFieldController extends RowFormFieldControll
     refill(): void;
     isParseError(): boolean;
     isValid(): boolean;
-    getErrorMessage(): string;
+    getErrorMessage(): string | null;
     isValidateOnChange2(): boolean;
     isValidateOnBlur2(): boolean;
 }

@@ -1,8 +1,8 @@
 import { Field } from '../Field';
 import { JSONString, RawRow } from '../../../../../types';
 export declare class CheckBoxListField extends Field {
-    getDisplayValue(row: any): any;
+    getDisplayValue(row: RawRow): any;
     getValueValue(row: any): any;
-    getDataSource(): import("../../..").DataSource;
-    findRowByRawValue(rawValue: JSONString): RawRow;
+    getDataSource(): import("../../..").DataSource | undefined;
+    findRowByRawValue(rawValue: JSONString): RawRow | undefined;
 }

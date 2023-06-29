@@ -11,8 +11,8 @@ export declare class DropdownDatePicker extends ReactComponent {
     onDatePickerDateSelected: (date: any) => void;
     getFormat(): any;
     getStringValue(): any;
-    getSelectedMonth(): any[];
-    getSelectedDate(): any[];
+    getSelectedMonth(): any[] | null;
+    getSelectedDate(): any[] | null;
     getValue(): any;
     shouldComponentUpdate(nextProps: any, nextState: any): boolean;
     getClassList(): string[];

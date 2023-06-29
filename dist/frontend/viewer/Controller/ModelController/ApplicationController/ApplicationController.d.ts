@@ -4,6 +4,7 @@ import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { QueryParams } from '../../../../../types';
+import { Key } from 'react';
 export interface OpenPageOptions {
     name: string;
     key?: any;
@@ -19,7 +20,7 @@ export interface OpenPageOptions {
 export declare class ApplicationController extends ModelController<Application> {
     private frontHostApp;
     lastId: number;
-    activePage: PageController;
+    activePage: PageController | null;
     modals: any[];
     statusbar: any;
     homePageName: string | null;
@@ -41,7 +42,7 @@ export declare class ApplicationController extends ModelController<Application> 
     getNextId(): number;
     getNewId(): string;
     addPage(pc: PageController): void;
-    findPageControllerByPageNameAndKey(pageName: any, key: any): PageController;
+    findPageControllerByPageNameAndKey(pageName: string, key: Key | null): PageController | null;
     onPageSelect(pc: PageController): void;
     closePage(pageController: PageController): Promise<void>;
     onActionClick(name: string): Promise<any>;
@@ -53,7 +54,7 @@ export declare class ApplicationController extends ModelController<Application> 
     onStatusbarCreate: (statusbar: any) => void;
     onLogout: () => Promise<void>;
     onMenuItemClick: (menu: any, type: any, name: any) => Promise<void>;
-    getActivePageName(): string;
+    getActivePageName(): string | null;
     onWindowPopState(e: any): Promise<void>;
     getTitle(): string;
     invalidate(): void;

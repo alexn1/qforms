@@ -298,6 +298,8 @@ class DataSource extends Model_1.Model {
         return this.rowsByKey[key] || null;
     }*/
     getRows() {
+        if (!this.rows)
+            throw new Error('no rows');
         return this.rows;
     }
     getRowByIndex(i) {
@@ -330,7 +332,7 @@ class DataSource extends Model_1.Model {
     getChangesByKey() {
         const changes = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)] = this.changes.get(row);
+            changes[this.getRowKey(row)] != this.changes.get(row);
         }
         return changes;
     }

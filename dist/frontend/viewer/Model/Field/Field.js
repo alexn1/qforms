@@ -63,8 +63,8 @@ class Field extends Model_1.Model {
     }
     getValue(row) {
         // console.log('Field.getValue', this.getFullName(), row);
-        if (!row && this.parent instanceof RowForm_1.RowForm) {
-            row = this.parent.getRow();
+        if (!row && this.getParent() instanceof RowForm_1.RowForm) {
+            row = this.getForm().getRow();
         }
         if (!row) {
             throw new Error(`${this.getFullName()}: need row`);

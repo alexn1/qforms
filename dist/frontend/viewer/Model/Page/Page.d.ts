@@ -28,7 +28,7 @@ export declare class Page extends Model {
     setParam(name: string, value: any): void;
     update(): Promise<void>;
     discard(): void;
-    getKey(): Key;
+    getKey(): Key | null;
     hasRowFormWithDefaultDs(): boolean;
     hasRowFormWithDefaultSqlDataSource(): boolean;
     hasRowForm(): boolean;

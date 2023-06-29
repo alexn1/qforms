@@ -8,8 +8,8 @@ export declare class BkHelper {
     static currentTime(): string;
     static templateToJsString(value: any, params: any): any;
     static readTextFile(path: any): Promise<string>;
-    static getFileContent(filePath: any): Promise<string>;
-    static getFileContentSync(filePath: any): string;
+    static getFileContent(filePath: any): Promise<string | null>;
+    static getFileContentSync(filePath: any): string | null;
     static readBinaryFile(filePath: any): Promise<unknown>;
     static createPath(arr: any): any;
     static getDirPath(filePath: any): any;

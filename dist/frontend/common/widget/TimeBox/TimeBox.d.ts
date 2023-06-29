@@ -5,11 +5,11 @@ export declare class TimeBox extends ReactComponent {
     onKeyPress: (event: any) => void;
     formatValue(value: any): string;
     onChange: (e: any) => void;
-    getValue(): number;
+    getValue(): number | null;
     setValue(value: any): void;
     onBlur: (e: any) => void;
     static getStringValue(value: any): string;
-    static getIntegerValue(stringValue: any): number;
+    static getIntegerValue(stringValue: string): number | null;
     static splitTime(value: any): number[];
     shouldComponentUpdate(nextProps: any, nextState: any): boolean;
     render(): JSX.Element;

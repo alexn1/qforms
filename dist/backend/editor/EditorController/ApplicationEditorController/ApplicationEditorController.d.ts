@@ -1,6 +1,6 @@
 import { VisualEditorController } from '../VisualEditorController';
 export declare class ApplicationEditorController extends VisualEditorController {
-    save(params: any): Promise<any>;
+    save(params: any): Promise<null>;
     getView(params: any): Promise<{
         data: {};
     }>;

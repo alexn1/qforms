@@ -1,8 +1,9 @@
 import { Model } from '../Model';
+import { Table } from '../Table/Table';
 export declare class Database extends Model {
-    tables: any[];
+    tables: Table[];
     init(): void;
-    addTable(table: any): void;
-    getTable(name: any): any;
-    emitResult(result: any, source?: any): any[];
+    addTable(table: Table): void;
+    getTable(name: string): Table;
+    emitResult(result: any, source?: null): any[];
 }

@@ -30,7 +30,7 @@ export declare class PageView<TPageController extends PageController = PageContr
     getStyle(): {
         width: number;
         height: number;
-    };
+    } | undefined;
     componentDidMount(): void;
     focus(): void;
 }

@@ -1,12 +1,13 @@
 import { EdDocumentController } from '../EdDocumentController';
 import { EdDataSourceController } from '../EdDataSourceController/EdDataSourceController';
 import { EdActionController } from '../../EdActionController/EdActionController';
+import { EdModelController } from '../../EdModelController';
 export declare class EdVisualController extends EdDocumentController {
     data: any;
     dataSources: any[];
     actions: any[];
     pageLinkController: any;
-    constructor(model: any, parent?: any);
+    constructor(model: any, parent?: EdModelController | null);
     createDocument(): Promise<any>;
     onControllerSave(value: any): Promise<void>;
     onCreateCustomController: (e: any) => Promise<void>;

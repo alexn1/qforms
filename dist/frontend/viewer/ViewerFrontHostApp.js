@@ -97,6 +97,8 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new AlertController_1.AlertController(Object.assign(Object.assign({}, options), { onClose: () => {
                             this.alertCtrl = null;
@@ -124,6 +126,8 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
                 if (root.childElementCount === 0) {
                     const ctrl = (this.alertCtrl = new ConfirmController_1.ConfirmController(Object.assign(Object.assign({}, options), { onClose: (result) => {
                             this.alertCtrl = null;

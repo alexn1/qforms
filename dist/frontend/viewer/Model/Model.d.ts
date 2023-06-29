@@ -3,7 +3,7 @@ import { DataSource } from './DataSource/DataSource';
 import { ModelData } from '../../../data';
 export declare class Model<T extends ModelData = any> extends EventEmitter {
     data: T;
-    parent: Model | null;
+    private parent;
     deinited: boolean;
     dataSources: DataSource[];
     constructor(data: T, parent: Model | null);
@@ -20,7 +20,7 @@ export declare class Model<T extends ModelData = any> extends EventEmitter {
     getName(): string;
     getFullName(): string;
     getCaption(): string;
-    getDataSource(name: string): DataSource;
+    getDataSource(name: string): DataSource | undefined;
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;

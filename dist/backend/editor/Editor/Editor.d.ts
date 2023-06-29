@@ -1,9 +1,9 @@
 import { BaseModel } from '../../BaseModel';
 export declare class Editor extends BaseModel {
     createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
-    getFile(filePath: any): Promise<string>;
+    getFile(filePath: any): Promise<string | undefined>;
     saveFile(filePath: any, content: any): Promise<void>;
-    getCustomFile(ext: any): Promise<string>;
+    getCustomFile(ext: any): Promise<string | undefined>;
     saveCustomFile(ext: any, text: any): Promise<void>;
     getCustomFilePath(ext: any): Promise<string>;
     moveDataColItem(colName: any, name: any, offset: any): void;

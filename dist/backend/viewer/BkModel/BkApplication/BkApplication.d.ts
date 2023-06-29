@@ -49,7 +49,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     fillPages(context: Context): Promise<any[]>;
     authenticate(context: Context, username: string, password: string): Promise<any>;
     isAuthentication(): boolean;
-    getUsers(context: Context): Promise<any>;
+    getUsers(context: Context): Promise<null>;
     rpc(name: string, context: Context): Promise<any>;
     getEnv(): string;
     getEnvVarValue(name: string): any;
@@ -57,8 +57,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     findDatabase(name: string): BkDatabase | undefined;
     getDatabase(name: string): BkDatabase;
     initContext(context: Context): Promise<void>;
-    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath: string | undefined): AppInfo;
-    static loadAppInfo(appFilePath: string, distDirPath: string | undefined): Promise<AppInfo>;
+    static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo;
+    static loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
     getDataSource(name: string): BkDataSource | undefined;
     getViewClassName(): string;

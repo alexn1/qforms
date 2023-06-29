@@ -14,7 +14,7 @@ class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile) {
         super(appFile.data);
         this.appFile = appFile;
-        this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile, null);
+        this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile);
     }
     getAppFile() {
         return this.appFile;

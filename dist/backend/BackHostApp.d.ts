@@ -80,11 +80,11 @@ export declare class BackHostApp {
         originalUrl: string;
         uri: string;
         platformVersion: any;
-        appVersion: string;
-        route: string;
+        appVersion: string | null;
+        route: string | null;
         body: any;
-        status: number;
-        data: object;
+        status: number | null;
+        data: object | null;
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
@@ -131,5 +131,5 @@ export declare class BackHostApp {
     getDistDirPath(): string;
     makeDistDirPathForApp(appFilePath: string): string;
     getLogger(): EventLog;
-    getFrontLogUrl(): string;
+    getFrontLogUrl(): string | undefined;
 }

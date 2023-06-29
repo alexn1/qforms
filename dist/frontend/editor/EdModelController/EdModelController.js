@@ -4,7 +4,6 @@ exports.EdModelController = void 0;
 const common_1 = require("../../common");
 class EdModelController {
     constructor(model, parent = null) {
-        // super();
         this.model = model;
         this.parent = parent;
         this.view = null;

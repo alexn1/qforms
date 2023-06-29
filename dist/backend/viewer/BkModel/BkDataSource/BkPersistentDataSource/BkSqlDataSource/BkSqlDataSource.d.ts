@@ -9,8 +9,8 @@ export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabas
     constructor(data: any, parent: any);
     fill(context: Context): Promise<{
         rows: import("../../../../../../types").RawRow[];
-        count: number;
-        limit?: number;
+        count: number | null;
+        limit?: number | undefined;
     }>;
     getKeyColumns(): string[];
     getCountQuery(context: Context): string;

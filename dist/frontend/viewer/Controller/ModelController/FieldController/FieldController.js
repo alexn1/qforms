@@ -67,7 +67,7 @@ class FieldController extends ModelController_1.ModelController {
         return stringValue;
     }
     getViewStyle(row) {
-        return null;
+        return undefined;
     }
     async openPage(options) {
         return await this.getParent().openPage(options);

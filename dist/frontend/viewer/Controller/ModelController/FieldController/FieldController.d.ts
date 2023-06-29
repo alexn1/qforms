@@ -7,7 +7,7 @@ export declare class FieldController<TField extends Field = Field> extends Model
     static create(model: Field, parent: FormController): FieldController;
     valueToString(value: any): string;
     stringToValue(stringValue: string): any;
-    getViewStyle(row: any): any;
+    getViewStyle(row: any): undefined;
     openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
     getParent<TFormController extends FormController = FormController>(): TFormController;
     getForm<TFormController extends FormController = FormController>(): TFormController;

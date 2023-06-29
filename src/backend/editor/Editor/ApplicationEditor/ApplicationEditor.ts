@@ -12,7 +12,7 @@ export class ApplicationEditor extends Editor {
 
     constructor(private appFile: JsonFile) {
         super(appFile.data);
-        this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile, null);
+        this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
     }
 
     getAppFile(): JsonFile {

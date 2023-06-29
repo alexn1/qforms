@@ -4,5 +4,5 @@ export declare class TableEditorController extends EditorController {
     delete(params: any): Promise<any>;
     moveUp(params: any): Promise<string>;
     moveDown(params: any): Promise<string>;
-    save(params: any): Promise<any>;
+    save(params: any): Promise<null>;
 }

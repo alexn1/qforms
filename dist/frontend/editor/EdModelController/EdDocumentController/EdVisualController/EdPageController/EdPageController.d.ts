@@ -1,11 +1,12 @@
 import { EdVisualController } from '../EdVisualController';
 import { EdFormController } from '../EdFormController/EdFormController';
 import { EdVisualView } from '../EdVisualView';
+import { EdPageLinkController } from '../../../EdPageLinkController/EdPageLinkController';
 export declare class EdPageController extends EdVisualController {
     options: any;
     forms: any[];
     items: any[];
-    constructor(model: any, pageLinkController?: any, options?: {});
+    constructor(model: any, pageLinkController?: EdPageLinkController | null, options?: {});
     init(): void;
     createForm(model: any): EdFormController;
     removeForm(formController: any): void;

@@ -6,7 +6,7 @@ export declare class IndexModule {
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     fill(): Promise<{
-        nodeEnv: string;
+        nodeEnv: string | null;
         appInfos: {
             fullName: string;
             envs: string[];

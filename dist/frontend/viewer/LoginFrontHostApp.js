@@ -13,6 +13,8 @@ class LoginFrontHostApp extends common_1.FrontHostApp {
         console.log('LoginFrontHostApp.run');
         const loginController = LoginController_1.LoginController.create(this);
         const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
+        if (!rootElement)
+            throw new Error('no root element');
         const loginView = common_1.Helper.createReactComponent(rootElement, loginController.getViewClass(), {
             ctrl: loginController,
         });

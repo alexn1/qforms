@@ -5,7 +5,7 @@ export declare class Editor {
     page: any;
     dataSources: any[];
     actions: any[];
-    constructor(data: any, parent?: any);
+    constructor(data: any, parent?: Editor | null);
     init(): void;
     getClassName(): any;
     getName(): any;

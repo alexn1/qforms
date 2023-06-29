@@ -1,7 +1,7 @@
 import { VisualEditorController } from '../VisualEditorController';
 export declare class PageEditorController extends VisualEditorController {
     get(params: any): Promise<any>;
-    save(params: any): Promise<any>;
+    save(params: any): Promise<null>;
     _new(params: any): Promise<{
         page: {
             '@class': string;

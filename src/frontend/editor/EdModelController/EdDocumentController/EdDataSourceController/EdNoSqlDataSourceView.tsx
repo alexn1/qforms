@@ -85,13 +85,13 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
                     <div className="btn-group" role="group">
                         <button
                             className={`${this.getButtonClass('selectQuery')}`}
-                            style={{ fontWeight: this.isSelected('selectQuery') ? 'bold' : null }}
+                            style={{ fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined }}
                             onClick={(e) => this.setState({ selected: 'selectQuery' })}>
                             selectQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
-                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : null }}
+                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }}
                             onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>

@@ -11,7 +11,7 @@ export declare class EditorFrontHostApp extends FrontHostApp {
     items: any;
     tabWidget: any;
     documents: any[];
-    modal: EdModalController;
+    modal: EdModalController | null;
     constructor(data: any, runAppLink: string);
     run(): Promise<void>;
     deinit(): void;

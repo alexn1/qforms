@@ -95,19 +95,19 @@ export class EdSqlDataSourceView extends EdDocumentView {
                     <div className="btn-group" role="group">
                         <button
                             className={`${this.getButtonClass('singleQuery')}`}
-                            style={{ fontWeight: this.isSelected('singleQuery') ? 'bold' : null }}
+                            style={{ fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined }}
                             onClick={(e) => this.setState({ selected: 'singleQuery' })}>
                             singleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('multipleQuery')}`}
-                            style={{ fontWeight: this.isSelected('multipleQuery') ? 'bold' : null }}
+                            style={{ fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined }}
                             onClick={(e) => this.setState({ selected: 'multipleQuery' })}>
                             multipleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
-                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : null }}
+                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }}
                             onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>

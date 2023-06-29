@@ -24,7 +24,7 @@ export interface ViewerFrontHostAppOptions extends FrontHostAppOptions {
 }
 export declare class ViewerFrontHostApp extends FrontHostApp {
     protected options: ViewerFrontHostAppOptions;
-    applicationController: ApplicationController;
+    applicationController: ApplicationController | null;
     constructor(options: ViewerFrontHostAppOptions);
     run(): Promise<void>;
     onWindowPopState(e: any): Promise<void>;
