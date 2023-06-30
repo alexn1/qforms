@@ -1,3 +1,9 @@
+export type Scalar = string | number | boolean;
+
+export type ScalarRecord = Record<string, Scalar>;
+
+export type StringRecord = Record<string, string>;
+
 // JSONString
 export type JSONString = string & { type: 'JSONString' };
 
