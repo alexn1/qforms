@@ -1,28 +1,28 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { JSONString } from '../../types';
+import { JSONString, Scalar } from '../../types';
 import { ReactComponent } from './ReactComponent';
 
 export class Helper {
-    /*static currentDate() {
+    /* static currentDate() {
         const now = new Date();
         let dd = now.getDate();if (dd < 10) dd = '0' + dd;
         let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
-    }*/
+    } */
 
-    /*static currentDateTime() {
+    /* static currentDateTime() {
         return Helper.currentDate() + ' ' + Helper.currentTime();
-    }*/
+    } */
 
-    /*static currentTime() {
+    /* static currentTime() {
         const now = new Date();
         let hh = now.getHours();if (hh < 10) hh = '0' + hh;
         let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
         let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
         return [hh, mm, ss].join(':');
-    }*/
+    } */
 
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
@@ -339,10 +339,10 @@ export class Helper {
     //     } */
     // }
 
-    static setCookie(name: string, value: string | number | boolean, time: number) {
-        var expires = '';
+    static setCookie(name: string, value: Scalar, time: number) {
+        let expires = '';
         if (time) {
-            var date = new Date(time);
+            const date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
@@ -350,10 +350,10 @@ export class Helper {
     }
 
     static getCookie(name: string): string | undefined {
-        var nameEQ = name + '=';
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
+        const nameEQ = name + '=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
             while (c.charAt(0) == ' ') c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) == 0)
                 return decodeURIComponent(c.substring(nameEQ.length, c.length));

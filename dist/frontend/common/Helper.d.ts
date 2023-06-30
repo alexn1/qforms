@@ -1,4 +1,4 @@
-import { JSONString } from '../../types';
+import { JSONString, Scalar } from '../../types';
 import { ReactComponent } from './ReactComponent';
 export declare class Helper {
     static formatDate(date: any, format: any): any;
@@ -30,7 +30,7 @@ export declare class Helper {
     static addTimezoneOffset(date: any): void;
     static cloneDate(date: Date): Date;
     static fillArray(n: number): number[];
-    static setCookie(name: string, value: string | number | boolean, time: number): void;
+    static setCookie(name: string, value: Scalar, time: number): void;
     static getCookie(name: string): string | undefined;
     static eraseCookie(name: string): void;
     static delay(ms?: number): Promise<unknown>;

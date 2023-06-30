@@ -7,23 +7,23 @@ exports.Helper = void 0;
 const react_1 = __importDefault(require("react"));
 const react_dom_1 = __importDefault(require("react-dom"));
 class Helper {
-    /*static currentDate() {
+    /* static currentDate() {
         const now = new Date();
         let dd = now.getDate();if (dd < 10) dd = '0' + dd;
         let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
-    }*/
-    /*static currentDateTime() {
+    } */
+    /* static currentDateTime() {
         return Helper.currentDate() + ' ' + Helper.currentTime();
-    }*/
-    /*static currentTime() {
+    } */
+    /* static currentTime() {
         const now = new Date();
         let hh = now.getHours();if (hh < 10) hh = '0' + hh;
         let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
         let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
         return [hh, mm, ss].join(':');
-    }*/
+    } */
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -295,19 +295,19 @@ class Helper {
     //     } */
     // }
     static setCookie(name, value, time) {
-        var expires = '';
+        let expires = '';
         if (time) {
-            var date = new Date(time);
+            const date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
     static getCookie(name) {
-        var nameEQ = name + '=';
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
+        const nameEQ = name + '=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
             while (c.charAt(0) == ' ')
                 c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) == 0)

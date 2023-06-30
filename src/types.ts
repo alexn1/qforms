@@ -1,9 +1,5 @@
 export type Scalar = string | number | boolean;
 
-export type ScalarRecord = Record<string, Scalar>;
-
-export type StringRecord = Record<string, string>;
-
 // JSONString
 export type JSONString = string & { type: 'JSONString' };
 
@@ -13,7 +9,7 @@ export type JSONString = string & { type: 'JSONString' };
 // '[123, "abc"]'
 export type Key = JSONString & { type2: 'Key' };
 
-export type KeyItem = number | string | boolean;
+export type KeyItem = Scalar;
 
 export type KeyArray = KeyItem[];
 
@@ -46,7 +42,7 @@ export interface ChangesByKey {
 }
 
 export interface QueryParams {
-    [name: string]: string | number | boolean | null;
+    [name: string]: Scalar | null;
 }
 
 export type Align = 'left' | 'center' | 'right';
