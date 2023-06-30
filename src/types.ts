@@ -56,12 +56,3 @@ export type Visibility = 'visible' | 'hidden';
 export interface Params {
     [name: string]: any;
 }
-
-export interface LogRecord {
-    source: 'client' | 'server';
-    level: 'trace' | 'debug' | 'info' | 'warn' | 'error' | 'fatal';
-    type: string;
-    message: string;
-    stack: string;
-    data: string;
-}
