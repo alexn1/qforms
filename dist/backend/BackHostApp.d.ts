@@ -10,7 +10,7 @@ import { IndexModule } from './index/IndexModule';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { Result } from '../Result';
-import { QueryParams } from '../types';
+import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 export interface BackHostAppParams {
@@ -114,14 +114,14 @@ export declare class BackHostApp {
         appFileName: string,
         env: string,
         domain?: string
-    ], cb: string, query?: QueryParams): void;
+    ], cb: string, query?: Record<string, Scalar | null>): void;
     getPostAlias(path: string, arr: [
         module: string,
         appDirName: string,
         appFileName: string,
         env: string,
         domain?: string
-    ], query?: QueryParams): void;
+    ], query?: Record<string, Scalar | null>): void;
     getNodeEnv(): string | null;
     isDevelopment(): boolean;
     isProduction(): boolean;

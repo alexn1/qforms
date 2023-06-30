@@ -5,7 +5,7 @@ import { WebSocketClient } from '../../../WebSocketClient';
 import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
-import { QueryParams } from '../../../../../types';
+import { Scalar } from '../../../../../types';
 import { Key } from 'react';
 
 export interface OpenPageOptions {
@@ -13,7 +13,7 @@ export interface OpenPageOptions {
     key?;
     newMode?: boolean;
     selectMode?: boolean;
-    params?: QueryParams;
+    params?: Record<string, Scalar>;
     modal?: boolean;
     selectedKey?: string;
     onClose?;

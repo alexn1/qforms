@@ -21,8 +21,7 @@ import { FileSessionStore } from './FileSessionStore';
 import { Result } from '../Result';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-// import Test from './test/Test';
-import { QueryParams } from '../types';
+import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
 
@@ -811,7 +810,7 @@ export class BackHostApp {
             domain?: string,
         ],
         cb: string,
-        query?: QueryParams,
+        query?: Record<string, Scalar | null>,
     ) {
         this.express[method](path, async (req, res, next) => {
             req.params.module = module;
@@ -841,7 +840,7 @@ export class BackHostApp {
             env: string,
             domain?: string,
         ],
-        query?: QueryParams,
+        query?: Record<string, Scalar | null>,
     ) {
         this.alias('get', path, arr, 'moduleGet', query);
         this.alias('post', path, arr, 'modulePost', query);

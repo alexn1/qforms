@@ -1,7 +1,5 @@
 import { Request, Response } from 'express';
 
-import { Params } from '../types';
-
 declare module 'express' {
     export interface Request {
         session: any;
@@ -31,7 +29,7 @@ export class Context {
         [name: string]: any;
     };
     querytime: any = { params: {} };
-    params: Params;
+    params: Record<string, any>;
 
     constructor(public options: ContextOptions = {}) {
         // console.log('Context', options);
@@ -107,7 +105,7 @@ export class Context {
         };
     }
 
-    getParams(): Params {
+    getParams(): Record<string, any> {
         // console.log('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();

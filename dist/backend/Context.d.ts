@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-import { Params } from '../types';
 declare module 'express' {
     interface Request {
         session: any;
@@ -28,7 +27,7 @@ export declare class Context {
         [name: string]: any;
     };
     querytime: any;
-    params: Params;
+    params: Record<string, any>;
     constructor(options?: ContextOptions);
     getRoute(): string;
     getVirtualPath(): string;
@@ -39,7 +38,7 @@ export declare class Context {
         [name: string]: string;
     };
     getQuery(): any;
-    getParams(): Params;
+    getParams(): Record<string, any>;
     getReq(): Request | undefined;
     getRes(): Response;
     getBody(): any;
