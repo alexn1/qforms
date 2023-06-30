@@ -31600,23 +31600,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Helper {
-    /*static currentDate() {
+    /* static currentDate() {
         const now = new Date();
         let dd = now.getDate();if (dd < 10) dd = '0' + dd;
         let mm = now.getMonth()+1;if (mm < 10) mm = '0' + mm;   /!*January is 0!*!/
         const yyyy = now.getFullYear();
         return [yyyy, mm, dd].join('-');
-    }*/
-    /*static currentDateTime() {
+    } */
+    /* static currentDateTime() {
         return Helper.currentDate() + ' ' + Helper.currentTime();
-    }*/
-    /*static currentTime() {
+    } */
+    /* static currentTime() {
         const now = new Date();
         let hh = now.getHours();if (hh < 10) hh = '0' + hh;
         let mm = now.getMinutes();if (mm < 10) mm = '0' + mm;
         let ss = now.getSeconds();if (ss < 10) ss = '0' + ss;
         return [hh, mm, ss].join(':');
-    }*/
+    } */
     static formatDate(date, format) {
         const YYYY = date.getFullYear();
         const M = date.getMonth() + 1;
@@ -31630,7 +31630,7 @@ class Helper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
@@ -31663,13 +31663,12 @@ class Helper {
         return obj;
     }
     static decodeValue(raw) {
-        try {
-            return JSON.parse(raw, Helper.dateTimeReviver);
-        }
-        catch (err) {
-            // console.log('raw:', raw);
-            throw err;
-        }
+        // try {
+        return JSON.parse(raw, Helper.dateTimeReviver);
+        // } catch (err) {
+        //     // console.log('raw:', raw);
+        //     throw err;
+        // }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -31752,7 +31751,7 @@ class Helper {
         return bytes.buffer;
     } */
     static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }
@@ -31888,19 +31887,19 @@ class Helper {
     //     } */
     // }
     static setCookie(name, value, time) {
-        var expires = '';
+        let expires = '';
         if (time) {
-            var date = new Date(time);
+            const date = new Date(time);
             // date.setTime(date.getTime() + (days*24*60*60*1000));
             expires = '; expires=' + date.toUTCString();
         }
         document.cookie = name + '=' + (encodeURIComponent(value) || '') + expires + '; path=/';
     }
     static getCookie(name) {
-        var nameEQ = name + '=';
-        var ca = document.cookie.split(';');
-        for (var i = 0; i < ca.length; i++) {
-            var c = ca[i];
+        const nameEQ = name + '=';
+        const ca = document.cookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
             while (c.charAt(0) == ' ')
                 c = c.substring(1, c.length);
             if (c.indexOf(nameEQ) == 0)
