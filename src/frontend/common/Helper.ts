@@ -37,7 +37,7 @@ export class Helper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) =>
+        return format.replace(/\{([\w.]+)\}/g, (text, name) =>
             values[name] ? values[name] : text,
         );
     }
@@ -78,12 +78,12 @@ export class Helper {
     }
 
     static decodeValue(raw: JSONString) {
-        try {
-            return JSON.parse(raw, Helper.dateTimeReviver);
-        } catch (err) {
-            // console.log('raw:', raw);
-            throw err;
-        }
+        // try {
+        return JSON.parse(raw, Helper.dateTimeReviver);
+        // } catch (err) {
+        //     // console.log('raw:', raw);
+        //     throw err;
+        // }
     }
 
     static dateTimeReviver(key, value) {
@@ -97,7 +97,12 @@ export class Helper {
         return value;
     }
 
-    static createReactComponent(rootElement: Element, type, props = {}, children?): ReactComponent | undefined {
+    static createReactComponent(
+        rootElement: Element,
+        type,
+        props = {},
+        children?,
+    ): ReactComponent | undefined {
         // console.log('Helper.createReactComponent', rootElement, type);
         let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
@@ -198,7 +203,7 @@ export class Helper {
     } */
 
     static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }

@@ -137,7 +137,7 @@ class Context {
     }
     getUrl() {
         const req = this.getReq();
-        var fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
+        const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
         // console.log('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }

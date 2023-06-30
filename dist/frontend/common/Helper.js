@@ -37,7 +37,7 @@ class Helper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w\.]+)\}/g, (text, name) => values[name] ? values[name] : text);
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
     static formatNumber(value) {
         return new Intl.NumberFormat('ru-RU').format(value);
@@ -70,13 +70,12 @@ class Helper {
         return obj;
     }
     static decodeValue(raw) {
-        try {
-            return JSON.parse(raw, Helper.dateTimeReviver);
-        }
-        catch (err) {
-            // console.log('raw:', raw);
-            throw err;
-        }
+        // try {
+        return JSON.parse(raw, Helper.dateTimeReviver);
+        // } catch (err) {
+        //     // console.log('raw:', raw);
+        //     throw err;
+        // }
     }
     static dateTimeReviver(key, value) {
         if (typeof value === 'string') {
@@ -159,7 +158,7 @@ class Helper {
         return bytes.buffer;
     } */
     static templateToJsString(value, params) {
-        return value.replace(/\$\{([\w\.@]+)\}/g, (text, name) => {
+        return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return `Helper.decodeValue('${Helper.encodeValue(params[name])}')`;
             }

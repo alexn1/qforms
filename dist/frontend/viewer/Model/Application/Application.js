@@ -47,12 +47,11 @@ class Application extends Model_1.Model {
         const [headers, body] = await common_1.FrontHostApp.doHttpRequest2(options);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
-        if (!headers['qforms-app-version'])
-            throw new Error('no qforms-app-version header');
+        // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
         this.emit('request', {
             time: Date.now() - start,
             remotePlatformVersion: headers['qforms-platform-version'],
-            remoteAppVersion: headers['qforms-app-version'],
+            remoteAppVersion: headers['qforms-app-version'] || null,
         });
         return body;
     }
