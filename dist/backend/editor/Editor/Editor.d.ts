@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel';
 import { BkModelData } from '../../../data';
-export declare class Editor extends BaseModel {
+export declare class Editor<TBkModelData extends BkModelData = BkModelData> extends BaseModel<TBkModelData> {
     createFileByParams(newFilePath: string, templateFilePath: string, params: any): Promise<any>;
     getFile(filePath: string): Promise<string | undefined>;
     saveFile(filePath: string, content: string): Promise<void>;

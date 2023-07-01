@@ -1,7 +1,10 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
+import { BkModelData } from '../../../data';
 
-export class BkModel extends BaseModel {
+export class BkModel<
+    TBkModelData extends BkModelData = BkModelData,
+> extends BaseModel<TBkModelData> {
     deinited = false;
     fillCollections: string[] = [];
 

@@ -1,5 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelData } from '../data';
+import { BkApplicationData, BkModelData } from '../data';
 export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     protected data: TBkModelData;
     private parent?;
@@ -7,22 +7,16 @@ export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     static getClassName(data: BkModelData): string;
     static getAttr(data: BkModelData, name: string): string;
     static getName(data: BkModelData): string;
-    static getEnvList(data: BkModelData): string[];
+    static getEnvList(data: BkApplicationData): string[];
     getClassName(): string;
     getName(): string;
-    static attributes(data: BkModelData): {
-        [name: string]: any;
-        name: string;
-    };
-    attributes(): {
-        [name: string]: any;
-        name: string;
-    };
+    static attributes(data: BkModelData): {};
+    attributes(): {};
     getAttr(name: string): string;
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;
     isData(colName: string, name: string): boolean;
-    getData(): BkModelData;
+    getData(): TBkModelData;
     getCol(name: string): any;
     getItemNames(colName: string): any;
     getColItemData(colName: string, name: string): any;

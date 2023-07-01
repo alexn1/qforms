@@ -7,8 +7,11 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
+import { BkPageData } from '../../../../data';
 
-export class BkPage<TBkApplication extends BkApplication = BkApplication> extends BkModel {
+export class BkPage<
+    TBkApplication extends BkApplication = BkApplication,
+> extends BkModel<BkPageData> {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     forms: BkForm[] = [];

@@ -2,7 +2,8 @@ import { Editor } from '../Editor';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-export declare class ApplicationEditor extends Editor {
+import { BkApplicationData } from '../../../../data';
+export declare class ApplicationEditor extends Editor<BkApplicationData> {
     private appFile;
     appInfo: AppInfo;
     constructor(appFile: JsonFile);

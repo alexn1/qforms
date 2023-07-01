@@ -1,10 +1,11 @@
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-export declare class PageEditor extends Editor {
-    appEditor: ApplicationEditor;
+import { BkPageData } from '../../../../data';
+export declare class PageEditor extends Editor<BkPageData> {
+    private appEditor;
     pageFile: JsonFile;
-    constructor(appEditor: any, pageFile: any);
+    constructor(appEditor: ApplicationEditor, pageFile: JsonFile);
     static createData(params: any): {
         '@class': string;
         '@attributes': {

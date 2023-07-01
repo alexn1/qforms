@@ -10,8 +10,8 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { ApplicationData } from '../../../../data';
-export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
+import { ApplicationData, BkApplicationData } from '../../../../data';
+export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<BkApplicationData> {
     private appInfo;
     private hostApp;
     private env;

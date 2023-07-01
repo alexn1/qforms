@@ -21,11 +21,13 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { index } from '../../index';
 
 import * as text from '../../text';
-import { ApplicationData } from '../../../../data';
+import { ApplicationData, BkApplicationData } from '../../../../data';
 
 const pkg = require('../../../../../package.json');
 
-export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel {
+export class BkApplication<
+    THostApp extends BackHostApp = BackHostApp,
+> extends BkModel<BkApplicationData> {
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
@@ -331,7 +333,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         // console.log(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
-        const obj = this.data.env![env];
+        const obj = this.data.env[env];
         if (!obj) throw new Error(`no env ${env}`);
         if (obj[name]) return obj[name];
         throw new Error(`no env ${name} in ${env}`);
@@ -345,7 +347,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return this.databases.find((database) => database.getName() === name);
     }
 
-    getDatabase(name: string): BkDatabase {        
+    getDatabase(name: string): BkDatabase {
         const db = this.findDatabase(name);
         if (!db) throw new Error(`no database with name: ${name}`);
         return db;
@@ -375,10 +377,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         };
     }
 
-    static async loadAppInfo(
-        appFilePath: string,
-        distDirPath?: string,
-    ): Promise<AppInfo> {
+    static async loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo> {
         // console.log('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();

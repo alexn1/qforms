@@ -6,7 +6,9 @@ import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 import { BkModelData } from '../../../data';
 
-export class Editor extends BaseModel {
+export class Editor<
+    TBkModelData extends BkModelData = BkModelData,
+> extends BaseModel<TBkModelData> {
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
