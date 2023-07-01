@@ -3,6 +3,7 @@ import { RowFormDateTimeFieldView } from './RowFormDateTimeFieldView';
 import { TimeBox } from '../../../../../../common';
 import { DateTimeField } from '../../../../../Model/Field/DateTimeField/DateTimeField';
 import { Helper } from '../../../../../../common/Helper';
+import { RowFormController } from '../../../FormController/RowFormController/RowFormController';
 
 export class RowFormDateTimeFieldController extends RowFormFieldController<DateTimeField> {
     widget2: any = null;
@@ -101,7 +102,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
             } catch (err) {
                 console.error('unhandled change event error:', this.getModel().getFullName(), err);
             }
-            this.getParent().onFieldChange({ source: this });
+            this.getParent<RowFormController>().onFieldChange({ source: this });
         }
     };
 
@@ -138,7 +139,7 @@ export class RowFormDateTimeFieldController extends RowFormFieldController<DateT
             } catch (err) {
                 console.error('unhandled change event error:', this.getModel().getFullName(), err);
             }
-            this.getParent().onFieldChange({ source: this });
+            this.getParent<RowFormController>().onFieldChange({ source: this });
         }
     };
 

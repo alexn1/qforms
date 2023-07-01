@@ -5,10 +5,10 @@ const Field_1 = require("../Field");
 const common_1 = require("../../../../common");
 class TextAreaField extends Field_1.Field {
     getRows() {
-        return this.data.rows;
+        return this.getData().rows;
     }
     getCols() {
-        return this.data.cols;
+        return this.getData().cols;
     }
 }
 exports.TextAreaField = TextAreaField;

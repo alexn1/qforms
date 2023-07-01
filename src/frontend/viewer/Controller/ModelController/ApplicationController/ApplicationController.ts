@@ -44,7 +44,7 @@ export class ApplicationController extends ModelController<Application> {
         //     this.getHostApp().isDebugMode(),
         //     model,
         // );
-        const { ctrlClass } = model.data;
+        const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
             if (!CustomClass) throw new Error(`no class ${ctrlClass}`);
@@ -58,7 +58,7 @@ export class ApplicationController extends ModelController<Application> {
         super.init();
         // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
-        const pageData = this.getModel().data.pages[0];
+        const pageData = this.getModel().getData().pages[0];
         this.activePage = pageData
             ? this.createPage(pageData, {
                   modal: false,
@@ -246,11 +246,11 @@ export class ApplicationController extends ModelController<Application> {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.getModel().data.menu
-                ? Object.keys(this.getModel().data.menu).map((key) => ({
+            ...(this.getModel().getData().menu
+                ? Object.keys(this.getModel().getData().menu).map((key) => ({
                       name: key,
                       title: key,
-                      items: this.getModel().data.menu[key].map((item) => ({
+                      items: this.getModel().getData().menu[key].map((item) => ({
                           type: item.type,
                           name: item.page || item.action,
                           title: item.caption,

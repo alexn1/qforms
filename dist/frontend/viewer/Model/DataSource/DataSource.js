@@ -98,7 +98,7 @@ class DataSource extends Model_1.Model {
     }
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
-        this.setRows(this.data.rows);
+        this.setRows(this.getData().rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
             table.on('insert', this.onTableInsert);
@@ -211,7 +211,7 @@ class DataSource extends Model_1.Model {
         return value;
     }
     getKeyValues(row) {
-        return this.data.keyColumns.reduce((keyValues, column) => {
+        return this.getData().keyColumns.reduce((keyValues, column) => {
             keyValues[column] = JSON.parse(row[column]);
             return keyValues;
         }, {});
@@ -219,7 +219,7 @@ class DataSource extends Model_1.Model {
     getRowKey(row) {
         // console.log('DataSource.getRowKey', row);
         const arr = [];
-        for (const column of this.data.keyColumns) {
+        for (const column of this.getData().keyColumns) {
             if (row[column] === undefined)
                 return null;
             if (row[column] === null)
@@ -365,7 +365,7 @@ class DataSource extends Model_1.Model {
         }
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.data.rows:', this.data.rows);
+        // console.log('this.getData().rows:', this.getData().rows);
     }
     getTable() {
         if (!this.getAttr('table'))

@@ -8,7 +8,7 @@ export class Database extends Model {
 
     init() {
         // console.log('Database.init', this.getName());
-        for (const data of this.data.tables) {
+        for (const data of this.getData().tables) {
             const table = new Table(data, this);
             table.init();
             this.addTable(table);

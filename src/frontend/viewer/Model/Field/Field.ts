@@ -152,19 +152,19 @@ export class Field extends Model {
     }
 
     isReadOnly(): boolean {
-        return this.data.readOnly === 'true';
+        return this.getData().readOnly === 'true';
     }
 
     isNotNull(): boolean {
-        return this.data.notNull === 'true';
+        return this.getData().notNull === 'true';
     }
 
     isNullable(): boolean {
-        return this.data.notNull === 'false';
+        return this.getData().notNull === 'false';
     }
 
     getWidth(): number | null {
-        const width = parseInt(this.data.width);
+        const width = parseInt(this.getData().width);
         if (isNaN(width)) return null;
         if (width === 0) return 100;
         return width;
@@ -175,19 +175,19 @@ export class Field extends Model {
     }
 
     isParam(): boolean {
-        return this.data.param === 'true';
+        return this.getData().param === 'true';
     }
 
     validateOnChange(): boolean {
-        if (this.data.validateOnChange !== undefined) {
-            return this.data.validateOnChange === 'true';
+        if (this.getData().validateOnChange !== undefined) {
+            return this.getData().validateOnChange === 'true';
         }
         return true;
     }
 
     validateOnBlur(): boolean {
-        if (this.data.validateOnBlur !== undefined) {
-            return this.data.validateOnBlur === 'true';
+        if (this.getData().validateOnBlur !== undefined) {
+            return this.getData().validateOnBlur === 'true';
         }
         return false;
     }

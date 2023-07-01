@@ -37,7 +37,7 @@ class Page extends Model_1.Model {
     }
     createForms() {
         // forms
-        for (const data of this.data.forms) {
+        for (const data of this.getData().forms) {
             const FormClass = Helper_1.Helper.getGlobalClass(Model_1.Model.getClassName(data));
             if (!FormClass)
                 throw new Error(`no ${Model_1.Model.getClassName(data)} class`);

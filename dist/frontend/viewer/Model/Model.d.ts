@@ -2,11 +2,11 @@ import { EventEmitter } from '../EventEmitter';
 import { DataSource } from './DataSource/DataSource';
 import { ModelData } from '../../../data';
 export declare class Model<T extends ModelData = any> extends EventEmitter {
-    data: T;
-    private parent;
+    private data;
+    private parent?;
     deinited: boolean;
     dataSources: DataSource[];
-    constructor(data: T, parent?: Model | null);
+    constructor(data: T, parent?: Model<any> | undefined);
     init(): void;
     deinit(): void;
     static getAttr(data: ModelData, name: string): any;
@@ -25,6 +25,6 @@ export declare class Model<T extends ModelData = any> extends EventEmitter {
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;
-    getParent(): Model;
+    getParent<TModel extends Model = Model>(): TModel;
     getData(): T;
 }

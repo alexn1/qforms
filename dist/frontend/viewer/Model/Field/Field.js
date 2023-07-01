@@ -144,16 +144,16 @@ class Field extends Model_1.Model {
         return this.getForm().getApp();
     }
     isReadOnly() {
-        return this.data.readOnly === 'true';
+        return this.getData().readOnly === 'true';
     }
     isNotNull() {
-        return this.data.notNull === 'true';
+        return this.getData().notNull === 'true';
     }
     isNullable() {
-        return this.data.notNull === 'false';
+        return this.getData().notNull === 'false';
     }
     getWidth() {
-        const width = parseInt(this.data.width);
+        const width = parseInt(this.getData().width);
         if (isNaN(width))
             return null;
         if (width === 0)
@@ -164,17 +164,17 @@ class Field extends Model_1.Model {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
     }
     isParam() {
-        return this.data.param === 'true';
+        return this.getData().param === 'true';
     }
     validateOnChange() {
-        if (this.data.validateOnChange !== undefined) {
-            return this.data.validateOnChange === 'true';
+        if (this.getData().validateOnChange !== undefined) {
+            return this.getData().validateOnChange === 'true';
         }
         return true;
     }
     validateOnBlur() {
-        if (this.data.validateOnBlur !== undefined) {
-            return this.data.validateOnBlur === 'true';
+        if (this.getData().validateOnBlur !== undefined) {
+            return this.getData().validateOnBlur === 'true';
         }
         return false;
     }

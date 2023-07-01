@@ -15,7 +15,7 @@ class Table extends Model_1.Model {
     } */
     init() {
         // console.log('Table.init', this.getFullName());
-        for (const data of this.data.columns) {
+        for (const data of this.getData().columns) {
             const column = new Column_1.Column(data, this);
             column.init();
             this.addColumn(column);

@@ -19,7 +19,7 @@ export class Form extends Model {
         this.createDataSources();
 
         // fields
-        for (const data of this.data.fields) {
+        for (const data of this.getData().fields) {
             const Class = Helper.getGlobalClass(data.class);
             if (!Class) throw new Error(`no ${data.class} class`);
             const field = new Class(data, this);

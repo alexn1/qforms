@@ -7,13 +7,13 @@ const common_1 = require("../../../common");
 const Helper_1 = require("../../../common/Helper");
 class Application extends Model_1.Model {
     constructor(data) {
-        super(data, null);
+        super(data);
         this.databases = [];
         this.dataSources = [];
     }
     init() {
         // console.log('Application.init');
-        if (!this.data.theme)
+        if (!this.getData().theme)
             throw new Error('no theme attr');
         // databases
         this.createDatabases();
@@ -21,7 +21,7 @@ class Application extends Model_1.Model {
         this.createDataSources();
     }
     createDatabases() {
-        for (const data of this.data.databases) {
+        for (const data of this.getData().databases) {
             const database = new Database_1.Database(data, this);
             database.init();
             this.addDatabase(database);
@@ -66,16 +66,16 @@ class Application extends Model_1.Model {
         return database;
     }
     getText() {
-        return this.data.text;
+        return this.getData().text;
     }
     getUser() {
-        return this.data.user;
+        return this.getData().user;
     }
     getDomain() {
         return this.getAttr('domain');
     }
     getVirtualPath() {
-        return this.data.virtualPath;
+        return this.getData().virtualPath;
     }
     async rpc(name, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
@@ -102,7 +102,7 @@ class Application extends Model_1.Model {
         return Promise.allSettled(promises);
     }
     getNodeEnv() {
-        return this.data.nodeEnv;
+        return this.getData().nodeEnv;
     }
     isDevelopment() {
         return this.getNodeEnv() === 'development';

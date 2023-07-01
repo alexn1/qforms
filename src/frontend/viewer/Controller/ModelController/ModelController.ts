@@ -22,9 +22,9 @@ export abstract class ModelController<TModel extends Model = Model> extends Cont
         return this.model;
     }
 
-    getParent(): ModelController {
+    getParent<TModelController extends ModelController = ModelController>(): TModelController {
         if (!this.parent) throw new Error(`${this.getModel().getFullName()}: no controller parent`);
-        return this.parent;
+        return this.parent as TModelController;
     }
 
     getTitle(): string {

@@ -11,12 +11,12 @@ export class Application extends Model<ApplicationData> {
     dataSources: DataSource[] = [];
 
     constructor(data: ApplicationData) {
-        super(data, null);
+        super(data);
     }
 
     init() {
         // console.log('Application.init');
-        if (!this.data.theme) throw new Error('no theme attr');
+        if (!this.getData().theme) throw new Error('no theme attr');
 
         // databases
         this.createDatabases();
@@ -26,7 +26,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     createDatabases() {
-        for (const data of this.data.databases) {
+        for (const data of this.getData().databases) {
             const database = new Database(data, this);
             database.init();
             this.addDatabase(database);
@@ -77,11 +77,11 @@ export class Application extends Model<ApplicationData> {
     }
 
     getText() {
-        return this.data.text;
+        return this.getData().text;
     }
 
     getUser() {
-        return this.data.user;
+        return this.getData().user;
     }
 
     getDomain() {
@@ -89,7 +89,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     getVirtualPath() {
-        return this.data.virtualPath;
+        return this.getData().virtualPath;
     }
 
     async rpc(name: string, params: { [name: string]: any }) {
@@ -117,7 +117,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     getNodeEnv(): string | null {
-        return this.data.nodeEnv;
+        return this.getData().nodeEnv;
     }
 
     isDevelopment(): boolean {

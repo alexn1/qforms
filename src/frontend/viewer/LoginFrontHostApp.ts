@@ -2,12 +2,11 @@ import { LoginController } from './Controller/LoginController/LoginController';
 import { FrontHostApp, Helper } from '../common';
 
 export class LoginFrontHostApp extends FrontHostApp {
-    data: any;
+    // data: any;
 
-    constructor(data) {
+    constructor(private data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();
-        this.data = data;
     }
 
     async run() {

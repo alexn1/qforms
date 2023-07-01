@@ -53,7 +53,7 @@ export class Page extends Model {
 
     createForms() {
         // forms
-        for (const data of this.data.forms) {
+        for (const data of this.getData().forms) {
             const FormClass = Helper.getGlobalClass(Model.getClassName(data));
             if (!FormClass) throw new Error(`no ${Model.getClassName(data)} class`);
             const form = new FormClass(data, this);

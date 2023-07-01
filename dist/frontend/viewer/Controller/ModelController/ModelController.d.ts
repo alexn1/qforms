@@ -8,7 +8,7 @@ export declare abstract class ModelController<TModel extends Model = Model> exte
     init(): void;
     deinit(): void;
     getModel(): TModel;
-    getParent(): ModelController;
+    getParent<TModelController extends ModelController = ModelController>(): TModelController;
     getTitle(): string;
     getViewClass(): any;
     isActionEnabled(name: string): boolean;

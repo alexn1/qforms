@@ -25,7 +25,7 @@ export class TableFormView<
         const dataSource = model.getDefaultDataSource();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
-                {model.data.newRowMode !== 'disabled' && (
+                {model.getData().newRowMode !== 'disabled' && (
                     <Button
                         key="new"
                         classList={['toolbar-button', 'default']}
@@ -35,7 +35,7 @@ export class TableFormView<
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
                 )}
-                {model.data.refreshButton === 'true' && dataSource.isPersistent() && (
+                {model.getData().refreshButton === 'true' && dataSource.isPersistent() && (
                     <Button
                         key="refresh"
                         classList={['toolbar-button']}
@@ -45,7 +45,7 @@ export class TableFormView<
                         <div>{model.getApp().getText().form.refresh}</div>
                     </Button>
                 )}
-                {model.data.deleteRowMode !== 'disabled' && (
+                {model.getData().deleteRowMode !== 'disabled' && (
                     <Button
                         key="delete"
                         classList={['toolbar-button']}

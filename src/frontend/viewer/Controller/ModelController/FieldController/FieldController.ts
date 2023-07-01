@@ -77,12 +77,12 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 
     async openPage(options: OpenPageOptions) {
-        return await this.getParent().openPage(options);
+        return await this.getParent<FormController>().openPage(options);
     }
 
-    getParent<TFormController extends FormController = FormController>(): TFormController {
+    /* getParent<TFormController extends FormController = FormController>(): TFormController {
         return super.getParent() as TFormController;
-    }
+    } */
 
     getForm<TFormController extends FormController = FormController>(): TFormController {
         return this.getParent();

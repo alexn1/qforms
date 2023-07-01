@@ -6,17 +6,17 @@ const common_1 = require("../../../../common");
 class CheckBoxListField extends Field_1.Field {
     getDisplayValue(row) {
         let value = null;
-        if (row[this.data.displayColumn]) {
+        if (row[this.getData().displayColumn]) {
             try {
-                value = common_1.Helper.decodeValue(row[this.data.displayColumn]);
+                value = common_1.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.data.displayColumn]);
+                console.log('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }
         else {
-            value = this.data.displayColumn;
+            value = this.getData().displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
                 return row.hasOwnProperty(name) ? row[name] || '' : text;
             });
@@ -24,13 +24,13 @@ class CheckBoxListField extends Field_1.Field {
         return value;
     }
     getValueValue(row) {
-        if (!row[this.data.valueColumn]) {
+        if (!row[this.getData().valueColumn]) {
             throw new Error('no valueColumn in CheckBoxList data source');
         }
-        return common_1.Helper.decodeValue(row[this.data.valueColumn]);
+        return common_1.Helper.decodeValue(row[this.getData().valueColumn]);
     }
     getDataSource() {
-        const name = this.data.dataSourceName;
+        const name = this.getData().dataSourceName;
         if (!name)
             throw new Error(`${this.getFullName()}: no dataSourceName`);
         if (this.getForm().getDataSource(name)) {
@@ -47,7 +47,7 @@ class CheckBoxListField extends Field_1.Field {
     findRowByRawValue(rawValue) {
         return this.getDataSource()
             .getRows()
-            .find((row) => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.getData().valueColumn] === rawValue);
     }
 }
 exports.CheckBoxListField = CheckBoxListField;

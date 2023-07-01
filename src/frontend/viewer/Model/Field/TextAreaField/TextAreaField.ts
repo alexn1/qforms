@@ -3,11 +3,11 @@ import { Helper } from '../../../../common';
 
 export class TextAreaField extends Field {
     getRows() {
-        return this.data.rows;
+        return this.getData().rows;
     }
 
     getCols() {
-        return this.data.cols;
+        return this.getData().cols;
     }
 }
 

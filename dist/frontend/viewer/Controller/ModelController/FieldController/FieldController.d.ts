@@ -11,7 +11,6 @@ export declare class FieldController<TField extends Field = Field> extends Model
     stringToValue(stringValue: string): any;
     getViewStyle(row: RawRow): CSSProperties | undefined;
     openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
-    getParent<TFormController extends FormController = FormController>(): TFormController;
     getForm<TFormController extends FormController = FormController>(): TFormController;
     getPage<TPageController extends PageController = PageController>(): TPageController;
     getApp<TApplicationController extends ApplicationController = ApplicationController>(): TApplicationController;

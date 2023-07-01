@@ -72,9 +72,9 @@ class FieldController extends ModelController_1.ModelController {
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
-    getParent() {
-        return super.getParent();
-    }
+    /* getParent<TFormController extends FormController = FormController>(): TFormController {
+        return super.getParent() as TFormController;
+    } */
     getForm() {
         return this.getParent();
     }

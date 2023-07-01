@@ -4,6 +4,7 @@ exports.LoginFrontHostApp = void 0;
 const LoginController_1 = require("./Controller/LoginController/LoginController");
 const common_1 = require("../common");
 class LoginFrontHostApp extends common_1.FrontHostApp {
+    // data: any;
     constructor(data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();

@@ -99,7 +99,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
             } catch (err) {
                 console.error('unhandled change event error:', this.getModel().getFullName(), err);
             }
-            this.getParent().onFieldChange({ source: this });
+            this.getParent<RowFormController>().onFieldChange({ source: this });
         }
     };
 
@@ -144,7 +144,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
             } catch (err) {
                 console.error('unhandled change event error:', this.getModel().getFullName(), err);
             }
-            this.getParent().onFieldChange({ source: this });
+            this.getParent<RowFormController>().onFieldChange({ source: this });
         }
     };
 

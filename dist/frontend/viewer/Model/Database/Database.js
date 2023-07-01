@@ -11,7 +11,7 @@ class Database extends Model_1.Model {
     }
     init() {
         // console.log('Database.init', this.getName());
-        for (const data of this.data.tables) {
+        for (const data of this.getData().tables) {
             const table = new Table_1.Table(data, this);
             table.init();
             this.addTable(table);
