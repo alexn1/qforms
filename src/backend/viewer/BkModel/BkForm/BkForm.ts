@@ -41,7 +41,7 @@ export class BkForm extends BkModel {
 
     async fill(context: Context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
-        if (this.getDataSource('default')) {
+        if (this.findDataSource('default')) {
             return super.fill(context);
         }
 
@@ -53,10 +53,6 @@ export class BkForm extends BkModel {
 
         return response;
     }
-
-    /* getDefaultDataSource() {
-        return this.getDataSource('default');
-    } */
 
     _getSurrogateDataSourceResponse(context: Context) {
         const row = {

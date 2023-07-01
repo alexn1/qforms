@@ -34,7 +34,7 @@ class BkForm extends BkModel_1.BkModel {
     }
     async fill(context) {
         // console.log('Form.fill', this.constructor.name, this.getFullName());
-        if (this.getDataSource('default')) {
+        if (this.findDataSource('default')) {
             return super.fill(context);
         }
         // surrogate data source response
@@ -44,9 +44,6 @@ class BkForm extends BkModel_1.BkModel {
         response.dataSources.push(dataSourceResponse);
         return response;
     }
-    /* getDefaultDataSource() {
-        return this.getDataSource('default');
-    } */
     _getSurrogateDataSourceResponse(context) {
         const row = {
             id: 1,

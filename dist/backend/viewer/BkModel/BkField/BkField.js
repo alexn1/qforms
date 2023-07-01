@@ -98,8 +98,7 @@ class BkField extends BkModel_1.BkModel {
         if (!this.getAttr('column'))
             throw new Error(`${this.getFullName()}: column attr is empty`);
         const defaultDataSource = this.getForm().getDataSource('default');
-        if (!defaultDataSource)
-            throw new Error(`${this.getFullName()}: no default datasource`);
+        // if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
         return defaultDataSource.getTable().getColumn(this.getAttr('column'));
     }
     getType() {

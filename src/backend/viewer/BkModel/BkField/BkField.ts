@@ -111,7 +111,7 @@ export class BkField extends BkModel {
     getDatabaseTableColumn(): BkColumn {
         if (!this.getAttr('column')) throw new Error(`${this.getFullName()}: column attr is empty`);
         const defaultDataSource = this.getForm().getDataSource('default') as BkPersistentDataSource;
-        if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
+        // if (!defaultDataSource) throw new Error(`${this.getFullName()}: no default datasource`);
         return defaultDataSource.getTable().getColumn(this.getAttr('column'));
     }
 
