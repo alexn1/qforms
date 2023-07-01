@@ -10,8 +10,8 @@ export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     static getEnvList(data: BkApplicationData): string[];
     getClassName(): string;
     getName(): string;
-    static attributes(data: BkModelData): {};
-    attributes(): {};
+    static attributes(data: BkModelData): import("../data").BkModelAttributes;
+    attributes(): import("../data").BkModelAttributes;
     getAttr(name: string): string;
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;

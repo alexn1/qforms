@@ -1,6 +1,7 @@
+import { BkTableFormData } from '../../../../../data';
 import { BkForm } from '../BkForm';
 
-export class BkTableForm extends BkForm {
+export class BkTableForm extends BkForm<BkTableFormData> {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/

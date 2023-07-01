@@ -6,11 +6,12 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 import { RawRow } from '../../../../types';
-export declare class BkForm extends BkModel {
+import { BkFormData } from '../../../../data';
+export declare class BkForm<TBkFormData extends BkFormData = BkFormData> extends BkModel<TBkFormData> {
     dataSources: BkDataSource[];
     actions: BkAction[];
     fields: BkField[];
-    constructor(data: any, parent: any);
+    constructor(data: TBkFormData, parent: BkPage);
     init(context: Context): Promise<void>;
     getDirPath(): string;
     fillAttributes(response: any): void;

@@ -8,14 +8,15 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { MyError } from '../../../MyError';
 import { Context } from '../../../Context';
-import { JSONString, RawRow, Row } from '../../../../types';
+import { JSONString, RawRow } from '../../../../types';
+import { BkFormData } from '../../../../data';
 
-export class BkForm extends BkModel {
+export class BkForm<TBkFormData extends BkFormData = BkFormData> extends BkModel<TBkFormData> {
     dataSources: BkDataSource[] = [];
     actions: BkAction[] = [];
     fields: BkField[] = [];
 
-    constructor(data, parent) {
+    constructor(data: TBkFormData, parent: BkPage) {
         super(data, parent);
         this.fillCollections = ['dataSources', 'actions', 'fields'];
     }
@@ -56,8 +57,7 @@ export class BkForm extends BkModel {
     }
 
     _getSurrogateDataSourceResponse(context: Context) {
-        const row = {     
-        } as RawRow;
+        const row = {} as RawRow;
         row['id'] = '[1]' as JSONString;
 
         for (const field of this.fields) {
