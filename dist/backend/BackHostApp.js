@@ -706,9 +706,11 @@ class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
+                    // @ts-ignore
                     req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }
+            // @ts-ignore
             await this[cb](req, res, next);
         });
     }

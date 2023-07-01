@@ -28,6 +28,8 @@ export type Align = 'left' | 'center' | 'right';
 
 export type Visibility = 'visible' | 'hidden';
 
+export type Display = 'block' | 'none';
+
 export const keyTupleToKey = (keyArray: KeyTuple): Key => {
     return JSON.stringify(keyArray) as Key;
 };

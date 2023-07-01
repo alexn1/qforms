@@ -1,4 +1,6 @@
 import React from 'react';
+
+import { Display } from '../../../../types';
 import { ReactComponent } from '../../ReactComponent';
 import { CloseIcon } from '../../icon/CloseIcon';
 import { ArrowIcon } from '../../icon/ArrowIcon';
@@ -64,7 +66,7 @@ export class Select extends ReactComponent {
         return this.isVisible() ? 'visible' : 'hidden';
     }
 
-    getDisplay() {
+    getDisplay(): Display {
         return this.isVisible() ? 'block' : 'none';
     }
 

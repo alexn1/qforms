@@ -1,4 +1,5 @@
 import React from 'react';
+import { Display } from '../../../../types';
 import { ReactComponent } from '../../ReactComponent';
 import { Visibility } from '../../../../types';
 import './Select.less';
@@ -10,7 +11,7 @@ export declare class Select extends ReactComponent {
     getValue(): any;
     isNullable(): any;
     getVisibility(): Visibility;
-    getDisplay(): "none" | "block";
+    getDisplay(): Display;
     onKeyDown: (e: any) => Promise<void>;
     onInputMouseDown: (e: any) => Promise<void>;
     onInputBlur: (e: any) => Promise<void>;

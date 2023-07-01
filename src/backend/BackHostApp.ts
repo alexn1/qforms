@@ -463,7 +463,7 @@ export class BackHostApp {
         }
     }
 
-    async moduleGet(req: Request, res: Response, next) {
+    async moduleGet(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         let context: Context | null = null;
@@ -504,7 +504,7 @@ export class BackHostApp {
         }
     }
 
-    async indexGet(req: Request, res: Response, next) {
+    async indexGet(req: Request, res: Response, next: NextFunction) {
         console.log(colors.magenta('indexGet'));
         try {
             const html = await this.indexModule.render();
@@ -549,7 +549,7 @@ export class BackHostApp {
         }
     }
 
-    async modulePost(req: Request, res: Response, next) {
+    async modulePost(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
         console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         let context: Context | null = null;
@@ -588,7 +588,7 @@ export class BackHostApp {
         }
     }
 
-    async moduleGetFile(req: Request, res: Response, next) {
+    async moduleGetFile(req: Request, res: Response, next: NextFunction) {
         if (this.getNodeEnv() === 'development') {
             // @ts-ignore
             console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
@@ -617,7 +617,7 @@ export class BackHostApp {
         }
     }
 
-    async _e404(req, res, next) {
+    async _e404(req: Request, res: Response, next: NextFunction) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(
             new MyError({
@@ -627,7 +627,7 @@ export class BackHostApp {
         );
     }
 
-    async _e500(err, req, res, next) {
+    async _e500(err: any, req: Request, res: Response, next: NextFunction) {
         console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
         const error = typeof err === 'string' ? new MyError({ message: err }) : err;
@@ -676,7 +676,7 @@ export class BackHostApp {
         return new Promise((resolve, reject) => {
             try {
                 const httpServer = http.createServer(this.express);
-                const tempErrorHandler = (err) => {
+                const tempErrorHandler = (err: any) => {
                     console.error('tempErrorHandler', err);
                     httpServer.off('error', tempErrorHandler);
                     reject(err);
@@ -731,7 +731,7 @@ export class BackHostApp {
         console.log('BackHostApp.onProcessExit', code);
     }
 
-    async onUnhandledRejection(err) {
+    async onUnhandledRejection(err: Error) {
         console.error(colors.red('BackHostApp.onUnhandledRejection'), err);
         err.message = `unhandledRejection: ${err.message}`;
         await this.logError(err);
@@ -748,7 +748,7 @@ export class BackHostApp {
         }
     }
 
-    onHttpServerError(err) {
+    onHttpServerError(err: any) {
         console.error(colors.red('BackHostApp.onHttpServerError'), err.code, err.message);
         /* if (err.code === 'EADDRINUSE') {
             console.error(`Address ${host}:${port} in use.`);
@@ -812,7 +812,7 @@ export class BackHostApp {
         cb: string,
         query?: Record<string, Scalar | null>,
     ) {
-        this.express[method](path, async (req, res, next) => {
+        this.express[method](path, async (req: Request, res: Response, next: NextFunction) => {
             req.params.module = module;
             req.params.appDirName = appDirName;
             req.params.appFileName = appFileName;
@@ -824,9 +824,11 @@ export class BackHostApp {
             }
             if (query) {
                 for (const name in query) {
+                    // @ts-ignore
                     req.query[name] = query[name] ? query[name] : req.params[name];
                 }
             }
+            // @ts-ignore
             await this[cb](req, res, next);
         });
     }
