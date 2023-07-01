@@ -121,8 +121,14 @@ export class Form extends Model {
         await this.getDefaultDataSource().refresh();
     }
 
-    getField(name: string) {
+    findField(name: string): Field | undefined {
         return this.fields.find((field) => field.getName() === name);
+    }
+
+    getField(name: string): Field {
+        const field = this.findField(name);
+        if (!field) throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
     }
 
     hasDefaultPersistentDataSource() {

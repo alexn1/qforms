@@ -105,8 +105,14 @@ class Form extends Model_1.Model {
     async refresh() {
         await this.getDefaultDataSource().refresh();
     }
-    getField(name) {
+    findField(name) {
         return this.fields.find((field) => field.getName() === name);
+    }
+    getField(name) {
+        const field = this.findField(name);
+        if (!field)
+            throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
     }
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();

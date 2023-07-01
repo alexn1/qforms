@@ -25,7 +25,8 @@ export declare class Form extends Model {
     getPage(): Page;
     getApp(): Application;
     refresh(): Promise<void>;
-    getField(name: string): Field | undefined;
+    findField(name: string): Field | undefined;
+    getField(name: string): Field;
     hasDefaultPersistentDataSource(): boolean;
     decodeRow(row: RawRow): Row;
 }
