@@ -401,8 +401,14 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return appInfos;
     }
 
-    getDataSource(name: string): BkDataSource | undefined {
+    findDataSource(name: string): BkDataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+
+    getDataSource(name: string): BkDataSource {
+        const ds = this.findDataSource(name);
+        if (!ds) throw new Error(`${this.getName()}: no data source ${name}`);
+        return ds;
     }
 
     getViewClassName(): string {

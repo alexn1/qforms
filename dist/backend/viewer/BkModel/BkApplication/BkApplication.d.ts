@@ -60,7 +60,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo;
     static loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo>;
     static getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]>;
-    getDataSource(name: string): BkDataSource | undefined;
+    findDataSource(name: string): BkDataSource | undefined;
+    getDataSource(name: string): BkDataSource;
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
