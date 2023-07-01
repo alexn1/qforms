@@ -9,7 +9,9 @@ export declare class PersistentDataSource extends DataSource {
     onTableInsert: (e: any) => Promise<void>;
     onTableDelete: (e: any) => Promise<void>;
     onTableRefresh: (e: any) => Promise<void>;
-    getPageParams(): any;
+    getPageParams(): {
+        [x: string]: any;
+    };
     refresh(): Promise<void>;
     refill(): Promise<void>;
     fill(frame: any): Promise<void>;

@@ -1,21 +1,20 @@
+import { Key } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { FrontHostApp } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
-import { Key } from 'react';
 export interface OpenPageOptions {
     name: string;
-    key?: any;
     newMode?: boolean;
     selectMode?: boolean;
     params?: Record<string, Scalar>;
     modal?: boolean;
-    selectedKey?: string;
-    onClose?: any;
-    onSelect?: any;
-    onCreate?: (page: Page) => void;
+    selectedKey?: Key;
+    onCreate?: (page: Page) => void | Promise<void>;
+    onSelect?: (key: Key | null) => void | Promise<void>;
+    onClose?: () => void | Promise<void>;
 }
 export declare class ApplicationController extends ModelController<Application> {
     private frontHostApp;

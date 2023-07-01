@@ -2,6 +2,7 @@ import { RowFormFieldController } from '../RowFormFieldController';
 import { RowFormComboBoxFieldView } from './RowFormComboBoxFieldView';
 import { Helper } from '../../../../../../common/Helper';
 import { ComboBoxField } from '../../../../../Model/Field/ComboBoxField/ComboBoxField';
+import { Key, keyToKeyTuple, keyTupleToKey } from '../../../../../../../types';
 
 export class RowFormComboBoxFieldController extends RowFormFieldController<ComboBoxField> {
     init() {
@@ -114,14 +115,14 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
         if (e.button === 0) {
             e.preventDefault();
             const id = this.getValue();
-            const selectedKey = id ? JSON.stringify([id]) : undefined;
+            const selectedKey = id ? keyTupleToKey([id]) : undefined;
             await this.openPage({
                 name: this.getModel().getAttr('itemSelectPage'),
                 selectMode: true,
                 selectedKey: selectedKey,
-                onSelect: async (key) => {
+                onSelect: async (key: Key) => {
                     if (key) {
-                        const [id] = Helper.decodeValue(key);
+                        const [id] = keyToKeyTuple(key);
                         // console.log('id:', id);
                         if (this.getValue() !== id) {
                             await this.getView().onChange(id.toString());

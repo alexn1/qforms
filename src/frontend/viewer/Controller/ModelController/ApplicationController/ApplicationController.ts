@@ -1,3 +1,4 @@
+import { Key } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Page, PageOptions } from '../../../Model/Page/Page';
 import { ApplicationView } from './ApplicationView';
@@ -6,19 +7,17 @@ import { FrontHostApp, Helper } from '../../../../common';
 import { PageController } from '../PageController/PageController';
 import { Application } from '../../../Model/Application/Application';
 import { Scalar } from '../../../../../types';
-import { Key } from 'react';
 
 export interface OpenPageOptions {
     name: string;
-    key?;
     newMode?: boolean;
     selectMode?: boolean;
     params?: Record<string, Scalar>;
     modal?: boolean;
-    selectedKey?: string;
-    onClose?;
-    onSelect?;
-    onCreate?: (page: Page) => void;
+    selectedKey?: Key;
+    onCreate?: (page: Page) => void | Promise<void>;
+    onSelect?: (key: Key | null) => void | Promise<void>;
+    onClose?: () => void | Promise<void>;
 }
 
 export class ApplicationController extends ModelController<Application> {
@@ -142,7 +141,7 @@ export class ApplicationController extends ModelController<Application> {
     async openPage(options: OpenPageOptions): Promise<PageController> {
         console.log('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
-        if (options.key) throw new Error('openPage: key param is deprecated');
+        // if (options.key) throw new Error('openPage: key param is deprecated');
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
@@ -250,11 +249,13 @@ export class ApplicationController extends ModelController<Application> {
                 ? Object.keys(this.getModel().getData().menu).map((key) => ({
                       name: key,
                       title: key,
-                      items: this.getModel().getData().menu[key].map((item) => ({
-                          type: item.type,
-                          name: item.page || item.action,
-                          title: item.caption,
-                      })),
+                      items: this.getModel()
+                          .getData()
+                          .menu[key].map((item) => ({
+                              type: item.type,
+                              name: item.page || item.action,
+                              title: item.caption,
+                          })),
                   }))
                 : []),
             // user

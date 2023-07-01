@@ -75,7 +75,7 @@ export class PageController<
             }
             await this.getApp().closePage(this);
             if (this.getModel().getOptions().onClose) {
-                this.getModel().getOptions().onClose();
+                this.getModel().getOptions().onClose!();
             }
         } else {
             await this.rerender();
@@ -118,7 +118,7 @@ export class PageController<
         }
         await this.getApp().closePage(this);
         if (this.getModel().getOptions().onClose) {
-            this.getModel().getOptions().onClose();
+            this.getModel().getOptions().onClose!();
         }
     }
 
@@ -260,10 +260,10 @@ export class PageController<
         await this.selectRow(null);
     };
 
-    async selectRow(key) {
+    async selectRow(key: Key | null) {
         console.log('PageController.selectRow', key);
         await this.close();
-        await this.getModel().getOptions().onSelect(key);
+        await this.getModel().getOptions().onSelect!(key);
     }
 
     invalidate() {

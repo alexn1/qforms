@@ -4,6 +4,7 @@ exports.RowFormComboBoxFieldController = void 0;
 const RowFormFieldController_1 = require("../RowFormFieldController");
 const RowFormComboBoxFieldView_1 = require("./RowFormComboBoxFieldView");
 const Helper_1 = require("../../../../../../common/Helper");
+const types_1 = require("../../../../../../../types");
 class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFieldController {
     constructor() {
         super(...arguments);
@@ -70,14 +71,14 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
-                const selectedKey = id ? JSON.stringify([id]) : undefined;
+                const selectedKey = id ? (0, types_1.keyTupleToKey)([id]) : undefined;
                 await this.openPage({
                     name: this.getModel().getAttr('itemSelectPage'),
                     selectMode: true,
                     selectedKey: selectedKey,
                     onSelect: async (key) => {
                         if (key) {
-                            const [id] = Helper_1.Helper.decodeValue(key);
+                            const [id] = (0, types_1.keyToKeyTuple)(key);
                             // console.log('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());

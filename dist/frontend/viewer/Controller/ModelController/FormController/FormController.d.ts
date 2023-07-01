@@ -3,7 +3,7 @@ import { FieldController } from '../FieldController/FieldController';
 import { PageController } from '../PageController/PageController';
 import { Form } from '../../../Model/Form/Form';
 import { ApplicationController, OpenPageOptions } from '../ApplicationController/ApplicationController';
-import { RawRow } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 export interface FormControllerState {
     updated: number;
 }
@@ -27,7 +27,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     onActionClick(name: string, row: RawRow): Promise<any>;
     getField<TFieldController extends FieldController = FieldController>(name: string): TFieldController;
     getApp(): ApplicationController;
-    getSelectedRowKey(): null;
+    getSelectedRowKey(): Key | null;
     isAutoFocus(): boolean;
     isVisible(): boolean;
     getActiveRow(): RawRow | null;

@@ -1,4 +1,5 @@
 import { Model } from '../Model';
+import { PageData } from '../../../../data';
 import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
@@ -11,19 +12,19 @@ export interface PageOptions {
     modal?: boolean;
     newMode?: boolean;
     selectMode?: boolean;
-    selectedKey?: string;
-    params?: any;
-    onCreate?: (page: Page) => void;
-    onSelect?: any;
-    onClose?: any;
+    selectedKey?: Key;
+    params?: Record<string, any>;
+    onCreate?: (page: Page) => void | Promise<void>;
+    onSelect?: (key: Key | null) => void | Promise<void>;
+    onClose?: () => void | Promise<void>;
 }
 
-export class Page extends Model {
+export class Page extends Model<PageData> {
     dataSources: any[] = [];
     forms: Form[] = [];
-    params: any = {};
+    params: Record<string, any> = {};
 
-    constructor(data, parent, private options: PageOptions) {
+    constructor(data: PageData, parent: Application, private options: PageOptions) {
         // console.log('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);

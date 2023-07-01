@@ -149,8 +149,7 @@ class ApplicationController extends ModelController_1.ModelController {
         console.log('ApplicationController.openPage', options);
         if (!options.name)
             throw new Error('no name');
-        if (options.key)
-            throw new Error('openPage: key param is deprecated');
+        // if (options.key) throw new Error('openPage: key param is deprecated');
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
         // console.log('pageController:', pageController);
@@ -245,7 +244,9 @@ class ApplicationController extends ModelController_1.ModelController {
                 ? Object.keys(this.getModel().getData().menu).map((key) => ({
                     name: key,
                     title: key,
-                    items: this.getModel().getData().menu[key].map((item) => ({
+                    items: this.getModel()
+                        .getData()
+                        .menu[key].map((item) => ({
                         type: item.type,
                         name: item.page || item.action,
                         title: item.caption,

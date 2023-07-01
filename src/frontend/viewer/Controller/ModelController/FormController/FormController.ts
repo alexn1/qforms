@@ -7,7 +7,7 @@ import {
     ApplicationController,
     OpenPageOptions,
 } from '../ApplicationController/ApplicationController';
-import { RawRow } from '../../../../../types';
+import { Key, RawRow } from '../../../../../types';
 
 export interface FormControllerState {
     updated: number;
@@ -98,7 +98,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return this.getParent().getParent() as ApplicationController;
     }
 
-    getSelectedRowKey() {
+    getSelectedRowKey(): Key | null {
         return null;
     }
 

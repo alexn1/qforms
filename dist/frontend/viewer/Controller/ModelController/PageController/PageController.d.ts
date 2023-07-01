@@ -31,10 +31,10 @@ export declare class PageController<TApplicationController extends ApplicationCo
     onActionClick(name: string): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;
     getTitle(): string;
-    getSelectedRowKey(): null;
+    getSelectedRowKey(): Key | null;
     onSelectClick: (e: any) => Promise<void>;
     onResetClick: (e: any) => Promise<void>;
-    selectRow(key: any): Promise<void>;
+    selectRow(key: Key | null): Promise<void>;
     invalidate(): void;
     getId(): string;
     isModal(): boolean;

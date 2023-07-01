@@ -2,6 +2,7 @@ export interface ModelData {
     class: string;
     name: string;
     caption: string;
+    ctrlClass: string;
     dataSources: any[];
     actions: any[];
 }
@@ -35,4 +36,7 @@ export interface ApplicationData extends ModelData {
     params: {
         [name: string]: any;
     };
+}
+export interface PageData extends ModelData {
+    forms: any[];
 }
