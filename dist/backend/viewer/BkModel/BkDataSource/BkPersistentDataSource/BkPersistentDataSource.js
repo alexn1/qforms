@@ -10,16 +10,16 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         }
         return dChanges;
     }
-    getValuesFromRow(row) {
-        console.log('PersistentDataSource.getValuesFromRow', row);
+    getValuesFromRow(rawRow) {
+        console.log('PersistentDataSource.getValuesFromRow', rawRow);
         const form = this.getForm();
         if (!form)
             throw new Error('not form ds');
         const values = {};
         for (const field of form.fields) {
             const column = field.getAttr('column');
-            if (Object.prototype.hasOwnProperty.call(row, column)) {
-                const value = field.rawToValue(row[column]);
+            if (Object.prototype.hasOwnProperty.call(rawRow, column)) {
+                const value = field.rawToValue(rawRow[column]);
                 values[column] = field.valueToDbValue(value);
             }
         }
