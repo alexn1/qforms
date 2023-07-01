@@ -306,8 +306,6 @@ class BkApplication extends BkModel_1.BkModel {
         return this.databases.find((database) => database.getName() === name);
     }
     getDatabase(name) {
-        if (!name)
-            throw new Error('getDatabase: no name');
         const db = this.findDatabase(name);
         if (!db)
             throw new Error(`no database with name: ${name}`);

@@ -119,8 +119,7 @@ class ViewerModule {
         }
         else {
             if (application.isAuthentication() &&
-                !(req.session.user &&
-                    req.session.user[context.getRoute()])) {
+                !(req.session.user && req.session.user[context.getRoute()])) {
                 throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
             }
             if (ACTIONS.indexOf(req.body.action) === -1) {
@@ -276,7 +275,7 @@ class ViewerModule {
                 if (result === undefined)
                     throw new Error('action update: result is undefined');
                 await database.commit(context);
-                await res.json(result);
+                res.json(result);
                 this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {

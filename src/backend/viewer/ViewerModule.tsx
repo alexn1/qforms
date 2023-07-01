@@ -175,10 +175,7 @@ export class ViewerModule {
         } else {
             if (
                 application.isAuthentication() &&
-                !(
-                    req.session.user &&
-                    req.session.user[context.getRoute()]
-                )
+                !(req.session.user && req.session.user[context.getRoute()])
             ) {
                 throw new MyError({ message: 'Unauthorized', status: 401, context });
             }
@@ -268,12 +265,12 @@ export class ViewerModule {
         if (req.body.page) {
             const page = await application.getPage(context, req.body.page);
             if (req.body.form) {
-                dataSource = page.getForm(req.body.form)!.getDataSource(req.body.ds)!;
+                dataSource = page.getForm(req.body.form).getDataSource(req.body.ds);
             } else {
-                dataSource = page.getDataSource(req.body.ds)!;
+                dataSource = page.getDataSource(req.body.ds);
             }
         } else {
-            dataSource = application.getDataSource(req.body.ds)!;
+            dataSource = application.getDataSource(req.body.ds);
         }
         await dataSource.getDatabase().connect(context);
         try {
@@ -296,14 +293,14 @@ export class ViewerModule {
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
-        const dataSource = form!.getDataSource('default');
-        const database = dataSource!.getDatabase();
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
         await database.connect(context);
         try {
             await application.initContext(context);
             await database.begin(context);
             try {
-                const result = await dataSource!.create(context);
+                const result = await dataSource.create(context);
                 if (result === undefined) throw new Error('insert action: result is undefined');
                 await database.commit(context);
                 await res.json(result);
@@ -325,17 +322,17 @@ export class ViewerModule {
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
-        const dataSource = form!.getDataSource('default');
-        const database = dataSource!.getDatabase();
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
         await database.connect(context);
         try {
             await application.initContext(context);
             await database.begin(context);
             try {
-                const result = await dataSource!.update(context);
+                const result = await dataSource.update(context);
                 if (result === undefined) throw new Error('action update: result is undefined');
                 await database.commit(context);
-                await res.json(result);
+                res.json(result);
                 this.hostApp.broadcastResult(application, context, result);
             } catch (err) {
                 await database.rollback(context, err);
@@ -354,8 +351,8 @@ export class ViewerModule {
         // const application = this.getApplication(context);
         const page = await application.getPage(context, req.body.page);
         const form = page.getForm(req.body.form);
-        const dataSource = form!.getDataSource('default');
-        const database = dataSource!.getDatabase();
+        const dataSource = form.getDataSource('default');
+        const database = dataSource.getDatabase();
         await database.connect(context);
         try {
             await application.initContext(context);
@@ -386,7 +383,7 @@ export class ViewerModule {
         if (req.body.page) {
             if (req.body.form) {
                 const page = await application.getPage(context, req.body.page);
-                model = page.getForm(req.body.form)!;
+                model = page.getForm(req.body.form);
             } else {
                 model = await application.getPage(context, req.body.page);
             }

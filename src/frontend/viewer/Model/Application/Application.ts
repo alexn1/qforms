@@ -65,9 +65,13 @@ export class Application extends Model<ApplicationData> {
         return body;
     }
 
-    getDatabase(name: string) {
+    findDatabase(name: string): Database | undefined {
+        return this.databases.find((database) => database.getName() === name);
+    }
+
+    getDatabase(name: string): Database {
         // console.log('Application.getDatabase', name);
-        const database = this.databases.find((database) => database.getName() === name);
+        const database = this.findDatabase(name);
         if (!database) throw new Error(`no database: ${name}`);
         return database;
     }

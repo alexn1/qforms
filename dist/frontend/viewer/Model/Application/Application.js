@@ -55,9 +55,12 @@ class Application extends Model_1.Model {
         });
         return body;
     }
+    findDatabase(name) {
+        return this.databases.find((database) => database.getName() === name);
+    }
     getDatabase(name) {
         // console.log('Application.getDatabase', name);
-        const database = this.databases.find((database) => database.getName() === name);
+        const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database: ${name}`);
         return database;

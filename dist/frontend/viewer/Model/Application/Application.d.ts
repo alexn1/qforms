@@ -13,6 +13,7 @@ export declare class Application extends Model<ApplicationData> {
     addDatabase(database: Database): void;
     logout(): Promise<void>;
     request(options: any): Promise<any>;
+    findDatabase(name: string): Database | undefined;
     getDatabase(name: string): Database;
     getText(): any;
     getUser(): {

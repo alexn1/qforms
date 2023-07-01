@@ -17,7 +17,7 @@ export declare class RowFormDateTimeFieldController extends RowFormFieldControll
     onBlur2: (widgetValue: any, fireEvent?: boolean) => void;
     getPlaceholder2(): string;
     getDefaultValue(): number;
-    setDefaultValue2(defaultValue: any): void;
+    setDefaultValue2(defaultValue: string | number): void;
     setValueFromView2(widgetValue: any): void;
     getTimeErrorText(): any;
     setValue2(widgetValue: any): void;

@@ -345,8 +345,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         return this.databases.find((database) => database.getName() === name);
     }
 
-    getDatabase(name: string): BkDatabase {
-        if (!name) throw new Error('getDatabase: no name');
+    getDatabase(name: string): BkDatabase {        
         const db = this.findDatabase(name);
         if (!db) throw new Error(`no database with name: ${name}`);
         return db;
