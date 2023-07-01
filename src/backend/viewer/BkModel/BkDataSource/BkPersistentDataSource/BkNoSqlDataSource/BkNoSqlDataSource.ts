@@ -8,13 +8,14 @@ import { Key, Row, RawRow, JSONString } from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
 import { BaseModel } from '../../../../../BaseModel';
 import { BkForm } from '../../../BkForm/BkForm';
+import { BkModelData } from '../../../../../../data';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
 
-    constructor(data, parent: BaseModel) {
+    constructor(data: BkModelData, parent: BaseModel) {
         super(data, parent);
-        this.table = this.getAttr('table')
+        this.table = this.isAttr('table')
             ? this.getDatabase().getTable(this.getAttr('table'))
             : null;
     }
@@ -51,10 +52,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         }
 
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.getParent<BkForm>().dumpRowToParams(
-                response.rows[0],
-                context.querytime.params,
-            );
+            this.getParent<BkForm>().dumpRowToParams(response.rows[0], context.querytime.params);
         }
 
         if (this.getLimit()) {

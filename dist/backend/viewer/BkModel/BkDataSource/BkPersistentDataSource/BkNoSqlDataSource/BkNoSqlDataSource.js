@@ -8,7 +8,7 @@ const BkHelper_1 = require("../../../../../BkHelper");
 class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
     constructor(data, parent) {
         super(data, parent);
-        this.table = this.getAttr('table')
+        this.table = this.isAttr('table')
             ? this.getDatabase().getTable(this.getAttr('table'))
             : null;
     }
