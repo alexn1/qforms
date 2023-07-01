@@ -87,6 +87,7 @@
         "webpack-node-externals": "^3.0.0"
     },
     "scripts": {
+        "build": "npx gulp build-dev",
         "start": "NODE_ENV=development node dist/backend/start.js",
         "start2": "NODE_ENV=development APPS_DIR_PATH=~/projects/qforms-apps node dist/backend/start.js",
         "start3": "NODE_ENV=development node dist/backend/bundle.js",
