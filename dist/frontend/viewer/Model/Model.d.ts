@@ -20,7 +20,8 @@ export declare class Model<T extends ModelData = any> extends EventEmitter {
     getName(): string;
     getFullName(): string;
     getCaption(): string;
-    getDataSource(name: string): DataSource | undefined;
+    findDataSource(name: string): DataSource | undefined;
+    getDataSource(name: string): DataSource;
     createDataSources(): void;
     deinitDataSources(): void;
     hasActions(): boolean;
