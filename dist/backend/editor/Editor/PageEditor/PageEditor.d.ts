@@ -22,7 +22,7 @@ export declare class PageEditor extends Editor<BkPageData> {
         actions: any[];
         forms: any[];
     };
-    setAttr(name: any, value: any): void;
+    setAttr(name: string, value: string): void;
     save(): Promise<void>;
     createJs(params: any): Promise<any>;
     createJsx(params: any): Promise<any>;

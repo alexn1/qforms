@@ -31,7 +31,7 @@ export class PageEditor extends Editor<BkPageData> {
         };
     }
 
-    setAttr(name, value) {
+    setAttr(name: string, value: string) {
         console.log('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
