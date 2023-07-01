@@ -15,7 +15,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
     constructor(data: BkModelData, parent: BaseModel) {
         super(data, parent);
-        this.table = this.isAttr('table')
+        this.table = this.getAttr('table')
             ? this.getDatabase().getTable(this.getAttr('table'))
             : null;
     }
