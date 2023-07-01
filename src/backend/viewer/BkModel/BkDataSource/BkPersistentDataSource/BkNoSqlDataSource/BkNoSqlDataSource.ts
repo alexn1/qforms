@@ -6,14 +6,14 @@ import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlData
 import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key, Row, RawRow, JSONString } from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
-import { BaseModel } from '../../../../../BaseModel';
 import { BkForm } from '../../../BkForm/BkForm';
 import { BkModelData } from '../../../../../../data';
+import { BkModel } from '../../../BkModel';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
 
-    constructor(data: BkModelData, parent: BaseModel) {
+    constructor(data: BkModelData, parent: BkModel) {
         super(data, parent);
         this.table = this.getAttr('table')
             ? this.getDatabase().getTable(this.getAttr('table'))

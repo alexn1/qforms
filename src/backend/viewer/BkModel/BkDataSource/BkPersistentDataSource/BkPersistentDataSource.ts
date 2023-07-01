@@ -2,10 +2,21 @@ import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
+import { BkModelData } from '../../../../../data';
+import { BkModel } from '../../BkModel';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,
 > extends BkDataSource {
+    table: BkTable | null = null;
+
+    constructor(data: BkModelData, parent: BkModel) {
+        super(data, parent);
+        if (this.getAttr('table')) {
+            this.table = this.getDatabase().getTable(this.getAttr('table'));
+        }
+    }
+
     decodeChanges(changes: ChangesByKey) {
         const dChanges: Record<Key, any> = {};
         for (const key in changes) {
@@ -36,8 +47,7 @@ export abstract class BkPersistentDataSource<
     }
 
     getTable(): BkTable {
-        const tableName = this.getAttr('table');
-        if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
-        return this.getDatabase().getTable(tableName);
+        if (!this.table) throw new Error(`${this.getFullName()}: no table`);
+        return this.table;
     }
 }

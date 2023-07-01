@@ -3,6 +3,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkPersistentDataSource = void 0;
 const BkDataSource_1 = require("../BkDataSource");
 class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
+    constructor(data, parent) {
+        super(data, parent);
+        this.table = null;
+        if (this.getAttr('table')) {
+            this.table = this.getDatabase().getTable(this.getAttr('table'));
+        }
+    }
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
@@ -32,10 +39,12 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         return this.getApp().getDatabase(databaseName);
     }
     getTable() {
-        const tableName = this.getAttr('table');
-        if (!tableName)
-            throw new Error(`${this.getFullName()}: no table name`);
-        return this.getDatabase().getTable(tableName);
+        /* const tableName = this.getAttr('table');
+        if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
+        return this.getDatabase().getTable(tableName); */
+        if (!this.table)
+            throw new Error(`${this.getFullName()}: no table`);
+        return this.table;
     }
 }
 exports.BkPersistentDataSource = BkPersistentDataSource;

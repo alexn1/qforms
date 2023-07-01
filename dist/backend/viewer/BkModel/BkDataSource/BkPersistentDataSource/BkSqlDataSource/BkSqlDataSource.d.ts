@@ -1,12 +1,9 @@
 import { BkPersistentDataSource } from '../BkPersistentDataSource';
 import { ReadResult } from '../../BkDataSource';
-import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
-    table: BkTable | null;
-    constructor(data: any, parent: any);
     fill(context: Context): Promise<{
         rows: import("../../../../../../types").RawRow[];
         count: number | null;

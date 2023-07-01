@@ -1,23 +1,14 @@
 import { BkPersistentDataSource } from '../BkPersistentDataSource';
 import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { BkHelper } from '../../../../../BkHelper';
-import { BkTable } from '../../../BkTable/BkTable';
 import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 
+
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
-    table: BkTable | null = null;
-
-    constructor(data, parent) {
-        super(data, parent);
-        if (this.getAttr('table')) {
-            this.table = this.getDatabase().getTable(this.getAttr('table'));
-        }
-    }
-
     async fill(context: Context) {
         // console.log('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);

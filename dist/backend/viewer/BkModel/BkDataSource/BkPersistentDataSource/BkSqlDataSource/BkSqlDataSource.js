@@ -6,13 +6,6 @@ const BkDataSource_1 = require("../../BkDataSource");
 const BkHelper_1 = require("../../../../../BkHelper");
 const Result_1 = require("../../../../../../Result");
 class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
-    constructor(data, parent) {
-        super(data, parent);
-        this.table = null;
-        if (this.getAttr('table')) {
-            this.table = this.getDatabase().getTable(this.getAttr('table'));
-        }
-    }
     async fill(context) {
         // console.log('SqlDataSource.fill', this.getFullName());
         const response = await super.fill(context);
