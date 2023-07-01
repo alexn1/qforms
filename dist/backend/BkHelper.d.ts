@@ -23,7 +23,7 @@ export declare class BkHelper {
     static writeFileSync(filePath: any, content: any): void;
     static writeFile2(filePath: any, content: any): Promise<void>;
     static mapObject(object: any, cb: any): {};
-    static fsUnlink(filePath: any): Promise<void>;
+    static fsUnlink(filePath: string): Promise<void>;
     static today(timeOffset: any): Date;
     static dateTimeReviver(key: any, value: any): any;
     static decodeValue(rawValue: JSONString): any;

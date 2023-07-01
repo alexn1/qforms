@@ -336,7 +336,7 @@ export class BkHelper {
         }, {});
     }
 
-    static fsUnlink(filePath): Promise<void> {
+    static fsUnlink(filePath: string): Promise<void> {
         return new Promise((resolve, reject) => {
             fs.unlink(filePath, (err) => {
                 if (err) {

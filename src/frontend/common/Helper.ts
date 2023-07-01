@@ -52,12 +52,12 @@ export class Helper {
         return Helper.getStartOfDay(now);
     }
 
-    static getStartOfDay(date) {
+    static getStartOfDay(date: Date) {
         return new Date(date.getFullYear(), date.getMonth(), date.getDate());
     }
 
-    static encodeObject(obj) {
-        const eObj = {};
+    static encodeObject(obj: Record<string, any>): Record<string, JSONString> {
+        const eObj = {} as Record<string, JSONString>;
         for (const name in obj) {
             eObj[name] = Helper.encodeValue(obj[name]);
         }
@@ -68,9 +68,9 @@ export class Helper {
         return JSON.stringify(value) as JSONString;
     }
 
-    static decodeObject(eObj): any {
+    static decodeObject(eObj: Record<string, JSONString>): any {
         if (!eObj) throw new Error('Helper.decodeObject: no object');
-        const obj = {};
+        const obj = {} as Record<string, any>;
         for (const name in eObj) {
             obj[name] = Helper.decodeValue(eObj[name]);
         }
@@ -86,7 +86,7 @@ export class Helper {
         // }
     }
 
-    static dateTimeReviver(key, value) {
+    static dateTimeReviver(key: string, value: any) {
         if (typeof value === 'string') {
             const a =
                 /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
@@ -99,7 +99,7 @@ export class Helper {
 
     static createReactComponent(
         rootElement: Element,
-        type,
+        type: any,
         props = {},
         children?,
     ): ReactComponent | undefined {
