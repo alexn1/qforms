@@ -23,7 +23,7 @@ export declare class BkMySqlDatabase extends BkSqlDatabase<PoolConnection> {
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
     getColumnTypeByDataType(dataType: any): string | null;
-    insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<any>;
+    insertRow(context: any, table: any, values: any, autoColumnTypes?: {}): Promise<Row>;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
 }

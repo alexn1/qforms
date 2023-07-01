@@ -143,17 +143,17 @@ class BkDataSource extends BkModel_1.BkModel {
         }
         return record;
     }
-    getKeyFromValues(values) {
-        const arr = [];
+    getKeyFromValues(record) {
+        const tuple = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
-            const value = values[column];
+            const value = record[column];
             if (value === null || value === undefined) {
                 throw new Error(`getKeyFromValues: no value of ${column} column`);
             }
-            arr.push(value);
+            tuple.push(value);
         }
-        return JSON.stringify(arr);
+        return JSON.stringify(tuple);
     }
     getFullName() {
         if (this.isOnForm()) {

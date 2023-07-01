@@ -132,11 +132,23 @@ export class BkForm extends BkModel {
         return !!context.getBody().newMode;
     }
 
-    getField(name: string): BkField | undefined {
+    findField(name: string): BkField | undefined {
         return this.fields.find((field) => field.getName() === name);
     }
 
-    getDataSource(name: string): BkDataSource | undefined {
+    getField(name: string): BkField {
+        const field = this.findField(name);
+        if (!field) throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
+    }
+
+    findDataSource(name: string): BkDataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+
+    getDataSource(name: string): BkDataSource {
+        const ds = this.findDataSource(name);
+        if (!ds) throw new Error(`${this.getFullName()}: no data source ${name}`);
+        return ds;
     }
 }

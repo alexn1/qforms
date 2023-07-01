@@ -48,6 +48,6 @@ export declare class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     getTableKeyColumns(table: string): Promise<any[]>;
     query(query: string): Promise<any[]>;
     queryAutoValues(context: Context, table: string, autoColumnTypes: any): Promise<{}>;
-    insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<any>;
+    insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<Row>;
     queryScalar(context: Context, query: string, params: any): Promise<any>;
 }

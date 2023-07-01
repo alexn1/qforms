@@ -29,6 +29,8 @@ export declare class BkForm extends BkModel {
     getPage(): BkPage;
     getFullName(): string;
     isNewMode(context: Context): boolean;
-    getField(name: string): BkField | undefined;
-    getDataSource(name: string): BkDataSource | undefined;
+    findField(name: string): BkField | undefined;
+    getField(name: string): BkField;
+    findDataSource(name: string): BkDataSource | undefined;
+    getDataSource(name: string): BkDataSource;
 }

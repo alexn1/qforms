@@ -41,7 +41,7 @@ export declare class BkDatabase<TConnection = any> extends BkModel {
     findParam(name: string): BkParam | undefined;
     getTable(name: string): BkTable;
     getParam(name: string): BkParam;
-    insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<void>;
+    insertRow(context: Context, table: string, values: any, autoColumnTypes?: any): Promise<Row>;
     getTableList(): Promise<string[]>;
     getTableInfo(table: any): Promise<any[]>;
     useTransaction(context: Context, cb: () => Promise<void>): Promise<void>;

@@ -136,7 +136,10 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         await this.getConnection(context).query('rollback');
     }
 
-    static formatQuery(query: string, params: { [name: string]: any } | null): {sql: string, values: any} {
+    static formatQuery(
+        query: string,
+        params: { [name: string]: any } | null,
+    ): { sql: string; values: any } {
         // console.log(`BkPostgreSqlDatabase.formatQuery: ${query}`);
         // console.log('params:', params);
         if (!params) {
@@ -310,7 +313,12 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`,
         }
     }
 
-    async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}) {
+    async insertRow(
+        context: Context,
+        table: string,
+        values: any,
+        autoColumnTypes: any = {},
+    ): Promise<Row> {
         console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
         // console.log('insert query:', query, values);

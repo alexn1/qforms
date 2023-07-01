@@ -5,10 +5,10 @@ export type JSONString = string & {
 export type Key = JSONString & {
     type2: 'Key';
 };
-export type KeyItem = Scalar;
-export type KeyTuple = KeyItem[];
+export type KeyElement = Scalar;
+export type KeyTuple = KeyElement[];
 export type KeyRecord = {
-    [column: string]: KeyItem;
+    [column: string]: KeyElement;
 };
 export type Row = {
     [column: string]: any;

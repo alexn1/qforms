@@ -266,7 +266,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         }
     }
 
-    async insertRow(context, table, values, autoColumnTypes = {}) {
+    async insertRow(context, table, values, autoColumnTypes = {}): Promise<Row> {
         console.log(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (autoColumns.length > 1)

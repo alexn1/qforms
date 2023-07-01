@@ -114,11 +114,23 @@ class BkForm extends BkModel_1.BkModel {
     isNewMode(context) {
         return !!context.getBody().newMode;
     }
-    getField(name) {
+    findField(name) {
         return this.fields.find((field) => field.getName() === name);
     }
-    getDataSource(name) {
+    getField(name) {
+        const field = this.findField(name);
+        if (!field)
+            throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
+    }
+    findDataSource(name) {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+    getDataSource(name) {
+        const ds = this.findDataSource(name);
+        if (!ds)
+            throw new Error(`${this.getFullName()}: no data source ${name}`);
+        return ds;
     }
 }
 exports.BkForm = BkForm;

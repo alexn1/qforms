@@ -23,7 +23,7 @@ export declare class BkDataSource extends BkModel {
     encodeRow(row: Row): RawRow;
     getApp(): BkApplication;
     getKeyValuesFromKey(key: Key): KeyRecord;
-    getKeyFromValues(values: any): Key;
+    getKeyFromValues(record: KeyRecord): Key;
     getFullName(): string;
     static keyToParams(key: Key, paramName?: string): KeyRecord;
     calcNewKeyValues(originalKeyValues: KeyRecord, values: any): KeyRecord;
