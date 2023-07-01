@@ -1,6 +1,6 @@
 import { FormController, FormControllerFields, FormControllerState } from '../FormController';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
-import { RawRow } from '../../../../../../types';
+import { RawRow, Key } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Grid } from '../../../../../common';
@@ -22,7 +22,7 @@ export declare class TableFormController extends FormController<TableForm> {
     onGridLinkClick: (key: any) => Promise<void>;
     onGridDeleteKeyDown: (row: any, key: any) => Promise<void>;
     new(): Promise<void>;
-    edit(key: any): Promise<void>;
+    edit(key: Key): Promise<void>;
     onModelRefresh: (e: any) => Promise<void>;
     onModelInsert: (e: any) => Promise<void>;
     onModelUpdate: (e: any) => Promise<void>;

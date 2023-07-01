@@ -31,7 +31,7 @@ export class ApplicationController extends ModelController<Application> {
     view: any;
 
     constructor(model: Application, private frontHostApp: FrontHostApp) {
-        super(model, null);
+        super(model);
         if (typeof window === 'object') {
             console.log(`${this.constructor.name}.constructor`, model);
         }
@@ -56,9 +56,9 @@ export class ApplicationController extends ModelController<Application> {
     init() {
         // console.log('ApplicationController.init');
         super.init();
-        // this.model.on('logout' , this.onLogout);
-        this.model.on('request', this.onRequest);
-        const pageData = this.model.data.pages[0];
+        // this.getModel().on('logout' , this.onLogout);
+        this.getModel().on('request', this.onRequest);
+        const pageData = this.getModel().data.pages[0];
         this.activePage = pageData
             ? this.createPage(pageData, {
                   modal: false,
@@ -72,8 +72,8 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     deinit() {
-        // this.model.off('logout', this.onLogout);
-        this.model.off('request', this.onRequest);
+        // this.getModel().off('logout', this.onLogout);
+        this.getModel().off('request', this.onRequest);
         super.deinit();
     }
 
@@ -88,7 +88,7 @@ export class ApplicationController extends ModelController<Application> {
             key: this.getModel().getName(),
         });
         if (this.statusbar) {
-            this.statusbar.setLastQueryTime(this.model.getAttr('time'));
+            this.statusbar.setLastQueryTime(this.getModel().getAttr('time'));
         }
     }
 
@@ -129,7 +129,7 @@ export class ApplicationController extends ModelController<Application> {
         if (options.modal === undefined) throw new Error('no options.modal');
 
         // model
-        const pageModel = new Page(pageData, this.model, options);
+        const pageModel = new Page(pageData, this.getModel(), options);
         pageModel.init();
 
         // controller
@@ -152,7 +152,7 @@ export class ApplicationController extends ModelController<Application> {
             return pageController;
         }
 
-        const { page: pageData } = await this.model.request({
+        const { page: pageData } = await this.getModel().request({
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -211,8 +211,8 @@ export class ApplicationController extends ModelController<Application> {
     findPageControllerByPageNameAndKey(pageName: string, key: Key | null): PageController | null {
         if (
             this.activePage &&
-            this.activePage.model.getName() === pageName &&
-            this.activePage.model.getKey() === key
+            this.activePage.getModel().getName() === pageName &&
+            this.activePage.getModel().getKey() === key
         ) {
             return this.activePage;
         }
@@ -220,11 +220,11 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     onPageSelect(pc: PageController): void {
-        console.log('ApplicationController.onPageSelect', pc.model.getName());
+        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
     }
 
     async closePage(pageController: PageController): Promise<void> {
-        console.log('ApplicationController.closePage', pageController.model.getFullName());
+        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         } else if (this.activePage === pageController) {
@@ -235,7 +235,7 @@ export class ApplicationController extends ModelController<Application> {
         }
         await this.rerender();
         pageController.deinit();
-        pageController.model.deinit();
+        pageController.getModel().deinit();
     }
 
     async onActionClick(name: string): Promise<any> {
@@ -246,11 +246,11 @@ export class ApplicationController extends ModelController<Application> {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.model.data.menu
-                ? Object.keys(this.model.data.menu).map((key) => ({
+            ...(this.getModel().data.menu
+                ? Object.keys(this.getModel().data.menu).map((key) => ({
                       name: key,
                       title: key,
-                      items: this.model.data.menu[key].map((item) => ({
+                      items: this.getModel().data.menu[key].map((item) => ({
                           type: item.type,
                           name: item.page || item.action,
                           title: item.caption,
@@ -258,11 +258,13 @@ export class ApplicationController extends ModelController<Application> {
                   }))
                 : []),
             // user
-            ...(this.model.getUser()
+            ...(this.getModel().getUser()
                 ? [
                       {
                           name: 'user',
-                          title: `${this.model.getDomain()}/${this.model.getUser().login}`,
+                          title: `${this.getModel().getDomain()}/${
+                              this.getModel().getUser().login
+                          }`,
                           items: [
                               {
                                   type: 'custom',
@@ -282,7 +284,7 @@ export class ApplicationController extends ModelController<Application> {
 
     onLogout = async () => {
         console.log('ApplicationController.onLogout');
-        const result = await this.model.request({ action: 'logout' });
+        const result = await this.getModel().request({ action: 'logout' });
         location.href = this.getRootPath();
     };
 

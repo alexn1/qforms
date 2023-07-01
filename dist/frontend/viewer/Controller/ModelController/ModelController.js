@@ -14,13 +14,15 @@ class ModelController extends Controller_1.Controller {
     init() { }
     deinit() {
         if (this.deinited)
-            throw new Error(`${this.model.getFullName()}: controller already deinited`);
+            throw new Error(`${this.getModel().getFullName()}: controller already deinited`);
         this.deinited = true;
     }
     getModel() {
         return this.model;
     }
     getParent() {
+        if (!this.parent)
+            throw new Error(`${this.getModel().getFullName()}: no controller parent`);
         return this.parent;
     }
     getTitle() {

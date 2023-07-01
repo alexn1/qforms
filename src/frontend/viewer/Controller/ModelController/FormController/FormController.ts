@@ -41,14 +41,14 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     init() {
-        for (const field of this.model.fields) {
+        for (const field of this.getModel().fields) {
             const ctrl = (this.fields[field.getName()] = FieldController.create(field, this));
             ctrl.init();
         }
     }
 
     deinit() {
-        // console.log('FormController.deinit:', this.model.getFullName());
+        // console.log('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -64,7 +64,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     getPage(): PageController {
-        return this.parent;
+        return this.getParent() as PageController;
     }
 
     isChanged(): boolean {
@@ -72,7 +72,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.model.getFullName());
+        // console.log('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
 
@@ -95,7 +95,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     getApp(): ApplicationController {
-        return this.parent.parent;
+        return this.getParent().getParent() as ApplicationController;
     }
 
     getSelectedRowKey() {

@@ -9,7 +9,7 @@ class TableFormDateFieldController extends TableFormFieldController_1.TableFormF
         return super.getViewClass() || TableFormDateFieldView_1.TableFormDateFieldView;
     }
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         if (value)
             return common_1.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';

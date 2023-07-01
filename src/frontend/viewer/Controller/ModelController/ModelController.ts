@@ -3,10 +3,10 @@ import { ModelView } from './ModelView';
 import { Model } from '../../Model/Model';
 import { Helper } from '../../../common';
 
-export abstract class ModelController<TModel extends Model> extends Controller {
+export abstract class ModelController<TModel extends Model = Model> extends Controller {
     deinited: boolean = false;
 
-    constructor(public model: TModel, public parent) {
+    constructor(private model: TModel, private parent?: ModelController) {
         super();
     }
 
@@ -14,7 +14,7 @@ export abstract class ModelController<TModel extends Model> extends Controller {
 
     deinit() {
         if (this.deinited)
-            throw new Error(`${this.model.getFullName()}: controller already deinited`);
+            throw new Error(`${this.getModel().getFullName()}: controller already deinited`);
         this.deinited = true;
     }
 
@@ -22,7 +22,8 @@ export abstract class ModelController<TModel extends Model> extends Controller {
         return this.model;
     }
 
-    getParent() {
+    getParent(): ModelController {
+        if (!this.parent) throw new Error(`${this.getModel().getFullName()}: no controller parent`);
         return this.parent;
     }
 

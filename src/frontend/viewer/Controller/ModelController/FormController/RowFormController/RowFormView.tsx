@@ -15,7 +15,7 @@ export class RowFormView<
         const text = ctrl.getModel().getApp().getText();
         return (
             <div className={`${this.getCssBlockName()}__toolbar flex grid-gap-5`}>
-                {ctrl.model.hasDefaultPersistentDataSource() && (
+                {ctrl.getModel().hasDefaultPersistentDataSource() && (
                     <Button
                         key="edit"
                         classList={['toolbar-button']}
@@ -25,7 +25,7 @@ export class RowFormView<
                         <div>{text.form.edit}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultPersistentDataSource() && (
+                {ctrl.getModel().hasDefaultPersistentDataSource() && (
                     <Button
                         key="save"
                         classList={['toolbar-button']}
@@ -36,7 +36,7 @@ export class RowFormView<
                         <div>{text.form.save}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && (
+                {ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && (
                     <Button
                         key="cancel"
                         classList={['toolbar-button']}
@@ -48,7 +48,7 @@ export class RowFormView<
                         <div>{text.form.cancel}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && (
+                {ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && (
                     <Button
                         key="discard"
                         classList={['toolbar-button']}
@@ -61,7 +61,7 @@ export class RowFormView<
                         <div>{text.form.discard}</div>
                     </Button>
                 )}
-                {ctrl.model.hasDefaultPersistentDataSource() &&
+                {ctrl.getModel().hasDefaultPersistentDataSource() &&
                     ctrl.getModel().getAttr('refreshButton') === 'true' && (
                         <Button
                             key="refresh"
@@ -73,7 +73,7 @@ export class RowFormView<
                             <div>{text.form.refresh}</div>
                         </Button>
                     )}
-                {this.isActionsVisible() && ctrl.model.hasActions() && (
+                {this.isActionsVisible() && ctrl.getModel().hasActions() && (
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
@@ -109,7 +109,7 @@ export class RowFormView<
     }
 
     renderField(fieldCtrl: RowFormFieldController) {
-        // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
+        // console.log('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return (
             <div key={`field.${name}`} className={`${this.getCssBlockName()}__field`}>

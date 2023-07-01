@@ -7,14 +7,14 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     init() {
         // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
-        const dataSource = this.model.getComboBoxDataSource();
+        const dataSource = this.getModel().getComboBoxDataSource();
         dataSource!.on('insert', this.onListInsert);
         dataSource!.on('update', this.onListUpdate);
         dataSource!.on('delete', this.onListDelete);
     }
 
     deinit() {
-        const dataSource = this.model.getComboBoxDataSource();
+        const dataSource = this.getModel().getComboBoxDataSource();
         dataSource!.off('insert', this.onListInsert);
         dataSource!.off('update', this.onListUpdate);
         dataSource!.off('delete', this.onListDelete);
@@ -38,11 +38,11 @@ export class RowFormComboBoxFieldController extends RowFormFieldController<Combo
     }
 
     getRows() {
-        return this.model.getComboBoxDataSource()!.getRows();
+        return this.getModel().getComboBoxDataSource()!.getRows();
     }
 
     getPlaceholder() {
-        if (this.model.getAttr('placeholder')) return this.model.getAttr('placeholder');
+        if (this.getModel().getAttr('placeholder')) return this.getModel().getAttr('placeholder');
         return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
     }
 

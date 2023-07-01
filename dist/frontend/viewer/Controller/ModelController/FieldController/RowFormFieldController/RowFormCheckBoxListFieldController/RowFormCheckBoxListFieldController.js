@@ -22,7 +22,7 @@ class RowFormCheckBoxListFieldController extends RowFormFieldController_1.RowFor
     init() {
         // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
         super.init();
-        const dataSource = this.model.getDataSource();
+        const dataSource = this.getModel().getDataSource();
         dataSource.on('insert', this.onListInsert);
         dataSource.on('update', this.onListUpdate);
         dataSource.on('delete', this.onListDelete);

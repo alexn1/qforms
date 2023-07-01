@@ -117,12 +117,12 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     }
 
     componentDidMount() {
-        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().model.getFullName());
+        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().model.getFullName(), snapshot);
+        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 

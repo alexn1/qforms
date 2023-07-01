@@ -2,7 +2,7 @@ import { FormController, FormControllerFields, FormControllerState } from '../Fo
 import { TableFormView } from './TableFormView';
 import { DataSource } from '../../../../Model/DataSource/DataSource';
 import { TableForm } from '../../../../Model/Form/TableForm/TableForm';
-import { RawRow } from '../../../../../../types';
+import { RawRow, Key } from '../../../../../../types';
 import { TableFormFieldController } from '../../FieldController/TableFormFieldController/TableFormFieldController';
 import { FieldController } from '../../FieldController/FieldController';
 import { Grid, Helper } from '../../../../../common';
@@ -26,19 +26,19 @@ export class TableFormController extends FormController<TableForm> {
         super.init();
         // this.parent.on('hide', this.onHidePage);
         // this.parent.on('show', this.onShowPage);
-        this.model.on('refresh', this.onModelRefresh);
-        this.model.on('update', this.onModelUpdate);
-        this.model.on('delete', this.onModelDelete);
-        this.model.on('insert', this.onModelInsert);
+        this.getModel().on('refresh', this.onModelRefresh);
+        this.getModel().on('update', this.onModelUpdate);
+        this.getModel().on('delete', this.onModelDelete);
+        this.getModel().on('insert', this.onModelInsert);
     }
 
     deinit() {
         // this.parent.off('hide', this.onHidePage);
         // this.parent.off('show', this.onShowPage);
-        this.model.off('refresh', this.onModelRefresh);
-        this.model.off('update', this.onModelUpdate);
-        this.model.off('delete', this.onModelDelete);
-        this.model.off('insert', this.onModelInsert);
+        this.getModel().off('refresh', this.onModelRefresh);
+        this.getModel().off('update', this.onModelUpdate);
+        this.getModel().off('delete', this.onModelDelete);
+        this.getModel().off('insert', this.onModelInsert);
         super.deinit();
     }
 
@@ -52,8 +52,8 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onRefreshClick = async (e) => {
-        console.log('TableFormController.onRefreshClick', this.model.getFullName());
-        await this.model.refresh();
+        console.log('TableFormController.onRefreshClick', this.getModel().getFullName());
+        await this.getModel().refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     };
@@ -61,14 +61,14 @@ export class TableFormController extends FormController<TableForm> {
     onDeleteClick = async (e) => {
         console.log(
             'TableFormController.onDeleteClick',
-            this.model.getFullName(),
+            this.getModel().getFullName(),
             this.grid!.getActiveRowKey(),
         );
         const result = await this.getApp().confirm({
-            message: this.model.getApp().getText().form.areYouSure,
+            message: this.getModel().getApp().getText().form.areYouSure,
         });
         if (result) {
-            await this.model.getDefaultDataSource().delete(this.grid!.getActiveRowKey());
+            await this.getModel().getDefaultDataSource().delete(this.grid!.getActiveRowKey());
         }
     };
 
@@ -77,9 +77,9 @@ export class TableFormController extends FormController<TableForm> {
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
         // console.log('row:', row);
-        // const key = this.model.getDefaultDataSource().getRowKey(row);
+        // const key = this.getModel().getDefaultDataSource().getRowKey(row);
         // console.log('key:', key);
-        switch (this.model.getAttr('editMethod')) {
+        switch (this.getModel().getAttr('editMethod')) {
             // case 'table':
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
             // break;
@@ -102,10 +102,10 @@ export class TableFormController extends FormController<TableForm> {
         console.log('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
             const result = await this.getApp().confirm({
-                message: this.model.getApp().getText().form.areYouSure,
+                message: this.getModel().getApp().getText().form.areYouSure,
             });
             if (result) {
-                await this.model.getDefaultDataSource().delete(key);
+                await this.getModel().getDefaultDataSource().delete(key);
             }
         }
     };
@@ -115,7 +115,7 @@ export class TableFormController extends FormController<TableForm> {
     }*/
 
     /*onShowPage = async () => {
-        console.log('TableFormController.onShowPage', this.model.getFullName());
+        console.log('TableFormController.onShowPage', this.getModel().getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
@@ -124,58 +124,58 @@ export class TableFormController extends FormController<TableForm> {
     }*/
 
     async new() {
-        if (this.model.getAttr('newRowMode') === 'oneclick') {
+        if (this.getModel().getAttr('newRowMode') === 'oneclick') {
             const row = {} as RawRow;
-            this.model.fillDefaultValues(row);
-            await this.model.getDefaultDataSource().insert(row);
-        } else if (this.model.getAttr('newRowMode') === 'editform') {
-            if (!this.model.getAttr('itemEditPage')) {
-                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
+            this.getModel().fillDefaultValues(row);
+            await this.getModel().getDefaultDataSource().insert(row);
+        } else if (this.getModel().getAttr('newRowMode') === 'editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
             }
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 newMode: true,
                 modal: true,
             });
-        } else if (this.model.getAttr('newRowMode') === 'createform') {
-            if (!this.model.getAttr('itemCreatePage')) {
-                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
+        } else if (this.getModel().getAttr('newRowMode') === 'createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
             }
             await this.openPage({
-                name: this.model.getAttr('itemCreatePage'),
+                name: this.getModel().getAttr('itemCreatePage'),
                 newMode: true,
                 modal: true,
             });
-        } else if (this.model.getAttr('newRowMode') === 'oneclick editform') {
-            if (!this.model.getAttr('itemEditPage')) {
-                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
+        } else if (this.getModel().getAttr('newRowMode') === 'oneclick editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
             }
             const row = {} as RawRow;
-            this.model.fillDefaultValues(row);
-            const result = await this.model.getDefaultDataSource().insert(row);
-            const database = this.model.getDefaultDataSource().getAttr('database');
-            const table = this.model.getDefaultDataSource().getAttr('table');
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 // key  : key,
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key),
                 },
             });
-        } else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
-            if (!this.model.getAttr('itemCreatePage')) {
-                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
+        } else if (this.getModel().getAttr('newRowMode') === 'oneclick createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
             }
             const row = {} as RawRow;
-            this.model.fillDefaultValues(row);
-            const result = await this.model.getDefaultDataSource().insert(row);
-            const database = this.model.getDefaultDataSource().getAttr('database');
-            const table = this.model.getDefaultDataSource().getAttr('table');
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name: this.model.getAttr('itemCreatePage'),
+                name: this.getModel().getAttr('itemCreatePage'),
                 // key  : key,
                 modal: true,
                 params: {
@@ -185,36 +185,36 @@ export class TableFormController extends FormController<TableForm> {
         }
     }
 
-    async edit(key) {
-        // console.log('TableForm.edit', this.model.getFullName(), key);
-        if (!this.model.getAttr('itemEditPage')) {
-            throw new Error(`${this.model.getFullName()}: itemEditPage is empty`);
+    async edit(key: Key) {
+        // console.log('TableForm.edit', this.getModel().getFullName(), key);
+        if (!this.getModel().getAttr('itemEditPage')) {
+            throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }
         try {
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 modal: true,
                 params: {
                     ...DataSource.keyToParams(key),
                 },
             });
         } catch (err) {
-            // console.error(`${this.model.getFullName()}: edit form error handler:`, err);
-            // alert(`${this.model.getFullName()}: ${err.message}`);
-            err.message = `${this.model.getFullName()} edit: ${err.message}`;
+            // console.error(`${this.getModel().getFullName()}: edit form error handler:`, err);
+            // alert(`${this.getModel().getFullName()}: ${err.message}`);
+            err.message = `${this.getModel().getFullName()} edit: ${err.message}`;
             throw err;
         }
     }
 
     onModelRefresh = async (e) => {
-        console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
+        console.log('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
         if (!this.view) return;
         this.invalidate();
         await this.rerender();
     };
 
     onModelInsert = async (e) => {
-        console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
+        console.log('TableFormController.onModelInsert', this.getModel().getFullName(), e);
         if (!this.view) return;
         if (this.grid && e.source) {
             for (const key of e.inserts) {
@@ -226,7 +226,12 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onModelUpdate = async (e) => {
-        console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
+        console.log(
+            'TableFormController.onModelUpdate',
+            this.getModel().getFullName(),
+            e,
+            this.view,
+        );
         if (!this.view) return;
         if (this.grid) {
             for (const key in e.updates) {
@@ -243,7 +248,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onModelDelete = async (e) => {
-        console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
+        console.log('TableFormController.onModelDelete', this.getModel().getFullName(), e);
         if (!this.view) return;
         if (this.grid) {
             for (const key of e.deletes) {
@@ -264,8 +269,8 @@ export class TableFormController extends FormController<TableForm> {
 
     getActiveRow(): RawRow | null {
         const key = this.grid!.getActiveRowKey();
-        if (!key) throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDefaultDataSource().getRow(key);
+        if (!key) throw new Error(`${this.getModel().getFullName()}: no active row key`);
+        return this.getModel().getDefaultDataSource().getRow(key);
     }
 
     isRowSelected = () => {
@@ -287,26 +292,26 @@ export class TableFormController extends FormController<TableForm> {
 
     onNextClick = async () => {
         console.log('TableFormController.onNextClick');
-        const frame = this.model.getDefaultDataSource().getFrame() + 1;
-        this.model.getDefaultDataSource().setFrame(frame);
-        this.model.getDefaultDataSource().refresh();
+        const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
+        this.getModel().getDefaultDataSource().setFrame(frame);
+        this.getModel().getDefaultDataSource().refresh();
         await this.rerender();
     };
 
     onPreviousClick = async () => {
         console.log('TableFormController.onPreviousClick');
-        const frame = this.model.getDefaultDataSource().getFrame() - 1;
-        this.model.getDefaultDataSource().setFrame(frame);
-        this.model.getDefaultDataSource().refresh();
+        const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
+        this.getModel().getDefaultDataSource().setFrame(frame);
+        this.getModel().getDefaultDataSource().refresh();
         this.rerender();
     };
 
     canPrev() {
-        return this.model.getDefaultDataSource().getFrame() > 1;
+        return this.getModel().getDefaultDataSource().getFrame() > 1;
     }
 
     canNext() {
-        const ds = this.model.getDefaultDataSource();
+        const ds = this.getModel().getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
 

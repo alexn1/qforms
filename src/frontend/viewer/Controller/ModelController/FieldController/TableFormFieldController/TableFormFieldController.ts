@@ -9,13 +9,13 @@ export class TableFormFieldController<
 > extends FieldController<TField> {
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
-        return this.valueToString(this.model.getValue(row));
+        return this.valueToString(this.getModel().getValue(row));
     }
 
     getForm<
         TTableFormController extends FormController = TableFormController,
     >(): TTableFormController {
-        return this.parent as TTableFormController;
+        return this.getParent() as TTableFormController;
     }
 
     getAlign(): Align | null {

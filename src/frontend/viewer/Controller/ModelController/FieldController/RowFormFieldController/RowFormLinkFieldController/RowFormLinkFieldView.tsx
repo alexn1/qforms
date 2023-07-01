@@ -1,5 +1,7 @@
+import { keyTupleToKey } from '../../../../../../../types';
 import { RowFormFieldView } from '../RowFormFieldView';
 import { RowFormLinkFieldController } from './RowFormLinkFieldController';
+
 import './RowFormLinkFieldView.less';
 
 export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldController> {
@@ -17,7 +19,7 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
         const pageName = ctrl.getModel().getAttr('page');
         if (pageName) {
             const value = ctrl.getValueForWidget();
-            href = ctrl.getPage().createOpenInNewLink(pageName, JSON.stringify([value]));
+            href = ctrl.getPage().createOpenInNewLink(pageName, keyTupleToKey([value]));
             // console.log('href:', link);
         }
 

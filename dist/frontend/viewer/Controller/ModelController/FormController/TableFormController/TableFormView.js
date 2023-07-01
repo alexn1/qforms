@@ -9,8 +9,8 @@ const react_1 = __importDefault(require("react"));
 const FormView_1 = require("../FormView");
 const DataSource_1 = require("../../../../Model/DataSource/DataSource");
 const common_1 = require("../../../../../common");
-require("./TableFormView.less");
 const Helper_1 = require("../../../../../common/Helper");
+require("./TableFormView.less");
 class TableFormView extends FormView_1.FormView {
     constructor() {
         super(...arguments);
@@ -33,14 +33,14 @@ class TableFormView extends FormView_1.FormView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0, jsx_runtime_1.jsx)(common_1.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0, jsx_runtime_1.jsx)(common_1.MoreVertIcon, {}) })))] })));
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0, jsx_runtime_1.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.getModel().hasActions() && ((0, jsx_runtime_1.jsx)(common_1.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0, jsx_runtime_1.jsx)(common_1.MoreVertIcon, {}) })))] })));
     }
     renderPaging() {
         const ctrl = this.getCtrl();
         const model = this.getCtrl().getModel();
         const dataSource = model.getDefaultDataSource();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0, jsx_runtime_1.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() &&
-                                `of ${Helper_1.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0, jsx_runtime_1.jsx)(common_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", Helper_1.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0, jsx_runtime_1.jsx)(common_1.RightIcon, { size: 18 }) }))] })))] })));
+                                `of ${Helper_1.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0, jsx_runtime_1.jsx)(common_1.LeftIcon, { size: 18 }) })), (0, jsx_runtime_1.jsx)(common_1.TextBox, { value: ctrl.getModel().getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", Helper_1.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0, jsx_runtime_1.jsx)(common_1.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
         const ctrl = this.getCtrl();
@@ -58,7 +58,7 @@ class TableFormView extends FormView_1.FormView {
     }
     getRows() {
         const ctrl = this.getCtrl();
-        return ctrl.model.getDefaultDataSource().getRows();
+        return ctrl.getModel().getDefaultDataSource().getRows();
     }
     getGridExtraColumn() {
         return true;
@@ -71,10 +71,10 @@ class TableFormView extends FormView_1.FormView {
         return react_1.default.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
-            name: ctrl.model.getFullName(),
+            name: ctrl.getModel().getFullName(),
             columns: this.getGridColumns(),
             rows: this.getRows(),
-            getRowKey: (row) => ctrl.model.getDefaultDataSource().getRowKey(row),
+            getRowKey: (row) => ctrl.getModel().getDefaultDataSource().getRowKey(row),
             onDoubleClick: ctrl.onGridCellDblClick,
             onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
             onSelectionChange: ctrl.onGridSelectionChange,

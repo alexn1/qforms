@@ -25,13 +25,13 @@ class FormController extends ModelController_1.ModelController {
         }
     }
     init() {
-        for (const field of this.model.fields) {
+        for (const field of this.getModel().fields) {
             const ctrl = (this.fields[field.getName()] = FieldController_1.FieldController.create(field, this));
             ctrl.init();
         }
     }
     deinit() {
-        // console.log('FormController.deinit:', this.model.getFullName());
+        // console.log('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -44,13 +44,13 @@ class FormController extends ModelController_1.ModelController {
         return await this.getPage().openPage(options);
     }
     getPage() {
-        return this.parent;
+        return this.getParent();
     }
     isChanged() {
         return false;
     }
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.model.getFullName());
+        // console.log('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
     getUpdated() {
@@ -66,7 +66,7 @@ class FormController extends ModelController_1.ModelController {
         return this.fields[name];
     }
     getApp() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getSelectedRowKey() {
         return null;

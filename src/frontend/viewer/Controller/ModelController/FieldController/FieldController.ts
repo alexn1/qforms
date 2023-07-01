@@ -12,7 +12,7 @@ import { RawRow } from '../../../../../types';
 
 export class FieldController<TField extends Field = Field> extends ModelController<TField> {
     static create(model: Field, parent: FormController): FieldController {
-        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
@@ -28,7 +28,7 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 
     valueToString(value): string {
-        // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
+        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -43,16 +43,16 @@ export class FieldController<TField extends Field = Field> extends ModelControll
                 return '';
             default:
                 throw new Error(
-                    `${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`,
+                    `${this.getModel().getFullName()}: unknown value type: ${typeof value}, value: ${value}`,
                 );
         }
     }
 
     stringToValue(stringValue: string) {
-        // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
-        const fieldType = this.model.getType();
+        const fieldType = this.getModel().getType();
         // console.log('fieldType:', fieldType);
         if (stringValue.trim() === '') return null;
         if (fieldType === 'object' || fieldType === 'boolean') {
@@ -81,21 +81,21 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 
     getParent<TFormController extends FormController = FormController>(): TFormController {
-        return super.getParent();
+        return super.getParent() as TFormController;
     }
 
     getForm<TFormController extends FormController = FormController>(): TFormController {
-        return this.parent;
+        return this.getParent();
     }
 
     getPage<TPageController extends PageController = PageController>(): TPageController {
-        return this.parent.parent;
+        return this.getParent().getParent() as TPageController;
     }
 
     getApp<
         TApplicationController extends ApplicationController = ApplicationController,
     >(): TApplicationController {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent() as TApplicationController;
     }
 
     isVisible(): boolean {

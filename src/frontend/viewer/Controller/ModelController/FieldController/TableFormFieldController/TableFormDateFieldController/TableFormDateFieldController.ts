@@ -9,7 +9,7 @@ export class TableFormDateFieldController extends TableFormFieldController<DateF
     }
 
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         if (value)
             return Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';

@@ -5,7 +5,7 @@ const ModelController_1 = require("../ModelController");
 const Helper_1 = require("../../../../common/Helper");
 class FieldController extends ModelController_1.ModelController {
     static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
@@ -22,7 +22,7 @@ class FieldController extends ModelController_1.ModelController {
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
-        // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
+        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -38,14 +38,14 @@ class FieldController extends ModelController_1.ModelController {
             case 'undefined':
                 return '';
             default:
-                throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+                throw new Error(`${this.getModel().getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
         }
     }
     stringToValue(stringValue) {
-        // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
-        const fieldType = this.model.getType();
+        const fieldType = this.getModel().getType();
         // console.log('fieldType:', fieldType);
         if (stringValue.trim() === '')
             return null;
@@ -76,13 +76,13 @@ class FieldController extends ModelController_1.ModelController {
         return super.getParent();
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getPage() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';

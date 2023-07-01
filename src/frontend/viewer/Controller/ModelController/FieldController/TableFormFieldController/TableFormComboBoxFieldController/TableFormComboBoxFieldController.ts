@@ -26,12 +26,12 @@ export class TableFormComboBoxFieldController extends TableFormFieldController<C
     }
 
     getValueForWidget(row: RawRow): string {
-        const value = this.model.getValue(row);
-        const rawValue = this.model.valueToRaw(value);
+        const value = this.getModel().getValue(row);
+        const rawValue = this.getModel().valueToRaw(value);
         if (rawValue === undefined || rawValue === 'null') return '';
-        const cbRow = this.model.findRowByRawValue(rawValue);
+        const cbRow = this.getModel().findRowByRawValue(rawValue);
         if (cbRow) {
-            return this.valueToString(this.model.getDisplayValue(cbRow));
+            return this.valueToString(this.getModel().getDisplayValue(cbRow));
         }
         return `[no row for id: ${rawValue}]`;
     }

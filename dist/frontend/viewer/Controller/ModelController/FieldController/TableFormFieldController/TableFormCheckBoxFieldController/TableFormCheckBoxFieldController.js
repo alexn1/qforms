@@ -9,7 +9,7 @@ class TableFormCheckBoxFieldController extends TableFormFieldController_1.TableF
         return super.getViewClass() || TableFormCheckBoxFieldView_1.TableFormCheckBoxFieldView;
     }
     getValueForWidget(row) {
-        return this.model.getValue(row);
+        return this.getModel().getValue(row);
     }
     getAlign() {
         return 'center';

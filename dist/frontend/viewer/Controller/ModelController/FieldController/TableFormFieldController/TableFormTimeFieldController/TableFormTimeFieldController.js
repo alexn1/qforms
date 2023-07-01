@@ -10,7 +10,7 @@ class TableFormTimeFieldController extends TableFormFieldController_1.TableFormF
         return super.getViewClass() || TableFormTimeFieldView_1.TableFormTimeFieldView;
     }
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         return common_1.TimeBox.getStringValue(value);
     }
 }

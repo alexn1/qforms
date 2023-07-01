@@ -41,7 +41,7 @@ export declare class DataSource extends Model {
     getRows(): RawRow[];
     getRowByIndex(i: number): RawRow;
     discard(): void;
-    static keyToParams(key: string, paramName?: string): KeyRecord;
+    static keyToParams(key: Key, paramName?: string): KeyRecord;
     getChangesByKey(): ChangesByKey;
     getRowWithChanges(row: RawRow): RawRow;
     hasNewRows(): boolean;

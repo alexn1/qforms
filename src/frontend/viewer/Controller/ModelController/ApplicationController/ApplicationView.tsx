@@ -59,7 +59,7 @@ export class ApplicationView<
     }
 
     render() {
-        console.log(`${this.constructor.name}.render`, this.getCtrl().model.getFullName());
+        console.log(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return (
             <div className={`${this.getCssBlockName()}__container`} style={this.getStyle()}>
                 {this.renderHeader()}
@@ -70,4 +70,3 @@ export class ApplicationView<
         );
     }
 }
-

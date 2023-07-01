@@ -1,6 +1,6 @@
+import { Key } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { Helper } from '../../../../common/Helper';
-import { FrontHostApp } from '../../../../common/FrontHostApp';
 import { FormController } from '../FormController/FormController';
 import { DataSource } from '../../../Model/DataSource/DataSource';
 import { RowFormController } from '../FormController/RowFormController/RowFormController';
@@ -47,7 +47,7 @@ export class PageController<
     }
 
     init() {
-        for (const form of this.model.forms) {
+        for (const form of this.getModel().forms) {
             const ctrl = FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
@@ -55,7 +55,7 @@ export class PageController<
     }
 
     deinit() {
-        console.log('PageController.deinit: ' + this.model.getFullName());
+        console.log('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -95,7 +95,7 @@ export class PageController<
         window.open(link, '_blank');
     };
 
-    createOpenInNewLink(pageName: string, key: string) {
+    createOpenInNewLink(pageName: string, key: Key) {
         return this.getApp()
             .getHostApp()
             .createLink({
@@ -105,14 +105,14 @@ export class PageController<
     }
 
     async close(): Promise<void> {
-        // console.log('PageController.close', this.model.getFullName());
+        // console.log('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
         // const valid = this.isValid();
         // console.log('valid:', valid);
-        if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
+        if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
-                message: this.model.getApp().getText().form.areYouSure,
+                message: this.getModel().getApp().getText().form.areYouSure,
             });
             if (!result) return;
         }
@@ -131,7 +131,7 @@ export class PageController<
     }
 
     isValid(): boolean {
-        // console.log('PageController.isValid', this.model.getFullName());
+        // console.log('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -141,23 +141,23 @@ export class PageController<
     }
 
     async onFormChange(e): Promise<void> {
-        // console.log('PageController.onFormChange', this.model.getFullName());
+        // console.log('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
 
     onFormDiscard(formController: FormController): void {
-        console.log('PageController.onFormDiscard', this.model.getFullName());
+        console.log('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
 
     onFormUpdate(e): void {
-        console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
+        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
 
     onFormInsert(e): void {
-        console.log('PageController.onFormInsert:', this.model.getFullName());
-        // console.log('hasNew:', this.model.hasNew());
+        console.log('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.log('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -178,10 +178,10 @@ export class PageController<
     }
 
     isChanged(): boolean {
-        // console.log('PageController.isChanged', this.model.getFullName());
+        // console.log('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
@@ -189,7 +189,7 @@ export class PageController<
     }
 
     getApp(): TApplicationController {
-        return this.parent;
+        return this.getParent() as TApplicationController;
     }
 
     getViewClass(): typeof PageView {
@@ -199,7 +199,7 @@ export class PageController<
     findForm<TFormController extends FormController = FormController>(
         name: string,
     ): TFormController | undefined {
-        return this.forms.find((form) => form.model.getName() === name) as TFormController;
+        return this.forms.find((form) => form.getModel().getName() === name) as TFormController;
     }
 
     getForm<TFormController extends FormController = FormController>(

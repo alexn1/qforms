@@ -9,7 +9,7 @@ const common_1 = require("../../../../common");
 const PageController_1 = require("../PageController/PageController");
 class ApplicationController extends ModelController_1.ModelController {
     constructor(model, frontHostApp) {
-        super(model, null);
+        super(model);
         this.frontHostApp = frontHostApp;
         this.lastId = 0;
         this.activePage = null; // active non modal page
@@ -34,7 +34,7 @@ class ApplicationController extends ModelController_1.ModelController {
         };
         this.onLogout = async () => {
             console.log('ApplicationController.onLogout');
-            const result = await this.model.request({ action: 'logout' });
+            const result = await this.getModel().request({ action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
@@ -85,9 +85,9 @@ class ApplicationController extends ModelController_1.ModelController {
     init() {
         // console.log('ApplicationController.init');
         super.init();
-        // this.model.on('logout' , this.onLogout);
-        this.model.on('request', this.onRequest);
-        const pageData = this.model.data.pages[0];
+        // this.getModel().on('logout' , this.onLogout);
+        this.getModel().on('request', this.onRequest);
+        const pageData = this.getModel().data.pages[0];
         this.activePage = pageData
             ? this.createPage(pageData, {
                 modal: false,
@@ -100,8 +100,8 @@ class ApplicationController extends ModelController_1.ModelController {
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }
     deinit() {
-        // this.model.off('logout', this.onLogout);
-        this.model.off('request', this.onRequest);
+        // this.getModel().off('logout', this.onLogout);
+        this.getModel().off('request', this.onRequest);
         super.deinit();
     }
     getViewClass() {
@@ -114,7 +114,7 @@ class ApplicationController extends ModelController_1.ModelController {
             key: this.getModel().getName(),
         });
         if (this.statusbar) {
-            this.statusbar.setLastQueryTime(this.model.getAttr('time'));
+            this.statusbar.setLastQueryTime(this.getModel().getAttr('time'));
         }
     }
     createVersionNotificationIfNotExists() {
@@ -138,7 +138,7 @@ class ApplicationController extends ModelController_1.ModelController {
         if (options.modal === undefined)
             throw new Error('no options.modal');
         // model
-        const pageModel = new Page_1.Page(pageData, this.model, options);
+        const pageModel = new Page_1.Page(pageData, this.getModel(), options);
         pageModel.init();
         // controller
         const pc = PageController_1.PageController.create(pageModel, this, `c${this.getNextId()}`);
@@ -158,7 +158,7 @@ class ApplicationController extends ModelController_1.ModelController {
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.model.request({
+        const { page: pageData } = await this.getModel().request({
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -209,17 +209,17 @@ class ApplicationController extends ModelController_1.ModelController {
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage &&
-            this.activePage.model.getName() === pageName &&
-            this.activePage.model.getKey() === key) {
+            this.activePage.getModel().getName() === pageName &&
+            this.activePage.getModel().getKey() === key) {
             return this.activePage;
         }
         return null;
     }
     onPageSelect(pc) {
-        console.log('ApplicationController.onPageSelect', pc.model.getName());
+        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
     }
     async closePage(pageController) {
-        console.log('ApplicationController.closePage', pageController.model.getFullName());
+        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         }
@@ -232,7 +232,7 @@ class ApplicationController extends ModelController_1.ModelController {
         }
         await this.rerender();
         pageController.deinit();
-        pageController.model.deinit();
+        pageController.getModel().deinit();
     }
     async onActionClick(name) {
         console.log('ApplicationController.onActionClick', name);
@@ -241,11 +241,11 @@ class ApplicationController extends ModelController_1.ModelController {
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.model.data.menu
-                ? Object.keys(this.model.data.menu).map((key) => ({
+            ...(this.getModel().data.menu
+                ? Object.keys(this.getModel().data.menu).map((key) => ({
                     name: key,
                     title: key,
-                    items: this.model.data.menu[key].map((item) => ({
+                    items: this.getModel().data.menu[key].map((item) => ({
                         type: item.type,
                         name: item.page || item.action,
                         title: item.caption,
@@ -253,11 +253,11 @@ class ApplicationController extends ModelController_1.ModelController {
                 }))
                 : []),
             // user
-            ...(this.model.getUser()
+            ...(this.getModel().getUser()
                 ? [
                     {
                         name: 'user',
-                        title: `${this.model.getDomain()}/${this.model.getUser().login}`,
+                        title: `${this.getModel().getDomain()}/${this.getModel().getUser().login}`,
                         items: [
                             {
                                 type: 'custom',

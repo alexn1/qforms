@@ -10,7 +10,8 @@
         "module": "commonjs",
         "resolveJsonModule": true,
         "strictNullChecks": true,
-        "incremental": true
+        "incremental": true,
+        // "noImplicitAny": true
     },
     "include": ["src/**/*"]
 }

@@ -80,14 +80,14 @@ class PageController extends ModelController_1.ModelController {
         return new PageController(model, parent, id, options);
     }
     init() {
-        for (const form of this.model.forms) {
+        for (const form of this.getModel().forms) {
             const ctrl = FormController_1.FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
         }
     }
     deinit() {
-        console.log('PageController.deinit: ' + this.model.getFullName());
+        console.log('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -99,14 +99,14 @@ class PageController extends ModelController_1.ModelController {
             .createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
-        // console.log('PageController.close', this.model.getFullName());
+        // console.log('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
         // const valid = this.isValid();
         // console.log('valid:', valid);
-        if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
+        if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
-                message: this.model.getApp().getText().form.areYouSure,
+                message: this.getModel().getApp().getText().form.areYouSure,
             });
             if (!result)
                 return;
@@ -124,7 +124,7 @@ class PageController extends ModelController_1.ModelController {
         }
     }
     isValid() {
-        // console.log('PageController.isValid', this.model.getFullName());
+        // console.log('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -133,20 +133,20 @@ class PageController extends ModelController_1.ModelController {
         return true;
     }
     async onFormChange(e) {
-        // console.log('PageController.onFormChange', this.model.getFullName());
+        // console.log('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.model.getFullName());
+        console.log('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
+        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
     onFormInsert(e) {
-        console.log('PageController.onFormInsert:', this.model.getFullName());
-        // console.log('hasNew:', this.model.hasNew());
+        console.log('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.log('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -165,23 +165,23 @@ class PageController extends ModelController_1.ModelController {
         return await this.getApp().openPage(options);
     }
     isChanged() {
-        // console.log('PageController.isChanged', this.model.getFullName());
+        // console.log('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
         return false;
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     getViewClass() {
         return super.getViewClass() || PageView_1.PageView;
     }
     findForm(name) {
-        return this.forms.find((form) => form.model.getName() === name);
+        return this.forms.find((form) => form.getModel().getName() === name);
     }
     getForm(name) {
         const form = this.findForm(name);

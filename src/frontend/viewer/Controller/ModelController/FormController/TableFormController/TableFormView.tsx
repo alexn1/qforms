@@ -11,8 +11,10 @@ import {
     Grid,
 } from '../../../../../common';
 import { TableFormController } from './TableFormController';
-import './TableFormView.less';
 import { Helper } from '../../../../../common/Helper';
+import { PageController } from '../../PageController/PageController';
+
+import './TableFormView.less';
 
 export class TableFormView<
     TTableFormController extends TableFormController = TableFormController,
@@ -28,7 +30,7 @@ export class TableFormView<
                         key="new"
                         classList={['toolbar-button', 'default']}
                         onClick={ctrl.onNewClick}
-                        enabled={!ctrl.parent.model.hasNew()}>
+                        enabled={!(ctrl.getParent() as PageController).getModel().hasNew()}>
                         {/*<AddIcon/>*/}
                         <div>{model.getApp().getText().form.new}</div>
                     </Button>
@@ -38,7 +40,7 @@ export class TableFormView<
                         key="refresh"
                         classList={['toolbar-button']}
                         onClick={ctrl.onRefreshClick}
-                        enabled={!ctrl.parent.model.hasNew()}>
+                        enabled={!(ctrl.getParent() as PageController).getModel().hasNew()}>
                         {/*<RefreshIcon/>*/}
                         <div>{model.getApp().getText().form.refresh}</div>
                     </Button>
@@ -53,7 +55,7 @@ export class TableFormView<
                         <div>{model.getApp().getText().form.delete}</div>
                     </Button>
                 )}
-                {ctrl.model.hasActions() && (
+                {ctrl.getModel().hasActions() && (
                     <DropdownButton
                         classList={['toolbar-dropdown-button']}
                         actions={this.getActionsForDropdownButton()}
@@ -85,7 +87,7 @@ export class TableFormView<
                             <LeftIcon size={18} />
                         </Button>
                         <TextBox
-                            value={ctrl.model.getDefaultDataSource().getFrame().toString()}
+                            value={ctrl.getModel().getDefaultDataSource().getFrame().toString()}
                             onChange={ctrl.onFrameChanged}
                         />
                         <div className="paging__framesCount">
@@ -126,7 +128,7 @@ export class TableFormView<
 
     getRows() {
         const ctrl = this.getCtrl();
-        return ctrl.model.getDefaultDataSource().getRows();
+        return ctrl.getModel().getDefaultDataSource().getRows();
     }
 
     getGridExtraColumn() {
@@ -142,10 +144,10 @@ export class TableFormView<
         return React.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
-            name: ctrl.model.getFullName(),
+            name: ctrl.getModel().getFullName(),
             columns: this.getGridColumns(),
             rows: this.getRows(),
-            getRowKey: (row) => ctrl.model.getDefaultDataSource().getRowKey(row),
+            getRowKey: (row) => ctrl.getModel().getDefaultDataSource().getRowKey(row),
             onDoubleClick: ctrl.onGridCellDblClick,
             onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
             onSelectionChange: ctrl.onGridSelectionChange,

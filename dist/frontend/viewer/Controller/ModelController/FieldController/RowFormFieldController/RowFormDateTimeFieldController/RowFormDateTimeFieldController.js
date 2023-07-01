@@ -35,7 +35,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -53,9 +53,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.onBlur2 = (widgetValue, fireEvent = true) => {
@@ -69,7 +69,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -87,9 +87,9 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.state.parseError2 = null;
@@ -102,7 +102,7 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         return this.getValue();
     }
     getValueForTime() {
-        // console.log('RowFormDateTimeFieldController.getValueForTime', this.model.getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
+        // console.log('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
             const value = date.getHours() * 60 + date.getMinutes();
@@ -161,11 +161,11 @@ class RowFormDateTimeFieldController extends RowFormFieldController_1.RowFormFie
         this.state.value.setHours(h, m);
     }
     validate2() {
-        // console.log('RowFormFieldController.validate', this.model.getFullName());
+        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
         this.state.error2 = this.getError2();
     }
     getError2() {
-        // console.log('RowFormFieldController.getError', this.model.getFullName());
+        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.widget2) {
             try {

@@ -1,3 +1,4 @@
+import { Key } from '../../../../../types';
 import { ModelController } from '../ModelController';
 import { FormController } from '../FormController/FormController';
 import { PageView } from './PageView';
@@ -13,7 +14,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     onSaveAndCloseClick: () => Promise<void>;
     onClosePageClick: (e: any) => Promise<void>;
     onOpenPageClick: (e: any) => Promise<void>;
-    createOpenInNewLink(pageName: string, key: string): string;
+    createOpenInNewLink(pageName: string, key: Key): string;
     close(): Promise<void>;
     validate(): void;
     isValid(): boolean;

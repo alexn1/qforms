@@ -5,10 +5,10 @@ const FieldController_1 = require("../FieldController");
 class TableFormFieldController extends FieldController_1.FieldController {
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
-        return this.valueToString(this.model.getValue(row));
+        return this.valueToString(this.getModel().getValue(row));
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getAlign() {
         return null;

@@ -36,8 +36,8 @@ export class RowFormTextAreaFieldView extends RowFormFieldView<RowFormTextAreaFi
                     disabled={!ctrl.isEditable()}
                     onChange={ctrl.onChange}
                     placeholder={ctrl.getPlaceholder()}
-                    rows={ctrl.model.getRows()}
-                    cols={ctrl.model.getCols()}
+                    rows={ctrl.getModel().getRows()}
+                    cols={ctrl.getModel().getCols()}
                     onFocus={this.onFocus}
                     onBlur={this.onBlur}
                 />

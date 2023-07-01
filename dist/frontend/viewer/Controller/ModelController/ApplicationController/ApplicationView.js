@@ -39,7 +39,7 @@ class ApplicationView extends ModelView_1.ModelView {
         return ((0, jsx_runtime_1.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0, jsx_runtime_1.jsx)(common_1.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
     }
     render() {
-        console.log(`${this.constructor.name}.render`, this.getCtrl().model.getFullName());
+        console.log(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }
