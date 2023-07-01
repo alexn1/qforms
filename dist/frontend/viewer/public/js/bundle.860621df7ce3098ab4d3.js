@@ -41996,8 +41996,11 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     addTable(table) {
         this.tables.push(table);
     }
+    findTable(name) {
+        return this.tables.find((table) => table.getName() === name);
+    }
     getTable(name) {
-        const table = this.tables.find((table) => table.getName() === name);
+        const table = this.findTable(name);
         if (!table)
             throw new Error(`${this.getFullName()}: no table with name: ${name}`);
         return table;
