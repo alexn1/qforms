@@ -57,8 +57,14 @@ class BkPage extends BkModel_1.BkModel {
     getForm(name) {
         return this.forms.find((form) => form.getName() === name);
     }
-    getDataSource(name) {
+    findDataSource(name) {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+    getDataSource(name) {
+        const ds = this.findDataSource(name);
+        if (!ds)
+            throw new Error(`${this.getName()}: no form ${name}`);
+        return ds;
     }
 }
 exports.BkPage = BkPage;

@@ -62,7 +62,13 @@ export class BkPage<TBkApplication extends BkApplication = BkApplication> extend
         return this.forms.find((form) => form.getName() === name);
     }
 
-    getDataSource(name: string): BkDataSource | undefined {
+    findDataSource(name: string): BkDataSource | undefined {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+
+    getDataSource(name: string): BkDataSource {
+        const ds = this.findDataSource(name);
+        if (!ds) throw new Error(`${this.getName()}: no form ${name}`);
+        return ds;
     }
 }
