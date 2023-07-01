@@ -1,4 +1,5 @@
 import path from 'path';
+import { Request, Response } from 'express';
 
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
@@ -117,26 +118,26 @@ export class EditorModule {
         res.end(html);
     }
 
-    async handleEditorPost(req, res, context: Context) {
+    async handleEditorPost(req: Request, res: Response, context: Context) {
         console.log('EditorModule.handleEditorPost', req.body);
-        if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
+        if (EDITOR_CONTROLLERS.indexOf(req.body!.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
-        if (EDITOR_ACTIONS.indexOf(req.body.action) === -1) {
-            throw new Error(`unknown action ${req.body.action}`);
+        if (EDITOR_ACTIONS.indexOf(req.body!.action) === -1) {
+            throw new Error(`unknown action ${req.body!.action}`);
         }
-        const editorControllerClassName = `${req.body.controller}EditorController`;
+        const editorControllerClassName = `${req.body!.controller}EditorController`;
         const ControllerClass = backend[editorControllerClassName];
         if (!ControllerClass) throw new Error(`no class with name ${editorControllerClassName}`);
 
         const appInfo = await BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
         const ctrl = new ControllerClass(appInfo, this.hostApp, null);
         await ctrl.init(context);
-        const method = req.body.action;
+        const method = req.body!.action;
         if (!ctrl[method]) throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
         // console.log('json result:', result);
         if (result === undefined) throw new Error('handleEditorPost: result is undefined');
-        await res.json(result);
+        res.json(result);
     }
 }

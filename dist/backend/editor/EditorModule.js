@@ -128,7 +128,7 @@ class EditorModule {
         // console.log('json result:', result);
         if (result === undefined)
             throw new Error('handleEditorPost: result is undefined');
-        await res.json(result);
+        res.json(result);
     }
 }
 exports.EditorModule = EditorModule;

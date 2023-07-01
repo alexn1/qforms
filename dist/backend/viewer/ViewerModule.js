@@ -39,6 +39,7 @@ const ACTIONS = [
 class ViewerModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
+        // this.hostApp = hostApp;
     }
     async init() {
         console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
@@ -187,7 +188,7 @@ class ViewerModule {
             const response = await page.fill(context);
             if (response === undefined)
                 throw new Error('page action: response is undefined');
-            await res.json({ page: response });
+            res.json({ page: response });
         }
         finally {
             await application.release(context);
@@ -218,7 +219,7 @@ class ViewerModule {
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
             console.log('select time:', time);
-            await res.json({ rows, count, time });
+            res.json({ rows, count, time });
             return time;
         }
         finally {
@@ -244,7 +245,7 @@ class ViewerModule {
                 if (result === undefined)
                     throw new Error('insert action: result is undefined');
                 await database.commit(context);
-                await res.json(result);
+                res.json(result);
                 this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {
@@ -306,7 +307,7 @@ class ViewerModule {
                 if (result === undefined)
                     throw new Error('delete result is undefined');
                 await database.commit(context);
-                await res.json(result);
+                res.json(result);
                 this.hostApp.broadcastResult(application, context, result);
             }
             catch (err) {
@@ -344,14 +345,14 @@ class ViewerModule {
                 throw new Error('rpc action: result is undefined');
             if (Array.isArray(result)) {
                 const [response, _result] = result;
-                await res.json(response);
+                res.json(response);
                 if (!(_result instanceof Result_1.Result)) {
                     throw new Error('_result is not Result');
                 }
                 this.hostApp.broadcastResult(application, context, _result);
             }
             else {
-                await res.json(result);
+                res.json(result);
                 if (result instanceof Result_1.Result) {
                     this.hostApp.broadcastResult(application, context, result);
                 }
@@ -362,7 +363,7 @@ class ViewerModule {
             err.message = `rpc error ${req.body.name}: ${err.message}`;
             err.context = context;
             await this.hostApp.logError(err, req);
-            await res.json({ errorMessage });
+            res.json({ errorMessage });
         }
     }
     // action
@@ -375,7 +376,7 @@ class ViewerModule {
         }
         delete req.session.user[context.getRoute()];
         await BkHelper_1.BkHelper.Session_save(req.session);
-        await res.json(null);
+        res.json(null);
     }
     // action
     async test(context, application) {
@@ -384,7 +385,7 @@ class ViewerModule {
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);
         // if (result === undefined) throw new Error('test action: result is undefined');
-        await res.json(null);
+        res.json(null);
     }
     async handleViewerGetFile(context, application, next) {
         await application.handleGetFile(context, next);

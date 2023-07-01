@@ -1,6 +1,6 @@
 /// <reference types="node" />
 import http from 'http';
-import { Express, Request, Response } from 'express';
+import { Express, NextFunction, Request, Response } from 'express';
 import { WebSocketServer } from './WebSocketServer';
 import { Context } from './Context';
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
@@ -72,7 +72,7 @@ export declare class BackHostApp {
     getAppFilePath(context: Context): string;
     createApplication(context: Context): Promise<BkApplication>;
     getApplicationClass(appInfo: AppInfo): typeof BkApplication;
-    createApp(req: any): Promise<AppInfo[]>;
+    createApp(req: Request): Promise<AppInfo[]>;
     composeContextData(err: Error, req: Request): {
         headers: any;
         method: string;
@@ -90,8 +90,8 @@ export declare class BackHostApp {
     logEvent(context: Context, message: string, data?: object): Promise<void>;
     moduleGet(req: Request, res: Response, next: any): Promise<void>;
     indexGet(req: Request, res: Response, next: any): Promise<void>;
-    indexPost(req: any, res: any, next: any): Promise<void>;
-    monitorGet(req: any, res: any, next: any): Promise<void>;
+    indexPost(req: Request, res: Response, next: NextFunction): Promise<void>;
+    monitorGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: any): Promise<void>;
     moduleGetFile(req: Request, res: Response, next: any): Promise<void>;
     _e404(req: any, res: any, next: any): Promise<void>;

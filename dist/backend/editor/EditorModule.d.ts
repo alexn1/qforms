@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 export declare class EditorModule {
@@ -9,5 +10,5 @@ export declare class EditorModule {
     getLinks(): string[];
     getScripts(): string[];
     handleEditorGet(req: any, res: any, context: Context): Promise<void>;
-    handleEditorPost(req: any, res: any, context: Context): Promise<void>;
+    handleEditorPost(req: Request, res: Response, context: Context): Promise<void>;
 }

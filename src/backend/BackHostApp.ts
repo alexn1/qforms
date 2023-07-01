@@ -1,5 +1,5 @@
 import http from 'http';
-import express, { Express, Request, Response } from 'express';
+import express, { Express, NextFunction, Request, Response } from 'express';
 import colors from 'colors/safe';
 import fs from 'fs';
 import path from 'path';
@@ -364,7 +364,7 @@ export class BackHostApp {
         return BkApplication;
     }
 
-    async createApp(req) {
+    async createApp(req: Request) {
         console.log('createApp');
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
@@ -514,11 +514,11 @@ export class BackHostApp {
         }
     }
 
-    async indexPost(req, res, next) {
+    async indexPost(req: Request, res: Response, next: NextFunction) {
         console.log(colors.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
-            await res.json({
+            res.json({
                 appInfos: appInfos.map((appInfo) => ({
                     fullName: appInfo.fullName,
                     envs: appInfo.envs,
@@ -529,7 +529,7 @@ export class BackHostApp {
         }
     }
 
-    async monitorGet(req, res, next) {
+    async monitorGet(req: Request, res: Response, next: NextFunction) {
         console.log(colors.magenta('monitorGet'), req.headers);
         try {
             if (!this.params.monitor) {

@@ -423,7 +423,7 @@ class BackHostApp {
         console.log(safe_1.default.magenta('indexPost'), req.params);
         try {
             const appInfos = await this.createApp(req);
-            await res.json({
+            res.json({
                 appInfos: appInfos.map((appInfo) => ({
                     fullName: appInfo.fullName,
                     envs: appInfo.envs,
