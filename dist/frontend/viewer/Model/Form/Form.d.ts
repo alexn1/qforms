@@ -28,5 +28,5 @@ export declare class Form extends Model {
     findField(name: string): Field | undefined;
     getField(name: string): Field;
     hasDefaultPersistentDataSource(): boolean;
-    decodeRow(row: RawRow): Row;
+    decodeRow(rawRow: RawRow): Row;
 }

@@ -41355,7 +41355,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 throw err;
             }
         }
-        return (0,_types__WEBPACK_IMPORTED_MODULE_5__.keyArrayToKey)(arr);
+        return (0,_types__WEBPACK_IMPORTED_MODULE_5__.keyTupleToKey)(arr);
     }
     removeRow(key) {
         const row = this.getRow(key);
@@ -42782,21 +42782,27 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     async refresh() {
         await this.getDefaultDataSource().refresh();
     }
-    getField(name) {
+    findField(name) {
         return this.fields.find((field) => field.getName() === name);
+    }
+    getField(name) {
+        const field = this.findField(name);
+        if (!field)
+            throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
     }
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();
     }
-    decodeRow(row) {
-        const values = {};
+    decodeRow(rawRow) {
+        const row = {};
         for (const field of this.fields) {
             const column = field.getAttr('column');
             if (column) {
-                values[column] = field.getValue(row);
+                row[column] = field.getValue(rawRow);
             }
         }
-        return values;
+        return row;
     }
 }
 
@@ -43562,13 +43568,13 @@ class WebSocketClient {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "keyArrayToKey": () => (/* binding */ keyArrayToKey),
-/* harmony export */   "keyToKeyArray": () => (/* binding */ keyToKeyArray)
+/* harmony export */   "keyToKeyTuple": () => (/* binding */ keyToKeyTuple),
+/* harmony export */   "keyTupleToKey": () => (/* binding */ keyTupleToKey)
 /* harmony export */ });
-const keyArrayToKey = (keyArray) => {
+const keyTupleToKey = (keyArray) => {
     return JSON.stringify(keyArray);
 };
-const keyToKeyArray = (key) => {
+const keyToKeyTuple = (key) => {
     return JSON.parse(key);
 };
 
@@ -43778,8 +43784,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.ViewerFrontHostApp),
 /* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_69__.VisibilityIcon),
 /* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_69__.VisibilityOffIcon),
-/* harmony export */   "keyArrayToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyArrayToKey),
-/* harmony export */   "keyToKeyArray": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyToKeyArray)
+/* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyToKeyTuple),
+/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_70__.keyTupleToKey)
 /* harmony export */ });
 /* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
 /* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");

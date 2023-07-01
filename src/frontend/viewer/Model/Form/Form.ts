@@ -135,14 +135,14 @@ export class Form extends Model {
         return this.getDefaultDataSource().isPersistent();
     }
 
-    decodeRow(row: RawRow): Row {
-        const values = {} as Row;
+    decodeRow(rawRow: RawRow): Row {
+        const row = {} as Row;
         for (const field of this.fields) {
             const column = field.getAttr('column');
             if (column) {
-                values[column] = field.getValue(row);
+                row[column] = field.getValue(rawRow);
             }
         }
-        return values;
+        return row;
     }
 }

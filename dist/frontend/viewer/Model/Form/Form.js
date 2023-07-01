@@ -117,15 +117,15 @@ class Form extends Model_1.Model {
     hasDefaultPersistentDataSource() {
         return this.getDefaultDataSource().isPersistent();
     }
-    decodeRow(row) {
-        const values = {};
+    decodeRow(rawRow) {
+        const row = {};
         for (const field of this.fields) {
             const column = field.getAttr('column');
             if (column) {
-                values[column] = field.getValue(row);
+                row[column] = field.getValue(rawRow);
             }
         }
-        return values;
+        return row;
     }
 }
 exports.Form = Form;
