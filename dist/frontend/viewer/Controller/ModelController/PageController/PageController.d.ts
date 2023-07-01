@@ -25,6 +25,7 @@ export declare class PageController<TApplicationController extends ApplicationCo
     isChanged(): boolean;
     getApp(): TApplicationController;
     getViewClass(): typeof PageView;
+    findForm<TFormController extends FormController = FormController>(name: string): TFormController | undefined;
     getForm<TFormController extends FormController = FormController>(name: string): TFormController;
     onActionClick(name: string): Promise<any>;
     onKeyDown: (e: any) => Promise<void>;

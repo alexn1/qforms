@@ -196,10 +196,18 @@ export class PageController<
         return super.getViewClass() || PageView;
     }
 
+    findForm<TFormController extends FormController = FormController>(
+        name: string,
+    ): TFormController | undefined {
+        return this.forms.find((form) => form.model.getName() === name) as TFormController;
+    }
+
     getForm<TFormController extends FormController = FormController>(
         name: string,
     ): TFormController {
-        return this.forms.find((form) => form.model.getName() === name) as TFormController;
+        const form = this.findForm<TFormController>(name);
+        if (!form) throw new Error(`${this.getModel().getFullName()}: no form controller ${name}`);
+        return form;
     }
 
     async onActionClick(name: string): Promise<any> {

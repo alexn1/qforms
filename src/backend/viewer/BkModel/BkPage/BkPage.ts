@@ -58,8 +58,14 @@ export class BkPage<TBkApplication extends BkApplication = BkApplication> extend
         return this.parent;
     }
 
-    getForm(name: string): BkForm | undefined {
+    findForm(name: string): BkForm | undefined {
         return this.forms.find((form) => form.getName() === name);
+    }
+
+    getForm(name: string): BkForm {
+        const form = this.findForm(name);
+        if (!form) throw new Error(`${this.getName()}: no form ${name}`);
+        return form;
     }
 
     findDataSource(name: string): BkDataSource | undefined {

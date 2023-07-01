@@ -192,8 +192,14 @@ export class Page extends Model {
         return result;
     }
 
-    getForm<TForm extends Form = Form>(name: string): TForm {
+    findForm<TForm extends Form = Form>(name: string): TForm | undefined {
         return this.forms.find((form) => form.getName() === name) as TForm;
+    }
+
+    getForm<TForm extends Form = Form>(name: string): TForm {
+        const form = this.findForm<TForm>(name);
+        if (!form) throw new Error(`${this.getFullName()}: no form ${name}`);
+        return form;
     }
 
     isSelectMode() {

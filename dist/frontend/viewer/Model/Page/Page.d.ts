@@ -39,6 +39,7 @@ export declare class Page extends Model {
     isModal(): boolean;
     onFormInsert(e: any): void;
     rpc(name: string, params: any): Promise<any>;
+    findForm<TForm extends Form = Form>(name: string): TForm | undefined;
     getForm<TForm extends Form = Form>(name: string): TForm;
     isSelectMode(): boolean;
     isFormInTab(): boolean;

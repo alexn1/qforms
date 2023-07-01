@@ -158,8 +158,14 @@ class Page extends Model_1.Model {
             throw new Error(result.errorMessage);
         return result;
     }
-    getForm(name) {
+    findForm(name) {
         return this.forms.find((form) => form.getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getFullName()}: no form ${name}`);
+        return form;
     }
     isSelectMode() {
         return !!this.options.selectMode;

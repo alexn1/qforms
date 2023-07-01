@@ -180,8 +180,14 @@ class PageController extends ModelController_1.ModelController {
     getViewClass() {
         return super.getViewClass() || PageView_1.PageView;
     }
-    getForm(name) {
+    findForm(name) {
         return this.forms.find((form) => form.model.getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getModel().getFullName()}: no form controller ${name}`);
+        return form;
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
