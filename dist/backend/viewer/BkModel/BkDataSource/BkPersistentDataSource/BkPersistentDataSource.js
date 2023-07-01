@@ -39,9 +39,6 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         return this.getApp().getDatabase(databaseName);
     }
     getTable() {
-        /* const tableName = this.getAttr('table');
-        if (!tableName) throw new Error(`${this.getFullName()}: no table name`);
-        return this.getDatabase().getTable(tableName); */
         if (!this.table)
             throw new Error(`${this.getFullName()}: no table`);
         return this.table;

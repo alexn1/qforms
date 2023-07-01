@@ -251,8 +251,5 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             return acc;
         }, {});
     }
-    async getBuffer(context, file) {
-        return file.data;
-    }
 }
 exports.BkSqlDataSource = BkSqlDataSource;

@@ -21,6 +21,5 @@ export declare class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabas
     delete(context: Context): Promise<Result>;
     fillAttributes(response: any): void;
     getAutoColumns(): string[];
-    getAutoColumnTypes(): {};
-    getBuffer(context: Context, file: any): Promise<any>;
+    getAutoColumnTypes(): Record<string, string>;
 }

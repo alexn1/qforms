@@ -7,7 +7,6 @@ import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { Key } from '../../../../../../types';
 import { BkForm } from '../../../BkForm/BkForm';
 
-
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     async fill(context: Context) {
         // console.log('SqlDataSource.fill', this.getFullName());
@@ -280,17 +279,17 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         return this.keyColumns.filter((name) => table.getColumn(name).isAuto());
     }
 
-    getAutoColumnTypes() {
+    getAutoColumnTypes(): Record<string, string> {
         if (!this.table) throw new Error('getAutoColumnTypes: no table');
         const table = this.table;
         const columns = this.getAutoColumns();
         return columns.reduce((acc, name) => {
             acc[name] = table.getColumn(name).getAttr('type');
             return acc;
-        }, {});
+        }, {} as Record<string, string>);
     }
 
-    async getBuffer(context: Context, file) {
+    /* async getBuffer(context: Context, file) {
         return file.data;
-    }
+    } */
 }
