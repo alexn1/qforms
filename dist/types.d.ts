@@ -25,5 +25,5 @@ export type ChangesByKey = {
 };
 export type Align = 'left' | 'center' | 'right';
 export type Visibility = 'visible' | 'hidden';
-export declare const keyArrayToKey: (keyArray: KeyTuple) => Key;
-export declare const keyToKeyArray: (key: Key) => KeyTuple;
+export declare const keyTupleToKey: (keyArray: KeyTuple) => Key;
+export declare const keyToKeyTuple: (key: Key) => KeyTuple;

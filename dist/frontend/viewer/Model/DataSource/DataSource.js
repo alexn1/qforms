@@ -233,7 +233,7 @@ class DataSource extends Model_1.Model {
                 throw err;
             }
         }
-        return (0, types_1.keyArrayToKey)(arr);
+        return (0, types_1.keyTupleToKey)(arr);
     }
     removeRow(key) {
         const row = this.getRow(key);

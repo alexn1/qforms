@@ -158,29 +158,29 @@ export class BkDataSource extends BkModel {
     }
 
     getKeyValuesFromKey(key: Key): KeyRecord {
-        const arr: KeyTuple = JSON.parse(key);
-        if (arr.length !== this.keyColumns.length) {
-            throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
+        const tuple: KeyTuple = JSON.parse(key);
+        if (tuple.length !== this.keyColumns.length) {
+            throw new Error(`key length mismatch: ${tuple.length} of ${this.keyColumns.length}`);
         }
-        const values: KeyRecord = {};
+        const record: KeyRecord = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
             const keyColumn = this.keyColumns[i];
-            values[keyColumn] = arr[i];
+            record[keyColumn] = tuple[i];
         }
-        return values;
+        return record;
     }
 
-    getKeyFromValues(values): Key {
-        const arr: KeyTuple = [];
+    getKeyFromValues(record: KeyRecord): Key {
+        const tuple: KeyTuple = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
-            const value = values[column];
+            const value = record[column];
             if (value === null || value === undefined) {
                 throw new Error(`getKeyFromValues: no value of ${column} column`);
             }
-            arr.push(value);
+            tuple.push(value);
         }
-        return JSON.stringify(arr) as Key;
+        return JSON.stringify(tuple) as Key;
     }
 
     getFullName(): string {

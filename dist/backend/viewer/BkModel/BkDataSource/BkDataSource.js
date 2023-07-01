@@ -132,16 +132,16 @@ class BkDataSource extends BkModel_1.BkModel {
         return this.parent.getApp();
     }
     getKeyValuesFromKey(key) {
-        const arr = JSON.parse(key);
-        if (arr.length !== this.keyColumns.length) {
-            throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
+        const tuple = JSON.parse(key);
+        if (tuple.length !== this.keyColumns.length) {
+            throw new Error(`key length mismatch: ${tuple.length} of ${this.keyColumns.length}`);
         }
-        const values = {};
+        const record = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
             const keyColumn = this.keyColumns[i];
-            values[keyColumn] = arr[i];
+            record[keyColumn] = tuple[i];
         }
-        return values;
+        return record;
     }
     getKeyFromValues(values) {
         const arr = [];

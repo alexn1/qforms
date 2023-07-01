@@ -10,8 +10,8 @@ import {
     RawRow,
     JSONString,
     ChangesByKey,
-    keyArrayToKey,
-    KeyItem,
+    keyTupleToKey,
+    KeyElement,
 } from '../../../../types';
 import { Result } from '../../../../Result';
 
@@ -176,14 +176,14 @@ export class DataSource extends Model {
             if (row[column] === undefined) return null;
             if (row[column] === null) throw new Error('wrong value null for data source value');
             try {
-                const value = JSON.parse(row[column]) as KeyItem;
+                const value = JSON.parse(row[column]) as KeyElement;
                 arr.push(value);
             } catch (err) {
                 console.log('getRowKey: cannot parse: ', row[column]);
                 throw err;
             }
         }
-        return keyArrayToKey(arr);
+        return keyTupleToKey(arr);
     }
 
     removeRow(key: Key) {

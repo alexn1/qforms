@@ -4,12 +4,12 @@ export type JSONString = string & { type: 'JSONString' };
 
 export type Key = JSONString & { type2: 'Key' };
 
-export type KeyItem = Scalar;
+export type KeyElement = Scalar;
 
-export type KeyTuple = KeyItem[];
+export type KeyTuple = KeyElement[];
 
 export type KeyRecord = {
-    [column: string]: KeyItem;
+    [column: string]: KeyElement;
 };
 
 export type Row = {
@@ -28,10 +28,10 @@ export type Align = 'left' | 'center' | 'right';
 
 export type Visibility = 'visible' | 'hidden';
 
-export const keyArrayToKey = (keyArray: KeyTuple): Key => {
+export const keyTupleToKey = (keyArray: KeyTuple): Key => {
     return JSON.stringify(keyArray) as Key;
 };
 
-export const keyToKeyArray = (key: Key): KeyTuple => {
+export const keyToKeyTuple = (key: Key): KeyTuple => {
     return JSON.parse(key);
 };
