@@ -58,9 +58,9 @@ class Editor extends BaseModel_1.BaseModel {
         await BkHelper_1.BkHelper.writeFile2(newFilePath, content);
         return content;
     }
-    /*getViewName() {
+    /* getViewName() {
         return this.constructor.name.replace('Editor', '') + 'View';
-    }*/
+    } */
     async getFile(filePath) {
         console.log('Editor.getFile', filePath);
         const exists = await BkHelper_1.BkHelper.exists(filePath);

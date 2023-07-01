@@ -1,3 +1,15 @@
+export interface BkModelData {
+    [name: string]: any;
+    '@class': string;
+    '@attributes': {
+        [name: string]: any;
+        name: string;
+    };
+    env?: {
+        [name: string]: any;
+    };
+}
+
 export interface ModelData {
     class: string;
     name: string;

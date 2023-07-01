@@ -1,10 +1,11 @@
-import { BaseModel, BkModelData } from '../../BaseModel';
+import { BaseModel } from '../../BaseModel';
+import { BkModelData } from '../../../data';
 export declare class Editor extends BaseModel {
-    createFileByParams(newFilePath: any, templateFilePath: any, params: any): Promise<any>;
-    getFile(filePath: any): Promise<string | undefined>;
-    saveFile(filePath: any, content: any): Promise<void>;
-    getCustomFile(ext: any): Promise<string | undefined>;
-    saveCustomFile(ext: any, text: any): Promise<void>;
+    createFileByParams(newFilePath: string, templateFilePath: string, params: any): Promise<any>;
+    getFile(filePath: string): Promise<string | undefined>;
+    saveFile(filePath: string, content: string): Promise<void>;
+    getCustomFile(ext: string): Promise<string | undefined>;
+    saveCustomFile(ext: string, text: string): Promise<void>;
     getCustomFilePath(ext: any): Promise<string>;
     moveDataColItem(colName: any, name: any, offset: any): void;
     setColData(colName: string, newData: BkModelData): any;

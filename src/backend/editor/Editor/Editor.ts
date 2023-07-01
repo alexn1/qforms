@@ -1,9 +1,10 @@
 import path from 'path';
 const ejs = require('ejs');
 
-import { BaseModel, BkModelData } from '../../BaseModel';
+import { BaseModel } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
+import { BkModelData } from '../../../data';
 
 export class Editor extends BaseModel {
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
@@ -22,7 +23,7 @@ export class Editor extends BaseModel {
         return text;
     } */
 
-    async createFileByParams(newFilePath, templateFilePath, params) {
+    async createFileByParams(newFilePath: string, templateFilePath: string, params) {
         const exists = await BkHelper.exists(newFilePath);
         if (exists) {
             throw new Error(`File ${path.basename(newFilePath)} already exists.`);
@@ -33,11 +34,11 @@ export class Editor extends BaseModel {
         return content;
     }
 
-    /*getViewName() {
+    /* getViewName() {
         return this.constructor.name.replace('Editor', '') + 'View';
-    }*/
+    } */
 
-    async getFile(filePath) {
+    async getFile(filePath: string) {
         console.log('Editor.getFile', filePath);
         const exists = await BkHelper.exists(filePath);
         if (exists) {
@@ -45,7 +46,7 @@ export class Editor extends BaseModel {
         }
     }
 
-    async saveFile(filePath, content): Promise<void> {
+    async saveFile(filePath: string, content: string): Promise<void> {
         const exists = await BkHelper.exists(filePath);
         if (!exists) {
             throw new Error(`File {path.basename(filePath)} doesn't exist.`);
@@ -53,13 +54,13 @@ export class Editor extends BaseModel {
         await BkHelper.writeFile2(filePath, content);
     }
 
-    async getCustomFile(ext) {
+    async getCustomFile(ext: string) {
         console.log('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
 
-    async saveCustomFile(ext, text): Promise<void> {
+    async saveCustomFile(ext: string, text: string): Promise<void> {
         const customFilePath = await this.getCustomFilePath(ext);
         await this.saveFile(customFilePath, text);
     }

@@ -1,15 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-export interface BkModelData {
-    [name: string]: any;
-    '@class': string;
-    '@attributes': {
-        [name: string]: any;
-        name: string;
-    };
-    env?: {
-        [name: string]: any;
-    };
-}
+import { BkModelData } from '../data';
 export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     protected data: TBkModelData;
     private parent?;
