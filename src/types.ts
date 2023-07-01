@@ -6,9 +6,9 @@ export type Key = JSONString & { type2: 'Key' };
 
 export type KeyItem = Scalar;
 
-export type KeyArray = KeyItem[];
+export type KeyTuple = KeyItem[];
 
-export type KeyObject = {
+export type KeyRecord = {
     [column: string]: KeyItem;
 };
 
@@ -28,10 +28,10 @@ export type Align = 'left' | 'center' | 'right';
 
 export type Visibility = 'visible' | 'hidden';
 
-export const keyArrayToKey = (keyArray: KeyArray): Key => {
+export const keyArrayToKey = (keyArray: KeyTuple): Key => {
     return JSON.stringify(keyArray) as Key;
 };
 
-export const keyToKeyArray = (key: Key): KeyArray => {
+export const keyToKeyArray = (key: Key): KeyTuple => {
     return JSON.parse(key);
 };

@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Form } from '../Form/Form';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
-import { Key, KeyObject, RawRow, JSONString, ChangesByKey } from '../../../../types';
+import { Key, KeyRecord, RawRow, JSONString, ChangesByKey } from '../../../../types';
 import { Result } from '../../../../Result';
 export declare class DataSource extends Model {
     rows: RawRow[] | null;
@@ -29,7 +29,7 @@ export declare class DataSource extends Model {
     hasNew(): boolean;
     isRowColumnChanged(row: RawRow, column: string): boolean;
     getValue(row: RawRow, column: string): JSONString;
-    getKeyValues(row: RawRow): KeyObject;
+    getKeyValues(row: RawRow): KeyRecord;
     getRowKey(row: RawRow): Key | null;
     removeRow(key: Key): void;
     newRow(row: RawRow): void;
@@ -41,7 +41,7 @@ export declare class DataSource extends Model {
     getRows(): RawRow[];
     getRowByIndex(i: number): RawRow;
     discard(): void;
-    static keyToParams(key: string, paramName?: string): KeyObject;
+    static keyToParams(key: string, paramName?: string): KeyRecord;
     getChangesByKey(): ChangesByKey;
     getRowWithChanges(row: RawRow): RawRow;
     hasNewRows(): boolean;

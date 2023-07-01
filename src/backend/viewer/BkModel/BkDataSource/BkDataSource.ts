@@ -10,7 +10,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkForm } from '../BkForm/BkForm';
 import { BkRowForm } from '../BkForm/BkRowForm/BkRowForm';
 import { BkTableForm } from '../BkForm/BkTableForm/BkTableForm';
-import { Key, KeyObject, Row, KeyArray, RawRow } from '../../../../types';
+import { Key, KeyRecord, Row, KeyTuple, RawRow } from '../../../../types';
 
 export type ReadResult = [RawRow[], number | null];
 
@@ -157,12 +157,12 @@ export class BkDataSource extends BkModel {
         return this.parent.getApp();
     }
 
-    getKeyValuesFromKey(key: Key): KeyObject {
-        const arr: KeyArray = JSON.parse(key);
+    getKeyValuesFromKey(key: Key): KeyRecord {
+        const arr: KeyTuple = JSON.parse(key);
         if (arr.length !== this.keyColumns.length) {
             throw new Error(`key length mismatch: ${arr.length} of ${this.keyColumns.length}`);
         }
-        const values: KeyObject = {};
+        const values: KeyRecord = {};
         for (let i = 0; i < this.keyColumns.length; i++) {
             const keyColumn = this.keyColumns[i];
             values[keyColumn] = arr[i];
@@ -171,7 +171,7 @@ export class BkDataSource extends BkModel {
     }
 
     getKeyFromValues(values): Key {
-        const arr: KeyArray = [];
+        const arr: KeyTuple = [];
         for (let i = 0; i < this.keyColumns.length; i++) {
             const column = this.keyColumns[i];
             const value = values[column];
@@ -195,10 +195,10 @@ export class BkDataSource extends BkModel {
         }
     }
 
-    static keyToParams(key: Key, paramName = 'key'): KeyObject {
+    static keyToParams(key: Key, paramName = 'key'): KeyRecord {
         if (typeof key !== 'string') throw new Error('key not string');
-        const params: KeyObject = {};
-        const arr: KeyArray = JSON.parse(key);
+        const params: KeyRecord = {};
+        const arr: KeyTuple = JSON.parse(key);
         if (arr.length === 1) {
             params[paramName] = arr[0];
         } else if (arr.length > 1) {
@@ -211,7 +211,7 @@ export class BkDataSource extends BkModel {
         return params;
     }
 
-    calcNewKeyValues(originalKeyValues: KeyObject, values): KeyObject {
+    calcNewKeyValues(originalKeyValues: KeyRecord, values): KeyRecord {
         const newKeyValues = this.keyColumns.reduce((acc, name) => {
             if (originalKeyValues[name] === undefined)
                 throw new Error(`no key column in values: ${name}`);

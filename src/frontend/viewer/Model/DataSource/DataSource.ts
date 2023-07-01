@@ -5,8 +5,8 @@ import { Application } from '../Application/Application';
 import { Helper } from '../../../common';
 import {
     Key,
-    KeyArray,
-    KeyObject,
+    KeyTuple,
+    KeyRecord,
     RawRow,
     JSONString,
     ChangesByKey,
@@ -162,7 +162,7 @@ export class DataSource extends Model {
         return value;
     }
 
-    getKeyValues(row: RawRow): KeyObject {
+    getKeyValues(row: RawRow): KeyRecord {
         return this.data.keyColumns.reduce((keyValues, column) => {
             keyValues[column] = JSON.parse(row[column]);
             return keyValues;
@@ -171,7 +171,7 @@ export class DataSource extends Model {
 
     getRowKey(row: RawRow): Key | null {
         // console.log('DataSource.getRowKey', row);
-        const arr: KeyArray = [];
+        const arr: KeyTuple = [];
         for (const column of this.data.keyColumns) {
             if (row[column] === undefined) return null;
             if (row[column] === null) throw new Error('wrong value null for data source value');
@@ -264,7 +264,7 @@ export class DataSource extends Model {
         this.changes.clear();
     }
 
-    static keyToParams(key: string, paramName: string = 'key'): KeyObject {
+    static keyToParams(key: string, paramName: string = 'key'): KeyRecord {
         if (typeof key !== 'string') throw new Error('key not string');
         const params = {};
         const arr = JSON.parse(key);
