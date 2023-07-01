@@ -76,7 +76,7 @@ class BkDatabase extends BkModel_1.BkModel {
         throw new Error(`${this.constructor.name}.getDefaultPort not implemented`);
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     findTable(name) {
         return this.tables.find((table) => table.getName() === name);

@@ -23,7 +23,7 @@ class BkTable extends BkModel_1.BkModel {
         return keyColumns;
     }
     getApp() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getColumn(name) {
         const column = this.columns.find((column) => column.getName() === name);

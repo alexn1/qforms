@@ -20,7 +20,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             this.checkKeyFields();
         }
         // if form data source named default then check mode
-        if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
+        if (this.isDefaultOnForm() && this.getParent().isNewMode(context)) {
             const limit = this.getLimit();
             if (limit) {
                 response.limit = limit;
@@ -42,7 +42,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             throw err;
         }
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
+            this.getParent().dumpRowToParams(response.rows[0], context.querytime.params);
         }
         if (this.getLimit()) {
             response.limit = context.params.limit;
@@ -58,7 +58,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (!query)
             throw new Error(`${this.getFullName()}: no countQuery`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;
@@ -68,7 +68,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (!query)
             throw new Error(`no singleQuery: ${this.getFullName()}`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;
@@ -78,7 +78,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         if (!query)
             throw new Error(`no multipleQuery: ${this.getFullName()}`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;

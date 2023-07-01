@@ -17,10 +17,10 @@ export class BkColumn extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
 
-    /*getDbType() {
+    /* getDbType() {
         return this.getAttr('dbType');
-    }*/
+    } */
 }

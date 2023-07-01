@@ -6,6 +6,7 @@ import { Context } from '../../../../../Context';
 import { Result } from '../../../../../../Result';
 import { BkSqlDatabase } from '../../../BkDatabase/BkSqlDatabase/BkSqlDatabase';
 import { Key } from '../../../../../../types';
+import { BkForm } from '../../../BkForm/BkForm';
 
 export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
     table: BkTable | null = null;
@@ -26,7 +27,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         }
 
         // if form data source named default then check mode
-        if (this.isDefaultOnForm() && this.parent.isNewMode(context)) {
+        if (this.isDefaultOnForm() && this.getParent<BkForm>().isNewMode(context)) {
             const limit = this.getLimit();
             if (limit) {
                 response.limit = limit;
@@ -50,7 +51,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         }
 
         if (this.isDefaultOnRowForm() && response.rows[0]) {
-            this.parent.dumpRowToParams(response.rows[0], context.querytime.params);
+            this.getParent<BkForm>().dumpRowToParams(response.rows[0], context.querytime.params);
         }
 
         if (this.getLimit()) {
@@ -69,7 +70,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         let query = this.getAttr('countQuery');
         if (!query) throw new Error(`${this.getFullName()}: no countQuery`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent<BkForm>().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;
@@ -79,7 +80,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         let query = this.getAttr('singleQuery');
         if (!query) throw new Error(`no singleQuery: ${this.getFullName()}`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent<BkForm>().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;
@@ -89,7 +90,7 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         let query = this.getAttr('multipleQuery');
         if (!query) throw new Error(`no multipleQuery: ${this.getFullName()}`);
         if (this.isOnForm()) {
-            query = this.parent.replaceThis(context, query);
+            query = this.getParent<BkForm>().replaceThis(context, query);
         }
         query = this.templateQuery(context, query);
         return query;

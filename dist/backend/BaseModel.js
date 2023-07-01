@@ -102,6 +102,8 @@ class BaseModel {
         return i;
     }
     getParent() {
+        if (!this.parent)
+            throw new Error('no parent');
         return this.parent;
     }
 }

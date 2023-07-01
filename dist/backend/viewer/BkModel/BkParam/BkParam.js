@@ -19,7 +19,7 @@ class BkParam extends BkModel_1.BkModel {
         }
     }
     getApp() {
-        return this.parent.getApp();
+        return this.getParent().getApp();
     }
 }
 exports.BkParam = BkParam;

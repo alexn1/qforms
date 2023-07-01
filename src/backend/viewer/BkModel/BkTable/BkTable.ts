@@ -27,7 +27,7 @@ export class BkTable extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
 
     getColumn(name: string): BkColumn {

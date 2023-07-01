@@ -113,7 +113,7 @@ export class BkDatabase<TConnection = any> extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent;
+        return this.getParent();
     }
 
     findTable(name: string): BkTable | undefined {
@@ -138,7 +138,12 @@ export class BkDatabase<TConnection = any> extends BkModel {
         return param;
     }
 
-    async insertRow(context: Context, table: string, values: any, autoColumnTypes: any = {}): Promise<Row> {
+    async insertRow(
+        context: Context,
+        table: string,
+        values: any,
+        autoColumnTypes: any = {},
+    ): Promise<Row> {
         throw new Error(`${this.constructor.name}.insertRow not implemented`);
     }
 

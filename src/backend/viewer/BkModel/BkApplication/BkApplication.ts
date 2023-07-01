@@ -331,7 +331,7 @@ export class BkApplication<THostApp extends BackHostApp = BackHostApp> extends B
         // console.log(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
-        const obj = this.data.env[env];
+        const obj = this.data.env![env];
         if (!obj) throw new Error(`no env ${env}`);
         if (obj[name]) return obj[name];
         throw new Error(`no env ${name} in ${env}`);

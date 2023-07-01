@@ -33,10 +33,10 @@ export class FieldEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page: this.parent.parent.getName(),
-            form: this.parent.getName(),
+            page: this.getParent().getParent().getName(),
+            form: this.getParent().getName(),
             field: this.getName(),
-            formClass: this.parent.constructor.name.replace('Editor', ''),
+            formClass: this.getParent().constructor.name.replace('Editor', ''),
             _class: this.constructor.name.replace('Editor', ''),
         });
         return js;
@@ -46,10 +46,10 @@ export class FieldEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'View.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
-            page: this.parent.parent.getName(),
-            form: this.parent.getName(),
+            page: this.getParent().getParent().getName(),
+            form: this.getParent().getName(),
             field: this.getName(),
-            formClass: this.parent.constructor.name.replace('Editor', ''),
+            formClass: this.getParent().constructor.name.replace('Editor', ''),
             _class: this.constructor.name.replace('Editor', ''),
         });
         return jsx;
@@ -59,17 +59,17 @@ export class FieldEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'View.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
-            page: this.parent.parent.getName(),
-            form: this.parent.getName(),
+            page: this.getParent().getParent().getName(),
+            form: this.getParent().getName(),
             field: this.getName(),
-            formClass: this.parent.constructor.name.replace('Editor', ''),
+            formClass: this.getParent().constructor.name.replace('Editor', ''),
             _class: this.constructor.name.replace('Editor', ''),
         });
         return less;
     }
 
     async getCollectionDirPath() {
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent<Editor>().getCustomDirPath();
         const dirPath = path.join(customDirPath, 'fields');
         return dirPath;
     }

@@ -1,21 +1,35 @@
-export class BaseModel {
-    constructor(public data: any, public parent?: any) {
+import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
+
+export interface BkModelData {
+    [name: string]: any;
+    '@class': string;
+    '@attributes': {
+        [name: string]: any;
+        name: string;
+    };
+    env?: {
+        [name: string]: any;
+    };
+}
+
+export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
+    constructor(public data: TBkModelData, public parent?: BaseModel) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
     }
 
-    static getClassName(data): string {
+    static getClassName(data: BkModelData): string {
         return data['@class'];
     }
 
-    static getAttr(data: any, name: string): string {
+    static getAttr(data: BkModelData, name: string): string {
         return data['@attributes'][name];
     }
 
-    static getName(data): string {
+    static getName(data: BkModelData): string {
         return BaseModel.getAttr(data, 'name');
     }
 
-    static getEnvList(data): string[] {
+    static getEnvList(data: BkModelData): string[] {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }
@@ -28,7 +42,7 @@ export class BaseModel {
         return BaseModel.getName(this.data);
     }
 
-    static attributes(data) {
+    static attributes(data: BkModelData) {
         return data['@attributes'];
     }
 
@@ -36,7 +50,7 @@ export class BaseModel {
         return this.data['@attributes'];
     }
 
-    getAttr(name): string {
+    getAttr(name: string): string {
         if (!this.isAttr(name)) throw new Error(`no attribute '${name}'`);
         return this.data['@attributes'][name];
     }
@@ -55,7 +69,7 @@ export class BaseModel {
         return !!this.getColItemData(colName, name);
     }
 
-    getData(): any {
+    getData(): BkModelData {
         return this.data;
     }
 
@@ -70,7 +84,7 @@ export class BaseModel {
     }
 
     getItemNames(colName: string) {
-        return this.getCol(colName).map((data) => BaseModel.getName(data));
+        return this.getCol(colName).map((data: BkModelData) => BaseModel.getName(data));
     }
 
     getColItemData(colName: string, name: string) {
@@ -87,22 +101,22 @@ export class BaseModel {
         return data;
     }
 
-    static findColDataByName(col, name: string) {
+    static findColDataByName(col: any[], name: string) {
         return col.find((data) => BaseModel.getName(data) === name);
     }
 
-    addModelData(colName: string, data) {
+    addModelData(colName: string, data: BkModelData) {
         const name = BaseModel.getName(data);
         if (this.getColItemData(colName, name))
             throw new Error(`${name} already exists in ${colName}`);
         this.getCol(colName).push(data);
     }
 
-    getApp() {
+    getApp(): BkApplication {
         throw new Error('getApp: not implemented');
     }
 
-    replaceDataColItem(colName: string, oldData, newData) {
+    replaceDataColItem(colName: string, oldData: BkModelData, newData: BkModelData) {
         const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
         if (i === -1)
@@ -111,7 +125,8 @@ export class BaseModel {
         return i;
     }
 
-    getParent() {
-        return this.parent;
+    getParent<T extends BaseModel = BaseModel>(): T {
+        if (!this.parent) throw new Error('no parent');
+        return this.parent as T;
     }
 }

@@ -15,7 +15,7 @@ class BkColumn extends BkModel_1.BkModel {
         return this.getAttr('auto') === 'true';
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
 }
 exports.BkColumn = BkColumn;

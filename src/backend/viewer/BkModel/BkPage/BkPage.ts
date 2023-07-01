@@ -20,7 +20,7 @@ export class BkPage<TBkApplication extends BkApplication = BkApplication> extend
     }
 
     getDirPath(): string {
-        return path.join(this.parent.getDirPath(), 'pages', this.getName());
+        return path.join(this.getParent<BkApplication>().getDirPath(), 'pages', this.getName());
     }
 
     fillAttributes(response: any): void {
@@ -55,7 +55,7 @@ export class BkPage<TBkApplication extends BkApplication = BkApplication> extend
     }
 
     getApp(): TBkApplication {
-        return this.parent;
+        return this.getParent();
     }
 
     findForm(name: string): BkForm | undefined {

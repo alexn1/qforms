@@ -120,7 +120,7 @@ export class Editor extends BaseModel {
 
     setData(colName, newData) {
         // console.log('Editor.setData', newData);
-        return this.parent.replaceDataColItem(colName, this.data, newData);
+        return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
 
     createItemEditor(colName: string, itemName: string): any {

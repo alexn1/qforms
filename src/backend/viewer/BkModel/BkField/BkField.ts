@@ -8,6 +8,7 @@ import { BkColumn } from '../BkColumn/BkColumn';
 import { BkHelper } from '../../../BkHelper';
 import { BkPersistentDataSource } from '../BkDataSource/BkPersistentDataSource/BkPersistentDataSource';
 import { JSONString, RawRow } from '../../../../types';
+import { Context } from '../../../Context';
 
 export class BkField extends BkModel {
     /* static async create(data, parent): Promise<Field> {
@@ -36,10 +37,10 @@ export class BkField extends BkModel {
     }
 
     getDirPath(): string {
-        return path.join(this.parent.getDirPath(), 'fields', this.getName());
+        return path.join(this.getParent<BkForm>().getDirPath(), 'fields', this.getName());
     }
 
-    fillDefaultValue(context, row) {
+    fillDefaultValue(context: Context, row) {
         const column = this.getAttr('column');
         if (!column) return;
         const defaultValue = this.getForm().replaceThis(context, this.getAttr('defaultValue'));
@@ -56,7 +57,7 @@ export class BkField extends BkModel {
         }
     }
 
-    dumpRowValueToParams(row: RawRow, params: { [name: string]: any }) {
+    dumpRowValueToParams(row: RawRow, params: Record<string, any>) {
         // console.log('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {
@@ -81,22 +82,22 @@ export class BkField extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
 
     getPage(): BkPage {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
 
     getForm(): BkForm {
-        return this.parent;
+        return this.getParent();
     }
 
     isParam(): boolean {
         return this.isAttr('param') && this.getAttr('param') === 'true';
     }
 
-    valueToRaw(value): JSONString {
+    valueToRaw(value: any): JSONString {
         return BkHelper.encodeValue(value);
     }
 

@@ -20,7 +20,7 @@ class BkPage extends BkModel_1.BkModel {
         await this.createColItems('forms', context);
     }
     getDirPath() {
-        return path_1.default.join(this.parent.getDirPath(), 'pages', this.getName());
+        return path_1.default.join(this.getParent().getDirPath(), 'pages', this.getName());
     }
     fillAttributes(response) {
         response.name = this.getAttr('name');
@@ -52,7 +52,7 @@ class BkPage extends BkModel_1.BkModel {
         });
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     findForm(name) {
         return this.forms.find((form) => form.getName() === name);

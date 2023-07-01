@@ -5,9 +5,10 @@ import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { ReadResult } from '../../BkDataSource';
 import { Row, RawRow } from '../../../../../../types';
+import { BaseModel } from '../../../../../BaseModel';
 export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
-    constructor(data: any, parent: any);
+    constructor(data: any, parent: BaseModel);
     fill(context: Context): Promise<any>;
     read(context: Context): Promise<ReadResult>;
     create(context: Context, _values?: any): Promise<Result>;

@@ -23,7 +23,11 @@ export class BkDataSource extends BkModel {
     } */
 
     getDirPath(): string {
-        return path.join(this.parent.getDirPath(), 'dataSources', this.getName());
+        return path.join(
+            this.getParent<BkForm | BkPage | BkApplication>().getDirPath(),
+            'dataSources',
+            this.getName(),
+        );
     }
 
     getJsonFilePath(): string {
@@ -154,7 +158,7 @@ export class BkDataSource extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.getApp();
+        return this.getParent().getApp();
     }
 
     getKeyValuesFromKey(key: Key): KeyRecord {
@@ -185,9 +189,11 @@ export class BkDataSource extends BkModel {
 
     getFullName(): string {
         if (this.isOnForm()) {
-            return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join(
-                '.',
-            );
+            return [
+                this.getParent<BkForm>().getPage().getName(),
+                this.getParent().getName(),
+                this.getName(),
+            ].join('.');
         } else if (this.parent instanceof BkPage) {
             return [this.parent.getName(), this.getName()].join('.');
         } else {
@@ -296,7 +302,8 @@ export class BkDataSource extends BkModel {
     }
 
     getForm(): BkForm {
-        return this.isOnForm() ? this.getParent() : null;
+        if (!this.isOnForm()) throw new Error(`${this.getFullName()}: not form data source`);
+        return this.getParent();
     }
 
     getAccess(context: Context): {

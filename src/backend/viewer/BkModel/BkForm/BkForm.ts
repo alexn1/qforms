@@ -8,6 +8,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { MyError } from '../../../MyError';
 import { Context } from '../../../Context';
+import { JSONString, RawRow, Row } from '../../../../types';
 
 export class BkForm extends BkModel {
     dataSources: BkDataSource[] = [];
@@ -26,7 +27,7 @@ export class BkForm extends BkModel {
     }
 
     getDirPath(): string {
-        return path.join(this.parent.getDirPath(), 'forms', this.getName());
+        return path.join(this.getParent<BkPage>().getDirPath(), 'forms', this.getName());
     }
 
     fillAttributes(response: any): void {
@@ -55,9 +56,10 @@ export class BkForm extends BkModel {
     }
 
     _getSurrogateDataSourceResponse(context: Context) {
-        const row = {
-            id: 1,
-        };
+        const row = {     
+        } as RawRow;
+        row['id'] = '[1]' as JSONString;
+
         for (const field of this.fields) {
             field.fillDefaultValue(context, row);
         }
@@ -69,7 +71,7 @@ export class BkForm extends BkModel {
         };
     }
 
-    dumpRowToParams(row, params) {
+    dumpRowToParams(row: RawRow, params: Record<string, any>) {
         for (const field of this.fields) {
             if (field.isParam()) {
                 field.dumpRowValueToParams(row, params);
@@ -113,11 +115,11 @@ export class BkForm extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
 
     getPage(): BkPage {
-        return this.parent;
+        return this.getParent();
     }
 
     getFullName(): string {

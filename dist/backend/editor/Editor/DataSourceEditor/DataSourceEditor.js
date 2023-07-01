@@ -29,7 +29,7 @@ class DataSourceEditor extends Editor_1.Editor {
         };
     }
     async getCollectionDirPath() {
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent().getCustomDirPath();
         return path_1.default.join(customDirPath, 'dataSources');
     }
     async createModelBackJs(params) {
@@ -54,7 +54,7 @@ class DataSourceEditor extends Editor_1.Editor {
             await this.parent.pageFile.save();
         }
         else {
-            await this.parent.getParent().pageFile.save();
+            await this.getParent().getParent().pageFile.save();
         }
     }
 }

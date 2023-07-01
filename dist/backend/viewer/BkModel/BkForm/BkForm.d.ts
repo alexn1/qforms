@@ -5,6 +5,7 @@ import { BkField } from '../BkField/BkField';
 import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
+import { RawRow } from '../../../../types';
 export declare class BkForm extends BkModel {
     dataSources: BkDataSource[];
     actions: BkAction[];
@@ -18,11 +19,9 @@ export declare class BkForm extends BkModel {
         class: string;
         name: string;
         keyColumns: string[];
-        rows: {
-            id: number;
-        }[];
+        rows: RawRow[];
     };
-    dumpRowToParams(row: any, params: any): void;
+    dumpRowToParams(row: RawRow, params: Record<string, any>): void;
     replaceThis(context: Context, query: string): string;
     rpc(name: string, context: Context): Promise<any>;
     getApp(): BkApplication;

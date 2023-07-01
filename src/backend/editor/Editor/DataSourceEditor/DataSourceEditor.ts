@@ -28,7 +28,7 @@ export class DataSourceEditor extends Editor {
     }
 
     async getCollectionDirPath() {
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent<Editor>().getCustomDirPath();
         return path.join(customDirPath, 'dataSources');
     }
 
@@ -54,7 +54,7 @@ export class DataSourceEditor extends Editor {
         } else if (this.parent instanceof PageEditor) {
             await this.parent.pageFile.save();
         } else {
-            await this.parent.getParent().pageFile.save();
+            await this.getParent().getParent<PageEditor>().pageFile.save();
         }
     }
 }

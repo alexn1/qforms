@@ -1,27 +1,45 @@
-export declare class BaseModel {
-    data: any;
-    parent?: any;
-    constructor(data: any, parent?: any);
-    static getClassName(data: any): string;
-    static getAttr(data: any, name: string): string;
-    static getName(data: any): string;
-    static getEnvList(data: any): string[];
+import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
+export interface BkModelData {
+    [name: string]: any;
+    '@class': string;
+    '@attributes': {
+        [name: string]: any;
+        name: string;
+    };
+    env?: {
+        [name: string]: any;
+    };
+}
+export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
+    data: TBkModelData;
+    parent?: BaseModel<BkModelData> | undefined;
+    constructor(data: TBkModelData, parent?: BaseModel<BkModelData> | undefined);
+    static getClassName(data: BkModelData): string;
+    static getAttr(data: BkModelData, name: string): string;
+    static getName(data: BkModelData): string;
+    static getEnvList(data: BkModelData): string[];
     getClassName(): string;
     getName(): string;
-    static attributes(data: any): any;
-    attributes(): any;
-    getAttr(name: any): string;
+    static attributes(data: BkModelData): {
+        [name: string]: any;
+        name: string;
+    };
+    attributes(): {
+        [name: string]: any;
+        name: string;
+    };
+    getAttr(name: string): string;
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;
     isData(colName: string, name: string): boolean;
-    getData(): any;
+    getData(): BkModelData;
     getCol(name: string): any;
     getItemNames(colName: string): any;
     getColItemData(colName: string, name: string): any;
     removeColData(colName: string, name: string): any;
-    static findColDataByName(col: any, name: string): any;
-    addModelData(colName: string, data: any): void;
-    getApp(): void;
-    replaceDataColItem(colName: string, oldData: any, newData: any): any;
-    getParent(): any;
+    static findColDataByName(col: any[], name: string): any;
+    addModelData(colName: string, data: BkModelData): void;
+    getApp(): BkApplication;
+    replaceDataColItem(colName: string, oldData: BkModelData, newData: BkModelData): any;
+    getParent<T extends BaseModel = BaseModel>(): T;
 }

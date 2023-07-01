@@ -21,7 +21,7 @@ class BkDataSource extends BkModel_1.BkModel {
         super(data, parent);
     } */
     getDirPath() {
-        return path_1.default.join(this.parent.getDirPath(), 'dataSources', this.getName());
+        return path_1.default.join(this.getParent().getDirPath(), 'dataSources', this.getName());
     }
     getJsonFilePath() {
         return path_1.default.join(this.getDirPath(), `${this.getName()}.json`);
@@ -129,7 +129,7 @@ class BkDataSource extends BkModel_1.BkModel {
         return rawRow;
     }
     getApp() {
-        return this.parent.getApp();
+        return this.getParent().getApp();
     }
     getKeyValuesFromKey(key) {
         const tuple = JSON.parse(key);
@@ -157,7 +157,11 @@ class BkDataSource extends BkModel_1.BkModel {
     }
     getFullName() {
         if (this.isOnForm()) {
-            return [this.parent.getPage().getName(), this.parent.getName(), this.getName()].join('.');
+            return [
+                this.getParent().getPage().getName(),
+                this.getParent().getName(),
+                this.getName(),
+            ].join('.');
         }
         else if (this.parent instanceof BkPage_1.BkPage) {
             return [this.parent.getName(), this.getName()].join('.');
@@ -252,7 +256,9 @@ class BkDataSource extends BkModel_1.BkModel {
         throw new Error(`${this.constructor.name}.delete not implemented`);
     }
     getForm() {
-        return this.isOnForm() ? this.getParent() : null;
+        if (!this.isOnForm())
+            throw new Error(`${this.getFullName()}: not form data source`);
+        return this.getParent();
     }
     getAccess(context) {
         return {

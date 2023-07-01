@@ -19,6 +19,6 @@ export class BkParam extends BkModel {
     }
 
     getApp(): BkApplication {
-        return this.parent.getApp();
+        return this.getParent().getApp();
     }
 }

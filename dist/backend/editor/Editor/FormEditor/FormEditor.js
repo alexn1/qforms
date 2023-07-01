@@ -36,7 +36,7 @@ class FormEditor extends Editor_1.Editor {
         const templateFilePath = path_1.default.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -46,7 +46,7 @@ class FormEditor extends Editor_1.Editor {
         const templateFilePath = path_1.default.join(__dirname, 'Form.jsx.ejs');
         const customFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -56,7 +56,7 @@ class FormEditor extends Editor_1.Editor {
         const templateFilePath = path_1.default.join(__dirname, 'Form.less.ejs');
         const customFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -66,14 +66,14 @@ class FormEditor extends Editor_1.Editor {
         const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.getClassName(),
         });
         return js;
     }
     async getCollectionDirPath() {
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent().getCustomDirPath();
         return path_1.default.join(customDirPath, 'forms');
     }
     getColName() {

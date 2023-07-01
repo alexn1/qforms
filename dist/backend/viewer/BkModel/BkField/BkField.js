@@ -31,7 +31,7 @@ class BkField extends BkModel_1.BkModel {
         response.autoFocus = this.getAttr('autoFocus');
     }
     getDirPath() {
-        return path_1.default.join(this.parent.getDirPath(), 'fields', this.getName());
+        return path_1.default.join(this.getParent().getDirPath(), 'fields', this.getName());
     }
     fillDefaultValue(context, row) {
         const column = this.getAttr('column');
@@ -74,13 +74,13 @@ class BkField extends BkModel_1.BkModel {
         return [this.getForm().getPage().getName(), this.getForm().getName(), this.getName()].join('.');
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
     getPage() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     isParam() {
         return this.isAttr('param') && this.getAttr('param') === 'true';

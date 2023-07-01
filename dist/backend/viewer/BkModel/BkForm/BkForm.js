@@ -21,7 +21,7 @@ class BkForm extends BkModel_1.BkModel {
         await this.createColItems('fields', context);
     }
     getDirPath() {
-        return path_1.default.join(this.parent.getDirPath(), 'forms', this.getName());
+        return path_1.default.join(this.getParent().getDirPath(), 'forms', this.getName());
     }
     fillAttributes(response) {
         response.class = this.getClassName();
@@ -45,9 +45,8 @@ class BkForm extends BkModel_1.BkModel {
         return response;
     }
     _getSurrogateDataSourceResponse(context) {
-        const row = {
-            id: 1,
-        };
+        const row = {};
+        row['id'] = '[1]';
         for (const field of this.fields) {
             field.fillDefaultValue(context, row);
         }
@@ -100,10 +99,10 @@ class BkForm extends BkModel_1.BkModel {
         });
     }
     getApp() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getPage() {
-        return this.parent;
+        return this.getParent();
     }
     getFullName() {
         return `${this.getPage().getName()}.${this.getName()}`;

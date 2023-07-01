@@ -80,7 +80,7 @@ class PageEditor extends Editor_1.Editor {
     }
     async getCustomDirPath() {
         console.log('PageEditor.getCustomDirPath');
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent().getCustomDirPath();
         return path_1.default.join(customDirPath, 'pages', this.getName());
     }
     reformat() {

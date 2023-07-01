@@ -35,7 +35,7 @@ export class FormEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -46,7 +46,7 @@ export class FormEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Form.jsx.ejs');
         const customFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -57,7 +57,7 @@ export class FormEditor extends Editor {
         const templateFilePath = path.join(__dirname, 'Form.less.ejs');
         const customFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customFilePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
         });
@@ -68,7 +68,7 @@ export class FormEditor extends Editor {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
         const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
-            page: this.parent.getName(),
+            page: this.getParent().getName(),
             form: this.getName(),
             _class: this.getClassName(),
         });
@@ -76,7 +76,7 @@ export class FormEditor extends Editor {
     }
 
     async getCollectionDirPath() {
-        const customDirPath = await this.parent.getCustomDirPath();
+        const customDirPath = await this.getParent<Editor>().getCustomDirPath();
         return path.join(customDirPath, 'forms');
     }
 
