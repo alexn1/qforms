@@ -49,10 +49,10 @@ export class DataSourceEditor extends Editor {
     }
 
     async save() {
-        if (this.parent instanceof ApplicationEditor) {
-            await this.parent.getAppFile().save();
-        } else if (this.parent instanceof PageEditor) {
-            await this.parent.pageFile.save();
+        if (this.getParent() instanceof ApplicationEditor) {
+            await this.getParent<ApplicationEditor>().getAppFile().save();
+        } else if (this.getParent() instanceof PageEditor) {
+            await this.getParent<PageEditor>().pageFile.save();
         } else {
             await this.getParent().getParent<PageEditor>().pageFile.save();
         }

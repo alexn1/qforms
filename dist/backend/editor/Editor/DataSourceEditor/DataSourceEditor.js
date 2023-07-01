@@ -47,11 +47,11 @@ class DataSourceEditor extends Editor_1.Editor {
         return 'dataSources';
     }
     async save() {
-        if (this.parent instanceof ApplicationEditor_1.ApplicationEditor) {
-            await this.parent.getAppFile().save();
+        if (this.getParent() instanceof ApplicationEditor_1.ApplicationEditor) {
+            await this.getParent().getAppFile().save();
         }
-        else if (this.parent instanceof PageEditor_1.PageEditor) {
-            await this.parent.pageFile.save();
+        else if (this.getParent() instanceof PageEditor_1.PageEditor) {
+            await this.getParent().pageFile.save();
         }
         else {
             await this.getParent().getParent().pageFile.save();

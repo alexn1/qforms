@@ -163,8 +163,8 @@ class BkDataSource extends BkModel_1.BkModel {
                 this.getName(),
             ].join('.');
         }
-        else if (this.parent instanceof BkPage_1.BkPage) {
-            return [this.parent.getName(), this.getName()].join('.');
+        else if (this.getParent() instanceof BkPage_1.BkPage) {
+            return [this.getParent().getName(), this.getName()].join('.');
         }
         else {
             return this.getName();
@@ -232,16 +232,16 @@ class BkDataSource extends BkModel_1.BkModel {
         return this.rows;
     }
     isOnForm() {
-        return this.parent instanceof BkForm_1.BkForm;
+        return this.getParent() instanceof BkForm_1.BkForm;
     }
     isDefaultOnForm() {
         return this.getName() === 'default' && this.isOnForm();
     }
     isDefaultOnRowForm() {
-        return this.getName() === 'default' && this.parent instanceof BkRowForm_1.BkRowForm;
+        return this.getName() === 'default' && this.getParent() instanceof BkRowForm_1.BkRowForm;
     }
     isDefaultOnTableForm() {
-        return this.getName() === 'default' && this.parent instanceof BkTableForm_1.BkTableForm;
+        return this.getName() === 'default' && this.getParent() instanceof BkTableForm_1.BkTableForm;
     }
     async read(context) {
         throw new Error(`${this.constructor.name}.select not implemented`);

@@ -194,8 +194,8 @@ export class BkDataSource extends BkModel {
                 this.getParent().getName(),
                 this.getName(),
             ].join('.');
-        } else if (this.parent instanceof BkPage) {
-            return [this.parent.getName(), this.getName()].join('.');
+        } else if (this.getParent() instanceof BkPage) {
+            return [this.getParent().getName(), this.getName()].join('.');
         } else {
             return this.getName();
         }
@@ -270,7 +270,7 @@ export class BkDataSource extends BkModel {
     }
 
     isOnForm(): boolean {
-        return this.parent instanceof BkForm;
+        return this.getParent() instanceof BkForm;
     }
 
     isDefaultOnForm(): boolean {
@@ -278,11 +278,11 @@ export class BkDataSource extends BkModel {
     }
 
     isDefaultOnRowForm(): boolean {
-        return this.getName() === 'default' && this.parent instanceof BkRowForm;
+        return this.getName() === 'default' && this.getParent() instanceof BkRowForm;
     }
 
     isDefaultOnTableForm(): boolean {
-        return this.getName() === 'default' && this.parent instanceof BkTableForm;
+        return this.getName() === 'default' && this.getParent() instanceof BkTableForm;
     }
 
     async read(context: Context): Promise<ReadResult> {

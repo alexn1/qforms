@@ -12,7 +12,7 @@ export interface BkModelData {
 }
 export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     data: TBkModelData;
-    parent?: BaseModel<BkModelData> | undefined;
+    private parent?;
     constructor(data: TBkModelData, parent?: BaseModel<BkModelData> | undefined);
     static getClassName(data: BkModelData): string;
     static getAttr(data: BkModelData, name: string): string;

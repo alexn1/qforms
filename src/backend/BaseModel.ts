@@ -13,7 +13,7 @@ export interface BkModelData {
 }
 
 export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
-    constructor(public data: TBkModelData, public parent?: BaseModel) {
+    constructor(public data: TBkModelData, private parent?: BaseModel) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
     }
 
