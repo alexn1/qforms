@@ -40581,8 +40581,14 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
     getViewClass() {
         return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_5__.PageView;
     }
-    getForm(name) {
+    findForm(name) {
         return this.forms.find((form) => form.model.getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getModel().getFullName()}: no form controller ${name}`);
+        return form;
     }
     async onActionClick(name) {
         console.log('PageController.onActionClick', name);
@@ -42970,8 +42976,14 @@ class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
     getCaption() {
         return this.getAttr('caption');
     }
-    getDataSource(name) {
+    findDataSource(name) {
         return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+    getDataSource(name) {
+        const ds = this.findDataSource(name);
+        if (!ds)
+            throw new Error(`${this.getFullName()}: no data source ${name}`);
+        return ds;
     }
     createDataSources() {
         for (const data of this.data.dataSources) {
@@ -43181,8 +43193,14 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             throw new Error(result.errorMessage);
         return result;
     }
-    getForm(name) {
+    findForm(name) {
         return this.forms.find((form) => form.getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getFullName()}: no form ${name}`);
+        return form;
     }
     isSelectMode() {
         return !!this.options.selectMode;
