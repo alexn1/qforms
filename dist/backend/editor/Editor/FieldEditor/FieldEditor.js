@@ -52,7 +52,7 @@ class FieldEditor extends Editor_1.Editor {
     }
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
-        this.setData(this.getColName(), newData);
+        this.setColData(this.getColName(), newData);
         return newData;
     }
     async createJs(params) {

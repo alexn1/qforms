@@ -131,7 +131,7 @@ class Editor extends BaseModel_1.BaseModel {
     /*createActionEditor(name) {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }*/
-    setData(colName, newData) {
+    setColData(colName, newData) {
         // console.log('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }

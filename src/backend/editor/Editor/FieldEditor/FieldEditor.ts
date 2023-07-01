@@ -25,7 +25,7 @@ export class FieldEditor extends Editor {
 
     changeClass(newClassName) {
         const newData = backend[`${newClassName}Editor`].createData(this.attributes());
-        this.setData(this.getColName(), newData);
+        this.setColData(this.getColName(), newData);
         return newData;
     }
 
