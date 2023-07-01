@@ -1,9 +1,9 @@
 import { JsonFile } from './JsonFile';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
-import { BaseModel } from './BaseModel';
+import { BaseModel, BkModelData } from './BaseModel';
 
 export class Converter {
-    static async reformat(appFilePath) {
+    static async reformat(appFilePath: string) {
         console.log('Convert.reformat', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
@@ -14,7 +14,7 @@ export class Converter {
         await appEditor.save();
 
         // pages
-        const pageNames = appEditor.data.pageLinks.map((data) => BaseModel.getName(data));
+        const pageNames = appEditor.getData().pageLinks.map((data: BkModelData) => BaseModel.getName(data));
         // console.log('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {

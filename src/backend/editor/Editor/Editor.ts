@@ -1,7 +1,7 @@
 import path from 'path';
 const ejs = require('ejs');
 
-import { BaseModel } from '../../BaseModel';
+import { BaseModel, BkModelData } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
 
@@ -118,7 +118,7 @@ export class Editor extends BaseModel {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }*/
 
-    setColData(colName, newData) {
+    setColData(colName: string, newData: BkModelData) {
         // console.log('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
