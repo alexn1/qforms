@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { Column } from '../Column/Column';
 import { Helper } from '../../../common/Helper';
-import { Result } from '../../../../Result';
+import { TableResult, InsertResult, UpdateResult, DeleteResult } from '../../../../Result';
 
 export class Table extends Model {
     columns: Column[] = [];
@@ -30,7 +30,7 @@ export class Table extends Model {
         return column;
     }
 
-    emitResult(result: Result, source = null): Array<Promise<void>> {
+    emitResult(result: TableResult, source: any = null): Array<Promise<void>> {
         console.log('Table.emitResult');
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
@@ -40,15 +40,15 @@ export class Table extends Model {
         ];
     }
 
-    emitInsert(source, inserts) {
+    emitInsert(source, inserts: InsertResult) {
         return this.emit('insert', { source, inserts });
     }
 
-    emitUpdate(source, updates) {
+    emitUpdate(source, updates: UpdateResult) {
         return this.emit('update', { source, updates });
     }
 
-    emitDelete(source, deletes) {
+    emitDelete(source, deletes: DeleteResult) {
         return this.emit('delete', { source, deletes });
     }
 
