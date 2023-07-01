@@ -36520,7 +36520,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         //     this.getHostApp().isDebugMode(),
         //     model,
         // );
-        const { ctrlClass } = model.data;
+        const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.getGlobalClass(ctrlClass);
             if (!CustomClass)
@@ -36534,7 +36534,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         super.init();
         // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
-        const pageData = this.getModel().data.pages[0];
+        const pageData = this.getModel().getData().pages[0];
         this.activePage = pageData
             ? this.createPage(pageData, {
                 modal: false,
@@ -36596,8 +36596,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         console.log('ApplicationController.openPage', options);
         if (!options.name)
             throw new Error('no name');
-        if (options.key)
-            throw new Error('openPage: key param is deprecated');
+        // if (options.key) throw new Error('openPage: key param is deprecated');
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
         // console.log('pageController:', pageController);
@@ -36688,11 +36687,13 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.getModel().data.menu
-                ? Object.keys(this.getModel().data.menu).map((key) => ({
+            ...(this.getModel().getData().menu
+                ? Object.keys(this.getModel().getData().menu).map((key) => ({
                     name: key,
                     title: key,
-                    items: this.getModel().data.menu[key].map((item) => ({
+                    items: this.getModel()
+                        .getData()
+                        .menu[key].map((item) => ({
                         type: item.type,
                         name: item.page || item.action,
                         title: item.caption,
@@ -36975,9 +36976,9 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
     async openPage(options) {
         return await this.getParent().openPage(options);
     }
-    getParent() {
-        return super.getParent();
-    }
+    /* getParent<TFormController extends FormController = FormController>(): TFormController {
+        return super.getParent() as TFormController;
+    } */
     getForm() {
         return this.getParent();
     }
@@ -37221,6 +37222,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
 /* harmony import */ var _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
 /* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../types */ "./src/types.ts");
+
 
 
 
@@ -37290,14 +37293,14 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
-                const selectedKey = id ? JSON.stringify([id]) : undefined;
+                const selectedKey = id ? (0,_types__WEBPACK_IMPORTED_MODULE_3__.keyTupleToKey)([id]) : undefined;
                 await this.openPage({
                     name: this.getModel().getAttr('itemSelectPage'),
                     selectMode: true,
                     selectedKey: selectedKey,
                     onSelect: async (key) => {
                         if (key) {
-                            const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(key);
+                            const [id] = (0,_types__WEBPACK_IMPORTED_MODULE_3__.keyToKeyTuple)(key);
                             // console.log('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
@@ -40209,7 +40212,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon, {}) })))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.getData().newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.getData().refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.getData().deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon, {}) })))] })));
     }
     renderPaging() {
         const ctrl = this.getCtrl();
@@ -40929,6 +40932,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp {
+    // data: any;
     constructor(data) {
         console.log('LoginFrontHostApp.constructor', data);
         super();
@@ -40976,13 +40980,13 @@ __webpack_require__.r(__webpack_exports__);
 
 class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     constructor(data) {
-        super(data, null);
+        super(data);
         this.databases = [];
         this.dataSources = [];
     }
     init() {
         // console.log('Application.init');
-        if (!this.data.theme)
+        if (!this.getData().theme)
             throw new Error('no theme attr');
         // databases
         this.createDatabases();
@@ -40990,7 +40994,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.createDataSources();
     }
     createDatabases() {
-        for (const data of this.data.databases) {
+        for (const data of this.getData().databases) {
             const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_1__.Database(data, this);
             database.init();
             this.addDatabase(database);
@@ -41035,16 +41039,16 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return database;
     }
     getText() {
-        return this.data.text;
+        return this.getData().text;
     }
     getUser() {
-        return this.data.user;
+        return this.getData().user;
     }
     getDomain() {
         return this.getAttr('domain');
     }
     getVirtualPath() {
-        return this.data.virtualPath;
+        return this.getData().virtualPath;
     }
     async rpc(name, params) {
         console.log('Application.rpc', this.getFullName(), name, params);
@@ -41071,7 +41075,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return Promise.allSettled(promises);
     }
     getNodeEnv() {
-        return this.data.nodeEnv;
+        return this.getData().nodeEnv;
     }
     isDevelopment() {
         return this.getNodeEnv() === 'development';
@@ -41233,7 +41237,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     init() {
         // console.log('DataSource.init', this.getFullName(), this.getClassName());
-        this.setRows(this.data.rows);
+        this.setRows(this.getData().rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
             table.on('insert', this.onTableInsert);
@@ -41346,7 +41350,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return value;
     }
     getKeyValues(row) {
-        return this.data.keyColumns.reduce((keyValues, column) => {
+        return this.getData().keyColumns.reduce((keyValues, column) => {
             keyValues[column] = JSON.parse(row[column]);
             return keyValues;
         }, {});
@@ -41354,7 +41358,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getRowKey(row) {
         // console.log('DataSource.getRowKey', row);
         const arr = [];
-        for (const column of this.data.keyColumns) {
+        for (const column of this.getData().keyColumns) {
             if (row[column] === undefined)
                 return null;
             if (row[column] === null)
@@ -41500,7 +41504,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
         // console.log(`key: ${key} to ${newKey}`);
         // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.data.rows:', this.data.rows);
+        // console.log('this.getData().rows:', this.getData().rows);
     }
     getTable() {
         if (!this.getAttr('table'))
@@ -41994,7 +41998,7 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     init() {
         // console.log('Database.init', this.getName());
-        for (const data of this.data.tables) {
+        for (const data of this.getData().tables) {
             const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(data, this);
             table.init();
             this.addTable(table);
@@ -42064,17 +42068,17 @@ __webpack_require__.r(__webpack_exports__);
 class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     getDisplayValue(row) {
         let value = null;
-        if (row[this.data.displayColumn]) {
+        if (row[this.getData().displayColumn]) {
             try {
-                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.displayColumn]);
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.data.displayColumn]);
+                console.log('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }
         else {
-            value = this.data.displayColumn;
+            value = this.getData().displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
                 return row.hasOwnProperty(name) ? row[name] || '' : text;
             });
@@ -42082,13 +42086,13 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return value;
     }
     getValueValue(row) {
-        if (!row[this.data.valueColumn]) {
+        if (!row[this.getData().valueColumn]) {
             throw new Error('no valueColumn in CheckBoxList data source');
         }
-        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.valueColumn]);
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().valueColumn]);
     }
     getDataSource() {
-        const name = this.data.dataSourceName;
+        const name = this.getData().dataSourceName;
         if (!name)
             throw new Error(`${this.getFullName()}: no dataSourceName`);
         if (this.getForm().getDataSource(name)) {
@@ -42105,7 +42109,7 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     findRowByRawValue(rawValue) {
         return this.getDataSource()
             .getRows()
-            .find((row) => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.getData().valueColumn] === rawValue);
     }
 }
 _common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(CheckBoxListField);
@@ -42130,17 +42134,17 @@ __webpack_require__.r(__webpack_exports__);
 class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     getDisplayValue(row) {
         let value = null;
-        if (row[this.data.displayColumn]) {
+        if (row[this.getData().displayColumn]) {
             try {
-                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.displayColumn]);
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.data.displayColumn]);
+                console.log('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }
         else {
-            value = this.data.displayColumn;
+            value = this.getData().displayColumn;
             value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
                 return row.hasOwnProperty(name) ? row[name] || '' : text;
             });
@@ -42148,22 +42152,22 @@ class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return value;
     }
     getValueValue(row) {
-        if (!row[this.data.valueColumn]) {
+        if (!row[this.getData().valueColumn]) {
             throw new Error('no valueColumn in ComboBox data source');
         }
-        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.data.valueColumn]);
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().valueColumn]);
     }
     getComboBoxDataSource() {
-        const name = this.data.dataSourceName;
+        const name = this.getData().dataSourceName;
         if (!name)
             throw new Error(`${this.getFullName()}: no dataSourceName`);
-        if (this.getForm().getDataSource(name)) {
+        if (this.getForm().findDataSource(name)) {
             return this.getForm().getDataSource(name);
         }
-        if (this.getPage().getDataSource(name)) {
+        if (this.getPage().findDataSource(name)) {
             return this.getPage().getDataSource(name);
         }
-        if (this.getApp().getDataSource(name)) {
+        if (this.getApp().findDataSource(name)) {
             return this.getApp().getDataSource(name);
         }
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
@@ -42171,7 +42175,7 @@ class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     findRowByRawValue(rawValue) {
         return this.getComboBoxDataSource()
             .getRows()
-            .find((row) => row[this.data.valueColumn] === rawValue);
+            .find((row) => row[this.getData().valueColumn] === rawValue);
     }
 }
 _common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(ComboBoxField);
@@ -42427,16 +42431,16 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.getForm().getApp();
     }
     isReadOnly() {
-        return this.data.readOnly === 'true';
+        return this.getData().readOnly === 'true';
     }
     isNotNull() {
-        return this.data.notNull === 'true';
+        return this.getData().notNull === 'true';
     }
     isNullable() {
-        return this.data.notNull === 'false';
+        return this.getData().notNull === 'false';
     }
     getWidth() {
-        const width = parseInt(this.data.width);
+        const width = parseInt(this.getData().width);
         if (isNaN(width))
             return null;
         if (width === 0)
@@ -42447,17 +42451,17 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
     }
     isParam() {
-        return this.data.param === 'true';
+        return this.getData().param === 'true';
     }
     validateOnChange() {
-        if (this.data.validateOnChange !== undefined) {
-            return this.data.validateOnChange === 'true';
+        if (this.getData().validateOnChange !== undefined) {
+            return this.getData().validateOnChange === 'true';
         }
         return true;
     }
     validateOnBlur() {
-        if (this.data.validateOnBlur !== undefined) {
-            return this.data.validateOnBlur === 'true';
+        if (this.getData().validateOnBlur !== undefined) {
+            return this.getData().validateOnBlur === 'true';
         }
         return false;
     }
@@ -42611,13 +42615,13 @@ class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         const name = this.getAttr('dataSourceName');
         if (!name)
             throw new Error(`${this.getFullName()}: no dataSourceName`);
-        if (this.getForm().getDataSource(name)) {
+        if (this.getForm().findDataSource(name)) {
             return this.getForm().getDataSource(name);
         }
-        if (this.getPage().getDataSource(name)) {
+        if (this.getPage().findDataSource(name)) {
             return this.getPage().getDataSource(name);
         }
-        if (this.getApp().getDataSource(name)) {
+        if (this.getApp().findDataSource(name)) {
             return this.getApp().getDataSource(name);
         }
         throw new Error(`${this.getFullName()}: no data source: ${name}`);
@@ -42650,10 +42654,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextAreaField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
     getRows() {
-        return this.data.rows;
+        return this.getData().rows;
     }
     getCols() {
-        return this.data.cols;
+        return this.getData().cols;
     }
 }
 _common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(TextAreaField);
@@ -42709,7 +42713,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         // data sources
         this.createDataSources();
         // fields
-        for (const data of this.data.fields) {
+        for (const data of this.getData().fields) {
             const Class = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(data.class);
             if (!Class)
                 throw new Error(`no ${data.class} class`);
@@ -42936,7 +42940,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
-    constructor(data, parent = null) {
+    constructor(data, parent) {
         if (!data.name)
             throw new Error(`${data.class} no name`);
         super();
@@ -43082,7 +43086,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     }
     createForms() {
         // forms
-        for (const data of this.data.forms) {
+        for (const data of this.getData().forms) {
             const FormClass = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data));
             if (!FormClass)
                 throw new Error(`no ${_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data)} class`);
@@ -43251,7 +43255,7 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     } */
     init() {
         // console.log('Table.init', this.getFullName());
-        for (const data of this.data.columns) {
+        for (const data of this.getData().columns) {
             const column = new _Column_Column__WEBPACK_IMPORTED_MODULE_1__.Column(data, this);
             column.init();
             this.addColumn(column);
