@@ -36456,7 +36456,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     constructor(model, frontHostApp) {
-        super(model, null);
+        super(model);
         this.frontHostApp = frontHostApp;
         this.lastId = 0;
         this.activePage = null; // active non modal page
@@ -36481,7 +36481,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         };
         this.onLogout = async () => {
             console.log('ApplicationController.onLogout');
-            const result = await this.model.request({ action: 'logout' });
+            const result = await this.getModel().request({ action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
@@ -36532,9 +36532,9 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     init() {
         // console.log('ApplicationController.init');
         super.init();
-        // this.model.on('logout' , this.onLogout);
-        this.model.on('request', this.onRequest);
-        const pageData = this.model.data.pages[0];
+        // this.getModel().on('logout' , this.onLogout);
+        this.getModel().on('request', this.onRequest);
+        const pageData = this.getModel().data.pages[0];
         this.activePage = pageData
             ? this.createPage(pageData, {
                 modal: false,
@@ -36547,8 +36547,8 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
     }
     deinit() {
-        // this.model.off('logout', this.onLogout);
-        this.model.off('request', this.onRequest);
+        // this.getModel().off('logout', this.onLogout);
+        this.getModel().off('request', this.onRequest);
         super.deinit();
     }
     getViewClass() {
@@ -36561,7 +36561,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             key: this.getModel().getName(),
         });
         if (this.statusbar) {
-            this.statusbar.setLastQueryTime(this.model.getAttr('time'));
+            this.statusbar.setLastQueryTime(this.getModel().getAttr('time'));
         }
     }
     createVersionNotificationIfNotExists() {
@@ -36585,7 +36585,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         if (options.modal === undefined)
             throw new Error('no options.modal');
         // model
-        const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page(pageData, this.model, options);
+        const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page(pageData, this.getModel(), options);
         pageModel.init();
         // controller
         const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController.create(pageModel, this, `c${this.getNextId()}`);
@@ -36605,7 +36605,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.model.request({
+        const { page: pageData } = await this.getModel().request({
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -36656,17 +36656,17 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
     }
     findPageControllerByPageNameAndKey(pageName, key) {
         if (this.activePage &&
-            this.activePage.model.getName() === pageName &&
-            this.activePage.model.getKey() === key) {
+            this.activePage.getModel().getName() === pageName &&
+            this.activePage.getModel().getKey() === key) {
             return this.activePage;
         }
         return null;
     }
     onPageSelect(pc) {
-        console.log('ApplicationController.onPageSelect', pc.model.getName());
+        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
     }
     async closePage(pageController) {
-        console.log('ApplicationController.closePage', pageController.model.getFullName());
+        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         }
@@ -36679,7 +36679,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         }
         await this.rerender();
         pageController.deinit();
-        pageController.model.deinit();
+        pageController.getModel().deinit();
     }
     async onActionClick(name) {
         console.log('ApplicationController.onActionClick', name);
@@ -36688,11 +36688,11 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         // console.log('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
-            ...(this.model.data.menu
-                ? Object.keys(this.model.data.menu).map((key) => ({
+            ...(this.getModel().data.menu
+                ? Object.keys(this.getModel().data.menu).map((key) => ({
                     name: key,
                     title: key,
-                    items: this.model.data.menu[key].map((item) => ({
+                    items: this.getModel().data.menu[key].map((item) => ({
                         type: item.type,
                         name: item.page || item.action,
                         title: item.caption,
@@ -36700,11 +36700,11 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
                 }))
                 : []),
             // user
-            ...(this.model.getUser()
+            ...(this.getModel().getUser()
                 ? [
                     {
                         name: 'user',
-                        title: `${this.model.getDomain()}/${this.model.getUser().login}`,
+                        title: `${this.getModel().getDomain()}/${this.getModel().getUser().login}`,
                         items: [
                             {
                                 type: 'custom',
@@ -36884,7 +36884,7 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
     }
     render() {
-        console.log(`${this.constructor.name}.render`, this.getCtrl().model.getFullName());
+        console.log(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }
@@ -36908,7 +36908,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName(), parent.model.getClassName());
+        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
@@ -36925,7 +36925,7 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
-        // console.log('Field.valueToString', this.model.getFullName(), typeof value, value);
+        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -36941,14 +36941,14 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
             case 'undefined':
                 return '';
             default:
-                throw new Error(`${this.model.getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+                throw new Error(`${this.getModel().getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
         }
     }
     stringToValue(stringValue) {
-        // console.log('FieldController.stringToValue', this.model.getFullName(), stringValue);
+        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
-        const fieldType = this.model.getType();
+        const fieldType = this.getModel().getType();
         // console.log('fieldType:', fieldType);
         if (stringValue.trim() === '')
             return null;
@@ -36979,13 +36979,13 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         return super.getParent();
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getPage() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getApp() {
-        return this.parent.parent.parent;
+        return this.getParent().getParent().getParent();
     }
     isVisible() {
         return this.getModel().getAttr('visible') === 'true';
@@ -37126,7 +37126,7 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
     init() {
         // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
         super.init();
-        const dataSource = this.model.getDataSource();
+        const dataSource = this.getModel().getDataSource();
         dataSource.on('insert', this.onListInsert);
         dataSource.on('update', this.onListUpdate);
         dataSource.on('delete', this.onListDelete);
@@ -37316,13 +37316,13 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
     init() {
         // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
-        const dataSource = this.model.getComboBoxDataSource();
+        const dataSource = this.getModel().getComboBoxDataSource();
         dataSource.on('insert', this.onListInsert);
         dataSource.on('update', this.onListUpdate);
         dataSource.on('delete', this.onListDelete);
     }
     deinit() {
-        const dataSource = this.model.getComboBoxDataSource();
+        const dataSource = this.getModel().getComboBoxDataSource();
         dataSource.off('insert', this.onListInsert);
         dataSource.off('update', this.onListUpdate);
         dataSource.off('delete', this.onListDelete);
@@ -37344,11 +37344,11 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
         }
     }
     getRows() {
-        return this.model.getComboBoxDataSource().getRows();
+        return this.getModel().getComboBoxDataSource().getRows();
     }
     getPlaceholder() {
-        if (this.model.getAttr('placeholder'))
-            return this.model.getAttr('placeholder');
+        if (this.getModel().getAttr('placeholder'))
+            return this.getModel().getAttr('placeholder');
         return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
     }
 }
@@ -37508,6 +37508,7 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.widget2 = null;
         this.defaultValue = 0;
         this.onView2Create = (widget2) => {
             // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
@@ -37534,7 +37535,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -37552,9 +37553,9 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.onBlur2 = (widgetValue, fireEvent = true) => {
@@ -37568,7 +37569,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.model.getFullName()}: cannot parse time: ${err.message}`);
+                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -37586,13 +37587,11 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
-        this.widget2 = null;
-        // this.defaultValue = 0;
         this.state.parseError2 = null;
         this.state.error2 = null;
     }
@@ -37603,7 +37602,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         return this.getValue();
     }
     getValueForTime() {
-        // console.log('RowFormDateTimeFieldController.getValueForTime', this.model.getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
+        // console.log('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
             const value = date.getHours() * 60 + date.getMinutes();
@@ -37662,11 +37661,11 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         this.state.value.setHours(h, m);
     }
     validate2() {
-        // console.log('RowFormFieldController.validate', this.model.getFullName());
+        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
         this.state.error2 = this.getError2();
     }
     getError2() {
-        // console.log('RowFormFieldController.getError', this.model.getFullName());
+        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.widget2) {
             try {
@@ -37816,7 +37815,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                 this.setValueFromWidget(widgetValue);
             }
             catch (err) {
-                console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+                console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
                 this.state.parseError = err.message;
             }
             // validate
@@ -37834,13 +37833,13 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.onBlur = (widgetValue, fireEvent = true) => {
-            console.log('RowFormFieldController.onBlur', this.model.getFullName(), JSON.stringify(widgetValue));
+            console.log('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
             if (!this.isEditable())
                 return;
             // this.resetErrors();
@@ -37852,7 +37851,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                 this.setValueFromWidget(widgetValue);
             }
             catch (err) {
-                console.error(`${this.model.getFullName()}: cannot parse view value: ${err.message}`);
+                console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
                 this.state.parseError = err.message;
             }
             // validate
@@ -37870,9 +37869,9 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                     this.emit('change', { value: widgetValue });
                 }
                 catch (err) {
-                    console.error('unhandled change event error:', this.model.getFullName(), err);
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.onChangePure = async (value, fireEvent = true) => {
@@ -37898,7 +37897,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                 catch (err) {
                     console.error('unhandled change event error:', this.getModel().getFullName(), err);
                 }
-                this.parent.onFieldChange({ source: this });
+                this.getParent().onFieldChange({ source: this });
             }
         };
         this.state = {
@@ -37910,15 +37909,15 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
     }
     init() {
         const row = this.getRow();
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         this.setValue(value);
-        // console.log(this.model.getFullName(), value);
+        // console.log(this.getModel().getFullName(), value);
     }
     refill() {
-        // console.log('RowFormFieldController.refill', this.model.getFullName());
+        // console.log('RowFormFieldController.refill', this.getModel().getFullName());
         if (!this.view)
             return;
-        const value = this.model.getValue(this.getRow());
+        const value = this.getModel().getValue(this.getRow());
         this.setValue(value);
         this.resetErrors();
         this.refreshChangedState();
@@ -37928,10 +37927,10 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         return form.getRow();
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     copyValueToModel() {
-        // console.log('RowFormFieldController.copyValueToModel', this.model.getFullName());
+        // console.log('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
     }
     /*_onChange(widgetValue) {
@@ -37943,33 +37942,33 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
     }
     getValueForWidget() {
         const value = this.getValue();
-        // console.log('value:', this.model.getFullName(), value, typeof value);
+        // console.log('value:', this.getModel().getFullName(), value, typeof value);
         return this.valueToString(value);
     }
     setValueFromWidget(widgetValue) {
-        // console.log('RowFormFieldController.setValueFromWidget', this.model.getFullName(), typeof widgetValue, widgetValue);
+        // console.log('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
         if (typeof widgetValue !== 'string')
-            throw new Error(`${this.model.getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
+            throw new Error(`${this.getModel().getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
         const value = this.stringToValue(widgetValue);
         // console.log('value:', value);
         this.setValue(value);
     }
     setValue(value) {
-        // console.log('RowFormFieldController.setValue', this.model.getFullName(), value);
+        // console.log('RowFormFieldController.setValue', this.getModel().getFullName(), value);
         this.state.value = value;
     }
     getValue() {
         return this.state.value;
     }
     isChanged() {
-        // console.log('RowFormFieldController.isChanged', this.model.getFullName(), this.state);
+        // console.log('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {
         return this.state.parseError === null && this.state.error === null;
     }
     validate() {
-        // console.log('RowFormFieldController.validate', this.model.getFullName());
+        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
         if (this.isVisible()) {
             this.state.error = this.getError();
         }
@@ -37978,9 +37977,9 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {
-        // console.log('RowFormFieldController.getPlaceholder', this.model.getFullName(), this.model.getAttr('placeholder'));
-        if (this.model.getAttr('placeholder'))
-            return this.model.getAttr('placeholder');
+        // console.log('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
+        if (this.getModel().getAttr('placeholder'))
+            return this.getModel().getAttr('placeholder');
         if (this.getApp().getHostApp().isDebugMode()) {
             const value = this.getValue();
             if (value === undefined)
@@ -37992,7 +37991,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         }
     }
     getError() {
-        // console.log('RowFormFieldController.getError', this.model.getFullName());
+        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.view && this.view.getWidget()) {
             try {
@@ -38013,38 +38012,39 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         return this.getModel().getApp().getText().form.required;
     }
     isEditable() {
-        return this.parent.getMode() === 'edit' && !this.model.isReadOnly();
+        return (this.getParent().getMode() === 'edit' &&
+            !this.getModel().isReadOnly());
     }
     isParseError() {
         return this.state.parseError !== null;
     }
     calcChangedState(row) {
-        // console.log('RowFormFieldController.calcChangedState', this.model.getFullName());
+        // console.log('RowFormFieldController.calcChangedState', this.getModel().getFullName());
         if (!row)
             throw new Error('FieldController: no row');
         if (this.isParseError()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: parse error: ${this.getErrorMessage()}`);
+            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.model.getFullName()}: not valid: ${this.getErrorMessage()}`);
+            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
             return true;
         }
-        if (this.model.hasColumn()) {
-            const fieldRawValue = this.model.valueToRaw(this.getValue());
-            const dsRawValue = this.model.getRawValue(row);
+        if (this.getModel().hasColumn()) {
+            const fieldRawValue = this.getModel().valueToRaw(this.getValue());
+            const dsRawValue = this.getModel().getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-                console.log(`FIELD CHANGED ${this.model.getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
+                console.log(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
-            if (this.model.isChanged(row)) {
-                let original = row[this.model.getAttr('column')];
-                let modified = this.model.getDefaultDataSource().getRowWithChanges(row)[this.model.getAttr('column')];
+            if (this.getModel().isChanged(row)) {
+                let original = row[this.getModel().getAttr('column')];
+                let modified = this.getModel().getDefaultDataSource().getRowWithChanges(row)[this.getModel().getAttr('column')];
                 if (original)
                     original = original.substr(0, 100);
                 if (modified)
                     modified = modified.substr(0, 100);
-                console.log(`MODEL CHANGED ${this.model.getFullName()}:`, original, modified);
+                console.log(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
                 return true;
             }
         }
@@ -38225,11 +38225,11 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
     }
     componentDidMount() {
-        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().model.getFullName());
+        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().model.getFullName(), snapshot);
+        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 }
@@ -38301,12 +38301,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "RowFormLinkFieldView": () => (/* binding */ RowFormLinkFieldView)
 /* harmony export */ });
 /* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
-/* harmony import */ var _RowFormLinkFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RowFormLinkFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../types */ "./src/types.ts");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _RowFormLinkFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormLinkFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less");
 
 
 
-class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+
+class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__.RowFormFieldView {
     render() {
         const ctrl = this.getCtrl();
         let href = ctrl.getValueForWidget();
@@ -38319,7 +38321,7 @@ class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
         const pageName = ctrl.getModel().getAttr('page');
         if (pageName) {
             const value = ctrl.getValueForWidget();
-            href = ctrl.getPage().createOpenInNewLink(pageName, JSON.stringify([value]));
+            href = ctrl.getPage().createOpenInNewLink(pageName, (0,_types__WEBPACK_IMPORTED_MODULE_1__.keyTupleToKey)([value]));
             // console.log('href:', link);
         }
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
@@ -38697,7 +38699,7 @@ class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     render() {
         // console.log('RowFormTextAreaFieldView.render', this.state);
         const ctrl = this.getCtrl();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.model.getRows(), cols: ctrl.model.getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.getModel().getRows(), cols: ctrl.getModel().getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
     }
 }
 
@@ -38926,7 +38928,7 @@ class TableFormCheckBoxFieldController extends _TableFormFieldController__WEBPAC
         return super.getViewClass() || _TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldView;
     }
     getValueForWidget(row) {
-        return this.model.getValue(row);
+        return this.getModel().getValue(row);
     }
     getAlign() {
         return 'center';
@@ -39009,13 +39011,13 @@ class TableFormComboBoxFieldController extends _TableFormFieldController__WEBPAC
         return super.getViewClass() || _TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldView;
     }
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
-        const rawValue = this.model.valueToRaw(value);
+        const value = this.getModel().getValue(row);
+        const rawValue = this.getModel().valueToRaw(value);
         if (rawValue === undefined || rawValue === 'null')
             return '';
-        const cbRow = this.model.findRowByRawValue(rawValue);
+        const cbRow = this.getModel().findRowByRawValue(rawValue);
         if (cbRow) {
-            return this.valueToString(this.model.getDisplayValue(cbRow));
+            return this.valueToString(this.getModel().getDisplayValue(cbRow));
         }
         return `[no row for id: ${rawValue}]`;
     }
@@ -39071,7 +39073,7 @@ class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IM
         return super.getViewClass() || _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldView;
     }
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         if (value)
             return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
@@ -39130,7 +39132,7 @@ class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPAC
         return super.getViewClass() || _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldView;
     }
     getValueForWidget(row) {
-        const value = this.model.getValue(row);
+        const value = this.getModel().getValue(row);
         if (value)
             return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
         return '';
@@ -39181,10 +39183,10 @@ __webpack_require__.r(__webpack_exports__);
 class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_0__.FieldController {
     getValueForWidget(row) {
         // console.log('TableFormFieldController.getValueForWidget');
-        return this.valueToString(this.model.getValue(row));
+        return this.valueToString(this.getModel().getValue(row));
     }
     getForm() {
-        return this.parent;
+        return this.getParent();
     }
     getAlign() {
         return null;
@@ -39427,13 +39429,13 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
     }
     init() {
-        for (const field of this.model.fields) {
+        for (const field of this.getModel().fields) {
             const ctrl = (this.fields[field.getName()] = _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_2__.FieldController.create(field, this));
             ctrl.init();
         }
     }
     deinit() {
-        // console.log('FormController.deinit:', this.model.getFullName());
+        // console.log('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -39446,13 +39448,13 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return await this.getPage().openPage(options);
     }
     getPage() {
-        return this.parent;
+        return this.getParent();
     }
     isChanged() {
         return false;
     }
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.model.getFullName());
+        // console.log('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
     getUpdated() {
@@ -39468,7 +39470,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return this.fields[name];
     }
     getApp() {
-        return this.parent.parent;
+        return this.getParent().getParent();
     }
     getSelectedRowKey() {
         return null;
@@ -39566,7 +39568,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             valid: true,
         };
         this.onModelRefresh = async (e) => {
-            console.log('RowFormController.onModelRefresh', this.model.getFullName());
+            console.log('RowFormController.onModelRefresh', this.getModel().getFullName());
             if (!this.view)
                 return;
             this.refill();
@@ -39574,18 +39576,18 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('RowFormController.onModelInsert', this.model.getFullName());
+            console.log('RowFormController.onModelInsert', this.getModel().getFullName());
             this.refill();
             this.invalidate();
             this.calcState();
-            this.parent.onFormInsert(e);
+            this.getParent().onFormInsert(e);
         };
         this.onModelUpdate = async (e) => {
-            console.log('RowFormController.onModelUpdate', this.model.getFullName(), e);
+            console.log('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
             this.refill();
             this.invalidate();
             this.calcState();
-            this.parent.onFormUpdate(e);
+            this.getParent().onFormUpdate(e);
         };
         this.onSaveClick = async () => {
             console.log('RowFormController.onSaveClick');
@@ -39594,7 +39596,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             if (this.isValid()) {
                 try {
                     this.getApp().getView().disableRerender();
-                    await this.model.update();
+                    await this.getModel().update();
                     this.state.mode = 'view';
                     console.log('form model updated', this.getModel().getFullName());
                 }
@@ -39604,12 +39606,12 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
                 }
             }
             else {
-                console.error(`cannot update invalid row form: ${this.model.getFullName()}`);
+                console.error(`cannot update invalid row form: ${this.getModel().getFullName()}`);
                 await this.rerender();
             }
         };
         this.onDiscardClick = () => {
-            console.log('RowFormController.onDiscardClick', this.model.getFullName());
+            console.log('RowFormController.onDiscardClick', this.getModel().getFullName());
             const changedFields = [];
             for (const name in this.fields) {
                 const field = this.fields[name];
@@ -39618,7 +39620,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
                 }
             }
             // console.log('changedFields:', changedFields);
-            this.model.discard(changedFields);
+            this.getModel().discard(changedFields);
             // refill changed fields
             changedFields.forEach((name) => {
                 this.fields[name].refill();
@@ -39630,11 +39632,11 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             }
             this.rerender();
             // event
-            this.parent.onFormDiscard(this);
+            this.getParent().onFormDiscard(this);
         };
         this.onRefreshClick = async () => {
-            // console.log('RowFormController.onRefreshClick', this.model.getFullName());
-            await this.model.refresh();
+            // console.log('RowFormController.onRefreshClick', this.getModel().getFullName());
+            await this.getModel().refresh();
         };
         this.onEditClick = (e) => {
             console.log('RowFormController.onEditClick');
@@ -39649,10 +39651,10 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
     }
     init() {
         super.init();
-        this.model.on('refresh', this.onModelRefresh);
-        this.model.on('insert', this.onModelInsert);
-        this.model.on('update', this.onModelUpdate);
-        if (this.model.getDefaultDataSource().isPersistent()) {
+        this.getModel().on('refresh', this.onModelRefresh);
+        this.getModel().on('insert', this.onModelInsert);
+        this.getModel().on('update', this.onModelUpdate);
+        if (this.getModel().getDefaultDataSource().isPersistent()) {
             this.state.mode = 'view';
         }
         this.calcState();
@@ -39661,14 +39663,14 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         }
     }
     deinit() {
-        // console.log('RowFormController.deinit', this.model.getFullName());
-        this.model.off('refresh', this.onModelRefresh);
-        this.model.off('insert', this.onModelInsert);
-        this.model.off('update', this.onModelUpdate);
+        // console.log('RowFormController.deinit', this.getModel().getFullName());
+        this.getModel().off('refresh', this.onModelRefresh);
+        this.getModel().off('insert', this.onModelInsert);
+        this.getModel().off('update', this.onModelUpdate);
         super.deinit();
     }
     calcState() {
-        this.state.hasNew = this.model.hasNew();
+        this.state.hasNew = this.getModel().hasNew();
         this.state.changed = this.isChanged();
         this.state.valid = this.isValid();
         // console.log('hasNew:', hasNew);
@@ -39676,13 +39678,13 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         // console.log('valid:', valid);
     }
     refill() {
-        console.log('RowFormController.refill', this.model.getFullName());
+        console.log('RowFormController.refill', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].refill();
         }
     }
     isValid() {
-        // console.log('RowFormController.isValid', this.model.getFullName());
+        // console.log('RowFormController.isValid', this.getModel().getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
             if (!field.isValid())
@@ -39703,8 +39705,8 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         }
     }
     isChanged() {
-        // console.log('RowFormController.isChanged', this.model.getFullName());
-        if (this.model.isChanged())
+        // console.log('RowFormController.isChanged', this.getModel().getFullName());
+        if (this.getModel().isChanged())
             return true;
         for (const name in this.fields) {
             const field = this.fields[name];
@@ -39714,13 +39716,13 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         return false;
     }
     async onFieldChange(e) {
-        // console.log('RowFormController.onFieldChange', this.model.getFullName());
+        // console.log('RowFormController.onFieldChange', this.getModel().getFullName());
         this.calcState();
         this.invalidate();
         await super.onFieldChange(e);
     }
     getViewClass() {
-        // console.log('RowFormController.getViewClass', this.model.getFullName());
+        // console.log('RowFormController.getViewClass', this.getModel().getFullName());
         return super.getViewClass() || _RowFormView__WEBPACK_IMPORTED_MODULE_1__.RowFormView;
     }
     getActiveRow() {
@@ -39773,8 +39775,8 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         // console.log('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.model.hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.model.hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.model.hasDefaultPersistentDataSource() && ctrl.model.getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.model.hasDefaultPersistentDataSource() &&
-                    ctrl.getModel().getAttr('refreshButton') === 'true' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.refresh }) }), "refresh")), this.isActionsVisible() && ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.MoreVertIcon, {}) })))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.getModel().hasDefaultPersistentDataSource() &&
+                    ctrl.getModel().getAttr('refreshButton') === 'true' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.refresh }) }), "refresh")), this.isActionsVisible() && ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.MoreVertIcon, {}) })))] })));
     }
     isActionsEnabled() {
         // return this.getCtrl().state.mode === 'view';
@@ -39792,7 +39794,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__label` }, { children: [model.getCaption(), ":", model.isNotNull() && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'red' } }, { children: "*" }))] }), `label.${name}`));
     }
     renderField(fieldCtrl) {
-        // console.log('RowFormView.renderField', fieldCtrl.model.getClassName());
+        // console.log('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__field` }, { children: this.renderFieldView(fieldCtrl) }), `field.${name}`));
     }
@@ -39884,18 +39886,18 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.new();
         };
         this.onRefreshClick = async (e) => {
-            console.log('TableFormController.onRefreshClick', this.model.getFullName());
-            await this.model.refresh();
+            console.log('TableFormController.onRefreshClick', this.getModel().getFullName());
+            await this.getModel().refresh();
             // console.error('refresh error handler:', err.message);
             // alert(err.message);
         };
         this.onDeleteClick = async (e) => {
-            console.log('TableFormController.onDeleteClick', this.model.getFullName(), this.grid.getActiveRowKey());
+            console.log('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
             const result = await this.getApp().confirm({
-                message: this.model.getApp().getText().form.areYouSure,
+                message: this.getModel().getApp().getText().form.areYouSure,
             });
             if (result) {
-                await this.model.getDefaultDataSource().delete(this.grid.getActiveRowKey());
+                await this.getModel().getDefaultDataSource().delete(this.grid.getActiveRowKey());
             }
         };
         this.onGridCellDblClick = async (row, key) => {
@@ -39903,9 +39905,9 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             // const bodyCell = e.bodyCell;
             // const row = bodyCell.bodyRow.dbRow;
             // console.log('row:', row);
-            // const key = this.model.getDefaultDataSource().getRowKey(row);
+            // const key = this.getModel().getDefaultDataSource().getRowKey(row);
             // console.log('key:', key);
-            switch (this.model.getAttr('editMethod')) {
+            switch (this.getModel().getAttr('editMethod')) {
                 // case 'table':
                 //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
                 // break;
@@ -39927,22 +39929,22 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             console.log('TableFormController.onGridDeleteKeyDown', row, key);
             if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
                 const result = await this.getApp().confirm({
-                    message: this.model.getApp().getText().form.areYouSure,
+                    message: this.getModel().getApp().getText().form.areYouSure,
                 });
                 if (result) {
-                    await this.model.getDefaultDataSource().delete(key);
+                    await this.getModel().getDefaultDataSource().delete(key);
                 }
             }
         };
         this.onModelRefresh = async (e) => {
-            console.log('TableFormController.onModelRefresh', this.model.getFullName(), e);
+            console.log('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             this.invalidate();
             await this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('TableFormController.onModelInsert', this.model.getFullName(), e);
+            console.log('TableFormController.onModelInsert', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid && e.source) {
@@ -39954,7 +39956,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onModelUpdate = async (e) => {
-            console.log('TableFormController.onModelUpdate', this.model.getFullName(), e, this.view);
+            console.log('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -39971,7 +39973,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onModelDelete = async (e) => {
-            console.log('TableFormController.onModelDelete', this.model.getFullName(), e);
+            console.log('TableFormController.onModelDelete', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -40008,16 +40010,16 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         };
         this.onNextClick = async () => {
             console.log('TableFormController.onNextClick');
-            const frame = this.model.getDefaultDataSource().getFrame() + 1;
-            this.model.getDefaultDataSource().setFrame(frame);
-            this.model.getDefaultDataSource().refresh();
+            const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
             await this.rerender();
         };
         this.onPreviousClick = async () => {
             console.log('TableFormController.onPreviousClick');
-            const frame = this.model.getDefaultDataSource().getFrame() - 1;
-            this.model.getDefaultDataSource().setFrame(frame);
-            this.model.getDefaultDataSource().refresh();
+            const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
             this.rerender();
         };
     }
@@ -40028,25 +40030,25 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         super.init();
         // this.parent.on('hide', this.onHidePage);
         // this.parent.on('show', this.onShowPage);
-        this.model.on('refresh', this.onModelRefresh);
-        this.model.on('update', this.onModelUpdate);
-        this.model.on('delete', this.onModelDelete);
-        this.model.on('insert', this.onModelInsert);
+        this.getModel().on('refresh', this.onModelRefresh);
+        this.getModel().on('update', this.onModelUpdate);
+        this.getModel().on('delete', this.onModelDelete);
+        this.getModel().on('insert', this.onModelInsert);
     }
     deinit() {
         // this.parent.off('hide', this.onHidePage);
         // this.parent.off('show', this.onShowPage);
-        this.model.off('refresh', this.onModelRefresh);
-        this.model.off('update', this.onModelUpdate);
-        this.model.off('delete', this.onModelDelete);
-        this.model.off('insert', this.onModelInsert);
+        this.getModel().off('refresh', this.onModelRefresh);
+        this.getModel().off('update', this.onModelUpdate);
+        this.getModel().off('delete', this.onModelDelete);
+        this.getModel().off('insert', this.onModelInsert);
         super.deinit();
     }
     /*onHidePage = async () => {
         this.grid.saveScroll();
     }*/
     /*onShowPage = async () => {
-        console.log('TableFormController.onShowPage', this.model.getFullName());
+        console.log('TableFormController.onShowPage', this.getModel().getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
@@ -40054,60 +40056,60 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         }
     }*/
     async new() {
-        if (this.model.getAttr('newRowMode') === 'oneclick') {
+        if (this.getModel().getAttr('newRowMode') === 'oneclick') {
             const row = {};
-            this.model.fillDefaultValues(row);
-            await this.model.getDefaultDataSource().insert(row);
+            this.getModel().fillDefaultValues(row);
+            await this.getModel().getDefaultDataSource().insert(row);
         }
-        else if (this.model.getAttr('newRowMode') === 'editform') {
-            if (!this.model.getAttr('itemEditPage')) {
-                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
+        else if (this.getModel().getAttr('newRowMode') === 'editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
             }
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 newMode: true,
                 modal: true,
             });
         }
-        else if (this.model.getAttr('newRowMode') === 'createform') {
-            if (!this.model.getAttr('itemCreatePage')) {
-                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
+        else if (this.getModel().getAttr('newRowMode') === 'createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
             }
             await this.openPage({
-                name: this.model.getAttr('itemCreatePage'),
+                name: this.getModel().getAttr('itemCreatePage'),
                 newMode: true,
                 modal: true,
             });
         }
-        else if (this.model.getAttr('newRowMode') === 'oneclick editform') {
-            if (!this.model.getAttr('itemEditPage')) {
-                throw new Error(`[${this.model.getFullName()}] itemEditPage is empty`);
+        else if (this.getModel().getAttr('newRowMode') === 'oneclick editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
             }
             const row = {};
-            this.model.fillDefaultValues(row);
-            const result = await this.model.getDefaultDataSource().insert(row);
-            const database = this.model.getDefaultDataSource().getAttr('database');
-            const table = this.model.getDefaultDataSource().getAttr('table');
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 // key  : key,
                 modal: true,
                 params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
             });
         }
-        else if (this.model.getAttr('newRowMode') === 'oneclick createform') {
-            if (!this.model.getAttr('itemCreatePage')) {
-                throw new Error(`[${this.model.getFullName()}] itemCreatePage is empty`);
+        else if (this.getModel().getAttr('newRowMode') === 'oneclick createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
             }
             const row = {};
-            this.model.fillDefaultValues(row);
-            const result = await this.model.getDefaultDataSource().insert(row);
-            const database = this.model.getDefaultDataSource().getAttr('database');
-            const table = this.model.getDefaultDataSource().getAttr('table');
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
             const [key] = result[database][table].insert;
             await this.openPage({
-                name: this.model.getAttr('itemCreatePage'),
+                name: this.getModel().getAttr('itemCreatePage'),
                 // key  : key,
                 modal: true,
                 params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
@@ -40115,35 +40117,35 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         }
     }
     async edit(key) {
-        // console.log('TableForm.edit', this.model.getFullName(), key);
-        if (!this.model.getAttr('itemEditPage')) {
-            throw new Error(`${this.model.getFullName()}: itemEditPage is empty`);
+        // console.log('TableForm.edit', this.getModel().getFullName(), key);
+        if (!this.getModel().getAttr('itemEditPage')) {
+            throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }
         try {
             await this.openPage({
-                name: this.model.getAttr('itemEditPage'),
+                name: this.getModel().getAttr('itemEditPage'),
                 modal: true,
                 params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
             });
         }
         catch (err) {
-            // console.error(`${this.model.getFullName()}: edit form error handler:`, err);
-            // alert(`${this.model.getFullName()}: ${err.message}`);
-            err.message = `${this.model.getFullName()} edit: ${err.message}`;
+            // console.error(`${this.getModel().getFullName()}: edit form error handler:`, err);
+            // alert(`${this.getModel().getFullName()}: ${err.message}`);
+            err.message = `${this.getModel().getFullName()} edit: ${err.message}`;
             throw err;
         }
     }
     getActiveRow() {
         const key = this.grid.getActiveRowKey();
         if (!key)
-            throw new Error(`${this.model.getFullName()}: no active row key`);
-        return this.model.getDefaultDataSource().getRow(key);
+            throw new Error(`${this.getModel().getFullName()}: no active row key`);
+        return this.getModel().getDefaultDataSource().getRow(key);
     }
     canPrev() {
-        return this.model.getDefaultDataSource().getFrame() > 1;
+        return this.getModel().getDefaultDataSource().getFrame() > 1;
     }
     canNext() {
-        const ds = this.model.getDefaultDataSource();
+        const ds = this.getModel().getDefaultDataSource();
         return ds.getFrame() < ds.getFramesCount();
     }
     getSelectedRowKey() {
@@ -40176,8 +40178,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _FormView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
 /* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
-/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
 
 
 
@@ -40207,14 +40209,14 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         const ctrl = this.getCtrl();
         const model = ctrl.getModel();
         const dataSource = model.getDefaultDataSource();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.parent.model.hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.model.hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon, {}) })))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.data.newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.data.refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.data.deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon, {}) })))] })));
     }
     renderPaging() {
         const ctrl = this.getCtrl();
         const model = this.getCtrl().getModel();
         const dataSource = model.getDefaultDataSource();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() &&
-                                `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_6__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.TextBox, { value: ctrl.model.getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_6__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })))] })));
+                                `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_5__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.TextBox, { value: ctrl.getModel().getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_5__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })))] })));
     }
     getGridColumns() {
         const ctrl = this.getCtrl();
@@ -40232,7 +40234,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
     }
     getRows() {
         const ctrl = this.getCtrl();
-        return ctrl.model.getDefaultDataSource().getRows();
+        return ctrl.getModel().getDefaultDataSource().getRows();
     }
     getGridExtraColumn() {
         return true;
@@ -40245,10 +40247,10 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         return react__WEBPACK_IMPORTED_MODULE_1__.createElement(this.getGridClass(), {
             classList: ['flex-max'],
             onCreate: ctrl.onGridCreate,
-            name: ctrl.model.getFullName(),
+            name: ctrl.getModel().getFullName(),
             columns: this.getGridColumns(),
             rows: this.getRows(),
-            getRowKey: (row) => ctrl.model.getDefaultDataSource().getRowKey(row),
+            getRowKey: (row) => ctrl.getModel().getDefaultDataSource().getRowKey(row),
             onDoubleClick: ctrl.onGridCellDblClick,
             onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
             onSelectionChange: ctrl.onGridSelectionChange,
@@ -40296,13 +40298,15 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
     init() { }
     deinit() {
         if (this.deinited)
-            throw new Error(`${this.model.getFullName()}: controller already deinited`);
+            throw new Error(`${this.getModel().getFullName()}: controller already deinited`);
         this.deinited = true;
     }
     getModel() {
         return this.model;
     }
     getParent() {
+        if (!this.parent)
+            throw new Error(`${this.getModel().getFullName()}: no controller parent`);
         return this.parent;
     }
     getTitle() {
@@ -40481,14 +40485,14 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return new PageController(model, parent, id, options);
     }
     init() {
-        for (const form of this.model.forms) {
+        for (const form of this.getModel().forms) {
             const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__.FormController.create(form, this);
             ctrl.init();
             this.forms.push(ctrl);
         }
     }
     deinit() {
-        console.log('PageController.deinit: ' + this.model.getFullName());
+        console.log('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -40500,14 +40504,14 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
     }
     async close() {
-        // console.log('PageController.close', this.model.getFullName());
+        // console.log('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
         // console.log('changed:', changed);
         // const valid = this.isValid();
         // console.log('valid:', valid);
-        if (this.model.hasRowFormWithDefaultSqlDataSource() && changed) {
+        if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
-                message: this.model.getApp().getText().form.areYouSure,
+                message: this.getModel().getApp().getText().form.areYouSure,
             });
             if (!result)
                 return;
@@ -40525,7 +40529,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
     }
     isValid() {
-        // console.log('PageController.isValid', this.model.getFullName());
+        // console.log('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -40534,20 +40538,20 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return true;
     }
     async onFormChange(e) {
-        // console.log('PageController.onFormChange', this.model.getFullName());
+        // console.log('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.model.getFullName());
+        console.log('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate:', this.model.getFullName(), e);
+        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
     onFormInsert(e) {
-        console.log('PageController.onFormInsert:', this.model.getFullName());
-        // console.log('hasNew:', this.model.hasNew());
+        console.log('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.log('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -40566,23 +40570,23 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return await this.getApp().openPage(options);
     }
     isChanged() {
-        // console.log('PageController.isChanged', this.model.getFullName());
+        // console.log('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.model.getFullName()}`);
+                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
         return false;
     }
     getApp() {
-        return this.parent;
+        return this.getParent();
     }
     getViewClass() {
         return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_5__.PageView;
     }
     findForm(name) {
-        return this.forms.find((form) => form.model.getName() === name);
+        return this.forms.find((form) => form.getModel().getName() === name);
     }
     getForm(name) {
         const form = this.findForm(name);
@@ -41020,9 +41024,12 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         });
         return body;
     }
+    findDatabase(name) {
+        return this.databases.find((database) => database.getName() === name);
+    }
     getDatabase(name) {
         // console.log('Application.getDatabase', name);
-        const database = this.databases.find((database) => database.getName() === name);
+        const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database: ${name}`);
         return database;
