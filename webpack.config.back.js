@@ -63,7 +63,10 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [{ from: '**/*.ejs', context: 'src' }],
+            patterns: [
+                { from: '**/*.ejs', context: 'src' },
+                { from: 'frontend/lib/**/*', context: 'src' },
+            ],
         }),
     ],
 };
