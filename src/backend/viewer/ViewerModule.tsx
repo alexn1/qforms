@@ -16,6 +16,7 @@ import { Application } from '../../frontend/viewer/Model/Application/Application
 import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { login } from './login';
 import { FrontHostApp } from '../../frontend/common';
+import { NextFunction } from 'connect';
 
 const pkg = require('../../../package.json');
 
@@ -41,12 +42,10 @@ const ACTIONS = [
 ];
 
 export class ViewerModule {
-    // hostApp: BackHostApp;
-    css: string[];
-    js: string[];
+    private css: string[];
+    private js: string[];
 
     constructor(private hostApp: BackHostApp) {
-        // this.hostApp = hostApp;
     }
 
     async init() {
@@ -438,7 +437,7 @@ export class ViewerModule {
         res.json(null);
     }
 
-    async handleViewerGetFile(context: Context, application: BkApplication, next) {
+    async handleViewerGetFile(context: Context, application: BkApplication, next: NextFunction) {
         await application.handleGetFile(context, next);
     }
 

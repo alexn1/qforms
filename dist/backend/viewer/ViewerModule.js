@@ -39,7 +39,6 @@ const ACTIONS = [
 class ViewerModule {
     constructor(hostApp) {
         this.hostApp = hostApp;
-        // this.hostApp = hostApp;
     }
     async init() {
         console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());

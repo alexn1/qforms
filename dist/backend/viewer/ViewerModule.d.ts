@@ -1,11 +1,12 @@
 import { Context } from '../Context';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
+import { NextFunction } from 'connect';
 export { TableForm, NoSqlDataSource, TextBoxField, TableFormTextBoxFieldController, RowForm, } from '../../frontend/viewer';
 export declare class ViewerModule {
     private hostApp;
-    css: string[];
-    js: string[];
+    private css;
+    private js;
     constructor(hostApp: BackHostApp);
     init(): Promise<void>;
     getLinks(): string[];
@@ -23,6 +24,6 @@ export declare class ViewerModule {
     rpc(context: Context, application: BkApplication): Promise<void>;
     logout(context: Context, application: BkApplication): Promise<void>;
     test(context: Context, application: BkApplication): Promise<void>;
-    handleViewerGetFile(context: Context, application: BkApplication, next: any): Promise<void>;
+    handleViewerGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
     getHostApp(): BackHostApp;
 }
