@@ -393,6 +393,7 @@ class BkApplication extends BkModel_1.BkModel {
     }
     removeClient(webSocket) {
         const i = this.clients.indexOf(webSocket);
+        // @ts-ignore
         if (i === -1)
             throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
         // console.log('i:', i);
@@ -407,6 +408,7 @@ class BkApplication extends BkModel_1.BkModel {
             throw new Error('no result');
         const uuid = context.getReq().body.uuid;
         for (const webSocket of this.clients) {
+            // @ts-ignore
             if (webSocket.uuid !== uuid) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
@@ -422,6 +424,7 @@ class BkApplication extends BkModel_1.BkModel {
         if (fResult) {
             const uuid = context.getReq().body.uuid;
             for (const webSocket of this.clients) {
+                // @ts-ignore
                 if (webSocket.uuid !== uuid) {
                     webSocket.send(JSON.stringify({ type: 'result', data: fResult }));
                 }

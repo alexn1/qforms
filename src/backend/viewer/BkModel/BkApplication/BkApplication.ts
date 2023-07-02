@@ -1,5 +1,6 @@
 import path, { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
+import {WebSocket} from 'ws';
 // import axios from 'axios';
 // import colors from 'colors/safe';
 
@@ -37,7 +38,7 @@ export class BkApplication<
     scripts: any[];
     menu: any;
     nav: any;
-    clients: any[] = [];
+    clients: WebSocket[] = [];
 
     constructor(
         private appInfo: AppInfo,
@@ -436,14 +437,15 @@ export class BkApplication<
         }
     }
 
-    addClient(webSocket): void {
+    addClient(webSocket: WebSocket): void {
         // add to clients
         this.clients.push(webSocket);
         // console.log('this.clients', this.clients);
     }
 
-    removeClient(webSocket): void {
+    removeClient(webSocket: WebSocket): void {
         const i = this.clients.indexOf(webSocket);
+        // @ts-ignore
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
         // console.log('i:', i);
         this.clients.splice(i, 1);
@@ -460,6 +462,7 @@ export class BkApplication<
         if (!result) throw new Error('no result');
         const uuid = context.getReq()!.body.uuid;
         for (const webSocket of this.clients) {
+            // @ts-ignore
             if (webSocket.uuid !== uuid) {
                 webSocket.send(JSON.stringify({ type: 'result', data: result }));
             }
@@ -478,6 +481,7 @@ export class BkApplication<
         if (fResult) {
             const uuid = context.getReq()!.body.uuid;
             for (const webSocket of this.clients) {
+                // @ts-ignore
                 if (webSocket.uuid !== uuid) {
                     webSocket.send(JSON.stringify({ type: 'result', data: fResult }));
                 }

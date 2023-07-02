@@ -1,3 +1,4 @@
+import { WebSocket } from 'ws';
 import { AppInfo } from '../../../AppInfo';
 import { BackHostApp } from '../../../BackHostApp';
 import { BkModel } from '../BkModel';
@@ -26,7 +27,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     scripts: any[];
     menu: any;
     nav: any;
-    clients: any[];
+    clients: WebSocket[];
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
@@ -66,8 +67,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getViewClassName(): string;
     connect(context: Context): Promise<void>;
     release(context: Context): Promise<void>;
-    addClient(webSocket: any): void;
-    removeClient(webSocket: any): void;
+    addClient(webSocket: WebSocket): void;
+    removeClient(webSocket: WebSocket): void;
     broadcastDomesticResultToClients(context: Context, result: Result): void;
     broadcastForeignResultToClients(context: Context, result: Result): void;
     composeForeignResult(result: Result): Result | null;

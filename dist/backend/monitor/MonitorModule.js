@@ -37,9 +37,12 @@ class MonitorModule {
                     }),
                     clients: app.clients.map((webSocket) => {
                         return {
+                            // @ts-ignore
                             uuid: webSocket.uuid,
+                            // @ts-ignore
                             userId: webSocket.userId,
                             ip: BkHelper_1.BkHelper.getWebSocketIP(webSocket),
+                            // @ts-ignore
                             version: webSocket.customFields.version,
                         };
                     }),

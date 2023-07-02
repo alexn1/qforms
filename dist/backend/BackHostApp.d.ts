@@ -115,7 +115,7 @@ export declare class BackHostApp {
         env: string,
         domain?: string
     ], cb: string, query?: Record<string, Scalar | null>): void;
-    getPostAlias(path: string, arr: [
+    getPostAlias(path: string, tuple: [
         module: string,
         appDirName: string,
         appFileName: string,

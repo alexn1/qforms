@@ -835,7 +835,7 @@ export class BackHostApp {
 
     getPostAlias(
         path: string,
-        arr: [
+        tuple: [
             module: string,
             appDirName: string,
             appFileName: string,
@@ -844,8 +844,8 @@ export class BackHostApp {
         ],
         query?: Record<string, Scalar | null>,
     ) {
-        this.alias('get', path, arr, 'moduleGet', query);
-        this.alias('post', path, arr, 'modulePost', query);
+        this.alias('get', path, tuple, 'moduleGet', query);
+        this.alias('post', path, tuple, 'modulePost', query);
     }
 
     getNodeEnv(): string | null {

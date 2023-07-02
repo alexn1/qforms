@@ -50,9 +50,12 @@ export class MonitorModule {
                     }),
                     clients: app.clients.map((webSocket) => {
                         return {
+                            // @ts-ignore
                             uuid: webSocket.uuid,
+                            // @ts-ignore
                             userId: webSocket.userId,
                             ip: BkHelper.getWebSocketIP(webSocket),
+                            // @ts-ignore
                             version: webSocket.customFields.version,
                         };
                     }),
