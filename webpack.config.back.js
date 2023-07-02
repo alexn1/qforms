@@ -34,6 +34,7 @@ module.exports = {
                             module: 'commonjs',
                             resolveJsonModule: true,
                             strictNullChecks: true,
+                            noImplicitAny: false,
                         },
                     },
                 },
