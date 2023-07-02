@@ -26,7 +26,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     invalidate(): void;
     onActionClick(name: string, row: RawRow): Promise<any>;
     getField<TFieldController extends FieldController = FieldController>(name: string): TFieldController;
-    getApp(): ApplicationController;
+    getApp<TApplicationController extends ApplicationController = ApplicationController>(): TApplicationController;
     getSelectedRowKey(): Key | null;
     isAutoFocus(): boolean;
     isVisible(): boolean;

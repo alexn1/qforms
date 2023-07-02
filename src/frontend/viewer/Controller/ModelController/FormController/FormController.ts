@@ -94,8 +94,10 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return this.fields[name] as TFieldController;
     }
 
-    getApp(): ApplicationController {
-        return this.getParent().getParent() as ApplicationController;
+    getApp<
+        TApplicationController extends ApplicationController = ApplicationController,
+    >(): TApplicationController {
+        return this.getParent().getParent() as TApplicationController;
     }
 
     getSelectedRowKey(): Key | null {
