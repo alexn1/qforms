@@ -8,9 +8,6 @@ class BkModel extends BaseModel_1.BaseModel {
         this.deinited = false;
         this.fillCollections = [];
     }
-    /* constructor(data: any, parent?: any) {
-        super(data, parent);
-    } */
     async init(context) { }
     async deinit() {
         this.checkDeinited();

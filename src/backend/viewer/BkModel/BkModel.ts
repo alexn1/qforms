@@ -8,10 +8,6 @@ export class BkModel<
     deinited = false;
     fillCollections: string[] = [];
 
-    /* constructor(data: any, parent?: any) {
-        super(data, parent);
-    } */
-
     async init(context: Context): Promise<void> {}
 
     async deinit(): Promise<void> {

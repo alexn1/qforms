@@ -111,7 +111,7 @@ export class BkApplication<
         return null;
     }
 
-    fillAttributes(response: any): void {
+    fillAttributes(response: ApplicationData): void {
         response.class = this.getClassName();
         response.name = this.getAttr('name');
         response.caption = this.getAttr('caption');

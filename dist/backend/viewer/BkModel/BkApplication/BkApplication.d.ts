@@ -38,7 +38,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getPublicDirPath(): string;
     getText(): any;
     getVersion(): string | null;
-    fillAttributes(response: any): void;
+    fillAttributes(response: ApplicationData): void;
     fill(context: Context): Promise<ApplicationData>;
     getClientUserFromServerUser(context: Context): Promise<any>;
     createMenu(context: Context): Promise<void>;
