@@ -42095,13 +42095,13 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         const name = this.getData().dataSourceName;
         if (!name)
             throw new Error(`${this.getFullName()}: no dataSourceName`);
-        if (this.getForm().getDataSource(name)) {
+        if (this.getForm().findDataSource(name)) {
             return this.getForm().getDataSource(name);
         }
-        if (this.getPage().getDataSource(name)) {
+        if (this.getPage().findDataSource(name)) {
             return this.getPage().getDataSource(name);
         }
-        if (this.getApp().getDataSource(name)) {
+        if (this.getApp().findDataSource(name)) {
             return this.getApp().getDataSource(name);
         }
         throw new Error(`${this.getFullName()}: no data source: ${name}`);

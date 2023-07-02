@@ -1,6 +1,7 @@
 import { Field } from '../Field';
 import { Helper } from '../../../../common';
 import { JSONString, RawRow } from '../../../../../types';
+import { DataSource } from '../../DataSource/DataSource';
 
 export class RadioField extends Field {
     getDisplayValue(row: RawRow) {
@@ -22,7 +23,7 @@ export class RadioField extends Field {
         return value;
     }
 
-    getValueValue(row) {
+    getValueValue(row: RawRow) {
         const valueColumn = this.getAttr('valueColumn');
         if (!row[valueColumn]) {
             throw new Error('no valueColumn in ComboBox data source');
@@ -30,7 +31,7 @@ export class RadioField extends Field {
         return Helper.decodeValue(row[valueColumn]);
     }
 
-    getDataSource() {
+    getDataSource(): DataSource {
         const name = this.getAttr('dataSourceName');
         if (!name) throw new Error(`${this.getFullName()}: no dataSourceName`);
         if (this.getForm().findDataSource(name)) {

@@ -63,8 +63,8 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
         return await this.getPage().openPage(options);
     }
 
-    getPage(): PageController {
-        return this.getParent() as PageController;
+    getPage<TPageController extends PageController = PageController>(): TPageController {
+        return this.getParent() as TPageController;
     }
 
     isChanged(): boolean {

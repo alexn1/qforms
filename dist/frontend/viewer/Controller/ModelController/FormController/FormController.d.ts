@@ -19,7 +19,7 @@ export declare class FormController<TForm extends Form = Form> extends ModelCont
     deinit(): void;
     isValid(): boolean;
     openPage(options: OpenPageOptions): Promise<PageController<ApplicationController>>;
-    getPage(): PageController;
+    getPage<TPageController extends PageController = PageController>(): TPageController;
     isChanged(): boolean;
     onFieldChange(e: any): Promise<void>;
     getUpdated(): number;
