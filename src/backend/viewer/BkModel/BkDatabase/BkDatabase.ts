@@ -2,9 +2,9 @@ import { BkModel } from '../BkModel';
 import { BkParam } from '../BkParam/BkParam';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkTable } from '../BkTable/BkTable';
-
 import { Context } from '../../../Context';
 import { Row } from '../../../../types';
+import { BkDatabaseData } from '../../BkModelData/BkDatabaseData/BkDatabaseData';
 
 export interface DbConfig {
     host: string;
@@ -14,7 +14,7 @@ export interface DbConfig {
     port?: number;
 }
 
-export class BkDatabase<TConnection = any> extends BkModel {
+export class BkDatabase<TConnection = any> extends BkModel<BkDatabaseData> {
     tables: BkTable[] = [];
     params: BkParam[] = [];
     fillCollections = ['tables'];
