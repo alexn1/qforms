@@ -1,5 +1,5 @@
-import { BkFormData } from '../BkFormData';
-export interface BkRowFormData extends BkFormData {
+import { BkFormScheme } from '../BkFormData';
+export interface BkRowFormScheme extends BkFormScheme {
     '@attributes': {
         name: string;
         caption: string;

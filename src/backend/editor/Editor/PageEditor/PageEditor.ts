@@ -3,9 +3,9 @@ import path from 'path';
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageData } from '../../../viewer/BkModelData/BkPageData/BkPageData';
+import { BkPageScheme } from '../../../viewer/BkModelData/BkPageData/BkPageData';
 
-export class PageEditor extends Editor<BkPageData> {
+export class PageEditor extends Editor<BkPageScheme> {
     constructor(private appEditor: ApplicationEditor, public pageFile: JsonFile) {
         super(pageFile.data, appEditor);
     }

@@ -7,13 +7,13 @@ import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key, Row, RawRow, JSONString } from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
 import { BkForm } from '../../../BkForm/BkForm';
-import { BkModelData } from '../../../../BkModelData/BkModelData';
+import { BkModelScheme } from '../../../../BkModelData/BkModelData';
 import { BkModel } from '../../../BkModel';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;
 
-    constructor(data: BkModelData, parent: BkModel) {
+    constructor(data: BkModelScheme, parent: BkModel) {
         super(data, parent);
         this.table = this.getAttr('table')
             ? this.getDatabase().getTable(this.getAttr('table'))

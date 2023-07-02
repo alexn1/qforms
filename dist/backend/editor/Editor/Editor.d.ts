@@ -1,6 +1,6 @@
 import { BaseModel } from '../../BaseModel';
-import { BkModelData } from '../../viewer/BkModelData/BkModelData';
-export declare class Editor<TBkModelData extends BkModelData = BkModelData> extends BaseModel<TBkModelData> {
+import { BkModelScheme } from '../../viewer/BkModelData/BkModelData';
+export declare class Editor<TBkModelData extends BkModelScheme = BkModelScheme> extends BaseModel<TBkModelData> {
     createFileByParams(newFilePath: string, templateFilePath: string, params: any): Promise<any>;
     getFile(filePath: string): Promise<string | undefined>;
     saveFile(filePath: string, content: string): Promise<void>;
@@ -8,7 +8,7 @@ export declare class Editor<TBkModelData extends BkModelData = BkModelData> exte
     saveCustomFile(ext: string, text: string): Promise<void>;
     getCustomFilePath(ext: any): Promise<string>;
     moveDataColItem(colName: any, name: any, offset: any): void;
-    setColData(colName: string, newData: BkModelData): any;
+    setColData(colName: string, newData: BkModelScheme): any;
     createItemEditor(colName: string, itemName: string): any;
     getCustomDirPath(): Promise<string>;
     getCollectionDirPath(): Promise<string>;

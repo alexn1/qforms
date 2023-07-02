@@ -1,16 +1,16 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelData } from './viewer/BkModelData/BkModelData';
-export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
+import { BkModelScheme } from './viewer/BkModelData/BkModelData';
+export declare class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
     protected data: TBkModelData;
     private parent?;
-    constructor(data: TBkModelData, parent?: BaseModel<BkModelData> | undefined);
-    static getClassName(data: BkModelData): string;
-    static getAttr(data: BkModelData, name: string): string;
-    static getName(data: BkModelData): string;
+    constructor(data: TBkModelData, parent?: BaseModel<BkModelScheme> | undefined);
+    static getClassName(data: BkModelScheme): string;
+    static getAttr(data: BkModelScheme, name: string): string;
+    static getName(data: BkModelScheme): string;
     getClassName(): string;
     getName(): string;
-    static attributes(data: BkModelData): import("./viewer/BkModelData/BkModelData").BkModelAttributes;
-    attributes(): import("./viewer/BkModelData/BkModelData").BkModelAttributes;
+    static attributes(data: BkModelScheme): import("./viewer/BkModelData/BkModelData").BkModelAttributesScheme;
+    attributes(): import("./viewer/BkModelData/BkModelData").BkModelAttributesScheme;
     getAttr(name: string): string;
     setAttr(name: string, value: string): void;
     isAttr(name: string): boolean;
@@ -21,8 +21,8 @@ export declare class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     getColItemData(colName: string, name: string): any;
     removeColData(colName: string, name: string): any;
     static findColDataByName(col: any[], name: string): any;
-    addModelData(colName: string, data: BkModelData): void;
+    addModelData(colName: string, data: BkModelScheme): void;
     getApp(): BkApplication;
-    replaceDataColItem(colName: string, oldData: BkModelData, newData: BkModelData): any;
+    replaceDataColItem(colName: string, oldData: BkModelScheme, newData: BkModelScheme): any;
     getParent<T extends BaseModel = BaseModel>(): T;
 }

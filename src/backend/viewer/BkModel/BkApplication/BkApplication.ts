@@ -1,6 +1,6 @@
 import path, { join } from 'path';
 import { v4 as uuidv4 } from 'uuid';
-import {WebSocket} from 'ws';
+import { WebSocket } from 'ws';
 // import axios from 'axios';
 // import colors from 'colors/safe';
 
@@ -23,13 +23,13 @@ import { index } from '../../index';
 
 import * as text from '../../text';
 import { ApplicationData } from '../../../../data';
-import { BkApplicationData } from '../../BkModelData/BkApplicationData/BkApplicationData';
+import { BkApplicationScheme } from '../../BkModelData/BkApplicationData/BkApplicationData';
 
 const pkg = require('../../../../../package.json');
 
 export class BkApplication<
     THostApp extends BackHostApp = BackHostApp,
-> extends BkModel<BkApplicationData> {
+> extends BkModel<BkApplicationScheme> {
     databases: BkDatabase[] = [];
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
@@ -574,7 +574,7 @@ export class BkApplication<
         }
     }
 
-    static getEnvList(data: BkApplicationData): string[] {
+    static getEnvList(data: BkApplicationScheme): string[] {
         const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
         return ['local', ...list];
     }

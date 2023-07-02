@@ -1,7 +1,7 @@
-export interface BkModelAttributes {
+export interface BkModelAttributesScheme {
     name: string;
 }
-export interface BkModelData {
+export interface BkModelScheme {
     '@class': string;
-    '@attributes': BkModelAttributes;
+    '@attributes': BkModelAttributesScheme;
 }

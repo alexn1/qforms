@@ -1,9 +1,9 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
-import { BkModelData } from '../../viewer/BkModelData/BkModelData';
+import { BkModelScheme } from '../../viewer/BkModelData/BkModelData';
 
 export class BkModel<
-    TBkModelData extends BkModelData = BkModelData,
+    TBkModelData extends BkModelScheme = BkModelScheme,
 > extends BaseModel<TBkModelData> {
     deinited = false;
     fillCollections: string[] = [];

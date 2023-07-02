@@ -1,20 +1,20 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelData } from './viewer/BkModelData/BkModelData';
+import { BkModelScheme } from './viewer/BkModelData/BkModelData';
 
-export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
+export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
     constructor(protected data: TBkModelData, private parent?: BaseModel) {
         if (!data) throw new Error(`new ${this.constructor.name}: no data`);
     }
 
-    static getClassName(data: BkModelData): string {
+    static getClassName(data: BkModelScheme): string {
         return data['@class'];
     }
 
-    static getAttr(data: BkModelData, name: string): string {
+    static getAttr(data: BkModelScheme, name: string): string {
         return data['@attributes'][name];
     }
 
-    static getName(data: BkModelData): string {
+    static getName(data: BkModelScheme): string {
         return BaseModel.getAttr(data, 'name');
     }
 
@@ -26,7 +26,7 @@ export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
         return BaseModel.getName(this.data);
     }
 
-    static attributes(data: BkModelData) {
+    static attributes(data: BkModelScheme) {
         return data['@attributes'];
     }
 
@@ -68,7 +68,7 @@ export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     }
 
     getItemNames(colName: string) {
-        return this.getCol(colName).map((data: BkModelData) => BaseModel.getName(data));
+        return this.getCol(colName).map((data: BkModelScheme) => BaseModel.getName(data));
     }
 
     getColItemData(colName: string, name: string) {
@@ -89,7 +89,7 @@ export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
         return col.find((data) => BaseModel.getName(data) === name);
     }
 
-    addModelData(colName: string, data: BkModelData) {
+    addModelData(colName: string, data: BkModelScheme) {
         const name = BaseModel.getName(data);
         if (this.getColItemData(colName, name))
             throw new Error(`${name} already exists in ${colName}`);
@@ -100,7 +100,7 @@ export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
         throw new Error('getApp: not implemented');
     }
 
-    replaceDataColItem(colName: string, oldData: BkModelData, newData: BkModelData) {
+    replaceDataColItem(colName: string, oldData: BkModelScheme, newData: BkModelScheme) {
         const dataCol = this.getCol(colName);
         const i = dataCol.indexOf(oldData);
         if (i === -1)

@@ -6,8 +6,8 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { Context } from '../../../Context';
 import { RawRow } from '../../../../types';
-import { BkFormData } from '../../../viewer/BkModelData/BkFormData/BkFormData';
-export declare class BkForm<TBkFormData extends BkFormData = BkFormData> extends BkModel<TBkFormData> {
+import { BkFormScheme } from '../../../viewer/BkModelData/BkFormData/BkFormData';
+export declare class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkModel<TBkFormData> {
     dataSources: BkDataSource[];
     actions: BkAction[];
     fields: BkField[];

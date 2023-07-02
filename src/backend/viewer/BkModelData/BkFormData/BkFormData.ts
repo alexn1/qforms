@@ -1,6 +1,6 @@
-import { BkModelData } from '../BkModelData';
+import { BkModelScheme } from '../BkModelData';
 
-export interface BkFormData extends BkModelData {
+export interface BkFormScheme extends BkModelScheme {
     dataSources: any[];
     actions: any[];
     fields: any[];

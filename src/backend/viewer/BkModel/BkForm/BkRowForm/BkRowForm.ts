@@ -1,8 +1,8 @@
 import { BkForm } from '../BkForm';
 import { Context } from '../../../../Context';
-import { BkRowFormData } from '../../../../viewer/BkModelData/BkFormData/BkRowFormData/BkRowFormData';
+import { BkRowFormScheme } from '../../../../viewer/BkModelData/BkFormData/BkRowFormData/BkRowFormData';
 
-export class BkRowForm extends BkForm<BkRowFormData> {
+export class BkRowForm extends BkForm<BkRowFormScheme> {
     // constructor(data, parent) {
     //     super(data, parent);
     //     // console.log('RowForm.constructor', this.getFullName());

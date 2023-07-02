@@ -1,5 +1,5 @@
-import { BkModelData } from '../BkModelData';
-export interface BkDatabaseData extends BkModelData {
+import { BkModelScheme } from '../BkModelData';
+export interface BkDatabaseScheme extends BkModelScheme {
     params: any[];
     tables: any[];
 }

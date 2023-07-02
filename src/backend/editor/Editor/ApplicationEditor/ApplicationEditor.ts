@@ -6,9 +6,9 @@ import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplicati
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationData } from '../../../viewer/BkModelData/BkApplicationData/BkApplicationData';
+import { BkApplicationScheme } from '../../../viewer/BkModelData/BkApplicationData/BkApplicationData';
 
-export class ApplicationEditor extends Editor<BkApplicationData> {
+export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
 
     constructor(private appFile: JsonFile) {

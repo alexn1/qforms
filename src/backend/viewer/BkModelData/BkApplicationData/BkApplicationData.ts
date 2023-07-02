@@ -1,6 +1,6 @@
-import { BkModelData, BkModelAttributes } from '../BkModelData';
+import { BkModelScheme, BkModelAttributesScheme } from '../BkModelData';
 
-export interface BkApplicationAttributes extends BkModelAttributes {
+export interface BkApplicationAttributesScheme extends BkModelAttributesScheme {
     formatVersion: string;
     caption: string;
     authentication: string;
@@ -14,8 +14,8 @@ export interface BkApplicationAttributes extends BkModelAttributes {
     modelClass: string;
 }
 
-export interface BkApplicationData extends BkModelData {
-    '@attributes': BkApplicationAttributes;
+export interface BkApplicationScheme extends BkModelScheme {
+    '@attributes': BkApplicationAttributesScheme;
     env: Record<string, any>;
     databases: any[];
     dataSources: any[];

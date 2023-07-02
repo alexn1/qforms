@@ -1,5 +1,5 @@
-import { BkModelData } from '../BkModelData';
-export interface BkPageData extends BkModelData {
+import { BkModelScheme } from '../BkModelData';
+export interface BkPageScheme extends BkModelScheme {
     '@attributes': {
         formatVersion: string;
         name: string;

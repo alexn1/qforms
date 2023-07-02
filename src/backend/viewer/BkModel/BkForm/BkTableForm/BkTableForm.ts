@@ -1,7 +1,7 @@
-import { BkTableFormData } from '../../../../viewer/BkModelData/BkFormData/BkTableFormData/BkTableFormData';
+import { BkTableFormScheme } from '../../../../viewer/BkModelData/BkFormData/BkTableFormData/BkTableFormData';
 import { BkForm } from '../BkForm';
 
-export class BkTableForm extends BkForm<BkTableFormData> {
+export class BkTableForm extends BkForm<BkTableFormScheme> {
     /*static async create(data, parent) {
         return new TableForm(data, parent);
     }*/

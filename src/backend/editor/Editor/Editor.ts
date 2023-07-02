@@ -4,10 +4,10 @@ const ejs = require('ejs');
 import { BaseModel } from '../../BaseModel';
 import { BkHelper } from '../../BkHelper';
 import * as backend from '../../../backend';
-import { BkModelData } from '../../viewer/BkModelData/BkModelData';
+import { BkModelScheme } from '../../viewer/BkModelData/BkModelData';
 
 export class Editor<
-    TBkModelData extends BkModelData = BkModelData,
+    TBkModelData extends BkModelScheme = BkModelScheme,
 > extends BaseModel<TBkModelData> {
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.log('Editor.createFileByReplace');
@@ -121,7 +121,7 @@ export class Editor<
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }*/
 
-    setColData(colName: string, newData: BkModelData) {
+    setColData(colName: string, newData: BkModelScheme) {
         // console.log('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }

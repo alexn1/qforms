@@ -2,8 +2,8 @@ import { Editor } from '../Editor';
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationData } from '../../../viewer/BkModelData/BkApplicationData/BkApplicationData';
-export declare class ApplicationEditor extends Editor<BkApplicationData> {
+import { BkApplicationScheme } from '../../../viewer/BkModelData/BkApplicationData/BkApplicationData';
+export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
     private appFile;
     appInfo: AppInfo;
     constructor(appFile: JsonFile);
