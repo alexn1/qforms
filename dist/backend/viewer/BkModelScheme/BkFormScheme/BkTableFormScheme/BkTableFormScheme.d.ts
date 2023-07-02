@@ -1,5 +1,4 @@
-import { BkFormScheme } from '../BkFormData';
-
+import { BkFormScheme } from '../BkFormScheme';
 export interface BkTableFormScheme extends BkFormScheme {
     '@attributes': {
         name: string;

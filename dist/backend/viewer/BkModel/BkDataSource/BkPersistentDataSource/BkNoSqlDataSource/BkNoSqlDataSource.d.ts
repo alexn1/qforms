@@ -5,7 +5,7 @@ import { Result } from '../../../../../../Result';
 import { BkNoSqlDatabase } from '../../../BkDatabase/BkNoSqlDatabase/BkNoSqlDatabase';
 import { ReadResult } from '../../BkDataSource';
 import { Row, RawRow } from '../../../../../../types';
-import { BkModelScheme } from '../../../../BkModelData/BkModelData';
+import { BkModelScheme } from '../../../../BkModelScheme/BkModelScheme';
 import { BkModel } from '../../../BkModel';
 export declare class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     table: BkTable | null;

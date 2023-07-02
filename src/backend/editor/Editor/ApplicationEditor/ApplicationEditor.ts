@@ -6,7 +6,7 @@ import { BkApplication } from '../../../viewer/BkModel/BkApplication/BkApplicati
 import { JsonFile } from '../../../JsonFile';
 import { AppInfo } from '../../../AppInfo';
 import { PageEditor } from '../PageEditor/PageEditor';
-import { BkApplicationScheme } from '../../../viewer/BkModelData/BkApplicationData/BkApplicationData';
+import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;

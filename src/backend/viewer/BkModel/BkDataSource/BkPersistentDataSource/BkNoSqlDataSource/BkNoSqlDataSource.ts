@@ -7,7 +7,7 @@ import { BkDataSource, ReadResult } from '../../BkDataSource';
 import { Key, Row, RawRow, JSONString } from '../../../../../../types';
 import { BkHelper } from '../../../../../BkHelper';
 import { BkForm } from '../../../BkForm/BkForm';
-import { BkModelScheme } from '../../../../BkModelData/BkModelData';
+import { BkModelScheme } from '../../../../BkModelScheme/BkModelScheme';
 import { BkModel } from '../../../BkModel';
 
 export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {

@@ -1,4 +1,4 @@
-import { BkModelScheme, BkModelAttributesScheme } from '../BkModelData';
+import { BkModelScheme, BkModelAttributesScheme } from '../BkModelScheme';
 
 export interface BkApplicationAttributesScheme extends BkModelAttributesScheme {
     formatVersion: string;

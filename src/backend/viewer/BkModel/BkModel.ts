@@ -1,6 +1,6 @@
 import { Context } from '../../Context';
 import { BaseModel } from '../../BaseModel';
-import { BkModelScheme } from '../../viewer/BkModelData/BkModelData';
+import { BkModelScheme } from '../BkModelScheme/BkModelScheme';
 
 export class BkModel<
     TBkModelData extends BkModelScheme = BkModelScheme,

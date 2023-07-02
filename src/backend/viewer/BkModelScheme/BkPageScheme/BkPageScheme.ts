@@ -1,4 +1,4 @@
-import { BkModelScheme } from '../BkModelData';
+import { BkModelScheme } from '../BkModelScheme';
 
 export interface BkPageScheme extends BkModelScheme {
     '@attributes': {

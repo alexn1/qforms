@@ -1,7 +1,7 @@
 import { JsonFile } from './JsonFile';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
-import { BkModelScheme } from './viewer/BkModelData/BkModelData';
+import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
 
 export class Converter {
     static async reformat(appFilePath: string) {

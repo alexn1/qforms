@@ -23,7 +23,7 @@ import { index } from '../../index';
 
 import * as text from '../../text';
 import { ApplicationData } from '../../../../data';
-import { BkApplicationScheme } from '../../BkModelData/BkApplicationData/BkApplicationData';
+import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 
 const pkg = require('../../../../../package.json');
 

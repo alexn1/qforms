@@ -1,5 +1,5 @@
 import { BaseModel } from '../../BaseModel';
-import { BkModelScheme } from '../../viewer/BkModelData/BkModelData';
+import { BkModelScheme } from '../../viewer/BkModelScheme/BkModelScheme';
 export declare class Editor<TBkModelData extends BkModelScheme = BkModelScheme> extends BaseModel<TBkModelData> {
     createFileByParams(newFilePath: string, templateFilePath: string, params: any): Promise<any>;
     getFile(filePath: string): Promise<string | undefined>;

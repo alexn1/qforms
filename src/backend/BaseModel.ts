@@ -1,5 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkModelScheme } from './viewer/BkModelData/BkModelData';
+import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
 
 export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
     constructor(protected data: TBkModelData, private parent?: BaseModel) {
