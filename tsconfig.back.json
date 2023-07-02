@@ -11,6 +11,7 @@
         "resolveJsonModule": true,
         "strictNullChecks": true,
         "incremental": true,
+        "tsBuildInfoFile": "./dist/tsconfig.back.tsbuildinfo"
         // "noImplicitAny": true
     },
     "include": ["src/**/*"]
