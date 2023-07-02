@@ -317,12 +317,12 @@ export class BkHelper {
             });
         });
     }
-    static writeFileSync(filePath, content) {
+    static writeFileSync(filePath: string, content: string) {
         console.log(colors.blue('BkHelper.writeFileSync'), filePath /* , content */);
         return fs.writeFileSync(filePath, content, 'utf8');
     }
 
-    static async writeFile2(filePath, content) {
+    static async writeFile2(filePath: string, content: string) {
         const dirPath = BkHelper.getDirPath(filePath);
         await BkHelper.createDirIfNotExists2(dirPath);
         return await BkHelper.writeFile(filePath, content);

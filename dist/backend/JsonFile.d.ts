@@ -6,5 +6,5 @@ export declare class JsonFile {
     create(): Promise<void>;
     read(): Promise<void>;
     save(): Promise<void>;
-    getAttr(name: any): string;
+    getAttr(name: string): string;
 }

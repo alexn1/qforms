@@ -20,8 +20,8 @@ export declare class BkHelper {
     static copyFile3(source: any, target: any): Promise<void>;
     static exists(path: any): Promise<boolean>;
     static writeFile(filePath: string, content: any): Promise<void>;
-    static writeFileSync(filePath: any, content: any): void;
-    static writeFile2(filePath: any, content: any): Promise<void>;
+    static writeFileSync(filePath: string, content: string): void;
+    static writeFile2(filePath: string, content: string): Promise<void>;
     static mapObject(object: any, cb: any): {};
     static fsUnlink(filePath: string): Promise<void>;
     static today(timeOffset: any): Date;

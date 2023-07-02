@@ -31,7 +31,7 @@ export class JsonFile {
         await BkHelper.writeFile2(this.filePath, this.content);
     }
 
-    getAttr(name) {
+    getAttr(name: string): string {
         const value = BaseModel.getAttr(this.data, name);
         if (value === undefined) throw new Error(`no attribute '${name}'`);
         return value;
