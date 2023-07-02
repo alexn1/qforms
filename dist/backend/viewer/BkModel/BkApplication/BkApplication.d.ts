@@ -10,7 +10,8 @@ import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { ApplicationData, BkApplicationData } from '../../../../data';
+import { ApplicationData } from '../../../../data';
+import { BkApplicationData } from '../../BkModelData/BkApplicationData/BkApplicationData';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<BkApplicationData> {
     private appInfo;
     private hostApp;
@@ -76,4 +77,5 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     handleGetFile(context: Context, next: any): Promise<void>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
     useDatabase<T = any>(context: Context, appDbName: string, cb: (db: BkDatabase) => Promise<T>): Promise<T>;
+    static getEnvList(data: BkApplicationData): string[];
 }

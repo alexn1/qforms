@@ -1,6 +1,6 @@
 import { BkForm } from '../BkForm';
 import { Context } from '../../../../Context';
-import { BkRowFormData } from '../../../../../data';
+import { BkRowFormData } from '../../../../viewer/BkModelData/BkFormData/BkRowFormData/BkRowFormData';
 
 export class BkRowForm extends BkForm<BkRowFormData> {
     // constructor(data, parent) {

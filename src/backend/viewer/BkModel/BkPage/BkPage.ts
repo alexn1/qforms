@@ -7,7 +7,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
 import { MyError } from '../../../MyError';
-import { BkPageData } from '../../../../data';
+import { BkPageData } from '../../../viewer/BkModelData/BkPageData/BkPageData';
 
 export class BkPage<
     TBkApplication extends BkApplication = BkApplication,

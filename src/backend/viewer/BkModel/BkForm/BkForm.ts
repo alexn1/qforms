@@ -9,7 +9,7 @@ import { BkApplication } from '../BkApplication/BkApplication';
 import { MyError } from '../../../MyError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
-import { BkFormData } from '../../../../data';
+import { BkFormData } from '../../../viewer/BkModelData/BkFormData/BkFormData';
 
 export class BkForm<TBkFormData extends BkFormData = BkFormData> extends BkModel<TBkFormData> {
     dataSources: BkDataSource[] = [];

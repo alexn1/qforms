@@ -3,7 +3,7 @@ import path from 'path';
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageData } from '../../../../data';
+import { BkPageData } from '../../../viewer/BkModelData/BkPageData/BkPageData';
 
 export class PageEditor extends Editor<BkPageData> {
     constructor(private appEditor: ApplicationEditor, public pageFile: JsonFile) {

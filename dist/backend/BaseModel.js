@@ -17,10 +17,6 @@ class BaseModel {
     static getName(data) {
         return BaseModel.getAttr(data, 'name');
     }
-    static getEnvList(data) {
-        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
-        return ['local', ...list];
-    }
     getClassName() {
         return this.data['@class'];
     }

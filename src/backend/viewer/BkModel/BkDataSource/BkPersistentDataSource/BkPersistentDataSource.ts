@@ -2,7 +2,7 @@ import { BkDataSource } from '../BkDataSource';
 import { BkDatabase } from '../../BkDatabase/BkDatabase';
 import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
-import { BkModelData } from '../../../../../data';
+import { BkModelData } from '../../../../viewer/BkModelData/BkModelData';
 import { BkModel } from '../../BkModel';
 
 export abstract class BkPersistentDataSource<

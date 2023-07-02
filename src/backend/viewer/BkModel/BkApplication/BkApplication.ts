@@ -21,7 +21,8 @@ import { ApplicationController } from '../../../../frontend/viewer/Controller/Mo
 import { index } from '../../index';
 
 import * as text from '../../text';
-import { ApplicationData, BkApplicationData } from '../../../../data';
+import { ApplicationData } from '../../../../data';
+import { BkApplicationData } from '../../BkModelData/BkApplicationData/BkApplicationData';
 
 const pkg = require('../../../../../package.json');
 
@@ -366,7 +367,7 @@ export class BkApplication<
             name: BaseModel.getName(data),
             caption: BaseModel.getAttr(data, 'caption'),
             fullName: join(dirName, fileName),
-            envs: BaseModel.getEnvList(data),
+            envs: BkApplication.getEnvList(data),
             dirName,
             fileName,
             filePath: path.resolve(filePath),
@@ -567,5 +568,10 @@ export class BkApplication<
         } finally {
             await db.release(context);
         }
+    }
+
+    static getEnvList(data: BkApplicationData): string[] {
+        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
+        return ['local', ...list];
     }
 }

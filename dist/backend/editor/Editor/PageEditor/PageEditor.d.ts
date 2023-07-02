@@ -1,7 +1,7 @@
 import { ApplicationEditor } from '../ApplicationEditor/ApplicationEditor';
 import { JsonFile } from '../../../JsonFile';
 import { Editor } from '../Editor';
-import { BkPageData } from '../../../../data';
+import { BkPageData } from '../../../viewer/BkModelData/BkPageData/BkPageData';
 export declare class PageEditor extends Editor<BkPageData> {
     private appEditor;
     pageFile: JsonFile;

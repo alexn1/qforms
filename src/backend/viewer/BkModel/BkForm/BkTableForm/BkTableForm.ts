@@ -1,4 +1,4 @@
-import { BkTableFormData } from '../../../../../data';
+import { BkTableFormData } from '../../../../viewer/BkModelData/BkFormData/BkTableFormData/BkTableFormData';
 import { BkForm } from '../BkForm';
 
 export class BkTableForm extends BkForm<BkTableFormData> {

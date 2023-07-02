@@ -323,7 +323,7 @@ class BkApplication extends BkModel_1.BkModel {
             name: BaseModel_1.BaseModel.getName(data),
             caption: BaseModel_1.BaseModel.getAttr(data, 'caption'),
             fullName: (0, path_1.join)(dirName, fileName),
-            envs: BaseModel_1.BaseModel.getEnvList(data),
+            envs: BkApplication.getEnvList(data),
             dirName,
             fileName,
             filePath: path_1.default.resolve(filePath),
@@ -485,6 +485,10 @@ class BkApplication extends BkModel_1.BkModel {
         finally {
             await db.release(context);
         }
+    }
+    static getEnvList(data) {
+        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
+        return ['local', ...list];
     }
 }
 exports.BkApplication = BkApplication;

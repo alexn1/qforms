@@ -1,5 +1,5 @@
 import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
-import { BkApplicationData, BkModelData } from '../data';
+import { BkModelData } from './viewer/BkModelData/BkModelData';
 
 export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
     constructor(protected data: TBkModelData, private parent?: BaseModel) {
@@ -16,11 +16,6 @@ export class BaseModel<TBkModelData extends BkModelData = BkModelData> {
 
     static getName(data: BkModelData): string {
         return BaseModel.getAttr(data, 'name');
-    }
-
-    static getEnvList(data: BkApplicationData): string[] {
-        const list = data.env ? Object.keys(data.env).filter((env) => env !== 'local') : [];
-        return ['local', ...list];
     }
 
     getClassName(): string {
