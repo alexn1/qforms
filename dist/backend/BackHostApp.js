@@ -126,6 +126,7 @@ class BackHostApp {
         process.on('SIGINT', this.onProcessSIGINT.bind(this));
         process.on('SIGTERM', this.onProcessSIGTERM.bind(this));
         process.on('exit', this.onProcessExit.bind(this));
+        process.on('uncaughtException', this.onUncaughtException.bind(this));
         process.on('unhandledRejection', this.onUnhandledRejection.bind(this));
     }
     getSecretSync() {
@@ -632,10 +633,15 @@ class BackHostApp {
     onProcessExit(code) {
         console.log('BackHostApp.onProcessExit', code);
     }
-    async onUnhandledRejection(err) {
-        console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), err);
-        err.message = `unhandledRejection: ${err.message}`;
+    async onUncaughtException(err, origin) {
+        console.error(safe_1.default.red('BackHostApp.onUncaughtException'), err);
+        err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
+    }
+    async onUnhandledRejection(reason) {
+        console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), reason);
+        reason.message = `unhandledRejection: ${reason.message}`;
+        await this.logError(reason);
     }
     async shutdown() {
         console.log('BackHostApp.shutdown');

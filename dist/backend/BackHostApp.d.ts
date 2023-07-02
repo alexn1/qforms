@@ -101,7 +101,8 @@ export declare class BackHostApp {
     onProcessSIGINT(): Promise<void>;
     onProcessSIGTERM(): Promise<void>;
     onProcessExit(code: number): void;
-    onUnhandledRejection(err: Error): Promise<void>;
+    onUncaughtException(err: any, origin: any): Promise<void>;
+    onUnhandledRejection(reason: any): Promise<void>;
     shutdown(): Promise<void>;
     onHttpServerError(err: any): void;
     getDomainFromRequest(req: any): string | null;
