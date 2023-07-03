@@ -623,7 +623,7 @@ class BackHostApp {
         }
     }
     async onProcessSIGINT() {
-        console.log('BackHostApp.onProcessSIGINT');
+        console.debug('BackHostApp.onProcessSIGINT');
         console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();

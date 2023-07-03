@@ -79,7 +79,7 @@ export class ViewerModule {
     }
 
     async handleViewerGet(context: Context, bkApplication: BkApplication) {
-        console.log(
+        console.debug(
             'ViewerModule.handleViewerGet',
             context.getDomain(),
             context.query,
