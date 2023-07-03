@@ -43,7 +43,7 @@ export class EdModelController {
     }
 
     getDocumentViewClass(): any {
-        console.log(`${this.constructor.name}.getDocumentViewClass`);
+        console.debug(`${this.constructor.name}.getDocumentViewClass`);
         return null;
     }
 

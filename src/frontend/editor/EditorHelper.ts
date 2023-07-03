@@ -3,7 +3,7 @@ import { PostgreSqlFormWizard } from './FormWizard/PostgreSqlFormWizard/PostgreS
 
 export class EditorHelper {
     static create(params) {
-        console.log('FormWizard.create', params);
+        console.debug('FormWizard.create', params);
         switch (params.model.database.getClassName()) {
             case 'MySqlDatabase':
                 return new MySqlFormWizard(params);

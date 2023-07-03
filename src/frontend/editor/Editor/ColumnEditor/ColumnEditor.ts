@@ -10,7 +10,7 @@ export class ColumnEditor extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log('ColumnEditor.setValue', name + ' = ' + value);
+        //console.debug('ColumnEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'save',

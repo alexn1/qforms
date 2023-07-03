@@ -17,7 +17,7 @@ export class NewFormFromTableView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewDataSourceView.onCreate');
+        // console.debug('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             page: this.page.getValue(),
             class: this.class.getValue(),
@@ -41,7 +41,7 @@ export class NewFormFromTableView extends ReactComponent {
             value: pageLink.getName(),
             title: pageLink.getName(),
         }));
-        console.log('pages:', pages);
+        console.debug('pages:', pages);
         return (
             <div
                 className={`${this.getCssClassNames()} NewModelView`}

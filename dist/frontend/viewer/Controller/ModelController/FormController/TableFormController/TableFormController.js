@@ -17,17 +17,17 @@ class TableFormController extends FormController_1.FormController {
             this.grid = grid;
         };
         this.onNewClick = async (e) => {
-            console.log('TableFormController.onNewClick');
+            console.debug('TableFormController.onNewClick');
             await this.new();
         };
         this.onRefreshClick = async (e) => {
-            console.log('TableFormController.onRefreshClick', this.getModel().getFullName());
+            console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
             // console.error('refresh error handler:', err.message);
             // alert(err.message);
         };
         this.onDeleteClick = async (e) => {
-            console.log('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
+            console.debug('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
             });
@@ -36,12 +36,12 @@ class TableFormController extends FormController_1.FormController {
             }
         };
         this.onGridCellDblClick = async (row, key) => {
-            // console.log('TableFormController.onGridCellDblClick', row);
+            // console.debug('TableFormController.onGridCellDblClick', row);
             // const bodyCell = e.bodyCell;
             // const row = bodyCell.bodyRow.dbRow;
-            // console.log('row:', row);
+            // console.debug('row:', row);
             // const key = this.getModel().getDefaultDataSource().getRowKey(row);
-            // console.log('key:', key);
+            // console.debug('key:', key);
             switch (this.getModel().getAttr('editMethod')) {
                 // case 'table':
                 //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
@@ -57,11 +57,11 @@ class TableFormController extends FormController_1.FormController {
             }
         };
         this.onGridLinkClick = async (key) => {
-            console.log('TableFormController.onGridLinkClick', key);
+            console.debug('TableFormController.onGridLinkClick', key);
             await this.edit(key);
         };
         this.onGridDeleteKeyDown = async (row, key) => {
-            console.log('TableFormController.onGridDeleteKeyDown', row, key);
+            console.debug('TableFormController.onGridDeleteKeyDown', row, key);
             if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
                 const result = await this.getApp().confirm({
                     message: this.getModel().getApp().getText().form.areYouSure,
@@ -72,14 +72,14 @@ class TableFormController extends FormController_1.FormController {
             }
         };
         this.onModelRefresh = async (e) => {
-            console.log('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             this.invalidate();
             await this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('TableFormController.onModelInsert', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelInsert', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid && e.source) {
@@ -91,7 +91,7 @@ class TableFormController extends FormController_1.FormController {
             await this.rerender();
         };
         this.onModelUpdate = async (e) => {
-            console.log('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
+            console.debug('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -108,7 +108,7 @@ class TableFormController extends FormController_1.FormController {
             await this.rerender();
         };
         this.onModelDelete = async (e) => {
-            console.log('TableFormController.onModelDelete', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelDelete', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -122,18 +122,18 @@ class TableFormController extends FormController_1.FormController {
             await this.rerender();
         };
         this.onGridSelectionChange = async (key) => {
-            // console.log('TableFormController.onGridSelectionChange', key);
+            // console.debug('TableFormController.onGridSelectionChange', key);
             this.invalidate();
             await this.getPage().rerender();
         };
         this.isRowSelected = () => {
-            // console.log('TableFormController.isRowSelected');
+            // console.debug('TableFormController.isRowSelected');
             return !!this.grid && !!this.grid.getActiveRowKey();
         };
         this.onFrameChanged = async (value) => {
-            console.log('TableFormController.onFrameChanged', value);
+            console.debug('TableFormController.onFrameChanged', value);
             let frame = parseInt(value);
-            console.log('frame:', frame);
+            console.debug('frame:', frame);
             const frameCount = this.getModel().getDefaultDataSource().getFramesCount();
             if (frame < 1)
                 frame = 1;
@@ -144,14 +144,14 @@ class TableFormController extends FormController_1.FormController {
             await this.rerender();
         };
         this.onNextClick = async () => {
-            console.log('TableFormController.onNextClick');
+            console.debug('TableFormController.onNextClick');
             const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
             this.getModel().getDefaultDataSource().setFrame(frame);
             this.getModel().getDefaultDataSource().refresh();
             await this.rerender();
         };
         this.onPreviousClick = async () => {
-            console.log('TableFormController.onPreviousClick');
+            console.debug('TableFormController.onPreviousClick');
             const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
             this.getModel().getDefaultDataSource().setFrame(frame);
             this.getModel().getDefaultDataSource().refresh();
@@ -183,11 +183,11 @@ class TableFormController extends FormController_1.FormController {
         this.grid.saveScroll();
     }*/
     /*onShowPage = async () => {
-        console.log('TableFormController.onShowPage', this.getModel().getFullName());
+        console.debug('TableFormController.onShowPage', this.getModel().getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
-            // console.log('document.activeElement:', document.activeElement);
+            // console.debug('document.activeElement:', document.activeElement);
         }
     }*/
     async new() {
@@ -252,7 +252,7 @@ class TableFormController extends FormController_1.FormController {
         }
     }
     async edit(key) {
-        // console.log('TableForm.edit', this.getModel().getFullName(), key);
+        // console.debug('TableForm.edit', this.getModel().getFullName(), key);
         if (!this.getModel().getAttr('itemEditPage')) {
             throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }

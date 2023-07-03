@@ -19,7 +19,7 @@ class RowFormPhoneFieldView extends RowFormFieldView_1.RowFormFieldView {
             await this.rerender();
         };
         this.onBlur = async (value) => {
-            // console.log('RowFormPhoneFieldView.onBlur', value);
+            // console.debug('RowFormPhoneFieldView.onBlur', value);
             this.removeCssClass('focus');
             this.getCtrl().onBlur(value);
         };
@@ -44,7 +44,7 @@ class RowFormPhoneFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0, jsx_runtime_1.jsx)(common_1.PhoneIcon, {}) })));
     }
     render() {
-        // console.log('RowFormPhoneFieldView.render');
+        // console.debug('RowFormPhoneFieldView.render');
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
     }
 }

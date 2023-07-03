@@ -3,12 +3,12 @@ import './Tooltip.less';
 
 export class Tooltip extends ReactComponent {
     // constructor(props) {
-    //     console.log('Tooltip.constructor', props);
+    //     console.debug('Tooltip.constructor', props);
     //     super(props);
     // }
 
     render() {
-        // console.log('Tooltip.render', this.state, this.props);
+        // console.debug('Tooltip.render', this.state, this.props);
         return (
             <div className={`Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}`}>
                 {this.props.type !== 'alert' && <div>tooltip</div>}

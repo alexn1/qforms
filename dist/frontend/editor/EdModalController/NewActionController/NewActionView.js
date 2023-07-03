@@ -8,7 +8,7 @@ class NewActionView extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewActionView.onCreate');
+            // console.debug('NewActionView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),

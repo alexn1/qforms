@@ -27,7 +27,7 @@ export class DataSourceEditor extends Editor {
     }
 
     removeKeyColumn(keyColumn) {
-        console.log('DatabaseEditor.removeParam', keyColumn.getName());
+        console.debug('DatabaseEditor.removeParam', keyColumn.getName());
         const i = this.keyColumns.indexOf(keyColumn);
         if (i === -1) throw new Error('no such keyColumn');
         this.keyColumns.splice(i, 1);
@@ -51,7 +51,7 @@ export class DataSourceEditor extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const args = {
             controller: 'DataSource',
             action: 'save',

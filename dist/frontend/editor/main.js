@@ -18,7 +18,7 @@ require("../common/style/grid-gap-5.less");
 require("../common/style/grid-gap-10.less");
 require("../common/style/wait.less");
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('editor.ejs DOMContentLoaded');
+    console.debug('editor.ejs DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
     const editorFrontHostApp = new EditorFrontHostApp_1.EditorFrontHostApp(data, data.runAppLink);
     editorFrontHostApp.init();

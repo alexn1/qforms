@@ -13,7 +13,7 @@ export class NewActionView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewActionView.onCreate');
+        // console.debug('NewActionView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
             caption: this.caption.getValue(),

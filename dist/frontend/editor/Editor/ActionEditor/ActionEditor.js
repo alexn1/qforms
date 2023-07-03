@@ -39,7 +39,7 @@ class ActionEditor extends Editor_1.Editor {
         };
     }
     async setValue(name, value) {
-        //console.log('ActionEditor.setValue', name + ' = ' + value);
+        //console.debug('ActionEditor.setValue', name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'save',
@@ -56,7 +56,7 @@ class ActionEditor extends Editor_1.Editor {
         });
     }
     async delete() {
-        console.log('ActionEditor.delete', this.getName());
+        console.debug('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }

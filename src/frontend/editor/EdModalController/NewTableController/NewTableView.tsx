@@ -11,7 +11,7 @@ export class NewTableView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewParamView.onCreate');
+        // console.debug('NewParamView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
         });

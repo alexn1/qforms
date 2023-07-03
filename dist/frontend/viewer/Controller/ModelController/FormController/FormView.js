@@ -6,7 +6,7 @@ class FormView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.log('FormView.onActionsClick:', li);
+            // console.debug('FormView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -23,7 +23,7 @@ class FormView extends ModelView_1.ModelView {
         this.checkParent();
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
+        console.debug('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
         if (nextProps.updated - this.props.updated)
             return true;
         return false;

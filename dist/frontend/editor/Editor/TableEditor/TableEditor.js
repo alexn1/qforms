@@ -22,7 +22,7 @@ class TableEditor extends Editor_1.Editor {
         return column;
     }
     removeColumn(column) {
-        console.log('TableEditor.removeColumn', column.getName());
+        console.debug('TableEditor.removeColumn', column.getName());
         const i = this.columns.indexOf(column);
         if (i === -1)
             throw new Error('no such column');
@@ -77,7 +77,7 @@ class TableEditor extends Editor_1.Editor {
         });
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'save',

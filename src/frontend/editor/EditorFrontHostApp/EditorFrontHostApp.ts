@@ -23,7 +23,7 @@ export class EditorFrontHostApp extends FrontHostApp {
 
     constructor(data, runAppLink: string) {
         super();
-        console.log('EditorFrontHostApp.constructor', data);
+        console.debug('EditorFrontHostApp.constructor', data);
         if (!data) throw new Error('no data');
         this.data = data;
         // @ts-ignore
@@ -40,12 +40,12 @@ export class EditorFrontHostApp extends FrontHostApp {
     }
 
     async run() {
-        console.log('EditorFrontHostApp.run');
+        console.debug('EditorFrontHostApp.run');
 
         // app
         const app = new ApplicationEditor(this.data.app);
         app.init();
-        // console.log('app:', app);
+        // console.debug('app:', app);
 
         // application controller
         const applicationController = new EdApplicationController(app, this);
@@ -63,15 +63,15 @@ export class EditorFrontHostApp extends FrontHostApp {
     deinit() {}
 
     onItemOpen2 = async (item) => {
-        console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
-        // console.log('parent:', item.view.parent);
+        console.debug('EditorFrontHostApp.onItemOpen2', item.getTitle());
+        // console.debug('parent:', item.view.parent);
         if (item instanceof EdPageLinkController && !item.hasPage()) {
             await item.loadPage();
         }
     };
 
     onItemSelect2 = async (item) => {
-        console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
+        console.debug('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
         if (item instanceof EdModelController) {
             if (item instanceof EdPageLinkController && !item.hasPage()) {
                 await item.loadPage();
@@ -90,24 +90,24 @@ export class EditorFrontHostApp extends FrontHostApp {
     }
 
     onPropertyGrid2Change = (name, value) => {
-        console.log('EditorFrontHostApp.onPropertyGrid2Change', name, value);
+        console.debug('EditorFrontHostApp.onPropertyGrid2Change', name, value);
         const controller = this.treeWidget2.getSelectedItem();
-        // console.log('controller', controller);
+        // console.debug('controller', controller);
         controller.setProperty(name, value);
     };
 
     beginEdit(obj, options) {
-        console.log('EditorFrontHostApp.beginEdit', obj, options);
+        console.debug('EditorFrontHostApp.beginEdit', obj, options);
         this.pg.setState({ object: { obj, options } });
     }
 
     endEdit() {
-        console.log('EditorFrontHostApp.endEdit');
+        console.debug('EditorFrontHostApp.endEdit');
         this.pg.setState({ object: null });
     }
 
     static async fetchPageData(fileName) {
-        console.log('EditorFrontHostApp.fetchPageData', fileName);
+        console.debug('EditorFrontHostApp.fetchPageData', fileName);
         return await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'get',
@@ -116,29 +116,29 @@ export class EditorFrontHostApp extends FrontHostApp {
     }
 
     fillActions(item) {
-        // console.log('EditorFrontHostApp.fillActions');
+        // console.debug('EditorFrontHostApp.fillActions');
         this.actionList.setState({ item });
     }
 
     clearActions() {
-        // console.log('EditorFrontHostApp.clearActions');
+        // console.debug('EditorFrontHostApp.clearActions');
         this.actionList.setState({ item: null });
     }
 
     onItemDoubleClick2 = async (item) => {
-        console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
+        console.debug('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
         const controller = item instanceof EdPageLinkController ? item.pageController : item;
         if (!controller || !(controller instanceof EdDocumentController)) return;
         await this.openDocument(controller);
     };
 
     async openDocument(controller) {
-        console.log('EditorFrontHostApp.openDocument', controller.getTitle());
+        console.debug('EditorFrontHostApp.openDocument', controller.getTitle());
         let document = this.findDocument(controller);
         if (!document) {
             document = await controller.createDocument();
             this.documents.push(document);
-            // console.log('document:', document);
+            // console.debug('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
         await this.view.rerender();
@@ -149,7 +149,7 @@ export class EditorFrontHostApp extends FrontHostApp {
     }
 
     onDocumentClose = (i) => {
-        console.log('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
+        console.debug('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
         const document = this.documents[i];
         const activeDocument = this.documents[this.tabWidget.state.active];
         this.documents.splice(i, 1);
@@ -169,25 +169,25 @@ export class EditorFrontHostApp extends FrontHostApp {
     };
 
     async openModal(modalController: EdModalController) {
-        console.log('EditorFrontHostApp.openModal');
+        console.debug('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
         /* if (modalController.view.el) {
-            console.log('element', modalController.view.getElement());
+            console.debug('element', modalController.view.getElement());
             modalController.view.getElement().focus();
         } */
     }
 
     async onModalClose() {
-        console.log('EditorFrontHostApp.onModalClose');
+        console.debug('EditorFrontHostApp.onModalClose');
         this.modal = null;
         await this.view.rerender();
     }
 
     onActionClick = async (actionName) => {
-        console.log('EditorFrontHostApp.onActionClick', actionName);
+        console.debug('EditorFrontHostApp.onActionClick', actionName);
         const item = this.treeWidget2.getSelectedItem();
-        // console.log('item', item);
+        // console.debug('item', item);
         const controller = item instanceof EdPageLinkController ? item.pageController : item;
         await controller.doAction(actionName);
     };

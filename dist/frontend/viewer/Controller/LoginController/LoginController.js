@@ -7,7 +7,7 @@ const common_1 = require("../../../common");
 class LoginController extends Controller_1.Controller {
     constructor(frontHostApp) {
         super();
-        console.log(`${this.constructor.name}.constructor`);
+        console.debug(`${this.constructor.name}.constructor`);
         this.frontHostApp = frontHostApp;
     }
     static create(frontHostApp) {

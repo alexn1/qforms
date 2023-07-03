@@ -10,7 +10,7 @@ class RowFormImageFieldView extends RowFormFieldView_1.RowFormFieldView {
         super(...arguments);
         this.onImageClick = async (e) => {
             const ctrl = this.getCtrl();
-            console.log('RowFormImageFieldView.onImageClick');
+            console.debug('RowFormImageFieldView.onImageClick');
         };
     }
     render() {

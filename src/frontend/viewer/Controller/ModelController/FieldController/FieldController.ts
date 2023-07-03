@@ -12,7 +12,7 @@ import { RawRow } from '../../../../../types';
 
 export class FieldController<TField extends Field = Field> extends ModelController<TField> {
     static create(model: Field, parent: FormController): FieldController {
-        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
+        // console.debug('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
@@ -27,8 +27,8 @@ export class FieldController<TField extends Field = Field> extends ModelControll
         return new GeneralClass(model, parent);
     }
 
-    valueToString(value): string {
-        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
+    valueToString(value: any): string {
+        // console.debug('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -49,11 +49,11 @@ export class FieldController<TField extends Field = Field> extends ModelControll
     }
 
     stringToValue(stringValue: string) {
-        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
+        // console.debug('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
         const fieldType = this.getModel().getType();
-        // console.log('fieldType:', fieldType);
+        // console.debug('fieldType:', fieldType);
         if (stringValue.trim() === '') return null;
         if (fieldType === 'object' || fieldType === 'boolean') {
             return JSON.parse(stringValue);

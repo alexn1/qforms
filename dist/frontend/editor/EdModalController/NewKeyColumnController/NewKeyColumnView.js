@@ -8,7 +8,7 @@ class NewKeyColumnView extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
+            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });

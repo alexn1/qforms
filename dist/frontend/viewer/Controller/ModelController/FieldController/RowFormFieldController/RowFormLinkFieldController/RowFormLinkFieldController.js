@@ -8,7 +8,7 @@ class RowFormLinkFieldController extends RowFormFieldController_1.RowFormFieldCo
     constructor() {
         super(...arguments);
         this.onClick = (e) => {
-            console.log('RowFormLinkFieldController.onClick', e);
+            console.debug('RowFormLinkFieldController.onClick', e);
             const pageName = this.getModel().getAttr('page');
             if (pageName) {
                 e.preventDefault();

@@ -20,7 +20,7 @@ export class RowFormLinkFieldView extends RowFormFieldView<RowFormLinkFieldContr
         if (pageName) {
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, keyTupleToKey([value]));
-            // console.log('href:', link);
+            // console.debug('href:', link);
         }
 
         return (

@@ -18,12 +18,12 @@ class ApplicationController extends ModelController_1.ModelController {
         this.homePageName = null;
         this.webSocketClient = null;
         this.onRequest = async (e) => {
-            console.log('onRequest', e);
+            console.debug('onRequest', e);
             if (this.statusbar) {
                 this.statusbar.setLastQueryTime(e.time);
             }
-            // console.log('e.remoteAppVersion', e.remoteAppVersion);
-            // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+            // console.debug('e.remoteAppVersion', e.remoteAppVersion);
+            // console.debug('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
             if (this.getModel().getData().versions.app &&
                 this.getModel().getData().versions.app !== e.remoteAppVersion) {
                 this.createVersionNotificationIfNotExists();
@@ -33,12 +33,12 @@ class ApplicationController extends ModelController_1.ModelController {
             this.statusbar = statusbar;
         };
         this.onLogout = async () => {
-            console.log('ApplicationController.onLogout');
+            console.debug('ApplicationController.onLogout');
             const result = await this.getModel().request({ action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
-            console.log('ApplicationController.onMenuItemClick', menu, type, name);
+            console.debug('ApplicationController.onMenuItemClick', menu, type, name);
             if (type === 'page') {
                 await this.openPage({ name: name, modal: false });
                 history.pushState({ pageName: name }, '', this.getHostApp().createLink({ page: name }));
@@ -63,11 +63,11 @@ class ApplicationController extends ModelController_1.ModelController {
             }
         };
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
     static create(model, frontHostApp) {
-        // console.log(
+        // console.debug(
         //     'ApplicationController.create',
         //     'debug:',
         //     this.getHostApp().isDebugMode(),
@@ -83,7 +83,7 @@ class ApplicationController extends ModelController_1.ModelController {
         return new ApplicationController(model, frontHostApp);
     }
     init() {
-        // console.log('ApplicationController.init');
+        // console.debug('ApplicationController.init');
         super.init();
         // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
@@ -108,7 +108,7 @@ class ApplicationController extends ModelController_1.ModelController {
         return super.getViewClass() || ApplicationView_1.ApplicationView;
     }
     createView(rootElement) {
-        // console.log('ApplicationController.createView');
+        // console.debug('ApplicationController.createView');
         this.view = common_1.Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
@@ -118,7 +118,7 @@ class ApplicationController extends ModelController_1.ModelController {
         }
     }
     createVersionNotificationIfNotExists() {
-        // console.log('ApplicationController.createVersionNotificationIfNotExists');
+        // console.debug('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
@@ -126,7 +126,7 @@ class ApplicationController extends ModelController_1.ModelController {
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         }
         else {
-            // console.log(`version notification already exists`);
+            // console.debug(`version notification already exists`);
         }
     }
     getGlobalParams() {
@@ -146,13 +146,13 @@ class ApplicationController extends ModelController_1.ModelController {
         return pc;
     }
     async openPage(options) {
-        console.log('ApplicationController.openPage', options);
+        console.debug('ApplicationController.openPage', options);
         if (!options.name)
             throw new Error('no name');
         // if (options.key) throw new Error('openPage: key param is deprecated');
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
             return pageController;
@@ -176,7 +176,7 @@ class ApplicationController extends ModelController_1.ModelController {
             };
         }
         const pc = this.createPage(pageData, options);
-        // console.log('pc:', pc);
+        // console.debug('pc:', pc);
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
@@ -186,7 +186,7 @@ class ApplicationController extends ModelController_1.ModelController {
         this.modals.push(ctrl);
     }
     removeModal(ctrl) {
-        // console.log('ApplicationController.removeModal', ctrl);
+        // console.debug('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1)
             throw new Error(`cannot find modal: ${ctrl.getId()}`);
@@ -215,10 +215,10 @@ class ApplicationController extends ModelController_1.ModelController {
         return null;
     }
     onPageSelect(pc) {
-        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
+        console.debug('ApplicationController.onPageSelect', pc.getModel().getName());
     }
     async closePage(pageController) {
-        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
+        console.debug('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         }
@@ -234,10 +234,10 @@ class ApplicationController extends ModelController_1.ModelController {
         pageController.getModel().deinit();
     }
     async onActionClick(name) {
-        console.log('ApplicationController.onActionClick', name);
+        console.debug('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
-        // console.log('ApplicationController.getMenuItemsProp');
+        // console.debug('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
             ...(this.getModel().getData().menu
@@ -284,14 +284,14 @@ class ApplicationController extends ModelController_1.ModelController {
         return null;
     }
     async onWindowPopState(e) {
-        console.log('ApplicationController.onWindowPopState', e.state);
+        console.debug('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
             name: e.state ? e.state.pageName : this.homePageName,
             modal: false,
         });
     }
     getTitle() {
-        // console.log('ApplicationController.getTitle', this.activePage);
+        // console.debug('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
             return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
         }

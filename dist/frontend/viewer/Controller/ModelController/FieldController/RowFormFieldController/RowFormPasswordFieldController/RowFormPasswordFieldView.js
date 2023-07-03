@@ -9,7 +9,7 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor(props) {
         super(props);
         this.onCloseClick = async (e) => {
-            // console.log('RowFormPasswordFieldView.onCloseClick');
+            // console.debug('RowFormPasswordFieldView.onCloseClick');
             const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({ value: '' });
@@ -17,12 +17,12 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
             this.getWidget().getElement().focus();
         };
         this.onFocus = async (e) => {
-            // console.log('RowFormPasswordFieldView.onFocus');
+            // console.debug('RowFormPasswordFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.log('RowFormPasswordFieldView.onBlur');
+            // console.debug('RowFormPasswordFieldView.onBlur');
             this.removeCssClass('focus');
             await this.rerender();
         };
@@ -39,14 +39,14 @@ class RowFormPasswordFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     isCloseVisible() {
-        // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormPasswordFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('this.getWidget().state.value:', this.getWidget().state.value);
+        // console.debug('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
     render() {

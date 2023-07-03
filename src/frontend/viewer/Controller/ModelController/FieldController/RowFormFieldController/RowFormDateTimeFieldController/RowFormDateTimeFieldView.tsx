@@ -5,7 +5,7 @@ import './RowFormDateTimeFieldView.less';
 
 export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFieldController> {
     onClear2 = async () => {
-        // console.log('RowFormDateTimeFieldView.onClear2');
+        // console.debug('RowFormDateTimeFieldView.onClear2');
         this.getCtrl().onChange2(null);
     };
 
@@ -60,7 +60,7 @@ export class RowFormDateTimeFieldView extends RowFormFieldView<RowFormDateTimeFi
     }
 
     render() {
-        // console.log('RowFormDateTimeFieldView.render');
+        // console.debug('RowFormDateTimeFieldView.render');
         return (
             <div
                 className={`${this.getCssClassNames()} ${this.getMode()}`}

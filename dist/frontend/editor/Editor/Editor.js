@@ -50,7 +50,7 @@ class Editor {
         return dataSource;
     }*/
     removeDataSource(dataSource) {
-        // console.log('Editor.removeDataSource', dataSource.getName());
+        // console.debug('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1)
             throw new Error('no such dataSource');
@@ -63,7 +63,7 @@ class Editor {
         return action;
     }*/
     removeAction(action) {
-        // console.log('Editor.removeField', action.getName());
+        // console.debug('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);
         if (i === -1)
             throw new Error('no such action');

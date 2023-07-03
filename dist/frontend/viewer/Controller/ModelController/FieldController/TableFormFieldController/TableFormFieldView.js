@@ -12,7 +12,7 @@ class TableFormFieldView extends FieldView_1.FieldView {
         this.span = react_1.default.createRef();
     }
     getSpanOffsetWidth() {
-        // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
+        // console.debug('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         if (!this.span.current)
             return 0;
         return this.span.current.offsetWidth;

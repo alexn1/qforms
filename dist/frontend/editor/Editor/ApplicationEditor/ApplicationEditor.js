@@ -17,7 +17,7 @@ class ApplicationEditor extends Editor_1.Editor {
         this.pageLinks = [];
     }
     init() {
-        console.log('ApplicationEditor.init', this.data);
+        console.debug('ApplicationEditor.init', this.data);
         // databases
         for (const data of this.data.databases) {
             this.createDatabase(data);
@@ -54,21 +54,21 @@ class ApplicationEditor extends Editor_1.Editor {
         return pageLink;
     }
     removeDatabase(database) {
-        console.log('ApplicationEditor.removeDatabase', database.getName());
+        console.debug('ApplicationEditor.removeDatabase', database.getName());
         const i = this.databases.indexOf(database);
         if (i === -1)
             throw new Error('no such database');
         this.databases.splice(i, 1);
     }
     removePageLink(pageLink) {
-        console.log('ApplicationEditor.removePageLink', pageLink.getName());
+        console.debug('ApplicationEditor.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);
         if (i === -1)
             throw new Error('no such pageLink');
         this.pageLinks.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'save',

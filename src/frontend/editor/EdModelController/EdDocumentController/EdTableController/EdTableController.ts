@@ -34,7 +34,7 @@ export class EdTableController extends EdDocumentController {
     }
 
     removeColumn(columnController) {
-        console.log('TableController.removeColumn', columnController.getTitle());
+        console.debug('TableController.removeColumn', columnController.getTitle());
         const i = this.columns.indexOf(columnController);
         if (i === -1) throw new Error('no such columnController');
         this.columns.splice(i, 1);
@@ -86,12 +86,14 @@ export class EdTableController extends EdDocumentController {
             }),
         );
     }
+
     onCreateFormButtonClick = async (e) => {
-        console.log('TableController.onCreateFormButtonClick');
+        console.debug('TableController.onCreateFormButtonClick');
         await this.createFormAction();
     };
+
     /*static async getView(view) {
-        console.log('TableController.getView', view);
+        console.debug('TableController.getView', view);
         return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
@@ -110,7 +112,7 @@ export class EdTableController extends EdDocumentController {
     }
 
     async createFormAction() {
-        console.log('TableController.createFormAction');
+        console.debug('TableController.createFormAction');
         await EditorFrontHostApp.editorApp.openModal(
             new NewFormFromTableController({
                 tableController: this,
@@ -123,7 +125,7 @@ export class EdTableController extends EdDocumentController {
                         formCaption: values.caption || values.name,
                     });
                     const params = formWizard.getFormParams();
-                    // console.log('params:', params);
+                    // console.debug('params:', params);
                     const databaseController = this.parent;
                     const applicationController = databaseController.parent;
                     const pageLinkController = applicationController.findPageLink(values.page);
@@ -131,9 +133,9 @@ export class EdTableController extends EdDocumentController {
                         await pageLinkController.loadPage();
                     }
                     const pageController = pageLinkController.pageController;
-                    // console.log('pageController:', pageController);
+                    // console.debug('pageController:', pageController);
                     const form = await pageController.model.newForm(params);
-                    // console.log('form:', form);
+                    // console.debug('form:', form);
                     const formController = pageController.createForm(form);
                     await EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                     formController.view.parent.open();
@@ -145,7 +147,7 @@ export class EdTableController extends EdDocumentController {
     }
 
     async delete() {
-        console.log('TableController.delete', this.getTitle());
+        console.debug('TableController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeTable2(this);
         EditorFrontHostApp.editorApp.treeWidget2.select(null);

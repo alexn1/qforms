@@ -34,21 +34,21 @@ class DatabaseEditor extends Editor_1.Editor {
         return table;
     }
     removeParam(param) {
-        console.log('DatabaseEditor.removeParam', param.getName());
+        console.debug('DatabaseEditor.removeParam', param.getName());
         const i = this.params.indexOf(param);
         if (i === -1)
             throw new Error('no such param');
         this.params.splice(i, 1);
     }
     removeTable(table) {
-        console.log('DatabaseEditor.removeTable', table.getName());
+        console.debug('DatabaseEditor.removeTable', table.getName());
         const i = this.tables.indexOf(table);
         if (i === -1)
             throw new Error('no such table');
         this.tables.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'save',
@@ -102,7 +102,7 @@ class DatabaseEditor extends Editor_1.Editor {
         return this.createTable(data);
     }
     async getView(view) {
-        console.log('DatabaseEditor.getView', view);
+        console.debug('DatabaseEditor.getView', view);
         return await common_1.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'getView',

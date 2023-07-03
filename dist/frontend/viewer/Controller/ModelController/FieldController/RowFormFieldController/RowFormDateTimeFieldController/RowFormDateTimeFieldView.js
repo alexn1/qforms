@@ -9,7 +9,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onClear2 = async () => {
-            // console.log('RowFormDateTimeFieldView.onClear2');
+            // console.debug('RowFormDateTimeFieldView.onClear2');
             this.getCtrl().onChange2(null);
         };
     }
@@ -36,7 +36,7 @@ class RowFormDateTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         return this.getCtrl().state.value ? 'datetime' : 'date';
     }
     render() {
-        // console.log('RowFormDateTimeFieldView.render');
+        // console.debug('RowFormDateTimeFieldView.render');
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getMode()}`, style: this.getStyle(this.getCtrl().getRow()) }, { children: [this.renderDatePart(), this.renderTimePart()] })));
     }
 }

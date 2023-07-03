@@ -9,7 +9,7 @@ export class RowFormCheckBoxFieldView extends RowFormFieldView<RowFormCheckBoxFi
     };
 
     render() {
-        // console.log('RowFormCheckBoxFieldView.render');
+        // console.debug('RowFormCheckBoxFieldView.render');
         const ctrl = this.getCtrl();
         return (
             <div className={this.getCssClassNames()}>

@@ -14,7 +14,7 @@ class TimeBox2 extends TimeBox_1.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.log('TimeBox2.onClear');
+            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();

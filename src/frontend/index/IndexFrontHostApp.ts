@@ -3,7 +3,7 @@ import { Helper, FrontHostApp } from '../common';
 
 export class IndexFrontHostApp {
     // data: any;
-    view: any = null;;
+    view: any = null;
     currentAppFullName: string | undefined = undefined;
     currentAppEnv: any = undefined;
     modals: any[] = [];
@@ -12,7 +12,7 @@ export class IndexFrontHostApp {
     appName: string | null = null;
 
     constructor(public data: any) {
-        console.log('IndexFrontHostApp.constructor', data);
+        console.debug('IndexFrontHostApp.constructor', data);
         // this.data = data;
         // this.view = null;
         // this.currentAppFullName = undefined;
@@ -24,7 +24,7 @@ export class IndexFrontHostApp {
     }
 
     init() {
-        // console.log('IndexFrontHostApp.init');
+        // console.debug('IndexFrontHostApp.init');
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
@@ -45,7 +45,7 @@ export class IndexFrontHostApp {
     }
 
     getEnvItems() {
-        // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
+        // console.debug('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) {
@@ -56,29 +56,29 @@ export class IndexFrontHostApp {
     }
 
     getAppInfo(fullName) {
-        // console.log('IndexFrontHostApp.getAppInfo', fullName);
+        // console.debug('IndexFrontHostApp.getAppInfo', fullName);
         return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
     }
 
     onAppChange = (fullName) => {
-        console.log('IndexFrontHostApp.onAppChange', fullName);
+        console.debug('IndexFrontHostApp.onAppChange', fullName);
         this.currentAppFullName = fullName;
         const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
         if (!appInfo) throw new Error(`no appInfo ${fullName}`);
-        // console.log('appInfo:', appInfo);
+        // console.debug('appInfo:', appInfo);
         this.currentAppEnv = appInfo.envs[0];
         this.view.rerender();
     };
 
     onEnvChange = (env) => {
-        console.log('IndexFrontHostApp.onEnvChange', env);
+        console.debug('IndexFrontHostApp.onEnvChange', env);
         this.currentAppEnv = env;
     };
 
     run = (e) => {
         if (this.currentAppFullName) {
             const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-            console.log('href:', href);
+            console.debug('href:', href);
             window.location.href = href;
         }
     };
@@ -86,7 +86,7 @@ export class IndexFrontHostApp {
     edit = (e) => {
         if (this.currentAppFullName) {
             const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-            console.log('href:', href);
+            console.debug('href:', href);
             window.location.href = href;
         }
     };
@@ -103,7 +103,7 @@ export class IndexFrontHostApp {
             folder: folderName,
             name: appName,
         });
-        console.log('data:', data);
+        console.debug('data:', data);
         if (data.appInfos) {
             this.data.appInfos = data.appInfos;
             this.currentAppFullName = `${folderName}/${appName}`;
@@ -112,18 +112,18 @@ export class IndexFrontHostApp {
     }
 
     closeModal = () => {
-        console.log('IndexFrontHostApp.closeModal');
+        console.debug('IndexFrontHostApp.closeModal');
         this.modals.pop();
         this.view.rerender();
     };
 
     onFolderNameCreate = (textBox) => {
-        console.log('IndexFrontHostApp.onFolderNameCreate');
+        console.debug('IndexFrontHostApp.onFolderNameCreate');
         this.folderNameTextBox = textBox;
     };
 
     onFolderNameChange = (folderName) => {
-        // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
+        // console.debug('IndexFrontHostApp.onFolderNameChange', folderName);
         this.folderName = folderName;
     };
 
@@ -132,8 +132,8 @@ export class IndexFrontHostApp {
     };
 
     onCreateClick = async (e) => {
-        console.log('IndexFrontHostApp.onCreateClick');
-        console.log(this.folderName, this.appName);
+        console.debug('IndexFrontHostApp.onCreateClick');
+        console.debug(this.folderName, this.appName);
         this.closeModal();
         await this.createApp(this.folderName, this.appName);
     };

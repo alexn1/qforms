@@ -31,19 +31,19 @@ class TreeItem extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onDivMouseDown = (e) => {
-            // console.log('TreeItem.onDivMouseDown', e.currentTarget);
+            // console.debug('TreeItem.onDivMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             tree.select(item);
         };
         this.onDivDoubleClick = (e) => {
-            // console.log('TreeItem.onDivDoubleClick');
+            // console.debug('TreeItem.onDivDoubleClick');
             const item = this.props.item;
             const tree = this.props.tree;
             tree.onDoubleClick(item);
         };
         this.onNodeMouseDown = (e) => {
-            // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
+            // console.debug('TreeItem.onNodeMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             const opened = this.state.opened;
@@ -70,18 +70,18 @@ class TreeItem extends common_1.ReactComponent {
         return this.li.current;
     }
     open() {
-        console.log('TreeItem.open', this.props.item.getTitle());
+        console.debug('TreeItem.open', this.props.item.getTitle());
         // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();
         }
         else {
-            console.log('this.parent', this.parent);
+            console.debug('this.parent', this.parent);
         }
     }
     render() {
-        // console.log('TreeItem.render', this.props.item.getTitle());
+        // console.debug('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
@@ -90,7 +90,7 @@ class TreeItem extends common_1.ReactComponent {
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
         return ((0, jsx_runtime_1.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : undefined }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : undefined, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0, jsx_runtime_1.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0, jsx_runtime_1.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0, jsx_runtime_1.jsx)("ul", { children: items.map((item) => ((0, jsx_runtime_1.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: (c) => {
-                            // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                            // console.debug('onCreate', this.props.item.getTitle(), item.getTitle());
                             c.parent = this;
                             item.view = c;
                         } }, item.getTitle()))) }))] }), title));

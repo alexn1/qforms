@@ -32,7 +32,7 @@ export class EdPageLinkController extends EdModelController {
     }
 
     async loadPage() {
-        console.log('PageLinkController.loadPage', this.getTitle());
+        console.debug('PageLinkController.loadPage', this.getTitle());
         if (this.pageController) throw new Error('page already loaded');
         const pageLink = this.model;
         const pageData = await EditorFrontHostApp.fetchPageData(pageLink.getFileName());
@@ -45,7 +45,7 @@ export class EdPageLinkController extends EdModelController {
         const pageController = new EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
 
         this.view.rerender();
     }
@@ -69,7 +69,7 @@ export class EdPageLinkController extends EdModelController {
     }
 
     remove() {
-        console.log('PageLinkController.remove', this.getTitle());
+        console.debug('PageLinkController.remove', this.getTitle());
         this.parent.removePageLink(this);
     }
 }

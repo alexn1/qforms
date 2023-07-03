@@ -19,7 +19,7 @@ class RowFormLinkFieldView extends RowFormFieldView_1.RowFormFieldView {
         if (pageName) {
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, (0, types_1.keyTupleToKey)([value]));
-            // console.log('href:', link);
+            // console.debug('href:', link);
         }
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
     }

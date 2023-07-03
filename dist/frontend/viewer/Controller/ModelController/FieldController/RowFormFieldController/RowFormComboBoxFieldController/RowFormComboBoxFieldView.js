@@ -9,7 +9,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onChange = async (widgetValue) => {
-            // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
+            // console.debug('RowFormComboBoxFieldView.onChange', widgetValue);
             this.rerender();
             await this.getCtrl().onChange(widgetValue);
         };
@@ -45,7 +45,7 @@ class RowFormComboBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         return ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" })));
     }
     render() {
-        // console.log('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        // console.debug('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderSelect(), this.getCtrl().getModel().getAttr('itemEditPage') &&
                     !!this.getCtrl().getValue() &&
                     this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()] })));

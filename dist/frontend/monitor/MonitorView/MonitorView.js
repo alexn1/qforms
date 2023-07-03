@@ -12,7 +12,7 @@ class MonitorView extends ReactComponent_1.ReactComponent {
                                                 } }, { children: `userId: ${client.userId}` }))] }, client.uuid))) })] })] })] }, app.route));
     }
     render() {
-        console.log('MonitorView.render', this.props.data);
+        console.debug('MonitorView.render', this.props.data);
         const data = this.props.data;
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "MonitorView" }, { children: [(0, jsx_runtime_1.jsxs)("div", { children: ["nodeEnv: ", data.nodeEnv] }), (0, jsx_runtime_1.jsxs)("div", { children: ["uptime: ", Helper_1.Helper.formatNumber(data.uptime), " ms"] }), (0, jsx_runtime_1.jsx)("div", { children: "applications:" }), (0, jsx_runtime_1.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })] })));
     }

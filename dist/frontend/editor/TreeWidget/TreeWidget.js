@@ -13,7 +13,7 @@ class TreeWidget extends common_1.ReactComponent {
         };
     }
     async select(item) {
-        console.log('TreeWidget.select', item ? item.getTitle() : null);
+        console.debug('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item))
             return;
         return new Promise((resolve) => {
@@ -25,7 +25,7 @@ class TreeWidget extends common_1.ReactComponent {
         });
     }
     onDoubleClick(item) {
-        // console.log('TreeWidget.onDoubleClick', item);
+        // console.debug('TreeWidget.onDoubleClick', item);
         if (this.props.onItemDoubleClick)
             this.props.onItemDoubleClick(item);
     }
@@ -40,11 +40,11 @@ class TreeWidget extends common_1.ReactComponent {
         return this.state.selectedItem;
     }
     scrollToSelected() {
-        console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
+        console.debug('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
         this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
-        console.log('TreeWidget.render' /*, this.props.items*/);
+        console.debug('TreeWidget.render' /*, this.props.items*/);
         const items = this.props.items;
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)("ul", { children: items.map((item) => ((0, jsx_runtime_1.jsx)(TreeItem_1.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: (c) => (item.view = c) }, item.getTitle()))) }) })));
     }

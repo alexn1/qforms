@@ -8,7 +8,7 @@ export class FormView<TFormController extends FormController> extends ModelView<
     }
 
     onActionsClick = async (li) => {
-        // console.log('FormView.onActionsClick:', li);
+        // console.debug('FormView.onActionsClick:', li);
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
@@ -23,7 +23,7 @@ export class FormView<TFormController extends FormController> extends ModelView<
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log(
+        console.debug(
             'FormView.shouldComponentUpdate',
             this.getCtrl().getModel().getFullName(),
             nextProps.updated - this.props.updated,

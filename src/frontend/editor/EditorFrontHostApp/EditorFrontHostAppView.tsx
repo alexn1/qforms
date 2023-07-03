@@ -21,7 +21,7 @@ export class EditorFrontHostAppView extends ReactComponent {
     }
 
     getTabs() {
-        console.log('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
+        console.debug('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
         return this.props.ctrl.documents.map((document) => ({
             name: document.controller.model.getFullName(),
             title: document.controller.model.getFullName(),

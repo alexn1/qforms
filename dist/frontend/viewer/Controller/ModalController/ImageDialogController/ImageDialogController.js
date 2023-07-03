@@ -5,7 +5,7 @@ const ModalController_1 = require("../ModalController");
 const ImageDialogView_1 = require("./ImageDialogView");
 class ImageDialogController extends ModalController_1.ModalController {
     constructor(options) {
-        // console.log('ImageDialogController.constructor', options);
+        // console.debug('ImageDialogController.constructor', options);
         super(options);
         this.onCloseClick = async (e) => {
             await this.close();
@@ -16,14 +16,14 @@ class ImageDialogController extends ModalController_1.ModalController {
             }
         };
         this.onImageClick = async (e) => {
-            console.log('ImageDialogController.onImageClick');
+            console.debug('ImageDialogController.onImageClick');
             await this.close();
         };
         if (!options.src)
             throw new Error('no src');
     }
     getViewClass() {
-        console.log('ImageDialogController.getViewClass');
+        console.debug('ImageDialogController.getViewClass');
         return ImageDialogView_1.ImageDialogView;
     }
     getSrc() {

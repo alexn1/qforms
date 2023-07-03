@@ -55,14 +55,14 @@ export class PageEditor extends Editor {
     }
 
     removeForm(form) {
-        console.log('Page.removeForm', form.getName());
+        console.debug('Page.removeForm', form.getName());
         const i = this.forms.indexOf(form);
         if (i === -1) throw new Error('no such form');
         this.forms.splice(i, 1);
     }
 
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'save',
@@ -87,7 +87,7 @@ export class PageEditor extends Editor {
     }
 
     async delete() {
-        console.log('PageEditor.delete', this.getName());
+        console.debug('PageEditor.delete', this.getName());
         await this.deleteData();
         this.pageLink.remove();
     }

@@ -16,7 +16,7 @@ class RowFormController extends FormController_1.FormController {
             valid: true,
         };
         this.onModelRefresh = async (e) => {
-            console.log('RowFormController.onModelRefresh', this.getModel().getFullName());
+            console.debug('RowFormController.onModelRefresh', this.getModel().getFullName());
             if (!this.view)
                 return;
             this.refill();
@@ -24,21 +24,21 @@ class RowFormController extends FormController_1.FormController {
             this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('RowFormController.onModelInsert', this.getModel().getFullName());
+            console.debug('RowFormController.onModelInsert', this.getModel().getFullName());
             this.refill();
             this.invalidate();
             this.calcState();
             this.getParent().onFormInsert(e);
         };
         this.onModelUpdate = async (e) => {
-            console.log('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
+            console.debug('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
             this.refill();
             this.invalidate();
             this.calcState();
             this.getParent().onFormUpdate(e);
         };
         this.onSaveClick = async () => {
-            console.log('RowFormController.onSaveClick');
+            console.debug('RowFormController.onSaveClick');
             this.validate();
             this.calcState();
             if (this.isValid()) {
@@ -46,7 +46,7 @@ class RowFormController extends FormController_1.FormController {
                     this.getApp().getView().disableRerender();
                     await this.getModel().update();
                     this.state.mode = 'view';
-                    console.log('form model updated', this.getModel().getFullName());
+                    console.debug('form model updated', this.getModel().getFullName());
                 }
                 finally {
                     this.getApp().getView().enableRerender();
@@ -59,7 +59,7 @@ class RowFormController extends FormController_1.FormController {
             }
         };
         this.onDiscardClick = () => {
-            console.log('RowFormController.onDiscardClick', this.getModel().getFullName());
+            console.debug('RowFormController.onDiscardClick', this.getModel().getFullName());
             const changedFields = [];
             for (const name in this.fields) {
                 const field = this.fields[name];
@@ -67,7 +67,7 @@ class RowFormController extends FormController_1.FormController {
                     changedFields.push(name);
                 }
             }
-            // console.log('changedFields:', changedFields);
+            // console.debug('changedFields:', changedFields);
             this.getModel().discard(changedFields);
             // refill changed fields
             changedFields.forEach((name) => {
@@ -83,16 +83,16 @@ class RowFormController extends FormController_1.FormController {
             this.getParent().onFormDiscard(this);
         };
         this.onRefreshClick = async () => {
-            // console.log('RowFormController.onRefreshClick', this.getModel().getFullName());
+            // console.debug('RowFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
         };
         this.onEditClick = (e) => {
-            console.log('RowFormController.onEditClick');
+            console.debug('RowFormController.onEditClick');
             this.state.mode = 'edit';
             this.rerender();
         };
         this.onCancelClick = (e) => {
-            console.log('RowFormController.onCancelClick');
+            console.debug('RowFormController.onCancelClick');
             this.state.mode = 'view';
             this.rerender();
         };
@@ -111,7 +111,7 @@ class RowFormController extends FormController_1.FormController {
         }
     }
     deinit() {
-        // console.log('RowFormController.deinit', this.getModel().getFullName());
+        // console.debug('RowFormController.deinit', this.getModel().getFullName());
         this.getModel().off('refresh', this.onModelRefresh);
         this.getModel().off('insert', this.onModelInsert);
         this.getModel().off('update', this.onModelUpdate);
@@ -121,18 +121,18 @@ class RowFormController extends FormController_1.FormController {
         this.state.hasNew = this.getModel().hasNew();
         this.state.changed = this.isChanged();
         this.state.valid = this.isValid();
-        // console.log('hasNew:', hasNew);
-        // console.log('changed:', changed);
-        // console.log('valid:', valid);
+        // console.debug('hasNew:', hasNew);
+        // console.debug('changed:', changed);
+        // console.debug('valid:', valid);
     }
     refill() {
-        console.log('RowFormController.refill', this.getModel().getFullName());
+        console.debug('RowFormController.refill', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].refill();
         }
     }
     isValid() {
-        // console.log('RowFormController.isValid', this.getModel().getFullName());
+        // console.debug('RowFormController.isValid', this.getModel().getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
             if (!field.isValid())
@@ -141,7 +141,7 @@ class RowFormController extends FormController_1.FormController {
         return true;
     }
     validate() {
-        // console.log('RowFormController.validate', this.getModel().getFullName());
+        // console.debug('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].validate();
         }
@@ -153,7 +153,7 @@ class RowFormController extends FormController_1.FormController {
         }
     }
     isChanged() {
-        // console.log('RowFormController.isChanged', this.getModel().getFullName());
+        // console.debug('RowFormController.isChanged', this.getModel().getFullName());
         if (this.getModel().isChanged())
             return true;
         for (const name in this.fields) {
@@ -164,13 +164,13 @@ class RowFormController extends FormController_1.FormController {
         return false;
     }
     async onFieldChange(e) {
-        // console.log('RowFormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('RowFormController.onFieldChange', this.getModel().getFullName());
         this.calcState();
         this.invalidate();
         await super.onFieldChange(e);
     }
     getViewClass() {
-        // console.log('RowFormController.getViewClass', this.getModel().getFullName());
+        // console.debug('RowFormController.getViewClass', this.getModel().getFullName());
         return super.getViewClass() || RowFormView_1.RowFormView;
     }
     getActiveRow() {

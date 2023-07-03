@@ -6,7 +6,7 @@ const common_1 = require("../../../../common");
 const FieldController_1 = require("../FieldController/FieldController");
 class FormController extends ModelController_1.ModelController {
     static create(model, parent) {
-        // console.log('FormController.create', model.getFullName());
+        // console.debug('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = common_1.Helper.getGlobalClass(ctrlClass);
@@ -21,7 +21,7 @@ class FormController extends ModelController_1.ModelController {
         super(model, parent);
         this.fields = {};
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
     init() {
@@ -31,7 +31,7 @@ class FormController extends ModelController_1.ModelController {
         }
     }
     deinit() {
-        // console.log('FormController.deinit:', this.getModel().getFullName());
+        // console.debug('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -50,7 +50,7 @@ class FormController extends ModelController_1.ModelController {
         return false;
     }
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
     getUpdated() {
@@ -60,7 +60,7 @@ class FormController extends ModelController_1.ModelController {
         this.state.updated = Date.now();
     }
     async onActionClick(name, row) {
-        console.log('FormController.onActionClick', name, row);
+        console.debug('FormController.onActionClick', name, row);
     }
     getField(name) {
         return this.fields[name];

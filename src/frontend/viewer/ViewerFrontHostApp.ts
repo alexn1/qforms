@@ -42,7 +42,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
     }
 
     async run() {
-        console.log('ViewerFrontHostApp.run', this.getData());
+        console.debug('ViewerFrontHostApp.run', this.getData());
 
         // application
         const application = new Application(this.getData());
@@ -72,7 +72,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
     }
 
     async onWindowPopState(e) {
-        // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        // console.debug('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController!.onWindowPopState(e);
     }
 
@@ -93,7 +93,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
                 4,
             ),
         };
-        console.log(`POST ${this.getData().logErrorUrl}`, body);
+        console.debug(`POST ${this.getData().logErrorUrl}`, body);
         fetch(this.getData().logErrorUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -109,7 +109,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
     }
 
     alert(options: { message: string; title?: string }): Promise<void> {
-        console.log('ViewerFrontHostApp.alert', options);
+        console.debug('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -123,12 +123,12 @@ export class ViewerFrontHostApp extends FrontHostApp {
                             resolve();
                         },
                     }));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), {
                         ctrl,
                         key: 0,
                     });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 } else {
                     reject(new Error('alert already exists'));
                 }
@@ -144,7 +144,7 @@ export class ViewerFrontHostApp extends FrontHostApp {
         yesButton?: string;
         noButton?: string;
     }): Promise<boolean> {
-        console.log('ViewerFrontHostApp.confirm', options);
+        console.debug('ViewerFrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -158,9 +158,9 @@ export class ViewerFrontHostApp extends FrontHostApp {
                             resolve(result);
                         },
                     }));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 } else {
                     reject(new Error('confirm already exists'));
                 }

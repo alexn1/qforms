@@ -37,7 +37,7 @@ class EdVisualView extends EdDocumentView_1.EdDocumentView {
             await ctrl.onControllerSave(this.cm.getValue());
         };
         this.onChange = async (instance, changeObj) => {
-            // console.log('VisualView.onChange', this.isChanged());
+            // console.debug('VisualView.onChange', this.isChanged());
             await this.rerender();
         };
         this.textarea = React.createRef();
@@ -49,7 +49,7 @@ class EdVisualView extends EdDocumentView_1.EdDocumentView {
         return null;
     }
     componentDidMount() {
-        // console.log('VisualView.componentDidMount', this.getTextarea());
+        // console.debug('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
             this.cm = EdDocumentView_1.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
@@ -57,7 +57,7 @@ class EdVisualView extends EdDocumentView_1.EdDocumentView {
         }
     }
     componentDidUpdate() {
-        // console.log('componentDidUpdate', this.getTextarea());
+        // console.debug('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !this.cm) {
@@ -65,7 +65,7 @@ class EdVisualView extends EdDocumentView_1.EdDocumentView {
         }
     }
     componentWillUnmount() {
-        // console.log('VisualView.componentWillUnmount');
+        // console.debug('VisualView.componentWillUnmount');
         if (this.cm) {
             this.cm.off('change', this.onChange);
         }

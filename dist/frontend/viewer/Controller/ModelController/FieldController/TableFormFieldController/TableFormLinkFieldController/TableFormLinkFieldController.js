@@ -8,7 +8,7 @@ class TableFormLinkFieldController extends TableFormFieldController_1.TableFormF
     constructor() {
         super(...arguments);
         this.onClick = (e) => {
-            console.log('TableFormLinkFieldController.onClick', e);
+            console.debug('TableFormLinkFieldController.onClick', e);
             e.preventDefault();
             this.emit('click', { source: this });
         };

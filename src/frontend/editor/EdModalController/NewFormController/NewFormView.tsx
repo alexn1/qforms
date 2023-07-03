@@ -15,7 +15,7 @@ export class NewFormView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewDataSourceView.onCreate');
+        // console.debug('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
             caption: this.caption.getValue(),

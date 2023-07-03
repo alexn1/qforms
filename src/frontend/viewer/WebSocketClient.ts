@@ -7,7 +7,7 @@ export class WebSocketClient {
     REFRESH_TIMEOUT: number;
 
     constructor(options: any = {}) {
-        // console.log('WebSocketClient.constructor', options);
+        // console.debug('WebSocketClient.constructor', options);
         this.options = options;
         if (!options.applicationController) throw new Error('no options.applicationController');
         if (!options.protocol) throw new Error('no options.protocol');
@@ -33,7 +33,7 @@ export class WebSocketClient {
     }
 
     connect() {
-        console.log('WebSocketClient.connect', this.url);
+        console.debug('WebSocketClient.connect', this.url);
         return new Promise((resolve, reject) => {
             this.webSocket = new WebSocket(this.url);
             this.webSocket.onclose = async (e) => {
@@ -50,14 +50,14 @@ export class WebSocketClient {
     }
 
     async onRefreshTimeout() {
-        // console.log('WebSocketClient.onRefreshTimeout');
+        // console.debug('WebSocketClient.onRefreshTimeout');
         this.refreshTimeoutId = null;
         this.send('ping');
         this.startRefreshTimeout();
     }
 
     send(data) {
-        console.log('WebSocketClient.send', data);
+        console.debug('WebSocketClient.send', data);
         this.webSocket.send(data);
     }
 
@@ -76,12 +76,12 @@ export class WebSocketClient {
     }
 
     async reconnect() {
-        console.log('WebSocketClient.reconnect');
+        console.debug('WebSocketClient.reconnect');
         try {
             await this.connect();
         } catch (err) {
             console.error(err);
-            console.log(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
+            console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
             setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
@@ -105,7 +105,7 @@ export class WebSocketClient {
     }
 
     async onMessage(e) {
-        console.log('WebSocketClient.onMessage', JSON.parse(e.data));
+        console.debug('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
             this.getApp().getView().disableRerender();

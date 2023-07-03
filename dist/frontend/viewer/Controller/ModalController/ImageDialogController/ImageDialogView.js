@@ -15,7 +15,7 @@ class ImageDialogView extends View_1.View {
         this.el = react_1.default.createRef();
     }
     render() {
-        console.log('ImageDialogView.render');
+        console.debug('ImageDialogView.render');
         const { ctrl } = this.props;
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [(0, jsx_runtime_1.jsx)("img", { className: `${this.getCssBlockName()}__image`, src: ctrl.getSrc(), onClick: ctrl.onImageClick }), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(common_1.CloseIcon2, {}) }))] })));
     }

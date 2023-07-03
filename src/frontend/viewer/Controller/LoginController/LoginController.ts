@@ -7,7 +7,7 @@ export class LoginController extends Controller {
 
     constructor(frontHostApp) {
         super();
-        console.log(`${this.constructor.name}.constructor`);
+        console.debug(`${this.constructor.name}.constructor`);
         this.frontHostApp = frontHostApp;
     }
 

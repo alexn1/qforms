@@ -8,7 +8,7 @@ class NewFieldView extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewFieldView.onCreate');
+            // console.debug('NewFieldView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),

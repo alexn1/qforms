@@ -44,13 +44,13 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
         const file = e.target.files[0];
         if (file) {
             const widgetValue = await Helper.readFileAsDataURL(file);
-            // console.log('widgetValue:', widgetValue);
+            // console.debug('widgetValue:', widgetValue);
             this.getCtrl().onChange(widgetValue);
         }
     };
 
     onImageClick = async (e) => {
-        console.log('RowFormFileFieldView.onImageClick');
+        console.debug('RowFormFileFieldView.onImageClick');
         const ctrl = this.getCtrl();
         const app = ctrl.getApp();
         const src = ctrl.getValueForWidget();
@@ -59,7 +59,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
             id: app.getNewId(),
             src,
             onClose: () => {
-                console.log('onClose');
+                console.debug('onClose');
                 this.getCtrl().getPage().getView().getElement().focus();
             },
         });
@@ -117,17 +117,17 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     }
 
     componentDidMount() {
-        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // console.debug('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
+        // console.debug('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 
     onImageIconClick = async (e) => {
-        console.log('RowFormFileFieldView.onImageIconClick');
+        console.debug('RowFormFileFieldView.onImageIconClick');
         this.getInput().click();
     };
 }

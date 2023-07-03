@@ -9,7 +9,7 @@ export class TableFormLinkFieldController extends TableFormFieldController<LinkF
     }
 
     onClick = (e) => {
-        console.log('TableFormLinkFieldController.onClick', e);
+        console.debug('TableFormLinkFieldController.onClick', e);
         e.preventDefault();
         this.emit('click', { source: this });
     };

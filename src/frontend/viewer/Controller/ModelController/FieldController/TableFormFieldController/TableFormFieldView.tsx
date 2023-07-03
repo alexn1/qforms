@@ -13,7 +13,7 @@ export class TableFormFieldView<
     }
 
     getSpanOffsetWidth() {
-        // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
+        // console.debug('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         if (!this.span.current) return 0;
         return this.span.current.offsetWidth;
     }

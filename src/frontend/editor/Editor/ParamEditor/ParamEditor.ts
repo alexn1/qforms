@@ -10,7 +10,7 @@ export class ParamEditor extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'save',

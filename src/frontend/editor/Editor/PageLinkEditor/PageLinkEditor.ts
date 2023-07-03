@@ -9,7 +9,7 @@ export class PageLinkEditor extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'save',
@@ -48,7 +48,7 @@ export class PageLinkEditor extends Editor {
     }
 
     remove() {
-        console.log('PageLinkEditor.remove', this.getName());
+        console.debug('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
 }

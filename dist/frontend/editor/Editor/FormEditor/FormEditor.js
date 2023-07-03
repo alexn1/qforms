@@ -47,14 +47,14 @@ class FormEditor extends Editor_1.Editor {
         return field;
     }
     removeField(field) {
-        console.log('FormEditor.removeField', field.getName());
+        console.debug('FormEditor.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1)
             throw new Error('no such field');
         this.fields.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'save',

@@ -27,7 +27,7 @@ class EdPageLinkController extends EdModelController_1.EdModelController {
         return this.pageController != null;
     }
     async loadPage() {
-        console.log('PageLinkController.loadPage', this.getTitle());
+        console.debug('PageLinkController.loadPage', this.getTitle());
         if (this.pageController)
             throw new Error('page already loaded');
         const pageLink = this.model;
@@ -39,7 +39,7 @@ class EdPageLinkController extends EdModelController_1.EdModelController {
         const pageController = new EdPageController_1.EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
         this.view.rerender();
     }
     getActions() {
@@ -58,7 +58,7 @@ class EdPageLinkController extends EdModelController_1.EdModelController {
         this.items = pageController.items;
     }
     remove() {
-        console.log('PageLinkController.remove', this.getTitle());
+        console.debug('PageLinkController.remove', this.getTitle());
         this.parent.removePageLink(this);
     }
 }

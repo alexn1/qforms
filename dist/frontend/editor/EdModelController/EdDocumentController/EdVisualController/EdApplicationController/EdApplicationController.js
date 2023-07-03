@@ -46,7 +46,7 @@ class EdApplicationController extends EdVisualController_1.EdVisualController {
         return pageLink;
     }
     removeDatabase(databaseController) {
-        console.log('ApplicationController.removeDatabase', databaseController.getTitle());
+        console.debug('ApplicationController.removeDatabase', databaseController.getTitle());
         const i = this.databases.indexOf(databaseController);
         if (i === -1)
             throw new Error('no such databaseController');
@@ -81,15 +81,15 @@ class EdApplicationController extends EdVisualController_1.EdVisualController {
                 await this.actionNewAction();
                 break;
             default:
-                console.log(name);
+                console.debug(name);
         }
     }
     async newDatabaseAction() {
-        console.log('ApplicationController.newDatabaseAction');
+        console.debug('ApplicationController.newDatabaseAction');
         // @ts-ignore
         await EditorFrontHostApp_1.EditorFrontHostApp.editorApp.openModal(new NewDatabaseController_1.NewDatabaseController({
             onCreate: async (values) => {
-                // console.log('values: ', values);
+                // console.debug('values: ', values);
                 const database = await this.model.newDatabase({
                     class: values.class,
                     name: values.name,

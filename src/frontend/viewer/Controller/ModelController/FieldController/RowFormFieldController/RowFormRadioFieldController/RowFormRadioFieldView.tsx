@@ -4,13 +4,13 @@ import './RowFormRadioFieldView.less';
 
 export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldController> {
     /*onChange = async widgetValue => {
-        // console.log('RowFormRadioFieldView.onChange', widgetValue);
+        // console.debug('RowFormRadioFieldView.onChange', widgetValue);
         this.rerender();
         await this.getCtrl().onChange(widgetValue);
     }*/
 
     onClick = async (e) => {
-        console.log('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
+        console.debug('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
         let value = JSON.parse(e.currentTarget.dataset.value);
         if (this.getCtrl().getValue() !== value) {
             await this.getCtrl().onChangePure(value);
@@ -33,7 +33,7 @@ export class RowFormRadioFieldView extends RowFormFieldView<RowFormRadioFieldCon
     }*/
 
     render() {
-        // console.log('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        // console.debug('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         const value = this.getCtrl().getValue();
         return (
             <div className={this.getCssClassNames()}>

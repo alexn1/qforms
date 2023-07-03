@@ -15,7 +15,7 @@ class ConfirmView extends View_1.View {
         this.el = react_1.default.createRef();
     }
     render() {
-        // console.log('ConfirmView.render', this.getCtrl().options);
+        // console.debug('ConfirmView.render', this.getCtrl().options);
         if (!this.getCtrl().options.yesButton)
             throw new Error('no yesButton option');
         if (!this.getCtrl().options.noButton)

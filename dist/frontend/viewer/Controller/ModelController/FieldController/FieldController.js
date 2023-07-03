@@ -5,7 +5,7 @@ const ModelController_1 = require("../ModelController");
 const Helper_1 = require("../../../../common/Helper");
 class FieldController extends ModelController_1.ModelController {
     static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
+        // console.debug('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
@@ -22,7 +22,7 @@ class FieldController extends ModelController_1.ModelController {
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
-        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
+        // console.debug('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -42,11 +42,11 @@ class FieldController extends ModelController_1.ModelController {
         }
     }
     stringToValue(stringValue) {
-        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
+        // console.debug('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
         const fieldType = this.getModel().getType();
-        // console.log('fieldType:', fieldType);
+        // console.debug('fieldType:', fieldType);
         if (stringValue.trim() === '')
             return null;
         if (fieldType === 'object' || fieldType === 'boolean') {

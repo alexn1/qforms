@@ -9,7 +9,7 @@ class ColumnEditor extends Editor_1.Editor {
         this.table = table;
     }
     async setValue(name, value) {
-        //console.log('ColumnEditor.setValue', name + ' = ' + value);
+        //console.debug('ColumnEditor.setValue', name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'save',

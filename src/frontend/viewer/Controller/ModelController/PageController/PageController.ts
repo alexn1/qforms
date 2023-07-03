@@ -20,7 +20,7 @@ export class PageController<
     constructor(model: Page, parent: ApplicationController, id: string) {
         super(model, parent);
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model, id);
+            console.debug(`${this.constructor.name}.constructor`, model, id);
         }
 
         if (!id) {
@@ -35,7 +35,7 @@ export class PageController<
         id: string,
         options: PageOptions | null = null,
     ): PageController {
-        // console.log('PageController.create', model.getName());
+        // console.debug('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
@@ -55,7 +55,7 @@ export class PageController<
     }
 
     deinit() {
-        console.log('PageController.deinit: ' + this.getModel().getFullName());
+        console.debug('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -63,13 +63,13 @@ export class PageController<
     }
 
     onSaveAndCloseClick = async () => {
-        console.log('PageController.onSaveAndCloseClick');
+        console.debug('PageController.onSaveAndCloseClick');
         this.validate();
         if (this.isValid()) {
             try {
                 this.getApp().getView().disableRerender();
                 await this.getModel().update();
-                console.log('page model updated', this.getModel().getFullName());
+                console.debug('page model updated', this.getModel().getFullName());
             } finally {
                 this.getApp().getView().enableRerender();
             }
@@ -83,7 +83,7 @@ export class PageController<
     };
 
     onClosePageClick = async (e) => {
-        console.log('PageController.onClosePageClick', this.getModel().getFullName());
+        console.debug('PageController.onClosePageClick', this.getModel().getFullName());
         await this.close();
     };
 
@@ -91,7 +91,7 @@ export class PageController<
         const name = this.getModel().getName();
         const key = this.getModel().getKey();
         const link = this.createOpenInNewLink(name, key!);
-        // console.log('link', link);
+        // console.debug('link', link);
         window.open(link, '_blank');
     };
 
@@ -105,11 +105,11 @@ export class PageController<
     }
 
     async close(): Promise<void> {
-        // console.log('PageController.close', this.getModel().getFullName());
+        // console.debug('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
-        // console.log('changed:', changed);
+        // console.debug('changed:', changed);
         // const valid = this.isValid();
-        // console.log('valid:', valid);
+        // console.debug('valid:', valid);
         if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
@@ -131,7 +131,7 @@ export class PageController<
     }
 
     isValid(): boolean {
-        // console.log('PageController.isValid', this.getModel().getFullName());
+        // console.debug('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -141,23 +141,23 @@ export class PageController<
     }
 
     async onFormChange(e): Promise<void> {
-        // console.log('PageController.onFormChange', this.getModel().getFullName());
+        // console.debug('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
 
     onFormDiscard(formController: FormController): void {
-        console.log('PageController.onFormDiscard', this.getModel().getFullName());
+        console.debug('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
 
     onFormUpdate(e): void {
-        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
+        console.debug('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
 
     onFormInsert(e): void {
-        console.log('PageController.onFormInsert:', this.getModel().getFullName());
-        // console.log('hasNew:', this.getModel().hasNew());
+        console.debug('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.debug('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -178,10 +178,10 @@ export class PageController<
     }
 
     isChanged(): boolean {
-        // console.log('PageController.isChanged', this.getModel().getFullName());
+        // console.debug('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
+                // console.debug(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
@@ -211,11 +211,11 @@ export class PageController<
     }
 
     async onActionClick(name: string): Promise<any> {
-        console.log('PageController.onActionClick', name);
+        console.debug('PageController.onActionClick', name);
     }
 
     onKeyDown = async (e) => {
-        // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
+        // console.debug('PageController.onKeyDown', this.getModel().getFullName(), e);
         if (e.key === 'Escape') {
             if (this.isModal()) {
                 await this.close();

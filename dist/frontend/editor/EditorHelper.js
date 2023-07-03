@@ -5,7 +5,7 @@ const MySqlFormWizard_1 = require("./FormWizard/MySqlFormWizard/MySqlFormWizard"
 const PostgreSqlFormWizard_1 = require("./FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard");
 class EditorHelper {
     static create(params) {
-        console.log('FormWizard.create', params);
+        console.debug('FormWizard.create', params);
         switch (params.model.database.getClassName()) {
             case 'MySqlDatabase':
                 return new MySqlFormWizard_1.MySqlFormWizard(params);

@@ -9,7 +9,7 @@ class PageLinkEditor extends Editor_1.Editor {
         this.application = parent;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'save',
@@ -44,7 +44,7 @@ class PageLinkEditor extends Editor_1.Editor {
         return this.data['@attributes'].fileName;
     }
     remove() {
-        console.log('PageLinkEditor.remove', this.getName());
+        console.debug('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
 }

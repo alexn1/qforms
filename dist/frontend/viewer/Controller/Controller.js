@@ -14,7 +14,7 @@ class Controller extends EventEmitter_1.EventEmitter {
             super();
         } */
         this.onViewCreate = (view) => {
-            // console.log('Controller.onViewCreate');
+            // console.debug('Controller.onViewCreate');
             this.view = view;
         };
     }

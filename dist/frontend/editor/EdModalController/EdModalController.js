@@ -5,11 +5,11 @@ const EditorFrontHostApp_1 = require("../EditorFrontHostApp/EditorFrontHostApp")
 class EdModalController {
     constructor(options) {
         this.onClose = async (e) => {
-            console.log('ModalController.onClose');
+            console.debug('ModalController.onClose');
             await this.close();
         };
         this.onCreate = async (values) => {
-            console.log('ModalController.onCreate', values);
+            console.debug('ModalController.onCreate', values);
             await this.close();
             if (this.options.onCreate) {
                 await this.options.onCreate(values);

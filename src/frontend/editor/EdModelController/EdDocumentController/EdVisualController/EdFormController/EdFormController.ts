@@ -46,7 +46,7 @@ export class EdFormController extends EdVisualController {
     }
 
     removeField(fieldController) {
-        console.log('FormController.removeField', fieldController.getTitle());
+        console.debug('FormController.removeField', fieldController.getTitle());
         const i = this.fields.indexOf(fieldController);
         if (i === -1) throw new Error('no such fieldController');
         this.fields.splice(i, 1);

@@ -62,14 +62,14 @@ export class EdDatabaseController extends EdDocumentController {
     }
 
     removeParam(paramController) {
-        console.log('DatabaseController.removeParam', paramController.getTitle());
+        console.debug('DatabaseController.removeParam', paramController.getTitle());
         const i = this.params.indexOf(paramController);
         if (i === -1) throw new Error('no such paramController');
         this.params.splice(i, 1);
     }
 
     removeTable2(tableController) {
-        console.log('DatabaseController.removeTable2', tableController.getTitle());
+        console.debug('DatabaseController.removeTable2', tableController.getTitle());
         const i = this.tables.indexOf(tableController);
         if (i === -1) throw new Error('no such tableController');
         this.tables.splice(i, 1);
@@ -144,7 +144,7 @@ export class EdDatabaseController extends EdDocumentController {
     async createDocument(): Promise<any> {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
-        // console.log('data:', result.data);
+        // console.debug('data:', result.data);
         // @ts-ignore
         document.treeWidgetItems = result.data.tables
             .sort()
@@ -153,22 +153,22 @@ export class EdDatabaseController extends EdDocumentController {
     }
 
     onTableSelect2 = async (item) => {
-        console.log('DatabaseController.onTableSelect2', item.getTitle());
+        console.debug('DatabaseController.onTableSelect2', item.getTitle());
         const tableName = item.getTitle();
         this.tableName = tableName;
         const data = await this.model.getTableInfo(tableName);
         this.tableInfo = data.tableInfo;
         this.document.view.rerender();
-        // console.log('tableInfo:', this.tableInfo);
+        // console.debug('tableInfo:', this.tableInfo);
     };
 
     onCreateTableClick = (e) => {
-        console.log('DatabaseController.onCreateTableClick');
+        console.debug('DatabaseController.onCreateTableClick');
         this.newTableAction(this.tableName, this.tableInfo);
     };
 
     async newTableAction(tableName, tableInfo) {
-        console.log('DatabaseController.newTableAction', tableName, tableInfo);
+        console.debug('DatabaseController.newTableAction', tableName, tableInfo);
         const table = await this.model.newTable({
             class: 'Table',
             name: tableName,
@@ -191,7 +191,7 @@ export class EdDatabaseController extends EdDocumentController {
     }
 
     async delete() {
-        console.log('DatabaseController.delete', this.getTitle());
+        console.debug('DatabaseController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDatabase(this);
         EditorFrontHostApp.editorApp.treeWidget2.select(null);

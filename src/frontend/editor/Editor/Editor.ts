@@ -62,7 +62,7 @@ export class Editor {
     }*/
 
     removeDataSource(dataSource) {
-        // console.log('Editor.removeDataSource', dataSource.getName());
+        // console.debug('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1) throw new Error('no such dataSource');
         this.dataSources.splice(i, 1);
@@ -76,7 +76,7 @@ export class Editor {
     }*/
 
     removeAction(action) {
-        // console.log('Editor.removeField', action.getName());
+        // console.debug('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);
         if (i === -1) throw new Error('no such action');
         this.actions.splice(i, 1);

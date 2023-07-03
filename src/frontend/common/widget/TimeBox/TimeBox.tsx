@@ -17,7 +17,7 @@ export class TimeBox extends ReactComponent {
     onKeyPress = (event) => {
         // console.log('TimeBox.onKeyPress', event.key, event.target.value);
         if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-            console.log('cancel', event.key);
+            console.debug('cancel', event.key);
             event.preventDefault();
         }
     };
@@ -48,7 +48,7 @@ export class TimeBox extends ReactComponent {
     }
 
     onChange = (e) => {
-        // console.log('TimeBox.onChange', e.target.value);
+        // console.debug('TimeBox.onChange', e.target.value);
         const target = e.target;
         const start = target.selectionStart;
         const end = target.selectionEnd;
@@ -57,10 +57,10 @@ export class TimeBox extends ReactComponent {
         }
         const inEnd = start === end && start === target.value.length;
         const stringValue = this.formatValue(target.value);
-        // console.log('before:', target.selectionStart, target.selectionEnd);
+        // console.debug('before:', target.selectionStart, target.selectionEnd);
         this.setState({ value: stringValue }, () => {
-            // console.log('after:', target.selectionStart, target.selectionEnd);
-            // console.log('inEnd:', inEnd);
+            // console.debug('after:', target.selectionStart, target.selectionEnd);
+            // console.debug('inEnd:', inEnd);
             if (!inEnd) {
                 target.selectionStart = start;
                 target.selectionEnd = end;
@@ -70,10 +70,10 @@ export class TimeBox extends ReactComponent {
                 try {
                     nValue = this.getValue();
                 } catch (err) {
-                    console.log(err.message);
+                    console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.log('nValue:', nValue);
+                // console.debug('nValue:', nValue);
                 this.props.onChange(nValue);
             }
         });
@@ -88,26 +88,26 @@ export class TimeBox extends ReactComponent {
     }
 
     onBlur = (e) => {
-        // console.log('TimeBox.onBlur');
+        // console.debug('TimeBox.onBlur');
         if (this.props.onBlur) {
             let nValue;
             try {
                 nValue = this.getValue();
             } catch (err) {
-                console.log(err.message);
+                console.debug(err.message);
                 nValue = NaN;
             }
-            // console.log('nValue:', nValue);
+            // console.debug('nValue:', nValue);
             this.props.onBlur(nValue);
         }
     };
 
     /*onKeyDown = event => {
-        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
         if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
         if (event.which < 96 || event.which > 105) {
-            console.log('cancel');
+            console.debug('cancel');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -119,13 +119,13 @@ export class TimeBox extends ReactComponent {
     }*/
 
     /*onKeyUp = event => {
-        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
 
     static getStringValue(value) {
-        // console.log('TimeBox.getStringValue', value);
+        // console.debug('TimeBox.getStringValue', value);
         if (value === null) return '';
         if (value !== undefined) {
             let h: number | string = Math.floor(value / 60);
@@ -138,7 +138,7 @@ export class TimeBox extends ReactComponent {
     }
 
     static getIntegerValue(stringValue: string) {
-        // console.log('TimeBox.getIntegerValue', stringValue);
+        // console.debug('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '') return null;
         const arr = stringValue.split(':');
@@ -164,7 +164,7 @@ export class TimeBox extends ReactComponent {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
             // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
@@ -177,7 +177,7 @@ export class TimeBox extends ReactComponent {
     }
 
     render() {
-        // console.log('TimeBox.render', this.state.value);
+        // console.debug('TimeBox.render', this.state.value);
         return (
             <input
                 ref={this.el}

@@ -39,7 +39,7 @@ export class RowFormTimeFieldController extends RowFormFieldController<TimeField
     }
 
     getPlaceholder() {
-        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultValue);
+        // console.debug('CarReservefromTimeController.getPlaceholder', this.defaultValue);
         if (this.defaultValue !== null) return TimeBox.getStringValue(this.defaultValue);
         return super.getPlaceholder();
     }

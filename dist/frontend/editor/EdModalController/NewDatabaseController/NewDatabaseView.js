@@ -8,7 +8,7 @@ class NewDatabaseView extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDatabaseView.onCreate');
+            // console.debug('NewDatabaseView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),

@@ -11,7 +11,7 @@ export class ChangeClassView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewDataSourceView.onCreate');
+        // console.debug('NewDataSourceView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
         });

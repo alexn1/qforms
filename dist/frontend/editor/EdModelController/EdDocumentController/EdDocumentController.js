@@ -15,7 +15,7 @@ class EdDocumentController extends EdModelController_1.EdModelController {
         return (this.document = document);
     }
     onDocumentClose() {
-        console.log('DocumentController.onDocumentClose', this.getTitle());
+        console.debug('DocumentController.onDocumentClose', this.getTitle());
         this.document = null;
     }
 }

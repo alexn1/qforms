@@ -43,7 +43,7 @@ export class RowFormController extends FormController<RowForm> {
     }
 
     deinit() {
-        // console.log('RowFormController.deinit', this.getModel().getFullName());
+        // console.debug('RowFormController.deinit', this.getModel().getFullName());
         this.getModel().off('refresh', this.onModelRefresh);
         this.getModel().off('insert', this.onModelInsert);
         this.getModel().off('update', this.onModelUpdate);
@@ -54,20 +54,20 @@ export class RowFormController extends FormController<RowForm> {
         this.state.hasNew = this.getModel().hasNew();
         this.state.changed = this.isChanged();
         this.state.valid = this.isValid();
-        // console.log('hasNew:', hasNew);
-        // console.log('changed:', changed);
-        // console.log('valid:', valid);
+        // console.debug('hasNew:', hasNew);
+        // console.debug('changed:', changed);
+        // console.debug('valid:', valid);
     }
 
     refill() {
-        console.log('RowFormController.refill', this.getModel().getFullName());
+        console.debug('RowFormController.refill', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].refill();
         }
     }
 
     onModelRefresh = async (e) => {
-        console.log('RowFormController.onModelRefresh', this.getModel().getFullName());
+        console.debug('RowFormController.onModelRefresh', this.getModel().getFullName());
         if (!this.view) return;
         this.refill();
         this.invalidate();
@@ -75,7 +75,7 @@ export class RowFormController extends FormController<RowForm> {
     };
 
     onModelInsert = async (e) => {
-        console.log('RowFormController.onModelInsert', this.getModel().getFullName());
+        console.debug('RowFormController.onModelInsert', this.getModel().getFullName());
         this.refill();
         this.invalidate();
         this.calcState();
@@ -83,7 +83,7 @@ export class RowFormController extends FormController<RowForm> {
     };
 
     onModelUpdate = async (e) => {
-        console.log('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
+        console.debug('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
         this.refill();
         this.invalidate();
         this.calcState();
@@ -91,7 +91,7 @@ export class RowFormController extends FormController<RowForm> {
     };
 
     isValid() {
-        // console.log('RowFormController.isValid', this.getModel().getFullName());
+        // console.debug('RowFormController.isValid', this.getModel().getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
             if (!field.isValid()) return false;
@@ -100,7 +100,7 @@ export class RowFormController extends FormController<RowForm> {
     }
 
     validate() {
-        // console.log('RowFormController.validate', this.getModel().getFullName());
+        // console.debug('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].validate();
         }
@@ -114,7 +114,7 @@ export class RowFormController extends FormController<RowForm> {
     }
 
     onSaveClick = async () => {
-        console.log('RowFormController.onSaveClick');
+        console.debug('RowFormController.onSaveClick');
         this.validate();
         this.calcState();
         if (this.isValid()) {
@@ -122,7 +122,7 @@ export class RowFormController extends FormController<RowForm> {
                 this.getApp().getView().disableRerender();
                 await this.getModel().update();
                 this.state.mode = 'view';
-                console.log('form model updated', this.getModel().getFullName());
+                console.debug('form model updated', this.getModel().getFullName());
             } finally {
                 this.getApp().getView().enableRerender();
                 await this.getApp().getView().rerender();
@@ -134,7 +134,7 @@ export class RowFormController extends FormController<RowForm> {
     };
 
     onDiscardClick = () => {
-        console.log('RowFormController.onDiscardClick', this.getModel().getFullName());
+        console.debug('RowFormController.onDiscardClick', this.getModel().getFullName());
         const changedFields: string[] = [];
         for (const name in this.fields) {
             const field = this.fields[name];
@@ -142,7 +142,7 @@ export class RowFormController extends FormController<RowForm> {
                 changedFields.push(name);
             }
         }
-        // console.log('changedFields:', changedFields);
+        // console.debug('changedFields:', changedFields);
         this.getModel().discard(changedFields);
 
         // refill changed fields
@@ -162,12 +162,12 @@ export class RowFormController extends FormController<RowForm> {
     };
 
     onRefreshClick = async () => {
-        // console.log('RowFormController.onRefreshClick', this.getModel().getFullName());
+        // console.debug('RowFormController.onRefreshClick', this.getModel().getFullName());
         await this.getModel().refresh();
     };
 
     isChanged() {
-        // console.log('RowFormController.isChanged', this.getModel().getFullName());
+        // console.debug('RowFormController.isChanged', this.getModel().getFullName());
         if (this.getModel().isChanged()) return true;
         for (const name in this.fields) {
             const field = this.fields[name];
@@ -177,26 +177,26 @@ export class RowFormController extends FormController<RowForm> {
     }
 
     async onFieldChange(e) {
-        // console.log('RowFormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('RowFormController.onFieldChange', this.getModel().getFullName());
         this.calcState();
         this.invalidate();
         await super.onFieldChange(e);
     }
 
     onEditClick = (e) => {
-        console.log('RowFormController.onEditClick');
+        console.debug('RowFormController.onEditClick');
         this.state.mode = 'edit';
         this.rerender();
     };
 
     onCancelClick = (e) => {
-        console.log('RowFormController.onCancelClick');
+        console.debug('RowFormController.onCancelClick');
         this.state.mode = 'view';
         this.rerender();
     };
 
     getViewClass() {
-        // console.log('RowFormController.getViewClass', this.getModel().getFullName());
+        // console.debug('RowFormController.getViewClass', this.getModel().getFullName());
         return super.getViewClass() || RowFormView;
     }
 

@@ -55,7 +55,7 @@ export class EdFieldController extends EdVisualController {
                 fieldCtrl: this,
                 onCreate: async (values) => {
                     const data = await this.model.changeClass({ class: values.class });
-                    console.log(data);
+                    console.debug(data);
                     EditorFrontHostApp.editorApp.fillPropertyGrid(this);
                     this.view.rerender();
                 },

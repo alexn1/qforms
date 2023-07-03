@@ -14,21 +14,21 @@ export class TreeItem extends ReactComponent {
     }
 
     onDivMouseDown = (e) => {
-        // console.log('TreeItem.onDivMouseDown', e.currentTarget);
+        // console.debug('TreeItem.onDivMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         tree.select(item);
     };
 
     onDivDoubleClick = (e) => {
-        // console.log('TreeItem.onDivDoubleClick');
+        // console.debug('TreeItem.onDivDoubleClick');
         const item = this.props.item;
         const tree = this.props.tree;
         tree.onDoubleClick(item);
     };
 
     onNodeMouseDown = (e) => {
-        // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
+        // console.debug('TreeItem.onNodeMouseDown', e.currentTarget);
         const item = this.props.item;
         const tree = this.props.tree;
         const opened = this.state.opened;
@@ -54,18 +54,18 @@ export class TreeItem extends ReactComponent {
     }
 
     open() {
-        console.log('TreeItem.open', this.props.item.getTitle());
+        console.debug('TreeItem.open', this.props.item.getTitle());
         // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();
         } else {
-            console.log('this.parent', this.parent);
+            console.debug('this.parent', this.parent);
         }
     }
 
     render() {
-        // console.log('TreeItem.render', this.props.item.getTitle());
+        // console.debug('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
@@ -93,7 +93,7 @@ export class TreeItem extends ReactComponent {
                                 item={item}
                                 paddingLeft={this.props.paddingLeft + 15}
                                 onCreate={(c) => {
-                                    // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                                    // console.debug('onCreate', this.props.item.getTitle(), item.getTitle());
                                     c.parent = this;
                                     item.view = c;
                                 }}

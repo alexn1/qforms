@@ -33,7 +33,7 @@ class EdModelController {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
     getDocumentViewClass() {
-        console.log(`${this.constructor.name}.getDocumentViewClass`);
+        console.debug(`${this.constructor.name}.getDocumentViewClass`);
         return null;
     }
     moveColItem(colName, item, offset) {

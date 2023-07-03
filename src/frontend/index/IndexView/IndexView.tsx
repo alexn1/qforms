@@ -59,7 +59,7 @@ export class IndexView extends ReactComponent {
     }
 
     render() {
-        console.log('IndexView.render');
+        console.debug('IndexView.render');
         const { ctrl } = this.props;
         return (
             <div className="IndexView">

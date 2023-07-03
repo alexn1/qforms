@@ -10,7 +10,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
     constructor(model, parent) {
         super(model, parent);
         this.onChange = async (widgetValue, fireEvent = true) => {
-            console.log('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
+            console.debug('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
             // this._onChange(widgetValue);
             this.resetErrors();
             this.rerender();
@@ -43,7 +43,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
             }
         };
         this.onBlur = (widgetValue, fireEvent = true) => {
-            console.log('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
+            console.debug('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
             if (!this.isEditable())
                 return;
             // this.resetErrors();
@@ -79,7 +79,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
             }
         };
         this.onChangePure = async (value, fireEvent = true) => {
-            console.log('RowFormFieldController.onChangePure', JSON.stringify(value));
+            console.debug('RowFormFieldController.onChangePure', JSON.stringify(value));
             // value
             this.setValue(value);
             this.resetErrors();
@@ -115,10 +115,10 @@ class RowFormFieldController extends FieldController_1.FieldController {
         const row = this.getRow();
         const value = this.getModel().getValue(row);
         this.setValue(value);
-        // console.log(this.getModel().getFullName(), value);
+        // console.debug(this.getModel().getFullName(), value);
     }
     refill() {
-        // console.log('RowFormFieldController.refill', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.refill', this.getModel().getFullName());
         if (!this.view)
             return;
         const value = this.getModel().getValue(this.getRow());
@@ -134,45 +134,45 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return this.getParent();
     }
     copyValueToModel() {
-        // console.log('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
     }
     /*_onChange(widgetValue) {
 
     }*/
     putValue(widgetValue) {
-        // console.log('RowFormFieldController.putValue', widgetValue);
+        // console.debug('RowFormFieldController.putValue', widgetValue);
         this.onChange(widgetValue, false);
     }
     getValueForWidget() {
         const value = this.getValue();
-        // console.log('value:', this.getModel().getFullName(), value, typeof value);
+        // console.debug('value:', this.getModel().getFullName(), value, typeof value);
         return this.valueToString(value);
     }
     setValueFromWidget(widgetValue) {
-        // console.log('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
+        // console.debug('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
         if (typeof widgetValue !== 'string')
             throw new Error(`${this.getModel().getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
         const value = this.stringToValue(widgetValue);
-        // console.log('value:', value);
+        // console.debug('value:', value);
         this.setValue(value);
     }
     setValue(value) {
-        // console.log('RowFormFieldController.setValue', this.getModel().getFullName(), value);
+        // console.debug('RowFormFieldController.setValue', this.getModel().getFullName(), value);
         this.state.value = value;
     }
     getValue() {
         return this.state.value;
     }
     isChanged() {
-        // console.log('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
+        // console.debug('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {
         return this.state.parseError === null && this.state.error === null;
     }
     validate() {
-        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
         if (this.isVisible()) {
             this.state.error = this.getError();
         }
@@ -181,7 +181,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {
-        // console.log('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
+        // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
         if (this.getModel().getAttr('placeholder'))
             return this.getModel().getAttr('placeholder');
         if (this.getApp().getHostApp().isDebugMode()) {
@@ -195,7 +195,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
         }
     }
     getError() {
-        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.view && this.view.getWidget()) {
             try {
@@ -223,22 +223,22 @@ class RowFormFieldController extends FieldController_1.FieldController {
         return this.state.parseError !== null;
     }
     calcChangedState(row) {
-        // console.log('RowFormFieldController.calcChangedState', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.calcChangedState', this.getModel().getFullName());
         if (!row)
             throw new Error('FieldController: no row');
         if (this.isParseError()) {
-            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
             return true;
         }
         if (this.getModel().hasColumn()) {
             const fieldRawValue = this.getModel().valueToRaw(this.getValue());
             const dsRawValue = this.getModel().getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-                console.log(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
+                console.debug(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
             if (this.getModel().isChanged(row)) {
@@ -248,7 +248,7 @@ class RowFormFieldController extends FieldController_1.FieldController {
                     original = original.substr(0, 100);
                 if (modified)
                     modified = modified.substr(0, 100);
-                console.log(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
+                console.debug(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
                 return true;
             }
         }

@@ -104,10 +104,10 @@ export class TableFormView<
     }
 
     renderGridCellView = (row, column, onCreate, onUnmount) => {
-        // console.log('TableFormView.renderGridCellView');
+        // console.debug('TableFormView.renderGridCellView');
         const ctrl = this.getCtrl().getField(column.name);
         if (!ctrl) throw new Error(`no field: ${column.name}`);
-        // console.log(column.name, ctrl.constructor.name);
+        // console.debug(column.name, ctrl.constructor.name);
         return React.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
     };
 

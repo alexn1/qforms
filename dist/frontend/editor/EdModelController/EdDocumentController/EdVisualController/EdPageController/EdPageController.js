@@ -24,7 +24,7 @@ class EdPageController extends EdVisualController_1.EdVisualController {
         ];
     }
     init() {
-        // console.log('PageController.init');
+        // console.debug('PageController.init');
         this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
         this.model.actions.forEach((action) => this.createAction(action));
         this.model.forms.forEach((form) => this.createForm(form));
@@ -36,7 +36,7 @@ class EdPageController extends EdVisualController_1.EdVisualController {
         return form;
     }
     removeForm(formController) {
-        console.log('PageController.removeForm', formController.getTitle());
+        console.debug('PageController.removeForm', formController.getTitle());
         const i = this.forms.indexOf(formController);
         if (i === -1)
             throw new Error('no such formController');
@@ -77,7 +77,7 @@ class EdPageController extends EdVisualController_1.EdVisualController {
                 EditorFrontHostApp_1.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
-                console.log(name);
+                console.debug(name);
         }
     }
     async newDataSourceAction() {

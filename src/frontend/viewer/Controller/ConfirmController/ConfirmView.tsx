@@ -11,7 +11,7 @@ export class ConfirmView<T extends ConfirmController> extends View<T> {
     }
 
     render() {
-        // console.log('ConfirmView.render', this.getCtrl().options);
+        // console.debug('ConfirmView.render', this.getCtrl().options);
         if (!this.getCtrl().options.yesButton) throw new Error('no yesButton option');
         if (!this.getCtrl().options.noButton) throw new Error('no noButton option');
         return (

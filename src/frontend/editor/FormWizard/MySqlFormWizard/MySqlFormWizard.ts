@@ -30,7 +30,7 @@ export class MySqlFormWizard extends FormWizard {
     }
 
     getCountQuery() {
-        console.log('MySqlFormWizard.getCountQuery');
+        console.debug('MySqlFormWizard.getCountQuery');
         return 'select count(*) from `{table}`'.replace('{table}', this.tableName);
     }
 }

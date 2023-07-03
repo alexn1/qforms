@@ -30,7 +30,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
     };
 
     onBlur = async (value) => {
-        // console.log('RowFormPhoneFieldView.onBlur', value);
+        // console.debug('RowFormPhoneFieldView.onBlur', value);
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);
     };
@@ -75,7 +75,7 @@ export class RowFormPhoneFieldView extends RowFormFieldView<RowFormPhoneFieldCon
     }
 
     render() {
-        // console.log('RowFormPhoneFieldView.render');
+        // console.debug('RowFormPhoneFieldView.render');
         return (
             <div className={this.getCssClassNames()}>
                 {this.renderPhoneBox()}

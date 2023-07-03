@@ -22,7 +22,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     state: FormControllerState;
 
     static create(model: Form, parent: PageController): FormController {
-        // console.log('FormController.create', model.getFullName());
+        // console.debug('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper.getGlobalClass(ctrlClass);
@@ -36,7 +36,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     constructor(model: TForm, parent: PageController) {
         super(model, parent);
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
 
@@ -48,7 +48,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     deinit() {
-        // console.log('FormController.deinit:', this.getModel().getFullName());
+        // console.debug('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -72,7 +72,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
 
@@ -85,7 +85,7 @@ export class FormController<TForm extends Form = Form> extends ModelController<T
     }
 
     async onActionClick(name: string, row: RawRow): Promise<any> {
-        console.log('FormController.onActionClick', name, row);
+        console.debug('FormController.onActionClick', name, row);
     }
 
     getField<TFieldController extends FieldController = FieldController>(

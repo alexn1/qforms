@@ -6,7 +6,7 @@ import { Image } from '../../../../../../common/widget/Image/Image';
 export class RowFormImageFieldView extends RowFormFieldView<RowFormImageFieldController> {
     onImageClick = async (e) => {
         const ctrl = this.getCtrl();
-        console.log('RowFormImageFieldView.onImageClick');
+        console.debug('RowFormImageFieldView.onImageClick');
     };
 
     render() {

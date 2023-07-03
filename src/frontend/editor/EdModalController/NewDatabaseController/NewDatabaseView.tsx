@@ -21,7 +21,7 @@ export class NewDatabaseView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewDatabaseView.onCreate');
+        // console.debug('NewDatabaseView.onCreate');
         await this.props.ctrl.onCreate({
             class: this.class.getValue(),
             name: this.name.getValue(),

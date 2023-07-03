@@ -2,15 +2,13 @@ import { LoginController } from './Controller/LoginController/LoginController';
 import { FrontHostApp, Helper } from '../common';
 
 export class LoginFrontHostApp extends FrontHostApp {
-    // data: any;
-
     constructor(private data) {
-        console.log('LoginFrontHostApp.constructor', data);
+        console.debug('LoginFrontHostApp.constructor', data);
         super();
     }
 
     async run() {
-        console.log('LoginFrontHostApp.run');
+        console.debug('LoginFrontHostApp.run');
         const loginController = LoginController.create(this);
         const rootElement = document.querySelector(
             `.${loginController.getViewClassCssBlockName()}__root`,

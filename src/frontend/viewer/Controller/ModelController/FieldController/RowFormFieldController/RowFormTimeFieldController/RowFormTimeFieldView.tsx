@@ -6,7 +6,7 @@ import './RowFormTimeFieldView.less';
 
 export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldController> {
     onCloseClick = async (e) => {
-        console.log('RowFormTimeFieldView.onCloseClick');
+        console.debug('RowFormTimeFieldView.onCloseClick');
         /*const ctrl = this.getCtrl();
         this.getWidget().state.value = '';
         this.getWidget().setState({value: ''});
@@ -14,12 +14,12 @@ export class RowFormTimeFieldView extends RowFormFieldView<RowFormTimeFieldContr
     };
 
     isCloseVisible() {
-        // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly) return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('this.getWidget().state.value:', ctrl.view.state.value);
+        // console.debug('this.getWidget().state.value:', ctrl.view.state.value);
         return this.getWidget().state.value !== '';
     }
 

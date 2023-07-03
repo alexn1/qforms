@@ -24,7 +24,7 @@ class MySqlFormWizard extends FormWizard_1.FormWizard {
             .join(',\n'));
     }
     getCountQuery() {
-        console.log('MySqlFormWizard.getCountQuery');
+        console.debug('MySqlFormWizard.getCountQuery');
         return 'select count(*) from `{table}`'.replace('{table}', this.tableName);
     }
 }

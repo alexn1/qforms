@@ -9,7 +9,7 @@ class ParamEditor extends Editor_1.Editor {
         this.database = database;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'save',

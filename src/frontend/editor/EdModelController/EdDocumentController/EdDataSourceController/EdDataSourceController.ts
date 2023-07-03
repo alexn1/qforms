@@ -43,7 +43,7 @@ export class EdDataSourceController extends EdDocumentController {
     }
 
     removeKeyColumn(keyColumnController) {
-        console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
+        console.debug('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
         const i = this.keyColumns.indexOf(keyColumnController);
         if (i === -1) throw new Error('no such keyColumnController');
         this.keyColumns.splice(i, 1);
@@ -117,7 +117,7 @@ export class EdDataSourceController extends EdDocumentController {
     }
 
     async onSaveClick(name, value) {
-        // console.log('DataSourceController.onSaveClick', name, value);
+        // console.debug('DataSourceController.onSaveClick', name, value);
         await this.model.setValue(name, value);
     }
 

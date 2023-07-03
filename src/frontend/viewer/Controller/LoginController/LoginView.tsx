@@ -13,7 +13,7 @@ export class LoginView<T extends LoginController = LoginController> extends View
     }
 
     onLoginFormSubmit = (e) => {
-        // console.log('LoginView.onLoginFormSubmit');
+        // console.debug('LoginView.onLoginFormSubmit');
         // @ts-ignore
         document.querySelector('.LoginView__button').disabled = true;
         // e.preventDefault();
@@ -32,7 +32,7 @@ export class LoginView<T extends LoginController = LoginController> extends View
     };
 
     render() {
-        // console.log('LoginView.render');
+        // console.debug('LoginView.render');
         return (
             <div className={`${this.getCssBlockName()}__container`}>
                 <form
@@ -85,4 +85,3 @@ declare global {
         LoginView: typeof LoginView;
     }
 }
-

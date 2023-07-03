@@ -9,7 +9,7 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
     constructor() {
         super(...arguments);
         this.onCloseClick = async (e) => {
-            console.log('RowFormTimeFieldView.onCloseClick');
+            console.debug('RowFormTimeFieldView.onCloseClick');
             /*const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({value: ''});
@@ -17,13 +17,13 @@ class RowFormTimeFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     isCloseVisible() {
-        // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly)
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('this.getWidget().state.value:', ctrl.view.state.value);
+        // console.debug('this.getWidget().state.value:', ctrl.view.state.value);
         return this.getWidget().state.value !== '';
     }
     render() {

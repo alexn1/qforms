@@ -9,11 +9,11 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
     constructor() {
         super(...arguments);
         this.onEditButtonClick = async (e) => {
-            console.log('RowFormComboBoxFieldController.onEditButtonClick');
+            console.debug('RowFormComboBoxFieldController.onEditButtonClick');
             const itemEditPage = this.getModel().getAttr('itemEditPage');
             const value = this.getValue();
-            // console.log('itemEditPage', itemEditPage);
-            // console.log('value:', value);
+            // console.debug('itemEditPage', itemEditPage);
+            // console.debug('value:', value);
             if (itemEditPage && value) {
                 await this.openPage({
                     name: itemEditPage,
@@ -24,7 +24,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
             }
         };
         this.onCreateButtonClick = async (e) => {
-            console.log('RowFormComboBoxFieldController.onCreateButtonClick');
+            console.debug('RowFormComboBoxFieldController.onCreateButtonClick');
             const newRowMode = this.getModel().getAttr('newRowMode');
             const itemCreateForm = this.getModel().getAttr('itemCreateForm');
             if (!itemCreateForm)
@@ -50,24 +50,24 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
                 form.off('insert', onInsert);
                 const [key] = e.inserts;
                 const [id] = Helper_1.Helper.decodeValue(key);
-                // console.log('id:', id);
+                // console.debug('id:', id);
                 await this.onChange(id.toString());
             };
             form.on('insert', onInsert);
         };
         this.onListInsert = async (e) => {
-            console.log('RowFormComboBoxFieldController.onListInsert');
+            console.debug('RowFormComboBoxFieldController.onListInsert');
             await this.rerender();
         };
         this.onListUpdate = async (e) => {
-            // console.log('RowFormComboBoxFieldController.onListUpdate');
+            // console.debug('RowFormComboBoxFieldController.onListUpdate');
             await this.rerender();
         };
         this.onListDelete = async (e) => {
             await this.rerender();
         };
         this.onItemSelect = async (e) => {
-            // console.log('RowFormComboBoxFieldController.onItemSelect');
+            // console.debug('RowFormComboBoxFieldController.onItemSelect');
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
@@ -79,7 +79,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
                     onSelect: async (key) => {
                         if (key) {
                             const [id] = (0, types_1.keyToKeyTuple)(key);
-                            // console.log('id:', id);
+                            // console.debug('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
                             }
@@ -95,7 +95,7 @@ class RowFormComboBoxFieldController extends RowFormFieldController_1.RowFormFie
         };
     }
     init() {
-        // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        // console.debug('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();
         dataSource.on('insert', this.onListInsert);

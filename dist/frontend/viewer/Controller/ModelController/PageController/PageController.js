@@ -12,13 +12,13 @@ class PageController extends ModelController_1.ModelController {
         super(model, parent);
         this.forms = [];
         this.onSaveAndCloseClick = async () => {
-            console.log('PageController.onSaveAndCloseClick');
+            console.debug('PageController.onSaveAndCloseClick');
             this.validate();
             if (this.isValid()) {
                 try {
                     this.getApp().getView().disableRerender();
                     await this.getModel().update();
-                    console.log('page model updated', this.getModel().getFullName());
+                    console.debug('page model updated', this.getModel().getFullName());
                 }
                 finally {
                     this.getApp().getView().enableRerender();
@@ -33,18 +33,18 @@ class PageController extends ModelController_1.ModelController {
             }
         };
         this.onClosePageClick = async (e) => {
-            console.log('PageController.onClosePageClick', this.getModel().getFullName());
+            console.debug('PageController.onClosePageClick', this.getModel().getFullName());
             await this.close();
         };
         this.onOpenPageClick = async (e) => {
             const name = this.getModel().getName();
             const key = this.getModel().getKey();
             const link = this.createOpenInNewLink(name, key);
-            // console.log('link', link);
+            // console.debug('link', link);
             window.open(link, '_blank');
         };
         this.onKeyDown = async (e) => {
-            // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
+            // console.debug('PageController.onKeyDown', this.getModel().getFullName(), e);
             if (e.key === 'Escape') {
                 if (this.isModal()) {
                     await this.close();
@@ -60,7 +60,7 @@ class PageController extends ModelController_1.ModelController {
             await this.selectRow(null);
         };
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model, id);
+            console.debug(`${this.constructor.name}.constructor`, model, id);
         }
         if (!id) {
             throw new Error('no id');
@@ -68,7 +68,7 @@ class PageController extends ModelController_1.ModelController {
         this.id = id;
     }
     static create(model, parent, id, options = null) {
-        // console.log('PageController.create', model.getName());
+        // console.debug('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = Helper_1.Helper.getGlobalClass(ctrlClass);
@@ -87,7 +87,7 @@ class PageController extends ModelController_1.ModelController {
         }
     }
     deinit() {
-        console.log('PageController.deinit: ' + this.getModel().getFullName());
+        console.debug('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -99,11 +99,11 @@ class PageController extends ModelController_1.ModelController {
             .createLink(Object.assign({ page: pageName }, DataSource_1.DataSource.keyToParams(key)));
     }
     async close() {
-        // console.log('PageController.close', this.getModel().getFullName());
+        // console.debug('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
-        // console.log('changed:', changed);
+        // console.debug('changed:', changed);
         // const valid = this.isValid();
-        // console.log('valid:', valid);
+        // console.debug('valid:', valid);
         if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
@@ -124,7 +124,7 @@ class PageController extends ModelController_1.ModelController {
         }
     }
     isValid() {
-        // console.log('PageController.isValid', this.getModel().getFullName());
+        // console.debug('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -133,20 +133,20 @@ class PageController extends ModelController_1.ModelController {
         return true;
     }
     async onFormChange(e) {
-        // console.log('PageController.onFormChange', this.getModel().getFullName());
+        // console.debug('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.getModel().getFullName());
+        console.debug('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
+        console.debug('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
     onFormInsert(e) {
-        console.log('PageController.onFormInsert:', this.getModel().getFullName());
-        // console.log('hasNew:', this.getModel().hasNew());
+        console.debug('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.debug('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -165,10 +165,10 @@ class PageController extends ModelController_1.ModelController {
         return await this.getApp().openPage(options);
     }
     isChanged() {
-        // console.log('PageController.isChanged', this.getModel().getFullName());
+        // console.debug('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
+                // console.debug(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
@@ -190,7 +190,7 @@ class PageController extends ModelController_1.ModelController {
         return form;
     }
     async onActionClick(name) {
-        console.log('PageController.onActionClick', name);
+        console.debug('PageController.onActionClick', name);
     }
     getTitle() {
         const model = this.getModel();

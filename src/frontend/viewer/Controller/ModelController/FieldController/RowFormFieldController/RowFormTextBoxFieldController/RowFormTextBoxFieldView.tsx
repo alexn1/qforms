@@ -19,20 +19,20 @@ export class RowFormTextBoxFieldView extends RowFormFieldView<RowFormTextBoxFiel
     };
 
     isCloseVisible() {
-        // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable()) return false;
         return ctrl.getValueForWidget() !== '';
     }
 
     onFocus = async (e) => {
-        // console.log('RowFormTextBoxFieldView.onFocus');
+        // console.debug('RowFormTextBoxFieldView.onFocus');
         this.addCssClass('focus');
         await this.rerender();
     };
 
     onBlur = async (e) => {
-        // console.log('RowFormTextBoxFieldView.onBlur');
+        // console.debug('RowFormTextBoxFieldView.onBlur');
         const value = e.target.value;
         this.removeCssClass('focus');
         this.getCtrl().onBlur(value);

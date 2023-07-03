@@ -6,7 +6,7 @@ export abstract class FormWizard {
     tableColumns: any;
 
     constructor(params) {
-        console.log('FormWizard.constructor', params);
+        console.debug('FormWizard.constructor', params);
         this.params = params;
         this.model = params.model;
         this.databaseName = params.model.database.getName();
@@ -52,7 +52,7 @@ export abstract class FormWizard {
     }
 
     getField(column) {
-        // console.log('FormWizard.getField', column);
+        // console.debug('FormWizard.getField', column);
         let field: any = {
             class: this.getFieldClass(column),
             name: column.name,

@@ -7,7 +7,7 @@ const TreeWidget_1 = require("../../../TreeWidget/TreeWidget");
 require("./EdDatabaseView.less");
 class EdDatabaseView extends common_1.ReactComponent {
     renderGrid() {
-        // console.log('DatabaseView.renderGrid');
+        // console.debug('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return ((0, jsx_runtime_1.jsx)(common_1.Grid, { classList: ['flex-max'], columns: [
                 { name: 'name', title: 'name', width: 100 },
@@ -20,7 +20,7 @@ class EdDatabaseView extends common_1.ReactComponent {
             ], rows: ctrl.tableInfo, getRowKey: (row) => row.name }));
     }
     render() {
-        // console.log('DatabaseView.render');
+        // console.debug('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'EdDatabaseView frame' }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && ((0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" })))] })) })) })), (0, jsx_runtime_1.jsx)(TreeWidget_1.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] })));

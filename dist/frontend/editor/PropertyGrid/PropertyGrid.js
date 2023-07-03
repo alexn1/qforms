@@ -8,7 +8,7 @@ class PropertyGrid extends common_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (name, value) => {
-            // console.log('PropertyGrid.onChange', name, value);
+            // console.debug('PropertyGrid.onChange', name, value);
             if (this.props.onChange) {
                 this.props.onChange(name, value);
             }

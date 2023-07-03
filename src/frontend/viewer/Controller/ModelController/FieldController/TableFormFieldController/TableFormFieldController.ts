@@ -8,7 +8,7 @@ export class TableFormFieldController<
     TField extends Field = Field,
 > extends FieldController<TField> {
     getValueForWidget(row) {
-        // console.log('TableFormFieldController.getValueForWidget');
+        // console.debug('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.getModel().getValue(row));
     }
 

@@ -5,7 +5,7 @@ import { Helper } from '../../../../../../common/Helper';
 
 export class RowFormCheckBoxListFieldController extends RowFormFieldController<CheckBoxListField> {
     init() {
-        // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
+        // console.debug('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getDataSource();
         dataSource!.on('insert', this.onListInsert);
@@ -30,12 +30,12 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
     }
 
     onListInsert = async (e) => {
-        console.log('RowFormCheckBoxListFieldController.onListInsert');
+        console.debug('RowFormCheckBoxListFieldController.onListInsert');
         await this.rerender();
     };
 
     onListUpdate = async (e) => {
-        // console.log('RowFormCheckBoxListFieldController.onListUpdate');
+        // console.debug('RowFormCheckBoxListFieldController.onListUpdate');
         await this.rerender();
     };
 
@@ -44,9 +44,9 @@ export class RowFormCheckBoxListFieldController extends RowFormFieldController<C
     };
 
     getValueForWidget() {
-        // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
+        // console.debug('RowFormCheckBoxListFieldController.getValueForWidget');
         const value = this.getValue();
-        // console.log('value:', value);
+        // console.debug('value:', value);
         return value;
     }
 

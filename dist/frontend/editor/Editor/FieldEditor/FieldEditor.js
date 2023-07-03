@@ -9,7 +9,7 @@ class FieldEditor extends Editor_1.Editor {
         this.form = form;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await common_1.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'save',

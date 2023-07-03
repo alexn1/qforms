@@ -39,7 +39,7 @@ export class ActionEditor extends Editor {
     }
 
     async setValue(name, value) {
-        //console.log('ActionEditor.setValue', name + ' = ' + value);
+        //console.debug('ActionEditor.setValue', name + ' = ' + value);
         const data = await FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'save',
@@ -64,7 +64,7 @@ export class ActionEditor extends Editor {
     }
 
     async delete() {
-        console.log('ActionEditor.delete', this.getName());
+        console.debug('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }

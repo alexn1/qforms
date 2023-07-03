@@ -39,7 +39,7 @@ class RowFormTimeFieldController extends RowFormFieldController_1.RowFormFieldCo
         }
     }
     getPlaceholder() {
-        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultValue);
+        // console.debug('CarReservefromTimeController.getPlaceholder', this.defaultValue);
         if (this.defaultValue !== null)
             return common_1.TimeBox.getStringValue(this.defaultValue);
         return super.getPlaceholder();

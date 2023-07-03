@@ -59,7 +59,7 @@ export class EdSqlDataSourceView extends EdDocumentView {
     }
 
     onChange = async (i, o) => {
-        // console.log('SqlDataSourceView.onChange');
+        // console.debug('SqlDataSourceView.onChange');
         await this.rerender();
     };
 
@@ -72,7 +72,7 @@ export class EdSqlDataSourceView extends EdDocumentView {
     }
 
     onSaveClick = async (e) => {
-        console.log('SqlDataSourceView.onSaveClick');
+        console.debug('SqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
         await this.rerender();
@@ -95,19 +95,25 @@ export class EdSqlDataSourceView extends EdDocumentView {
                     <div className="btn-group" role="group">
                         <button
                             className={`${this.getButtonClass('singleQuery')}`}
-                            style={{ fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined }}
+                            style={{
+                                fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined,
+                            }}
                             onClick={(e) => this.setState({ selected: 'singleQuery' })}>
                             singleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('multipleQuery')}`}
-                            style={{ fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined }}
+                            style={{
+                                fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined,
+                            }}
                             onClick={(e) => this.setState({ selected: 'multipleQuery' })}>
                             multipleQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
-                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }}
+                            style={{
+                                fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
+                            }}
                             onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>

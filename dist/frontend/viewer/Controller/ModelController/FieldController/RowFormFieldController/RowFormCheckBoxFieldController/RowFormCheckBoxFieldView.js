@@ -13,7 +13,7 @@ class RowFormCheckBoxFieldView extends RowFormFieldView_1.RowFormFieldView {
         };
     }
     render() {
-        // console.log('RowFormCheckBoxFieldView.render');
+        // console.debug('RowFormCheckBoxFieldView.render');
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0, jsx_runtime_1.jsx)(common_1.CheckBox, { onCreate: this.onWidgetCreate, checked: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: this.onCheckBoxChange }) })));
     }

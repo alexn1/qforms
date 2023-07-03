@@ -17,7 +17,7 @@ export class TimeBox2 extends TimeBox {
     }
 
     onClear = (e) => {
-        // console.log('TimeBox2.onClear');
+        // console.debug('TimeBox2.onClear');
         this.setState({ value: '' }, () => {
             if (this.props.onClear) {
                 this.props.onClear();

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FormWizard = void 0;
 class FormWizard {
     constructor(params) {
-        console.log('FormWizard.constructor', params);
+        console.debug('FormWizard.constructor', params);
         this.params = params;
         this.model = params.model;
         this.databaseName = params.model.database.getName();
@@ -40,7 +40,7 @@ class FormWizard {
         return 'TextBoxField';
     }
     getField(column) {
-        // console.log('FormWizard.getField', column);
+        // console.debug('FormWizard.getField', column);
         let field = {
             class: this.getFieldClass(column),
             name: column.name,

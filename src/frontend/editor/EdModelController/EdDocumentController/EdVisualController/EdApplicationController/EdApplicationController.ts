@@ -58,7 +58,7 @@ export class EdApplicationController extends EdVisualController {
     }
 
     removeDatabase(databaseController) {
-        console.log('ApplicationController.removeDatabase', databaseController.getTitle());
+        console.debug('ApplicationController.removeDatabase', databaseController.getTitle());
         const i = this.databases.indexOf(databaseController);
         if (i === -1) throw new Error('no such databaseController');
         this.databases.splice(i, 1);
@@ -94,17 +94,17 @@ export class EdApplicationController extends EdVisualController {
                 await this.actionNewAction();
                 break;
             default:
-                console.log(name);
+                console.debug(name);
         }
     }
 
     async newDatabaseAction() {
-        console.log('ApplicationController.newDatabaseAction');
+        console.debug('ApplicationController.newDatabaseAction');
         // @ts-ignore
         await EditorFrontHostApp.editorApp.openModal(
             new NewDatabaseController({
                 onCreate: async (values) => {
-                    // console.log('values: ', values);
+                    // console.debug('values: ', values);
                     const database = await this.model.newDatabase({
                         class: values.class,
                         name: values.name,

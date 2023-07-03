@@ -32,12 +32,12 @@ export class ApplicationController extends ModelController<Application> {
     constructor(model: Application, private frontHostApp: FrontHostApp) {
         super(model);
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
 
     static create(model: Application, frontHostApp: FrontHostApp): ApplicationController {
-        // console.log(
+        // console.debug(
         //     'ApplicationController.create',
         //     'debug:',
         //     this.getHostApp().isDebugMode(),
@@ -53,7 +53,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     init() {
-        // console.log('ApplicationController.init');
+        // console.debug('ApplicationController.init');
         super.init();
         // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
@@ -81,7 +81,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     createView(rootElement: Element) {
-        // console.log('ApplicationController.createView');
+        // console.debug('ApplicationController.createView');
         this.view = Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
@@ -92,12 +92,12 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     onRequest = async (e) => {
-        console.log('onRequest', e);
+        console.debug('onRequest', e);
         if (this.statusbar) {
             this.statusbar.setLastQueryTime(e.time);
         }
-        // console.log('e.remoteAppVersion', e.remoteAppVersion);
-        // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+        // console.debug('e.remoteAppVersion', e.remoteAppVersion);
+        // console.debug('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
         if (
             this.getModel().getData().versions.app &&
             this.getModel().getData().versions.app !== e.remoteAppVersion
@@ -107,14 +107,14 @@ export class ApplicationController extends ModelController<Application> {
     };
 
     createVersionNotificationIfNotExists() {
-        // console.log('ApplicationController.createVersionNotificationIfNotExists');
+        // console.debug('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
             div.className = 'version-notification';
             document.querySelector(`.${this.getView().getCssBlockName()}__body`)!.append(div);
         } else {
-            // console.log(`version notification already exists`);
+            // console.debug(`version notification already exists`);
         }
     }
 
@@ -139,13 +139,13 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     async openPage(options: OpenPageOptions): Promise<PageController> {
-        console.log('ApplicationController.openPage', options);
+        console.debug('ApplicationController.openPage', options);
         if (!options.name) throw new Error('no name');
         // if (options.key) throw new Error('openPage: key param is deprecated');
 
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
             return pageController;
@@ -170,7 +170,7 @@ export class ApplicationController extends ModelController<Application> {
             };
         }
         const pc = this.createPage(pageData, options);
-        // console.log('pc:', pc);
+        // console.debug('pc:', pc);
 
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
@@ -184,7 +184,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     removeModal(ctrl): void {
-        // console.log('ApplicationController.removeModal', ctrl);
+        // console.debug('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1) throw new Error(`cannot find modal: ${ctrl.getId()}`);
         this.modals.splice(i, 1);
@@ -219,11 +219,11 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     onPageSelect(pc: PageController): void {
-        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
+        console.debug('ApplicationController.onPageSelect', pc.getModel().getName());
     }
 
     async closePage(pageController: PageController): Promise<void> {
-        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
+        console.debug('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         } else if (this.activePage === pageController) {
@@ -238,11 +238,11 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     async onActionClick(name: string): Promise<any> {
-        console.log('ApplicationController.onActionClick', name);
+        console.debug('ApplicationController.onActionClick', name);
     }
 
     getMenuItemsProp() {
-        // console.log('ApplicationController.getMenuItemsProp');
+        // console.debug('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
             ...(this.getModel().getData().menu
@@ -284,13 +284,13 @@ export class ApplicationController extends ModelController<Application> {
     };
 
     onLogout = async () => {
-        console.log('ApplicationController.onLogout');
+        console.debug('ApplicationController.onLogout');
         const result = await this.getModel().request({ action: 'logout' });
         location.href = this.getRootPath();
     };
 
     onMenuItemClick = async (menu, type, name) => {
-        console.log('ApplicationController.onMenuItemClick', menu, type, name);
+        console.debug('ApplicationController.onMenuItemClick', menu, type, name);
         if (type === 'page') {
             await this.openPage({ name: name, modal: false });
             history.pushState({ pageName: name }, '', this.getHostApp().createLink({ page: name }));
@@ -326,7 +326,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     async onWindowPopState(e) {
-        console.log('ApplicationController.onWindowPopState', e.state);
+        console.debug('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
             name: e.state ? e.state.pageName : this.homePageName,
             modal: false,
@@ -334,7 +334,7 @@ export class ApplicationController extends ModelController<Application> {
     }
 
     getTitle() {
-        // console.log('ApplicationController.getTitle', this.activePage);
+        // console.debug('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
             return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
         }

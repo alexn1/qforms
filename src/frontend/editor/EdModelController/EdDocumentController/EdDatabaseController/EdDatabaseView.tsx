@@ -4,7 +4,7 @@ import './EdDatabaseView.less';
 
 export class EdDatabaseView extends ReactComponent {
     renderGrid() {
-        // console.log('DatabaseView.renderGrid');
+        // console.debug('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return (
             <Grid
@@ -25,7 +25,7 @@ export class EdDatabaseView extends ReactComponent {
     }
 
     render() {
-        // console.log('DatabaseView.render');
+        // console.debug('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return (

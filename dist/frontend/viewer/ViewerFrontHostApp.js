@@ -39,7 +39,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         this.applicationController = null;
     }
     async run() {
-        console.log('ViewerFrontHostApp.run', this.getData());
+        console.debug('ViewerFrontHostApp.run', this.getData());
         // application
         const application = new Application_1.Application(this.getData());
         application.init();
@@ -62,7 +62,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         }
     }
     async onWindowPopState(e) {
-        // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        // console.debug('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
     }
     logError(err) {
@@ -78,7 +78,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                 appVersion: this.getData().versions.app,
             }, null, 4),
         };
-        console.log(`POST ${this.getData().logErrorUrl}`, body);
+        console.debug(`POST ${this.getData().logErrorUrl}`, body);
         fetch(this.getData().logErrorUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -93,7 +93,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         return this.options.data;
     }
     alert(options) {
-        console.log('ViewerFrontHostApp.alert', options);
+        console.debug('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -105,12 +105,12 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                             react_dom_1.default.unmountComponentAtNode(root);
                             resolve();
                         } })));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), {
                         ctrl,
                         key: 0,
                     });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('alert already exists'));
@@ -122,7 +122,7 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
         });
     }
     confirm(options) {
-        console.log('ViewerFrontHostApp.confirm', options);
+        console.debug('ViewerFrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -134,9 +134,9 @@ class ViewerFrontHostApp extends common_1.FrontHostApp {
                             react_dom_1.default.unmountComponentAtNode(root);
                             resolve(result);
                         } })));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = common_1.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('confirm already exists'));

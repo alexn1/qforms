@@ -37,7 +37,7 @@ export class TableFormComboBoxFieldController extends TableFormFieldController<C
     }
 
     onListUpdate = async (e) => {
-        // console.log('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
+        // console.debug('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
         this.getForm().invalidate();
         await this.getForm().rerender();
     };

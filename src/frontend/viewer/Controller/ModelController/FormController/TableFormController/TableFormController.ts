@@ -47,19 +47,19 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onNewClick = async (e) => {
-        console.log('TableFormController.onNewClick');
+        console.debug('TableFormController.onNewClick');
         await this.new();
     };
 
     onRefreshClick = async (e) => {
-        console.log('TableFormController.onRefreshClick', this.getModel().getFullName());
+        console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
         await this.getModel().refresh();
         // console.error('refresh error handler:', err.message);
         // alert(err.message);
     };
 
     onDeleteClick = async (e) => {
-        console.log(
+        console.debug(
             'TableFormController.onDeleteClick',
             this.getModel().getFullName(),
             this.grid!.getActiveRowKey(),
@@ -73,12 +73,12 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onGridCellDblClick = async (row, key) => {
-        // console.log('TableFormController.onGridCellDblClick', row);
+        // console.debug('TableFormController.onGridCellDblClick', row);
         // const bodyCell = e.bodyCell;
         // const row = bodyCell.bodyRow.dbRow;
-        // console.log('row:', row);
+        // console.debug('row:', row);
         // const key = this.getModel().getDefaultDataSource().getRowKey(row);
-        // console.log('key:', key);
+        // console.debug('key:', key);
         switch (this.getModel().getAttr('editMethod')) {
             // case 'table':
             //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
@@ -94,12 +94,12 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onGridLinkClick = async (key) => {
-        console.log('TableFormController.onGridLinkClick', key);
+        console.debug('TableFormController.onGridLinkClick', key);
         await this.edit(key);
     };
 
     onGridDeleteKeyDown = async (row, key) => {
-        console.log('TableFormController.onGridDeleteKeyDown', row, key);
+        console.debug('TableFormController.onGridDeleteKeyDown', row, key);
         if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
@@ -115,11 +115,11 @@ export class TableFormController extends FormController<TableForm> {
     }*/
 
     /*onShowPage = async () => {
-        console.log('TableFormController.onShowPage', this.getModel().getFullName());
+        console.debug('TableFormController.onShowPage', this.getModel().getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
-            // console.log('document.activeElement:', document.activeElement);
+            // console.debug('document.activeElement:', document.activeElement);
         }
     }*/
 
@@ -186,7 +186,7 @@ export class TableFormController extends FormController<TableForm> {
     }
 
     async edit(key: Key) {
-        // console.log('TableForm.edit', this.getModel().getFullName(), key);
+        // console.debug('TableForm.edit', this.getModel().getFullName(), key);
         if (!this.getModel().getAttr('itemEditPage')) {
             throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }
@@ -207,14 +207,14 @@ export class TableFormController extends FormController<TableForm> {
     }
 
     onModelRefresh = async (e) => {
-        console.log('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
+        console.debug('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
         if (!this.view) return;
         this.invalidate();
         await this.rerender();
     };
 
     onModelInsert = async (e) => {
-        console.log('TableFormController.onModelInsert', this.getModel().getFullName(), e);
+        console.debug('TableFormController.onModelInsert', this.getModel().getFullName(), e);
         if (!this.view) return;
         if (this.grid && e.source) {
             for (const key of e.inserts) {
@@ -226,7 +226,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onModelUpdate = async (e) => {
-        console.log(
+        console.debug(
             'TableFormController.onModelUpdate',
             this.getModel().getFullName(),
             e,
@@ -248,7 +248,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onModelDelete = async (e) => {
-        console.log('TableFormController.onModelDelete', this.getModel().getFullName(), e);
+        console.debug('TableFormController.onModelDelete', this.getModel().getFullName(), e);
         if (!this.view) return;
         if (this.grid) {
             for (const key of e.deletes) {
@@ -262,7 +262,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onGridSelectionChange = async (key) => {
-        // console.log('TableFormController.onGridSelectionChange', key);
+        // console.debug('TableFormController.onGridSelectionChange', key);
         this.invalidate();
         await this.getPage().rerender();
     };
@@ -274,14 +274,14 @@ export class TableFormController extends FormController<TableForm> {
     }
 
     isRowSelected = () => {
-        // console.log('TableFormController.isRowSelected');
+        // console.debug('TableFormController.isRowSelected');
         return !!this.grid && !!this.grid.getActiveRowKey();
     };
 
     onFrameChanged = async (value) => {
-        console.log('TableFormController.onFrameChanged', value);
+        console.debug('TableFormController.onFrameChanged', value);
         let frame = parseInt(value);
-        console.log('frame:', frame);
+        console.debug('frame:', frame);
         const frameCount = this.getModel().getDefaultDataSource().getFramesCount();
         if (frame < 1) frame = 1;
         if (frame > frameCount) frame = frameCount;
@@ -291,7 +291,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onNextClick = async () => {
-        console.log('TableFormController.onNextClick');
+        console.debug('TableFormController.onNextClick');
         const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
         this.getModel().getDefaultDataSource().setFrame(frame);
         this.getModel().getDefaultDataSource().refresh();
@@ -299,7 +299,7 @@ export class TableFormController extends FormController<TableForm> {
     };
 
     onPreviousClick = async () => {
-        console.log('TableFormController.onPreviousClick');
+        console.debug('TableFormController.onPreviousClick');
         const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
         this.getModel().getDefaultDataSource().setFrame(frame);
         this.getModel().getDefaultDataSource().refresh();

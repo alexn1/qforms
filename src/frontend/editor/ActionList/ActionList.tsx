@@ -9,12 +9,12 @@ export class ActionList extends ReactComponent {
     }
 
     onClick = async (li) => {
-        console.log('ActionList.onClick', li);
+        console.debug('ActionList.onClick', li);
         await this.props.onClick(li.dataset.action);
     };
 
     render() {
-        // console.log('ActionList.render', this.state.item);
+        // console.debug('ActionList.render', this.state.item);
         return (
             <DropdownButton
                 title={'Actions'}

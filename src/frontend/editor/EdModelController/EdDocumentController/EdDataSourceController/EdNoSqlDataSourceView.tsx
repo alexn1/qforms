@@ -49,7 +49,7 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
     }
 
     onChange = async (i, o) => {
-        // console.log('NoSqlDataSourceView.onChange');
+        // console.debug('NoSqlDataSourceView.onChange');
         await this.rerender();
     };
 
@@ -62,7 +62,7 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
     }
 
     onSaveClick = async (e) => {
-        console.log('NoSqlDataSourceView.onSaveClick');
+        console.debug('NoSqlDataSourceView.onSaveClick');
         const ctrl = this.props.ctrl;
         await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
         await this.rerender();
@@ -85,13 +85,17 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
                     <div className="btn-group" role="group">
                         <button
                             className={`${this.getButtonClass('selectQuery')}`}
-                            style={{ fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined }}
+                            style={{
+                                fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined,
+                            }}
                             onClick={(e) => this.setState({ selected: 'selectQuery' })}>
                             selectQuery
                         </button>
                         <button
                             className={`${this.getButtonClass('countQuery')}`}
-                            style={{ fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }}
+                            style={{
+                                fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
+                            }}
                             onClick={(e) => this.setState({ selected: 'countQuery' })}>
                             countQuery
                         </button>

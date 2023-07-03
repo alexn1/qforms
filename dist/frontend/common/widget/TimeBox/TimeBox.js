@@ -14,12 +14,12 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-                console.log('cancel', event.key);
+                console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.log('TimeBox.onChange', e.target.value);
+            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -28,10 +28,10 @@ class TimeBox extends ReactComponent_1.ReactComponent {
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.log('before:', target.selectionStart, target.selectionEnd);
+            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.log('after:', target.selectionStart, target.selectionEnd);
-                // console.log('inEnd:', inEnd);
+                // console.debug('after:', target.selectionStart, target.selectionEnd);
+                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -42,26 +42,26 @@ class TimeBox extends ReactComponent_1.ReactComponent {
                         nValue = this.getValue();
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.log('nValue:', nValue);
+                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.log('TimeBox.onBlur');
+            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
                     nValue = this.getValue();
                 }
                 catch (err) {
-                    console.log(err.message);
+                    console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.log('nValue:', nValue);
+                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -104,11 +104,11 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         this.setState({ value: TimeBox.getStringValue(value) });
     }
     /*onKeyDown = event => {
-        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
         if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
         if (event.which < 96 || event.which > 105) {
-            console.log('cancel');
+            console.debug('cancel');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -119,12 +119,12 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         }
     }*/
     /*onKeyUp = event => {
-        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
     static getStringValue(value) {
-        // console.log('TimeBox.getStringValue', value);
+        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -139,7 +139,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.log('TimeBox.getIntegerValue', stringValue);
+        // console.debug('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '')
             return null;
@@ -170,7 +170,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
             // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
@@ -185,7 +185,7 @@ class TimeBox extends ReactComponent_1.ReactComponent {
         return false;
     }
     render() {
-        // console.log('TimeBox.render', this.state.value);
+        // console.debug('TimeBox.render', this.state.value);
         return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
             // onKeyDown={this.onKeyDown}
             // onKeyUp={this.onKeyUp}

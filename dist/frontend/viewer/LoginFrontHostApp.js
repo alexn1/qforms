@@ -4,14 +4,13 @@ exports.LoginFrontHostApp = void 0;
 const LoginController_1 = require("./Controller/LoginController/LoginController");
 const common_1 = require("../common");
 class LoginFrontHostApp extends common_1.FrontHostApp {
-    // data: any;
     constructor(data) {
-        console.log('LoginFrontHostApp.constructor', data);
+        console.debug('LoginFrontHostApp.constructor', data);
         super();
         this.data = data;
     }
     async run() {
-        console.log('LoginFrontHostApp.run');
+        console.debug('LoginFrontHostApp.run');
         const loginController = LoginController_1.LoginController.create(this);
         const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
         if (!rootElement)

@@ -11,7 +11,7 @@ export class ImageDialogView<T extends ImageDialogController> extends View<T> {
     }
 
     render() {
-        console.log('ImageDialogView.render');
+        console.debug('ImageDialogView.render');
         const { ctrl } = this.props;
         return (
             <div

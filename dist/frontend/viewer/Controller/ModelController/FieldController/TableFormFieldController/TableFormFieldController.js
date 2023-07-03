@@ -4,7 +4,7 @@ exports.TableFormFieldController = void 0;
 const FieldController_1 = require("../FieldController");
 class TableFormFieldController extends FieldController_1.FieldController {
     getValueForWidget(row) {
-        // console.log('TableFormFieldController.getValueForWidget');
+        // console.debug('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.getModel().getValue(row));
     }
     getForm() {

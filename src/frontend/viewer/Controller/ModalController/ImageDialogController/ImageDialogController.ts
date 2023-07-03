@@ -3,13 +3,13 @@ import { ImageDialogView } from './ImageDialogView';
 
 export class ImageDialogController extends ModalController {
     constructor(options) {
-        // console.log('ImageDialogController.constructor', options);
+        // console.debug('ImageDialogController.constructor', options);
         super(options);
         if (!options.src) throw new Error('no src');
     }
 
     getViewClass() {
-        console.log('ImageDialogController.getViewClass');
+        console.debug('ImageDialogController.getViewClass');
         return ImageDialogView;
     }
 
@@ -28,7 +28,7 @@ export class ImageDialogController extends ModalController {
     };
 
     onImageClick = async (e) => {
-        console.log('ImageDialogController.onImageClick');
+        console.debug('ImageDialogController.onImageClick');
         await this.close();
     };
 }

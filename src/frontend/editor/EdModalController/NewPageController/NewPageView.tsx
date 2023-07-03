@@ -15,7 +15,7 @@ export class NewPageView extends ReactComponent {
     }
 
     onCreate = async (e?) => {
-        // console.log('NewPageView.onCreate');
+        // console.debug('NewPageView.onCreate');
         await this.props.ctrl.onCreate({
             name: this.name.getValue(),
             caption: this.caption.getValue(),

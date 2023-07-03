@@ -33,11 +33,11 @@ class EdSqlDataSourceView extends EdDocumentView_1.EdDocumentView {
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
-            // console.log('SqlDataSourceView.onChange');
+            // console.debug('SqlDataSourceView.onChange');
             await this.rerender();
         };
         this.onSaveClick = async (e) => {
-            console.log('SqlDataSourceView.onSaveClick');
+            console.debug('SqlDataSourceView.onSaveClick');
             const ctrl = this.props.ctrl;
             await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
             await this.rerender();
@@ -84,7 +84,13 @@ class EdSqlDataSourceView extends EdDocumentView_1.EdDocumentView {
     }
     render() {
         const { ctrl } = this.props;
-        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'EdSqlDataSourceView full flex-column' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.singleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.multipleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
+        return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'EdSqlDataSourceView full flex-column' }, { children: [(0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0, jsx_runtime_1.jsx)(common_1.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: {
+                                        fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: {
+                                        fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0, jsx_runtime_1.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: {
+                                        fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.singleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.multipleRef }) })), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0, jsx_runtime_1.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 exports.EdSqlDataSourceView = EdSqlDataSourceView;

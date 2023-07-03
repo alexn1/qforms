@@ -17,7 +17,7 @@ export class EdDocumentController extends EdModelController {
     }
 
     onDocumentClose() {
-        console.log('DocumentController.onDocumentClose', this.getTitle());
+        console.debug('DocumentController.onDocumentClose', this.getTitle());
         this.document = null;
     }
 }

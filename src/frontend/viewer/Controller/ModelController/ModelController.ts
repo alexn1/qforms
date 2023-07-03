@@ -32,7 +32,7 @@ export abstract class ModelController<TModel extends Model = Model> extends Cont
     }
 
     getViewClass(): any {
-        // console.log(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
+        // console.debug(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
         const model = this.getModel();
         if (!model.isAttr('viewClass')) {
             throw new Error(`${this.constructor.name} not supports view`);
