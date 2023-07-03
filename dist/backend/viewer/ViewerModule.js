@@ -41,11 +41,11 @@ class ViewerModule {
         this.hostApp = hostApp;
     }
     async init() {
-        console.log('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
+        console.debug('ViewerModule.init', 'getFrontendDirPath:', this.hostApp.getFrontendDirPath());
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'css')).map((path) => `/viewer/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'viewer/public'), 'js')).map((path) => `/viewer/public/${path}`);
-        console.log('ViewerModule.css:', this.css);
-        console.log('ViewerModule.js:', this.js);
+        console.debug('ViewerModule.css:', this.css);
+        console.debug('ViewerModule.js:', this.js);
         if (!this.js.length)
             throw new Error('no qforms js');
     }

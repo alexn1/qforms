@@ -31,6 +31,8 @@ const BACKEND_DIR_PATH = __dirname;
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
+const QFORMS_LOG_LEVEL =
+    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'log' : 'log');
 
 export interface BackHostAppParams {
     [name: string]: any;
@@ -73,6 +75,7 @@ export class BackHostApp {
 
     async run(): Promise<void> {
         // console.log(`${this.constructor.name}.run`);
+        this.initConsole();
         this.initDirPaths();
         this.checkNodeVersion();
         this.checkApplicationFolder();
@@ -92,6 +95,12 @@ export class BackHostApp {
 
     getPort(): number {
         return this.params.port || LISTEN_PORT;
+    }
+
+    initConsole() {
+        if (QFORMS_LOG_LEVEL === 'log') {
+            console.debug = () => {};
+        }
     }
 
     async initHttpServer() {
@@ -163,8 +172,10 @@ export class BackHostApp {
             this.isDevelopment() ? '/index2' : ''
         }\n`;
         message += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
+        message += `\cwd: ${process.cwd()}\n`;
         message += `\tappsDirPath: ${this.appsDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
+        message += `\tQFORMS_LOG_LEVEL: ${QFORMS_LOG_LEVEL}\n`;
 
         if (this.isDevelopment()) {
             message += `\tmonitor: http://${host}:${port}/monitor\n`;
@@ -285,7 +296,7 @@ export class BackHostApp {
 
         // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
-            console.log('application is creating:', context.getRoute());
+            console.debug('application is creating:', context.getRoute());
             const promise = EmptyPromise.create();
             this.createAppQueue[context.getRoute()]!.push(promise);
             return promise;
@@ -296,7 +307,7 @@ export class BackHostApp {
             const app = (this.applications[context.getRoute()] = await this.createApplication(
                 context,
             ));
-            console.log(
+            console.debug(
                 'application created, start resolve loop',
                 context.getRoute(),
                 this.createAppQueue[context.getRoute()]!.length,
@@ -339,7 +350,7 @@ export class BackHostApp {
     }
 
     async createApplication(context: Context): Promise<BkApplication> {
-        console.log(`BackHostApp.createApplication: ${context.getRoute()}`);
+        console.debug(`BackHostApp.createApplication: ${context.getRoute()}`);
 
         const appFilePath = this.getAppFilePath(context);
         const distDirPath = this.makeDistDirPathForApp(appFilePath);

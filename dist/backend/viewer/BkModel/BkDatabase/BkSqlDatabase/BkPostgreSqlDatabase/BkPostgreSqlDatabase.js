@@ -45,7 +45,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return new pg_1.Pool(config);
     }
     async connect(context) {
-        console.log('PostgreSqlDatabase.connect', this.getName());
+        console.debug('PostgreSqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
         this.checkDeinited();

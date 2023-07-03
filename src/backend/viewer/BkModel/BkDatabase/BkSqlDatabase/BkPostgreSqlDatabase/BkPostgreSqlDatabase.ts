@@ -19,7 +19,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }*/
 
     async deinit(): Promise<void> {
-        console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
+        console.debug(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
 
         for (const configString in this.pool) {
@@ -47,7 +47,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async connect(context: Context): Promise<void> {
-        console.log('PostgreSqlDatabase.connect', this.getName());
+        console.debug('PostgreSqlDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
         this.checkDeinited();
         const name = this.getName();
@@ -59,7 +59,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async release(context: Context): Promise<void> {
-        console.log('PostgreSqlDatabase.release', this.getName());
+        console.debug('PostgreSqlDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         this.getConnection(context).release();
         context.connections[this.getName()] = null;
@@ -71,7 +71,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
         if (context.query.sql) {
-            console.log(
+            console.debug(
                 colors.blue('PostgreSqlDatabase.queryResult'),
                 {
                     query,
