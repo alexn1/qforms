@@ -33,7 +33,7 @@ class BkPage extends BkModel_1.BkModel {
         }
     }
     async fill(context) {
-        // console.log('Page.fill', this.constructor.name, this.getFullName());
+        // console.debug('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
@@ -42,7 +42,7 @@ class BkPage extends BkModel_1.BkModel {
         return response;
     }
     async rpc(name, context) {
-        console.log('Page.rpc', name, context.getBody());
+        console.debug('Page.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new MyError_1.MyError({

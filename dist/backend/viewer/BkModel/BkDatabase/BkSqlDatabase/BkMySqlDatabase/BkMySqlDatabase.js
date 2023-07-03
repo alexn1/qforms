@@ -10,10 +10,10 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     }
     /* constructor(data, parent?) {
         super(data, parent);
-        console.log('new MySqlDatabase');
+        console.debug('new MySqlDatabase');
     } */
     async deinit() {
-        console.log(`MySqlDatabase.deinit: ${this.getName()}`);
+        console.debug(`MySqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
         if (this.pool !== null) {
             await new Promise((resolve) => {
@@ -25,16 +25,16 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
     }
     getPool() {
-        //console.log('MySqlDatabase.getPool');
+        //console.debug('MySqlDatabase.getPool');
         if (!this.pool) {
-            //console.log('creating connection pool for: ' + database);
+            //console.debug('creating connection pool for: ' + database);
             this.pool = (0, mysql_1.createPool)(this.getConfig());
         }
-        //console.log('pool connections count: ' + this.pool._allConnections.length);
+        //console.debug('pool connections count: ' + this.pool._allConnections.length);
         return this.pool;
     }
     getConfig() {
-        console.log('MySqlDatabase.getConfig');
+        console.debug('MySqlDatabase.getConfig');
         return Object.assign(Object.assign({}, super.getConfig()), { queryFormat: BkMySqlDatabase.queryFormat });
     }
     /*getDefaultPort(): number {
@@ -53,7 +53,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     async queryRows(context, query, params = null) {
-        console.log('MySqlDatabase.queryRows', query, params);
+        console.debug('MySqlDatabase.queryRows', query, params);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = true;
         const cnn = await this.getConnection(context);
@@ -75,7 +75,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     async queryResult(context, query, params = null) {
-        console.log('MySqlDatabase.queryResult', query, params);
+        console.debug('MySqlDatabase.queryResult', query, params);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const nest = false;
         const cnn = await this.getConnection(context);
@@ -91,7 +91,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     _getRows(result, fields) {
-        //console.log('MySqlDatabase._getRows');
+        //console.debug('MySqlDatabase._getRows');
         const fieldCount = {};
         for (let j = 0; j < fields.length; j++) {
             const f = fields[j];
@@ -115,7 +115,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return rows;
     }
     begin(context) {
-        console.log('MySqlDatabase.begin');
+        console.debug('MySqlDatabase.begin');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.beginTransaction((err) => {
@@ -129,7 +129,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     commit(context) {
-        console.log('MySqlDatabase.commit');
+        console.debug('MySqlDatabase.commit');
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.commit((err) => {
@@ -143,7 +143,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     rollback(context, err) {
-        console.log('MySqlDatabase.rollback:', this.getName(), err.message);
+        console.debug('MySqlDatabase.rollback:', this.getName(), err.message);
         const cnn = this.getConnection(context);
         return new Promise((resolve, reject) => {
             cnn.rollback(() => {
@@ -152,14 +152,14 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         });
     }
     static queryFormat(query, params = {}) {
-        console.log('MySqlDatabase.queryFormat', query, params);
+        console.debug('MySqlDatabase.queryFormat', query, params);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (params.hasOwnProperty(name)) {
                 return (0, mysql_1.escape)(params[name]);
             }
             throw new Error(`no query param: ${name}`);
         });
-        console.log('real db sql: ' + sql);
+        console.debug('real db sql: ' + sql);
         return sql;
     }
     static typeCast(field, next) {
@@ -169,7 +169,7 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return next();
     }
     async getTableList() {
-        console.log('MySqlDatabase.getTableList');
+        console.debug('MySqlDatabase.getTableList');
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = (0, mysql_1.createConnection)(config);
@@ -180,16 +180,16 @@ class BkMySqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
                     reject(err);
                 }
                 else {
-                    //console.log('rows:', rows);
+                    //console.debug('rows:', rows);
                     const tables = rows.map((row) => row[fields[0].name]);
-                    console.log('tables:', tables);
+                    console.debug('tables:', tables);
                     resolve(tables);
                 }
             });
         });
     }
     async getTableInfo(table) {
-        console.log('MySqlDatabase.getTableInfo:', table);
+        console.debug('MySqlDatabase.getTableInfo:', table);
         const config = this.getConfig();
         return new Promise((resolve, reject) => {
             const cnn = (0, mysql_1.createConnection)(config);
@@ -204,7 +204,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 }
                 else {
                     const tableInfo = rows.map((row) => {
-                        // console.log('row:', row);
+                        // console.debug('row:', row);
                         return {
                             name: row.COLUMN_NAME,
                             type: this.getColumnTypeByDataType(row.COLUMN_TYPE),
@@ -218,7 +218,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                             // EXTRA         : row.EXTRA,
                         };
                     });
-                    console.log('tableInfo:', tableInfo);
+                    console.debug('tableInfo:', tableInfo);
                     resolve(tableInfo);
                 }
             });
@@ -240,14 +240,14 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
-        console.log(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        console.debug(`MySqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (autoColumns.length > 1)
             throw new Error('mysql does not support more than one auto increment column');
         const query = this.getInsertQuery(table, values);
-        // console.log('insert query:', query, values);
+        // console.debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // console.log('insert result:', result);
+        // console.debug('insert result:', result);
         if (autoColumns.length === 1) {
             if (!result.insertId)
                 throw new Error('no insertId');
@@ -268,7 +268,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
                 _row[column] = row[column];
             }
         }
-        console.log('_row:', _row);
+        console.debug('_row:', _row);
         */
         /*
         const buffers = {};
@@ -282,7 +282,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         */
     }
     async connect(context) {
-        console.log('MySqlDatabase.connect', this.getName());
+        console.debug('MySqlDatabase.connect', this.getName());
         if (!context)
             throw new Error('no context');
         this.checkDeinited();
@@ -293,7 +293,7 @@ WHERE table_schema = '${config.database}' and table_name = '${table}'`;
         context.connections[name] = await BkMySqlDatabase.Pool_getConnection(this.getPool());
     }
     async release(context) {
-        console.log('MySqlDatabase.release', this.getName());
+        console.debug('MySqlDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
         this.getConnection(context).release();

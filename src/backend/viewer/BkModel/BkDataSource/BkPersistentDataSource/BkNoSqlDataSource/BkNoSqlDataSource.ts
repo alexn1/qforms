@@ -108,7 +108,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     }
 
     async create(context: Context, _values: any = null): Promise<Result> {
-        console.log('NoSqlDataSource.create');
+        console.debug('NoSqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -122,18 +122,18 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
-        console.log('values', values);
+        console.debug('values', values);
 
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
-        console.log('insertResult:', insertResult);
+        console.debug('insertResult:', insertResult);
 
         const newRow = { _id: insertResult.insertedId };
         const key = this.getKeyFromValues(newRow);
         if (!key) throw new Error('create: cannot calc row key');
-        console.log('key:', key);
+        console.debug('key:', key);
 
         const keyParams = BkDataSource.keyToParams(key);
-        // console.log('keyParams:', keyParams);
+        // console.debug('keyParams:', keyParams);
 
         // row
         const [row] = await this.getDatabase().queryRows(
@@ -145,7 +145,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
 
-        // console.log('row:', row);
+        // console.debug('row:', row);
 
         const result = new Result();
         Result.addInsertToResult(result, databaseName, tableName, key);
@@ -154,7 +154,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
     }
 
     async update(context: Context): Promise<Result> {
-        console.log('NoSqlDataSource.update');
+        console.debug('NoSqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -163,22 +163,22 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
-        // console.log('changes:', changes);
+        // console.debug('changes:', changes);
 
         const key = Object.keys(changes)[0] as Key;
-        console.log('key:', key);
+        console.debug('key:', key);
         const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
 
         const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
             $set: values,
         });
-        console.log('updateResult', updateResult);
+        console.debug('updateResult', updateResult);
 
         // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource.keyToParams(newKey);
-        console.log('newKey:', newKey);
+        console.debug('newKey:', newKey);
 
         // row
         const [row] = await this.getDatabase().queryRows(
@@ -189,7 +189,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
         if (!row) throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // console.log('row:', row);
+        // console.debug('row:', row);
 
         // result
         const result = new Result();
@@ -210,7 +210,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             this.getAttr('table'),
             filter,
         );
-        console.log('updateResult', deleteResult);
+        console.debug('updateResult', deleteResult);
 
         const result = new Result();
         Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);

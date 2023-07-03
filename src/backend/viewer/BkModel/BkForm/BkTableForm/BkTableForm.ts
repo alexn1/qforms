@@ -7,7 +7,7 @@ export class BkTableForm extends BkForm<BkTableFormScheme> {
     }*/
 
     // async fill(context) {
-    //     console.log('TableForm.fill', this.constructor.name, this.getFullName());
+    //     console.debug('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
 

@@ -69,11 +69,11 @@ class BkApplication extends BkModel_1.BkModel {
     async getScripts(context) {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // console.log('publicDirPath:', publicDirPath);
+        // console.debug('publicDirPath:', publicDirPath);
         return (await BkHelper_1.BkHelper.getFilePaths(publicDirPath, 'js')).map((src) => `${virtualPath}/${src}`);
     }
     async deinit() {
-        console.log(`Application.deinit: ${this.getName()}`);
+        console.debug(`Application.deinit: ${this.getName()}`);
         await super.deinit();
         // databases
         for (const database of this.databases) {
@@ -110,7 +110,7 @@ class BkApplication extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // console.log('Application.fill');
+        // console.debug('Application.fill');
         const start = Date.now();
         const response = (await super.fill(context));
         response.route = context.getRoute();
@@ -157,7 +157,7 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     async createMenu(context) {
-        // console.log('Application.createMenu');
+        // console.debug('Application.createMenu');
         const menu = {};
         const nav = {};
         // pages
@@ -205,7 +205,7 @@ class BkApplication extends BkModel_1.BkModel {
         return new BkPageLink_1.BkPageLink(data, this);
     }
     async createPage(pageLinkName) {
-        // console.log('Application.createPage', pageLinkName);
+        // console.debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -222,7 +222,7 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async getPage(context, pageLinkName) {
-        // console.log('Application.getPage', pageLinkName);
+        // console.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -238,7 +238,7 @@ class BkApplication extends BkModel_1.BkModel {
             .map((data) => BaseModel_1.BaseModel.getName(data));
     }
     async fillPages(context) {
-        // console.log('Application.fillPages', context.query.page);
+        // console.debug('Application.fillPages', context.query.page);
         const pages = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -255,7 +255,7 @@ class BkApplication extends BkModel_1.BkModel {
         return pages;
     }
     async authenticate(context, username, password) {
-        console.log('Application.authenticate');
+        console.debug('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -271,7 +271,7 @@ class BkApplication extends BkModel_1.BkModel {
         return null;
     }
     async rpc(name, context) {
-        // console.log('Application.rpc', name, context.getReq().body);
+        // console.debug('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
         throw new MyError_1.MyError({
@@ -281,14 +281,14 @@ class BkApplication extends BkModel_1.BkModel {
         });
     }
     /* async request(options) {
-        console.log(colors.magenta('Application.request'), options);
+        console.debug(colors.magenta('Application.request'), options);
         return await axios(options);
     } */
     getEnv() {
         return this.env;
     }
     getEnvVarValue(name) {
-        // console.log(`Application.getEnvVarValue: ${name}`);
+        // console.debug(`Application.getEnvVarValue: ${name}`);
         if (!name)
             throw new Error('no name');
         const env = this.getEnv();
@@ -314,7 +314,7 @@ class BkApplication extends BkModel_1.BkModel {
     // to init custom context params before each request get/post
     async initContext(context) { }
     static makeAppInfoFromAppFile(appFile, distDirPath) {
-        // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
+        // console.debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path_1.default.basename(path_1.default.dirname(filePath));
         const fileName = path_1.default.basename(filePath, path_1.default.extname(filePath));
@@ -334,14 +334,14 @@ class BkApplication extends BkModel_1.BkModel {
         };
     }
     static async loadAppInfo(appFilePath, distDirPath) {
-        // console.log('Application.loadAppInfo', appFilePath);
+        // console.debug('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
         return appInfo;
     }
     static async getAppInfos(appsDirPath, distDirPath) {
-        // console.log('BkApplication.getAppInfos', appsDirPath);
+        // console.debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper_1.BkHelper._glob(path_1.default.join(appsDirPath, '*/*.json'));
         const appInfos = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
@@ -389,19 +389,19 @@ class BkApplication extends BkModel_1.BkModel {
     addClient(webSocket) {
         // add to clients
         this.clients.push(webSocket);
-        // console.log('this.clients', this.clients);
+        // console.debug('this.clients', this.clients);
     }
     removeClient(webSocket) {
         const i = this.clients.indexOf(webSocket);
         // @ts-ignore
         if (i === -1)
             throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        // console.log('i:', i);
+        // console.debug('i:', i);
         this.clients.splice(i, 1);
-        // console.log('this.clients', this.clients);
+        // console.debug('this.clients', this.clients);
     }
     broadcastDomesticResultToClients(context, result) {
-        console.log('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
+        console.debug('Application.broadcastDomesticResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -415,7 +415,7 @@ class BkApplication extends BkModel_1.BkModel {
         }
     }
     broadcastForeignResultToClients(context, result) {
-        console.log('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
+        console.debug('Application.broadcastForeignResultToClients', context.getReq().body.uuid, result);
         if (!context.getReq().body.uuid)
             throw new Error('no uuid');
         if (!result)
@@ -460,7 +460,7 @@ class BkApplication extends BkModel_1.BkModel {
         return true;
     }
     async handleGetFile(context, next) {
-        // console.log('Application.handleGetFile', context.getUri());
+        // console.debug('Application.handleGetFile', context.getUri());
         const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper_1.BkHelper.exists(filePath)) {
             context.getRes().sendFile(filePath);

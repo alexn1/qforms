@@ -13,11 +13,11 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         this.pool = {};
     }
     /* constructor(data, parent?) {
-        console.log('new PostgreSqlDatabase');
+        console.debug('new PostgreSqlDatabase');
         super(data, parent);
     } */
     /*static async create(data, parent) {
-        // console.log('PostgreSqlDatabase.create');
+        // console.debug('PostgreSqlDatabase.create');
         return new PostgreSqlDatabase(data, parent);
     }*/
     async deinit() {
@@ -32,7 +32,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         this.pool = {};
     }
     getPool(context) {
-        // console.log('PostgreSqlDatabase.getPool');
+        // console.debug('PostgreSqlDatabase.getPool');
         const config = this.getConfig(context);
         const configString = JSON.stringify(config);
         if (!this.pool[configString]) {
@@ -73,25 +73,25 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         if (context.query.sql) {
-            console.log('sql:', sql);
-            console.log('values:', values);
+            console.debug('sql:', sql);
+            console.debug('values:', values);
         }
         const result = await this.getConnection(context).query(sql, values);
-        // console.log('cnn.query result:', result);
+        // console.debug('cnn.query result:', result);
         return result;
     }
     static async queryResult(pool, query, params = null) {
         console.debug(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
-        // console.log('sql:', sql);
-        // console.log('values:', values);
+        // console.debug('sql:', sql);
+        // console.debug('values:', values);
         const result = await pool.query(sql, values);
-        // console.log('cnn.query result:', result);
+        // console.debug('cnn.query result:', result);
         return result;
     }
     async queryRows(context, query, params = null) {
-        // console.log('PostgreSqlDatabase.queryRows'/*, query, params*/);
+        // console.debug('PostgreSqlDatabase.queryRows'/*, query, params*/);
         const result = await this.queryResult(context, query, params);
         return result.rows;
     }
@@ -114,15 +114,15 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         await this.getConnection(context).query('rollback');
     }
     static formatQuery(query, params) {
-        // console.log(`BkPostgreSqlDatabase.formatQuery: ${query}`);
-        // console.log('params:', params);
+        // console.debug(`BkPostgreSqlDatabase.formatQuery: ${query}`);
+        // console.debug('params:', params);
         if (!params) {
             return { sql: query, values: null };
         }
         const usedValues = BkSqlDatabase_1.BkSqlDatabase.getUsedParams(query);
-        // console.log('usedValues:', usedValues);
+        // console.debug('usedValues:', usedValues);
         const keys = Object.keys(params).filter((key) => usedValues.indexOf(key) > -1);
-        // console.log('keys:', keys);
+        // console.debug('keys:', keys);
         const values = keys.map((key) => params[key]);
         const sql = query.replace(/\{([\w\.@]+)\}/g, (text, name) => {
             if (keys.indexOf(name) > -1) {
@@ -139,14 +139,14 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
             .join(' and ');
         const query = `delete from "${tableName}" where ${whereString}`;
-        // console.log('query:', query);
+        // console.debug('query:', query);
         return query;
     }
     getUpdateQuery(tableName, values, where) {
         return BkPostgreSqlDatabase.getUpdateQuery(tableName, values, where);
     }
     static getUpdateQuery(tableName, values, where) {
-        // console.log('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
+        // console.debug('PostgreSqlDatabase.getUpdateQuery', tableName, values, where/*, Object.keys(values).map(name => typeof values[name])*/);
         const valueKeys = Object.keys(values);
         const whereKeys = Object.keys(where);
         if (valueKeys.length === 0)
@@ -158,29 +158,29 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return `update "${tableName}" set ${valuesString} where ${whereString}`;
     }
     getInsertQuery(tableName, values) {
-        // console.log('PostgreSqlDatabase.getInsertQuery');
+        // console.debug('PostgreSqlDatabase.getInsertQuery');
         const columns = Object.keys(values);
         if (!columns.length)
             return `insert into "${tableName}" default values`;
         const columnsString = columns.map((column) => `"${column}"`).join(', ');
         const valuesString = columns.map((column) => `{${column}}`).join(', ');
         const query = `insert into "${tableName}"(${columnsString}) values (${valuesString})`;
-        // console.log('query:', query);
+        // console.debug('query:', query);
         return query;
     }
     async getTableList() {
-        console.log('PostgreSqlDatabase.getTableList');
+        console.debug('PostgreSqlDatabase.getTableList');
         const rows = await this.query(`select "table_name" from information_schema.tables where table_schema = 'public'`);
         const tableList = rows.map((row) => row.table_name);
-        // console.log('tableList:', tableList);
+        // console.debug('tableList:', tableList);
         return tableList;
     }
     async getTableInfo(table) {
-        console.log('PostgreSqlDatabase.getTableInfo');
+        console.debug('PostgreSqlDatabase.getTableInfo');
         const keyColumns = await this.getTableKeyColumns(table);
-        // console.log('keyColumns:', keyColumns);
+        // console.debug('keyColumns:', keyColumns);
         const rows = await this.query(`select * from INFORMATION_SCHEMA.COLUMNS where table_name = '${table}' order by ordinal_position`);
-        // console.log('getTableInfo rows:', rows);
+        // console.debug('getTableInfo rows:', rows);
         const tableInfo = rows.map((row) => ({
             name: row.column_name,
             type: this.getColumnTypeByDataType(row.data_type),
@@ -190,7 +190,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
             comment: null,
             dbType: row.data_type,
         }));
-        // console.log('tableInfo:', tableInfo);
+        // console.debug('tableInfo:', tableInfo);
         return tableInfo;
     }
     getColumnTypeByDataType(dataType) {
@@ -217,7 +217,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         }
     }
     async getTableKeyColumns(table) {
-        console.log('PostgreSqlDatabase.getTableKeyColumns');
+        console.debug('PostgreSqlDatabase.getTableKeyColumns');
         const rows = await this.query(`SELECT a.attname, format_type(a.atttypid, a.atttypmod) AS data_type
 FROM   pg_index i
 JOIN   pg_attribute a ON a.attrelid = i.indrelid AND a.attnum = ANY(i.indkey)
@@ -236,18 +236,18 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         return 5432;
     }*/
     async queryAutoValues(context, table, autoColumnTypes) {
-        console.log('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
+        console.debug('PostgreSqlDatabase.queryAutoValues', autoColumnTypes);
         const autoColumns = Object.keys(autoColumnTypes);
         if (!autoColumns.length)
             throw new Error('no auto columns');
         const queries = autoColumns.map((column) => `select currval('"${table}_${column}_seq"')`);
         const query = queries.join('; ');
-        // console.log('query:', query);
+        // console.debug('query:', query);
         const result = await this.queryResult(context, query);
-        // console.log('result:', result);
+        // console.debug('result:', result);
         if (result instanceof Array) {
             return autoColumns.reduce((acc, name, i) => {
-                // console.log('name:', name);
+                // console.debug('name:', name);
                 const r = result[i];
                 let [{ currval: val }] = r.rows;
                 if (autoColumnTypes[name] === 'number' && typeof val === 'string')
@@ -269,15 +269,15 @@ WHERE  i.indrelid = '"${table}"'::regclass AND i.indisprimary;`);
         }
     }
     async insertRow(context, table, values, autoColumnTypes = {}) {
-        console.log(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
+        console.debug(`PostgreSqlDatabase.insertRow ${table}`, values, autoColumnTypes);
         const query = this.getInsertQuery(table, values);
-        // console.log('insert query:', query, values);
+        // console.debug('insert query:', query, values);
         const result = await this.queryResult(context, query, values);
-        // console.log('insert result:', result);
+        // console.debug('insert result:', result);
         // auto
         if (Object.keys(autoColumnTypes).length > 0) {
             const auto = await this.queryAutoValues(context, table, autoColumnTypes);
-            console.log('auto:', auto);
+            console.debug('auto:', auto);
             return Object.assign(Object.assign({}, auto), values);
         }
         return Object.assign({}, values);

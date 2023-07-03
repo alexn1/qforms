@@ -18,7 +18,7 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
         return dChanges;
     }
     getValuesFromRow(rawRow) {
-        console.log('PersistentDataSource.getValuesFromRow', rawRow);
+        console.debug('PersistentDataSource.getValuesFromRow', rawRow);
         const form = this.getForm();
         if (!form)
             throw new Error('not form ds');

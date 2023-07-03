@@ -26,7 +26,7 @@ export abstract class BkPersistentDataSource<
     }
 
     getValuesFromRow(rawRow: RawRow): Row {
-        console.log('PersistentDataSource.getValuesFromRow', rawRow);
+        console.debug('PersistentDataSource.getValuesFromRow', rawRow);
         const form = this.getForm();
         if (!form) throw new Error('not form ds');
         const values = {} as Row;

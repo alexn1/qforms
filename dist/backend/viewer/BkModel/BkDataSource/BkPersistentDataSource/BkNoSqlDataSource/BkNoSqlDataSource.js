@@ -82,7 +82,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         return [rawRows, count];
     }
     async create(context, _values = null) {
-        console.log('NoSqlDataSource.create');
+        console.debug('NoSqlDataSource.create');
         if (this.getAccess(context).create !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -92,30 +92,30 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
-        console.log('values', values);
+        console.debug('values', values);
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
-        console.log('insertResult:', insertResult);
+        console.debug('insertResult:', insertResult);
         const newRow = { _id: insertResult.insertedId };
         const key = this.getKeyFromValues(newRow);
         if (!key)
             throw new Error('create: cannot calc row key');
-        console.log('key:', key);
+        console.debug('key:', key);
         const keyParams = BkDataSource_1.BkDataSource.keyToParams(key);
-        // console.log('keyParams:', keyParams);
+        // console.debug('keyParams:', keyParams);
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), keyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // console.log('row:', row);
+        // console.debug('row:', row);
         const result = new Result_1.Result();
         Result_1.Result.addInsertToResult(result, databaseName, tableName, key);
         Result_1.Result.addInsertExToResult(result, databaseName, tableName, key, rawRow);
         return result;
     }
     async update(context) {
-        console.log('NoSqlDataSource.update');
+        console.debug('NoSqlDataSource.update');
         if (this.getAccess(context).update !== true) {
             throw new Error(`[${this.getFullName()}]: access denied.`);
         }
@@ -124,26 +124,26 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
         const changes = this.decodeChanges(context.getBody().changes);
-        // console.log('changes:', changes);
+        // console.debug('changes:', changes);
         const key = Object.keys(changes)[0];
-        console.log('key:', key);
+        console.debug('key:', key);
         const filter = this.getKeyValuesFromKey(key);
         const values = changes[key];
         const updateResult = await this.getDatabase().updateOne(context, tableName, filter, {
             $set: values,
         });
-        console.log('updateResult', updateResult);
+        console.debug('updateResult', updateResult);
         // new key
         const newKey = this.calcNewKey(key, values);
         const newKeyParams = BkDataSource_1.BkDataSource.keyToParams(newKey);
-        console.log('newKey:', newKey);
+        console.debug('newKey:', newKey);
         // row
         const [row] = await this.getDatabase().queryRows(context, this.getSelectQuery(context), newKeyParams);
         if (!row)
             throw new Error('select query does not return row');
         this.checkRow(row);
         const rawRow = this.encodeRow(row);
-        // console.log('row:', row);
+        // console.debug('row:', row);
         // result
         const result = new Result_1.Result();
         Result_1.Result.addUpdateToResult(result, databaseName, tableName, key, newKey);
@@ -157,7 +157,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         const { key } = context.params;
         const filter = this.getKeyValuesFromKey(key);
         const deleteResult = await this.getDatabase().deleteOne(context, this.getAttr('table'), filter);
-        console.log('updateResult', deleteResult);
+        console.debug('updateResult', deleteResult);
         const result = new Result_1.Result();
         Result_1.Result.addDeleteToResult(result, this.getAttr('database'), this.getAttr('table'), key);
         return result;

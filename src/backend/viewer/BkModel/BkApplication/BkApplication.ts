@@ -24,6 +24,7 @@ import { index } from '../../index';
 import * as text from '../../text';
 import { ApplicationData } from '../../../../data';
 import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { NextFunction } from 'express';
 
 const pkg = require('../../../../../package.json');
 
@@ -73,14 +74,14 @@ export class BkApplication<
     async getScripts(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
-        // console.log('publicDirPath:', publicDirPath);
+        // console.debug('publicDirPath:', publicDirPath);
         return (await BkHelper.getFilePaths(publicDirPath, 'js')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
 
     async deinit(): Promise<void> {
-        console.log(`Application.deinit: ${this.getName()}`);
+        console.debug(`Application.deinit: ${this.getName()}`);
         await super.deinit();
 
         // databases
@@ -124,7 +125,7 @@ export class BkApplication<
     }
 
     async fill(context: Context): Promise<ApplicationData> {
-        // console.log('Application.fill');
+        // console.debug('Application.fill');
         const start = Date.now();
         const response = (await super.fill(context)) as ApplicationData;
 
@@ -185,7 +186,7 @@ export class BkApplication<
     }
 
     async createMenu(context: Context): Promise<void> {
-        // console.log('Application.createMenu');
+        // console.debug('Application.createMenu');
         const menu = {};
         const nav = {};
 
@@ -240,7 +241,7 @@ export class BkApplication<
     }
 
     async createPage(pageLinkName: string): Promise<BkPage> {
-        // console.log('Application.createPage', pageLinkName);
+        // console.debug('Application.createPage', pageLinkName);
         if (!this.isData('pageLinks', pageLinkName)) {
             throw new Error(`no page with name: ${pageLinkName}`);
         }
@@ -259,7 +260,7 @@ export class BkApplication<
     }
 
     async getPage(context: Context, pageLinkName: string): Promise<BkPage> {
-        // console.log('Application.getPage', pageLinkName);
+        // console.debug('Application.getPage', pageLinkName);
         const user = context.getUser();
         if (user && this.authorizePage(user, pageLinkName) === false) {
             throw new Error('authorization error');
@@ -277,7 +278,7 @@ export class BkApplication<
     }
 
     async fillPages(context: Context): Promise<any[]> {
-        // console.log('Application.fillPages', context.query.page);
+        // console.debug('Application.fillPages', context.query.page);
         const pages: any[] = [];
         if (context.query.page) {
             const page = await this.getPage(context, context.query.page);
@@ -294,7 +295,7 @@ export class BkApplication<
     }
 
     async authenticate(context: Context, username: string, password: string): Promise<any> {
-        console.log('Application.authenticate');
+        console.debug('Application.authenticate');
         if (username === this.getAttr('user') && password === this.getAttr('password')) {
             return {
                 id: 1,
@@ -313,7 +314,7 @@ export class BkApplication<
     }
 
     async rpc(name: string, context: Context) {
-        // console.log('Application.rpc', name, context.getReq().body);
+        // console.debug('Application.rpc', name, context.getReq().body);
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no remote proc ${this.constructor.name}.${name}`,
@@ -323,7 +324,7 @@ export class BkApplication<
     }
 
     /* async request(options) {
-        console.log(colors.magenta('Application.request'), options);
+        console.debug(colors.magenta('Application.request'), options);
         return await axios(options);
     } */
 
@@ -332,7 +333,7 @@ export class BkApplication<
     }
 
     getEnvVarValue(name: string) {
-        // console.log(`Application.getEnvVarValue: ${name}`);
+        // console.debug(`Application.getEnvVarValue: ${name}`);
         if (!name) throw new Error('no name');
         const env = this.getEnv();
         const obj = this.data.env[env];
@@ -359,7 +360,7 @@ export class BkApplication<
     async initContext(context: Context): Promise<void> {}
 
     static makeAppInfoFromAppFile(appFile: JsonFile, distDirPath?: string): AppInfo {
-        // console.log('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
+        // console.debug('Application.makeAppInfoFromAppFile:', appFile.filePath, appFile.data);
         const { data, filePath } = appFile;
         const dirName = path.basename(path.dirname(filePath));
         const fileName = path.basename(filePath, path.extname(filePath));
@@ -380,7 +381,7 @@ export class BkApplication<
     }
 
     static async loadAppInfo(appFilePath: string, distDirPath?: string): Promise<AppInfo> {
-        // console.log('Application.loadAppInfo', appFilePath);
+        // console.debug('Application.loadAppInfo', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
         const appInfo = BkApplication.makeAppInfoFromAppFile(appFile, distDirPath);
@@ -388,7 +389,7 @@ export class BkApplication<
     }
 
     static async getAppInfos(appsDirPath: string, distDirPath: string): Promise<AppInfo[]> {
-        // console.log('BkApplication.getAppInfos', appsDirPath);
+        // console.debug('BkApplication.getAppInfos', appsDirPath);
         const appFilesPaths = await BkHelper._glob(path.join(appsDirPath, '*/*.json'));
         const appInfos: AppInfo[] = [];
         for (let i = 0; i < appFilesPaths.length; i++) {
@@ -440,20 +441,20 @@ export class BkApplication<
     addClient(webSocket: WebSocket): void {
         // add to clients
         this.clients.push(webSocket);
-        // console.log('this.clients', this.clients);
+        // console.debug('this.clients', this.clients);
     }
 
     removeClient(webSocket: WebSocket): void {
         const i = this.clients.indexOf(webSocket);
         // @ts-ignore
         if (i === -1) throw new Error(`cannot find socket: ${webSocket.route} ${webSocket.uuid}`);
-        // console.log('i:', i);
+        // console.debug('i:', i);
         this.clients.splice(i, 1);
-        // console.log('this.clients', this.clients);
+        // console.debug('this.clients', this.clients);
     }
 
     broadcastDomesticResultToClients(context: Context, result: Result): void {
-        console.log(
+        console.debug(
             'Application.broadcastDomesticResultToClients',
             context.getReq()!.body.uuid,
             result,
@@ -470,7 +471,7 @@ export class BkApplication<
     }
 
     broadcastForeignResultToClients(context: Context, result: Result): void {
-        console.log(
+        console.debug(
             'Application.broadcastForeignResultToClients',
             context.getReq()!.body.uuid,
             result,
@@ -519,8 +520,8 @@ export class BkApplication<
         return true;
     }
 
-    async handleGetFile(context: Context, next) {
-        // console.log('Application.handleGetFile', context.getUri());
+    async handleGetFile(context: Context, next: NextFunction) {
+        // console.debug('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper.exists(filePath)) {
             context.getRes().sendFile(filePath);

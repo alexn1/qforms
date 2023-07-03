@@ -5,11 +5,11 @@ import { BkRowFormScheme } from '../../../BkModelScheme/BkFormScheme/BkRowFormSc
 export class BkRowForm extends BkForm<BkRowFormScheme> {
     // constructor(data, parent) {
     //     super(data, parent);
-    //     // console.log('RowForm.constructor', this.getFullName());
+    //     // console.debug('RowForm.constructor', this.getFullName());
     // }
 
     // async fill(context) {
-    //     console.log('RowForm.fill', this.constructor.name, this.getFullName());
+    //     console.debug('RowForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
 

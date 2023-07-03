@@ -26,7 +26,7 @@ class BkDateField extends BkField_1.BkField {
         else {
             raw = BkHelper_1.BkHelper.encodeValue(value);
         }
-        // console.log('DateField.valueToRaw', this.getFullName(), value, raw);
+        // console.debug('DateField.valueToRaw', this.getFullName(), value, raw);
         return raw;
     }
     rawToValue(raw) {
@@ -34,7 +34,7 @@ class BkDateField extends BkField_1.BkField {
         if (value && !this.isTimezone()) {
             BkHelper_1.BkHelper.addTimezoneOffset(value);
         }
-        // console.log('DateField.rawToValue', this.getFullName(), raw, value);
+        // console.debug('DateField.rawToValue', this.getFullName(), raw, value);
         return value;
     }
 }

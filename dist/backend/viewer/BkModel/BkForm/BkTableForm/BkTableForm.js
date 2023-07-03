@@ -7,7 +7,7 @@ class BkTableForm extends BkForm_1.BkForm {
         return new TableForm(data, parent);
     }*/
     // async fill(context) {
-    //     console.log('TableForm.fill', this.constructor.name, this.getFullName());
+    //     console.debug('TableForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
     fillAttributes(response) {

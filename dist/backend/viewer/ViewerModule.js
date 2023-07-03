@@ -56,7 +56,7 @@ class ViewerModule {
         return this.js;
     }
     async handleViewerGet(context, bkApplication) {
-        console.log('ViewerModule.handleViewerGet', context.getDomain(), context.query, context.getReq().url);
+        console.debug('ViewerModule.handleViewerGet', context.getDomain(), context.query, context.getReq().url);
         if (bkApplication.isAuthentication() &&
             !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
             await this.loginGet(context, bkApplication);
@@ -94,12 +94,12 @@ class ViewerModule {
             ctrl: applicationController,
             onCreate: (c) => { },
         }));
-        // console.log('appViewHtml:', appViewHtml);
+        // console.debug('appViewHtml:', appViewHtml);
         const html = bkApplication.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
     }
     async loginGet(context, application) {
-        console.log('ViewerModule.loginGet');
+        console.debug('ViewerModule.loginGet');
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...application.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...application.scripts] }));
         const html = (0, login_1.login)(pkg.version, context, application, links, scripts, {
@@ -112,7 +112,7 @@ class ViewerModule {
         context.getRes().end(html);
     }
     async handleViewerPost(context, application) {
-        // console.log('ViewerModule.handleViewerPost');
+        // console.debug('ViewerModule.handleViewerPost');
         const req = context.getReq();
         if (req.body.action === 'login') {
             await this.loginPost(context, application);
@@ -129,7 +129,7 @@ class ViewerModule {
         }
     }
     async loginPost(context, application) {
-        console.log('ViewerModule.loginPost');
+        console.debug('ViewerModule.loginPost');
         const req = context.getReq();
         const res = context.getRes();
         if (req.body.tzOffset === undefined)
@@ -320,7 +320,7 @@ class ViewerModule {
     }
     // action
     async rpc(context, application) {
-        console.log('ViewerModule.rpc', context.getReq().body);
+        console.debug('ViewerModule.rpc', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -367,7 +367,7 @@ class ViewerModule {
     }
     // action
     async logout(context, application) {
-        console.log('ViewerModule.logout');
+        console.debug('ViewerModule.logout');
         const req = context.getReq();
         const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
@@ -379,7 +379,7 @@ class ViewerModule {
     }
     // action
     async test(context, application) {
-        console.log('ViewerModule.test', context.getReq().body);
+        console.debug('ViewerModule.test', context.getReq().body);
         const req = context.getReq();
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);

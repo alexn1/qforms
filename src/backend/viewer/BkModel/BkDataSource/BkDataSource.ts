@@ -35,7 +35,7 @@ export class BkDataSource extends BkModel {
     }
 
     async init(context: Context): Promise<void> {
-        // console.log('DataSource.init', this.getFullName());
+        // console.debug('DataSource.init', this.getFullName());
         await super.init(context);
 
         // keyColumns
@@ -52,7 +52,7 @@ export class BkDataSource extends BkModel {
 
     getKeyColumns(): string[] {
         const keyColumns = this.getItemNames('keyColumns');
-        // console.log('keyColumns:', keyColumns);
+        // console.debug('keyColumns:', keyColumns);
         if (!keyColumns.length) {
             throw new Error(
                 `${this.getFullName()}: DataSource without table must have at least one key column`,
@@ -74,7 +74,7 @@ export class BkDataSource extends BkModel {
 
     checkKeyFields() {
         const fieldsClumns = this.getForm().fields.map((field) => field.getAttr('column'));
-        // console.log('fieldsClumns:', fieldsClumns);
+        // console.debug('fieldsClumns:', fieldsClumns);
         for (const keyColumn of this.keyColumns) {
             if (!fieldsClumns.includes(keyColumn)) {
                 throw new Error(`[${this.getFullName()}]: no field with key column: ${keyColumn}`);
@@ -103,9 +103,9 @@ export class BkDataSource extends BkModel {
             .filter((column) => !!column);
         for (const rowColumn of rowColumns) {
             if (!formColumns.includes(rowColumn)) {
-                console.log('rowColumns:', rowColumns);
-                console.log('formColumns:', formColumns);
-                console.log('row:', row);
+                console.debug('rowColumns:', rowColumns);
+                console.debug('formColumns:', formColumns);
+                console.debug('row:', row);
                 throw new Error(
                     `${this.getFullName()}: not used column "${rowColumn}" in result set`,
                 );
@@ -247,7 +247,7 @@ export class BkDataSource extends BkModel {
     async fill(
         context: Context,
     ): Promise<{ rows: RawRow[]; count: number | null; limit?: number }> {
-        // console.log('DataSource.fill', this.getFullName());
+        // console.debug('DataSource.fill', this.getFullName());
         const response = await super.fill(context);
 
         // keyColumns
@@ -259,7 +259,7 @@ export class BkDataSource extends BkModel {
     }
 
     async getRows(): Promise<Row[]> {
-        // console.log('DataSource.getRows');
+        // console.debug('DataSource.getRows');
         /* const jsonFilePath = this.getJsonFilePath();
         const exists = await BkHelper.exists(jsonFilePath);
         if (exists) {

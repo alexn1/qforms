@@ -38,7 +38,7 @@ export class BkPage<
     }
 
     async fill(context: Context): Promise<any> {
-        // console.log('Page.fill', this.constructor.name, this.getFullName());
+        // console.debug('Page.fill', this.constructor.name, this.getFullName());
         const response = await super.fill(context);
         await this.fillCollection(response, 'dataSources', context);
         await this.fillCollection(response, 'actions', context);
@@ -48,7 +48,7 @@ export class BkPage<
     }
 
     async rpc(name: string, context: Context): Promise<any> {
-        console.log('Page.rpc', name, context.getBody());
+        console.debug('Page.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
         throw new MyError({
             message: `no remote proc ${this.constructor.name}.${name}`,

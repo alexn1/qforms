@@ -25,7 +25,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     getUrl() {
-        // console.log('config', this.getConfig());
+        // console.debug('config', this.getConfig());
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
@@ -48,9 +48,9 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
             acc[name] = name === '_id' ? new ObjectId(filter[name]) : filter[name];
             return acc;
         }, {});
-        console.log('colName', colName);
-        console.log('_filter:', _filter);
-        console.log('update', update);
+        console.debug('colName', colName);
+        console.debug('_filter:', _filter);
+        console.debug('update', update);
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
 
@@ -60,7 +60,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
 
     async deleteOne(context: Context, colName: string, filter): Promise<any> {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
-        // console.log('_filter', _filter);
+        // console.debug('_filter', _filter);
         return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
 
@@ -122,10 +122,10 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         // for find() and aggregate()
         if (result instanceof FindCursor || result instanceof AggregationCursor) {
             const rows = await result.toArray();
-            // console.log('rows:', rows);
+            // console.debug('rows:', rows);
             const [firstRow] = rows;
             if (!firstRow) throw new Error('queryScalar: no first row');
-            // console.log('firstRow:', firstRow);
+            // console.debug('firstRow:', firstRow);
             const firstField = Object.keys(firstRow)[0];
             if (!firstField) throw new Error('queryScalar: no first field');
             return firstRow[firstField];
@@ -139,17 +139,17 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     async begin(context: Context): Promise<void> {
-        console.log('MongoDbDatabase.begin');
+        console.debug('MongoDbDatabase.begin');
         this.getConnection(context).session.startTransaction();
     }
 
     async commit(context: Context): Promise<void> {
-        console.log('MongoDbDatabase.commit');
+        console.debug('MongoDbDatabase.commit');
         this.getConnection(context).session.commitTransaction();
     }
 
     async rollback(context: Context, err): Promise<void> {
-        console.log('MongoDbDatabase.rollback');
+        console.debug('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
     }
 }

@@ -20,7 +20,7 @@ export class BkDatabase<TConnection = any> extends BkModel<BkDatabaseScheme> {
     fillCollections = ['tables'];
 
     /* constructor(data, parent?) {
-        //console.log('Database.constructor');
+        //console.debug('Database.constructor');
         super(data, parent);
     } */
 
@@ -42,7 +42,7 @@ export class BkDatabase<TConnection = any> extends BkModel<BkDatabaseScheme> {
     }
 
     getConnection(context: Context): TConnection {
-        // console.log('Database.getConnection');
+        // console.debug('Database.getConnection');
         if (!context) throw new Error('no context');
         const name = this.getName();
         if (!context.connections[name]) {

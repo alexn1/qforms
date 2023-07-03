@@ -13,6 +13,7 @@ import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { ApplicationData } from '../../../../data';
 import { BkApplicationScheme } from '../../BkModelScheme/BkApplicationScheme/BkApplicationScheme';
+import { NextFunction } from 'express';
 export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> extends BkModel<BkApplicationScheme> {
     private appInfo;
     private hostApp;
@@ -75,7 +76,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     getTitle(context: Context): string;
     getLoginViewClassName(): string;
     isAvailable(): boolean;
-    handleGetFile(context: Context, next: any): Promise<void>;
+    handleGetFile(context: Context, next: NextFunction): Promise<void>;
     renderIndexHtml(context: Context, applicationController: ApplicationController, qformsVersion: string, links: string, scripts: string, data: ApplicationData, appViewHtml: string): string;
     useDatabase<T = any>(context: Context, appDbName: string, cb: (db: BkDatabase) => Promise<T>): Promise<T>;
     static getEnvList(data: BkApplicationScheme): string[];

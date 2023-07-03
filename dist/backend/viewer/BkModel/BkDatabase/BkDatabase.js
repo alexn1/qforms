@@ -10,7 +10,7 @@ class BkDatabase extends BkModel_1.BkModel {
         this.fillCollections = ['tables'];
     }
     /* constructor(data, parent?) {
-        //console.log('Database.constructor');
+        //console.debug('Database.constructor');
         super(data, parent);
     } */
     async init(context) {
@@ -27,7 +27,7 @@ class BkDatabase extends BkModel_1.BkModel {
         return !!context.connections[this.getName()];
     }
     getConnection(context) {
-        // console.log('Database.getConnection');
+        // console.debug('Database.getConnection');
         if (!context)
             throw new Error('no context');
         const name = this.getName();

@@ -21,7 +21,7 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         context.connections[name] = { client, session };
     }
     getUrl() {
-        // console.log('config', this.getConfig());
+        // console.debug('config', this.getConfig());
         const { host, user, password, port } = this.getConfig();
         const userPassword = user && password ? `${user}:${password}@` : '';
         const host2 = process.env.DB_HOST || host;
@@ -41,9 +41,9 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
             acc[name] = name === '_id' ? new mongodb_1.ObjectId(filter[name]) : filter[name];
             return acc;
         }, {});
-        console.log('colName', colName);
-        console.log('_filter:', _filter);
-        console.log('update', update);
+        console.debug('colName', colName);
+        console.debug('_filter:', _filter);
+        console.debug('update', update);
         return await this.getDbLink(context).collection(colName).updateOne(_filter, update);
     }
     async insertOne(context, colName, document) {
@@ -51,7 +51,7 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
     }
     async deleteOne(context, colName, filter) {
         const _filter = BkMongoDbDatabase.makeObjectIds(filter);
-        // console.log('_filter', _filter);
+        // console.debug('_filter', _filter);
         return await this.getDbLink(context).collection(colName).deleteOne(_filter);
     }
     static makeObjectIds(filter, names = ['_id']) {
@@ -90,11 +90,11 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         // for find() and aggregate()
         if (result instanceof mongodb_1.FindCursor || result instanceof mongodb_1.AggregationCursor) {
             const rows = await result.toArray();
-            // console.log('rows:', rows);
+            // console.debug('rows:', rows);
             const [firstRow] = rows;
             if (!firstRow)
                 throw new Error('queryScalar: no first row');
-            // console.log('firstRow:', firstRow);
+            // console.debug('firstRow:', firstRow);
             const firstField = Object.keys(firstRow)[0];
             if (!firstField)
                 throw new Error('queryScalar: no first field');
@@ -106,15 +106,15 @@ class BkMongoDbDatabase extends BkNoSqlDatabase_1.BkNoSqlDatabase {
         return 27017;
     }
     async begin(context) {
-        console.log('MongoDbDatabase.begin');
+        console.debug('MongoDbDatabase.begin');
         this.getConnection(context).session.startTransaction();
     }
     async commit(context) {
-        console.log('MongoDbDatabase.commit');
+        console.debug('MongoDbDatabase.commit');
         this.getConnection(context).session.commitTransaction();
     }
     async rollback(context, err) {
-        console.log('MongoDbDatabase.rollback');
+        console.debug('MongoDbDatabase.rollback');
         this.getConnection(context).session.abortTransaction();
     }
 }

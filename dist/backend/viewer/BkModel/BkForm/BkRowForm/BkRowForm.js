@@ -5,10 +5,10 @@ const BkForm_1 = require("../BkForm");
 class BkRowForm extends BkForm_1.BkForm {
     // constructor(data, parent) {
     //     super(data, parent);
-    //     // console.log('RowForm.constructor', this.getFullName());
+    //     // console.debug('RowForm.constructor', this.getFullName());
     // }
     // async fill(context) {
-    //     console.log('RowForm.fill', this.constructor.name, this.getFullName());
+    //     console.debug('RowForm.fill', this.constructor.name, this.getFullName());
     //     return super.fill(context);
     // }
     isNewMode(context) {

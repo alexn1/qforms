@@ -136,7 +136,7 @@ export class ViewerModule {
                 onCreate: (c) => {},
             } as any),
         );
-        // console.log('appViewHtml:', appViewHtml);
+        // console.debug('appViewHtml:', appViewHtml);
 
         const html = bkApplication.renderIndexHtml(
             context,
@@ -152,7 +152,7 @@ export class ViewerModule {
     }
 
     async loginGet(context: Context, application: BkApplication) {
-        console.log('ViewerModule.loginGet');
+        console.debug('ViewerModule.loginGet');
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.getLinks(), ...application.links]} />,
         );
@@ -170,7 +170,7 @@ export class ViewerModule {
     }
 
     async handleViewerPost(context: Context, application: BkApplication) {
-        // console.log('ViewerModule.handleViewerPost');
+        // console.debug('ViewerModule.handleViewerPost');
         const req = context.getReq()!;
         if (req.body.action === 'login') {
             await this.loginPost(context, application);
@@ -189,7 +189,7 @@ export class ViewerModule {
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {
-        console.log('ViewerModule.loginPost');
+        console.debug('ViewerModule.loginPost');
         const req = context.getReq()!;
         const res = context.getRes();
         if (req.body.tzOffset === undefined) throw new Error('no tzOffset');
@@ -376,7 +376,7 @@ export class ViewerModule {
 
     // action
     async rpc(context: Context, application: BkApplication) {
-        console.log('ViewerModule.rpc', context.getReq()!.body);
+        console.debug('ViewerModule.rpc', context.getReq()!.body);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -419,7 +419,7 @@ export class ViewerModule {
 
     // action
     async logout(context: Context, application: BkApplication) {
-        console.log('ViewerModule.logout');
+        console.debug('ViewerModule.logout');
         const req = context.getReq()!;
         const res = context.getRes();
         if (!req.session.user || !req.session.user[context.getRoute()]) {
@@ -432,7 +432,7 @@ export class ViewerModule {
 
     // action
     async test(context: Context, application: BkApplication) {
-        console.log('ViewerModule.test', context.getReq()!.body);
+        console.debug('ViewerModule.test', context.getReq()!.body);
         const req = context.getReq();
         const res = context.getRes();
         // const result = await Test[req.body.name](req, res, context, application);

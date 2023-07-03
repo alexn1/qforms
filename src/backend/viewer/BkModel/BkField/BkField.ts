@@ -58,18 +58,18 @@ export class BkField extends BkModel {
     }
 
     dumpRowValueToParams(row: RawRow, params: Record<string, any>) {
-        // console.log('Field.dumpRowValueToParams', this.getFullName());
+        // console.debug('Field.dumpRowValueToParams', this.getFullName());
         const fullName = this.getFullName();
         try {
             const column = this.getAttr('column');
             if (!column) throw new Error('no column attr');
             const rawValue = row[column];
-            // console.log('rawValue:', rawValue);
+            // console.debug('rawValue:', rawValue);
             const value = rawValue !== undefined ? this.rawToValue(rawValue) : null;
-            // console.log('value:', value);
+            // console.debug('value:', value);
             params[fullName] = value;
         } catch (err) {
-            // console.log('row:', row);
+            // console.debug('row:', row);
             err.message = `${fullName}: ${err.message}`;
             throw err;
         }

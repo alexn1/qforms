@@ -33,7 +33,7 @@ class BkForm extends BkModel_1.BkModel {
         response.ctrlClass = this.getAttr('ctrlClass');
     }
     async fill(context) {
-        // console.log('Form.fill', this.constructor.name, this.getFullName());
+        // console.debug('Form.fill', this.constructor.name, this.getFullName());
         if (this.findDataSource('default')) {
             return super.fill(context);
         }
@@ -63,7 +63,7 @@ class BkForm extends BkModel_1.BkModel {
                 field.dumpRowValueToParams(row, params);
             }
         }
-        // console.log(params);
+        // console.debug(params);
     }
     replaceThis(context, query) {
         return query
@@ -89,7 +89,7 @@ class BkForm extends BkModel_1.BkModel {
         });
     }
     async rpc(name, context) {
-        console.log('Form.rpc', name, context.getBody());
+        console.debug('Form.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
         throw new MyError_1.MyError({

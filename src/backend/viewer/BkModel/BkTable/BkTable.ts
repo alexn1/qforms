@@ -8,7 +8,7 @@ export class BkTable extends BkModel {
 
     constructor(data, parent) {
         super(data, parent);
-        // console.log('Table.constructor', this.getName());
+        // console.debug('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
     }
 
@@ -17,7 +17,7 @@ export class BkTable extends BkModel {
     }
 
     getKeyColumns(): string[] {
-        // console.log('Table.getKeyColumns');
+        // console.debug('Table.getKeyColumns');
         const keyColumns = this.columns
             .filter((column) => column.isKey())
             .map((column) => column.getName());

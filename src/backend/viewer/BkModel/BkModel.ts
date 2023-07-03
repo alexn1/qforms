@@ -22,7 +22,7 @@ export class BkModel<
     }
 
     async fill(context: Context): Promise<any> {
-        // console.log('Model.fill', this.constructor.name, this.getName());
+        // console.debug('Model.fill', this.constructor.name, this.getName());
         const response = {};
 
         // attributes
@@ -61,7 +61,7 @@ export class BkModel<
     }
 
     async createColItems(colName: string, context: Context): Promise<void> {
-        // console.log(`Model.createColItems ${this.getName()}.${colName}`);
+        // console.debug(`Model.createColItems ${this.getName()}.${colName}`);
         for (const itemData of this.getCol(colName)) {
             await this.createColItem(colName, itemData, context);
         }

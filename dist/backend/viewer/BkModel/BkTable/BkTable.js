@@ -6,14 +6,14 @@ class BkTable extends BkModel_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
         this.columns = [];
-        // console.log('Table.constructor', this.getName());
+        // console.debug('Table.constructor', this.getName());
         this.fillCollections = ['columns'];
     }
     async init(context) {
         await this.createColItems('columns', context);
     }
     getKeyColumns() {
-        // console.log('Table.getKeyColumns');
+        // console.debug('Table.getKeyColumns');
         const keyColumns = this.columns
             .filter((column) => column.isKey())
             .map((column) => column.getName());
