@@ -32,7 +32,7 @@ const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
 const QFORMS_LOG_LEVEL =
-    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'log' : 'log');
+    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
 
 export interface BackHostAppParams {
     [name: string]: any;
@@ -98,9 +98,11 @@ export class BackHostApp {
     }
 
     initConsole() {
-        if (QFORMS_LOG_LEVEL === 'log') {
-            console.debug = () => {};
-        }
+        const levels = ['debug', 'log', 'warn', 'error'];
+        const level = levels.indexOf(QFORMS_LOG_LEVEL);
+        if (level > levels.indexOf('debug')) console.debug = () => {};
+        if (level > levels.indexOf('log')) console.log = () => {};
+        if (level > levels.indexOf('warn')) console.warn = () => {};
     }
 
     async initHttpServer() {
@@ -168,14 +170,16 @@ export class BackHostApp {
     }
 
     composeStartMessage(host: string, port: string | number): string {
-        let message = `QForms server v${pkg.version} listening on http://${host}:${port}${
+        let message = '\n';
+        message += `NODE_ENV=${process.env.NODE_ENV}\n`;
+        message += `QFORMS_LOG_LEVEL=${QFORMS_LOG_LEVEL}\n`;
+        message += '\n';
+        message += `QForms server v${pkg.version} listening on http://${host}:${port}${
             this.isDevelopment() ? '/index2' : ''
         }\n`;
-        message += `\tprocess.env.NODE_ENV: ${process.env.NODE_ENV}\n`;
-        message += `\cwd: ${process.cwd()}\n`;
+        message += `\tcwd: ${process.cwd()}\n`;
         message += `\tappsDirPath: ${this.appsDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
-        message += `\tQFORMS_LOG_LEVEL: ${QFORMS_LOG_LEVEL}\n`;
 
         if (this.isDevelopment()) {
             message += `\tmonitor: http://${host}:${port}/monitor\n`;

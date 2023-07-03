@@ -21,7 +21,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return new PostgreSqlDatabase(data, parent);
     }*/
     async deinit() {
-        console.log(`PostgreSqlDatabase.deinit: ${this.getName()}`);
+        console.debug(`PostgreSqlDatabase.deinit: ${this.getName()}`);
         await super.deinit();
         for (const configString in this.pool) {
             const pool = this.pool[configString];
@@ -57,7 +57,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         context.connections[name] = await pool.connect();
     }
     async release(context) {
-        console.log('PostgreSqlDatabase.release', this.getName());
+        console.debug('PostgreSqlDatabase.release', this.getName());
         if (!context)
             throw new Error('no context');
         this.getConnection(context).release();
@@ -65,7 +65,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
     }
     async queryResult(context, query, params = null) {
         if (context.query.sql) {
-            console.log(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
+            console.debug(colors_1.default.blue('PostgreSqlDatabase.queryResult'), {
                 query,
                 params,
             } /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
