@@ -6,10 +6,10 @@ const react_1 = require("react");
 const ReactComponent_1 = require("../ReactComponent");
 class TextBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('TextBox.constructor', props);
+        // console.debug('TextBox.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.log('TextBox.onChange', e.target.value);
+            // console.debug('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
         this.el = (0, react_1.createRef)();
@@ -30,13 +30,13 @@ class TextBox extends ReactComponent_1.ReactComponent {
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }

@@ -7,10 +7,10 @@ const Button_1 = require("../Button");
 require("./Box.less");
 class Box extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('Box.constructor', props);
+        // console.debug('Box.constructor', props);
         super(props);
         this.update = () => {
-            console.log('Box.update');
+            console.debug('Box.update');
             this.setState({
                 backgroundColor: 'green',
             });
@@ -20,23 +20,23 @@ class Box extends ReactComponent_1.ReactComponent {
         };
     }
     // componentWillMount() {
-    //     console.log('Box.componentWillMount');
+    //     console.debug('Box.componentWillMount');
     // }
     componentDidMount() {
-        console.log('Box.componentDidMount');
+        console.debug('Box.componentDidMount');
     }
     componentWillUnmount() {
-        console.log('Box.componentWillUnmount');
+        console.debug('Box.componentWillUnmount');
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        console.debug('Box.shouldComponentUpdate', nextProps, nextState);
         return true;
     }
     componentDidUpdate() {
-        console.log('Box.componentDidUpdate');
+        console.debug('Box.componentDidUpdate');
     }
     render() {
-        console.log('Box.render');
+        console.debug('Box.render');
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0, jsx_runtime_1.jsx)(Button_1.Button, { name: "one" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "two" }), (0, jsx_runtime_1.jsx)(Button_1.Button, { name: "three" })] })));
     }
 }

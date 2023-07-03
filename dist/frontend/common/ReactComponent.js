@@ -42,14 +42,14 @@ class ReactComponent extends react_1.Component {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.log(`${this.constructor.name}.rerender`, this.state);
+        // console.debug(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
         return new Promise((resolve) => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {
-                    console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                    console.debug(`${this.constructor.name}.rerender time:`, Date.now() - start);
                 }
                 resolve();
             });
@@ -63,23 +63,23 @@ class ReactComponent extends react_1.Component {
         return true;
     }
     disableRerender() {
-        console.log(`${this.constructor.name}.disableRerender`);
+        console.debug(`${this.constructor.name}.disableRerender`);
         this.allowRerender = false;
     }
     enableRerender() {
-        console.log(`${this.constructor.name}.enableRerender`);
+        console.debug(`${this.constructor.name}.enableRerender`);
         this.allowRerender = true;
     }
     componentWillUnmount() {
-        // console.log('ReactComponent.componentWillUnmount');
+        // console.debug('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
     /* componentDidMount() {
-        console.log('ReactComponent.componentDidMount', this.constructor.name);
+        console.debug('ReactComponent.componentDidMount', this.constructor.name);
     } */
     isEnabled() {
-        // console.log('ReactComponent.isEnabled', this.state);
+        // console.debug('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
     }
     isDisabled() {
@@ -92,7 +92,7 @@ class ReactComponent extends react_1.Component {
         return false;
     }
     disable() {
-        // console.log('ReactComponent.disable');
+        // console.debug('ReactComponent.disable');
         if (!this.state)
             throw new Error('no state');
         this.setState({ disabled: true });

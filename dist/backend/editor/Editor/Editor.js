@@ -34,7 +34,7 @@ const BkHelper_1 = require("../../BkHelper");
 const backend = __importStar(require("../../../backend"));
 class Editor extends BaseModel_1.BaseModel {
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-        console.log('Editor.createFileByReplace');
+        console.debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await BkHelper.exists(newFilePath);
         if (exists) {
@@ -62,7 +62,7 @@ class Editor extends BaseModel_1.BaseModel {
         return this.constructor.name.replace('Editor', '') + 'View';
     } */
     async getFile(filePath) {
-        console.log('Editor.getFile', filePath);
+        console.debug('Editor.getFile', filePath);
         const exists = await BkHelper_1.BkHelper.exists(filePath);
         if (exists) {
             return await BkHelper_1.BkHelper.readTextFile(filePath);
@@ -76,7 +76,7 @@ class Editor extends BaseModel_1.BaseModel {
         await BkHelper_1.BkHelper.writeFile2(filePath, content);
     }
     async getCustomFile(ext) {
-        console.log('Editor.getCustomFile', ext);
+        console.debug('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
@@ -132,7 +132,7 @@ class Editor extends BaseModel_1.BaseModel {
         return new backend.ActionEditor(this.getColItemData('actions', name), this);
     }*/
     setColData(colName, newData) {
-        // console.log('Editor.setData', newData);
+        // console.debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
     createItemEditor(colName, itemName) {
@@ -155,7 +155,7 @@ class Editor extends BaseModel_1.BaseModel {
         this.moveDataColItem(colName, itemName, 1);
     }
     newItemData(className, colName, params) {
-        console.log('Editor.newItemData', className, colName, params);
+        console.debug('Editor.newItemData', className, colName, params);
         const { name } = params;
         if (!name)
             throw new Error('no name');
@@ -171,7 +171,7 @@ class Editor extends BaseModel_1.BaseModel {
         throw new Error(`${this.constructor.name}.getColName not implemented`);
     }
     static createItemData(data) {
-        // console.log('Editor.createItemData', data);
+        // console.debug('Editor.createItemData', data);
         try {
             const params = data['@attributes']
                 ? Object.assign(Object.assign({ class: BaseModel_1.BaseModel.getClassName(data) }, BaseModel_1.BaseModel.attributes(data)), data) : data;

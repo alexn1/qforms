@@ -11,7 +11,7 @@ class Slider extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onPrevClick = (e) => {
-            // console.log('Slider.onPrevClick');
+            // console.debug('Slider.onPrevClick');
             this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
@@ -21,7 +21,7 @@ class Slider extends ReactComponent_1.ReactComponent {
             });
         };
         this.onNextClick = (e) => {
-            // console.log('Slider.onNextClick');
+            // console.debug('Slider.onNextClick');
             this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
@@ -31,7 +31,7 @@ class Slider extends ReactComponent_1.ReactComponent {
             });
         };
         this.onImageClick = (e) => {
-            console.log('Slider.onImageClick');
+            console.debug('Slider.onImageClick');
             if (this.state.classList) {
                 this.setState({ classList: null });
             }
@@ -47,7 +47,7 @@ class Slider extends ReactComponent_1.ReactComponent {
         this.state = { image: 0, classList: null };
     }
     render() {
-        // console.log('Slider.render', this.props.images);
+        // console.debug('Slider.render', this.props.images);
         const images = this.props.images || [];
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0, jsx_runtime_1.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0, jsx_runtime_1.jsx)(LeftIcon_1.LeftIcon, {}) }))), images.length > 1 && ((0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0, jsx_runtime_1.jsx)(RightIcon_1.RightIcon, {}) }))), (0, jsx_runtime_1.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0, jsx_runtime_1.jsx)(CloseIcon2_1.CloseIcon2, {}) }))] })));
     }

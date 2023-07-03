@@ -4,7 +4,7 @@ exports.ActionEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class ActionEditorController extends EditorController_1.EditorController {
     async _new(params) {
-        console.log('ActionEditorController._new');
+        console.debug('ActionEditorController._new');
         const appEditor = this.createApplicationEditor();
         let data;
         if (params.pageFileName) {

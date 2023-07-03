@@ -554,7 +554,7 @@ class BackHostApp {
         }));
     }
     async _e500(err, req, res, next) {
-        console.log(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl);
+        console.error(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(safe_1.default.red(err));
         const error = typeof err === 'string' ? new MyError_1.MyError({ message: err }) : err;
         res.status(error.status || 500);
@@ -583,12 +583,12 @@ class BackHostApp {
         await this.logError(error, req);
     }
     /* _getTest(req, res, next) {
-        console.log('getTest');
+        console.debug('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
     } */
     /* _postTest(req, res, next) {
-        console.log('postTest', req.body);
+        console.debug('postTest', req.body);
         res.json({foo: 'bar'});
     } */
     createAndRunHttpServer(host, port) {
@@ -753,7 +753,7 @@ class BackHostApp {
         return this.params;
     }
     broadcastResult(sourceApplication, context, result) {
-        console.log('BackHostApp.broadcastResult');
+        console.debug('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
@@ -765,7 +765,7 @@ class BackHostApp {
         }
     }
     static test() {
-        console.log('BackHostApp.test');
+        console.debug('BackHostApp.test');
     }
     getDistDirPath() {
         return this.distDirPath;

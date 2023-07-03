@@ -4,11 +4,11 @@ exports.ParamEditorController = void 0;
 const EditorController_1 = require("../EditorController");
 class ParamEditorController extends EditorController_1.EditorController {
     /*constructor(...args) {
-        console.log('ParamEditorController.constructor');
+        console.debug('ParamEditorController.constructor');
         super(...args);
     }*/
     async _new(params) {
-        console.log('ParamEditorController._new');
+        console.debug('ParamEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.newItemData('Param', 'params', params);
@@ -16,7 +16,7 @@ class ParamEditorController extends EditorController_1.EditorController {
         return data;
     }
     async save(params) {
-        console.log('ParamEditorController.save');
+        console.debug('ParamEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const paramEditor = databaseEditor.createItemEditor('params', params.param);
@@ -25,7 +25,7 @@ class ParamEditorController extends EditorController_1.EditorController {
         return null;
     }
     async delete(params) {
-        console.log('ParamEditorController.delete');
+        console.debug('ParamEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('params', params.param);

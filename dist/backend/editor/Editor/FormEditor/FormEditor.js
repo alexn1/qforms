@@ -21,7 +21,7 @@ class FormEditor extends Editor_1.Editor {
         };
     }
     static createData(params) {
-        console.log('FormEditor.createData', params);
+        console.debug('FormEditor.createData', params);
         return {
             '@class': 'Form',
             '@attributes': Object.assign({}, FormEditor.createAttributes(params)),

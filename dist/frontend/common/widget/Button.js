@@ -6,7 +6,7 @@ const react_1 = require("react");
 const ReactComponent_1 = require("../ReactComponent");
 class Button extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('Button.constructor', props);
+        // console.debug('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
         this.el = (0, react_1.createRef)();
@@ -38,7 +38,7 @@ class Button extends ReactComponent_1.ReactComponent {
         };
     }
     render() {
-        // console.log('Button.render', this.props.title, this.props);
+        // console.debug('Button.render', this.props.title, this.props);
         return ((0, jsx_runtime_1.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }

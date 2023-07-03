@@ -8,7 +8,7 @@ class GridRow extends ReactComponent_1.ReactComponent {
         return this.props.active && this.props.activeColumn === j;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+        // console.debug('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -23,7 +23,7 @@ class GridRow extends ReactComponent_1.ReactComponent {
         return true;
     }
     render() {
-        // console.log('GridRow.render', this.props.i);
+        // console.debug('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;

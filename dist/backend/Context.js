@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Context = void 0;
 class Context {
     constructor(options = {}) {
-        // console.log('Context', options);
+        // console.debug('Context', options);
         this.options = options;
         this.connections = {};
         this.querytime = { params: {} };
@@ -57,7 +57,7 @@ class Context {
         return Object.assign({}, (this.getReq() && this.getReq().query ? this.getReq().query : {}));
     }
     getParams() {
-        // console.log('Context.getParams:');
+        // console.debug('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return Object.assign(Object.assign(Object.assign(Object.assign(Object.assign(Object.assign({}, this.getCookies()), this.query), this.params), (this.querytime ? this.querytime.params : {})), (user ? { userId: user.id, userName: user.name } : {})), (timeOffset !== null ? { timeOffset } : {}));
@@ -138,7 +138,7 @@ class Context {
     getUrl() {
         const req = this.getReq();
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-        // console.log('Context.getUrl', fullUrl);
+        // console.debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }
     static getIpFromReq(req) {

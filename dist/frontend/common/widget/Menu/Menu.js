@@ -6,24 +6,24 @@ const ReactComponent_1 = require("../../ReactComponent");
 require("./Menu.less");
 class Menu extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('Menu.constructor', props);
+        // console.debug('Menu.constructor', props);
         super(props);
         this.onMenuClick = async (e) => {
-            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            // console.debug('Menu.onMenuClick', e.currentTarget.dataset.menu);
             await this.toggleMenu(e.currentTarget.dataset.menu);
         };
         this.onBlur = async (e) => {
-            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            // console.debug('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
         this.onMouseDown = (e) => {
-            // console.log('Menu.onMouseDown');
+            // console.debug('Menu.onMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
         this.onMenuItemClick = async (e) => {
-            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            // console.debug('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
             e.persist();
             const { menu, type, name } = e.target.dataset;
             await this.closeMenu(menu);

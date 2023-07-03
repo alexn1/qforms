@@ -12,42 +12,42 @@ require("./DropdownDatePicker.less");
 // oldDates boolean true
 class DropdownDatePicker extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('DropdownDatePicker.constructor', props);
+        // console.debug('DropdownDatePicker.constructor', props);
         super(props);
         this.onInputClick = (e) => {
-            // console.log('DropdownDatePicker.onInputClick', e);
+            // console.debug('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
             this.setState((prevState) => ({ open: !prevState.open }));
         };
         this.onInputKeyDown = (e) => {
-            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            // console.debug('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onCloseDown = async (e) => {
-            // console.log('DropdownDatePicker.onCloseDown', e);
+            // console.debug('DropdownDatePicker.onCloseDown', e);
             this.setState({ value: null });
             if (this.props.onChange) {
                 this.props.onChange(null);
             }
         };
         this.onBlur = (e) => {
-            // console.log('DropdownDatePicker.onBlur');
+            // console.debug('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onDatePickerMouseDown = (e) => {
-            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            // console.debug('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
         this.onDatePickerDateSelected = (date) => {
-            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            // console.debug('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
             if (this.props.onChange) {
@@ -109,7 +109,7 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -134,7 +134,7 @@ class DropdownDatePicker extends ReactComponent_1.ReactComponent {
                     minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
-        // console.log('DropdownDatePicker.render', this.props, this.state);
+        // console.debug('DropdownDatePicker.render', this.props, this.state);
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
     }
     isDebugMode() {

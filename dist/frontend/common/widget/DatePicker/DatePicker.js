@@ -18,22 +18,22 @@ require("./DatePicker.less");
 //  highlightedDate array [2021, 0, 1]
 class DatePicker extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('DatePicker.constructor', props);
+        // console.debug('DatePicker.constructor', props);
         super(props);
         this.onClick = (e) => {
-            console.log('DatePicker.onClick', e.target);
+            console.debug('DatePicker.onClick', e.target);
             if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
                 return this.onDateClick(e.target);
             }
         };
         this.onMouseDown = (e) => {
-            // console.log('DatePicker.onMouseDown');
+            // console.debug('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
         this.onNextClick = (e) => {
-            // console.log('DatePicker.next');
+            // console.debug('DatePicker.next');
             this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
@@ -43,7 +43,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             });
         };
         this.onPrevClick = (e) => {
-            // console.log('DatePicker.prev');
+            // console.debug('DatePicker.prev');
             this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
@@ -79,7 +79,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
     calcSelectedMonth() {
-        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        // console.debug('DatePicker.calcSelectedMonth', this.props.selectedDate);
         if (this.props.selectedDate) {
             return [this.props.selectedDate[0], this.props.selectedDate[1]];
         }
@@ -93,7 +93,7 @@ class DatePicker extends ReactComponent_1.ReactComponent {
             // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
             // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
             const date = new Date(Math.min(...dates));
-            // console.log('date:', date);
+            // console.debug('date:', date);
             return [date.getFullYear(), date.getMonth()];
         }
     }
@@ -146,13 +146,13 @@ class DatePicker extends ReactComponent_1.ReactComponent {
         return true;
     }
     onDateClick(target) {
-        // console.log('DatePicker.onDateClick', target.dataset.date);
+        // console.debug('DatePicker.onDateClick', target.dataset.date);
         if (this.props.onDateSelected) {
             this.props.onDateSelected(JSON.parse(target.dataset.date));
         }
     }
     render() {
-        // console.log('DatePicker.render', this.props, this.state);
+        // console.debug('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = Helper_1.Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;

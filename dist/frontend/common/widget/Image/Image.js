@@ -12,7 +12,7 @@ class Image extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onImgClick = async (e) => {
-            console.log('Image.onImgClick');
+            console.debug('Image.onImgClick');
             if (this.props.onClick) {
                 return await this.props.onClick();
             }

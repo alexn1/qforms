@@ -5,10 +5,10 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const ReactComponent_1 = require("../ReactComponent");
 class Radio extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('Radio.constructor', props.value);
+        // console.debug('Radio.constructor', props.value);
         super(props);
         this.onChange = async (e) => {
-            // console.log('Radio.onChange', e.target.value);
+            // console.debug('Radio.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
@@ -19,7 +19,7 @@ class Radio extends ReactComponent_1.ReactComponent {
         this.state = {
             value: this.getInitialValue(),
         };
-        console.log('value:', JSON.stringify(this.getValue()));
+        console.debug('value:', JSON.stringify(this.getValue()));
     }
     getInitialValue() {
         let value = null;
@@ -28,7 +28,7 @@ class Radio extends ReactComponent_1.ReactComponent {
             const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
-                console.log('items:', this.props.items);
+                console.debug('items:', this.props.items);
             }
         }
         return value;
@@ -48,7 +48,7 @@ class Radio extends ReactComponent_1.ReactComponent {
         return false;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;

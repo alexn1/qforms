@@ -33,7 +33,7 @@ class PageEditor extends Editor_1.Editor {
         };
     }
     setAttr(name, value) {
-        console.log('PageEditor.setAttr', name, value);
+        console.debug('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
@@ -79,7 +79,7 @@ class PageEditor extends Editor_1.Editor {
         return js;
     }
     async getCustomDirPath() {
-        console.log('PageEditor.getCustomDirPath');
+        console.debug('PageEditor.getCustomDirPath');
         const customDirPath = await this.getParent().getCustomDirPath();
         return path_1.default.join(customDirPath, 'pages', this.getName());
     }

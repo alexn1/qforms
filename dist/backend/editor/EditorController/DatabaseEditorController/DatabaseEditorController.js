@@ -30,7 +30,7 @@ class DatabaseEditorController extends EditorController_1.EditorController {
         return data;
     }
     async save(params) {
-        console.log('DatabaseEditorController.save');
+        console.debug('DatabaseEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         databaseEditor.setAttr(params.attr, params.value);

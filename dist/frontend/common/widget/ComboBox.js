@@ -5,17 +5,17 @@ const jsx_runtime_1 = require("react/jsx-runtime");
 const ReactComponent_1 = require("../ReactComponent");
 class ComboBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
+        // console.debug('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         this.onChange = async (e) => {
-            // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
+            // console.debug('ComboBox.onChange', e.target.value, typeof e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
             }
         };
         this.onMouseDown = async (e) => {
-            // console.log('ComboBox.onMouseDown', e.button);
+            // console.debug('ComboBox.onMouseDown', e.button);
             if (this.props.onMouseDown) {
                 await this.props.onMouseDown(e);
             }
@@ -34,7 +34,7 @@ class ComboBox extends ReactComponent_1.ReactComponent {
                 }
                 else {
                     console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
-                    console.log('items:', this.props.items);
+                    console.debug('items:', this.props.items);
                 }
             }
         }
@@ -48,20 +48,20 @@ class ComboBox extends ReactComponent_1.ReactComponent {
         }
         if (value === null)
             throw new Error('null is wrong value for ComboBox');
-        // console.log('combobox value:', value);
+        // console.debug('combobox value:', value);
         return value;
     }
     getValue() {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.log('ComboBox.render', this.state.value);
+        // console.debug('ComboBox.render', this.state.value);
         return ((0, jsx_runtime_1.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0, jsx_runtime_1.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
                     this.props.items.map((item) => ((0, jsx_runtime_1.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }

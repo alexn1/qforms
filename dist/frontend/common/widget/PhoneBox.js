@@ -11,8 +11,8 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onKeyPress = (e) => {
-            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
-            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            // console.debug('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.debug('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
                 e.preventDefault();
             }
@@ -23,11 +23,11 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
             }
         };
         this.onChange = (e) => {
-            // console.log('PhoneBox.onChange', e.target.value);
+            // console.debug('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
             const len = e.target.value.length;
-            // console.log('start/end/len:', start, end, len);
+            // console.debug('start/end/len:', start, end, len);
             // disable edition in middle
             if (start !== end || start !== len) {
                 return;
@@ -45,10 +45,10 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
             }
         };
         this.onBlur = (e) => {
-            // console.log('PhoneBox.onBlur');
+            // console.debug('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // console.log('value:', value);
+            // console.debug('value:', value);
             // event
             if (this.props.onBlur) {
                 this.props.onBlur(value);
@@ -63,7 +63,7 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
         return PhoneBox.clearValue(this.state.value);
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
             // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
@@ -71,7 +71,7 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
         return true;
     }
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return ((0, jsx_runtime_1.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     static clearValue(value) {
@@ -95,7 +95,7 @@ class PhoneBox extends ReactComponent_1.ReactComponent {
         const value = PhoneBox.clearValue(_value);
         // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        // console.log('arr:', arr);
+        // console.debug('arr:', arr);
         if (arr) {
             if (arr[5]) {
                 return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;

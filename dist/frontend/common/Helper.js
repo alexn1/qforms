@@ -73,7 +73,7 @@ class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.log('raw:', raw);
+        //     // console.debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -86,7 +86,7 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // console.log('Helper.createReactComponent', rootElement, type);
+        // console.debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -97,7 +97,7 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // console.log('Helper.createReactComponent2', rootElement, type);
+        // console.debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react_1.default.createElement(react_1.default.StrictMode, {}, [
             react_1.default.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -177,7 +177,7 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -204,7 +204,7 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -246,7 +246,7 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // console.log('Helper.fallbackCopyTextToClipboard', text);
+        // console.debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -262,7 +262,7 @@ class Helper {
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
-        console.log('Helper.copyTextToClipboard', text);
+        console.debug('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -270,7 +270,7 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
-        // console.log('Helper.addMinutes', date, minutes);
+        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -323,7 +323,7 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // console.log('Helper.registerGlobalClass', Class.name);
+        // console.debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
@@ -336,7 +336,7 @@ class Helper {
         }
     }
     static getGlobalClass(className) {
-        // console.log('Helper.getGlobalClass', className);
+        // console.debug('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {

@@ -20,7 +20,7 @@ class ApplicationEditor extends Editor_1.Editor {
         return this.appFile;
     }
     static createData(params) {
-        // console.log('ApplicationEditor.createData', params);
+        // console.debug('ApplicationEditor.createData', params);
         if (!params.name)
             throw new Error('no name');
         return {
@@ -68,7 +68,7 @@ class ApplicationEditor extends Editor_1.Editor {
         };
     }
     async save() {
-        console.log('ApplicationEditor.save');
+        console.debug('ApplicationEditor.save');
         await this.appFile.save();
     }
     async removePageFile(name) {

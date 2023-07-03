@@ -75,8 +75,8 @@ class EditorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'css')).map((path) => `/editor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'editor/public'), 'js')).map((path) => `/editor/public/${path}`);
-        // console.log('editor.css:', this.css);
-        // console.log('editor.js:' , this.js);
+        // console.debug('editor.css:', this.css);
+        // console.debug('editor.js:' , this.js);
     }
     getLinks() {
         return [
@@ -93,7 +93,7 @@ class EditorModule {
         ];
     }
     async handleEditorGet(req, res, context) {
-        console.log('EditorModule.handleEditorGet');
+        console.debug('EditorModule.handleEditorGet');
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(this.hostApp.getAppFilePath(context));
         // data
         const data = {
@@ -107,7 +107,7 @@ class EditorModule {
         res.end(html);
     }
     async handleEditorPost(req, res, context) {
-        console.log('EditorModule.handleEditorPost', req.body);
+        console.debug('EditorModule.handleEditorPost', req.body);
         if (EDITOR_CONTROLLERS.indexOf(req.body.controller) === -1) {
             throw new Error(`unknown controller: ${req.body.controller}`);
         }
@@ -125,7 +125,7 @@ class EditorModule {
         if (!ctrl[method])
             throw new Error(`no method: ${editorControllerClassName}.${method}`);
         const result = await ctrl[method](context.params);
-        // console.log('json result:', result);
+        // console.debug('json result:', result);
         if (result === undefined)
             throw new Error('handleEditorPost: result is undefined');
         res.json(result);

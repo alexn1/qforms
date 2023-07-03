@@ -11,13 +11,13 @@ class EditorController {
     }
     async init(context) { }
     async getView(params) {
-        console.log('EditorController.getView');
+        console.debug('EditorController.getView');
         return {
             data: {},
         };
     }
     createApplicationEditor() {
-        console.log('EditorController.createApplicationEditor');
+        console.debug('EditorController.createApplicationEditor');
         return new ApplicationEditor_1.ApplicationEditor(this.appInfo.appFile);
     }
 }

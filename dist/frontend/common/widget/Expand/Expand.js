@@ -9,7 +9,7 @@ class Expand extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onTitleClick = (e) => {
-            console.log('Expand.onTitleClick');
+            console.debug('Expand.onTitleClick');
             this.setState((prevState) => {
                 return { opened: !prevState.opened };
             });

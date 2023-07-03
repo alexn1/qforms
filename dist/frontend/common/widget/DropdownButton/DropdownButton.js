@@ -10,28 +10,28 @@ class DropdownButton extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onButtonClick = (e) => {
-            // console.log('DropdownButton.onButtonClick');
+            // console.debug('DropdownButton.onButtonClick');
             this.setState((state) => ({ open: !state.open }));
         };
         this.onButtonBlur = (e) => {
-            // console.log('DropdownButton.onButtonBlur');
+            // console.debug('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onKeyDown = (e) => {
-            // console.log('DropdownButton.onKeyDown', e.key);
+            // console.debug('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onUlMouseDown = (e) => {
-            // console.log('DropdownButton.onUlMouseDown');
+            // console.debug('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
         this.onLiClick = async (e) => {
-            // console.log('DropdownButton.onLiClick', e.currentTarget);
+            // console.debug('DropdownButton.onLiClick', e.currentTarget);
             const li = e.currentTarget;
             this.setState({ open: false }, () => {
                 if (this.props.onClick) {

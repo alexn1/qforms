@@ -9,7 +9,7 @@ class EventLog {
         this.url = options === null || options === void 0 ? void 0 : options.url;
     }
     async create(event) {
-        // console.log('EventLog.create', event);
+        // console.debug('EventLog.create', event);
         if (!this.pool)
             throw new Error('no pool');
         await BkPostgreSqlDatabase_1.BkPostgreSqlDatabase.queryResult(this.pool, 'insert into log(created, type, source, message, stack, data, ip) values ({created}, {type}, {source}, {message}, {stack}, {data}, {ip})', {

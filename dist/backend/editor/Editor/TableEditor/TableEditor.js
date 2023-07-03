@@ -4,7 +4,7 @@ exports.TableEditor = void 0;
 const Editor_1 = require("../Editor");
 class TableEditor extends Editor_1.Editor {
     static createData(params) {
-        // console.log('TableEditor.createData', params);
+        // console.debug('TableEditor.createData', params);
         return {
             '@class': 'Table',
             '@attributes': {

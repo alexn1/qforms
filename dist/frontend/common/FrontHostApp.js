@@ -8,7 +8,7 @@ class FrontHostApp {
         this.options = options;
         this.alertCtrl = null;
         this.documentTitle = ''; // for run on back
-        // console.log('FrontHostApp.constructor');
+        // console.debug('FrontHostApp.constructor');
     }
     init() {
         window.addEventListener('error', this.onWindowError.bind(this));
@@ -19,7 +19,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        console.debug('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -31,7 +31,7 @@ class FrontHostApp {
         }
     }
     async onWindowError(e) {
-        console.log('FrontHostApp.onWindowError', e);
+        console.debug('FrontHostApp.onWindowError', e);
         try {
             e.preventDefault();
             const err = e.error;
@@ -70,7 +70,7 @@ class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // console.log('headers:', headers);
+                // console.debug('headers:', headers);
                 const body = await response.json();
                 return [headers, body];
             }
@@ -87,14 +87,14 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     async onWindowPopState(e) {
-        console.log('FrontHostApp.onWindowPopState', e.state);
+        console.debug('FrontHostApp.onWindowPopState', e.state);
     }
     async alert(options) {
-        console.log('FrontHostApp.alert', options);
+        console.debug('FrontHostApp.alert', options);
         alert(options.message);
     }
     async confirm(options) {
-        console.log('FrontHostApp.confirm', options);
+        console.debug('FrontHostApp.confirm', options);
         return confirm(options.message);
     }
     setDocumentTitle(title) {

@@ -6,7 +6,7 @@ const ReactComponent_1 = require("../../ReactComponent");
 require("./Statusbar.less");
 class Statusbar extends ReactComponent_1.ReactComponent {
     constructor(props) {
-        // console.log('Statusbar.constructor', props);
+        // console.debug('Statusbar.constructor', props);
         super(props);
         this.state = {};
     }

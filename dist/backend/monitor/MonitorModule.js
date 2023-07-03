@@ -18,8 +18,8 @@ class MonitorModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'css')).map((path) => `/monitor/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'monitor/public'), 'js')).map((path) => `/monitor/public/${path}`);
-        // console.log('monitor.css:', this.css);
-        // console.log('monitor.js:' , this.js);
+        // console.debug('monitor.css:', this.css);
+        // console.debug('monitor.js:' , this.js);
     }
     fill() {
         return {

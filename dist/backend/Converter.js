@@ -6,7 +6,7 @@ const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/Applicati
 const BaseModel_1 = require("./BaseModel");
 class Converter {
     static async reformat(appFilePath) {
-        console.log('Convert.reformat', appFilePath);
+        console.debug('Convert.reformat', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         // app
@@ -17,7 +17,7 @@ class Converter {
         const pageNames = appEditor
             .getData()
             .pageLinks.map((data) => BaseModel_1.BaseModel.getName(data));
-        // console.log('pageNames:', pageNames);
+        // console.debug('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);

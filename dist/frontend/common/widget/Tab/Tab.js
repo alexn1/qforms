@@ -8,7 +8,7 @@ class Tab extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.log('Tab.onLiMouseDown', e.target);
+            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -23,10 +23,10 @@ class Tab extends ReactComponent_1.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.log('Tab.onLiClick', e.target);
+            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.log('close tab:', i);
+                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -44,7 +44,7 @@ class Tab extends ReactComponent_1.ReactComponent {
         if (i === this.getActive())
             return;
         const start = Date.now();
-        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
     }
     renderTitles() {
         return this.props.tabs.map((tab, i) => ((0, jsx_runtime_1.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : undefined, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0, jsx_runtime_1.jsx)("span", { children: tab.title }), this.props.canClose && (0, jsx_runtime_1.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));

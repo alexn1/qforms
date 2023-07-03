@@ -19,13 +19,13 @@ class IndexModule {
     async init() {
         this.css = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'css')).map((path) => `/index/public/${path}`);
         this.js = (await BkHelper_1.BkHelper.getFilePaths(path_1.default.join(this.hostApp.getFrontendDirPath(), 'index/public'), 'js')).map((path) => `/index/public/${path}`);
-        // console.log('app.css:', this.css);
-        // console.log('app.js:' , this.js);
+        // console.debug('app.css:', this.css);
+        // console.debug('app.js:' , this.js);
     }
     async fill() {
         const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication_1.BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
-        // console.log('appInfos:', appInfos);
+        // console.debug('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -59,7 +59,7 @@ class IndexModule {
     <script type="application/json">${data2}</script>
     <!--<script>
         document.addEventListener('DOMContentLoaded', () => {
-            // console.log('DOMContentLoaded');
+            // console.debug('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             new IndexFrontHostApp(data).init();
         });

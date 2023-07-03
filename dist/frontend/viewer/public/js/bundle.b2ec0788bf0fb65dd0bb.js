@@ -32007,7 +32007,7 @@ class FrontHostApp {
         this.options = options;
         this.alertCtrl = null;
         this.documentTitle = ''; // for run on back
-        // console.log('FrontHostApp.constructor');
+        // console.debug('FrontHostApp.constructor');
     }
     init() {
         window.addEventListener('error', this.onWindowError.bind(this));
@@ -32018,7 +32018,7 @@ class FrontHostApp {
         throw new Error('FrontHostApp.run not implemented');
     }
     async onWindowUnhandledrejection(e) {
-        console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        console.debug('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -32030,7 +32030,7 @@ class FrontHostApp {
         }
     }
     async onWindowError(e) {
-        console.log('FrontHostApp.onWindowError', e);
+        console.debug('FrontHostApp.onWindowError', e);
         try {
             e.preventDefault();
             const err = e.error;
@@ -32069,7 +32069,7 @@ class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // console.log('headers:', headers);
+                // console.debug('headers:', headers);
                 const body = await response.json();
                 return [headers, body];
             }
@@ -32086,14 +32086,14 @@ class FrontHostApp {
         document.querySelector('html').classList.remove('wait');
     }
     async onWindowPopState(e) {
-        console.log('FrontHostApp.onWindowPopState', e.state);
+        console.debug('FrontHostApp.onWindowPopState', e.state);
     }
     async alert(options) {
-        console.log('FrontHostApp.alert', options);
+        console.debug('FrontHostApp.alert', options);
         alert(options.message);
     }
     async confirm(options) {
-        console.log('FrontHostApp.confirm', options);
+        console.debug('FrontHostApp.confirm', options);
         return confirm(options.message);
     }
     setDocumentTitle(title) {
@@ -32255,7 +32255,7 @@ class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.log('raw:', raw);
+        //     // console.debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -32268,7 +32268,7 @@ class Helper {
         return value;
     }
     static createReactComponent(rootElement, type, props = {}, children) {
-        // console.log('Helper.createReactComponent', rootElement, type);
+        // console.debug('Helper.createReactComponent', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -32279,7 +32279,7 @@ class Helper {
         return component;
     }
     static createReactComponent2(rootElement, type, props = {}, children) {
-        // console.log('Helper.createReactComponent2', rootElement, type);
+        // console.debug('Helper.createReactComponent2', rootElement, type);
         let component = undefined;
         const reactRootElement = react__WEBPACK_IMPORTED_MODULE_0__.createElement(react__WEBPACK_IMPORTED_MODULE_0__.StrictMode, {}, [
             react__WEBPACK_IMPORTED_MODULE_0__.createElement(type, Object.assign(Object.assign({}, props), { onCreate: (c, name) => {
@@ -32359,7 +32359,7 @@ class Helper {
         arr.splice(newIndex, 0, arr.splice(oldIndex, 1)[0]);
     }
     static formatTime(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32386,7 +32386,7 @@ class Helper {
         }
     }
     static formatTime2(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -32428,7 +32428,7 @@ class Helper {
         return 7 * Helper.DAY();
     }
     static fallbackCopyTextToClipboard(text) {
-        // console.log('Helper.fallbackCopyTextToClipboard', text);
+        // console.debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -32444,7 +32444,7 @@ class Helper {
         activeElement.focus();
     }
     static async copyTextToClipboard(text) {
-        console.log('Helper.copyTextToClipboard', text);
+        console.debug('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -32452,7 +32452,7 @@ class Helper {
         await navigator.clipboard.writeText(text);
     }
     static addMinutes(date, minutes) {
-        // console.log('Helper.addMinutes', date, minutes);
+        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
     static removeTimezoneOffset(date) {
@@ -32505,7 +32505,7 @@ class Helper {
         });
     }
     static registerGlobalClass(Class) {
-        // console.log('Helper.registerGlobalClass', Class.name);
+        // console.debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name])
                 throw new Error(`window.${Class.name} already used`);
@@ -32518,7 +32518,7 @@ class Helper {
         }
     }
     static getGlobalClass(className) {
-        // console.log('Helper.getGlobalClass', className);
+        // console.debug('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : __webpack_require__.g[className];
     }
     static addClassToDocumentElement(className) {
@@ -32584,14 +32584,14 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return this.getClassList().join(' ');
     }
     rerender(logTime = true) {
-        // console.log(`${this.constructor.name}.rerender`, this.state);
+        // console.debug(`${this.constructor.name}.rerender`, this.state);
         if (!this.canRerender())
             return Promise.resolve();
         return new Promise((resolve) => {
             const start = Date.now();
             this.forceUpdate(() => {
                 if (logTime) {
-                    console.log(`${this.constructor.name}.rerender time:`, Date.now() - start);
+                    console.debug(`${this.constructor.name}.rerender time:`, Date.now() - start);
                 }
                 resolve();
             });
@@ -32605,23 +32605,23 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return true;
     }
     disableRerender() {
-        console.log(`${this.constructor.name}.disableRerender`);
+        console.debug(`${this.constructor.name}.disableRerender`);
         this.allowRerender = false;
     }
     enableRerender() {
-        console.log(`${this.constructor.name}.enableRerender`);
+        console.debug(`${this.constructor.name}.enableRerender`);
         this.allowRerender = true;
     }
     componentWillUnmount() {
-        // console.log('ReactComponent.componentWillUnmount');
+        // console.debug('ReactComponent.componentWillUnmount');
         if (this.props.onUnmount)
             this.props.onUnmount(this, this.props.name);
     }
     /* componentDidMount() {
-        console.log('ReactComponent.componentDidMount', this.constructor.name);
+        console.debug('ReactComponent.componentDidMount', this.constructor.name);
     } */
     isEnabled() {
-        // console.log('ReactComponent.isEnabled', this.state);
+        // console.debug('ReactComponent.isEnabled', this.state);
         return !this.isDisabled();
     }
     isDisabled() {
@@ -32634,7 +32634,7 @@ class ReactComponent extends react__WEBPACK_IMPORTED_MODULE_0__.Component {
         return false;
     }
     disable() {
-        // console.log('ReactComponent.disable');
+        // console.debug('ReactComponent.disable');
         if (!this.state)
             throw new Error('no state');
         this.setState({ disabled: true });
@@ -33412,10 +33412,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('Box.constructor', props);
+        // console.debug('Box.constructor', props);
         super(props);
         this.update = () => {
-            console.log('Box.update');
+            console.debug('Box.update');
             this.setState({
                 backgroundColor: 'green',
             });
@@ -33425,23 +33425,23 @@ class Box extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         };
     }
     // componentWillMount() {
-    //     console.log('Box.componentWillMount');
+    //     console.debug('Box.componentWillMount');
     // }
     componentDidMount() {
-        console.log('Box.componentDidMount');
+        console.debug('Box.componentDidMount');
     }
     componentWillUnmount() {
-        console.log('Box.componentWillUnmount');
+        console.debug('Box.componentWillUnmount');
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        console.debug('Box.shouldComponentUpdate', nextProps, nextState);
         return true;
     }
     componentDidUpdate() {
-        console.log('Box.componentDidUpdate');
+        console.debug('Box.componentDidUpdate');
     }
     render() {
-        console.log('Box.render');
+        console.debug('Box.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "Box" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "one" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "two" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_Button__WEBPACK_IMPORTED_MODULE_2__.Button, { name: "three" })] })));
     }
 }
@@ -33471,7 +33471,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.log('Button.constructor', props);
+        // console.debug('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
         this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
@@ -33503,7 +33503,7 @@ class Button extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         };
     }
     render() {
-        // console.log('Button.render', this.props.title, this.props);
+        // console.debug('Button.render', this.props.title, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: this.getCssClassNames(), ref: this.el, id: this.props.id, type: this.props.type, name: this.props.name, disabled: this.isDisabled(), onClick: this.props.onClick, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onKeyDown: this.props.onKeyDown, style: this.getStyle() }, { children: this.props.title || this.props.children })));
     }
 }
@@ -33535,7 +33535,7 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
     constructor(props) {
         super(props);
         this.onChange = (e) => {
-            // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+            // console.debug('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
                 this.setState((prevState) => {
                     if (this.props.onChange) {
@@ -33565,7 +33565,7 @@ class CheckBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         return this.state.checked;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
@@ -33603,28 +33603,28 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
     constructor(props) {
         super(props);
         this.onCheckBoxChange = (e) => {
-            // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+            // console.debug('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
             const checked = e.target.checked;
             const itemValue = e.target.dataset.value;
-            // console.log('itemValue:', itemValue);
+            // console.debug('itemValue:', itemValue);
             this.setState((prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
                 if (checked) {
                     if (value.indexOf(itemValue) > -1) {
-                        console.log('value:', itemValue, checked, value);
+                        console.debug('value:', itemValue, checked, value);
                         throw new Error('CheckBoxList value error');
                     }
                     value.push(itemValue);
                 }
                 else {
                     if (value.indexOf(itemValue) === -1) {
-                        console.log('value:', itemValue, checked, value);
+                        console.debug('value:', itemValue, checked, value);
                         throw new Error('CheckBoxList value error');
                     }
                     value.splice(value.indexOf(itemValue), 1);
                 }
-                // console.log('value:', value);
+                // console.debug('value:', value);
                 return { value };
             }, () => {
                 if (this.props.onChange) {
@@ -33651,8 +33651,8 @@ class CheckBoxList extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCom
         return `${this.props.name}.${value}`;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // console.log('nextProps.value:', nextProps.value);
+        // console.debug('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('nextProps.value:', nextProps.value);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -33689,17 +33689,17 @@ __webpack_require__.r(__webpack_exports__);
 
 class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
+        // console.debug('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         this.onChange = async (e) => {
-            // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
+            // console.debug('ComboBox.onChange', e.target.value, typeof e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
             }
         };
         this.onMouseDown = async (e) => {
-            // console.log('ComboBox.onMouseDown', e.button);
+            // console.debug('ComboBox.onMouseDown', e.button);
             if (this.props.onMouseDown) {
                 await this.props.onMouseDown(e);
             }
@@ -33718,7 +33718,7 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
                 }
                 else {
                     console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
-                    console.log('items:', this.props.items);
+                    console.debug('items:', this.props.items);
                 }
             }
         }
@@ -33732,20 +33732,20 @@ class ComboBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         }
         if (value === null)
             throw new Error('null is wrong value for ComboBox');
-        // console.log('combobox value:', value);
+        // console.debug('combobox value:', value);
         return value;
     }
     getValue() {
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.log('ComboBox.render', this.state.value);
+        // console.debug('ComboBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("select", Object.assign({ className: this.getCssClassNames(), onChange: this.onChange, value: this.state.value, disabled: this.props.readOnly, size: this.props.size, style: this.props.style, id: this.props.id, onDoubleClick: this.props.onDoubleClick, onMouseDown: this.onMouseDown }, { children: [this.props.nullable && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: '' }, { children: this.props.placeholder })), this.props.items &&
                     this.props.items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("option", Object.assign({ value: item.value }, { children: item.title || item.value }), item.value)))] })));
     }
@@ -33791,22 +33791,22 @@ __webpack_require__.r(__webpack_exports__);
 //  highlightedDate array [2021, 0, 1]
 class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('DatePicker.constructor', props);
+        // console.debug('DatePicker.constructor', props);
         super(props);
         this.onClick = (e) => {
-            console.log('DatePicker.onClick', e.target);
+            console.debug('DatePicker.onClick', e.target);
             if (e.target.nodeName === 'TD' && e.target.classList.contains('selectable')) {
                 return this.onDateClick(e.target);
             }
         };
         this.onMouseDown = (e) => {
-            // console.log('DatePicker.onMouseDown');
+            // console.debug('DatePicker.onMouseDown');
             if (this.props.onMouseDown) {
                 return this.props.onMouseDown(e);
             }
         };
         this.onNextClick = (e) => {
-            // console.log('DatePicker.next');
+            // console.debug('DatePicker.next');
             this.setState((prevState) => {
                 const next = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 next.setMonth(next.getMonth() + 1);
@@ -33816,7 +33816,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             });
         };
         this.onPrevClick = (e) => {
-            // console.log('DatePicker.prev');
+            // console.debug('DatePicker.prev');
             this.setState((prevState) => {
                 const prev = new Date(prevState.selectedMonth[0], prevState.selectedMonth[1]);
                 prev.setMonth(prev.getMonth() - 1);
@@ -33852,7 +33852,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
         return true;
     }
     calcSelectedMonth() {
-        // console.log('DatePicker.calcSelectedMonth', this.props.selectedDate);
+        // console.debug('DatePicker.calcSelectedMonth', this.props.selectedDate);
         if (this.props.selectedDate) {
             return [this.props.selectedDate[0], this.props.selectedDate[1]];
         }
@@ -33866,7 +33866,7 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
             // if (this.props.selectedDate) dates.push(DatePicker.createDateFromArr(this.props.selectedDate).getTime());
             // if (this.props.selectedMonth) dates.push(new Date(this.props.selectedMonth[0], this.props.selectedMonth[1], 1).getTime());
             const date = new Date(Math.min(...dates));
-            // console.log('date:', date);
+            // console.debug('date:', date);
             return [date.getFullYear(), date.getMonth()];
         }
     }
@@ -33919,13 +33919,13 @@ class DatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompo
         return true;
     }
     onDateClick(target) {
-        // console.log('DatePicker.onDateClick', target.dataset.date);
+        // console.debug('DatePicker.onDateClick', target.dataset.date);
         if (this.props.onDateSelected) {
             this.props.onDateSelected(JSON.parse(target.dataset.date));
         }
     }
     render() {
-        // console.log('DatePicker.render', this.props, this.state);
+        // console.debug('DatePicker.render', this.props, this.state);
         const date = this.getFirstDateOfTable();
         const today = _Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.today();
         const minDate = this.isMinDate() ? this.createMinDate() : null;
@@ -33998,28 +33998,28 @@ class DropdownButton extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactC
     constructor(props) {
         super(props);
         this.onButtonClick = (e) => {
-            // console.log('DropdownButton.onButtonClick');
+            // console.debug('DropdownButton.onButtonClick');
             this.setState((state) => ({ open: !state.open }));
         };
         this.onButtonBlur = (e) => {
-            // console.log('DropdownButton.onButtonBlur');
+            // console.debug('DropdownButton.onButtonBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onKeyDown = (e) => {
-            // console.log('DropdownButton.onKeyDown', e.key);
+            // console.debug('DropdownButton.onKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onUlMouseDown = (e) => {
-            // console.log('DropdownButton.onUlMouseDown');
+            // console.debug('DropdownButton.onUlMouseDown');
             e.preventDefault();
         };
         this.onLiClick = async (e) => {
-            // console.log('DropdownButton.onLiClick', e.currentTarget);
+            // console.debug('DropdownButton.onLiClick', e.currentTarget);
             const li = e.currentTarget;
             this.setState({ open: false }, () => {
                 if (this.props.onClick) {
@@ -34077,42 +34077,42 @@ __webpack_require__.r(__webpack_exports__);
 // oldDates boolean true
 class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('DropdownDatePicker.constructor', props);
+        // console.debug('DropdownDatePicker.constructor', props);
         super(props);
         this.onInputClick = (e) => {
-            // console.log('DropdownDatePicker.onInputClick', e);
+            // console.debug('DropdownDatePicker.onInputClick', e);
             if (this.props.readOnly)
                 return;
             this.setState((prevState) => ({ open: !prevState.open }));
         };
         this.onInputKeyDown = (e) => {
-            // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+            // console.debug('DropdownDatePicker.onInputKeyDown', e.key);
             if (e.key === 'Escape' && this.state.open) {
                 this.setState({ open: false });
                 e.stopPropagation();
             }
         };
         this.onCloseDown = async (e) => {
-            // console.log('DropdownDatePicker.onCloseDown', e);
+            // console.debug('DropdownDatePicker.onCloseDown', e);
             this.setState({ value: null });
             if (this.props.onChange) {
                 this.props.onChange(null);
             }
         };
         this.onBlur = (e) => {
-            // console.log('DropdownDatePicker.onBlur');
+            // console.debug('DropdownDatePicker.onBlur');
             if (this.state.open) {
                 this.setState({ open: false });
             }
         };
         this.onDatePickerMouseDown = (e) => {
-            // console.log('DropdownDatePicker.onDatePickerMouseDown');
+            // console.debug('DropdownDatePicker.onDatePickerMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
         this.onDatePickerDateSelected = (date) => {
-            // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+            // console.debug('DropdownDatePicker.onDatePickerDateSelected', date);
             const value = new Date(date[0], date[1], date[2]);
             this.setState({ open: false, value });
             if (this.props.onChange) {
@@ -34174,7 +34174,7 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -34199,7 +34199,7 @@ class DropdownDatePicker extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.Re
                     minDate: this.props.minDate, selectedMonth: this.getSelectedMonth(), selectedDate: this.getSelectedDate(), onMouseDown: this.onDatePickerMouseDown, onDateSelected: this.onDatePickerDateSelected, selectToday: this.props.selectToday, highlightedDate: this.props.highlightedDate })] })));
     }
     render() {
-        // console.log('DropdownDatePicker.render', this.props, this.state);
+        // console.debug('DropdownDatePicker.render', this.props, this.state);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderInput(), this.renderCloseIcon(), this.renderDateIcon(), this.state.open && this.renderDatePicker()] })));
     }
     isDebugMode() {
@@ -34236,7 +34236,7 @@ class Expand extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
     constructor(props) {
         super(props);
         this.onTitleClick = (e) => {
-            console.log('Expand.onTitleClick');
+            console.debug('Expand.onTitleClick');
             this.setState((prevState) => {
                 return { opened: !prevState.opened };
             });
@@ -34289,10 +34289,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.log('Grid.constructor', props);
+        // console.debug('Grid.constructor', props);
         super(props);
         this.onCellMouseDown = async (e) => {
-            console.log('Grid.onCellMouseDown', this.isLink());
+            console.debug('Grid.onCellMouseDown', this.isLink());
             e.preventDefault(); // prevent text selection on double click
             if (this.isDisabled())
                 return;
@@ -34308,34 +34308,34 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             }
         };
         this.onRowMouseDown = async (e) => {
-            console.log('Grid.onRowMouseDown', this.isLink());
+            console.debug('Grid.onRowMouseDown', this.isLink());
             // if (this.isLink()) return;
             const key = e.currentTarget.dataset.row;
             await this.selectRow(key);
         };
         this.onCellDoubleClick = async (e) => {
-            // console.log('Grid.onCellDoubleClick');
+            // console.debug('Grid.onCellDoubleClick');
             const button = e.button;
             const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.log('row:', row);
+            // console.debug('row:', row);
             if (button === 0 && this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onRowDoubleClick = async (e) => {
-            // console.log('Grid.onRowDoubleClick');
+            // console.debug('Grid.onRowDoubleClick');
             const i = parseInt(e.currentTarget.dataset.r);
             const row = this.props.rows[i];
             const key = e.currentTarget.dataset.row;
-            // console.log('row:', row);
+            // console.debug('row:', row);
             if (this.props.onDoubleClick) {
                 await this.props.onDoubleClick(row, key);
             }
         };
         this.onKeyDown = async (e) => {
-            // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+            // console.debug('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
             if (this.isDisabled())
                 return;
             switch (e.keyCode) {
@@ -34372,7 +34372,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             }
         };
         this.onResizeDoubleClick = async (e) => {
-            console.log('Grid.onResizeDoubleClick', e.target);
+            console.debug('Grid.onResizeDoubleClick', e.target);
             const i = parseInt(e.target.dataset.i);
             const column = this.props.columns[i];
             if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column))
@@ -34383,14 +34383,14 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             await this.rerender();
         };
         this.onCellViewCreate = (c) => {
-            // console.log('Grid.onCellViewCreate', c.props.column.name);
+            // console.debug('Grid.onCellViewCreate', c.props.column.name);
             const columnName = c.props.column.name;
             if (this.columns[columnName] === undefined)
                 this.columns[columnName] = [];
             this.columns[columnName].push(c);
         };
         this.onCellViewUnmount = (c) => {
-            // console.log('Grid.onCellViewUnmount', c.props.column.name);
+            // console.debug('Grid.onCellViewUnmount', c.props.column.name);
             const columnName = c.props.column.name;
             const i = this.columns[columnName].indexOf(c);
             if (i === -1)
@@ -34398,19 +34398,19 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
             this.columns[columnName].splice(i, 1);
         };
         this.onBodyScroll = async (e) => {
-            // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+            // console.debug('Grid.onBodyScroll', e.target.scrollLeft);
             this.head.current.scrollLeft = e.target.scrollLeft;
         };
         this.onLinkClick = async (e) => {
-            console.log('Grid.onLinkClick', e.ctrlKey);
+            console.debug('Grid.onLinkClick', e.ctrlKey);
             if (e.ctrlKey)
                 return;
             e.preventDefault();
-            /*if (!this.isLink()) return;
+            /* if (!this.isLink()) return;
             const key = e.currentTarget.dataset.key;
             if (this.props.onLinkClick) {
                 await this.props.onLinkClick(key);
-            }*/
+            } */
         };
         this.state = {
             key: this.props.selectedKey || null,
@@ -34435,7 +34435,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return this.state.key;
     }
     setActiveRowKey(key) {
-        // console.log('Grid.setActiveRowKey', key);
+        // console.debug('Grid.setActiveRowKey', key);
         // @ts-ignore
         this.state.key = key;
     }
@@ -34443,7 +34443,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return this.getActiveRowKey() === key;
     }
     async onCopy() {
-        console.log('Grid.onCopy');
+        console.debug('Grid.onCopy');
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
@@ -34453,7 +34453,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return this.props.rows.find((row) => this.getRowKey(row) === key);
     }
     async onLeft() {
-        console.log('Grid.onLeft');
+        console.debug('Grid.onLeft');
         const j = this.getActiveColumn();
         if (j - 1 >= 0) {
             this.setActiveColumn(j - 1);
@@ -34461,7 +34461,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async onUp() {
-        console.log('Grid.onUp');
+        console.debug('Grid.onUp');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
         const i = this.props.rows.indexOf(row);
@@ -34473,7 +34473,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async onRight() {
-        console.log('Grid.onRight');
+        console.debug('Grid.onRight');
         const j = this.getActiveColumn();
         if (j + 1 <= this.props.columns.length - 1) {
             this.setActiveColumn(j + 1);
@@ -34481,7 +34481,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async onDown() {
-        console.log('Grid.onDown');
+        console.debug('Grid.onDown');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
         const i = this.props.rows.indexOf(row);
@@ -34493,25 +34493,25 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async onEnter() {
-        console.log('Grid.onEnter');
+        console.debug('Grid.onEnter');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.log(row, key);
+        // console.debug(row, key);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
     }
     async onDelete() {
-        console.log('Grid.onDelete');
+        console.debug('Grid.onDelete');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.log(row, key);
+        // console.debug(row, key);
         if (this.props.onDeleteKeyDown) {
             await this.props.onDeleteKeyDown(row, key);
         }
     }
     async selectCell(key, j) {
-        // console.log('Grid.selectCell', key, j);
+        // console.debug('Grid.selectCell', key, j);
         if (this.getActiveRowKey() === key && this.getActiveColumn() === j)
             return;
         this.setActiveRowKey(key);
@@ -34524,7 +34524,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         }
     }
     async selectRow(key) {
-        // console.log('Grid.selectRow', key);
+        // console.debug('Grid.selectRow', key);
         if (this.getActiveRowKey() === key)
             return;
         this.setActiveRowKey(key);
@@ -34570,7 +34570,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_5__.GridCell, { grid: this, row: row, column: column, onCreate: this.onCellViewCreate, onUnmount: this.onCellViewUnmount }));
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        // console.debug('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -34579,7 +34579,7 @@ class Grid extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return true;
     }
     render() {
-        // console.log('Grid.render', this.props.name);
+        // console.debug('Grid.render', this.props.name);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__head`, ref: this.head }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__tr` }, { children: [this.props.columns && this.renderColumns(), !!this.props.extraColumn && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { className: `${this.getCssBlockName()}__th` }))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__body`, onScroll: this.onBodyScroll }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table` }, { children: this.props.rows && this.renderRows() })) }))] })));
     }
     isLink() {
@@ -34663,7 +34663,7 @@ class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
         return this.props.active && this.props.activeColumn === j;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
+        // console.debug('GridRow.shouldComponentUpdate', nextProps.updated - this.props.updated, nextProps.resized - this.props.resized);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated)
                 return true;
@@ -34678,7 +34678,7 @@ class GridRow extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponen
         return true;
     }
     render() {
-        // console.log('GridRow.render', this.props.i);
+        // console.debug('GridRow.render', this.props.i);
         const grid = this.props.grid;
         const row = this.props.row;
         const i = this.props.i;
@@ -34717,7 +34717,7 @@ class Image extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     constructor(props) {
         super(props);
         this.onImgClick = async (e) => {
-            console.log('Image.onImgClick');
+            console.debug('Image.onImgClick');
             if (this.props.onClick) {
                 return await this.props.onClick();
             }
@@ -34766,24 +34766,24 @@ __webpack_require__.r(__webpack_exports__);
 
 class Menu extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('Menu.constructor', props);
+        // console.debug('Menu.constructor', props);
         super(props);
         this.onMenuClick = async (e) => {
-            // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+            // console.debug('Menu.onMenuClick', e.currentTarget.dataset.menu);
             await this.toggleMenu(e.currentTarget.dataset.menu);
         };
         this.onBlur = async (e) => {
-            // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+            // console.debug('Menu.onBlur', e.currentTarget.dataset.menu);
             await this.closeMenu(e.currentTarget.dataset.menu);
         };
         this.onMouseDown = (e) => {
-            // console.log('Menu.onMouseDown');
+            // console.debug('Menu.onMouseDown');
             e.preventDefault();
             // e.stopPropagation();
             // return false;
         };
         this.onMenuItemClick = async (e) => {
-            // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+            // console.debug('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
             e.persist();
             const { menu, type, name } = e.target.dataset;
             await this.closeMenu(menu);
@@ -34948,8 +34948,8 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     constructor(props) {
         super(props);
         this.onKeyPress = (e) => {
-            // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
-            // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+            // console.debug('PhoneBox.onKeyPress', e.key, e.target.value);
+            // console.debug('start/end', e.target.selectionStart, e.target.selectionEnd);
             if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
                 e.preventDefault();
             }
@@ -34960,11 +34960,11 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
             }
         };
         this.onChange = (e) => {
-            // console.log('PhoneBox.onChange', e.target.value);
+            // console.debug('PhoneBox.onChange', e.target.value);
             const start = e.target.selectionStart;
             const end = e.target.selectionEnd;
             const len = e.target.value.length;
-            // console.log('start/end/len:', start, end, len);
+            // console.debug('start/end/len:', start, end, len);
             // disable edition in middle
             if (start !== end || start !== len) {
                 return;
@@ -34982,10 +34982,10 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
             }
         };
         this.onBlur = (e) => {
-            // console.log('PhoneBox.onBlur');
+            // console.debug('PhoneBox.onBlur');
             let value = PhoneBox.clearValue(e.target.value);
             value = PhoneBox.ifNoCodeAddRussianCode(value);
-            // console.log('value:', value);
+            // console.debug('value:', value);
             // event
             if (this.props.onBlur) {
                 this.props.onBlur(value);
@@ -35000,7 +35000,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return PhoneBox.clearValue(this.state.value);
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
             // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
@@ -35008,7 +35008,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         return true;
     }
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, value: this.state.value, onFocus: this.props.onFocus, onChange: this.onChange, onBlur: this.onBlur, onKeyPress: this.onKeyPress }));
     }
     static clearValue(value) {
@@ -35032,7 +35032,7 @@ class PhoneBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
         const value = PhoneBox.clearValue(_value);
         // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        // console.log('arr:', arr);
+        // console.debug('arr:', arr);
         if (arr) {
             if (arr[5]) {
                 return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;
@@ -35077,10 +35077,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('Radio.constructor', props.value);
+        // console.debug('Radio.constructor', props.value);
         super(props);
         this.onChange = async (e) => {
-            // console.log('Radio.onChange', e.target.value);
+            // console.debug('Radio.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 await this.props.onChange(e.target.value);
@@ -35091,7 +35091,7 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
         this.state = {
             value: this.getInitialValue(),
         };
-        console.log('value:', JSON.stringify(this.getValue()));
+        console.debug('value:', JSON.stringify(this.getValue()));
     }
     getInitialValue() {
         let value = null;
@@ -35100,7 +35100,7 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
             const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
-                console.log('items:', this.props.items);
+                console.debug('items:', this.props.items);
             }
         }
         return value;
@@ -35120,7 +35120,7 @@ class Radio extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent 
         return false;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -35160,14 +35160,14 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
     constructor(props) {
         super(props);
         this.onKeyDown = async (e) => {
-            // console.log('Select.onKeyDown');
+            // console.debug('Select.onKeyDown');
             if (this.isVisible()) {
                 this.setState({ visible: false });
                 e.stopPropagation();
             }
         };
         this.onInputMouseDown = async (e) => {
-            console.log('Select.onInputMouseDown');
+            console.debug('Select.onInputMouseDown');
             if (this.props.readOnly)
                 return;
             if (this.props.onMouseDown) {
@@ -35176,15 +35176,15 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
             else {
                 if (!this.isVisible()) {
                     const [selected] = this.el.current.querySelectorAll('li.selected');
-                    // console.log('selected:', selected);
+                    // console.debug('selected:', selected);
                     if (selected) {
-                        // console.log('selected.offsetTop:', selected.offsetTop);
+                        // console.debug('selected.offsetTop:', selected.offsetTop);
                         const scrollTop = selected.offsetTop -
                             this.dropdown.current.getBoundingClientRect().height / 2 +
                             selected.getBoundingClientRect().height / 2;
-                        console.log('scrollTop:', scrollTop);
+                        console.debug('scrollTop:', scrollTop);
                         this.dropdown.current.scrollTop = scrollTop;
-                        console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+                        console.debug('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
                     }
                 }
                 this.setState((prevState) => {
@@ -35193,16 +35193,16 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
             }
         };
         this.onInputBlur = async (e) => {
-            console.log('Select.onInputBlur', e.target);
+            console.debug('Select.onInputBlur', e.target);
             this.setState({ visible: false });
         };
         this.onDropdownMouseDown = async (e) => {
             e.preventDefault();
         };
         this.onDropdownClick = async (e) => {
-            console.log('Select.onDropdownClick', e.target.offsetTop);
+            console.debug('Select.onDropdownClick', e.target.offsetTop);
             const value = JSON.parse(e.target.dataset.value);
-            // console.log('value:', value);
+            // console.debug('value:', value);
             this.setState({ value: value, visible: false }, async () => {
                 if (this.props.onChange) {
                     await this.props.onChange(value.toString());
@@ -35227,7 +35227,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         return this.state.visible;
     }
     getInitialValue() {
-        // console.log('Select.getInitialValue', this.props.value);
+        // console.debug('Select.getInitialValue', this.props.value);
         let value = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
@@ -35237,7 +35237,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
                 }
                 else {
                     console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
-                    console.log('items:', this.getItems());
+                    console.debug('items:', this.getItems());
                 }
             }
         }
@@ -35256,7 +35256,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         }
         if (value === null)
             throw new Error('null is wrong value for Select');
-        // console.log('select value:', value);
+        // console.debug('select value:', value);
         return value;
     }
     getValue() {
@@ -35280,11 +35280,11 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
         const item = this.getItems().find((item) => item.value === value);
         if (!item)
             throw new Error(`cannot find item by value: ${value}`);
-        // console.log('item:', item);
+        // console.debug('item:', item);
         return item.title || item.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -35311,7 +35311,7 @@ class Select extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent
                 })] })));
     }
     render() {
-        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
+        // console.debug('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ ref: this.el, className: this.getCssClassNames() }, { children: [this.renderInput(), this.isNullable() && this.renderClose(), this.renderIcon(), this.renderDropdown()] })));
     }
 }
@@ -35349,7 +35349,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
     constructor(props) {
         super(props);
         this.onPrevClick = (e) => {
-            // console.log('Slider.onPrevClick');
+            // console.debug('Slider.onPrevClick');
             this.setState((prevState) => {
                 let image = prevState.image - 1;
                 if (image < 0) {
@@ -35359,7 +35359,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
             });
         };
         this.onNextClick = (e) => {
-            // console.log('Slider.onNextClick');
+            // console.debug('Slider.onNextClick');
             this.setState((prevState) => {
                 let image = prevState.image + 1;
                 if (image > this.props.images.length - 1) {
@@ -35369,7 +35369,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
             });
         };
         this.onImageClick = (e) => {
-            console.log('Slider.onImageClick');
+            console.debug('Slider.onImageClick');
             if (this.state.classList) {
                 this.setState({ classList: null });
             }
@@ -35385,7 +35385,7 @@ class Slider extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
         this.state = { image: 0, classList: null };
     }
     render() {
-        // console.log('Slider.render', this.props.images);
+        // console.debug('Slider.render', this.props.images);
         const images = this.props.images || [];
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: 'Slider_image', src: images[this.state.image], onClick: this.onImageClick }), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'Slider__label' }, { children: [images.length > 0 ? this.state.image + 1 : 0, " / ", images.length] }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow left', onClick: this.onPrevClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_LeftIcon__WEBPACK_IMPORTED_MODULE_2__.LeftIcon, {}) }))), images.length > 1 && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__arrow right', onClick: this.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_RightIcon__WEBPACK_IMPORTED_MODULE_3__.RightIcon, {}) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'Slider__close', onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2, {}) }))] })));
     }
@@ -35416,7 +35416,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Statusbar extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('Statusbar.constructor', props);
+        // console.debug('Statusbar.constructor', props);
         super(props);
         this.state = {};
     }
@@ -35455,7 +35455,7 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.log('Tab.onLiMouseDown', e.target);
+            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -35470,10 +35470,10 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.log('Tab.onLiClick', e.target);
+            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.log('close tab:', i);
+                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -35491,7 +35491,7 @@ class Tab extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         if (i === this.getActive())
             return;
         const start = Date.now();
-        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
     }
     renderTitles() {
         return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: i === this.getActive() ? 'active' : undefined, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
@@ -35531,7 +35531,7 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onLiMouseDown = (e) => {
-            // console.log('Tab.onLiMouseDown', e.target);
+            // console.debug('Tab.onLiMouseDown', e.target);
             if (e.target.classList.contains('close'))
                 return;
             const i = parseInt(e.currentTarget.dataset.i);
@@ -35546,10 +35546,10 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
             }
         };
         this.onLiClick = (e) => {
-            // console.log('Tab.onLiClick', e.target);
+            // console.debug('Tab.onLiClick', e.target);
             if (e.target.classList.contains('close')) {
                 const i = parseInt(e.currentTarget.dataset.i);
-                // console.log('close tab:', i);
+                // console.debug('close tab:', i);
                 if (this.props.onTabClose)
                     this.props.onTabClose(i);
             }
@@ -35567,7 +35567,7 @@ class Tab2 extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         if (i === this.getActive())
             return;
         const start = Date.now();
-        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
     }
     renderTitles() {
         return this.props.tabs.map((tab, i) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ className: `${this.getCssBlockName()}__button ${i === this.getActive() ? 'active' : ''}`, onMouseDown: this.onLiMouseDown, onClick: this.onLiClick, "data-i": i }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: tab.title }), this.props.canClose && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: "close" }, { children: "\u00D7" }))] }), tab.name)));
@@ -35603,10 +35603,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
-        // console.log('TextArea.constructor', props);
+        // console.debug('TextArea.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.log('TextArea.onChange', e.target.value);
+            // console.debug('TextArea.onChange', e.target.value);
             this.setState({ value: e.target.value });
             if (this.props.onChange) {
                 this.props.onChange(e.target.value);
@@ -35620,13 +35620,13 @@ class TextArea extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactCompone
         return this.state.value;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.log('TextArea.render');
+        // console.debug('TextArea.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { className: this.getCssClassNames(), readOnly: this.props.readOnly, disabled: this.props.disabled, placeholder: this.props.placeholder, rows: this.props.rows, cols: this.props.cols, value: this.state.value, onChange: this.onChange, onFocus: this.props.onFocus, onBlur: this.props.onBlur }));
     }
 }
@@ -35656,10 +35656,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.log('TextBox.constructor', props);
+        // console.debug('TextBox.constructor', props);
         super(props);
         this.onChange = (e) => {
-            // console.log('TextBox.onChange', e.target.value);
+            // console.debug('TextBox.onChange', e.target.value);
             this._setValue(e.target.value);
         };
         this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
@@ -35680,13 +35680,13 @@ class TextBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         }
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: this.props.type || 'text', id: this.props.id, name: this.props.name, readOnly: this.props.readOnly, disabled: this.isDisabled(), placeholder: this.props.placeholder, autoFocus: this.props.autoFocus, spellCheck: this.props.spellCheck, autoComplete: this.props.autocomplete, required: this.props.required, value: this.state.value, onFocus: this.props.onFocus, onBlur: this.props.onBlur, onChange: this.onChange }));
     }
 }
@@ -35716,10 +35716,10 @@ __webpack_require__.r(__webpack_exports__);
 
 class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
-        // console.log('TimeBox.constructor', props);
+        // console.debug('TimeBox.constructor', props);
         super(props);
         this.onKeyPress = (event) => {
-            // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+            // console.debug('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
                 console.debug('cancel', event.key);
                 event.preventDefault();

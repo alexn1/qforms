@@ -8,7 +8,7 @@ class CheckBox extends ReactComponent_1.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (e) => {
-            // console.log('CheckBox.onChange', e.target.checked, this.props.readOnly);
+            // console.debug('CheckBox.onChange', e.target.checked, this.props.readOnly);
             if (!this.props.readOnly) {
                 this.setState((prevState) => {
                     if (this.props.onChange) {
@@ -38,7 +38,7 @@ class CheckBox extends ReactComponent_1.ReactComponent {
         return this.state.checked;
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.checked = typeof nextProps.checked === 'boolean' ? nextProps.checked : null;
         return true;
