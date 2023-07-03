@@ -25,7 +25,7 @@ export class Page extends Model<PageData> {
     params: Record<string, any> = {};
 
     constructor(data: PageData, parent: Application, private options: PageOptions) {
-        // console.log('Page.constructor', options);
+        // console.debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         if (options.onCreate) {
@@ -41,7 +41,7 @@ export class Page extends Model<PageData> {
     }
 
     deinit() {
-        // console.log('Page.deinit', this.getFullName());
+        // console.debug('Page.deinit', this.getFullName());
         if (this.deinited) throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
         this.deinitForms();
@@ -81,12 +81,12 @@ export class Page extends Model<PageData> {
     }
 
     setParam(name: string, value: any) {
-        // console.log('Page.setParam', name);
+        // console.debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
 
     async update() {
-        console.log('Page.update', this.getFullName());
+        console.debug('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -95,7 +95,7 @@ export class Page extends Model<PageData> {
     }
 
     discard() {
-        console.log('Page.discard', this.getFullName());
+        console.debug('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof RowForm) {
                 form.discard();
@@ -170,7 +170,7 @@ export class Page extends Model<PageData> {
     }
 
     onFormInsert(e) {
-        console.log('Page.onFormInsert', e);
+        console.debug('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -180,7 +180,7 @@ export class Page extends Model<PageData> {
     }
 
     async rpc(name: string, params) {
-        // console.log('Page.rpc', this.getFullName(), name, params);
+        // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const result = await this.getApp().request({
             uuid: this.getApp().getAttr('uuid'),

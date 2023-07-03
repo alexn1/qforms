@@ -36,7 +36,7 @@ class Result {
         result[dName][tName].insertEx[key] = row;
     }
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
-        // console.log('Result.addUpdateToResult');
+        // console.debug('Result.addUpdateToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -46,7 +46,7 @@ class Result {
         result[dName][tName].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, dName, tName, oldKey, row) {
-        // console.log('Result.addUpdateExToResult');
+        // console.debug('Result.addUpdateExToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])

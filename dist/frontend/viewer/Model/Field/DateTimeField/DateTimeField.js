@@ -12,7 +12,7 @@ class DateTimeField extends Field_1.Field {
         if (value && this.getAttr('timezone') === 'false') {
             common_1.Helper.addTimezoneOffset(value);
         }
-        // console.log('DateTimeField.rawToValue:', value);
+        // console.debug('DateTimeField.rawToValue:', value);
         return value;
     }
     valueToRaw(value) {
@@ -20,13 +20,13 @@ class DateTimeField extends Field_1.Field {
         if (value && this.getAttr('timezone') === 'false') {
             const v = common_1.Helper.cloneDate(value);
             common_1.Helper.removeTimezoneOffset(v);
-            // console.log('date without timezone:', v);
+            // console.debug('date without timezone:', v);
             rawValue = common_1.Helper.encodeValue(v);
         }
         else {
             rawValue = common_1.Helper.encodeValue(value);
         }
-        // console.log('DateTimeField.valueToRaw', rawValue);
+        // console.debug('DateTimeField.valueToRaw', rawValue);
         return rawValue;
     }
 }

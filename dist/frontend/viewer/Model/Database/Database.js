@@ -10,7 +10,7 @@ class Database extends Model_1.Model {
         this.tables = [];
     }
     init() {
-        // console.log('Database.init', this.getName());
+        // console.debug('Database.init', this.getName());
         for (const data of this.getData().tables) {
             const table = new Table_1.Table(data, this);
             table.init();
@@ -30,7 +30,7 @@ class Database extends Model_1.Model {
         return table;
     }
     emitResult(result, source = null) {
-        console.log('Database.emitResult');
+        console.debug('Database.emitResult');
         const promises = [];
         for (const table in result) {
             promises.push(...this.getTable(table).emitResult(result[table], source));

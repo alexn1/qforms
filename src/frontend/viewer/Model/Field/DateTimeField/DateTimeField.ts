@@ -12,21 +12,21 @@ export class DateTimeField extends Field {
         if (value && this.getAttr('timezone') === 'false') {
             Helper.addTimezoneOffset(value);
         }
-        // console.log('DateTimeField.rawToValue:', value);
+        // console.debug('DateTimeField.rawToValue:', value);
         return value;
     }
 
-    valueToRaw(value): JSONString {
+    valueToRaw(value: any): JSONString {
         let rawValue: JSONString;
         if (value && this.getAttr('timezone') === 'false') {
             const v = Helper.cloneDate(value);
             Helper.removeTimezoneOffset(v);
-            // console.log('date without timezone:', v);
+            // console.debug('date without timezone:', v);
             rawValue = Helper.encodeValue(v);
         } else {
             rawValue = Helper.encodeValue(value);
         }
-        // console.log('DateTimeField.valueToRaw', rawValue);
+        // console.debug('DateTimeField.valueToRaw', rawValue);
         return rawValue;
     }
 }

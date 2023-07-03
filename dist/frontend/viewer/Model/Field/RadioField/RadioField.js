@@ -12,7 +12,7 @@ class RadioField extends Field_1.Field {
                 value = common_1.Helper.decodeValue(row[displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[displayColumn]);
+                console.debug('cannot parse:', row[displayColumn]);
                 throw err;
             }
         }

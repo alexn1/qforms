@@ -20,7 +20,7 @@ class Field extends Model_1.Model {
         });
     }
     fillDefaultValue(row) {
-        // console.log('Field.fillDefaultValue', this.getFullName());
+        // console.debug('Field.fillDefaultValue', this.getFullName());
         const column = this.getAttr('column');
         if (!column)
             return;
@@ -28,7 +28,7 @@ class Field extends Model_1.Model {
         const js = common_1.Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string')
             throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
-        // console.log('js', this.getFullName(), js);
+        // console.debug('js', this.getFullName(), js);
         // module.Helper
         try {
             const value = eval(js);
@@ -41,19 +41,19 @@ class Field extends Model_1.Model {
         }
     }
     valueToPageParams(row) {
-        // console.log('Field.valueToPageParams', this.getFullName());
+        // console.debug('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
             // we need to dump value to param without meta info such as timezone prop
             const value = this.getValue(row);
             const rawValue = this.valueToRaw(value);
-            // console.log('value:', value);
-            // console.log('rawValue:', rawValue);
+            // console.debug('value:', value);
+            // console.debug('rawValue:', rawValue);
             const paramValue = rawValue !== undefined ? common_1.Helper.decodeValue(rawValue) : undefined;
             this.getPage().setParam(this.getFullName(), paramValue);
         }
     }
     isChanged(row) {
-        // console.log('Field.isChanged', this.getFullName());
+        // console.debug('Field.isChanged', this.getFullName());
         if (!this.getAttr('column'))
             throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
@@ -62,7 +62,7 @@ class Field extends Model_1.Model {
         return !!this.getAttr('column');
     }
     getValue(row) {
-        // console.log('Field.getValue', this.getFullName(), row);
+        // console.debug('Field.getValue', this.getFullName(), row);
         if (!row && this.getParent() instanceof RowForm_1.RowForm) {
             row = this.getForm().getRow();
         }
@@ -95,12 +95,12 @@ class Field extends Model_1.Model {
             return this.rawToValue(rawValue);
         }
         catch (err) {
-            console.log('raw value decode error:', this.getFullName(), rawValue);
+            console.debug('raw value decode error:', this.getFullName(), rawValue);
             throw err;
         }
     }
     setValue(row, value) {
-        // console.log('Field.setValue', this.getFullName(), value);
+        // console.debug('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column'))
             throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);

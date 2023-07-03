@@ -13,7 +13,7 @@ class Column extends Model_1.Model {
         }
     }
     init() {
-        // console.log('Column.init', this.getFullName());
+        // console.debug('Column.init', this.getFullName());
     }
     getType() {
         return this.getAttr('type');

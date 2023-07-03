@@ -10,7 +10,7 @@ export class RowFormView<
     TRowFormController extends RowFormController = RowFormController,
 > extends FormView<TRowFormController> {
     renderToolbar(): any {
-        // console.log('RowFormView.renderToolbar');
+        // console.debug('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
         return (
@@ -109,7 +109,7 @@ export class RowFormView<
     }
 
     renderField(fieldCtrl: RowFormFieldController) {
-        // console.log('RowFormView.renderField', fieldCtrl.getModel().getClassName());
+        // console.debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return (
             <div key={`field.${name}`} className={`${this.getCssBlockName()}__field`}>
@@ -131,7 +131,7 @@ export class RowFormView<
     }
 
     renderError(fieldCtrl: RowFormFieldController) {
-        // console.log('RowFormView.renderError:', fieldCtrl.state);
+        // console.debug('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return (
             <div key={`tooltip.${name}`} className={`${this.getCssBlockName()}__error`}>
@@ -166,7 +166,7 @@ export class RowFormView<
     }
 
     renderGroups() {
-        // console.log('RowFormView.renderGroups');
+        // console.debug('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
         return (
             <div className={`${this.getCssBlockName()}__groups`}>
@@ -180,7 +180,7 @@ export class RowFormView<
     }
 
     render() {
-        console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
+        console.debug('RowFormView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} flex-column grid-gap-5`}

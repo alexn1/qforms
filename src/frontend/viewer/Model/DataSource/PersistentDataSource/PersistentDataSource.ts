@@ -17,7 +17,7 @@ export class PersistentDataSource extends DataSource {
     }*/
 
     async insert(row: RawRow) {
-        console.log('PersistentDataSource.insert', row);
+        console.debug('PersistentDataSource.insert', row);
         const database = this.getAttr('database') as string;
         const table = this.getAttr('table') as string;
         if (table === '') throw new Error('no data source table to insert');
@@ -37,12 +37,12 @@ export class PersistentDataSource extends DataSource {
         for (const column in values) {
             row[column] = values[column];
         }
-        // console.log('key:', key);
-        // console.log('row:', row);
+        // console.debug('key:', key);
+        // console.debug('row:', row);
 
         // clear news & changes
         this.news.splice(this.news.indexOf(row), 1);
-        // console.log('this.news:', this.news);
+        // console.debug('this.news:', this.news);
         this.changes.clear();
 
         // add new row to rows
@@ -60,7 +60,7 @@ export class PersistentDataSource extends DataSource {
     }
 
     async update(): Promise<Result | null> {
-        console.log('PersistentDataSource.update', this.getFullName());
+        console.debug('PersistentDataSource.update', this.getFullName());
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '') throw new Error('no data source table to update');
@@ -97,7 +97,7 @@ export class PersistentDataSource extends DataSource {
     }
 
     async delete(key: Key) {
-        console.log('PersistentDataSource.delete:', this.getFullName(), key);
+        console.debug('PersistentDataSource.delete:', this.getFullName(), key);
         if (!key) throw new Error('no key');
         const database = this.getAttr('database');
         const table = this.getAttr('table');
@@ -125,14 +125,14 @@ export class PersistentDataSource extends DataSource {
     }
 
     onTableUpdate = async (e) => {
-        console.log('PersistentDataSource.onTableUpdate', this.getFullName(), e);
+        console.debug('PersistentDataSource.onTableUpdate', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
         if (e.source === this) {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
         }
-        // console.log('updates:', e.updates);
+        // console.debug('updates:', e.updates);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
 
         // update rows
@@ -146,7 +146,7 @@ export class PersistentDataSource extends DataSource {
     };
 
     onTableInsert = async (e) => {
-        console.log('PersistentDataSource.onTableInsert', this.getFullName(), e);
+        console.debug('PersistentDataSource.onTableInsert', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
         if (e.source === this) {
@@ -165,7 +165,7 @@ export class PersistentDataSource extends DataSource {
     };
 
     onTableDelete = async (e) => {
-        console.log('PersistentDataSource.onTableDelete', this.getFullName(), e);
+        console.debug('PersistentDataSource.onTableDelete', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source === this) {
@@ -180,7 +180,7 @@ export class PersistentDataSource extends DataSource {
     };
 
     onTableRefresh = async (e) => {
-        console.log('PersistentDataSource.onTableRefresh', this.getFullName(), e);
+        console.debug('PersistentDataSource.onTableRefresh', this.getFullName(), e);
         if (this.deinited)
             throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
         if (e.source) throw new Error('refresh is foreign result so source must be null');
@@ -197,7 +197,7 @@ export class PersistentDataSource extends DataSource {
     }
 
     async refresh() {
-        console.log('PersistentDataSource.refresh', this.getFullName());
+        console.debug('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
         if (this.getParent() instanceof Form) {
             this.getForm()!.onDataSourceRefresh({ source: this });
@@ -205,7 +205,7 @@ export class PersistentDataSource extends DataSource {
     }
 
     async refill() {
-        console.log('PersistentDataSource.refill', this.getFullName());
+        console.debug('PersistentDataSource.refill', this.getFullName());
         if (this.isChanged())
             throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
         const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
@@ -229,7 +229,7 @@ export class PersistentDataSource extends DataSource {
     }
 
     async select(params = {}) {
-        console.log('PersistentDataSource.select', this.getFullName(), params);
+        console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
@@ -243,7 +243,7 @@ export class PersistentDataSource extends DataSource {
             },
         });
         if (!(data.rows instanceof Array)) throw new Error('rows must be array');
-        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+        // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
 

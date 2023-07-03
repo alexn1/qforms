@@ -11,7 +11,7 @@ class CheckBoxListField extends Field_1.Field {
                 value = common_1.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.getData().displayColumn]);
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }

@@ -12,7 +12,7 @@ class Application extends Model_1.Model {
         this.dataSources = [];
     }
     init() {
-        // console.log('Application.init');
+        // console.debug('Application.init');
         if (!this.getData().theme)
             throw new Error('no theme attr');
         // databases
@@ -59,7 +59,7 @@ class Application extends Model_1.Model {
         return this.databases.find((database) => database.getName() === name);
     }
     getDatabase(name) {
-        // console.log('Application.getDatabase', name);
+        // console.debug('Application.getDatabase', name);
         const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database: ${name}`);
@@ -78,7 +78,7 @@ class Application extends Model_1.Model {
         return this.getData().virtualPath;
     }
     async rpc(name, params) {
-        console.log('Application.rpc', this.getFullName(), name, params);
+        console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const response = await this.request({
@@ -92,12 +92,12 @@ class Application extends Model_1.Model {
         return response;
     }
     emitResult(result, source) {
-        console.log('Application.emitResult', result, source);
+        console.debug('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
-        // console.log('promises:', promises);
+        // console.debug('promises:', promises);
         // @ts-ignore
         return Promise.allSettled(promises);
     }

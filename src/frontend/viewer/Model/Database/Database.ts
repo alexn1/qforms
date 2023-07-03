@@ -7,7 +7,7 @@ export class Database extends Model {
     tables: Table[] = [];
 
     init() {
-        // console.log('Database.init', this.getName());
+        // console.debug('Database.init', this.getName());
         for (const data of this.getData().tables) {
             const table = new Table(data, this);
             table.init();
@@ -30,7 +30,7 @@ export class Database extends Model {
     }
 
     emitResult(result: DatabaseResult, source = null) {
-        console.log('Database.emitResult');
+        console.debug('Database.emitResult');
         const promises: any[] = [];
         for (const table in result) {
             promises.push(...this.getTable(table).emitResult(result[table], source));

@@ -32,7 +32,7 @@ export class DataSource extends Model {
     }
 
     init() {
-        // console.log('DataSource.init', this.getFullName(), this.getClassName());
+        // console.debug('DataSource.init', this.getFullName(), this.getClassName());
         this.setRows(this.getData().rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
@@ -77,23 +77,23 @@ export class DataSource extends Model {
     }
 
     fillRowsByKey() {
-        // console.log('DataSource.fillRowsByKey', this.getFullName())
+        // console.debug('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
         for (let i = 0; i < this.rows!.length; i++) {
             const row = this.rows![i];
             const key = this.getRowKey(row);
             this.rowsByKey[key!] = row;
         }
-        // console.log('this.rowsByKey:', this.getFullName(), this.rowsByKey);
+        // console.debug('this.rowsByKey:', this.getFullName(), this.rowsByKey);
     }
 
     // deinit() {
-    //     console.log('DataSource.deinit', this.getFullName());
+    //     console.debug('DataSource.deinit', this.getFullName());
     //     super.deinit();
     // }
 
     /*getType(column) {
-        // console.log('DataSource.getType', this.getClassName(), column);
+        // console.debug('DataSource.getType', this.getClassName(), column);
         throw new Error('DataSource column type not implemented');
     }*/
 
@@ -109,7 +109,7 @@ export class DataSource extends Model {
     }
 
     setValue(row: RawRow, column: string, value: JSONString) {
-        // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
+        // console.debug('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
         if (typeof value === 'object' && value !== null) {
@@ -128,11 +128,11 @@ export class DataSource extends Model {
         }
         if (this.changes.has(row) && !Object.keys(this.changes.get(row)!).length)
             this.changes.delete(row);
-        // console.log('changes:', this.changes);
+        // console.debug('changes:', this.changes);
     }
 
     isChanged(): boolean {
-        // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
+        // console.debug('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
 
@@ -141,12 +141,12 @@ export class DataSource extends Model {
     }
 
     isRowColumnChanged(row: RawRow, column: string) {
-        // console.log('DataSource.isRowColumnChanged', this.getFullName());
+        // console.debug('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
 
     getValue(row: RawRow, column: string): JSONString {
-        // console.log('DataSource.getValue', column);
+        // console.debug('DataSource.getValue', column);
         let value: JSONString;
         if (this.changes.has(row) && this.changes.get(row)![column] !== undefined) {
             value = this.changes.get(row)![column];
@@ -158,7 +158,7 @@ export class DataSource extends Model {
                 `getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`,
             );
         }
-        // console.log('DataSource.getValue:', value);
+        // console.debug('DataSource.getValue:', value);
         return value;
     }
 
@@ -170,7 +170,7 @@ export class DataSource extends Model {
     }
 
     getRowKey(row: RawRow): Key | null {
-        // console.log('DataSource.getRowKey', row);
+        // console.debug('DataSource.getRowKey', row);
         const arr: KeyTuple = [];
         for (const column of this.getData().keyColumns) {
             if (row[column] === undefined) return null;
@@ -179,7 +179,7 @@ export class DataSource extends Model {
                 const value = JSON.parse(row[column]) as KeyElement;
                 arr.push(value);
             } catch (err) {
-                console.log('getRowKey: cannot parse: ', row[column]);
+                console.debug('getRowKey: cannot parse: ', row[column]);
                 throw err;
             }
         }
@@ -196,7 +196,7 @@ export class DataSource extends Model {
     }
 
     newRow(row: RawRow) {
-        console.log('DataSource.newRow', this.getFullName(), row);
+        console.debug('DataSource.newRow', this.getFullName(), row);
         if (this.rows!.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
@@ -259,7 +259,7 @@ export class DataSource extends Model {
     }
 
     discard() {
-        console.log('DataSource.discard', this.getFullName());
+        console.debug('DataSource.discard', this.getFullName());
         if (!this.isChanged()) throw new Error(`no changes in data source ${this.getFullName()}`);
         this.changes.clear();
     }
@@ -306,7 +306,7 @@ export class DataSource extends Model {
     }
 
     updateRow(key: Key, newValues: RawRow) {
-        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
+        console.debug('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key) throw new Error('no key');
         const row = this.getRow(key);
         if (!row) throw new Error(`${this.getFullName()}: no row with key ${key}`);
@@ -316,9 +316,9 @@ export class DataSource extends Model {
             delete this.rowsByKey![key];
             this.rowsByKey![newKey!] = row;
         }
-        // console.log(`key: ${key} to ${newKey}`);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.getData().rows:', this.getData().rows);
+        // console.debug(`key: ${key} to ${newKey}`);
+        // console.debug('this.rowsByKey:', this.rowsByKey);
+        // console.debug('this.getData().rows:', this.getData().rows);
     }
 
     getTable() {
@@ -327,31 +327,31 @@ export class DataSource extends Model {
     }
 
     getDatabase() {
-        // console.log('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
+        // console.debug('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
         if (!this.getAttr('database'))
             throw new Error(`${this.getFullName()}: database attr empty`);
         return this.getApp().getDatabase(this.getAttr('database'));
     }
 
     getType(columnName: string) {
-        // console.log('DataSource.getType', columnName);
+        // console.debug('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
-        // console.log('type:', type);
+        // console.debug('type:', type);
         return type;
     }
 
     async insert(row?: RawRow): Promise<any> {
-        console.log('DataSource.insert', this.news);
+        console.debug('DataSource.insert', this.news);
         if (!this.news.length) throw new Error('no new rows to insert');
         const inserts: Key[] = [];
         for (const row of this.news) {
             const newValues = this.getRowWithChanges(row);
-            // console.log('newValues:', newValues);
+            // console.debug('newValues:', newValues);
             DataSource.copyNewValues(row, newValues);
-            // console.log('row:', row);
+            // console.debug('row:', row);
             const key = this.getRowKey(row);
             if (!key) throw new Error('invalid insert row, no key');
-            // console.log('key:', key);
+            // console.debug('key:', key);
             inserts.push(key);
         }
         this.changes.clear();
@@ -359,8 +359,8 @@ export class DataSource extends Model {
             this.addRow(row);
         }
         this.news = [];
-        console.log('rows:', this.getRows());
-        console.log('inserts:', inserts);
+        console.debug('rows:', this.getRows());
+        console.debug('inserts:', inserts);
 
         // events
         if (this.getParent() instanceof Form) {
@@ -382,7 +382,7 @@ export class DataSource extends Model {
     }
 
     async delete(key: Key): Promise<Result | null> {
-        console.log('DataSource.delete', key);
+        console.debug('DataSource.delete', key);
         if (!key) throw new Error('no key');
         this.removeRow(key);
 
@@ -407,25 +407,25 @@ export class DataSource extends Model {
     }
 
     async update(): Promise<Result | null> {
-        console.log('DataSource.update', this.getFullName());
+        console.debug('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();
             return null;
         }
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
         const changes = this.getChangesByKey();
-        // console.log('changes:', changes);
+        // console.debug('changes:', changes);
 
         // apply changes to rows
         const updates: { [key: Key]: Key } = {};
         for (const key in changes) {
-            // console.log('key:', key);
+            // console.debug('key:', key);
             const row = this.getRow(key as Key);
-            // console.log('row:', row);
+            // console.debug('row:', row);
             const newValues = this.getRowWithChanges(row!);
-            // console.log('newValues:', newValues);
+            // console.debug('newValues:', newValues);
             const newKey = this.getRowKey(newValues);
-            // console.log('newKey:', newKey);
+            // console.debug('newKey:', newKey);
             this.updateRow(key as Key, newValues);
             updates[key] = newKey;
         }
@@ -460,19 +460,19 @@ export class DataSource extends Model {
             // console.error('onTableInsert stop self insert', this.getFullName());
             return;
         }
-        console.log('DataSource.onTableInsert', this.getFullName(), e);
+        console.debug('DataSource.onTableInsert', this.getFullName(), e);
         if (!e.inserts.length) throw new Error(`${this.getFullName()}: no inserts`);
 
         for (const key of e.inserts) {
             if (this.getRow(key)) {
-                console.log('rows:', this.rows);
-                console.log('rowsByKey:', this.rowsByKey);
+                console.debug('rows:', this.rows);
+                console.debug('rowsByKey:', this.rowsByKey);
                 throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
             }
             const newValues = e.source.getRow(key);
             const newRow = {} as RawRow;
             DataSource.copyNewValues(newRow, newValues);
-            // console.log('newRow:', newRow);
+            // console.debug('newRow:', newRow);
             this.addRow(newRow);
         }
 
@@ -490,7 +490,7 @@ export class DataSource extends Model {
             // console.error('onTableUpdate stop self update', this.getFullName());
             return;
         }
-        console.log('DataSource.onTableUpdate', this.getFullName(), e);
+        console.debug('DataSource.onTableUpdate', this.getFullName(), e);
         if (!Object.keys(e.updates).length) throw new Error(`${this.getFullName()}: no updates`);
         for (const key in e.updates) {
             if (this.getRow(key as Key)) {
@@ -514,7 +514,7 @@ export class DataSource extends Model {
             // console.error('onTableDelete stop self update', this.getFullName());
             return;
         }
-        console.log('DataSource.onTableDelete', this.getFullName(), e);
+        console.debug('DataSource.onTableDelete', this.getFullName(), e);
         if (!e.deletes.length) throw new Error(`${this.getFullName()}: no deletes`);
         for (const key of e.deletes) {
             if (this.getRow(key)) {
@@ -538,7 +538,7 @@ export class DataSource extends Model {
     }
 
     moveRow(row: RawRow, offset: number) {
-        console.log('DataSource.moveRow');
+        console.debug('DataSource.moveRow');
         Helper.moveArrItem(this.rows, row, offset);
 
         // refresh event

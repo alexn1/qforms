@@ -14,7 +14,7 @@ class Table extends Model_1.Model {
         this.columns = [];
     } */
     init() {
-        // console.log('Table.init', this.getFullName());
+        // console.debug('Table.init', this.getFullName());
         for (const data of this.getData().columns) {
             const column = new Column_1.Column(data, this);
             column.init();
@@ -31,7 +31,7 @@ class Table extends Model_1.Model {
         return column;
     }
     emitResult(result, source = null) {
-        console.log('Table.emitResult');
+        console.debug('Table.emitResult');
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
             ...(result.update ? [this.emitUpdate(source, result.update)] : []),

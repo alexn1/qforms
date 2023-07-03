@@ -13,7 +13,7 @@ class PageView extends ModelView_1.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.log('PageView.onActionsClick:', li);
+            // console.debug('PageView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -154,7 +154,7 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     componentDidMount() {
-        // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         }
         else {
@@ -162,9 +162,9 @@ class PageView extends ModelView_1.ModelView {
         }
     }
     focus() {
-        // console.log('PageView.focus', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.log('focus', this.getElement());
+            // console.debug('focus', this.getElement());
             this.getElement().focus();
         }
         else {

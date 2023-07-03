@@ -52,11 +52,11 @@ class PageController extends ModelController_1.ModelController {
             }
         };
         this.onSelectClick = async (e) => {
-            console.log('PageController.onSelectClick');
+            console.debug('PageController.onSelectClick');
             await this.selectRow(this.getSelectedRowKey());
         };
         this.onResetClick = async (e) => {
-            console.log('PageController.onResetClick');
+            console.debug('PageController.onResetClick');
             await this.selectRow(null);
         };
         if (typeof window === 'object') {
@@ -220,7 +220,7 @@ class PageController extends ModelController_1.ModelController {
         return null;
     }
     async selectRow(key) {
-        console.log('PageController.selectRow', key);
+        console.debug('PageController.selectRow', key);
         await this.close();
         await this.getModel().getOptions().onSelect(key);
     }

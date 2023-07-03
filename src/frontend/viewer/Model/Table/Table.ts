@@ -12,7 +12,7 @@ export class Table extends Model {
     } */
 
     init() {
-        // console.log('Table.init', this.getFullName());
+        // console.debug('Table.init', this.getFullName());
         for (const data of this.getData().columns) {
             const column = new Column(data, this);
             column.init();
@@ -31,7 +31,7 @@ export class Table extends Model {
     }
 
     emitResult(result: TableResult, source: any = null): Array<Promise<void>> {
-        console.log('Table.emitResult');
+        console.debug('Table.emitResult');
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
             ...(result.update ? [this.emitUpdate(source, result.update)] : []),

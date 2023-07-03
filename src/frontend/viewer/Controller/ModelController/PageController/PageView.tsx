@@ -23,7 +23,7 @@ export class PageView<
     }
 
     onActionsClick = async (li) => {
-        // console.log('PageView.onActionsClick:', li);
+        // console.debug('PageView.onActionsClick:', li);
         const ctrl = this.getCtrl();
         const name = li.dataset.action;
         try {
@@ -293,7 +293,7 @@ export class PageView<
     }
 
     componentDidMount() {
-        // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         } else {
             this.focus();
@@ -301,9 +301,9 @@ export class PageView<
     }
 
     focus() {
-        // console.log('PageView.focus', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.log('focus', this.getElement());
+            // console.debug('focus', this.getElement());
             this.getElement().focus();
         } else {
             console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);

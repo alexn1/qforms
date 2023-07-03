@@ -10,7 +10,7 @@ export class CheckBoxListField extends Field {
             try {
                 value = Helper.decodeValue(row[this.getData().displayColumn]);
             } catch (err) {
-                console.log('cannot parse:', row[this.getData().displayColumn]);
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         } else {

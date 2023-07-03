@@ -8,12 +8,12 @@ class DateField extends Field_1.Field {
         return this.getAttr('format');
     }
     rawToValue(raw) {
-        // console.log('DateField.rawToValue', this.getFullName(), raw);
+        // console.debug('DateField.rawToValue', this.getFullName(), raw);
         const value = common_1.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
             common_1.Helper.addTimezoneOffset(value);
         }
-        // console.log('DateField.rawToValue:', raw, value);
+        // console.debug('DateField.rawToValue:', raw, value);
         return value;
     }
     valueToRaw(value) {
@@ -26,7 +26,7 @@ class DateField extends Field_1.Field {
         else {
             rawValue = common_1.Helper.encodeValue(value);
         }
-        // console.log('DateField.valueToRaw', rawValue);
+        // console.debug('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }

@@ -7,7 +7,7 @@ const Helper_1 = require("../../../common/Helper");
 const RowForm_1 = require("../Form/RowForm/RowForm");
 class Page extends Model_1.Model {
     constructor(data, parent, options) {
-        // console.log('Page.constructor', options);
+        // console.debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
@@ -25,7 +25,7 @@ class Page extends Model_1.Model {
         console.debug('page params:', this.getParams());
     }
     deinit() {
-        // console.log('Page.deinit', this.getFullName());
+        // console.debug('Page.deinit', this.getFullName());
         if (this.deinited)
             throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
@@ -58,11 +58,11 @@ class Page extends Model_1.Model {
         return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
     }
     setParam(name, value) {
-        // console.log('Page.setParam', name);
+        // console.debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
-        console.log('Page.update', this.getFullName());
+        console.debug('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -70,7 +70,7 @@ class Page extends Model_1.Model {
         }
     }
     discard() {
-        console.log('Page.discard', this.getFullName());
+        console.debug('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof RowForm_1.RowForm) {
                 form.discard();
@@ -135,7 +135,7 @@ class Page extends Model_1.Model {
         return !!this.options.modal;
     }
     onFormInsert(e) {
-        console.log('Page.onFormInsert', e);
+        console.debug('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = DataSource_1.DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -144,7 +144,7 @@ class Page extends Model_1.Model {
         }
     }
     async rpc(name, params) {
-        // console.log('Page.rpc', this.getFullName(), name, params);
+        // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request({

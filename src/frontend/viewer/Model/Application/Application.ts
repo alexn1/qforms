@@ -15,7 +15,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     init() {
-        // console.log('Application.init');
+        // console.debug('Application.init');
         if (!this.getData().theme) throw new Error('no theme attr');
 
         // databases
@@ -70,7 +70,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     getDatabase(name: string): Database {
-        // console.log('Application.getDatabase', name);
+        // console.debug('Application.getDatabase', name);
         const database = this.findDatabase(name);
         if (!database) throw new Error(`no database: ${name}`);
         return database;
@@ -93,7 +93,7 @@ export class Application extends Model<ApplicationData> {
     }
 
     async rpc(name: string, params: { [name: string]: any }) {
-        console.log('Application.rpc', this.getFullName(), name, params);
+        console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const response = await this.request({
             uuid: this.getAttr('uuid'),
@@ -106,12 +106,12 @@ export class Application extends Model<ApplicationData> {
     }
 
     emitResult(result: Result, source?: any) {
-        console.log('Application.emitResult', result, source);
+        console.debug('Application.emitResult', result, source);
         const promises: any[] = [];
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
-        // console.log('promises:', promises);
+        // console.debug('promises:', promises);
         // @ts-ignore
         return Promise.allSettled(promises);
     }

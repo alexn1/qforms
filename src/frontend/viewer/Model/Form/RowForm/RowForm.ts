@@ -39,7 +39,7 @@ export class RowForm extends Form {
     }
 
     getKey(): Key | null {
-        // console.log('RowForm.getKey', this.getFullName());
+        // console.debug('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
         if (dataSource.isPersistent()) {
             const row = this.getRow();
@@ -55,7 +55,7 @@ export class RowForm extends Form {
     }
 
     discard(fields: string[] = []) {
-        console.log('RowForm.discard', fields);
+        console.debug('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
             fields.forEach((name) => {

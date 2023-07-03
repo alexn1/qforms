@@ -37,11 +37,11 @@ class BackHostApp {
         this.params = params;
         this.applications = {};
         this.createAppQueue = {};
-        // console.log('BackHostApp.constructor');
+        // console.debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
     async run() {
-        // console.log(`${this.constructor.name}.run`);
+        // console.debug(`${this.constructor.name}.run`);
         this.initConsole();
         this.initDirPaths();
         this.checkNodeVersion();
@@ -77,7 +77,7 @@ class BackHostApp {
     }
     checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
-        // console.log('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
+        // console.debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
             throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
@@ -211,7 +211,7 @@ class BackHostApp {
         this.express.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(context) {
-        // console.log(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
+        // console.debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
             /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
@@ -272,7 +272,7 @@ class BackHostApp {
         return application;
     }
     getApplicationClass(appInfo) {
-        // console.log('BackHostApp.getApplicationClass', appInfo);
+        // console.debug('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel_1.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -283,7 +283,7 @@ class BackHostApp {
         return BkApplication_1.BkApplication;
     }
     async createApp(req) {
-        console.log('createApp');
+        console.debug('BackHostApp.createApp');
         if (!req.body.folder)
             throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name)

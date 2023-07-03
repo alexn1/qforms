@@ -11,7 +11,7 @@ export class RadioField extends Field {
             try {
                 value = Helper.decodeValue(row[displayColumn]);
             } catch (err) {
-                console.log('cannot parse:', row[displayColumn]);
+                console.debug('cannot parse:', row[displayColumn]);
                 throw err;
             }
         } else {

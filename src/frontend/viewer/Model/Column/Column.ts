@@ -11,7 +11,7 @@ export class Column extends Model {
     }
 
     init() {
-        // console.log('Column.init', this.getFullName());
+        // console.debug('Column.init', this.getFullName());
     }
 
     getType() {
