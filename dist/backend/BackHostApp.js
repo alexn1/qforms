@@ -635,7 +635,7 @@ class BackHostApp {
         }
     }
     async onProcessSIGTERM() {
-        console.log('BackHostApp.onProcessSIGTERM');
+        console.debug('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -647,7 +647,7 @@ class BackHostApp {
         }
     }
     onProcessExit(code) {
-        console.log('BackHostApp.onProcessExit', code);
+        console.log('BackHostApp.onProcessExit:', code);
     }
     async onUncaughtException(err, origin) {
         console.error(safe_1.default.red('BackHostApp.onUncaughtException'), err);
@@ -660,11 +660,11 @@ class BackHostApp {
         await this.logError(reason);
     }
     async shutdown() {
-        console.log('BackHostApp.shutdown');
+        console.debug('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            console.log('route:', route);
+            // console.debug('route:', route);
             const application = this.applications[route];
             await application.deinit();
         }

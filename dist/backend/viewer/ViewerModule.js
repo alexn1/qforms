@@ -74,7 +74,7 @@ class ViewerModule {
         }
     }
     async renderHtml(bkApplication, context) {
-        console.log('ViewerModule.renderHtml');
+        console.debug('ViewerModule.renderHtml');
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: [...this.getLinks(), ...bkApplication.links] }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: [...this.getScripts(), ...bkApplication.scripts] }));
         const data = await bkApplication.fill(context);
@@ -177,7 +177,7 @@ class ViewerModule {
     }
     // action (fill page)
     async page(context, application) {
-        console.log('ViewerModule.page', context.getReq().body.page);
+        console.debug('ViewerModule.page', context.getReq().body.page);
         const req = context.getReq();
         const res = context.getRes();
         await application.connect(context);

@@ -21,8 +21,8 @@ class Page extends Model_1.Model {
     init() {
         this.createDataSources();
         this.createForms();
-        console.log('page options:', this.options);
-        console.log('page params:', this.getParams());
+        console.debug('page options:', this.options);
+        console.debug('page params:', this.getParams());
     }
     deinit() {
         // console.log('Page.deinit', this.getFullName());

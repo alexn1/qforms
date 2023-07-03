@@ -105,7 +105,7 @@ export class ViewerModule {
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
-        console.log('ViewerModule.renderHtml');
+        console.debug('ViewerModule.renderHtml');
 
         const links = ReactDOMServer.renderToStaticMarkup(
             <Links links={[...this.getLinks(), ...bkApplication.links]} />,

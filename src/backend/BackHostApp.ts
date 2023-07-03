@@ -732,7 +732,7 @@ export class BackHostApp {
     }
 
     async onProcessSIGTERM() {
-        console.log('BackHostApp.onProcessSIGTERM');
+        console.debug('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -744,7 +744,7 @@ export class BackHostApp {
     }
 
     onProcessExit(code: number) {
-        console.log('BackHostApp.onProcessExit', code);
+        console.log('BackHostApp.onProcessExit:', code);
     }
 
     async onUncaughtException(err, origin) {
@@ -760,11 +760,11 @@ export class BackHostApp {
     }
 
     async shutdown() {
-        console.log('BackHostApp.shutdown');
+        console.debug('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            console.log('route:', route);
+            // console.debug('route:', route);
             const application = this.applications[route];
             await application.deinit();
         }

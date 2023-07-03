@@ -36,8 +36,8 @@ export class Page extends Model<PageData> {
     init() {
         this.createDataSources();
         this.createForms();
-        console.log('page options:', this.options);
-        console.log('page params:', this.getParams());
+        console.debug('page options:', this.options);
+        console.debug('page params:', this.getParams());
     }
 
     deinit() {

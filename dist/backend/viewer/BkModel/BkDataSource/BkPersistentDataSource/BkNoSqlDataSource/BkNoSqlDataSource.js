@@ -62,8 +62,8 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         // exec selectQuery
         const start = Date.now();
         const rows = await this.getDatabase().queryRows(context, this.getSelectQuery(context), this.getSelectParams(context));
-        console.log('rows query time:', Date.now() - start);
-        // console.log('rows:', rows);
+        console.debug('rows query time:', Date.now() - start);
+        // console.debug('rows:', rows);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
         // count
@@ -72,7 +72,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
             try {
                 const start = Date.now();
                 count = await this.getDatabase().queryScalar(context, this.getCountQuery(context), this.getSelectParams(context));
-                console.log('count query time:', Date.now() - start);
+                console.debug('count query time:', Date.now() - start);
             }
             catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
