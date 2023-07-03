@@ -18,28 +18,28 @@ export class CheckBoxList extends ReactComponent {
     }
 
     onCheckBoxChange = (e) => {
-        // console.log('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
+        // console.debug('CheckBoxList.onCheckBoxChange', e.target.id, e.target.checked);
         const checked = e.target.checked;
         const itemValue = e.target.dataset.value;
-        // console.log('itemValue:', itemValue);
+        // console.debug('itemValue:', itemValue);
         this.setState(
             (prevState) => {
                 const prevValue = prevState.value || [];
                 const value = [...prevValue];
                 if (checked) {
                     if (value.indexOf(itemValue) > -1) {
-                        console.log('value:', itemValue, checked, value);
+                        console.debug('value:', itemValue, checked, value);
                         throw new Error('CheckBoxList value error');
                     }
                     value.push(itemValue);
                 } else {
                     if (value.indexOf(itemValue) === -1) {
-                        console.log('value:', itemValue, checked, value);
+                        console.debug('value:', itemValue, checked, value);
                         throw new Error('CheckBoxList value error');
                     }
                     value.splice(value.indexOf(itemValue), 1);
                 }
-                // console.log('value:', value);
+                // console.debug('value:', value);
                 return { value };
             },
             () => {
@@ -59,8 +59,8 @@ export class CheckBoxList extends ReactComponent {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
-        // console.log('nextProps.value:', nextProps.value);
+        // console.debug('CheckBoxList.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('nextProps.value:', nextProps.value);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;

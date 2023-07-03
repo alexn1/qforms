@@ -16,7 +16,7 @@ export class Image extends ReactComponent {
     }
 
     onImgClick = async (e) => {
-        console.log('Image.onImgClick');
+        console.debug('Image.onImgClick');
         if (this.props.onClick) {
             return await this.props.onClick();
         }
@@ -41,7 +41,7 @@ export class Image extends ReactComponent {
     }
 
     /*componentDidMount() {
-        console.log('Image.componentDidMount', this.getNaturalSize());
+        console.debug('Image.componentDidMount', this.getNaturalSize());
     }*/
 }
 

@@ -3,7 +3,7 @@ import { ReactComponent } from '../ReactComponent';
 
 export class Button extends ReactComponent {
     constructor(props) {
-        // console.log('Button.constructor', props);
+        // console.debug('Button.constructor', props);
         super(props);
         this.state = { disabled: undefined };
         this.el = createRef();
@@ -41,7 +41,7 @@ export class Button extends ReactComponent {
     }
 
     render() {
-        // console.log('Button.render', this.props.title, this.props);
+        // console.debug('Button.render', this.props.title, this.props);
         return (
             <button
                 className={this.getCssClassNames()}

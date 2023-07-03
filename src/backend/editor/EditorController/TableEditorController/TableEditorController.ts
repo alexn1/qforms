@@ -6,7 +6,7 @@ export class TableEditorController extends EditorController {
     }*/
 
     async _new(params) {
-        console.log('TableEditorController._new');
+        console.debug('TableEditorController._new');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         // const data = databaseEditor.newTableData(params);
@@ -16,7 +16,7 @@ export class TableEditorController extends EditorController {
     }
 
     async delete(params) {
-        console.log('TableEditorController.delete');
+        console.debug('TableEditorController.delete');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const data = databaseEditor.removeColData('tables', params.table);
@@ -41,7 +41,7 @@ export class TableEditorController extends EditorController {
     }
 
     async save(params) {
-        console.log('TableEditorController.save');
+        console.debug('TableEditorController.save');
         const appEditor = this.createApplicationEditor();
         const databaseEditor = appEditor.createItemEditor('databases', params.database);
         const tableEditor = databaseEditor.createItemEditor('tables', params.table);

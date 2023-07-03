@@ -47,7 +47,7 @@ export class FormEditorController extends VisualEditorController {
     }
 
     async getView(params) {
-        console.log('FormEditorController.getView');
+        console.debug('FormEditorController.getView');
         const result = await super.getView(params);
         switch (params.view) {
             case 'VisualView.html':

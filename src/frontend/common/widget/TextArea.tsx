@@ -2,7 +2,7 @@ import { ReactComponent } from '../ReactComponent';
 
 export class TextArea extends ReactComponent {
     constructor(props) {
-        // console.log('TextArea.constructor', props);
+        // console.debug('TextArea.constructor', props);
         super(props);
         this.state = {
             value: this.props.value || '',
@@ -14,7 +14,7 @@ export class TextArea extends ReactComponent {
     }
 
     onChange = (e) => {
-        // console.log('TextArea.onChange', e.target.value);
+        // console.debug('TextArea.onChange', e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {
             this.props.onChange(e.target.value);
@@ -22,14 +22,14 @@ export class TextArea extends ReactComponent {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextArea.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
 
     render() {
-        // console.log('TextArea.render');
+        // console.debug('TextArea.render');
         return (
             <textarea
                 className={this.getCssClassNames()}

@@ -9,14 +9,14 @@ export class FileSessionStore extends session.Store {
     dirPath: string;
 
     constructor(dirPath: string) {
-        // console.log('FileSessionStore.constructor', dirPath);
+        // console.debug('FileSessionStore.constructor', dirPath);
         super();
         this.dirPath = dirPath;
         this.store = {};
     }
 
     set(sid, session, cb) {
-        console.log('FileSessionStore.set', sid, session);
+        console.debug('FileSessionStore.set', sid, session);
         this.store[sid] = session;
         const sessionFilePath = path.join(this.dirPath, `${sid}.json`);
         const content = JSON.stringify(session, null, 4);
@@ -26,7 +26,7 @@ export class FileSessionStore extends session.Store {
     }
 
     get(sid, cb) {
-        // console.log('FileSessionStore.get', sid);
+        // console.debug('FileSessionStore.get', sid);
         const session = this.store[sid];
         if (session) {
             cb(null, session);
@@ -48,7 +48,7 @@ export class FileSessionStore extends session.Store {
     }
 
     destroy(sid, cb) {
-        console.log('FileSessionStore.destroy', sid);
+        console.debug('FileSessionStore.destroy', sid);
         delete this.store[sid];
         cb(null);
     }

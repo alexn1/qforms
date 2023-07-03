@@ -3,7 +3,7 @@ import './Statusbar.less';
 
 export class Statusbar extends ReactComponent {
     constructor(props) {
-        // console.log('Statusbar.constructor', props);
+        // console.debug('Statusbar.constructor', props);
         super(props);
         this.state = {};
     }

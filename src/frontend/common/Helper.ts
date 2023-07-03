@@ -81,7 +81,7 @@ export class Helper {
         // try {
         return JSON.parse(raw, Helper.dateTimeReviver);
         // } catch (err) {
-        //     // console.log('raw:', raw);
+        //     // console.debug('raw:', raw);
         //     throw err;
         // }
     }
@@ -103,7 +103,7 @@ export class Helper {
         props = {},
         children?,
     ): ReactComponent | undefined {
-        // console.log('Helper.createReactComponent', rootElement, type);
+        // console.debug('Helper.createReactComponent', rootElement, type);
         let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
@@ -127,7 +127,7 @@ export class Helper {
         props = {},
         children?,
     ): ReactComponent | undefined {
-        // console.log('Helper.createReactComponent2', rootElement, type);
+        // console.debug('Helper.createReactComponent2', rootElement, type);
         let component: ReactComponent | undefined = undefined;
         const reactRootElement = React.createElement(React.StrictMode, {}, [
             React.createElement(
@@ -221,7 +221,7 @@ export class Helper {
     }
 
     static formatTime(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -245,7 +245,7 @@ export class Helper {
     }
 
     static formatTime2(_sec) {
-        // console.log('Helper.formatTime', sec);
+        // console.debug('Helper.formatTime', sec);
         let sec = _sec;
         let sign = '';
         if (_sec < 0) {
@@ -289,7 +289,7 @@ export class Helper {
     }
 
     static fallbackCopyTextToClipboard(text) {
-        // console.log('Helper.fallbackCopyTextToClipboard', text);
+        // console.debug('Helper.fallbackCopyTextToClipboard', text);
         const activeElement = document.activeElement;
         const textArea = document.createElement('textarea');
         textArea.value = text;
@@ -306,7 +306,7 @@ export class Helper {
     }
 
     static async copyTextToClipboard(text) {
-        console.log('Helper.copyTextToClipboard', text);
+        console.debug('Helper.copyTextToClipboard', text);
         if (!navigator.clipboard) {
             Helper.fallbackCopyTextToClipboard(text);
             return;
@@ -315,7 +315,7 @@ export class Helper {
     }
 
     static addMinutes(date, minutes) {
-        // console.log('Helper.addMinutes', date, minutes);
+        // console.lodebugg('Helper.addMinutes', date, minutes);
         date.setMinutes(date.getMinutes() + minutes);
     }
 
@@ -377,7 +377,7 @@ export class Helper {
     }
 
     static registerGlobalClass(Class) {
-        // console.log('Helper.registerGlobalClass', Class.name);
+        // console.debug('Helper.registerGlobalClass', Class.name);
         if (typeof window === 'object') {
             if (window[Class.name]) throw new Error(`window.${Class.name} already used`);
             window[Class.name] = Class;
@@ -388,7 +388,7 @@ export class Helper {
     }
 
     static getGlobalClass(className: string): any {
-        // console.log('Helper.getGlobalClass', className);
+        // console.debug('Helper.getGlobalClass', className);
         return typeof window === 'object' ? window[className] : global[className];
     }
 

@@ -2,7 +2,7 @@ import { ReactComponent } from '../ReactComponent';
 
 export class ComboBox extends ReactComponent {
     constructor(props) {
-        // console.log('ComboBox.constructor', props.value, typeof props.value, props.items);
+        // console.debug('ComboBox.constructor', props.value, typeof props.value, props.items);
         super(props);
         if (!props.items) throw new Error('no ComboBox items');
         this.state = { value: this.getInitialValue() };
@@ -17,7 +17,7 @@ export class ComboBox extends ReactComponent {
                 if (this.props.nullable && value === '') {
                 } else {
                     console.error(`ComboBox: no item for value:`, JSON.stringify(this.props.value));
-                    console.log('items:', this.props.items);
+                    console.debug('items:', this.props.items);
                 }
             }
         } else {
@@ -28,7 +28,7 @@ export class ComboBox extends ReactComponent {
             }
         }
         if (value === null) throw new Error('null is wrong value for ComboBox');
-        // console.log('combobox value:', value);
+        // console.debug('combobox value:', value);
         return value;
     }
 
@@ -37,7 +37,7 @@ export class ComboBox extends ReactComponent {
     }
 
     onChange = async (e) => {
-        // console.log('ComboBox.onChange', e.target.value, typeof e.target.value);
+        // console.debug('ComboBox.onChange', e.target.value, typeof e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {
             await this.props.onChange(e.target.value);
@@ -45,21 +45,21 @@ export class ComboBox extends ReactComponent {
     };
 
     onMouseDown = async (e) => {
-        // console.log('ComboBox.onMouseDown', e.button);
+        // console.debug('ComboBox.onMouseDown', e.button);
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
         }
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('ComboBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
 
     render() {
-        // console.log('ComboBox.render', this.state.value);
+        // console.debug('ComboBox.render', this.state.value);
         return (
             <select
                 className={this.getCssClassNames()}

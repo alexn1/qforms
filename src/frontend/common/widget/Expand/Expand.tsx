@@ -19,7 +19,7 @@ export class Expand extends ReactComponent {
     }
 
     onTitleClick = (e) => {
-        console.log('Expand.onTitleClick');
+        console.debug('Expand.onTitleClick');
         this.setState((prevState) => {
             return { opened: !prevState.opened };
         });

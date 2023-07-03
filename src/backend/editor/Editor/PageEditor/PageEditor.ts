@@ -32,7 +32,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     setAttr(name: string, value: string) {
-        console.log('PageEditor.setAttr', name, value);
+        console.debug('PageEditor.setAttr', name, value);
         if (name === 'name') {
             const pageLinkEditor = this.appEditor.createItemEditor('pageLinks', this.getName());
             pageLinkEditor.setAttr(name, value);
@@ -84,7 +84,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async getCustomDirPath() {
-        console.log('PageEditor.getCustomDirPath');
+        console.debug('PageEditor.getCustomDirPath');
         const customDirPath = await this.getParent<Editor>().getCustomDirPath();
         return path.join(customDirPath, 'pages', this.getName());
     }

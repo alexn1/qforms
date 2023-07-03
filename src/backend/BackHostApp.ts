@@ -644,7 +644,7 @@ export class BackHostApp {
     }
 
     async _e500(err: any, req: Request, res: Response, next: NextFunction) {
-        console.log(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
+        console.error(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
         const error = typeof err === 'string' ? new MyError({ message: err }) : err;
         res.status(error.status || 500);
@@ -678,13 +678,13 @@ export class BackHostApp {
     }
 
     /* _getTest(req, res, next) {
-        console.log('getTest');
+        console.debug('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
     } */
 
     /* _postTest(req, res, next) {
-        console.log('postTest', req.body);
+        console.debug('postTest', req.body);
         res.json({foo: 'bar'});
     } */
 
@@ -887,7 +887,7 @@ export class BackHostApp {
     }
 
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result) {
-        console.log('BackHostApp.broadcastResult');
+        console.debug('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
@@ -899,7 +899,7 @@ export class BackHostApp {
     }
 
     static test() {
-        console.log('BackHostApp.test');
+        console.debug('BackHostApp.test');
     }
 
     getDistDirPath(): string {

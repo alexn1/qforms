@@ -61,7 +61,7 @@ export class BaseModel<TBkModelData extends BkModelScheme = BkModelScheme> {
         if (!name) throw new Error('getCol: no name');
         const arr = this.data[name];
         if (!arr) {
-            // console.log('this.data', this.data);
+            // console.debug('this.data', this.data);
             throw new Error(`getCol: no col ${name}`);
         }
         return arr;

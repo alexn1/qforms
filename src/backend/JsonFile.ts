@@ -26,7 +26,7 @@ export class JsonFile {
     }
 
     async save(): Promise<void> {
-        console.log('JsonFile.save', this.filePath);
+        console.debug('JsonFile.save', this.filePath);
         this.content = JSON.stringify(this.data, null, 4);
         await BkHelper.writeFile2(this.filePath, this.content);
     }

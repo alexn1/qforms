@@ -24,7 +24,7 @@ export class FrontHostApp {
     documentTitle = ''; // for run on back
 
     constructor(protected options?: FrontHostAppOptions) {
-        // console.log('FrontHostApp.constructor');
+        // console.debug('FrontHostApp.constructor');
     }
 
     init() {
@@ -38,7 +38,7 @@ export class FrontHostApp {
     }
 
     async onWindowUnhandledrejection(e) {
-        console.log('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        console.debug('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;
@@ -50,7 +50,7 @@ export class FrontHostApp {
     }
 
     async onWindowError(e) {
-        console.log('FrontHostApp.onWindowError', e);
+        console.debug('FrontHostApp.onWindowError', e);
         try {
             e.preventDefault();
             const err = e.error;
@@ -103,7 +103,7 @@ export class FrontHostApp {
                     acc[name] = value;
                     return acc;
                 }, {});
-                // console.log('headers:', headers);
+                // console.debug('headers:', headers);
                 const body = await response.json();
                 return [headers, body];
             }
@@ -122,11 +122,11 @@ export class FrontHostApp {
     }
 
     async onWindowPopState(e) {
-        console.log('FrontHostApp.onWindowPopState', e.state);
+        console.debug('FrontHostApp.onWindowPopState', e.state);
     }
 
     async alert(options: { message: string; title?: string }): Promise<void> {
-        console.log('FrontHostApp.alert', options);
+        console.debug('FrontHostApp.alert', options);
         alert(options.message);
     }
 
@@ -136,7 +136,7 @@ export class FrontHostApp {
         yesButton?: string;
         noButton?: string;
     }): Promise<boolean> {
-        console.log('FrontHostApp.confirm', options);
+        console.debug('FrontHostApp.confirm', options);
         return confirm(options.message);
     }
 
@@ -163,7 +163,7 @@ export class FrontHostApp {
         }
     }
 
-    createLink(params: {[name: string]: any} | null = null): string {
+    createLink(params: { [name: string]: any } | null = null): string {
         const path =
             typeof window === 'object' ? window.location.pathname : this.getOptions().url.pathname;
         if (params) {

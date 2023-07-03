@@ -28,14 +28,14 @@ export class IndexModule {
                 'js',
             )
         ).map((path) => `/index/public/${path}`);
-        // console.log('app.css:', this.css);
-        // console.log('app.js:' , this.js);
+        // console.debug('app.css:', this.css);
+        // console.debug('app.js:' , this.js);
     }
 
     async fill() {
         const distDirPath = this.hostApp.makeDistDirPathForApp(this.hostApp.appsDirPath);
         const appInfos = await BkApplication.getAppInfos(this.hostApp.appsDirPath, distDirPath);
-        // console.log('appInfos:', appInfos);
+        // console.debug('appInfos:', appInfos);
         return {
             nodeEnv: this.hostApp.getNodeEnv(),
             appInfos: appInfos.map((appInfo) => ({
@@ -74,7 +74,7 @@ export class IndexModule {
     <script type="application/json">${data2}</script>
     <!--<script>
         document.addEventListener('DOMContentLoaded', () => {
-            // console.log('DOMContentLoaded');
+            // console.debug('DOMContentLoaded');
             const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
             new IndexFrontHostApp(data).init();
         });

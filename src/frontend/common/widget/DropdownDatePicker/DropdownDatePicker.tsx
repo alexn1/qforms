@@ -11,7 +11,7 @@ import './DropdownDatePicker.less';
 // oldDates boolean true
 export class DropdownDatePicker extends ReactComponent {
     constructor(props) {
-        // console.log('DropdownDatePicker.constructor', props);
+        // console.debug('DropdownDatePicker.constructor', props);
         super(props);
         this.state = {
             open: false,
@@ -23,13 +23,13 @@ export class DropdownDatePicker extends ReactComponent {
     }
 
     onInputClick = (e) => {
-        // console.log('DropdownDatePicker.onInputClick', e);
+        // console.debug('DropdownDatePicker.onInputClick', e);
         if (this.props.readOnly) return;
         this.setState((prevState) => ({ open: !prevState.open }));
     };
 
     onInputKeyDown = (e) => {
-        // console.log('DropdownDatePicker.onInputKeyDown', e.key);
+        // console.debug('DropdownDatePicker.onInputKeyDown', e.key);
         if (e.key === 'Escape' && this.state.open) {
             this.setState({ open: false });
             e.stopPropagation();
@@ -37,7 +37,7 @@ export class DropdownDatePicker extends ReactComponent {
     };
 
     onCloseDown = async (e) => {
-        // console.log('DropdownDatePicker.onCloseDown', e);
+        // console.debug('DropdownDatePicker.onCloseDown', e);
         this.setState({ value: null });
         if (this.props.onChange) {
             this.props.onChange(null);
@@ -45,21 +45,21 @@ export class DropdownDatePicker extends ReactComponent {
     };
 
     onBlur = (e) => {
-        // console.log('DropdownDatePicker.onBlur');
+        // console.debug('DropdownDatePicker.onBlur');
         if (this.state.open) {
             this.setState({ open: false });
         }
     };
 
     onDatePickerMouseDown = (e) => {
-        // console.log('DropdownDatePicker.onDatePickerMouseDown');
+        // console.debug('DropdownDatePicker.onDatePickerMouseDown');
         e.preventDefault();
         // e.stopPropagation();
         // return false;
     };
 
     onDatePickerDateSelected = (date) => {
-        // console.log('DropdownDatePicker.onDatePickerDateSelected', date);
+        // console.debug('DropdownDatePicker.onDatePickerDateSelected', date);
         const value = new Date(date[0], date[1], date[2]);
         this.setState({ open: false, value });
         if (this.props.onChange) {
@@ -120,7 +120,7 @@ export class DropdownDatePicker extends ReactComponent {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('DropdownDatePicker.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -186,7 +186,7 @@ export class DropdownDatePicker extends ReactComponent {
     }
 
     render() {
-        // console.log('DropdownDatePicker.render', this.props, this.state);
+        // console.debug('DropdownDatePicker.render', this.props, this.state);
         return (
             <div className={this.getCssClassNames()}>
                 {this.renderInput()}

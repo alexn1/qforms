@@ -26,7 +26,7 @@ export class Select extends ReactComponent {
     }
 
     getInitialValue() {
-        // console.log('Select.getInitialValue', this.props.value);
+        // console.debug('Select.getInitialValue', this.props.value);
         let value: any = null;
         if (this.props.value !== undefined && this.props.value !== null) {
             value = this.props.value;
@@ -35,7 +35,7 @@ export class Select extends ReactComponent {
                 if (this.isNullable() && value === '') {
                 } else {
                     console.error(`Select: no item for value:`, JSON.stringify(this.props.value));
-                    console.log('items:', this.getItems());
+                    console.debug('items:', this.getItems());
                 }
             }
         } else {
@@ -50,7 +50,7 @@ export class Select extends ReactComponent {
             }
         }
         if (value === null) throw new Error('null is wrong value for Select');
-        // console.log('select value:', value);
+        // console.debug('select value:', value);
         return value;
     }
 
@@ -71,7 +71,7 @@ export class Select extends ReactComponent {
     }
 
     onKeyDown = async (e) => {
-        // console.log('Select.onKeyDown');
+        // console.debug('Select.onKeyDown');
         if (this.isVisible()) {
             this.setState({ visible: false });
             e.stopPropagation();
@@ -79,23 +79,26 @@ export class Select extends ReactComponent {
     };
 
     onInputMouseDown = async (e) => {
-        console.log('Select.onInputMouseDown');
+        console.debug('Select.onInputMouseDown');
         if (this.props.readOnly) return;
         if (this.props.onMouseDown) {
             await this.props.onMouseDown(e);
         } else {
             if (!this.isVisible()) {
                 const [selected] = this.el.current.querySelectorAll('li.selected');
-                // console.log('selected:', selected);
+                // console.debug('selected:', selected);
                 if (selected) {
-                    // console.log('selected.offsetTop:', selected.offsetTop);
+                    // console.debug('selected.offsetTop:', selected.offsetTop);
                     const scrollTop =
                         selected.offsetTop -
                         this.dropdown.current.getBoundingClientRect().height / 2 +
                         selected.getBoundingClientRect().height / 2;
-                    console.log('scrollTop:', scrollTop);
+                    console.debug('scrollTop:', scrollTop);
                     this.dropdown.current.scrollTop = scrollTop;
-                    console.log('this.dropdown.current.scrollTop', this.dropdown.current.scrollTop);
+                    console.debug(
+                        'this.dropdown.current.scrollTop',
+                        this.dropdown.current.scrollTop,
+                    );
                 }
             }
             this.setState((prevState) => {
@@ -105,7 +108,7 @@ export class Select extends ReactComponent {
     };
 
     onInputBlur = async (e) => {
-        console.log('Select.onInputBlur', e.target);
+        console.debug('Select.onInputBlur', e.target);
         this.setState({ visible: false });
     };
 
@@ -114,9 +117,9 @@ export class Select extends ReactComponent {
     };
 
     onDropdownClick = async (e) => {
-        console.log('Select.onDropdownClick', e.target.offsetTop);
+        console.debug('Select.onDropdownClick', e.target.offsetTop);
         const value = JSON.parse(e.target.dataset.value);
-        // console.log('value:', value);
+        // console.debug('value:', value);
         this.setState({ value: value, visible: false }, async () => {
             if (this.props.onChange) {
                 await this.props.onChange(value.toString());
@@ -140,12 +143,12 @@ export class Select extends ReactComponent {
         if (value === '') return '';
         const item = this.getItems().find((item) => item.value === value);
         if (!item) throw new Error(`cannot find item by value: ${value}`);
-        // console.log('item:', item);
+        // console.debug('item:', item);
         return item.title || item.value;
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('Select.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
@@ -223,7 +226,7 @@ export class Select extends ReactComponent {
     }
 
     render() {
-        // console.log('Select.render', this.state.value, this.getValueTitle(this.state.value));
+        // console.debug('Select.render', this.state.value, this.getValueTitle(this.state.value));
         return (
             <div ref={this.el} className={this.getCssClassNames()}>
                 {this.renderInput()}

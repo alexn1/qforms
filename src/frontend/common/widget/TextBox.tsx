@@ -3,7 +3,7 @@ import { ReactComponent } from '../ReactComponent';
 
 export class TextBox extends ReactComponent {
     constructor(props) {
-        // console.log('TextBox.constructor', props);
+        // console.debug('TextBox.constructor', props);
         super(props);
         this.el = createRef();
         this.state = {
@@ -26,19 +26,19 @@ export class TextBox extends ReactComponent {
     }
 
     onChange = (e) => {
-        // console.log('TextBox.onChange', e.target.value);
+        // console.debug('TextBox.onChange', e.target.value);
         this._setValue(e.target.value);
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;
     }
 
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return (
             <input
                 ref={this.el}

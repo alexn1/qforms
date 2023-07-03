@@ -2,7 +2,7 @@ import { Editor } from '../Editor';
 
 export class TableEditor extends Editor {
     static createData(params) {
-        // console.log('TableEditor.createData', params);
+        // console.debug('TableEditor.createData', params);
         return {
             '@class': 'Table',
             '@attributes': {

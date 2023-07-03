@@ -3,18 +3,18 @@ import './Menu.less';
 
 export class Menu extends ReactComponent {
     constructor(props) {
-        // console.log('Menu.constructor', props);
+        // console.debug('Menu.constructor', props);
         super(props);
         this.state = {};
     }
 
     onMenuClick = async (e) => {
-        // console.log('Menu.onMenuClick', e.currentTarget.dataset.menu);
+        // console.debug('Menu.onMenuClick', e.currentTarget.dataset.menu);
         await this.toggleMenu(e.currentTarget.dataset.menu);
     };
 
     onBlur = async (e) => {
-        // console.log('Menu.onBlur', e.currentTarget.dataset.menu);
+        // console.debug('Menu.onBlur', e.currentTarget.dataset.menu);
         await this.closeMenu(e.currentTarget.dataset.menu);
     };
 
@@ -34,14 +34,14 @@ export class Menu extends ReactComponent {
     }
 
     onMouseDown = (e) => {
-        // console.log('Menu.onMouseDown');
+        // console.debug('Menu.onMouseDown');
         e.preventDefault();
         // e.stopPropagation();
         // return false;
     };
 
     onMenuItemClick = async (e) => {
-        // console.log('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
+        // console.debug('Menu.onMenuItemClick', e.target.dataset.menu, e.target.dataset.item);
         e.persist();
         const { menu, type, name } = e.target.dataset;
         await this.closeMenu(menu);
@@ -55,7 +55,9 @@ export class Menu extends ReactComponent {
             <div className="Menu">
                 {this.props.items &&
                     this.props.items.map((menu) => (
-                        <div key={menu.name} className={this.state[menu.name] ? 'active' : undefined}>
+                        <div
+                            key={menu.name}
+                            className={this.state[menu.name] ? 'active' : undefined}>
                             <button
                                 data-menu={menu.name}
                                 onClick={this.onMenuClick}

@@ -4,7 +4,7 @@ import './Box.less';
 
 export class Box extends ReactComponent {
     constructor(props) {
-        // console.log('Box.constructor', props);
+        // console.debug('Box.constructor', props);
         super(props);
         this.state = {
             backgroundColor: 'purple',
@@ -12,35 +12,35 @@ export class Box extends ReactComponent {
     }
 
     // componentWillMount() {
-    //     console.log('Box.componentWillMount');
+    //     console.debug('Box.componentWillMount');
     // }
 
     componentDidMount() {
-        console.log('Box.componentDidMount');
+        console.debug('Box.componentDidMount');
     }
 
     componentWillUnmount() {
-        console.log('Box.componentWillUnmount');
+        console.debug('Box.componentWillUnmount');
     }
 
     update = () => {
-        console.log('Box.update');
+        console.debug('Box.update');
         this.setState({
             backgroundColor: 'green',
         });
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('Box.shouldComponentUpdate', nextProps, nextState);
+        console.debug('Box.shouldComponentUpdate', nextProps, nextState);
         return true;
     }
 
     componentDidUpdate() {
-        console.log('Box.componentDidUpdate');
+        console.debug('Box.componentDidUpdate');
     }
 
     render() {
-        console.log('Box.render');
+        console.debug('Box.render');
         return (
             <div className="Box">
                 <Button name="one" />

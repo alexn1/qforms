@@ -14,19 +14,19 @@ export class DropdownButton extends ReactComponent {
     }
 
     onButtonClick = (e) => {
-        // console.log('DropdownButton.onButtonClick');
+        // console.debug('DropdownButton.onButtonClick');
         this.setState((state) => ({ open: !state.open }));
     };
 
     onButtonBlur = (e) => {
-        // console.log('DropdownButton.onButtonBlur');
+        // console.debug('DropdownButton.onButtonBlur');
         if (this.state.open) {
             this.setState({ open: false });
         }
     };
 
     onKeyDown = (e) => {
-        // console.log('DropdownButton.onKeyDown', e.key);
+        // console.debug('DropdownButton.onKeyDown', e.key);
         if (e.key === 'Escape' && this.state.open) {
             this.setState({ open: false });
             e.stopPropagation();
@@ -34,12 +34,12 @@ export class DropdownButton extends ReactComponent {
     };
 
     onUlMouseDown = (e) => {
-        // console.log('DropdownButton.onUlMouseDown');
+        // console.debug('DropdownButton.onUlMouseDown');
         e.preventDefault();
     };
 
     onLiClick = async (e) => {
-        // console.log('DropdownButton.onLiClick', e.currentTarget);
+        // console.debug('DropdownButton.onLiClick', e.currentTarget);
         const li = e.currentTarget;
         this.setState({ open: false }, () => {
             if (this.props.onClick) {

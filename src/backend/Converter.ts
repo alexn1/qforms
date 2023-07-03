@@ -5,7 +5,7 @@ import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
 
 export class Converter {
     static async reformat(appFilePath: string) {
-        console.log('Convert.reformat', appFilePath);
+        console.debug('Convert.reformat', appFilePath);
         const appFile = new JsonFile(appFilePath);
         await appFile.read();
 
@@ -18,7 +18,7 @@ export class Converter {
         const pageNames = appEditor
             .getData()
             .pageLinks.map((data: BkModelScheme) => BaseModel.getName(data));
-        // console.log('pageNames:', pageNames);
+        // console.debug('pageNames:', pageNames);
         // const pageName = pageNames[0];
         for (const pageName of pageNames) {
             const pageEditor = await appEditor.getPage(pageName);

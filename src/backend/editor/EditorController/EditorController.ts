@@ -16,14 +16,14 @@ export class EditorController {
     async init(context: Context) {}
 
     async getView(params) {
-        console.log('EditorController.getView');
+        console.debug('EditorController.getView');
         return {
             data: {},
         };
     }
 
     createApplicationEditor() {
-        console.log('EditorController.createApplicationEditor');
+        console.debug('EditorController.createApplicationEditor');
         return new ApplicationEditor(this.appInfo.appFile);
     }
 }

@@ -15,8 +15,8 @@ export class PhoneBox extends ReactComponent {
     }
 
     onKeyPress = (e) => {
-        // console.log('PhoneBox.onKeyPress', e.key, e.target.value);
-        // console.log('start/end', e.target.selectionStart, e.target.selectionEnd);
+        // console.debug('PhoneBox.onKeyPress', e.key, e.target.value);
+        // console.debug('start/end', e.target.selectionStart, e.target.selectionEnd);
         if (!['+', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(e.key)) {
             e.preventDefault();
         }
@@ -30,11 +30,11 @@ export class PhoneBox extends ReactComponent {
     };
 
     onChange = (e) => {
-        // console.log('PhoneBox.onChange', e.target.value);
+        // console.debug('PhoneBox.onChange', e.target.value);
         const start = e.target.selectionStart;
         const end = e.target.selectionEnd;
         const len = e.target.value.length;
-        // console.log('start/end/len:', start, end, len);
+        // console.debug('start/end/len:', start, end, len);
 
         // disable edition in middle
         if (start !== end || start !== len) {
@@ -57,10 +57,10 @@ export class PhoneBox extends ReactComponent {
     };
 
     onBlur = (e) => {
-        // console.log('PhoneBox.onBlur');
+        // console.debug('PhoneBox.onBlur');
         let value = PhoneBox.clearValue(e.target.value);
         value = PhoneBox.ifNoCodeAddRussianCode(value);
-        // console.log('value:', value);
+        // console.debug('value:', value);
 
         // event
         if (this.props.onBlur) {
@@ -69,7 +69,7 @@ export class PhoneBox extends ReactComponent {
     };
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('TextBox.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         if (nextProps.value !== undefined) {
             // @ts-ignore
             this.state.value = PhoneBox.formatPhoneNumber(nextProps.value);
@@ -78,7 +78,7 @@ export class PhoneBox extends ReactComponent {
     }
 
     render() {
-        // console.log('TextBox.render');
+        // console.debug('TextBox.render');
         return (
             <input
                 ref={this.el}
@@ -122,7 +122,7 @@ export class PhoneBox extends ReactComponent {
 
         // russian country code
         const arr = /(^\+7)(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})/.exec(value);
-        // console.log('arr:', arr);
+        // console.debug('arr:', arr);
         if (arr) {
             if (arr[5]) {
                 return `${arr[1]} ${arr[2]} ${arr[3]}-${arr[4]}-${arr[5]}`;

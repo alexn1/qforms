@@ -10,7 +10,7 @@ export class Grid extends ReactComponent {
     head: React.RefObject<any>;
 
     constructor(props) {
-        // console.log('Grid.constructor', props);
+        // console.debug('Grid.constructor', props);
         super(props);
         this.state = {
             key: this.props.selectedKey || null,
@@ -40,7 +40,7 @@ export class Grid extends ReactComponent {
     }
 
     setActiveRowKey(key) {
-        // console.log('Grid.setActiveRowKey', key);
+        // console.debug('Grid.setActiveRowKey', key);
         // @ts-ignore
         this.state.key = key;
     }
@@ -50,7 +50,7 @@ export class Grid extends ReactComponent {
     }
 
     onCellMouseDown = async (e) => {
-        console.log('Grid.onCellMouseDown', this.isLink());
+        console.debug('Grid.onCellMouseDown', this.isLink());
         e.preventDefault(); // prevent text selection on double click
         if (this.isDisabled()) return;
         this.getElement().focus();
@@ -66,37 +66,37 @@ export class Grid extends ReactComponent {
     };
 
     onRowMouseDown = async (e) => {
-        console.log('Grid.onRowMouseDown', this.isLink());
+        console.debug('Grid.onRowMouseDown', this.isLink());
         // if (this.isLink()) return;
         const key = e.currentTarget.dataset.row;
         await this.selectRow(key);
     };
 
     onCellDoubleClick = async (e) => {
-        // console.log('Grid.onCellDoubleClick');
+        // console.debug('Grid.onCellDoubleClick');
         const button = e.button;
         const [i, j] = JSON.parse(e.currentTarget.dataset.rc);
         const row = this.props.rows[i];
         const key = e.currentTarget.dataset.row;
-        // console.log('row:', row);
+        // console.debug('row:', row);
         if (button === 0 && this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
     };
 
     onRowDoubleClick = async (e) => {
-        // console.log('Grid.onRowDoubleClick');
+        // console.debug('Grid.onRowDoubleClick');
         const i = parseInt(e.currentTarget.dataset.r);
         const row = this.props.rows[i];
         const key = e.currentTarget.dataset.row;
-        // console.log('row:', row);
+        // console.debug('row:', row);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
     };
 
     onKeyDown = async (e) => {
-        // console.log('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
+        // console.debug('Grid.onKeyDown', e.keyCode, e.ctrlKey, e.shiftKey);
         if (this.isDisabled()) return;
         switch (e.keyCode) {
             case 37:
@@ -133,7 +133,7 @@ export class Grid extends ReactComponent {
     };
 
     async onCopy() {
-        console.log('Grid.onCopy');
+        console.debug('Grid.onCopy');
         const row = this.findRow(this.getActiveRowKey());
         const column = this.props.columns[this.getActiveColumn()].name;
         const text = row[column];
@@ -145,7 +145,7 @@ export class Grid extends ReactComponent {
     }
 
     async onLeft() {
-        console.log('Grid.onLeft');
+        console.debug('Grid.onLeft');
         const j = this.getActiveColumn();
         if (j - 1 >= 0) {
             this.setActiveColumn(j - 1);
@@ -154,7 +154,7 @@ export class Grid extends ReactComponent {
     }
 
     async onUp() {
-        console.log('Grid.onUp');
+        console.debug('Grid.onUp');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
         const i = this.props.rows.indexOf(row);
@@ -167,7 +167,7 @@ export class Grid extends ReactComponent {
     }
 
     async onRight() {
-        console.log('Grid.onRight');
+        console.debug('Grid.onRight');
         const j = this.getActiveColumn();
         if (j + 1 <= this.props.columns.length - 1) {
             this.setActiveColumn(j + 1);
@@ -176,7 +176,7 @@ export class Grid extends ReactComponent {
     }
 
     async onDown() {
-        console.log('Grid.onDown');
+        console.debug('Grid.onDown');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
         const i = this.props.rows.indexOf(row);
@@ -189,27 +189,27 @@ export class Grid extends ReactComponent {
     }
 
     async onEnter() {
-        console.log('Grid.onEnter');
+        console.debug('Grid.onEnter');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.log(row, key);
+        // console.debug(row, key);
         if (this.props.onDoubleClick) {
             await this.props.onDoubleClick(row, key);
         }
     }
 
     async onDelete() {
-        console.log('Grid.onDelete');
+        console.debug('Grid.onDelete');
         const key = this.getActiveRowKey();
         const row = this.findRow(key);
-        // console.log(row, key);
+        // console.debug(row, key);
         if (this.props.onDeleteKeyDown) {
             await this.props.onDeleteKeyDown(row, key);
         }
     }
 
     async selectCell(key, j) {
-        // console.log('Grid.selectCell', key, j);
+        // console.debug('Grid.selectCell', key, j);
         if (this.getActiveRowKey() === key && this.getActiveColumn() === j) return;
         this.setActiveRowKey(key);
         this.setActiveColumn(j);
@@ -221,7 +221,7 @@ export class Grid extends ReactComponent {
     }
 
     async selectRow(key) {
-        // console.log('Grid.selectRow', key);
+        // console.debug('Grid.selectRow', key);
         if (this.getActiveRowKey() === key) return;
         this.setActiveRowKey(key);
         if (this.props.onSelectionChange) {
@@ -238,7 +238,7 @@ export class Grid extends ReactComponent {
     }
 
     onResizeDoubleClick = async (e) => {
-        console.log('Grid.onResizeDoubleClick', e.target);
+        console.debug('Grid.onResizeDoubleClick', e.target);
         const i = parseInt(e.target.dataset.i);
         const column = this.props.columns[i];
         if (this.state.columnWidth[column.name] === this.getMaxColumnWidth(column)) return;
@@ -300,14 +300,14 @@ export class Grid extends ReactComponent {
     }
 
     onCellViewCreate = (c) => {
-        // console.log('Grid.onCellViewCreate', c.props.column.name);
+        // console.debug('Grid.onCellViewCreate', c.props.column.name);
         const columnName = c.props.column.name;
         if (this.columns[columnName] === undefined) this.columns[columnName] = [];
         this.columns[columnName].push(c);
     };
 
     onCellViewUnmount = (c) => {
-        // console.log('Grid.onCellViewUnmount', c.props.column.name);
+        // console.debug('Grid.onCellViewUnmount', c.props.column.name);
         const columnName = c.props.column.name;
         const i = this.columns[columnName].indexOf(c);
         if (i === -1) throw new Error('cannot find FieldView in Grid.columns');
@@ -315,7 +315,7 @@ export class Grid extends ReactComponent {
     };
 
     onBodyScroll = async (e) => {
-        // console.log('Grid.onBodyScroll', e.target.scrollLeft);
+        // console.debug('Grid.onBodyScroll', e.target.scrollLeft);
         this.head.current.scrollLeft = e.target.scrollLeft;
     };
 
@@ -342,7 +342,7 @@ export class Grid extends ReactComponent {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
+        // console.debug('Grid.shouldComponentUpdate', this.props.name, nextProps.updated - this.props.updated);
         if (this.props.updated) {
             if (nextProps.updated - this.props.updated) return true;
             return false;
@@ -351,7 +351,7 @@ export class Grid extends ReactComponent {
     }
 
     render() {
-        // console.log('Grid.render', this.props.name);
+        // console.debug('Grid.render', this.props.name);
         return (
             <div
                 className={`${this.getCssClassNames()} ${this.isDisabled() ? 'disabled' : ''}`}
@@ -382,14 +382,14 @@ export class Grid extends ReactComponent {
     }
 
     onLinkClick = async (e) => {
-        console.log('Grid.onLinkClick', e.ctrlKey);
+        console.debug('Grid.onLinkClick', e.ctrlKey);
         if (e.ctrlKey) return;
         e.preventDefault();
-        /*if (!this.isLink()) return;
+        /* if (!this.isLink()) return;
         const key = e.currentTarget.dataset.key;
         if (this.props.onLinkClick) {
             await this.props.onLinkClick(key);
-        }*/
+        } */
     };
 }
 

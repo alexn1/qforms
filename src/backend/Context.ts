@@ -32,7 +32,7 @@ export class Context {
     params: Record<string, any>;
 
     constructor(public options: ContextOptions = {}) {
-        // console.log('Context', options);
+        // console.debug('Context', options);
 
         // query
         this.query = {
@@ -106,7 +106,7 @@ export class Context {
     }
 
     getParams(): Record<string, any> {
-        // console.log('Context.getParams:');
+        // console.debug('Context.getParams:');
         const user = this.getUser();
         const timeOffset = this.getTimeOffset();
         return {
@@ -210,7 +210,7 @@ export class Context {
     getUrl(): URL {
         const req = this.getReq()!;
         const fullUrl = `${req.protocol}://${req.get('host')}${req.originalUrl}`;
-        // console.log('Context.getUrl', fullUrl);
+        // console.debug('Context.getUrl', fullUrl);
         return new URL(fullUrl);
     }
 

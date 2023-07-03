@@ -12,7 +12,7 @@ export class Slider extends ReactComponent {
     }
 
     onPrevClick = (e) => {
-        // console.log('Slider.onPrevClick');
+        // console.debug('Slider.onPrevClick');
         this.setState((prevState) => {
             let image = prevState.image - 1;
             if (image < 0) {
@@ -23,7 +23,7 @@ export class Slider extends ReactComponent {
     };
 
     onNextClick = (e) => {
-        // console.log('Slider.onNextClick');
+        // console.debug('Slider.onNextClick');
         this.setState((prevState) => {
             let image = prevState.image + 1;
             if (image > this.props.images.length - 1) {
@@ -34,7 +34,7 @@ export class Slider extends ReactComponent {
     };
 
     onImageClick = (e) => {
-        console.log('Slider.onImageClick');
+        console.debug('Slider.onImageClick');
         if (this.state.classList) {
             this.setState({ classList: null });
         } else {
@@ -47,7 +47,7 @@ export class Slider extends ReactComponent {
     };
 
     render() {
-        // console.log('Slider.render', this.props.images);
+        // console.debug('Slider.render', this.props.images);
         const images = this.props.images || [];
         return (
             <div className={this.getCssClassNames()}>

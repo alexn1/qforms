@@ -3,7 +3,7 @@ import { ReactComponent } from '../../ReactComponent';
 
 export class TimeBox extends ReactComponent {
     constructor(props) {
-        // console.log('TimeBox.constructor', props);
+        // console.debug('TimeBox.constructor', props);
         super(props);
         if (props.value && typeof props.value !== 'number') {
             throw new Error(`need number type, got ${typeof props.value}`);
@@ -15,7 +15,7 @@ export class TimeBox extends ReactComponent {
     }
 
     onKeyPress = (event) => {
-        // console.log('TimeBox.onKeyPress', event.key, event.target.value);
+        // console.debug('TimeBox.onKeyPress', event.key, event.target.value);
         if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
             console.debug('cancel', event.key);
             event.preventDefault();

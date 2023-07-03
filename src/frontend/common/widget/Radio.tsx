@@ -2,13 +2,13 @@ import { ReactComponent } from '../ReactComponent';
 
 export class Radio extends ReactComponent {
     constructor(props) {
-        // console.log('Radio.constructor', props.value);
+        // console.debug('Radio.constructor', props.value);
         super(props);
         if (!props.name) throw new Error('no name');
         this.state = {
             value: this.getInitialValue(),
         };
-        console.log('value:', JSON.stringify(this.getValue()));
+        console.debug('value:', JSON.stringify(this.getValue()));
     }
 
     getInitialValue() {
@@ -18,7 +18,7 @@ export class Radio extends ReactComponent {
             const item = this.props.items.find((item) => item.value === this.props.value);
             if (!item) {
                 console.error(`Radio: no item for value:`, JSON.stringify(this.props.value));
-                console.log('items:', this.props.items);
+                console.debug('items:', this.props.items);
             }
         }
         return value;
@@ -29,7 +29,7 @@ export class Radio extends ReactComponent {
     }
 
     onChange = async (e) => {
-        // console.log('Radio.onChange', e.target.value);
+        // console.debug('Radio.onChange', e.target.value);
         this.setState({ value: e.target.value });
         if (this.props.onChange) {
             await this.props.onChange(e.target.value);
@@ -58,7 +58,7 @@ export class Radio extends ReactComponent {
     }
 
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
+        // console.debug('Radio.shouldComponentUpdate', 'nextProps:', nextProps, 'nextState:', nextState);
         // @ts-ignore
         this.state.value = nextProps.value;
         return true;

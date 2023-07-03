@@ -21,7 +21,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
     }
 
     static createData(params) {
-        // console.log('ApplicationEditor.createData', params);
+        // console.debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
             '@class': 'Application',
@@ -71,7 +71,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
     }
 
     async save() {
-        console.log('ApplicationEditor.save');
+        console.debug('ApplicationEditor.save');
         await this.appFile.save();
     }
 

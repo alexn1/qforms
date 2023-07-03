@@ -10,7 +10,7 @@ export class WebSocketServer {
 
     constructor(options) {
         this.options = options;
-        // console.log('WebSocketServer.constructor');
+        // console.debug('WebSocketServer.constructor');
         this.server = new ws.Server({
             server: options.httpServer,
             path: '/',
@@ -20,13 +20,13 @@ export class WebSocketServer {
     }
 
     async onError(err) {
-        console.log('WebSocketServer.onError', err);
+        console.error('WebSocketServer.onError', err);
     }
 
     async onConnection(webSocket) {
         console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
         const parts = url.parse(webSocket.upgradeReq.url, true);
-        // console.log('parts.query:', parts.query);
+        // console.debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');
         if (!parts.query.uuid) throw new Error('no uuid');
         webSocket.route = parts.query.route;
@@ -51,17 +51,23 @@ export class WebSocketServer {
 
         // say hello
         webSocket.send(JSON.stringify({ type: 'info', data: { hello: webSocket.uuid } }));
-        // console.log('this.clients', this.clients);
+        // console.debug('this.clients', this.clients);
         context.destroy();
     }
 
     async onClose(webSocket, code, reason) {
-        console.log('WebSocketServer.onSocketClose', webSocket.route, webSocket.uuid, code, reason);
+        console.debug(
+            'WebSocketServer.onSocketClose',
+            webSocket.route,
+            webSocket.uuid,
+            code,
+            reason,
+        );
         this.getHostApp().getApplicationByRoute(webSocket.route).removeClient(webSocket);
     }
 
     async onMessage(webSocket, data, flags) {
-        console.log('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
+        console.debug('WebSocketServer.onMessage', webSocket.route, webSocket.uuid, data, flags);
     }
 
     getHostApp(): BackHostApp {

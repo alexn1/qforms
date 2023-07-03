@@ -17,7 +17,7 @@ export class FormEditor extends Editor {
     }
 
     static createData(params): any {
-        console.log('FormEditor.createData', params);
+        console.debug('FormEditor.createData', params);
         return {
             '@class': 'Form',
             '@attributes': {

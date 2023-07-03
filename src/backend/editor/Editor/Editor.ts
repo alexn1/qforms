@@ -10,7 +10,7 @@ export class Editor<
     TBkModelData extends BkModelScheme = BkModelScheme,
 > extends BaseModel<TBkModelData> {
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
-        console.log('Editor.createFileByReplace');
+        console.debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
         const exists = await BkHelper.exists(newFilePath);
         if (exists) {
@@ -41,7 +41,7 @@ export class Editor<
     } */
 
     async getFile(filePath: string) {
-        console.log('Editor.getFile', filePath);
+        console.debug('Editor.getFile', filePath);
         const exists = await BkHelper.exists(filePath);
         if (exists) {
             return await BkHelper.readTextFile(filePath);
@@ -57,7 +57,7 @@ export class Editor<
     }
 
     async getCustomFile(ext: string) {
-        console.log('Editor.getCustomFile', ext);
+        console.debug('Editor.getCustomFile', ext);
         const customFilePath = await this.getCustomFilePath(ext);
         return this.getFile(customFilePath);
     }
@@ -122,7 +122,7 @@ export class Editor<
     }*/
 
     setColData(colName: string, newData: BkModelScheme) {
-        // console.log('Editor.setData', newData);
+        // console.debug('Editor.setData', newData);
         return this.getParent().replaceDataColItem(colName, this.data, newData);
     }
 
@@ -151,7 +151,7 @@ export class Editor<
     }
 
     newItemData(className, colName, params) {
-        console.log('Editor.newItemData', className, colName, params);
+        console.debug('Editor.newItemData', className, colName, params);
         const { name } = params;
         if (!name) throw new Error('no name');
         const editorClassName = `${className}Editor`;
@@ -167,7 +167,7 @@ export class Editor<
     }
 
     static createItemData(data) {
-        // console.log('Editor.createItemData', data);
+        // console.debug('Editor.createItemData', data);
         try {
             const params = data['@attributes']
                 ? {

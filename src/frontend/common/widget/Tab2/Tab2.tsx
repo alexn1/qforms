@@ -15,7 +15,7 @@ export class Tab2 extends ReactComponent {
     }
 
     onLiMouseDown = (e) => {
-        // console.log('Tab.onLiMouseDown', e.target);
+        // console.debug('Tab.onLiMouseDown', e.target);
         if (e.target.classList.contains('close')) return;
         const i = parseInt(e.currentTarget.dataset.i);
         if (this.props.getActive) {
@@ -28,10 +28,10 @@ export class Tab2 extends ReactComponent {
     };
 
     onLiClick = (e) => {
-        // console.log('Tab.onLiClick', e.target);
+        // console.debug('Tab.onLiClick', e.target);
         if (e.target.classList.contains('close')) {
             const i = parseInt(e.currentTarget.dataset.i);
-            // console.log('close tab:', i);
+            // console.debug('close tab:', i);
             if (this.props.onTabClose) this.props.onTabClose(i);
         }
     };
@@ -39,7 +39,7 @@ export class Tab2 extends ReactComponent {
     selectTab(i) {
         if (i === this.getActive()) return;
         const start = Date.now();
-        this.setState({ active: i }, () => console.log('selectTab time:', Date.now() - start));
+        this.setState({ active: i }, () => console.debug('selectTab time:', Date.now() - start));
     }
 
     renderTitles() {
