@@ -242,7 +242,7 @@ export class ViewerModule {
 
     // action (fill page)
     async page(context: Context, application: BkApplication) {
-        console.log('ViewerModule.page', context.getReq()!.body.page);
+        console.debug('ViewerModule.page', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         await application.connect(context);

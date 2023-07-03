@@ -8,7 +8,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     session: ClientSession;
 }> {
     async connect(context: Context): Promise<void> {
-        console.log('MongoDbDatabase.connect', this.getName());
+        console.debug('MongoDbDatabase.connect', this.getName());
         if (!context) throw new Error('no context');
         this.checkDeinited();
         const name = this.getName();
@@ -18,7 +18,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
 
         const url = this.getUrl();
         const client = new MongoClient(url);
-        console.log(`MongoDbDatabase: connecting to ${url}`);
+        console.debug(`MongoDbDatabase: connecting to ${url}`);
         await client.connect();
         const session = client.startSession();
         context.connections[name] = { client, session };
@@ -35,7 +35,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
     }
 
     async release(context: Context): Promise<void> {
-        console.log('MongoDbDatabase.release', this.getName());
+        console.debug('MongoDbDatabase.release', this.getName());
         if (!context) throw new Error('no context');
         const { client, session } = this.getConnection(context);
         session.endSession();
@@ -100,7 +100,7 @@ export class BkMongoDbDatabase extends BkNoSqlDatabase<{
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<Row[]> {
-        console.log('MongoDbDatabase.query', query, params);
+        console.debug('MongoDbDatabase.query', query, params);
         const result = await this.queryResult(context, query, params);
 
         // for find() and aggregate()

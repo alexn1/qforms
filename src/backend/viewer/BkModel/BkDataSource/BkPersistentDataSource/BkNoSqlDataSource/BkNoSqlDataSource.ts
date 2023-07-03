@@ -82,8 +82,8 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
             this.getSelectQuery(context),
             this.getSelectParams(context),
         );
-        console.log('rows query time:', Date.now() - start);
-        // console.log('rows:', rows);
+        console.debug('rows query time:', Date.now() - start);
+        // console.debug('rows:', rows);
         this.checkRows(rows);
         const rawRows = this.encodeRows(rows);
 
@@ -97,7 +97,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
                     this.getCountQuery(context),
                     this.getSelectParams(context),
                 );
-                console.log('count query time:', Date.now() - start);
+                console.debug('count query time:', Date.now() - start);
             } catch (err) {
                 err.message = `${this.getFullName()}: ${err.message}`;
                 throw err;
