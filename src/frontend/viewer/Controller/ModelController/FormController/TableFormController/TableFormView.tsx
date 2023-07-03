@@ -161,7 +161,7 @@ export class TableFormView<
     }
 
     render() {
-        console.log('TableFormView.render', this.getCtrl().getModel().getFullName());
+        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return (
             <div

@@ -142,7 +142,7 @@ class PageView extends ModelView_1.ModelView {
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
     }
     render() {
-        console.log('PageView.render', this.getCtrl().getModel().getFullName());
+        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {

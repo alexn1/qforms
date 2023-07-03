@@ -87,7 +87,7 @@ class TableFormView extends FormView_1.FormView {
         });
     }
     render() {
-        console.log('TableFormView.render', this.getCtrl().getModel().getFullName());
+        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return ((0, jsx_runtime_1.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }

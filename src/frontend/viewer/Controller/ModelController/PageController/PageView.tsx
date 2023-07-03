@@ -266,7 +266,7 @@ export class PageView<
     }
 
     render() {
-        console.log('PageView.render', this.getCtrl().getModel().getFullName());
+        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
         return (
             <div
                 className={`${this.getCssClassNames()} ${
