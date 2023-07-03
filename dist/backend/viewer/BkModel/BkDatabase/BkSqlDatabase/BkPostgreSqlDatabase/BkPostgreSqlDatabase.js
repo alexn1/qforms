@@ -81,7 +81,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return result;
     }
     static async queryResult(pool, query, params = null) {
-        console.log(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
+        console.debug(colors_1.default.blue('static PostgreSqlDatabase.queryResult'), query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/);
         BkSqlDatabase_1.BkSqlDatabase.checkParams(query, params);
         const { sql, values } = BkPostgreSqlDatabase.formatQuery(query, params);
         // console.log('sql:', sql);
@@ -108,7 +108,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         await this.getConnection(context).query('commit');
     }
     async rollback(context, err) {
-        console.log(colors_1.default.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
+        console.debug(colors_1.default.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context)
             throw new Error('no context');
         await this.getConnection(context).query('rollback');
@@ -133,7 +133,7 @@ class BkPostgreSqlDatabase extends BkSqlDatabase_1.BkSqlDatabase {
         return { sql, values };
     }
     getDeleteQuery(tableName, rowKeyValues) {
-        // console.log('PostgreSqlDatabase.getDeleteQuery');
+        // console.debug('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)

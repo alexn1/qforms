@@ -259,7 +259,7 @@ export class ViewerModule {
 
     // action
     async select(context: Context, application: BkApplication) {
-        console.log('ViewerModule.select', context.getReq()!.body.page);
+        console.debug('ViewerModule.select', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         const start = Date.now();
@@ -279,7 +279,7 @@ export class ViewerModule {
             await application.initContext(context);
             const [rows, count] = await dataSource.read(context);
             const time = Date.now() - start;
-            console.log('select time:', time);
+            console.debug('select time:', time);
             res.json({ rows, count, time });
             return time;
         } finally {
@@ -289,7 +289,7 @@ export class ViewerModule {
 
     // action
     async insert(context: Context, application: BkApplication) {
-        console.log('ViewerModule.insert', context.getReq()!.body.page);
+        console.debug('ViewerModule.insert', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -318,7 +318,7 @@ export class ViewerModule {
 
     // action
     async update(context: Context, application: BkApplication) {
-        console.log('ViewerModule.update', context.getReq()!.body.page);
+        console.debug('ViewerModule.update', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);
@@ -347,7 +347,7 @@ export class ViewerModule {
 
     // action
     async _delete(context: Context, application: BkApplication) {
-        console.log('ViewerModule._delete', context.getReq()!.body.page);
+        console.debug('ViewerModule._delete', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
         // const application = this.getApplication(context);

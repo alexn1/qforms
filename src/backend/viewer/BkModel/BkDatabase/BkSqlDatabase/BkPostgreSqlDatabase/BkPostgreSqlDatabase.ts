@@ -95,7 +95,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
         query: string,
         params: { [name: string]: any } | null = null,
     ): Promise<any> {
-        console.log(
+        console.debug(
             colors.blue('static PostgreSqlDatabase.queryResult'),
             query /*, params*/ /*, params ? Object.keys(params).map(name => typeof params[name]) : null*/,
         );
@@ -131,7 +131,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     async rollback(context: Context, err): Promise<void> {
-        console.log(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
+        console.debug(colors.red('PostgreSqlDatabase.rollback: '), this.getName(), err.message);
         if (!context) throw new Error('no context');
         await this.getConnection(context).query('rollback');
     }
@@ -160,7 +160,7 @@ export class BkPostgreSqlDatabase extends BkSqlDatabase<PoolClient> {
     }
 
     getDeleteQuery(tableName: string, rowKeyValues: any): string {
-        // console.log('PostgreSqlDatabase.getDeleteQuery');
+        // console.debug('PostgreSqlDatabase.getDeleteQuery');
         const keyColumns = Object.keys(rowKeyValues);
         const whereString = keyColumns
             .map((keyColumn) => `"${keyColumn}" = {${keyColumn}}`)
