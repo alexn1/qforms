@@ -35132,12 +35132,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-                console.log('cancel', event.key);
+                console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.log('TimeBox.onChange', e.target.value);
+            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -35146,10 +35146,10 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.log('before:', target.selectionStart, target.selectionEnd);
+            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.log('after:', target.selectionStart, target.selectionEnd);
-                // console.log('inEnd:', inEnd);
+                // console.debug('after:', target.selectionStart, target.selectionEnd);
+                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -35160,26 +35160,26 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                         nValue = this.getValue();
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.log('nValue:', nValue);
+                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.log('TimeBox.onBlur');
+            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
                     nValue = this.getValue();
                 }
                 catch (err) {
-                    console.log(err.message);
+                    console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.log('nValue:', nValue);
+                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -35222,11 +35222,11 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.setState({ value: TimeBox.getStringValue(value) });
     }
     /*onKeyDown = event => {
-        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
         if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
         if (event.which < 96 || event.which > 105) {
-            console.log('cancel');
+            console.debug('cancel');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -35237,12 +35237,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         }
     }*/
     /*onKeyUp = event => {
-        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
     static getStringValue(value) {
-        // console.log('TimeBox.getStringValue', value);
+        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -35257,7 +35257,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.log('TimeBox.getIntegerValue', stringValue);
+        // console.debug('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '')
             return null;
@@ -35288,7 +35288,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
             // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
@@ -35303,7 +35303,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return false;
     }
     render() {
-        // console.log('TimeBox.render', this.state.value);
+        // console.debug('TimeBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
             // onKeyDown={this.onKeyDown}
             // onKeyUp={this.onKeyUp}
@@ -35344,7 +35344,7 @@ class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.log('TimeBox2.onClear');
+            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();
@@ -35390,11 +35390,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     // constructor(props) {
-    //     console.log('Tooltip.constructor', props);
+    //     console.debug('Tooltip.constructor', props);
     //     super(props);
     // }
     render() {
-        // console.log('Tooltip.render', this.state, this.props);
+        // console.debug('Tooltip.render', this.state, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
@@ -35421,7 +35421,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class IndexFrontHostApp {
-    ;
     constructor(data) {
         this.data = data;
         // data: any;
@@ -35433,30 +35432,30 @@ class IndexFrontHostApp {
         this.folderName = null;
         this.appName = null;
         this.onAppChange = (fullName) => {
-            console.log('IndexFrontHostApp.onAppChange', fullName);
+            console.debug('IndexFrontHostApp.onAppChange', fullName);
             this.currentAppFullName = fullName;
             const appInfo = this.data.appInfos.find((app) => app.fullName === fullName);
             if (!appInfo)
                 throw new Error(`no appInfo ${fullName}`);
-            // console.log('appInfo:', appInfo);
+            // console.debug('appInfo:', appInfo);
             this.currentAppEnv = appInfo.envs[0];
             this.view.rerender();
         };
         this.onEnvChange = (env) => {
-            console.log('IndexFrontHostApp.onEnvChange', env);
+            console.debug('IndexFrontHostApp.onEnvChange', env);
             this.currentAppEnv = env;
         };
         this.run = (e) => {
             if (this.currentAppFullName) {
                 const href = `viewer/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.log('href:', href);
+                console.debug('href:', href);
                 window.location.href = href;
             }
         };
         this.edit = (e) => {
             if (this.currentAppFullName) {
                 const href = `editor/${this.currentAppFullName}/${this.currentAppEnv}/domain/`;
-                console.log('href:', href);
+                console.debug('href:', href);
                 window.location.href = href;
             }
         };
@@ -35466,28 +35465,28 @@ class IndexFrontHostApp {
             this.folderNameTextBox.getElement().focus();
         };
         this.closeModal = () => {
-            console.log('IndexFrontHostApp.closeModal');
+            console.debug('IndexFrontHostApp.closeModal');
             this.modals.pop();
             this.view.rerender();
         };
         this.onFolderNameCreate = (textBox) => {
-            console.log('IndexFrontHostApp.onFolderNameCreate');
+            console.debug('IndexFrontHostApp.onFolderNameCreate');
             this.folderNameTextBox = textBox;
         };
         this.onFolderNameChange = (folderName) => {
-            // console.log('IndexFrontHostApp.onFolderNameChange', folderName);
+            // console.debug('IndexFrontHostApp.onFolderNameChange', folderName);
             this.folderName = folderName;
         };
         this.onAppNameChange = (appName) => {
             this.appName = appName;
         };
         this.onCreateClick = async (e) => {
-            console.log('IndexFrontHostApp.onCreateClick');
-            console.log(this.folderName, this.appName);
+            console.debug('IndexFrontHostApp.onCreateClick');
+            console.debug(this.folderName, this.appName);
             this.closeModal();
             await this.createApp(this.folderName, this.appName);
         };
-        console.log('IndexFrontHostApp.constructor', data);
+        console.debug('IndexFrontHostApp.constructor', data);
         // this.data = data;
         // this.view = null;
         // this.currentAppFullName = undefined;
@@ -35498,7 +35497,7 @@ class IndexFrontHostApp {
         // this.appName = null;
     }
     init() {
-        // console.log('IndexFrontHostApp.init');
+        // console.debug('IndexFrontHostApp.init');
         const appInfo = this.data.appInfos[0];
         this.currentAppFullName = appInfo ? appInfo.fullName : undefined;
         this.currentAppEnv = appInfo && appInfo.envs[0] ? appInfo.envs[0] : undefined;
@@ -35516,7 +35515,7 @@ class IndexFrontHostApp {
         }));
     }
     getEnvItems() {
-        // console.log('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
+        // console.debug('IndexFrontHostApp.getEnvItems', this.currentAppFullName);
         if (this.currentAppFullName) {
             const appInfo = this.getAppInfo(this.currentAppFullName);
             if (appInfo) {
@@ -35526,7 +35525,7 @@ class IndexFrontHostApp {
         return [];
     }
     getAppInfo(fullName) {
-        // console.log('IndexFrontHostApp.getAppInfo', fullName);
+        // console.debug('IndexFrontHostApp.getAppInfo', fullName);
         return this.data.appInfos.find((appInfo) => appInfo.fullName === fullName);
     }
     async createApp(folderName, appName) {
@@ -35535,7 +35534,7 @@ class IndexFrontHostApp {
             folder: folderName,
             name: appName,
         });
-        console.log('data:', data);
+        console.debug('data:', data);
         if (data.appInfos) {
             this.data.appInfos = data.appInfos;
             this.currentAppFullName = `${folderName}/${appName}`;
@@ -35569,7 +35568,7 @@ class IndexView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: ctrl.modals.map((modal) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Modal, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "modal-dialog modal-sm" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-content" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-header" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['close'], onClick: ctrl.closeModal }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("h4", Object.assign({ className: "modal-title" }, { children: "New Application" }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-body" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "folderName" }, { children: "Folder Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "folderName", onCreate: ctrl.onFolderNameCreate, onChange: ctrl.onFolderNameChange })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "appName" }, { children: "Application Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { id: "appName", onChange: ctrl.onAppNameChange })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "modal-footer" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ name: "create", classList: ['btn', 'btn-primary'], onClick: ctrl.onCreateClick }, { children: "Create" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default'], onClick: ctrl.closeModal }, { children: "Close" }))] }))] })) })) }, modal.id.toString()))) }));
     }
     render() {
-        console.log('IndexView.render');
+        console.debug('IndexView.render');
         const { ctrl } = this.props;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "IndexView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "container", style: { backgroundColor: '#eee' } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "row", style: { margin: '50px 0' } }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppFullName, items: ctrl.getAppItems(), size: 15, style: { width: '100%' }, onDoubleClick: ctrl.run, onChange: ctrl.onAppChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { value: ctrl.currentAppEnv, items: ctrl.getEnvItems(), onChange: ctrl.onEnvChange }) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-primary', 'btn-block'], onClick: ctrl.run }, { children: "Run" })), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.edit }, { children: "Edit" }))), ctrl.data.nodeEnv === 'development' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ classList: ['btn', 'btn-default', 'btn-block'], onClick: ctrl.btnCreate_Click }, { children: "New..." })))] })] })) })), this.renderModals()] })));
     }
@@ -35656,7 +35655,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./IndexFrontHostApp */ "./src/frontend/index/IndexFrontHostApp.ts");
 
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('DOMContentLoaded');
+    console.debug('DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
     new _IndexFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.IndexFrontHostApp(data).init();
 });

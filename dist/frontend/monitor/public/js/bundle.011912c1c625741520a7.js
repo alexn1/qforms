@@ -31687,7 +31687,7 @@ class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.Re
                                                 } }, { children: `userId: ${client.userId}` }))] }, client.uuid))) })] })] })] }, app.route));
     }
     render() {
-        console.log('MonitorView.render', this.props.data);
+        console.debug('MonitorView.render', this.props.data);
         const data = this.props.data;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "MonitorView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["nodeEnv: ", data.nodeEnv] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["uptime: ", _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.formatNumber(data.uptime), " ms"] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "applications:" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: data.applications.map((app) => this.renderApplication(app)) })] })));
     }
@@ -31779,7 +31779,7 @@ __webpack_require__.r(__webpack_exports__);
 
 document.addEventListener('DOMContentLoaded', () => {
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    console.log('data:', data);
+    console.debug('data:', data);
     _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(document.querySelector('.monitor__root'), _MonitorView_MonitorView__WEBPACK_IMPORTED_MODULE_0__.MonitorView, { data });
 });
 

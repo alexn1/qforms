@@ -35408,12 +35408,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-                console.log('cancel', event.key);
+                console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.log('TimeBox.onChange', e.target.value);
+            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -35422,10 +35422,10 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.log('before:', target.selectionStart, target.selectionEnd);
+            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.log('after:', target.selectionStart, target.selectionEnd);
-                // console.log('inEnd:', inEnd);
+                // console.debug('after:', target.selectionStart, target.selectionEnd);
+                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -35436,26 +35436,26 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                         nValue = this.getValue();
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.log('nValue:', nValue);
+                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.log('TimeBox.onBlur');
+            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
                     nValue = this.getValue();
                 }
                 catch (err) {
-                    console.log(err.message);
+                    console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.log('nValue:', nValue);
+                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -35498,11 +35498,11 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.setState({ value: TimeBox.getStringValue(value) });
     }
     /*onKeyDown = event => {
-        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
         if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
         if (event.which < 96 || event.which > 105) {
-            console.log('cancel');
+            console.debug('cancel');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -35513,12 +35513,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         }
     }*/
     /*onKeyUp = event => {
-        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
     static getStringValue(value) {
-        // console.log('TimeBox.getStringValue', value);
+        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -35533,7 +35533,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.log('TimeBox.getIntegerValue', stringValue);
+        // console.debug('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '')
             return null;
@@ -35564,7 +35564,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
             // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
@@ -35579,7 +35579,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return false;
     }
     render() {
-        // console.log('TimeBox.render', this.state.value);
+        // console.debug('TimeBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
             // onKeyDown={this.onKeyDown}
             // onKeyUp={this.onKeyUp}
@@ -35620,7 +35620,7 @@ class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.log('TimeBox2.onClear');
+            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();
@@ -35666,11 +35666,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     // constructor(props) {
-    //     console.log('Tooltip.constructor', props);
+    //     console.debug('Tooltip.constructor', props);
     //     super(props);
     // }
     render() {
-        // console.log('Tooltip.render', this.state, this.props);
+        // console.debug('Tooltip.render', this.state, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
@@ -35700,7 +35700,7 @@ class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onClick = async (li) => {
-            console.log('ActionList.onClick', li);
+            console.debug('ActionList.onClick', li);
             await this.props.onClick(li.dataset.action);
         };
         this.state = {
@@ -35708,7 +35708,7 @@ class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         };
     }
     render() {
-        // console.log('ActionList.render', this.state.item);
+        // console.debug('ActionList.render', this.state.item);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item
                 ? this.state.item.getActions().map((action) => {
                     return { name: action.action, title: action.caption };
@@ -35763,7 +35763,7 @@ class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
+            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
             });
@@ -35819,11 +35819,11 @@ __webpack_require__.r(__webpack_exports__);
 class EdModalController {
     constructor(options) {
         this.onClose = async (e) => {
-            console.log('ModalController.onClose');
+            console.debug('ModalController.onClose');
             await this.close();
         };
         this.onCreate = async (values) => {
-            console.log('ModalController.onCreate', values);
+            console.debug('ModalController.onCreate', values);
             await this.close();
             if (this.options.onCreate) {
                 await this.options.onCreate(values);
@@ -35918,7 +35918,7 @@ class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewActionView.onCreate');
+            // console.debug('NewActionView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -35988,7 +35988,7 @@ class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent 
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
+            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36056,7 +36056,7 @@ class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCompon
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
+            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 class: this.class.getValue(),
@@ -36130,7 +36130,7 @@ class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDatabaseView.onCreate');
+            // console.debug('NewDatabaseView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),
@@ -36212,7 +36212,7 @@ class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewFieldView.onCreate');
+            // console.debug('NewFieldView.onCreate');
             await this.props.ctrl.onCreate({
                 class: this.class.getValue(),
                 name: this.name.getValue(),
@@ -36309,7 +36309,7 @@ class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
+            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -36385,7 +36385,7 @@ class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCom
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewDataSourceView.onCreate');
+            // console.debug('NewDataSourceView.onCreate');
             await this.props.ctrl.onCreate({
                 page: this.page.getValue(),
                 class: this.class.getValue(),
@@ -36414,7 +36414,7 @@ class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCom
             value: pageLink.getName(),
             title: pageLink.getName(),
         }));
-        console.log('pages:', pages);
+        console.debug('pages:', pages);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: (c) => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", value: 'TableForm', items: [
                                         { value: 'RowForm', title: 'RowForm' },
                                         { value: 'TableForm', title: 'TableForm' },
@@ -36468,7 +36468,7 @@ class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactCompone
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
+            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36536,7 +36536,7 @@ class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewPageView.onCreate');
+            // console.debug('NewPageView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
                 caption: this.caption.getValue(),
@@ -36611,7 +36611,7 @@ class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
+            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36679,7 +36679,7 @@ class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onCreate = async (e) => {
-            // console.log('NewParamView.onCreate');
+            // console.debug('NewParamView.onCreate');
             await this.props.ctrl.onCreate({
                 name: this.name.getValue(),
             });
@@ -36879,7 +36879,7 @@ class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MOD
         return keyColumn;
     }
     removeKeyColumn(keyColumnController) {
-        console.log('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
+        console.debug('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
         const i = this.keyColumns.indexOf(keyColumnController);
         if (i === -1)
             throw new Error('no such keyColumnController');
@@ -36946,7 +36946,7 @@ class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MOD
         return super.getDocumentViewClass();
     }
     async onSaveClick(name, value) {
-        // console.log('DataSourceController.onSaveClick', name, value);
+        // console.debug('DataSourceController.onSaveClick', name, value);
         await this.model.setValue(name, value);
     }
     async delete() {
@@ -36984,11 +36984,11 @@ class EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
-            // console.log('NoSqlDataSourceView.onChange');
+            // console.debug('NoSqlDataSourceView.onChange');
             await this.rerender();
         };
         this.onSaveClick = async (e) => {
-            console.log('NoSqlDataSourceView.onSaveClick');
+            console.debug('NoSqlDataSourceView.onSaveClick');
             const ctrl = this.props.ctrl;
             await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
             await this.rerender();
@@ -37030,7 +37030,11 @@ class EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__
     }
     render() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdNoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: { fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdNoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: {
+                                        fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: {
+                                        fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 
@@ -37061,11 +37065,11 @@ class EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.E
     constructor(props) {
         super(props);
         this.onChange = async (i, o) => {
-            // console.log('SqlDataSourceView.onChange');
+            // console.debug('SqlDataSourceView.onChange');
             await this.rerender();
         };
         this.onSaveClick = async (e) => {
-            console.log('SqlDataSourceView.onSaveClick');
+            console.debug('SqlDataSourceView.onSaveClick');
             const ctrl = this.props.ctrl;
             await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
             await this.rerender();
@@ -37112,7 +37116,13 @@ class EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.E
     }
     render() {
         const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: { fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: { fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: { fontWeight: this.isSelected('countQuery') ? 'bold' : undefined }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: {
+                                        fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: {
+                                        fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: {
+                                        fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
+                                    }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
     }
 }
 
@@ -37147,16 +37157,16 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
     constructor(model, parent) {
         super(model, parent);
         this.onTableSelect2 = async (item) => {
-            console.log('DatabaseController.onTableSelect2', item.getTitle());
+            console.debug('DatabaseController.onTableSelect2', item.getTitle());
             const tableName = item.getTitle();
             this.tableName = tableName;
             const data = await this.model.getTableInfo(tableName);
             this.tableInfo = data.tableInfo;
             this.document.view.rerender();
-            // console.log('tableInfo:', this.tableInfo);
+            // console.debug('tableInfo:', this.tableInfo);
         };
         this.onCreateTableClick = (e) => {
-            console.log('DatabaseController.onCreateTableClick');
+            console.debug('DatabaseController.onCreateTableClick');
             this.newTableAction(this.tableName, this.tableInfo);
         };
         this.tableName = null;
@@ -37200,14 +37210,14 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
         return table;
     }
     removeParam(paramController) {
-        console.log('DatabaseController.removeParam', paramController.getTitle());
+        console.debug('DatabaseController.removeParam', paramController.getTitle());
         const i = this.params.indexOf(paramController);
         if (i === -1)
             throw new Error('no such paramController');
         this.params.splice(i, 1);
     }
     removeTable2(tableController) {
-        console.log('DatabaseController.removeTable2', tableController.getTitle());
+        console.debug('DatabaseController.removeTable2', tableController.getTitle());
         const i = this.tables.indexOf(tableController);
         if (i === -1)
             throw new Error('no such tableController');
@@ -37274,7 +37284,7 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
     async createDocument() {
         const document = await super.createDocument();
         const result = await this.model.getView('DatabaseView/DatabaseView.html');
-        // console.log('data:', result.data);
+        // console.debug('data:', result.data);
         // @ts-ignore
         document.treeWidgetItems = result.data.tables
             .sort()
@@ -37282,7 +37292,7 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
         return document;
     }
     async newTableAction(tableName, tableInfo) {
-        console.log('DatabaseController.newTableAction', tableName, tableInfo);
+        console.debug('DatabaseController.newTableAction', tableName, tableInfo);
         const table = await this.model.newTable({
             class: 'Table',
             name: tableName,
@@ -37304,7 +37314,7 @@ class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODUL
         // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
     }
     async delete() {
-        console.log('DatabaseController.delete', this.getTitle());
+        console.debug('DatabaseController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeDatabase(this);
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
@@ -37338,7 +37348,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     renderGrid() {
-        // console.log('DatabaseView.renderGrid');
+        // console.debug('DatabaseView.renderGrid');
         const ctrl = this.props.ctrl;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
                 { name: 'name', title: 'name', width: 100 },
@@ -37351,7 +37361,7 @@ class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent
             ], rows: ctrl.tableInfo, getRowKey: (row) => row.name }));
     }
     render() {
-        // console.log('DatabaseView.render');
+        // console.debug('DatabaseView.render');
         const ctrl = this.props.ctrl;
         const document = this.props.document;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdDatabaseView frame' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" })))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] })));
@@ -37386,7 +37396,7 @@ class EdDocumentController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
         return (this.document = document);
     }
     onDocumentClose() {
-        console.log('DocumentController.onDocumentClose', this.getTitle());
+        console.debug('DocumentController.onDocumentClose', this.getTitle());
         this.document = null;
     }
 }
@@ -37453,7 +37463,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
     constructor(model, parent) {
         super(model, parent);
         this.onCreateFormButtonClick = async (e) => {
-            console.log('TableController.onCreateFormButtonClick');
+            console.debug('TableController.onCreateFormButtonClick');
             await this.createFormAction();
         };
         this.columns = [];
@@ -37474,7 +37484,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
         return column;
     }
     removeColumn(columnController) {
-        console.log('TableController.removeColumn', columnController.getTitle());
+        console.debug('TableController.removeColumn', columnController.getTitle());
         const i = this.columns.indexOf(columnController);
         if (i === -1)
             throw new Error('no such columnController');
@@ -37523,7 +37533,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
         }));
     }
     /*static async getView(view) {
-        console.log('TableController.getView', view);
+        console.debug('TableController.getView', view);
         return FrontHostApp.doHttpRequest({
             controller: 'Table',
             action    : 'getView',
@@ -37540,7 +37550,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
         });
     }
     async createFormAction() {
-        console.log('TableController.createFormAction');
+        console.debug('TableController.createFormAction');
         await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
             tableController: this,
             onCreate: async (values) => {
@@ -37552,7 +37562,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
                     formCaption: values.caption || values.name,
                 });
                 const params = formWizard.getFormParams();
-                // console.log('params:', params);
+                // console.debug('params:', params);
                 const databaseController = this.parent;
                 const applicationController = databaseController.parent;
                 const pageLinkController = applicationController.findPageLink(values.page);
@@ -37560,9 +37570,9 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
                     await pageLinkController.loadPage();
                 }
                 const pageController = pageLinkController.pageController;
-                // console.log('pageController:', pageController);
+                // console.debug('pageController:', pageController);
                 const form = await pageController.model.newForm(params);
-                // console.log('form:', form);
+                // console.debug('form:', form);
                 const formController = pageController.createForm(form);
                 await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
                 formController.view.parent.open();
@@ -37572,7 +37582,7 @@ class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0
         }));
     }
     async delete() {
-        console.log('TableController.delete', this.getTitle());
+        console.debug('TableController.delete', this.getTitle());
         await this.model.delete();
         this.parent.removeTable2(this);
         _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
@@ -37687,7 +37697,7 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
         return pageLink;
     }
     removeDatabase(databaseController) {
-        console.log('ApplicationController.removeDatabase', databaseController.getTitle());
+        console.debug('ApplicationController.removeDatabase', databaseController.getTitle());
         const i = this.databases.indexOf(databaseController);
         if (i === -1)
             throw new Error('no such databaseController');
@@ -37722,15 +37732,15 @@ class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODU
                 await this.actionNewAction();
                 break;
             default:
-                console.log(name);
+                console.debug(name);
         }
     }
     async newDatabaseAction() {
-        console.log('ApplicationController.newDatabaseAction');
+        console.debug('ApplicationController.newDatabaseAction');
         // @ts-ignore
         await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
             onCreate: async (values) => {
-                // console.log('values: ', values);
+                // console.debug('values: ', values);
                 const database = await this.model.newDatabase({
                     class: values.class,
                     name: values.name,
@@ -37864,7 +37874,7 @@ class EdFieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__
             fieldCtrl: this,
             onCreate: async (values) => {
                 const data = await this.model.changeClass({ class: values.class });
-                console.log(data);
+                console.debug(data);
                 _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
                 this.view.rerender();
             },
@@ -37954,7 +37964,7 @@ class EdFormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
         return field;
     }
     removeField(fieldController) {
-        console.log('FormController.removeField', fieldController.getTitle());
+        console.debug('FormController.removeField', fieldController.getTitle());
         const i = this.fields.indexOf(fieldController);
         if (i === -1)
             throw new Error('no such fieldController');
@@ -38107,7 +38117,7 @@ class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
         ];
     }
     init() {
-        // console.log('PageController.init');
+        // console.debug('PageController.init');
         this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
         this.model.actions.forEach((action) => this.createAction(action));
         this.model.forms.forEach((form) => this.createForm(form));
@@ -38119,7 +38129,7 @@ class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
         return form;
     }
     removeForm(formController) {
-        console.log('PageController.removeForm', formController.getTitle());
+        console.debug('PageController.removeForm', formController.getTitle());
         const i = this.forms.indexOf(formController);
         if (i === -1)
             throw new Error('no such formController');
@@ -38160,7 +38170,7 @@ class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.
                 _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
                 break;
             default:
-                console.log(name);
+                console.debug(name);
         }
     }
     async newDataSourceAction() {
@@ -38252,19 +38262,19 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
     constructor(model, parent = null) {
         super(model, parent);
         this.onCreateCustomController = async (e) => {
-            console.log('ApplicationController.onCreateCustomController');
+            console.debug('ApplicationController.onCreateCustomController');
             const data = await this.model.createController();
             this.data.js = data.js;
             this.document.view.rerender();
         };
         this.onCreateCustomView = async (e) => {
-            console.log('VisualController.onCreateCustomView');
+            console.debug('VisualController.onCreateCustomView');
             const data = await this.model.createView();
             this.data.jsx = data.jsx;
             this.document.view.rerender();
         };
         this.onCreateCustomStyle = async (e) => {
-            console.log('VisualController.onCreateCustomStyle');
+            console.debug('VisualController.onCreateCustomStyle');
             const data = await this.model.createStyle();
             this.data.less = data.less;
             this.document.view.rerender();
@@ -38275,27 +38285,27 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         this.data = null;
     }
     async createDocument() {
-        console.log('VisualController.createDocument');
+        console.debug('VisualController.createDocument');
         const document = await super.createDocument();
         const result = await this.model.getView('VisualView.html');
         this.data = result.data;
         return document;
     }
     async onControllerSave(value) {
-        console.log('ApplicationController.onControllerSave' /*, value*/);
+        console.debug('ApplicationController.onControllerSave' /*, value*/);
         const result = await this.model.saveController(value);
         this.data.js = result.js;
         this.document.view.rerender();
     }
     createDataSource(model) {
-        console.log('VisualController.createDataSource', model);
+        console.debug('VisualController.createDataSource', model);
         const dataSource = new _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__.EdDataSourceController(model, this);
         dataSource.init();
         this.dataSources.push(dataSource);
         return dataSource;
     }
     removeDataSource(dataSourceController) {
-        // console.log('VisualController.removeDataSource', dataSourceController.getTitle());
+        // console.debug('VisualController.removeDataSource', dataSourceController.getTitle());
         const i = this.dataSources.indexOf(dataSourceController);
         if (i === -1)
             throw new Error('no such dataSourceController');
@@ -38308,14 +38318,14 @@ class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_
         return action;
     }
     removeAction(actionController) {
-        // console.log('VisualController.removeAction', actionController.getTitle());
+        // console.debug('VisualController.removeAction', actionController.getTitle());
         const i = this.actions.indexOf(actionController);
         if (i === -1)
             throw new Error('no such actionController');
         this.actions.splice(i, 1);
     }
     async actionNewAction() {
-        console.log('VisualController.actionNewAction');
+        console.debug('VisualController.actionNewAction');
         await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
             onCreate: async (values) => {
                 const action = await this.model.newAction({
@@ -38368,7 +38378,7 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
             await ctrl.onControllerSave(this.cm.getValue());
         };
         this.onChange = async (instance, changeObj) => {
-            // console.log('VisualView.onChange', this.isChanged());
+            // console.debug('VisualView.onChange', this.isChanged());
             await this.rerender();
         };
         this.textarea = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -38380,7 +38390,7 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         return null;
     }
     componentDidMount() {
-        // console.log('VisualView.componentDidMount', this.getTextarea());
+        // console.debug('VisualView.componentDidMount', this.getTextarea());
         const ctrl = this.props.ctrl;
         if (ctrl.data.js) {
             this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
@@ -38388,7 +38398,7 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         }
     }
     componentDidUpdate() {
-        // console.log('componentDidUpdate', this.getTextarea());
+        // console.debug('componentDidUpdate', this.getTextarea());
         const ctrl = this.props.ctrl;
         const textarea = this.getTextarea();
         if (textarea && ctrl.data.js && !this.cm) {
@@ -38396,7 +38406,7 @@ class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocume
         }
     }
     componentWillUnmount() {
-        // console.log('VisualView.componentWillUnmount');
+        // console.debug('VisualView.componentWillUnmount');
         if (this.cm) {
             this.cm.off('change', this.onChange);
         }
@@ -38509,7 +38519,7 @@ class EdModelController {
         throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
     }
     getDocumentViewClass() {
-        console.log(`${this.constructor.name}.getDocumentViewClass`);
+        console.debug(`${this.constructor.name}.getDocumentViewClass`);
         return null;
     }
     moveColItem(colName, item, offset) {
@@ -38560,7 +38570,7 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
         return this.pageController != null;
     }
     async loadPage() {
-        console.log('PageLinkController.loadPage', this.getTitle());
+        console.debug('PageLinkController.loadPage', this.getTitle());
         if (this.pageController)
             throw new Error('page already loaded');
         const pageLink = this.model;
@@ -38572,7 +38582,7 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
         const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.EdPageController(page, this);
         pageController.init();
         this.setPageController(pageController);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
         this.view.rerender();
     }
     getActions() {
@@ -38591,7 +38601,7 @@ class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0
         this.items = pageController.items;
     }
     remove() {
-        console.log('PageLinkController.remove', this.getTitle());
+        console.debug('PageLinkController.remove', this.getTitle());
         this.parent.removePageLink(this);
     }
 }
@@ -38701,7 +38711,7 @@ class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         };
     }
     async setValue(name, value) {
-        //console.log('ActionEditor.setValue', name + ' = ' + value);
+        //console.debug('ActionEditor.setValue', name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Action',
             action: 'save',
@@ -38718,7 +38728,7 @@ class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async delete() {
-        console.log('ActionEditor.delete', this.getName());
+        console.debug('ActionEditor.delete', this.getName());
         await this.deleteData();
         this.parent.removeAction(this);
     }
@@ -38774,7 +38784,7 @@ class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.pageLinks = [];
     }
     init() {
-        console.log('ApplicationEditor.init', this.data);
+        console.debug('ApplicationEditor.init', this.data);
         // databases
         for (const data of this.data.databases) {
             this.createDatabase(data);
@@ -38811,21 +38821,21 @@ class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return pageLink;
     }
     removeDatabase(database) {
-        console.log('ApplicationEditor.removeDatabase', database.getName());
+        console.debug('ApplicationEditor.removeDatabase', database.getName());
         const i = this.databases.indexOf(database);
         if (i === -1)
             throw new Error('no such database');
         this.databases.splice(i, 1);
     }
     removePageLink(pageLink) {
-        console.log('ApplicationEditor.removePageLink', pageLink.getName());
+        console.debug('ApplicationEditor.removePageLink', pageLink.getName());
         const i = this.pageLinks.indexOf(pageLink);
         if (i === -1)
             throw new Error('no such pageLink');
         this.pageLinks.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Application',
             action: 'save',
@@ -38965,7 +38975,7 @@ class ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.table = table;
     }
     async setValue(name, value) {
-        //console.log('ColumnEditor.setValue', name + ' = ' + value);
+        //console.debug('ColumnEditor.setValue', name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Column',
             action: 'save',
@@ -39039,7 +39049,7 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return keyColumn;
     }
     removeKeyColumn(keyColumn) {
-        console.log('DatabaseEditor.removeParam', keyColumn.getName());
+        console.debug('DatabaseEditor.removeParam', keyColumn.getName());
         const i = this.keyColumns.indexOf(keyColumn);
         if (i === -1)
             throw new Error('no such keyColumn');
@@ -39062,7 +39072,7 @@ class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const args = {
             controller: 'DataSource',
             action: 'save',
@@ -39313,21 +39323,21 @@ class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return table;
     }
     removeParam(param) {
-        console.log('DatabaseEditor.removeParam', param.getName());
+        console.debug('DatabaseEditor.removeParam', param.getName());
         const i = this.params.indexOf(param);
         if (i === -1)
             throw new Error('no such param');
         this.params.splice(i, 1);
     }
     removeTable(table) {
-        console.log('DatabaseEditor.removeTable', table.getName());
+        console.debug('DatabaseEditor.removeTable', table.getName());
         const i = this.tables.indexOf(table);
         if (i === -1)
             throw new Error('no such table');
         this.tables.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'save',
@@ -39381,7 +39391,7 @@ class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return this.createTable(data);
     }
     async getView(view) {
-        console.log('DatabaseEditor.getView', view);
+        console.debug('DatabaseEditor.getView', view);
         return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
             controller: 'Database',
             action: 'getView',
@@ -39483,7 +39493,7 @@ class Editor {
         return dataSource;
     }*/
     removeDataSource(dataSource) {
-        // console.log('Editor.removeDataSource', dataSource.getName());
+        // console.debug('Editor.removeDataSource', dataSource.getName());
         const i = this.dataSources.indexOf(dataSource);
         if (i === -1)
             throw new Error('no such dataSource');
@@ -39496,7 +39506,7 @@ class Editor {
         return action;
     }*/
     removeAction(action) {
-        // console.log('Editor.removeField', action.getName());
+        // console.debug('Editor.removeField', action.getName());
         const i = this.actions.indexOf(action);
         if (i === -1)
             throw new Error('no such action');
@@ -39527,7 +39537,7 @@ class FieldEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.form = form;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Field',
             action: 'save',
@@ -39729,14 +39739,14 @@ class FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return field;
     }
     removeField(field) {
-        console.log('FormEditor.removeField', field.getName());
+        console.debug('FormEditor.removeField', field.getName());
         const i = this.fields.indexOf(field);
         if (i === -1)
             throw new Error('no such field');
         this.fields.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Form',
             action: 'save',
@@ -39918,7 +39928,7 @@ class KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.dataSource = dataSource;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'KeyColumn',
             action: 'save',
@@ -40026,14 +40036,14 @@ class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return form;
     }
     removeForm(form) {
-        console.log('Page.removeForm', form.getName());
+        console.debug('Page.removeForm', form.getName());
         const i = this.forms.indexOf(form);
         if (i === -1)
             throw new Error('no such form');
         this.forms.splice(i, 1);
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'save',
@@ -40056,7 +40066,7 @@ class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async delete() {
-        console.log('PageEditor.delete', this.getName());
+        console.debug('PageEditor.delete', this.getName());
         await this.deleteData();
         this.pageLink.remove();
     }
@@ -40171,7 +40181,7 @@ class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.application = parent;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'PageLink',
             action: 'save',
@@ -40206,7 +40216,7 @@ class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return this.data['@attributes'].fileName;
     }
     remove() {
-        console.log('PageLinkEditor.remove', this.getName());
+        console.debug('PageLinkEditor.remove', this.getName());
         this.parent.removePageLink(this);
     }
 }
@@ -40234,7 +40244,7 @@ class ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         this.database = database;
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
             controller: 'Param',
             action: 'save',
@@ -40301,7 +40311,7 @@ class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         return column;
     }
     removeColumn(column) {
-        console.log('TableEditor.removeColumn', column.getName());
+        console.debug('TableEditor.removeColumn', column.getName());
         const i = this.columns.indexOf(column);
         if (i === -1)
             throw new Error('no such column');
@@ -40356,7 +40366,7 @@ class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
         });
     }
     async setValue(name, value) {
-        //console.log(name + ' = ' + value);
+        //console.debug(name + ' = ' + value);
         const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
             controller: 'Table',
             action: 'save',
@@ -40405,14 +40415,14 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
     constructor(data, runAppLink) {
         super();
         this.onItemOpen2 = async (item) => {
-            console.log('EditorFrontHostApp.onItemOpen2', item.getTitle());
-            // console.log('parent:', item.view.parent);
+            console.debug('EditorFrontHostApp.onItemOpen2', item.getTitle());
+            // console.debug('parent:', item.view.parent);
             if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
                 await item.loadPage();
             }
         };
         this.onItemSelect2 = async (item) => {
-            console.log('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
+            console.debug('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
             if (item instanceof _EdModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
                 if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
                     await item.loadPage();
@@ -40426,20 +40436,20 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
             }
         };
         this.onPropertyGrid2Change = (name, value) => {
-            console.log('EditorFrontHostApp.onPropertyGrid2Change', name, value);
+            console.debug('EditorFrontHostApp.onPropertyGrid2Change', name, value);
             const controller = this.treeWidget2.getSelectedItem();
-            // console.log('controller', controller);
+            // console.debug('controller', controller);
             controller.setProperty(name, value);
         };
         this.onItemDoubleClick2 = async (item) => {
-            console.log('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
+            console.debug('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
             const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
             if (!controller || !(controller instanceof _EdModelController_EdDocumentController_EdDocumentController__WEBPACK_IMPORTED_MODULE_6__.EdDocumentController))
                 return;
             await this.openDocument(controller);
         };
         this.onDocumentClose = (i) => {
-            console.log('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
+            console.debug('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
             const document = this.documents[i];
             const activeDocument = this.documents[this.tabWidget.state.active];
             this.documents.splice(i, 1);
@@ -40460,13 +40470,13 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
             this.view.rerender();
         };
         this.onActionClick = async (actionName) => {
-            console.log('EditorFrontHostApp.onActionClick', actionName);
+            console.debug('EditorFrontHostApp.onActionClick', actionName);
             const item = this.treeWidget2.getSelectedItem();
-            // console.log('item', item);
+            // console.debug('item', item);
             const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
             await controller.doAction(actionName);
         };
-        console.log('EditorFrontHostApp.constructor', data);
+        console.debug('EditorFrontHostApp.constructor', data);
         if (!data)
             throw new Error('no data');
         this.data = data;
@@ -40483,11 +40493,11 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         this.modal = null;
     }
     async run() {
-        console.log('EditorFrontHostApp.run');
+        console.debug('EditorFrontHostApp.run');
         // app
         const app = new _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__.ApplicationEditor(this.data.app);
         app.init();
-        // console.log('app:', app);
+        // console.debug('app:', app);
         // application controller
         const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.EdApplicationController(app, this);
         applicationController.init();
@@ -40501,15 +40511,15 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         this.beginEdit(propList['list'], propList['options']);
     }
     beginEdit(obj, options) {
-        console.log('EditorFrontHostApp.beginEdit', obj, options);
+        console.debug('EditorFrontHostApp.beginEdit', obj, options);
         this.pg.setState({ object: { obj, options } });
     }
     endEdit() {
-        console.log('EditorFrontHostApp.endEdit');
+        console.debug('EditorFrontHostApp.endEdit');
         this.pg.setState({ object: null });
     }
     static async fetchPageData(fileName) {
-        console.log('EditorFrontHostApp.fetchPageData', fileName);
+        console.debug('EditorFrontHostApp.fetchPageData', fileName);
         return await _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp.doHttpRequest({
             controller: 'Page',
             action: 'get',
@@ -40517,20 +40527,20 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         });
     }
     fillActions(item) {
-        // console.log('EditorFrontHostApp.fillActions');
+        // console.debug('EditorFrontHostApp.fillActions');
         this.actionList.setState({ item });
     }
     clearActions() {
-        // console.log('EditorFrontHostApp.clearActions');
+        // console.debug('EditorFrontHostApp.clearActions');
         this.actionList.setState({ item: null });
     }
     async openDocument(controller) {
-        console.log('EditorFrontHostApp.openDocument', controller.getTitle());
+        console.debug('EditorFrontHostApp.openDocument', controller.getTitle());
         let document = this.findDocument(controller);
         if (!document) {
             document = await controller.createDocument();
             this.documents.push(document);
-            // console.log('document:', document);
+            // console.debug('document:', document);
         }
         this.tabWidget.state.active = this.documents.indexOf(document);
         await this.view.rerender();
@@ -40539,16 +40549,16 @@ class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0
         return this.documents.find((document) => document.controller === controller) || null;
     }
     async openModal(modalController) {
-        console.log('EditorFrontHostApp.openModal');
+        console.debug('EditorFrontHostApp.openModal');
         this.modal = modalController;
         await this.view.rerender();
         /* if (modalController.view.el) {
-            console.log('element', modalController.view.getElement());
+            console.debug('element', modalController.view.getElement());
             modalController.view.getElement().focus();
         } */
     }
     async onModalClose() {
-        console.log('EditorFrontHostApp.onModalClose');
+        console.debug('EditorFrontHostApp.onModalClose');
         this.modal = null;
         await this.view.rerender();
     }
@@ -40596,7 +40606,7 @@ class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactC
         });
     }
     getTabs() {
-        console.log('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
+        console.debug('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
         return this.props.ctrl.documents.map((document) => ({
             name: document.controller.model.getFullName(),
             title: document.controller.model.getFullName(),
@@ -40634,7 +40644,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class EditorHelper {
     static create(params) {
-        console.log('FormWizard.create', params);
+        console.debug('FormWizard.create', params);
         switch (params.model.database.getClassName()) {
             case 'MySqlDatabase':
                 return new _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__.MySqlFormWizard(params);
@@ -40661,7 +40671,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class FormWizard {
     constructor(params) {
-        console.log('FormWizard.constructor', params);
+        console.debug('FormWizard.constructor', params);
         this.params = params;
         this.model = params.model;
         this.databaseName = params.model.database.getName();
@@ -40698,7 +40708,7 @@ class FormWizard {
         return 'TextBoxField';
     }
     getField(column) {
-        // console.log('FormWizard.getField', column);
+        // console.debug('FormWizard.getField', column);
         let field = {
             class: this.getFieldClass(column),
             name: column.name,
@@ -40790,7 +40800,7 @@ class MySqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizar
             .join(',\n'));
     }
     getCountQuery() {
-        console.log('MySqlFormWizard.getCountQuery');
+        console.debug('MySqlFormWizard.getCountQuery');
         return 'select count(*) from `{table}`'.replace('{table}', this.tableName);
     }
 }
@@ -40812,20 +40822,20 @@ __webpack_require__.r(__webpack_exports__);
 
 class PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
     getSingleQuery() {
-        console.log('PostgreSqlFormWizard.getSingleQuery');
+        console.debug('PostgreSqlFormWizard.getSingleQuery');
         const columns = this.getColumns().map((column) => column.name);
         return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'
             .replace('{table}', this.tableName)
             .replace('{columns}', columns.map((column) => `    "${column}"`).join(',\n'));
     }
     getMultipleQuery() {
-        console.log('PostgreSqlFormWizard.getMultipleQuery');
+        console.debug('PostgreSqlFormWizard.getMultipleQuery');
         const columns = this.getColumns().map((column) => column.name);
         const _columns = columns.map((column) => `    "${column}"`).join(',\n');
         return `select\n${_columns}\nfrom "${this.tableName}"\norder by "id"\nlimit {limit}\noffset {offset}`;
     }
     getCountQuery() {
-        console.log('PostgreSqlFormWizard.getCountQuery');
+        console.debug('PostgreSqlFormWizard.getCountQuery');
         return `select count(*) from "${this.tableName}"`;
     }
 }
@@ -40853,7 +40863,7 @@ class PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     constructor(props) {
         super(props);
         this.onChange = (name, value) => {
-            // console.log('PropertyGrid.onChange', name, value);
+            // console.debug('PropertyGrid.onChange', name, value);
             if (this.props.onChange) {
                 this.props.onChange(name, value);
             }
@@ -40921,19 +40931,19 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
     constructor(props) {
         super(props);
         this.onDivMouseDown = (e) => {
-            // console.log('TreeItem.onDivMouseDown', e.currentTarget);
+            // console.debug('TreeItem.onDivMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             tree.select(item);
         };
         this.onDivDoubleClick = (e) => {
-            // console.log('TreeItem.onDivDoubleClick');
+            // console.debug('TreeItem.onDivDoubleClick');
             const item = this.props.item;
             const tree = this.props.tree;
             tree.onDoubleClick(item);
         };
         this.onNodeMouseDown = (e) => {
-            // console.log('TreeItem.onNodeMouseDown', e.currentTarget);
+            // console.debug('TreeItem.onNodeMouseDown', e.currentTarget);
             const item = this.props.item;
             const tree = this.props.tree;
             const opened = this.state.opened;
@@ -40960,18 +40970,18 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         return this.li.current;
     }
     open() {
-        console.log('TreeItem.open', this.props.item.getTitle());
+        console.debug('TreeItem.open', this.props.item.getTitle());
         // @ts-ignore
         this.state.opened = true;
         if (this.parent) {
             this.parent.open();
         }
         else {
-            console.log('this.parent', this.parent);
+            console.debug('this.parent', this.parent);
         }
     }
     render() {
-        // console.log('TreeItem.render', this.props.item.getTitle());
+        // console.debug('TreeItem.render', this.props.item.getTitle());
         const tree = this.props.tree;
         const item = this.props.item;
         const items = item.items;
@@ -40980,7 +40990,7 @@ class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
         const style = item.getStyle ? item.getStyle() : null;
         const title = item.getTitle();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : undefined, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: (c) => {
-                            // console.log('onCreate', this.props.item.getTitle(), item.getTitle());
+                            // console.debug('onCreate', this.props.item.getTitle(), item.getTitle());
                             c.parent = this;
                             item.view = c;
                         } }, item.getTitle()))) }))] }), title));
@@ -41016,7 +41026,7 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         };
     }
     async select(item) {
-        console.log('TreeWidget.select', item ? item.getTitle() : null);
+        console.debug('TreeWidget.select', item ? item.getTitle() : null);
         if (this.isSelected(item))
             return;
         return new Promise((resolve) => {
@@ -41028,7 +41038,7 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         });
     }
     onDoubleClick(item) {
-        // console.log('TreeWidget.onDoubleClick', item);
+        // console.debug('TreeWidget.onDoubleClick', item);
         if (this.props.onItemDoubleClick)
             this.props.onItemDoubleClick(item);
     }
@@ -41043,11 +41053,11 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
         return this.state.selectedItem;
     }
     scrollToSelected() {
-        console.log('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
+        console.debug('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
         this.getSelectedItem().view.getElement().scrollIntoView();
     }
     render() {
-        console.log('TreeWidget.render' /*, this.props.items*/);
+        console.debug('TreeWidget.render' /*, this.props.items*/);
         const items = this.props.items;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: (c) => (item.view = c) }, item.getTitle()))) }) })));
     }
@@ -41164,7 +41174,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 document.addEventListener('DOMContentLoaded', async () => {
-    console.log('editor.ejs DOMContentLoaded');
+    console.debug('editor.ejs DOMContentLoaded');
     const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
     const editorFrontHostApp = new _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp(data, data.runAppLink);
     editorFrontHostApp.init();

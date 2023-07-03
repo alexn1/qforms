@@ -31948,7 +31948,7 @@ class Result {
         result[dName][tName].insertEx[key] = row;
     }
     static addUpdateToResult(result, dName, tName, oldKey, newKey) {
-        // console.log('Result.addUpdateToResult');
+        // console.debug('Result.addUpdateToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -31958,7 +31958,7 @@ class Result {
         result[dName][tName].update[oldKey] = newKey;
     }
     static addUpdateExToResult(result, dName, tName, oldKey, row) {
-        // console.log('Result.addUpdateExToResult');
+        // console.debug('Result.addUpdateExToResult');
         if (!result[dName])
             result[dName] = new DatabaseResult();
         if (!result[dName][tName])
@@ -35721,12 +35721,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.onKeyPress = (event) => {
             // console.log('TimeBox.onKeyPress', event.key, event.target.value);
             if (!['0', '1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(event.key)) {
-                console.log('cancel', event.key);
+                console.debug('cancel', event.key);
                 event.preventDefault();
             }
         };
         this.onChange = (e) => {
-            // console.log('TimeBox.onChange', e.target.value);
+            // console.debug('TimeBox.onChange', e.target.value);
             const target = e.target;
             const start = target.selectionStart;
             const end = target.selectionEnd;
@@ -35735,10 +35735,10 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
             }
             const inEnd = start === end && start === target.value.length;
             const stringValue = this.formatValue(target.value);
-            // console.log('before:', target.selectionStart, target.selectionEnd);
+            // console.debug('before:', target.selectionStart, target.selectionEnd);
             this.setState({ value: stringValue }, () => {
-                // console.log('after:', target.selectionStart, target.selectionEnd);
-                // console.log('inEnd:', inEnd);
+                // console.debug('after:', target.selectionStart, target.selectionEnd);
+                // console.debug('inEnd:', inEnd);
                 if (!inEnd) {
                     target.selectionStart = start;
                     target.selectionEnd = end;
@@ -35749,26 +35749,26 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
                         nValue = this.getValue();
                     }
                     catch (err) {
-                        console.log(err.message);
+                        console.debug(err.message);
                         nValue = NaN;
                     }
-                    // console.log('nValue:', nValue);
+                    // console.debug('nValue:', nValue);
                     this.props.onChange(nValue);
                 }
             });
         };
         this.onBlur = (e) => {
-            // console.log('TimeBox.onBlur');
+            // console.debug('TimeBox.onBlur');
             if (this.props.onBlur) {
                 let nValue;
                 try {
                     nValue = this.getValue();
                 }
                 catch (err) {
-                    console.log(err.message);
+                    console.debug(err.message);
                     nValue = NaN;
                 }
-                // console.log('nValue:', nValue);
+                // console.debug('nValue:', nValue);
                 this.props.onBlur(nValue);
             }
         };
@@ -35811,11 +35811,11 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         this.setState({ value: TimeBox.getStringValue(value) });
     }
     /*onKeyDown = event => {
-        console.log('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
+        console.debug('TimeBox.onKeyDown', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.key);
         const mask = '00:00';
         if ([8, 46, 37, 39, 36, 35].includes(event.which)) return;
         if (event.which < 96 || event.which > 105) {
-            console.log('cancel');
+            console.debug('cancel');
             event.stopPropagation();
             event.preventDefault();
         }
@@ -35826,12 +35826,12 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         }
     }*/
     /*onKeyUp = event => {
-        console.log('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
+        console.debug('TimeBox.onKeyUp', event.which, event.target.value.length, event.target.selectionStart, event.target.selectionEnd, event.target.value);
         event.stopPropagation();
         event.preventDefault();
     }*/
     static getStringValue(value) {
-        // console.log('TimeBox.getStringValue', value);
+        // console.debug('TimeBox.getStringValue', value);
         if (value === null)
             return '';
         if (value !== undefined) {
@@ -35846,7 +35846,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return '';
     }
     static getIntegerValue(stringValue) {
-        // console.log('TimeBox.getIntegerValue', stringValue);
+        // console.debug('TimeBox.getIntegerValue', stringValue);
         // try {
         if (stringValue === '')
             return null;
@@ -35877,7 +35877,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return [hours, minutes];
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.log('TimeBox.shouldComponentUpdate', this.state, nextState);
+        // console.debug('TimeBox.shouldComponentUpdate', this.state, nextState);
         if (this.props.value !== nextProps.value) {
             // @ts-ignore
             this.state.value = TimeBox.getStringValue(nextProps.value);
@@ -35892,7 +35892,7 @@ class TimeBox extends _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponen
         return false;
     }
     render() {
-        // console.log('TimeBox.render', this.state.value);
+        // console.debug('TimeBox.render', this.state.value);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.el, className: this.getCssClassNames(), type: 'text', id: this.props.id, readOnly: this.props.readOnly, placeholder: this.props.placeholder, value: this.state.value, onChange: this.onChange, 
             // onKeyDown={this.onKeyDown}
             // onKeyUp={this.onKeyUp}
@@ -35933,7 +35933,7 @@ class TimeBox2 extends _TimeBox__WEBPACK_IMPORTED_MODULE_2__.TimeBox {
     constructor(props) {
         super(props);
         this.onClear = (e) => {
-            // console.log('TimeBox2.onClear');
+            // console.debug('TimeBox2.onClear');
             this.setState({ value: '' }, () => {
                 if (this.props.onClear) {
                     this.props.onClear();
@@ -35979,11 +35979,11 @@ __webpack_require__.r(__webpack_exports__);
 
 class Tooltip extends _ReactComponent__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
     // constructor(props) {
-    //     console.log('Tooltip.constructor', props);
+    //     console.debug('Tooltip.constructor', props);
     //     super(props);
     // }
     render() {
-        // console.log('Tooltip.render', this.state, this.props);
+        // console.debug('Tooltip.render', this.state, this.props);
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `Tooltip ${this.props.type} ${this.props.hidden ? 'hidden' : ''}` }, { children: [this.props.type !== 'alert' && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: "tooltip" }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: this.props.position }, { children: this.props.tip || 'tip' }))] })));
     }
 }
@@ -36150,7 +36150,7 @@ class ConfirmView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
         this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     render() {
-        // console.log('ConfirmView.render', this.getCtrl().options);
+        // console.debug('ConfirmView.render', this.getCtrl().options);
         if (!this.getCtrl().options.yesButton)
             throw new Error('no yesButton option');
         if (!this.getCtrl().options.noButton)
@@ -36187,7 +36187,7 @@ class Controller extends _EventEmitter__WEBPACK_IMPORTED_MODULE_1__.EventEmitter
             super();
         } */
         this.onViewCreate = (view) => {
-            // console.log('Controller.onViewCreate');
+            // console.debug('Controller.onViewCreate');
             this.view = view;
         };
     }
@@ -36234,7 +36234,7 @@ __webpack_require__.r(__webpack_exports__);
 class LoginController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
     constructor(frontHostApp) {
         super();
-        console.log(`${this.constructor.name}.constructor`);
+        console.debug(`${this.constructor.name}.constructor`);
         this.frontHostApp = frontHostApp;
     }
     static create(frontHostApp) {
@@ -36286,7 +36286,7 @@ class LoginView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
     constructor(props) {
         super(props);
         this.onLoginFormSubmit = (e) => {
-            // console.log('LoginView.onLoginFormSubmit');
+            // console.debug('LoginView.onLoginFormSubmit');
             // @ts-ignore
             document.querySelector('.LoginView__button').disabled = true;
             // e.preventDefault();
@@ -36303,7 +36303,7 @@ class LoginView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
         return this.getCtrl().getFrontHostApp().getData().title;
     }
     render() {
-        // console.log('LoginView.render');
+        // console.debug('LoginView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) })));
     }
 }
@@ -36327,7 +36327,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class ImageDialogController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
     constructor(options) {
-        // console.log('ImageDialogController.constructor', options);
+        // console.debug('ImageDialogController.constructor', options);
         super(options);
         this.onCloseClick = async (e) => {
             await this.close();
@@ -36338,14 +36338,14 @@ class ImageDialogController extends _ModalController__WEBPACK_IMPORTED_MODULE_0_
             }
         };
         this.onImageClick = async (e) => {
-            console.log('ImageDialogController.onImageClick');
+            console.debug('ImageDialogController.onImageClick');
             await this.close();
         };
         if (!options.src)
             throw new Error('no src');
     }
     getViewClass() {
-        console.log('ImageDialogController.getViewClass');
+        console.debug('ImageDialogController.getViewClass');
         return _ImageDialogView__WEBPACK_IMPORTED_MODULE_1__.ImageDialogView;
     }
     getSrc() {
@@ -36382,7 +36382,7 @@ class ImageDialogView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
         this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
     render() {
-        console.log('ImageDialogView.render');
+        console.debug('ImageDialogView.render');
         const { ctrl } = this.props;
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: `${this.getCssBlockName()}__image`, src: ctrl.getSrc(), onClick: ctrl.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }))] })));
     }
@@ -36465,12 +36465,12 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         this.homePageName = null;
         this.webSocketClient = null;
         this.onRequest = async (e) => {
-            console.log('onRequest', e);
+            console.debug('onRequest', e);
             if (this.statusbar) {
                 this.statusbar.setLastQueryTime(e.time);
             }
-            // console.log('e.remoteAppVersion', e.remoteAppVersion);
-            // console.log('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+            // console.debug('e.remoteAppVersion', e.remoteAppVersion);
+            // console.debug('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
             if (this.getModel().getData().versions.app &&
                 this.getModel().getData().versions.app !== e.remoteAppVersion) {
                 this.createVersionNotificationIfNotExists();
@@ -36480,12 +36480,12 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.statusbar = statusbar;
         };
         this.onLogout = async () => {
-            console.log('ApplicationController.onLogout');
+            console.debug('ApplicationController.onLogout');
             const result = await this.getModel().request({ action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
-            console.log('ApplicationController.onMenuItemClick', menu, type, name);
+            console.debug('ApplicationController.onMenuItemClick', menu, type, name);
             if (type === 'page') {
                 await this.openPage({ name: name, modal: false });
                 history.pushState({ pageName: name }, '', this.getHostApp().createLink({ page: name }));
@@ -36510,11 +36510,11 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             }
         };
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
     static create(model, frontHostApp) {
-        // console.log(
+        // console.debug(
         //     'ApplicationController.create',
         //     'debug:',
         //     this.getHostApp().isDebugMode(),
@@ -36530,7 +36530,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return new ApplicationController(model, frontHostApp);
     }
     init() {
-        // console.log('ApplicationController.init');
+        // console.debug('ApplicationController.init');
         super.init();
         // this.getModel().on('logout' , this.onLogout);
         this.getModel().on('request', this.onRequest);
@@ -36555,7 +36555,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return super.getViewClass() || _ApplicationView__WEBPACK_IMPORTED_MODULE_2__.ApplicationView;
     }
     createView(rootElement) {
-        // console.log('ApplicationController.createView');
+        // console.debug('ApplicationController.createView');
         this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent2(rootElement, this.getViewClass(), {
             ctrl: this,
             key: this.getModel().getName(),
@@ -36565,7 +36565,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         }
     }
     createVersionNotificationIfNotExists() {
-        // console.log('ApplicationController.createVersionNotificationIfNotExists');
+        // console.debug('ApplicationController.createVersionNotificationIfNotExists');
         if (!document.querySelector('.version-notification')) {
             const div = document.createElement('div');
             div.innerHTML = this.getModel().getText().application.versionNotification;
@@ -36573,7 +36573,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
         }
         else {
-            // console.log(`version notification already exists`);
+            // console.debug(`version notification already exists`);
         }
     }
     getGlobalParams() {
@@ -36593,13 +36593,13 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return pc;
     }
     async openPage(options) {
-        console.log('ApplicationController.openPage', options);
+        console.debug('ApplicationController.openPage', options);
         if (!options.name)
             throw new Error('no name');
         // if (options.key) throw new Error('openPage: key param is deprecated');
         // if this page with this key is already opened, then show it
         const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
-        // console.log('pageController:', pageController);
+        // console.debug('pageController:', pageController);
         if (pageController) {
             this.onPageSelect(pageController);
             return pageController;
@@ -36623,7 +36623,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             };
         }
         const pc = this.createPage(pageData, options);
-        // console.log('pc:', pc);
+        // console.debug('pc:', pc);
         // show
         pc.isModal() ? this.addModal(pc) : this.addPage(pc);
         await this.rerender();
@@ -36633,7 +36633,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         this.modals.push(ctrl);
     }
     removeModal(ctrl) {
-        // console.log('ApplicationController.removeModal', ctrl);
+        // console.debug('ApplicationController.removeModal', ctrl);
         const i = this.modals.indexOf(ctrl);
         if (i === -1)
             throw new Error(`cannot find modal: ${ctrl.getId()}`);
@@ -36662,10 +36662,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return null;
     }
     onPageSelect(pc) {
-        console.log('ApplicationController.onPageSelect', pc.getModel().getName());
+        console.debug('ApplicationController.onPageSelect', pc.getModel().getName());
     }
     async closePage(pageController) {
-        console.log('ApplicationController.closePage', pageController.getModel().getFullName());
+        console.debug('ApplicationController.closePage', pageController.getModel().getFullName());
         if (this.modals.indexOf(pageController) > -1) {
             this.modals.splice(this.modals.indexOf(pageController), 1);
         }
@@ -36681,10 +36681,10 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         pageController.getModel().deinit();
     }
     async onActionClick(name) {
-        console.log('ApplicationController.onActionClick', name);
+        console.debug('ApplicationController.onActionClick', name);
     }
     getMenuItemsProp() {
-        // console.log('ApplicationController.getMenuItemsProp');
+        // console.debug('ApplicationController.getMenuItemsProp');
         return [
             // pages & actions
             ...(this.getModel().getData().menu
@@ -36731,14 +36731,14 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         return null;
     }
     async onWindowPopState(e) {
-        console.log('ApplicationController.onWindowPopState', e.state);
+        console.debug('ApplicationController.onWindowPopState', e.state);
         await this.openPage({
             name: e.state ? e.state.pageName : this.homePageName,
             modal: false,
         });
     }
     getTitle() {
-        // console.log('ApplicationController.getTitle', this.activePage);
+        // console.debug('ApplicationController.getTitle', this.activePage);
         if (this.activePage) {
             return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
         }
@@ -36885,7 +36885,7 @@ class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView 
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
     }
     render() {
-        console.log(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        console.debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
     }
 }
@@ -36909,7 +36909,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     static create(model, parent) {
-        // console.log('FieldController.create', model.getFullName(), parent.getModel().getClassName());
+        // console.debug('FieldController.create', model.getFullName(), parent.getModel().getClassName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
@@ -36926,7 +36926,7 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         return new GeneralClass(model, parent);
     }
     valueToString(value) {
-        // console.log('Field.valueToString', this.getModel().getFullName(), typeof value, value);
+        // console.debug('Field.valueToString', this.getModel().getFullName(), typeof value, value);
         switch (typeof value) {
             case 'string':
                 return value;
@@ -36946,11 +36946,11 @@ class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Mode
         }
     }
     stringToValue(stringValue) {
-        // console.log('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
+        // console.debug('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
         // if (stringValue === undefined) return undefined;
         // if (stringValue === null) return null;
         const fieldType = this.getModel().getType();
-        // console.log('fieldType:', fieldType);
+        // console.debug('fieldType:', fieldType);
         if (stringValue.trim() === '')
             return null;
         if (fieldType === 'object' || fieldType === 'boolean') {
@@ -37084,7 +37084,7 @@ class RowFormCheckBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         };
     }
     render() {
-        // console.log('RowFormCheckBoxFieldView.render');
+        // console.debug('RowFormCheckBoxFieldView.render');
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { onCreate: this.onWidgetCreate, checked: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: this.onCheckBoxChange }) })));
     }
@@ -37113,11 +37113,11 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
     constructor() {
         super(...arguments);
         this.onListInsert = async (e) => {
-            console.log('RowFormCheckBoxListFieldController.onListInsert');
+            console.debug('RowFormCheckBoxListFieldController.onListInsert');
             await this.rerender();
         };
         this.onListUpdate = async (e) => {
-            // console.log('RowFormCheckBoxListFieldController.onListUpdate');
+            // console.debug('RowFormCheckBoxListFieldController.onListUpdate');
             await this.rerender();
         };
         this.onListDelete = async (e) => {
@@ -37125,7 +37125,7 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
         };
     }
     init() {
-        // console.log('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
+        // console.debug('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getDataSource();
         dataSource.on('insert', this.onListInsert);
@@ -37146,9 +37146,9 @@ class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPAC
         return this.getModel().getDataSource().getRows();
     }
     getValueForWidget() {
-        // console.log('RowFormCheckBoxListFieldController.getValueForWidget');
+        // console.debug('RowFormCheckBoxListFieldController.getValueForWidget');
         const value = this.getValue();
-        // console.log('value:', value);
+        // console.debug('value:', value);
         return value;
     }
     setValueFromWidget(widgetValue) {
@@ -37231,11 +37231,11 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
     constructor() {
         super(...arguments);
         this.onEditButtonClick = async (e) => {
-            console.log('RowFormComboBoxFieldController.onEditButtonClick');
+            console.debug('RowFormComboBoxFieldController.onEditButtonClick');
             const itemEditPage = this.getModel().getAttr('itemEditPage');
             const value = this.getValue();
-            // console.log('itemEditPage', itemEditPage);
-            // console.log('value:', value);
+            // console.debug('itemEditPage', itemEditPage);
+            // console.debug('value:', value);
             if (itemEditPage && value) {
                 await this.openPage({
                     name: itemEditPage,
@@ -37246,7 +37246,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
             }
         };
         this.onCreateButtonClick = async (e) => {
-            console.log('RowFormComboBoxFieldController.onCreateButtonClick');
+            console.debug('RowFormComboBoxFieldController.onCreateButtonClick');
             const newRowMode = this.getModel().getAttr('newRowMode');
             const itemCreateForm = this.getModel().getAttr('itemCreateForm');
             if (!itemCreateForm)
@@ -37272,24 +37272,24 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
                 form.off('insert', onInsert);
                 const [key] = e.inserts;
                 const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(key);
-                // console.log('id:', id);
+                // console.debug('id:', id);
                 await this.onChange(id.toString());
             };
             form.on('insert', onInsert);
         };
         this.onListInsert = async (e) => {
-            console.log('RowFormComboBoxFieldController.onListInsert');
+            console.debug('RowFormComboBoxFieldController.onListInsert');
             await this.rerender();
         };
         this.onListUpdate = async (e) => {
-            // console.log('RowFormComboBoxFieldController.onListUpdate');
+            // console.debug('RowFormComboBoxFieldController.onListUpdate');
             await this.rerender();
         };
         this.onListDelete = async (e) => {
             await this.rerender();
         };
         this.onItemSelect = async (e) => {
-            // console.log('RowFormComboBoxFieldController.onItemSelect');
+            // console.debug('RowFormComboBoxFieldController.onItemSelect');
             if (e.button === 0) {
                 e.preventDefault();
                 const id = this.getValue();
@@ -37301,7 +37301,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
                     onSelect: async (key) => {
                         if (key) {
                             const [id] = (0,_types__WEBPACK_IMPORTED_MODULE_3__.keyToKeyTuple)(key);
-                            // console.log('id:', id);
+                            // console.debug('id:', id);
                             if (this.getValue() !== id) {
                                 await this.getView().onChange(id.toString());
                             }
@@ -37317,7 +37317,7 @@ class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IM
         };
     }
     init() {
-        // console.log('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        // console.debug('RowFormComboBoxFieldController.init', this.getModel().getFullName());
         super.init();
         const dataSource = this.getModel().getComboBoxDataSource();
         dataSource.on('insert', this.onListInsert);
@@ -37382,7 +37382,7 @@ class RowFormComboBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     constructor() {
         super(...arguments);
         this.onChange = async (widgetValue) => {
-            // console.log('RowFormComboBoxFieldView.onChange', widgetValue);
+            // console.debug('RowFormComboBoxFieldView.onChange', widgetValue);
             this.rerender();
             await this.getCtrl().onChange(widgetValue);
         };
@@ -37418,7 +37418,7 @@ class RowFormComboBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" })));
     }
     render() {
-        // console.log('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        // console.debug('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderSelect(), this.getCtrl().getModel().getAttr('itemEditPage') &&
                     !!this.getCtrl().getValue() &&
                     this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()] })));
@@ -37514,11 +37514,11 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         this.widget2 = null;
         this.defaultValue = 0;
         this.onView2Create = (widget2) => {
-            // console.log('RowFormDateTimeFieldController.onView2Create', widget2);
+            // console.debug('RowFormDateTimeFieldController.onView2Create', widget2);
             this.widget2 = widget2;
         };
         /*_onChange(widgetValue) {
-            // console.log('RowFormDateTimeFieldController._onChange', this.widget2);
+            // console.debug('RowFormDateTimeFieldController._onChange', this.widget2);
             if (widgetValue !== null) {
                 setTimeout(() => {
                     const input = this.widget2.getInputElement();
@@ -37528,7 +37528,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
             }
         }*/
         this.onChange2 = (widgetValue, fireEvent = true) => {
-            // console.log('RowFormDateTimeFieldController.onChange2', widgetValue);
+            // console.debug('RowFormDateTimeFieldController.onChange2', widgetValue);
             this.resetErrors();
             this.resetErrors2();
             this.rerender();
@@ -37538,7 +37538,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
+                console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -37562,7 +37562,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
             }
         };
         this.onBlur2 = (widgetValue, fireEvent = true) => {
-            console.log('RowFormDateTimeFieldController.onBlur2', widgetValue);
+            console.debug('RowFormDateTimeFieldController.onBlur2', widgetValue);
             if (!this.isEditable())
                 return;
             this.resetErrors2();
@@ -37572,7 +37572,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
                 this.setValueFromView2(widgetValue);
             }
             catch (err) {
-                console.log(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
+                console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
                 this.state.parseError2 = err.message;
             }
             // validate
@@ -37605,13 +37605,13 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         return this.getValue();
     }
     getValueForTime() {
-        // console.log('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
+        // console.debug('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
         const date = this.getValue();
         if (date) {
             const value = date.getHours() * 60 + date.getMinutes();
-            // console.log('value:', value);
+            // console.debug('value:', value);
             if (value !== this.defaultValue) {
-                // console.log('not equal to default value', value, this.defaultValue);
+                // console.debug('not equal to default value', value, this.defaultValue);
                 return value;
             }
         }
@@ -37637,7 +37637,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         return this.defaultValue;
     }
     setDefaultValue2(defaultValue) {
-        // console.log('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
+        // console.debug('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
         if (typeof defaultValue === 'string') {
             this.defaultValue = _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getIntegerValue(defaultValue);
         }
@@ -37664,11 +37664,11 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         this.state.value.setHours(h, m);
     }
     validate2() {
-        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
         this.state.error2 = this.getError2();
     }
     getError2() {
-        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.widget2) {
             try {
@@ -37700,7 +37700,7 @@ class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IM
         return this.state.parseError2 === null && this.state.error2 === null;
     }
     refill() {
-        // console.log('RowFormDateTimeFieldController.refill');
+        // console.debug('RowFormDateTimeFieldController.refill');
         if (!this.widget2)
             return;
         super.refill();
@@ -37756,7 +37756,7 @@ class RowFormDateTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     constructor() {
         super(...arguments);
         this.onClear2 = async () => {
-            // console.log('RowFormDateTimeFieldView.onClear2');
+            // console.debug('RowFormDateTimeFieldView.onClear2');
             this.getCtrl().onChange2(null);
         };
     }
@@ -37783,7 +37783,7 @@ class RowFormDateTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         return this.getCtrl().state.value ? 'datetime' : 'date';
     }
     render() {
-        // console.log('RowFormDateTimeFieldView.render');
+        // console.debug('RowFormDateTimeFieldView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getMode()}`, style: this.getStyle(this.getCtrl().getRow()) }, { children: [this.renderDatePart(), this.renderTimePart()] })));
     }
 }
@@ -37809,7 +37809,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
     constructor(model, parent) {
         super(model, parent);
         this.onChange = async (widgetValue, fireEvent = true) => {
-            console.log('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
+            console.debug('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
             // this._onChange(widgetValue);
             this.resetErrors();
             this.rerender();
@@ -37842,7 +37842,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
             }
         };
         this.onBlur = (widgetValue, fireEvent = true) => {
-            console.log('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
+            console.debug('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
             if (!this.isEditable())
                 return;
             // this.resetErrors();
@@ -37878,7 +37878,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
             }
         };
         this.onChangePure = async (value, fireEvent = true) => {
-            console.log('RowFormFieldController.onChangePure', JSON.stringify(value));
+            console.debug('RowFormFieldController.onChangePure', JSON.stringify(value));
             // value
             this.setValue(value);
             this.resetErrors();
@@ -37914,10 +37914,10 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         const row = this.getRow();
         const value = this.getModel().getValue(row);
         this.setValue(value);
-        // console.log(this.getModel().getFullName(), value);
+        // console.debug(this.getModel().getFullName(), value);
     }
     refill() {
-        // console.log('RowFormFieldController.refill', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.refill', this.getModel().getFullName());
         if (!this.view)
             return;
         const value = this.getModel().getValue(this.getRow());
@@ -37933,45 +37933,45 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         return this.getParent();
     }
     copyValueToModel() {
-        // console.log('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
         this.getModel().setValue(this.getRow(), this.getValue());
     }
     /*_onChange(widgetValue) {
 
     }*/
     putValue(widgetValue) {
-        // console.log('RowFormFieldController.putValue', widgetValue);
+        // console.debug('RowFormFieldController.putValue', widgetValue);
         this.onChange(widgetValue, false);
     }
     getValueForWidget() {
         const value = this.getValue();
-        // console.log('value:', this.getModel().getFullName(), value, typeof value);
+        // console.debug('value:', this.getModel().getFullName(), value, typeof value);
         return this.valueToString(value);
     }
     setValueFromWidget(widgetValue) {
-        // console.log('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
+        // console.debug('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
         if (typeof widgetValue !== 'string')
             throw new Error(`${this.getModel().getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
         const value = this.stringToValue(widgetValue);
-        // console.log('value:', value);
+        // console.debug('value:', value);
         this.setValue(value);
     }
     setValue(value) {
-        // console.log('RowFormFieldController.setValue', this.getModel().getFullName(), value);
+        // console.debug('RowFormFieldController.setValue', this.getModel().getFullName(), value);
         this.state.value = value;
     }
     getValue() {
         return this.state.value;
     }
     isChanged() {
-        // console.log('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
+        // console.debug('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
         return this.state.changed;
     }
     isValid() {
         return this.state.parseError === null && this.state.error === null;
     }
     validate() {
-        // console.log('RowFormFieldController.validate', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
         if (this.isVisible()) {
             this.state.error = this.getError();
         }
@@ -37980,7 +37980,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         this.state.changed = this.calcChangedState(this.getRow());
     }
     getPlaceholder() {
-        // console.log('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
+        // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
         if (this.getModel().getAttr('placeholder'))
             return this.getModel().getAttr('placeholder');
         if (this.getApp().getHostApp().isDebugMode()) {
@@ -37994,7 +37994,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         }
     }
     getError() {
-        // console.log('RowFormFieldController.getError', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
         // parse validator
         if (this.view && this.view.getWidget()) {
             try {
@@ -38022,22 +38022,22 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
         return this.state.parseError !== null;
     }
     calcChangedState(row) {
-        // console.log('RowFormFieldController.calcChangedState', this.getModel().getFullName());
+        // console.debug('RowFormFieldController.calcChangedState', this.getModel().getFullName());
         if (!row)
             throw new Error('FieldController: no row');
         if (this.isParseError()) {
-            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
             return true;
         }
         if (!this.isValid()) {
-            console.log(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
             return true;
         }
         if (this.getModel().hasColumn()) {
             const fieldRawValue = this.getModel().valueToRaw(this.getValue());
             const dsRawValue = this.getModel().getRawValue(row);
             if (fieldRawValue !== dsRawValue) {
-                console.log(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
+                console.debug(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
                 return true;
             }
             if (this.getModel().isChanged(row)) {
@@ -38047,7 +38047,7 @@ class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1
                     original = original.substr(0, 100);
                 if (modified)
                     modified = modified.substr(0, 100);
-                console.log(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
+                console.debug(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
                 return true;
             }
         }
@@ -38178,12 +38178,12 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
             const file = e.target.files[0];
             if (file) {
                 const widgetValue = await _common__WEBPACK_IMPORTED_MODULE_3__.Helper.readFileAsDataURL(file);
-                // console.log('widgetValue:', widgetValue);
+                // console.debug('widgetValue:', widgetValue);
                 this.getCtrl().onChange(widgetValue);
             }
         };
         this.onImageClick = async (e) => {
-            console.log('RowFormFileFieldView.onImageClick');
+            console.debug('RowFormFileFieldView.onImageClick');
             const ctrl = this.getCtrl();
             const app = ctrl.getApp();
             const src = ctrl.getValueForWidget();
@@ -38192,14 +38192,14 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
                 id: app.getNewId(),
                 src,
                 onClose: () => {
-                    console.log('onClose');
+                    console.debug('onClose');
                     this.getCtrl().getPage().getView().getElement().focus();
                 },
             });
             await app.openModal(imageDialogCtrl);
         };
         this.onImageIconClick = async (e) => {
-            console.log('RowFormFileFieldView.onImageIconClick');
+            console.debug('RowFormFileFieldView.onImageIconClick');
             this.getInput().click();
         };
         this.image = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
@@ -38228,11 +38228,11 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
     }
     componentDidMount() {
-        // console.log('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // console.debug('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
         setTimeout(() => this.updateSize(), 0);
     }
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // console.log('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
+        // console.debug('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
         setTimeout(() => this.updateSize(), 0);
     }
 }
@@ -38260,7 +38260,7 @@ class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORT
     constructor() {
         super(...arguments);
         this.onClick = (e) => {
-            console.log('RowFormLinkFieldController.onClick', e);
+            console.debug('RowFormLinkFieldController.onClick', e);
             const pageName = this.getModel().getAttr('page');
             if (pageName) {
                 e.preventDefault();
@@ -38325,7 +38325,7 @@ class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
         if (pageName) {
             const value = ctrl.getValueForWidget();
             href = ctrl.getPage().createOpenInNewLink(pageName, (0,_types__WEBPACK_IMPORTED_MODULE_1__.keyTupleToKey)([value]));
-            // console.log('href:', link);
+            // console.debug('href:', link);
         }
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
     }
@@ -38382,7 +38382,7 @@ class RowFormPasswordFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     constructor(props) {
         super(props);
         this.onCloseClick = async (e) => {
-            // console.log('RowFormPasswordFieldView.onCloseClick');
+            // console.debug('RowFormPasswordFieldView.onCloseClick');
             const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({ value: '' });
@@ -38390,12 +38390,12 @@ class RowFormPasswordFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
             this.getWidget().getElement().focus();
         };
         this.onFocus = async (e) => {
-            // console.log('RowFormPasswordFieldView.onFocus');
+            // console.debug('RowFormPasswordFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.log('RowFormPasswordFieldView.onBlur');
+            // console.debug('RowFormPasswordFieldView.onBlur');
             this.removeCssClass('focus');
             await this.rerender();
         };
@@ -38412,14 +38412,14 @@ class RowFormPasswordFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         };
     }
     isCloseVisible() {
-        // console.log('RowFormPasswordFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormPasswordFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('this.getWidget().state.value:', this.getWidget().state.value);
+        // console.debug('this.getWidget().state.value:', this.getWidget().state.value);
         return this.getWidget().state.value !== '';
     }
     render() {
@@ -38503,7 +38503,7 @@ class RowFormPhoneFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1
             await this.rerender();
         };
         this.onBlur = async (value) => {
-            // console.log('RowFormPhoneFieldView.onBlur', value);
+            // console.debug('RowFormPhoneFieldView.onBlur', value);
             this.removeCssClass('focus');
             this.getCtrl().onBlur(value);
         };
@@ -38528,7 +38528,7 @@ class RowFormPhoneFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.PhoneIcon, {}) })));
     }
     render() {
-        // console.log('RowFormPhoneFieldView.render');
+        // console.debug('RowFormPhoneFieldView.render');
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
     }
 }
@@ -38597,13 +38597,13 @@ __webpack_require__.r(__webpack_exports__);
 class RowFormRadioFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
     constructor() {
         /*onChange = async widgetValue => {
-            // console.log('RowFormRadioFieldView.onChange', widgetValue);
+            // console.debug('RowFormRadioFieldView.onChange', widgetValue);
             this.rerender();
             await this.getCtrl().onChange(widgetValue);
         }*/
         super(...arguments);
         this.onClick = async (e) => {
-            console.log('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
+            console.debug('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
             let value = JSON.parse(e.currentTarget.dataset.value);
             if (this.getCtrl().getValue() !== value) {
                 await this.getCtrl().onChangePure(value);
@@ -38625,7 +38625,7 @@ class RowFormRadioFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1
         </div>;
     }*/
     render() {
-        // console.log('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        // console.debug('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
         const value = this.getCtrl().getValue();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.getCtrl()
                 .getItems()
@@ -38686,12 +38686,12 @@ class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
     constructor(props) {
         super(props);
         this.onFocus = async (e) => {
-            // console.log('RowFormTextAreaFieldView.onFocus');
+            // console.debug('RowFormTextAreaFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.log('RowFormTextAreaFieldView.onBlur');
+            // console.debug('RowFormTextAreaFieldView.onBlur');
             this.removeCssClass('focus');
             await this.rerender();
         };
@@ -38700,7 +38700,7 @@ class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODUL
         };
     }
     render() {
-        // console.log('RowFormTextAreaFieldView.render', this.state);
+        // console.debug('RowFormTextAreaFieldView.render', this.state);
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.getModel().getRows(), cols: ctrl.getModel().getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
     }
@@ -38763,12 +38763,12 @@ class RowFormTextBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE
             }, 0);
         };
         this.onFocus = async (e) => {
-            // console.log('RowFormTextBoxFieldView.onFocus');
+            // console.debug('RowFormTextBoxFieldView.onFocus');
             this.addCssClass('focus');
             await this.rerender();
         };
         this.onBlur = async (e) => {
-            // console.log('RowFormTextBoxFieldView.onBlur');
+            // console.debug('RowFormTextBoxFieldView.onBlur');
             const value = e.target.value;
             this.removeCssClass('focus');
             this.getCtrl().onBlur(value);
@@ -38778,7 +38778,7 @@ class RowFormTextBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE
         };
     }
     isCloseVisible() {
-        // console.log('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
         const ctrl = this.getCtrl();
         if (!ctrl.isEditable())
             return false;
@@ -38851,7 +38851,7 @@ class RowFormTimeFieldController extends _RowFormFieldController__WEBPACK_IMPORT
         }
     }
     getPlaceholder() {
-        // console.log('CarReservefromTimeController.getPlaceholder', this.defaultValue);
+        // console.debug('CarReservefromTimeController.getPlaceholder', this.defaultValue);
         if (this.defaultValue !== null)
             return _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getStringValue(this.defaultValue);
         return super.getPlaceholder();
@@ -38884,7 +38884,7 @@ class RowFormTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
     constructor() {
         super(...arguments);
         this.onCloseClick = async (e) => {
-            console.log('RowFormTimeFieldView.onCloseClick');
+            console.debug('RowFormTimeFieldView.onCloseClick');
             /*const ctrl = this.getCtrl();
             this.getWidget().state.value = '';
             this.getWidget().setState({value: ''});
@@ -38892,13 +38892,13 @@ class RowFormTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1_
         };
     }
     isCloseVisible() {
-        // console.log('RowFormTimeFieldView.isCloseVisible', this.props.value);
+        // console.debug('RowFormTimeFieldView.isCloseVisible', this.props.value);
         if (this.props.readOnly)
             return false;
         if (!this.getWidget()) {
             return this.props.value !== undefined;
         }
-        // console.log('this.getWidget().state.value:', ctrl.view.state.value);
+        // console.debug('this.getWidget().state.value:', ctrl.view.state.value);
         return this.getWidget().state.value !== '';
     }
     render() {
@@ -38991,7 +38991,7 @@ class TableFormComboBoxFieldController extends _TableFormFieldController__WEBPAC
     constructor() {
         super(...arguments);
         this.onListUpdate = async (e) => {
-            // console.log('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
+            // console.debug('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
             this.getForm().invalidate();
             await this.getForm().rerender();
         };
@@ -39185,7 +39185,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_0__.FieldController {
     getValueForWidget(row) {
-        // console.log('TableFormFieldController.getValueForWidget');
+        // console.debug('TableFormFieldController.getValueForWidget');
         return this.valueToString(this.getModel().getValue(row));
     }
     getForm() {
@@ -39219,7 +39219,7 @@ class TableFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_1__.FieldVi
         this.span = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
     }
     getSpanOffsetWidth() {
-        // console.log('TableFormFieldView.getSpanOffsetWidth', this.span.current);
+        // console.debug('TableFormFieldView.getSpanOffsetWidth', this.span.current);
         if (!this.span.current)
             return 0;
         return this.span.current.offsetWidth;
@@ -39249,7 +39249,7 @@ class TableFormLinkFieldController extends _TableFormFieldController__WEBPACK_IM
     constructor() {
         super(...arguments);
         this.onClick = (e) => {
-            console.log('TableFormLinkFieldController.onClick', e);
+            console.debug('TableFormLinkFieldController.onClick', e);
             e.preventDefault();
             this.emit('click', { source: this });
         };
@@ -39413,7 +39413,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
     static create(model, parent) {
-        // console.log('FormController.create', model.getFullName());
+        // console.debug('FormController.create', model.getFullName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
@@ -39428,7 +39428,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         super(model, parent);
         this.fields = {};
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model);
+            console.debug(`${this.constructor.name}.constructor`, model);
         }
     }
     init() {
@@ -39438,7 +39438,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
     }
     deinit() {
-        // console.log('FormController.deinit:', this.getModel().getFullName());
+        // console.debug('FormController.deinit:', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].deinit();
         }
@@ -39457,7 +39457,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return false;
     }
     async onFieldChange(e) {
-        // console.log('FormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('FormController.onFieldChange', this.getModel().getFullName());
         await this.getPage().onFormChange(e);
     }
     getUpdated() {
@@ -39467,7 +39467,7 @@ class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         this.state.updated = Date.now();
     }
     async onActionClick(name, row) {
-        console.log('FormController.onActionClick', name, row);
+        console.debug('FormController.onActionClick', name, row);
     }
     getField(name) {
         return this.fields[name];
@@ -39516,7 +39516,7 @@ class FormView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.log('FormView.onActionsClick:', li);
+            // console.debug('FormView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -39533,7 +39533,7 @@ class FormView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
         this.checkParent();
     }
     shouldComponentUpdate(nextProps, nextState) {
-        console.log('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
+        console.debug('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
         if (nextProps.updated - this.props.updated)
             return true;
         return false;
@@ -39571,7 +39571,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             valid: true,
         };
         this.onModelRefresh = async (e) => {
-            console.log('RowFormController.onModelRefresh', this.getModel().getFullName());
+            console.debug('RowFormController.onModelRefresh', this.getModel().getFullName());
             if (!this.view)
                 return;
             this.refill();
@@ -39579,21 +39579,21 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('RowFormController.onModelInsert', this.getModel().getFullName());
+            console.debug('RowFormController.onModelInsert', this.getModel().getFullName());
             this.refill();
             this.invalidate();
             this.calcState();
             this.getParent().onFormInsert(e);
         };
         this.onModelUpdate = async (e) => {
-            console.log('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
+            console.debug('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
             this.refill();
             this.invalidate();
             this.calcState();
             this.getParent().onFormUpdate(e);
         };
         this.onSaveClick = async () => {
-            console.log('RowFormController.onSaveClick');
+            console.debug('RowFormController.onSaveClick');
             this.validate();
             this.calcState();
             if (this.isValid()) {
@@ -39601,7 +39601,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
                     this.getApp().getView().disableRerender();
                     await this.getModel().update();
                     this.state.mode = 'view';
-                    console.log('form model updated', this.getModel().getFullName());
+                    console.debug('form model updated', this.getModel().getFullName());
                 }
                 finally {
                     this.getApp().getView().enableRerender();
@@ -39614,7 +39614,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             }
         };
         this.onDiscardClick = () => {
-            console.log('RowFormController.onDiscardClick', this.getModel().getFullName());
+            console.debug('RowFormController.onDiscardClick', this.getModel().getFullName());
             const changedFields = [];
             for (const name in this.fields) {
                 const field = this.fields[name];
@@ -39622,7 +39622,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
                     changedFields.push(name);
                 }
             }
-            // console.log('changedFields:', changedFields);
+            // console.debug('changedFields:', changedFields);
             this.getModel().discard(changedFields);
             // refill changed fields
             changedFields.forEach((name) => {
@@ -39638,16 +39638,16 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
             this.getParent().onFormDiscard(this);
         };
         this.onRefreshClick = async () => {
-            // console.log('RowFormController.onRefreshClick', this.getModel().getFullName());
+            // console.debug('RowFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
         };
         this.onEditClick = (e) => {
-            console.log('RowFormController.onEditClick');
+            console.debug('RowFormController.onEditClick');
             this.state.mode = 'edit';
             this.rerender();
         };
         this.onCancelClick = (e) => {
-            console.log('RowFormController.onCancelClick');
+            console.debug('RowFormController.onCancelClick');
             this.state.mode = 'view';
             this.rerender();
         };
@@ -39666,7 +39666,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         }
     }
     deinit() {
-        // console.log('RowFormController.deinit', this.getModel().getFullName());
+        // console.debug('RowFormController.deinit', this.getModel().getFullName());
         this.getModel().off('refresh', this.onModelRefresh);
         this.getModel().off('insert', this.onModelInsert);
         this.getModel().off('update', this.onModelUpdate);
@@ -39676,18 +39676,18 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         this.state.hasNew = this.getModel().hasNew();
         this.state.changed = this.isChanged();
         this.state.valid = this.isValid();
-        // console.log('hasNew:', hasNew);
-        // console.log('changed:', changed);
-        // console.log('valid:', valid);
+        // console.debug('hasNew:', hasNew);
+        // console.debug('changed:', changed);
+        // console.debug('valid:', valid);
     }
     refill() {
-        console.log('RowFormController.refill', this.getModel().getFullName());
+        console.debug('RowFormController.refill', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].refill();
         }
     }
     isValid() {
-        // console.log('RowFormController.isValid', this.getModel().getFullName());
+        // console.debug('RowFormController.isValid', this.getModel().getFullName());
         for (const name in this.fields) {
             const field = this.fields[name];
             if (!field.isValid())
@@ -39696,7 +39696,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         return true;
     }
     validate() {
-        // console.log('RowFormController.validate', this.getModel().getFullName());
+        // console.debug('RowFormController.validate', this.getModel().getFullName());
         for (const name in this.fields) {
             this.fields[name].validate();
         }
@@ -39708,7 +39708,7 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         }
     }
     isChanged() {
-        // console.log('RowFormController.isChanged', this.getModel().getFullName());
+        // console.debug('RowFormController.isChanged', this.getModel().getFullName());
         if (this.getModel().isChanged())
             return true;
         for (const name in this.fields) {
@@ -39719,13 +39719,13 @@ class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.For
         return false;
     }
     async onFieldChange(e) {
-        // console.log('RowFormController.onFieldChange', this.getModel().getFullName());
+        // console.debug('RowFormController.onFieldChange', this.getModel().getFullName());
         this.calcState();
         this.invalidate();
         await super.onFieldChange(e);
     }
     getViewClass() {
-        // console.log('RowFormController.getViewClass', this.getModel().getFullName());
+        // console.debug('RowFormController.getViewClass', this.getModel().getFullName());
         return super.getViewClass() || _RowFormView__WEBPACK_IMPORTED_MODULE_1__.RowFormView;
     }
     getActiveRow() {
@@ -39775,7 +39775,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
     renderToolbar() {
-        // console.log('RowFormView.renderToolbar');
+        // console.debug('RowFormView.renderToolbar');
         const { ctrl } = this.props;
         const text = ctrl.getModel().getApp().getText();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.getModel().hasDefaultPersistentDataSource() &&
@@ -39797,7 +39797,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__label` }, { children: [model.getCaption(), ":", model.isNotNull() && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'red' } }, { children: "*" }))] }), `label.${name}`));
     }
     renderField(fieldCtrl) {
-        // console.log('RowFormView.renderField', fieldCtrl.getModel().getClassName());
+        // console.debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
         const name = fieldCtrl.getModel().getName();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__field` }, { children: this.renderFieldView(fieldCtrl) }), `field.${name}`));
     }
@@ -39812,7 +39812,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         return fieldCtrl.renderView();
     }
     renderError(fieldCtrl) {
-        // console.log('RowFormView.renderError:', fieldCtrl.state);
+        // console.debug('RowFormView.renderError:', fieldCtrl.state);
         const name = fieldCtrl.getModel().getName();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`));
     }
@@ -39836,7 +39836,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
         </div>;*/
     }
     renderGroups() {
-        // console.log('RowFormView.renderGroups');
+        // console.debug('RowFormView.renderGroups');
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__groups` }, { children: Object.keys(ctrl.fields)
                 .filter((name) => ctrl.getField(name).isVisible())
@@ -39845,7 +39845,7 @@ class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
             }) })));
     }
     render() {
-        console.log('RowFormView.render', this.getCtrl().getModel().getFullName());
+        console.debug('RowFormView.render', this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} flex-column grid-gap-5`, style: this.getStyle() }, { children: [(this.getCtrl().getModel().hasDefaultPersistentDataSource() ||
                     this.getCtrl().getModel().hasActions()) &&
                     this.renderToolbar(), this.renderGroups()] })));
@@ -39885,17 +39885,17 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             this.grid = grid;
         };
         this.onNewClick = async (e) => {
-            console.log('TableFormController.onNewClick');
+            console.debug('TableFormController.onNewClick');
             await this.new();
         };
         this.onRefreshClick = async (e) => {
-            console.log('TableFormController.onRefreshClick', this.getModel().getFullName());
+            console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
             await this.getModel().refresh();
             // console.error('refresh error handler:', err.message);
             // alert(err.message);
         };
         this.onDeleteClick = async (e) => {
-            console.log('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
+            console.debug('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
             });
@@ -39904,12 +39904,12 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             }
         };
         this.onGridCellDblClick = async (row, key) => {
-            // console.log('TableFormController.onGridCellDblClick', row);
+            // console.debug('TableFormController.onGridCellDblClick', row);
             // const bodyCell = e.bodyCell;
             // const row = bodyCell.bodyRow.dbRow;
-            // console.log('row:', row);
+            // console.debug('row:', row);
             // const key = this.getModel().getDefaultDataSource().getRowKey(row);
-            // console.log('key:', key);
+            // console.debug('key:', key);
             switch (this.getModel().getAttr('editMethod')) {
                 // case 'table':
                 //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
@@ -39925,11 +39925,11 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             }
         };
         this.onGridLinkClick = async (key) => {
-            console.log('TableFormController.onGridLinkClick', key);
+            console.debug('TableFormController.onGridLinkClick', key);
             await this.edit(key);
         };
         this.onGridDeleteKeyDown = async (row, key) => {
-            console.log('TableFormController.onGridDeleteKeyDown', row, key);
+            console.debug('TableFormController.onGridDeleteKeyDown', row, key);
             if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
                 const result = await this.getApp().confirm({
                     message: this.getModel().getApp().getText().form.areYouSure,
@@ -39940,14 +39940,14 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             }
         };
         this.onModelRefresh = async (e) => {
-            console.log('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             this.invalidate();
             await this.rerender();
         };
         this.onModelInsert = async (e) => {
-            console.log('TableFormController.onModelInsert', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelInsert', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid && e.source) {
@@ -39959,7 +39959,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onModelUpdate = async (e) => {
-            console.log('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
+            console.debug('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -39976,7 +39976,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onModelDelete = async (e) => {
-            console.log('TableFormController.onModelDelete', this.getModel().getFullName(), e);
+            console.debug('TableFormController.onModelDelete', this.getModel().getFullName(), e);
             if (!this.view)
                 return;
             if (this.grid) {
@@ -39990,18 +39990,18 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onGridSelectionChange = async (key) => {
-            // console.log('TableFormController.onGridSelectionChange', key);
+            // console.debug('TableFormController.onGridSelectionChange', key);
             this.invalidate();
             await this.getPage().rerender();
         };
         this.isRowSelected = () => {
-            // console.log('TableFormController.isRowSelected');
+            // console.debug('TableFormController.isRowSelected');
             return !!this.grid && !!this.grid.getActiveRowKey();
         };
         this.onFrameChanged = async (value) => {
-            console.log('TableFormController.onFrameChanged', value);
+            console.debug('TableFormController.onFrameChanged', value);
             let frame = parseInt(value);
-            console.log('frame:', frame);
+            console.debug('frame:', frame);
             const frameCount = this.getModel().getDefaultDataSource().getFramesCount();
             if (frame < 1)
                 frame = 1;
@@ -40012,14 +40012,14 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
             await this.rerender();
         };
         this.onNextClick = async () => {
-            console.log('TableFormController.onNextClick');
+            console.debug('TableFormController.onNextClick');
             const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
             this.getModel().getDefaultDataSource().setFrame(frame);
             this.getModel().getDefaultDataSource().refresh();
             await this.rerender();
         };
         this.onPreviousClick = async () => {
-            console.log('TableFormController.onPreviousClick');
+            console.debug('TableFormController.onPreviousClick');
             const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
             this.getModel().getDefaultDataSource().setFrame(frame);
             this.getModel().getDefaultDataSource().refresh();
@@ -40051,11 +40051,11 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         this.grid.saveScroll();
     }*/
     /*onShowPage = async () => {
-        console.log('TableFormController.onShowPage', this.getModel().getFullName());
+        console.debug('TableFormController.onShowPage', this.getModel().getFullName());
         if (!this.grid.isHidden()) {
             this.grid.restoreScroll();
             this.grid.focus();
-            // console.log('document.activeElement:', document.activeElement);
+            // console.debug('document.activeElement:', document.activeElement);
         }
     }*/
     async new() {
@@ -40120,7 +40120,7 @@ class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.F
         }
     }
     async edit(key) {
-        // console.log('TableForm.edit', this.getModel().getFullName(), key);
+        // console.debug('TableForm.edit', this.getModel().getFullName(), key);
         if (!this.getModel().getAttr('itemEditPage')) {
             throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
         }
@@ -40194,11 +40194,11 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
     constructor() {
         super(...arguments);
         this.renderGridCellView = (row, column, onCreate, onUnmount) => {
-            // console.log('TableFormView.renderGridCellView');
+            // console.debug('TableFormView.renderGridCellView');
             const ctrl = this.getCtrl().getField(column.name);
             if (!ctrl)
                 throw new Error(`no field: ${column.name}`);
-            // console.log(column.name, ctrl.constructor.name);
+            // console.debug(column.name, ctrl.constructor.name);
             return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
         };
         this.createLinkCallback = (key) => {
@@ -40266,7 +40266,7 @@ class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
         });
     }
     render() {
-        console.log('TableFormView.render', this.getCtrl().getModel().getFullName());
+        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
         const ctrl = this.getCtrl();
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
     }
@@ -40316,7 +40316,7 @@ class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controlle
         return this.getModel().getCaption();
     }
     getViewClass() {
-        // console.log(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
+        // console.debug(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
         const model = this.getModel();
         if (!model.isAttr('viewClass')) {
             throw new Error(`${this.constructor.name} not supports view`);
@@ -40420,13 +40420,13 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         super(model, parent);
         this.forms = [];
         this.onSaveAndCloseClick = async () => {
-            console.log('PageController.onSaveAndCloseClick');
+            console.debug('PageController.onSaveAndCloseClick');
             this.validate();
             if (this.isValid()) {
                 try {
                     this.getApp().getView().disableRerender();
                     await this.getModel().update();
-                    console.log('page model updated', this.getModel().getFullName());
+                    console.debug('page model updated', this.getModel().getFullName());
                 }
                 finally {
                     this.getApp().getView().enableRerender();
@@ -40441,18 +40441,18 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             }
         };
         this.onClosePageClick = async (e) => {
-            console.log('PageController.onClosePageClick', this.getModel().getFullName());
+            console.debug('PageController.onClosePageClick', this.getModel().getFullName());
             await this.close();
         };
         this.onOpenPageClick = async (e) => {
             const name = this.getModel().getName();
             const key = this.getModel().getKey();
             const link = this.createOpenInNewLink(name, key);
-            // console.log('link', link);
+            // console.debug('link', link);
             window.open(link, '_blank');
         };
         this.onKeyDown = async (e) => {
-            // console.log('PageController.onKeyDown', this.getModel().getFullName(), e);
+            // console.debug('PageController.onKeyDown', this.getModel().getFullName(), e);
             if (e.key === 'Escape') {
                 if (this.isModal()) {
                     await this.close();
@@ -40460,15 +40460,15 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             }
         };
         this.onSelectClick = async (e) => {
-            console.log('PageController.onSelectClick');
+            console.debug('PageController.onSelectClick');
             await this.selectRow(this.getSelectedRowKey());
         };
         this.onResetClick = async (e) => {
-            console.log('PageController.onResetClick');
+            console.debug('PageController.onResetClick');
             await this.selectRow(null);
         };
         if (typeof window === 'object') {
-            console.log(`${this.constructor.name}.constructor`, model, id);
+            console.debug(`${this.constructor.name}.constructor`, model, id);
         }
         if (!id) {
             throw new Error('no id');
@@ -40476,7 +40476,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         this.id = id;
     }
     static create(model, parent, id, options = null) {
-        // console.log('PageController.create', model.getName());
+        // console.debug('PageController.create', model.getName());
         const { ctrlClass } = model.getData();
         if (ctrlClass) {
             const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
@@ -40495,7 +40495,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
     }
     deinit() {
-        console.log('PageController.deinit: ' + this.getModel().getFullName());
+        console.debug('PageController.deinit: ' + this.getModel().getFullName());
         for (const form of this.forms) {
             form.deinit();
         }
@@ -40507,11 +40507,11 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
             .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
     }
     async close() {
-        // console.log('PageController.close', this.getModel().getFullName());
+        // console.debug('PageController.close', this.getModel().getFullName());
         const changed = this.isChanged();
-        // console.log('changed:', changed);
+        // console.debug('changed:', changed);
         // const valid = this.isValid();
-        // console.log('valid:', valid);
+        // console.debug('valid:', valid);
         if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
             const result = await this.getApp().confirm({
                 message: this.getModel().getApp().getText().form.areYouSure,
@@ -40532,7 +40532,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         }
     }
     isValid() {
-        // console.log('PageController.isValid', this.getModel().getFullName());
+        // console.debug('PageController.isValid', this.getModel().getFullName());
         for (const form of this.forms) {
             if (!form.isValid()) {
                 return false;
@@ -40541,20 +40541,20 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return true;
     }
     async onFormChange(e) {
-        // console.log('PageController.onFormChange', this.getModel().getFullName());
+        // console.debug('PageController.onFormChange', this.getModel().getFullName());
         this.rerender();
     }
     onFormDiscard(formController) {
-        console.log('PageController.onFormDiscard', this.getModel().getFullName());
+        console.debug('PageController.onFormDiscard', this.getModel().getFullName());
         this.rerender();
     }
     onFormUpdate(e) {
-        console.log('PageController.onFormUpdate:', this.getModel().getFullName(), e);
+        console.debug('PageController.onFormUpdate:', this.getModel().getFullName(), e);
         this.rerender();
     }
     onFormInsert(e) {
-        console.log('PageController.onFormInsert:', this.getModel().getFullName());
-        // console.log('hasNew:', this.getModel().hasNew());
+        console.debug('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.debug('hasNew:', this.getModel().hasNew());
         for (const form of this.forms) {
             form.invalidate();
         }
@@ -40573,10 +40573,10 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return await this.getApp().openPage(options);
     }
     isChanged() {
-        // console.log('PageController.isChanged', this.getModel().getFullName());
+        // console.debug('PageController.isChanged', this.getModel().getFullName());
         for (const form of this.forms) {
             if (form.isChanged()) {
-                // console.log(`FORM CHANGED: ${form.getModel().getFullName()}`);
+                // console.debug(`FORM CHANGED: ${form.getModel().getFullName()}`);
                 return true;
             }
         }
@@ -40598,7 +40598,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return form;
     }
     async onActionClick(name) {
-        console.log('PageController.onActionClick', name);
+        console.debug('PageController.onActionClick', name);
     }
     getTitle() {
         const model = this.getModel();
@@ -40628,7 +40628,7 @@ class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.Model
         return null;
     }
     async selectRow(key) {
-        console.log('PageController.selectRow', key);
+        console.debug('PageController.selectRow', key);
         await this.close();
         await this.getModel().getOptions().onSelect(key);
     }
@@ -40678,7 +40678,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
     constructor(props) {
         super(props);
         this.onActionsClick = async (li) => {
-            // console.log('PageView.onActionsClick:', li);
+            // console.debug('PageView.onActionsClick:', li);
             const ctrl = this.getCtrl();
             const name = li.dataset.action;
             try {
@@ -40807,7 +40807,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
                     this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
     }
     render() {
-        console.log('PageView.render', this.getCtrl().getModel().getFullName());
+        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
         return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
     }
     getStyle() {
@@ -40819,7 +40819,7 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         }
     }
     componentDidMount() {
-        // console.log('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
         if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
         }
         else {
@@ -40827,9 +40827,9 @@ class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
         }
     }
     focus() {
-        // console.log('PageView.focus', this.getCtrl().getModel().getFullName());
+        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
         if (this.getElement()) {
-            // console.log('focus', this.getElement());
+            // console.debug('focus', this.getElement());
             this.getElement().focus();
         }
         else {
@@ -40884,27 +40884,27 @@ class EventEmitter {
         this.list = {};
     }
     on(name, cb) {
-        // console.log('EventEmitter.on', name);
+        // console.debug('EventEmitter.on', name);
         if (!this.list[name]) {
             this.list[name] = [];
         }
         this.list[name].push(cb);
     }
     off(name, cb) {
-        // console.log('EventEmitter.off', name);
+        // console.debug('EventEmitter.off', name);
         const i = this.list[name].indexOf(cb);
         if (i === -1) {
             throw new Error(`cannot find cb for ${name}`);
         }
-        // console.log(i);
+        // console.debug(i);
         this.list[name].splice(i, 1);
     }
     async emit(name, e) {
-        // console.log('EventEmitter.emit', name, e);
+        // console.debug('EventEmitter.emit', name, e);
         if (this.list[name] && this.list[name].length) {
             // @ts-ignore
             const results = await Promise.allSettled(this.list[name].map((cb) => cb(e)));
-            // console.log('results:', results);
+            // console.debug('results:', results);
             for (const result of results) {
                 if (result.status === 'rejected') {
                     throw result.reason;
@@ -40932,14 +40932,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp {
-    // data: any;
     constructor(data) {
-        console.log('LoginFrontHostApp.constructor', data);
+        console.debug('LoginFrontHostApp.constructor', data);
         super();
         this.data = data;
     }
     async run() {
-        console.log('LoginFrontHostApp.run');
+        console.debug('LoginFrontHostApp.run');
         const loginController = _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_0__.LoginController.create(this);
         const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
         if (!rootElement)
@@ -40985,7 +40984,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.dataSources = [];
     }
     init() {
-        // console.log('Application.init');
+        // console.debug('Application.init');
         if (!this.getData().theme)
             throw new Error('no theme attr');
         // databases
@@ -41032,7 +41031,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.databases.find((database) => database.getName() === name);
     }
     getDatabase(name) {
-        // console.log('Application.getDatabase', name);
+        // console.debug('Application.getDatabase', name);
         const database = this.findDatabase(name);
         if (!database)
             throw new Error(`no database: ${name}`);
@@ -41051,7 +41050,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.getData().virtualPath;
     }
     async rpc(name, params) {
-        console.log('Application.rpc', this.getFullName(), name, params);
+        console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const response = await this.request({
@@ -41065,12 +41064,12 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return response;
     }
     emitResult(result, source) {
-        console.log('Application.emitResult', result, source);
+        console.debug('Application.emitResult', result, source);
         const promises = [];
         for (const database in result) {
             promises.push(...this.getDatabase(database).emitResult(result[database], source));
         }
-        // console.log('promises:', promises);
+        // console.debug('promises:', promises);
         // @ts-ignore
         return Promise.allSettled(promises);
     }
@@ -41113,7 +41112,7 @@ class Column extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     init() {
-        // console.log('Column.init', this.getFullName());
+        // console.debug('Column.init', this.getFullName());
     }
     getType() {
         return this.getAttr('type');
@@ -41163,19 +41162,19 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 // console.error('onTableInsert stop self insert', this.getFullName());
                 return;
             }
-            console.log('DataSource.onTableInsert', this.getFullName(), e);
+            console.debug('DataSource.onTableInsert', this.getFullName(), e);
             if (!e.inserts.length)
                 throw new Error(`${this.getFullName()}: no inserts`);
             for (const key of e.inserts) {
                 if (this.getRow(key)) {
-                    console.log('rows:', this.rows);
-                    console.log('rowsByKey:', this.rowsByKey);
+                    console.debug('rows:', this.rows);
+                    console.debug('rowsByKey:', this.rowsByKey);
                     throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
                 }
                 const newValues = e.source.getRow(key);
                 const newRow = {};
                 DataSource.copyNewValues(newRow, newValues);
-                // console.log('newRow:', newRow);
+                // console.debug('newRow:', newRow);
                 this.addRow(newRow);
             }
             // events
@@ -41191,7 +41190,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 // console.error('onTableUpdate stop self update', this.getFullName());
                 return;
             }
-            console.log('DataSource.onTableUpdate', this.getFullName(), e);
+            console.debug('DataSource.onTableUpdate', this.getFullName(), e);
             if (!Object.keys(e.updates).length)
                 throw new Error(`${this.getFullName()}: no updates`);
             for (const key in e.updates) {
@@ -41214,7 +41213,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 // console.error('onTableDelete stop self update', this.getFullName());
                 return;
             }
-            console.log('DataSource.onTableDelete', this.getFullName(), e);
+            console.debug('DataSource.onTableDelete', this.getFullName(), e);
             if (!e.deletes.length)
                 throw new Error(`${this.getFullName()}: no deletes`);
             for (const key of e.deletes) {
@@ -41236,7 +41235,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     init() {
-        // console.log('DataSource.init', this.getFullName(), this.getClassName());
+        // console.debug('DataSource.init', this.getFullName(), this.getClassName());
         this.setRows(this.getData().rows);
         if (this.getAttr('table')) {
             const table = this.getTable();
@@ -41275,21 +41274,21 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.rows.length;
     }
     fillRowsByKey() {
-        // console.log('DataSource.fillRowsByKey', this.getFullName())
+        // console.debug('DataSource.fillRowsByKey', this.getFullName())
         this.rowsByKey = {};
         for (let i = 0; i < this.rows.length; i++) {
             const row = this.rows[i];
             const key = this.getRowKey(row);
             this.rowsByKey[key] = row;
         }
-        // console.log('this.rowsByKey:', this.getFullName(), this.rowsByKey);
+        // console.debug('this.rowsByKey:', this.getFullName(), this.rowsByKey);
     }
     // deinit() {
-    //     console.log('DataSource.deinit', this.getFullName());
+    //     console.debug('DataSource.deinit', this.getFullName());
     //     super.deinit();
     // }
     /*getType(column) {
-        // console.log('DataSource.getType', this.getClassName(), column);
+        // console.debug('DataSource.getType', this.getClassName(), column);
         throw new Error('DataSource column type not implemented');
     }*/
     discardRowColumn(row, column) {
@@ -41303,7 +41302,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.changes.get(row)[column] = newValue;
     }
     setValue(row, column, value) {
-        // console.log('DataSource.setValue', this.getFullName(), column, value, typeof value);
+        // console.debug('DataSource.setValue', this.getFullName(), column, value, typeof value);
         if (value === undefined)
             throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
         if (typeof value === 'object' && value !== null) {
@@ -41321,21 +41320,21 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
         if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length)
             this.changes.delete(row);
-        // console.log('changes:', this.changes);
+        // console.debug('changes:', this.changes);
     }
     isChanged() {
-        // console.log('DataSource.isChanged', this.getFullName(), this.changes.size);
+        // console.debug('DataSource.isChanged', this.getFullName(), this.changes.size);
         return !!this.changes.size;
     }
     hasNew() {
         return !!this.news.length;
     }
     isRowColumnChanged(row, column) {
-        // console.log('DataSource.isRowColumnChanged', this.getFullName());
+        // console.debug('DataSource.isRowColumnChanged', this.getFullName());
         return row[column] !== this.getValue(row, column);
     }
     getValue(row, column) {
-        // console.log('DataSource.getValue', column);
+        // console.debug('DataSource.getValue', column);
         let value;
         if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
             value = this.changes.get(row)[column];
@@ -41346,7 +41345,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (value !== undefined && typeof value !== 'string') {
             throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`);
         }
-        // console.log('DataSource.getValue:', value);
+        // console.debug('DataSource.getValue:', value);
         return value;
     }
     getKeyValues(row) {
@@ -41356,7 +41355,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }, {});
     }
     getRowKey(row) {
-        // console.log('DataSource.getRowKey', row);
+        // console.debug('DataSource.getRowKey', row);
         const arr = [];
         for (const column of this.getData().keyColumns) {
             if (row[column] === undefined)
@@ -41368,7 +41367,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
                 arr.push(value);
             }
             catch (err) {
-                console.log('getRowKey: cannot parse: ', row[column]);
+                console.debug('getRowKey: cannot parse: ', row[column]);
                 throw err;
             }
         }
@@ -41385,7 +41384,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         delete this.rowsByKey[key];
     }
     newRow(row) {
-        console.log('DataSource.newRow', this.getFullName(), row);
+        console.debug('DataSource.newRow', this.getFullName(), row);
         if (this.rows.length > 0) {
             throw new Error('rows can be added to empty data sources only in new mode');
         }
@@ -41445,7 +41444,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.rows[i];
     }
     discard() {
-        console.log('DataSource.discard', this.getFullName());
+        console.debug('DataSource.discard', this.getFullName());
         if (!this.isChanged())
             throw new Error(`no changes in data source ${this.getFullName()}`);
         this.changes.clear();
@@ -41490,7 +41489,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     updateRow(key, newValues) {
-        console.log('DataSource.updateRow', this.getFullName(), key, newValues);
+        console.debug('DataSource.updateRow', this.getFullName(), key, newValues);
         if (!key)
             throw new Error('no key');
         const row = this.getRow(key);
@@ -41502,9 +41501,9 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             delete this.rowsByKey[key];
             this.rowsByKey[newKey] = row;
         }
-        // console.log(`key: ${key} to ${newKey}`);
-        // console.log('this.rowsByKey:', this.rowsByKey);
-        // console.log('this.getData().rows:', this.getData().rows);
+        // console.debug(`key: ${key} to ${newKey}`);
+        // console.debug('this.rowsByKey:', this.rowsByKey);
+        // console.debug('this.getData().rows:', this.getData().rows);
     }
     getTable() {
         if (!this.getAttr('table'))
@@ -41512,31 +41511,31 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.getDatabase().getTable(this.getAttr('table'));
     }
     getDatabase() {
-        // console.log('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
+        // console.debug('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
         if (!this.getAttr('database'))
             throw new Error(`${this.getFullName()}: database attr empty`);
         return this.getApp().getDatabase(this.getAttr('database'));
     }
     getType(columnName) {
-        // console.log('DataSource.getType', columnName);
+        // console.debug('DataSource.getType', columnName);
         const type = this.getTable().getColumn(columnName).getType();
-        // console.log('type:', type);
+        // console.debug('type:', type);
         return type;
     }
     async insert(row) {
-        console.log('DataSource.insert', this.news);
+        console.debug('DataSource.insert', this.news);
         if (!this.news.length)
             throw new Error('no new rows to insert');
         const inserts = [];
         for (const row of this.news) {
             const newValues = this.getRowWithChanges(row);
-            // console.log('newValues:', newValues);
+            // console.debug('newValues:', newValues);
             DataSource.copyNewValues(row, newValues);
-            // console.log('row:', row);
+            // console.debug('row:', row);
             const key = this.getRowKey(row);
             if (!key)
                 throw new Error('invalid insert row, no key');
-            // console.log('key:', key);
+            // console.debug('key:', key);
             inserts.push(key);
         }
         this.changes.clear();
@@ -41544,8 +41543,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             this.addRow(row);
         }
         this.news = [];
-        console.log('rows:', this.getRows());
-        console.log('inserts:', inserts);
+        console.debug('rows:', this.getRows());
+        console.debug('inserts:', inserts);
         // events
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
             this.getForm().onDataSourceInsert({ source: this, inserts });
@@ -41565,7 +41564,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return null;
     }
     async delete(key) {
-        console.log('DataSource.delete', key);
+        console.debug('DataSource.delete', key);
         if (!key)
             throw new Error('no key');
         this.removeRow(key);
@@ -41589,7 +41588,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return null;
     }
     async update() {
-        console.log('DataSource.update', this.getFullName());
+        console.debug('DataSource.update', this.getFullName());
         if (this.news.length) {
             await this.insert();
             return null;
@@ -41597,17 +41596,17 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         const changes = this.getChangesByKey();
-        // console.log('changes:', changes);
+        // console.debug('changes:', changes);
         // apply changes to rows
         const updates = {};
         for (const key in changes) {
-            // console.log('key:', key);
+            // console.debug('key:', key);
             const row = this.getRow(key);
-            // console.log('row:', row);
+            // console.debug('row:', row);
             const newValues = this.getRowWithChanges(row);
-            // console.log('newValues:', newValues);
+            // console.debug('newValues:', newValues);
             const newKey = this.getRowKey(newValues);
-            // console.log('newKey:', newKey);
+            // console.debug('newKey:', newKey);
             this.updateRow(key, newValues);
             updates[key] = newKey;
         }
@@ -41636,7 +41635,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return this.isAttr('database');
     }
     moveRow(row, offset) {
-        console.log('DataSource.moveRow');
+        console.debug('DataSource.moveRow');
         _common__WEBPACK_IMPORTED_MODULE_4__.Helper.moveArrItem(this.rows, row, offset);
         // refresh event
         const event = { source: this };
@@ -41731,14 +41730,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         } */
         super(...arguments);
         this.onTableUpdate = async (e) => {
-            console.log('PersistentDataSource.onTableUpdate', this.getFullName(), e);
+            console.debug('PersistentDataSource.onTableUpdate', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
             if (e.source === this) {
                 // console.error('onTableUpdate stop self update', this.getFullName());
                 return;
             }
-            // console.log('updates:', e.updates);
+            // console.debug('updates:', e.updates);
             if (!Object.keys(e.updates).length)
                 throw new Error(`${this.getFullName()}: no updates`);
             // update rows
@@ -41750,7 +41749,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('update', e);
         };
         this.onTableInsert = async (e) => {
-            console.log('PersistentDataSource.onTableInsert', this.getFullName(), e);
+            console.debug('PersistentDataSource.onTableInsert', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
             if (e.source === this) {
@@ -41766,7 +41765,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('insert', e);
         };
         this.onTableDelete = async (e) => {
-            console.log('PersistentDataSource.onTableDelete', this.getFullName(), e);
+            console.debug('PersistentDataSource.onTableDelete', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source === this) {
@@ -41780,7 +41779,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
             this.emit('delete', e);
         };
         this.onTableRefresh = async (e) => {
-            console.log('PersistentDataSource.onTableRefresh', this.getFullName(), e);
+            console.debug('PersistentDataSource.onTableRefresh', this.getFullName(), e);
             if (this.deinited)
                 throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
             if (e.source)
@@ -41799,7 +41798,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         super.deinit();
     }*/
     async insert(row) {
-        console.log('PersistentDataSource.insert', row);
+        console.debug('PersistentDataSource.insert', row);
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '')
@@ -41819,11 +41818,11 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         for (const column in values) {
             row[column] = values[column];
         }
-        // console.log('key:', key);
-        // console.log('row:', row);
+        // console.debug('key:', key);
+        // console.debug('row:', row);
         // clear news & changes
         this.news.splice(this.news.indexOf(row), 1);
-        // console.log('this.news:', this.news);
+        // console.debug('this.news:', this.news);
         this.changes.clear();
         // add new row to rows
         this.addRow(row);
@@ -41837,7 +41836,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return result;
     }
     async update() {
-        console.log('PersistentDataSource.update', this.getFullName());
+        console.debug('PersistentDataSource.update', this.getFullName());
         const database = this.getAttr('database');
         const table = this.getAttr('table');
         if (table === '')
@@ -41872,7 +41871,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return result;
     }
     async delete(key) {
-        console.log('PersistentDataSource.delete:', this.getFullName(), key);
+        console.debug('PersistentDataSource.delete:', this.getFullName(), key);
         if (!key)
             throw new Error('no key');
         const database = this.getAttr('database');
@@ -41902,14 +41901,14 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         return page ? page.getParams() : {};
     }
     async refresh() {
-        console.log('PersistentDataSource.refresh', this.getFullName());
+        console.debug('PersistentDataSource.refresh', this.getFullName());
         await this.refill();
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
             this.getForm().onDataSourceRefresh({ source: this });
         }
     }
     async refill() {
-        console.log('PersistentDataSource.refill', this.getFullName());
+        console.debug('PersistentDataSource.refill', this.getFullName());
         if (this.isChanged())
             throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
         const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
@@ -41931,7 +41930,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         await this.fill(this.lastFrame);
     }
     async select(params = {}) {
-        console.log('PersistentDataSource.select', this.getFullName(), params);
+        console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
         const data = await this.getApp().request({
@@ -41943,7 +41942,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         });
         if (!(data.rows instanceof Array))
             throw new Error('rows must be array');
-        // if (data.time) console.log(`select time of ${this.getFullName()}:`, data.time);
+        // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
         return data;
     }
     isPersistent() {
@@ -41997,7 +41996,7 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.tables = [];
     }
     init() {
-        // console.log('Database.init', this.getName());
+        // console.debug('Database.init', this.getName());
         for (const data of this.getData().tables) {
             const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(data, this);
             table.init();
@@ -42017,7 +42016,7 @@ class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return table;
     }
     emitResult(result, source = null) {
-        console.log('Database.emitResult');
+        console.debug('Database.emitResult');
         const promises = [];
         for (const table in result) {
             promises.push(...this.getTable(table).emitResult(result[table], source));
@@ -42073,7 +42072,7 @@ class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
                 value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.getData().displayColumn]);
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }
@@ -42139,7 +42138,7 @@ class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
                 value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[this.getData().displayColumn]);
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
                 throw err;
             }
         }
@@ -42202,12 +42201,12 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         return this.getAttr('format');
     }
     rawToValue(raw) {
-        // console.log('DateField.rawToValue', this.getFullName(), raw);
+        // console.debug('DateField.rawToValue', this.getFullName(), raw);
         const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
         if (value && this.getAttr('timezone') === 'false') {
             _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
         }
-        // console.log('DateField.rawToValue:', raw, value);
+        // console.debug('DateField.rawToValue:', raw, value);
         return value;
     }
     valueToRaw(value) {
@@ -42220,7 +42219,7 @@ class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         else {
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
-        // console.log('DateField.valueToRaw', rawValue);
+        // console.debug('DateField.valueToRaw', rawValue);
         return rawValue;
     }
 }
@@ -42252,7 +42251,7 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         if (value && this.getAttr('timezone') === 'false') {
             _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
         }
-        // console.log('DateTimeField.rawToValue:', value);
+        // console.debug('DateTimeField.rawToValue:', value);
         return value;
     }
     valueToRaw(value) {
@@ -42260,13 +42259,13 @@ class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
         if (value && this.getAttr('timezone') === 'false') {
             const v = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.cloneDate(value);
             _common__WEBPACK_IMPORTED_MODULE_1__.Helper.removeTimezoneOffset(v);
-            // console.log('date without timezone:', v);
+            // console.debug('date without timezone:', v);
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
         }
         else {
             rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
         }
-        // console.log('DateTimeField.valueToRaw', rawValue);
+        // console.debug('DateTimeField.valueToRaw', rawValue);
         return rawValue;
     }
 }
@@ -42307,7 +42306,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         });
     }
     fillDefaultValue(row) {
-        // console.log('Field.fillDefaultValue', this.getFullName());
+        // console.debug('Field.fillDefaultValue', this.getFullName());
         const column = this.getAttr('column');
         if (!column)
             return;
@@ -42315,7 +42314,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         const js = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.templateToJsString(defaultValue, this.getPage().getParams());
         if (typeof js !== 'string')
             throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
-        // console.log('js', this.getFullName(), js);
+        // console.debug('js', this.getFullName(), js);
         // module.Helper
         try {
             const value = eval(js);
@@ -42328,19 +42327,19 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     valueToPageParams(row) {
-        // console.log('Field.valueToPageParams', this.getFullName());
+        // console.debug('Field.valueToPageParams', this.getFullName());
         if (this.isParam()) {
             // we need to dump value to param without meta info such as timezone prop
             const value = this.getValue(row);
             const rawValue = this.valueToRaw(value);
-            // console.log('value:', value);
-            // console.log('rawValue:', rawValue);
+            // console.debug('value:', value);
+            // console.debug('rawValue:', rawValue);
             const paramValue = rawValue !== undefined ? _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue) : undefined;
             this.getPage().setParam(this.getFullName(), paramValue);
         }
     }
     isChanged(row) {
-        // console.log('Field.isChanged', this.getFullName());
+        // console.debug('Field.isChanged', this.getFullName());
         if (!this.getAttr('column'))
             throw new Error(`${this.getFullName()}: field has no column`);
         return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
@@ -42349,7 +42348,7 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return !!this.getAttr('column');
     }
     getValue(row) {
-        // console.log('Field.getValue', this.getFullName(), row);
+        // console.debug('Field.getValue', this.getFullName(), row);
         if (!row && this.getParent() instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__.RowForm) {
             row = this.getForm().getRow();
         }
@@ -42382,12 +42381,12 @@ class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             return this.rawToValue(rawValue);
         }
         catch (err) {
-            console.log('raw value decode error:', this.getFullName(), rawValue);
+            console.debug('raw value decode error:', this.getFullName(), rawValue);
             throw err;
         }
     }
     setValue(row, value) {
-        // console.log('Field.setValue', this.getFullName(), value);
+        // console.debug('Field.setValue', this.getFullName(), value);
         if (!this.getAttr('column'))
             throw new Error(`field has no column: ${this.getFullName()}`);
         const rawValue = this.valueToRaw(value);
@@ -42592,7 +42591,7 @@ class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
                 value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[displayColumn]);
             }
             catch (err) {
-                console.log('cannot parse:', row[displayColumn]);
+                console.debug('cannot parse:', row[displayColumn]);
                 throw err;
             }
         }
@@ -42723,7 +42722,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     deinit() {
-        // console.log('Form.deinit:', this.getFullName());
+        // console.debug('Form.deinit:', this.getFullName());
         this.deinitDataSources();
         for (const field of this.fields) {
             field.deinit();
@@ -42736,24 +42735,24 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     onDataSourceRefresh(e) {
-        // console.log('Form.onDataSourceRefresh', this.getFullName());
+        // console.debug('Form.onDataSourceRefresh', this.getFullName());
         this.emit('refresh', e);
     }
     onDataSourceInsert(e) {
-        // console.log('Form.onDataSourceInsert', this.getFullName());
+        // console.debug('Form.onDataSourceInsert', this.getFullName());
         this.getPage().onFormInsert(e);
         this.emit('insert', e);
     }
     onDataSourceUpdate(e) {
-        // console.log('Form.onDataSourceUpdate', this.getFullName());
+        // console.debug('Form.onDataSourceUpdate', this.getFullName());
         this.emit('update', e);
     }
     onDataSourceDelete(e) {
-        // console.log('Form.onDataSourceDelete', this.getFullName());
+        // console.debug('Form.onDataSourceDelete', this.getFullName());
         this.emit('delete', e);
     }
     async update() {
-        console.log('Form.update', this.getFullName(), this.isChanged());
+        console.debug('Form.update', this.getFullName(), this.isChanged());
         if (this.getPage().deinited)
             throw new Error('page already deinited');
         if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows())
@@ -42761,15 +42760,15 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         await this.getDefaultDataSource().update();
     }
     isChanged() {
-        // console.log('Form.isChanged', this.getFullName());
+        // console.debug('Form.isChanged', this.getFullName());
         return this.getDefaultDataSource().isChanged();
     }
     hasNew() {
-        // console.log('Form.hasNew', this.getFullName());
+        // console.debug('Form.hasNew', this.getFullName());
         return this.getDefaultDataSource().hasNew();
     }
     async rpc(name, params) {
-        console.log('Form.rpc', this.getFullName(), name, params);
+        console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request({
@@ -42876,7 +42875,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         return this.getDefaultDataSource().getSingleRow(withChanges);
     }
     getKey() {
-        // console.log('RowForm.getKey', this.getFullName());
+        // console.debug('RowForm.getKey', this.getFullName());
         const dataSource = this.getDefaultDataSource();
         if (dataSource.isPersistent()) {
             const row = this.getRow();
@@ -42890,7 +42889,7 @@ class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
         return row;
     }
     discard(fields = []) {
-        console.log('RowForm.discard', fields);
+        console.debug('RowForm.discard', fields);
         if (this.getDefaultDataSource().isChanged()) {
             this.getDefaultDataSource().discard();
             fields.forEach((name) => {
@@ -43056,7 +43055,7 @@ __webpack_require__.r(__webpack_exports__);
 
 class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     constructor(data, parent, options) {
-        // console.log('Page.constructor', options);
+        // console.debug('Page.constructor', options);
         // if (!options.id) throw new Error('no page id');
         super(data, parent);
         this.options = options;
@@ -43070,11 +43069,11 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     init() {
         this.createDataSources();
         this.createForms();
-        console.log('page options:', this.options);
-        console.log('page params:', this.getParams());
+        console.debug('page options:', this.options);
+        console.debug('page params:', this.getParams());
     }
     deinit() {
-        // console.log('Page.deinit', this.getFullName());
+        // console.debug('Page.deinit', this.getFullName());
         if (this.deinited)
             throw new Error(`page ${this.getFullName()} is already deinited`);
         this.deinitDataSources();
@@ -43107,11 +43106,11 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
     }
     setParam(name, value) {
-        // console.log('Page.setParam', name);
+        // console.debug('Page.setParam', name);
         this.params[name] = value !== undefined ? value : null;
     }
     async update() {
-        console.log('Page.update', this.getFullName());
+        console.debug('Page.update', this.getFullName());
         for (const form of this.forms) {
             if (form.isChanged() || form.hasNew()) {
                 await form.update();
@@ -43119,7 +43118,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     discard() {
-        console.log('Page.discard', this.getFullName());
+        console.debug('Page.discard', this.getFullName());
         for (const form of this.forms) {
             if (form instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm) {
                 form.discard();
@@ -43184,7 +43183,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return !!this.options.modal;
     }
     onFormInsert(e) {
-        console.log('Page.onFormInsert', e);
+        console.debug('Page.onFormInsert', e);
         for (const key of e.inserts) {
             const keyParams = _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__.DataSource.keyToParams(key); // key params to page params
             for (const name in keyParams) {
@@ -43193,7 +43192,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         }
     }
     async rpc(name, params) {
-        // console.log('Page.rpc', this.getFullName(), name, params);
+        // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
         const result = await this.getApp().request({
@@ -43254,7 +43253,7 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.columns = [];
     } */
     init() {
-        // console.log('Table.init', this.getFullName());
+        // console.debug('Table.init', this.getFullName());
         for (const data of this.getData().columns) {
             const column = new _Column_Column__WEBPACK_IMPORTED_MODULE_1__.Column(data, this);
             column.init();
@@ -43271,7 +43270,7 @@ class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return column;
     }
     emitResult(result, source = null) {
-        console.log('Table.emitResult');
+        console.debug('Table.emitResult');
         return [
             ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
             ...(result.update ? [this.emitUpdate(source, result.update)] : []),
@@ -43366,7 +43365,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         this.applicationController = null;
     }
     async run() {
-        console.log('ViewerFrontHostApp.run', this.getData());
+        console.debug('ViewerFrontHostApp.run', this.getData());
         // application
         const application = new _Model_Application_Application__WEBPACK_IMPORTED_MODULE_1__.Application(this.getData());
         application.init();
@@ -43389,7 +43388,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         }
     }
     async onWindowPopState(e) {
-        // console.log('ViewerFrontHostApp.onWindowPopState', e.state);
+        // console.debug('ViewerFrontHostApp.onWindowPopState', e.state);
         await this.applicationController.onWindowPopState(e);
     }
     logError(err) {
@@ -43405,7 +43404,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
                 appVersion: this.getData().versions.app,
             }, null, 4),
         };
-        console.log(`POST ${this.getData().logErrorUrl}`, body);
+        console.debug(`POST ${this.getData().logErrorUrl}`, body);
         fetch(this.getData().logErrorUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -43420,7 +43419,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         return this.options.data;
     }
     alert(options) {
-        console.log('ViewerFrontHostApp.alert', options);
+        console.debug('ViewerFrontHostApp.alert', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -43432,12 +43431,12 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
                             react_dom__WEBPACK_IMPORTED_MODULE_0__.unmountComponentAtNode(root);
                             resolve();
                         } })));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), {
                         ctrl,
                         key: 0,
                     });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('alert already exists'));
@@ -43449,7 +43448,7 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
         });
     }
     confirm(options) {
-        console.log('ViewerFrontHostApp.confirm', options);
+        console.debug('ViewerFrontHostApp.confirm', options);
         return new Promise((resolve, reject) => {
             try {
                 const root = document.querySelector('.alert-root');
@@ -43461,9 +43460,9 @@ class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostA
                             react_dom__WEBPACK_IMPORTED_MODULE_0__.unmountComponentAtNode(root);
                             resolve(result);
                         } })));
-                    // console.log('ctrl:', ctrl);
+                    // console.debug('ctrl:', ctrl);
                     const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
-                    // console.log('view', view);
+                    // console.debug('view', view);
                 }
                 else {
                     reject(new Error('confirm already exists'));
@@ -43492,7 +43491,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 class WebSocketClient {
     constructor(options = {}) {
-        // console.log('WebSocketClient.constructor', options);
+        // console.debug('WebSocketClient.constructor', options);
         this.options = options;
         if (!options.applicationController)
             throw new Error('no options.applicationController');
@@ -43516,7 +43515,7 @@ class WebSocketClient {
             .join('&');
     }
     connect() {
-        console.log('WebSocketClient.connect', this.url);
+        console.debug('WebSocketClient.connect', this.url);
         return new Promise((resolve, reject) => {
             this.webSocket = new WebSocket(this.url);
             this.webSocket.onclose = async (e) => {
@@ -43532,13 +43531,13 @@ class WebSocketClient {
         });
     }
     async onRefreshTimeout() {
-        // console.log('WebSocketClient.onRefreshTimeout');
+        // console.debug('WebSocketClient.onRefreshTimeout');
         this.refreshTimeoutId = null;
         this.send('ping');
         this.startRefreshTimeout();
     }
     send(data) {
-        console.log('WebSocketClient.send', data);
+        console.debug('WebSocketClient.send', data);
         this.webSocket.send(data);
     }
     startRefreshTimeout() {
@@ -43551,13 +43550,13 @@ class WebSocketClient {
         }
     }
     async reconnect() {
-        console.log('WebSocketClient.reconnect');
+        console.debug('WebSocketClient.reconnect');
         try {
             await this.connect();
         }
         catch (err) {
             console.error(err);
-            console.log(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
+            console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
             setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
         }
     }
@@ -43575,7 +43574,7 @@ class WebSocketClient {
         await this.reconnect();
     }
     async onMessage(e) {
-        console.log('WebSocketClient.onMessage', JSON.parse(e.data));
+        console.debug('WebSocketClient.onMessage', JSON.parse(e.data));
         const packet = JSON.parse(e.data);
         if (packet.type === 'result') {
             this.getApp().getView().disableRerender();
