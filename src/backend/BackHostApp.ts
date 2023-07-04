@@ -567,13 +567,16 @@ export class BackHostApp {
 
     async modulePost(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
-        // console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        console.debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+
+        // log request
         console.log(
             // @ts-ignore
-            colors.magenta.underline('BackHostApp.modulePost'),
+            colors.magenta.underline('POST'),
             `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
             `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`,
         );
+
         let context: Context | null = null;
         try {
             if (req.params.module === 'viewer') {

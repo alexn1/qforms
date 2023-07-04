@@ -474,10 +474,11 @@ class BackHostApp {
     }
     async modulePost(req, res, next) {
         // @ts-ignore
-        // console.log(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        console.debug(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        // log request
         console.log(
         // @ts-ignore
-        safe_1.default.magenta.underline('BackHostApp.modulePost'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
+        safe_1.default.magenta.underline('POST'), `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`, `${req.body.page}.${req.body.form}.${req.body.ds}.${req.body.action}`);
         let context = null;
         try {
             if (req.params.module === 'viewer') {
