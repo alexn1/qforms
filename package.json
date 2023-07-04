@@ -90,7 +90,7 @@
     "scripts": {
         "build": "npx gulp build-dev",
         "start": "NODE_ENV=development node dist/backend/start.js",
-        "start2": "NODE_ENV=development APPS_DIR_PATH=~/projects/qforms-apps node dist/backend/start.js",
+        "start2": "NODE_ENV=production APPS_DIR_PATH=~/projects/qforms-apps node dist/backend/start.js",
         "start3": "NODE_ENV=development node dist/backend/bundle.js",
         "nodemon-start": "NODE_ENV=development nodemon --watch dist --watch apps dist/backend/start.js",
         "tsc-build": "tsc --build tsconfig.back.json",
