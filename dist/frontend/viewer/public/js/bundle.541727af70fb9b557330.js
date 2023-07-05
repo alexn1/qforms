@@ -32046,23 +32046,24 @@ class FrontHostApp {
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
         return body;
     }
-    static async doHttpRequest2(body) {
-        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, body);
-        const [headers, data] = await FrontHostApp.postJson(window.location.href, body);
+    static async doHttpRequest2(method, body) {
+        console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
+        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
         console.warn(`body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`, data);
         return [headers, data];
     }
-    static async postJson(url, data) {
-        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    static async fetchJson(method, url, data) {
+        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
     }
-    static async post(url, body, contentType) {
+    static async fetch(method, url, body, contentType) {
         try {
             FrontHostApp.startWait();
-            const response = await fetch(url, Object.assign({ method: 'POST', body: body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
+            const response = await fetch(url, Object.assign({ method,
+                body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
             if (response.ok) {
                 const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
                     const [name, value] = header;
@@ -36481,7 +36482,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         };
         this.onLogout = async () => {
             console.debug('ApplicationController.onLogout');
-            const result = await this.getModel().request({ action: 'logout' });
+            const result = await this.getModel().request('post', { action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
@@ -36604,7 +36605,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.getModel().request({
+        const { page: pageData } = await this.getModel().request('post', {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -41008,15 +41009,15 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.databases.push(database);
     }
     async logout() {
-        const data = await this.request({
+        const data = await this.request('post', {
             action: 'logout',
         });
         this.emit('logout', { source: this });
     }
-    async request(body) {
+    async request(method, body) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(body);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -41053,11 +41054,11 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const response = await this.request({
-            uuid: this.getAttr('uuid'),
+        const response = await this.request('post', {
             action: 'rpc',
             name: name,
             params: params,
+            uuid: this.getAttr('uuid'),
         });
         if (response.errorMessage)
             throw new Error(response.errorMessage);
@@ -41803,9 +41804,9 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const table = this.getAttr('table');
         if (table === '')
             throw new Error('no data source table to insert');
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'insert',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             row: this.getRowWithChanges(row),
@@ -41847,9 +41848,9 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         // specific to PersistentDataSource
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'update',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             changes: this.getChangesByKey(),
@@ -41879,9 +41880,9 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: '_delete',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
             form: this.getForm().getName(),
             params: { key },
@@ -41933,7 +41934,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request({
+        const data = await this.getApp().request('post', {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,
@@ -42771,9 +42772,9 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getPage().getName(),
             form: this.getName(),
             name: name,
@@ -43195,9 +43196,9 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getName(),
             name: name,
             params: params,

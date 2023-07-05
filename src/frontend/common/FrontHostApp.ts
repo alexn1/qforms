@@ -1,7 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
 import { ChangesByKey } from '../viewer';
-import { RawRow } from '../../types';
+import { RawRow, Scalar } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -21,6 +21,8 @@ export interface Location {
     hash: string;
 }
 
+export type RequestMethod = 'get' | 'post' | 'patch';
+
 export interface RequestBody {
     action: string;
     page?: string | null;
@@ -29,7 +31,7 @@ export interface RequestBody {
     name?: string;
     uuid?: string;
     changes?: ChangesByKey;
-    params?: any;
+    params?: Record<string, Scalar>;
     row?: RawRow;
     newMode?: boolean;
 }
@@ -80,9 +82,9 @@ export class FrontHostApp {
         console.error('FrontHostApp.logError', err);
     }
 
-    static async doHttpRequest(data) {
+    static async doHttpRequest(data: RequestBody) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
         console.warn(
             `body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`,
             body,
@@ -90,9 +92,9 @@ export class FrontHostApp {
         return body;
     }
 
-    static async doHttpRequest2(body: RequestBody) {
-        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, body);
-        const [headers, data] = await FrontHostApp.postJson(window.location.href, body);
+    static async doHttpRequest2(method: RequestMethod, body: RequestBody) {
+        console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
+        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
         console.warn(
             `body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`,
             data,
@@ -100,16 +102,16 @@ export class FrontHostApp {
         return [headers, data];
     }
 
-    static async postJson(url: string, data: any) {
-        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    static async fetchJson(method: RequestMethod, url: string, data: any) {
+        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
     }
 
-    static async post(url: string, body: any, contentType: string) {
+    static async fetch(method: RequestMethod, url: string, body: any, contentType: string) {
         try {
             FrontHostApp.startWait();
             const response = await fetch(url, {
-                method: 'POST',
-                body: body,
+                method,
+                body,
                 ...(contentType ? { headers: { 'Content-Type': contentType } } : {}),
             });
             if (response.ok) {
@@ -117,7 +119,7 @@ export class FrontHostApp {
                     const [name, value] = header;
                     acc[name] = value;
                     return acc;
-                }, {});
+                }, {} as Record<string, string>);
                 // console.debug('headers:', headers);
                 const data = await response.json();
                 return [headers, data];

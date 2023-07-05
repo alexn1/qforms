@@ -151,7 +151,7 @@ export class ApplicationController extends ModelController<Application> {
             return pageController;
         }
 
-        const { page: pageData } = await this.getModel().request({
+        const { page: pageData } = await this.getModel().request('post', {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -285,7 +285,7 @@ export class ApplicationController extends ModelController<Application> {
 
     onLogout = async () => {
         console.debug('ApplicationController.onLogout');
-        const result = await this.getModel().request({ action: 'logout' });
+        const result = await this.getModel().request('post', { action: 'logout' });
         location.href = this.getRootPath();
     };
 

@@ -2,7 +2,7 @@ import { Model } from '../Model';
 import { Helper } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { Key, RawRow, Row } from '../../../../types';
+import { Key, RawRow, Row, Scalar } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 
@@ -84,12 +84,12 @@ export class Form extends Model {
         return this.getDefaultDataSource().hasNew();
     }
 
-    async rpc(name: string, params: { [name: string]: any }) {
+    async rpc(name: string, params: Record<string, Scalar>) {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getPage().getName(),
             form: this.getName(),
             name: name,

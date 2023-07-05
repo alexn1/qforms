@@ -1,10 +1,11 @@
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
-import { FrontHostApp, RequestBody } from '../../../common';
+import { FrontHostApp, RequestBody, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
 import { ApplicationData } from '../../../../data';
+import { Scalar } from '../../../../types';
 
 export class Application extends Model<ApplicationData> {
     databases: Database[] = [];
@@ -44,16 +45,16 @@ export class Application extends Model<ApplicationData> {
     }
 
     async logout() {
-        const data = await this.request({
+        const data = await this.request('post', {
             action: 'logout',
         });
         this.emit('logout', { source: this });
     }
 
-    async request(body: RequestBody) {
+    async request(method: RequestMethod, body: RequestBody) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, data] = await FrontHostApp.doHttpRequest2(body);
+        const [headers, data] = await FrontHostApp.doHttpRequest2(method, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -92,14 +93,14 @@ export class Application extends Model<ApplicationData> {
         return this.getData().virtualPath;
     }
 
-    async rpc(name: string, params: { [name: string]: any }) {
+    async rpc(name: string, params: Record<string, Scalar>) {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const response = await this.request({
-            uuid: this.getAttr('uuid'),
+        const response = await this.request('post', {
             action: 'rpc',
-            name: name,
+            name: name,            
             params: params,
+            uuid: this.getAttr('uuid'),
         });
         if (response.errorMessage) throw new Error(response.errorMessage);
         return response;

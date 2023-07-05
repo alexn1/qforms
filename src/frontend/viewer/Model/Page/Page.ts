@@ -4,7 +4,7 @@ import { DataSource } from '../DataSource/DataSource';
 import { Helper } from '../../../common/Helper';
 import { Form } from '../Form/Form';
 import { RowForm } from '../Form/RowForm/RowForm';
-import { Key } from '../../../../types';
+import { Key, Scalar } from '../../../../types';
 import { Application } from '../Application/Application';
 
 export interface PageOptions {
@@ -179,12 +179,12 @@ export class Page extends Model<PageData> {
         }
     }
 
-    async rpc(name: string, params) {
+    async rpc(name: string, params: Record<string, Scalar>) {
         // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
-        const result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result = await this.getApp().request('post', {
             action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getName(),
             name: name,
             params: params,

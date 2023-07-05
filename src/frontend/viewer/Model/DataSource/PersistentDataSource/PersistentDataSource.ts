@@ -22,16 +22,16 @@ export class PersistentDataSource extends DataSource {
         const table = this.getAttr('table') as string;
         if (table === '') throw new Error('no data source table to insert');
 
-        const result: Result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result: Result = await this.getApp().request('post', {
             action: 'insert',
+            uuid: this.getApp().getAttr('uuid'),
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             row: this.getRowWithChanges(row),
         });
 
         // key & values
-        const [key] = Object.keys(result[database][table].insertEx!);
+        const [key] = Object.keys(result[database][table].insertEx!) as [Key];
         if (!key) throw new Error('no inserted row key');
         const values = result[database][table].insertEx![key];
         for (const column in values) {
@@ -70,15 +70,15 @@ export class PersistentDataSource extends DataSource {
         if (!this.changes.size) throw new Error(`no changes: ${this.getFullName()}`);
 
         // specific to PersistentDataSource
-        const result: Result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result: Result = await this.getApp().request('post', {
             action: 'update',
+            uuid: this.getApp().getAttr('uuid'),            
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             changes: this.getChangesByKey(),
         });
 
-        const [key] = Object.keys(result[database][table].updateEx!);
+        const [key] = Object.keys(result[database][table].updateEx!) as [Key];
         if (!key) throw new Error('no updated row');
         const newValues = result[database][table].updateEx![key];
         // const newKey = this.getRowKey(newValues);
@@ -104,9 +104,9 @@ export class PersistentDataSource extends DataSource {
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result: Result = await this.getApp().request({
-            uuid: this.getApp().getAttr('uuid'),
+        const result: Result = await this.getApp().request('post', {
             action: '_delete',
+            uuid: this.getApp().getAttr('uuid'),            
             page: this.getForm()!.getPage().getName(),
             form: this.getForm()!.getName(),
             params: { key },
@@ -232,7 +232,7 @@ export class PersistentDataSource extends DataSource {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request({
+        const data = await this.getApp().request('post', {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,
