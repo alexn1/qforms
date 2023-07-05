@@ -89,10 +89,10 @@ export declare class BackHostApp {
     };
     logError(err: Error, req?: Request): Promise<void>;
     logEvent(context: Context, message: string, data?: object): Promise<void>;
-    moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     indexGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     indexPost(req: Request, res: Response, next: NextFunction): Promise<void>;
     monitorGet(req: Request, res: Response, next: NextFunction): Promise<void>;
+    moduleGet(req: Request, res: Response, next: NextFunction): Promise<void>;
     modulePost(req: Request, res: Response, next: NextFunction): Promise<void>;
     moduleGetFile(req: Request, res: Response, next: NextFunction): Promise<void>;
     _e404(req: Request, res: Response, next: NextFunction): Promise<void>;

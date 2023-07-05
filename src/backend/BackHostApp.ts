@@ -479,47 +479,6 @@ export class BackHostApp {
         }
     }
 
-    async moduleGet(req: Request, res: Response, next: NextFunction) {
-        // @ts-ignore
-        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
-        let context: Context | null = null;
-        try {
-            if (req.params.module === 'viewer') {
-                context = new Context({
-                    req,
-                    res,
-                    domain: this.getDomainFromRequest(req),
-                });
-                const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
-                if (application.isAvailable()) {
-                    await this.viewerModule.handleViewerGet(context, application);
-                } else {
-                    next();
-                }
-            } else if (req.params.module === 'editor') {
-                if (this.isDevelopment()) {
-                    context = new Context({
-                        req,
-                        res,
-                        domain: this.getDomainFromRequest(req),
-                    });
-                    await this.editorModule.handleEditorGet(req, res, context);
-                } else {
-                    next();
-                }
-            } else {
-                next();
-            }
-        } catch (err) {
-            next(err);
-        } finally {
-            if (context) {
-                context.destroy();
-            }
-        }
-    }
-
     async indexGet(req: Request, res: Response, next: NextFunction) {
         console.log(colors.magenta('indexGet'));
         try {
@@ -562,6 +521,47 @@ export class BackHostApp {
             }
         } catch (err) {
             next(err);
+        }
+    }
+
+    async moduleGet(req: Request, res: Response, next: NextFunction) {
+        // @ts-ignore
+        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        let context: Context | null = null;
+        try {
+            if (req.params.module === 'viewer') {
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                const application = await this.createApplicationIfNotExists(context);
+                context.setVersionHeaders(pkg.version, application.getVersion());
+                if (application.isAvailable()) {
+                    await this.viewerModule.handleViewerGet(context, application);
+                } else {
+                    next();
+                }
+            } else if (req.params.module === 'editor') {
+                if (this.isDevelopment()) {
+                    context = new Context({
+                        req,
+                        res,
+                        domain: this.getDomainFromRequest(req),
+                    });
+                    await this.editorModule.handleEditorGet(req, res, context);
+                } else {
+                    next();
+                }
+            } else {
+                next();
+            }
+        } catch (err) {
+            next(err);
+        } finally {
+            if (context) {
+                context.destroy();
+            }
         }
     }
 
