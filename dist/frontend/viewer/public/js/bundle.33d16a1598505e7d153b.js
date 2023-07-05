@@ -32046,7 +32046,7 @@ class FrontHostApp {
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
         return body;
     }
@@ -36482,7 +36482,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
         };
         this.onLogout = async () => {
             console.debug('ApplicationController.onLogout');
-            const result = await this.getModel().request('post', { action: 'logout' });
+            const result = await this.getModel().request('POST', { action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
@@ -36605,7 +36605,7 @@ class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0_
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.getModel().request('post', {
+        const { page: pageData } = await this.getModel().request('POST', {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,
@@ -41009,7 +41009,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         this.databases.push(database);
     }
     async logout() {
-        const data = await this.request('post', {
+        const data = await this.request('POST', {
             action: 'logout',
         });
         this.emit('logout', { source: this });
@@ -41054,7 +41054,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const response = await this.request('post', {
+        const response = await this.request('POST', {
             action: 'rpc',
             name: name,
             params: params,
@@ -41804,7 +41804,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         const table = this.getAttr('table');
         if (table === '')
             throw new Error('no data source table to insert');
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'insert',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -41848,7 +41848,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         // specific to PersistentDataSource
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -41880,7 +41880,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -41934,7 +41934,7 @@ class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.Data
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request('post', {
+        const data = await this.getApp().request('POST', {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,
@@ -42772,7 +42772,7 @@ class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         console.debug('Form.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getPage().getName(),
@@ -43196,7 +43196,7 @@ class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getName(),

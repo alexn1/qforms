@@ -21,10 +21,10 @@ export interface Location {
     hash: string;
 }
 
-export type RequestMethod = 'get' | 'post' | 'patch';
+export type RequestMethod = 'GET' | 'POST' | 'PATCH';
 
 export interface RequestBody {
-    action: string;
+    action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'logout';
     page?: string | null;
     form?: string | null;
     ds?: string;
@@ -84,7 +84,7 @@ export class FrontHostApp {
 
     static async doHttpRequest(data: any) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
         console.warn(
             `body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`,
             body,
