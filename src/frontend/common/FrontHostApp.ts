@@ -1,5 +1,7 @@
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
+import { ChangesByKey } from '../viewer';
+import { RawRow } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;
@@ -17,6 +19,19 @@ export interface Location {
     pathname: string;
     search: string;
     hash: string;
+}
+
+export interface RequestBodySchema {
+    action: string;
+    page?: string | null;
+    form?: string | null;
+    ds?: string;
+    name?: string;
+    uuid?: string;
+    changes?: ChangesByKey;
+    params?: any;
+    row?: RawRow;
+    newMode?: boolean;
 }
 
 export class FrontHostApp {
@@ -61,6 +76,10 @@ export class FrontHostApp {
         }
     }
 
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+    }
+
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
@@ -71,25 +90,21 @@ export class FrontHostApp {
         return body;
     }
 
-    logError(err) {
-        console.error('FrontHostApp.logError', err);
-    }
-
-    static async doHttpRequest2(data) {
-        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+    static async doHttpRequest2(body: RequestBodySchema) {
+        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, body);
+        const [headers, data] = await FrontHostApp.postJson(window.location.href, body);
         console.warn(
-            `body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`,
-            body,
+            `body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`,
+            data,
         );
-        return [headers, body];
+        return [headers, data];
     }
 
-    static async postJson(url, data) {
+    static async postJson(url: string, data: any) {
         return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
     }
 
-    static async post(url, body, contentType) {
+    static async post(url: string, body: any, contentType: string) {
         try {
             FrontHostApp.startWait();
             const response = await fetch(url, {
@@ -104,8 +119,8 @@ export class FrontHostApp {
                     return acc;
                 }, {});
                 // console.debug('headers:', headers);
-                const body = await response.json();
-                return [headers, body];
+                const data = await response.json();
+                return [headers, data];
             }
             throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
         } finally {

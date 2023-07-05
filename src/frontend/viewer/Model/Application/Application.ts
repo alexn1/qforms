@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
-import { FrontHostApp } from '../../../common';
+import { FrontHostApp, RequestBodySchema } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
@@ -50,10 +50,10 @@ export class Application extends Model<ApplicationData> {
         this.emit('logout', { source: this });
     }
 
-    async request(options) {
+    async request(body: RequestBodySchema) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, body] = await FrontHostApp.doHttpRequest2(options);
+        const [headers, data] = await FrontHostApp.doHttpRequest2(body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -62,7 +62,7 @@ export class Application extends Model<ApplicationData> {
             remotePlatformVersion: headers['qforms-platform-version'],
             remoteAppVersion: headers['qforms-app-version'] || null,
         });
-        return body;
+        return data;
     }
 
     findDatabase(name: string): Database | undefined {

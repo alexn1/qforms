@@ -32041,20 +32041,20 @@ class FrontHostApp {
             console.error(`onWindowError error: ${err.message}`);
         }
     }
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+    }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
         return body;
     }
-    logError(err) {
-        console.error('FrontHostApp.logError', err);
-    }
-    static async doHttpRequest2(data) {
-        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
-        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
-        return [headers, body];
+    static async doHttpRequest2(body) {
+        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, body);
+        const [headers, data] = await FrontHostApp.postJson(window.location.href, body);
+        console.warn(`body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`, data);
+        return [headers, data];
     }
     static async postJson(url, data) {
         return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
@@ -32070,8 +32070,8 @@ class FrontHostApp {
                     return acc;
                 }, {});
                 // console.debug('headers:', headers);
-                const body = await response.json();
-                return [headers, body];
+                const data = await response.json();
+                return [headers, data];
             }
             throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
         }
@@ -41013,10 +41013,10 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         });
         this.emit('logout', { source: this });
     }
-    async request(options) {
+    async request(body) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, body] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(options);
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -41025,7 +41025,7 @@ class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             remotePlatformVersion: headers['qforms-platform-version'],
             remoteAppVersion: headers['qforms-app-version'] || null,
         });
-        return body;
+        return data;
     }
     findDatabase(name) {
         return this.databases.find((database) => database.getName() === name);
