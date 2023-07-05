@@ -486,7 +486,6 @@ class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
                 const time = await this.viewerModule.handleViewerPost(context, application);
                 // await this.logRequest(req, context, time);
             }
@@ -531,7 +530,6 @@ class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
                 await this.viewerModule.handleViewerGetFile(context, application, next);
             }
             catch (err) {

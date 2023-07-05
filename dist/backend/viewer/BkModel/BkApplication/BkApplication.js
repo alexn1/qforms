@@ -463,6 +463,7 @@ class BkApplication extends BkModel_1.BkModel {
         // console.debug('Application.handleGetFile', context.getUri());
         const filePath = path_1.default.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper_1.BkHelper.exists(filePath)) {
+            // context.setVersionHeaders(pkg.version, this.getVersion());
             context.getRes().sendFile(filePath);
         }
         else {

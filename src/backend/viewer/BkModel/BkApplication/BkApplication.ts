@@ -524,6 +524,7 @@ export class BkApplication<
         // console.debug('Application.handleGetFile', context.getUri());
         const filePath = path.join(this.getPublicDirPath(), context.getUri());
         if (await BkHelper.exists(filePath)) {
+            // context.setVersionHeaders(pkg.version, this.getVersion());
             context.getRes().sendFile(filePath);
         } else {
             // next();

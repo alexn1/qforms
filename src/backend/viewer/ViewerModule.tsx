@@ -185,6 +185,7 @@ export class ViewerModule {
             if (ACTIONS.indexOf(req.body.action) === -1) {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
+            context.setVersionHeaders(pkg.version, application.getVersion());
             return await this[req.body.action](context, application);
         }
     }
