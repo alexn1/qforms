@@ -87,9 +87,11 @@ export class ViewerModule {
             // Object.keys(context.query).map((name) => typeof context.query[name]),
         );
 
+        const req = context.getReq()!;
+
         if (
             bkApplication.isAuthentication() &&
-            !(context.getReq()!.session.user && context.getReq()!.session.user[context.getRoute()])
+            !(req.session.user && req.session.user[context.getRoute()])
         ) {
             await this.loginGet(context, bkApplication);
         } else {
@@ -102,6 +104,28 @@ export class ViewerModule {
             } finally {
                 await bkApplication.release(context);
             }
+        }
+    }
+
+    async handleViewerPost(context: Context, application: BkApplication) {
+        // console.debug('ViewerModule.handleViewerPost');
+        const req = context.getReq()!;
+        if (req.body.action === 'login') {
+            await this.loginPost(context, application);
+        } else {
+            if (
+                application.isAuthentication() &&
+                !(req.session.user && req.session.user[context.getRoute()])
+            ) {
+                throw new MyError({ message: 'Unauthorized', status: 401, context });
+            }
+
+            // handle action
+            if (ACTIONS.indexOf(req.body.action) === -1) {
+                throw new Error(`unknown action: ${req.body.action}`);
+            }
+            context.setVersionHeaders(pkg.version, application.getVersion());
+            return await this[req.body.action](context, application);
         }
     }
 
@@ -168,26 +192,6 @@ export class ViewerModule {
             username: context.query.username,
         });
         context.getRes().end(html);
-    }
-
-    async handleViewerPost(context: Context, application: BkApplication) {
-        // console.debug('ViewerModule.handleViewerPost');
-        const req = context.getReq()!;
-        if (req.body.action === 'login') {
-            await this.loginPost(context, application);
-        } else {
-            if (
-                application.isAuthentication() &&
-                !(req.session.user && req.session.user[context.getRoute()])
-            ) {
-                throw new MyError({ message: 'Unauthorized', status: 401, context });
-            }
-            if (ACTIONS.indexOf(req.body.action) === -1) {
-                throw new Error(`unknown action: ${req.body.action}`);
-            }
-            context.setVersionHeaders(pkg.version, application.getVersion());
-            return await this[req.body.action](context, application);
-        }
     }
 
     async loginPost(context: Context, application: BkApplication): Promise<void> {

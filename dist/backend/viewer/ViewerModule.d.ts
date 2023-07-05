@@ -12,9 +12,9 @@ export declare class ViewerModule {
     getLinks(): string[];
     getScripts(): string[];
     handleViewerGet(context: Context, bkApplication: BkApplication): Promise<void>;
+    handleViewerPost(context: Context, application: BkApplication): Promise<any>;
     renderHtml(bkApplication: BkApplication, context: Context): Promise<string>;
     loginGet(context: Context, application: BkApplication): Promise<void>;
-    handleViewerPost(context: Context, application: BkApplication): Promise<any>;
     loginPost(context: Context, application: BkApplication): Promise<void>;
     page(context: Context, application: BkApplication): Promise<void>;
     select(context: Context, application: BkApplication): Promise<number>;
