@@ -78,7 +78,7 @@ export class ViewerModule {
         return this.js;
     }
 
-    async handleGet(context: Context, bkApplication: BkApplication) {
+    async handleGet(context: Context, bkApplication: BkApplication): Promise<void> {
         console.debug(
             'ViewerModule.handleGet',
             context.getDomain(),
@@ -95,19 +95,14 @@ export class ViewerModule {
         ) {
             await this.loginGet(context, bkApplication);
         } else {
-            await bkApplication.connect(context);
-            try {
-                await bkApplication.initContext(context);
-                const html = await this.renderHtml(bkApplication, context);
-                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-                context.getRes().end(html);
-            } finally {
-                await bkApplication.release(context);
-            }
+            console.log('body:', context.getBody());
+
+            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+            await this.index(context, bkApplication);
         }
     }
 
-    async handlePost(context: Context, application: BkApplication) {
+    async handlePost(context: Context, application: BkApplication): Promise<void> {
         // console.debug('ViewerModule.handlePost');
         const req = context.getReq()!;
         if (req.body.action === 'login') {
@@ -125,7 +120,7 @@ export class ViewerModule {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
             context.setVersionHeaders(pkg.version, application.getVersion());
-            return await this[req.body.action](context, application);
+            await this[req.body.action](context, application);
         }
     }
 
@@ -246,8 +241,22 @@ export class ViewerModule {
         }
     }
 
+    // action (index page, action by default for GET request)
+    async index(context: Context, bkApplication: BkApplication): Promise<void> {
+        console.debug('ViewerModule.index');
+        const res = context.getRes();
+        await bkApplication.connect(context);
+        try {
+            await bkApplication.initContext(context);
+            const html = await this.renderHtml(bkApplication, context);
+            res.end(html);
+        } finally {
+            await bkApplication.release(context);
+        }
+    }
+
     // action (fill page)
-    async page(context: Context, application: BkApplication) {
+    async page(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.page', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -264,7 +273,7 @@ export class ViewerModule {
     }
 
     // action
-    async select(context: Context, application: BkApplication) {
+    async select(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.select', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -287,14 +296,13 @@ export class ViewerModule {
             const time = Date.now() - start;
             console.debug('select time:', time);
             res.json({ rows, count, time });
-            return time;
         } finally {
             await dataSource.getDatabase().release(context);
         }
     }
 
     // action
-    async insert(context: Context, application: BkApplication) {
+    async insert(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.insert', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -323,7 +331,7 @@ export class ViewerModule {
     }
 
     // action
-    async update(context: Context, application: BkApplication) {
+    async update(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.update', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -352,7 +360,7 @@ export class ViewerModule {
     }
 
     // action
-    async _delete(context: Context, application: BkApplication) {
+    async _delete(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule._delete', context.getReq()!.body.page);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -381,7 +389,7 @@ export class ViewerModule {
     }
 
     // action
-    async rpc(context: Context, application: BkApplication) {
+    async rpc(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.rpc', context.getReq()!.body);
         const req = context.getReq()!;
         const res = context.getRes();
@@ -424,7 +432,7 @@ export class ViewerModule {
     }
 
     // action
-    async logout(context: Context, application: BkApplication) {
+    async logout(context: Context, application: BkApplication): Promise<void> {
         console.debug('ViewerModule.logout');
         const req = context.getReq()!;
         const res = context.getRes();
@@ -446,7 +454,7 @@ export class ViewerModule {
         res.json(null);
     }
 
-    async handleViewerGetFile(context: Context, application: BkApplication, next: NextFunction) {
+    async handleGetFile(context: Context, application: BkApplication, next: NextFunction) {
         await application.handleGetFile(context, next);
     }
 

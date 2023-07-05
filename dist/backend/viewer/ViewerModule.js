@@ -63,16 +63,9 @@ class ViewerModule {
             await this.loginGet(context, bkApplication);
         }
         else {
-            await bkApplication.connect(context);
-            try {
-                await bkApplication.initContext(context);
-                const html = await this.renderHtml(bkApplication, context);
-                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-                context.getRes().end(html);
-            }
-            finally {
-                await bkApplication.release(context);
-            }
+            console.log('body:', context.getBody());
+            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+            await this.index(context, bkApplication);
         }
     }
     async handlePost(context, application) {
@@ -91,7 +84,7 @@ class ViewerModule {
                 throw new Error(`unknown action: ${req.body.action}`);
             }
             context.setVersionHeaders(pkg.version, application.getVersion());
-            return await this[req.body.action](context, application);
+            await this[req.body.action](context, application);
         }
     }
     async renderHtml(bkApplication, context) {
@@ -179,6 +172,20 @@ class ViewerModule {
             await application.release(context);
         }
     }
+    // action (index page, action by default for GET request)
+    async index(context, bkApplication) {
+        console.debug('ViewerModule.index');
+        const res = context.getRes();
+        await bkApplication.connect(context);
+        try {
+            await bkApplication.initContext(context);
+            const html = await this.renderHtml(bkApplication, context);
+            res.end(html);
+        }
+        finally {
+            await bkApplication.release(context);
+        }
+    }
     // action (fill page)
     async page(context, application) {
         console.debug('ViewerModule.page', context.getReq().body.page);
@@ -223,7 +230,6 @@ class ViewerModule {
             const time = Date.now() - start;
             console.debug('select time:', time);
             res.json({ rows, count, time });
-            return time;
         }
         finally {
             await dataSource.getDatabase().release(context);
@@ -390,7 +396,7 @@ class ViewerModule {
         // if (result === undefined) throw new Error('test action: result is undefined');
         res.json(null);
     }
-    async handleViewerGetFile(context, application, next) {
+    async handleGetFile(context, application, next) {
         await application.handleGetFile(context, next);
     }
     getHostApp() {

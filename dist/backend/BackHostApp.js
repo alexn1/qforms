@@ -486,7 +486,7 @@ class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                const time = await this.viewerModule.handlePost(context, application);
+                await this.viewerModule.handlePost(context, application);
                 // await this.logRequest(req, context, time);
             }
             else if (req.params.module === 'editor') {
@@ -530,7 +530,7 @@ class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                await this.viewerModule.handleViewerGetFile(context, application, next);
+                await this.viewerModule.handleGetFile(context, application, next);
             }
             catch (err) {
                 err.message = `moduleGetFile error: ${err.message}`;

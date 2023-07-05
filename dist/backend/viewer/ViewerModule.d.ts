@@ -12,18 +12,19 @@ export declare class ViewerModule {
     getLinks(): string[];
     getScripts(): string[];
     handleGet(context: Context, bkApplication: BkApplication): Promise<void>;
-    handlePost(context: Context, application: BkApplication): Promise<any>;
+    handlePost(context: Context, application: BkApplication): Promise<void>;
     renderHtml(bkApplication: BkApplication, context: Context): Promise<string>;
     loginGet(context: Context, application: BkApplication): Promise<void>;
     loginPost(context: Context, application: BkApplication): Promise<void>;
+    index(context: Context, bkApplication: BkApplication): Promise<void>;
     page(context: Context, application: BkApplication): Promise<void>;
-    select(context: Context, application: BkApplication): Promise<number>;
+    select(context: Context, application: BkApplication): Promise<void>;
     insert(context: Context, application: BkApplication): Promise<void>;
     update(context: Context, application: BkApplication): Promise<void>;
     _delete(context: Context, application: BkApplication): Promise<void>;
     rpc(context: Context, application: BkApplication): Promise<void>;
     logout(context: Context, application: BkApplication): Promise<void>;
     test(context: Context, application: BkApplication): Promise<void>;
-    handleViewerGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
+    handleGetFile(context: Context, application: BkApplication, next: NextFunction): Promise<void>;
     getHostApp(): BackHostApp;
 }
