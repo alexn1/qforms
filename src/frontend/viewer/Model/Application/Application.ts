@@ -1,6 +1,6 @@
 import { Model } from '../Model';
 import { Database } from '../Database/Database';
-import { FrontHostApp, RequestBodySchema } from '../../../common';
+import { FrontHostApp, RequestBody } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
@@ -50,7 +50,7 @@ export class Application extends Model<ApplicationData> {
         this.emit('logout', { source: this });
     }
 
-    async request(body: RequestBodySchema) {
+    async request(body: RequestBody) {
         // console.warn('Application.request', data);
         const start = Date.now();
         const [headers, data] = await FrontHostApp.doHttpRequest2(body);

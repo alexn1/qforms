@@ -21,7 +21,7 @@ export interface Location {
     hash: string;
 }
 
-export interface RequestBodySchema {
+export interface RequestBody {
     action: string;
     page?: string | null;
     form?: string | null;
@@ -90,7 +90,7 @@ export class FrontHostApp {
         return body;
     }
 
-    static async doHttpRequest2(body: RequestBodySchema) {
+    static async doHttpRequest2(body: RequestBody) {
         console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, body);
         const [headers, data] = await FrontHostApp.postJson(window.location.href, body);
         console.warn(
