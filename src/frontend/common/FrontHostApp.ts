@@ -82,7 +82,7 @@ export class FrontHostApp {
         console.error('FrontHostApp.logError', err);
     }
 
-    static async doHttpRequest(data: RequestBody) {
+    static async doHttpRequest(data: any) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
         const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
         console.warn(

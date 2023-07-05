@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Field } from '../../Model/Field/Field';
-import { Key, RawRow, Row } from '../../../../types';
+import { Key, RawRow, Row, Scalar } from '../../../../types';
 import { Page } from '../Page/Page';
 import { Application } from '../Application/Application';
 export declare class Form extends Model {
@@ -17,9 +17,7 @@ export declare class Form extends Model {
     update(): Promise<void>;
     isChanged(): boolean;
     hasNew(): boolean;
-    rpc(name: string, params: {
-        [name: string]: any;
-    }): Promise<any>;
+    rpc(name: string, params: Record<string, Scalar>): Promise<any>;
     getKey(): Key | null;
     getDefaultDataSource<TDataSource extends DataSource = DataSource>(): TDataSource;
     getPage(): Page;

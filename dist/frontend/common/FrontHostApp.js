@@ -42,28 +42,29 @@ class FrontHostApp {
             console.error(`onWindowError error: ${err.message}`);
         }
     }
-    static async doHttpRequest(data) {
-        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
-        console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
-        return body;
-    }
     logError(err) {
         console.error('FrontHostApp.logError', err);
     }
-    static async doHttpRequest2(data) {
-        console.warn('FrontHostApp.doHttpRequest2', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.postJson(window.location.href, data);
+    static async doHttpRequest(data) {
+        console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
-        return [headers, body];
+        return body;
     }
-    static async postJson(url, data) {
-        return await FrontHostApp.post(url, JSON.stringify(data), 'application/json;charset=utf-8');
+    static async doHttpRequest2(method, body) {
+        console.warn('FrontHostApp.doHttpRequest2', method, window.location.href, body);
+        const [headers, data] = await FrontHostApp.fetchJson(method, window.location.href, body);
+        console.warn(`body ${body.page}.${body.form}.${body.ds || body.name}.${body.action}:`, data);
+        return [headers, data];
     }
-    static async post(url, body, contentType) {
+    static async fetchJson(method, url, data) {
+        return await FrontHostApp.fetch(method, url, JSON.stringify(data), 'application/json');
+    }
+    static async fetch(method, url, body, contentType) {
         try {
             FrontHostApp.startWait();
-            const response = await fetch(url, Object.assign({ method: 'POST', body: body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
+            const response = await fetch(url, Object.assign({ method,
+                body }, (contentType ? { headers: { 'Content-Type': contentType } } : {})));
             if (response.ok) {
                 const headers = Array.from(response.headers.entries()).reduce((acc, header) => {
                     const [name, value] = header;
@@ -71,8 +72,8 @@ class FrontHostApp {
                     return acc;
                 }, {});
                 // console.debug('headers:', headers);
-                const body = await response.json();
-                return [headers, body];
+                const data = await response.json();
+                return [headers, data];
             }
             throw new Error(`${response.status} ${response.statusText}: ${await response.text()}`);
         }

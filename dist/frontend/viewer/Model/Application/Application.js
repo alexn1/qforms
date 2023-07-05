@@ -36,15 +36,15 @@ class Application extends Model_1.Model {
         this.databases.push(database);
     }
     async logout() {
-        const data = await this.request({
+        const data = await this.request('post', {
             action: 'logout',
         });
         this.emit('logout', { source: this });
     }
-    async request(options) {
+    async request(method, body) {
         // console.warn('Application.request', data);
         const start = Date.now();
-        const [headers, body] = await common_1.FrontHostApp.doHttpRequest2(options);
+        const [headers, data] = await common_1.FrontHostApp.doHttpRequest2(method, body);
         if (!headers['qforms-platform-version'])
             throw new Error('no qforms-platform-version header');
         // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
@@ -53,7 +53,7 @@ class Application extends Model_1.Model {
             remotePlatformVersion: headers['qforms-platform-version'],
             remoteAppVersion: headers['qforms-app-version'] || null,
         });
-        return body;
+        return data;
     }
     findDatabase(name) {
         return this.databases.find((database) => database.getName() === name);
@@ -81,11 +81,11 @@ class Application extends Model_1.Model {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const response = await this.request({
-            uuid: this.getAttr('uuid'),
+        const response = await this.request('post', {
             action: 'rpc',
             name: name,
             params: params,
+            uuid: this.getAttr('uuid'),
         });
         if (response.errorMessage)
             throw new Error(response.errorMessage);
