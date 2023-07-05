@@ -97,6 +97,7 @@ export class ViewerModule {
             try {
                 await bkApplication.initContext(context);
                 const html = await this.renderHtml(bkApplication, context);
+                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
                 context.getRes().end(html);
             } finally {
                 await bkApplication.release(context);

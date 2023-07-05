@@ -526,7 +526,15 @@ export class BackHostApp {
 
     async moduleGet(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
-        console.log(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        // console.debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+
+        // log request
+        console.log(
+            // @ts-ignore
+            colors.magenta.underline('GET'),
+            `${req.params.module}/${req.params.appDirName}/${req.params.appFileName}/${req.params.env}/${req.params.domain}`,
+        );
+
         let context: Context | null = null;
         try {
             if (req.params.module === 'viewer') {
@@ -536,23 +544,18 @@ export class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                context.setVersionHeaders(pkg.version, application.getVersion());
                 if (application.isAvailable()) {
                     await this.viewerModule.handleViewerGet(context, application);
                 } else {
                     next();
                 }
-            } else if (req.params.module === 'editor') {
-                if (this.isDevelopment()) {
-                    context = new Context({
-                        req,
-                        res,
-                        domain: this.getDomainFromRequest(req),
-                    });
-                    await this.editorModule.handleEditorGet(req, res, context);
-                } else {
-                    next();
-                }
+            } else if (req.params.module === 'editor' && this.isDevelopment()) {
+                context = new Context({
+                    req,
+                    res,
+                    domain: this.getDomainFromRequest(req),
+                });
+                await this.editorModule.handleEditorGet(req, res, context);
             } else {
                 next();
             }
@@ -614,10 +617,12 @@ export class BackHostApp {
     }
 
     async moduleGetFile(req: Request, res: Response, next: NextFunction) {
-        if (this.getNodeEnv() === 'development') {
-            // @ts-ignore
-            console.log(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
-        }
+        // @ts-ignore
+        console.debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+
+        // @ts-ignore
+        console.log(colors.magenta.underline('GET'), req.originalUrl);
+
         if (req.params.module === 'viewer') {
             let context: Context | null = null;
             try {
