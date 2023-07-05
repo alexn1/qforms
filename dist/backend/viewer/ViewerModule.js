@@ -56,6 +56,7 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
+        var _a;
         console.debug('ViewerModule.handleGet', context.getDomain(), context.query, context.getReq().url);
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
@@ -63,9 +64,13 @@ class ViewerModule {
             await this.loginGet(context, bkApplication);
         }
         else {
-            console.log('body:', context.getBody());
-            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-            await this.index(context, bkApplication);
+            if ((_a = context.getBody()) === null || _a === void 0 ? void 0 : _a.action) {
+                await this.handleAction(context, bkApplication);
+            }
+            else {
+                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+                await this.index(context, bkApplication);
+            }
         }
     }
     async handlePost(context, application) {
@@ -79,13 +84,16 @@ class ViewerModule {
                 !(req.session.user && req.session.user[context.getRoute()])) {
                 throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
             }
-            // handle action
-            if (ACTIONS.indexOf(req.body.action) === -1) {
-                throw new Error(`unknown action: ${req.body.action}`);
-            }
-            context.setVersionHeaders(pkg.version, application.getVersion());
-            await this[req.body.action](context, application);
+            await this.handleAction(context, application);
         }
+    }
+    async handleAction(context, application) {
+        const req = context.getReq();
+        if (ACTIONS.indexOf(req.body.action) === -1) {
+            throw new Error(`unknown action: ${req.body.action}`);
+        }
+        context.setVersionHeaders(pkg.version, application.getVersion());
+        await this[req.body.action](context, application);
     }
     async renderHtml(bkApplication, context) {
         console.debug('ViewerModule.renderHtml');

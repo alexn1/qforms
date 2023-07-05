@@ -95,10 +95,12 @@ export class ViewerModule {
         ) {
             await this.loginGet(context, bkApplication);
         } else {
-            console.log('body:', context.getBody());
-
-            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-            await this.index(context, bkApplication);
+            if (context.getBody()?.action) {
+                await this.handleAction(context, bkApplication);
+            } else {
+                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+                await this.index(context, bkApplication);
+            }
         }
     }
 
@@ -115,13 +117,18 @@ export class ViewerModule {
                 throw new MyError({ message: 'Unauthorized', status: 401, context });
             }
 
-            // handle action
-            if (ACTIONS.indexOf(req.body.action) === -1) {
-                throw new Error(`unknown action: ${req.body.action}`);
-            }
-            context.setVersionHeaders(pkg.version, application.getVersion());
-            await this[req.body.action](context, application);
+            await this.handleAction(context, application);
         }
+    }
+
+    async handleAction(context: Context, application: BkApplication) {
+        const req = context.getReq()!;
+
+        if (ACTIONS.indexOf(req.body.action) === -1) {
+            throw new Error(`unknown action: ${req.body.action}`);
+        }
+        context.setVersionHeaders(pkg.version, application.getVersion());
+        await this[req.body.action](context, application);
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
