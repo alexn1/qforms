@@ -55,8 +55,8 @@ class ViewerModule {
     getScripts() {
         return this.js;
     }
-    async handleViewerGet(context, bkApplication) {
-        console.debug('ViewerModule.handleViewerGet', context.getDomain(), context.query, context.getReq().url);
+    async handleGet(context, bkApplication) {
+        console.debug('ViewerModule.handleGet', context.getDomain(), context.query, context.getReq().url);
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
             !(req.session.user && req.session.user[context.getRoute()])) {
@@ -75,8 +75,8 @@ class ViewerModule {
             }
         }
     }
-    async handleViewerPost(context, application) {
-        // console.debug('ViewerModule.handleViewerPost');
+    async handlePost(context, application) {
+        // console.debug('ViewerModule.handlePost');
         const req = context.getReq();
         if (req.body.action === 'login') {
             await this.loginPost(context, application);

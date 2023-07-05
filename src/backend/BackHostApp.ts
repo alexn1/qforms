@@ -545,7 +545,7 @@ export class BackHostApp {
                 });
                 const application = await this.createApplicationIfNotExists(context);
                 if (application.isAvailable()) {
-                    await this.viewerModule.handleViewerGet(context, application);
+                    await this.viewerModule.handleGet(context, application);
                 } else {
                     next();
                 }
@@ -589,7 +589,7 @@ export class BackHostApp {
                     domain: this.getDomainFromRequest(req),
                 });
                 const application = await this.createApplicationIfNotExists(context);
-                const time = await this.viewerModule.handleViewerPost(context, application);
+                const time = await this.viewerModule.handlePost(context, application);
                 // await this.logRequest(req, context, time);
             } else if (req.params.module === 'editor') {
                 if (this.isDevelopment()) {

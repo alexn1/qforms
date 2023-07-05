@@ -78,9 +78,9 @@ export class ViewerModule {
         return this.js;
     }
 
-    async handleViewerGet(context: Context, bkApplication: BkApplication) {
+    async handleGet(context: Context, bkApplication: BkApplication) {
         console.debug(
-            'ViewerModule.handleViewerGet',
+            'ViewerModule.handleGet',
             context.getDomain(),
             context.query,
             context.getReq()!.url,
@@ -107,8 +107,8 @@ export class ViewerModule {
         }
     }
 
-    async handleViewerPost(context: Context, application: BkApplication) {
-        // console.debug('ViewerModule.handleViewerPost');
+    async handlePost(context: Context, application: BkApplication) {
+        // console.debug('ViewerModule.handlePost');
         const req = context.getReq()!;
         if (req.body.action === 'login') {
             await this.loginPost(context, application);
