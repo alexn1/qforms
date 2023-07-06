@@ -6,7 +6,7 @@ import { Context } from '../Context';
 import { BkHelper } from '../BkHelper';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
-import { MyError } from '../MyError';
+import { HttpError } from '../MyError';
 import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';
 import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';
@@ -110,7 +110,7 @@ export class ViewerModule {
                 application.isAuthentication() &&
                 !(req.session.user && req.session.user[context.getRoute()])
             ) {
-                throw new MyError({ message: 'Unauthorized', status: 401, context });
+                throw new HttpError({ message: 'Unauthorized', status: 401, context });
             }
 
             await this.handleAction(context, application);

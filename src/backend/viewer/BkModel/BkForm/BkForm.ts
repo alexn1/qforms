@@ -6,7 +6,7 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkField } from '../BkField/BkField';
 import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { MyError } from '../../../MyError';
+import { HttpError } from '../../../MyError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
 import { BkFormScheme } from '../../BkModelScheme/BkFormScheme/BkFormScheme';
@@ -107,7 +107,7 @@ export class BkForm<TBkFormData extends BkFormScheme = BkFormScheme> extends BkM
     async rpc(name: string, context: Context) {
         console.debug('Form.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
-        throw new MyError({
+        throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

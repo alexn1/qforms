@@ -45,7 +45,7 @@ class BkPage extends BkModel_1.BkModel {
         console.debug('Page.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.MyError({
+        throw new MyError_1.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

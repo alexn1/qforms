@@ -1,7 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyError = void 0;
-class MyError extends Error {
+exports.HttpError = void 0;
+class HttpError extends Error {
     constructor(options) {
         super(options.message);
         this.context = options.context;
@@ -9,4 +9,4 @@ class MyError extends Error {
         this.data = options.data;
     }
 }
-exports.MyError = MyError;
+exports.HttpError = HttpError;

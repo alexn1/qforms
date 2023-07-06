@@ -6,7 +6,7 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
-import { MyError } from '../../../MyError';
+import { HttpError } from '../../../MyError';
 import { BkPageScheme } from '../../BkModelScheme/BkPageScheme/BkPageScheme';
 
 export class BkPage<
@@ -50,7 +50,7 @@ export class BkPage<
     async rpc(name: string, context: Context): Promise<any> {
         console.debug('Page.rpc', name, context.getBody());
         if (this[name]) return await this[name](context);
-        throw new MyError({
+        throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

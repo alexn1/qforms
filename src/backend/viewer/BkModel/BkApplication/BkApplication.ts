@@ -16,7 +16,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
-import { MyError } from '../../../MyError';
+import { HttpError } from '../../../MyError';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { index } from '../../index';
@@ -316,7 +316,7 @@ export class BkApplication<
     async rpc(name: string, context: Context) {
         // console.debug('Application.rpc', name, context.getReq().body);
         if (this[name]) return await this[name](context);
-        throw new MyError({
+        throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -536,7 +536,7 @@ export class BkApplication<
         }
         /*
         if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-            throw new MyError({message: 'not authenticated', context});
+            throw new HttpError({message: 'not authenticated', context});
         }
         */
     }

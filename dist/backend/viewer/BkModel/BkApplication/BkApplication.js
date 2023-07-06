@@ -274,7 +274,7 @@ class BkApplication extends BkModel_1.BkModel {
         // console.debug('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.MyError({
+        throw new MyError_1.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
@@ -473,7 +473,7 @@ class BkApplication extends BkModel_1.BkModel {
         }
         /*
         if (this.isAuthentication() && !(context.getReq().session.user && context.getReq().session.user[context.getRoute()])) {
-            throw new MyError({message: 'not authenticated', context});
+            throw new HttpError({message: 'not authenticated', context});
         }
         */
     }

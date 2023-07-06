@@ -1,6 +1,6 @@
 import { Context } from './Context';
 
-export class MyError extends Error {
+export class HttpError extends Error {
     context?: Context;
     status?: number;
     data?: object;

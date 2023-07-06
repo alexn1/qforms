@@ -14,7 +14,7 @@ import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
-import { MyError } from './MyError';
+import { HttpError } from './MyError';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { FileSessionStore } from './FileSessionStore';
@@ -396,7 +396,7 @@ export class BackHostApp {
     }
 
     composeContextData(err: Error, req: Request) {
-        const route = err instanceof MyError && err.context ? err.context.getRoute() : null;
+        const route = err instanceof HttpError && err.context ? err.context.getRoute() : null;
         return {
             headers: req.headers,
             method: req.method,
@@ -407,8 +407,8 @@ export class BackHostApp {
             appVersion: route ? this.applications[route].getVersion() : null,
             route: route,
             body: req.body,
-            status: err instanceof MyError ? err.status || null : null,
-            data: err instanceof MyError ? err.data || null : null,
+            status: err instanceof HttpError ? err.status || null : null,
+            data: err instanceof HttpError ? err.data || null : null,
         };
     }
 
@@ -648,7 +648,7 @@ export class BackHostApp {
     async _e404(req: Request, res: Response, next: NextFunction) {
         console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(
-            new MyError({
+            new HttpError({
                 message: `${req.method} ${req.originalUrl} not found`,
                 status: 404,
             }),
@@ -658,7 +658,7 @@ export class BackHostApp {
     async _e500(err: any, req: Request, res: Response, next: NextFunction) {
         console.error(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(colors.red(err));
-        const error = typeof err === 'string' ? new MyError({ message: err }) : err;
+        const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (
             req.headers['content-type'] &&

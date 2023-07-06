@@ -299,7 +299,7 @@ class BackHostApp {
         return appInfos;
     }
     composeContextData(err, req) {
-        const route = err instanceof MyError_1.MyError && err.context ? err.context.getRoute() : null;
+        const route = err instanceof MyError_1.HttpError && err.context ? err.context.getRoute() : null;
         return {
             headers: req.headers,
             method: req.method,
@@ -310,8 +310,8 @@ class BackHostApp {
             appVersion: route ? this.applications[route].getVersion() : null,
             route: route,
             body: req.body,
-            status: err instanceof MyError_1.MyError ? err.status || null : null,
-            data: err instanceof MyError_1.MyError ? err.data || null : null,
+            status: err instanceof MyError_1.HttpError ? err.status || null : null,
+            data: err instanceof MyError_1.HttpError ? err.data || null : null,
         };
     }
     async logError(err, req) {
@@ -548,7 +548,7 @@ class BackHostApp {
     }
     async _e404(req, res, next) {
         console.error(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
-        next(new MyError_1.MyError({
+        next(new MyError_1.HttpError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404,
         }));
@@ -556,7 +556,7 @@ class BackHostApp {
     async _e500(err, req, res, next) {
         console.error(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl);
         console.error(safe_1.default.red(err));
-        const error = typeof err === 'string' ? new MyError_1.MyError({ message: err }) : err;
+        const error = typeof err === 'string' ? new MyError_1.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&
             req.headers['content-type'].indexOf('application/json') !== -1) {

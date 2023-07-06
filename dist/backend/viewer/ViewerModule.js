@@ -76,7 +76,7 @@ class ViewerModule {
         else {
             if (application.isAuthentication() &&
                 !(req.session.user && req.session.user[context.getRoute()])) {
-                throw new MyError_1.MyError({ message: 'Unauthorized', status: 401, context });
+                throw new MyError_1.HttpError({ message: 'Unauthorized', status: 401, context });
             }
             await this.handleAction(context, application);
         }
