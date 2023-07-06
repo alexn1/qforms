@@ -736,9 +736,9 @@ class BackHostApp {
             await this[cb](req, res, next);
         });
     }
-    getPostAlias(path, tuple, query) {
-        this.alias('get', path, tuple, 'moduleGet', query);
-        this.alias('post', path, tuple, 'modulePost', query);
+    getPostAlias(path, route, query) {
+        this.alias('get', path, route, 'moduleGet', query);
+        this.alias('post', path, route, 'modulePost', query);
     }
     getNodeEnv() {
         return process.env.NODE_ENV || null;

@@ -34,6 +34,14 @@ const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT
 const QFORMS_LOG_LEVEL =
     process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
 
+export type Route = [
+    module: 'viewer' | 'editor',
+    appDirName: string,
+    appFileName: string,
+    env: string,
+    domain?: string,
+];
+
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
@@ -834,15 +842,9 @@ export class BackHostApp {
     initCustomRoutes() {}
 
     alias(
-        method: string,
+        method: 'get' | 'post',
         path: string,
-        [module, appDirName, appFileName, env, domain]: [
-            module: string,
-            appDirName: string,
-            appFileName: string,
-            env: string,
-            domain?: string,
-        ],
+        [module, appDirName, appFileName, env, domain]: Route,
         cb: string,
         query?: Record<string, Scalar | null>,
     ) {
@@ -867,19 +869,9 @@ export class BackHostApp {
         });
     }
 
-    getPostAlias(
-        path: string,
-        tuple: [
-            module: string,
-            appDirName: string,
-            appFileName: string,
-            env: string,
-            domain?: string,
-        ],
-        query?: Record<string, Scalar | null>,
-    ) {
-        this.alias('get', path, tuple, 'moduleGet', query);
-        this.alias('post', path, tuple, 'modulePost', query);
+    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>) {
+        this.alias('get', path, route, 'moduleGet', query);
+        this.alias('post', path, route, 'modulePost', query);
     }
 
     getNodeEnv(): string | null {

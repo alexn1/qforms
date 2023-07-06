@@ -13,6 +13,13 @@ import { Result } from '../Result';
 import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
+export type Route = [
+    module: 'viewer' | 'editor',
+    appDirName: string,
+    appFileName: string,
+    env: string,
+    domain?: string
+];
 export interface BackHostAppParams {
     [name: string]: any;
     appsDirPath?: string;
@@ -110,20 +117,8 @@ export declare class BackHostApp {
     postError(req: Request, res: Response, next: (err?: Error) => void): Promise<void>;
     getFrontendDirPath(): string;
     initCustomRoutes(): void;
-    alias(method: string, path: string, [module, appDirName, appFileName, env, domain]: [
-        module: string,
-        appDirName: string,
-        appFileName: string,
-        env: string,
-        domain?: string
-    ], cb: string, query?: Record<string, Scalar | null>): void;
-    getPostAlias(path: string, tuple: [
-        module: string,
-        appDirName: string,
-        appFileName: string,
-        env: string,
-        domain?: string
-    ], query?: Record<string, Scalar | null>): void;
+    alias(method: 'get' | 'post', path: string, [module, appDirName, appFileName, env, domain]: Route, cb: string, query?: Record<string, Scalar | null>): void;
+    getPostAlias(path: string, route: Route, query?: Record<string, Scalar | null>): void;
     getNodeEnv(): string | null;
     isDevelopment(): boolean;
     isProduction(): boolean;
