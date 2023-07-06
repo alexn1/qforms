@@ -34,7 +34,7 @@ class ApplicationController extends ModelController_1.ModelController {
         };
         this.onLogout = async () => {
             console.debug('ApplicationController.onLogout');
-            const result = await this.getModel().request('post', { action: 'logout' });
+            const result = await this.getModel().request('POST', { action: 'logout' });
             location.href = this.getRootPath();
         };
         this.onMenuItemClick = async (menu, type, name) => {
@@ -157,7 +157,7 @@ class ApplicationController extends ModelController_1.ModelController {
             this.onPageSelect(pageController);
             return pageController;
         }
-        const { page: pageData } = await this.getModel().request('post', {
+        const { page: pageData } = await this.getModel().request('POST', {
             action: 'page',
             page: options.name,
             newMode: !!options.newMode,

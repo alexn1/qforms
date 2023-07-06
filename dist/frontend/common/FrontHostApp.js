@@ -47,7 +47,7 @@ class FrontHostApp {
     }
     static async doHttpRequest(data) {
         console.warn('FrontHostApp.doHttpRequest', 'POST', window.location.href, data);
-        const [headers, body] = await FrontHostApp.fetchJson('post', window.location.href, data);
+        const [headers, body] = await FrontHostApp.fetchJson('POST', window.location.href, data);
         console.warn(`body ${data.page}.${data.form}.${data.ds || data.name}.${data.action}:`, body);
         return body;
     }

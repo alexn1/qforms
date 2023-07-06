@@ -147,7 +147,7 @@ class Page extends Model_1.Model {
         // console.debug('Page.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'rpc',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getName(),

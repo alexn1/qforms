@@ -83,7 +83,7 @@ class PersistentDataSource extends DataSource_1.DataSource {
         const table = this.getAttr('table');
         if (table === '')
             throw new Error('no data source table to insert');
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'insert',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -127,7 +127,7 @@ class PersistentDataSource extends DataSource_1.DataSource {
         if (!this.changes.size)
             throw new Error(`no changes: ${this.getFullName()}`);
         // specific to PersistentDataSource
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: 'update',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -159,7 +159,7 @@ class PersistentDataSource extends DataSource_1.DataSource {
         if (!table) {
             throw new Error(`no table in data source: ${this.getFullName()}`);
         }
-        const result = await this.getApp().request('post', {
+        const result = await this.getApp().request('POST', {
             action: '_delete',
             uuid: this.getApp().getAttr('uuid'),
             page: this.getForm().getPage().getName(),
@@ -213,7 +213,7 @@ class PersistentDataSource extends DataSource_1.DataSource {
         console.debug('PersistentDataSource.select', this.getFullName(), params);
         const page = this.getPage();
         const form = this.getForm();
-        const data = await this.getApp().request('post', {
+        const data = await this.getApp().request('POST', {
             action: 'select',
             page: page ? page.getName() : null,
             form: form ? form.getName() : null,

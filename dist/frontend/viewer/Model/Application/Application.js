@@ -36,7 +36,7 @@ class Application extends Model_1.Model {
         this.databases.push(database);
     }
     async logout() {
-        const data = await this.request('post', {
+        const data = await this.request('POST', {
             action: 'logout',
         });
         this.emit('logout', { source: this });
@@ -81,7 +81,7 @@ class Application extends Model_1.Model {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name)
             throw new Error('no name');
-        const response = await this.request('post', {
+        const response = await this.request('POST', {
             action: 'rpc',
             name: name,
             params: params,

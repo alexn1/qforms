@@ -18,9 +18,9 @@ export interface Location {
     search: string;
     hash: string;
 }
-export type RequestMethod = 'get' | 'post' | 'patch';
+export type RequestMethod = 'GET' | 'POST' | 'PATCH';
 export interface RequestBody {
-    action: string;
+    action: 'page' | 'insert' | 'select' | 'update' | '_delete' | 'rpc' | 'logout';
     page?: string | null;
     form?: string | null;
     ds?: string;

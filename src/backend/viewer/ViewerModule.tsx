@@ -95,12 +95,8 @@ export class ViewerModule {
         ) {
             await this.loginGet(context, bkApplication);
         } else {
-            if (context.getBody()?.action) {
-                await this.handleAction(context, bkApplication);
-            } else {
-                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-                await this.index(context, bkApplication);
-            }
+            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+            await this.index(context, bkApplication);
         }
     }
 

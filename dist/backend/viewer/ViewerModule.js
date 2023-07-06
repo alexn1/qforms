@@ -56,7 +56,6 @@ class ViewerModule {
         return this.js;
     }
     async handleGet(context, bkApplication) {
-        var _a;
         console.debug('ViewerModule.handleGet', context.getDomain(), context.query, context.getReq().url);
         const req = context.getReq();
         if (bkApplication.isAuthentication() &&
@@ -64,13 +63,8 @@ class ViewerModule {
             await this.loginGet(context, bkApplication);
         }
         else {
-            if ((_a = context.getBody()) === null || _a === void 0 ? void 0 : _a.action) {
-                await this.handleAction(context, bkApplication);
-            }
-            else {
-                context.setVersionHeaders(pkg.version, bkApplication.getVersion());
-                await this.index(context, bkApplication);
-            }
+            context.setVersionHeaders(pkg.version, bkApplication.getVersion());
+            await this.index(context, bkApplication);
         }
     }
     async handlePost(context, application) {
