@@ -63,11 +63,14 @@ export class BackHostApp {
     express: Express;
     httpServer: http.Server;
     wsServer: WebSocketServer;
+
+    // dir path
     appsDirPath: string;
     distDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
+
     indexModule: IndexModule;
     monitorModule: MonitorModule;
     viewerModule: ViewerModule;
@@ -172,8 +175,8 @@ export class BackHostApp {
     initDirPaths() {
         this.appsDirPath = path.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
-        this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.frontendDirPath = path.resolve(path.join(BACKEND_DIR_PATH, '../frontend'));
+        this.runtimeDirPath = path.resolve(this.params.runtimeDirPath || './runtime');
         this.sessionDirPath = path.join(this.runtimeDirPath, 'session');
     }
 
@@ -188,6 +191,9 @@ export class BackHostApp {
         message += `\tcwd: ${process.cwd()}\n`;
         message += `\tappsDirPath: ${this.appsDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
+        message += `\tfrontendDirPath: ${this.frontendDirPath}\n`;
+        message += `\truntimeDirPath: ${this.runtimeDirPath}\n`;
+        message += `\tsessionDirPath: ${this.sessionDirPath}\n`;
 
         if (this.isDevelopment()) {
             message += `\tmonitor: http://${host}:${port}/monitor\n`;
