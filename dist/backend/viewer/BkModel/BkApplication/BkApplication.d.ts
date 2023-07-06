@@ -24,16 +24,16 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     pages: {
         [pageLinkName: string]: BkPage;
     };
-    links: any[];
-    scripts: any[];
+    links: string[];
+    scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
     clients: WebSocket[];
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
-    getLinks(context: Context): Promise<any[]>;
-    getScripts(context: Context): Promise<any[]>;
+    getLinks(context: Context): Promise<string[]>;
+    getScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
     getDistDirPath(): string | undefined;

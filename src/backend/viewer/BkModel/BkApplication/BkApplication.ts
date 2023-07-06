@@ -35,8 +35,8 @@ export class BkApplication<
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
     pages: { [pageLinkName: string]: BkPage } = {};
-    links: any[];
-    scripts: any[];
+    links: string[];
+    scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
     clients: WebSocket[] = [];
@@ -64,14 +64,14 @@ export class BkApplication<
         return this.hostApp;
     }
 
-    async getLinks(context: Context): Promise<any[]> {
+    async getLinks(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         return (await BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,
         );
     }
 
-    async getScripts(context: Context): Promise<any[]> {
+    async getScripts(context: Context): Promise<string[]> {
         const virtualPath = context.getVirtualPath();
         const publicDirPath = this.getPublicDirPath();
         // console.debug('publicDirPath:', publicDirPath);
