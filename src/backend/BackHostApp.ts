@@ -381,7 +381,7 @@ export class BackHostApp {
         // console.debug('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
-            const CustomClass = global[modelClass];
+            const CustomClass = (global as any)[modelClass];
             if (!CustomClass) throw new Error(`no class ${modelClass}`);
             return CustomClass;
         }
@@ -767,13 +767,13 @@ export class BackHostApp {
         console.log('BackHostApp.onProcessExit:', code);
     }
 
-    async onUncaughtException(err, origin) {
+    async onUncaughtException(err: Error, origin: string) {
         console.error(colors.red('BackHostApp.onUncaughtException'), err);
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
 
-    async onUnhandledRejection(reason) {
+    async onUnhandledRejection(reason: Error | any, promise: Promise<any>) {
         console.error(colors.red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);

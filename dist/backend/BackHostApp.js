@@ -654,7 +654,7 @@ class BackHostApp {
         err.message = `uncaughtException: ${err.message}`;
         await this.logError(err);
     }
-    async onUnhandledRejection(reason) {
+    async onUnhandledRejection(reason, promise) {
         console.error(safe_1.default.red('BackHostApp.onUnhandledRejection'), reason);
         reason.message = `unhandledRejection: ${reason.message}`;
         await this.logError(reason);

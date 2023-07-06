@@ -194,7 +194,7 @@ export class Context {
         }
     }
 
-    setParam(name: string, value): void {
+    setParam(name: string, value: any): void {
         this.params[name] = value;
     }
 

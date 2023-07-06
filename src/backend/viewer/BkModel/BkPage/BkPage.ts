@@ -49,7 +49,9 @@ export class BkPage<
 
     async rpc(name: string, context: Context): Promise<any> {
         console.debug('Page.rpc', name, context.getBody());
-        if (this[name]) return await this[name](context);
+        if (Object.prototype.hasOwnProperty.call(this, name)) {
+            return await (this as any)[name](context);
+        }
         throw new HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },

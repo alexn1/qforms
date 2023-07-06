@@ -124,7 +124,7 @@ export class ViewerModule {
             throw new Error(`unknown action: ${req.body.action}`);
         }
         context.setVersionHeaders(pkg.version, application.getVersion());
-        await this[req.body.action](context, application);
+        await (this as any)[req.body.action](context, application);
     }
 
     async renderHtml(bkApplication: BkApplication, context: Context): Promise<string> {
