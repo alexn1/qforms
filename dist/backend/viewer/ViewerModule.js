@@ -9,7 +9,7 @@ const path_1 = __importDefault(require("path"));
 const react_1 = __importDefault(require("react"));
 const server_1 = __importDefault(require("react-dom/server"));
 const BkHelper_1 = require("../BkHelper");
-const MyError_1 = require("../MyError");
+const HttpError_1 = require("../HttpError");
 const Result_1 = require("../../Result");
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
@@ -76,7 +76,7 @@ class ViewerModule {
         else {
             if (application.isAuthentication() &&
                 !(req.session.user && req.session.user[context.getRoute()])) {
-                throw new MyError_1.HttpError({ message: 'Unauthorized', status: 401, context });
+                throw new HttpError_1.HttpError({ message: 'Unauthorized', status: 401, context });
             }
             await this.handleAction(context, application);
         }

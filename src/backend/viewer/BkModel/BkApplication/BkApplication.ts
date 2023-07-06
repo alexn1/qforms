@@ -16,7 +16,7 @@ import { BkPage } from '../BkPage/BkPage';
 import { BkPageLink } from '../BkPageLink/BkPageLink';
 import { Context } from '../../../Context';
 import { JsonFile } from '../../../JsonFile';
-import { HttpError } from '../../../MyError';
+import { HttpError } from '../../../HttpError';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
 import { index } from '../../index';

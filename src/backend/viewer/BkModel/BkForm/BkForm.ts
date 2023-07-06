@@ -6,7 +6,7 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkField } from '../BkField/BkField';
 import { BkPage } from '../BkPage/BkPage';
 import { BkApplication } from '../BkApplication/BkApplication';
-import { HttpError } from '../../../MyError';
+import { HttpError } from '../../../HttpError';
 import { Context } from '../../../Context';
 import { JSONString, RawRow } from '../../../../types';
 import { BkFormScheme } from '../../BkModelScheme/BkFormScheme/BkFormScheme';

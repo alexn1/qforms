@@ -31,7 +31,7 @@ const BkModel_1 = require("../BkModel");
 const BkHelper_1 = require("../../../BkHelper");
 const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
-const MyError_1 = require("../../../MyError");
+const HttpError_1 = require("../../../HttpError");
 const Result_1 = require("../../../../Result");
 const index_1 = require("../../index");
 const text = __importStar(require("../../text"));
@@ -274,7 +274,7 @@ class BkApplication extends BkModel_1.BkModel {
         // console.debug('Application.rpc', name, context.getReq().body);
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.HttpError({
+        throw new HttpError_1.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,

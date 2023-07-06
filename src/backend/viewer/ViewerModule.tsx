@@ -6,7 +6,7 @@ import { Context } from '../Context';
 import { BkHelper } from '../BkHelper';
 import { BackHostApp } from '../BackHostApp';
 import { BkApplication } from './BkModel/BkApplication/BkApplication';
-import { HttpError } from '../MyError';
+import { HttpError } from '../HttpError';
 import { BkModel } from './BkModel/BkModel';
 import { Result } from '../../Result';
 import { BkDataSource } from './BkModel/BkDataSource/BkDataSource';

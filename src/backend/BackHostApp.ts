@@ -14,7 +14,7 @@ import { BkApplication } from './viewer/BkModel/BkApplication/BkApplication';
 import { AppInfo } from './AppInfo';
 import { MonitorModule } from './monitor/MonitorModule';
 import { IndexModule } from './index/IndexModule';
-import { HttpError } from './MyError';
+import { HttpError } from './HttpError';
 import { ViewerModule } from './viewer/ViewerModule';
 import { EditorModule } from './editor/EditorModule';
 import { FileSessionStore } from './FileSessionStore';

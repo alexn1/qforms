@@ -6,7 +6,7 @@ import { BkAction } from '../BkAction/BkAction';
 import { BkApplication } from '../BkApplication/BkApplication';
 import { BkForm } from '../BkForm/BkForm';
 import { Context } from '../../../Context';
-import { HttpError } from '../../../MyError';
+import { HttpError } from '../../../HttpError';
 import { BkPageScheme } from '../../BkModelScheme/BkPageScheme/BkPageScheme';
 
 export class BkPage<

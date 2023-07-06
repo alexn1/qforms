@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BkForm = void 0;
 const path_1 = __importDefault(require("path"));
 const BkModel_1 = require("../BkModel");
-const MyError_1 = require("../../../MyError");
+const HttpError_1 = require("../../../HttpError");
 class BkForm extends BkModel_1.BkModel {
     constructor(data, parent) {
         super(data, parent);
@@ -92,7 +92,7 @@ class BkForm extends BkModel_1.BkModel {
         console.debug('Form.rpc', name, context.getBody());
         if (this[name])
             return await this[name](context);
-        throw new MyError_1.HttpError({
+        throw new HttpError_1.HttpError({
             message: `no remote proc ${this.constructor.name}.${name}`,
             data: { method: `${this.constructor.name}.rpc` },
             context,
