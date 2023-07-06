@@ -206,8 +206,16 @@ class BackHostApp {
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
+        this.express.use((req, res, next) => {
+            console.log(req.method, req.originalUrl);
+            next();
+        });
         // handle static for index and monitor
-        this.express.use(express_1.default.static(this.frontendDirPath));
+        this.express.use(express_1.default.static(this.frontendDirPath, {
+        /* setHeaders: (res, path, stat) => {
+            console.log(relative(this.frontendDirPath, path));
+        }, */
+        }));
         this.initCustomRoutes();
         // 404 and 500 error handlers
         this.express.use(this._e404.bind(this));

@@ -291,8 +291,19 @@ export class BackHostApp {
             this.moduleGetFile.bind(this),
         );
 
+        this.express.use((req: Request, res: Response, next: NextFunction) => {
+            console.log(req.method, req.originalUrl);
+            next();
+        });
+
         // handle static for index and monitor
-        this.express.use(express.static(this.frontendDirPath));
+        this.express.use(
+            express.static(this.frontendDirPath, {
+                /* setHeaders: (res, path, stat) => {
+                    console.log(relative(this.frontendDirPath, path));
+                }, */
+            }),
+        );
 
         this.initCustomRoutes();
 
