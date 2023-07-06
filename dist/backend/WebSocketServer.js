@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.WebSocketServer = void 0;
 const ws_1 = __importDefault(require("ws"));
 const url_1 = __importDefault(require("url"));
+const safe_1 = __importDefault(require("colors/safe"));
 const Context_1 = require("./Context");
 class WebSocketServer {
     constructor(options) {
@@ -22,7 +23,8 @@ class WebSocketServer {
         console.error('WebSocketServer.onError', err);
     }
     async onConnection(webSocket) {
-        console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        console.debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        console.log('wss:', safe_1.default.bgYellow(safe_1.default.black(decodeURIComponent(webSocket.upgradeReq.url))));
         const parts = url_1.default.parse(webSocket.upgradeReq.url, true);
         // console.debug('parts.query:', parts.query);
         if (!parts.query.route)

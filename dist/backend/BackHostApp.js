@@ -697,7 +697,8 @@ class BackHostApp {
         return domain;
     }
     async postError(req, res, next) {
-        console.log(safe_1.default.blue('BackHostApp.postError'), req.body.message);
+        console.debug(safe_1.default.blue('BackHostApp.postError'), req.body.message);
+        console.log('client error:', safe_1.default.red(req.body.message));
         try {
             const data = JSON.stringify({
                 headers: req.headers,

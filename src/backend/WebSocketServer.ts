@@ -1,5 +1,6 @@
 import ws from 'ws';
 import url from 'url';
+import colors from 'colors/safe';
 
 import { BackHostApp } from './BackHostApp';
 import { Context } from './Context';
@@ -24,7 +25,13 @@ export class WebSocketServer {
     }
 
     async onConnection(webSocket) {
-        console.log('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+        console.debug('WebSocketServer.onConnection', webSocket.upgradeReq.url);
+
+        console.log(
+            'wss:',
+            colors.bgYellow(colors.black(decodeURIComponent(webSocket.upgradeReq.url))),
+        );
+
         const parts = url.parse(webSocket.upgradeReq.url, true);
         // console.debug('parts.query:', parts.query);
         if (!parts.query.route) throw new Error('no route');

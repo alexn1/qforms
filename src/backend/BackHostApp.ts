@@ -258,7 +258,7 @@ export class BackHostApp {
         // this.express.post('/test', this._postTest.bind(this));
 
         // error logger
-        this.express.options('/error', (req, res, next) => {
+        this.express.options('/error', (req: Request, res: Response, next: NextFunction) => {
             console.log('options /error');
             res.header('Access-Control-Allow-Origin', '*');
             res.header('Access-Control-Allow-Headers', 'Content-Type, Content-Length');
@@ -828,7 +828,10 @@ export class BackHostApp {
     }
 
     async postError(req: Request, res: Response, next: (err?: Error) => void) {
-        console.log(colors.blue('BackHostApp.postError'), req.body.message);
+        console.debug(colors.blue('BackHostApp.postError'), req.body.message);
+
+        console.log('client error:', colors.red(req.body.message));
+
         try {
             const data = JSON.stringify(
                 {
