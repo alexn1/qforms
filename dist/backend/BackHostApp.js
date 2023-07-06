@@ -206,15 +206,11 @@ class BackHostApp {
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/', this.moduleGet.bind(this));
         this.express.post('/:module/:appDirName/:appFileName/:env/:domain/', this.modulePost.bind(this));
         this.express.get('/:module/:appDirName/:appFileName/:env/:domain/*', this.moduleGetFile.bind(this));
-        this.express.use((req, res, next) => {
-            console.log(req.method, req.originalUrl);
-            next();
-        });
         // handle static for index and monitor
         this.express.use(express_1.default.static(this.frontendDirPath, {
-        /* setHeaders: (res, path, stat) => {
-            console.log(relative(this.frontendDirPath, path));
-        }, */
+            setHeaders: (res, fullPath, stat) => {
+                console.log(`static: /${path_1.default.relative(this.frontendDirPath, fullPath)} ${res.statusCode}`);
+            },
         }));
         this.initCustomRoutes();
         // 404 and 500 error handlers
@@ -558,15 +554,15 @@ class BackHostApp {
         }
     }
     async _e404(req, res, next) {
-        console.error(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
+        console.debug(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
         next(new HttpError_1.HttpError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404,
         }));
     }
     async _e500(err, req, res, next) {
-        console.error(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl);
-        console.error(safe_1.default.red(err));
+        console.debug(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
+        console.log(safe_1.default.red(err.message));
         const error = typeof err === 'string' ? new HttpError_1.HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (req.headers['content-type'] &&

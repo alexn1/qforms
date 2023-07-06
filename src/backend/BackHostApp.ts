@@ -291,17 +291,16 @@ export class BackHostApp {
             this.moduleGetFile.bind(this),
         );
 
-        this.express.use((req: Request, res: Response, next: NextFunction) => {
-            console.log(req.method, req.originalUrl);
-            next();
-        });
-
         // handle static for index and monitor
         this.express.use(
             express.static(this.frontendDirPath, {
-                /* setHeaders: (res, path, stat) => {
-                    console.log(relative(this.frontendDirPath, path));
-                }, */
+                setHeaders: (res, fullPath, stat) => {
+                    console.log(
+                        `static: /${path.relative(this.frontendDirPath, fullPath)} ${
+                            res.statusCode
+                        }`,
+                    );
+                },
             }),
         );
 
@@ -671,7 +670,7 @@ export class BackHostApp {
     }
 
     async _e404(req: Request, res: Response, next: NextFunction) {
-        console.error(colors.magenta(req.method), 'error/404', req.originalUrl);
+        console.debug(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(
             new HttpError({
                 message: `${req.method} ${req.originalUrl} not found`,
@@ -681,8 +680,10 @@ export class BackHostApp {
     }
 
     async _e500(err: any, req: Request, res: Response, next: NextFunction) {
-        console.error(colors.magenta('module.exports.e500:'), req.method, req.originalUrl);
-        console.error(colors.red(err));
+        console.debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
+
+        console.log(colors.red(err.message));
+
         const error = typeof err === 'string' ? new HttpError({ message: err }) : err;
         res.status(error.status || 500);
         if (
