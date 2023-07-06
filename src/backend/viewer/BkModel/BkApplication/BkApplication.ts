@@ -37,8 +37,8 @@ export class BkApplication<
     pages: { [pageLinkName: string]: BkPage } = {};
     links: any[];
     scripts: any[];
-    menu: any;
-    nav: any;
+    menu: Record<string, any[]>;
+    nav: Record<string, any[]>;
     clients: WebSocket[] = [];
 
     constructor(
@@ -187,8 +187,8 @@ export class BkApplication<
 
     async createMenu(context: Context): Promise<void> {
         // console.debug('Application.createMenu');
-        const menu = {};
-        const nav = {};
+        const menu: Record<string, any[]> = {};
+        const nav: Record<string, any[]> = {};
 
         // pages
         const pageLinkNames = this.getItemNames('pageLinks');

@@ -26,8 +26,8 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     };
     links: any[];
     scripts: any[];
-    menu: any;
-    nav: any;
+    menu: Record<string, any[]>;
+    nav: Record<string, any[]>;
     clients: WebSocket[];
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
