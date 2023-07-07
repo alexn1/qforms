@@ -118,6 +118,7 @@ class BackHostApp {
     initDirPaths() {
         this.appsDirPath = path_1.default.resolve(this.params.appsDirPath || APPS_DIR_PATH);
         this.distDirPath = this.params.distDirPath || this.appsDirPath;
+        this.backendDirPath = BACKEND_DIR_PATH;
         this.frontendDirPath = path_1.default.resolve(path_1.default.join(BACKEND_DIR_PATH, '../frontend'));
         this.runtimeDirPath = path_1.default.resolve(this.params.runtimeDirPath || './runtime');
         this.sessionDirPath = path_1.default.join(this.runtimeDirPath, 'session');
@@ -131,6 +132,7 @@ class BackHostApp {
         message += `\tcwd: ${process.cwd()}\n`;
         message += `\tappsDirPath: ${this.appsDirPath}\n`;
         message += `\tdistDirPath: ${this.distDirPath}\n`;
+        message += `\tbackendDirPath: ${this.backendDirPath}\n`;
         message += `\tfrontendDirPath: ${this.frontendDirPath}\n`;
         message += `\truntimeDirPath: ${this.runtimeDirPath}\n`;
         message += `\tsessionDirPath: ${this.sessionDirPath}\n`;

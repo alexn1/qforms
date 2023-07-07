@@ -45,6 +45,7 @@ export declare class BackHostApp {
     wsServer: WebSocketServer;
     appsDirPath: string;
     distDirPath: string;
+    backendDirPath: string;
     frontendDirPath: string;
     runtimeDirPath: string;
     sessionDirPath: string;
