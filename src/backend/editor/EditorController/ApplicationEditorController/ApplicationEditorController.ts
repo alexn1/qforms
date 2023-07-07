@@ -3,10 +3,6 @@ import path from 'path';
 import { VisualEditorController } from '../VisualEditorController';
 
 export class ApplicationEditorController extends VisualEditorController {
-    /*constructor(...args) {
-        super(...args);
-    }*/
-
     async save(params) {
         const appEditor = this.createApplicationEditor();
         appEditor.setAttr(params.attr, params.value);

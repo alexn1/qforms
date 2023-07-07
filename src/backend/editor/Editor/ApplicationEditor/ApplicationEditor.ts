@@ -20,7 +20,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         return this.appFile;
     }
 
-    static createData(params) {
+    static createData(params: Record<string, any>) {
         // console.debug('ApplicationEditor.createData', params);
         if (!params.name) throw new Error('no name');
         return {
@@ -49,7 +49,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         };
     }
 
-    static async createAppFile(appFilePath, params) {
+    static async createAppFile(appFilePath: string, params) {
         const data = ApplicationEditor.createData(params);
         const appFile = new JsonFile(appFilePath, data);
         await appFile.create();
@@ -75,20 +75,20 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         await this.appFile.save();
     }
 
-    async removePageFile(name) {
+    async removePageFile(name: string) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const pageFilePath = path.join(this.appInfo.dirPath, pageLinkEditor.getAttr('fileName'));
         await BkHelper.fsUnlink(pageFilePath);
     }
 
-    async createPageEditor(relFilePath): Promise<PageEditor> {
+    async createPageEditor(relFilePath: string): Promise<PageEditor> {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
         return new PageEditor(this, pageFile);
     }
 
-    async getPage(name): Promise<PageEditor> {
+    async getPage(name: string): Promise<PageEditor> {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
         const relFilePath = pageLinkEditor.getAttr('fileName');
         return await this.createPageEditor(relFilePath);

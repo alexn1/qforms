@@ -8,7 +8,7 @@ export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
     constructor(appFile: JsonFile);
     getAppFile(): JsonFile;
-    static createData(params: any): {
+    static createData(params: Record<string, any>): {
         '@class': string;
         '@attributes': {
             formatVersion: string;
@@ -30,7 +30,7 @@ export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
         actions: any[];
         pageLinks: any[];
     };
-    static createAppFile(appFilePath: any, params: any): Promise<JsonFile>;
+    static createAppFile(appFilePath: string, params: any): Promise<JsonFile>;
     newPageAndPageLinkData(params: any): Promise<{
         page: {
             '@class': string;
@@ -51,9 +51,9 @@ export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
         pageLink: any;
     }>;
     save(): Promise<void>;
-    removePageFile(name: any): Promise<void>;
-    createPageEditor(relFilePath: any): Promise<PageEditor>;
-    getPage(name: any): Promise<PageEditor>;
+    removePageFile(name: string): Promise<void>;
+    createPageEditor(relFilePath: string): Promise<PageEditor>;
+    getPage(name: string): Promise<PageEditor>;
     createJs(params: any): Promise<any>;
     createModelBackJs(params: any): Promise<any>;
     getCustomDirPath(): Promise<string>;
