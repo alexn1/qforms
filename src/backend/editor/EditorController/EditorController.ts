@@ -5,14 +5,7 @@ import { AppInfo } from '../../AppInfo';
 import { Context } from '../../Context';
 
 export class EditorController {
-    // appInfo: AppInfo;
-    // hostApp: BackHostApp;
-
-    constructor(public appInfo: AppInfo, public hostApp: BackHostApp) {
-        // if (!hostApp) throw new Error(`no hostApp for ${this.constructor.name}`);
-        // this.appInfo = appInfo;
-        // this.hostApp = hostApp;
-    }
+    constructor(public appInfo: AppInfo, public hostApp: BackHostApp) {}
 
     async init(context: Context) {}
 

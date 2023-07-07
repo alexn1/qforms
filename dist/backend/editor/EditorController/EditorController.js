@@ -7,8 +7,6 @@ exports.EditorController = void 0;
 const path_1 = __importDefault(require("path"));
 const ApplicationEditor_1 = require("../Editor/ApplicationEditor/ApplicationEditor");
 class EditorController {
-    // appInfo: AppInfo;
-    // hostApp: BackHostApp;
     constructor(appInfo, hostApp) {
         this.appInfo = appInfo;
         this.hostApp = hostApp;
