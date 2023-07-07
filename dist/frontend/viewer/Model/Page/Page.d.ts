@@ -1,7 +1,7 @@
 import { Model } from '../Model';
 import { PageData } from '../../../../data';
 import { Form } from '../Form/Form';
-import { Key, Scalar } from '../../../../types';
+import { Key } from '../../../../types';
 import { Application } from '../Application/Application';
 export interface PageOptions {
     id?: string;
@@ -41,7 +41,7 @@ export declare class Page extends Model<PageData> {
     getApp(): Application;
     isModal(): boolean;
     onFormInsert(e: any): void;
-    rpc(name: string, params: Record<string, Scalar>): Promise<any>;
+    rpc(name: string, params: Record<string, any>): Promise<any>;
     findForm<TForm extends Form = Form>(name: string): TForm | undefined;
     getForm<TForm extends Form = Form>(name: string): TForm;
     isSelectMode(): boolean;
