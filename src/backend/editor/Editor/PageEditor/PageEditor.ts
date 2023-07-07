@@ -6,8 +6,12 @@ import { Editor } from '../Editor';
 import { BkPageScheme } from '../../../viewer/BkModelScheme/BkPageScheme/BkPageScheme';
 
 export class PageEditor extends Editor<BkPageScheme> {
-    constructor(private appEditor: ApplicationEditor, public pageFile: JsonFile) {
-        super(pageFile.data, appEditor);
+    constructor(
+        private appEditor: ApplicationEditor,
+        public pageFile: JsonFile,
+        editorPath: string,
+    ) {
+        super(pageFile.data, appEditor, editorPath);
     }
 
     static createData(params) {
@@ -45,7 +49,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async createJs(params) {
-        const templateFilePath = path.join(__dirname, 'Page.js.ejs');
+        const templateFilePath = path.join(this.getEditorPath(), 'Editor/PageEditor/Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getName(),

@@ -5,7 +5,6 @@ import { PageEditor } from '../PageEditor/PageEditor';
 import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplicationScheme/BkApplicationScheme';
 export declare class ApplicationEditor extends Editor<BkApplicationScheme> {
     private appFile;
-    private editorPath;
     appInfo: AppInfo;
     constructor(appFile: JsonFile, editorPath: string);
     getAppFile(): JsonFile;

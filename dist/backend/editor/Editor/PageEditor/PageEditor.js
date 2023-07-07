@@ -7,8 +7,8 @@ exports.PageEditor = void 0;
 const path_1 = __importDefault(require("path"));
 const Editor_1 = require("../Editor");
 class PageEditor extends Editor_1.Editor {
-    constructor(appEditor, pageFile) {
-        super(pageFile.data, appEditor);
+    constructor(appEditor, pageFile, editorPath) {
+        super(pageFile.data, appEditor, editorPath);
         this.appEditor = appEditor;
         this.pageFile = pageFile;
     }
@@ -44,7 +44,7 @@ class PageEditor extends Editor_1.Editor {
         await this.pageFile.save();
     }
     async createJs(params) {
-        const templateFilePath = path_1.default.join(__dirname, 'Page.js.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/PageEditor/Page.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getName(),

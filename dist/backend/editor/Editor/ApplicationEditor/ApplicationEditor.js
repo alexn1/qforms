@@ -12,9 +12,8 @@ const JsonFile_1 = require("../../../JsonFile");
 const PageEditor_1 = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor_1.Editor {
     constructor(appFile, editorPath) {
-        super(appFile.data);
+        super(appFile.data, undefined, editorPath);
         this.appFile = appFile;
-        this.editorPath = editorPath;
         this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile);
     }
     getAppFile() {
@@ -81,7 +80,7 @@ class ApplicationEditor extends Editor_1.Editor {
         const pageFilePath = path_1.default.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile_1.JsonFile(pageFilePath);
         await pageFile.read();
-        return new PageEditor_1.PageEditor(this, pageFile);
+        return new PageEditor_1.PageEditor(this, pageFile, this.getEditorPath());
     }
     async getPage(name) {
         const pageLinkEditor = this.createItemEditor('pageLinks', name);
@@ -90,7 +89,7 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
-        const templateFilePath = path_1.default.join(this.editorPath, 'Editor/ApplicationEditor/Application.js.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/ApplicationEditor/Application.js.ejs');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             application: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),
@@ -99,7 +98,7 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async createModelBackJs(params) {
         const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(this.editorPath, 'Editor/ApplicationEditor/Model.back.js.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/ApplicationEditor/Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });

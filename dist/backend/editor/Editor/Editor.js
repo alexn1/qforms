@@ -33,6 +33,15 @@ const BaseModel_1 = require("../../BaseModel");
 const BkHelper_1 = require("../../BkHelper");
 const backend = __importStar(require("../../../backend"));
 class Editor extends BaseModel_1.BaseModel {
+    constructor(data, parent, editorPath) {
+        super(data, parent);
+        this.editorPath = editorPath;
+    }
+    getEditorPath() {
+        if (!this.editorPath)
+            throw new Error(`${this.constructor.name}: no editorPath`);
+        return this.editorPath;
+    }
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
@@ -139,7 +148,7 @@ class Editor extends BaseModel_1.BaseModel {
         const data = this.getColItemData(colName, itemName);
         const className = BaseModel_1.BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
-        return new Class(data, this);
+        return new Class(data, this, this.editorPath);
     }
     async getCustomDirPath() {
         const collectionDirPath = await this.getCollectionDirPath();

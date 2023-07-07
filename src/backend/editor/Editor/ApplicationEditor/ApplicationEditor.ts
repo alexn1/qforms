@@ -11,8 +11,8 @@ import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplication
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
 
-    constructor(private appFile: JsonFile, private editorPath: string) {
-        super(appFile.data);
+    constructor(private appFile: JsonFile, editorPath: string) {
+        super(appFile.data, undefined, editorPath);
         this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
     }
 
@@ -85,7 +85,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         const pageFilePath = path.join(this.appInfo.dirPath, relFilePath);
         const pageFile = new JsonFile(pageFilePath);
         await pageFile.read();
-        return new PageEditor(this, pageFile);
+        return new PageEditor(this, pageFile, this.getEditorPath());
     }
 
     async getPage(name: string): Promise<PageEditor> {
@@ -98,7 +98,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         const customJsFilePath = await this.getCustomFilePath('js');
 
         const templateFilePath = path.join(
-            this.editorPath,
+            this.getEditorPath(),
             'Editor/ApplicationEditor/Application.js.ejs',
         );
 
@@ -113,7 +113,7 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
 
         const templateFilePath = path.join(
-            this.editorPath,
+            this.getEditorPath(),
             'Editor/ApplicationEditor/Model.back.js.ejs',
         );
 

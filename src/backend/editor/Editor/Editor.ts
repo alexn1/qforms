@@ -9,6 +9,15 @@ import { BkModelScheme } from '../../viewer/BkModelScheme/BkModelScheme';
 export class Editor<
     TBkModelData extends BkModelScheme = BkModelScheme,
 > extends BaseModel<TBkModelData> {
+    constructor(data: TBkModelData, parent: Editor | undefined, private editorPath: string) {
+        super(data, parent);
+    }
+
+    getEditorPath(): string {
+        if (!this.editorPath) throw new Error(`${this.constructor.name}: no editorPath`);
+        return this.editorPath;
+    }
+
     /* async createFileByReplace(newFilePath, templateFilePath, replaceFrom, replaceTo, emptyTemplate) {
         console.debug('Editor.createFileByReplace');
         emptyTemplate = emptyTemplate || '';
@@ -130,7 +139,7 @@ export class Editor<
         const data = this.getColItemData(colName, itemName);
         const className = BaseModel.getClassName(data);
         const Class = backend[`${className}Editor`];
-        return new Class(data, this);
+        return new Class(data, this, this.editorPath);
     }
 
     async getCustomDirPath() {

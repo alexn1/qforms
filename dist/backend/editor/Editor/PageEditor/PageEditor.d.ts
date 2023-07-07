@@ -5,7 +5,7 @@ import { BkPageScheme } from '../../../viewer/BkModelScheme/BkPageScheme/BkPageS
 export declare class PageEditor extends Editor<BkPageScheme> {
     private appEditor;
     pageFile: JsonFile;
-    constructor(appEditor: ApplicationEditor, pageFile: JsonFile);
+    constructor(appEditor: ApplicationEditor, pageFile: JsonFile, editorPath: string);
     static createData(params: any): {
         '@class': string;
         '@attributes': {
