@@ -34,7 +34,10 @@ export class DataSourceEditor extends Editor {
 
     async createModelBackJs(params) {
         const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const templateFilePath = path.join(
+            this.getEditorPath(),
+            'Editor/DataSourceEditor/Model.back.js.ejs',
+        );
         const js = await this.createFileByParams(filePath, templateFilePath, {
             _class: this.getClassName(),
             page: params.page ? params.page : '',
