@@ -99,7 +99,7 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async createModelBackJs(params) {
         const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
+        const templateFilePath = path_1.default.join(this.editorPath, 'Editor/ApplicationEditor/Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });

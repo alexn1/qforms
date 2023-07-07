@@ -10,9 +10,6 @@ class EditorController {
     constructor(appInfo, hostApp) {
         this.appInfo = appInfo;
         this.hostApp = hostApp;
-        // if (!hostApp) throw new Error(`no hostApp for ${this.constructor.name}`);
-        // this.appInfo = appInfo;
-        // this.hostApp = hostApp;
     }
     async init(context) { }
     async getView(params) {

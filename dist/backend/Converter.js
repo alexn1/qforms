@@ -8,13 +8,14 @@ const path_1 = __importDefault(require("path"));
 const JsonFile_1 = require("./JsonFile");
 const ApplicationEditor_1 = require("./editor/Editor/ApplicationEditor/ApplicationEditor");
 const BaseModel_1 = require("./BaseModel");
+const BACKEND_DIR_PATH = __dirname;
 class Converter {
     static async reformat(appFilePath) {
         console.debug('Convert.reformat', appFilePath);
         const appFile = new JsonFile_1.JsonFile(appFilePath);
         await appFile.read();
         // app
-        const appEditor = new ApplicationEditor_1.ApplicationEditor(appFile, path_1.default.join(__dirname, 'editor'));
+        const appEditor = new ApplicationEditor_1.ApplicationEditor(appFile, path_1.default.join(BACKEND_DIR_PATH, 'editor'));
         appEditor.reformat();
         await appEditor.save();
         // pages

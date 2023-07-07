@@ -4,6 +4,8 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
 
+const BACKEND_DIR_PATH = __dirname;
+
 export class Converter {
     static async reformat(appFilePath: string) {
         console.debug('Convert.reformat', appFilePath);
@@ -11,7 +13,7 @@ export class Converter {
         await appFile.read();
 
         // app
-        const appEditor = new ApplicationEditor(appFile, path.join(__dirname, 'editor'));
+        const appEditor = new ApplicationEditor(appFile, path.join(BACKEND_DIR_PATH, 'editor'));
         appEditor.reformat();
         await appEditor.save();
 
