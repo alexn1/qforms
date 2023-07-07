@@ -30,7 +30,7 @@ export class FieldEditor extends Editor {
     }
 
     async createJs(params) {
-        const templateFilePath = path.join(__dirname, 'Field.js.ejs');
+        const templateFilePath = path.join(this.getEditorPath(), 'Editor/FieldEditor/Field.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getParent().getParent().getName(),
@@ -43,7 +43,7 @@ export class FieldEditor extends Editor {
     }
 
     async createJsx(params) {
-        const templateFilePath = path.join(__dirname, 'View.jsx.ejs');
+        const templateFilePath = path.join(this.getEditorPath(), 'Editor/FieldEditor/View.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
             page: this.getParent().getParent().getName(),
@@ -56,7 +56,10 @@ export class FieldEditor extends Editor {
     }
 
     async createLess(params) {
-        const templateFilePath = path.join(__dirname, 'View.less.ejs');
+        const templateFilePath = path.join(
+            this.getEditorPath(),
+            'Editor/FieldEditor/View.less.ejs',
+        );
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
             page: this.getParent().getParent().getName(),
