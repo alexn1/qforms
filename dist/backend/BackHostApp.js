@@ -631,7 +631,7 @@ class BackHostApp {
     }
     async onProcessSIGINT() {
         console.debug('BackHostApp.onProcessSIGINT');
-        console.log('Received INT signal (Ctrl+C), shutting down gracefully...');
+        console.log(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
             process.exit(0);
@@ -654,7 +654,8 @@ class BackHostApp {
         }
     }
     onProcessExit(code) {
-        console.log('BackHostApp.onProcessExit:', code);
+        console.debug('BackHostApp.onProcessExit:', code);
+        console.log('exit:', code);
     }
     async onUncaughtException(err, origin) {
         console.error(safe_1.default.red('BackHostApp.onUncaughtException'), err);
