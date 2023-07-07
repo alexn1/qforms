@@ -5,7 +5,7 @@ export abstract class View<TController extends Controller> extends ReactComponen
     constructor(props) {
         super(props);
         if (!props.ctrl) throw new Error(`${this.constructor.name}: no ctrl`);
-        if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
+        // if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
     }
 
     getCtrl(): TController {

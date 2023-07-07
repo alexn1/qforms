@@ -40859,8 +40859,7 @@ class View extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
         super(props);
         if (!props.ctrl)
             throw new Error(`${this.constructor.name}: no ctrl`);
-        if (!props.onCreate)
-            throw new Error(`${this.constructor.name}: no onCreate`);
+        // if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
     }
     getCtrl() {
         return this.props.ctrl;

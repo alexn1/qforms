@@ -7,8 +7,7 @@ class View extends common_1.ReactComponent {
         super(props);
         if (!props.ctrl)
             throw new Error(`${this.constructor.name}: no ctrl`);
-        if (!props.onCreate)
-            throw new Error(`${this.constructor.name}: no onCreate`);
+        // if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
     }
     getCtrl() {
         return this.props.ctrl;
