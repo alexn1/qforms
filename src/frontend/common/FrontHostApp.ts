@@ -55,7 +55,7 @@ export class FrontHostApp {
     }
 
     async onWindowUnhandledrejection(e) {
-        console.debug('FrontHostApp.onWindowUnhandledrejection' /*, e*/);
+        console.debug('FrontHostApp.onWindowUnhandledrejection' /* , e */);
         try {
             e.preventDefault();
             const err = e instanceof Error ? e : e.reason || e.detail.reason;

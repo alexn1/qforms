@@ -153,12 +153,11 @@ export class ViewerModule {
         const applicationController = ApplicationController.create(application, frontHostApp);
         applicationController.init();
 
-        const appViewHtml = ReactDOMServer.renderToString(
-            React.createElement(applicationController.getViewClass(), {
-                ctrl: applicationController,
-                onCreate: (c) => {},
-            } as any),
-        );
+        const element = React.createElement(applicationController.getViewClass(), {
+            ctrl: applicationController,
+        });
+
+        const appViewHtml = ReactDOMServer.renderToString(element);
         // console.debug('appViewHtml:', appViewHtml);
 
         const html = bkApplication.renderIndexHtml(

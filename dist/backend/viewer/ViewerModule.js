@@ -106,10 +106,10 @@ class ViewerModule {
         // applicationController
         const applicationController = ApplicationController_1.ApplicationController.create(application, frontHostApp);
         applicationController.init();
-        const appViewHtml = server_1.default.renderToString(react_1.default.createElement(applicationController.getViewClass(), {
+        const element = react_1.default.createElement(applicationController.getViewClass(), {
             ctrl: applicationController,
-            onCreate: (c) => { },
-        }));
+        });
+        const appViewHtml = server_1.default.renderToString(element);
         // console.debug('appViewHtml:', appViewHtml);
         const html = bkApplication.renderIndexHtml(context, applicationController, pkg.version, links, scripts, data, appViewHtml);
         return html;
