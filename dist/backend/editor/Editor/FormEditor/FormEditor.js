@@ -33,7 +33,7 @@ class FormEditor extends Editor_1.Editor {
         };
     }
     async createJs(params) {
-        const templateFilePath = path_1.default.join(__dirname, 'Form.js.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Form.js.ejs');
         const customJsFilePath = await this.getCustomFilePath('js');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             page: this.getParent().getName(),
@@ -43,7 +43,7 @@ class FormEditor extends Editor_1.Editor {
         return js;
     }
     async createJsx(params) {
-        const templateFilePath = path_1.default.join(__dirname, 'Form.jsx.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Form.jsx.ejs');
         const customFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.getParent().getName(),
@@ -53,7 +53,7 @@ class FormEditor extends Editor_1.Editor {
         return jsx;
     }
     async createLess(params) {
-        const templateFilePath = path_1.default.join(__dirname, 'Form.less.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Form.less.ejs');
         const customFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customFilePath, templateFilePath, {
             page: this.getParent().getName(),
@@ -64,7 +64,7 @@ class FormEditor extends Editor_1.Editor {
     }
     async createModelBackJs(params) {
         const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(__dirname, 'Model.back.js.ejs');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             page: this.getParent().getName(),
             form: this.getName(),
