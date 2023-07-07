@@ -11,9 +11,10 @@ const BkApplication_1 = require("../../../viewer/BkModel/BkApplication/BkApplica
 const JsonFile_1 = require("../../../JsonFile");
 const PageEditor_1 = require("../PageEditor/PageEditor");
 class ApplicationEditor extends Editor_1.Editor {
-    constructor(appFile) {
+    constructor(appFile, editorPath) {
         super(appFile.data);
         this.appFile = appFile;
+        this.editorPath = editorPath;
         this.appInfo = BkApplication_1.BkApplication.makeAppInfoFromAppFile(appFile);
     }
     getAppFile() {
@@ -89,7 +90,7 @@ class ApplicationEditor extends Editor_1.Editor {
     }
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
-        const templateFilePath = path_1.default.join(__dirname, 'Application.js.ejs');
+        const templateFilePath = path_1.default.join(this.editorPath, 'Editor/ApplicationEditor/Application.js.ejs');
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             application: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),

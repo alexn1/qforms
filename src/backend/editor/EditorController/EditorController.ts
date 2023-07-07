@@ -1,3 +1,4 @@
+import path from 'path';
 import { BackHostApp } from '../../BackHostApp';
 import { ApplicationEditor } from '../Editor/ApplicationEditor/ApplicationEditor';
 import { AppInfo } from '../../AppInfo';
@@ -24,6 +25,9 @@ export class EditorController {
 
     createApplicationEditor() {
         console.debug('EditorController.createApplicationEditor');
-        return new ApplicationEditor(this.appInfo.appFile);
+        return new ApplicationEditor(
+            this.appInfo.appFile,
+            path.join(this.hostApp.backendDirPath, 'editor'),
+        );
     }
 }

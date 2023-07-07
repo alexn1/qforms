@@ -11,7 +11,7 @@ import { BkApplicationScheme } from '../../../viewer/BkModelScheme/BkApplication
 export class ApplicationEditor extends Editor<BkApplicationScheme> {
     appInfo: AppInfo;
 
-    constructor(private appFile: JsonFile) {
+    constructor(private appFile: JsonFile, private editorPath: string) {
         super(appFile.data);
         this.appInfo = BkApplication.makeAppInfoFromAppFile(appFile);
     }
@@ -96,7 +96,12 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
 
     async createJs(params) {
         const customJsFilePath = await this.getCustomFilePath('js');
-        const templateFilePath = path.join(__dirname, 'Application.js.ejs');
+
+        const templateFilePath = path.join(
+            this.editorPath,
+            'Editor/ApplicationEditor/Application.js.ejs',
+        );
+
         const js = await this.createFileByParams(customJsFilePath, templateFilePath, {
             application: this.getName(),
             _class: this.constructor.name.replace('Editor', ''),

@@ -1,3 +1,4 @@
+import path from 'path';
 import { JsonFile } from './JsonFile';
 import { ApplicationEditor } from './editor/Editor/ApplicationEditor/ApplicationEditor';
 import { BaseModel } from './BaseModel';
@@ -10,7 +11,7 @@ export class Converter {
         await appFile.read();
 
         // app
-        const appEditor = new ApplicationEditor(appFile);
+        const appEditor = new ApplicationEditor(appFile, path.join(__dirname, 'editor'));
         appEditor.reformat();
         await appEditor.save();
 
