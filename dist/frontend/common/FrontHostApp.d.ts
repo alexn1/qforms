@@ -1,5 +1,5 @@
 import { ChangesByKey } from '../viewer';
-import { RawRow, Scalar } from '../../types';
+import { RawRow } from '../../types';
 export interface FrontHostAppOptions {
     debug: boolean;
     url: URL;
@@ -27,7 +27,7 @@ export interface RequestBody {
     name?: string;
     uuid?: string;
     changes?: ChangesByKey;
-    params?: Record<string, Scalar>;
+    params?: Record<string, any>;
     row?: RawRow;
     newMode?: boolean;
 }

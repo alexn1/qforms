@@ -4,7 +4,6 @@ import { RequestBody, RequestMethod } from '../../../common';
 import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { ApplicationData } from '../../../../data';
-import { Scalar } from '../../../../types';
 export declare class Application extends Model<ApplicationData> {
     databases: Database[];
     dataSources: DataSource[];
@@ -25,7 +24,7 @@ export declare class Application extends Model<ApplicationData> {
     };
     getDomain(): any;
     getVirtualPath(): string;
-    rpc(name: string, params: Record<string, Scalar>): Promise<any>;
+    rpc(name: string, params: Record<string, any>): Promise<any>;
     emitResult(result: Result, source?: any): any;
     getNodeEnv(): string | null;
     isDevelopment(): boolean;

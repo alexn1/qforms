@@ -35,7 +35,7 @@ export class BkApplication<
     actions: BkAction[] = [];
     dataSources: BkDataSource[] = [];
     pages: { [pageLinkName: string]: BkPage } = {};
-    links: string[];
+    links: any[];
     scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
@@ -64,7 +64,7 @@ export class BkApplication<
         return this.hostApp;
     }
 
-    async getLinks(context: Context): Promise<string[]> {
+    async getLinks(context: Context): Promise<any[]> {
         const virtualPath = context.getVirtualPath();
         return (await BkHelper.getFilePaths(this.getPublicDirPath(), 'css')).map(
             (src) => `${virtualPath}/${src}`,

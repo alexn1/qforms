@@ -5,7 +5,6 @@ import { DataSource } from '../../Model/DataSource/DataSource';
 import { Result } from '../../../../Result';
 import { Helper } from '../../../common/Helper';
 import { ApplicationData } from '../../../../data';
-import { Scalar } from '../../../../types';
 
 export class Application extends Model<ApplicationData> {
     databases: Database[] = [];
@@ -93,7 +92,7 @@ export class Application extends Model<ApplicationData> {
         return this.getData().virtualPath;
     }
 
-    async rpc(name: string, params: Record<string, Scalar>) {
+    async rpc(name: string, params: Record<string, any>) {
         console.debug('Application.rpc', this.getFullName(), name, params);
         if (!name) throw new Error('no name');
         const response = await this.request('POST', {

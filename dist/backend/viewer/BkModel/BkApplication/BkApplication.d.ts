@@ -24,7 +24,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     pages: {
         [pageLinkName: string]: BkPage;
     };
-    links: string[];
+    links: any[];
     scripts: string[];
     menu: Record<string, any[]>;
     nav: Record<string, any[]>;
@@ -32,7 +32,7 @@ export declare class BkApplication<THostApp extends BackHostApp = BackHostApp> e
     constructor(appInfo: AppInfo, hostApp: THostApp, env?: string);
     init(context: Context): Promise<void>;
     getHostApp(): THostApp;
-    getLinks(context: Context): Promise<string[]>;
+    getLinks(context: Context): Promise<any[]>;
     getScripts(context: Context): Promise<string[]>;
     deinit(): Promise<void>;
     getDirPath(): string;
