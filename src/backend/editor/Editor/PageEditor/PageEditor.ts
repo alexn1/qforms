@@ -59,7 +59,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async createJsx(params) {
-        const templateFilePath = path.join(__dirname, 'Page.jsx.ejs');
+        const templateFilePath = path.join(this.getEditorPath(), 'Editor/PageEditor/age.jsx.ejs');
         const customJsxFilePath = await this.getCustomFilePath('jsx');
         const jsx = await this.createFileByParams(customJsxFilePath, templateFilePath, {
             page: this.getName(),
@@ -69,7 +69,7 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async createLess(params) {
-        const templateFilePath = path.join(__dirname, 'Page.less.ejs');
+        const templateFilePath = path.join(this.getEditorPath(), 'Editor/PageEditor/Page.less.ejs');
         const customLessFilePath = await this.getCustomFilePath('less');
         const less = await this.createFileByParams(customLessFilePath, templateFilePath, {
             page: this.getName(),
@@ -79,8 +79,11 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path.join(__dirname, 'Model.back.js.ejs');
+        const filePath = path.join(
+            await this.getCustomDirPath(),
+            'Editor/PageEditor/Model.back.js',
+        );
+        const templateFilePath = path.join(this.getEditorPath(), 'Model.back.js.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });
