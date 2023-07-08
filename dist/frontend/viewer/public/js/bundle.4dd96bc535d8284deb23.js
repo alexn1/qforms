@@ -350,10 +350,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModalController/EdModalView.less":
-/*!****************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/EdModalView.less ***!
-  \****************************************************************/
+/***/ "./src/frontend/viewer/Controller/AlertController/AlertView.less":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/AlertController/AlertView.less ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -362,10 +362,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModalController/NewModelView.less":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewModelView.less ***!
-  \*****************************************************************/
+/***/ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.less":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ConfirmController/ConfirmView.less ***!
+  \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -374,10 +374,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less":
-/*!**********************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less ***!
-  \**********************************************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/LoginController/LoginView.less":
+/*!***********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/LoginController/LoginView.less ***!
+  \***********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -386,10 +386,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less":
-/*!********************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less ***!
-  \********************************************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less":
+/*!***************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less ***!
+  \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -398,10 +398,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less":
-/*!*************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less ***!
-  \*************************************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less":
+/*!***************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less ***!
+  \***************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -410,10 +410,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less":
-/*!*******************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less ***!
-  \*******************************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.less":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.less ***!
+  \************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -422,10 +422,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less":
-/*!*********************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less ***!
-  \*********************************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.less":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.less ***!
+  \********************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -434,10 +434,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less":
-/*!****************************************************************************!*\
-  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less ***!
-  \****************************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.less":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.less ***!
+  \************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -446,10 +446,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/PropertyGrid/PropertyGrid.less":
-/*!************************************************************!*\
-  !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.less ***!
-  \************************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.less":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.less ***!
+  \****************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -458,10 +458,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/TreeWidget/TreeWidget.less":
-/*!********************************************************!*\
-  !*** ./src/frontend/editor/TreeWidget/TreeWidget.less ***!
-  \********************************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.less":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.less ***!
+  \************************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -470,10 +470,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/style/editor.less":
-/*!***********************************************!*\
-  !*** ./src/frontend/editor/style/editor.less ***!
-  \***********************************************/
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less ***!
+  \****************************************************************************************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -482,9 +482,189 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/style/error.less":
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less ***!
+  \****************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.less":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.less ***!
+  \************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.less":
+/*!******************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.less ***!
+  \******************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less":
+/*!******************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less ***!
+  \******************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.less":
+/*!************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.less ***!
+  \************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.less":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.less ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.less":
+/*!****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.less ***!
+  \****************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.less":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.less ***!
+  \******************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.less":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.less ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.less":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.less ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less":
+/*!**********************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less ***!
+  \**********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less":
+/*!**************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.less":
+/*!*************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/PageController/PageView.less ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/application.less":
+/*!****************************************************!*\
+  !*** ./src/frontend/viewer/style/application.less ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/field.less":
 /*!**********************************************!*\
-  !*** ./src/frontend/editor/style/error.less ***!
+  !*** ./src/frontend/viewer/style/field.less ***!
   \**********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -494,9 +674,33 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/style/global.less":
+/***/ "./src/frontend/viewer/style/form.less":
+/*!*********************************************!*\
+  !*** ./src/frontend/viewer/style/form.less ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/page.less":
+/*!*********************************************!*\
+  !*** ./src/frontend/viewer/style/page.less ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/paging.less":
 /*!***********************************************!*\
-  !*** ./src/frontend/editor/style/global.less ***!
+  !*** ./src/frontend/viewer/style/paging.less ***!
   \***********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
@@ -506,10 +710,34 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/frontend/editor/style/tree-bar.less":
-/*!*************************************************!*\
-  !*** ./src/frontend/editor/style/tree-bar.less ***!
-  \*************************************************/
+/***/ "./src/frontend/viewer/style/toolbar-button.less":
+/*!*******************************************************!*\
+  !*** ./src/frontend/viewer/style/toolbar-button.less ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/toolbar-dropdown-button.less":
+/*!****************************************************************!*\
+  !*** ./src/frontend/viewer/style/toolbar-dropdown-button.less ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/style/version-notification.less":
+/*!*************************************************************!*\
+  !*** ./src/frontend/viewer/style/version-notification.less ***!
+  \*************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
@@ -31675,6 +31903,91 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "./src/Result.ts":
+/*!***********************!*\
+  !*** ./src/Result.ts ***!
+  \***********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DatabaseResult": () => (/* binding */ DatabaseResult),
+/* harmony export */   "InsertExResult": () => (/* binding */ InsertExResult),
+/* harmony export */   "Result": () => (/* binding */ Result),
+/* harmony export */   "TableResult": () => (/* binding */ TableResult),
+/* harmony export */   "UpdateEx": () => (/* binding */ UpdateEx),
+/* harmony export */   "UpdateResult": () => (/* binding */ UpdateResult)
+/* harmony export */ });
+class InsertExResult {
+}
+class UpdateResult {
+}
+class UpdateEx {
+}
+class TableResult {
+}
+class DatabaseResult {
+}
+class Result {
+    static addInsertToResult(result, dName, tName, key) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].insert)
+            result[dName][tName].insert = [];
+        result[dName][tName].insert.push(key);
+    }
+    static addInsertExToResult(result, dName, tName, key, row) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].insertEx)
+            result[dName][tName].insertEx = new InsertExResult();
+        result[dName][tName].insertEx[key] = row;
+    }
+    static addUpdateToResult(result, dName, tName, oldKey, newKey) {
+        // console.debug('Result.addUpdateToResult');
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].update)
+            result[dName][tName].update = new UpdateResult();
+        result[dName][tName].update[oldKey] = newKey;
+    }
+    static addUpdateExToResult(result, dName, tName, oldKey, row) {
+        // console.debug('Result.addUpdateExToResult');
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].updateEx)
+            result[dName][tName].updateEx = new UpdateEx();
+        result[dName][tName].updateEx[oldKey] = row;
+    }
+    static addDeleteToResult(result, dName, tName, key) {
+        if (!result[dName])
+            result[dName] = new DatabaseResult();
+        if (!result[dName][tName])
+            result[dName][tName] = new TableResult();
+        if (!result[dName][tName].delete)
+            result[dName][tName].delete = [];
+        result[dName][tName].delete.push(key);
+    }
+    static addTableToResult(result, dName, tName, tResult) {
+        if (!result[dName])
+            result[dName] = {};
+        if (result[dName][tName])
+            throw new Error(`table ${tName} already exists`);
+        result[dName][tName] = tResult;
+    }
+}
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/FrontHostApp.ts":
 /*!*********************************************!*\
   !*** ./src/frontend/common/FrontHostApp.ts ***!
@@ -32909,6 +33222,79 @@ if (typeof window === 'object') {
 
 /***/ }),
 
+/***/ "./src/frontend/common/icon/index.ts":
+/*!*******************************************!*\
+  !*** ./src/frontend/common/icon/index.ts ***!
+  \*******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__.ArrowIcon),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _CancelIcon__WEBPACK_IMPORTED_MODULE_11__.CancelIcon),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _CloseIcon__WEBPACK_IMPORTED_MODULE_0__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__.CloseIcon2),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _DateIcon__WEBPACK_IMPORTED_MODULE_18__.DateIcon),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _DoneIcon__WEBPACK_IMPORTED_MODULE_10__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _DownIcon__WEBPACK_IMPORTED_MODULE_17__.DownIcon),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _EditIcon__WEBPACK_IMPORTED_MODULE_15__.EditIcon),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _LeftIcon__WEBPACK_IMPORTED_MODULE_1__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _LocationIcon__WEBPACK_IMPORTED_MODULE_8__.LocationIcon),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__.PasswordIcon),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__.PhoneIcon),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _RightIcon__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__.SettingsIcon),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _TimeIcon__WEBPACK_IMPORTED_MODULE_19__.TimeIcon),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__.VisibilityOffIcon)
+/* harmony export */ });
+/* harmony import */ var _CloseIcon__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
+/* harmony import */ var _LeftIcon__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
+/* harmony import */ var _RightIcon__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
+/* harmony import */ var _OpenInNewIcon__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
+/* harmony import */ var _MoreVertIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
+/* harmony import */ var _CloseIcon2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
+/* harmony import */ var _VisibilityIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
+/* harmony import */ var _VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
+/* harmony import */ var _LocationIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
+/* harmony import */ var _SettingsIcon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
+/* harmony import */ var _DoneIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
+/* harmony import */ var _CancelIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
+/* harmony import */ var _PhoneIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
+/* harmony import */ var _PasswordIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
+/* harmony import */ var _DeleteIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
+/* harmony import */ var _EditIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
+/* harmony import */ var _ArrowIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
+/* harmony import */ var _DownIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
+/* harmony import */ var _DateIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
+/* harmony import */ var _TimeIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
 /***/ "./src/frontend/common/index.ts":
 /*!**************************************!*\
   !*** ./src/frontend/common/index.ts ***!
@@ -32917,164 +33303,72 @@ if (typeof window === 'object') {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__.ArrowIcon),
-/* harmony export */   "Box": () => (/* reexport safe */ _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__.Box),
-/* harmony export */   "Button": () => (/* reexport safe */ _widget_Button__WEBPACK_IMPORTED_MODULE_27__.Button),
-/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__.CancelIcon),
-/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__.CheckBox),
-/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__.CheckBoxList),
-/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
-/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__.CloseIcon2),
-/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__.ComboBox),
-/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__.DateIcon),
-/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__.DatePicker),
-/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__.DeleteIcon),
-/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__.DoneIcon),
-/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__.DownIcon),
-/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__.DropdownButton),
-/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__.DropdownDatePicker),
-/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__.EditIcon),
-/* harmony export */   "Expand": () => (/* reexport safe */ _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__.Expand),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.CheckBoxList),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.CloseIcon2),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.ComboBox),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DatePicker),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Expand),
 /* harmony export */   "FrontHostApp": () => (/* reexport safe */ _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp),
-/* harmony export */   "Grid": () => (/* reexport safe */ _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__.Grid),
-/* harmony export */   "GridCell": () => (/* reexport safe */ _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__.GridCell),
-/* harmony export */   "GridRow": () => (/* reexport safe */ _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__.GridRow),
+/* harmony export */   "Grid": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.GridRow),
 /* harmony export */   "Helper": () => (/* reexport safe */ _Helper__WEBPACK_IMPORTED_MODULE_1__.Helper),
-/* harmony export */   "Image": () => (/* reexport safe */ _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__.Image),
-/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__.LeftIcon),
-/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__.LocationIcon),
-/* harmony export */   "Menu": () => (/* reexport safe */ _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__.Menu),
-/* harmony export */   "Modal": () => (/* reexport safe */ _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__.Modal),
-/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__.MoreVertIcon),
-/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__.OpenInNewIcon),
-/* harmony export */   "Password": () => (/* reexport safe */ _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__.Password),
-/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__.PasswordIcon),
-/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__.PhoneBox),
-/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__.PhoneIcon),
-/* harmony export */   "Radio": () => (/* reexport safe */ _widget_Radio__WEBPACK_IMPORTED_MODULE_51__.Radio),
+/* harmony export */   "Image": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Image),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LeftIcon),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.LocationIcon),
+/* harmony export */   "Menu": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.OpenInNewIcon),
+/* harmony export */   "Password": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Password),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PasswordIcon),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.PhoneBox),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Radio),
 /* harmony export */   "ReactComponent": () => (/* reexport safe */ _ReactComponent__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
-/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__.RightIcon),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.RightIcon),
 /* harmony export */   "Search": () => (/* reexport safe */ _Search__WEBPACK_IMPORTED_MODULE_3__.Search),
-/* harmony export */   "Select": () => (/* reexport safe */ _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__.Select),
-/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__.SettingsIcon),
-/* harmony export */   "Slider": () => (/* reexport safe */ _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__.Slider),
-/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__.Statusbar),
-/* harmony export */   "Tab": () => (/* reexport safe */ _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__.Tab),
-/* harmony export */   "Tab2": () => (/* reexport safe */ _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__.Tab2),
-/* harmony export */   "TextArea": () => (/* reexport safe */ _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__.TextArea),
-/* harmony export */   "TextBox": () => (/* reexport safe */ _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__.TextBox),
-/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__.TimeBox),
-/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__.TimeBox2),
-/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__.TimeIcon),
-/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__.Tooltip),
-/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__.VisibilityIcon),
-/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__.VisibilityOffIcon)
+/* harmony export */   "Select": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _widget__WEBPACK_IMPORTED_MODULE_5__.Tooltip),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _icon__WEBPACK_IMPORTED_MODULE_4__.VisibilityOffIcon)
 /* harmony export */ });
 /* harmony import */ var _FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
 /* harmony import */ var _Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Helper */ "./src/frontend/common/Helper.ts");
 /* harmony import */ var _ReactComponent__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReactComponent */ "./src/frontend/common/ReactComponent.tsx");
 /* harmony import */ var _Search__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Search */ "./src/frontend/common/Search.ts");
-/* harmony import */ var _icon_CloseIcon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon/CloseIcon */ "./src/frontend/common/icon/CloseIcon.tsx");
-/* harmony import */ var _icon_LeftIcon__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./icon/LeftIcon */ "./src/frontend/common/icon/LeftIcon.tsx");
-/* harmony import */ var _icon_RightIcon__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./icon/RightIcon */ "./src/frontend/common/icon/RightIcon.tsx");
-/* harmony import */ var _icon_OpenInNewIcon__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./icon/OpenInNewIcon */ "./src/frontend/common/icon/OpenInNewIcon.tsx");
-/* harmony import */ var _icon_MoreVertIcon__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./icon/MoreVertIcon */ "./src/frontend/common/icon/MoreVertIcon.tsx");
-/* harmony import */ var _icon_CloseIcon2__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./icon/CloseIcon2 */ "./src/frontend/common/icon/CloseIcon2.tsx");
-/* harmony import */ var _icon_VisibilityIcon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./icon/VisibilityIcon */ "./src/frontend/common/icon/VisibilityIcon.tsx");
-/* harmony import */ var _icon_VisibilityOffIcon__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./icon/VisibilityOffIcon */ "./src/frontend/common/icon/VisibilityOffIcon.tsx");
-/* harmony import */ var _icon_LocationIcon__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./icon/LocationIcon */ "./src/frontend/common/icon/LocationIcon.tsx");
-/* harmony import */ var _icon_SettingsIcon__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./icon/SettingsIcon */ "./src/frontend/common/icon/SettingsIcon.tsx");
-/* harmony import */ var _icon_DoneIcon__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./icon/DoneIcon */ "./src/frontend/common/icon/DoneIcon.tsx");
-/* harmony import */ var _icon_CancelIcon__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./icon/CancelIcon */ "./src/frontend/common/icon/CancelIcon.tsx");
-/* harmony import */ var _icon_PhoneIcon__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./icon/PhoneIcon */ "./src/frontend/common/icon/PhoneIcon.tsx");
-/* harmony import */ var _icon_PasswordIcon__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./icon/PasswordIcon */ "./src/frontend/common/icon/PasswordIcon.tsx");
-/* harmony import */ var _icon_DeleteIcon__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./icon/DeleteIcon */ "./src/frontend/common/icon/DeleteIcon.tsx");
-/* harmony import */ var _icon_EditIcon__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./icon/EditIcon */ "./src/frontend/common/icon/EditIcon.tsx");
-/* harmony import */ var _icon_ArrowIcon__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./icon/ArrowIcon */ "./src/frontend/common/icon/ArrowIcon.tsx");
-/* harmony import */ var _icon_DownIcon__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./icon/DownIcon */ "./src/frontend/common/icon/DownIcon.tsx");
-/* harmony import */ var _icon_DateIcon__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./icon/DateIcon */ "./src/frontend/common/icon/DateIcon.tsx");
-/* harmony import */ var _icon_TimeIcon__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./icon/TimeIcon */ "./src/frontend/common/icon/TimeIcon.tsx");
-/* harmony import */ var _widget_Box_Box__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./widget/Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
-/* harmony import */ var _widget_CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./widget/CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
-/* harmony import */ var _widget_ComboBox__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./widget/ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
-/* harmony import */ var _widget_Button__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./widget/Button */ "./src/frontend/common/widget/Button.tsx");
-/* harmony import */ var _widget_Tab_Tab__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./widget/Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
-/* harmony import */ var _widget_DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./widget/DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
-/* harmony import */ var _widget_TextBox__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./widget/TextBox */ "./src/frontend/common/widget/TextBox.tsx");
-/* harmony import */ var _widget_Grid_Grid__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./widget/Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
-/* harmony import */ var _widget_GridRow_GridRow__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./widget/GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
-/* harmony import */ var _widget_GridCell_GridCell__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./widget/GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
-/* harmony import */ var _widget_Modal_Modal__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./widget/Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
-/* harmony import */ var _widget_Password_Password__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./widget/Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
-/* harmony import */ var _widget_Menu_Menu__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./widget/Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
-/* harmony import */ var _widget_Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./widget/Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
-/* harmony import */ var _widget_Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./widget/Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
-/* harmony import */ var _widget_DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./widget/DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
-/* harmony import */ var _widget_DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./widget/DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
-/* harmony import */ var _widget_Select_Select__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./widget/Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
-/* harmony import */ var _widget_TextArea__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./widget/TextArea */ "./src/frontend/common/widget/TextArea.tsx");
-/* harmony import */ var _widget_Tab2_Tab2__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./widget/Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
-/* harmony import */ var _widget_PhoneBox__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./widget/PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
-/* harmony import */ var _widget_TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./widget/TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
-/* harmony import */ var _widget_Image_Image__WEBPACK_IMPORTED_MODULE_47__ = __webpack_require__(/*! ./widget/Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
-/* harmony import */ var _widget_CheckBoxList__WEBPACK_IMPORTED_MODULE_48__ = __webpack_require__(/*! ./widget/CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
-/* harmony import */ var _widget_Slider_Slider__WEBPACK_IMPORTED_MODULE_49__ = __webpack_require__(/*! ./widget/Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
-/* harmony import */ var _widget_Expand_Expand__WEBPACK_IMPORTED_MODULE_50__ = __webpack_require__(/*! ./widget/Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
-/* harmony import */ var _widget_Radio__WEBPACK_IMPORTED_MODULE_51__ = __webpack_require__(/*! ./widget/Radio */ "./src/frontend/common/widget/Radio.tsx");
+/* harmony import */ var _icon__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./icon */ "./src/frontend/common/icon/index.ts");
+/* harmony import */ var _widget__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./widget */ "./src/frontend/common/widget/index.ts");
 
 
 
 
 // icon
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // widget
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -35683,5386 +35977,7942 @@ if (typeof window === 'object') {
 
 /***/ }),
 
-/***/ "./src/frontend/editor/ActionList/ActionList.tsx":
-/*!*******************************************************!*\
-  !*** ./src/frontend/editor/ActionList/ActionList.tsx ***!
-  \*******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ActionList": () => (/* binding */ ActionList)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-
-
-class ActionList extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onClick = async (li) => {
-            console.debug('ActionList.onClick', li);
-            await this.props.onClick(li.dataset.action);
-        };
-        this.state = {
-            item: null,
-        };
-    }
-    render() {
-        // console.debug('ActionList.render', this.state.item);
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.DropdownButton, { title: 'Actions', onClick: this.onClick, actions: this.state.item
-                ? this.state.item.getActions().map((action) => {
-                    return { name: action.action, title: action.caption };
-                })
-                : [] }));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts":
-/*!**********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts ***!
-  \**********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChangeClassController": () => (/* binding */ ChangeClassController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeClassView */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx");
-
-
-class ChangeClassController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _ChangeClassView__WEBPACK_IMPORTED_MODULE_1__.ChangeClassView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx":
-/*!*****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassView.tsx ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ChangeClassView": () => (/* binding */ ChangeClassView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class ChangeClassView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "Change Field Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                    { value: 'TextBoxField' },
-                                    { value: 'ComboBoxField' },
-                                    { value: 'TextAreaField' },
-                                    { value: 'LinkField' },
-                                    { value: 'ImageField' },
-                                    { value: 'LabelField' },
-                                    { value: 'DateField' },
-                                    { value: 'TimeField' },
-                                    { value: 'DateTimeField' },
-                                    { value: 'CheckBoxField' },
-                                    { value: 'CheckBoxListField' },
-                                    { value: 'FileField' },
-                                    { value: 'PhoneField' },
-                                    { value: 'PasswordField' },
-                                    { value: 'RadioField' },
-                                ], value: ctrl.options.fieldCtrl.model.getClassName(), onCreate: (c) => (this.class = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "change", type: "button", onClick: this.onCreate }, { children: "Change" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/EdModalController.ts":
-/*!********************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/EdModalController.ts ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdModalController": () => (/* binding */ EdModalController)
-/* harmony export */ });
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-class EdModalController {
-    constructor(options) {
-        this.onClose = async (e) => {
-            console.debug('ModalController.onClose');
-            await this.close();
-        };
-        this.onCreate = async (values) => {
-            console.debug('ModalController.onCreate', values);
-            await this.close();
-            if (this.options.onCreate) {
-                await this.options.onCreate(values);
-            }
-        };
-        this.options = options;
-    }
-    async close() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp.editorApp.onModalClose();
-    }
-    getViewClass() {
-        throw new Error('ModalController.getViewClass not implemented');
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/EdModalView.tsx":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/EdModalView.tsx ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdModalView": () => (/* binding */ EdModalView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdModalView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdModalView.less */ "./src/frontend/editor/EdModalController/EdModalView.less");
-/* harmony import */ var _NewModelView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./NewModelView.less */ "./src/frontend/editor/EdModalController/NewModelView.less");
-
-
-
-
-
-class EdModalView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Modal, { children: react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), {
-                ctrl,
-                onCreate: (c) => (ctrl.view = c),
-            }) }));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts":
-/*!******************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts ***!
-  \******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewActionController": () => (/* binding */ NewActionController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewActionView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewActionView */ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx");
-
-
-class NewActionController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewActionView__WEBPACK_IMPORTED_MODULE_1__.NewActionView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx":
-/*!*************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewActionController/NewActionView.tsx ***!
-  \*************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewActionView": () => (/* binding */ NewActionView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewActionView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewActionView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Action" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts":
-/*!******************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts ***!
-  \******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewColumnController": () => (/* binding */ NewColumnController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewColumnView */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx");
-
-
-class NewColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewColumnView__WEBPACK_IMPORTED_MODULE_1__.NewColumnView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx":
-/*!*************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewColumnController/NewColumnView.tsx ***!
-  \*************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewColumnView": () => (/* binding */ NewColumnView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "columnName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "columnName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts":
-/*!**************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts ***!
-  \**************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDataSourceController": () => (/* binding */ NewDataSourceController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDataSourceView */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx");
-
-
-class NewDataSourceController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewDataSourceView__WEBPACK_IMPORTED_MODULE_1__.NewDataSourceView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx":
-/*!*********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceView.tsx ***!
-  \*********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDataSourceView": () => (/* binding */ NewDataSourceView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewDataSourceView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Data Source" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                        { value: 'DataSource', title: 'DataSource' },
-                                        { value: 'SqlDataSource', title: 'SqlDataSource' },
-                                        { value: 'NoSqlDataSource', title: 'NoSqlDataSource' },
-                                    ], onCreate: (c) => (this.class = c), value: 'SqlDataSource' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts":
-/*!**********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts ***!
-  \**********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDatabaseController": () => (/* binding */ NewDatabaseController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewDatabaseView */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx");
-
-
-class NewDatabaseController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewDatabaseView__WEBPACK_IMPORTED_MODULE_1__.NewDatabaseView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx":
-/*!*****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseView.tsx ***!
-  \*****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewDatabaseView": () => (/* binding */ NewDatabaseView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewDatabaseView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                host: this.host.getValue(),
-                database: this.database.getValue(),
-                user: this.user.getValue(),
-                password: this.password.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-        this.name = null;
-        this.host = null;
-        this.database = null;
-        this.user = null;
-        this.password = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `NewModelView__title` }, { children: "New Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__body` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: 'class', items: [
-                                        { value: 'MySqlDatabase', title: 'MySqlDatabase' },
-                                        { value: 'PostgreSqlDatabase', title: 'PostgreSqlDatabase' },
-                                        { value: 'MongoDbDatabase', title: 'MongoDbDatabase' },
-                                    ], onCreate: (c) => (this.class = c), value: 'PostgreSqlDatabase' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'name', value: 'default', onCreate: (c) => (this.name = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "host" }, { children: "Host" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'host', value: 'localhost', onCreate: (c) => (this.host = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "database" }, { children: "Database" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'database', value: 'test', onCreate: (c) => (this.database = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "User" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'user', value: 'test', onCreate: (c) => (this.user = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "user" }, { children: "Password" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: 'password', value: '123qwe', onCreate: (c) => (this.password = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `NewModelView__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ name: "create", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFieldController": () => (/* binding */ NewFieldController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFieldView */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx");
-
-
-class NewFieldController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewFieldView__WEBPACK_IMPORTED_MODULE_1__.NewFieldView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx":
-/*!***********************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFieldController/NewFieldView.tsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFieldView": () => (/* binding */ NewFieldView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFieldView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewFieldView.onCreate');
-            await this.props.ctrl.onCreate({
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                caption: this.caption.getValue() || this.name.getValue(),
-                type: this.type.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.class = null;
-        this.name = null;
-        this.caption = null;
-        this.type = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Field" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", items: [
-                                        { value: 'TextBoxField' },
-                                        { value: 'ComboBoxField' },
-                                        { value: 'TextAreaField' },
-                                        { value: 'LinkField' },
-                                        { value: 'ImageField' },
-                                        { value: 'LabelField' },
-                                        { value: 'DateField' },
-                                        { value: 'TimeField' },
-                                        { value: 'DateTimeField' },
-                                        { value: 'CheckBoxField' },
-                                        { value: 'CheckBoxListField' },
-                                        { value: 'FileField' },
-                                        { value: 'PhoneField' },
-                                        { value: 'PasswordField' },
-                                        { value: 'RadioField' },
-                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "type" }, { children: "Type" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "type", value: '', items: [
-                                        { value: '', title: '' },
-                                        { value: 'string', title: 'string' },
-                                        { value: 'number', title: 'number' },
-                                        { value: 'boolean', title: 'boolean' },
-                                        { value: 'object', title: 'object' },
-                                        { value: 'date', title: 'date' },
-                                    ], onCreate: (c) => (this.type = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormController": () => (/* binding */ NewFormController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormView */ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx");
-
-
-class NewFormController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewFormView__WEBPACK_IMPORTED_MODULE_1__.NewFormView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFormController/NewFormView.tsx ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormView": () => (/* binding */ NewFormView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFormView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-                class: this.class.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-        this.class = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "formClass" }, { children: "Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "formClass", value: 'TableForm', items: [
-                                        { value: 'RowForm', title: 'RowForm' },
-                                        { value: 'TableForm', title: 'TableForm' },
-                                        { value: 'Form', title: 'Form' },
-                                    ], onCreate: (c) => (this.class = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts":
-/*!********************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts ***!
-  \********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormFromTableController": () => (/* binding */ NewFormFromTableController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewFormFromTableView */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx");
-
-
-class NewFormFromTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewFormFromTableView__WEBPACK_IMPORTED_MODULE_1__.NewFormFromTableView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx":
-/*!***************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableView.tsx ***!
-  \***************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewFormFromTableView": () => (/* binding */ NewFormFromTableView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewFormFromTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewDataSourceView.onCreate');
-            await this.props.ctrl.onCreate({
-                page: this.page.getValue(),
-                class: this.class.getValue(),
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.page = null;
-        this.class = null;
-        this.name = null;
-        this.caption = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        const tableController = ctrl.options.tableController;
-        const pages = tableController.model.parent.parent.pageLinks.map((pageLink) => ({
-            value: pageLink.getName(),
-            title: pageLink.getName(),
-        }));
-        console.debug('pages:', pages);
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Form" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "table" }, { children: "Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "table", disabled: true, value: tableController.model.getName() })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "page" }, { children: "Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "page", items: pages, value: pages[pages.length - 1].value, onCreate: (c) => (this.page = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "class" }, { children: "Form Class" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "class", value: 'TableForm', items: [
-                                        { value: 'RowForm', title: 'RowForm' },
-                                        { value: 'TableForm', title: 'TableForm' },
-                                    ], onCreate: (c) => (this.class = c) })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", value: ctrl.options.tableController.model.getName(), onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts":
-/*!************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts ***!
-  \************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewKeyColumnController": () => (/* binding */ NewKeyColumnController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewKeyColumnView */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx");
-
-
-class NewKeyColumnController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewKeyColumnView__WEBPACK_IMPORTED_MODULE_1__.NewKeyColumnView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx":
-/*!*******************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnView.tsx ***!
-  \*******************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewKeyColumnView": () => (/* binding */ NewKeyColumnView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewKeyColumnView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Key Column" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewPageController": () => (/* binding */ NewPageController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewPageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewPageView */ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx");
-
-
-class NewPageController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewPageView__WEBPACK_IMPORTED_MODULE_1__.NewPageView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx":
-/*!*********************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewPageController/NewPageView.tsx ***!
-  \*********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewPageView": () => (/* binding */ NewPageView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewPageView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewPageView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-                caption: this.caption.getValue(),
-                startup: this.startup.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-        this.caption = null;
-        this.startup = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Page" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__body' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "caption" }, { children: "Caption" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "caption", onCreate: (c) => (this.caption = c), autocomplete: 'off' })] }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "startup" }, { children: "Startup" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.ComboBox, { id: "startup", items: [
-                                        { value: 'false', title: 'false' },
-                                        { value: 'true', title: 'true' },
-                                    ], onCreate: (c) => (this.startup = c) })] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewParamController": () => (/* binding */ NewParamController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewParamView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewParamView */ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx");
-
-
-class NewParamController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewParamView__WEBPACK_IMPORTED_MODULE_1__.NewParamView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx":
-/*!***********************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewParamController/NewParamView.tsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewParamView": () => (/* binding */ NewParamView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewParamView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Param" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "name" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "name", onCreate: (c) => (this.name = c), autocomplete: 'off', autoFocus: true })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewTableController": () => (/* binding */ NewTableController)
-/* harmony export */ });
-/* harmony import */ var _EdModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModalController */ "./src/frontend/editor/EdModalController/EdModalController.ts");
-/* harmony import */ var _NewTableView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./NewTableView */ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx");
-
-
-class NewTableController extends _EdModalController__WEBPACK_IMPORTED_MODULE_0__.EdModalController {
-    getViewClass() {
-        return _NewTableView__WEBPACK_IMPORTED_MODULE_1__.NewTableView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx":
-/*!***********************************************************************************!*\
-  !*** ./src/frontend/editor/EdModalController/NewTableController/NewTableView.tsx ***!
-  \***********************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "NewTableView": () => (/* binding */ NewTableView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class NewTableView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onCreate = async (e) => {
-            // console.debug('NewParamView.onCreate');
-            await this.props.ctrl.onCreate({
-                name: this.name.getValue(),
-            });
-        };
-        this.onKeyDown = (e) => {
-            if (e.key === 'Escape') {
-                this.props.ctrl.onClose();
-            }
-            else if (e.key === 'Enter') {
-                this.onCreate();
-            }
-        };
-        this.el = (0,react__WEBPACK_IMPORTED_MODULE_1__.createRef)();
-        this.name = null;
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} NewModelView`, ref: this.el, tabIndex: 0, onKeyDown: this.onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__header' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__title' }, { children: "New Table" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", className: "close", onClick: ctrl.onClose }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { children: "\u00D7" }) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'NewModelView__body' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("label", Object.assign({ htmlFor: "tableName" }, { children: "Name" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { id: "tableName", onCreate: (c) => (this.name = c) })] }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'NewModelView__footer' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ type: "button", onClick: ctrl.onClose }, { children: "Close" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ name: "create", type: "button", onClick: this.onCreate }, { children: "Create" }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdActionController": () => (/* binding */ EdActionController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-
-class EdActionController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getActions() {
-        return [
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('actions', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('actions', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-        }
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeAction(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts":
-/*!****************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts ***!
-  \****************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdColumnController": () => (/* binding */ EdColumnController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-
-
-class EdColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getActions() {
-        return [{ action: 'delete', caption: 'Delete' }];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-        }
-    }
-    static async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action: 'getView',
-            params: {
-                view: view,
-            },
-        });
-    }
-    getPropList() {
-        const propList = super.getPropList();
-        propList.options['key'] = ['true', 'false'];
-        propList.options['auto'] = ['true', 'false'];
-        propList.options['nullable'] = ['true', 'false'];
-        propList.options['type'] = ['', 'string', 'number', 'boolean', 'object', 'date'];
-        /*propList.options['dbType']   = [
-            '',
-            'integer',
-            'character varying',
-            'boolean',
-            'timestamp with time zone',
-            'text',
-            'json',
-        ];*/
-        return propList;
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeColumn(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts":
-/*!*********************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts ***!
-  \*********************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdDataSourceController": () => (/* binding */ EdDataSourceController)
-/* harmony export */ });
-/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
-/* harmony import */ var _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdKeyColumnController/EdKeyColumnController */ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EdModalController/NewKeyColumnController/NewKeyColumnController */ "./src/frontend/editor/EdModalController/NewKeyColumnController/NewKeyColumnController.ts");
-/* harmony import */ var _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx");
-/* harmony import */ var _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EdNoSqlDataSourceView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx");
-
-
-
-
-
-
-class EdDataSourceController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.onCreateModelBack = async (e) => {
-            const data = await this.model.createModelBackJs();
-        };
-        this.keyColumns = [];
-        this.items = [
-            {
-                getTitle: () => 'Key Columns',
-                items: this.keyColumns,
-            },
-        ];
-    }
-    getTitle() {
-        return `${this.model.getClassName()}: ${this.model.getName()}`;
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'brown',
-        };
-    }
-    init() {
-        this.model.keyColumns.forEach((keyColumn) => this.createKeyColumn(keyColumn));
-    }
-    createKeyColumn(model) {
-        const keyColumn = new _EdKeyColumnController_EdKeyColumnController__WEBPACK_IMPORTED_MODULE_1__.EdKeyColumnController(model, this);
-        keyColumn.init();
-        this.keyColumns.push(keyColumn);
-        return keyColumn;
-    }
-    removeKeyColumn(keyColumnController) {
-        console.debug('DataSourceController.removeKeyColumn', keyColumnController.getTitle());
-        const i = this.keyColumns.indexOf(keyColumnController);
-        if (i === -1)
-            throw new Error('no such keyColumnController');
-        this.keyColumns.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newItem', caption: 'New Key Column' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'newItem':
-                await this.actionNewKeyColumn();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('dataSources', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('dataSources', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-        }
-    }
-    async actionNewKeyColumn() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewKeyColumnController_NewKeyColumnController__WEBPACK_IMPORTED_MODULE_3__.NewKeyColumnController({
-            onCreate: async (values) => {
-                const keyColumn = await this.model.newKeyColumn(values.name);
-                const keyColumnController = this.createKeyColumn(keyColumn);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(keyColumnController);
-                keyColumnController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    getPropList() {
-        const propList = {
-            list: {},
-            options: {},
-        };
-        // list
-        for (const name in this.model.data['@attributes']) {
-            if (!['countQuery', 'singleQuery', 'multipleQuery', 'selectQuery'].includes(name)) {
-                propList.list[name] = this.model.data['@attributes'][name];
-            }
-        }
-        return propList;
-    }
-    getDocumentViewClass() {
-        if (this.model.getClassName() === 'SqlDataSource')
-            return _EdSqlDataSourceView__WEBPACK_IMPORTED_MODULE_4__.EdSqlDataSourceView;
-        if (this.model.getClassName() === 'NoSqlDataSource')
-            return _EdNoSqlDataSourceView__WEBPACK_IMPORTED_MODULE_5__.EdNoSqlDataSourceView;
-        return super.getDocumentViewClass();
-    }
-    async onSaveClick(name, value) {
-        // console.debug('DataSourceController.onSaveClick', name, value);
-        await this.model.setValue(name, value);
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeDataSource(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx":
-/*!*********************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.tsx ***!
-  \*********************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdNoSqlDataSourceView": () => (/* binding */ EdNoSqlDataSourceView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdNoSqlDataSourceView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdNoSqlDataSourceView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdNoSqlDataSourceView.less");
-
-
-
-
-
-class EdNoSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
-    constructor(props) {
-        super(props);
-        this.onChange = async (i, o) => {
-            // console.debug('NoSqlDataSourceView.onChange');
-            await this.rerender();
-        };
-        this.onSaveClick = async (e) => {
-            console.debug('NoSqlDataSourceView.onSaveClick');
-            const ctrl = this.props.ctrl;
-            await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
-            await this.rerender();
-        };
-        this.selectRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = {
-            selected: 'selectQuery',
-        };
-        this.selectQuery = null;
-        this.countQuery = null;
-    }
-    componentDidMount() {
-        const { ctrl } = this.props;
-        this.selectQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.selectRef.current, ctrl.model.getAttr('selectQuery'));
-        this.countQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
-        this.selectQuery.on('change', this.onChange);
-        this.countQuery.on('change', this.onChange);
-    }
-    componentWillUnmount() {
-        this.selectQuery.off('change', this.onChange);
-        this.countQuery.off('change', this.onChange);
-    }
-    isChanged() {
-        const { ctrl } = this.props;
-        const cm = this[this.state.selected];
-        if (!cm)
-            return false;
-        return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
-    }
-    getButtonClass(name) {
-        return this.state.selected === name ? 'btn-primary' : 'btn-default';
-    }
-    getVisibility(name) {
-        return this.state.selected === name ? 'visible' : 'hidden';
-    }
-    isSelected(name) {
-        return this.state.selected === name;
-    }
-    render() {
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdNoSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('selectQuery')}`, style: {
-                                        fontWeight: this.isSelected('selectQuery') ? 'bold' : undefined,
-                                    }, onClick: (e) => this.setState({ selected: 'selectQuery' }) }, { children: "selectQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: {
-                                        fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
-                                    }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('selectQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.selectRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx":
-/*!*******************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.tsx ***!
-  \*******************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdSqlDataSourceView": () => (/* binding */ EdSqlDataSourceView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdSqlDataSourceView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdSqlDataSourceView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdSqlDataSourceView.less");
-
-
-
-
-
-class EdSqlDataSourceView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
-    constructor(props) {
-        super(props);
-        this.onChange = async (i, o) => {
-            // console.debug('SqlDataSourceView.onChange');
-            await this.rerender();
-        };
-        this.onSaveClick = async (e) => {
-            console.debug('SqlDataSourceView.onSaveClick');
-            const ctrl = this.props.ctrl;
-            await ctrl.onSaveClick(this.state.selected, this[this.state.selected].getValue());
-            await this.rerender();
-        };
-        this.singleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.multipleRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.countRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.state = {
-            selected: 'singleQuery',
-        };
-        this.singleQuery = null;
-        this.multipleQuery = null;
-        this.countQuery = null;
-    }
-    componentDidMount() {
-        const { ctrl } = this.props;
-        this.singleQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.singleRef.current, ctrl.model.getAttr('singleQuery'));
-        this.multipleQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.multipleRef.current, ctrl.model.getAttr('multipleQuery'));
-        this.countQuery = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.countRef.current, ctrl.model.getAttr('countQuery'));
-        this.singleQuery.on('change', this.onChange);
-        this.multipleQuery.on('change', this.onChange);
-        this.countQuery.on('change', this.onChange);
-    }
-    componentWillUnmount() {
-        this.singleQuery.off('change', this.onChange);
-        this.multipleQuery.off('change', this.onChange);
-        this.countQuery.off('change', this.onChange);
-    }
-    isChanged() {
-        const { ctrl } = this.props;
-        const cm = this[this.state.selected];
-        if (!cm)
-            return false;
-        return cm.getValue() !== ctrl.model.getAttr(this.state.selected);
-    }
-    getButtonClass(name) {
-        return this.state.selected === name ? 'btn-primary' : 'btn-default';
-    }
-    getVisibility(name) {
-        return this.state.selected === name ? 'visible' : 'hidden';
-    }
-    isSelected(name) {
-        return this.state.selected === name;
-    }
-    render() {
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdSqlDataSourceView full flex-column' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onSaveClick, enabled: this.isChanged() }, { children: "Save" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "btn-group", role: "group" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('singleQuery')}`, style: {
-                                        fontWeight: this.isSelected('singleQuery') ? 'bold' : undefined,
-                                    }, onClick: (e) => this.setState({ selected: 'singleQuery' }) }, { children: "singleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('multipleQuery')}`, style: {
-                                        fontWeight: this.isSelected('multipleQuery') ? 'bold' : undefined,
-                                    }, onClick: (e) => this.setState({ selected: 'multipleQuery' }) }, { children: "multipleQuery" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getButtonClass('countQuery')}`, style: {
-                                        fontWeight: this.isSelected('countQuery') ? 'bold' : undefined,
-                                    }, onClick: (e) => this.setState({ selected: 'countQuery' }) }, { children: "countQuery" }))] }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "edit flex-max full" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('singleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.singleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('multipleQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.multipleRef }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "cm-container full", style: { visibility: this.getVisibility('countQuery') } }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.countRef }) }))] }))] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts":
-/*!*****************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts ***!
-  \*****************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdDatabaseController": () => (/* binding */ EdDatabaseController)
-/* harmony export */ });
-/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
-/* harmony import */ var _EdParamController_EdParamController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdParamController/EdParamController */ "./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts");
-/* harmony import */ var _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdTableController/EdTableController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts");
-/* harmony import */ var _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdDatabaseView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewParamController/NewParamController */ "./src/frontend/editor/EdModalController/NewParamController/NewParamController.ts");
-/* harmony import */ var _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EdModalController/NewTableController/NewTableController */ "./src/frontend/editor/EdModalController/NewTableController/NewTableController.ts");
-
-
-
-
-
-
-
-class EdDatabaseController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.onTableSelect2 = async (item) => {
-            console.debug('DatabaseController.onTableSelect2', item.getTitle());
-            const tableName = item.getTitle();
-            this.tableName = tableName;
-            const data = await this.model.getTableInfo(tableName);
-            this.tableInfo = data.tableInfo;
-            this.document.view.rerender();
-            // console.debug('tableInfo:', this.tableInfo);
-        };
-        this.onCreateTableClick = (e) => {
-            console.debug('DatabaseController.onCreateTableClick');
-            this.newTableAction(this.tableName, this.tableInfo);
-        };
-        this.tableName = null;
-        this.tableInfo = null;
-        this.params = [];
-        this.tables = [];
-        this.items = [
-            {
-                getTitle: () => 'Params',
-                items: this.params,
-            },
-            {
-                getTitle: () => 'Tables',
-                items: this.tables,
-            },
-        ];
-    }
-    getTitle() {
-        return `${this.model.getClassName()}: ${this.model.getName()}`;
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'purple',
-        };
-    }
-    init() {
-        this.model.params.forEach((param) => this.createParam(param));
-        this.model.tables.forEach((table) => this.createTable2(table));
-    }
-    createParam(model) {
-        const param = new _EdParamController_EdParamController__WEBPACK_IMPORTED_MODULE_1__.EdParamController(model, this);
-        param.init();
-        this.params.push(param);
-        return param;
-    }
-    createTable2(model) {
-        const table = new _EdTableController_EdTableController__WEBPACK_IMPORTED_MODULE_2__.EdTableController(model, this);
-        table.init();
-        this.tables.push(table);
-        return table;
-    }
-    removeParam(paramController) {
-        console.debug('DatabaseController.removeParam', paramController.getTitle());
-        const i = this.params.indexOf(paramController);
-        if (i === -1)
-            throw new Error('no such paramController');
-        this.params.splice(i, 1);
-    }
-    removeTable2(tableController) {
-        console.debug('DatabaseController.removeTable2', tableController.getTitle());
-        const i = this.tables.indexOf(tableController);
-        if (i === -1)
-            throw new Error('no such tableController');
-        this.tables.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newParam', caption: 'New Param' },
-            { action: 'newTable', caption: 'New Table' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'newParam':
-                await this.actionNewParam();
-                break;
-            case 'newTable':
-                await this.actionNewTable();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('databases', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('databases', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            default:
-                throw new Error(`unknown action: ${name}`);
-        }
-    }
-    async actionNewParam() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewParamController_NewParamController__WEBPACK_IMPORTED_MODULE_5__.NewParamController({
-            onCreate: async (values) => {
-                const param = await this.model.newParam(values.name);
-                const paramController = this.createParam(param);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(paramController);
-                paramController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async actionNewTable() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewTableController_NewTableController__WEBPACK_IMPORTED_MODULE_6__.NewTableController({
-            onCreate: async (values) => {
-                const table = await this.model.newTable({ name: values.name });
-                const tableController = this.createTable2(table);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
-                tableController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async createDocument() {
-        const document = await super.createDocument();
-        const result = await this.model.getView('DatabaseView/DatabaseView.html');
-        // console.debug('data:', result.data);
-        // @ts-ignore
-        document.treeWidgetItems = result.data.tables
-            .sort()
-            .map((tableName) => ({ getTitle: () => tableName }));
-        return document;
-    }
-    async newTableAction(tableName, tableInfo) {
-        console.debug('DatabaseController.newTableAction', tableName, tableInfo);
-        const table = await this.model.newTable({
-            class: 'Table',
-            name: tableName,
-            columns: tableInfo.map((column) => ({
-                class: 'Column',
-                name: column.name,
-                caption: column.name,
-                type: column.type,
-                dbType: column.dbType,
-                key: column.key.toString(),
-                auto: column.auto.toString(),
-                nullable: column.nullable.toString(),
-            })),
-        });
-        const tableController = this.createTable2(table);
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(tableController);
-        tableController.view.parent.open();
-        this.view.rerender();
-        // EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-    }
-    async delete() {
-        console.debug('DatabaseController.delete', this.getTitle());
-        await this.model.delete();
-        this.parent.removeDatabase(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-    getDocumentViewClass() {
-        return _EdDatabaseView__WEBPACK_IMPORTED_MODULE_3__.EdDatabaseView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx":
-/*!************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.tsx ***!
-  \************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdDatabaseView": () => (/* binding */ EdDatabaseView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
-/* harmony import */ var _EdDatabaseView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EdDatabaseView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseView.less");
-
-
-
-
-class EdDatabaseView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    renderGrid() {
-        // console.debug('DatabaseView.renderGrid');
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
-                { name: 'name', title: 'name', width: 100 },
-                { name: 'type', title: 'type', width: 60 },
-                { name: 'key', title: 'key', width: 60 },
-                { name: 'auto', title: 'auto', width: 60 },
-                { name: 'nullable', title: 'nullable', width: 60 },
-                { name: 'dbType', title: 'dbType', width: 200 },
-                { name: 'comment', title: 'comment', width: 100 },
-            ], rows: ctrl.tableInfo, getRowKey: (row) => row.name }));
-    }
-    render() {
-        // console.debug('DatabaseView.render');
-        const ctrl = this.props.ctrl;
-        const document = this.props.document;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EdDatabaseView frame' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'client frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'divTableInfo full flex-column' }, { children: [ctrl.tableInfo && this.renderGrid(), ctrl.tableInfo && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateTableClick }, { children: "Create Table" })))] })) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_2__.TreeWidget, { classList: ['sidebar'], items: document.treeWidgetItems, onItemSelect: ctrl.onTableSelect2 })] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts":
-/*!********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdDocumentController": () => (/* binding */ EdDocumentController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-
-class EdDocumentController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.document = null;
-    }
-    async createDocument() {
-        const document = {
-            controller: this,
-            view: null,
-        };
-        return (this.document = document);
-    }
-    onDocumentClose() {
-        console.debug('DocumentController.onDocumentClose', this.getTitle());
-        this.document = null;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx":
-/*!***************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx ***!
-  \***************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdDocumentView": () => (/* binding */ EdDocumentView)
-/* harmony export */ });
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-class EdDocumentView extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
-    static createCM(textarea, value) {
-        // @ts-ignore
-        const cm = CodeMirror.fromTextArea(textarea, {
-            lineNumbers: true,
-            styleActiveLine: true,
-            matchBrackets: true,
-        });
-        cm.setOption('theme', 'cobalt');
-        cm.setValue(value);
-        return cm;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts":
-/*!***********************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableController.ts ***!
-  \***********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdTableController": () => (/* binding */ EdTableController)
-/* harmony export */ });
-/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
-/* harmony import */ var _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdColumnController/EdColumnController */ "./src/frontend/editor/EdModelController/EdColumnController/EdColumnController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewColumnController/NewColumnController */ "./src/frontend/editor/EdModalController/NewColumnController/NewColumnController.ts");
-/* harmony import */ var _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../EdModalController/NewFormFromTableController/NewFormFromTableController */ "./src/frontend/editor/EdModalController/NewFormFromTableController/NewFormFromTableController.ts");
-/* harmony import */ var _EditorHelper__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../EditorHelper */ "./src/frontend/editor/EditorHelper.ts");
-/* harmony import */ var _EdTableView__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EdTableView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx");
-
-
-
-
-
-
-
-
-class EdTableController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.onCreateFormButtonClick = async (e) => {
-            console.debug('TableController.onCreateFormButtonClick');
-            await this.createFormAction();
-        };
-        this.columns = [];
-        this.items = [
-            {
-                getTitle: () => 'Columns',
-                items: this.columns,
-            },
-        ];
-    }
-    init() {
-        this.model.columns.forEach((column) => this.createColumn(column));
-    }
-    createColumn(model) {
-        const column = new _EdColumnController_EdColumnController__WEBPACK_IMPORTED_MODULE_1__.EdColumnController(model, this);
-        column.init();
-        this.columns.push(column);
-        return column;
-    }
-    removeColumn(columnController) {
-        console.debug('TableController.removeColumn', columnController.getTitle());
-        const i = this.columns.indexOf(columnController);
-        if (i === -1)
-            throw new Error('no such columnController');
-        this.columns.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newColumn', caption: 'New Column' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-            case 'newColumn':
-                await this.actionNewColumn();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('tables', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('tables', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            default:
-                throw new Error(`unknown action: ${name}`);
-        }
-    }
-    async actionNewColumn() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewColumnController_NewColumnController__WEBPACK_IMPORTED_MODULE_4__.NewColumnController({
-            onCreate: async (values) => {
-                const column = await this.model.newColumn(values.name);
-                const columnController = this.createColumn(column);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(columnController);
-                columnController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    /*static async getView(view) {
-        console.debug('TableController.getView', view);
-        return FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action    : 'getView',
-            params    : {view : view}
-        });
-    }*/
-    static async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: 'getView',
-            params: {
-                view: view,
-            },
-        });
-    }
-    async createFormAction() {
-        console.debug('TableController.createFormAction');
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFormFromTableController_NewFormFromTableController__WEBPACK_IMPORTED_MODULE_5__.NewFormFromTableController({
-            tableController: this,
-            onCreate: async (values) => {
-                const formWizard = _EditorHelper__WEBPACK_IMPORTED_MODULE_6__.EditorHelper.create({
-                    model: this.model,
-                    pageName: values.page,
-                    className: values.class,
-                    formName: values.name,
-                    formCaption: values.caption || values.name,
-                });
-                const params = formWizard.getFormParams();
-                // console.debug('params:', params);
-                const databaseController = this.parent;
-                const applicationController = databaseController.parent;
-                const pageLinkController = applicationController.findPageLink(values.page);
-                if (!pageLinkController.pageController) {
-                    await pageLinkController.loadPage();
-                }
-                const pageController = pageLinkController.pageController;
-                // console.debug('pageController:', pageController);
-                const form = await pageController.model.newForm(params);
-                // console.debug('form:', form);
-                const formController = pageController.createForm(form);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
-                formController.view.parent.open();
-                pageLinkController.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async delete() {
-        console.debug('TableController.delete', this.getTitle());
-        await this.model.delete();
-        this.parent.removeTable2(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-    getDocumentViewClass() {
-        return _EdTableView__WEBPACK_IMPORTED_MODULE_7__.EdTableView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx":
-/*!******************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.tsx ***!
-  \******************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdTableView": () => (/* binding */ EdTableView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdTableView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./EdTableView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdTableController/EdTableView.less");
-
-
-
-class EdTableView extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    renderRows() {
-        const ctrl = this.props.ctrl;
-        return ctrl.columns.map((column) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('name') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('caption') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('type') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('key') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('auto') }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: column.model.getAttr('nullable') })] }, column.model.getName())));
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "client frame" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "frame__container flex-column" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Grid, { classList: ['flex-max'], columns: [
-                                { name: 'name', title: 'name', width: 100 },
-                                { name: 'caption', title: 'caption', width: 100 },
-                                { name: 'type', title: 'type', width: 60 },
-                                { name: 'key', title: 'key', width: 60 },
-                                { name: 'auto', title: 'auto', width: 60 },
-                                { name: 'nullable', title: 'nullable', width: 60 },
-                            ], rows: ctrl.columns.map((column) => column.model.getAttributes()), getRowKey: (row) => row.name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.Button, Object.assign({ onClick: ctrl.onCreateFormButtonClick }, { children: "Create Form" }))] })) })) })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts":
-/*!******************************************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts ***!
-  \******************************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdApplicationController": () => (/* binding */ EdApplicationController)
-/* harmony export */ });
-/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
-/* harmony import */ var _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EdDatabaseController/EdDatabaseController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDatabaseController/EdDatabaseController.ts");
-/* harmony import */ var _EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../EdPageLinkController/EdPageLinkController */ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewDatabaseController/NewDatabaseController */ "./src/frontend/editor/EdModalController/NewDatabaseController/NewDatabaseController.ts");
-/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
-/* harmony import */ var _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../../EdModalController/NewPageController/NewPageController */ "./src/frontend/editor/EdModalController/NewPageController/NewPageController.ts");
-/* harmony import */ var _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../EdPageController/EdPageController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts");
-/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
-
-
-
-
-
-
-
-
-
-class EdApplicationController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
-    constructor(model, editorApp) {
-        super(model);
-        this.editorApp = editorApp;
-        this.databases = [];
-        this.dataSources = [];
-        this.actions = [];
-        this.pageLinks = [];
-        // items
-        this.opened = true;
-        this.items = [
-            { getTitle: () => 'Databases', items: this.databases },
-            { getTitle: () => 'Data Sources', items: this.dataSources },
-            { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Pages', items: this.pageLinks, opened: true },
-        ];
-    }
-    init() {
-        this.model.databases.forEach((database) => this.createDatabase(database));
-        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
-        this.model.actions.forEach((action) => this.createAction(action));
-        this.model.pageLinks.forEach((pageLink) => this.createPageLink(pageLink));
-    }
-    createDatabase(model) {
-        const database = new _EdDatabaseController_EdDatabaseController__WEBPACK_IMPORTED_MODULE_1__.EdDatabaseController(model, this);
-        database.init();
-        this.databases.push(database);
-        return database;
-    }
-    createPageLink(model) {
-        const pageLink = new _EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_2__.EdPageLinkController(model, this);
-        pageLink.init();
-        this.pageLinks.push(pageLink);
-        return pageLink;
-    }
-    removeDatabase(databaseController) {
-        console.debug('ApplicationController.removeDatabase', databaseController.getTitle());
-        const i = this.databases.indexOf(databaseController);
-        if (i === -1)
-            throw new Error('no such databaseController');
-        this.databases.splice(i, 1);
-    }
-    removePageLink(pageLinkController) {
-        const i = this.pageLinks.indexOf(pageLinkController);
-        if (i === -1)
-            throw new Error('no such pageLinkController');
-        this.pageLinks.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newDatabase', caption: 'New Database' },
-            { action: 'newDataSource', caption: 'New Data Source' },
-            { action: 'newAction', caption: 'New Action' },
-            { action: 'newPage', caption: 'New Page' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'newDatabase':
-                await this.newDatabaseAction();
-                break;
-            case 'newDataSource':
-                await this.newDataSourceAction();
-                break;
-            case 'newPage':
-                await this.newPageAction();
-                break;
-            case 'newAction':
-                await this.actionNewAction();
-                break;
-            default:
-                console.debug(name);
-        }
-    }
-    async newDatabaseAction() {
-        console.debug('ApplicationController.newDatabaseAction');
-        // @ts-ignore
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDatabaseController_NewDatabaseController__WEBPACK_IMPORTED_MODULE_4__.NewDatabaseController({
-            onCreate: async (values) => {
-                // console.debug('values: ', values);
-                const database = await this.model.newDatabase({
-                    class: values.class,
-                    name: values.name,
-                    params: [
-                        { class: 'Param', name: 'host', value: values.host },
-                        { class: 'Param', name: 'database', value: values.database },
-                        { class: 'Param', name: 'user', value: values.user },
-                        { class: 'Param', name: 'password', value: values.password },
-                    ],
-                });
-                const databaseController = this.createDatabase(database);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(databaseController);
-                databaseController.view.parent.open();
-                this.view.rerender();
-                // @ts-ignore
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async newDataSourceAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_5__.NewDataSourceController({
-            onCreate: async (values) => {
-                const dataSource = await this.model.newDataSource({
-                    name: values.name,
-                    class: values.class,
-                });
-                const dataSourceController = this.createDataSource(dataSource);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-                dataSourceController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async newPageAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewPageController_NewPageController__WEBPACK_IMPORTED_MODULE_6__.NewPageController({
-            onCreate: async (values) => {
-                const page = await this.model.newPage({
-                    name: values.name,
-                    caption: values.caption || values.name,
-                    startup: values.startup,
-                });
-                const pageLinkController = this.createPageLink(page.pageLink);
-                const pageController = new _EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_7__.EdPageController(page, pageLinkController);
-                pageController.init();
-                pageLinkController.setPageController(pageController);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(pageLinkController);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    getPropList() {
-        const propList = super.getPropList();
-        propList.options['authentication'] = ['true', 'false'];
-        propList.options['lang'] = ['en', 'ru'];
-        return propList;
-    }
-    findPageLink(name) {
-        return this.pageLinks.find((pageLink) => pageLink.model.getName() === name);
-    }
-    getDocumentViewClass() {
-        // @ts-ignore
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_8__.EdVisualView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts":
-/*!******************************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts ***!
-  \******************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdFieldController": () => (/* binding */ EdFieldController)
-/* harmony export */ });
-/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EdModalController/ChangeClassController/ChangeClassController */ "./src/frontend/editor/EdModalController/ChangeClassController/ChangeClassController.ts");
-/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
-
-
-
-
-class EdFieldController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getTitle() {
-        return `${this.model.getClassName()}: ${this.model.getName()}`;
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'blue',
-        };
-    }
-    getActions() {
-        return [
-            { action: 'changeClass', caption: 'Change Class' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'changeClass':
-                await this.actionChangeClass();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('fields', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('fields', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-        }
-    }
-    async actionChangeClass() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_ChangeClassController_ChangeClassController__WEBPACK_IMPORTED_MODULE_2__.ChangeClassController({
-            fieldCtrl: this,
-            onCreate: async (values) => {
-                const data = await this.model.changeClass({ class: values.class });
-                console.debug(data);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.fillPropertyGrid(this);
-                this.view.rerender();
-            },
-        }));
-    }
-    getPropList() {
-        const list = this.model.data['@attributes'];
-        const options = {};
-        options['visible'] = ['true', 'false'];
-        options['readOnly'] = ['true', 'false'];
-        options['notNull'] = ['true', 'false'];
-        options['param'] = ['true', 'false'];
-        options['validateOnChange'] = ['true', 'false'];
-        options['validateOnBlur'] = ['true', 'false'];
-        options['autoFocus'] = ['true', 'false'];
-        options['timezone'] = ['true', 'false'];
-        options['newRowMode'] = ['disabled', 'editPage', 'createPage'];
-        options['type'] = ['', 'string', 'number', 'boolean', 'object', 'date'];
-        return { list: list, options: options };
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeField(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-    getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_3__.EdVisualView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts":
-/*!****************************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts ***!
-  \****************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdFormController": () => (/* binding */ EdFormController)
-/* harmony export */ });
-/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
-/* harmony import */ var _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFieldController/EdFieldController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFieldController/EdFieldController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
-/* harmony import */ var _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../EdModalController/NewFieldController/NewFieldController */ "./src/frontend/editor/EdModalController/NewFieldController/NewFieldController.ts");
-/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
-
-
-
-
-
-
-class EdFormController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.dataSources = [];
-        this.actions = [];
-        this.fields = [];
-        this.items = [
-            { getTitle: () => 'Data Sources', items: this.dataSources },
-            { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Fields', items: this.fields },
-        ];
-    }
-    getTitle() {
-        return `${this.model.getClassName()}: ${this.model.getName()}`;
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'green',
-        };
-    }
-    init() {
-        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
-        this.model.fields.forEach((field) => this.createField(field));
-        this.model.actions.forEach((action) => this.createAction(action));
-    }
-    createField(model) {
-        const field = new _EdFieldController_EdFieldController__WEBPACK_IMPORTED_MODULE_1__.EdFieldController(model, this);
-        field.init();
-        this.fields.push(field);
-        return field;
-    }
-    removeField(fieldController) {
-        console.debug('FormController.removeField', fieldController.getTitle());
-        const i = this.fields.indexOf(fieldController);
-        if (i === -1)
-            throw new Error('no such fieldController');
-        this.fields.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newDataSource', caption: 'New Data Source' },
-            { action: 'newField', caption: 'New Field' },
-            { action: 'newAction', caption: 'New Action' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'newDataSource':
-                await this.actionNewDataSource();
-                break;
-            case 'newField':
-                await this.actionNewField();
-                break;
-            case 'newAction':
-                await this.actionNewAction();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.moveUp();
-                this.parent.moveColItem('forms', this, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.moveDown();
-                this.parent.moveColItem('forms', this, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-        }
-    }
-    async actionNewDataSource() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
-            onCreate: async (values) => {
-                const dataSource = await this.model.newDataSource({
-                    name: values.name,
-                    class: values.class,
-                });
-                const dataSourceController = this.createDataSource(dataSource);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-                dataSourceController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async actionNewField() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFieldController_NewFieldController__WEBPACK_IMPORTED_MODULE_4__.NewFieldController({
-            onCreate: async (values) => {
-                const field = await this.model.newField({
-                    class: values.class,
-                    name: values.name,
-                    caption: values.caption,
-                    type: values.type,
-                });
-                const fieldController = this.createField(field);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(fieldController);
-                fieldController.view.parent.open();
-                this.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    getPropList() {
-        return {
-            list: this.model.data['@attributes'],
-            options: {
-                editMethod: ['disabled', 'table', 'form'],
-                newRowMode: [
-                    'disabled',
-                    'oneclick',
-                    'editform',
-                    'createform',
-                    'oneclick editform',
-                    'oneclick createform',
-                ],
-                deleteRowMode: ['disabled', 'enabled'],
-                refreshButton: ['true', 'false'],
-                visible: ['true', 'false'],
-                newMode: ['', 'true', 'false'],
-                backOnly: ['true', 'false'],
-            },
-        };
-    }
-    async setProperty(name, value) {
-        await this.model.setValue(name, value);
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeForm(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-    getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_5__.EdVisualView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts":
-/*!****************************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts ***!
-  \****************************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdPageController": () => (/* binding */ EdPageController)
-/* harmony export */ });
-/* harmony import */ var _EdVisualController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdVisualController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts");
-/* harmony import */ var _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdFormController/EdFormController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdFormController/EdFormController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../EdModalController/NewDataSourceController/NewDataSourceController */ "./src/frontend/editor/EdModalController/NewDataSourceController/NewDataSourceController.ts");
-/* harmony import */ var _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../Editor/DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-/* harmony import */ var _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../EdModalController/NewFormController/NewFormController */ "./src/frontend/editor/EdModalController/NewFormController/NewFormController.ts");
-/* harmony import */ var _EdVisualView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdVisualView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx");
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-
-
-
-
-
-
-
-
-class EdPageController extends _EdVisualController__WEBPACK_IMPORTED_MODULE_0__.EdVisualController {
-    constructor(model, pageLinkController = null, options = {}) {
-        super(model);
-        this.options = options;
-        this.pageLinkController = pageLinkController;
-        this.dataSources = [];
-        this.actions = [];
-        this.forms = [];
-        this.items = [
-            { getTitle: () => 'Data Sources', items: this.dataSources },
-            { getTitle: () => 'Actions', items: this.actions },
-            { getTitle: () => 'Forms', items: this.forms },
-        ];
-    }
-    init() {
-        // console.debug('PageController.init');
-        this.model.dataSources.forEach((dataSource) => this.createDataSource(dataSource));
-        this.model.actions.forEach((action) => this.createAction(action));
-        this.model.forms.forEach((form) => this.createForm(form));
-    }
-    createForm(model) {
-        const form = new _EdFormController_EdFormController__WEBPACK_IMPORTED_MODULE_1__.EdFormController(model, this);
-        form.init();
-        this.forms.push(form);
-        return form;
-    }
-    removeForm(formController) {
-        console.debug('PageController.removeForm', formController.getTitle());
-        const i = this.forms.indexOf(formController);
-        if (i === -1)
-            throw new Error('no such formController');
-        this.forms.splice(i, 1);
-    }
-    getActions() {
-        return [
-            { action: 'newDataSource', caption: 'New Data Source' },
-            { action: 'newAction', caption: 'New Action' },
-            { action: 'newForm', caption: 'New Form' },
-            { action: 'moveUp', caption: 'Move Up' },
-            { action: 'moveDown', caption: 'Move Down' },
-            { action: 'delete', caption: 'Delete' },
-        ];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'newForm':
-                await this.actionNewForm();
-                break;
-            case 'newDataSource':
-                await this.newDataSourceAction();
-                break;
-            case 'newAction':
-                await this.actionNewAction();
-                break;
-            case 'delete':
-                await this.delete();
-                break;
-            case 'moveUp':
-                await this.model.pageLink.moveUp();
-                this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, -1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            case 'moveDown':
-                await this.model.pageLink.moveDown();
-                this.pageLinkController.parent.moveColItem('pageLinks', this.pageLinkController, 1);
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-                break;
-            default:
-                console.debug(name);
-        }
-    }
-    async newDataSourceAction() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewDataSourceController_NewDataSourceController__WEBPACK_IMPORTED_MODULE_3__.NewDataSourceController({
-            onCreate: async (values) => {
-                const dataSourceData = await _Editor_DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_4__.DataSourceEditor.create(this.model, {
-                    name: values.name,
-                    class: values.class,
-                });
-                const dataSource = this.model.createDataSource(dataSourceData);
-                const dataSourceController = this.createDataSource(dataSource);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(dataSourceController);
-                dataSourceController.view.parent.open();
-                this.pageLinkController.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    async actionNewForm() {
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewFormController_NewFormController__WEBPACK_IMPORTED_MODULE_5__.NewFormController({
-            onCreate: async (values) => {
-                const form = await this.model.newForm({
-                    name: values.name,
-                    caption: values.caption || values.name,
-                    class: values.class,
-                });
-                const formController = this.createForm(form);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(formController);
-                formController.view.parent.open();
-                this.pageLinkController.view.rerender();
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-    getPropList() {
-        const propList = super.getPropList();
-        propList.list['menu'] = this.getPageLink().getAttr('menu');
-        propList.list['startup'] = this.getPageLink().getAttr('startup');
-        propList.options['startup'] = ['true', 'false'];
-        propList.options['formInTab'] = ['true', 'false'];
-        return propList;
-    }
-    async setProperty(name, value) {
-        if (name === 'startup' || name === 'menu') {
-            this.getPageLink().setValue(name, value);
-        }
-        else {
-            _EdModelController__WEBPACK_IMPORTED_MODULE_7__.EdModelController.prototype.setProperty.call(this, name, value);
-        }
-    }
-    getPageLink() {
-        return this.model.pageLink;
-    }
-    async delete() {
-        await this.model.delete();
-        this.pageLinkController.parent.removePageLink(this.pageLinkController);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-    getDocumentViewClass() {
-        return _EdVisualView__WEBPACK_IMPORTED_MODULE_6__.EdVisualView;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts":
-/*!*************************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualController.ts ***!
-  \*************************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdVisualController": () => (/* binding */ EdVisualController)
-/* harmony export */ });
-/* harmony import */ var _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
-/* harmony import */ var _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EdDataSourceController/EdDataSourceController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDataSourceController/EdDataSourceController.ts");
-/* harmony import */ var _EdActionController_EdActionController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EdActionController/EdActionController */ "./src/frontend/editor/EdModelController/EdActionController/EdActionController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../EdModalController/NewActionController/NewActionController */ "./src/frontend/editor/EdModalController/NewActionController/NewActionController.ts");
-
-
-
-
-
-class EdVisualController extends _EdDocumentController__WEBPACK_IMPORTED_MODULE_0__.EdDocumentController {
-    constructor(model, parent = null) {
-        super(model, parent);
-        this.onCreateCustomController = async (e) => {
-            console.debug('ApplicationController.onCreateCustomController');
-            const data = await this.model.createController();
-            this.data.js = data.js;
-            this.document.view.rerender();
-        };
-        this.onCreateCustomView = async (e) => {
-            console.debug('VisualController.onCreateCustomView');
-            const data = await this.model.createView();
-            this.data.jsx = data.jsx;
-            this.document.view.rerender();
-        };
-        this.onCreateCustomStyle = async (e) => {
-            console.debug('VisualController.onCreateCustomStyle');
-            const data = await this.model.createStyle();
-            this.data.less = data.less;
-            this.document.view.rerender();
-        };
-        this.onCreateModelBack = async (e) => {
-            const data = await this.model.createModelBackJs();
-        };
-        this.data = null;
-    }
-    async createDocument() {
-        console.debug('VisualController.createDocument');
-        const document = await super.createDocument();
-        const result = await this.model.getView('VisualView.html');
-        this.data = result.data;
-        return document;
-    }
-    async onControllerSave(value) {
-        console.debug('ApplicationController.onControllerSave' /*, value*/);
-        const result = await this.model.saveController(value);
-        this.data.js = result.js;
-        this.document.view.rerender();
-    }
-    createDataSource(model) {
-        console.debug('VisualController.createDataSource', model);
-        const dataSource = new _EdDataSourceController_EdDataSourceController__WEBPACK_IMPORTED_MODULE_1__.EdDataSourceController(model, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-    removeDataSource(dataSourceController) {
-        // console.debug('VisualController.removeDataSource', dataSourceController.getTitle());
-        const i = this.dataSources.indexOf(dataSourceController);
-        if (i === -1)
-            throw new Error('no such dataSourceController');
-        this.dataSources.splice(i, 1);
-    }
-    createAction(model) {
-        const action = new _EdActionController_EdActionController__WEBPACK_IMPORTED_MODULE_2__.EdActionController(model, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    removeAction(actionController) {
-        // console.debug('VisualController.removeAction', actionController.getTitle());
-        const i = this.actions.indexOf(actionController);
-        if (i === -1)
-            throw new Error('no such actionController');
-        this.actions.splice(i, 1);
-    }
-    async actionNewAction() {
-        console.debug('VisualController.actionNewAction');
-        await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.openModal(new _EdModalController_NewActionController_NewActionController__WEBPACK_IMPORTED_MODULE_4__.NewActionController({
-            onCreate: async (values) => {
-                const action = await this.model.newAction({
-                    name: values.name,
-                    caption: values.caption,
-                });
-                const actionController = this.createAction(action);
-                await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.select(actionController);
-                actionController.view.parent.open();
-                if (this.pageLinkController) {
-                    this.pageLinkController.view.rerender();
-                }
-                else {
-                    this.view.rerender();
-                }
-                _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostApp.editorApp.treeWidget2.scrollToSelected();
-            },
-        }));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx":
-/*!********************************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.tsx ***!
-  \********************************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdVisualView": () => (/* binding */ EdVisualView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdDocumentView */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentView.tsx");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EdVisualView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EdVisualView.less */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdVisualView.less");
-
-
-
-
-
-class EdVisualView extends _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView {
-    constructor(props) {
-        super(props);
-        this.onControllerSave = async (e) => {
-            const ctrl = this.props.ctrl;
-            await ctrl.onControllerSave(this.cm.getValue());
-        };
-        this.onChange = async (instance, changeObj) => {
-            // console.debug('VisualView.onChange', this.isChanged());
-            await this.rerender();
-        };
-        this.textarea = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.cm = null;
-    }
-    getTextarea() {
-        if (this.textarea)
-            return this.textarea.current;
-        return null;
-    }
-    componentDidMount() {
-        // console.debug('VisualView.componentDidMount', this.getTextarea());
-        const ctrl = this.props.ctrl;
-        if (ctrl.data.js) {
-            this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
-            this.cm.on('change', this.onChange);
-        }
-    }
-    componentDidUpdate() {
-        // console.debug('componentDidUpdate', this.getTextarea());
-        const ctrl = this.props.ctrl;
-        const textarea = this.getTextarea();
-        if (textarea && ctrl.data.js && !this.cm) {
-            this.cm = _EdDocumentView__WEBPACK_IMPORTED_MODULE_2__.EdDocumentView.createCM(this.getTextarea(), ctrl.data.js);
-        }
-    }
-    componentWillUnmount() {
-        // console.debug('VisualView.componentWillUnmount');
-        if (this.cm) {
-            this.cm.off('change', this.onChange);
-        }
-    }
-    isChanged() {
-        if (!this.cm) {
-            return false;
-        }
-        return this.props.ctrl.data.js !== this.cm.getValue();
-    }
-    render() {
-        const ctrl = this.props.ctrl;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EdVisualView full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "full flex-column" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "toolbar" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateModelBack }, { children: "Model.back.js" })), !ctrl.data.js && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomController }, { children: "Controller.front.js" }))), !ctrl.data.jsx && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomView }, { children: "View.jsx" }))), !ctrl.data.less && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: ctrl.onCreateCustomStyle }, { children: "View.less" }))), ctrl.data.js && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onControllerSave, enabled: this.isChanged() }, { children: "Save" })))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'edit flex-max full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'cm-container full' }, { children: ctrl.data.js && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("textarea", { ref: this.textarea }) })) }))] })) })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts":
-/*!**********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdKeyColumnController/EdKeyColumnController.ts ***!
-  \**********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdKeyColumnController": () => (/* binding */ EdKeyColumnController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-
-
-class EdKeyColumnController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getActions() {
-        return [{ action: 'delete', caption: 'Delete' }];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-        }
-    }
-    static async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action: 'getView',
-            params: {
-                view: view,
-            },
-        });
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeKeyColumn(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdModelController.ts":
-/*!********************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdModelController.ts ***!
-  \********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdModelController": () => (/* binding */ EdModelController)
-/* harmony export */ });
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-
-class EdModelController {
-    constructor(model, parent = null) {
-        this.model = model;
-        this.parent = parent;
-        this.view = null;
-    }
-    init() { }
-    getTitle() {
-        return this.model.getName();
-    }
-    getStyle() {
-        return {
-        // fontWeight: 'bold',
-        };
-    }
-    getPropList() {
-        return {
-            list: this.model.data['@attributes'],
-            options: {},
-        };
-    }
-    async setProperty(name, value) {
-        await this.model.setValue(name, value);
-    }
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.model.getName() === name);
-    }*/
-    async doAction(name) {
-        throw new Error(`${this.constructor.name}.doAction('${name}') not implemented`);
-    }
-    getDocumentViewClass() {
-        console.debug(`${this.constructor.name}.getDocumentViewClass`);
-        return null;
-    }
-    moveColItem(colName, item, offset) {
-        _common__WEBPACK_IMPORTED_MODULE_0__.Helper.moveArrItem(this[colName], item, offset);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts":
-/*!********************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts ***!
-  \********************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdPageLinkController": () => (/* binding */ EdPageLinkController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Editor/PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-/* harmony import */ var _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../EdDocumentController/EdVisualController/EdPageController/EdPageController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdPageController/EdPageController.ts");
-
-
-
-
-class EdPageLinkController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    constructor(model, parent) {
-        super(model, parent);
-        this.node = true;
-        this.pageController = null;
-        this.items = null;
-    }
-    getTitle() {
-        if (this.pageController)
-            return this.pageController.getTitle();
-        return super.getTitle();
-    }
-    getStyle() {
-        return {
-            // fontWeight: 'bold',
-            color: 'red',
-        };
-    }
-    hasPage() {
-        return this.pageController != null;
-    }
-    async loadPage() {
-        console.debug('PageLinkController.loadPage', this.getTitle());
-        if (this.pageController)
-            throw new Error('page already loaded');
-        const pageLink = this.model;
-        const pageData = await _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_1__.EditorFrontHostApp.fetchPageData(pageLink.getFileName());
-        // page
-        const page = new _Editor_PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor(pageData, pageLink);
-        page.init();
-        // pageController
-        const pageController = new _EdDocumentController_EdVisualController_EdPageController_EdPageController__WEBPACK_IMPORTED_MODULE_3__.EdPageController(page, this);
-        pageController.init();
-        this.setPageController(pageController);
-        // console.debug('pageController:', pageController);
-        this.view.rerender();
-    }
-    getActions() {
-        return this.pageController.getActions();
-    }
-    getPropList() {
-        return this.pageController.getPropList();
-    }
-    async setProperty(name, value) {
-        this.pageController.setProperty(name, value);
-    }
-    setPageController(pageController) {
-        if (this.pageController)
-            throw new Error('pageLinkController already has pageController');
-        this.pageController = pageController;
-        this.items = pageController.items;
-    }
-    remove() {
-        console.debug('PageLinkController.remove', this.getTitle());
-        this.parent.removePageLink(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts":
-/*!**************************************************************************************!*\
-  !*** ./src/frontend/editor/EdModelController/EdParamController/EdParamController.ts ***!
-  \**************************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EdParamController": () => (/* binding */ EdParamController)
-/* harmony export */ });
-/* harmony import */ var _EdModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-
-
-
-class EdParamController extends _EdModelController__WEBPACK_IMPORTED_MODULE_0__.EdModelController {
-    /*constructor(model, parent) {
-        super(model, parent);
-    }*/
-    getActions() {
-        return [{ action: 'delete', caption: 'Delete' }];
-    }
-    async doAction(name) {
-        switch (name) {
-            case 'delete':
-                await this.delete();
-                break;
-        }
-    }
-    static async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action: 'getView',
-            params: {
-                view: view,
-            },
-        });
-    }
-    async delete() {
-        await this.model.delete();
-        this.parent.removeParam(this);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.select(null);
-        _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_2__.EditorFrontHostApp.editorApp.treeWidget2.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ActionEditor": () => (/* binding */ ActionEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-
-class ActionEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    /* constructor(data, parent) {
-        super(data, parent);
-    } */
-    /* async getView(view) {
-        return await FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action    : 'getView',
-            params    : {
-                view : view,
-                page : this.data !== undefined ? this.form.page.getName() : null,
-                form : this.data !== undefined ? this.form.getName()      : null,
-            }
-        });
-    } */
-    getParams() {
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_1__.FormEditor) {
-            return {
-                pageFileName: this.parent.page.pageLink.getAttr('fileName'),
-                form: this.parent.getAttr('name'),
-                action: this.getAttr('name'),
-            };
-        }
-        else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_2__.PageEditor) {
-            return {
-                pageFileName: this.parent.pageLink.getAttr('fileName'),
-                action: this.getAttr('name'),
-            };
-        }
-        return {
-            action: this.getAttr('name'),
-        };
-    }
-    async setValue(name, value) {
-        //console.debug('ActionEditor.setValue', name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: 'save',
-            params: Object.assign(Object.assign({}, this.getParams()), { attr: name, value: value }),
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: 'delete',
-            params: Object.assign({}, this.getParams()),
-        });
-    }
-    async delete() {
-        console.debug('ActionEditor.delete', this.getName());
-        await this.deleteData();
-        this.parent.removeAction(this);
-    }
-    moveUp() {
-        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: 'moveUp',
-            params: Object.assign({}, this.getParams()),
-        });
-    }
-    moveDown() {
-        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: 'moveDown',
-            params: Object.assign({}, this.getParams()),
-        });
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts":
-/*!***************************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ApplicationEditor": () => (/* binding */ ApplicationEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DatabaseEditor/DatabaseEditor */ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts");
-/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-/* harmony import */ var _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageLinkEditor/PageLinkEditor */ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-
-
-
-
-
-
-
-class ApplicationEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data) {
-        super(data);
-        this.databases = [];
-        this.dataSources = [];
-        this.actions = [];
-        this.pageLinks = [];
-    }
-    init() {
-        console.debug('ApplicationEditor.init', this.data);
-        // databases
-        for (const data of this.data.databases) {
-            this.createDatabase(data);
-        }
-        // dataSources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-        // pageLinks
-        for (const data of this.data.pageLinks) {
-            this.createPageLink(data);
-        }
-    }
-    createAction(data) {
-        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_6__.ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    createDatabase(data) {
-        const database = new _DatabaseEditor_DatabaseEditor__WEBPACK_IMPORTED_MODULE_1__.DatabaseEditor(data, this);
-        database.init();
-        this.databases.push(database);
-        return database;
-    }
-    createPageLink(data) {
-        const pageLink = new _PageLinkEditor_PageLinkEditor__WEBPACK_IMPORTED_MODULE_3__.PageLinkEditor(data, this);
-        pageLink.init();
-        this.pageLinks.push(pageLink);
-        return pageLink;
-    }
-    removeDatabase(database) {
-        console.debug('ApplicationEditor.removeDatabase', database.getName());
-        const i = this.databases.indexOf(database);
-        if (i === -1)
-            throw new Error('no such database');
-        this.databases.splice(i, 1);
-    }
-    removePageLink(pageLink) {
-        console.debug('ApplicationEditor.removePageLink', pageLink.getName());
-        const i = this.pageLinks.indexOf(pageLink);
-        if (i === -1)
-            throw new Error('no such pageLink');
-        this.pageLinks.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'save',
-            params: {
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async newPageAndPageLinkData(params) {
-        params['menu'] = params['startup'] === 'true' ? 'Pages' : '';
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: '_new',
-            params: params,
-        });
-    }
-    async newPage(params) {
-        const { page: pageData, pageLink: pageLinkData } = await this.newPageAndPageLinkData(params);
-        const pageLink = this.createPageLink(pageLinkData);
-        return new _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_5__.PageEditor(pageData, pageLink);
-    }
-    async newDatabase(params) {
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: '_new',
-            params: params,
-        });
-        return this.createDatabase(data);
-    }
-    async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'getView',
-            params: {
-                app: this.getName(),
-                view: view,
-            },
-        });
-    }
-    async saveView(text, view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'saveView',
-            params: {
-                app: this.getName(),
-                view: view,
-                text: text,
-            },
-        });
-    }
-    async saveController(text) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'saveController',
-            params: {
-                app: this.getName(),
-                text: text,
-            },
-        });
-    }
-    async createView() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'createView',
-            params: {
-                app: this.getName(),
-            },
-        });
-    }
-    async createController() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'createController',
-            params: {
-                app: this.getName(),
-            },
-        });
-    }
-    async createModelBackJs() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Application',
-            action: 'createModelBackJs',
-            params: {
-                app: this.getName(),
-            },
-        });
-    }
-    async newDataSource(params) {
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action: '_new',
-            params: params,
-        });
-        return this.createDataSource(data);
-    }
-    async newAction(params) {
-        // params['pageFileName'] = this.page.pageLink.getFileName();
-        // params['form']         = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: '_new',
-            params: params,
-        });
-        return this.createAction(data);
-    }
-    createDataSource(data) {
-        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_2__.DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts":
-/*!*****************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts ***!
-  \*****************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ColumnEditor": () => (/* binding */ ColumnEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-class ColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, table) {
-        super(data, table);
-        this.table = table;
-    }
-    async setValue(name, value) {
-        //console.debug('ColumnEditor.setValue', name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action: 'save',
-            params: {
-                database: this.table.database.getName(),
-                table: this.table.getName(),
-                column: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action: 'delete',
-            params: {
-                database: this.table.database.getName(),
-                table: this.table.getName(),
-                column: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeColumn(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts":
-/*!*************************************************************************!*\
-  !*** ./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts ***!
-  \*************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DataSourceEditor": () => (/* binding */ DataSourceEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../KeyColumnEditor/KeyColumnEditor */ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts");
-/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-/* harmony import */ var _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageEditor/PageEditor */ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
-
-
-
-
-
-
-class DataSourceEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, parent) {
-        super(data, parent);
-        this.keyColumns = [];
-    }
-    init() {
-        for (const data of this.data.keyColumns) {
-            this.createKeyColumn(data);
-        }
-    }
-    createKeyColumn(data) {
-        const keyColumn = new _KeyColumnEditor_KeyColumnEditor__WEBPACK_IMPORTED_MODULE_1__.KeyColumnEditor(data, this);
-        keyColumn.init();
-        this.keyColumns.push(keyColumn);
-        return keyColumn;
-    }
-    removeKeyColumn(keyColumn) {
-        console.debug('DatabaseEditor.removeParam', keyColumn.getName());
-        const i = this.keyColumns.indexOf(keyColumn);
-        if (i === -1)
-            throw new Error('no such keyColumn');
-        this.keyColumns.splice(i, 1);
-    }
-    static async create(parent, params) {
-        if (parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            const form = parent;
-            params['page'] = form.page.pageLink.getFileName();
-            params['form'] = form.getName();
-        }
-        if (parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            const page = parent;
-            params['page'] = page.pageLink.getFileName();
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action: '_new',
-            params: params,
-        });
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const args = {
-            controller: 'DataSource',
-            action: 'save',
-            params: {
-                dataSource: this.getName(),
-                attr: name,
-                value: value,
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.pageFileName = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.form = this.parent.getName();
-            // @ts-ignore
-            args.params.pageFileName = this.parent.page.pageLink.getFileName();
-        }
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        const args = {
-            controller: 'DataSource',
-            action: 'delete',
-            params: {
-                dataSource: this.getName(),
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.form = this.parent.getName();
-            // @ts-ignore
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async createModelBackJs() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action: 'createModelBackJs',
-            params: Object.assign(Object.assign(Object.assign({}, (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor
-                ? {
-                    page: this.parent.getName(),
-                    pageFileName: this.parent.pageLink.getFileName(),
-                }
-                : {})), (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor
-                ? {
-                    form: this.parent.getName(),
-                    page: this.parent.page.getName(),
-                    pageFileName: this.parent.page.pageLink.getFileName(),
-                }
-                : {})), { dataSource: this.getName() }),
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDataSource(this);
-    }
-    async moveUp() {
-        const args = {
-            controller: 'DataSource',
-            action: 'moveUp',
-            params: {
-                dataSource: this.getName(),
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.form = this.parent.getName();
-            // @ts-ignore
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async moveDown() {
-        const args = {
-            controller: 'DataSource',
-            action: 'moveDown',
-            params: {
-                dataSource: this.getName(),
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.form = this.parent.getName();
-            // @ts-ignore
-            args.params.page = this.parent.page.pageLink.getFileName();
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async newKeyColumnData(name) {
-        const args = {
-            controller: 'KeyColumn',
-            action: '_new',
-            params: {
-                dataSource: this.getName(),
-                class: 'KeyColumn',
-                name: name,
-            },
-        };
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.page = this.parent.page.pageLink.getFileName();
-            // @ts-ignore
-            args.params.form = this.parent.getName();
-        }
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.page = this.parent.pageLink.getFileName();
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async newKeyColumn(name) {
-        const data = await this.newKeyColumnData(name);
-        return this.createKeyColumn(data);
-    }
-    async getView(view) {
-        const args = {
-            controller: 'DataSource',
-            action: 'getView',
-            params: {
-                dataSource: this instanceof DataSourceEditor ? this.getName() : undefined,
-                view: view,
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            // @ts-ignore
-            args.params.pageFileName =
-                this instanceof DataSourceEditor ? this.parent.pageLink.getFileName() : undefined;
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            // @ts-ignore
-            args.params.pageFileName =
-                this instanceof DataSourceEditor
-                    ? this.parent.page.pageLink.getFileName()
-                    : undefined;
-            // @ts-ignore
-            args.params.form = this instanceof DataSourceEditor ? this.parent.getName() : undefined;
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async saveController(text) {
-        const args = {
-            controller: 'DataSource',
-            action: 'saveController',
-            params: {
-                dataSource: this.getName(),
-                text: text,
-            },
-        };
-        if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            args.params.pageFileName = this.parent.pageLink.getFileName();
-        }
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            args.params.pageFileName = this.parent.page.pageLink.getFileName();
-            args.params.form = this.parent.getName();
-        }
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async createController() {
-        const args = {
-            controller: 'DataSource',
-            action: 'createController',
-            params: {
-                page: this.parent.page.getName(),
-                pageFileName: this.parent.page.pageLink.getFileName(),
-                form: this.parent.getName(),
-                dataSource: this.getName(),
-            },
-        };
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    getFullName() {
-        if (this.parent instanceof _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_2__.FormEditor) {
-            return [this.parent.parent.getName(), this.parent.getName(), this.getName()].join('.');
-        }
-        else if (this.parent instanceof _PageEditor_PageEditor__WEBPACK_IMPORTED_MODULE_3__.PageEditor) {
-            return [this.parent.getName(), this.getName()].join('.');
-        }
-        else if (this.parent instanceof _ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_5__.ApplicationEditor) {
-            return this.getName();
-        }
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts":
-/*!*********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/DatabaseEditor/DatabaseEditor.ts ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "DatabaseEditor": () => (/* binding */ DatabaseEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ParamEditor/ParamEditor */ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts");
-/* harmony import */ var _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../TableEditor/TableEditor */ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-
-class DatabaseEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, parent) {
-        super(data, parent);
-        this.params = [];
-        this.tables = [];
-    }
-    init() {
-        // params
-        for (const data of this.data.params) {
-            this.createParam(data);
-        }
-        // tables
-        for (const data of this.data.tables) {
-            this.createTable(data);
-        }
-    }
-    createParam(data) {
-        const param = new _ParamEditor_ParamEditor__WEBPACK_IMPORTED_MODULE_1__.ParamEditor(data, this);
-        param.init();
-        this.params.push(param);
-        return param;
-    }
-    createTable(data) {
-        const table = new _TableEditor_TableEditor__WEBPACK_IMPORTED_MODULE_2__.TableEditor(data, this);
-        table.init();
-        this.tables.push(table);
-        return table;
-    }
-    removeParam(param) {
-        console.debug('DatabaseEditor.removeParam', param.getName());
-        const i = this.params.indexOf(param);
-        if (i === -1)
-            throw new Error('no such param');
-        this.params.splice(i, 1);
-    }
-    removeTable(table) {
-        console.debug('DatabaseEditor.removeTable', table.getName());
-        const i = this.tables.indexOf(table);
-        if (i === -1)
-            throw new Error('no such table');
-        this.tables.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'save',
-            params: {
-                database: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'delete',
-            params: {
-                database: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeDatabase(this);
-    }
-    async newParam(name) {
-        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action: '_new',
-            params: {
-                database: this.getName(),
-                class: 'Param',
-                name: name,
-            },
-        });
-        return this.createParam(data);
-    }
-    async newTable(params) {
-        if (!params.name)
-            throw new Error('newTable: no name');
-        const data = await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: '_new',
-            params: {
-                database: this.getName(),
-                class: 'Table',
-                name: params.name,
-                columns: params.columns,
-            },
-        });
-        return this.createTable(data);
-    }
-    async getView(view) {
-        console.debug('DatabaseEditor.getView', view);
-        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'getView',
-            params: {
-                view: view,
-                database: this.data !== undefined ? this.getName() : null,
-            },
-        });
-    }
-    async getTableInfo(table) {
-        return await _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'getTableInfo',
-            params: {
-                database: this.data !== undefined ? this.getName() : null,
-                table: table,
-            },
-        });
-    }
-    moveUp() {
-        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'moveUp',
-            params: {
-                database: this.getName(),
-            },
-        });
-    }
-    moveDown() {
-        return _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp.doHttpRequest({
-            controller: 'Database',
-            action: 'moveDown',
-            params: {
-                database: this.getName(),
-            },
-        });
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/Editor.ts":
-/*!**********************************************!*\
-  !*** ./src/frontend/editor/Editor/Editor.ts ***!
-  \**********************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "Editor": () => (/* binding */ Editor)
-/* harmony export */ });
-class Editor {
-    constructor(data, parent = null) {
-        if (!data)
-            throw new Error('no data');
-        this.data = data;
-        this.parent = parent;
-    }
-    init() { }
-    getClassName() {
-        return this.data['@class'];
-    }
-    getName() {
-        return this.getAttr('name');
-    }
-    getFullName(splitter = '.') {
-        let name;
-        if (this.form) {
-            name = `${this.form.page.getName()}${splitter}${this.form.getName()}${splitter}${this.getName()}`;
-        }
-        else if (this.page) {
-            name = `${this.page.getName()}${splitter}${this.getName()}`;
-        }
-        else {
-            name = this.getName();
-        }
-        return name;
-    }
-    async setValue(name, value) {
-        throw new Error(`${this.constructor.name}.setValue not implemented`);
-    }
-    getAttr(name) {
-        return this.data['@attributes'][name];
-    }
-    getAttributes() {
-        return this.data['@attributes'];
-    }
-    setAttr(name, value) {
-        this.data['@attributes'][name] = value;
-    }
-    /*getObject(col, name) {
-        return this[col].find(obj => obj.getName() === name);
-    }*/
-    /*createDataSource(data) {
-        const dataSource = new DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }*/
-    removeDataSource(dataSource) {
-        // console.debug('Editor.removeDataSource', dataSource.getName());
-        const i = this.dataSources.indexOf(dataSource);
-        if (i === -1)
-            throw new Error('no such dataSource');
-        this.dataSources.splice(i, 1);
-    }
-    /*createAction(data) {
-        const action = new ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }*/
-    removeAction(action) {
-        // console.debug('Editor.removeField', action.getName());
-        const i = this.actions.indexOf(action);
-        if (i === -1)
-            throw new Error('no such action');
-        this.actions.splice(i, 1);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FieldEditor": () => (/* binding */ FieldEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-class FieldEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, form) {
-        super(data, form);
-        this.form = form;
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'save',
-            params: {
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'delete',
-            params: {
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form: this.form.getName(),
-                field: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeField(this);
-    }
-    async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'getView',
-            params: {
-                view: view,
-                page: this.data !== undefined ? this.form.page.getName() : null,
-                form: this.data !== undefined ? this.form.getName() : null,
-                field: this.data !== undefined ? this.getName() : null,
-            },
-        });
-    }
-    async saveView(text, view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'saveView',
-            params: {
-                page: this.form.page.getName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                view: view,
-                text: text,
-            },
-        });
-    }
-    async saveController(text) {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'saveController',
-            params: {
-                page: this.form.page.getName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                text: text,
-            },
-        });
-    }
-    async createView() {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'createView',
-            params: {
-                page: this.form.page.getName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-    async createStyle() {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'createStyle',
-            params: {
-                page: this.form.page.getName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-    async createController() {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'createController',
-            params: {
-                page: this.form.page.getName(),
-                form: this.form.getName(),
-                field: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-    async changeClass(params) {
-        params['page'] = this.form.page.getName();
-        params['form'] = this.form.getName();
-        params['field'] = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'changeClass',
-            params: params,
-        });
-        return (this.data = data);
-    }
-    moveUp() {
-        return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'moveUp',
-            params: {
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form: this.form.getName(),
-                field: this.getName(),
-            },
-        });
-    }
-    moveDown() {
-        return _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: 'moveDown',
-            params: {
-                pageFileName: this.form.page.pageLink.getFileName(),
-                form: this.form.getName(),
-                field: this.getName(),
-            },
-        });
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts":
-/*!*************************************************************!*\
-  !*** ./src/frontend/editor/Editor/FormEditor/FormEditor.ts ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormEditor": () => (/* binding */ FormEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-/* harmony import */ var _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FieldEditor/FieldEditor */ "./src/frontend/editor/Editor/FieldEditor/FieldEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-
-
-class FormEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, page) {
-        super(data, page);
-        this.page = page;
-        this.dataSources = [];
-        this.fields = [];
-        this.actions = [];
-    }
-    init() {
-        // dataSources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-        // fields
-        for (const data of this.data.fields) {
-            this.createField(data);
-        }
-    }
-    createDataSource(data) {
-        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-    createAction(data) {
-        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    createField(data) {
-        const field = new _FieldEditor_FieldEditor__WEBPACK_IMPORTED_MODULE_3__.FieldEditor(data, this);
-        field.init();
-        this.fields.push(field);
-        return field;
-    }
-    removeField(field) {
-        console.debug('FormEditor.removeField', field.getName());
-        const i = this.fields.indexOf(field);
-        if (i === -1)
-            throw new Error('no such field');
-        this.fields.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'save',
-            params: {
-                pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'delete',
-            params: {
-                pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeForm(this);
-    }
-    moveUp() {
-        const args = {
-            controller: 'Form',
-            action: 'moveUp',
-            params: {
-                pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName(),
-            },
-        };
-        return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    moveDown() {
-        const args = {
-            controller: 'Form',
-            action: 'moveDown',
-            params: {
-                pageFileName: this.page.pageLink.getFileName(),
-                form: this.getName(),
-            },
-        };
-        return _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest(args);
-    }
-    async newField(params) {
-        params['pageFileName'] = this.page.pageLink.getFileName();
-        params['form'] = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Field',
-            action: '_new',
-            params: params,
-        });
-        return this.createField(data);
-    }
-    async newAction(params) {
-        params['pageFileName'] = this.page.pageLink.getFileName();
-        params['form'] = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: '_new',
-            params: params,
-        });
-        return this.createAction(data);
-    }
-    async newDataSource(params) {
-        params['page'] = this.page.pageLink.getFileName();
-        params['form'] = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'DataSource',
-            action: '_new',
-            params: params,
-        });
-        return this.createDataSource(data);
-    }
-    async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'getView',
-            params: {
-                view: view,
-                page: this.data !== undefined ? this.page.getName() : null,
-                form: this.data !== undefined ? this.getName() : null,
-            },
-        });
-    }
-    async saveView(text, view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'saveView',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-                view: view,
-                text: text,
-            },
-        });
-    }
-    async saveController(text) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'saveController',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-                text: text,
-            },
-        });
-    }
-    async createModelBackJs() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'createModelBackJs',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-            },
-        });
-    }
-    async createView() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'createView',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-    async createController() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'createController',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-    async createStyle() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: 'createStyle',
-            params: {
-                page: this.page.getName(),
-                form: this.getName(),
-                class: this.getClassName(),
-            },
-        });
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts":
-/*!***********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/KeyColumnEditor/KeyColumnEditor.ts ***!
-  \***********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "KeyColumnEditor": () => (/* binding */ KeyColumnEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-class KeyColumnEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, dataSource) {
-        super(data, dataSource);
-        this.dataSource = dataSource;
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action: 'save',
-            params: {
-                form: this.dataSource.parent.getName(),
-                pageFileName: this.dataSource.parent.page.pageLink.getFileName(),
-                dataSource: this.dataSource.getName(),
-                keyColumn: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'KeyColumn',
-            action: 'delete',
-            params: Object.assign(Object.assign(Object.assign({}, (this.getPage() ? { page: this.getPage().pageLink.getFileName() } : {})), (this.getForm() ? { form: this.getForm().getName() } : {})), { dataSource: this.dataSource.getName(), keyColumn: this.getName() }),
-        });
-    }
-    getPage() {
-        if (this.dataSource.parent.constructor.name === 'FormEditor') {
-            return this.dataSource.parent.page;
-        }
-        if (this.dataSource.parent.constructor.name === 'PageEditor') {
-            return this.dataSource.parent;
-        }
-        return null;
-    }
-    getForm() {
-        if (this.dataSource.parent.constructor.name === 'FormEditor') {
-            return this.dataSource.parent;
-        }
-        return null;
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeKeyColumn(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/PageEditor/PageEditor.ts":
-/*!*************************************************************!*\
-  !*** ./src/frontend/editor/Editor/PageEditor/PageEditor.ts ***!
-  \*************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PageEditor": () => (/* binding */ PageEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSourceEditor/DataSourceEditor */ "./src/frontend/editor/Editor/DataSourceEditor/DataSourceEditor.ts");
-/* harmony import */ var _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ActionEditor/ActionEditor */ "./src/frontend/editor/Editor/ActionEditor/ActionEditor.ts");
-/* harmony import */ var _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../FormEditor/FormEditor */ "./src/frontend/editor/Editor/FormEditor/FormEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-
-
-class PageEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, pageLink) {
-        super(data);
-        this.pageLink = pageLink;
-        this.dataSources = [];
-        this.actions = [];
-        this.forms = [];
-    }
-    init() {
-        // data sources
-        for (const data of this.data.dataSources) {
-            this.createDataSource(data);
-        }
-        // actions
-        for (const data of this.data.actions) {
-            this.createAction(data);
-        }
-        // forms
-        for (const data of this.data.forms) {
-            this.createForm(data);
-        }
-    }
-    createDataSource(data) {
-        const dataSource = new _DataSourceEditor_DataSourceEditor__WEBPACK_IMPORTED_MODULE_1__.DataSourceEditor(data, this);
-        dataSource.init();
-        this.dataSources.push(dataSource);
-        return dataSource;
-    }
-    createAction(data) {
-        const action = new _ActionEditor_ActionEditor__WEBPACK_IMPORTED_MODULE_2__.ActionEditor(data, this);
-        action.init();
-        this.actions.push(action);
-        return action;
-    }
-    createForm(data) {
-        const form = new _FormEditor_FormEditor__WEBPACK_IMPORTED_MODULE_3__.FormEditor(data, this);
-        form.init();
-        this.forms.push(form);
-        return form;
-    }
-    removeForm(form) {
-        console.debug('Page.removeForm', form.getName());
-        const i = this.forms.indexOf(form);
-        if (i === -1)
-            throw new Error('no such form');
-        this.forms.splice(i, 1);
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'save',
-            params: {
-                fileName: this.pageLink.getFileName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'delete',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        console.debug('PageEditor.delete', this.getName());
-        await this.deleteData();
-        this.pageLink.remove();
-    }
-    async newForm(params) {
-        params['pageFileName'] = this.pageLink.getFileName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Form',
-            action: '_new',
-            params: params,
-        });
-        return this.createForm(data);
-    }
-    async getView(view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'getView',
-            params: {
-                view: view,
-                page: this.data !== undefined ? this.getName() : null,
-            },
-        });
-    }
-    async saveView(text, view) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'saveView',
-            params: {
-                page: this.getName(),
-                view: view,
-                text: text,
-            },
-        });
-    }
-    async saveController(text) {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'saveController',
-            params: {
-                page: this.getName(),
-                text: text,
-            },
-        });
-    }
-    async createView() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'createView',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async createController() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'createController',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async createStyle() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'createStyle',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async createModelBackJs() {
-        return await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'createModelBackJs',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async newAction(params) {
-        params['pageFileName'] = this.pageLink.getFileName();
-        // params['form']         = this.getName();
-        const data = await _common__WEBPACK_IMPORTED_MODULE_4__.FrontHostApp.doHttpRequest({
-            controller: 'Action',
-            action: '_new',
-            params: params,
-        });
-        return this.createAction(data);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts":
-/*!*********************************************************************!*\
-  !*** ./src/frontend/editor/Editor/PageLinkEditor/PageLinkEditor.ts ***!
-  \*********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PageLinkEditor": () => (/* binding */ PageLinkEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-class PageLinkEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, parent) {
-        super(data, parent);
-        this.application = parent;
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action: 'save',
-            params: {
-                pageLink: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async moveUp() {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action: 'moveUp',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    async moveDown() {
-        return await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'PageLink',
-            action: 'moveDown',
-            params: {
-                page: this.getName(),
-            },
-        });
-    }
-    getFileName() {
-        return this.data['@attributes'].fileName;
-    }
-    remove() {
-        console.debug('PageLinkEditor.remove', this.getName());
-        this.parent.removePageLink(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/Editor/ParamEditor/ParamEditor.ts ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ParamEditor": () => (/* binding */ ParamEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-class ParamEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action: 'save',
-            params: {
-                database: this.database.getName(),
-                param: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp.doHttpRequest({
-            controller: 'Param',
-            action: 'delete',
-            params: {
-                database: this.database.getName(),
-                param: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeParam(this);
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/Editor/TableEditor/TableEditor.ts":
-/*!***************************************************************!*\
-  !*** ./src/frontend/editor/Editor/TableEditor/TableEditor.ts ***!
-  \***************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TableEditor": () => (/* binding */ TableEditor)
-/* harmony export */ });
-/* harmony import */ var _Editor__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Editor */ "./src/frontend/editor/Editor/Editor.ts");
-/* harmony import */ var _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ColumnEditor/ColumnEditor */ "./src/frontend/editor/Editor/ColumnEditor/ColumnEditor.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
-
-
-
-class TableEditor extends _Editor__WEBPACK_IMPORTED_MODULE_0__.Editor {
-    constructor(data, database) {
-        super(data, database);
-        this.database = database;
-        this.columns = [];
-    }
-    init() {
-        for (const data of this.data.columns) {
-            this.createColumn(data);
-        }
-    }
-    createColumn(data) {
-        const column = new _ColumnEditor_ColumnEditor__WEBPACK_IMPORTED_MODULE_1__.ColumnEditor(data, this);
-        column.init();
-        this.columns.push(column);
-        return column;
-    }
-    removeColumn(column) {
-        console.debug('TableEditor.removeColumn', column.getName());
-        const i = this.columns.indexOf(column);
-        if (i === -1)
-            throw new Error('no such column');
-        this.columns.splice(i, 1);
-    }
-    async newColumn(name) {
-        if (!name)
-            throw new Error(`newColumn: no name`);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
-            controller: 'Column',
-            action: '_new',
-            params: {
-                database: this.database.getName(),
-                table: this.getName(),
-                name: name,
-            },
-        });
-        return this.createColumn(data);
-    }
-    async deleteData() {
-        await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: 'delete',
-            params: {
-                database: this.database.getName(),
-                table: this.getName(),
-            },
-        });
-    }
-    async delete() {
-        await this.deleteData();
-        this.parent.removeTable(this);
-    }
-    moveUp() {
-        return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: 'moveUp',
-            params: {
-                database: this.database.getName(),
-                table: this.getName(),
-            },
-        });
-    }
-    moveDown() {
-        return _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: 'moveDown',
-            params: {
-                database: this.database.getName(),
-                table: this.getName(),
-            },
-        });
-    }
-    async setValue(name, value) {
-        //console.debug(name + ' = ' + value);
-        const data = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest({
-            controller: 'Table',
-            action: 'save',
-            params: {
-                database: this.database.getName(),
-                table: this.getName(),
-                attr: name,
-                value: value,
-            },
-        });
-        this.setAttr(name, value);
-        return data;
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts":
-/*!**********************************************************************!*\
-  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts ***!
-  \**********************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditorFrontHostApp": () => (/* binding */ EditorFrontHostApp)
-/* harmony export */ });
-/* harmony import */ var _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common/FrontHostApp */ "./src/frontend/common/FrontHostApp.ts");
-/* harmony import */ var _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Editor/ApplicationEditor/ApplicationEditor */ "./src/frontend/editor/Editor/ApplicationEditor/ApplicationEditor.ts");
-/* harmony import */ var _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdVisualController/EdApplicationController/EdApplicationController.ts");
-/* harmony import */ var _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EditorFrontHostAppView */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx");
-/* harmony import */ var _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../EdModelController/EdPageLinkController/EdPageLinkController */ "./src/frontend/editor/EdModelController/EdPageLinkController/EdPageLinkController.ts");
-/* harmony import */ var _EdModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../EdModelController/EdModelController */ "./src/frontend/editor/EdModelController/EdModelController.ts");
-/* harmony import */ var _EdModelController_EdDocumentController_EdDocumentController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdModelController/EdDocumentController/EdDocumentController */ "./src/frontend/editor/EdModelController/EdDocumentController/EdDocumentController.ts");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-
-
-
-
-
-
-
-
-class EditorFrontHostApp extends _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp {
-    constructor(data, runAppLink) {
-        super();
-        this.onItemOpen2 = async (item) => {
-            console.debug('EditorFrontHostApp.onItemOpen2', item.getTitle());
-            // console.debug('parent:', item.view.parent);
-            if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
-                await item.loadPage();
-            }
-        };
-        this.onItemSelect2 = async (item) => {
-            console.debug('EditorFrontHostApp.onItemSelect2', item ? item.getTitle() : null);
-            if (item instanceof _EdModelController_EdModelController__WEBPACK_IMPORTED_MODULE_5__.EdModelController) {
-                if (item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController && !item.hasPage()) {
-                    await item.loadPage();
-                }
-                this.fillActions(item);
-                this.fillPropertyGrid(item);
-            }
-            else {
-                this.clearActions();
-                this.endEdit();
-            }
-        };
-        this.onPropertyGrid2Change = (name, value) => {
-            console.debug('EditorFrontHostApp.onPropertyGrid2Change', name, value);
-            const controller = this.treeWidget2.getSelectedItem();
-            // console.debug('controller', controller);
-            controller.setProperty(name, value);
-        };
-        this.onItemDoubleClick2 = async (item) => {
-            console.debug('EditorFrontHostApp.onItemDoubleClick2', item.getTitle());
-            const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
-            if (!controller || !(controller instanceof _EdModelController_EdDocumentController_EdDocumentController__WEBPACK_IMPORTED_MODULE_6__.EdDocumentController))
-                return;
-            await this.openDocument(controller);
-        };
-        this.onDocumentClose = (i) => {
-            console.debug('EditorFrontHostApp.onDocumentClose', i, this.tabWidget.state.active);
-            const document = this.documents[i];
-            const activeDocument = this.documents[this.tabWidget.state.active];
-            this.documents.splice(i, 1);
-            document.controller.onDocumentClose();
-            if (document === activeDocument) {
-                if (this.documents.length) {
-                    if (this.tabWidget.state.active >= this.documents.length) {
-                        this.tabWidget.state.active = this.documents.length - 1;
-                    }
-                }
-                else {
-                    this.tabWidget.state.active = null;
-                }
-            }
-            else {
-                this.tabWidget.state.active = this.documents.indexOf(activeDocument);
-            }
-            this.view.rerender();
-        };
-        this.onActionClick = async (actionName) => {
-            console.debug('EditorFrontHostApp.onActionClick', actionName);
-            const item = this.treeWidget2.getSelectedItem();
-            // console.debug('item', item);
-            const controller = item instanceof _EdModelController_EdPageLinkController_EdPageLinkController__WEBPACK_IMPORTED_MODULE_4__.EdPageLinkController ? item.pageController : item;
-            await controller.doAction(actionName);
-        };
-        console.debug('EditorFrontHostApp.constructor', data);
-        if (!data)
-            throw new Error('no data');
-        this.data = data;
-        // @ts-ignore
-        EditorFrontHostApp.editorApp = this;
-        this.runAppLink = runAppLink;
-        this.view = null;
-        this.actionList = null;
-        this.treeWidget2 = null;
-        this.pg = null; // property grid
-        this.items = null; // treeWidget2 items
-        this.tabWidget = null;
-        this.documents = [];
-        this.modal = null;
-    }
-    async run() {
-        console.debug('EditorFrontHostApp.run');
-        // app
-        const app = new _Editor_ApplicationEditor_ApplicationEditor__WEBPACK_IMPORTED_MODULE_1__.ApplicationEditor(this.data.app);
-        app.init();
-        // console.debug('app:', app);
-        // application controller
-        const applicationController = new _EdModelController_EdDocumentController_EdVisualController_EdApplicationController_EdApplicationController__WEBPACK_IMPORTED_MODULE_2__.EdApplicationController(app, this);
-        applicationController.init();
-        this.items = [applicationController];
-        // view
-        this.view = _common__WEBPACK_IMPORTED_MODULE_7__.Helper.createReactComponent(document.querySelector('.editor__root'), _EditorFrontHostAppView__WEBPACK_IMPORTED_MODULE_3__.EditorFrontHostAppView, { ctrl: this, key: 'editor' });
-    }
-    deinit() { }
-    fillPropertyGrid(ctrl) {
-        const propList = ctrl.getPropList();
-        this.beginEdit(propList['list'], propList['options']);
-    }
-    beginEdit(obj, options) {
-        console.debug('EditorFrontHostApp.beginEdit', obj, options);
-        this.pg.setState({ object: { obj, options } });
-    }
-    endEdit() {
-        console.debug('EditorFrontHostApp.endEdit');
-        this.pg.setState({ object: null });
-    }
-    static async fetchPageData(fileName) {
-        console.debug('EditorFrontHostApp.fetchPageData', fileName);
-        return await _common_FrontHostApp__WEBPACK_IMPORTED_MODULE_0__.FrontHostApp.doHttpRequest({
-            controller: 'Page',
-            action: 'get',
-            params: { fileName },
-        });
-    }
-    fillActions(item) {
-        // console.debug('EditorFrontHostApp.fillActions');
-        this.actionList.setState({ item });
-    }
-    clearActions() {
-        // console.debug('EditorFrontHostApp.clearActions');
-        this.actionList.setState({ item: null });
-    }
-    async openDocument(controller) {
-        console.debug('EditorFrontHostApp.openDocument', controller.getTitle());
-        let document = this.findDocument(controller);
-        if (!document) {
-            document = await controller.createDocument();
-            this.documents.push(document);
-            // console.debug('document:', document);
-        }
-        this.tabWidget.state.active = this.documents.indexOf(document);
-        await this.view.rerender();
-    }
-    findDocument(controller) {
-        return this.documents.find((document) => document.controller === controller) || null;
-    }
-    async openModal(modalController) {
-        console.debug('EditorFrontHostApp.openModal');
-        this.modal = modalController;
-        await this.view.rerender();
-        /* if (modalController.view.el) {
-            console.debug('element', modalController.view.getElement());
-            modalController.view.getElement().focus();
-        } */
-    }
-    async onModalClose() {
-        console.debug('EditorFrontHostApp.onModalClose');
-        this.modal = null;
-        await this.view.rerender();
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx":
-/*!***************************************************************************!*\
-  !*** ./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.tsx ***!
-  \***************************************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditorFrontHostAppView": () => (/* binding */ EditorFrontHostAppView)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ActionList/ActionList */ "./src/frontend/editor/ActionList/ActionList.tsx");
-/* harmony import */ var _TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../TreeWidget/TreeWidget */ "./src/frontend/editor/TreeWidget/TreeWidget.tsx");
-/* harmony import */ var _PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PropertyGrid/PropertyGrid */ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx");
-/* harmony import */ var _EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../EdModalController/EdModalView */ "./src/frontend/editor/EdModalController/EdModalView.tsx");
-/* harmony import */ var _EditorFrontHostAppView_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EditorFrontHostAppView.less */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostAppView.less");
-
-
-
-
-
-
-
-
-class EditorFrontHostAppView extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    renderDocumentView(document) {
-        if (!document.controller.getDocumentViewClass()) {
-            return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", { children: ["no document view for ", document.controller.constructor.name] });
-        }
-        return react__WEBPACK_IMPORTED_MODULE_1__.createElement(document.controller.getDocumentViewClass(), {
-            // @ts-ignore
-            onCreate: (c) => (document.view = c),
-            document: document,
-            ctrl: document.controller,
-        });
-    }
-    getTabs() {
-        console.debug('EditorFrontHostAppView.getTabs', this.props.ctrl.documents);
-        return this.props.ctrl.documents.map((document) => ({
-            name: document.controller.model.getFullName(),
-            title: document.controller.model.getFullName(),
-            content: this.renderDocumentView(document),
-        }));
-    }
-    render() {
-        const { ctrl } = this.props;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "EditorFrontHostAppView" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'EditorFrontHostAppView__sidebar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'tree-bar' }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: ctrl.runAppLink, target: "_blank" }, { children: "Run Application" })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_ActionList_ActionList__WEBPACK_IMPORTED_MODULE_3__.ActionList, { onCreate: (c) => (ctrl.actionList = c), onClick: ctrl.onActionClick }) })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame full' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeWidget_TreeWidget__WEBPACK_IMPORTED_MODULE_4__.TreeWidget, { classList: ['full'], onCreate: (c) => (ctrl.treeWidget2 = c), items: ctrl.items, onItemSelect: ctrl.onItemSelect2, onItemDoubleClick: ctrl.onItemDoubleClick2, onItemOpen: ctrl.onItemOpen2 }) })) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['Tab-blue', 'full'], tabs: [
-                                {
-                                    name: 'properties',
-                                    title: 'Properties',
-                                    content: ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_PropertyGrid_PropertyGrid__WEBPACK_IMPORTED_MODULE_5__.PropertyGrid, { onCreate: (c) => (ctrl.pg = c), onChange: ctrl.onPropertyGrid2Change })),
-                                },
-                            ] })] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'EditorFrontHostAppView__client' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tab, { classList: ['full'], canClose: true, onTabClose: ctrl.onDocumentClose, onCreate: (c) => (ctrl.tabWidget = c), tabs: this.getTabs() }) })), ctrl.modal && react__WEBPACK_IMPORTED_MODULE_1__.createElement(_EdModalController_EdModalView__WEBPACK_IMPORTED_MODULE_6__.EdModalView, { ctrl: ctrl.modal })] })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/EditorHelper.ts":
+/***/ "./src/frontend/common/widget/index.ts":
 /*!*********************************************!*\
-  !*** ./src/frontend/editor/EditorHelper.ts ***!
+  !*** ./src/frontend/common/widget/index.ts ***!
   \*********************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "EditorHelper": () => (/* binding */ EditorHelper)
+/* harmony export */   "Box": () => (/* reexport safe */ _Box_Box__WEBPACK_IMPORTED_MODULE_0__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _Button__WEBPACK_IMPORTED_MODULE_3__.Button),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__.CheckBox),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__.CheckBoxList),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _ComboBox__WEBPACK_IMPORTED_MODULE_2__.ComboBox),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__.DatePicker),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__.DropdownDatePicker),
+/* harmony export */   "Expand": () => (/* reexport safe */ _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__.Expand),
+/* harmony export */   "Grid": () => (/* reexport safe */ _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__.GridRow),
+/* harmony export */   "Image": () => (/* reexport safe */ _Image_Image__WEBPACK_IMPORTED_MODULE_23__.Image),
+/* harmony export */   "Menu": () => (/* reexport safe */ _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__.Modal),
+/* harmony export */   "Password": () => (/* reexport safe */ _Password_Password__WEBPACK_IMPORTED_MODULE_11__.Password),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _PhoneBox__WEBPACK_IMPORTED_MODULE_21__.PhoneBox),
+/* harmony export */   "Radio": () => (/* reexport safe */ _Radio__WEBPACK_IMPORTED_MODULE_27__.Radio),
+/* harmony export */   "Select": () => (/* reexport safe */ _Select_Select__WEBPACK_IMPORTED_MODULE_17__.Select),
+/* harmony export */   "Slider": () => (/* reexport safe */ _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__.Slider),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__.Tab2),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _TextArea__WEBPACK_IMPORTED_MODULE_18__.TextArea),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _TextBox__WEBPACK_IMPORTED_MODULE_6__.TextBox),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__.TimeBox2),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__.Tooltip)
 /* harmony export */ });
-/* harmony import */ var _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./FormWizard/MySqlFormWizard/MySqlFormWizard */ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts");
-/* harmony import */ var _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard */ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts");
+/* harmony import */ var _Box_Box__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Box/Box */ "./src/frontend/common/widget/Box/Box.tsx");
+/* harmony import */ var _CheckBox_CheckBox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckBox/CheckBox */ "./src/frontend/common/widget/CheckBox/CheckBox.tsx");
+/* harmony import */ var _ComboBox__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ComboBox */ "./src/frontend/common/widget/ComboBox.tsx");
+/* harmony import */ var _Button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Button */ "./src/frontend/common/widget/Button.tsx");
+/* harmony import */ var _Tab_Tab__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Tab/Tab */ "./src/frontend/common/widget/Tab/Tab.tsx");
+/* harmony import */ var _DropdownButton_DropdownButton__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DropdownButton/DropdownButton */ "./src/frontend/common/widget/DropdownButton/DropdownButton.tsx");
+/* harmony import */ var _TextBox__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TextBox */ "./src/frontend/common/widget/TextBox.tsx");
+/* harmony import */ var _Grid_Grid__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Grid/Grid */ "./src/frontend/common/widget/Grid/Grid.tsx");
+/* harmony import */ var _GridRow_GridRow__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./GridRow/GridRow */ "./src/frontend/common/widget/GridRow/GridRow.tsx");
+/* harmony import */ var _GridCell_GridCell__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./GridCell/GridCell */ "./src/frontend/common/widget/GridCell/GridCell.tsx");
+/* harmony import */ var _Modal_Modal__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Modal/Modal */ "./src/frontend/common/widget/Modal/Modal.tsx");
+/* harmony import */ var _Password_Password__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Password/Password */ "./src/frontend/common/widget/Password/Password.tsx");
+/* harmony import */ var _Menu_Menu__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Menu/Menu */ "./src/frontend/common/widget/Menu/Menu.tsx");
+/* harmony import */ var _Statusbar_Statusbar__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Statusbar/Statusbar */ "./src/frontend/common/widget/Statusbar/Statusbar.tsx");
+/* harmony import */ var _Tooltip_Tooltip__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Tooltip/Tooltip */ "./src/frontend/common/widget/Tooltip/Tooltip.tsx");
+/* harmony import */ var _DropdownDatePicker_DropdownDatePicker__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./DropdownDatePicker/DropdownDatePicker */ "./src/frontend/common/widget/DropdownDatePicker/DropdownDatePicker.tsx");
+/* harmony import */ var _DatePicker_DatePicker__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./DatePicker/DatePicker */ "./src/frontend/common/widget/DatePicker/DatePicker.tsx");
+/* harmony import */ var _Select_Select__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Select/Select */ "./src/frontend/common/widget/Select/Select.tsx");
+/* harmony import */ var _TextArea__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./TextArea */ "./src/frontend/common/widget/TextArea.tsx");
+/* harmony import */ var _Tab2_Tab2__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Tab2/Tab2 */ "./src/frontend/common/widget/Tab2/Tab2.tsx");
+/* harmony import */ var _TimeBox_TimeBox__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./TimeBox/TimeBox */ "./src/frontend/common/widget/TimeBox/TimeBox.tsx");
+/* harmony import */ var _PhoneBox__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./PhoneBox */ "./src/frontend/common/widget/PhoneBox.tsx");
+/* harmony import */ var _TimeBox_TimeBox2_TimeBox2__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./TimeBox/TimeBox2/TimeBox2 */ "./src/frontend/common/widget/TimeBox/TimeBox2/TimeBox2.tsx");
+/* harmony import */ var _Image_Image__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./Image/Image */ "./src/frontend/common/widget/Image/Image.tsx");
+/* harmony import */ var _CheckBoxList__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./CheckBoxList */ "./src/frontend/common/widget/CheckBoxList.tsx");
+/* harmony import */ var _Slider_Slider__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./Slider/Slider */ "./src/frontend/common/widget/Slider/Slider.tsx");
+/* harmony import */ var _Expand_Expand__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./Expand/Expand */ "./src/frontend/common/widget/Expand/Expand.tsx");
+/* harmony import */ var _Radio__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./Radio */ "./src/frontend/common/widget/Radio.tsx");
 
 
-class EditorHelper {
-    static create(params) {
-        console.debug('FormWizard.create', params);
-        switch (params.model.database.getClassName()) {
-            case 'MySqlDatabase':
-                return new _FormWizard_MySqlFormWizard_MySqlFormWizard__WEBPACK_IMPORTED_MODULE_0__.MySqlFormWizard(params);
-            case 'PostgreSqlDatabase':
-                return new _FormWizard_PostgreSqlFormWizard_PostgreSqlFormWizard__WEBPACK_IMPORTED_MODULE_1__.PostgreSqlFormWizard(params);
-            default:
-                throw new Error(`unknown database class: ${params.model.database.getClassName()}`);
-        }
-    }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /***/ }),
 
-/***/ "./src/frontend/editor/FormWizard/FormWizard.ts":
-/*!******************************************************!*\
-  !*** ./src/frontend/editor/FormWizard/FormWizard.ts ***!
-  \******************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "FormWizard": () => (/* binding */ FormWizard)
-/* harmony export */ });
-class FormWizard {
-    constructor(params) {
-        console.debug('FormWizard.constructor', params);
-        this.params = params;
-        this.model = params.model;
-        this.databaseName = params.model.database.getName();
-        this.tableName = params.model.getName();
-        this.tableColumns = Object.keys(params.model.data.columns).map((name) => params.model.data.columns[name]['@attributes']);
-    }
-    getDataSources() {
-        return [
-            {
-                class: 'SqlDataSource',
-                name: 'default',
-                database: this.databaseName,
-                table: this.tableName,
-                limit: this.params.className === 'TableForm' ? '100' : '',
-                countQuery: this.getCountQuery(),
-                singleQuery: this.getSingleQuery(),
-                multipleQuery: this.getMultipleQuery(),
-            },
-        ];
-    }
-    getFieldClass(column) {
-        if (column.type === 'date')
-            return 'DateField';
-        if (column.type === 'boolean')
-            return 'CheckBoxField';
-        if (this.params.className === 'RowForm') {
-            if (column.dbType === 'text') {
-                return 'TextAreaField';
-            }
-            if (column.dbType === 'json') {
-                return 'TextAreaField';
-            }
-        }
-        return 'TextBoxField';
-    }
-    getField(column) {
-        // console.debug('FormWizard.getField', column);
-        let field = {
-            class: this.getFieldClass(column),
-            name: column.name,
-            caption: column.caption || column.name,
-        };
-        if (column.key === 'true') {
-            if (column.auto === 'false') {
-                field.notNull = 'true';
-            }
-        }
-        else {
-            if (column.nullable === 'false') {
-                field.notNull = 'true';
-                field.readOnly = 'false';
-            }
-        }
-        if (column.auto === 'true') {
-            field.readOnly = 'true';
-        }
-        if (column.type === 'date' && column.dbType === 'timestamp without time zone') {
-            field.timezone = 'false';
-        }
-        return field;
-    }
-    getFields() {
-        /*let fields = {};
-        this.getColumns().forEach(column => {
-            fields[column.name] = this.getField(column);
-        });
-        return fields;*/
-        return this.getColumns().map((column) => this.getField(column));
-    }
-    getColumns() {
-        return this.tableColumns.filter((column) => {
-            if (this.params.className === 'TableForm') {
-                if (column.dbType === 'text')
-                    return false;
-                if (column.dbType === 'bytea')
-                    return false;
-            }
-            return true;
-        });
-    }
-    getFormParams() {
-        return {
-            name: this.params.formName,
-            caption: this.params.formCaption,
-            class: this.params.className,
-            dataSources: this.getDataSources(),
-            fields: this.getFields(),
-        };
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts":
+/***/ "./src/frontend/viewer/Controller/AlertController/AlertController.ts":
 /*!***************************************************************************!*\
-  !*** ./src/frontend/editor/FormWizard/MySqlFormWizard/MySqlFormWizard.ts ***!
+  !*** ./src/frontend/viewer/Controller/AlertController/AlertController.ts ***!
   \***************************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "MySqlFormWizard": () => (/* binding */ MySqlFormWizard)
+/* harmony export */   "AlertController": () => (/* binding */ AlertController)
 /* harmony export */ });
-/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+/* harmony import */ var _AlertView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AlertView */ "./src/frontend/viewer/Controller/AlertController/AlertView.tsx");
 
-class MySqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
-    getSingleQuery() {
-        const columns = this.tableColumns.map((column) => column.name);
-        return 'select\n{columns}\nfrom `{table}`\nwhere id = {key}'
-            .replace('{table}', this.tableName)
-            .replace('{columns}', columns
-            .map((column) => {
-            return '    `' + column + '`';
-        })
-            .join(',\n'));
+
+class AlertController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
+    constructor(options) {
+        super();
+        this.onOkButtonClick = async (e) => {
+            this.close();
+        };
+        this.onCloseClick = async (e) => {
+            this.close();
+        };
+        this.onKeyDown = async (e) => {
+            if (e.key === 'Escape') {
+                this.close();
+            }
+        };
+        this.options = options;
+        if (!options.message)
+            throw new Error('no message');
+        if (!options.onClose)
+            throw new Error('no onClose');
     }
-    getMultipleQuery() {
-        const columns = this.tableColumns.map((column) => column.name);
-        return 'select\n{columns}\nfrom `{table}`\nlimit {offset}, {limit}'
-            .replace('{table}', this.tableName)
-            .replace('{columns}', columns
-            .map((column) => {
-            return '    `' + column + '`';
-        })
-            .join(',\n'));
+    getViewClass() {
+        return _AlertView__WEBPACK_IMPORTED_MODULE_1__.AlertView;
     }
-    getCountQuery() {
-        console.debug('MySqlFormWizard.getCountQuery');
-        return 'select count(*) from `{table}`'.replace('{table}', this.tableName);
+    close() {
+        this.options.onClose();
     }
 }
 
 
 /***/ }),
 
-/***/ "./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts":
-/*!*************************************************************************************!*\
-  !*** ./src/frontend/editor/FormWizard/PostgreSqlFormWizard/PostgreSqlFormWizard.ts ***!
-  \*************************************************************************************/
+/***/ "./src/frontend/viewer/Controller/AlertController/AlertView.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/AlertController/AlertView.tsx ***!
+  \**********************************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PostgreSqlFormWizard": () => (/* binding */ PostgreSqlFormWizard)
+/* harmony export */   "AlertView": () => (/* binding */ AlertView)
 /* harmony export */ });
-/* harmony import */ var _FormWizard__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormWizard */ "./src/frontend/editor/FormWizard/FormWizard.ts");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _AlertView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AlertView.less */ "./src/frontend/viewer/Controller/AlertController/AlertView.less");
 
-class PostgreSqlFormWizard extends _FormWizard__WEBPACK_IMPORTED_MODULE_0__.FormWizard {
-    getSingleQuery() {
-        console.debug('PostgreSqlFormWizard.getSingleQuery');
-        const columns = this.getColumns().map((column) => column.name);
-        return 'select\n{columns}\nfrom "{table}"\nwhere id = {key}'
-            .replace('{table}', this.tableName)
-            .replace('{columns}', columns.map((column) => `    "${column}"`).join(',\n'));
+
+
+
+
+class AlertView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
+    constructor(props) {
+        super(props);
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
-    getMultipleQuery() {
-        console.debug('PostgreSqlFormWizard.getMultipleQuery');
-        const columns = this.getColumns().map((column) => column.name);
-        const _columns = columns.map((column) => `    "${column}"`).join(',\n');
-        return `select\n${_columns}\nfrom "${this.tableName}"\norder by "id"\nlimit {limit}\noffset {offset}`;
+    getHeaderStyle() {
+        return this.getCtrl().options.titleStyle /* || {color: 'red'}*/;
     }
-    getCountQuery() {
-        console.debug('PostgreSqlFormWizard.getCountQuery');
-        return `select count(*) from "${this.tableName}"`;
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__content flex-column` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title`, style: this.getHeaderStyle() }, { children: this.getCtrl().options.title || 'Alert' })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: this.getCtrl().onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max` }, { children: this.getCtrl().options.message })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { classList: [`${this.getCssBlockName()}__ok-button`], title: 'OK', onClick: this.getCtrl().onOkButtonClick }) }))] })) })) })));
+    }
+    componentDidMount() {
+        this.getElement().focus();
     }
 }
 
 
 /***/ }),
 
-/***/ "./src/frontend/editor/PropertyGrid/PropertyGrid.tsx":
+/***/ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts":
+/*!*******************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts ***!
+  \*******************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ConfirmController": () => (/* binding */ ConfirmController)
+/* harmony export */ });
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+/* harmony import */ var _ConfirmView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ConfirmView */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx");
+
+
+class ConfirmController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
+    constructor(options) {
+        super();
+        this.onYesClick = (e) => {
+            this.close(true);
+        };
+        this.onCloseClick = (e) => {
+            this.close(false);
+        };
+        this.onKeyDown = async (e) => {
+            if (e.key === 'Escape') {
+                this.close(false);
+            }
+        };
+        this.options = options;
+        if (!options.message)
+            throw new Error('no message');
+        if (!options.onClose)
+            throw new Error('no onClose');
+    }
+    getViewClass() {
+        return _ConfirmView__WEBPACK_IMPORTED_MODULE_1__.ConfirmView;
+    }
+    close(result) {
+        this.options.onClose(result);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx":
+/*!**************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ConfirmController/ConfirmView.tsx ***!
+  \**************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ConfirmView": () => (/* binding */ ConfirmView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ConfirmView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ConfirmView.less */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmView.less");
+
+
+
+
+
+class ConfirmView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
+    constructor(props) {
+        super(props);
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    render() {
+        // console.debug('ConfirmView.render', this.getCtrl().options);
+        if (!this.getCtrl().options.yesButton)
+            throw new Error('no yesButton option');
+        if (!this.getCtrl().options.noButton)
+            throw new Error('no noButton option');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__content flex-column` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title`, style: this.getCtrl().options.titleStyle }, { children: this.getCtrl().options.title || 'Confirm' })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: this.getCtrl().onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max` }, { children: this.getCtrl().options.message })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { classList: [`${this.getCssBlockName()}__no-button`], title: this.getCtrl().options.noButton, onClick: this.getCtrl().onCloseClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, { classList: [`${this.getCssBlockName()}__yes-button`], title: this.getCtrl().options.yesButton, onClick: this.getCtrl().onYesClick })] }))] })) })) })));
+    }
+    componentDidMount() {
+        this.getElement().focus();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/Controller.ts":
+/*!******************************************************!*\
+  !*** ./src/frontend/viewer/Controller/Controller.ts ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Controller": () => (/* binding */ Controller)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _EventEmitter__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.ts");
+
+
+class Controller extends _EventEmitter__WEBPACK_IMPORTED_MODULE_1__.EventEmitter {
+    constructor() {
+        super(...arguments);
+        this.view = null;
+        /* constructor() {
+            super();
+        } */
+        this.onViewCreate = (view) => {
+            // console.debug('Controller.onViewCreate');
+            this.view = view;
+        };
+    }
+    async rerender() {
+        if (this.view) {
+            return await this.view.rerender();
+        }
+        console.error(`${this.constructor.name}.rerender no view`);
+    }
+    getView() {
+        return this.view;
+    }
+    getViewClass() {
+        throw new Error(`${this.constructor.name}.getViewClass not implemented`);
+    }
+    createElement() {
+        // @ts-ignore
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement(this.getViewClass(), {
+            ctrl: this,
+            onCreate: this.onViewCreate,
+        });
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/LoginController/LoginController.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/LoginController/LoginController.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LoginController": () => (/* binding */ LoginController)
+/* harmony export */ });
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+/* harmony import */ var _LoginView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class LoginController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
+    constructor(frontHostApp) {
+        super();
+        console.debug(`${this.constructor.name}.constructor`);
+        this.frontHostApp = frontHostApp;
+    }
+    static create(frontHostApp) {
+        const data = frontHostApp.getData();
+        if (!data.name)
+            throw new Error('no app name');
+        const CustomClass = _common__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(`${data.name}LoginController`);
+        const Class = CustomClass || LoginController;
+        return new Class(frontHostApp);
+    }
+    getViewClass() {
+        return _LoginView__WEBPACK_IMPORTED_MODULE_1__.LoginView;
+    }
+    getText() {
+        return this.frontHostApp.getText();
+    }
+    getFrontHostApp() {
+        return this.frontHostApp;
+    }
+    getViewClassCssBlockName() {
+        return this.getViewClass().name;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/LoginController/LoginView.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LoginView": () => (/* binding */ LoginView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _LoginView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./LoginView.less */ "./src/frontend/viewer/Controller/LoginController/LoginView.less");
+
+
+
+
+
+class LoginView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
+    constructor(props) {
+        super(props);
+        this.onLoginFormSubmit = (e) => {
+            // console.debug('LoginView.onLoginFormSubmit');
+            // @ts-ignore
+            document.querySelector('.LoginView__button').disabled = true;
+            // e.preventDefault();
+        };
+        this.onChange = (e) => {
+            this.errMsgRef.current.innerHTML = '';
+        };
+        this.errMsgRef = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    renderLogo() {
+        return null;
+    }
+    renderTitle() {
+        return this.getCtrl().getFrontHostApp().getData().title;
+    }
+    render() {
+        // console.debug('LoginView.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__container` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("form", Object.assign({ className: `${this.getCssBlockName()}__form`, method: 'post', onSubmit: this.onLoginFormSubmit }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'tzOffset', value: JSON.stringify(new Date().getTimezoneOffset()) }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { type: 'hidden', name: 'action', value: 'login' }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__logo-title` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__logo` }, { children: this.renderLogo() })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: this.renderTitle() }))] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.TextBox, { classList: [`${this.getCssBlockName()}__field`], name: 'username', placeholder: this.getCtrl().getText().login.username, required: true, autoFocus: true, spellCheck: false, value: this.getCtrl().getFrontHostApp().getData().username || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Password, { classList: [`${this.getCssBlockName()}__field2`], name: 'password', placeholder: this.getCtrl().getText().login.password, value: this.getCtrl().getFrontHostApp().getData().password || '', onChange: this.onChange }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("p", Object.assign({ className: `${this.getCssBlockName()}__err-msg`, ref: this.errMsgRef }, { children: this.getCtrl().getFrontHostApp().getData().errMsg })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("button", Object.assign({ className: `${this.getCssBlockName()}__button`, type: 'submit' }, { children: this.getCtrl().getText().login.signIn }))] })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts":
+/*!*******************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ImageDialogController": () => (/* binding */ ImageDialogController)
+/* harmony export */ });
+/* harmony import */ var _ModalController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModalController */ "./src/frontend/viewer/Controller/ModalController/ModalController.ts");
+/* harmony import */ var _ImageDialogView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ImageDialogView */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.tsx");
+
+
+class ImageDialogController extends _ModalController__WEBPACK_IMPORTED_MODULE_0__.ModalController {
+    constructor(options) {
+        // console.debug('ImageDialogController.constructor', options);
+        super(options);
+        this.onCloseClick = async (e) => {
+            await this.close();
+        };
+        this.onKeyDown = async (e) => {
+            if (e.key === 'Escape') {
+                await this.close();
+            }
+        };
+        this.onImageClick = async (e) => {
+            console.debug('ImageDialogController.onImageClick');
+            await this.close();
+        };
+        if (!options.src)
+            throw new Error('no src');
+    }
+    getViewClass() {
+        console.debug('ImageDialogController.getViewClass');
+        return _ImageDialogView__WEBPACK_IMPORTED_MODULE_1__.ImageDialogView;
+    }
+    getSrc() {
+        return this.options.src;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.tsx":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.tsx ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ImageDialogView": () => (/* binding */ ImageDialogView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../View */ "./src/frontend/viewer/Controller/View.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ImageDialogView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ImageDialogView.less */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogView.less");
+
+
+
+
+
+class ImageDialogView extends _View__WEBPACK_IMPORTED_MODULE_2__.View {
+    constructor(props) {
+        super(props);
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    render() {
+        console.debug('ImageDialogView.render');
+        const { ctrl } = this.props;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("img", { className: `${this.getCssBlockName()}__image`, src: ctrl.getSrc(), onClick: ctrl.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }))] })));
+    }
+    componentDidMount() {
+        this.getElement().focus();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModalController/ModalController.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModalController/ModalController.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModalController": () => (/* binding */ ModalController)
+/* harmony export */ });
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+
+class ModalController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
+    constructor(options = {}) {
+        super();
+        if (!options.app)
+            throw new Error('no app');
+        if (!options.id)
+            throw new Error('no id');
+        this.options = options;
+    }
+    getId() {
+        return this.options.id;
+    }
+    getApp() {
+        return this.options.app;
+    }
+    async close() {
+        await this.getApp().closeModal(this);
+        if (this.options.onClose) {
+            this.options.onClose();
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts":
+/*!*******************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts ***!
+  \*******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* binding */ ApplicationController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../Model/Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
+/* harmony import */ var _ApplicationView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
+/* harmony import */ var _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../WebSocketClient */ "./src/frontend/viewer/WebSocketClient.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+
+
+
+
+
+
+class ApplicationController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+    constructor(model, frontHostApp) {
+        super(model);
+        this.frontHostApp = frontHostApp;
+        this.lastId = 0;
+        this.activePage = null; // active non modal page
+        this.modals = [];
+        this.statusbar = null;
+        this.homePageName = null;
+        this.webSocketClient = null;
+        this.onRequest = async (e) => {
+            console.debug('onRequest', e);
+            if (this.statusbar) {
+                this.statusbar.setLastQueryTime(e.time);
+            }
+            // console.debug('e.remoteAppVersion', e.remoteAppVersion);
+            // console.debug('this.getModel().getData().versions.app', this.getModel().getData().versions.app);
+            if (this.getModel().getData().versions.app &&
+                this.getModel().getData().versions.app !== e.remoteAppVersion) {
+                this.createVersionNotificationIfNotExists();
+            }
+        };
+        this.onStatusbarCreate = (statusbar) => {
+            this.statusbar = statusbar;
+        };
+        this.onLogout = async () => {
+            console.debug('ApplicationController.onLogout');
+            const result = await this.getModel().request('POST', { action: 'logout' });
+            location.href = this.getRootPath();
+        };
+        this.onMenuItemClick = async (menu, type, name) => {
+            console.debug('ApplicationController.onMenuItemClick', menu, type, name);
+            if (type === 'page') {
+                await this.openPage({ name: name, modal: false });
+                history.pushState({ pageName: name }, '', this.getHostApp().createLink({ page: name }));
+            }
+            else if (type === 'action') {
+                try {
+                    const result = await this.onActionClick(name);
+                    if (!result) {
+                        throw new Error(`no handler for action '${name}'`);
+                    }
+                }
+                catch (err) {
+                    console.error(err);
+                    await this.alert({ message: err.message });
+                }
+            }
+            else if (type === 'custom' && name === 'logout') {
+                await this.onLogout();
+            }
+            else {
+                throw new Error(`unknown menu type/name: ${type}/${name}`);
+            }
+        };
+        if (typeof window === 'object') {
+            console.debug(`${this.constructor.name}.constructor`, model);
+        }
+    }
+    static create(model, frontHostApp) {
+        // console.debug(
+        //     'ApplicationController.create',
+        //     'debug:',
+        //     this.getHostApp().isDebugMode(),
+        //     model,
+        // );
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.getGlobalClass(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, frontHostApp);
+        }
+        return new ApplicationController(model, frontHostApp);
+    }
+    init() {
+        // console.debug('ApplicationController.init');
+        super.init();
+        // this.getModel().on('logout' , this.onLogout);
+        this.getModel().on('request', this.onRequest);
+        const pageData = this.getModel().getData().pages[0];
+        this.activePage = pageData
+            ? this.createPage(pageData, {
+                modal: false,
+                params: this.getGlobalParams(),
+            })
+            : null;
+        // this.frontHostApp.setDocumentTitle(this.getTitle());
+        // Helper.addClassToDocumentElement(Helper.inIframe() ? 'iframe' : 'not-iframe');
+        const activePageName = this.getActivePageName();
+        this.homePageName = activePageName ? activePageName : this.frontHostApp.getDocumentTitle();
+    }
+    deinit() {
+        // this.getModel().off('logout', this.onLogout);
+        this.getModel().off('request', this.onRequest);
+        super.deinit();
+    }
+    getViewClass() {
+        return super.getViewClass() || _ApplicationView__WEBPACK_IMPORTED_MODULE_2__.ApplicationView;
+    }
+    createView(rootElement) {
+        // console.debug('ApplicationController.createView');
+        this.view = _common__WEBPACK_IMPORTED_MODULE_4__.Helper.createReactComponent2(rootElement, this.getViewClass(), {
+            ctrl: this,
+            key: this.getModel().getName(),
+        });
+        if (this.statusbar) {
+            this.statusbar.setLastQueryTime(this.getModel().getAttr('time'));
+        }
+    }
+    createVersionNotificationIfNotExists() {
+        // console.debug('ApplicationController.createVersionNotificationIfNotExists');
+        if (!document.querySelector('.version-notification')) {
+            const div = document.createElement('div');
+            div.innerHTML = this.getModel().getText().application.versionNotification;
+            div.className = 'version-notification';
+            document.querySelector(`.${this.getView().getCssBlockName()}__body`).append(div);
+        }
+        else {
+            // console.debug(`version notification already exists`);
+        }
+    }
+    getGlobalParams() {
+        return {
+        // foo: 'bar'
+        };
+    }
+    createPage(pageData, options) {
+        if (options.modal === undefined)
+            throw new Error('no options.modal');
+        // model
+        const pageModel = new _Model_Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page(pageData, this.getModel(), options);
+        pageModel.init();
+        // controller
+        const pc = _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController.create(pageModel, this, `c${this.getNextId()}`);
+        pc.init();
+        return pc;
+    }
+    async openPage(options) {
+        console.debug('ApplicationController.openPage', options);
+        if (!options.name)
+            throw new Error('no name');
+        // if (options.key) throw new Error('openPage: key param is deprecated');
+        // if this page with this key is already opened, then show it
+        const pageController = this.findPageControllerByPageNameAndKey(options.name, null);
+        // console.debug('pageController:', pageController);
+        if (pageController) {
+            this.onPageSelect(pageController);
+            return pageController;
+        }
+        const { page: pageData } = await this.getModel().request('POST', {
+            action: 'page',
+            page: options.name,
+            newMode: !!options.newMode,
+            params: options.params || {},
+        });
+        // modal by default
+        if (options.modal === undefined) {
+            options.modal = true;
+        }
+        if (!options.onClose) {
+            const activeElement = document.activeElement;
+            options.onClose = () => {
+                // @ts-ignore
+                if (activeElement)
+                    activeElement.focus();
+            };
+        }
+        const pc = this.createPage(pageData, options);
+        // console.debug('pc:', pc);
+        // show
+        pc.isModal() ? this.addModal(pc) : this.addPage(pc);
+        await this.rerender();
+        return pc;
+    }
+    addModal(ctrl) {
+        this.modals.push(ctrl);
+    }
+    removeModal(ctrl) {
+        // console.debug('ApplicationController.removeModal', ctrl);
+        const i = this.modals.indexOf(ctrl);
+        if (i === -1)
+            throw new Error(`cannot find modal: ${ctrl.getId()}`);
+        this.modals.splice(i, 1);
+    }
+    getNextId() {
+        this.lastId++;
+        return this.lastId;
+    }
+    getNewId() {
+        return `c${this.getNextId()}`;
+    }
+    addPage(pc) {
+        if (this.activePage) {
+            this.closePage(this.activePage);
+        }
+        this.activePage = pc;
+        this.frontHostApp.setDocumentTitle(this.getTitle());
+    }
+    findPageControllerByPageNameAndKey(pageName, key) {
+        if (this.activePage &&
+            this.activePage.getModel().getName() === pageName &&
+            this.activePage.getModel().getKey() === key) {
+            return this.activePage;
+        }
+        return null;
+    }
+    onPageSelect(pc) {
+        console.debug('ApplicationController.onPageSelect', pc.getModel().getName());
+    }
+    async closePage(pageController) {
+        console.debug('ApplicationController.closePage', pageController.getModel().getFullName());
+        if (this.modals.indexOf(pageController) > -1) {
+            this.modals.splice(this.modals.indexOf(pageController), 1);
+        }
+        else if (this.activePage === pageController) {
+            this.activePage = null;
+            document.title = '';
+        }
+        else {
+            throw new Error('page not found');
+        }
+        await this.rerender();
+        pageController.deinit();
+        pageController.getModel().deinit();
+    }
+    async onActionClick(name) {
+        console.debug('ApplicationController.onActionClick', name);
+    }
+    getMenuItemsProp() {
+        // console.debug('ApplicationController.getMenuItemsProp');
+        return [
+            // pages & actions
+            ...(this.getModel().getData().menu
+                ? Object.keys(this.getModel().getData().menu).map((key) => ({
+                    name: key,
+                    title: key,
+                    items: this.getModel()
+                        .getData()
+                        .menu[key].map((item) => ({
+                        type: item.type,
+                        name: item.page || item.action,
+                        title: item.caption,
+                    })),
+                }))
+                : []),
+            // user
+            ...(this.getModel().getUser()
+                ? [
+                    {
+                        name: 'user',
+                        title: `${this.getModel().getDomain()}/${this.getModel().getUser().login}`,
+                        items: [
+                            {
+                                type: 'custom',
+                                name: 'logout',
+                                title: 'Logout',
+                            },
+                        ],
+                    },
+                ]
+                : []),
+        ];
+    }
+    /*getFocusCtrl() {
+        if (this.modals.length > 0) {
+            return this.modals[this.modals.length - 1];
+        }
+        return this.activePage;
+    }*/
+    getActivePageName() {
+        if (this.activePage) {
+            return this.activePage.getModel().getName();
+        }
+        return null;
+    }
+    async onWindowPopState(e) {
+        console.debug('ApplicationController.onWindowPopState', e.state);
+        await this.openPage({
+            name: e.state ? e.state.pageName : this.homePageName,
+            modal: false,
+        });
+    }
+    getTitle() {
+        // console.debug('ApplicationController.getTitle', this.activePage);
+        if (this.activePage) {
+            return `${this.activePage.getTitle()} - ${this.getModel().getCaption()}`;
+        }
+        return this.getModel().getCaption();
+    }
+    invalidate() {
+        if (this.activePage)
+            this.activePage.invalidate();
+        this.modals
+            .filter((ctrl) => ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController)
+            .forEach((page) => page.invalidate());
+    }
+    async alert(options) {
+        if (!options.title) {
+            options.title = this.getModel().getText().application.alert;
+        }
+        const activeElement = document.activeElement;
+        try {
+            return await this.frontHostApp.alert(options);
+        }
+        finally {
+            // @ts-ignore
+            if (activeElement)
+                activeElement.focus();
+        }
+    }
+    async confirm(options) {
+        if (!options.title) {
+            options.title = this.getModel().getText().application.confirm;
+        }
+        if (!options.yesButton) {
+            options.yesButton = this.getModel().getText().confirm.yes;
+        }
+        if (!options.noButton) {
+            options.noButton = this.getModel().getText().confirm.no;
+        }
+        const activeElement = document.activeElement;
+        try {
+            return await this.frontHostApp.confirm(options);
+        }
+        finally {
+            // @ts-ignore
+            if (activeElement)
+                activeElement.focus();
+        }
+    }
+    getRootPath() {
+        return '/';
+    }
+    async openModal(ctrl) {
+        this.addModal(ctrl);
+        await this.rerender();
+    }
+    async closeModal(ctrl) {
+        this.removeModal(ctrl);
+        await this.rerender();
+    }
+    getHostApp() {
+        return this.frontHostApp;
+    }
+    async connect() {
+        const data = this.getModel().getData();
+        this.webSocketClient = new _WebSocketClient__WEBPACK_IMPORTED_MODULE_3__.WebSocketClient({
+            applicationController: this,
+            protocol: window.location.protocol === 'https:' ? 'wss' : 'ws',
+            route: data.route,
+            uuid: data.uuid,
+            userId: data.user ? data.user.id : null,
+        });
+        await this.webSocketClient.connect();
+    }
+    async rpc(name, params = {}) {
+        const result = await this.getModel().rpc(name, params);
+        /*if (result.errorMessage) {
+            this.getHostApp().logError(new Error(result.errorMessage));
+            await this.alert({
+                title     : this.getModel().getText().application.error,
+                titleStyle: {color: 'red'},
+                message   : result.errorMessage
+            });
+        }*/
+        return result;
+    }
+    getDomain() {
+        return this.getModel().getDomain();
+    }
+    getBaseUrl() {
+        return `/${this.getDomain()}`;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(ApplicationController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationView": () => (/* binding */ ApplicationView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+/* harmony import */ var _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ApplicationView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ApplicationView.less */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.less");
+
+
+
+
+
+
+class ApplicationView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
+    renderActivePage() {
+        const { ctrl } = this.props;
+        if (ctrl.activePage) {
+            return this.renderView(ctrl.activePage);
+        }
+        return null;
+    }
+    renderView(ctrl, props = {}) {
+        return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), Object.assign({ parent: this, ctrl: ctrl, onCreate: ctrl.onViewCreate }, props));
+    }
+    renderModals() {
+        return this.getCtrl().modals.map((ctrl) => {
+            if (ctrl instanceof _PageController_PageController__WEBPACK_IMPORTED_MODULE_3__.PageController) {
+                return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Modal, { children: this.renderView(ctrl) }, ctrl.getId());
+            }
+            return this.renderView(ctrl, { key: ctrl.getId() });
+        });
+    }
+    renderHeader() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("header", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Menu, { items: this.getCtrl().getMenuItemsProp(), onClick: this.getCtrl().onMenuItemClick }) })));
+    }
+    renderMain() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("main", Object.assign({ className: `${this.getCssBlockName()}__main` }, { children: this.renderActivePage() }));
+    }
+    renderFooter() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("footer", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Statusbar, { onCreate: this.getCtrl().onStatusbarCreate }) })));
+    }
+    render() {
+        console.debug(`${this.constructor.name}.render`, this.getCtrl().getModel().getFullName());
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__container`, style: this.getStyle() }, { children: [this.renderHeader(), this.renderMain(), this.renderFooter(), this.renderModals()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldController": () => (/* binding */ FieldController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class FieldController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+    static create(model, parent) {
+        // console.debug('FieldController.create', model.getFullName(), parent.getModel().getClassName());
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no global class ${ctrlClass}`);
+            return new CustomClass(model, parent);
+        }
+        const generalClassName = `${parent
+            .getModel()
+            .getClassName()}${model.getClassName()}Controller`;
+        const GeneralClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(generalClassName);
+        if (!GeneralClass)
+            throw new Error(`no global class ${generalClassName}`);
+        return new GeneralClass(model, parent);
+    }
+    valueToString(value) {
+        // console.debug('Field.valueToString', this.getModel().getFullName(), typeof value, value);
+        switch (typeof value) {
+            case 'string':
+                return value;
+            case 'object':
+                if (value === null)
+                    return '';
+                if (value instanceof Date)
+                    return value.toISOString();
+                return JSON.stringify(value, null, 4);
+            case 'number':
+            case 'boolean':
+                return value.toString();
+            case 'undefined':
+                return '';
+            default:
+                throw new Error(`${this.getModel().getFullName()}: unknown value type: ${typeof value}, value: ${value}`);
+        }
+    }
+    stringToValue(stringValue) {
+        // console.debug('FieldController.stringToValue', this.getModel().getFullName(), stringValue);
+        // if (stringValue === undefined) return undefined;
+        // if (stringValue === null) return null;
+        const fieldType = this.getModel().getType();
+        // console.debug('fieldType:', fieldType);
+        if (stringValue.trim() === '')
+            return null;
+        if (fieldType === 'object' || fieldType === 'boolean') {
+            return JSON.parse(stringValue);
+        }
+        else if (fieldType === 'date') {
+            const date = new Date(stringValue);
+            if (date.toString() === 'Invalid Date')
+                throw new Error(`${this.getApp().getModel().getText().error.invalidDate}: ${stringValue}`);
+            return date;
+        }
+        else if (fieldType === 'number') {
+            const num = Number(stringValue);
+            if (isNaN(num))
+                throw new Error(this.getApp().getModel().getText().error.notNumber);
+            return num;
+        }
+        return stringValue;
+    }
+    getViewStyle(row) {
+        return undefined;
+    }
+    async openPage(options) {
+        return await this.getParent().openPage(options);
+    }
+    /* getParent<TFormController extends FormController = FormController>(): TFormController {
+        return super.getParent() as TFormController;
+    } */
+    getForm() {
+        return this.getParent();
+    }
+    getPage() {
+        return this.getParent().getParent();
+    }
+    getApp() {
+        return this.getParent().getParent().getParent();
+    }
+    isVisible() {
+        return this.getModel().getAttr('visible') === 'true';
+    }
+    isAutoFocus() {
+        return this.getModel().getAttr('autoFocus') === 'true';
+    }
+    getAutocomplete() {
+        return this.getModel().getAttr('autocomplete') || null;
+    }
+    getFormat() {
+        return this.getModel().getAttr('format');
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.tsx":
+/*!**************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.tsx ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FieldView": () => (/* binding */ FieldView)
+/* harmony export */ });
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+
+class FieldView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
+    getStyle(row) {
+        return this.getCtrl().getViewStyle(row);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxFieldController": () => (/* binding */ RowFormCheckBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormCheckBoxFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxFieldView;
+    }
+    getValueForWidget() {
+        return this.getValue();
+    }
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormCheckBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxFieldView": () => (/* binding */ RowFormCheckBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormCheckBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormCheckBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldView.less");
+
+
+
+
+class RowFormCheckBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor() {
+        super(...arguments);
+        this.onCheckBoxChange = (checked, e) => {
+            this.getCtrl().onChange(checked);
+        };
+    }
+    render() {
+        // console.debug('RowFormCheckBoxFieldView.render');
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { onCreate: this.onWidgetCreate, checked: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: this.onCheckBoxChange }) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts":
+/*!************************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts ***!
+  \************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* binding */ RowFormCheckBoxListFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormCheckBoxListFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormCheckBoxListFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onListInsert = async (e) => {
+            console.debug('RowFormCheckBoxListFieldController.onListInsert');
+            await this.rerender();
+        };
+        this.onListUpdate = async (e) => {
+            // console.debug('RowFormCheckBoxListFieldController.onListUpdate');
+            await this.rerender();
+        };
+        this.onListDelete = async (e) => {
+            await this.rerender();
+        };
+    }
+    init() {
+        // console.debug('RowFormCheckBoxListFieldController.init', this.getModel().getFullName());
+        super.init();
+        const dataSource = this.getModel().getDataSource();
+        dataSource.on('insert', this.onListInsert);
+        dataSource.on('update', this.onListUpdate);
+        dataSource.on('delete', this.onListDelete);
+    }
+    deinit() {
+        const dataSource = this.getModel().getDataSource();
+        dataSource.off('insert', this.onListInsert);
+        dataSource.off('update', this.onListUpdate);
+        dataSource.off('delete', this.onListDelete);
+        super.deinit();
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormCheckBoxListFieldView;
+    }
+    getRows() {
+        return this.getModel().getDataSource().getRows();
+    }
+    getValueForWidget() {
+        // console.debug('RowFormCheckBoxListFieldController.getValueForWidget');
+        const value = this.getValue();
+        // console.debug('value:', value);
+        return value;
+    }
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
+    }
+    getItemFromRow(row) {
+        return {
+            value: this.valueToString(this.getModel().getValueValue(row)),
+            title: this.getModel().getDisplayValue(row),
+        };
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormCheckBoxListFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx ***!
+  \*******************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* binding */ RowFormCheckBoxListFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormCheckBoxListFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormCheckBoxListFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.less");
+
+
+
+
+class RowFormCheckBoxListFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    getItems() {
+        const ctrl = this.getCtrl();
+        try {
+            return ctrl.getRows().map((row) => {
+                return ctrl.getItemFromRow(row);
+            });
+        }
+        catch (err) {
+            err.message = `${ctrl.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
+    renderCheckBoxList() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBoxList, { name: ctrl.getModel().getFullName(), classList: [`${this.getCssBlockName()}__checkboxlist`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, items: this.getItems() }));
+    }
+    render() {
+        return (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.renderCheckBoxList() }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormComboBoxFieldController": () => (/* binding */ RowFormComboBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../types */ "./src/types.ts");
+
+
+
+
+class RowFormComboBoxFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onEditButtonClick = async (e) => {
+            console.debug('RowFormComboBoxFieldController.onEditButtonClick');
+            const itemEditPage = this.getModel().getAttr('itemEditPage');
+            const value = this.getValue();
+            // console.debug('itemEditPage', itemEditPage);
+            // console.debug('value:', value);
+            if (itemEditPage && value) {
+                await this.openPage({
+                    name: itemEditPage,
+                    params: {
+                        key: value,
+                    },
+                });
+            }
+        };
+        this.onCreateButtonClick = async (e) => {
+            console.debug('RowFormComboBoxFieldController.onCreateButtonClick');
+            const newRowMode = this.getModel().getAttr('newRowMode');
+            const itemCreateForm = this.getModel().getAttr('itemCreateForm');
+            if (!itemCreateForm)
+                throw new Error('no itemCreateForm');
+            let createPageName;
+            if (newRowMode === 'editPage') {
+                createPageName = this.getModel().getAttr('itemEditPage');
+            }
+            else if (newRowMode === 'createPage') {
+                createPageName = this.getModel().getAttr('itemCreatePage');
+            }
+            else {
+                throw new Error(`wrong newRowMode value: ${newRowMode}`);
+            }
+            // page
+            const pc = await this.openPage({
+                name: createPageName,
+                newMode: true,
+            });
+            // form
+            const form = pc.getModel().getForm(itemCreateForm);
+            const onInsert = async (e) => {
+                form.off('insert', onInsert);
+                const [key] = e.inserts;
+                const [id] = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.decodeValue(key);
+                // console.debug('id:', id);
+                await this.onChange(id.toString());
+            };
+            form.on('insert', onInsert);
+        };
+        this.onListInsert = async (e) => {
+            console.debug('RowFormComboBoxFieldController.onListInsert');
+            await this.rerender();
+        };
+        this.onListUpdate = async (e) => {
+            // console.debug('RowFormComboBoxFieldController.onListUpdate');
+            await this.rerender();
+        };
+        this.onListDelete = async (e) => {
+            await this.rerender();
+        };
+        this.onItemSelect = async (e) => {
+            // console.debug('RowFormComboBoxFieldController.onItemSelect');
+            if (e.button === 0) {
+                e.preventDefault();
+                const id = this.getValue();
+                const selectedKey = id ? (0,_types__WEBPACK_IMPORTED_MODULE_3__.keyTupleToKey)([id]) : undefined;
+                await this.openPage({
+                    name: this.getModel().getAttr('itemSelectPage'),
+                    selectMode: true,
+                    selectedKey: selectedKey,
+                    onSelect: async (key) => {
+                        if (key) {
+                            const [id] = (0,_types__WEBPACK_IMPORTED_MODULE_3__.keyToKeyTuple)(key);
+                            // console.debug('id:', id);
+                            if (this.getValue() !== id) {
+                                await this.getView().onChange(id.toString());
+                            }
+                        }
+                        else {
+                            if (this.getValue() !== null) {
+                                await this.getView().onChange('');
+                            }
+                        }
+                    },
+                });
+            }
+        };
+    }
+    init() {
+        // console.debug('RowFormComboBoxFieldController.init', this.getModel().getFullName());
+        super.init();
+        const dataSource = this.getModel().getComboBoxDataSource();
+        dataSource.on('insert', this.onListInsert);
+        dataSource.on('update', this.onListUpdate);
+        dataSource.on('delete', this.onListDelete);
+    }
+    deinit() {
+        const dataSource = this.getModel().getComboBoxDataSource();
+        dataSource.off('insert', this.onListInsert);
+        dataSource.off('update', this.onListUpdate);
+        dataSource.off('delete', this.onListDelete);
+        super.deinit();
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormComboBoxFieldView;
+    }
+    getItems() {
+        try {
+            return this.getRows().map((row) => ({
+                value: this.valueToString(this.getModel().getValueValue(row)),
+                title: this.getModel().getDisplayValue(row),
+            }));
+        }
+        catch (err) {
+            err.message = `${this.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
+    getRows() {
+        return this.getModel().getComboBoxDataSource().getRows();
+    }
+    getPlaceholder() {
+        if (this.getModel().getAttr('placeholder'))
+            return this.getModel().getAttr('placeholder');
+        return this.getApp().getHostApp().isDebugMode() ? '[null]' : null;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormComboBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* binding */ RowFormComboBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormComboBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormComboBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.less");
+
+
+
+
+class RowFormComboBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor() {
+        super(...arguments);
+        this.onChange = async (widgetValue) => {
+            // console.debug('RowFormComboBoxFieldView.onChange', widgetValue);
+            this.rerender();
+            await this.getCtrl().onChange(widgetValue);
+        };
+    }
+    isCreateButtonVisible() {
+        if (this.getCtrl().getForm().getMode() !== 'edit') {
+            return false;
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'disabled') {
+            return false;
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'editPage') {
+            return (!!this.getCtrl().getModel().getAttr('itemEditPage') &&
+                !!this.getCtrl().getModel().getAttr('itemCreateForm'));
+        }
+        if (this.getCtrl().getModel().getAttr('newRowMode') === 'createPage') {
+            return (!!this.getCtrl().getModel().getAttr('itemCreatePage') &&
+                !!this.getCtrl().getModel().getAttr('itemCreateForm'));
+        }
+    }
+    renderSelect() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Select, { classList: [`${this.getCssBlockName()}__select`], onCreate: this.onWidgetCreate, 
+            // nullable={ctrl.getModel().isNullable()}
+            value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: this.onChange, items: ctrl.getItems(), placeholder: ctrl.getPlaceholder(), onMouseDown: ctrl.getModel().getAttr('itemSelectPage') ? ctrl.onItemSelect : null }));
+    }
+    renderEditButton() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__edit-button`], onClick: ctrl.onEditButtonClick, enabled: !!ctrl.getValue() }, { children: "..." })));
+    }
+    renderCreateButton() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: [`${this.getCssBlockName()}__create-button`], onClick: ctrl.onCreateButtonClick }, { children: "+" })));
+    }
+    render() {
+        // console.debug('RowFormComboBoxFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderSelect(), this.getCtrl().getModel().getAttr('itemEditPage') &&
+                    !!this.getCtrl().getValue() &&
+                    this.renderEditButton(), this.isCreateButtonVisible() && this.renderCreateButton()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController.ts":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController.ts ***!
+  \********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormDateFieldController": () => (/* binding */ RowFormDateFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormDateFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormDateFieldView;
+    }
+    getValueForWidget() {
+        return this.getValue();
+    }
+    setValueFromWidget(widgetValue) {
+        this.setValue(widgetValue);
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormDateFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.tsx":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.tsx ***!
+  \***************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormDateFieldView": () => (/* binding */ RowFormDateFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormDateFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormDateFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.less");
+
+
+
+
+class RowFormDateFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    render() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
+                // getMinDate={this.props.getMinDate}
+                minDate: this.props.minDate, debug: ctrl.getApp().getHostApp().isDebugMode() }) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormDateTimeFieldController": () => (/* binding */ RowFormDateTimeFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+
+class RowFormDateTimeFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor(model, parent) {
+        super(model, parent);
+        this.widget2 = null;
+        this.defaultValue = 0;
+        this.onView2Create = (widget2) => {
+            // console.debug('RowFormDateTimeFieldController.onView2Create', widget2);
+            this.widget2 = widget2;
+        };
+        /*_onChange(widgetValue) {
+            // console.debug('RowFormDateTimeFieldController._onChange', this.widget2);
+            if (widgetValue !== null) {
+                setTimeout(() => {
+                    const input = this.widget2.getInputElement();
+                    input.focus();
+                    input.setSelectionRange(0, input.value.length);
+                }, 0);
+            }
+        }*/
+        this.onChange2 = (widgetValue, fireEvent = true) => {
+            // console.debug('RowFormDateTimeFieldController.onChange2', widgetValue);
+            this.resetErrors();
+            this.resetErrors2();
+            this.rerender();
+            if (!this.isValidateOnChange2())
+                return;
+            try {
+                this.setValueFromView2(widgetValue);
+            }
+            catch (err) {
+                console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
+                this.state.parseError2 = err.message;
+            }
+            // validate
+            if (!this.state.parseError2) {
+                this.validate2();
+                if (this.isValid()) {
+                    this.copyValueToModel();
+                }
+            }
+            // changed
+            this.refreshChangedState();
+            // event
+            if (fireEvent) {
+                try {
+                    this.emit('change', { value: widgetValue });
+                }
+                catch (err) {
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
+                }
+                this.getParent().onFieldChange({ source: this });
+            }
+        };
+        this.onBlur2 = (widgetValue, fireEvent = true) => {
+            console.debug('RowFormDateTimeFieldController.onBlur2', widgetValue);
+            if (!this.isEditable())
+                return;
+            this.resetErrors2();
+            this.rerender();
+            // get value from widget
+            try {
+                this.setValueFromView2(widgetValue);
+            }
+            catch (err) {
+                console.debug(`${this.getModel().getFullName()}: cannot parse time: ${err.message}`);
+                this.state.parseError2 = err.message;
+            }
+            // validate
+            if (!this.state.parseError2) {
+                this.validate2();
+                if (this.isValid()) {
+                    this.copyValueToModel();
+                }
+            }
+            // changed
+            this.refreshChangedState();
+            // event
+            if (fireEvent) {
+                try {
+                    this.emit('change', { value: widgetValue });
+                }
+                catch (err) {
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
+                }
+                this.getParent().onFieldChange({ source: this });
+            }
+        };
+        this.state.parseError2 = null;
+        this.state.error2 = null;
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormDateTimeFieldView;
+    }
+    getValueForWidget() {
+        return this.getValue();
+    }
+    getValueForTime() {
+        // console.debug('RowFormDateTimeFieldController.getValueForTime', this.getModel().getFullName(), this.defaultValue, TimeBox.getStringValue(this.defaultValue));
+        const date = this.getValue();
+        if (date) {
+            const value = date.getHours() * 60 + date.getMinutes();
+            // console.debug('value:', value);
+            if (value !== this.defaultValue) {
+                // console.debug('not equal to default value', value, this.defaultValue);
+                return value;
+            }
+        }
+        return null;
+    }
+    setValueFromWidget(widgetValue) {
+        if (widgetValue === null) {
+            this.state.parseError2 = null;
+            this.resetErrors2();
+            if (this.widget2)
+                this.widget2.setValue(null);
+        }
+        else {
+            const [h, m] = _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.splitTime(this.defaultValue);
+            widgetValue.setHours(h, m);
+        }
+        this.setValue(widgetValue);
+    }
+    getPlaceholder2() {
+        return _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getStringValue(this.defaultValue);
+    }
+    getDefaultValue() {
+        return this.defaultValue;
+    }
+    setDefaultValue2(defaultValue) {
+        // console.debug('RowFormDateTimeFieldController.setDefaultValue2', this.widget2 ? this.widget2.getValue() : null);
+        if (typeof defaultValue === 'string') {
+            this.defaultValue = _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getIntegerValue(defaultValue);
+        }
+        else {
+            if (defaultValue >= 24 * 60)
+                throw new Error(`wrong default value: ${defaultValue}`);
+            this.defaultValue = defaultValue;
+        }
+        if (this.widget2 && this.widget2.getValue() === null && this.state.value) {
+            this.setValue2(null);
+        }
+    }
+    setValueFromView2(widgetValue) {
+        if (isNaN(widgetValue))
+            throw new Error(this.getTimeErrorText());
+        this.setValue2(widgetValue);
+    }
+    getTimeErrorText() {
+        return this.getModel().getApp().getText().field.timeNotValid;
+    }
+    setValue2(widgetValue) {
+        const value = widgetValue !== null ? widgetValue : this.defaultValue;
+        const [h, m] = _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.splitTime(value);
+        this.state.value.setHours(h, m);
+    }
+    validate2() {
+        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
+        this.state.error2 = this.getError2();
+    }
+    getError2() {
+        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
+        // parse validator
+        if (this.widget2) {
+            try {
+                const widgetValue = this.widget2.getValue();
+            }
+            catch (err) {
+                return `can't parse time: ${err.message}`;
+            }
+        }
+        return null;
+    }
+    isParseError2() {
+        return this.state.parseError2 !== null;
+    }
+    resetErrors2() {
+        this.setError2(null);
+        this.state.parseError2 = null;
+    }
+    setError2(error2) {
+        this.state.error2 = error2;
+    }
+    getErrorMessage2() {
+        if (this.state.parseError2) {
+            return this.state.parseError2;
+        }
+        return this.state.error2;
+    }
+    isValid2() {
+        return this.state.parseError2 === null && this.state.error2 === null;
+    }
+    refill() {
+        // console.debug('RowFormDateTimeFieldController.refill');
+        if (!this.widget2)
+            return;
+        super.refill();
+        this.widget2.setValue(this.getValueForTime());
+        this.resetErrors2();
+        this.refreshChangedState();
+    }
+    isParseError() {
+        return super.isParseError() || this.isParseError2();
+    }
+    isValid() {
+        return super.isValid() && this.isValid2();
+    }
+    getErrorMessage() {
+        if (super.getErrorMessage() === null && this.getErrorMessage2() === null)
+            return null;
+        return [
+            ...(super.getErrorMessage() ? [super.getErrorMessage()] : []),
+            ...(this.getErrorMessage2() ? [this.getErrorMessage2()] : []),
+        ].join(', ');
+    }
+    isValidateOnChange2() {
+        return true;
+    }
+    isValidateOnBlur2() {
+        return false;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(RowFormDateTimeFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormDateTimeFieldView": () => (/* binding */ RowFormDateTimeFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormDateTimeFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormDateTimeFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.less");
+
+
+
+
+class RowFormDateTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor() {
+        super(...arguments);
+        this.onClear2 = async () => {
+            // console.debug('RowFormDateTimeFieldView.onClear2');
+            this.getCtrl().onChange2(null);
+        };
+    }
+    isCloseVisible() {
+        if (this.props.readOnly)
+            return false;
+        const { ctrl } = this.props;
+        if (!ctrl.widget2) {
+            return this.props.value !== undefined;
+        }
+        return ctrl.widget2.state.value !== '';
+    }
+    renderDatePart() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker, { classList: [`${this.getCssBlockName()}__dropdown-date-picker`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), format: ctrl.getFormat(), oldDates: this.props.oldDates, 
+            // getMinDate={this.props.getMinDate}
+            highlightedDate: ctrl.getHighlightedDate ? ctrl.getHighlightedDate() : null, selectToday: ctrl.getSelectToday ? ctrl.getSelectToday() : null, minDate: ctrl.getMinDate ? ctrl.getMinDate() : null, debug: ctrl.getApp().getHostApp().isDebugMode() }));
+    }
+    renderTimePart() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TimeBox2, { classList: [`${this.getCssBlockName()}__time-box`], onCreate: ctrl.onView2Create, readOnly: !ctrl.isEditable(), value: ctrl.getValueForTime(), onChange: ctrl.onChange2, onBlur: ctrl.isValidateOnBlur2() ? ctrl.onBlur2 : null, placeholder: ctrl.getPlaceholder2(), onClear: this.onClear2 }));
+    }
+    getMode() {
+        return this.getCtrl().state.value ? 'datetime' : 'date';
+    }
+    render() {
+        // console.debug('RowFormDateTimeFieldView.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getMode()}`, style: this.getStyle(this.getCtrl().getRow()) }, { children: [this.renderDatePart(), this.renderTimePart()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts":
+/*!*************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts ***!
+  \*************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormFieldController": () => (/* binding */ RowFormFieldController)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _FieldController__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
+
+
+class RowFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_1__.FieldController {
+    constructor(model, parent) {
+        super(model, parent);
+        this.onChange = async (widgetValue, fireEvent = true) => {
+            console.debug('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
+            // this._onChange(widgetValue);
+            this.resetErrors();
+            this.rerender();
+            // get value from widget
+            try {
+                this.setValueFromWidget(widgetValue);
+            }
+            catch (err) {
+                console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
+                this.state.parseError = err.message;
+            }
+            // validate
+            if (!this.state.parseError && this.isValidateOnChange()) {
+                this.validate();
+                if (this.isValid()) {
+                    this.copyValueToModel();
+                }
+            }
+            // changed
+            this.refreshChangedState();
+            // event
+            if (fireEvent) {
+                try {
+                    this.emit('change', { value: widgetValue });
+                }
+                catch (err) {
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
+                }
+                this.getParent().onFieldChange({ source: this });
+            }
+        };
+        this.onBlur = (widgetValue, fireEvent = true) => {
+            console.debug('RowFormFieldController.onBlur', this.getModel().getFullName(), JSON.stringify(widgetValue));
+            if (!this.isEditable())
+                return;
+            // this.resetErrors();
+            this.rerender(); // to clear field focus class
+            if (!this.isValidateOnBlur())
+                return;
+            // get value from widget
+            try {
+                this.setValueFromWidget(widgetValue);
+            }
+            catch (err) {
+                console.error(`${this.getModel().getFullName()}: cannot parse view value: ${err.message}`);
+                this.state.parseError = err.message;
+            }
+            // validate
+            if (!this.state.parseError && this.isValidateOnBlur()) {
+                this.validate();
+                if (this.isValid()) {
+                    this.copyValueToModel();
+                }
+            }
+            // changed
+            this.refreshChangedState();
+            // event
+            if (fireEvent) {
+                try {
+                    this.emit('change', { value: widgetValue });
+                }
+                catch (err) {
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
+                }
+                this.getParent().onFieldChange({ source: this });
+            }
+        };
+        this.onChangePure = async (value, fireEvent = true) => {
+            console.debug('RowFormFieldController.onChangePure', JSON.stringify(value));
+            // value
+            this.setValue(value);
+            this.resetErrors();
+            this.rerender();
+            // validate
+            if (this.isValidateOnChange()) {
+                this.validate();
+                if (this.isValid()) {
+                    this.copyValueToModel();
+                }
+            }
+            // changed
+            this.refreshChangedState();
+            // event
+            if (fireEvent) {
+                try {
+                    this.emit('change', { value });
+                }
+                catch (err) {
+                    console.error('unhandled change event error:', this.getModel().getFullName(), err);
+                }
+                this.getParent().onFieldChange({ source: this });
+            }
+        };
+        this.state = {
+            value: null,
+            parseError: null,
+            error: null,
+            changed: false,
+        };
+    }
+    init() {
+        const row = this.getRow();
+        const value = this.getModel().getValue(row);
+        this.setValue(value);
+        // console.debug(this.getModel().getFullName(), value);
+    }
+    refill() {
+        // console.debug('RowFormFieldController.refill', this.getModel().getFullName());
+        if (!this.view)
+            return;
+        const value = this.getModel().getValue(this.getRow());
+        this.setValue(value);
+        this.resetErrors();
+        this.refreshChangedState();
+    }
+    getRow() {
+        const form = this.getModel().getForm();
+        return form.getRow();
+    }
+    getForm() {
+        return this.getParent();
+    }
+    copyValueToModel() {
+        // console.debug('RowFormFieldController.copyValueToModel', this.getModel().getFullName());
+        this.getModel().setValue(this.getRow(), this.getValue());
+    }
+    /*_onChange(widgetValue) {
+
+    }*/
+    putValue(widgetValue) {
+        // console.debug('RowFormFieldController.putValue', widgetValue);
+        this.onChange(widgetValue, false);
+    }
+    getValueForWidget() {
+        const value = this.getValue();
+        // console.debug('value:', this.getModel().getFullName(), value, typeof value);
+        return this.valueToString(value);
+    }
+    setValueFromWidget(widgetValue) {
+        // console.debug('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
+        if (typeof widgetValue !== 'string')
+            throw new Error(`${this.getModel().getFullName()}: widgetValue must be string, but got ${typeof widgetValue}`);
+        const value = this.stringToValue(widgetValue);
+        // console.debug('value:', value);
+        this.setValue(value);
+    }
+    setValue(value) {
+        // console.debug('RowFormFieldController.setValue', this.getModel().getFullName(), value);
+        this.state.value = value;
+    }
+    getValue() {
+        return this.state.value;
+    }
+    isChanged() {
+        // console.debug('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
+        return this.state.changed;
+    }
+    isValid() {
+        return this.state.parseError === null && this.state.error === null;
+    }
+    validate() {
+        // console.debug('RowFormFieldController.validate', this.getModel().getFullName());
+        if (this.isVisible()) {
+            this.state.error = this.getError();
+        }
+    }
+    refreshChangedState() {
+        this.state.changed = this.calcChangedState(this.getRow());
+    }
+    getPlaceholder() {
+        // console.debug('RowFormFieldController.getPlaceholder', this.getModel().getFullName(), this.getModel().getAttr('placeholder'));
+        if (this.getModel().getAttr('placeholder'))
+            return this.getModel().getAttr('placeholder');
+        if (this.getApp().getHostApp().isDebugMode()) {
+            const value = this.getValue();
+            if (value === undefined)
+                return 'undefined';
+            if (value === null)
+                return 'null';
+            if (value === '')
+                return 'empty string';
+        }
+    }
+    getError() {
+        // console.debug('RowFormFieldController.getError', this.getModel().getFullName());
+        // parse validator
+        if (this.view && this.view.getWidget()) {
+            try {
+                const widgetValue = this.view.getWidget().getValue();
+            }
+            catch (err) {
+                return `can't parse value: ${err.message}`;
+            }
+        }
+        // null validator
+        const value = this.getValue();
+        if (this.getModel().isNotNull() && (value === null || value === undefined)) {
+            return this.getNullErrorText();
+        }
+        return null;
+    }
+    getNullErrorText() {
+        return this.getModel().getApp().getText().form.required;
+    }
+    isEditable() {
+        return (this.getParent().getMode() === 'edit' &&
+            !this.getModel().isReadOnly());
+    }
+    isParseError() {
+        return this.state.parseError !== null;
+    }
+    calcChangedState(row) {
+        // console.debug('RowFormFieldController.calcChangedState', this.getModel().getFullName());
+        if (!row)
+            throw new Error('FieldController: no row');
+        if (this.isParseError()) {
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: parse error: ${this.getErrorMessage()}`);
+            return true;
+        }
+        if (!this.isValid()) {
+            console.debug(`FIELD CHANGED ${this.getModel().getFullName()}: not valid: ${this.getErrorMessage()}`);
+            return true;
+        }
+        if (this.getModel().hasColumn()) {
+            const fieldRawValue = this.getModel().valueToRaw(this.getValue());
+            const dsRawValue = this.getModel().getRawValue(row);
+            if (fieldRawValue !== dsRawValue) {
+                console.debug(`FIELD CHANGED ${this.getModel().getFullName()}`, JSON.stringify(dsRawValue), JSON.stringify(fieldRawValue));
+                return true;
+            }
+            if (this.getModel().isChanged(row)) {
+                let original = row[this.getModel().getAttr('column')];
+                let modified = this.getModel().getDefaultDataSource().getRowWithChanges(row)[this.getModel().getAttr('column')];
+                if (original)
+                    original = original.substr(0, 100);
+                if (modified)
+                    modified = modified.substr(0, 100);
+                console.debug(`MODEL CHANGED ${this.getModel().getFullName()}:`, original, modified);
+                return true;
+            }
+        }
+        return false;
+    }
+    setError(error) {
+        this.state.error = error;
+    }
+    resetErrors() {
+        this.setError(null);
+        this.state.parseError = null;
+    }
+    getErrorMessage() {
+        if (this.state.parseError) {
+            return this.state.parseError;
+        }
+        return this.state.error;
+    }
+    renderView() {
+        return react__WEBPACK_IMPORTED_MODULE_0__.createElement(this.getViewClass(), {
+            onCreate: this.onViewCreate,
+            ctrl: this,
+        });
+    }
+    isValidateOnChange() {
+        return this.getModel().validateOnChange();
+    }
+    isValidateOnBlur() {
+        return this.getModel().validateOnBlur();
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx":
+/*!********************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx ***!
+  \********************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormFieldView": () => (/* binding */ RowFormFieldView)
+/* harmony export */ });
+/* harmony import */ var _FieldView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.tsx");
+
+class RowFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_0__.FieldView {
+    constructor(props) {
+        super(props);
+        this.onWidgetCreate = (widget) => {
+            this.widget = widget;
+        };
+        this.widget = null;
+    }
+    getWidget() {
+        return this.widget;
+    }
+    getClassList() {
+        const ctrl = this.getCtrl();
+        return [
+            ...super.getClassList(),
+            ...(ctrl.isEditable() ? ['editable'] : []),
+            ...(ctrl.isChanged() ? ['changed'] : []),
+            ...(ctrl.getErrorMessage() !== null ? ['error'] : []),
+        ];
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController.ts":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController.ts ***!
+  \********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormFileFieldController": () => (/* binding */ RowFormFileFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormFileFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormFileFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormFileFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormFileFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFileFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormFileFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.tsx":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.tsx ***!
+  \***************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormFileFieldView": () => (/* binding */ RowFormFileFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../ModalController/ImageDialogController/ImageDialogController */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts");
+/* harmony import */ var _RowFormFileFieldView_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./RowFormFileFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less");
+
+
+
+
+
+
+class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onClearClick = (e) => {
+            this.getCtrl().onChange('');
+        };
+        this.onChange = async (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const widgetValue = await _common__WEBPACK_IMPORTED_MODULE_3__.Helper.readFileAsDataURL(file);
+                // console.debug('widgetValue:', widgetValue);
+                this.getCtrl().onChange(widgetValue);
+            }
+        };
+        this.onImageClick = async (e) => {
+            console.debug('RowFormFileFieldView.onImageClick');
+            const ctrl = this.getCtrl();
+            const app = ctrl.getApp();
+            const src = ctrl.getValueForWidget();
+            const imageDialogCtrl = new _ModalController_ImageDialogController_ImageDialogController__WEBPACK_IMPORTED_MODULE_4__.ImageDialogController({
+                app,
+                id: app.getNewId(),
+                src,
+                onClose: () => {
+                    console.debug('onClose');
+                    this.getCtrl().getPage().getView().getElement().focus();
+                },
+            });
+            await app.openModal(imageDialogCtrl);
+        };
+        this.onImageIconClick = async (e) => {
+            console.debug('RowFormFileFieldView.onImageIconClick');
+            this.getInput().click();
+        };
+        this.image = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.div = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.input = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    getImage() {
+        return this.image.current;
+    }
+    getDiv() {
+        return this.div.current;
+    }
+    getInput() {
+        return this.input.current;
+    }
+    updateSize() {
+        if (this.getImage()) {
+            const ns = this.getImage().getNaturalSize();
+            this.getDiv().innerText = `${ns[0]}×${ns[1]}`;
+        }
+    }
+    render() {
+        const ctrl = this.getCtrl();
+        const row = ctrl.getRow();
+        const value = ctrl.getValueForWidget();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames(), style: this.getStyle(row) }, { children: [!!value ? ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__image-block` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Image, { classList: [`${this.getCssBlockName()}__image`], ref: this.image, src: value, onClick: this.onImageClick }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: `${this.getCssBlockName()}__size`, ref: this.div }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__length` }, { children: _common__WEBPACK_IMPORTED_MODULE_3__.Helper.formatNumber(value.length) }))] }))) : ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__image-icon`, onClick: this.onImageIconClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("svg", Object.assign({ xmlns: "http://www.w3.org/2000/svg", width: 48 * 2, height: 48 * 2, viewBox: "0 0 48 48" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("path", { d: "M38.65 15.3V11h-4.3V8h4.3V3.65h3V8H46v3h-4.35v4.3ZM4.7 44q-1.2 0-2.1-.9-.9-.9-.9-2.1V15.35q0-1.15.9-2.075.9-.925 2.1-.925h7.35L15.7 8h14v3H17.1l-3.65 4.35H4.7V41h34V20h3v21q0 1.2-.925 2.1-.925.9-2.075.9Zm17-7.3q3.6 0 6.05-2.45 2.45-2.45 2.45-6.1 0-3.6-2.45-6.025Q25.3 19.7 21.7 19.7q-3.65 0-6.075 2.425Q13.2 24.55 13.2 28.15q0 3.65 2.425 6.1Q18.05 36.7 21.7 36.7Zm0-3q-2.4 0-3.95-1.575-1.55-1.575-1.55-3.975 0-2.35 1.55-3.9 1.55-1.55 3.95-1.55 2.35 0 3.925 1.55 1.575 1.55 1.575 3.9 0 2.4-1.575 3.975Q24.05 33.7 21.7 33.7Zm0-5.5Z" }) })) }))), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { ref: this.input, type: "file", onChange: this.onChange, disabled: !ctrl.isEditable(), style: { display: !value ? 'none' : undefined } }), !!value && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ onClick: this.onClearClick, enabled: ctrl.isEditable() }, { children: this.getCtrl().getApp().getModel().getText().field.clear })))] }))] })));
+    }
+    componentDidMount() {
+        // console.debug('RowFormFileFieldView.componentDidMount', this.getCtrl().getModel().getFullName());
+        setTimeout(() => this.updateSize(), 0);
+    }
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        // console.debug('RowFormFileFieldView.componentDidUpdate', this.getCtrl().getModel().getFullName(), snapshot);
+        setTimeout(() => this.updateSize(), 0);
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts ***!
+  \********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormLinkFieldController": () => (/* binding */ RowFormLinkFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormLinkFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormLinkFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onClick = (e) => {
+            console.debug('RowFormLinkFieldController.onClick', e);
+            const pageName = this.getModel().getAttr('page');
+            if (pageName) {
+                e.preventDefault();
+                this.openPage({
+                    name: pageName,
+                    params: {
+                        key: this.getValue(),
+                    },
+                });
+            }
+            // @ts-ignore
+            this.emit({ source: this });
+        };
+    }
+    getViewClass() {
+        return super.getViewClass() || _RowFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormLinkFieldView;
+    }
+    getDisplayValue() {
+        const displayColumn = this.getModel().getAttr('displayColumn');
+        if (displayColumn) {
+            const ds = this.getModel().getDefaultDataSource();
+            const rawValue = ds.getValue(ds.getSingleRow(), displayColumn);
+            return JSON.parse(rawValue);
+        }
+        return null;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormLinkFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.tsx ***!
+  \***************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormLinkFieldView": () => (/* binding */ RowFormLinkFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../../../types */ "./src/types.ts");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _RowFormLinkFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormLinkFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldView.less");
+
+
+
+
+class RowFormLinkFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__.RowFormFieldView {
+    render() {
+        const ctrl = this.getCtrl();
+        let href = ctrl.getValueForWidget();
+        let displayValue = ctrl.getValueForWidget();
+        // valueOfDisplayColumn
+        const valueOfDisplayColumn = ctrl.getDisplayValue();
+        if (valueOfDisplayColumn) {
+            displayValue = valueOfDisplayColumn;
+        }
+        const pageName = ctrl.getModel().getAttr('page');
+        if (pageName) {
+            const value = ctrl.getValueForWidget();
+            href = ctrl.getPage().createOpenInNewLink(pageName, (0,_types__WEBPACK_IMPORTED_MODULE_1__.keyTupleToKey)([value]));
+            // console.debug('href:', link);
+        }
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: href, onClick: ctrl.onClick, target: '_blank' }, { children: displayValue })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPasswordFieldController": () => (/* binding */ RowFormPasswordFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormPasswordFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormPasswordFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormPasswordFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormPasswordFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormPasswordFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormPasswordFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPasswordFieldView": () => (/* binding */ RowFormPasswordFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormPasswordFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormPasswordFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldView.less");
+
+
+
+
+class RowFormPasswordFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onCloseClick = async (e) => {
+            // console.debug('RowFormPasswordFieldView.onCloseClick');
+            const ctrl = this.getCtrl();
+            this.getWidget().state.value = '';
+            this.getWidget().setState({ value: '' });
+            ctrl.onChange('');
+            this.getWidget().getElement().focus();
+        };
+        this.onFocus = async (e) => {
+            // console.debug('RowFormPasswordFieldView.onFocus');
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (e) => {
+            // console.debug('RowFormPasswordFieldView.onBlur');
+            this.removeCssClass('focus');
+            await this.rerender();
+        };
+        this.onIconClick = (e) => {
+            this.setState((prevState) => {
+                return {
+                    type: prevState.type === 'password' ? 'text' : 'password',
+                };
+            });
+        };
+        this.state = {
+            classList: [],
+            type: 'password',
+        };
+    }
+    isCloseVisible() {
+        // console.debug('RowFormPasswordFieldView.isCloseVisible', this.props.value);
+        const ctrl = this.getCtrl();
+        if (!ctrl.isEditable())
+            return false;
+        if (!this.getWidget()) {
+            return this.props.value !== undefined;
+        }
+        // console.debug('this.getWidget().state.value:', this.getWidget().state.value);
+        return this.getWidget().state.value !== '';
+    }
+    render() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { classList: [`${this.getCssBlockName()}__input`], type: this.state.type, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon`, onClick: this.onIconClick }, { children: this.state.type === 'password' ? (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.VisibilityIcon, {}) : (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.VisibilityOffIcon, {}) }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPhoneFieldController": () => (/* binding */ RowFormPhoneFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormPhoneFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormPhoneFieldView;
+    }
+    getPhoneFormatErrorText() {
+        return this.getModel().getApp().getText().form.phoneNumberFormatError;
+    }
+    getError() {
+        const error = super.getError();
+        if (error)
+            return error;
+        // russian phone format validator
+        const value = this.getValue();
+        if (value && value.substr(0, 2) === '+7' && value.length < 12) {
+            return this.getPhoneFormatErrorText();
+        }
+        return null;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormPhoneFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx ***!
+  \*****************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormPhoneFieldView": () => (/* binding */ RowFormPhoneFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormPhoneFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormPhoneFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.less");
+
+
+
+
+class RowFormPhoneFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onClear = async (e) => {
+            this.getCtrl().onChange('');
+            setTimeout(() => {
+                this.getWidget().getElement().focus();
+            }, 0);
+        };
+        this.onFocus = async (e) => {
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (value) => {
+            // console.debug('RowFormPhoneFieldView.onBlur', value);
+            this.removeCssClass('focus');
+            this.getCtrl().onBlur(value);
+        };
+        this.state = {
+            classList: [],
+        };
+    }
+    isCloseVisible() {
+        const ctrl = this.getCtrl();
+        if (!ctrl.isEditable())
+            return false;
+        return ctrl.getValueForWidget() !== '';
+    }
+    renderPhoneBox() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.PhoneBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+    }
+    renderClearButton() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })));
+    }
+    renderPhoneIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__icon` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.PhoneIcon, {}) })));
+    }
+    render() {
+        // console.debug('RowFormPhoneFieldView.render');
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderPhoneBox(), this.renderClearButton(), this.renderPhoneIcon()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController.ts":
+/*!**********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController.ts ***!
+  \**********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormRadioFieldController": () => (/* binding */ RowFormRadioFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormRadioFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormRadioFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormRadioFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormRadioFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormRadioFieldView;
+    }
+    getItems() {
+        try {
+            return this.getRows().map((row) => ({
+                // value: this.valueToString(this.getModel().getValueValue(row)),
+                value: this.getModel().getValueValue(row),
+                title: this.getModel().getDisplayValue(row),
+            }));
+        }
+        catch (err) {
+            err.message = `${this.getModel().getFullName()}: ${err.message}`;
+            throw err;
+        }
+    }
+    getRows() {
+        return this.getModel().getDataSource().getRows();
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormRadioFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.tsx":
+/*!*****************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.tsx ***!
+  \*****************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormRadioFieldView": () => (/* binding */ RowFormRadioFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _RowFormRadioFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./RowFormRadioFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldView.less");
+
+
+
+class RowFormRadioFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor() {
+        /*onChange = async widgetValue => {
+            // console.debug('RowFormRadioFieldView.onChange', widgetValue);
+            this.rerender();
+            await this.getCtrl().onChange(widgetValue);
+        }*/
+        super(...arguments);
+        this.onClick = async (e) => {
+            console.debug('RowFormRadioFieldView.onClick', e.currentTarget.dataset.value);
+            let value = JSON.parse(e.currentTarget.dataset.value);
+            if (this.getCtrl().getValue() !== value) {
+                await this.getCtrl().onChangePure(value);
+            }
+        };
+    }
+    /*render() {
+        return <div className={this.getCssClassNames()}>
+            <Radio  classList={[
+                        `${this.getCssBlockName()}__radio`,
+                        ...(!this.getCtrl().isEditable() ? ['readOnly'] : [])
+                    ]}
+                    name={this.getCtrl().getModel().getFullName()}
+                    items={this.getCtrl().getItems()}
+                    value={this.getCtrl().getValueForWidget()}
+                    readOnly={!this.getCtrl().isEditable()}
+                    onChange={this.onChange}
+            />
+        </div>;
+    }*/
+    render() {
+        // console.debug('RowFormRadioFieldView.render', this.getCtrl().getItems(), this.getCtrl().getValue());
+        const value = this.getCtrl().getValue();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: this.getCtrl()
+                .getItems()
+                .map((item) => {
+                return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("input", { className: `${this.getCssBlockName()}__toggle ${value === item.value ? 'selected' : ''}`, type: 'button', value: item.title || item.value, disabled: !this.getCtrl().isEditable(), "data-value": JSON.stringify(item.value), onClick: this.onClick }, item.value));
+            }) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* binding */ RowFormTextAreaFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextAreaFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormTextAreaFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormTextAreaFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormTextAreaFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* binding */ RowFormTextAreaFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormTextAreaFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormTextAreaFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.less");
+
+
+
+
+class RowFormTextAreaFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onFocus = async (e) => {
+            // console.debug('RowFormTextAreaFieldView.onFocus');
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (e) => {
+            // console.debug('RowFormTextAreaFieldView.onBlur');
+            this.removeCssClass('focus');
+            await this.rerender();
+        };
+        this.state = {
+            classList: [],
+        };
+    }
+    render() {
+        // console.debug('RowFormTextAreaFieldView.render', this.state);
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextArea, { classList: [`${this.getCssBlockName()}__textarea`], onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), disabled: !ctrl.isEditable(), onChange: ctrl.onChange, placeholder: ctrl.getPlaceholder(), rows: ctrl.getModel().getRows(), cols: ctrl.getModel().getCols(), onFocus: this.onFocus, onBlur: this.onBlur }) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.ts":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.ts ***!
+  \**************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextBoxFieldController": () => (/* binding */ RowFormTextBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormTextBoxFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormTextBoxFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormTextBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* binding */ RowFormTextBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.less");
+
+
+
+
+class RowFormTextBoxFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor(props) {
+        super(props);
+        this.onClear = async (e) => {
+            this.getCtrl().onChange('');
+            setTimeout(() => {
+                this.getWidget().getElement().focus();
+            }, 0);
+        };
+        this.onFocus = async (e) => {
+            // console.debug('RowFormTextBoxFieldView.onFocus');
+            this.addCssClass('focus');
+            await this.rerender();
+        };
+        this.onBlur = async (e) => {
+            // console.debug('RowFormTextBoxFieldView.onBlur');
+            const value = e.target.value;
+            this.removeCssClass('focus');
+            this.getCtrl().onBlur(value);
+        };
+        this.state = {
+            classList: [],
+        };
+    }
+    isCloseVisible() {
+        // console.debug('RowFormTextBoxFieldView.isCloseVisible', this.props.value);
+        const ctrl = this.getCtrl();
+        if (!ctrl.isEditable())
+            return false;
+        return ctrl.getValueForWidget() !== '';
+    }
+    renderTextBox() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TextBox, { classList: [`${this.getCssBlockName()}__input`], value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), enabled: ctrl.isEditable(), autoFocus: ctrl.isAutoFocus(), placeholder: ctrl.getPlaceholder() || null, autocomplete: ctrl.getAutocomplete(), onCreate: this.onWidgetCreate, onChange: ctrl.onChange, onFocus: this.onFocus, onBlur: this.onBlur }));
+    }
+    renderCloseIcon() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close ${this.isCloseVisible() ? 'visible' : ''}`, onMouseDown: this.onClear }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) })));
+    }
+    render() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [this.renderTextBox(), this.renderCloseIcon()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldController.ts":
+/*!********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldController.ts ***!
+  \********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTimeFieldController": () => (/* binding */ RowFormTimeFieldController)
+/* harmony export */ });
+/* harmony import */ var _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _RowFormTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+
+class RowFormTimeFieldController extends _RowFormFieldController__WEBPACK_IMPORTED_MODULE_0__.RowFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.defaultValue = null;
+    }
+    /* constructor(...args) {
+        super(...args);
+        this.defaultValue = null;
+    } */
+    getViewClass() {
+        return super.getViewClass() || _RowFormTimeFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormTimeFieldView;
+    }
+    getValueForWidget() {
+        return this.getValue();
+    }
+    setValueFromWidget(widgetValue) {
+        if (isNaN(widgetValue))
+            throw new Error('wrong time');
+        this.setValue(widgetValue);
+    }
+    getDefaultValue() {
+        return this.defaultValue;
+    }
+    setDefaultValue2(defaultValue) {
+        if (typeof defaultValue === 'string') {
+            this.defaultValue = _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getIntegerValue(defaultValue);
+        }
+        else {
+            if (defaultValue >= 24 * 60)
+                throw new Error(`wrong default value: ${defaultValue}`);
+            this.defaultValue = defaultValue;
+        }
+    }
+    getPlaceholder() {
+        // console.debug('CarReservefromTimeController.getPlaceholder', this.defaultValue);
+        if (this.defaultValue !== null)
+            return _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox.getStringValue(this.defaultValue);
+        return super.getPlaceholder();
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(RowFormTimeFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.tsx":
+/*!***************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.tsx ***!
+  \***************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormTimeFieldView": () => (/* binding */ RowFormTimeFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormTimeFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormTimeFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldView.less");
+
+
+
+
+class RowFormTimeFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_1__.RowFormFieldView {
+    constructor() {
+        super(...arguments);
+        this.onCloseClick = async (e) => {
+            console.debug('RowFormTimeFieldView.onCloseClick');
+            /*const ctrl = this.getCtrl();
+            this.getWidget().state.value = '';
+            this.getWidget().setState({value: ''});
+            ctrl.onChange(null);*/
+        };
+    }
+    isCloseVisible() {
+        // console.debug('RowFormTimeFieldView.isCloseVisible', this.props.value);
+        if (this.props.readOnly)
+            return false;
+        if (!this.getWidget()) {
+            return this.props.value !== undefined;
+        }
+        // console.debug('this.getWidget().state.value:', ctrl.view.state.value);
+        return this.getWidget().state.value !== '';
+    }
+    render() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.getCssClassNames() }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.TimeBox, { onCreate: this.onWidgetCreate, value: ctrl.getValueForWidget(), readOnly: !ctrl.isEditable(), onChange: ctrl.onChange, onBlur: ctrl.onBlur, placeholder: ctrl.getPlaceholder() }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `close ${this.isCloseVisible() ? 'visible' : ''}`, onClick: this.onCloseClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon, {}) }))] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldController.ts":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldController.ts ***!
+  \**********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormCheckBoxFieldController": () => (/* binding */ TableFormCheckBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class TableFormCheckBoxFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormCheckBoxFieldView;
+    }
+    getValueForWidget(row) {
+        return this.getModel().getValue(row);
+    }
+    getAlign() {
+        return 'center';
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormCheckBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* binding */ TableFormCheckBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _TableFormCheckBoxFieldView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TableFormCheckBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.less");
+
+
+
+
+class TableFormCheckBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames(), style: Object.assign(Object.assign({}, this.getStyle(row)), { textAlign: ctrl.getAlign() }) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.CheckBox, { ref: this.span, checked: ctrl.getValueForWidget(row), readOnly: true, disabled: true }) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldController.ts":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldController.ts ***!
+  \**********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormComboBoxFieldController": () => (/* binding */ TableFormComboBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class TableFormComboBoxFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onListUpdate = async (e) => {
+            // console.debug('TableFormComboBoxFieldController.onListUpdate', this.getModel().getFullName());
+            this.getForm().invalidate();
+            await this.getForm().rerender();
+        };
+    }
+    init() {
+        super.init();
+        const dataSource = this.getModel().getComboBoxDataSource();
+        dataSource.on('insert', this.onListUpdate);
+        dataSource.on('update', this.onListUpdate);
+        dataSource.on('delete', this.onListUpdate);
+    }
+    deinit() {
+        const dataSource = this.getModel().getComboBoxDataSource();
+        dataSource.off('insert', this.onListUpdate);
+        dataSource.off('update', this.onListUpdate);
+        dataSource.off('delete', this.onListUpdate);
+        super.deinit();
+    }
+    getViewClass() {
+        return super.getViewClass() || _TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormComboBoxFieldView;
+    }
+    getValueForWidget(row) {
+        const value = this.getModel().getValue(row);
+        const rawValue = this.getModel().valueToRaw(value);
+        if (rawValue === undefined || rawValue === 'null')
+            return '';
+        const cbRow = this.getModel().findRowByRawValue(rawValue);
+        if (cbRow) {
+            return this.valueToString(this.getModel().getDisplayValue(cbRow));
+        }
+        return `[no row for id: ${rawValue}]`;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormComboBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* binding */ TableFormComboBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+
+
+class TableFormComboBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.ts":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.ts ***!
+  \**************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateFieldController": () => (/* binding */ TableFormDateFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormDateFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateFieldView;
+    }
+    getValueForWidget(row) {
+        const value = this.getModel().getValue(row);
+        if (value)
+            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        return '';
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormDateFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateFieldView": () => (/* binding */ TableFormDateFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _TableFormDateFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TableFormDateFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.less");
+
+
+
+class TableFormDateFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts":
+/*!**********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts ***!
+  \**********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* binding */ TableFormDateTimeFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormDateTimeFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormDateTimeFieldView;
+    }
+    getValueForWidget(row) {
+        const value = this.getModel().getValue(row);
+        if (value)
+            return _common__WEBPACK_IMPORTED_MODULE_2__.Helper.formatDate(value, this.getFormat() || '{DD}.{MM}.{YYYY} {hh}:{mm}:{ss}');
+        return '';
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormDateTimeFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx":
+/*!*****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx ***!
+  \*****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* binding */ TableFormDateTimeFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+
+
+class TableFormDateTimeFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts":
+/*!*****************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts ***!
+  \*****************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormFieldController": () => (/* binding */ TableFormFieldController)
+/* harmony export */ });
+/* harmony import */ var _FieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
+
+class TableFormFieldController extends _FieldController__WEBPACK_IMPORTED_MODULE_0__.FieldController {
+    getValueForWidget(row) {
+        // console.debug('TableFormFieldController.getValueForWidget');
+        return this.valueToString(this.getModel().getValue(row));
+    }
+    getForm() {
+        return this.getParent();
+    }
+    getAlign() {
+        return null;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx":
+/*!************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx ***!
+  \************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormFieldView": () => (/* binding */ TableFormFieldView)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _FieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldView.tsx");
+
+
+class TableFormFieldView extends _FieldView__WEBPACK_IMPORTED_MODULE_1__.FieldView {
+    constructor(props) {
+        super(props);
+        this.span = react__WEBPACK_IMPORTED_MODULE_0__.createRef();
+    }
+    getSpanOffsetWidth() {
+        // console.debug('TableFormFieldView.getSpanOffsetWidth', this.span.current);
+        if (!this.span.current)
+            return 0;
+        return this.span.current.offsetWidth;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController.ts":
+/*!**************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController.ts ***!
+  \**************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormLinkFieldController": () => (/* binding */ TableFormLinkFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormLinkFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class TableFormLinkFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    constructor() {
+        super(...arguments);
+        this.onClick = (e) => {
+            console.debug('TableFormLinkFieldController.onClick', e);
+            e.preventDefault();
+            this.emit('click', { source: this });
+        };
+    }
+    getViewClass() {
+        return super.getViewClass() || _TableFormLinkFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormLinkFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormLinkFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.tsx":
+/*!*********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.tsx ***!
+  \*********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormLinkFieldView": () => (/* binding */ TableFormLinkFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _TableFormLinkFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TableFormLinkFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldView.less");
+
+
+
+class TableFormLinkFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("a", Object.assign({ href: "#", onClick: ctrl.onClick }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts ***!
+  \****************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormPhoneFieldController": () => (/* binding */ TableFormPhoneFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class TableFormPhoneFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormPhoneFieldView;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormPhoneFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx":
+/*!***********************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldView.tsx ***!
+  \***********************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormPhoneFieldView": () => (/* binding */ TableFormPhoneFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormPhoneFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: _common__WEBPACK_IMPORTED_MODULE_2__.PhoneBox.formatPhoneNumber(this.getCtrl().getValueForWidget(row)) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.ts":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.ts ***!
+  \********************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* binding */ TableFormTextBoxFieldController)
+/* harmony export */ });
+/* harmony import */ var _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../TableFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldController.ts");
+/* harmony import */ var _TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class TableFormTextBoxFieldController extends _TableFormFieldController__WEBPACK_IMPORTED_MODULE_0__.TableFormFieldController {
+    getViewClass() {
+        return super.getViewClass() || _TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormTextBoxFieldView;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(TableFormTextBoxFieldController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx":
+/*!***************************************************************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx ***!
+  \***************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* binding */ TableFormTextBoxFieldView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TableFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormFieldView.tsx");
+/* harmony import */ var _TableFormTextBoxFieldView_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TableFormTextBoxFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.less");
+
+
+
+class TableFormTextBoxFieldView extends _TableFormFieldView__WEBPACK_IMPORTED_MODULE_1__.TableFormFieldView {
+    render() {
+        const row = this.props.row;
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssClassNames()} ellipsis`, style: this.getStyle(row) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ ref: this.span }, { children: ctrl.getValueForWidget(row) })) })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormController": () => (/* binding */ FormController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FieldController/FieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/FieldController.ts");
+
+
+
+class FormController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+    static create(model, parent) {
+        // console.debug('FormController.create', model.getFullName());
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, parent);
+        }
+        const GeneralClass = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(`${model.getClassName()}Controller`);
+        return new GeneralClass(model, parent);
+    }
+    constructor(model, parent) {
+        super(model, parent);
+        this.fields = {};
+        if (typeof window === 'object') {
+            console.debug(`${this.constructor.name}.constructor`, model);
+        }
+    }
+    init() {
+        for (const field of this.getModel().fields) {
+            const ctrl = (this.fields[field.getName()] = _FieldController_FieldController__WEBPACK_IMPORTED_MODULE_2__.FieldController.create(field, this));
+            ctrl.init();
+        }
+    }
+    deinit() {
+        // console.debug('FormController.deinit:', this.getModel().getFullName());
+        for (const name in this.fields) {
+            this.fields[name].deinit();
+        }
+        super.deinit();
+    }
+    isValid() {
+        return true;
+    }
+    async openPage(options) {
+        return await this.getPage().openPage(options);
+    }
+    getPage() {
+        return this.getParent();
+    }
+    isChanged() {
+        return false;
+    }
+    async onFieldChange(e) {
+        // console.debug('FormController.onFieldChange', this.getModel().getFullName());
+        await this.getPage().onFormChange(e);
+    }
+    getUpdated() {
+        return this.state.updated;
+    }
+    invalidate() {
+        this.state.updated = Date.now();
+    }
+    async onActionClick(name, row) {
+        console.debug('FormController.onActionClick', name, row);
+    }
+    getField(name) {
+        return this.fields[name];
+    }
+    getApp() {
+        return this.getParent().getParent();
+    }
+    getSelectedRowKey() {
+        return null;
+    }
+    isAutoFocus() {
+        for (const name in this.fields) {
+            if (this.fields[name].isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    isVisible() {
+        return this.getModel().getAttr('visible') === 'true';
+    }
+    getActiveRow() {
+        throw new Error('FormController.getActiveRow not implemented');
+    }
+    getRow() {
+        throw new Error('FormController.getRow not implemented');
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx":
+/*!************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FormView": () => (/* binding */ FormView)
+/* harmony export */ });
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+
+class FormView extends _ModelView__WEBPACK_IMPORTED_MODULE_0__.ModelView {
+    constructor(props) {
+        super(props);
+        this.onActionsClick = async (li) => {
+            // console.debug('FormView.onActionsClick:', li);
+            const ctrl = this.getCtrl();
+            const name = li.dataset.action;
+            try {
+                const result = await ctrl.onActionClick(name, ctrl.getActiveRow());
+                if (!result) {
+                    throw new Error(`no handler for action '${name}'`);
+                }
+            }
+            catch (err) {
+                console.error(err);
+                await this.getCtrl().getApp().alert({ message: err.message });
+            }
+        };
+        this.checkParent();
+    }
+    shouldComponentUpdate(nextProps, nextState) {
+        console.debug('FormView.shouldComponentUpdate', this.getCtrl().getModel().getFullName(), nextProps.updated - this.props.updated);
+        if (nextProps.updated - this.props.updated)
+            return true;
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts":
+/*!**************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts ***!
+  \**************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormController": () => (/* binding */ RowFormController)
+/* harmony export */ });
+/* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _RowFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./RowFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class RowFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
+    constructor() {
+        super(...arguments);
+        this.fields = {};
+        this.state = {
+            updated: Date.now(),
+            mode: 'edit',
+            hasNew: false,
+            changed: false,
+            valid: true,
+        };
+        this.onModelRefresh = async (e) => {
+            console.debug('RowFormController.onModelRefresh', this.getModel().getFullName());
+            if (!this.view)
+                return;
+            this.refill();
+            this.invalidate();
+            this.rerender();
+        };
+        this.onModelInsert = async (e) => {
+            console.debug('RowFormController.onModelInsert', this.getModel().getFullName());
+            this.refill();
+            this.invalidate();
+            this.calcState();
+            this.getParent().onFormInsert(e);
+        };
+        this.onModelUpdate = async (e) => {
+            console.debug('RowFormController.onModelUpdate', this.getModel().getFullName(), e);
+            this.refill();
+            this.invalidate();
+            this.calcState();
+            this.getParent().onFormUpdate(e);
+        };
+        this.onSaveClick = async () => {
+            console.debug('RowFormController.onSaveClick');
+            this.validate();
+            this.calcState();
+            if (this.isValid()) {
+                try {
+                    this.getApp().getView().disableRerender();
+                    await this.getModel().update();
+                    this.state.mode = 'view';
+                    console.debug('form model updated', this.getModel().getFullName());
+                }
+                finally {
+                    this.getApp().getView().enableRerender();
+                    await this.getApp().getView().rerender();
+                }
+            }
+            else {
+                console.error(`cannot update invalid row form: ${this.getModel().getFullName()}`);
+                await this.rerender();
+            }
+        };
+        this.onDiscardClick = () => {
+            console.debug('RowFormController.onDiscardClick', this.getModel().getFullName());
+            const changedFields = [];
+            for (const name in this.fields) {
+                const field = this.fields[name];
+                if (field.isChanged() || !field.isValid()) {
+                    changedFields.push(name);
+                }
+            }
+            // console.debug('changedFields:', changedFields);
+            this.getModel().discard(changedFields);
+            // refill changed fields
+            changedFields.forEach((name) => {
+                this.fields[name].refill();
+            });
+            // ui
+            this.calcState();
+            if (this.getModel().hasDefaultPersistentDataSource()) {
+                this.state.mode = 'view';
+            }
+            this.rerender();
+            // event
+            this.getParent().onFormDiscard(this);
+        };
+        this.onRefreshClick = async () => {
+            // console.debug('RowFormController.onRefreshClick', this.getModel().getFullName());
+            await this.getModel().refresh();
+        };
+        this.onEditClick = (e) => {
+            console.debug('RowFormController.onEditClick');
+            this.state.mode = 'edit';
+            this.rerender();
+        };
+        this.onCancelClick = (e) => {
+            console.debug('RowFormController.onCancelClick');
+            this.state.mode = 'view';
+            this.rerender();
+        };
+    }
+    init() {
+        super.init();
+        this.getModel().on('refresh', this.onModelRefresh);
+        this.getModel().on('insert', this.onModelInsert);
+        this.getModel().on('update', this.onModelUpdate);
+        if (this.getModel().getDefaultDataSource().isPersistent()) {
+            this.state.mode = 'view';
+        }
+        this.calcState();
+        if (this.state.hasNew) {
+            this.state.mode = 'edit';
+        }
+    }
+    deinit() {
+        // console.debug('RowFormController.deinit', this.getModel().getFullName());
+        this.getModel().off('refresh', this.onModelRefresh);
+        this.getModel().off('insert', this.onModelInsert);
+        this.getModel().off('update', this.onModelUpdate);
+        super.deinit();
+    }
+    calcState() {
+        this.state.hasNew = this.getModel().hasNew();
+        this.state.changed = this.isChanged();
+        this.state.valid = this.isValid();
+        // console.debug('hasNew:', hasNew);
+        // console.debug('changed:', changed);
+        // console.debug('valid:', valid);
+    }
+    refill() {
+        console.debug('RowFormController.refill', this.getModel().getFullName());
+        for (const name in this.fields) {
+            this.fields[name].refill();
+        }
+    }
+    isValid() {
+        // console.debug('RowFormController.isValid', this.getModel().getFullName());
+        for (const name in this.fields) {
+            const field = this.fields[name];
+            if (!field.isValid())
+                return false;
+        }
+        return true;
+    }
+    validate() {
+        // console.debug('RowFormController.validate', this.getModel().getFullName());
+        for (const name in this.fields) {
+            this.fields[name].validate();
+        }
+        this.invalidate();
+    }
+    clearFieldsError() {
+        for (const name in this.fields) {
+            this.fields[name].setError(null);
+        }
+    }
+    isChanged() {
+        // console.debug('RowFormController.isChanged', this.getModel().getFullName());
+        if (this.getModel().isChanged())
+            return true;
+        for (const name in this.fields) {
+            const field = this.fields[name];
+            if (field.isChanged())
+                return true;
+        }
+        return false;
+    }
+    async onFieldChange(e) {
+        // console.debug('RowFormController.onFieldChange', this.getModel().getFullName());
+        this.calcState();
+        this.invalidate();
+        await super.onFieldChange(e);
+    }
+    getViewClass() {
+        // console.debug('RowFormController.getViewClass', this.getModel().getFullName());
+        return super.getViewClass() || _RowFormView__WEBPACK_IMPORTED_MODULE_1__.RowFormView;
+    }
+    getActiveRow() {
+        return this.getModel().getRow(true);
+    }
+    getRow() {
+        return this.getModel().getRow(true);
+    }
+    getMode() {
+        return this.state.mode;
+    }
+    isActionEnabled(name) {
+        return this.isViewMode();
+    }
+    isEditMode() {
+        return this.getMode() === 'edit';
+    }
+    isViewMode() {
+        return this.getMode() === 'view';
+    }
+    getField(name) {
+        return this.fields[name];
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(RowFormController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx":
+/*!*********************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx ***!
+  \*********************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RowFormView": () => (/* binding */ RowFormView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _FormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _RowFormView_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RowFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.less");
+
+
+
+
+class RowFormView extends _FormView__WEBPACK_IMPORTED_MODULE_1__.FormView {
+    renderToolbar() {
+        // console.debug('RowFormView.renderToolbar');
+        const { ctrl } = this.props;
+        const text = ctrl.getModel().getApp().getText();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onEditClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.edit }) }), "edit")), ctrl.getModel().hasDefaultPersistentDataSource() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: (ctrl.state.changed || ctrl.state.hasNew) && ctrl.state.valid, onClick: ctrl.onSaveClick, visible: ctrl.getMode() === 'edit' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.save }) }), "save")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], visible: ctrl.getMode() === 'edit' && !ctrl.state.changed && ctrl.state.valid, onClick: ctrl.onCancelClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.cancel }) }), "cancel")), ctrl.getModel().hasDefaultPersistentDataSource() && ctrl.getModel().getKey() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: ctrl.state.changed || !ctrl.isValid(), onClick: ctrl.onDiscardClick, visible: ctrl.getMode() === 'edit' && (ctrl.state.changed || !ctrl.state.valid) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.discard }) }), "discard")), ctrl.getModel().hasDefaultPersistentDataSource() &&
+                    ctrl.getModel().getAttr('refreshButton') === 'true' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Button, Object.assign({ classList: ['toolbar-button'], enabled: !ctrl.state.changed && !ctrl.state.hasNew, onClick: ctrl.onRefreshClick, visible: ctrl.getMode() === 'view' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: text.form.refresh }) }), "refresh")), this.isActionsVisible() && ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick, enabled: this.isActionsEnabled() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.MoreVertIcon, {}) })))] })));
+    }
+    isActionsEnabled() {
+        // return this.getCtrl().state.mode === 'view';
+        return true;
+    }
+    isActionsVisible() {
+        if (this.getCtrl().getModel().hasDefaultPersistentDataSource()) {
+            return !!this.getCtrl().getModel().getKey();
+        }
+        return true;
+    }
+    renderLabel(fieldCtrl) {
+        const model = fieldCtrl.getModel();
+        const name = model.getName();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__label` }, { children: [model.getCaption(), ":", model.isNotNull() && (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: { color: 'red' } }, { children: "*" }))] }), `label.${name}`));
+    }
+    renderField(fieldCtrl) {
+        // console.debug('RowFormView.renderField', fieldCtrl.getModel().getClassName());
+        const name = fieldCtrl.getModel().getName();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__field` }, { children: this.renderFieldView(fieldCtrl) }), `field.${name}`));
+    }
+    renderFieldView(fieldCtrl) {
+        return RowFormView.renderFieldView(fieldCtrl);
+    }
+    static renderFieldView(fieldCtrl) {
+        /*return React.createElement(fieldCtrl.getViewClass(), {
+            onCreate: fieldCtrl.onViewCreate,
+            ctrl: fieldCtrl,
+        });*/
+        return fieldCtrl.renderView();
+    }
+    renderError(fieldCtrl) {
+        // console.debug('RowFormView.renderError:', fieldCtrl.state);
+        const name = fieldCtrl.getModel().getName();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__error` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_2__.Tooltip, { position: "left", type: "alert", hidden: fieldCtrl.getErrorMessage() === null, tip: fieldCtrl.getErrorMessage() }) }), `tooltip.${name}`));
+    }
+    renderGroup(fieldCtrl) {
+        /*return (
+            <>
+                {this.renderLabel(fieldCtrl)}
+                {this.renderField(fieldCtrl)}
+                {this.renderError(fieldCtrl)}
+            </>
+        );*/
+        return [
+            this.renderLabel(fieldCtrl),
+            this.renderField(fieldCtrl),
+            this.renderError(fieldCtrl),
+        ];
+        /*return <div key={fieldCtrl.getModel().getName()} className={`${this.getCssClassNames()}__group`}>
+            {this.renderLabel(fieldCtrl)}
+            {this.renderField(fieldCtrl)}
+            {this.renderError(fieldCtrl)}
+        </div>;*/
+    }
+    renderGroups() {
+        // console.debug('RowFormView.renderGroups');
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__groups` }, { children: Object.keys(ctrl.fields)
+                .filter((name) => ctrl.getField(name).isVisible())
+                .map((name) => {
+                return this.renderGroup(ctrl.getField(name));
+            }) })));
+    }
+    render() {
+        console.debug('RowFormView.render', this.getCtrl().getModel().getFullName());
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} flex-column grid-gap-5`, style: this.getStyle() }, { children: [(this.getCtrl().getModel().hasDefaultPersistentDataSource() ||
+                    this.getCtrl().getModel().hasActions()) &&
+                    this.renderToolbar(), this.renderGroups()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormController.ts":
+/*!******************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormController.ts ***!
+  \******************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormController": () => (/* binding */ TableFormController)
+/* harmony export */ });
+/* harmony import */ var _FormController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _TableFormView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
+
+
+
+
+class TableFormController extends _FormController__WEBPACK_IMPORTED_MODULE_0__.FormController {
+    constructor() {
+        super(...arguments);
+        this.fields = {};
+        this.state = {
+            updated: Date.now(),
+        };
+        this.grid = null;
+        this.onGridCreate = (grid) => {
+            this.grid = grid;
+        };
+        this.onNewClick = async (e) => {
+            console.debug('TableFormController.onNewClick');
+            await this.new();
+        };
+        this.onRefreshClick = async (e) => {
+            console.debug('TableFormController.onRefreshClick', this.getModel().getFullName());
+            await this.getModel().refresh();
+            // console.error('refresh error handler:', err.message);
+            // alert(err.message);
+        };
+        this.onDeleteClick = async (e) => {
+            console.debug('TableFormController.onDeleteClick', this.getModel().getFullName(), this.grid.getActiveRowKey());
+            const result = await this.getApp().confirm({
+                message: this.getModel().getApp().getText().form.areYouSure,
+            });
+            if (result) {
+                await this.getModel().getDefaultDataSource().delete(this.grid.getActiveRowKey());
+            }
+        };
+        this.onGridCellDblClick = async (row, key) => {
+            // console.debug('TableFormController.onGridCellDblClick', row);
+            // const bodyCell = e.bodyCell;
+            // const row = bodyCell.bodyRow.dbRow;
+            // console.debug('row:', row);
+            // const key = this.getModel().getDefaultDataSource().getRowKey(row);
+            // console.debug('key:', key);
+            switch (this.getModel().getAttr('editMethod')) {
+                // case 'table':
+                //     this.grid.gridColumns[bodyCell.qFieldName].beginEdit(bodyCell);
+                // break;
+                case 'form':
+                    if (this.getPage().getModel().isSelectMode()) {
+                        await this.getPage().selectRow(key);
+                    }
+                    else {
+                        await this.edit(key);
+                    }
+                    break;
+            }
+        };
+        this.onGridLinkClick = async (key) => {
+            console.debug('TableFormController.onGridLinkClick', key);
+            await this.edit(key);
+        };
+        this.onGridDeleteKeyDown = async (row, key) => {
+            console.debug('TableFormController.onGridDeleteKeyDown', row, key);
+            if (this.getModel().getAttr('deleteRowMode') !== 'disabled') {
+                const result = await this.getApp().confirm({
+                    message: this.getModel().getApp().getText().form.areYouSure,
+                });
+                if (result) {
+                    await this.getModel().getDefaultDataSource().delete(key);
+                }
+            }
+        };
+        this.onModelRefresh = async (e) => {
+            console.debug('TableFormController.onModelRefresh', this.getModel().getFullName(), e);
+            if (!this.view)
+                return;
+            this.invalidate();
+            await this.rerender();
+        };
+        this.onModelInsert = async (e) => {
+            console.debug('TableFormController.onModelInsert', this.getModel().getFullName(), e);
+            if (!this.view)
+                return;
+            if (this.grid && e.source) {
+                for (const key of e.inserts) {
+                    this.grid.setActiveRowKey(key);
+                }
+            }
+            this.invalidate();
+            await this.rerender();
+        };
+        this.onModelUpdate = async (e) => {
+            console.debug('TableFormController.onModelUpdate', this.getModel().getFullName(), e, this.view);
+            if (!this.view)
+                return;
+            if (this.grid) {
+                for (const key in e.updates) {
+                    if (this.grid.getActiveRowKey() === key) {
+                        const newKey = e.updates[key];
+                        if (key !== newKey) {
+                            this.grid.setActiveRowKey(newKey);
+                        }
+                    }
+                }
+            }
+            this.invalidate();
+            await this.rerender();
+        };
+        this.onModelDelete = async (e) => {
+            console.debug('TableFormController.onModelDelete', this.getModel().getFullName(), e);
+            if (!this.view)
+                return;
+            if (this.grid) {
+                for (const key of e.deletes) {
+                    if (this.grid.getActiveRowKey() === key) {
+                        this.grid.setActiveRowKey(null);
+                    }
+                }
+            }
+            this.invalidate();
+            await this.rerender();
+        };
+        this.onGridSelectionChange = async (key) => {
+            // console.debug('TableFormController.onGridSelectionChange', key);
+            this.invalidate();
+            await this.getPage().rerender();
+        };
+        this.isRowSelected = () => {
+            // console.debug('TableFormController.isRowSelected');
+            return !!this.grid && !!this.grid.getActiveRowKey();
+        };
+        this.onFrameChanged = async (value) => {
+            console.debug('TableFormController.onFrameChanged', value);
+            let frame = parseInt(value);
+            console.debug('frame:', frame);
+            const frameCount = this.getModel().getDefaultDataSource().getFramesCount();
+            if (frame < 1)
+                frame = 1;
+            if (frame > frameCount)
+                frame = frameCount;
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
+            await this.rerender();
+        };
+        this.onNextClick = async () => {
+            console.debug('TableFormController.onNextClick');
+            const frame = this.getModel().getDefaultDataSource().getFrame() + 1;
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
+            await this.rerender();
+        };
+        this.onPreviousClick = async () => {
+            console.debug('TableFormController.onPreviousClick');
+            const frame = this.getModel().getDefaultDataSource().getFrame() - 1;
+            this.getModel().getDefaultDataSource().setFrame(frame);
+            this.getModel().getDefaultDataSource().refresh();
+            this.rerender();
+        };
+    }
+    getViewClass() {
+        return super.getViewClass() || _TableFormView__WEBPACK_IMPORTED_MODULE_1__.TableFormView;
+    }
+    init() {
+        super.init();
+        // this.parent.on('hide', this.onHidePage);
+        // this.parent.on('show', this.onShowPage);
+        this.getModel().on('refresh', this.onModelRefresh);
+        this.getModel().on('update', this.onModelUpdate);
+        this.getModel().on('delete', this.onModelDelete);
+        this.getModel().on('insert', this.onModelInsert);
+    }
+    deinit() {
+        // this.parent.off('hide', this.onHidePage);
+        // this.parent.off('show', this.onShowPage);
+        this.getModel().off('refresh', this.onModelRefresh);
+        this.getModel().off('update', this.onModelUpdate);
+        this.getModel().off('delete', this.onModelDelete);
+        this.getModel().off('insert', this.onModelInsert);
+        super.deinit();
+    }
+    /*onHidePage = async () => {
+        this.grid.saveScroll();
+    }*/
+    /*onShowPage = async () => {
+        console.debug('TableFormController.onShowPage', this.getModel().getFullName());
+        if (!this.grid.isHidden()) {
+            this.grid.restoreScroll();
+            this.grid.focus();
+            // console.debug('document.activeElement:', document.activeElement);
+        }
+    }*/
+    async new() {
+        if (this.getModel().getAttr('newRowMode') === 'oneclick') {
+            const row = {};
+            this.getModel().fillDefaultValues(row);
+            await this.getModel().getDefaultDataSource().insert(row);
+        }
+        else if (this.getModel().getAttr('newRowMode') === 'editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
+            }
+            await this.openPage({
+                name: this.getModel().getAttr('itemEditPage'),
+                newMode: true,
+                modal: true,
+            });
+        }
+        else if (this.getModel().getAttr('newRowMode') === 'createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
+            }
+            await this.openPage({
+                name: this.getModel().getAttr('itemCreatePage'),
+                newMode: true,
+                modal: true,
+            });
+        }
+        else if (this.getModel().getAttr('newRowMode') === 'oneclick editform') {
+            if (!this.getModel().getAttr('itemEditPage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemEditPage is empty`);
+            }
+            const row = {};
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
+            const [key] = result[database][table].insert;
+            await this.openPage({
+                name: this.getModel().getAttr('itemEditPage'),
+                // key  : key,
+                modal: true,
+                params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
+            });
+        }
+        else if (this.getModel().getAttr('newRowMode') === 'oneclick createform') {
+            if (!this.getModel().getAttr('itemCreatePage')) {
+                throw new Error(`[${this.getModel().getFullName()}] itemCreatePage is empty`);
+            }
+            const row = {};
+            this.getModel().fillDefaultValues(row);
+            const result = await this.getModel().getDefaultDataSource().insert(row);
+            const database = this.getModel().getDefaultDataSource().getAttr('database');
+            const table = this.getModel().getDefaultDataSource().getAttr('table');
+            const [key] = result[database][table].insert;
+            await this.openPage({
+                name: this.getModel().getAttr('itemCreatePage'),
+                // key  : key,
+                modal: true,
+                params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
+            });
+        }
+    }
+    async edit(key) {
+        // console.debug('TableForm.edit', this.getModel().getFullName(), key);
+        if (!this.getModel().getAttr('itemEditPage')) {
+            throw new Error(`${this.getModel().getFullName()}: itemEditPage is empty`);
+        }
+        try {
+            await this.openPage({
+                name: this.getModel().getAttr('itemEditPage'),
+                modal: true,
+                params: Object.assign({}, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_2__.DataSource.keyToParams(key)),
+            });
+        }
+        catch (err) {
+            // console.error(`${this.getModel().getFullName()}: edit form error handler:`, err);
+            // alert(`${this.getModel().getFullName()}: ${err.message}`);
+            err.message = `${this.getModel().getFullName()} edit: ${err.message}`;
+            throw err;
+        }
+    }
+    getActiveRow() {
+        const key = this.grid.getActiveRowKey();
+        if (!key)
+            throw new Error(`${this.getModel().getFullName()}: no active row key`);
+        return this.getModel().getDefaultDataSource().getRow(key);
+    }
+    canPrev() {
+        return this.getModel().getDefaultDataSource().getFrame() > 1;
+    }
+    canNext() {
+        const ds = this.getModel().getDefaultDataSource();
+        return ds.getFrame() < ds.getFramesCount();
+    }
+    getSelectedRowKey() {
+        return this.grid ? this.grid.getActiveRowKey() : null;
+    }
+    isActionEnabled(name) {
+        return this.isRowSelected();
+    }
+    getField(name) {
+        return this.fields[name];
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(TableFormController);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx":
+/*!*************************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx ***!
+  \*************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableFormView": () => (/* binding */ TableFormView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _FormView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormView */ "./src/frontend/viewer/Controller/ModelController/FormController/FormView.tsx");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _TableFormView_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./TableFormView.less */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.less");
+
+
+
+
+
+
+
+class TableFormView extends _FormView__WEBPACK_IMPORTED_MODULE_2__.FormView {
+    constructor() {
+        super(...arguments);
+        this.renderGridCellView = (row, column, onCreate, onUnmount) => {
+            // console.debug('TableFormView.renderGridCellView');
+            const ctrl = this.getCtrl().getField(column.name);
+            if (!ctrl)
+                throw new Error(`no field: ${column.name}`);
+            // console.debug(column.name, ctrl.constructor.name);
+            return react__WEBPACK_IMPORTED_MODULE_1__.createElement(ctrl.getViewClass(), { row, column, onCreate, onUnmount, ctrl });
+        };
+        this.createLinkCallback = (key) => {
+            return this.getCtrl()
+                .getApp()
+                .getHostApp()
+                .createLink(Object.assign({ page: this.getCtrl().getModel().getAttr('itemEditPage') }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
+        };
+    }
+    renderToolbar() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        const dataSource = model.getDefaultDataSource();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar flex grid-gap-5` }, { children: [model.getData().newRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onNewClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.new }) }), "new")), model.getData().refreshButton === 'true' && dataSource.isPersistent() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onRefreshClick, enabled: !ctrl.getParent().getModel().hasNew() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.refresh }) }), "refresh")), model.getData().deleteRowMode !== 'disabled' && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onDeleteClick, enabled: ctrl.isRowSelected() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().form.delete }) }), "delete")), ctrl.getModel().hasActions() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.MoreVertIcon, {}) })))] })));
+    }
+    renderPaging() {
+        const ctrl = this.getCtrl();
+        const model = this.getCtrl().getModel();
+        const dataSource = model.getDefaultDataSource();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "paging__countBlock" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("span", Object.assign({ className: "count" }, { children: [dataSource.getRowsLength(), ' ', dataSource.getLimit() &&
+                                `of ${_common_Helper__WEBPACK_IMPORTED_MODULE_5__.Helper.formatNumber(dataSource.getCount())}`] })) })), dataSource.getLimit() && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__gotoBlock" }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canPrev(), onClick: ctrl.onPreviousClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.LeftIcon, { size: 18 }) })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.TextBox, { value: ctrl.getModel().getDefaultDataSource().getFrame().toString(), onChange: ctrl.onFrameChanged }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: "paging__framesCount" }, { children: [' ', "/ ", _common_Helper__WEBPACK_IMPORTED_MODULE_5__.Helper.formatNumber(dataSource.getFramesCount()), ' '] })), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.Button, Object.assign({ enabled: ctrl.canNext(), onClick: ctrl.onNextClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_4__.RightIcon, { size: 18 }) }))] })))] })));
+    }
+    getGridColumns() {
+        const ctrl = this.getCtrl();
+        return Object.keys(ctrl.fields)
+            .filter((name) => ctrl.getField(name).isVisible())
+            .map((name) => {
+            const field = ctrl.getField(name);
+            return {
+                name: field.getModel().getName(),
+                title: field.getModel().getCaption(),
+                width: field.getModel().getWidth(),
+                align: field.getAlign(),
+            };
+        });
+    }
+    getRows() {
+        const ctrl = this.getCtrl();
+        return ctrl.getModel().getDefaultDataSource().getRows();
+    }
+    getGridExtraColumn() {
+        return true;
+    }
+    getGridClass() {
+        return _common__WEBPACK_IMPORTED_MODULE_4__.Grid;
+    }
+    renderGrid() {
+        const ctrl = this.getCtrl();
+        return react__WEBPACK_IMPORTED_MODULE_1__.createElement(this.getGridClass(), {
+            classList: ['flex-max'],
+            onCreate: ctrl.onGridCreate,
+            name: ctrl.getModel().getFullName(),
+            columns: this.getGridColumns(),
+            rows: this.getRows(),
+            getRowKey: (row) => ctrl.getModel().getDefaultDataSource().getRowKey(row),
+            onDoubleClick: ctrl.onGridCellDblClick,
+            onDeleteKeyDown: ctrl.onGridDeleteKeyDown,
+            onSelectionChange: ctrl.onGridSelectionChange,
+            onLinkClick: ctrl.onGridLinkClick,
+            renderGridCellView: this.renderGridCellView,
+            updated: ctrl.getUpdated(),
+            extraColumn: this.getGridExtraColumn(),
+            selectedKey: ctrl.getPage().getModel().getOptions().selectedKey,
+            createLinkCallback: this.createLinkCallback,
+        });
+    }
+    render() {
+        console.debug('TableFormView.render', this.getCtrl().getModel().getFullName());
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} full flex-column grid-gap-5`, style: this.getStyle() }, { children: [this.renderToolbar(), this.renderGrid(), ctrl.getModel().hasDefaultPersistentDataSource() && this.renderPaging()] })));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ModelController.ts":
+/*!***************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ModelController.ts ***!
+  \***************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModelController": () => (/* binding */ ModelController)
+/* harmony export */ });
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Controller */ "./src/frontend/viewer/Controller/Controller.ts");
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+
+class ModelController extends _Controller__WEBPACK_IMPORTED_MODULE_0__.Controller {
+    constructor(model, parent) {
+        super();
+        this.model = model;
+        this.parent = parent;
+        this.deinited = false;
+    }
+    init() { }
+    deinit() {
+        if (this.deinited)
+            throw new Error(`${this.getModel().getFullName()}: controller already deinited`);
+        this.deinited = true;
+    }
+    getModel() {
+        return this.model;
+    }
+    getParent() {
+        if (!this.parent)
+            throw new Error(`${this.getModel().getFullName()}: no controller parent`);
+        return this.parent;
+    }
+    getTitle() {
+        return this.getModel().getCaption();
+    }
+    getViewClass() {
+        // console.debug(`${this.constructor.name}.getViewClass`, this.getModel().getAttr('viewClass'));
+        const model = this.getModel();
+        if (!model.isAttr('viewClass')) {
+            throw new Error(`${this.constructor.name} not supports view`);
+        }
+        const viewClassName = model.getAttr('viewClass');
+        if (viewClassName) {
+            const viewClass = _common__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(viewClassName);
+            if (!viewClass)
+                throw new Error(`no class ${viewClassName}`);
+            if (!(viewClass.prototype instanceof _ModelView__WEBPACK_IMPORTED_MODULE_1__.ModelView)) {
+                throw new Error(`view class ${viewClassName} is not inherited from ModelView`);
+            }
+            return viewClass;
+        }
+        return null;
+    }
+    isActionEnabled(name) {
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/ModelView.tsx ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ModelView": () => (/* binding */ ModelView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _View__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../View */ "./src/frontend/viewer/Controller/View.tsx");
+/* harmony import */ var _Model_Model__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Model/Model */ "./src/frontend/viewer/Model/Model.ts");
+
+
+
+class ModelView extends _View__WEBPACK_IMPORTED_MODULE_1__.View {
+    constructor() {
+        super(...arguments);
+        this.renderActionIcon = undefined;
+    }
+    getActionsForDropdownButton() {
+        return this.getCtrl()
+            .getModel()
+            .getCol('actions')
+            .map((data) => {
+            const actionName = _Model_Model__WEBPACK_IMPORTED_MODULE_2__.Model.getName(data);
+            return {
+                name: actionName,
+                title: this.renderActionIcon
+                    ? [
+                        (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: this.renderActionIcon(actionName) }, 'icon'),
+                        (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: _Model_Model__WEBPACK_IMPORTED_MODULE_2__.Model.getAttr(data, 'caption') }, 'title'),
+                    ]
+                    : _Model_Model__WEBPACK_IMPORTED_MODULE_2__.Model.getAttr(data, 'caption'),
+                enabled: this.getCtrl().isActionEnabled(actionName),
+            };
+        });
+    }
+    getCssBlockName() {
+        const model = this.getCtrl().getModel();
+        if (model.isAttr('cssBlock') && model.getAttr('cssBlock')) {
+            return model.getAttr('cssBlock');
+        }
+        return super.getCssBlockName();
+    }
+    getStyle(row) { }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts":
+/*!*****************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts ***!
+  \*****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageController": () => (/* binding */ PageController)
+/* harmony export */ });
+/* harmony import */ var _ModelController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../ModelController */ "./src/frontend/viewer/Controller/ModelController/ModelController.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../FormController/FormController */ "./src/frontend/viewer/Controller/ModelController/FormController/FormController.ts");
+/* harmony import */ var _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../Model/DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
+/* harmony import */ var _PageView__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
+
+
+
+
+
+
+class PageController extends _ModelController__WEBPACK_IMPORTED_MODULE_0__.ModelController {
+    constructor(model, parent, id) {
+        super(model, parent);
+        this.forms = [];
+        this.onSaveAndCloseClick = async () => {
+            console.debug('PageController.onSaveAndCloseClick');
+            this.validate();
+            if (this.isValid()) {
+                try {
+                    this.getApp().getView().disableRerender();
+                    await this.getModel().update();
+                    console.debug('page model updated', this.getModel().getFullName());
+                }
+                finally {
+                    this.getApp().getView().enableRerender();
+                }
+                await this.getApp().closePage(this);
+                if (this.getModel().getOptions().onClose) {
+                    this.getModel().getOptions().onClose();
+                }
+            }
+            else {
+                await this.rerender();
+            }
+        };
+        this.onClosePageClick = async (e) => {
+            console.debug('PageController.onClosePageClick', this.getModel().getFullName());
+            await this.close();
+        };
+        this.onOpenPageClick = async (e) => {
+            const name = this.getModel().getName();
+            const key = this.getModel().getKey();
+            const link = this.createOpenInNewLink(name, key);
+            // console.debug('link', link);
+            window.open(link, '_blank');
+        };
+        this.onKeyDown = async (e) => {
+            // console.debug('PageController.onKeyDown', this.getModel().getFullName(), e);
+            if (e.key === 'Escape') {
+                if (this.isModal()) {
+                    await this.close();
+                }
+            }
+        };
+        this.onSelectClick = async (e) => {
+            console.debug('PageController.onSelectClick');
+            await this.selectRow(this.getSelectedRowKey());
+        };
+        this.onResetClick = async (e) => {
+            console.debug('PageController.onResetClick');
+            await this.selectRow(null);
+        };
+        if (typeof window === 'object') {
+            console.debug(`${this.constructor.name}.constructor`, model, id);
+        }
+        if (!id) {
+            throw new Error('no id');
+        }
+        this.id = id;
+    }
+    static create(model, parent, id, options = null) {
+        // console.debug('PageController.create', model.getName());
+        const { ctrlClass } = model.getData();
+        if (ctrlClass) {
+            const CustomClass = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(ctrlClass);
+            if (!CustomClass)
+                throw new Error(`no class ${ctrlClass}`);
+            return new CustomClass(model, parent, id, options);
+        }
+        // @ts-ignore
+        return new PageController(model, parent, id, options);
+    }
+    init() {
+        for (const form of this.getModel().forms) {
+            const ctrl = _FormController_FormController__WEBPACK_IMPORTED_MODULE_2__.FormController.create(form, this);
+            ctrl.init();
+            this.forms.push(ctrl);
+        }
+    }
+    deinit() {
+        console.debug('PageController.deinit: ' + this.getModel().getFullName());
+        for (const form of this.forms) {
+            form.deinit();
+        }
+        super.deinit();
+    }
+    createOpenInNewLink(pageName, key) {
+        return this.getApp()
+            .getHostApp()
+            .createLink(Object.assign({ page: pageName }, _Model_DataSource_DataSource__WEBPACK_IMPORTED_MODULE_3__.DataSource.keyToParams(key)));
+    }
+    async close() {
+        // console.debug('PageController.close', this.getModel().getFullName());
+        const changed = this.isChanged();
+        // console.debug('changed:', changed);
+        // const valid = this.isValid();
+        // console.debug('valid:', valid);
+        if (this.getModel().hasRowFormWithDefaultSqlDataSource() && changed) {
+            const result = await this.getApp().confirm({
+                message: this.getModel().getApp().getText().form.areYouSure,
+            });
+            if (!result)
+                return;
+        }
+        await this.getApp().closePage(this);
+        if (this.getModel().getOptions().onClose) {
+            this.getModel().getOptions().onClose();
+        }
+    }
+    validate() {
+        for (const form of this.forms) {
+            if (form instanceof _FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_4__.RowFormController) {
+                form.validate();
+            }
+        }
+    }
+    isValid() {
+        // console.debug('PageController.isValid', this.getModel().getFullName());
+        for (const form of this.forms) {
+            if (!form.isValid()) {
+                return false;
+            }
+        }
+        return true;
+    }
+    async onFormChange(e) {
+        // console.debug('PageController.onFormChange', this.getModel().getFullName());
+        this.rerender();
+    }
+    onFormDiscard(formController) {
+        console.debug('PageController.onFormDiscard', this.getModel().getFullName());
+        this.rerender();
+    }
+    onFormUpdate(e) {
+        console.debug('PageController.onFormUpdate:', this.getModel().getFullName(), e);
+        this.rerender();
+    }
+    onFormInsert(e) {
+        console.debug('PageController.onFormInsert:', this.getModel().getFullName());
+        // console.debug('hasNew:', this.getModel().hasNew());
+        for (const form of this.forms) {
+            form.invalidate();
+        }
+        this.rerender();
+    }
+    async openPage(options) {
+        if (!options.params) {
+            options.params = {};
+        }
+        const params = this.getModel().getParams();
+        for (const name in params) {
+            if (!options.params[name]) {
+                options.params[name] = params[name];
+            }
+        }
+        return await this.getApp().openPage(options);
+    }
+    isChanged() {
+        // console.debug('PageController.isChanged', this.getModel().getFullName());
+        for (const form of this.forms) {
+            if (form.isChanged()) {
+                // console.debug(`FORM CHANGED: ${form.getModel().getFullName()}`);
+                return true;
+            }
+        }
+        return false;
+    }
+    getApp() {
+        return this.getParent();
+    }
+    getViewClass() {
+        return super.getViewClass() || _PageView__WEBPACK_IMPORTED_MODULE_5__.PageView;
+    }
+    findForm(name) {
+        return this.forms.find((form) => form.getModel().getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getModel().getFullName()}: no form controller ${name}`);
+        return form;
+    }
+    async onActionClick(name) {
+        console.debug('PageController.onActionClick', name);
+    }
+    getTitle() {
+        const model = this.getModel();
+        const key = model.getKey();
+        let keyPart = null;
+        if (key) {
+            const arr = JSON.parse(key);
+            if (arr.length === 1 && typeof arr[0] === 'number') {
+                keyPart = `#${arr[0]}`;
+            }
+            else {
+                keyPart = `${key}`;
+            }
+        }
+        return [
+            model.getCaption(),
+            ...(this.getApp().getHostApp().isDebugMode() ? [`(${this.getId()})`] : []),
+            ...(keyPart ? [keyPart] : []),
+        ].join(' ');
+    }
+    getSelectedRowKey() {
+        for (const form of this.forms) {
+            const selectedRowKey = form.getSelectedRowKey();
+            if (selectedRowKey)
+                return selectedRowKey;
+        }
+        return null;
+    }
+    async selectRow(key) {
+        console.debug('PageController.selectRow', key);
+        await this.close();
+        await this.getModel().getOptions().onSelect(key);
+    }
+    invalidate() {
+        this.forms.forEach((form) => form.invalidate());
+    }
+    getId() {
+        return this.id;
+    }
+    isModal() {
+        return this.getModel().isModal();
+    }
+    isAutoFocus() {
+        for (const form of this.forms) {
+            if (form.isAutoFocus()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx":
+/*!************************************************************************************!*\
+  !*** ./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx ***!
+  \************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PageView": () => (/* binding */ PageView)
+/* harmony export */ });
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var _ModelView__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ModelView */ "./src/frontend/viewer/Controller/ModelController/ModelView.tsx");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _PageView_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./PageView.less */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.less");
+
+
+
+
+
+class PageView extends _ModelView__WEBPACK_IMPORTED_MODULE_2__.ModelView {
+    constructor(props) {
+        super(props);
+        this.onActionsClick = async (li) => {
+            // console.debug('PageView.onActionsClick:', li);
+            const ctrl = this.getCtrl();
+            const name = li.dataset.action;
+            try {
+                const result = await ctrl.onActionClick(name);
+                if (!result) {
+                    throw new Error(`no handler for action '${name}'`);
+                }
+            }
+            catch (err) {
+                console.error(err);
+                await this.getCtrl().getApp().alert({ message: err.message });
+            }
+        };
+        this.checkParent();
+        this.el = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+    }
+    isToolbar() {
+        const model = this.getCtrl().getModel();
+        return model.hasActions();
+        //|| (model.isModal() && model.hasRowFormWithDefaultSqlDataSource())
+        //|| model.isSelectMode();
+    }
+    getFormTabs(forms) {
+        return forms.map((form) => {
+            return {
+                name: form.getModel().getName(),
+                title: form.getTitle(),
+                content: this.renderForm(form),
+            };
+        });
+    }
+    getRowForms() {
+        return this.getCtrl()
+            .forms.filter((form) => form.getModel().getClassName() === 'RowForm')
+            .filter((form) => form.isVisible());
+    }
+    getTableForms() {
+        return this.getCtrl()
+            .forms.filter((form) => form.getModel().getClassName() === 'TableForm')
+            .filter((form) => form.isVisible());
+    }
+    renderForm(formCtrl, props = {}) {
+        return react__WEBPACK_IMPORTED_MODULE_1__.createElement(formCtrl.getViewClass(), Object.assign({ parent: this, key: formCtrl.getModel().getName(), ctrl: formCtrl, onCreate: formCtrl.onViewCreate, updated: formCtrl.getUpdated() }, props));
+    }
+    renderRowForms() {
+        return this.getRowForms().map((form) => this.renderForm(form));
+    }
+    renderTitle() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("h1", Object.assign({ className: `${this.getCssBlockName()}__title` }, { children: [ctrl.getTitle(), model.hasRowFormWithDefaultSqlDataSource() &&
+                    (ctrl.isChanged() || model.hasNew()) && [
+                    ' ',
+                    (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ className: `${this.getCssBlockName()}__star` }, { children: "*" }), 'star'),
+                ]] })));
+    }
+    renderSelectButton() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onSelectClick, enabled: !!ctrl.getSelectedRowKey() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().page.select }) })));
+    }
+    renderSaveAndCloseButton() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ classList: ['toolbar-button', 'default'], onClick: ctrl.onSaveAndCloseClick, enabled: ctrl.isValid() && (model.hasNew() || ctrl.isChanged()) }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().page.saveAndClose }) })));
+    }
+    renderCloseButton() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Button, Object.assign({ classList: ['toolbar-button'], onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", { children: model.getApp().getText().page.close }) })));
+    }
+    renderActionsDropdownButton() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.DropdownButton, Object.assign({ classList: ['toolbar-dropdown-button'], actions: this.getActionsForDropdownButton(), onClick: this.onActionsClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.MoreVertIcon, {}) })));
+    }
+    renderToolbar() {
+        const ctrl = this.getCtrl();
+        const model = ctrl.getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__toolbar` }, { children: model.hasActions() && this.renderActionsDropdownButton() })));
+    }
+    /* shouldComponentUpdate(nextProps, nextState) {
+        return false;
+    } */
+    renderTableForms() {
+        const tableForms = this.getTableForms();
+        if (tableForms.length === 1) {
+            return this.renderForm(tableForms[0]);
+        }
+        else {
+            return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__table-forms flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: "frame__container" }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Tab2, { tabs: this.getFormTabs(tableForms), classList: ['Tab-blue', 'full'] }) })) })));
+        }
+    }
+    renderOpenPageHeaderButton() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__open`, onClick: ctrl.onOpenPageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.OpenInNewIcon, {}) }), 'open'));
+    }
+    renderClosePageHeaderButton() {
+        const ctrl = this.getCtrl();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__close`, onClick: ctrl.onClosePageClick }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.CloseIcon2, {}) }), 'close'));
+    }
+    renderHeader() {
+        const model = this.getCtrl().getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__header` }, { children: [this.renderTitle(), model.isModal() && [
+                    ...(model.getKey() ? [this.renderOpenPageHeaderButton()] : []),
+                    this.renderClosePageHeaderButton(),
+                ]] })));
+    }
+    renderMain() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: `${this.getCssBlockName()}__main flex-max frame` }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: 'frame__container flex-column grid-gap-10' }, { children: [this.isToolbar() && this.renderToolbar(), this.getCtrl().getModel().isFormInTab()
+                        ? this.renderForms2()
+                        : this.renderForms()] })) })));
+    }
+    renderForms() {
+        const model = this.getCtrl().getModel();
+        return [
+            ...(model.hasRowForm() ? [this.renderRowForms()] : []),
+            ...(model.hasTableForm() ? [this.renderTableForms()] : []),
+        ];
+    }
+    renderForms2() {
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_3__.Tab2, { tabs: this.getFormTabs(this.getCtrl().forms.filter((form) => form.isVisible())), classList: ['Tab-blue', 'full'] }));
+    }
+    renderFooter() {
+        const model = this.getCtrl().getModel();
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssBlockName()}__footer` }, { children: [this.renderCloseButton(), model.isModal() &&
+                    model.hasRowFormWithDefaultSqlDataSource() &&
+                    this.renderSaveAndCloseButton(), model.isSelectMode() && this.renderSelectButton()] })));
+    }
+    render() {
+        console.debug('PageView.render', this.getCtrl().getModel().getFullName());
+        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: `${this.getCssClassNames()} ${this.getCtrl().isModal() ? '' : 'full'} flex-column`, style: this.getStyle(), ref: this.el, tabIndex: 0, onKeyDown: this.getCtrl().onKeyDown }, { children: [this.renderHeader(), this.renderMain(), this.getCtrl().isModal() && this.renderFooter()] })));
+    }
+    getStyle() {
+        if (this.getCtrl().isModal()) {
+            return {
+                width: 1000,
+                height: 750,
+            };
+        }
+    }
+    componentDidMount() {
+        // console.debug('PageView.componentDidMount', this.getCtrl().getModel().getFullName());
+        if (this.getCtrl().isAutoFocus() && !this.getCtrl().getModel().getKey()) {
+        }
+        else {
+            this.focus();
+        }
+    }
+    focus() {
+        // console.debug('PageView.focus', this.getCtrl().getModel().getFullName());
+        if (this.getElement()) {
+            // console.debug('focus', this.getElement());
+            this.getElement().focus();
+        }
+        else {
+            console.error(`${this.getCtrl().getModel().getFullName()}: el is null (ref={this.el})`);
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/View.tsx":
+/*!*************************************************!*\
+  !*** ./src/frontend/viewer/Controller/View.tsx ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "View": () => (/* binding */ View)
+/* harmony export */ });
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
+
+class View extends _common__WEBPACK_IMPORTED_MODULE_0__.ReactComponent {
+    constructor(props) {
+        super(props);
+        if (!props.ctrl)
+            throw new Error(`${this.constructor.name}: no ctrl`);
+        // if (!props.onCreate) throw new Error(`${this.constructor.name}: no onCreate`);
+    }
+    getCtrl() {
+        return this.props.ctrl;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Controller/index.ts":
+/*!*************************************************!*\
+  !*** ./src/frontend/viewer/Controller/index.ts ***!
+  \*************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* reexport safe */ _ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_28__.ApplicationController),
+/* harmony export */   "ApplicationView": () => (/* reexport safe */ _ModelController_ApplicationController_ApplicationView__WEBPACK_IMPORTED_MODULE_0__.ApplicationView),
+/* harmony export */   "LoginController": () => (/* reexport safe */ _LoginController_LoginController__WEBPACK_IMPORTED_MODULE_16__.LoginController),
+/* harmony export */   "LoginView": () => (/* reexport safe */ _LoginController_LoginView__WEBPACK_IMPORTED_MODULE_34__.LoginView),
+/* harmony export */   "PageController": () => (/* reexport safe */ _ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_5__.PageController),
+/* harmony export */   "PageView": () => (/* reexport safe */ _ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_1__.PageView),
+/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_22__.RowFormCheckBoxFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldController__WEBPACK_IMPORTED_MODULE_27__.RowFormCheckBoxListFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_26__.RowFormCheckBoxListFieldView),
+/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_7__.RowFormComboBoxFieldController),
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_40__.RowFormComboBoxFieldView),
+/* harmony export */   "RowFormController": () => (/* reexport safe */ _ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_2__.RowFormController),
+/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldController__WEBPACK_IMPORTED_MODULE_6__.RowFormDateFieldController),
+/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldView__WEBPACK_IMPORTED_MODULE_36__.RowFormDateFieldView),
+/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_18__.RowFormDateTimeFieldController),
+/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_39__.RowFormDateTimeFieldView),
+/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormFieldController__WEBPACK_IMPORTED_MODULE_33__.RowFormFieldController),
+/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormFieldView__WEBPACK_IMPORTED_MODULE_30__.RowFormFieldView),
+/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormFileFieldController_RowFormFileFieldController__WEBPACK_IMPORTED_MODULE_23__.RowFormFileFieldController),
+/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormLinkFieldController_RowFormLinkFieldController__WEBPACK_IMPORTED_MODULE_35__.RowFormLinkFieldController),
+/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormPasswordFieldController_RowFormPasswordFieldController__WEBPACK_IMPORTED_MODULE_12__.RowFormPasswordFieldController),
+/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_24__.RowFormPhoneFieldController),
+/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_41__.RowFormPhoneFieldView),
+/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormRadioFieldController_RowFormRadioFieldController__WEBPACK_IMPORTED_MODULE_21__.RowFormRadioFieldController),
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_11__.RowFormTextAreaFieldController),
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_37__.RowFormTextAreaFieldView),
+/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_8__.RowFormTextBoxFieldController),
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_38__.RowFormTextBoxFieldView),
+/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _ModelController_FieldController_RowFormFieldController_RowFormTimeFieldController_RowFormTimeFieldController__WEBPACK_IMPORTED_MODULE_43__.RowFormTimeFieldController),
+/* harmony export */   "RowFormView": () => (/* reexport safe */ _ModelController_FormController_RowFormController_RowFormView__WEBPACK_IMPORTED_MODULE_3__.RowFormView),
+/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_20__.TableFormCheckBoxFieldController),
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_13__.TableFormCheckBoxFieldView),
+/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_19__.TableFormComboBoxFieldController),
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_14__.TableFormComboBoxFieldView),
+/* harmony export */   "TableFormController": () => (/* reexport safe */ _ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_9__.TableFormController),
+/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_10__.TableFormDateFieldController),
+/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_32__.TableFormDateFieldView),
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_17__.TableFormDateTimeFieldController),
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_15__.TableFormDateTimeFieldView),
+/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormLinkFieldController_TableFormLinkFieldController__WEBPACK_IMPORTED_MODULE_42__.TableFormLinkFieldController),
+/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_25__.TableFormPhoneFieldController),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_4__.TableFormTextBoxFieldController),
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_31__.TableFormTextBoxFieldView),
+/* harmony export */   "TableFormView": () => (/* reexport safe */ _ModelController_FormController_TableFormController_TableFormView__WEBPACK_IMPORTED_MODULE_29__.TableFormView)
+/* harmony export */ });
+/* harmony import */ var _ModelController_ApplicationController_ApplicationView__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModelController/ApplicationController/ApplicationView */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationView.tsx");
+/* harmony import */ var _ModelController_PageController_PageView__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ModelController/PageController/PageView */ "./src/frontend/viewer/Controller/ModelController/PageController/PageView.tsx");
+/* harmony import */ var _ModelController_FormController_RowFormController_RowFormController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModelController/FormController/RowFormController/RowFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormController.ts");
+/* harmony import */ var _ModelController_FormController_RowFormController_RowFormView__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./ModelController/FormController/RowFormController/RowFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/RowFormController/RowFormView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldController.ts");
+/* harmony import */ var _ModelController_PageController_PageController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ModelController/PageController/PageController */ "./src/frontend/viewer/Controller/ModelController/PageController/PageController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldController__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldController__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldController.ts");
+/* harmony import */ var _ModelController_FormController_TableFormController_TableFormController__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./ModelController/FormController/TableFormController/TableFormController */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldController__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldController__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormPasswordFieldController_RowFormPasswordFieldController__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPasswordFieldController/RowFormPasswordFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldView__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldView.tsx");
+/* harmony import */ var _LoginController_LoginController__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./LoginController/LoginController */ "./src/frontend/viewer/Controller/LoginController/LoginController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormDateTimeFieldController_TableFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateTimeFieldController/TableFormDateTimeFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldController__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormComboBoxFieldController_TableFormComboBoxFieldController__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormComboBoxFieldController/TableFormComboBoxFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormCheckBoxFieldController_TableFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormCheckBoxFieldController/TableFormCheckBoxFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormRadioFieldController_RowFormRadioFieldController__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormRadioFieldController/RowFormRadioFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxFieldController_RowFormCheckBoxFieldController__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxFieldController/RowFormCheckBoxFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormFileFieldController_RowFormFileFieldController__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormPhoneFieldController_TableFormPhoneFieldController__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormPhoneFieldController/TableFormPhoneFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldView__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormCheckBoxListFieldController_RowFormCheckBoxListFieldController__WEBPACK_IMPORTED_MODULE_27__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormCheckBoxListFieldController/RowFormCheckBoxListFieldController.ts");
+/* harmony import */ var _ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_28__ = __webpack_require__(/*! ./ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
+/* harmony import */ var _ModelController_FormController_TableFormController_TableFormView__WEBPACK_IMPORTED_MODULE_29__ = __webpack_require__(/*! ./ModelController/FormController/TableFormController/TableFormView */ "./src/frontend/viewer/Controller/ModelController/FormController/TableFormController/TableFormView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormFieldView__WEBPACK_IMPORTED_MODULE_30__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormTextBoxFieldController_TableFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_31__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormTextBoxFieldController/TableFormTextBoxFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormDateFieldController_TableFormDateFieldView__WEBPACK_IMPORTED_MODULE_32__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormDateFieldController/TableFormDateFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormFieldController__WEBPACK_IMPORTED_MODULE_33__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFieldController.ts");
+/* harmony import */ var _LoginController_LoginView__WEBPACK_IMPORTED_MODULE_34__ = __webpack_require__(/*! ./LoginController/LoginView */ "./src/frontend/viewer/Controller/LoginController/LoginView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormLinkFieldController_RowFormLinkFieldController__WEBPACK_IMPORTED_MODULE_35__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormLinkFieldController/RowFormLinkFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormDateFieldController_RowFormDateFieldView__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateFieldController/RowFormDateFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormTextAreaFieldController_RowFormTextAreaFieldView__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextAreaFieldController/RowFormTextAreaFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormTextBoxFieldController_RowFormTextBoxFieldView__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTextBoxFieldController/RowFormTextBoxFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormDateTimeFieldController_RowFormDateTimeFieldView__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormDateTimeFieldController/RowFormDateTimeFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormComboBoxFieldController_RowFormComboBoxFieldView__WEBPACK_IMPORTED_MODULE_40__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormComboBoxFieldController/RowFormComboBoxFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormPhoneFieldController_RowFormPhoneFieldView__WEBPACK_IMPORTED_MODULE_41__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormPhoneFieldController/RowFormPhoneFieldView.tsx");
+/* harmony import */ var _ModelController_FieldController_TableFormFieldController_TableFormLinkFieldController_TableFormLinkFieldController__WEBPACK_IMPORTED_MODULE_42__ = __webpack_require__(/*! ./ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/TableFormFieldController/TableFormLinkFieldController/TableFormLinkFieldController.ts");
+/* harmony import */ var _ModelController_FieldController_RowFormFieldController_RowFormTimeFieldController_RowFormTimeFieldController__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldController */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormTimeFieldController/RowFormTimeFieldController.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/EventEmitter.ts":
+/*!*********************************************!*\
+  !*** ./src/frontend/viewer/EventEmitter.ts ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "EventEmitter": () => (/* binding */ EventEmitter)
+/* harmony export */ });
+class EventEmitter {
+    constructor() {
+        this.list = {};
+    }
+    on(name, cb) {
+        // console.debug('EventEmitter.on', name);
+        if (!this.list[name]) {
+            this.list[name] = [];
+        }
+        this.list[name].push(cb);
+    }
+    off(name, cb) {
+        // console.debug('EventEmitter.off', name);
+        const i = this.list[name].indexOf(cb);
+        if (i === -1) {
+            throw new Error(`cannot find cb for ${name}`);
+        }
+        // console.debug(i);
+        this.list[name].splice(i, 1);
+    }
+    async emit(name, e) {
+        // console.debug('EventEmitter.emit', name, e);
+        if (this.list[name] && this.list[name].length) {
+            // @ts-ignore
+            const results = await Promise.allSettled(this.list[name].map((cb) => cb(e)));
+            // console.debug('results:', results);
+            for (const result of results) {
+                if (result.status === 'rejected') {
+                    throw result.reason;
+                }
+            }
+        }
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/LoginFrontHostApp.ts":
+/*!**************************************************!*\
+  !*** ./src/frontend/viewer/LoginFrontHostApp.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LoginFrontHostApp": () => (/* binding */ LoginFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Controller/LoginController/LoginController */ "./src/frontend/viewer/Controller/LoginController/LoginController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+
+
+class LoginFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_1__.FrontHostApp {
+    constructor(data) {
+        console.debug('LoginFrontHostApp.constructor', data);
+        super();
+        this.data = data;
+    }
+    async run() {
+        console.debug('LoginFrontHostApp.run');
+        const loginController = _Controller_LoginController_LoginController__WEBPACK_IMPORTED_MODULE_0__.LoginController.create(this);
+        const rootElement = document.querySelector(`.${loginController.getViewClassCssBlockName()}__root`);
+        if (!rootElement)
+            throw new Error('no root element');
+        const loginView = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.createReactComponent(rootElement, loginController.getViewClass(), {
+            ctrl: loginController,
+        });
+    }
+    getText() {
+        return this.data.text;
+    }
+    getData() {
+        return this.data;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(LoginFrontHostApp);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Application/Application.ts":
+/*!**************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Application/Application.ts ***!
+  \**************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Application": () => (/* binding */ Application)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+
+class Application extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor(data) {
+        super(data);
+        this.databases = [];
+        this.dataSources = [];
+    }
+    init() {
+        // console.debug('Application.init');
+        if (!this.getData().theme)
+            throw new Error('no theme attr');
+        // databases
+        this.createDatabases();
+        // data sources
+        this.createDataSources();
+    }
+    createDatabases() {
+        for (const data of this.getData().databases) {
+            const database = new _Database_Database__WEBPACK_IMPORTED_MODULE_1__.Database(data, this);
+            database.init();
+            this.addDatabase(database);
+        }
+    }
+    deinit() {
+        this.deinitDataSources();
+        // TODO: add deinit on opened pages
+        super.deinit();
+    }
+    addDatabase(database) {
+        this.databases.push(database);
+    }
+    async logout() {
+        const data = await this.request('POST', {
+            action: 'logout',
+        });
+        this.emit('logout', { source: this });
+    }
+    async request(method, body) {
+        // console.warn('Application.request', data);
+        const start = Date.now();
+        const [headers, data] = await _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp.doHttpRequest2(method, body);
+        if (!headers['qforms-platform-version'])
+            throw new Error('no qforms-platform-version header');
+        // if (!headers['qforms-app-version']) throw new Error('no qforms-app-version header');
+        this.emit('request', {
+            time: Date.now() - start,
+            remotePlatformVersion: headers['qforms-platform-version'],
+            remoteAppVersion: headers['qforms-app-version'] || null,
+        });
+        return data;
+    }
+    findDatabase(name) {
+        return this.databases.find((database) => database.getName() === name);
+    }
+    getDatabase(name) {
+        // console.debug('Application.getDatabase', name);
+        const database = this.findDatabase(name);
+        if (!database)
+            throw new Error(`no database: ${name}`);
+        return database;
+    }
+    getText() {
+        return this.getData().text;
+    }
+    getUser() {
+        return this.getData().user;
+    }
+    getDomain() {
+        return this.getAttr('domain');
+    }
+    getVirtualPath() {
+        return this.getData().virtualPath;
+    }
+    async rpc(name, params) {
+        console.debug('Application.rpc', this.getFullName(), name, params);
+        if (!name)
+            throw new Error('no name');
+        const response = await this.request('POST', {
+            action: 'rpc',
+            name: name,
+            params: params,
+            uuid: this.getAttr('uuid'),
+        });
+        if (response.errorMessage)
+            throw new Error(response.errorMessage);
+        return response;
+    }
+    emitResult(result, source) {
+        console.debug('Application.emitResult', result, source);
+        const promises = [];
+        for (const database in result) {
+            promises.push(...this.getDatabase(database).emitResult(result[database], source));
+        }
+        // console.debug('promises:', promises);
+        // @ts-ignore
+        return Promise.allSettled(promises);
+    }
+    getNodeEnv() {
+        return this.getData().nodeEnv;
+    }
+    isDevelopment() {
+        return this.getNodeEnv() === 'development';
+    }
+    getRoute() {
+        return this.getAttr('route');
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(Application);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Column/Column.ts":
+/*!****************************************************!*\
+  !*** ./src/frontend/viewer/Model/Column/Column.ts ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Column": () => (/* binding */ Column)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class Column extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor(data, parent) {
+        super(data, parent);
+        if (!this.getAttr('type'))
+            throw new Error(`column ${this.getFullName()}: no type`);
+        if (!['string', 'number', 'boolean', 'object', 'date'].includes(this.getAttr('type'))) {
+            throw new Error(`${this.getFullName()}: wrong column type: ${this.getAttr('type')}`);
+        }
+    }
+    init() {
+        // console.debug('Column.init', this.getFullName());
+    }
+    getType() {
+        return this.getAttr('type');
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(Column);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/DataSource.ts":
+/*!************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/DataSource.ts ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DataSource": () => (/* binding */ DataSource)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _Page_Page__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
+/* harmony import */ var _Application_Application__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+
+
+
+
+
+
+class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor(data, parent) {
+        super(data, parent);
+        this.rows = null;
+        this.rowsByKey = null;
+        this.news = [];
+        this.changes = new Map();
+        this.frame = 1;
+        this.count = null;
+        this.lastFrame = 1;
+        this.onTableInsert = async (e) => {
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+            if (e.source === this) {
+                // console.error('onTableInsert stop self insert', this.getFullName());
+                return;
+            }
+            console.debug('DataSource.onTableInsert', this.getFullName(), e);
+            if (!e.inserts.length)
+                throw new Error(`${this.getFullName()}: no inserts`);
+            for (const key of e.inserts) {
+                if (this.getRow(key)) {
+                    console.debug('rows:', this.rows);
+                    console.debug('rowsByKey:', this.rowsByKey);
+                    throw new Error(`${this.getFullName()}: row already in this data source: ${key}`);
+                }
+                const newValues = e.source.getRow(key);
+                const newRow = {};
+                DataSource.copyNewValues(newRow, newValues);
+                // console.debug('newRow:', newRow);
+                this.addRow(newRow);
+            }
+            // events
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceInsert(e);
+            }
+            this.emit('insert', e);
+        };
+        this.onTableUpdate = async (e) => {
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+            if (e.source === this) {
+                // console.error('onTableUpdate stop self update', this.getFullName());
+                return;
+            }
+            console.debug('DataSource.onTableUpdate', this.getFullName(), e);
+            if (!Object.keys(e.updates).length)
+                throw new Error(`${this.getFullName()}: no updates`);
+            for (const key in e.updates) {
+                if (this.getRow(key)) {
+                    const newKey = e.updates[key];
+                    const sourceRow = e.source.getRow(newKey);
+                    this.updateRow(key, sourceRow);
+                }
+            }
+            // events
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceUpdate(e);
+            }
+            this.emit('update', e);
+        };
+        this.onTableDelete = async (e) => {
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+            if (e.source === this) {
+                // console.error('onTableDelete stop self update', this.getFullName());
+                return;
+            }
+            console.debug('DataSource.onTableDelete', this.getFullName(), e);
+            if (!e.deletes.length)
+                throw new Error(`${this.getFullName()}: no deletes`);
+            for (const key of e.deletes) {
+                if (this.getRow(key)) {
+                    this.removeRow(key);
+                }
+            }
+            // events
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceDelete(e);
+            }
+            this.emit('delete', e);
+        };
+        this.onTableRefresh = async (e) => {
+            throw new Error('DataSource.onTableRefresh: not implemented');
+        };
+        if (data.count !== undefined) {
+            this.count = data.count;
+        }
+    }
+    init() {
+        // console.debug('DataSource.init', this.getFullName(), this.getClassName());
+        this.setRows(this.getData().rows);
+        if (this.getAttr('table')) {
+            const table = this.getTable();
+            table.on('insert', this.onTableInsert);
+            table.on('update', this.onTableUpdate);
+            table.on('delete', this.onTableDelete);
+            table.on('refresh', this.onTableRefresh);
+        }
+    }
+    deinit() {
+        if (this.getAttr('table')) {
+            const table = this.getTable();
+            table.off('insert', this.onTableInsert);
+            table.off('update', this.onTableUpdate);
+            table.off('delete', this.onTableDelete);
+            table.off('refresh', this.onTableRefresh);
+        }
+        super.deinit();
+    }
+    setRows(rows) {
+        this.rows = rows;
+        this.fillRowsByKey();
+    }
+    addRow(row) {
+        this.rows.push(row);
+        const key = this.getRowKey(row);
+        this.rowsByKey[key] = row;
+    }
+    addRows(rows) {
+        for (let i = 0; i < rows.length; i++) {
+            this.rows.push(rows[i]);
+        }
+        this.fillRowsByKey();
+    }
+    getRowsLength() {
+        return this.rows.length;
+    }
+    fillRowsByKey() {
+        // console.debug('DataSource.fillRowsByKey', this.getFullName())
+        this.rowsByKey = {};
+        for (let i = 0; i < this.rows.length; i++) {
+            const row = this.rows[i];
+            const key = this.getRowKey(row);
+            this.rowsByKey[key] = row;
+        }
+        // console.debug('this.rowsByKey:', this.getFullName(), this.rowsByKey);
+    }
+    // deinit() {
+    //     console.debug('DataSource.deinit', this.getFullName());
+    //     super.deinit();
+    // }
+    /*getType(column) {
+        // console.debug('DataSource.getType', this.getClassName(), column);
+        throw new Error('DataSource column type not implemented');
+    }*/
+    discardRowColumn(row, column) {
+        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+            delete this.changes.get(row)[column];
+        }
+    }
+    changeRowColumn(row, column, newValue) {
+        if (!this.changes.has(row))
+            this.changes.set(row, {});
+        this.changes.get(row)[column] = newValue;
+    }
+    setValue(row, column, value) {
+        // console.debug('DataSource.setValue', this.getFullName(), column, value, typeof value);
+        if (value === undefined)
+            throw new Error(`${this.getFullName()}: undefined is wrong value for data source`);
+        if (typeof value === 'object' && value !== null) {
+            throw new Error(`setValue: ${this.getFullName()}.${column}: object must be in JSON format`);
+        }
+        if (row[column] !== value) {
+            this.changeRowColumn(row, column, value);
+            if (row[column] === undefined && value === null) {
+                // workaround for new rows
+                this.discardRowColumn(row, column);
+            }
+        }
+        else {
+            this.discardRowColumn(row, column);
+        }
+        if (this.changes.has(row) && !Object.keys(this.changes.get(row)).length)
+            this.changes.delete(row);
+        // console.debug('changes:', this.changes);
+    }
+    isChanged() {
+        // console.debug('DataSource.isChanged', this.getFullName(), this.changes.size);
+        return !!this.changes.size;
+    }
+    hasNew() {
+        return !!this.news.length;
+    }
+    isRowColumnChanged(row, column) {
+        // console.debug('DataSource.isRowColumnChanged', this.getFullName());
+        return row[column] !== this.getValue(row, column);
+    }
+    getValue(row, column) {
+        // console.debug('DataSource.getValue', column);
+        let value;
+        if (this.changes.has(row) && this.changes.get(row)[column] !== undefined) {
+            value = this.changes.get(row)[column];
+        }
+        else {
+            value = row[column];
+        }
+        if (value !== undefined && typeof value !== 'string') {
+            throw new Error(`getValue: ${this.getFullName()}.${column}: object must be in JSON format, value: ${value}`);
+        }
+        // console.debug('DataSource.getValue:', value);
+        return value;
+    }
+    getKeyValues(row) {
+        return this.getData().keyColumns.reduce((keyValues, column) => {
+            keyValues[column] = JSON.parse(row[column]);
+            return keyValues;
+        }, {});
+    }
+    getRowKey(row) {
+        // console.debug('DataSource.getRowKey', row);
+        const arr = [];
+        for (const column of this.getData().keyColumns) {
+            if (row[column] === undefined)
+                return null;
+            if (row[column] === null)
+                throw new Error('wrong value null for data source value');
+            try {
+                const value = JSON.parse(row[column]);
+                arr.push(value);
+            }
+            catch (err) {
+                console.debug('getRowKey: cannot parse: ', row[column]);
+                throw err;
+            }
+        }
+        return (0,_types__WEBPACK_IMPORTED_MODULE_5__.keyTupleToKey)(arr);
+    }
+    removeRow(key) {
+        const row = this.getRow(key);
+        if (!row)
+            throw new Error(`${this.getFullName()}: no row with key ${key} to remove`);
+        const i = this.rows.indexOf(row);
+        if (i === -1)
+            throw new Error(`${this.getFullName()}: no row with i ${i} to remove`);
+        this.rows.splice(i, 1);
+        delete this.rowsByKey[key];
+    }
+    newRow(row) {
+        console.debug('DataSource.newRow', this.getFullName(), row);
+        if (this.rows.length > 0) {
+            throw new Error('rows can be added to empty data sources only in new mode');
+        }
+        this.news.push(row);
+    }
+    getSingleRow(withChanges = false) {
+        if (this.news[0])
+            return this.news[0];
+        const row = this.rows[0];
+        if (!row)
+            throw new Error('no single row');
+        if (withChanges) {
+            return this.getRowWithChanges(row);
+        }
+        return row;
+    }
+    getForm() {
+        return this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form ? this.getParent() : null;
+    }
+    getPage() {
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
+            return this.getParent();
+        return null;
+    }
+    getApp() {
+        if (this.getParent() instanceof _Application_Application__WEBPACK_IMPORTED_MODULE_3__.Application)
+            return this.getParent();
+        if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
+            return this.getParent().getParent();
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
+            return this.getParent().getParent().getParent();
+        throw new Error('unknown parent');
+    }
+    /*getNamespace() {
+        if (this.parent instanceof Form) {
+            return this.parent.getPage().getName() + '.' + this.parent.getName() + '.' + this.getName();
+        }
+        if (this.parent instanceof Page) {
+            return this.parent.getName() + '.' + this.getName();
+        }
+        return this.getName();
+    }*/
+    getRow(key) {
+        return this.rowsByKey[key] || null;
+    }
+    /*getRowByKey(key) {
+        return this.rowsByKey[key] || null;
+    }*/
+    getRows() {
+        if (!this.rows)
+            throw new Error('no rows');
+        return this.rows;
+    }
+    getRowByIndex(i) {
+        return this.rows[i];
+    }
+    discard() {
+        console.debug('DataSource.discard', this.getFullName());
+        if (!this.isChanged())
+            throw new Error(`no changes in data source ${this.getFullName()}`);
+        this.changes.clear();
+    }
+    static keyToParams(key, paramName = 'key') {
+        if (typeof key !== 'string')
+            throw new Error('key not string');
+        const params = {};
+        const arr = JSON.parse(key);
+        if (arr.length === 1) {
+            params[paramName] = arr[0];
+        }
+        else if (arr.length > 1) {
+            for (let i = 0; i < arr.length; i++) {
+                params[`${paramName}${i + 1}`] = arr[i];
+            }
+        }
+        else {
+            throw new Error(`invalid key: ${key}`);
+        }
+        return params;
+    }
+    getChangesByKey() {
+        const changes = {};
+        for (const row of this.changes.keys()) {
+            changes[this.getRowKey(row)] != this.changes.get(row);
+        }
+        return changes;
+    }
+    getRowWithChanges(row) {
+        if (this.changes.has(row)) {
+            return Object.assign(Object.assign({}, row), this.changes.get(row));
+        }
+        return row;
+    }
+    hasNewRows() {
+        return this.news.length > 0;
+    }
+    static copyNewValues(row, newValues) {
+        for (const name in newValues) {
+            row[name] = newValues[name];
+        }
+    }
+    updateRow(key, newValues) {
+        console.debug('DataSource.updateRow', this.getFullName(), key, newValues);
+        if (!key)
+            throw new Error('no key');
+        const row = this.getRow(key);
+        if (!row)
+            throw new Error(`${this.getFullName()}: no row with key ${key}`);
+        const newKey = this.getRowKey(newValues);
+        DataSource.copyNewValues(row, newValues); // copy new values to original row object
+        if (key !== newKey) {
+            delete this.rowsByKey[key];
+            this.rowsByKey[newKey] = row;
+        }
+        // console.debug(`key: ${key} to ${newKey}`);
+        // console.debug('this.rowsByKey:', this.rowsByKey);
+        // console.debug('this.getData().rows:', this.getData().rows);
+    }
+    getTable() {
+        if (!this.getAttr('table'))
+            throw new Error(`${this.getFullName()}: table attr empty`);
+        return this.getDatabase().getTable(this.getAttr('table'));
+    }
+    getDatabase() {
+        // console.debug('DataSource.getDatabase', this.getFullName(), this.getAttr('database'));
+        if (!this.getAttr('database'))
+            throw new Error(`${this.getFullName()}: database attr empty`);
+        return this.getApp().getDatabase(this.getAttr('database'));
+    }
+    getType(columnName) {
+        // console.debug('DataSource.getType', columnName);
+        const type = this.getTable().getColumn(columnName).getType();
+        // console.debug('type:', type);
+        return type;
+    }
+    async insert(row) {
+        console.debug('DataSource.insert', this.news);
+        if (!this.news.length)
+            throw new Error('no new rows to insert');
+        const inserts = [];
+        for (const row of this.news) {
+            const newValues = this.getRowWithChanges(row);
+            // console.debug('newValues:', newValues);
+            DataSource.copyNewValues(row, newValues);
+            // console.debug('row:', row);
+            const key = this.getRowKey(row);
+            if (!key)
+                throw new Error('invalid insert row, no key');
+            // console.debug('key:', key);
+            inserts.push(key);
+        }
+        this.changes.clear();
+        for (const row of this.news) {
+            this.addRow(row);
+        }
+        this.news = [];
+        console.debug('rows:', this.getRows());
+        console.debug('inserts:', inserts);
+        // events
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceInsert({ source: this, inserts });
+        }
+        this.emit('insert', { source: this, inserts });
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (database && table) {
+            const result = {
+                [database]: {
+                    [table]: { insert: inserts },
+                },
+            };
+            await this.getApp().emitResult(result, this);
+            return result;
+        }
+        return null;
+    }
+    async delete(key) {
+        console.debug('DataSource.delete', key);
+        if (!key)
+            throw new Error('no key');
+        this.removeRow(key);
+        // events
+        const deletes = [key];
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceDelete({ source: this, deletes });
+        }
+        this.emit('delete', { source: this, deletes });
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (database && table) {
+            const result = {
+                [database]: {
+                    [table]: { delete: deletes },
+                },
+            };
+            await this.getApp().emitResult(result, this);
+            return result;
+        }
+        return null;
+    }
+    async update() {
+        console.debug('DataSource.update', this.getFullName());
+        if (this.news.length) {
+            await this.insert();
+            return null;
+        }
+        if (!this.changes.size)
+            throw new Error(`no changes: ${this.getFullName()}`);
+        const changes = this.getChangesByKey();
+        // console.debug('changes:', changes);
+        // apply changes to rows
+        const updates = {};
+        for (const key in changes) {
+            // console.debug('key:', key);
+            const row = this.getRow(key);
+            // console.debug('row:', row);
+            const newValues = this.getRowWithChanges(row);
+            // console.debug('newValues:', newValues);
+            const newKey = this.getRowKey(newValues);
+            // console.debug('newKey:', newKey);
+            this.updateRow(key, newValues);
+            updates[key] = newKey;
+        }
+        this.changes.clear();
+        // events
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceUpdate({ source: this, updates });
+        }
+        this.emit('update', { source: this, updates });
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (database && table) {
+            const reuslt = {
+                [database]: {
+                    [table]: {
+                        update: updates,
+                    },
+                },
+            };
+            await this.getApp().emitResult(reuslt, this);
+            return reuslt;
+        }
+        return null;
+    }
+    isSurrogate() {
+        return this.isAttr('database');
+    }
+    moveRow(row, offset) {
+        console.debug('DataSource.moveRow');
+        _common__WEBPACK_IMPORTED_MODULE_4__.Helper.moveArrItem(this.rows, row, offset);
+        // refresh event
+        const event = { source: this };
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceRefresh(event);
+        }
+        this.emit('refresh', event);
+    }
+    getLimit() {
+        if (this.getAttr('limit')) {
+            return parseInt(this.getAttr('limit'));
+        }
+        return null;
+    }
+    getCount() {
+        if (this.count === null)
+            throw new Error(`${this.getFullName()}: no count info`);
+        return this.count;
+    }
+    getFrame() {
+        return this.frame;
+    }
+    getLastFrame() {
+        return this.lastFrame;
+    }
+    setFrame(frame) {
+        this.frame = frame;
+    }
+    getFramesCount() {
+        if (this.count === null)
+            throw new Error(`${this.getFullName()}: no count info`);
+        if (this.count === 0)
+            return 1;
+        if (this.getLimit())
+            return Math.ceil(this.count / this.getLimit());
+        return 1;
+    }
+    hasMore() {
+        return this.lastFrame < this.getFramesCount();
+    }
+    isPersistent() {
+        return false;
+    }
+    async refresh() {
+        throw new Error('DataSource.refresh not implemented');
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_4__.Helper.registerGlobalClass(DataSource);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts":
+/*!******************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts ***!
+  \******************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "NoSqlDataSource": () => (/* binding */ NoSqlDataSource)
+/* harmony export */ });
+/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class NoSqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(NoSqlDataSource);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts":
+/*!*******************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PersistentDataSource": () => (/* binding */ PersistentDataSource)
+/* harmony export */ });
+/* harmony import */ var _DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+
+
+class PersistentDataSource extends _DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource {
+    constructor() {
+        /* constructor(data, parent) {
+            super(data, parent);
+        } */
+        super(...arguments);
+        this.onTableUpdate = async (e) => {
+            console.debug('PersistentDataSource.onTableUpdate', this.getFullName(), e);
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableUpdate`);
+            if (e.source === this) {
+                // console.error('onTableUpdate stop self update', this.getFullName());
+                return;
+            }
+            // console.debug('updates:', e.updates);
+            if (!Object.keys(e.updates).length)
+                throw new Error(`${this.getFullName()}: no updates`);
+            // update rows
+            await this.refill();
+            // events
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceUpdate(e);
+            }
+            this.emit('update', e);
+        };
+        this.onTableInsert = async (e) => {
+            console.debug('PersistentDataSource.onTableInsert', this.getFullName(), e);
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableInsert`);
+            if (e.source === this) {
+                // console.error('onTableInsert stop self insert', this.getFullName());
+                return;
+            }
+            // update rows
+            await this.refill();
+            // events
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceInsert(e);
+            }
+            this.emit('insert', e);
+        };
+        this.onTableDelete = async (e) => {
+            console.debug('PersistentDataSource.onTableDelete', this.getFullName(), e);
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+            if (e.source === this) {
+                // console.error('onTableDelete stop self delete', this.getFullName());
+                return;
+            }
+            await this.refill();
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceDelete(e);
+            }
+            this.emit('delete', e);
+        };
+        this.onTableRefresh = async (e) => {
+            console.debug('PersistentDataSource.onTableRefresh', this.getFullName(), e);
+            if (this.deinited)
+                throw new Error(`${this.getFullName()}: this data source deinited for onTableDelete`);
+            if (e.source)
+                throw new Error('refresh is foreign result so source must be null');
+            await this.refill();
+            if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+                this.getForm().onDataSourceRefresh(e);
+            }
+            this.emit('refresh', e);
+        };
+    }
+    /*init() {
+        super.init();
+    }*/
+    /*deinit() {
+        super.deinit();
+    }*/
+    async insert(row) {
+        console.debug('PersistentDataSource.insert', row);
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (table === '')
+            throw new Error('no data source table to insert');
+        const result = await this.getApp().request('POST', {
+            action: 'insert',
+            uuid: this.getApp().getAttr('uuid'),
+            page: this.getForm().getPage().getName(),
+            form: this.getForm().getName(),
+            row: this.getRowWithChanges(row),
+        });
+        // key & values
+        const [key] = Object.keys(result[database][table].insertEx);
+        if (!key)
+            throw new Error('no inserted row key');
+        const values = result[database][table].insertEx[key];
+        for (const column in values) {
+            row[column] = values[column];
+        }
+        // console.debug('key:', key);
+        // console.debug('row:', row);
+        // clear news & changes
+        this.news.splice(this.news.indexOf(row), 1);
+        // console.debug('this.news:', this.news);
+        this.changes.clear();
+        // add new row to rows
+        this.addRow(row);
+        // events
+        const event = { source: this, inserts: result[database][table].insert };
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceInsert(event);
+        }
+        this.emit('insert', event);
+        await this.getApp().emitResult(result, this);
+        return result;
+    }
+    async update() {
+        console.debug('PersistentDataSource.update', this.getFullName());
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (table === '')
+            throw new Error('no data source table to update');
+        if (this.news[0]) {
+            return await this.insert(this.news[0]);
+        }
+        if (!this.changes.size)
+            throw new Error(`no changes: ${this.getFullName()}`);
+        // specific to PersistentDataSource
+        const result = await this.getApp().request('POST', {
+            action: 'update',
+            uuid: this.getApp().getAttr('uuid'),
+            page: this.getForm().getPage().getName(),
+            form: this.getForm().getName(),
+            changes: this.getChangesByKey(),
+        });
+        const [key] = Object.keys(result[database][table].updateEx);
+        if (!key)
+            throw new Error('no updated row');
+        const newValues = result[database][table].updateEx[key];
+        // const newKey = this.getRowKey(newValues);
+        this.changes.clear();
+        this.updateRow(key, newValues);
+        // events
+        const event = { source: this, updates: result[database][table].update };
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceUpdate(event);
+        }
+        this.emit('update', event);
+        await this.getApp().emitResult(result, this);
+        return result;
+    }
+    async delete(key) {
+        console.debug('PersistentDataSource.delete:', this.getFullName(), key);
+        if (!key)
+            throw new Error('no key');
+        const database = this.getAttr('database');
+        const table = this.getAttr('table');
+        if (!table) {
+            throw new Error(`no table in data source: ${this.getFullName()}`);
+        }
+        const result = await this.getApp().request('POST', {
+            action: '_delete',
+            uuid: this.getApp().getAttr('uuid'),
+            page: this.getForm().getPage().getName(),
+            form: this.getForm().getName(),
+            params: { key },
+        });
+        await this.refill();
+        // events
+        const event = { source: this, deletes: result[database][table].delete };
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceDelete(event);
+        }
+        this.emit('delete', event);
+        await this.getApp().emitResult(result, this);
+        return result;
+    }
+    getPageParams() {
+        const page = this.getPage();
+        return page ? page.getParams() : {};
+    }
+    async refresh() {
+        console.debug('PersistentDataSource.refresh', this.getFullName());
+        await this.refill();
+        if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form) {
+            this.getForm().onDataSourceRefresh({ source: this });
+        }
+    }
+    async refill() {
+        console.debug('PersistentDataSource.refill', this.getFullName());
+        if (this.isChanged())
+            throw new Error(`cannot refill changed data source: ${this.getFullName()}`);
+        const data = await this.select(this.getLimit() ? { frame: this.frame } : {});
+        this.count = data.count;
+        this.setRows(data.rows);
+        this.lastFrame = 1;
+    }
+    async fill(frame) {
+        if (this.isChanged())
+            throw new Error(`cannot fill changed data source: ${this.getFullName()}`);
+        const data = await this.select(this.getLimit() ? { frame } : {});
+        this.count = data.count;
+        this.addRows(data.rows);
+    }
+    async more() {
+        if (!this.hasMore())
+            throw new Error(`${this.getFullName()}: no more rows`);
+        this.lastFrame++;
+        await this.fill(this.lastFrame);
+    }
+    async select(params = {}) {
+        console.debug('PersistentDataSource.select', this.getFullName(), params);
+        const page = this.getPage();
+        const form = this.getForm();
+        const data = await this.getApp().request('POST', {
+            action: 'select',
+            page: page ? page.getName() : null,
+            form: form ? form.getName() : null,
+            ds: this.getName(),
+            params: Object.assign(Object.assign({}, this.getPageParams()), params),
+        });
+        if (!(data.rows instanceof Array))
+            throw new Error('rows must be array');
+        // if (data.time) console.debug(`select time of ${this.getFullName()}:`, data.time);
+        return data;
+    }
+    isPersistent() {
+        return true;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts":
+/*!**************************************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts ***!
+  \**************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "SqlDataSource": () => (/* binding */ SqlDataSource)
+/* harmony export */ });
+/* harmony import */ var _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class SqlDataSource extends _PersistentDataSource__WEBPACK_IMPORTED_MODULE_0__.PersistentDataSource {
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(SqlDataSource);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Database/Database.ts":
+/*!********************************************************!*\
+  !*** ./src/frontend/viewer/Model/Database/Database.ts ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Database": () => (/* binding */ Database)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _Table_Table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Table/Table */ "./src/frontend/viewer/Model/Table/Table.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+
+class Database extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor() {
+        super(...arguments);
+        this.tables = [];
+    }
+    init() {
+        // console.debug('Database.init', this.getName());
+        for (const data of this.getData().tables) {
+            const table = new _Table_Table__WEBPACK_IMPORTED_MODULE_1__.Table(data, this);
+            table.init();
+            this.addTable(table);
+        }
+    }
+    addTable(table) {
+        this.tables.push(table);
+    }
+    findTable(name) {
+        return this.tables.find((table) => table.getName() === name);
+    }
+    getTable(name) {
+        const table = this.findTable(name);
+        if (!table)
+            throw new Error(`${this.getFullName()}: no table with name: ${name}`);
+        return table;
+    }
+    emitResult(result, source = null) {
+        console.debug('Database.emitResult');
+        const promises = [];
+        for (const table in result) {
+            promises.push(...this.getTable(table).emitResult(result[table], source));
+        }
+        return promises;
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(Database);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/CheckBoxField/CheckBoxField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/CheckBoxField/CheckBoxField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxField": () => (/* binding */ CheckBoxField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class CheckBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(CheckBoxField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts":
+/*!********************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxListField": () => (/* binding */ CheckBoxListField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class CheckBoxListField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getDisplayValue(row) {
+        let value = null;
+        if (row[this.getData().displayColumn]) {
+            try {
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
+            }
+            catch (err) {
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
+                throw err;
+            }
+        }
+        else {
+            value = this.getData().displayColumn;
+            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
+            });
+        }
+        return value;
+    }
+    getValueValue(row) {
+        if (!row[this.getData().valueColumn]) {
+            throw new Error('no valueColumn in CheckBoxList data source');
+        }
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().valueColumn]);
+    }
+    getDataSource() {
+        const name = this.getData().dataSourceName;
+        if (!name)
+            throw new Error(`${this.getFullName()}: no dataSourceName`);
+        if (this.getForm().findDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        }
+        if (this.getPage().findDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        }
+        if (this.getApp().findDataSource(name)) {
+            return this.getApp().getDataSource(name);
+        }
+        throw new Error(`${this.getFullName()}: no data source: ${name}`);
+    }
+    findRowByRawValue(rawValue) {
+        return this.getDataSource()
+            .getRows()
+            .find((row) => row[this.getData().valueColumn] === rawValue);
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(CheckBoxListField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ComboBoxField": () => (/* binding */ ComboBoxField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class ComboBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getDisplayValue(row) {
+        let value = null;
+        if (row[this.getData().displayColumn]) {
+            try {
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().displayColumn]);
+            }
+            catch (err) {
+                console.debug('cannot parse:', row[this.getData().displayColumn]);
+                throw err;
+            }
+        }
+        else {
+            value = this.getData().displayColumn;
+            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
+            });
+        }
+        return value;
+    }
+    getValueValue(row) {
+        if (!row[this.getData().valueColumn]) {
+            throw new Error('no valueColumn in ComboBox data source');
+        }
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[this.getData().valueColumn]);
+    }
+    getComboBoxDataSource() {
+        const name = this.getData().dataSourceName;
+        if (!name)
+            throw new Error(`${this.getFullName()}: no dataSourceName`);
+        if (this.getForm().findDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        }
+        if (this.getPage().findDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        }
+        if (this.getApp().findDataSource(name)) {
+            return this.getApp().getDataSource(name);
+        }
+        throw new Error(`${this.getFullName()}: no data source: ${name}`);
+    }
+    findRowByRawValue(rawValue) {
+        return this.getComboBoxDataSource()
+            .getRows()
+            .find((row) => row[this.getData().valueColumn] === rawValue);
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(ComboBoxField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/DateField/DateField.ts":
+/*!****************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/DateField/DateField.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateField": () => (/* binding */ DateField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class DateField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getFormat() {
+        return this.getAttr('format');
+    }
+    rawToValue(raw) {
+        // console.debug('DateField.rawToValue', this.getFullName(), raw);
+        const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(raw);
+        if (value && this.getAttr('timezone') === 'false') {
+            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
+        }
+        // console.debug('DateField.rawToValue:', raw, value);
+        return value;
+    }
+    valueToRaw(value) {
+        let rawValue;
+        if (value && this.getAttr('timezone') === 'false') {
+            const v = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.removeTimezoneOffset(v);
+            rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
+        }
+        else {
+            rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
+        }
+        // console.debug('DateField.valueToRaw', rawValue);
+        return rawValue;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DateField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/DateTimeField/DateTimeField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/DateTimeField/DateTimeField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "DateTimeField": () => (/* binding */ DateTimeField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class DateTimeField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getFormat() {
+        return this.getAttr('format');
+    }
+    rawToValue(rawValue) {
+        const value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue);
+        if (value && this.getAttr('timezone') === 'false') {
+            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.addTimezoneOffset(value);
+        }
+        // console.debug('DateTimeField.rawToValue:', value);
+        return value;
+    }
+    valueToRaw(value) {
+        let rawValue;
+        if (value && this.getAttr('timezone') === 'false') {
+            const v = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.cloneDate(value);
+            _common__WEBPACK_IMPORTED_MODULE_1__.Helper.removeTimezoneOffset(v);
+            // console.debug('date without timezone:', v);
+            rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(v);
+        }
+        else {
+            rawValue = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
+        }
+        // console.debug('DateTimeField.valueToRaw', rawValue);
+        return rawValue;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(DateTimeField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/Field.ts":
+/*!**************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/Field.ts ***!
+  \**************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Field": () => (/* binding */ Field)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+
+
+
+class Field extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    // constructor(data, parent) {
+    //     super(data, parent);
+    // }
+    init() { }
+    replaceThis(value) {
+        return value.replace(/\{([@\w\.]+)\}/g, (text, name) => {
+            if (name.indexOf('.') === -1)
+                return text;
+            let arr = name.split('.');
+            if (arr[0] === 'this')
+                arr[0] = this.getPage().getName();
+            return `{${arr.join('.')}}`;
+        });
+    }
+    fillDefaultValue(row) {
+        // console.debug('Field.fillDefaultValue', this.getFullName());
+        const column = this.getAttr('column');
+        if (!column)
+            return;
+        const defaultValue = this.replaceThis(this.getAttr('defaultValue'));
+        const js = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.templateToJsString(defaultValue, this.getPage().getParams());
+        if (typeof js !== 'string')
+            throw new Error(`${this.getFullName()}: defaultValue must be templated to js string`);
+        // console.debug('js', this.getFullName(), js);
+        // module.Helper
+        try {
+            const value = eval(js);
+            if (value !== undefined) {
+                row[column] = this.valueToRaw(value);
+            }
+        }
+        catch (err) {
+            throw new Error(`[${this.getFullName()}] fillDefaultValue: ${err.toString()}`);
+        }
+    }
+    valueToPageParams(row) {
+        // console.debug('Field.valueToPageParams', this.getFullName());
+        if (this.isParam()) {
+            // we need to dump value to param without meta info such as timezone prop
+            const value = this.getValue(row);
+            const rawValue = this.valueToRaw(value);
+            // console.debug('value:', value);
+            // console.debug('rawValue:', rawValue);
+            const paramValue = rawValue !== undefined ? _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue) : undefined;
+            this.getPage().setParam(this.getFullName(), paramValue);
+        }
+    }
+    isChanged(row) {
+        // console.debug('Field.isChanged', this.getFullName());
+        if (!this.getAttr('column'))
+            throw new Error(`${this.getFullName()}: field has no column`);
+        return this.getDefaultDataSource().isRowColumnChanged(row, this.getAttr('column'));
+    }
+    hasColumn() {
+        return !!this.getAttr('column');
+    }
+    getValue(row) {
+        // console.debug('Field.getValue', this.getFullName(), row);
+        if (!row && this.getParent() instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_2__.RowForm) {
+            row = this.getForm().getRow();
+        }
+        if (!row) {
+            throw new Error(`${this.getFullName()}: need row`);
+        }
+        let rawValue;
+        if (this.getAttr('column')) {
+            rawValue = this.getRawValue(row);
+        }
+        else if (this.getAttr('value')) {
+            const js = this.getAttr('value');
+            try {
+                rawValue = eval(js);
+            }
+            catch (err) {
+                console.error(err);
+                throw new Error(`${this.getFullName()}: value eval error: ${err.message}`);
+            }
+        }
+        else {
+            throw new Error(`${this.getFullName()}: no column and no value in field`);
+        }
+        // use rawValue
+        if (rawValue === undefined)
+            return undefined;
+        if (rawValue === null)
+            throw new Error(`[${this.getFullName()}]: null is wrong raw value`);
+        try {
+            return this.rawToValue(rawValue);
+        }
+        catch (err) {
+            console.debug('raw value decode error:', this.getFullName(), rawValue);
+            throw err;
+        }
+    }
+    setValue(row, value) {
+        // console.debug('Field.setValue', this.getFullName(), value);
+        if (!this.getAttr('column'))
+            throw new Error(`field has no column: ${this.getFullName()}`);
+        const rawValue = this.valueToRaw(value);
+        this.getForm().getDefaultDataSource().setValue(row, this.getAttr('column'), rawValue);
+        this.valueToPageParams(row);
+    }
+    rawToValue(rawValue) {
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(rawValue);
+    }
+    valueToRaw(value) {
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.encodeValue(value);
+    }
+    getRawValue(row) {
+        if (!this.hasColumn())
+            throw new Error(`${this.getFullName()}: no column`);
+        return this.getForm().getDefaultDataSource().getValue(row, this.getAttr('column'));
+    }
+    getDefaultDataSource() {
+        return this.getForm().getDefaultDataSource();
+    }
+    getType() {
+        if (this.getAttr('type')) {
+            return this.getAttr('type');
+        }
+        if (this.getAttr('column')) {
+            const dataSource = this.getDefaultDataSource();
+            if (dataSource.isSurrogate()) {
+                return dataSource.getType(this.getAttr('column'));
+            }
+            throw new Error('field type empty');
+        }
+        throw new Error('field type and column empty');
+    }
+    getForm() {
+        return this.getParent();
+    }
+    getPage() {
+        return this.getForm().getPage();
+    }
+    getApp() {
+        return this.getForm().getApp();
+    }
+    isReadOnly() {
+        return this.getData().readOnly === 'true';
+    }
+    isNotNull() {
+        return this.getData().notNull === 'true';
+    }
+    isNullable() {
+        return this.getData().notNull === 'false';
+    }
+    getWidth() {
+        const width = parseInt(this.getData().width);
+        if (isNaN(width))
+            return null;
+        if (width === 0)
+            return 100;
+        return width;
+    }
+    getFullName() {
+        return `${this.getPage().getName()}.${this.getForm().getName()}.${this.getName()}`;
+    }
+    isParam() {
+        return this.getData().param === 'true';
+    }
+    validateOnChange() {
+        if (this.getData().validateOnChange !== undefined) {
+            return this.getData().validateOnChange === 'true';
+        }
+        return true;
+    }
+    validateOnBlur() {
+        if (this.getData().validateOnBlur !== undefined) {
+            return this.getData().validateOnBlur === 'true';
+        }
+        return false;
+    }
+    getCaption() {
+        const caption = this.getAttr('caption');
+        if (caption === '') {
+            const columnName = this.getAttr('column');
+            if (columnName && this.getForm().hasDefaultPersistentDataSource()) {
+                const ds = this.getForm().getDataSource('default');
+                if (ds.getAttr('table')) {
+                    const column = ds.getTable().getColumn(columnName);
+                    return column.getCaption();
+                }
+            }
+        }
+        return caption;
+    }
+}
+// Helper.registerGlobalClass(Field);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/FileField/FileField.ts":
+/*!****************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/FileField/FileField.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "FileField": () => (/* binding */ FileField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class FileField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(FileField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/LinkField/LinkField.ts":
+/*!****************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/LinkField/LinkField.ts ***!
+  \****************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "LinkField": () => (/* binding */ LinkField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class LinkField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(LinkField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PasswordField": () => (/* binding */ PasswordField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class PasswordField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(PasswordField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts":
+/*!******************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PhoneField": () => (/* binding */ PhoneField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class PhoneField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(PhoneField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/RadioField/RadioField.ts":
+/*!******************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/RadioField/RadioField.ts ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RadioField": () => (/* binding */ RadioField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class RadioField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getDisplayValue(row) {
+        const displayColumn = this.getAttr('displayColumn');
+        let value = null;
+        if (row[displayColumn]) {
+            try {
+                value = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[displayColumn]);
+            }
+            catch (err) {
+                console.debug('cannot parse:', row[displayColumn]);
+                throw err;
+            }
+        }
+        else {
+            value = displayColumn;
+            value = value.replace(/\{([\w\.]+)\}/g, (text, name) => {
+                return row.hasOwnProperty(name) ? row[name] || '' : text;
+            });
+        }
+        return value;
+    }
+    getValueValue(row) {
+        const valueColumn = this.getAttr('valueColumn');
+        if (!row[valueColumn]) {
+            throw new Error('no valueColumn in ComboBox data source');
+        }
+        return _common__WEBPACK_IMPORTED_MODULE_1__.Helper.decodeValue(row[valueColumn]);
+    }
+    getDataSource() {
+        const name = this.getAttr('dataSourceName');
+        if (!name)
+            throw new Error(`${this.getFullName()}: no dataSourceName`);
+        if (this.getForm().findDataSource(name)) {
+            return this.getForm().getDataSource(name);
+        }
+        if (this.getPage().findDataSource(name)) {
+            return this.getPage().getDataSource(name);
+        }
+        if (this.getApp().findDataSource(name)) {
+            return this.getApp().getDataSource(name);
+        }
+        throw new Error(`${this.getFullName()}: no data source: ${name}`);
+    }
+    findRowByRawValue(rawValue) {
+        const valueColumn = this.getAttr('valueColumn');
+        return this.getDataSource()
+            .getRows()
+            .find((row) => row[valueColumn] === rawValue);
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(RadioField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.ts":
+/*!************************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.ts ***!
+  \************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextAreaField": () => (/* binding */ TextAreaField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common */ "./src/frontend/common/index.ts");
+
+
+class TextAreaField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+    getRows() {
+        return this.getData().rows;
+    }
+    getCols() {
+        return this.getData().cols;
+    }
+}
+_common__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(TextAreaField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.ts":
+/*!**********************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.ts ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TextBoxField": () => (/* binding */ TextBoxField)
+/* harmony export */ });
+/* harmony import */ var _Field__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class TextBoxField extends _Field__WEBPACK_IMPORTED_MODULE_0__.Field {
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(TextBoxField);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Form/Form.ts":
+/*!************************************************!*\
+  !*** ./src/frontend/viewer/Model/Form/Form.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Form": () => (/* binding */ Form)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
+
+
+class Form extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor() {
+        super(...arguments);
+        this.dataSources = [];
+        this.fields = [];
+    }
+    /* constructor(data, parent) {
+        super(data, parent);
+    } */
+    init() {
+        // data sources
+        this.createDataSources();
+        // fields
+        for (const data of this.getData().fields) {
+            const Class = _common__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(data.class);
+            if (!Class)
+                throw new Error(`no ${data.class} class`);
+            const field = new Class(data, this);
+            field.init();
+            this.fields.push(field);
+        }
+    }
+    deinit() {
+        // console.debug('Form.deinit:', this.getFullName());
+        this.deinitDataSources();
+        for (const field of this.fields) {
+            field.deinit();
+        }
+        super.deinit();
+    }
+    fillDefaultValues(row) {
+        for (const field of this.fields) {
+            field.fillDefaultValue(row);
+        }
+    }
+    onDataSourceRefresh(e) {
+        // console.debug('Form.onDataSourceRefresh', this.getFullName());
+        this.emit('refresh', e);
+    }
+    onDataSourceInsert(e) {
+        // console.debug('Form.onDataSourceInsert', this.getFullName());
+        this.getPage().onFormInsert(e);
+        this.emit('insert', e);
+    }
+    onDataSourceUpdate(e) {
+        // console.debug('Form.onDataSourceUpdate', this.getFullName());
+        this.emit('update', e);
+    }
+    onDataSourceDelete(e) {
+        // console.debug('Form.onDataSourceDelete', this.getFullName());
+        this.emit('delete', e);
+    }
+    async update() {
+        console.debug('Form.update', this.getFullName(), this.isChanged());
+        if (this.getPage().deinited)
+            throw new Error('page already deinited');
+        if (!this.isChanged() && !this.getDefaultDataSource().hasNewRows())
+            throw new Error(`form model not changed or does not have new rows: ${this.getFullName()}`);
+        await this.getDefaultDataSource().update();
+    }
+    isChanged() {
+        // console.debug('Form.isChanged', this.getFullName());
+        return this.getDefaultDataSource().isChanged();
+    }
+    hasNew() {
+        // console.debug('Form.hasNew', this.getFullName());
+        return this.getDefaultDataSource().hasNew();
+    }
+    async rpc(name, params) {
+        console.debug('Form.rpc', this.getFullName(), name, params);
+        if (!name)
+            throw new Error('no name');
+        const result = await this.getApp().request('POST', {
+            action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
+            page: this.getPage().getName(),
+            form: this.getName(),
+            name: name,
+            params: params,
+        });
+        if (result.errorMessage)
+            throw new Error(result.errorMessage);
+        return result;
+    }
+    getKey() {
+        return null;
+    }
+    getDefaultDataSource() {
+        const dataSource = this.getDataSource('default');
+        if (!dataSource)
+            throw new Error(`${this.getFullName()}: no default data source`);
+        return dataSource;
+    }
+    getPage() {
+        return this.getParent();
+    }
+    getApp() {
+        return this.getPage().getApp();
+    }
+    async refresh() {
+        await this.getDefaultDataSource().refresh();
+    }
+    findField(name) {
+        return this.fields.find((field) => field.getName() === name);
+    }
+    getField(name) {
+        const field = this.findField(name);
+        if (!field)
+            throw new Error(`${this.getFullName()}: no field ${name}`);
+        return field;
+    }
+    hasDefaultPersistentDataSource() {
+        return this.getDefaultDataSource().isPersistent();
+    }
+    decodeRow(rawRow) {
+        const row = {};
+        for (const field of this.fields) {
+            const column = field.getAttr('column');
+            if (column) {
+                row[column] = field.getValue(rawRow);
+            }
+        }
+        return row;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts":
 /*!***********************************************************!*\
-  !*** ./src/frontend/editor/PropertyGrid/PropertyGrid.tsx ***!
+  !*** ./src/frontend/viewer/Model/Form/RowForm/RowForm.ts ***!
   \***********************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "PropertyGrid": () => (/* binding */ PropertyGrid)
+/* harmony export */   "RowForm": () => (/* binding */ RowForm)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _PropertyGrid_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PropertyGrid.less */ "./src/frontend/editor/PropertyGrid/PropertyGrid.less");
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
-
-class PropertyGrid extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onChange = (name, value) => {
-            // console.debug('PropertyGrid.onChange', name, value);
-            if (this.props.onChange) {
-                this.props.onChange(name, value);
-            }
-        };
-        this.state = {};
+class RowForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
+    init() {
+        super.init();
+        if (this.isNewMode()) {
+            this.getDefaultDataSource().newRow(this.createRow());
+        }
+        this.fillParams(this.getRow()); // dump row values to page params
     }
-    getObj() {
-        if (this.state.object) {
-            return this.state.object.obj;
+    isNewMode() {
+        const newMode = this.getAttr('newMode');
+        if (newMode === 'true')
+            return true;
+        if (newMode === 'false')
+            return false;
+        return this.getPage().isNewMode();
+    }
+    fillParams(row) {
+        for (const field of this.fields) {
+            field.valueToPageParams(row);
+        }
+    }
+    onDataSourceUpdate(e) {
+        this.fillParams(this.getRow());
+        super.onDataSourceUpdate(e);
+    }
+    onDataSourceInsert(e) {
+        this.fillParams(this.getRow());
+        super.onDataSourceInsert(e);
+    }
+    getRow(withChanges = false) {
+        return this.getDefaultDataSource().getSingleRow(withChanges);
+    }
+    getKey() {
+        // console.debug('RowForm.getKey', this.getFullName());
+        const dataSource = this.getDefaultDataSource();
+        if (dataSource.isPersistent()) {
+            const row = this.getRow();
+            return dataSource.getRowKey(row);
         }
         return null;
+    }
+    createRow() {
+        const row = {};
+        this.fillDefaultValues(row);
+        return row;
+    }
+    discard(fields = []) {
+        console.debug('RowForm.discard', fields);
+        if (this.getDefaultDataSource().isChanged()) {
+            this.getDefaultDataSource().discard();
+            fields.forEach((name) => {
+                this.getField(name).valueToPageParams(this.getRow());
+            });
+        }
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(RowForm);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Form/TableForm/TableForm.ts":
+/*!***************************************************************!*\
+  !*** ./src/frontend/viewer/Model/Form/TableForm/TableForm.ts ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "TableForm": () => (/* binding */ TableForm)
+/* harmony export */ });
+/* harmony import */ var _Form__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class TableForm extends _Form__WEBPACK_IMPORTED_MODULE_0__.Form {
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.registerGlobalClass(TableForm);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Model.ts":
+/*!********************************************!*\
+  !*** ./src/frontend/viewer/Model/Model.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Model": () => (/* binding */ Model)
+/* harmony export */ });
+/* harmony import */ var _EventEmitter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../EventEmitter */ "./src/frontend/viewer/EventEmitter.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common/Helper */ "./src/frontend/common/Helper.ts");
+
+
+class Model extends _EventEmitter__WEBPACK_IMPORTED_MODULE_0__.EventEmitter {
+    constructor(data, parent) {
+        if (!data.name)
+            throw new Error(`${data.class} no name`);
+        super();
+        this.data = data;
+        this.parent = parent;
+        this.deinited = false;
+    }
+    init() { }
+    deinit() {
+        if (this.deinited)
+            throw new Error(`${this.getFullName()}: model already deinited`);
+        this.deinited = true;
+    }
+    static getAttr(data, name) {
+        return data[name];
+    }
+    static getCol(data, name) {
+        return data[name];
+    }
+    static getName(data) {
+        return Model.getAttr(data, 'name');
+    }
+    static getClassName(data) {
+        return Model.getAttr(data, 'class');
+    }
+    isAttr(name) {
+        return this.data.hasOwnProperty(name);
+    }
+    getAttr(name) {
+        return this.data[name];
+    }
+    getCol(name) {
+        return this.data[name];
+    }
+    getClassName() {
+        return this.getAttr('class');
+    }
+    getName() {
+        return this.getAttr('name');
+    }
+    getFullName() {
+        if (this.parent) {
+            return `${this.parent.getFullName()}.${this.getName()}`;
+        }
+        return this.getName();
+    }
+    getCaption() {
+        return this.getAttr('caption');
+    }
+    findDataSource(name) {
+        return this.dataSources.find((dataSource) => dataSource.getName() === name);
+    }
+    getDataSource(name) {
+        const ds = this.findDataSource(name);
+        if (!ds)
+            throw new Error(`${this.getFullName()}: no data source ${name}`);
+        return ds;
+    }
+    createDataSources() {
+        for (const data of this.data.dataSources) {
+            try {
+                const Class = _common_Helper__WEBPACK_IMPORTED_MODULE_1__.Helper.getGlobalClass(data.class);
+                if (!Class)
+                    throw new Error(`no ${data.class} class`);
+                const dataSource = new Class(data, this);
+                dataSource.init();
+                this.dataSources.push(dataSource);
+            }
+            catch (err) {
+                err.message = `${this.getFullName()}.${data.name}: ${err.message}`;
+                throw err;
+            }
+        }
+    }
+    deinitDataSources() {
+        for (const dataSource of this.dataSources) {
+            dataSource.deinit();
+        }
+    }
+    hasActions() {
+        return this.data.actions.length > 0;
+    }
+    getParent() {
+        if (!this.parent)
+            throw new Error('np parent');
+        return this.parent;
+    }
+    getData() {
+        return this.data;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/Page/Page.ts":
+/*!************************************************!*\
+  !*** ./src/frontend/viewer/Model/Page/Page.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Page": () => (/* binding */ Page)
+/* harmony export */ });
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
+/* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+
+
+
+
+class Page extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor(data, parent, options) {
+        // console.debug('Page.constructor', options);
+        // if (!options.id) throw new Error('no page id');
+        super(data, parent);
+        this.options = options;
+        this.dataSources = [];
+        this.forms = [];
+        this.params = {};
+        if (options.onCreate) {
+            options.onCreate(this);
+        }
+    }
+    init() {
+        this.createDataSources();
+        this.createForms();
+        console.debug('page options:', this.options);
+        console.debug('page params:', this.getParams());
+    }
+    deinit() {
+        // console.debug('Page.deinit', this.getFullName());
+        if (this.deinited)
+            throw new Error(`page ${this.getFullName()} is already deinited`);
+        this.deinitDataSources();
+        this.deinitForms();
+        super.deinit();
     }
     getOptions() {
-        if (this.state.object) {
-            return this.state.object.options;
+        return this.options;
+    }
+    createForms() {
+        // forms
+        for (const data of this.getData().forms) {
+            const FormClass = _common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.getGlobalClass(_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data));
+            if (!FormClass)
+                throw new Error(`no ${_Model__WEBPACK_IMPORTED_MODULE_0__.Model.getClassName(data)} class`);
+            const form = new FormClass(data, this);
+            form.init();
+            this.forms.push(form);
+        }
+    }
+    deinitForms() {
+        for (const form of this.forms) {
+            form.deinit();
+        }
+    }
+    /*getId() {
+        return this.options.id;
+    }*/
+    getParams() {
+        return Object.assign(Object.assign({}, (this.options.params || {})), this.params);
+    }
+    setParam(name, value) {
+        // console.debug('Page.setParam', name);
+        this.params[name] = value !== undefined ? value : null;
+    }
+    async update() {
+        console.debug('Page.update', this.getFullName());
+        for (const form of this.forms) {
+            if (form.isChanged() || form.hasNew()) {
+                await form.update();
+            }
+        }
+    }
+    discard() {
+        console.debug('Page.discard', this.getFullName());
+        for (const form of this.forms) {
+            if (form instanceof _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm) {
+                form.discard();
+            }
+        }
+    }
+    getKey() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm') {
+                return form.getKey();
+            }
         }
         return null;
     }
-    renderInput(name) {
-        const obj = this.getObj();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.TextBox, { name: name, value: obj[name], spellCheck: 'false', onBlur: (event) => {
-                if (obj[name] !== event.currentTarget.value) {
-                    this.onChange(name, event.currentTarget.value);
-                }
-            }, autocomplete: 'off' }));
-    }
-    renderSelect(name) {
-        const obj = this.getObj();
-        const options = this.getOptions();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_common__WEBPACK_IMPORTED_MODULE_1__.ComboBox, { name: name, value: obj[name], items: options[name].map((value) => ({
-                value: value,
-                title: value,
-            })), onChange: (value) => this.onChange(name, value) }));
-    }
-    renderRows() {
-        const obj = this.getObj();
-        const options = this.getOptions();
-        return Object.keys(obj).map((name) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("tr", { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: name }), (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("td", { children: options[name] !== undefined ? this.renderSelect(name) : this.renderInput(name) })] }, name)));
-    }
-    render() {
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'PropertyGrid full frame' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: 'frame__container' }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("table", Object.assign({ className: 'PropertyGrid__table', cellPadding: 0, cellSpacing: 0 }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("tbody", { children: this.getObj() && this.renderRows() }) })) })) })));
-    }
-}
-
-
-/***/ }),
-
-/***/ "./src/frontend/editor/TreeWidget/TreeItem.tsx":
-/*!*****************************************************!*\
-  !*** ./src/frontend/editor/TreeWidget/TreeItem.tsx ***!
-  \*****************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TreeItem": () => (/* binding */ TreeItem)
-/* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-
-
-
-class TreeItem extends _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.onDivMouseDown = (e) => {
-            // console.debug('TreeItem.onDivMouseDown', e.currentTarget);
-            const item = this.props.item;
-            const tree = this.props.tree;
-            tree.select(item);
-        };
-        this.onDivDoubleClick = (e) => {
-            // console.debug('TreeItem.onDivDoubleClick');
-            const item = this.props.item;
-            const tree = this.props.tree;
-            tree.onDoubleClick(item);
-        };
-        this.onNodeMouseDown = (e) => {
-            // console.debug('TreeItem.onNodeMouseDown', e.currentTarget);
-            const item = this.props.item;
-            const tree = this.props.tree;
-            const opened = this.state.opened;
-            e.stopPropagation();
-            this.setState((prevState) => {
-                return { opened: !prevState.opened };
-            });
-            if (!opened) {
-                tree.onOpen(item);
+    hasRowFormWithDefaultDs() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm' && form.getDefaultDataSource()) {
+                return true;
             }
-        };
-        this.state = {
-            opened: props.item.opened !== undefined ? props.item.opened : false,
-        };
-        this.li = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-    }
-    isSelected() {
-        return this.props.tree.getSelectedItem() === this.props.item;
-    }
-    isOpened() {
-        return this.state.opened;
-    }
-    getElement() {
-        return this.li.current;
-    }
-    open() {
-        console.debug('TreeItem.open', this.props.item.getTitle());
-        // @ts-ignore
-        this.state.opened = true;
-        if (this.parent) {
-            this.parent.open();
         }
-        else {
-            console.debug('this.parent', this.parent);
+        return false;
+    }
+    hasRowFormWithDefaultSqlDataSource() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm' && form.hasDefaultPersistentDataSource()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    hasRowForm() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'RowForm' && form.getAttr('visible') === 'true') {
+                return true;
+            }
+        }
+        return false;
+    }
+    hasTableForm() {
+        for (const form of this.forms) {
+            if (form.getClassName() === 'TableForm' && form.getAttr('visible') === 'true') {
+                return true;
+            }
+        }
+        return false;
+    }
+    isNewMode() {
+        return !!this.options.newMode;
+    }
+    hasNew() {
+        for (const form of this.forms) {
+            if (form.hasNew()) {
+                return true;
+            }
+        }
+        return false;
+    }
+    getApp() {
+        return this.getParent();
+    }
+    isModal() {
+        return !!this.options.modal;
+    }
+    onFormInsert(e) {
+        console.debug('Page.onFormInsert', e);
+        for (const key of e.inserts) {
+            const keyParams = _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_1__.DataSource.keyToParams(key); // key params to page params
+            for (const name in keyParams) {
+                this.setParam(name, keyParams[name]);
+            }
         }
     }
-    render() {
-        // console.debug('TreeItem.render', this.props.item.getTitle());
-        const tree = this.props.tree;
-        const item = this.props.item;
-        const items = item.items;
-        const hasItems = !!(items && items.length);
-        const isNode = item.node || hasItems;
-        const style = item.getStyle ? item.getStyle() : null;
-        const title = item.getTitle();
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("li", Object.assign({ ref: this.li, className: this.isOpened() ? 'opened' : undefined }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsxs)("div", Object.assign({ className: this.isSelected() ? 'active' : undefined, style: { paddingLeft: this.props.paddingLeft }, onMouseDown: this.onDivMouseDown, onDoubleClick: this.onDivDoubleClick }, { children: [(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", { className: isNode ? 'node' : 'leaf', onMouseDown: this.onNodeMouseDown }), "\u00A0", (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("span", Object.assign({ style: style }, { children: title }))] })), hasItems && ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(TreeItem, { tree: tree, item: item, paddingLeft: this.props.paddingLeft + 15, onCreate: (c) => {
-                            // console.debug('onCreate', this.props.item.getTitle(), item.getTitle());
-                            c.parent = this;
-                            item.view = c;
-                        } }, item.getTitle()))) }))] }), title));
+    async rpc(name, params) {
+        // console.debug('Page.rpc', this.getFullName(), name, params);
+        if (!name)
+            throw new Error('no name');
+        const result = await this.getApp().request('POST', {
+            action: 'rpc',
+            uuid: this.getApp().getAttr('uuid'),
+            page: this.getName(),
+            name: name,
+            params: params,
+        });
+        if (result.errorMessage)
+            throw new Error(result.errorMessage);
+        return result;
+    }
+    findForm(name) {
+        return this.forms.find((form) => form.getName() === name);
+    }
+    getForm(name) {
+        const form = this.findForm(name);
+        if (!form)
+            throw new Error(`${this.getFullName()}: no form ${name}`);
+        return form;
+    }
+    isSelectMode() {
+        return !!this.options.selectMode;
+    }
+    isFormInTab() {
+        return this.isAttr('formInTab') && this.getAttr('formInTab') === 'true';
     }
 }
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(Page);
 
 
 /***/ }),
 
-/***/ "./src/frontend/editor/TreeWidget/TreeWidget.tsx":
-/*!*******************************************************!*\
-  !*** ./src/frontend/editor/TreeWidget/TreeWidget.tsx ***!
-  \*******************************************************/
+/***/ "./src/frontend/viewer/Model/Table/Table.ts":
+/*!**************************************************!*\
+  !*** ./src/frontend/viewer/Model/Table/Table.ts ***!
+  \**************************************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "TreeWidget": () => (/* binding */ TreeWidget)
+/* harmony export */   "Table": () => (/* binding */ Table)
 /* harmony export */ });
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../common */ "./src/frontend/common/index.ts");
-/* harmony import */ var _TreeItem__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./TreeItem */ "./src/frontend/editor/TreeWidget/TreeItem.tsx");
-/* harmony import */ var _TreeWidget_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./TreeWidget.less */ "./src/frontend/editor/TreeWidget/TreeWidget.less");
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Model */ "./src/frontend/viewer/Model/Model.ts");
+/* harmony import */ var _Column_Column__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Column/Column */ "./src/frontend/viewer/Model/Column/Column.ts");
+/* harmony import */ var _common_Helper__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../common/Helper */ "./src/frontend/common/Helper.ts");
 
 
 
-
-class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedItem: null,
-        };
+class Table extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
+    constructor() {
+        super(...arguments);
+        this.columns = [];
     }
-    async select(item) {
-        console.debug('TreeWidget.select', item ? item.getTitle() : null);
-        if (this.isSelected(item))
-            return;
-        return new Promise((resolve) => {
-            this.setState({ selectedItem: item }, () => {
-                if (this.props.onItemSelect)
-                    this.props.onItemSelect(item);
-                resolve();
-            });
+    /* constructor(data, parent) {
+        super(data, parent);
+        this.columns = [];
+    } */
+    init() {
+        // console.debug('Table.init', this.getFullName());
+        for (const data of this.getData().columns) {
+            const column = new _Column_Column__WEBPACK_IMPORTED_MODULE_1__.Column(data, this);
+            column.init();
+            this.addColumn(column);
+        }
+    }
+    addColumn(column) {
+        this.columns.push(column);
+    }
+    getColumn(name) {
+        const column = this.columns.find((column) => column.getName() === name);
+        if (!column)
+            throw new Error(`table ${this.getFullName()}: no column ${name}`);
+        return column;
+    }
+    emitResult(result, source = null) {
+        console.debug('Table.emitResult');
+        return [
+            ...(result.insert ? [this.emitInsert(source, result.insert)] : []),
+            ...(result.update ? [this.emitUpdate(source, result.update)] : []),
+            ...(result.delete ? [this.emitDelete(source, result.delete)] : []),
+            ...(result.refresh ? [this.emitRefresh(source)] : []),
+        ];
+    }
+    emitInsert(source, inserts) {
+        return this.emit('insert', { source, inserts });
+    }
+    emitUpdate(source, updates) {
+        return this.emit('update', { source, updates });
+    }
+    emitDelete(source, deletes) {
+        return this.emit('delete', { source, deletes });
+    }
+    emitRefresh(source) {
+        return this.emit('refresh', { source });
+    }
+}
+_common_Helper__WEBPACK_IMPORTED_MODULE_2__.Helper.registerGlobalClass(Table);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/Model/index.ts":
+/*!********************************************!*\
+  !*** ./src/frontend/viewer/Model/index.ts ***!
+  \********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _Field_CheckBoxField_CheckBoxField__WEBPACK_IMPORTED_MODULE_14__.CheckBoxField),
+/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _Field_CheckBoxListField_CheckBoxListField__WEBPACK_IMPORTED_MODULE_18__.CheckBoxListField),
+/* harmony export */   "Column": () => (/* reexport safe */ _Column_Column__WEBPACK_IMPORTED_MODULE_21__.Column),
+/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_6__.ComboBoxField),
+/* harmony export */   "DataSource": () => (/* reexport safe */ _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_0__.DataSource),
+/* harmony export */   "Database": () => (/* reexport safe */ _Database_Database__WEBPACK_IMPORTED_MODULE_19__.Database),
+/* harmony export */   "DateField": () => (/* reexport safe */ _Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_5__.DateField),
+/* harmony export */   "DateTimeField": () => (/* reexport safe */ _Field_DateTimeField_DateTimeField__WEBPACK_IMPORTED_MODULE_13__.DateTimeField),
+/* harmony export */   "FileField": () => (/* reexport safe */ _Field_FileField_FileField__WEBPACK_IMPORTED_MODULE_16__.FileField),
+/* harmony export */   "Form": () => (/* reexport safe */ _Form_Form__WEBPACK_IMPORTED_MODULE_2__.Form),
+/* harmony export */   "LinkField": () => (/* reexport safe */ _Field_LinkField_LinkField__WEBPACK_IMPORTED_MODULE_22__.LinkField),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _DataSource_PersistentDataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_9__.NoSqlDataSource),
+/* harmony export */   "Page": () => (/* reexport safe */ _Page_Page__WEBPACK_IMPORTED_MODULE_1__.Page),
+/* harmony export */   "PasswordField": () => (/* reexport safe */ _Field_PasswordField_PasswordField__WEBPACK_IMPORTED_MODULE_12__.PasswordField),
+/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _DataSource_PersistentDataSource_PersistentDataSource__WEBPACK_IMPORTED_MODULE_10__.PersistentDataSource),
+/* harmony export */   "PhoneField": () => (/* reexport safe */ _Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_17__.PhoneField),
+/* harmony export */   "RadioField": () => (/* reexport safe */ _Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_15__.RadioField),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__.RowForm),
+/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _DataSource_PersistentDataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_8__.SqlDataSource),
+/* harmony export */   "Table": () => (/* reexport safe */ _Table_Table__WEBPACK_IMPORTED_MODULE_20__.Table),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _Form_TableForm_TableForm__WEBPACK_IMPORTED_MODULE_4__.TableForm),
+/* harmony export */   "TextAreaField": () => (/* reexport safe */ _Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_11__.TextAreaField),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_7__.TextBoxField)
+/* harmony export */ });
+/* harmony import */ var _DataSource_DataSource__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DataSource/DataSource */ "./src/frontend/viewer/Model/DataSource/DataSource.ts");
+/* harmony import */ var _Page_Page__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Page/Page */ "./src/frontend/viewer/Model/Page/Page.ts");
+/* harmony import */ var _Form_Form__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Form/Form */ "./src/frontend/viewer/Model/Form/Form.ts");
+/* harmony import */ var _Form_RowForm_RowForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Form/RowForm/RowForm */ "./src/frontend/viewer/Model/Form/RowForm/RowForm.ts");
+/* harmony import */ var _Form_TableForm_TableForm__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Form/TableForm/TableForm */ "./src/frontend/viewer/Model/Form/TableForm/TableForm.ts");
+/* harmony import */ var _Field_DateField_DateField__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Field/DateField/DateField */ "./src/frontend/viewer/Model/Field/DateField/DateField.ts");
+/* harmony import */ var _Field_ComboBoxField_ComboBoxField__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Field/ComboBoxField/ComboBoxField */ "./src/frontend/viewer/Model/Field/ComboBoxField/ComboBoxField.ts");
+/* harmony import */ var _Field_TextBoxField_TextBoxField__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Field/TextBoxField/TextBoxField */ "./src/frontend/viewer/Model/Field/TextBoxField/TextBoxField.ts");
+/* harmony import */ var _DataSource_PersistentDataSource_SqlDataSource_SqlDataSource__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DataSource/PersistentDataSource/SqlDataSource/SqlDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/SqlDataSource/SqlDataSource.ts");
+/* harmony import */ var _DataSource_PersistentDataSource_NoSqlDataSource_NoSqlDataSource__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/NoSqlDataSource/NoSqlDataSource.ts");
+/* harmony import */ var _DataSource_PersistentDataSource_PersistentDataSource__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DataSource/PersistentDataSource/PersistentDataSource */ "./src/frontend/viewer/Model/DataSource/PersistentDataSource/PersistentDataSource.ts");
+/* harmony import */ var _Field_TextAreaField_TextAreaField__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Field/TextAreaField/TextAreaField */ "./src/frontend/viewer/Model/Field/TextAreaField/TextAreaField.ts");
+/* harmony import */ var _Field_PasswordField_PasswordField__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Field/PasswordField/PasswordField */ "./src/frontend/viewer/Model/Field/PasswordField/PasswordField.ts");
+/* harmony import */ var _Field_DateTimeField_DateTimeField__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Field/DateTimeField/DateTimeField */ "./src/frontend/viewer/Model/Field/DateTimeField/DateTimeField.ts");
+/* harmony import */ var _Field_CheckBoxField_CheckBoxField__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./Field/CheckBoxField/CheckBoxField */ "./src/frontend/viewer/Model/Field/CheckBoxField/CheckBoxField.ts");
+/* harmony import */ var _Field_RadioField_RadioField__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./Field/RadioField/RadioField */ "./src/frontend/viewer/Model/Field/RadioField/RadioField.ts");
+/* harmony import */ var _Field_FileField_FileField__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./Field/FileField/FileField */ "./src/frontend/viewer/Model/Field/FileField/FileField.ts");
+/* harmony import */ var _Field_PhoneField_PhoneField__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./Field/PhoneField/PhoneField */ "./src/frontend/viewer/Model/Field/PhoneField/PhoneField.ts");
+/* harmony import */ var _Field_CheckBoxListField_CheckBoxListField__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./Field/CheckBoxListField/CheckBoxListField */ "./src/frontend/viewer/Model/Field/CheckBoxListField/CheckBoxListField.ts");
+/* harmony import */ var _Database_Database__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./Database/Database */ "./src/frontend/viewer/Model/Database/Database.ts");
+/* harmony import */ var _Table_Table__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./Table/Table */ "./src/frontend/viewer/Model/Table/Table.ts");
+/* harmony import */ var _Column_Column__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./Column/Column */ "./src/frontend/viewer/Model/Column/Column.ts");
+/* harmony import */ var _Field_LinkField_LinkField__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./Field/LinkField/LinkField */ "./src/frontend/viewer/Model/Field/LinkField/LinkField.ts");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/ViewerFrontHostApp.ts":
+/*!***************************************************!*\
+  !*** ./src/frontend/viewer/ViewerFrontHostApp.ts ***!
+  \***************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ViewerFrontHostApp": () => (/* binding */ ViewerFrontHostApp)
+/* harmony export */ });
+/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
+/* harmony import */ var _Model_Application_Application__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Model/Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
+/* harmony import */ var _Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Controller/ModelController/ApplicationController/ApplicationController */ "./src/frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Controller/AlertController/AlertController */ "./src/frontend/viewer/Controller/AlertController/AlertController.ts");
+/* harmony import */ var _Controller_ConfirmController_ConfirmController__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Controller/ConfirmController/ConfirmController */ "./src/frontend/viewer/Controller/ConfirmController/ConfirmController.ts");
+/* harmony import */ var _style_application_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./style/application.less */ "./src/frontend/viewer/style/application.less");
+/* harmony import */ var _style_field_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/field.less */ "./src/frontend/viewer/style/field.less");
+/* harmony import */ var _style_form_less__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style/form.less */ "./src/frontend/viewer/style/form.less");
+/* harmony import */ var _style_page_less__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./style/page.less */ "./src/frontend/viewer/style/page.less");
+/* harmony import */ var _style_paging_less__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./style/paging.less */ "./src/frontend/viewer/style/paging.less");
+/* harmony import */ var _style_toolbar_button_less__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./style/toolbar-button.less */ "./src/frontend/viewer/style/toolbar-button.less");
+/* harmony import */ var _style_toolbar_dropdown_button_less__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./style/toolbar-dropdown-button.less */ "./src/frontend/viewer/style/toolbar-dropdown-button.less");
+/* harmony import */ var _style_version_notification_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./style/version-notification.less */ "./src/frontend/viewer/style/version-notification.less");
+/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
+/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
+/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
+/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../common/style/flex-max.less */ "./src/frontend/common/style/flex-max.less");
+/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../common/style/frame.less */ "./src/frontend/common/style/frame.less");
+/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../common/style/full.less */ "./src/frontend/common/style/full.less");
+/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../common/style/global.less */ "./src/frontend/common/style/global.less");
+/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../common/style/grid-gap-5.less */ "./src/frontend/common/style/grid-gap-5.less");
+/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
+/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
+
+
+
+
+
+
+// style
+
+
+
+
+
+
+
+
+// common style
+
+
+
+
+
+
+
+
+
+
+class ViewerFrontHostApp extends _common__WEBPACK_IMPORTED_MODULE_3__.FrontHostApp {
+    constructor(options) {
+        if (!options.data)
+            throw new Error('ViewerFrontHostApp: no data');
+        super(options);
+        this.options = options;
+        this.applicationController = null;
+    }
+    async run() {
+        console.debug('ViewerFrontHostApp.run', this.getData());
+        // application
+        const application = new _Model_Application_Application__WEBPACK_IMPORTED_MODULE_1__.Application(this.getData());
+        application.init();
+        // applicationController
+        const applicationController = (this.applicationController = _Controller_ModelController_ApplicationController_ApplicationController__WEBPACK_IMPORTED_MODULE_2__.ApplicationController.create(application, this));
+        applicationController.init();
+        // view
+        const rootElementName = `.${applicationController.getViewClass().name}__root`;
+        const rootElement = document.querySelector(rootElementName);
+        if (!rootElement) {
+            throw new Error(`no root element: ${rootElementName}`);
+        }
+        applicationController.createView(rootElement);
+        // connect
+        try {
+            await applicationController.connect();
+        }
+        catch (err) {
+            this.logError(err);
+        }
+    }
+    async onWindowPopState(e) {
+        // console.debug('ViewerFrontHostApp.onWindowPopState', e.state);
+        await this.applicationController.onWindowPopState(e);
+    }
+    logError(err) {
+        console.error('FrontHostApp.logError', err);
+        const body = {
+            type: 'error',
+            source: 'client',
+            message: err.message,
+            stack: err.stack,
+            data: JSON.stringify({
+                href: window.location.href,
+                platformVersion: this.getData().versions.platform,
+                appVersion: this.getData().versions.app,
+            }, null, 4),
+        };
+        console.debug(`POST ${this.getData().logErrorUrl}`, body);
+        fetch(this.getData().logErrorUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json;charset=utf-8' },
+            body: JSON.stringify(body),
+        }).catch((err) => {
+            console.error(err.message);
         });
     }
-    onDoubleClick(item) {
-        // console.debug('TreeWidget.onDoubleClick', item);
-        if (this.props.onItemDoubleClick)
-            this.props.onItemDoubleClick(item);
+    getData() {
+        if (!this.options.data)
+            throw new Error('no data');
+        return this.options.data;
     }
-    onOpen(item) {
-        if (this.props.onItemOpen)
-            this.props.onItemOpen(item);
+    alert(options) {
+        console.debug('ViewerFrontHostApp.alert', options);
+        return new Promise((resolve, reject) => {
+            try {
+                const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
+                if (root.childElementCount === 0) {
+                    const ctrl = (this.alertCtrl = new _Controller_AlertController_AlertController__WEBPACK_IMPORTED_MODULE_4__.AlertController(Object.assign(Object.assign({}, options), { onClose: () => {
+                            this.alertCtrl = null;
+                            react_dom__WEBPACK_IMPORTED_MODULE_0__.unmountComponentAtNode(root);
+                            resolve();
+                        } })));
+                    // console.debug('ctrl:', ctrl);
+                    const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), {
+                        ctrl,
+                        key: 0,
+                    });
+                    // console.debug('view', view);
+                }
+                else {
+                    reject(new Error('alert already exists'));
+                }
+            }
+            catch (err) {
+                reject(err);
+            }
+        });
     }
-    isSelected(item) {
-        return this.state.selectedItem === item;
-    }
-    getSelectedItem() {
-        return this.state.selectedItem;
-    }
-    scrollToSelected() {
-        console.debug('TreeWidget.scrollToSelected', this.getSelectedItem().getTitle());
-        this.getSelectedItem().view.getElement().scrollIntoView();
-    }
-    render() {
-        console.debug('TreeWidget.render' /*, this.props.items*/);
-        const items = this.props.items;
-        return ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("div", Object.assign({ className: this.getCssClassNames() }, { children: (0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)("ul", { children: items.map((item) => ((0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_0__.jsx)(_TreeItem__WEBPACK_IMPORTED_MODULE_2__.TreeItem, { tree: this, item: item, paddingLeft: 5, onCreate: (c) => (item.view = c) }, item.getTitle()))) }) })));
+    confirm(options) {
+        console.debug('ViewerFrontHostApp.confirm', options);
+        return new Promise((resolve, reject) => {
+            try {
+                const root = document.querySelector('.alert-root');
+                if (!root)
+                    throw new Error('no .alert-root');
+                if (root.childElementCount === 0) {
+                    const ctrl = (this.alertCtrl = new _Controller_ConfirmController_ConfirmController__WEBPACK_IMPORTED_MODULE_5__.ConfirmController(Object.assign(Object.assign({}, options), { onClose: (result) => {
+                            this.alertCtrl = null;
+                            react_dom__WEBPACK_IMPORTED_MODULE_0__.unmountComponentAtNode(root);
+                            resolve(result);
+                        } })));
+                    // console.debug('ctrl:', ctrl);
+                    const view = _common__WEBPACK_IMPORTED_MODULE_3__.Helper.createReactComponent(root, ctrl.getViewClass(), { ctrl });
+                    // console.debug('view', view);
+                }
+                else {
+                    reject(new Error('confirm already exists'));
+                }
+            }
+            catch (err) {
+                reject(err);
+            }
+        });
     }
 }
+_common__WEBPACK_IMPORTED_MODULE_3__.Helper.registerGlobalClass(ViewerFrontHostApp);
+
+
+/***/ }),
+
+/***/ "./src/frontend/viewer/WebSocketClient.ts":
+/*!************************************************!*\
+  !*** ./src/frontend/viewer/WebSocketClient.ts ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "WebSocketClient": () => (/* binding */ WebSocketClient)
+/* harmony export */ });
+class WebSocketClient {
+    constructor(options = {}) {
+        // console.debug('WebSocketClient.constructor', options);
+        this.options = options;
+        if (!options.applicationController)
+            throw new Error('no options.applicationController');
+        if (!options.protocol)
+            throw new Error('no options.protocol');
+        this.url = `${options.protocol}://${window.location.host}/?${this.createUriParamsString(options)}`;
+        this.webSocket = null;
+        this.refreshTimeoutId = null;
+        this.RECONNECT_TIMEOUT = 10; // sec
+        this.REFRESH_TIMEOUT = 60 * 60; // sec
+    }
+    createUriParamsString(options) {
+        const params = {
+            route: options.route,
+            uuid: options.uuid,
+            userId: options.userId,
+            version: this.getApp().getModel().getData().versions.app,
+        };
+        return Object.keys(params)
+            .map((key) => `${key}=${encodeURIComponent(params[key])}`)
+            .join('&');
+    }
+    connect() {
+        console.debug('WebSocketClient.connect', this.url);
+        return new Promise((resolve, reject) => {
+            this.webSocket = new WebSocket(this.url);
+            this.webSocket.onclose = async (e) => {
+                this.webSocket = null;
+                reject(new Error(`Connection failed ${e.code}`));
+            };
+            this.webSocket.onopen = (e) => {
+                this.webSocket.onclose = this.onClose.bind(this);
+                this.webSocket.onmessage = this.onMessage.bind(this);
+                this.startRefreshTimeout();
+                resolve(e);
+            };
+        });
+    }
+    async onRefreshTimeout() {
+        // console.debug('WebSocketClient.onRefreshTimeout');
+        this.refreshTimeoutId = null;
+        this.send('ping');
+        this.startRefreshTimeout();
+    }
+    send(data) {
+        console.debug('WebSocketClient.send', data);
+        this.webSocket.send(data);
+    }
+    startRefreshTimeout() {
+        this.refreshTimeoutId = setTimeout(this.onRefreshTimeout.bind(this), this.REFRESH_TIMEOUT * 1000);
+    }
+    resetRefreshTimeout() {
+        if (this.refreshTimeoutId) {
+            clearTimeout(this.refreshTimeoutId);
+            this.refreshTimeoutId = null;
+        }
+    }
+    async reconnect() {
+        console.debug('WebSocketClient.reconnect');
+        try {
+            await this.connect();
+        }
+        catch (err) {
+            console.error(err);
+            console.debug(`waiting ${this.RECONNECT_TIMEOUT} sec for socket reconnect...`);
+            setTimeout(async () => await this.reconnect(), this.RECONNECT_TIMEOUT * 1000);
+        }
+    }
+    async onClose(e) {
+        console.error('WebSocketClient.onClose', e);
+        this.getApp()
+            .getHostApp()
+            .logError(new Error(`websocket close ${this.getApp().getModel().getDomain()}/${this.getApp()
+            .getModel()
+            .getName()}`));
+        this.resetRefreshTimeout();
+        this.webSocket.onclose = null;
+        this.webSocket.onmessage = null;
+        this.webSocket = null;
+        await this.reconnect();
+    }
+    async onMessage(e) {
+        console.debug('WebSocketClient.onMessage', JSON.parse(e.data));
+        const packet = JSON.parse(e.data);
+        if (packet.type === 'result') {
+            this.getApp().getView().disableRerender();
+            await this.getApp().getModel().emitResult(packet.data);
+            this.getApp().getView().enableRerender();
+            this.getApp().getView().rerender();
+        }
+    }
+    getApp() {
+        return this.options.applicationController;
+    }
+}
+
+
+/***/ }),
+
+/***/ "./src/types.ts":
+/*!**********************!*\
+  !*** ./src/types.ts ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "keyToKeyTuple": () => (/* binding */ keyToKeyTuple),
+/* harmony export */   "keyTupleToKey": () => (/* binding */ keyTupleToKey)
+/* harmony export */ });
+const keyTupleToKey = (keyArray) => {
+    return JSON.stringify(keyArray);
+};
+const keyToKeyTuple = (key) => {
+    return JSON.parse(key);
+};
 
 
 /***/ })
@@ -41138,51 +43988,160 @@ class TreeWidget extends _common__WEBPACK_IMPORTED_MODULE_1__.ReactComponent {
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!*************************************!*\
-  !*** ./src/frontend/editor/main.ts ***!
-  \*************************************/
+/*!**************************************!*\
+  !*** ./src/frontend/viewer/index.ts ***!
+  \**************************************/
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./EditorFrontHostApp/EditorFrontHostApp */ "./src/frontend/editor/EditorFrontHostApp/EditorFrontHostApp.ts");
-/* harmony import */ var _style_editor_less__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./style/editor.less */ "./src/frontend/editor/style/editor.less");
-/* harmony import */ var _style_error_less__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style/error.less */ "./src/frontend/editor/style/error.less");
-/* harmony import */ var _style_global_less__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style/global.less */ "./src/frontend/editor/style/global.less");
-/* harmony import */ var _style_tree_bar_less__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style/tree-bar.less */ "./src/frontend/editor/style/tree-bar.less");
-/* harmony import */ var _common_style_ellipsis_less__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../common/style/ellipsis.less */ "./src/frontend/common/style/ellipsis.less");
-/* harmony import */ var _common_style_flex_less__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../common/style/flex.less */ "./src/frontend/common/style/flex.less");
-/* harmony import */ var _common_style_flex_column_less__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../common/style/flex-column.less */ "./src/frontend/common/style/flex-column.less");
-/* harmony import */ var _common_style_flex_max_less__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../common/style/flex-max.less */ "./src/frontend/common/style/flex-max.less");
-/* harmony import */ var _common_style_frame_less__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../common/style/frame.less */ "./src/frontend/common/style/frame.less");
-/* harmony import */ var _common_style_full_less__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../common/style/full.less */ "./src/frontend/common/style/full.less");
-/* harmony import */ var _common_style_global_less__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../common/style/global.less */ "./src/frontend/common/style/global.less");
-/* harmony import */ var _common_style_grid_gap_5_less__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../common/style/grid-gap-5.less */ "./src/frontend/common/style/grid-gap-5.less");
-/* harmony import */ var _common_style_grid_gap_10_less__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../common/style/grid-gap-10.less */ "./src/frontend/common/style/grid-gap-10.less");
-/* harmony import */ var _common_style_wait_less__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../common/style/wait.less */ "./src/frontend/common/style/wait.less");
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "ApplicationController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.ApplicationController),
+/* harmony export */   "ApplicationView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.ApplicationView),
+/* harmony export */   "ArrowIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.ArrowIcon),
+/* harmony export */   "Box": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Box),
+/* harmony export */   "Button": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Button),
+/* harmony export */   "CancelIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.CancelIcon),
+/* harmony export */   "CheckBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.CheckBox),
+/* harmony export */   "CheckBoxField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.CheckBoxField),
+/* harmony export */   "CheckBoxList": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.CheckBoxList),
+/* harmony export */   "CheckBoxListField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.CheckBoxListField),
+/* harmony export */   "CloseIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon),
+/* harmony export */   "CloseIcon2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.CloseIcon2),
+/* harmony export */   "Column": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.Column),
+/* harmony export */   "ComboBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.ComboBox),
+/* harmony export */   "ComboBoxField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.ComboBoxField),
+/* harmony export */   "DataSource": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.DataSource),
+/* harmony export */   "Database": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.Database),
+/* harmony export */   "DatabaseResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.DatabaseResult),
+/* harmony export */   "DateField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.DateField),
+/* harmony export */   "DateIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DateIcon),
+/* harmony export */   "DatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DatePicker),
+/* harmony export */   "DateTimeField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.DateTimeField),
+/* harmony export */   "DeleteIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DeleteIcon),
+/* harmony export */   "DoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DoneIcon),
+/* harmony export */   "DownIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DownIcon),
+/* harmony export */   "DropdownButton": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DropdownButton),
+/* harmony export */   "DropdownDatePicker": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.DropdownDatePicker),
+/* harmony export */   "EditIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.EditIcon),
+/* harmony export */   "Expand": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Expand),
+/* harmony export */   "FileField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.FileField),
+/* harmony export */   "Form": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.Form),
+/* harmony export */   "FrontHostApp": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.FrontHostApp),
+/* harmony export */   "Grid": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Grid),
+/* harmony export */   "GridCell": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.GridCell),
+/* harmony export */   "GridRow": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.GridRow),
+/* harmony export */   "Helper": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Helper),
+/* harmony export */   "Image": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Image),
+/* harmony export */   "InsertExResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.InsertExResult),
+/* harmony export */   "LeftIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.LeftIcon),
+/* harmony export */   "LinkField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.LinkField),
+/* harmony export */   "LocationIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.LocationIcon),
+/* harmony export */   "LoginController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.LoginController),
+/* harmony export */   "LoginFrontHostApp": () => (/* reexport safe */ _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_3__.LoginFrontHostApp),
+/* harmony export */   "LoginView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.LoginView),
+/* harmony export */   "Menu": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Menu),
+/* harmony export */   "Modal": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Modal),
+/* harmony export */   "MoreVertIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.MoreVertIcon),
+/* harmony export */   "NoSqlDataSource": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.NoSqlDataSource),
+/* harmony export */   "OpenInNewIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.OpenInNewIcon),
+/* harmony export */   "Page": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.Page),
+/* harmony export */   "PageController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.PageController),
+/* harmony export */   "PageView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.PageView),
+/* harmony export */   "Password": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Password),
+/* harmony export */   "PasswordField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.PasswordField),
+/* harmony export */   "PasswordIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.PasswordIcon),
+/* harmony export */   "PersistentDataSource": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.PersistentDataSource),
+/* harmony export */   "PhoneBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.PhoneBox),
+/* harmony export */   "PhoneField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.PhoneField),
+/* harmony export */   "PhoneIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.PhoneIcon),
+/* harmony export */   "Radio": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Radio),
+/* harmony export */   "RadioField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.RadioField),
+/* harmony export */   "ReactComponent": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.ReactComponent),
+/* harmony export */   "Result": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.Result),
+/* harmony export */   "RightIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.RightIcon),
+/* harmony export */   "RowForm": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.RowForm),
+/* harmony export */   "RowFormCheckBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormCheckBoxFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormCheckBoxListFieldController),
+/* harmony export */   "RowFormCheckBoxListFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormCheckBoxListFieldView),
+/* harmony export */   "RowFormComboBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormComboBoxFieldController),
+/* harmony export */   "RowFormComboBoxFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormComboBoxFieldView),
+/* harmony export */   "RowFormController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormController),
+/* harmony export */   "RowFormDateFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormDateFieldController),
+/* harmony export */   "RowFormDateFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormDateFieldView),
+/* harmony export */   "RowFormDateTimeFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormDateTimeFieldController),
+/* harmony export */   "RowFormDateTimeFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormDateTimeFieldView),
+/* harmony export */   "RowFormFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormFieldController),
+/* harmony export */   "RowFormFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormFieldView),
+/* harmony export */   "RowFormFileFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormFileFieldController),
+/* harmony export */   "RowFormLinkFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormLinkFieldController),
+/* harmony export */   "RowFormPasswordFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormPasswordFieldController),
+/* harmony export */   "RowFormPhoneFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormPhoneFieldController),
+/* harmony export */   "RowFormPhoneFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormPhoneFieldView),
+/* harmony export */   "RowFormRadioFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormRadioFieldController),
+/* harmony export */   "RowFormTextAreaFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormTextAreaFieldController),
+/* harmony export */   "RowFormTextAreaFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormTextAreaFieldView),
+/* harmony export */   "RowFormTextBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormTextBoxFieldController),
+/* harmony export */   "RowFormTextBoxFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormTextBoxFieldView),
+/* harmony export */   "RowFormTimeFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormTimeFieldController),
+/* harmony export */   "RowFormView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.RowFormView),
+/* harmony export */   "Search": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Search),
+/* harmony export */   "Select": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Select),
+/* harmony export */   "SettingsIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.SettingsIcon),
+/* harmony export */   "Slider": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Slider),
+/* harmony export */   "SqlDataSource": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.SqlDataSource),
+/* harmony export */   "Statusbar": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Statusbar),
+/* harmony export */   "Tab": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Tab),
+/* harmony export */   "Tab2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Tab2),
+/* harmony export */   "Table": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.Table),
+/* harmony export */   "TableForm": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.TableForm),
+/* harmony export */   "TableFormCheckBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormCheckBoxFieldController),
+/* harmony export */   "TableFormCheckBoxFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormCheckBoxFieldView),
+/* harmony export */   "TableFormComboBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormComboBoxFieldController),
+/* harmony export */   "TableFormComboBoxFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormComboBoxFieldView),
+/* harmony export */   "TableFormController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormController),
+/* harmony export */   "TableFormDateFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormDateFieldController),
+/* harmony export */   "TableFormDateFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormDateFieldView),
+/* harmony export */   "TableFormDateTimeFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormDateTimeFieldController),
+/* harmony export */   "TableFormDateTimeFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormDateTimeFieldView),
+/* harmony export */   "TableFormLinkFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormLinkFieldController),
+/* harmony export */   "TableFormPhoneFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormPhoneFieldController),
+/* harmony export */   "TableFormTextBoxFieldController": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormTextBoxFieldController),
+/* harmony export */   "TableFormTextBoxFieldView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormTextBoxFieldView),
+/* harmony export */   "TableFormView": () => (/* reexport safe */ _Controller__WEBPACK_IMPORTED_MODULE_6__.TableFormView),
+/* harmony export */   "TableResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.TableResult),
+/* harmony export */   "TextArea": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.TextArea),
+/* harmony export */   "TextAreaField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.TextAreaField),
+/* harmony export */   "TextBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.TextBox),
+/* harmony export */   "TextBoxField": () => (/* reexport safe */ _Model__WEBPACK_IMPORTED_MODULE_5__.TextBoxField),
+/* harmony export */   "TimeBox": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox),
+/* harmony export */   "TimeBox2": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.TimeBox2),
+/* harmony export */   "TimeIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.TimeIcon),
+/* harmony export */   "Tooltip": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.Tooltip),
+/* harmony export */   "UpdateEx": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateEx),
+/* harmony export */   "UpdateResult": () => (/* reexport safe */ _Result__WEBPACK_IMPORTED_MODULE_1__.UpdateResult),
+/* harmony export */   "ViewerFrontHostApp": () => (/* reexport safe */ _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_4__.ViewerFrontHostApp),
+/* harmony export */   "VisibilityIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.VisibilityIcon),
+/* harmony export */   "VisibilityOffIcon": () => (/* reexport safe */ _common__WEBPACK_IMPORTED_MODULE_2__.VisibilityOffIcon),
+/* harmony export */   "keyToKeyTuple": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyToKeyTuple),
+/* harmony export */   "keyTupleToKey": () => (/* reexport safe */ _types__WEBPACK_IMPORTED_MODULE_0__.keyTupleToKey)
+/* harmony export */ });
+/* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../types */ "./src/types.ts");
+/* harmony import */ var _Result__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Result */ "./src/Result.ts");
+/* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../common */ "./src/frontend/common/index.ts");
+/* harmony import */ var _LoginFrontHostApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginFrontHostApp */ "./src/frontend/viewer/LoginFrontHostApp.ts");
+/* harmony import */ var _ViewerFrontHostApp__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./ViewerFrontHostApp */ "./src/frontend/viewer/ViewerFrontHostApp.ts");
+/* harmony import */ var _Model__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Model */ "./src/frontend/viewer/Model/index.ts");
+/* harmony import */ var _Controller__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Controller */ "./src/frontend/viewer/Controller/index.ts");
 
-// style
 
 
 
 
-// common style
+// Model
 
+// Controller
 
-
-
-
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', async () => {
-    console.debug('editor.ejs DOMContentLoaded');
-    const data = JSON.parse(document.querySelector('script[type="application/json"]').textContent);
-    const editorFrontHostApp = new _EditorFrontHostApp_EditorFrontHostApp__WEBPACK_IMPORTED_MODULE_0__.EditorFrontHostApp(data, data.runAppLink);
-    editorFrontHostApp.init();
-    await editorFrontHostApp.run();
-});
 
 })();
 
+window.qforms = __webpack_exports__;
 /******/ })()
 ;
