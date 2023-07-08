@@ -2,8 +2,8 @@ export * from '../../types';
 export * from '../../Result';
 export * from '../common';
 
-export { LoginFrontHostApp } from './LoginFrontHostApp';
-export { ViewerFrontHostApp } from './ViewerFrontHostApp';
+export * from './LoginFrontHostApp';
+export * from './ViewerFrontHostApp';
 
 // Model
 export * from './Model';

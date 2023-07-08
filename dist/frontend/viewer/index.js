@@ -14,14 +14,11 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
     for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ViewerFrontHostApp = exports.LoginFrontHostApp = void 0;
 __exportStar(require("../../types"), exports);
 __exportStar(require("../../Result"), exports);
 __exportStar(require("../common"), exports);
-var LoginFrontHostApp_1 = require("./LoginFrontHostApp");
-Object.defineProperty(exports, "LoginFrontHostApp", { enumerable: true, get: function () { return LoginFrontHostApp_1.LoginFrontHostApp; } });
-var ViewerFrontHostApp_1 = require("./ViewerFrontHostApp");
-Object.defineProperty(exports, "ViewerFrontHostApp", { enumerable: true, get: function () { return ViewerFrontHostApp_1.ViewerFrontHostApp; } });
+__exportStar(require("./LoginFrontHostApp"), exports);
+__exportStar(require("./ViewerFrontHostApp"), exports);
 // Model
 __exportStar(require("./Model"), exports);
 // Controller
