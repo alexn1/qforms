@@ -1,4 +1,4 @@
-export const index = (version, data, runAppLink, appDirName, appFileName, env, links, scripts) => {
+export const home = (version, data, runAppLink, appDirName, appFileName, env, links, scripts) => {
     return `<!DOCTYPE html>
 <html class="editor" lang="en">
 <head>

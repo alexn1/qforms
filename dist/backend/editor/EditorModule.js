@@ -35,7 +35,7 @@ const server_1 = __importDefault(require("react-dom/server"));
 const Links_1 = require("../Links");
 const Scripts_1 = require("../Scripts");
 const backend = __importStar(require("../index"));
-const index_1 = require("./index");
+const home_1 = require("./home");
 const pkg = require('../../../package.json');
 const EDITOR_CONTROLLERS = [
     'Application',
@@ -103,7 +103,7 @@ class EditorModule {
         };
         const links = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Links_1.Links, { links: this.getLinks() }));
         const scripts = server_1.default.renderToStaticMarkup((0, jsx_runtime_1.jsx)(Scripts_1.Scripts, { scripts: this.getScripts() }));
-        const html = (0, index_1.index)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
+        const html = (0, home_1.home)(pkg.version, Object.assign(Object.assign({}, data), { runAppLink: `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1` }), `/viewer/${context.getAppDirName()}/${context.getAppFileName()}/${context.getEnv()}/${context.getDomain()}/?debug=1`, context.getAppDirName(), context.getAppFileName(), context.getEnv(), links, scripts);
         res.end(html);
     }
     async handleEditorPost(req, res, context) {

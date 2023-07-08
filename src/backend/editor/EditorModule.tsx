@@ -9,7 +9,7 @@ import ReactDOMServer from 'react-dom/server';
 import { Links } from '../Links';
 import { Scripts } from '../Scripts';
 import * as backend from '../index';
-import { index } from './index';
+import { home } from './home';
 
 const pkg = require('../../../package.json');
 
@@ -102,7 +102,7 @@ export class EditorModule {
         const scripts = ReactDOMServer.renderToStaticMarkup(
             <Scripts scripts={this.getScripts()} />,
         );
-        const html = index(
+        const html = home(
             pkg.version,
             {
                 ...data,
