@@ -1,12 +1,10 @@
 export * from './BkHelper';
-export * from '../Result';
 export * from './Context';
 export * from './BaseModel';
 export * from './BackHostApp';
 export * from './Converter';
 export * from './JsonFile';
 export * from './AppInfo';
-export * from '../types';
 
 // viewer
 export * from './viewer';

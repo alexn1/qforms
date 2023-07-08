@@ -15,14 +15,12 @@ var __exportStar = (this && this.__exportStar) || function(m, exports) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 __exportStar(require("./BkHelper"), exports);
-__exportStar(require("../Result"), exports);
 __exportStar(require("./Context"), exports);
 __exportStar(require("./BaseModel"), exports);
 __exportStar(require("./BackHostApp"), exports);
 __exportStar(require("./Converter"), exports);
 __exportStar(require("./JsonFile"), exports);
 __exportStar(require("./AppInfo"), exports);
-__exportStar(require("../types"), exports);
 // viewer
 __exportStar(require("./viewer"), exports);
 // editor
