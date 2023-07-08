@@ -19,7 +19,7 @@ import { JsonFile } from '../../../JsonFile';
 import { HttpError } from '../../../HttpError';
 import { Result } from '../../../../Result';
 import { ApplicationController } from '../../../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
-import { index } from '../../index';
+import { home } from '../../home';
 
 import * as text from '../../text';
 import { ApplicationData } from '../../../../data';
@@ -550,7 +550,7 @@ export class BkApplication<
         data: ApplicationData,
         appViewHtml: string,
     ): string {
-        return index(
+        return home(
             this,
             context,
             applicationController,

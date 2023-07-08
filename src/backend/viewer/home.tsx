@@ -1,9 +1,24 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.home = void 0;
-const home = (application, context, applicationController, qformsVersion, links, scripts, data, appViewHtml) => {
+import { ApplicationController } from '../../frontend/viewer/Controller/ModelController/ApplicationController/ApplicationController';
+import { Context } from '../Context';
+import { BkApplication } from './BkModel/BkApplication/BkApplication';
+import { ApplicationData } from '../../data';
+
+export const home = (
+    application: BkApplication,
+    context: Context,
+    applicationController: ApplicationController,
+    qformsVersion: string,
+    links: string,
+    scripts: string,
+    data: ApplicationData,
+    appViewHtml: string,
+) => {
     return `<!DOCTYPE html>
-<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${context.query.debug === '1' ? 'debug' : ''} ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr('lang')}">
+<html class="${application.getViewClassName()} ${application.getAttr('theme')} ${
+        context.query.debug === '1' ? 'debug' : ''
+    } ${context.query.frame === '1' ? 'iframe' : 'not-iframe'}" lang="${application.getAttr(
+        'lang',
+    )}">
 <head>
     <!-- qforms v${qformsVersion} -->
     <!-- app v${application.getVersion()}  -->
@@ -31,4 +46,3 @@ const home = (application, context, applicationController, qformsVersion, links,
 </body>
 </html>`;
 };
-exports.home = home;

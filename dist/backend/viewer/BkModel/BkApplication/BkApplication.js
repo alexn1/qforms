@@ -33,7 +33,7 @@ const BkPageLink_1 = require("../BkPageLink/BkPageLink");
 const JsonFile_1 = require("../../../JsonFile");
 const HttpError_1 = require("../../../HttpError");
 const Result_1 = require("../../../../Result");
-const index_1 = require("../../index");
+const home_1 = require("../../home");
 const text = __importStar(require("../../text"));
 const pkg = require('../../../../../package.json');
 class BkApplication extends BkModel_1.BkModel {
@@ -478,7 +478,7 @@ class BkApplication extends BkModel_1.BkModel {
         */
     }
     renderIndexHtml(context, applicationController, qformsVersion, links, scripts, data, appViewHtml) {
-        return (0, index_1.index)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
+        return (0, home_1.home)(this, context, applicationController, qformsVersion, links, scripts, data, appViewHtml);
     }
     async useDatabase(context, appDbName, cb) {
         const db = this.getDatabase(appDbName);
