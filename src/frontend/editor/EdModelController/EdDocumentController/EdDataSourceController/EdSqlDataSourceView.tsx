@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { EdDocumentView } from '../EdDocumentView';
 import { Button } from '../../../../common';
-import { Visibility } from '../../../../viewer';
+import { Visibility } from '../../../../../types';
 
 import './EdSqlDataSourceView.less';
 

@@ -1,7 +1,6 @@
+import { RawRow, ChangesByKey } from '../../types';
 import { Helper } from '../common/Helper';
 import { Search } from '../common/Search';
-import { ChangesByKey } from '../viewer';
-import { RawRow } from '../../types';
 
 export interface FrontHostAppOptions {
     debug: boolean;

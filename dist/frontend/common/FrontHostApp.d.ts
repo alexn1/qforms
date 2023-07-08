@@ -1,5 +1,4 @@
-import { ChangesByKey } from '../viewer';
-import { RawRow } from '../../types';
+import { RawRow, ChangesByKey } from '../../types';
 export interface FrontHostAppOptions {
     debug: boolean;
     url: URL;

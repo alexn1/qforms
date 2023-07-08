@@ -20,7 +20,7 @@ export declare class TableFormView<TTableFormController extends TableFormControl
         ctrl: import("../../FieldController/TableFormFieldController/TableFormFieldController").TableFormFieldController<import("../../../../Model/Field/Field").Field>;
     }, any, any>>;
     getGridColumns(): any[];
-    getRows(): import("../../../..").RawRow[];
+    getRows(): import("../../../../../..").RawRow[];
     getGridExtraColumn(): boolean;
     getGridClass(): typeof Grid;
     renderGrid(): React.CElement<any, Grid>;

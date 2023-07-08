@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { EdDocumentView } from '../EdDocumentView';
-import { Visibility } from '../../../../viewer';
+import { Visibility } from '../../../../../types';
 import './EdSqlDataSourceView.less';
 export declare class EdSqlDataSourceView extends EdDocumentView {
     singleRef: React.RefObject<any>;
