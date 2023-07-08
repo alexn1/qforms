@@ -5,5 +5,4 @@ export * from './Result';
 export * from './backend';
 
 // frontend
-export * from './frontend/common';
-export * from './frontend/viewer';
+export * from './frontend';

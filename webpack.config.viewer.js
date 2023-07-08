@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 module.exports = {
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
-    entry: './src/frontend/viewer/index.ts',
+    entry: './src/frontend/index.ts',
     output: {
         clean: true,
         path: path.resolve(__dirname, './dist/frontend/viewer/public'),

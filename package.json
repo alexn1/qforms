@@ -4,9 +4,7 @@
     "description": "A fullstack framework/platform based on Express and React for building Web UI for databases.",
     "main": "dist/index.js",
     "files": [
-        "dist",
-        "front.js",
-        "front.d.ts"
+        "dist"
     ],
     "dependencies": {
         "body-parser": "^1.19.1",
