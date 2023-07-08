@@ -4,5 +4,6 @@ export * from './Result';
 // backend
 export * from './backend';
 
-// frontend/viewer
+// frontend
+export * from './frontend/common';
 export * from './frontend/viewer';

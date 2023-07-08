@@ -6,3 +6,6 @@ export * from './Model';
 
 // Controller
 export * from './Controller';
+
+// tmp
+export * from '../common';

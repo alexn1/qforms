@@ -18,5 +18,6 @@ __exportStar(require("./types"), exports);
 __exportStar(require("./Result"), exports);
 // backend
 __exportStar(require("./backend"), exports);
-// frontend/viewer
+// frontend
+__exportStar(require("./frontend/common"), exports);
 __exportStar(require("./frontend/viewer"), exports);

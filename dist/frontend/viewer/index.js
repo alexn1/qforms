@@ -20,3 +20,5 @@ __exportStar(require("./ViewerFrontHostApp"), exports);
 __exportStar(require("./Model"), exports);
 // Controller
 __exportStar(require("./Controller"), exports);
+// tmp
+__exportStar(require("../common"), exports);
