@@ -6,7 +6,6 @@ import colors from 'colors/safe';
 import fetch from 'node-fetch';
 
 import { JSONString } from '../types';
-import { EmptyPromise } from './EmptyPromise';
 
 function _getFilePathsSync(dirPath: string, ext: string) {
     const filePaths = glob.sync(path.join(dirPath, '*.' + ext));
