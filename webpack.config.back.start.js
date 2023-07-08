@@ -1,20 +1,16 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
-const CopyPlugin = require('copy-webpack-plugin');
+// const CopyPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 module.exports = {
-    entry: './src/index.ts',
+    entry: './src/start.ts',
     output: {
         // clean: true,
         path: path.resolve(__dirname, './dist'),
-        filename: 'index.js',
-
-        libraryTarget: 'umd',
-        library: 'qforms',
-        umdNamedDefine: true,
+        filename: 'start.js',
     },
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
@@ -53,7 +49,7 @@ module.exports = {
         extensions: ['.tsx', '.ts', '.js'],
     },
     target: 'node',
-    externals: [nodeExternals()],
+    externals: [nodeExternals(), './index'],
     externalsType: 'commonjs',
     optimization: {
         nodeEnv: false,
@@ -66,11 +62,11 @@ module.exports = {
         ],
     },
     plugins: [
-        new CopyPlugin({
-            patterns: [
-                { from: '**/*.ejs', context: 'src' },
-                { from: 'frontend/lib/**/*', context: 'src' },
-            ],
-        }),
+        // new CopyPlugin({
+        //     patterns: [
+        //         { from: '**/*.ejs', context: 'src' },
+        //         { from: 'frontend/lib/**/*', context: 'src' },
+        //     ],
+        // }),
     ],
 };
