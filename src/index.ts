@@ -1,5 +1,8 @@
 export * from './types';
 export * from './Result';
+
+// backend
 export * from './backend';
 
-export * from './frontend/common/Helper';
+// frontend/viewer
+export * from './frontend/viewer';
