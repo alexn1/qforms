@@ -47,8 +47,8 @@ export declare class DataSource extends Model {
     hasNewRows(): boolean;
     static copyNewValues(row: RawRow, newValues: RawRow): void;
     updateRow(key: Key, newValues: RawRow): void;
-    getTable(): import("../..").Table;
-    getDatabase(): import("../..").Database;
+    getTable(): import("..").Table;
+    getDatabase(): import("..").Database;
     getType(columnName: string): any;
     insert(row?: RawRow): Promise<any>;
     delete(key: Key): Promise<Result | null>;
