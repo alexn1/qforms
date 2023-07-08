@@ -4,7 +4,7 @@ import { ApplicationEditor } from './editor/Editor/ApplicationEditor/Application
 import { BaseModel } from './BaseModel';
 import { BkModelScheme } from './viewer/BkModelScheme/BkModelScheme';
 
-const BACKEND_DIR_PATH = __dirname;
+const BACKEND_DIR_PATH = path.join(__dirname, 'backend');
 
 export class Converter {
     static async reformat(appFilePath: string) {

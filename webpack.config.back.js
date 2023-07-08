@@ -6,11 +6,15 @@ const TerserPlugin = require('terser-webpack-plugin');
 // console.log('process.env.NODE_ENV', process.env.NODE_ENV);
 
 module.exports = {
-    entry: './src/backend/start.ts',
+    entry: './src/index.ts',
     output: {
         // clean: true,
         path: path.resolve(__dirname, './dist'),
-        filename: 'backend/bundle.js',
+        filename: 'index.js',
+
+        libraryTarget: 'umd',
+        library: 'qforms',
+        umdNamedDefine: true,
     },
     mode: process.env.NODE_ENV || 'production',
     devtool: false,
