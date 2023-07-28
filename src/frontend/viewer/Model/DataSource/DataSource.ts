@@ -224,11 +224,16 @@ export class DataSource extends Model {
     }
 
     getApp(): Application {
+        console.debug('DataSource.getApp', this.getFullName());
         if (this.getParent() instanceof Application) return this.getParent() as Application;
         if (this.getParent() instanceof Page) return this.getParent().getParent() as Application;
         if (this.getParent() instanceof Form)
             return this.getParent().getParent().getParent() as Application;
-        throw new Error('unknown parent');
+        throw new Error(
+            `unknown parent: ${
+                this.getParent().constructor.name
+            }(${this.getParent().getFullName()})`,
+        );
     }
 
     /*getNamespace() {

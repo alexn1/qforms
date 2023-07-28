@@ -41550,13 +41550,14 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
         return null;
     }
     getApp() {
+        console.debug('DataSource.getApp', this.getFullName());
         if (this.getParent() instanceof _Application_Application__WEBPACK_IMPORTED_MODULE_3__.Application)
             return this.getParent();
         if (this.getParent() instanceof _Page_Page__WEBPACK_IMPORTED_MODULE_2__.Page)
             return this.getParent().getParent();
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
             return this.getParent().getParent().getParent();
-        throw new Error('unknown parent');
+        throw new Error(`unknown parent: ${this.getParent().constructor.name}(${this.getParent().getFullName()})`);
     }
     /*getNamespace() {
         if (this.parent instanceof Form) {

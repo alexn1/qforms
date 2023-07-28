@@ -19579,13 +19579,14 @@ class DataSource extends Model_1.Model {
         return null;
     }
     getApp() {
+        console.debug('DataSource.getApp', this.getFullName());
         if (this.getParent() instanceof Application_1.Application)
             return this.getParent();
         if (this.getParent() instanceof Page_1.Page)
             return this.getParent().getParent();
         if (this.getParent() instanceof Form_1.Form)
             return this.getParent().getParent().getParent();
-        throw new Error('unknown parent');
+        throw new Error(`unknown parent: ${this.getParent().constructor.name}(${this.getParent().getFullName()})`);
     }
     /*getNamespace() {
         if (this.parent instanceof Form) {
