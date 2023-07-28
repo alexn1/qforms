@@ -14,6 +14,7 @@ import {
     KeyElement,
 } from '../../../../types';
 import { Result } from '../../../../Result';
+import { Field } from '../Field/Field';
 
 export class DataSource extends Model {
     rows: RawRow[] | null = null;
@@ -229,6 +230,9 @@ export class DataSource extends Model {
         if (this.getParent() instanceof Page) return this.getParent().getParent() as Application;
         if (this.getParent() instanceof Form)
             return this.getParent().getParent().getParent() as Application;
+        if (this.getParent() instanceof Field)
+            return this.getParent().getParent().getParent().getParent() as Application;
+
         throw new Error(
             `unknown parent: ${
                 this.getParent().constructor.name

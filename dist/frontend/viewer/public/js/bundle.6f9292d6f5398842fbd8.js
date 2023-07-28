@@ -41277,6 +41277,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Application_Application__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 /* harmony import */ var _common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 /* harmony import */ var _types__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+/* harmony import */ var _Field_Field__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Field/Field */ "./src/frontend/viewer/Model/Field/Field.ts");
+
 
 
 
@@ -41557,6 +41559,8 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
             return this.getParent().getParent();
         if (this.getParent() instanceof _Form_Form__WEBPACK_IMPORTED_MODULE_1__.Form)
             return this.getParent().getParent().getParent();
+        if (this.getParent() instanceof _Field_Field__WEBPACK_IMPORTED_MODULE_6__.Field)
+            return this.getParent().getParent().getParent().getParent();
         throw new Error(`unknown parent: ${this.getParent().constructor.name}(${this.getParent().getFullName()})`);
     }
     /*getNamespace() {
