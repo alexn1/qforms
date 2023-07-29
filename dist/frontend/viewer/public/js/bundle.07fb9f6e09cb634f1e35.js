@@ -41613,7 +41613,7 @@ class DataSource extends _Model__WEBPACK_IMPORTED_MODULE_0__.Model {
     getChangesByKey() {
         const changes = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)] != this.changes.get(row);
+            changes[this.getRowKey(row)] = this.changes.get(row);
         }
         return changes;
     }

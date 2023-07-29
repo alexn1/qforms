@@ -292,7 +292,7 @@ export class DataSource extends Model {
     getChangesByKey(): ChangesByKey {
         const changes: ChangesByKey = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)!] != this.changes.get(row);
+            changes[this.getRowKey(row)!] = this.changes.get(row)!;
         }
         return changes;
     }
