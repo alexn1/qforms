@@ -209,10 +209,10 @@ export class BkSqlDataSource extends BkPersistentDataSource<BkSqlDatabase> {
         if (!this.table) throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const changes = this.decodeChanges(context.getBody().changes);
-
+        const changes = this.getChanges(context);
         // console.debug('changes:', changes);
-        const key = Object.keys(changes)[0] as Key;
+
+        const [key] = Object.keys(changes) as [Key];
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
 

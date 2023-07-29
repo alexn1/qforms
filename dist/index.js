@@ -6949,6 +6949,9 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
             this.table = this.getDatabase().getTable(this.getAttr('table'));
         }
     }
+    getChanges(context) {
+        return this.decodeChanges(context.getBody().changes);
+    }
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
@@ -7177,9 +7180,9 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
             throw new Error(`no database table desc: ${this.getAttr('table')}`);
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const changes = this.decodeChanges(context.getBody().changes);
+        const changes = this.getChanges(context);
         // console.debug('changes:', changes);
-        const key = Object.keys(changes)[0];
+        const [key] = Object.keys(changes);
         const where = this.getKeyValuesFromKey(key);
         const values = changes[key];
         // update row
@@ -19641,7 +19644,7 @@ class DataSource extends Model_1.Model {
     getChangesByKey() {
         const changes = {};
         for (const row of this.changes.keys()) {
-            changes[this.getRowKey(row)] != this.changes.get(row);
+            changes[this.getRowKey(row)] = this.changes.get(row);
         }
         return changes;
     }

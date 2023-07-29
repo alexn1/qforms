@@ -4,6 +4,7 @@ import { BkTable } from '../../BkTable/BkTable';
 import { RawRow, ChangesByKey, Key, Row } from '../../../../../types';
 import { BkModelScheme } from '../../../BkModelScheme/BkModelScheme';
 import { BkModel } from '../../BkModel';
+import { Context } from '../../../../Context';
 
 export abstract class BkPersistentDataSource<
     TDatabase extends BkDatabase = BkDatabase,
@@ -17,7 +18,11 @@ export abstract class BkPersistentDataSource<
         }
     }
 
-    decodeChanges(changes: ChangesByKey) {
+    getChanges(context: Context) {
+        return this.decodeChanges(context.getBody().changes);
+    }
+
+    decodeChanges(changes: ChangesByKey): Record<Key, any> {
         const dChanges: Record<Key, any> = {};
         for (const key in changes) {
             dChanges[key as Key] = this.getValuesFromRow(changes[key as Key]);
@@ -26,18 +31,20 @@ export abstract class BkPersistentDataSource<
     }
 
     getValuesFromRow(rawRow: RawRow): Row {
-        console.debug('PersistentDataSource.getValuesFromRow', rawRow);
+        // console.debug('PersistentDataSource.getValuesFromRow', rawRow);
         const form = this.getForm();
         if (!form) throw new Error('not form ds');
-        const values = {} as Row;
+
+        const row = {} as Row;
         for (const field of form.fields) {
             const column = field.getAttr('column');
             if (Object.prototype.hasOwnProperty.call(rawRow, column)) {
                 const value = field.rawToValue(rawRow[column]);
-                values[column] = field.valueToDbValue(value);
+                row[column] = field.valueToDbValue(value);
             }
         }
-        return values;
+
+        return row;
     }
 
     getDatabase(): TDatabase {
