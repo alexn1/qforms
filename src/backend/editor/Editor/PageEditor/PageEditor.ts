@@ -79,10 +79,10 @@ export class PageEditor extends Editor<BkPageScheme> {
     }
 
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
+        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.ts');
         const templateFilePath = path.join(
             this.getEditorPath(),
-            'Editor/PageEditor/Model.back.js.ejs',
+            'Editor/PageEditor/Model.back.ts.ejs',
         );
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),

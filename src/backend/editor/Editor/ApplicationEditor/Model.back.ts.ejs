@@ -1,0 +1,16 @@
+import { BkApplication, Context, BkHelper } from 'qforms';
+
+const pkg = require('../../../package.json');
+
+export class <%=name%>BkApplication extends BkApplication {
+    getVersion() {
+        return pkg.version;
+    }
+
+    /* async prName(context: Context) {
+        const {param1} = context.params;
+        return {abc: 'xyz'};
+    } */
+}
+
+BkHelper.registerGlobalClass(<%=name%>BkApplication);

@@ -80,7 +80,7 @@ export class EdNoSqlDataSourceView extends EdDocumentView {
                     <Button onClick={this.onSaveClick} enabled={this.isChanged()}>
                         Save
                     </Button>
-                    <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
+                    <Button onClick={ctrl.onCreateModelBack}>Model.back.ts</Button>
                     &nbsp;
                     <div className="btn-group" role="group">
                         <button

@@ -110,11 +110,11 @@ export class ApplicationEditor extends Editor<BkApplicationScheme> {
     }
 
     async createModelBackJs(params) {
-        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.js');
+        const filePath = path.join(await this.getCustomDirPath(), 'Model.back.ts');
 
         const templateFilePath = path.join(
             this.getEditorPath(),
-            'Editor/ApplicationEditor/Model.back.js.ejs',
+            'Editor/ApplicationEditor/Model.back.ts.ejs',
         );
 
         const js = await this.createFileByParams(filePath, templateFilePath, {

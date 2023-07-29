@@ -67,7 +67,7 @@ export class EdVisualView extends EdDocumentView {
             <div className={'EdVisualView full'}>
                 <div className="full flex-column">
                     <div className="toolbar">
-                        <Button onClick={ctrl.onCreateModelBack}>Model.back.js</Button>
+                        <Button onClick={ctrl.onCreateModelBack}>Model.back.ts</Button>
                         {!ctrl.data.js && (
                             <Button onClick={ctrl.onCreateCustomController}>
                                 Controller.front.js

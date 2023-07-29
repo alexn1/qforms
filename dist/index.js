@@ -2908,8 +2908,8 @@ class ApplicationEditor extends Editor_1.Editor {
         return js;
     }
     async createModelBackJs(params) {
-        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/ApplicationEditor/Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.ts');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/ApplicationEditor/Model.back.ts.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });
@@ -3979,8 +3979,8 @@ class FormEditor extends Editor_1.Editor {
         return less;
     }
     async createModelBackJs(params) {
-        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.ts');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/FormEditor/Model.back.ts.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             page: this.getParent().getName(),
             form: this.getName(),
@@ -4174,8 +4174,8 @@ class PageEditor extends Editor_1.Editor {
         return less;
     }
     async createModelBackJs(params) {
-        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/PageEditor/Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.ts');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/PageEditor/Model.back.ts.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             name: this.getName(),
         });
