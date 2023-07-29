@@ -1,6 +1,6 @@
-const { <%=_class%> } = require('qforms');
+import { Bk<%=_class%>, BkHelper } from 'qforms';
 
-class <%=page%><%=form%><%=dataSource%>Back<%=_class%> extends <%=_class%> {
+class <%=page%><%=form%><%=dataSource%>Back<%=_class%> extends Bk<%=_class%> {
     constructor(...args) {
         console.debug('<%=page%><%=form%><%=dataSource%>Back<%=_class%>.constructor');
         super(...args);
@@ -41,4 +41,4 @@ class <%=page%><%=form%><%=dataSource%>Back<%=_class%> extends <%=_class%> {
 
 }
 
-module.exports = <%=page%><%=form%><%=dataSource%>Back<%=_class%>;
+BkHelper.registerGlobalClass(<%=page%><%=form%><%=dataSource%>Back<%=_class%>);

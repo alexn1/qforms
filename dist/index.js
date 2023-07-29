@@ -3015,8 +3015,8 @@ class DataSourceEditor extends Editor_1.Editor {
         return path_1.default.join(customDirPath, 'dataSources');
     }
     async createModelBackJs(params) {
-        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.js');
-        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/DataSourceEditor/Model.back.js.ejs');
+        const filePath = path_1.default.join(await this.getCustomDirPath(), 'Model.back.ts');
+        const templateFilePath = path_1.default.join(this.getEditorPath(), 'Editor/DataSourceEditor/Model.back.ts.ejs');
         const js = await this.createFileByParams(filePath, templateFilePath, {
             _class: this.getClassName(),
             page: params.page ? params.page : '',
@@ -19312,6 +19312,7 @@ const Page_1 = __webpack_require__(/*! ../Page/Page */ "./src/frontend/viewer/Mo
 const Application_1 = __webpack_require__(/*! ../Application/Application */ "./src/frontend/viewer/Model/Application/Application.ts");
 const common_1 = __webpack_require__(/*! ../../../common */ "./src/frontend/common/index.ts");
 const types_1 = __webpack_require__(/*! ../../../../types */ "./src/types.ts");
+const Field_1 = __webpack_require__(/*! ../Field/Field */ "./src/frontend/viewer/Model/Field/Field.ts");
 class DataSource extends Model_1.Model {
     constructor(data, parent) {
         super(data, parent);
@@ -19586,6 +19587,8 @@ class DataSource extends Model_1.Model {
             return this.getParent().getParent();
         if (this.getParent() instanceof Form_1.Form)
             return this.getParent().getParent().getParent();
+        if (this.getParent() instanceof Field_1.Field)
+            return this.getParent().getParent().getParent().getParent();
         throw new Error(`unknown parent: ${this.getParent().constructor.name}(${this.getParent().getFullName()})`);
     }
     /*getNamespace() {
