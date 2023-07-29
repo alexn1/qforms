@@ -121,7 +121,7 @@ export class BkNoSqlDataSource extends BkPersistentDataSource<BkNoSqlDatabase> {
 
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
+        const values = _values ? _values : this.decodeRow(context.getBody().row);
         console.debug('values', values);
 
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);

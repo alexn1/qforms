@@ -25,13 +25,13 @@ export abstract class BkPersistentDataSource<
     decodeChanges(changes: ChangesByKey): Record<Key, any> {
         const dChanges: Record<Key, any> = {};
         for (const key in changes) {
-            dChanges[key as Key] = this.getValuesFromRow(changes[key as Key]);
+            dChanges[key as Key] = this.decodeRow(changes[key as Key]);
         }
         return dChanges;
     }
 
-    getValuesFromRow(rawRow: RawRow): Row {
-        // console.debug('PersistentDataSource.getValuesFromRow', rawRow);
+    decodeRow(rawRow: RawRow): Row {
+        // console.debug('PersistentDataSource.decodeRow', rawRow);
         const form = this.getForm();
         if (!form) throw new Error('not form ds');
 

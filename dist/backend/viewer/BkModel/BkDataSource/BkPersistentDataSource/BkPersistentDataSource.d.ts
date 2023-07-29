@@ -10,7 +10,7 @@ export declare abstract class BkPersistentDataSource<TDatabase extends BkDatabas
     constructor(data: BkModelScheme, parent: BkModel);
     getChanges(context: Context): Record<Key, any>;
     decodeChanges(changes: ChangesByKey): Record<Key, any>;
-    getValuesFromRow(rawRow: RawRow): Row;
+    decodeRow(rawRow: RawRow): Row;
     getDatabase(): TDatabase;
     getTable(): BkTable;
 }

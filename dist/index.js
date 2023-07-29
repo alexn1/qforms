@@ -6807,7 +6807,7 @@ class BkNoSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource 
         }
         const databaseName = this.getAttr('database');
         const tableName = this.getAttr('table');
-        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
+        const values = _values ? _values : this.decodeRow(context.getBody().row);
         console.debug('values', values);
         const insertResult = await this.getDatabase().insertOne(context, tableName, values);
         console.debug('insertResult:', insertResult);
@@ -6955,24 +6955,24 @@ class BkPersistentDataSource extends BkDataSource_1.BkDataSource {
     decodeChanges(changes) {
         const dChanges = {};
         for (const key in changes) {
-            dChanges[key] = this.getValuesFromRow(changes[key]);
+            dChanges[key] = this.decodeRow(changes[key]);
         }
         return dChanges;
     }
-    getValuesFromRow(rawRow) {
-        console.debug('PersistentDataSource.getValuesFromRow', rawRow);
+    decodeRow(rawRow) {
+        // console.debug('PersistentDataSource.decodeRow', rawRow);
         const form = this.getForm();
         if (!form)
             throw new Error('not form ds');
-        const values = {};
+        const row = {};
         for (const field of form.fields) {
             const column = field.getAttr('column');
             if (Object.prototype.hasOwnProperty.call(rawRow, column)) {
                 const value = field.rawToValue(rawRow[column]);
-                values[column] = field.valueToDbValue(value);
+                row[column] = field.valueToDbValue(value);
             }
         }
-        return values;
+        return row;
     }
     getDatabase() {
         const databaseName = this.getAttr('database');
@@ -7146,7 +7146,7 @@ class BkSqlDataSource extends BkPersistentDataSource_1.BkPersistentDataSource {
         }
         const database = this.getAttr('database');
         const table = this.getAttr('table');
-        const values = _values ? _values : this.getValuesFromRow(context.getBody().row);
+        const values = _values ? _values : this.decodeRow(context.getBody().row);
         const autoColumnTypes = this.getAutoColumnTypes();
         // console.debug('autoColumnTypes:', autoColumnTypes);
         const newRow = await this.getDatabase().insertRow(context, table, values, autoColumnTypes);
