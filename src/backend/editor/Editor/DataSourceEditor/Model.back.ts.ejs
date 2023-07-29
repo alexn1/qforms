@@ -1,29 +1,25 @@
-import { Bk<%=_class%>, BkHelper } from 'qforms';
+import { Bk<%=_class%>, Context, BkHelper } from 'qforms';
 
 class <%=page%><%=form%><%=dataSource%>Back<%=_class%> extends Bk<%=_class%> {
-    constructor(...args) {
-        console.debug('<%=page%><%=form%><%=dataSource%>Back<%=_class%>.constructor');
-        super(...args);
-    }
 
-    /* async create(context, _values = null) {
+    /* async create(context: Context, _values = null) {
         return await super.create(context, _values);
     } */
 
-    /* async read(context) {
+    /* async read(context: Context) {
         return await super.read(context);
     } */
 
-    /* async update(context) {
+    /* async update(context: Context) {
         return await super.update(context);
     } */
 
-    /* async delete(context) {
+    /* async delete(context: Context) {
         return await super.delete(delete);
     }*/
 
     /*
-    getAccess(context) {
+    getAccess(context: Context) {
         return {
             select: true,
             insert: true,
@@ -34,7 +30,7 @@ class <%=page%><%=form%><%=dataSource%>Back<%=_class%> extends Bk<%=_class%> {
     */
 
     /*
-    getSelectParams(context) {
+    getSelectParams(context: Context) {
         return context.getParams();
     }
     */
