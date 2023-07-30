@@ -562,12 +562,12 @@ export class BkApplication<
         );
     }
 
-    async useDatabase<T = any>(
+    async useDatabase<TDb extends BkDatabase = BkDatabase, TRetVal = any>(
         context: Context,
         appDbName: string,
-        cb: (db: BkDatabase) => Promise<T>,
-    ): Promise<T> {
-        const db = this.getDatabase(appDbName);
+        cb: (db: TDb) => Promise<TRetVal>,
+    ): Promise<TRetVal> {
+        const db = this.getDatabase(appDbName) as TDb;
         await db.connect(context);
         try {
             return await cb(db);
