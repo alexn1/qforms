@@ -150,8 +150,8 @@ export class Helper {
         ReactDOM.unmountComponentAtNode(root);
     }
 
-    static readFileAsDataURL(file) {
-        return new Promise((resolve) => {
+    static readFileAsDataURL(file: Blob) {
+        return new Promise<string | ArrayBuffer | null>((resolve) => {
             const reader = new FileReader();
             reader.onload = () => resolve(reader.result);
             reader.readAsDataURL(file);

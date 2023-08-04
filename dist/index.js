@@ -16004,6 +16004,12 @@ const FieldController_1 = __webpack_require__(/*! ../FieldController */ "./src/f
 class RowFormFieldController extends FieldController_1.FieldController {
     constructor(model, parent) {
         super(model, parent);
+        this.state = {
+            value: null,
+            parseError: null,
+            error: null,
+            changed: false,
+        };
         this.onChange = async (widgetValue, fireEvent = true) => {
             console.debug('RowFormFieldController.onChange', JSON.stringify(typeof widgetValue === 'string' ? widgetValue.substring(0, 100) : widgetValue));
             // this._onChange(widgetValue);
@@ -16099,12 +16105,12 @@ class RowFormFieldController extends FieldController_1.FieldController {
                 this.getParent().onFieldChange({ source: this });
             }
         };
-        this.state = {
+        /* this.state = {
             value: null,
             parseError: null,
             error: null,
             changed: false,
-        };
+        }; */
     }
     init() {
         const row = this.getRow();

@@ -43,7 +43,7 @@ export class RowFormFileFieldView extends RowFormFieldView<RowFormFileFieldContr
     onChange = async (e) => {
         const file = e.target.files[0];
         if (file) {
-            const widgetValue = await Helper.readFileAsDataURL(file);
+            const widgetValue = await Helper.readFileAsDataURL(file) as string;
             // console.debug('widgetValue:', widgetValue);
             this.getCtrl().onChange(widgetValue);
         }

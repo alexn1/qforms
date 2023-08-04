@@ -13,7 +13,7 @@ export declare class Helper {
     static createReactComponent(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent | undefined;
     static createReactComponent2(rootElement: Element, type: any, props?: {}, children?: any): ReactComponent | undefined;
     static destroyReactComponent(root: any): void;
-    static readFileAsDataURL(file: any): Promise<unknown>;
+    static readFileAsDataURL(file: Blob): Promise<string | ArrayBuffer | null>;
     static templateToJsString(value: any, params: any): any;
     static moveArrItem(arr: any, item: any, offset: any): void;
     static formatTime(_sec: any): string;

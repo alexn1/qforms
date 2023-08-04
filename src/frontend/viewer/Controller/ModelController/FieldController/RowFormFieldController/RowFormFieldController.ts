@@ -8,16 +8,21 @@ import { RowForm } from '../../../../Model/Form/RowForm/RowForm';
 import { JSONString, RawRow } from '../../../../../../types';
 
 export class RowFormFieldController<TField extends Field = Field> extends FieldController<TField> {
-    state: any;
+    state: { value: any; parseError: string | null; error: string | null; changed: boolean } = {
+        value: null,
+        parseError: null,
+        error: null,
+        changed: false,
+    };
 
-    constructor(model: TField, parent) {
+    constructor(model: TField, parent: FormController) {
         super(model, parent);
-        this.state = {
+        /* this.state = {
             value: null,
             parseError: null,
             error: null,
             changed: false,
-        };
+        }; */
     }
 
     init() {
@@ -54,12 +59,12 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
 
     }*/
 
-    putValue(widgetValue) {
+    putValue(widgetValue: string) {
         // console.debug('RowFormFieldController.putValue', widgetValue);
         this.onChange(widgetValue, false);
     }
 
-    onChange = async (widgetValue, fireEvent = true) => {
+    onChange = async (widgetValue: string, fireEvent = true) => {
         console.debug(
             'RowFormFieldController.onChange',
             JSON.stringify(
@@ -103,7 +108,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         }
     };
 
-    onBlur = (widgetValue, fireEvent = true) => {
+    onBlur = (widgetValue: string, fireEvent = true) => {
         console.debug(
             'RowFormFieldController.onBlur',
             this.getModel().getFullName(),
@@ -154,7 +159,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return this.valueToString(value);
     }
 
-    setValueFromWidget(widgetValue) {
+    setValueFromWidget(widgetValue: string) {
         // console.debug('RowFormFieldController.setValueFromWidget', this.getModel().getFullName(), typeof widgetValue, widgetValue);
         if (typeof widgetValue !== 'string')
             throw new Error(
@@ -165,7 +170,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         this.setValue(value);
     }
 
-    setValue(value) {
+    setValue(value: any) {
         // console.debug('RowFormFieldController.setValue', this.getModel().getFullName(), value);
         this.state.value = value;
     }
@@ -174,7 +179,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return this.state.value;
     }
 
-    isChanged() {
+    isChanged(): boolean {
         // console.debug('RowFormFieldController.isChanged', this.getModel().getFullName(), this.state);
         return this.state.changed;
     }
@@ -226,7 +231,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return null;
     }
 
-    getNullErrorText() {
+    getNullErrorText(): string {
         return this.getModel().getApp().getText().form.required;
     }
 
@@ -285,7 +290,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return false;
     }
 
-    setError(error) {
+    setError(error: string | null) {
         this.state.error = error;
     }
 
