@@ -236,7 +236,7 @@ export class ViewerModule {
                     username: req.body.username,
                     password: req.body.password,
                 });
-                res.end(html);
+                res.status(401).end(html);
             }
         } finally {
             await application.release(context);
