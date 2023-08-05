@@ -16367,15 +16367,18 @@ const common_1 = __webpack_require__(/*! ../../../../../../common */ "./src/fron
 const ImageDialogController_1 = __webpack_require__(/*! ../../../../ModalController/ImageDialogController/ImageDialogController */ "./src/frontend/viewer/Controller/ModalController/ImageDialogController/ImageDialogController.ts");
 __webpack_require__(/*! ./RowFormFileFieldView.less */ "./src/frontend/viewer/Controller/ModelController/FieldController/RowFormFieldController/RowFormFileFieldController/RowFormFileFieldView.less");
 class RowFormFileFieldView extends RowFormFieldView_1.RowFormFieldView {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super(...arguments);
+        this.image = react_1.default.createRef();
+        this.div = react_1.default.createRef();
+        this.input = react_1.default.createRef();
         this.onClearClick = (e) => {
             this.getCtrl().onChange('');
         };
         this.onChange = async (e) => {
             const file = e.target.files[0];
             if (file) {
-                const widgetValue = await common_1.Helper.readFileAsDataURL(file);
+                const widgetValue = (await common_1.Helper.readFileAsDataURL(file));
                 // console.debug('widgetValue:', widgetValue);
                 this.getCtrl().onChange(widgetValue);
             }
@@ -16400,10 +16403,13 @@ class RowFormFileFieldView extends RowFormFieldView_1.RowFormFieldView {
             console.debug('RowFormFileFieldView.onImageIconClick');
             this.getInput().click();
         };
-        this.image = react_1.default.createRef();
-        this.div = react_1.default.createRef();
-        this.input = react_1.default.createRef();
     }
+    /* constructor(props) {
+        super(props);
+        // this.image = React.createRef();
+        // this.div = React.createRef();
+        // this.input = React.createRef();
+    } */
     getImage() {
         return this.image.current;
     }

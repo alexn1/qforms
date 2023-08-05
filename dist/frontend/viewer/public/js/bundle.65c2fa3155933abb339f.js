@@ -38169,15 +38169,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2__.RowFormFieldView {
-    constructor(props) {
-        super(props);
+    constructor() {
+        super(...arguments);
+        this.image = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.div = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
+        this.input = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
         this.onClearClick = (e) => {
             this.getCtrl().onChange('');
         };
         this.onChange = async (e) => {
             const file = e.target.files[0];
             if (file) {
-                const widgetValue = await _common__WEBPACK_IMPORTED_MODULE_3__.Helper.readFileAsDataURL(file);
+                const widgetValue = (await _common__WEBPACK_IMPORTED_MODULE_3__.Helper.readFileAsDataURL(file));
                 // console.debug('widgetValue:', widgetValue);
                 this.getCtrl().onChange(widgetValue);
             }
@@ -38202,10 +38205,13 @@ class RowFormFileFieldView extends _RowFormFieldView__WEBPACK_IMPORTED_MODULE_2_
             console.debug('RowFormFileFieldView.onImageIconClick');
             this.getInput().click();
         };
-        this.image = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.div = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
-        this.input = react__WEBPACK_IMPORTED_MODULE_1__.createRef();
     }
+    /* constructor(props) {
+        super(props);
+        // this.image = React.createRef();
+        // this.div = React.createRef();
+        // this.input = React.createRef();
+    } */
     getImage() {
         return this.image.current;
     }

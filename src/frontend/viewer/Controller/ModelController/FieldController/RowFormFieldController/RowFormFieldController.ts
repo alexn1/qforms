@@ -321,7 +321,7 @@ export class RowFormFieldController<TField extends Field = Field> extends FieldC
         return this.getModel().validateOnBlur();
     }
 
-    onChangePure = async (value, fireEvent = true) => {
+    onChangePure = async (value: any, fireEvent = true) => {
         console.debug('RowFormFieldController.onChangePure', JSON.stringify(value));
 
         // value

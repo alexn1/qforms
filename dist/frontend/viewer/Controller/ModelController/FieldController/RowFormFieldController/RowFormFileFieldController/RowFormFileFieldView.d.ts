@@ -6,7 +6,6 @@ export declare class RowFormFileFieldView extends RowFormFieldView<RowFormFileFi
     image: React.RefObject<any>;
     div: React.RefObject<any>;
     input: React.RefObject<any>;
-    constructor(props: any);
     getImage(): any;
     getDiv(): any;
     getInput(): any;
