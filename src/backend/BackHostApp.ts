@@ -24,6 +24,7 @@ import { BaseModel } from './BaseModel';
 import { Scalar } from '../types';
 import { EventLog, EventLogOptions } from './EventLog';
 import { EmptyPromise } from './EmptyPromise';
+import { debug, log, warn, error } from '../console';
 
 const pkg = require('../../package.json');
 
@@ -98,7 +99,7 @@ export class BackHostApp {
         await this.initHttpServer();
         this.initWebSocketServer();
         this.listenProcessEvents();
-        console.log(this.composeStartMessage(this.getHost(), this.getPort()));
+        log(this.composeStartMessage(this.getHost(), this.getPort()));
     }
 
     getHost(): string {

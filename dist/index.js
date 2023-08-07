@@ -765,6 +765,7 @@ const ApplicationEditor_1 = __webpack_require__(/*! ./editor/Editor/ApplicationE
 const BaseModel_1 = __webpack_require__(/*! ./BaseModel */ "./src/backend/BaseModel.ts");
 const EventLog_1 = __webpack_require__(/*! ./EventLog */ "./src/backend/EventLog.ts");
 const EmptyPromise_1 = __webpack_require__(/*! ./EmptyPromise */ "./src/backend/EmptyPromise.ts");
+const console_1 = __webpack_require__(/*! ../console */ "./src/console.ts");
 const pkg = __webpack_require__(/*! ../../package.json */ "./package.json");
 const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
@@ -792,7 +793,7 @@ class BackHostApp {
         await this.initHttpServer();
         this.initWebSocketServer();
         this.listenProcessEvents();
-        console.log(this.composeStartMessage(this.getHost(), this.getPort()));
+        (0, console_1.log)(this.composeStartMessage(this.getHost(), this.getPort()));
     }
     getHost() {
         return this.params.host || LISTEN_HOST;
@@ -9914,6 +9915,45 @@ const en_json_1 = __importDefault(__webpack_require__(/*! ./en.json */ "./src/ba
 exports.en = en_json_1.default;
 const ru_json_1 = __importDefault(__webpack_require__(/*! ./ru.json */ "./src/backend/viewer/text/ru.json"));
 exports.ru = ru_json_1.default;
+
+
+/***/ }),
+
+/***/ "./src/console.ts":
+/*!************************!*\
+  !*** ./src/console.ts ***!
+  \************************/
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.error = exports.warn = exports.log = exports.debug = exports.levels = void 0;
+exports.levels = ['debug', 'log', 'warn', 'error'];
+const QFORMS_LOG_LEVEL = process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
+const level = exports.levels.indexOf(QFORMS_LOG_LEVEL);
+function debug(...messages) {
+    if (level <= exports.levels.indexOf('debug')) {
+        process.stdout.write(`${messages.join(' ')}\n`);
+    }
+}
+exports.debug = debug;
+function log(...messages) {
+    if (level <= exports.levels.indexOf('log')) {
+        process.stdout.write(`${messages.join(' ')}\n`);
+    }
+}
+exports.log = log;
+function warn(...messages) {
+    if (level <= exports.levels.indexOf('log')) {
+        process.stdout.write(`${messages.join(' ')}\n`);
+    }
+}
+exports.warn = warn;
+function error(...messages) {
+    process.stderr.write(`${messages.join(' ')}\n`);
+}
+exports.error = error;
 
 
 /***/ }),
