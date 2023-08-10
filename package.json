@@ -103,7 +103,7 @@
         "docker:build": "npx gulp docker-build",
         "docker:run": "npx gulp docker-run",
         "prettier:write": "npx prettier --write \"src/**/*.{ts,tsx,less}\"",
-        "test": "jest ./test --coverage",
+        "test": "jest --coverage",
         "build:prod": "npx gulp build-prod",
         "tsc-build": "tsc --build tsconfig.back.json",
         "tsc-build-watch": "tsc --build tsconfig.back.json --watch"
