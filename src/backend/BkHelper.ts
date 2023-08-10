@@ -1,6 +1,7 @@
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
+// @ts-ignore
 import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
@@ -17,7 +18,7 @@ function _getFilePathsSync(dirPath: string, ext: string) {
     return filePaths;
 }
 
-async function _getFilePaths2(dirPath, ext, filePaths) {
+async function _getFilePaths2(dirPath: string, ext: string, filePaths: string[]) {
     // console.debug('_getFilePaths2', dirPath);
     // all files from directory
     const files = await BkHelper._glob(path.join(dirPath, '*.' + ext));
@@ -37,8 +38,8 @@ async function _getFilePaths2(dirPath, ext, filePaths) {
 }
 
 export class BkHelper {
-    static getRandomString(length) {
-        function getRandomInt(min, max) {
+    static getRandomString(length: number) {
+        function getRandomInt(min: number, max: number) {
             return Math.floor(Math.random() * (max - min + 1)) + min;
         }
         const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
@@ -50,13 +51,13 @@ export class BkHelper {
         return result;
     }
 
-    static getFilePathsSync(publicDirPath, subDirPath, ext) {
+    static getFilePathsSync(publicDirPath: string, subDirPath: string, ext: string) {
         return _getFilePathsSync(path.join(publicDirPath, subDirPath), ext).map((filePath) => {
             return slash(path.relative(publicDirPath, filePath));
         });
     }
 
-    static _glob(path): Promise<any[]> {
+    static _glob(path: string): Promise<any[]> {
         return new Promise((resolve, reject) => {
             glob(path, (err, items) => {
                 if (err) {
@@ -68,9 +69,9 @@ export class BkHelper {
         });
     }
 
-    static async getFilePaths(dirPath, ext): Promise<string[]> {
+    static async getFilePaths(dirPath: string, ext: string): Promise<string[]> {
         // console.debug('BkHelper.getFilePaths');
-        const filePaths = [];
+        const filePaths: string[] = [];
         await _getFilePaths2(dirPath, ext, filePaths);
         const relativeFilePaths = filePaths.map((filePath) => {
             return slash(path.relative(dirPath, filePath));
@@ -118,7 +119,7 @@ export class BkHelper {
         return BkHelper.currentDate() + ' ' + BkHelper.currentTime();
     } */
 
-    static templateToJsString(value, params) {
+    static templateToJsString(value: string, params: Record<string, any>) {
         return value.replace(/\$\{([\w.@]+)\}/g, (text, name) => {
             if (Object.prototype.hasOwnProperty.call(params, name)) {
                 return `BkHelper.decodeValue('${BkHelper.encodeValue(params[name])}')`;
@@ -138,7 +139,7 @@ export class BkHelper {
         return obj;
     } */
 
-    static readTextFile(path): Promise<string> {
+    static readTextFile(path: string): Promise<string> {
         // console.debug(colors.blue('BkHelper.readTextFile'), path);
         return new Promise((resolve, reject) => {
             fs.readFile(path, 'utf8', (err, content) => {
@@ -151,13 +152,13 @@ export class BkHelper {
         });
     }
 
-    static async getFileContent(filePath) {
+    static async getFileContent(filePath: string) {
         if (await BkHelper.exists(filePath)) {
             return BkHelper.readTextFile(filePath);
         }
         return null;
     }
-    static getFileContentSync(filePath) {
+    static getFileContentSync(filePath: string) {
         // console.debug(colors.blue('BkHelper.getFileContentSync'), filePath);
         if (!fs.existsSync(filePath)) {
             return null;
@@ -165,7 +166,7 @@ export class BkHelper {
         return fs.readFileSync(filePath, 'utf8');
     }
 
-    static readBinaryFile(filePath) {
+    static readBinaryFile(filePath: string) {
         console.debug(colors.blue('BkHelper.readBinaryFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.readFile(filePath, (err, data) => {
@@ -178,18 +179,18 @@ export class BkHelper {
         });
     }
 
-    static createPath(arr) {
+    static createPath(arr: string[]) {
         if (arr.length === 0) throw new Error('no path elements');
         if (arr.length === 1) return '/';
         return arr.join('/');
     }
 
-    static getDirPath(filePath) {
+    static getDirPath(filePath: string) {
         const arr = filePath.split('/');
         return BkHelper.createPath(arr.slice(0, arr.length - 1));
     }
 
-    static async createDirIfNotExists2(originalDirPath) {
+    static async createDirIfNotExists2(originalDirPath: string) {
         // console.debug('BkHelper.createDirIfNotExists2', originalDirPath);
         const arr = originalDirPath.split('/');
         for (let i = 1; i <= arr.length; i++) {
@@ -202,7 +203,7 @@ export class BkHelper {
         }
     }
 
-    static createDirIfNotExists(dirPath): Promise<void> {
+    static createDirIfNotExists(dirPath: string): Promise<void> {
         console.debug(colors.blue('BkHelper.createDirIfNotExists'), dirPath);
         return new Promise((resolve, reject) => {
             fs.exists(dirPath, (exists) => {
@@ -221,7 +222,7 @@ export class BkHelper {
         });
     }
 
-    static createDirIfNotExistsSync(dirPath) {
+    static createDirIfNotExistsSync(dirPath: string) {
         // console.debug(colors.blue('BkHelper.createDirIfNotExistsSync'), dirPath);
         if (!fs.existsSync(dirPath)) {
             fs.mkdirSync(dirPath);
@@ -247,7 +248,7 @@ export class BkHelper {
         return _.object(keys, values);
     } */
 
-    static moveArrItem(arr, item, offset) {
+    static moveArrItem(arr: any[], item: any, offset: number) {
         const oldIndex = arr.indexOf(item);
         if (oldIndex === -1) throw new Error('cannot find element');
         const newIndex = oldIndex + offset;
@@ -278,7 +279,7 @@ export class BkHelper {
         });
     } */
 
-    static copyFile3(source, target): Promise<void> {
+    static copyFile3(source: fs.PathLike, target: fs.PathLike): Promise<void> {
         return new Promise((resolve, reject) => {
             const rd = fs.createReadStream(source);
             rd.on('error', (err) => {
@@ -295,7 +296,7 @@ export class BkHelper {
         });
     }
 
-    static exists(path): Promise<boolean> {
+    static exists(path: fs.PathLike): Promise<boolean> {
         // console.debug(colors.blue('BkHelper.exists'), path);
         return new Promise((resolve) => {
             fs.exists(path, (exists) => {
@@ -304,7 +305,7 @@ export class BkHelper {
         });
     }
 
-    static writeFile(filePath: string, content): Promise<void> {
+    static writeFile(filePath: string, content: string): Promise<void> {
         console.debug(colors.blue('BkHelper.writeFile'), filePath);
         return new Promise((resolve, reject) => {
             fs.writeFile(filePath, content, 'utf8', (err) => {
@@ -327,9 +328,9 @@ export class BkHelper {
         return await BkHelper.writeFile(filePath, content);
     }
 
-    static mapObject(object, cb) {
-        return Object.keys(object).reduce((obj, key) => {
-            const [newKey, newVal] = cb(key, object[key]);
+    static mapObject(object: any, cb: any) {
+        return Object.keys(object).reduce((obj: any, key) => {
+            const [newKey, newVal] = cb(key, object[key]) as [string, any];
             obj[newKey] = newVal;
             return obj;
         }, {});
@@ -348,7 +349,7 @@ export class BkHelper {
     }
 
     // timeOffset number in minutes
-    static today(timeOffset) {
+    static today(timeOffset: number) {
         // console.debug('BkHelper.today', timeOffset);
         let ts = Date.now();
         if (timeOffset !== undefined && timeOffset !== null) {
@@ -362,7 +363,7 @@ export class BkHelper {
         return new Date(ts);
     }
 
-    static dateTimeReviver(key, value) {
+    static dateTimeReviver(key: any, value: string | number | Date) {
         if (typeof value === 'string') {
             const a =
                 /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(\.\d{3})?(Z|([+-])(\d{2}):(\d{2}))?$/.exec(
@@ -387,8 +388,8 @@ export class BkHelper {
         return JSON.stringify(value) as JSONString;
     }
 
-    static decodeObject(obj): any {
-        const dObj = {};
+    static decodeObject(obj: any): any {
+        const dObj: any = {};
         for (const name in obj) {
             if (typeof obj[name] !== 'string')
                 throw new Error(`cannot decode: ${name}, type: ${typeof obj[name]}`);
@@ -417,9 +418,9 @@ export class BkHelper {
         return 7 * BkHelper.DAY();
     }
 
-    static Session_save(session): Promise<void> {
+    static Session_save(session: any): Promise<void> {
         return new Promise((resolve, reject) => {
-            session.save((err) => {
+            session.save((err: any) => {
                 if (err) {
                     reject(err);
                 } else {
@@ -463,12 +464,13 @@ export class BkHelper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) =>
+        return format.replace(/\{([\w.]+)\}/g, (text, name: string) =>
+            // @ts-ignore
             values[name] ? values[name] : text,
         );
     }
 
-    static getFirstField(object: Object) {
+    static getFirstField(object: any) {
         const [key] = Object.keys(object);
         if (!key) throw new Error('getFirstField: no fields');
         return object[key];
@@ -480,22 +482,22 @@ export class BkHelper {
             .reduce((acc, [name, value]) => {
                 acc[name] = value;
                 return acc;
-            }, {});
+            }, {} as any);
     }
 
-    static getWebSocketIP(webSocket) {
+    static getWebSocketIP(webSocket: any) {
         return webSocket.upgradeReq.headers['x-real-ip']
             ? webSocket.upgradeReq.headers['x-real-ip']
             : webSocket.upgradeReq.socket.remoteAddress;
     }
 
-    static getWebSocketPort(webSocket) {
+    static getWebSocketPort(webSocket: any) {
         return webSocket.upgradeReq.headers['x-real-port']
             ? webSocket.upgradeReq.headers['x-real-port']
             : webSocket.upgradeReq.socket.remotePort;
     }
 
-    static templateArray(arr) {
+    static templateArray(arr: any[]) {
         return arr.map((item) => {
             const type = typeof item;
             if (type === 'number' || type === 'boolean') {
@@ -527,7 +529,7 @@ export class BkHelper {
         return new Intl.NumberFormat('ru-RU').format(value);
     }
 
-    static formatTime2(_sec) {
+    static formatTime2(_sec: number) {
         // console.debug('BkHelper.formatTime', sec);
         let sec = _sec;
         let sign = '';
@@ -551,9 +553,11 @@ export class BkHelper {
         }
     }
 
-    static registerGlobalClass(Class) {
+    static registerGlobalClass(Class: any) {
         // console.debug('BkHelper.registerGlobalClass', Class.name);
+        // @ts-ignore
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
+        // @ts-ignore
         global[Class.name] = Class;
     }
 
