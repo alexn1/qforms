@@ -1,7 +1,6 @@
 import fs from 'fs';
 import glob from 'glob';
 import path from 'path';
-// @ts-ignore
 import slash from 'slash';
 import colors from 'colors/safe';
 import fetch from 'node-fetch';
@@ -465,7 +464,6 @@ export class BkHelper {
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
         return format.replace(/\{([\w.]+)\}/g, (text, name: string) =>
-            // @ts-ignore
             values[name] ? values[name] : text,
         );
     }
@@ -555,9 +553,7 @@ export class BkHelper {
 
     static registerGlobalClass(Class: any) {
         // console.debug('BkHelper.registerGlobalClass', Class.name);
-        // @ts-ignore
         if (global[Class.name]) throw new Error(`global.${Class.name} already used`);
-        // @ts-ignore
         global[Class.name] = Class;
     }
 
@@ -581,5 +577,4 @@ export class BkHelper {
     }
 }
 
-// @ts-ignore
-global.BkHelper = BkHelper;
+BkHelper.registerGlobalClass(BkHelper);

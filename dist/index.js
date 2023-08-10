@@ -1671,7 +1671,6 @@ exports.BkHelper = void 0;
 const fs_1 = __importDefault(__webpack_require__(/*! fs */ "fs"));
 const glob_1 = __importDefault(__webpack_require__(/*! glob */ "glob"));
 const path_1 = __importDefault(__webpack_require__(/*! path */ "path"));
-// @ts-ignore
 const slash_1 = __importDefault(__webpack_require__(/*! slash */ "slash"));
 const safe_1 = __importDefault(__webpack_require__(/*! colors/safe */ "colors/safe"));
 const node_fetch_1 = __importDefault(__webpack_require__(/*! node-fetch */ "node-fetch"));
@@ -2098,9 +2097,7 @@ class BkHelper {
         const mm = m < 10 ? `0${m}` : m;
         const ss = s < 10 ? `0${s}` : s;
         const values = { YYYY, M, D, h, m, s, MM, DD, hh, mm, ss };
-        return format.replace(/\{([\w.]+)\}/g, (text, name) => 
-        // @ts-ignore
-        values[name] ? values[name] : text);
+        return format.replace(/\{([\w.]+)\}/g, (text, name) => values[name] ? values[name] : text);
     }
     static getFirstField(object) {
         const [key] = Object.keys(object);
@@ -2183,10 +2180,8 @@ class BkHelper {
     }
     static registerGlobalClass(Class) {
         // console.debug('BkHelper.registerGlobalClass', Class.name);
-        // @ts-ignore
         if (global[Class.name])
             throw new Error(`global.${Class.name} already used`);
-        // @ts-ignore
         global[Class.name] = Class;
     }
     static getContentFromDataUrl(value) {
@@ -2209,8 +2204,7 @@ class BkHelper {
     }
 }
 exports.BkHelper = BkHelper;
-// @ts-ignore
-global.BkHelper = BkHelper;
+BkHelper.registerGlobalClass(BkHelper);
 
 
 /***/ }),
