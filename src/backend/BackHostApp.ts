@@ -32,8 +32,9 @@ const BACKEND_DIR_PATH = path.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const QFORMS_LOG_LEVEL =
-    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
+
+/* const QFORMS_LOG_LEVEL =
+    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log'); */
 
 export type Route = [
     module: 'viewer' | 'editor',
@@ -82,13 +83,13 @@ export class BackHostApp {
     private eventLog: EventLog;
 
     constructor(private params: BackHostAppParams = {}) {
-        // console.debug('BackHostApp.constructor');
+        // debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
 
     async run(): Promise<void> {
-        // console.debug(`${this.constructor.name}.run`);
-        this.initConsole();
+        // debug(`${this.constructor.name}.run`);
+        // this.initConsole();
         this.initDirPaths();
         this.checkNodeVersion();
         this.checkApplicationFolder();
@@ -110,13 +111,13 @@ export class BackHostApp {
         return this.params.port || LISTEN_PORT;
     }
 
-    initConsole() {
+    /* initConsole() {
         const levels = ['debug', 'log', 'warn', 'error'];
         const level = levels.indexOf(QFORMS_LOG_LEVEL);
         if (level > levels.indexOf('debug')) console.debug = () => {};
         if (level > levels.indexOf('log')) console.log = () => {};
         if (level > levels.indexOf('warn')) console.warn = () => {};
-    }
+    } */
 
     async initHttpServer() {
         this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
@@ -125,7 +126,7 @@ export class BackHostApp {
 
     checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
-        // console.debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
+        // debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
             throw new Error(
@@ -186,7 +187,7 @@ export class BackHostApp {
     composeStartMessage(host: string, port: string | number): string {
         let message = '\n';
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
-        message += `QFORMS_LOG_LEVEL=${QFORMS_LOG_LEVEL}\n`;
+        message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
         message += '\n';
         message += `QForms server v${pkg.version} listening on http://${host}:${port}${
             this.isDevelopment() ? '/index2' : ''
@@ -316,7 +317,7 @@ export class BackHostApp {
     }
 
     async createApplicationIfNotExists(context: Context): Promise<BkApplication> {
-        // console.debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
+        // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
             /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
@@ -328,7 +329,7 @@ export class BackHostApp {
 
         // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
-            console.debug('application is creating:', context.getRoute());
+            debug('application is creating:', context.getRoute());
             const promise = EmptyPromise.create();
             this.createAppQueue[context.getRoute()]!.push(promise);
             return promise;
@@ -339,7 +340,7 @@ export class BackHostApp {
             const app = (this.applications[context.getRoute()] = await this.createApplication(
                 context,
             ));
-            console.debug(
+            debug(
                 'application created, start resolve loop',
                 context.getRoute(),
                 this.createAppQueue[context.getRoute()]!.length,
@@ -382,7 +383,7 @@ export class BackHostApp {
     }
 
     async createApplication(context: Context): Promise<BkApplication> {
-        console.debug(`BackHostApp.createApplication: ${context.getRoute()}`);
+        debug(`BackHostApp.createApplication: ${context.getRoute()}`);
 
         const appFilePath = this.getAppFilePath(context);
         const distDirPath = this.makeDistDirPathForApp(appFilePath);
@@ -398,7 +399,7 @@ export class BackHostApp {
     }
 
     getApplicationClass(appInfo: AppInfo): typeof BkApplication {
-        // console.debug('BackHostApp.getApplicationClass', appInfo);
+        // debug('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
             const CustomClass = (global as any)[modelClass];
@@ -409,7 +410,7 @@ export class BackHostApp {
     }
 
     async createApp(req: Request) {
-        console.debug('BackHostApp.createApp');
+        debug('BackHostApp.createApp');
         if (!req.body.folder) throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name) throw new Error('name required: ' + req.body.name);
         const folder = req.body.folder;
@@ -554,7 +555,7 @@ export class BackHostApp {
 
     async moduleGet(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
-        // console.debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
 
         // log request
         console.log(
@@ -598,7 +599,7 @@ export class BackHostApp {
 
     async modulePost(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
-        console.debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        debug(colors.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
 
         // log request
         console.log(
@@ -645,7 +646,7 @@ export class BackHostApp {
 
     async moduleGetFile(req: Request, res: Response, next: NextFunction) {
         // @ts-ignore
-        console.debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+        debug(colors.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
 
         // @ts-ignore
         console.log(colors.magenta.underline('GET'), req.originalUrl);
@@ -674,7 +675,7 @@ export class BackHostApp {
     }
 
     async _e404(req: Request, res: Response, next: NextFunction) {
-        console.debug(colors.magenta(req.method), 'error/404', req.originalUrl);
+        debug(colors.magenta(req.method), 'error/404', req.originalUrl);
         next(
             new HttpError({
                 message: `${req.method} ${req.originalUrl} not found`,
@@ -684,7 +685,7 @@ export class BackHostApp {
     }
 
     async _e500(err: any, req: Request, res: Response, next: NextFunction) {
-        console.debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
+        debug(colors.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
 
         console.log(colors.red(err.message));
 
@@ -720,13 +721,13 @@ export class BackHostApp {
     }
 
     /* _getTest(req, res, next) {
-        console.debug('getTest');
+        debug('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
     } */
 
     /* _postTest(req, res, next) {
-        console.debug('postTest', req.body);
+        debug('postTest', req.body);
         res.json({foo: 'bar'});
     } */
 
@@ -762,7 +763,7 @@ export class BackHostApp {
     }
 
     async onProcessSIGINT() {
-        console.debug('BackHostApp.onProcessSIGINT');
+        debug('BackHostApp.onProcessSIGINT');
         console.log(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
@@ -774,7 +775,7 @@ export class BackHostApp {
     }
 
     async onProcessSIGTERM() {
-        console.debug('BackHostApp.onProcessSIGTERM');
+        debug('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -786,7 +787,7 @@ export class BackHostApp {
     }
 
     onProcessExit(code: number) {
-        console.debug('BackHostApp.onProcessExit:', code);
+        debug('BackHostApp.onProcessExit:', code);
         console.log('exit:', code);
     }
 
@@ -803,11 +804,11 @@ export class BackHostApp {
     }
 
     async shutdown() {
-        console.debug('BackHostApp.shutdown');
+        debug('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            // console.debug('route:', route);
+            // debug('route:', route);
             const application = this.applications[route];
             await application.deinit();
         }
@@ -833,7 +834,7 @@ export class BackHostApp {
     }
 
     async postError(req: Request, res: Response, next: (err?: Error) => void) {
-        console.debug(colors.blue('BackHostApp.postError'), req.body.message);
+        debug(colors.blue('BackHostApp.postError'), req.body.message);
 
         console.log('client error:', colors.red(req.body.message));
 
@@ -917,7 +918,7 @@ export class BackHostApp {
     }
 
     broadcastResult(sourceApplication: BkApplication, context: Context, result: Result) {
-        console.debug('BackHostApp.broadcastResult');
+        debug('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
@@ -929,7 +930,7 @@ export class BackHostApp {
     }
 
     static test() {
-        console.debug('BackHostApp.test');
+        debug('BackHostApp.test');
     }
 
     getDistDirPath(): string {

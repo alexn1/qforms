@@ -771,18 +771,17 @@ const BACKEND_DIR_PATH = path_1.default.join(__dirname, 'backend');
 const APPS_DIR_PATH = process.env.APPS_DIR_PATH || './apps';
 const LISTEN_HOST = process.env.LISTEN_HOST || 'localhost';
 const LISTEN_PORT = (process.env.LISTEN_PORT && parseInt(process.env.LISTEN_PORT)) || 7000;
-const QFORMS_LOG_LEVEL = process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log');
 class BackHostApp {
     constructor(params = {}) {
         this.params = params;
         this.applications = {};
         this.createAppQueue = {};
-        // console.debug('BackHostApp.constructor');
+        // debug('BackHostApp.constructor');
         this.startTime = new Date();
     }
     async run() {
-        // console.debug(`${this.constructor.name}.run`);
-        this.initConsole();
+        // debug(`${this.constructor.name}.run`);
+        // this.initConsole();
         this.initDirPaths();
         this.checkNodeVersion();
         this.checkApplicationFolder();
@@ -801,23 +800,20 @@ class BackHostApp {
     getPort() {
         return this.params.port || LISTEN_PORT;
     }
-    initConsole() {
+    /* initConsole() {
         const levels = ['debug', 'log', 'warn', 'error'];
         const level = levels.indexOf(QFORMS_LOG_LEVEL);
-        if (level > levels.indexOf('debug'))
-            console.debug = () => { };
-        if (level > levels.indexOf('log'))
-            console.log = () => { };
-        if (level > levels.indexOf('warn'))
-            console.warn = () => { };
-    }
+        if (level > levels.indexOf('debug')) console.debug = () => {};
+        if (level > levels.indexOf('log')) console.log = () => {};
+        if (level > levels.indexOf('warn')) console.warn = () => {};
+    } */
     async initHttpServer() {
         this.httpServer = await this.createAndRunHttpServer(this.getHost(), this.getPort());
         this.httpServer.on('error', this.onHttpServerError.bind(this));
     }
     checkNodeVersion() {
         const [majorNodeVersion] = process.versions.node.split('.');
-        // console.debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
+        // debug('majorNodeVersion', majorNodeVersion, typeof majorNodeVersion);
         const MIN_NODE_VERSION = 14;
         if (parseInt(majorNodeVersion) < MIN_NODE_VERSION) {
             throw new Error(`min node version required ${MIN_NODE_VERSION}, current ${majorNodeVersion}`);
@@ -866,7 +862,7 @@ class BackHostApp {
     composeStartMessage(host, port) {
         let message = '\n';
         message += `NODE_ENV=${process.env.NODE_ENV}\n`;
-        message += `QFORMS_LOG_LEVEL=${QFORMS_LOG_LEVEL}\n`;
+        message += `QFORMS_LOG_LEVEL=${process.env.QFORMS_LOG_LEVEL}\n`;
         message += '\n';
         message += `QForms server v${pkg.version} listening on http://${host}:${port}${this.isDevelopment() ? '/index2' : ''}\n`;
         message += `\tcwd: ${process.cwd()}\n`;
@@ -960,7 +956,7 @@ class BackHostApp {
         this.express.use(this._e500.bind(this));
     }
     async createApplicationIfNotExists(context) {
-        // console.debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
+        // debug(`BackHostApp.createApplicationIfNotExists debug: ${context.query.debug}, env: ${context.getEnv()}`);
         const application = this.applications[context.getRoute()];
         if (application) {
             /* if (req.method === 'GET' && (context.query.debug === '1' || context.getModule() === 'edit')) {
@@ -971,7 +967,7 @@ class BackHostApp {
         }
         // if creating application
         if (Array.isArray(this.createAppQueue[context.getRoute()])) {
-            console.debug('application is creating:', context.getRoute());
+            (0, console_1.debug)('application is creating:', context.getRoute());
             const promise = EmptyPromise_1.EmptyPromise.create();
             this.createAppQueue[context.getRoute()].push(promise);
             return promise;
@@ -979,7 +975,7 @@ class BackHostApp {
         this.createAppQueue[context.getRoute()] = [];
         try {
             const app = (this.applications[context.getRoute()] = await this.createApplication(context));
-            console.debug('application created, start resolve loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
+            (0, console_1.debug)('application created, start resolve loop', context.getRoute(), this.createAppQueue[context.getRoute()].length);
             for (const p of this.createAppQueue[context.getRoute()]) {
                 p.resolve(app);
             }
@@ -1009,7 +1005,7 @@ class BackHostApp {
         return path_1.default.join(this.appsDirPath, context.getAppDirName(), context.getAppFileName() + '.json');
     }
     async createApplication(context) {
-        console.debug(`BackHostApp.createApplication: ${context.getRoute()}`);
+        (0, console_1.debug)(`BackHostApp.createApplication: ${context.getRoute()}`);
         const appFilePath = this.getAppFilePath(context);
         const distDirPath = this.makeDistDirPathForApp(appFilePath);
         const appInfo = await BkApplication_1.BkApplication.loadAppInfo(appFilePath, distDirPath);
@@ -1021,7 +1017,7 @@ class BackHostApp {
         return application;
     }
     getApplicationClass(appInfo) {
-        // console.debug('BackHostApp.getApplicationClass', appInfo);
+        // debug('BackHostApp.getApplicationClass', appInfo);
         const modelClass = BaseModel_1.BaseModel.getAttr(appInfo.appFile.data, 'modelClass');
         if (modelClass) {
             const CustomClass = global[modelClass];
@@ -1032,7 +1028,7 @@ class BackHostApp {
         return BkApplication_1.BkApplication;
     }
     async createApp(req) {
-        console.debug('BackHostApp.createApp');
+        (0, console_1.debug)('BackHostApp.createApp');
         if (!req.body.folder)
             throw new Error('folder required: ' + req.body.folder);
         if (!req.body.name)
@@ -1177,7 +1173,7 @@ class BackHostApp {
     }
     async moduleGet(req, res, next) {
         // @ts-ignore
-        // console.debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
+        // debug(colors.magenta.underline('BackHostApp.moduleGet'), req.params);
         // log request
         console.log(
         // @ts-ignore
@@ -1221,7 +1217,7 @@ class BackHostApp {
     }
     async modulePost(req, res, next) {
         // @ts-ignore
-        console.debug(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
+        (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.modulePost'), req.params, req.body);
         // log request
         console.log(
         // @ts-ignore
@@ -1267,7 +1263,7 @@ class BackHostApp {
     }
     async moduleGetFile(req, res, next) {
         // @ts-ignore
-        console.debug(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
+        (0, console_1.debug)(safe_1.default.magenta.underline('BackHostApp.moduleGetFile'), req.originalUrl);
         // @ts-ignore
         console.log(safe_1.default.magenta.underline('GET'), req.originalUrl);
         if (req.params.module === 'viewer') {
@@ -1296,14 +1292,14 @@ class BackHostApp {
         }
     }
     async _e404(req, res, next) {
-        console.debug(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
+        (0, console_1.debug)(safe_1.default.magenta(req.method), 'error/404', req.originalUrl);
         next(new HttpError_1.HttpError({
             message: `${req.method} ${req.originalUrl} not found`,
             status: 404,
         }));
     }
     async _e500(err, req, res, next) {
-        console.debug(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
+        (0, console_1.debug)(safe_1.default.magenta('module.exports.e500:'), req.method, req.originalUrl, err);
         console.log(safe_1.default.red(err.message));
         const error = typeof err === 'string' ? new HttpError_1.HttpError({ message: err }) : err;
         res.status(error.status || 500);
@@ -1332,12 +1328,12 @@ class BackHostApp {
         await this.logError(error, req);
     }
     /* _getTest(req, res, next) {
-        console.debug('getTest');
+        debug('getTest');
         res.setHeader('Content-Type', 'text/plain;charset=utf-8');
         res.end('getTest');
     } */
     /* _postTest(req, res, next) {
-        console.debug('postTest', req.body);
+        debug('postTest', req.body);
         res.json({foo: 'bar'});
     } */
     createAndRunHttpServer(host, port) {
@@ -1372,7 +1368,7 @@ class BackHostApp {
         }
     }
     async onProcessSIGINT() {
-        console.debug('BackHostApp.onProcessSIGINT');
+        (0, console_1.debug)('BackHostApp.onProcessSIGINT');
         console.log(' Received INT signal (Ctrl+C), shutting down gracefully...');
         try {
             await this.shutdown();
@@ -1384,7 +1380,7 @@ class BackHostApp {
         }
     }
     async onProcessSIGTERM() {
-        console.debug('BackHostApp.onProcessSIGTERM');
+        (0, console_1.debug)('BackHostApp.onProcessSIGTERM');
         console.log('Received SIGTERM (kill) signal, shutting down forcefully.');
         try {
             await this.shutdown();
@@ -1396,7 +1392,7 @@ class BackHostApp {
         }
     }
     onProcessExit(code) {
-        console.debug('BackHostApp.onProcessExit:', code);
+        (0, console_1.debug)('BackHostApp.onProcessExit:', code);
         console.log('exit:', code);
     }
     async onUncaughtException(err, origin) {
@@ -1410,11 +1406,11 @@ class BackHostApp {
         await this.logError(reason);
     }
     async shutdown() {
-        console.debug('BackHostApp.shutdown');
+        (0, console_1.debug)('BackHostApp.shutdown');
         const routes = Object.keys(this.applications);
         for (let i = 0; i < routes.length; i++) {
             const route = routes[i];
-            // console.debug('route:', route);
+            // debug('route:', route);
             const application = this.applications[route];
             await application.deinit();
         }
@@ -1440,7 +1436,7 @@ class BackHostApp {
         return domain;
     }
     async postError(req, res, next) {
-        console.debug(safe_1.default.blue('BackHostApp.postError'), req.body.message);
+        (0, console_1.debug)(safe_1.default.blue('BackHostApp.postError'), req.body.message);
         console.log('client error:', safe_1.default.red(req.body.message));
         try {
             const data = JSON.stringify({
@@ -1504,7 +1500,7 @@ class BackHostApp {
         return this.params;
     }
     broadcastResult(sourceApplication, context, result) {
-        console.debug('BackHostApp.broadcastResult');
+        (0, console_1.debug)('BackHostApp.broadcastResult');
         for (const route in this.applications) {
             if (context.getRoute() === route && this.applications[route] === sourceApplication) {
                 sourceApplication.broadcastDomesticResultToClients(context, result);
@@ -1516,7 +1512,7 @@ class BackHostApp {
         }
     }
     static test() {
-        console.debug('BackHostApp.test');
+        (0, console_1.debug)('BackHostApp.test');
     }
     getDistDirPath() {
         return this.distDirPath;
@@ -22168,7 +22164,7 @@ module.exports = require("url");
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"name":"qforms","version":"0.30.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"scripts":{"build":"npx gulp build-dev","start":"NODE_ENV=development node dist/start.js","start2":"NODE_ENV=development QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps node dist/start.js","nodemon-start":"NODE_ENV=development nodemon --watch dist --watch apps dist/start.js","webpack-back-index":"NODE_ENV=development webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=development webpack --config webpack.config.back.start.js","webpack-front-index":"NODE_ENV=development webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=development webpack --config webpack.config.monitor.js","webpack-front-editor":"NODE_ENV=development webpack --config webpack.config.editor.js","webpack-front-editor-watch":"NODE_ENV=development webpack --config webpack.config.editor.js --watch","webpack-front-viewer":"NODE_ENV=development webpack --config webpack.config.viewer.js","webpack-front-viewer-watch":"NODE_ENV=development webpack --config webpack.config.viewer.js --watch","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\"","test":"jest test/jest","build:prod":"npx gulp build-prod","tsc-build":"tsc --build tsconfig.back.json","tsc-build-watch":"tsc --build tsconfig.back.json --watch"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
+module.exports = JSON.parse('{"name":"qforms","version":"0.30.0-dev","description":"A fullstack framework/platform based on Express and React for building Web UI for databases.","main":"dist/index.js","files":["dist"],"dependencies":{"body-parser":"^1.19.1","colors":"^1.4.0","cookie-parser":"^1.4.6","ejs":"~3.1.7","express":"^4.17.2","express-session":"^1.17.2","glob":"^5.0.5","mongodb":"^4.13.0","mysql":"^2.18.1","node-fetch":"^2.6.7","pg":"^8.11.0","react":"^17.0.2","react-dom":"^17.0.2","slash":"^1.0.0","uuid":"^8.3.2","ws":"^2.3.1"},"devDependencies":{"@babel/cli":"^7.16.0","@babel/core":"^7.16.5","@babel/plugin-proposal-class-properties":"^7.16.5","@babel/plugin-transform-react-jsx":"^7.16.5","@babel/preset-react":"^7.18.6","@types/cookie-parser":"^1.4.3","@types/express":"^4.17.14","@types/express-session":"^1.17.6","@types/glob":"^8.1.0","@types/jest":"^29.4.0","@types/mysql":"^2.15.21","@types/node":"^14.18.34","@types/node-fetch":"^2.6.4","@types/pg":"^8.6.6","@types/react":"^17.0.52","@types/react-dom":"^17.0.18","@types/slash":"^3.0.0","@types/uuid":"^9.0.2","@types/ws":"^8.5.5","@typescript-eslint/eslint-plugin":"^5.45.1","@typescript-eslint/parser":"^5.45.1","babel-loader":"^9.1.0","babel-preset-react-app":"^3.1.2","chai":"^3.2.0","copy-webpack-plugin":"^11.0.0","css-loader":"^6.7.3","del":"^1.2.1","eslint":"^8.29.0","eslint-config-airbnb":"^19.0.4","eslint-config-airbnb-typescript":"^17.0.0","eslint-config-prettier":"^8.6.0","eslint-plugin-import":"^2.26.0","eslint-plugin-jsx-a11y":"^6.6.1","eslint-plugin-prettier":"^4.2.1","eslint-plugin-react":"^7.31.11","eslint-plugin-react-hooks":"^4.6.0","gulp":"^4.0.2","gulp-babel":"^8.0.0","gulp-clean-css":"^4.3.0","gulp-concat":"^2.6.0","gulp-hash-filename":"^3.0.0","gulp-less":"^4.0.1","gulp-minify":"^3.1.0","gulp-sourcemaps":"^3.0.0","gulp-typescript":"^6.0.0-alpha.1","gulp-uglify":"^3.0.2","jest":"^29.4.3","less-loader":"^11.1.0","mini-css-extract-plugin":"^2.7.2","nodemon":"^2.0.20","null-loader":"^4.0.1","prettier":"^2.8.4","should":"^7.0.4","terser-webpack-plugin":"^5.3.6","through":"^2.3.8","ts-jest":"^29.0.5","ts-loader":"^9.3.1","typescript":"^4.9.3","webpack":"^5.74.0","webpack-cli":"^4.10.0","webpack-node-externals":"^3.0.0"},"scripts":{"build":"npx gulp build-dev","start":"NODE_ENV=development node dist/start.js","start2":"NODE_ENV=development QFORMS_LOG_LEVEL=log APPS_DIR_PATH=~/projects/qforms-apps node dist/start.js","nodemon-start":"NODE_ENV=development nodemon --watch dist --watch apps dist/start.js","webpack-back-index":"NODE_ENV=development webpack --config webpack.config.back.index.js","webpack-back-start":"NODE_ENV=development webpack --config webpack.config.back.start.js","webpack-front-index":"NODE_ENV=development webpack --config webpack.config.index.js","webpack-front-monitor":"NODE_ENV=development webpack --config webpack.config.monitor.js","webpack-front-editor":"NODE_ENV=development webpack --config webpack.config.editor.js","webpack-front-editor-watch":"NODE_ENV=development webpack --config webpack.config.editor.js --watch","webpack-front-viewer":"NODE_ENV=development webpack --config webpack.config.viewer.js","webpack-front-viewer-watch":"NODE_ENV=development webpack --config webpack.config.viewer.js --watch","docker:build":"npx gulp docker-build","docker:run":"npx gulp docker-run","prettier:write":"npx prettier --write \\"src/**/*.{ts,tsx,less}\\"","test":"jest --coverage","build:prod":"npx gulp build-prod","tsc-build":"tsc --build tsconfig.back.json","tsc-build-watch":"tsc --build tsconfig.back.json --watch"},"repository":{"type":"git","url":"https://github.com/alexn1/qforms.git"},"keywords":["web","ui","database"],"author":{"name":"Alexander Nesterenko","email":"alex140@gmail.com","url":"https://github.com/alexn1"},"license":"MIT","bugs":{"url":"https://github.com/alexn1/qforms/issues"},"homepage":"https://github.com/alexn1/qforms"}');
 
 /***/ }),
 

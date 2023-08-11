@@ -62,7 +62,6 @@ export declare class BackHostApp {
     run(): Promise<void>;
     getHost(): string;
     getPort(): number;
-    initConsole(): void;
     initHttpServer(): Promise<void>;
     checkNodeVersion(): void;
     checkApplicationFolder(): void;
