@@ -9954,9 +9954,6 @@ exports.ru = ru_json_1.default;
 Object.defineProperty(exports, "__esModule", ({ value: true }));
 exports.error = exports.warn = exports.log = exports.debug = exports.getLogLevelName = exports.getLogLevel = exports.LOG_LEVELS = void 0;
 exports.LOG_LEVELS = ['debug', 'log', 'warn', 'error'];
-/* const QFORMS_LOG_LEVEL =
-    process.env.QFORMS_LOG_LEVEL || (process.env.NODE_ENV === 'development' ? 'debug' : 'log'); */
-// const level = levels.indexOf(getLogLevelName());
 function getLogLevel() {
     return exports.LOG_LEVELS.indexOf(getLogLevelName());
 }

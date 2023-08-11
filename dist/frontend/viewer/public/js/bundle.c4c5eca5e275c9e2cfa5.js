@@ -31928,7 +31928,7 @@ function getLogLevelName() {
         // @ts-ignore
         return window.QFORMS_LOG_LEVEL || 'debug';
     }
-    else if (typeof __webpack_require__.g === 'object') {
+    else if (typeof global === 'object') {
         return (process.env.QFORMS_LOG_LEVEL ||
             ( true ? 'debug' : 0));
     }
@@ -32485,14 +32485,14 @@ class Helper {
             window[Class.name] = Class;
         }
         else {
-            if (__webpack_require__.g[Class.name])
+            if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
-            __webpack_require__.g[Class.name] = Class;
+            global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
         // console.debug('Helper.getGlobalClass', className);
-        return typeof window === 'object' ? window[className] : __webpack_require__.g[className];
+        return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {
         if (typeof document === 'object') {
@@ -44039,18 +44039,6 @@ const keyToKeyTuple = (key) => {
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */

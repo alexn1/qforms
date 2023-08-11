@@ -75,4 +75,7 @@ module.exports = {
             filename: 'css/bundle.[contenthash].css',
         }),
     ],
+    node: {
+        global: false,
+    },
 };

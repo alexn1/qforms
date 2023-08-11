@@ -31521,14 +31521,14 @@ class Helper {
             window[Class.name] = Class;
         }
         else {
-            if (__webpack_require__.g[Class.name])
+            if (global[Class.name])
                 throw new Error(`global.${Class.name} already used`);
-            __webpack_require__.g[Class.name] = Class;
+            global[Class.name] = Class;
         }
     }
     static getGlobalClass(className) {
         // console.debug('Helper.getGlobalClass', className);
-        return typeof window === 'object' ? window[className] : __webpack_require__.g[className];
+        return typeof window === 'object' ? window[className] : global[className];
     }
     static addClassToDocumentElement(className) {
         if (typeof document === 'object') {
@@ -31733,18 +31733,6 @@ class MonitorView extends _common_ReactComponent__WEBPACK_IMPORTED_MODULE_2__.Re
 /******/ 				}
 /******/ 			}
 /******/ 		};
-/******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/global */
-/******/ 	(() => {
-/******/ 		__webpack_require__.g = (function() {
-/******/ 			if (typeof globalThis === 'object') return globalThis;
-/******/ 			try {
-/******/ 				return this || new Function('return this')();
-/******/ 			} catch (e) {
-/******/ 				if (typeof window === 'object') return window;
-/******/ 			}
-/******/ 		})();
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/hasOwnProperty shorthand */
